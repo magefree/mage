@@ -24,6 +24,7 @@ public class ClementTheWorrywortTest extends CardTestPlayerBase{
       castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, frog);
       setChoice(playerA, "Spore Frog");
 
+      setStrictChooseMode(true);
       setStopAt(1, PhaseStep.BEGIN_COMBAT);
       execute();
 
@@ -57,6 +58,7 @@ public class ClementTheWorrywortTest extends CardTestPlayerBase{
       castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Haze Frog");
       setChoice(playerA, frog);
 
+      setStrictChooseMode(true);
       setStopAt(1, PhaseStep.BEGIN_COMBAT);
       execute();
 
@@ -88,9 +90,9 @@ public class ClementTheWorrywortTest extends CardTestPlayerBase{
       addCard(Zone.BATTLEFIELD, playerB, "Forest");
 
       castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Llanowar Elves");
-
       // No choice required
 
+      setStrictChooseMode(true);
       setStopAt(2, PhaseStep.BEGIN_COMBAT);
       execute();
 
