@@ -1,4 +1,4 @@
-package mage.cards.e;
+package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -22,9 +22,9 @@ import java.util.UUID;
 /**
  * @author TheElk801, jeffwadsworth
  */
-public final class EdginLarcenousLutenist extends CardImpl {
+public final class BohnBeguilingBalladeer extends CardImpl {
 
-    public EdginLarcenousLutenist(UUID ownerId, CardSetInfo setInfo) {
+    public BohnBeguilingBalladeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -42,13 +42,13 @@ public final class EdginLarcenousLutenist extends CardImpl {
         this.addAbility(ability);
     }
 
-    private EdginLarcenousLutenist(final EdginLarcenousLutenist card) {
+    private BohnBeguilingBalladeer(final BohnBeguilingBalladeer card) {
         super(card);
     }
 
     @Override
-    public EdginLarcenousLutenist copy() {
-        return new EdginLarcenousLutenist(this);
+    public BohnBeguilingBalladeer copy() {
+        return new BohnBeguilingBalladeer(this);
     }
 }
 

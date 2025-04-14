@@ -1,4 +1,4 @@
-package mage.cards.h;
+package mage.cards.j;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -24,9 +24,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class HolgaRelentlessRager extends CardImpl {
+public final class JurinLeadingTheCharge extends CardImpl {
 
-    public HolgaRelentlessRager(UUID ownerId, CardSetInfo setInfo) {
+    public JurinLeadingTheCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -45,13 +45,13 @@ public final class HolgaRelentlessRager extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new HolgaRelentlessRagerEffect()));
     }
 
-    private HolgaRelentlessRager(final HolgaRelentlessRager card) {
+    private JurinLeadingTheCharge(final JurinLeadingTheCharge card) {
         super(card);
     }
 
     @Override
-    public HolgaRelentlessRager copy() {
-        return new HolgaRelentlessRager(this);
+    public JurinLeadingTheCharge copy() {
+        return new JurinLeadingTheCharge(this);
     }
 }
 

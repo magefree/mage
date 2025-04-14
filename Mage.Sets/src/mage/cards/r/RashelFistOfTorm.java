@@ -1,4 +1,4 @@
-package mage.cards.x;
+package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,11 +18,11 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class XenkPaladinUnbroken extends CardImpl {
+public final class RashelFistOfTorm extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.AURA, "Auras");
 
-    public XenkPaladinUnbroken(UUID ownerId, CardSetInfo setInfo) {
+    public RashelFistOfTorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -40,12 +40,12 @@ public final class XenkPaladinUnbroken extends CardImpl {
         )));
     }
 
-    private XenkPaladinUnbroken(final XenkPaladinUnbroken card) {
+    private RashelFistOfTorm(final RashelFistOfTorm card) {
         super(card);
     }
 
     @Override
-    public XenkPaladinUnbroken copy() {
-        return new XenkPaladinUnbroken(this);
+    public RashelFistOfTorm copy() {
+        return new RashelFistOfTorm(this);
     }
 }

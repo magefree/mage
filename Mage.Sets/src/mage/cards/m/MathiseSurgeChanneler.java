@@ -1,4 +1,4 @@
-package mage.cards.s;
+package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -8,10 +8,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -21,7 +18,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SimonWildMagicSorcerer extends CardImpl {
+public final class MathiseSurgeChanneler extends CardImpl {
 
     private static final FilterSpell filter = new FilterInstantOrSorcerySpell("an instant or sorcery spell with mana value 3 or greater");
 
@@ -29,7 +26,7 @@ public final class SimonWildMagicSorcerer extends CardImpl {
         filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 2));
     }
 
-    public SimonWildMagicSorcerer(UUID ownerId, CardSetInfo setInfo) {
+    public MathiseSurgeChanneler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -41,7 +38,7 @@ public final class SimonWildMagicSorcerer extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell with mana value 3 or greater, roll a d20.
         RollDieWithResultTableEffect effect = new RollDieWithResultTableEffect(20);
-        this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, false, SetTargetPointer.SPELL));
 
         // 1-9 | Each player draws a card.
         effect.addTableEntry(1, 9, new DrawCardAllEffect(1));
@@ -50,15 +47,15 @@ public final class SimonWildMagicSorcerer extends CardImpl {
         effect.addTableEntry(10, 19, new DrawCardSourceControllerEffect(1, true));
 
         // 20 | Copy that spell. You may choose new targets for the copy.
-        effect.addTableEntry(20, 20, new CopyTargetStackObjectEffect());
+        effect.addTableEntry(20, 20, new CopyTargetStackObjectEffect(true));
     }
 
-    private SimonWildMagicSorcerer(final SimonWildMagicSorcerer card) {
+    private MathiseSurgeChanneler(final MathiseSurgeChanneler card) {
         super(card);
     }
 
     @Override
-    public SimonWildMagicSorcerer copy() {
-        return new SimonWildMagicSorcerer(this);
+    public MathiseSurgeChanneler copy() {
+        return new MathiseSurgeChanneler(this);
     }
 }

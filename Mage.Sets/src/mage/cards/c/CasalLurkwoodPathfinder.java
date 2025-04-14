@@ -1,4 +1,4 @@
-package mage.cards.d;
+package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DoricNaturesWarden extends CardImpl {
+public final class CasalLurkwoodPathfinder extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Forest card");
 
@@ -30,7 +30,7 @@ public final class DoricNaturesWarden extends CardImpl {
         filter.add(SubType.FOREST.getPredicate());
     }
 
-    public DoricNaturesWarden(UUID ownerId, CardSetInfo setInfo) {
+    public CasalLurkwoodPathfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -38,7 +38,7 @@ public final class DoricNaturesWarden extends CardImpl {
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.d.DoricOwlbearAvenger.class;
+        this.secondSideCardClazz = CasalPathbreakerOwlbear.class;
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
@@ -55,12 +55,12 @@ public final class DoricNaturesWarden extends CardImpl {
         )));
     }
 
-    private DoricNaturesWarden(final DoricNaturesWarden card) {
+    private CasalLurkwoodPathfinder(final CasalLurkwoodPathfinder card) {
         super(card);
     }
 
     @Override
-    public DoricNaturesWarden copy() {
-        return new DoricNaturesWarden(this);
+    public CasalLurkwoodPathfinder copy() {
+        return new CasalLurkwoodPathfinder(this);
     }
 }

@@ -1,4 +1,4 @@
-package mage.cards.d;
+package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DoricOwlbearAvenger extends CardImpl {
+public final class CasalPathbreakerOwlbear extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -27,7 +27,7 @@ public final class DoricOwlbearAvenger extends CardImpl {
         filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
-    public DoricOwlbearAvenger(UUID ownerId, CardSetInfo setInfo) {
+    public CasalPathbreakerOwlbear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -57,12 +57,12 @@ public final class DoricOwlbearAvenger extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect()));
     }
 
-    private DoricOwlbearAvenger(final DoricOwlbearAvenger card) {
+    private CasalPathbreakerOwlbear(final CasalPathbreakerOwlbear card) {
         super(card);
     }
 
     @Override
-    public DoricOwlbearAvenger copy() {
-        return new DoricOwlbearAvenger(this);
+    public CasalPathbreakerOwlbear copy() {
+        return new CasalPathbreakerOwlbear(this);
     }
 }

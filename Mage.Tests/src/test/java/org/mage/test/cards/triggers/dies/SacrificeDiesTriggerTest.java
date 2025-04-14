@@ -491,10 +491,10 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_BatchEvent_ForgeNeverwinterCharlatan_SacrificeAnother() {
+    public void test_BatchEvent_EvinWaterdeepOpportunist_SacrificeAnother() {
         // Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token.
         // This ability triggers only once each turn.
-        addCard(Zone.BATTLEFIELD, playerA, "Forge, Neverwinter Charlatan");
+        addCard(Zone.BATTLEFIELD, playerA, "Evin, Waterdeep Opportunist");
         //
         // {2}, {T}, Sacrifice a creature: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
@@ -514,10 +514,10 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_BatchEvent_ForgeNeverwinterCharlatan_SacrificeItself() {
+    public void test_BatchEvent_EvinWaterdeepOpportunist_SacrificeItself() {
         // Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token.
         // This ability triggers only once each turn.
-        addCard(Zone.BATTLEFIELD, playerA, "Forge, Neverwinter Charlatan");
+        addCard(Zone.BATTLEFIELD, playerA, "Evin, Waterdeep Opportunist");
         //
         // {2}, {T}, Sacrifice a creature: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
@@ -525,7 +525,7 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
 
         // sacrifice itself
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice");
-        setChoice(playerA, "Forge, Neverwinter Charlatan"); // to sacrifice
+        setChoice(playerA, "Evin, Waterdeep Opportunist"); // to sacrifice
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

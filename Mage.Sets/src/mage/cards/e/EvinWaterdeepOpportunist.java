@@ -1,4 +1,4 @@
-package mage.cards.f;
+package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.common.SacrificeOneOrMorePermanentsTriggeredAbility;
@@ -26,13 +26,13 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ForgeNeverwinterCharlatan extends CardImpl {
+public final class EvinWaterdeepOpportunist extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.TREASURE));
     private static final DynamicValue twiceXValue = new MultipliedValue(xValue, 2);
     private static final Hint hint = new ValueHint("Treasures you control", xValue);
 
-    public ForgeNeverwinterCharlatan(UUID ownerId, CardSetInfo setInfo) {
+    public EvinWaterdeepOpportunist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -60,12 +60,12 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
         ).setTriggersLimitEachTurn(1));
     }
 
-    private ForgeNeverwinterCharlatan(final ForgeNeverwinterCharlatan card) {
+    private EvinWaterdeepOpportunist(final EvinWaterdeepOpportunist card) {
         super(card);
     }
 
     @Override
-    public ForgeNeverwinterCharlatan copy() {
-        return new ForgeNeverwinterCharlatan(this);
+    public EvinWaterdeepOpportunist copy() {
+        return new EvinWaterdeepOpportunist(this);
     }
 }
