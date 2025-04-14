@@ -265,7 +265,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Optimistic Scavenger", 21, Rarity.UNCOMMON, mage.cards.o.OptimisticScavenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Optimistic Scavenger", 288, Rarity.UNCOMMON, mage.cards.o.OptimisticScavenger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Orphans of the Wheat", 22, Rarity.UNCOMMON, mage.cards.o.OrphansOfTheWheat.class));
-        //cards.add(new SetCardInfo("Osseous Sticktwister", 112, Rarity.UNCOMMON, mage.cards.o.OsseousSticktwister.class));
+        cards.add(new SetCardInfo("Osseous Sticktwister", 112, Rarity.UNCOMMON, mage.cards.o.OsseousSticktwister.class));
         //cards.add(new SetCardInfo("Overgrown Zealot", 193, Rarity.UNCOMMON, mage.cards.o.OvergrownZealot.class));
         cards.add(new SetCardInfo("Overlord of the Balemurk", 113, Rarity.MYTHIC, mage.cards.o.OverlordOfTheBalemurk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overlord of the Balemurk", 377, Rarity.MYTHIC, mage.cards.o.OverlordOfTheBalemurk.class, NON_FULL_USE_VARIOUS));
