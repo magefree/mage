@@ -401,5 +401,6 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Young Pyromancer", 95, Rarity.UNCOMMON, mage.cards.y.YoungPyromancer.class));
         cards.add(new SetCardInfo("Zenith Festival", 41, Rarity.RARE, mage.cards.z.ZenithFestival.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 142, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
+        cards.add(new SetCardInfo("Zurgo Stormrender", 10, Rarity.MYTHIC, mage.cards.z.ZurgoStormrender.class));
     }
 }
