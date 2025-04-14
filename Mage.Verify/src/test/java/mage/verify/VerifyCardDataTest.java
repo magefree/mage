@@ -1663,6 +1663,12 @@ public class VerifyCardDataTest {
     private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
+            if (card instanceof SpellOptionCard && ref.layout.equals("reversible_card")) {
+                // TODO: Remove when MtgJson updated
+                // workaround for reversible omen cards e.g. Bloomvine Regent // Claim Territory // Bloomvine Regent
+                // both sides have main card info
+                return;
+            }
             checkAll(card, ref, cardIndex);
         } else if (!CHECK_ONLY_ABILITIES_TEXT) {
             warn(card, "Can't find card in mtgjson to verify");
