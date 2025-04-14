@@ -439,14 +439,14 @@ public class CardView extends SimpleCardView {
                 leftSplitCostsStr = String.join("", mainCard.getManaCostSymbols());
                 leftSplitRules = mainCard.getSharedRules(game);
                 leftSplitTypeLine = getCardTypeLine(game, mainCard);
-                SpellOptionCard splitCardSpell = mainCard.getSpellCard();
-                rightSplitName = splitCardSpell.getName();
-                rightSplitCostsStr = String.join("", splitCardSpell.getManaCostSymbols());
-                rightSplitRules = splitCardSpell.getRules(game);
-                rightSplitTypeLine = getCardTypeLine(game, splitCardSpell);
-                fullCardName = mainCard.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + splitCardSpell.getName();
+                SpellOptionCard spellOptionCard = mainCard.getSpellCard();
+                rightSplitName = spellOptionCard.getName();
+                rightSplitCostsStr = String.join("", spellOptionCard.getManaCostSymbols());
+                rightSplitRules = spellOptionCard.getRules(game);
+                rightSplitTypeLine = getCardTypeLine(game, spellOptionCard);
+                fullCardName = mainCard.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionCard.getName();
                 this.manaCostLeftStr = mainCard.getManaCostSymbols();
-                this.manaCostRightStr = splitCardSpell.getManaCostSymbols();
+                this.manaCostRightStr = spellOptionCard.getManaCostSymbols();
             } else if (card instanceof MockCard) {
                 // deck editor cards
                 fullCardName = ((MockCard) card).getFullName(true);

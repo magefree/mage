@@ -1,6 +1,7 @@
 package mage.view;
 
 import mage.cards.Card;
+import mage.cards.CardWithSpellOption;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -79,6 +80,12 @@ public class PermanentView extends CardView {
                 this.alternateName = original.getName();
             }
         }
+
+        // for adventure/omen cards, remove spell card rules
+        if (card instanceof CardWithSpellOption) {
+            this.rules.removeIf(rule -> rule.startsWith("Adventure") || rule.startsWith("Omen"));
+        }
+
         if (permanent.getOwnerId() != null && !permanent.getOwnerId().equals(permanent.getControllerId())) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {
