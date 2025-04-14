@@ -63,6 +63,7 @@ class CallTheSpiritDragonsEffect extends OneShotEffect {
                     SubType.DRAGON, color.getDescription() + " Dragon you control"
             );
             filter.add(new ColorPredicate(color));
+            filters.add(filter);
         }
     }
 

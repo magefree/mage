@@ -16,7 +16,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     public static final ObjectColor GREEN = new ObjectColor("G");
 
     public static final ObjectColor COLORLESS = new ObjectColor();
-private static final List<ObjectColor>allColors= Arrays.asList(WHITE,BLUE,BLACK,RED,GREEN);
+    private static final List<ObjectColor> allColors = Arrays.asList(WHITE, BLUE, BLACK, RED, GREEN);
     private boolean white;
     private boolean blue;
     private boolean black;
