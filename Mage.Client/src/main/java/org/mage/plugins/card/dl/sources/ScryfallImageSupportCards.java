@@ -701,6 +701,15 @@ public class ScryfallImageSupportCards {
             put("REX/Mountain/24b", "https://api.scryfall.com/cards/rex/24/en?format=image&face=back");
             put("REX/Plains/21b", "https://api.scryfall.com/cards/rex/21/en?format=image&face=back");
             put("REX/Swamp/23b", "https://api.scryfall.com/cards/rex/23/en?format=image&face=back");
+
+            // TDM - fake double faced cards
+            put("TDM/Bloomvine Regent/381b", "https://api.scryfall.com/cards/tdm/381/en?format=image&face=back");
+            put("TDM/Clarion Conqueror/377b", "https://api.scryfall.com/cards/tdm/377/en?format=image&face=back");
+            put("TDM/Magmatic Hellkite/380b", "https://api.scryfall.com/cards/tdm/380/en?format=image&face=back");
+            put("TDM/Marang River Regent/378b", "https://api.scryfall.com/cards/tdm/378/en?format=image&face=back");
+            put("TDM/Scavenger Regent/379b", "https://api.scryfall.com/cards/tdm/379/en?format=image&face=back");
+            put("TDM/Ugin, Eye of the Storms/382b", "https://api.scryfall.com/cards/tdm/382/en?format=image&face=back");
+
         }
     };
 

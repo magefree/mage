@@ -59,8 +59,9 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Betor, Kin to All", 353, Rarity.MYTHIC, mage.cards.b.BetorKinToAll.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bewildering Blizzard", 38, Rarity.UNCOMMON, mage.cards.b.BewilderingBlizzard.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 250, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
-        cards.add(new SetCardInfo("Bloomvine Regent", 136, Rarity.RARE, mage.cards.b.BloomvineRegent.class));
-        cards.add(new SetCardInfo("Bloomvine Regent", 381, Rarity.RARE, mage.cards.b.BloomvineRegent.class));
+        cards.add(new SetCardInfo("Bloomvine Regent", 136, Rarity.RARE, mage.cards.b.BloomvineRegent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bloomvine Regent", 381, Rarity.RARE, mage.cards.b.BloomvineRegent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bloomvine Regent", "381b", Rarity.RARE, mage.cards.b.BloomvineRegent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blossoming Sands", 251, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bone-Cairn Butcher", 173, Rarity.UNCOMMON, mage.cards.b.BoneCairnButcher.class));
         cards.add(new SetCardInfo("Boulderborn Dragon", 239, Rarity.COMMON, mage.cards.b.BoulderbornDragon.class, NON_FULL_USE_VARIOUS));
@@ -230,8 +231,9 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Magmatic Hellkite", 301, Rarity.RARE, mage.cards.m.MagmaticHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Magmatic Hellkite", 380, Rarity.RARE, mage.cards.m.MagmaticHellkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mammoth Bellow", 205, Rarity.UNCOMMON, mage.cards.m.MammothBellow.class));
-        cards.add(new SetCardInfo("Marang River Regent", 378, Rarity.RARE, mage.cards.m.MarangRiverRegent.class));
-        cards.add(new SetCardInfo("Marang River Regent", 51, Rarity.RARE, mage.cards.m.MarangRiverRegent.class));
+        cards.add(new SetCardInfo("Marang River Regent", 51, Rarity.RARE, mage.cards.m.MarangRiverRegent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marang River Regent", 378, Rarity.RARE, mage.cards.m.MarangRiverRegent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marang River Regent", "378b", Rarity.RARE, mage.cards.m.MarangRiverRegent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mardu Devotee", 16, Rarity.COMMON, mage.cards.m.MarduDevotee.class));
         cards.add(new SetCardInfo("Mardu Monument", 245, Rarity.UNCOMMON, mage.cards.m.MarduMonument.class));
         cards.add(new SetCardInfo("Mardu Siegebreaker", 206, Rarity.RARE, mage.cards.m.MarduSiegebreaker.class, NON_FULL_USE_VARIOUS));
@@ -326,8 +328,9 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Sarkhan, Dragon Ascendant", 302, Rarity.RARE, mage.cards.s.SarkhanDragonAscendant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sarkhan, Dragon Ascendant", 403, Rarity.MYTHIC, mage.cards.s.SarkhanDragonAscendant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sarkhan, Dragon Ascendant", 413, Rarity.MYTHIC, mage.cards.s.SarkhanDragonAscendant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Scavenger Regent", 379, Rarity.RARE, mage.cards.s.ScavengerRegent.class));
-        cards.add(new SetCardInfo("Scavenger Regent", 90, Rarity.RARE, mage.cards.s.ScavengerRegent.class));
+        cards.add(new SetCardInfo("Scavenger Regent", 90, Rarity.RARE, mage.cards.s.ScavengerRegent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scavenger Regent", 379, Rarity.RARE, mage.cards.s.ScavengerRegent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scavenger Regent", "379b", Rarity.RARE, mage.cards.s.ScavengerRegent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scoured Barrens", 267, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Seize Opportunity", 119, Rarity.COMMON, mage.cards.s.SeizeOpportunity.class));
         cards.add(new SetCardInfo("Severance Priest", 222, Rarity.RARE, mage.cards.s.SeverancePriest.class, NON_FULL_USE_VARIOUS));
