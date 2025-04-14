@@ -448,7 +448,7 @@
 |Generate|TOK:CNS|Construct|||DarettiConstructToken|
 |Generate|TOK:CNS|Demon|||DemonFlyingToken|
 |Generate|TOK:CNS|Elephant|||ElephantToken|
-#un-implemented card|Generate|TOK:CNS|Ogre||
+|Generate|TOK:CNS|Ogre|||Ogre44Token|
 |Generate|TOK:CNS|Spirit|||SpiritWhiteToken|
 |Generate|TOK:CNS|Squirrel|||SquirrelToken|
 |Generate|TOK:CNS|Wolf|||WolfToken|
