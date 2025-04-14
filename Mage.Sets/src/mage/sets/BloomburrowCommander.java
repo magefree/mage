@@ -148,6 +148,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Illusory Ambusher", 167, Rarity.UNCOMMON, mage.cards.i.IllusoryAmbusher.class));
         cards.add(new SetCardInfo("Inferno Titan", 198, Rarity.MYTHIC, mage.cards.i.InfernoTitan.class));
         cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 77, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class));
+        cards.add(new SetCardInfo("Insatiable Frugivore", 18, Rarity.RARE, mage.cards.i.InsatiableFrugivore.class));
         cards.add(new SetCardInfo("Inspiring Overseer", 141, Rarity.COMMON, mage.cards.i.InspiringOverseer.class));
         cards.add(new SetCardInfo("Intellectual Offering", 168, Rarity.RARE, mage.cards.i.IntellectualOffering.class));
         cards.add(new SetCardInfo("Ishai, Ojutai Dragonspeaker", 89, Rarity.MYTHIC, mage.cards.i.IshaiOjutaiDragonspeaker.class));
