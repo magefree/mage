@@ -277,10 +277,10 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Silent Clearing", 115, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Smoke Bomb", 259, Rarity.UNCOMMON, mage.cards.s.SmokeBomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smoke Bomb", 75, Rarity.UNCOMMON, mage.cards.s.SmokeBomb.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Sokrates, Athenian Teacher", 121, Rarity.RARE, mage.cards.s.SokratesAthenianTeacher.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Sokrates, Athenian Teacher", 250, Rarity.RARE, mage.cards.s.SokratesAthenianTeacher.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Sokrates, Athenian Teacher", 273, Rarity.RARE, mage.cards.s.SokratesAthenianTeacher.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Sokrates, Athenian Teacher", 67, Rarity.RARE, mage.cards.s.SokratesAthenianTeacher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sokrates, Athenian Teacher", 121, Rarity.RARE, mage.cards.s.SokratesAthenianTeacher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sokrates, Athenian Teacher", 250, Rarity.RARE, mage.cards.s.SokratesAthenianTeacher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sokrates, Athenian Teacher", 273, Rarity.RARE, mage.cards.s.SokratesAthenianTeacher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sokrates, Athenian Teacher", 67, Rarity.RARE, mage.cards.s.SokratesAthenianTeacher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spartan Veteran", 292, Rarity.COMMON, mage.cards.s.SpartanVeteran.class));
         cards.add(new SetCardInfo("Staff of Eden, Vault's Key", 123, Rarity.MYTHIC, mage.cards.s.StaffOfEdenVaultsKey.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Staff of Eden, Vault's Key", 260, Rarity.MYTHIC, mage.cards.s.StaffOfEdenVaultsKey.class, NON_FULL_USE_VARIOUS));
