@@ -28,7 +28,7 @@ public final class AinokWayfarer extends CardImpl {
 
         // When this creature enters, mill three cards. You may put a land card from among them into your hand. If you don't, put a +1/+1 counter on this creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillThenPutInHandEffect(
-                1, StaticFilters.FILTER_CARD_LAND_A,
+                3, StaticFilters.FILTER_CARD_LAND_A,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true)
         )));
     }
