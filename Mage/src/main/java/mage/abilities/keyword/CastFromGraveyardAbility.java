@@ -114,6 +114,7 @@ public abstract class CastFromGraveyardAbility extends SpellAbility {
         spellAbilityCopy.addCost(this.getCosts().copy());
         spellAbilityCopy.addCost(this.getManaCosts().copy());
         spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
+        spellAbilityCopy.setCostAdjuster(this.getCostAdjuster());
         spellAbilityToResolve = spellAbilityCopy;
         ContinuousEffect effect = new CastFromGraveyardReplacementEffect();
         effect.setTargetPointer(new FixedTarget(getSourceId(), game.getState().getZoneChangeCounter(getSourceId())));

@@ -549,6 +549,8 @@ public interface Ability extends Controllable, Serializable {
      */
     Ability setCostAdjuster(CostAdjuster costAdjuster);
 
+    CostAdjuster getCostAdjuster();
+
     /**
      * Prepare {X} settings for announce
      */

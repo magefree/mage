@@ -788,6 +788,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public CostAdjuster getCostAdjuster() {
+        return costAdjuster;
+    }
+
+    @Override
     public void adjustX(Game game) {
         if (costAdjuster != null) {
             costAdjuster.prepareX(this, game);

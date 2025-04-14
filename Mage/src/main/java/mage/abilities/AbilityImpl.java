@@ -1762,6 +1762,11 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public CostAdjuster getCostAdjuster() {
+        return costAdjuster;
+    }
+
+    @Override
     public void adjustX(Game game) {
         if (costAdjuster != null) {
             costAdjuster.prepareX(this, game);
