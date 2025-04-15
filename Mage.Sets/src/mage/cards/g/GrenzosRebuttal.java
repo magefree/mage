@@ -56,7 +56,8 @@ class GrenzosRebuttalEffect extends OneShotEffect {
 
     GrenzosRebuttalEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Starting with you, each player chooses an artifact, a creature, and a land from among the permanents controlled by the player to their left." + "Destroy each permanent chosen this way.";
+        this.staticText = "Starting with you, each player chooses an artifact, a creature, and a land from among the permanents controlled by the player to their left." + 
+        "Destroy each permanent chosen this way.";
     }
 
     private GrenzosRebuttalEffect(final GrenzosRebuttalEffect effect) {
