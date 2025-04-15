@@ -3,7 +3,6 @@ package mage.cards.g;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -56,8 +55,7 @@ class GrenzosRebuttalEffect extends OneShotEffect {
 
     GrenzosRebuttalEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Starting with you, each player chooses an artifact, a creature, and a land from among the permanents controlled by the player to their left. " + 
-        "Destroy each permanent chosen this way.";
+        this.staticText = "Starting with you, each player chooses an artifact, a creature, and a land from among the permanents controlled by the player to their left. " + "Destroy each permanent chosen this way.";
     }
 
     private GrenzosRebuttalEffect(final GrenzosRebuttalEffect effect) {
@@ -76,7 +74,7 @@ class GrenzosRebuttalEffect extends OneShotEffect {
         if (controller == null || !controller.canRespond()) {
             return false;
         }
-        List<Card> chosenPermanents = new ArrayList<>();
+        List<Permanent> chosenPermanents = new ArrayList<>();
 
         PlayerList playerList = game.getState().getPlayersInRange(controllerId, game, true);
 
@@ -115,10 +113,8 @@ class GrenzosRebuttalEffect extends OneShotEffect {
             currentPlayer = nextPlayer;
         }
 
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-            if (!chosenPermanents.contains(permanent)) {
-                permanent.destroy(source, game);
-            }
+        for (Permanent permanent : chosenPermanents) {
+            permanent.destroy(source, game);
         }
 
         return true;
