@@ -18,7 +18,7 @@ public class SecretLairShowdown extends ExpansionSet {
     private SecretLairShowdown() {
         super("Secret Lair Showdown", "SLP", ExpansionSet.buildDate(2023, 2, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
 		
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 7, Rarity.RARE, mage.cards.a.AnOfferYouCantRefuse.class));
         cards.add(new SetCardInfo("Brainstorm", 1, Rarity.RARE, mage.cards.b.Brainstorm.class));
