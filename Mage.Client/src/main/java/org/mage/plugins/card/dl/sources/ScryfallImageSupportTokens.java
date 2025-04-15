@@ -1,9 +1,9 @@
 package org.mage.plugins.card.dl.sources;
 
+import mage.cards.repository.TokenRepository;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import mage.cards.repository.TokenRepository;
 
 /**
  * @author JayDi85
