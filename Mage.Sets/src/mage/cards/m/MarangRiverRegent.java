@@ -1,29 +1,36 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.OmenCard;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.OmenCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Jmlundeen
  */
 public final class MarangRiverRegent extends OmenCard {
 
+    private static final FilterPermanent filter = new FilterNonlandPermanent("other target nonland permanents");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
     public MarangRiverRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{4}{U}{U}", "Coil and Catch", "{3}{U}");
-        
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(7);
@@ -33,7 +40,7 @@ public final class MarangRiverRegent extends OmenCard {
 
         // When this creature enters, return up to two other target nonland permanents to their owners' hands.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetNonlandPermanent(0, 2));
+        ability.addTarget(new TargetPermanent(0, 2, filter));
         this.addAbility(ability);
 
         // Coil and Catch
