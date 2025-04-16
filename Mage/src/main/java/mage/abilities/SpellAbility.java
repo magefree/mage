@@ -238,9 +238,12 @@ public class SpellAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule(boolean all) {
         if (all) {
-            return new StringBuilder(super.getRule(all)).append(name).toString();
+            // show full rules, e.g. for hand
+            return super.getRule(true) + this.name;
+        } else {
+            // hide spell ability, e.g. for permanent
+            return super.getRule(false);
         }
-        return super.getRule(false);
     }
 
     public String getName() {

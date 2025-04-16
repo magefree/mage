@@ -1,7 +1,6 @@
 package mage.cards;
 
 import mage.abilities.Ability;
-import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
@@ -134,8 +133,8 @@ class OmenCardSpellAbility extends SpellAbility {
         this.nameFull = ability.nameFull;
         if (!ability.finalized) {
             throw new IllegalStateException("Wrong code usage. "
-                + "Omen (" + cardName + ") "
-                + "need to call finalizeOmen() at the very end of the card's constructor.");
+                    + "Omen (" + cardName + ") "
+                    + "need to call finalizeOmen() at the very end of the card's constructor.");
         }
         this.finalized = true;
     }
@@ -147,24 +146,13 @@ class OmenCardSpellAbility extends SpellAbility {
 
     @Override
     public String getRule(boolean all) {
-        return this.getRule();
-    }
-
-    @Override
-    public String getRule() {
-        StringBuilder sbRule = new StringBuilder();
-        sbRule.append(this.nameFull);
-        sbRule.append(" ");
-        sbRule.append(getManaCosts().getText());
-        sbRule.append(" &mdash; ");
-        Modes modes = this.getModes();
-        if (modes.size() <= 1) {
-            sbRule.append(modes.getMode().getEffects().getTextStartingUpperCase(modes.getMode()));
-        } else {
-            sbRule.append(getModes().getText());
-        }
-        sbRule.append(" <i>(Then shuffle this card into its owner's library.)<i>");
-        return sbRule.toString();
+        // TODO: must hide rules in permanent like SpellAbility, but can't due effects text
+        return this.nameFull
+                + " "
+                + getManaCosts().getText()
+                + " &mdash; "
+                + super.getRule(false) // without cost
+                + " <i>(Then shuffle this card into its owner's library.)</i>";
     }
 
     @Override

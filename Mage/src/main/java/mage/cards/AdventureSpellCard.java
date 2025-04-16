@@ -1,7 +1,6 @@
 package mage.cards;
 
 import mage.abilities.Ability;
-import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.ExileAdventureSpellEffect;
 import mage.constants.CardType;
@@ -162,24 +161,13 @@ class AdventureCardSpellAbility extends SpellAbility {
 
     @Override
     public String getRule(boolean all) {
-        return this.getRule();
-    }
-
-    @Override
-    public String getRule() {
-        StringBuilder sbRule = new StringBuilder();
-        sbRule.append(this.nameFull);
-        sbRule.append(" ");
-        sbRule.append(getManaCosts().getText());
-        sbRule.append(" &mdash; ");
-        Modes modes = this.getModes();
-        if (modes.size() <= 1) {
-            sbRule.append(modes.getMode().getEffects().getTextStartingUpperCase(modes.getMode()));
-        } else {
-            sbRule.append(getModes().getText());
-        }
-        sbRule.append(" <i>(Then exile this card. You may cast the creature later from exile.)</i>");
-        return sbRule.toString();
+        // TODO: must hide rules in permanent like SpellAbility, but can't due effects text
+        return this.nameFull
+                + " "
+                + getManaCosts().getText()
+                + " &mdash; "
+                + super.getRule(false) // without cost
+                + " <i>(Then exile this card. You may cast the creature later from exile.)</i>";
     }
 
     @Override
