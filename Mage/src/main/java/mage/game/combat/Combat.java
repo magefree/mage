@@ -644,6 +644,16 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 }
             }
+            // Allow unconventional forced attacks (War's Toll) to record creatures as having been forced to attack.
+            for (UUID attackingCreatureId : this.getAttackers()) {
+                Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
+                    RestrictionEffect effect = entry.getKey();
+                    for (Ability ability : entry.getValue()) {
+                        effect.updateForcedAttackersAfter(numberAttackers, attackingCreature, ability, game, creaturesForcedToAttack);
+                    }
+                }
+            }
         }
         return true;
     }
