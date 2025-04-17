@@ -173,6 +173,7 @@ Magic Origins|MagicOrigins|
 Magic Player Rewards|MagicPlayerRewards|
 Magic: The Gathering-Commander|Commander|
 Magic: The Gathering-Conspiracy|Conspiracy|
+Marvel's Spider-Man Eternal|MarvelsSpiderManEternal|
 Masterpiece Series|MasterpieceSeries|
 Masterpiece Series Amonkhet|MasterpieceSeriesAmonkhet|
 Masters Edition|MastersEdition|
