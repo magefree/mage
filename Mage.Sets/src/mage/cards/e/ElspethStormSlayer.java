@@ -52,9 +52,9 @@ public final class ElspethStormSlayer extends CardImpl {
                 CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
         ), 0);
         ability.addEffect(new GainAbilityControlledEffect(
-                FlyingAbility.getInstance(), Duration.EndOfTurn,
+                FlyingAbility.getInstance(), Duration.UntilYourNextTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURE
-        ).setText("those creatures gain flying until end of turn"));
+        ).setText("those creatures gain flying until your next turn"));
         this.addAbility(ability);
 
         // -3: Destroy target creature an opponent controls with mana value 3 or greater.
