@@ -20,6 +20,12 @@ public final class FinalFantasy extends ExpansionSet {
         this.blockName = "Final Fantasy"; // for sorting in GUI
         this.hasBasicLands = false; // temporary
 
+        cards.add(new SetCardInfo("Cecil, Dark Knight", 91, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cecil, Dark Knight", 380, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cecil, Dark Knight", 445, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 91, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 380, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 445, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class));
         cards.add(new SetCardInfo("Sazh's Chocobo", 200, Rarity.UNCOMMON, mage.cards.s.SazhsChocobo.class));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 553, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class));
