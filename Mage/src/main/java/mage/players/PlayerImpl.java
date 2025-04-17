@@ -781,15 +781,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             Card card = isDrawsFromBottom() ? getLibrary().drawFromBottom(game) : getLibrary().drawFromTop(game);
             if (card != null) {
                 card.moveToZone(Zone.HAND, source, game, false); // if you want to use event.getSourceId() here then thinks x10 times
-                if (isTopCardRevealed()) {
+                if (isTopCardRevealed() && !isDrawsFromBottom()) {
                     game.fireInformEvent(getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
                 }
                 game.fireEvent(new DrewCardEvent(card.getId(), getId(), source, event));
                 numDrawn++;
             }
         }
-        if (!isTopCardRevealed() && numDrawn > 0) {
-            game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
+        if ((!isTopCardRevealed() || isDrawsFromBottom()) && numDrawn > 0) {
+            game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a")
+                    + " card" + (numDrawn > 1 ? "s" : "")
+                    + (isDrawsFromBottom() ? " from the bottom of their library" : ""));
         }
         // if this method was called from a replacement event, pass the number of cards back through
         // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
