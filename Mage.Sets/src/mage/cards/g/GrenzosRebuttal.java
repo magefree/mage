@@ -98,9 +98,7 @@ class GrenzosRebuttalEffect extends OneShotEffect {
                     Target target = new TargetPermanent(1, 1, filter, true);
 
                     if (target.canChoose(currentPlayer.getId(), source, game)) {
-                        while (currentPlayer.canRespond() && !target.isChosen(game) && target.canChoose(currentPlayer.getId(), source, game)) {
-                            currentPlayer.chooseTarget(Outcome.Benefit, target, source, game);
-                        }
+                        currentPlayer.chooseTarget(Outcome.Benefit, target, source, game);
 
                         Permanent artifact = game.getPermanent(target.getFirstTarget());
                         if (artifact != null) {
