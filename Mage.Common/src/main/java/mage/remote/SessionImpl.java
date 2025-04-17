@@ -269,6 +269,7 @@ public class SessionImpl implements Session {
                 }
 
                 if (result) {
+                    // server state used in client side to setup game panels and dialogs, e.g. test mode info or available game types
                     serverState = server.getServerState();
                     if (serverState == null) {
                         throw new MageVersionException(client.getVersion(), null);
@@ -600,6 +601,16 @@ public class SessionImpl implements Session {
         @Override
         public void handleCallback(Callback callback) throws HandleCallbackException {
             try {
+                // on connection client will receive all waiting callbacks from a server, e.g. started table, draft pick, etc
+                // but it's require to get server settings first (server state), e.g. for test mode
+                // possible bugs: hidden cheat button or enabled clicks protection in draft
+                // so wait for server state some time
+                if (serverState == null) {
+                    ThreadUtils.sleep(1000);
+                    if (serverState == null) {
+                        logger.error("Can't receive server state before other data (possible reason: unstable network)");
+                    }
+                }
                 client.onCallback((ClientCallback) callback.getCallbackObject());
             } catch (Exception ex) {
                 logger.error("handleCallback error", ex);
