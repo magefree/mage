@@ -34,9 +34,14 @@ import java.util.*;
 public interface Ability extends Controllable, Serializable {
 
     /**
-     * Assigns a new {@link java.util.UUID}
+     * Assigns a new random {@link java.util.UUID}
      */
     void newId();
+
+    /**
+     * Assigns a new {@link java.util.UUID}
+     */
+    void newId(UUID newID);
 
     /**
      * Assigns a new {@link java.util.UUID}
