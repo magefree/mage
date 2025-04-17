@@ -17,7 +17,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author noxx
  */
-public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
+public class ExileAndReturnUnderYourControlTest extends CardTestPlayerBase {
 
     @Test
     public void testPermanentControlEffect() {
