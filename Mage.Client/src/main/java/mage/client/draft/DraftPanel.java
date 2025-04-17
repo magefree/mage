@@ -45,8 +45,9 @@
 
      /**
       * ms delay between booster showing up and pick being allowed.
+      * Will be disabled in test mode
       */
-     private static final int protectionTime = 1500;
+     private static final int PROTECTION_CLICKS_TIMEOUT_MS = 1500;
      /**
       * Timer starting at booster being displayed, to protect from early pick due to clicking
       * a little too much on the last pick.
@@ -138,7 +139,11 @@
                  }
          );
 
-         protectionTimer = new Timer(protectionTime, e -> protectionTimer.stop());
+         int protectionTimeout = PROTECTION_CLICKS_TIMEOUT_MS;
+         if (SessionHandler.isTestMode()) {
+             protectionTimeout = 100;
+         }
+         protectionTimer = new Timer(protectionTimeout, e -> protectionTimer.stop());
      }
 
      public void cleanUp() {

@@ -85,7 +85,8 @@ public final class Main {
     // - fast game buttons;
     // - cheat commands;
     // - no deck validation;
-    // - no connection validation by pings (no disconnects on IDE's debugger usage)
+    // - no draft's clicks protection timeout;
+    // - no connection validation by pings (no disconnects on IDE's debugger usage);
     // - load any deck in sideboarding;
     // - simplified registration and login (no password check);
     // - debug main menu for GUI and rendering testing (must use -debug arg for client app);
