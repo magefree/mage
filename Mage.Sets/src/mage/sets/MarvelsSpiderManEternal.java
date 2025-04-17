@@ -16,7 +16,7 @@ public final class MarvelsSpiderManEternal extends ExpansionSet {
     }
 
     private MarvelsSpiderManEternal() {
-        super("Marvel's Spider-Man Eternal", "SPE", ExpansionSet.buildDate(2025, 9, 26), SetType.EXPANSION);
+        super("Marvel's Spider-Man Eternal", "SPE", ExpansionSet.buildDate(2025, 9, 26), SetType.SUPPLEMENTAL);
         this.blockName = "Marvel's Spider-Man"; // for sorting in GUI
         this.hasBasicLands = false; // temporary
 
