@@ -1093,13 +1093,13 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
-        card.removeCounters(counterName, amount, source, game, isDamage);
+    public int removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
+        return card.removeCounters(counterName, amount, source, game, isDamage);
     }
 
     @Override
-    public void removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
-        card.removeCounters(counter, source, game, isDamage);
+    public int removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
+        return card.removeCounters(counter, source, game, isDamage);
     }
 
     @Override
