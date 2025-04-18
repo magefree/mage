@@ -48,7 +48,7 @@ public class ThreadExecutorImpl implements ThreadExecutor {
         ((ThreadPoolExecutor) gameExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) gameExecutor).setThreadFactory(new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_GAME));
 
-        tourneyExecutor = new FixedThreadPoolWithException(Math.min(2, config.getMaxGameThreads() / GAMES_PER_TOURNEY_RATIO));
+        tourneyExecutor = new FixedThreadPoolWithException(Math.max(2, config.getMaxGameThreads() / GAMES_PER_TOURNEY_RATIO));
         ((ThreadPoolExecutor) tourneyExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) tourneyExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) tourneyExecutor).setThreadFactory(new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY));
