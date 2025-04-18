@@ -20,7 +20,11 @@ public class OneOrMoreCombatDamagePlayerTriggeredAbility extends OneOrMoreDamage
     }
 
     public OneOrMoreCombatDamagePlayerTriggeredAbility(Effect effect, SetTargetPointer setTargetPointer) {
-        this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_PERMANENT_CREATURES, setTargetPointer, false);
+        this(effect, setTargetPointer, false);
+    }
+
+    public OneOrMoreCombatDamagePlayerTriggeredAbility(Effect effect, SetTargetPointer setTargetPointer, boolean optional) {
+        this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_PERMANENT_CREATURES, setTargetPointer, optional);
     }
 
     public OneOrMoreCombatDamagePlayerTriggeredAbility(Zone zone, Effect effect, FilterCreaturePermanent filter,
