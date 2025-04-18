@@ -13,13 +13,12 @@ import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.PlayerType;
 import mage.players.net.UserData;
-import mage.utils.CompressUtil;
 import mage.util.ThreadUtils;
+import mage.utils.CompressUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
 import org.jboss.remoting.callback.Callback;
-import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
@@ -31,6 +30,7 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.CancellationException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,6 +46,8 @@ public class SessionImpl implements Session {
     // client's validation ping must be less than server's leasePeriod
     private static final int SESSION_VALIDATOR_PING_PERIOD_SECS = 4;
     private static final int SESSION_VALIDATOR_PING_TIMEOUT_SECS = 3;
+
+    private static final int CONNECT_WAIT_BEFORE_PROCESS_ANY_CALLBACKS_SECS = 3;
 
     public static final String ADMIN_NAME = "Admin"; // if you change here then change in User too
     public static final String KEEP_MY_OLD_SESSION = "keep_my_old_session"; // for disconnects without active session lose (keep tables/games)
@@ -598,24 +600,43 @@ public class SessionImpl implements Session {
 
     class CallbackHandler implements InvokerCallbackHandler {
 
+        final CopyOnWriteArrayList<ClientCallback> waitingCallbacks = new CopyOnWriteArrayList<>();
+
         @Override
-        public void handleCallback(Callback callback) throws HandleCallbackException {
-            try {
-                // on connection client will receive all waiting callbacks from a server, e.g. started table, draft pick, etc
-                // but it's require to get server settings first (server state), e.g. for test mode
-                // possible bugs: hidden cheat button or enabled clicks protection in draft
-                // so wait for server state some time
+        public void handleCallback(Callback callback) {
+            // keep callbacks
+            ClientCallback clientCallback = (ClientCallback) callback.getCallbackObject();
+            waitingCallbacks.add(clientCallback);
+
+            // wait for client ready
+            // on connection client will receive all waiting callbacks from a server, e.g. started table, draft pick, etc
+            // but it's require to get server settings first (server state), e.g. for test mode
+            // possible bugs:
+            // - hidden cheat button or enabled clicks protection in draft
+            // - miss dialogs like draft or game panels
+            // so wait for server state some time
+            if (serverState == null) {
+                ThreadUtils.sleep(CONNECT_WAIT_BEFORE_PROCESS_ANY_CALLBACKS_SECS * 1000);
                 if (serverState == null) {
-                    ThreadUtils.sleep(1000);
-                    if (serverState == null) {
-                        logger.error("Can't receive server state before other data (possible reason: unstable network)");
-                    }
+                    logger.error("Can't receive server state before other data (possible reason: unstable network): "
+                            + clientCallback.getInfo());
                 }
-                client.onCallback((ClientCallback) callback.getCallbackObject());
+            }
+
+            // execute waiting queue
+            // client.onCallback must process and ignore outdated data inside
+            List<ClientCallback> executingCallbacks;
+            synchronized (waitingCallbacks) {
+                executingCallbacks = new ArrayList<>(waitingCallbacks);
+                executingCallbacks.sort(Comparator.comparingInt(ClientCallback::getMessageId));
+                waitingCallbacks.clear();
+            }
+
+            try {
+                executingCallbacks.forEach(client::onCallback);
             } catch (Exception ex) {
                 logger.error("handleCallback error", ex);
             }
-
         }
     }
 

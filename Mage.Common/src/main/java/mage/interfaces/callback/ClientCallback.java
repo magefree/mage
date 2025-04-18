@@ -99,4 +99,7 @@ public class ClientCallback implements Serializable {
         return messageId;
     }
 
+    public String getInfo() {
+        return String.format("message %d - %s - %s", this.getMessageId(), this.getMethod().getType(), this.getMethod());
+    }
 }
