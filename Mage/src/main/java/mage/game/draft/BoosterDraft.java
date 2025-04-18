@@ -34,6 +34,7 @@ public class BoosterDraft extends DraftImpl {
             }
             boosterNum++;
         }
+        this.boosterSendingEnd();
         this.fireEndDraftEvent();
     }
 

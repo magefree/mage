@@ -1,6 +1,7 @@
 package mage.server.draft;
 
 import mage.game.draft.Draft;
+import mage.game.draft.DraftPlayer;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.User;
@@ -154,6 +155,10 @@ public class DraftSession {
 
     private DraftPickView getDraftPickView(int timeout) {
         return new DraftPickView(draft.getPlayer(playerId), timeout);
+    }
+
+    public DraftPlayer getDraftPlayer() {
+        return draft.getPlayer(playerId);
     }
 
     public Draft getDraft() {

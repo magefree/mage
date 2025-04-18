@@ -336,7 +336,7 @@ public abstract class MatchImpl implements Match {
             while (!isDoneSideboarding()) {
                 try {
                     this.wait();
-                } catch (InterruptedException ex) {
+                } catch (InterruptedException ignore) {
                 }
             }
         }
