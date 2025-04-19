@@ -1,5 +1,7 @@
 package mage.abilities.effects;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -54,6 +56,10 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
     }
 
     public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game, boolean canUseChooseDialogs) {
+        return true;
+    }
+
+    public boolean updateForcedAttackersAfter(int numberAttackers, Permanent attackingCreature, Ability source, Game game, Map<UUID, Set<UUID>> creaturesForcedToAttack) {
         return true;
     }
 
