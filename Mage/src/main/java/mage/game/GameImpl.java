@@ -4201,4 +4201,19 @@ public abstract class GameImpl implements Game {
                 .append(this.getState().isGameOver() ? "; FINISHED: " + this.getWinner() : "");
         return sb.toString();
     }
+
+    @Override
+    public int getPlayerAutoTargetLevel(UUID abilityControllerId) {
+        Player player = getPlayer(abilityControllerId);
+        if (player == null) {
+            return 2;
+        }
+        int playerAutoTargetLevel;
+        if (player.isHuman() && player.getControllingPlayersUserData(this) != null) { // Ensure that non-strictChooseMode ComputerPlayer will still use this ability
+            playerAutoTargetLevel = player.getControllingPlayersUserData(this).getAutoTargetLevel();
+        } else {
+            playerAutoTargetLevel = 2;
+        }
+        return playerAutoTargetLevel;
+    }
 }
