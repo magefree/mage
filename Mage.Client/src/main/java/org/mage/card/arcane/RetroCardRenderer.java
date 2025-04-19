@@ -973,7 +973,7 @@ public class RetroCardRenderer extends CardRenderer {
             if (symbolHeight > advance) {
                 advance = symbolHeight;
             }
-            int symbolX = x - borderWidth;
+            int symbolX = x - borderWidth - frameInset;
             int symbolY = y + (advance - symbolHeight) / 2;
             if (doDraw) {
                 if (loyaltyRule.loyaltyChange < 0 || loyaltyRule.loyaltyChange == TextboxLoyaltyRule.MINUS_X) {
