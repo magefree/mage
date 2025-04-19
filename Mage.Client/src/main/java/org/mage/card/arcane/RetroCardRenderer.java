@@ -42,7 +42,7 @@ public class RetroCardRenderer extends CardRenderer {
 
     public static final BufferedImage BG_IMG_WHITE = loadBackgroundImage("white_retro");
     public static final BufferedImage BG_IMG_BLUE = loadBackgroundImage("blue_retro");
-    public static final BufferedImage BG_IMG_BLACK = loadBackgroundImage("black");
+    public static final BufferedImage BG_IMG_BLACK = loadBackgroundImage("black_retro");
     public static final BufferedImage BG_IMG_RED = loadBackgroundImage("red_retro");
     public static final BufferedImage BG_IMG_GREEN = loadBackgroundImage("green_retro");
     public static final BufferedImage BG_IMG_GOLD = loadBackgroundImage("gold_retro");
@@ -61,30 +61,16 @@ public class RetroCardRenderer extends CardRenderer {
     public static final Color BORDER_COLORLESS = new Color(208, 212, 212);
     public static final Color BORDER_LAND = new Color(190, 173, 115);
 
-    public static final Color BOX_WHITE = new Color(244, 245, 239);
-    public static final Color BOX_BLUE = new Color(201, 223, 237);
-    public static final Color BOX_BLACK = new Color(204, 194, 192);
-    public static final Color BOX_RED = new Color(246, 208, 185);
-    public static final Color BOX_GREEN = new Color(205, 221, 213);
+    public static final Color BOX_WHITE = new Color(248, 247, 245);
+    public static final Color BOX_BLUE = new Color(200, 226, 235);
+    public static final Color BOX_BLACK = new Color(230, 191, 134);
+    public static final Color BOX_RED = new Color(203, 141, 117);
+    public static final Color BOX_GREEN = new Color(234, 187, 134);
     public static final Color BOX_GOLD = new Color(223, 195, 136);
     public static final Color BOX_COLORLESS = new Color(200, 208, 212);
     public static final Color BOX_LAND = new Color(220, 215, 213);
     public static final Color BOX_INVENTION = new Color(209, 97, 33);
     public static final Color BOX_VEHICLE = new Color(155, 105, 60);
-
-    public static final Color BOX_UST_WHITE = new Color(240, 240, 220);
-    public static final Color BOX_UST_BLUE = new Color(10, 100, 180);
-    public static final Color BOX_UST_BLACK = new Color(28, 30, 28);
-    public static final Color BOX_UST_RED = new Color(229, 74, 32);
-    public static final Color BOX_UST_GREEN = new Color(7, 130, 53);
-
-    public static final Color BOX_WHITE_NIGHT = new Color(169, 160, 145);
-    public static final Color BOX_BLUE_NIGHT = new Color(46, 133, 176);
-    public static final Color BOX_BLACK_NIGHT = new Color(95, 90, 89);
-    public static final Color BOX_RED_NIGHT = new Color(188, 87, 57);
-    public static final Color BOX_GREEN_NIGHT = new Color(31, 100, 44);
-    public static final Color BOX_GOLD_NIGHT = new Color(171, 134, 70);
-    public static final Color BOX_COLORLESS_NIGHT = new Color(118, 147, 158);
 
     public static final Color LAND_TEXTBOX_WHITE = new Color(248, 232, 188, 234);
     public static final Color LAND_TEXTBOX_BLUE = new Color(189, 212, 236, 234);
@@ -99,14 +85,15 @@ public class RetroCardRenderer extends CardRenderer {
     public static final Color LAND_SPIRAL_TEXTBOX_RED = new Color(242, 168, 133, 220);
     public static final Color LAND_SPIRAL_TEXTBOX_GREEN = new Color(198, 220, 198, 220);
 
-    public static final Color TEXTBOX_WHITE = new Color(252, 249, 244, 234);
-    public static final Color TEXTBOX_BLUE = new Color(229, 238, 247, 234);
-    public static final Color TEXTBOX_BLACK = new Color(241, 241, 240, 234);
-    public static final Color TEXTBOX_RED = new Color(243, 224, 217, 234);
-    public static final Color TEXTBOX_GREEN = new Color(217, 232, 223, 234);
-    public static final Color TEXTBOX_GOLD = new Color(240, 234, 209, 234);
-    public static final Color TEXTBOX_COLORLESS = new Color(199, 209, 213, 234);
-    public static final Color TEXTBOX_LAND = new Color(218, 214, 212, 234);
+    public static final Color TEXTBOX_WHITE = new Color(248, 247, 245);
+    public static final Color TEXTBOX_BLUE = new Color(200, 226, 235);
+    public static final Color TEXTBOX_BLACK = new Color(230, 191, 134);
+    public static final Color TEXTBOX_RED = new Color(203, 141, 117);
+    public static final Color TEXTBOX_GREEN = new Color(234, 187, 134);
+    public static final Color TEXTBOX_GOLD = new Color(154, 142, 145);
+    public static final Color TEXTBOX_COLORLESS = new Color(190, 183, 178);
+    public static final Color TEXTBOX_ARTIFACT = new Color(199, 209, 213, 234);
+    public static final Color TEXTBOX_LAND = new Color(211, 151, 92, 255);
 
     public static final Color ERROR_COLOR = new Color(255, 0, 255);
 
@@ -139,7 +126,7 @@ public class RetroCardRenderer extends CardRenderer {
     protected int boxHeight;
 
     // How far down the card is the type line placed?
-    protected static final float TYPE_LINE_Y_FRAC = 0.54f; // x cardHeight
+    protected static final float TYPE_LINE_Y_FRAC = 0.52f; // x cardHeight
     protected int typeLineY;
 
     // Possible sizes of rules text font
@@ -159,8 +146,9 @@ public class RetroCardRenderer extends CardRenderer {
     // Processed mana cost string
     protected String manaCostString;
 
-    // Is an adventure or omen
-    protected boolean isCardWithSpellOption = false;
+    // Inset frame colors
+    protected Color frameTopRightColor;
+    protected Color frameBottomLeftColor;
 
     public RetroCardRenderer(CardView card) {
         // Pass off to parent
@@ -168,10 +156,6 @@ public class RetroCardRenderer extends CardRenderer {
 
         // Mana cost string
         manaCostString = ManaSymbols.getClearManaCost(cardView.getManaCostStr());
-    }
-
-    protected boolean isCardWithSpellOption() {
-        return isCardWithSpellOption;
     }
 
     @Override
@@ -202,8 +186,8 @@ public class RetroCardRenderer extends CardRenderer {
                 BOX_HEIGHT_FRAC * cardHeight);
 
         // Art / text box size
-        innerContentWidth = contentWidth - boxHeight + frameInset * 2;
-        innerContentStart = totalContentInset + boxHeight / 2 - frameInset;
+        innerContentWidth = contentWidth - boxHeight + frameInset * 4;
+        innerContentStart = totalContentInset + boxHeight / 2 - frameInset * 2;
 
         // Type line at
         typeLineY = (int) (TYPE_LINE_Y_FRAC * cardHeight);
@@ -218,6 +202,10 @@ public class RetroCardRenderer extends CardRenderer {
         ptTextHeight = getPTTextHeightForLineHeight(boxHeight);
         ptTextOffset = (boxHeight - ptTextHeight) / 2;
         ptTextFont = new Font("Arial", Font.BOLD, ptTextHeight);
+
+        // Inset Frame Colors
+        frameTopRightColor = getFrameColor(true);
+        frameBottomLeftColor = getFrameColor(false);
     }
 
     @Override
@@ -284,8 +272,8 @@ public class RetroCardRenderer extends CardRenderer {
 
             // Normal drawing of art from a source part of the card frame into the rect
             drawArtIntoRect(g,
-                    totalContentInset + boxHeight / 2, totalContentInset + boxHeight / 2,
-                    contentWidth - boxHeight, typeLineY - borderWidth * 3,
+                    innerContentStart, innerContentStart,
+                    contentWidth - boxHeight / 2, typeLineY - borderWidth * 2,
                     sourceRect, shouldPreserveAspect);
 
         }
@@ -297,7 +285,7 @@ public class RetroCardRenderer extends CardRenderer {
         ObjectColor frameColors = getFrameObjectColor();
 
         // Get the border paint
-        Color boxColor = getBoxColor(frameColors, cardView.getCardTypes(), attribs.isTransformed);
+        Color boxColor = getBoxColor(frameColors, cardView.getCardTypes());
         Paint textboxPaint = getTextboxPaint(frameColors, cardView.getCardTypes(), cardWidth, lessOpaqueRulesTextBox);
         Paint borderPaint = getBorderPaint(frameColors, cardView.getCardTypes(), cardWidth);
 
@@ -310,11 +298,11 @@ public class RetroCardRenderer extends CardRenderer {
         drawTextboxBackground(g, textboxPaint, frameColors, isOriginalDualLand());
 
         drawInsetFrame(g, innerContentStart, innerContentStart,
-                innerContentWidth, typeLineY - borderWidth * 3 + frameInset * 2);
+                innerContentWidth, typeLineY - borderWidth * 2 + frameInset);
 
         drawTypeLine(g, attribs, getCardTypeLine(),
                 innerContentStart, typeLineY,
-                contentWidth, boxHeight, true);
+                innerContentWidth, boxHeight, true);
 
         // Draw the transform circle
         int nameOffset = drawTransformationCircle(g, attribs, borderPaint);
@@ -347,10 +335,10 @@ public class RetroCardRenderer extends CardRenderer {
         int yi1 = y + height - frameInset;
 
         // Colors for visual effect (you can customize this)
-        Color topColor = new Color(85, 68, 32);
-        Color leftColor = new Color(152, 124, 107);
-        Color rightColor = new Color(85, 68, 32);
-        Color bottomColor = new Color(152, 124, 107);
+        Color topColor = frameTopRightColor;
+        Color leftColor = frameBottomLeftColor;
+        Color rightColor = frameTopRightColor;
+        Color bottomColor = frameBottomLeftColor;
 
         // Top trapezoid
         g2.setColor(topColor);
@@ -394,337 +382,63 @@ public class RetroCardRenderer extends CardRenderer {
     }
 
     private void drawTextboxBackground(Graphics2D g, Paint textboxPaint, ObjectColor frameColors, boolean isOriginalDual) {
-            g.setPaint(textboxPaint);
+        g.setPaint(textboxPaint);
         int x = innerContentStart;
         if (cardView.getCardTypes().contains(CardType.LAND)) {
-                int total_height_of_box = cardHeight - borderWidth * 3 - typeLineY - 2 - boxHeight;
+            int total_height_of_box = cardHeight - borderWidth * 3 - typeLineY - 2 - boxHeight;
 
-                // Analysis of LEA Duals (Scrubland) gives 16.5 height of unit of 'spirals' in the text area
-                int height_of_spiral = (int) Math.round(total_height_of_box / 16.5);
-                int total_height_spiral = total_height_of_box;
+            // Analysis of LEA Duals (Scrubland) gives 16.5 height of unit of 'spirals' in the text area
+            int height_of_spiral = (int) Math.round(total_height_of_box / 16.5);
+            int total_height_spiral = total_height_of_box;
 
-                List<ObjectColor> twoColors = frameColors.getColors();
+            List<ObjectColor> twoColors = frameColors.getColors();
 
-                if (twoColors.size() <= 2) {
-                    if (isOriginalDual && twoColors.size() == 2) {
-                        g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), false));
-                    }
-                    g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, total_height_of_box);
+            if (twoColors.size() <= 2) {
+                if (isOriginalDual && twoColors.size() == 2) {
+                    g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), false));
                 }
-                if (frameColors.getColorCount() >= 3) {
-                    g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, total_height_of_box);
-                }
-                if (frameColors.getColorCount() == 2) {
-                    if (isOriginalDual) {
-                        g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), true));
-
-                        // Horizontal bars
-                        g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, innerContentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, innerContentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, innerContentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
-
-                        g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 7 * height_of_spiral, innerContentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 5 * height_of_spiral, innerContentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 3 * height_of_spiral, innerContentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
-                        g.fillRect(x, typeLineY + boxHeight + 1 + total_height_of_box - height_of_spiral, innerContentWidth - 2, height_of_spiral);
-
-                        // Vertical bars
-                        g.fillRect(x, typeLineY + boxHeight + 1, height_of_spiral, total_height_spiral - 1);
-                        g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
-
-                        g.fillRect(totalContentInset + innerContentWidth - 7 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
-                        g.fillRect(totalContentInset + innerContentWidth - 5 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
-                        g.fillRect(totalContentInset + innerContentWidth - 3 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
-                        g.fillRect(totalContentInset + innerContentWidth - 1 * height_of_spiral, typeLineY + boxHeight + 1 + 0 * height_of_spiral, height_of_spiral, total_height_spiral - 1);
-                    }
-                }
-            } else {
-                g.fillRect(
-                        x, typeLineY + boxHeight,
-                        innerContentWidth, cardHeight / 3 - boxHeight / 2);
+                g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, total_height_of_box);
             }
-    }
+            if (frameColors.getColorCount() >= 3) {
+                g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, total_height_of_box);
+            }
+            if (frameColors.getColorCount() == 2) {
+                if (isOriginalDual) {
+                    g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), true));
 
-    private void drawMainFrame(Graphics2D g, Paint borderPaint) {
-        g.setPaint(borderPaint);
-        g.drawRect(
-                totalContentInset, totalContentInset,
-                contentWidth - 1, cardHeight - borderWidth * 3 - totalContentInset - 1);
-    }
+                    // Horizontal bars
+                    g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, innerContentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, innerContentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, innerContentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
 
-    public void drawZendikarCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
-                                       Color boxColor, Paint paint) {
-        if (artImage == null) {
-            return;
+                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 7 * height_of_spiral, innerContentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 5 * height_of_spiral, innerContentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 3 * height_of_spiral, innerContentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
+                    g.fillRect(x, typeLineY + boxHeight + 1 + total_height_of_box - height_of_spiral, innerContentWidth - 2, height_of_spiral);
+
+                    // Vertical bars
+                    g.fillRect(x, typeLineY + boxHeight + 1, height_of_spiral, total_height_spiral - 1);
+                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
+
+                    g.fillRect(totalContentInset + innerContentWidth - 7 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
+                    g.fillRect(totalContentInset + innerContentWidth - 5 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
+                    g.fillRect(totalContentInset + innerContentWidth - 3 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
+                    g.fillRect(totalContentInset + innerContentWidth - 1 * height_of_spiral, typeLineY + boxHeight + 1 + 0 * height_of_spiral, height_of_spiral, total_height_spiral - 1);
+                }
+            }
+            g.setColor(new Color(0xF5AD41));
+            g.drawRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, total_height_of_box);
+        } else {
+            g.fillRect(
+                    x, typeLineY + boxHeight,
+                    innerContentWidth, cardHeight / 3 - boxHeight / 2);
+            g.setColor(Color.black);
+            g.drawRect(x, typeLineY + boxHeight,
+                    innerContentWidth, cardHeight / 3 - boxHeight / 2);
         }
-
-        BufferedImage artToUse = artImage;
-        int srcW = artToUse.getWidth();
-        int srcH = artToUse.getHeight();
-
-        // Get a box based on the standard scan from gatherer.
-        // Width = 185/223 pixels (centered)
-        // Height = 220/310, 38 pixels from top
-        int subx = 19 * srcW / 223;
-        int suby = 38 * srcH / 310;
-        artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
-
-        Path2D.Double curve = new Path2D.Double();
-
-        int ew = x2 - x;
-        int eh = 700 * (y2 - y) / 335;
-        Arc2D arc = new Arc2D.Double(x, y - 197 * eh / 700, ew, eh, 0, 360, Arc2D.OPEN);
-        Arc2D innerarc = new Arc2D.Double(x + 1, y - 197 * eh / 700 + 1, ew - 2, eh - 2, 0, 360, Arc2D.OPEN);
-
-        curve.append(new Rectangle2D.Double(x, y, x2 - x, y2 - y), false);
-        g2.setClip(new Rectangle2D.Double(x, y, x2 - x, y2 - y));
-        g2.setClip(arc);
-
-        Rectangle2D r = curve.getBounds2D();
-        g2.drawImage(artToUse, x, y, x2 - x, y2 - y, null);
-        g2.setClip(null);
-        g2.setClip(new Rectangle2D.Double(x, y, x2 - x, y2 - y));
-
-        g2.setColor(CardRendererUtils.abitdarker(boxColor));
-        g2.draw(arc);
-        g2.setColor(Color.black);
-        g2.draw(innerarc);
-
-        g2.setClip(null);
-    }
-
-    public void drawBFZCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
-                                  int topxdelta, int endydelta,
-                                  Color boxColor, Paint paint) {
-        if (artImage == null) {
-            return;
-        }
-        BufferedImage artToUse = artImage;
-        int srcW = artToUse.getWidth();
-        int srcH = artToUse.getHeight();
-
-        // Get a box based on the standard scan from gatherer.
-        // Width = 185/223 pixels (centered)
-        // Height = 220/310, 38 pixels from top
-        int subx = 19 * srcW / 223;
-        int suby = 38 * srcH / 310;
-        artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
-
-        Path2D.Double curve = new Path2D.Double();
-        curve.moveTo(x + topxdelta, y);
-        curve.quadTo(x, y + endydelta / 2, x, y + endydelta);
-        curve.lineTo(x, y2);
-        curve.lineTo(x2, y2);
-        curve.lineTo(x2, y + endydelta);
-        curve.quadTo(x2, y + endydelta / 2, x2 - topxdelta, y);
-        curve.lineTo(x + topxdelta, y);
-
-        Path2D.Double innercurve = new Path2D.Double();
-        innercurve.moveTo(x + topxdelta, y + 1);
-        innercurve.quadTo(x + 1, y + endydelta / 2, x + 1, y + endydelta);
-        innercurve.lineTo(x + 1, y2 - 1);
-        innercurve.lineTo(x2 - 1, y2 - 1);
-        innercurve.lineTo(x2 - 1, y + endydelta);
-        innercurve.quadTo(x2 - 1, y + endydelta / 2, x2 - topxdelta, y + 1);
-        innercurve.lineTo(x + topxdelta, y + 1);
-
-        Rectangle2D r = curve.getBounds2D();
-        int minX = (int) r.getX();
-
-        g2.setClip(curve);
-        g2.drawImage(artToUse, minX, y, (x2 - x) + (x - minX) * 2, y2 - y, null);
-
-        g2.setClip(null);
-        g2.setColor(CardRendererUtils.abitdarker(boxColor));
-        g2.setPaint(paint);
-        g2.draw(curve);
-
-        g2.setColor(Color.black);
-        g2.draw(innercurve);
-    }
-
-    public void drawBorderlessCurves(Graphics2D g2, int w, int h, Color boxColor) {
-        BufferedImage artToUse = artImage;
-
-        int srcW = w;
-        int srcH = h;
-        if (artToUse != null) {
-            srcW = artToUse.getWidth();
-            srcH = artToUse.getHeight();
-        }
-
-        g2.setPaint(java.awt.Color.black);
-
-        // Dimensions:  534 height, 384 width, 34 offset at top, 41 offset at bottom.  Curve at bottom right is from an ellipse: 245 high, 196 wide, with center offset from
-        // right side by 36  (so top left is at: (width - 159, height - 41 -196)  center at: 41+127 = width - 36, height - 168)
-        int scan_width = 384;
-        int scan_height = 534;
-        int scan_ew = 174;
-        int scan_eh = 254;
-        int offset_ew = 160;
-        int offset_eh = 41;
-        int middle_ew = 52;
-        int middle_eh = 26;
-
-        // Bottom left side arc
-        int ex = (offset_ew - scan_ew) * w / scan_width;
-        int ey = h - (offset_eh + scan_eh) * h / scan_height;
-        int bot_ey = h - offset_eh * h / scan_height;
-        int ew = scan_ew * w / scan_width;
-        int eh = scan_eh * h / scan_height;
-        int end_curve_ex = ex + ew / 2;
-
-        Arc2D arc = new Arc2D.Double(ex, ey, ew, eh, 180, 90, Arc2D.OPEN);
-
-        // Bottom right side arc
-        ex = w - offset_ew * w / scan_width;
-        ey = h - (offset_eh + scan_eh) * h / scan_height;
-        bot_ey = h - offset_eh * h / scan_height;
-        Arc2D arc2 = new Arc2D.Double(ex, ey, ew, eh, 270, 90, Arc2D.OPEN);
-
-        // Middle bump.. 52x26
-        int mid_ex = w / 2 - middle_ew * w / (scan_width * 2);
-        int mid_ey = bot_ey - middle_eh * h / (scan_height * 2);
-        int end_mid_ex = w / 2 + middle_ew * w / (scan_width * 2);
-
-        Arc2D arc3 = new Arc2D.Double(mid_ex, mid_ey, middle_ew * w / scan_width, middle_eh * h / scan_height, 180, -180, Arc2D.OPEN);
-
-        Path2D.Double curve = new Path2D.Double();
-        curve.moveTo(0, 0);
-        curve.lineTo(0, bot_ey);
-        curve.append(arc, true);
-        curve.lineTo(mid_ex, bot_ey);
-        curve.append(arc3, true);
-        curve.lineTo(w - ew / 2, bot_ey);
-        curve.append(arc2, true);
-        curve.lineTo(w, 0);
-        curve.lineTo(0, 0);
-
-        g2.setClip(curve);
-        if (artToUse != null) {
-            artToUse = artImage.getSubimage(0, 0, srcW, srcH);
-            g2.drawImage(artToUse, 0, 0, w, h, null);
-        }
-
-        g2.setClip(null);
-        g2.setStroke(new BasicStroke(3));
-        g2.draw(arc);
-        g2.draw(new Rectangle(end_curve_ex, bot_ey, mid_ex - end_curve_ex, 0));
-        g2.draw(arc3);
-        g2.draw(new Rectangle(end_mid_ex, bot_ey, mid_ex - end_curve_ex, 0));
-        g2.draw(arc2);
-        g2.setStroke(new BasicStroke(1));
-        g2.setColor(boxColor);
-    }
-
-    public void drawCardAndBlackBorder(Graphics2D g2, int w, int h, Color boxColor) {
-        BufferedImage artToUse = artImage;
-        int srcW = w;
-        int srcH = h;
-        if (artToUse != null) {
-            srcW = artToUse.getWidth();
-            srcH = artToUse.getHeight();
-        }
-
-        // Draw main part (most of card)
-        RoundRectangle2D rr = new RoundRectangle2D.Double(borderWidth, borderWidth,
-                cardWidth - borderWidth * 2, cardHeight - borderWidth * 4 - cornerRadius * 2,
-                cornerRadius - 1, cornerRadius - 1);
-        Area a = new Area(rr);
-
-        RoundRectangle2D rr2 = new RoundRectangle2D.Double(borderWidth, cardHeight - borderWidth * 4 - cornerRadius * 4,
-                cardWidth - borderWidth * 2, cornerRadius * 4,
-                cornerRadius * 2, cornerRadius * 2);
-        a.add(new Area(rr2));
-
-        // Draw the M15 rounded "swoosh" at the bottom
-        Rectangle r = new Rectangle(borderWidth + contentInset, cardHeight - borderWidth * 6 - 1, cardWidth - borderWidth * 2 - contentInset * 2, borderWidth * 2);
-        a.add(new Area(r));
-        g2.setClip(a);
-        if (artToUse != null) {
-            artToUse = artImage.getSubimage(0, 0, srcW, srcH);
-            g2.drawImage(artToUse, 0, 0, w, h, null);
-        }
-        g2.setClip(null);
-    }
-
-    public void drawUSTCurves(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
-                              int topxdelta, int endydelta,
-                              Color boxColor, Paint paint) {
-        BufferedImage artToUse = artImage;
-
-        int srcW = x2;
-        int srcH = y2;
-        if (artToUse != null) {
-            srcW = artToUse.getWidth();
-            srcH = artToUse.getHeight();
-        }
-
-        g2.setPaint(paint);
-
-        // Dimensions:  534 height, 384 width, 34 offset at top, 41 offset at bottom.  Curve at bottom right is from an ellipse: 245 high, 196 wide, with center offset from
-        // right side by 36  (so top left is at: (width - 159, height - 41 -196)  center at: 41+127 = width - 36, height - 168)
-        int scan_width = 384;
-        int scan_height = 534;
-        int scan_ew = 196;
-        int scan_eh = 254;
-        int offset_ew = 159;
-        int offset_eh = 41;
-        int middle_ew = 52;
-        int middle_eh = 26;
-
-        // Bottom left side arc
-        int ex = (offset_ew - scan_ew) * x2 / scan_width;
-        int ey = y2 - (offset_eh + scan_eh) * y2 / scan_height;
-        int bot_ey = y2 - offset_eh * y2 / scan_height;
-        int ew = scan_ew * x2 / scan_width;
-        int eh = scan_eh * y2 / scan_height;
-        int end_curve_ex = ex + ew / 2;
-
-        Arc2D arc = new Arc2D.Double(ex, ey, ew, eh, 180, 90, Arc2D.OPEN);
-
-        // Bottom right side arc
-        ex = x2 - offset_ew * x2 / scan_width;
-        ey = y2 - (offset_eh + scan_eh) * y2 / scan_height;
-        bot_ey = y2 - offset_eh * y2 / scan_height;
-        Arc2D arc2 = new Arc2D.Double(ex, ey, ew, eh, 270, 90, Arc2D.OPEN);
-
-        // Middle bump.. 52x26
-        int mid_ex = x2 / 2 - middle_ew * x2 / (scan_width * 2);
-        int mid_ey = bot_ey - middle_eh * y2 / (scan_height * 2);
-        int end_mid_ex = x2 / 2 + middle_ew * x2 / (scan_width * 2);
-
-        Arc2D arc3 = new Arc2D.Double(mid_ex, mid_ey, middle_ew * x2 / scan_width, middle_eh * y2 / scan_height, 180, -180, Arc2D.OPEN);
-
-        Path2D.Double curve = new Path2D.Double();
-        curve.moveTo(0, 0);
-        curve.lineTo(0, bot_ey);
-        curve.append(arc, true);
-        curve.lineTo(mid_ex, bot_ey);
-        curve.append(arc3, true);
-        curve.lineTo(x2 - ew / 2, bot_ey);
-        curve.append(arc2, true);
-        curve.lineTo(x2, 0);
-        curve.lineTo(0, 0);
-
-        g2.setClip(curve);
-        if (artToUse != null) {
-            artToUse = artImage.getSubimage(0, 0, srcW, srcH);
-            g2.drawImage(artToUse, 0, 0, x2, y2, null);
-        }
-
-        g2.setClip(null);
-        g2.setStroke(new BasicStroke(3));
-        g2.draw(arc);
-        g2.draw(new Rectangle(end_curve_ex, bot_ey, mid_ex - end_curve_ex, 0));
-        g2.draw(arc3);
-        g2.draw(new Rectangle(end_mid_ex, bot_ey, mid_ex - end_curve_ex, 0));
-        g2.draw(arc2);
-        g2.setStroke(new BasicStroke(1));
-        g2.setColor(boxColor);
     }
 
     // Draw the name line
@@ -755,8 +469,12 @@ public class RetroCardRenderer extends CardRenderer {
             }
             if (breakIndex > 0) {
                 TextLayout layout = measure.getLayout(0, breakIndex);
-                g.setColor(Color.white);
-                layout.draw(g, x, y + boxTextOffset + boxTextHeight - 1);
+                int drawX = x;
+                int drawY = y + boxTextOffset + boxTextHeight - 1;
+
+                // Draw main text
+                g.setColor(getBoxTextColor(attribs));
+                layout.draw(g, drawX, drawY);
             }
         }
 
@@ -804,11 +522,12 @@ public class RetroCardRenderer extends CardRenderer {
             }
             if (breakIndex > 0) {
                 TextLayout layout = measure.getLayout(0, breakIndex);
-                g.setColor(Color.white);
+                g.setColor(getBoxTextColor(attribs));
                 layout.draw(g, x, y + (h - boxTextHeight) / 2 + boxTextHeight - 1);
             }
         }
     }
+
 
     public void paintOutlineTextByGlow(Graphics2D g, String text, Color color, int x, int y) {
         GlowText label = new GlowText();
@@ -895,14 +614,8 @@ public class RetroCardRenderer extends CardRenderer {
                     borderPaint,
                     isVehicle ? BOX_VEHICLE : fill);
 
-            // Draw shadow line top
-            g.setColor(new Color(180, 180, 180));
-            g.fillRect(
-                    x + contentInset, curY - boxHeight - 1,
-                    partBoxWidth - 2 * contentInset, 1);
-
             // Draw text
-            Color defaultTextColor = new Color(180, 180, 180);
+            Color defaultTextColor = Color.black;
             boolean defaultTextLight = true;
             g.setFont(ptTextFont);
 
@@ -1330,19 +1043,21 @@ public class RetroCardRenderer extends CardRenderer {
 
     protected int drawTransformationCircle(Graphics2D g, CardPanelAttributes attribs, Paint borderPaint) {
         int transformCircleOffset = 0;
+        int y = totalContentInset / 2 + frameInset;
+        int height = (boxHeight - boxTextHeight) / 2 + boxTextHeight - 1;
         if (isTransformCard(attribs)) {
-            transformCircleOffset = boxHeight - contentInset;
+            transformCircleOffset = height - contentInset * 2;
             g.setPaint(borderPaint);
-            g.drawOval(borderWidth, totalContentInset, boxHeight - 1, boxHeight - 1);
+            g.drawOval(borderWidth, y, height - 1, height - 1);
             g.setColor(Color.black);
-            g.fillOval(borderWidth + 1, totalContentInset + 1, boxHeight - 2, boxHeight - 2);
+            g.fillOval(borderWidth + 1, y + 1, height - 2, height - 2);
             g.setColor(Color.white);
             if (attribs.isTransformed) {
-                g.fillArc(borderWidth + 3, totalContentInset + 3, boxHeight - 6, boxHeight - 6, 90, 270);
+                g.fillArc(borderWidth + 3, y + 3, height - 6, height - 6, 90, 270);
                 g.setColor(Color.black);
-                g.fillArc(borderWidth + 3 + 3, totalContentInset + 3, boxHeight - 6 - 3, boxHeight - 6, 90, 270);
+                g.fillArc(borderWidth + 3 + 3, y + 3, height - 6 - 3, height - 6, 90, 270);
             } else {
-                g.fillOval(borderWidth + 3, totalContentInset + 3, boxHeight - 6, boxHeight - 6);
+                g.fillOval(borderWidth + 3, y + 3, height - 6, height - 6);
             }
         }
         return transformCircleOffset;
@@ -1361,14 +1076,37 @@ public class RetroCardRenderer extends CardRenderer {
         return h - 4;
     }
 
+    protected Color getFrameColor(boolean isTop) {
+        ObjectColor color = cardView.getColor();
+        if (color.isMulticolored()) {
+            return isTop ? new Color(118, 98, 43) : new Color(228, 221, 182);
+        } else if (color.isBlack()) {
+            return isTop ? new Color(34, 34, 34) : new Color(122, 121, 113);
+        } else if (color.isWhite()) {
+            return isTop ? new Color(187, 171, 144) : new Color(253, 247, 226);
+        } else if (color.isBlue()) {
+            return isTop ? new Color(40, 112, 110) : new Color(146, 202, 219);
+        } else if (color.isGreen()) {
+            return isTop ? new Color(59, 79, 46) : new Color(122, 154, 106);
+        } else if (color.isRed()) {
+            return isTop ? new Color(117, 57, 25) : new Color(245, 146, 107);
+        } else if (cardView.getCardTypes().contains(CardType.ARTIFACT)) {
+            return isTop ? new Color(85, 68, 32) : new Color(152, 124, 107);
+        } else {
+            return isTop ? new Color(139, 130, 130) : new Color(165, 165, 169);
+        }
+    }
+
     // Determine the color of the name / type line text
     protected Color getBoxTextColor(CardPanelAttributes attribs) {
-        if (attribs.isTransformed) {
+        if (!cardView.getColor().isMulticolored() && cardView.getColor().isWhite()) {
+            return Color.black;
+        } else if (attribs.isTransformed) {
             return Color.white;
         } else if (cardView.isAbility()) {
             return Color.white;
         } else {
-            return Color.black;
+            return Color.white;
         }
     }
 
@@ -1403,7 +1141,7 @@ public class RetroCardRenderer extends CardRenderer {
         }
     }
     // Get the box color for the given colors
-    protected Color getBoxColor(ObjectColor colors, Collection<CardType> types, boolean isNightCard) {
+    protected Color getBoxColor(ObjectColor colors, Collection<CardType> types) {
         if (cardView.isAbility()) {
             return Color.BLACK;
         } else if (colors.getColorCount() == 2 && types.contains(CardType.LAND)) {
@@ -1412,23 +1150,23 @@ public class RetroCardRenderer extends CardRenderer {
             // box as normal.
             return BOX_LAND;
         } else if (colors.isMulticolored()) {
-            return isNightCard ? BOX_GOLD_NIGHT : BOX_GOLD;
+            return BOX_GOLD;
         } else if (colors.isColorless()) {
             if (types.contains(CardType.LAND)) {
                 return BOX_LAND;
             } else {
-                return isNightCard ? BOX_COLORLESS_NIGHT : BOX_COLORLESS;
+                return BOX_COLORLESS;
             }
         } else if (colors.isWhite()) {
-            return isNightCard ? BOX_WHITE_NIGHT : BOX_WHITE;
+            return BOX_WHITE;
         } else if (colors.isBlue()) {
-            return isNightCard ? BOX_BLUE_NIGHT : BOX_BLUE;
+            return BOX_BLUE;
         } else if (colors.isBlack()) {
-            return isNightCard ? BOX_BLACK_NIGHT : BOX_BLACK;
+            return BOX_BLACK;
         } else if (colors.isRed()) {
-            return isNightCard ? BOX_RED_NIGHT : BOX_RED;
+            return BOX_RED;
         } else if (colors.isGreen()) {
-            return isNightCard ? BOX_GREEN_NIGHT : BOX_GREEN;
+            return BOX_GREEN;
         } else {
             return ERROR_COLOR;
         }
@@ -1582,21 +1320,13 @@ public class RetroCardRenderer extends CardRenderer {
     // Determine the border paint to use, based on an ObjectColors
     protected static Paint getTextboxPaint(ObjectColor colors, Collection<CardType> types, int width, boolean lessOpaqueRulesTextBox) {
         if (colors.isMulticolored()) {
-            if (colors.getColorCount() == 2) {
+            if (colors.getColorCount() == 2 && types.contains(CardType.LAND)) {
                 List<ObjectColor> twoColors = colors.getColors();
                 Color[] translatedColors;
-                if (types.contains(CardType.LAND)) {
-                    translatedColors = new Color[]{
-                            getLessOpaqueColor(getLandTextboxColor(twoColors.get(0)), lessOpaqueRulesTextBox),
-                            getLessOpaqueColor(getLandTextboxColor(twoColors.get(1)), lessOpaqueRulesTextBox)
-                    };
-                } else {
-                    translatedColors = new Color[]{
-                            getLessOpaqueColor(getTextboxColor(twoColors.get(0)), lessOpaqueRulesTextBox),
-                            getLessOpaqueColor(getTextboxColor(twoColors.get(1)), lessOpaqueRulesTextBox)
-                    };
-                }
-
+                translatedColors = new Color[]{
+                        getLessOpaqueColor(getLandTextboxColor(twoColors.get(0)), lessOpaqueRulesTextBox),
+                        getLessOpaqueColor(getLandTextboxColor(twoColors.get(1)), lessOpaqueRulesTextBox)
+                };
                 // Special case for two colors, gradient paint
                 return new LinearGradientPaint(
                         0, 0, width, 0,
