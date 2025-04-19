@@ -23,6 +23,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -88,7 +89,7 @@ class HansErikssonEffect extends OneShotEffect {
             return player.moveCards(card, Zone.HAND, source, game);
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return true;
         }
