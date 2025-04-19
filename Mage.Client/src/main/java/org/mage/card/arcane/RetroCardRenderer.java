@@ -66,8 +66,8 @@ public class RetroCardRenderer extends CardRenderer {
     public static final Color BOX_BLACK = new Color(230, 191, 134);
     public static final Color BOX_RED = new Color(203, 141, 117);
     public static final Color BOX_GREEN = new Color(234, 187, 134);
-    public static final Color BOX_GOLD = new Color(223, 195, 136);
-    public static final Color BOX_COLORLESS = new Color(200, 208, 212);
+    public static final Color BOX_GOLD = new Color(154, 142, 145);
+    public static final Color BOX_COLORLESS = new Color(190, 183, 178);
     public static final Color BOX_LAND = new Color(220, 215, 213);
     public static final Color BOX_INVENTION = new Color(209, 97, 33);
     public static final Color BOX_VEHICLE = new Color(155, 105, 60);
