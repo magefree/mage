@@ -199,7 +199,7 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
         return new OldGrowthTrollContinuousEffect(this);
     }
 
-    private static final Ability makeAbility() {
+    private static Ability makeAbility() {
         Ability activatedAbility = new SimpleActivatedAbility(
                 new CreateTokenEffect(new TrollWarriorToken(), 1, true, false), new GenericManaCost(1)
         );

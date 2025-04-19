@@ -70,6 +70,7 @@ class KarnLiberatedEffect extends OneShotEffect {
 
     private KarnLiberatedEffect(final KarnLiberatedEffect effect) {
         super(effect);
+        this.exileId = effect.exileId;
     }
 
     @Override
