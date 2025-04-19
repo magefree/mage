@@ -426,7 +426,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
-        if (game.inCheckPlayableState()) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 
