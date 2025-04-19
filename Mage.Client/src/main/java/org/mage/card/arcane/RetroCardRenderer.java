@@ -186,8 +186,8 @@ public class RetroCardRenderer extends CardRenderer {
                 BOX_HEIGHT_FRAC * cardHeight);
 
         // Art / text box size
-        innerContentWidth = contentWidth - boxHeight + frameInset * 4;
-        innerContentStart = totalContentInset + boxHeight / 2 - frameInset * 2;
+        innerContentWidth = (int) (cardWidth * 0.81f);
+        innerContentStart = (int) (cardWidth * 0.095f);
 
         // Type line at
         typeLineY = (int) (TYPE_LINE_Y_FRAC * cardHeight);
@@ -272,8 +272,8 @@ public class RetroCardRenderer extends CardRenderer {
 
             // Normal drawing of art from a source part of the card frame into the rect
             drawArtIntoRect(g,
-                    innerContentStart, innerContentStart,
-                    contentWidth - boxHeight / 2, typeLineY - borderWidth * 2,
+                    innerContentStart + frameInset, innerContentStart + frameInset * 2,
+                    innerContentWidth - frameInset * 2, (int) (cardHeight * .45),
                     sourceRect, shouldPreserveAspect);
 
         }
@@ -297,11 +297,11 @@ public class RetroCardRenderer extends CardRenderer {
         // Draw the textbox fill
         drawTextboxBackground(g, textboxPaint, frameColors, isOriginalDualLand());
 
-        drawInsetFrame(g, innerContentStart, innerContentStart,
+        drawInsetFrame(g, innerContentStart, innerContentStart + frameInset,
                 innerContentWidth, typeLineY - borderWidth * 2 + frameInset);
 
         drawTypeLine(g, attribs, getCardTypeLine(),
-                innerContentStart, typeLineY,
+                innerContentStart, typeLineY + frameInset,
                 innerContentWidth, boxHeight, true);
 
         // Draw the transform circle
@@ -310,12 +310,12 @@ public class RetroCardRenderer extends CardRenderer {
         // Draw the name line
         drawNameLine(g, attribs, cardView.getDisplayName(), manaCostString,
                 innerContentStart + nameOffset, totalContentInset / 2 - frameInset,
-                contentWidth - nameOffset - borderWidth - frameInset, boxHeight);
+                contentWidth - nameOffset - borderWidth, boxHeight);
 
         // Draw the textbox rules
         drawRulesText(g, textboxKeywords, textboxRules,
                 innerContentStart + 2, typeLineY + boxHeight + 2,
-                innerContentWidth - 4, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);
+                innerContentWidth - 4, (int) ((cardHeight - borderWidth * 2) * 0.33f), false);
 
         // Draw the bottom right stuff
         drawBottomRight(g, attribs, borderPaint, boxColor);
@@ -379,17 +379,24 @@ public class RetroCardRenderer extends CardRenderer {
         bottom.lineTo(xi0, yi1);
         bottom.closePath();
         g2.fill(bottom);
+
+        g2.setColor(CardRendererUtils.abitdarker(topColor));
+        g2.draw(top);
+        g2.draw(right);
+//        g2.setColor(CardRendererUtils.abitdarker(bottomColor));
+        g2.draw(left);
+        g2.draw(bottom);
     }
 
     private void drawTextboxBackground(Graphics2D g, Paint textboxPaint, ObjectColor frameColors, boolean isOriginalDual) {
         g.setPaint(textboxPaint);
         int x = innerContentStart;
+        int backgroundHeight = (int) ((cardHeight - borderWidth * 2) * 0.33f);
         if (cardView.getCardTypes().contains(CardType.LAND)) {
-            int total_height_of_box = cardHeight - borderWidth * 3 - typeLineY - 2 - boxHeight;
 
             // Analysis of LEA Duals (Scrubland) gives 16.5 height of unit of 'spirals' in the text area
-            int height_of_spiral = (int) Math.round(total_height_of_box / 16.5);
-            int total_height_spiral = total_height_of_box;
+            int height_of_spiral = (int) Math.round(backgroundHeight / 16.5);
+            int total_height_spiral = backgroundHeight;
 
             List<ObjectColor> twoColors = frameColors.getColors();
 
@@ -397,10 +404,10 @@ public class RetroCardRenderer extends CardRenderer {
                 if (isOriginalDual && twoColors.size() == 2) {
                     g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), false));
                 }
-                g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, total_height_of_box);
+                g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, backgroundHeight);
             }
             if (frameColors.getColorCount() >= 3) {
-                g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, total_height_of_box);
+                g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, backgroundHeight);
             }
             if (frameColors.getColorCount() == 2) {
                 if (isOriginalDual) {
@@ -412,10 +419,10 @@ public class RetroCardRenderer extends CardRenderer {
                     g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, innerContentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
                     g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, innerContentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
 
-                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 7 * height_of_spiral, innerContentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 5 * height_of_spiral, innerContentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 3 * height_of_spiral, innerContentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
-                    g.fillRect(x, typeLineY + boxHeight + 1 + total_height_of_box - height_of_spiral, innerContentWidth - 2, height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + backgroundHeight - 7 * height_of_spiral, innerContentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + backgroundHeight - 5 * height_of_spiral, innerContentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + backgroundHeight - 3 * height_of_spiral, innerContentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
+                    g.fillRect(x, typeLineY + boxHeight + 1 + backgroundHeight - height_of_spiral, innerContentWidth - 2, height_of_spiral);
 
                     // Vertical bars
                     g.fillRect(x, typeLineY + boxHeight + 1, height_of_spiral, total_height_spiral - 1);
@@ -430,14 +437,14 @@ public class RetroCardRenderer extends CardRenderer {
                 }
             }
             g.setColor(new Color(0xF5AD41));
-            g.drawRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, total_height_of_box);
+            g.drawRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, backgroundHeight);
         } else {
             g.fillRect(
                     x, typeLineY + boxHeight,
-                    innerContentWidth, cardHeight / 3 - boxHeight / 2);
+                    innerContentWidth, backgroundHeight);
             g.setColor(Color.black);
             g.drawRect(x, typeLineY + boxHeight,
-                    innerContentWidth, cardHeight / 3 - boxHeight / 2);
+                    innerContentWidth, backgroundHeight);
         }
     }
 
