@@ -273,7 +273,7 @@ public class RetroCardRenderer extends CardRenderer {
             // Normal drawing of art from a source part of the card frame into the rect
             drawArtIntoRect(g,
                     innerContentStart + frameInset, innerContentStart + frameInset * 2,
-                    innerContentWidth - frameInset * 2, (int) (cardHeight * .45),
+                    innerContentWidth - frameInset * 2, typeLineY - borderWidth * 2,
                     sourceRect, shouldPreserveAspect);
 
         }
