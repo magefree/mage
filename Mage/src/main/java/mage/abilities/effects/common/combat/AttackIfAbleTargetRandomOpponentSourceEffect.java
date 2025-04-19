@@ -36,7 +36,7 @@ public class AttackIfAbleTargetRandomOpponentSourceEffect extends OneShotEffect 
         if (controller == null) {
             return false;
         }
-        List<UUID> opponents = new ArrayList<>(game.getOpponents(controller.getId()));
+        List<UUID> opponents = new ArrayList<>(game.getOpponents(controller.getId(), true));
         Player opponent = game.getPlayer(opponents.get(RandomUtil.nextInt(opponents.size())));
         if (opponent != null) {
             game.informPlayers(opponent.getLogName() + " was chosen at random.");

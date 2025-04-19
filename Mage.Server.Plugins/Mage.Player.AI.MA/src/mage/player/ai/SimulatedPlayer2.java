@@ -200,7 +200,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
                 Ability ability1 = iterator.next();
                 if (ability1.getTargets().size() == 1 && ability1.getTargets().get(0).getTargets().size() == 1) {
                     Permanent permanent = game.getPermanent(ability1.getFirstTarget());
-                    if (permanent != null && !game.getOpponents(playerId).contains(permanent.getControllerId())) {
+                    if (permanent != null && !game.getOpponents(playerId, true).contains(permanent.getControllerId())) {
                         iterator.remove();
                         continue;
                     }
@@ -216,11 +216,11 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
                 Ability ability1 = iterator.next();
                 if (ability1.getTargets().size() == 1 && ability1.getTargets().get(0).getTargets().size() == 1) {
                     Permanent permanent = game.getPermanent(ability1.getFirstTarget());
-                    if (permanent != null && game.getOpponents(playerId).contains(permanent.getControllerId())) {
+                    if (permanent != null && game.getOpponents(playerId, true).contains(permanent.getControllerId())) {
                         iterator.remove();
                         continue;
                     }
-                    if (game.getOpponents(playerId).contains(ability1.getFirstTarget())) {
+                    if (game.getOpponents(playerId, true).contains(ability1.getFirstTarget())) {
                         iterator.remove();
                     }
                 }
@@ -233,7 +233,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     public List<Combat> addAttackers(Game game) {
         Map<Integer, Combat> engagements = new HashMap<>();
         //useful only for two player games - will only attack first opponent
-        UUID defenderId = game.getOpponents(playerId).iterator().next();
+        UUID defenderId = game.getOpponents(playerId, true).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
