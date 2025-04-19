@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 import mage.util.CardUtil;
@@ -67,10 +68,7 @@ enum VeteranSurvivorCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game
-                .getExile()
-                .getExileZone(CardUtil.getExileZoneId(game, source))
-                .getCards(game)
-                .size() >= 3;
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        return exileZone != null && exileZone.getCards(game).size() >= 3;
     }
 }
