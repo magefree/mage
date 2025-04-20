@@ -10,7 +10,6 @@ import mage.constants.MageObjectType;
 import mage.constants.SubType;
 import mage.view.CardView;
 import mage.view.PermanentView;
-import org.apache.log4j.Logger;
 
 import java.awt.*;
 import java.awt.font.*;
@@ -23,22 +22,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
 import static org.mage.card.arcane.ModernCardResourceLoader.*;
 
 /**
  * @author stravant@gmail.com, JayDi85, Jmlundeen
  * <p>
  * Base rendering class for old border cards
- * M15 frame style, for another styles see https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
  */
 public class RetroCardRenderer extends CardRenderer {
 
-    private static final Logger LOGGER = Logger.getLogger(RetroCardRenderer.class);
-    private static final GlowText glowTextRenderer = new GlowText();
     public static final Color MANA_ICONS_TEXT_COLOR = Color.DARK_GRAY; // text color of missing mana icons in IMAGE render mode
-
-    // public static final Font BASE_BELEREN_FONT = loadFont("beleren-bold");
 
     public static final BufferedImage BG_IMG_WHITE = loadBackgroundImage("white_retro");
     public static final BufferedImage BG_IMG_BLUE = loadBackgroundImage("blue_retro");
@@ -50,14 +43,13 @@ public class RetroCardRenderer extends CardRenderer {
     public static final BufferedImage BG_IMG_LAND = loadBackgroundImage("land_retro");
     public static final BufferedImage BG_IMG_COLORLESS = loadBackgroundImage("colorless_retro");
 
-    public static final BufferedImage FRAME_INVENTION = loadFramePart("invention_frame");
 
-    public static final Color BORDER_WHITE = new Color(216, 203, 188);
-    public static final Color BORDER_BLUE = new Color(20, 121, 175);
-    public static final Color BORDER_BLACK = new Color(45, 45, 35);
-    public static final Color BORDER_RED = new Color(201, 71, 58);
-    public static final Color BORDER_GREEN = new Color(4, 136, 69);
-    public static final Color BORDER_GOLD = new Color(255, 228, 124);
+    public static final Color BORDER_WHITE = new Color(168, 159, 156);
+    public static final Color BORDER_BLUE = new Color(29, 107, 124);
+    public static final Color BORDER_BLACK = new Color(77, 71, 73);
+    public static final Color BORDER_RED = new Color(200, 71, 58);
+    public static final Color BORDER_GREEN = new Color(91, 136, 62, 255);
+    public static final Color BORDER_GOLD = new Color(244, 172, 65);
     public static final Color BORDER_COLORLESS = new Color(208, 212, 212);
     public static final Color BORDER_LAND = new Color(190, 173, 115);
 
@@ -92,7 +84,6 @@ public class RetroCardRenderer extends CardRenderer {
     public static final Color TEXTBOX_GREEN = new Color(234, 187, 134);
     public static final Color TEXTBOX_GOLD = new Color(154, 142, 145);
     public static final Color TEXTBOX_COLORLESS = new Color(190, 183, 178);
-    public static final Color TEXTBOX_ARTIFACT = new Color(199, 209, 213, 234);
     public static final Color TEXTBOX_LAND = new Color(211, 151, 92, 255);
 
     public static final Color ERROR_COLOR = new Color(255, 0, 255);
@@ -273,7 +264,7 @@ public class RetroCardRenderer extends CardRenderer {
             // Normal drawing of art from a source part of the card frame into the rect
             drawArtIntoRect(g,
                     innerContentStart + frameInset, innerContentStart + frameInset * 2,
-                    innerContentWidth - frameInset * 2, typeLineY - borderWidth * 2,
+                    innerContentWidth - frameInset * 2, typeLineY - borderWidth * 2 - frameInset,
                     sourceRect, shouldPreserveAspect);
 
         }
@@ -295,14 +286,14 @@ public class RetroCardRenderer extends CardRenderer {
         }
 
         // Draw the textbox fill
-        drawTextboxBackground(g, textboxPaint, frameColors, isOriginalDualLand());
+        drawTextboxBackground(g, textboxPaint, frameColors, borderPaint, isOriginalDualLand());
 
         drawInsetFrame(g, innerContentStart, innerContentStart + frameInset,
-                innerContentWidth, typeLineY - borderWidth * 2 + frameInset);
+                innerContentWidth, typeLineY - borderWidth * 2 + frameInset, borderPaint, cardView.getCardTypes().contains(CardType.LAND));
 
         drawTypeLine(g, attribs, getCardTypeLine(),
                 innerContentStart, typeLineY + frameInset,
-                innerContentWidth, boxHeight, true);
+                innerContentWidth, boxHeight + frameInset);
 
         // Draw the transform circle
         int nameOffset = drawTransformationCircle(g, attribs, borderPaint);
@@ -310,22 +301,20 @@ public class RetroCardRenderer extends CardRenderer {
         // Draw the name line
         drawNameLine(g, attribs, cardView.getDisplayName(), manaCostString,
                 innerContentStart + nameOffset, totalContentInset / 2 - frameInset,
-                contentWidth - nameOffset - borderWidth, boxHeight);
+                contentWidth - nameOffset - borderWidth);
 
         // Draw the textbox rules
         drawRulesText(g, textboxKeywords, textboxRules,
                 innerContentStart + 2, typeLineY + boxHeight + 2,
-                innerContentWidth - 4, (int) ((cardHeight - borderWidth * 2) * 0.33f), false);
+                innerContentWidth - 4, (int) ((cardHeight - borderWidth * 2) * 0.33f));
 
         // Draw the bottom right stuff
-        drawBottomRight(g, attribs, borderPaint, boxColor);
+        drawBottomRight(g, borderPaint, boxColor);
     }
 
-    private void drawInsetFrame(Graphics2D g2, int x, int y, int width, int height) {
+    private void drawInsetFrame(Graphics2D g2, int x, int y, int width, int height, Paint borderPaint, boolean isLand) {
 
         // Outer and inner bounds
-        int x0 = x;
-        int y0 = y;
         int x1 = x + width;
         int y1 = y + height;
 
@@ -343,52 +332,62 @@ public class RetroCardRenderer extends CardRenderer {
         // Top trapezoid
         g2.setColor(topColor);
         Path2D top = new Path2D.Double();
-        top.moveTo(x0, y0);
-        top.lineTo(x1, y0);
+        top.moveTo(x, y);
+        top.lineTo(x1, y);
         top.lineTo(xi1, yi0);
         top.lineTo(xi0, yi0);
         top.closePath();
-        g2.fill(top);
 
         // Left trapezoid
         g2.setColor(leftColor);
         Path2D left = new Path2D.Double();
-        left.moveTo(x0, y0);
+        left.moveTo(x, y);
         left.lineTo(xi0, yi0);
         left.lineTo(xi0, yi1);
-        left.lineTo(x0, y1);
+        left.lineTo(x, y1);
         left.closePath();
-        g2.fill(left);
 
         // Right trapezoid
         g2.setColor(rightColor);
         Path2D right = new Path2D.Double();
-        right.moveTo(x1, y0);
+        right.moveTo(x1, y);
         right.lineTo(x1, y1);
         right.lineTo(xi1, yi1);
         right.lineTo(xi1, yi0);
         right.closePath();
-        g2.fill(right);
 
         // Bottom trapezoid
         g2.setColor(bottomColor);
         Path2D bottom = new Path2D.Double();
-        bottom.moveTo(x0, y1);
+        bottom.moveTo(x, y1);
         bottom.lineTo(x1, y1);
         bottom.lineTo(xi1, yi1);
         bottom.lineTo(xi0, yi1);
         bottom.closePath();
-        g2.fill(bottom);
 
-        g2.setColor(CardRendererUtils.abitdarker(topColor));
-        g2.draw(top);
-        g2.draw(right);
-//        g2.setColor(CardRendererUtils.abitdarker(bottomColor));
-        g2.draw(left);
-        g2.draw(bottom);
+        if (isLand) {
+            g2.draw(top);
+            g2.draw(left);
+            g2.draw(right);
+            g2.draw(bottom);
+            if (cardView.getFrameColor().getColorCount() > 1) {
+                g2.setColor(BORDER_LAND);
+            } else {
+                g2.setPaint(borderPaint);
+            }
+        } else {
+            g2.fill(top);
+            g2.fill(left);
+            g2.fill(right);
+            g2.draw(bottom);
+            g2.setColor(CardRendererUtils.abitdarker(topColor));
+        }
+        g2.setStroke(new BasicStroke(1.5f));
+        g2.drawRect(x, y, x1 - x, y1 - y);
+        g2.setStroke(new BasicStroke(1));
     }
 
-    private void drawTextboxBackground(Graphics2D g, Paint textboxPaint, ObjectColor frameColors, boolean isOriginalDual) {
+    private void drawTextboxBackground(Graphics2D g, Paint textboxPaint, ObjectColor frameColors, Paint borderPaint, boolean isOriginalDual) {
         g.setPaint(textboxPaint);
         int x = innerContentStart;
         int backgroundHeight = (int) ((cardHeight - borderWidth * 2) * 0.33f);
@@ -396,18 +395,25 @@ public class RetroCardRenderer extends CardRenderer {
 
             // Analysis of LEA Duals (Scrubland) gives 16.5 height of unit of 'spirals' in the text area
             int height_of_spiral = (int) Math.round(backgroundHeight / 16.5);
-            int total_height_spiral = backgroundHeight;
 
             List<ObjectColor> twoColors = frameColors.getColors();
+            g.setPaint(borderPaint);
+            g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth, backgroundHeight);
+            g.setColor(Color.black);
+            g.drawRect(x, typeLineY + boxHeight + 1, innerContentWidth, backgroundHeight);
+            g.setPaint(textboxPaint);
 
             if (twoColors.size() <= 2) {
                 if (isOriginalDual && twoColors.size() == 2) {
                     g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), false));
                 }
-                g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, backgroundHeight);
+                g.fillRect(x + frameInset, typeLineY + boxHeight + 1 + frameInset, innerContentWidth - frameInset * 2, backgroundHeight - frameInset * 2);
+                g.setColor(Color.black);
+                g.drawRect(x + frameInset, typeLineY + boxHeight + 1 + frameInset, innerContentWidth - frameInset * 2, backgroundHeight - frameInset * 2);
+
             }
             if (frameColors.getColorCount() >= 3) {
-                g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, backgroundHeight);
+                g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 4, backgroundHeight);
             }
             if (frameColors.getColorCount() == 2) {
                 if (isOriginalDual) {
@@ -425,19 +431,17 @@ public class RetroCardRenderer extends CardRenderer {
                     g.fillRect(x, typeLineY + boxHeight + 1 + backgroundHeight - height_of_spiral, innerContentWidth - 2, height_of_spiral);
 
                     // Vertical bars
-                    g.fillRect(x, typeLineY + boxHeight + 1, height_of_spiral, total_height_spiral - 1);
-                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
+                    g.fillRect(x, typeLineY + boxHeight + 1, height_of_spiral, backgroundHeight - 1);
+                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 4 * height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 8 * height_of_spiral);
+                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 12 * height_of_spiral);
 
-                    g.fillRect(totalContentInset + innerContentWidth - 7 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
-                    g.fillRect(totalContentInset + innerContentWidth - 5 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
-                    g.fillRect(totalContentInset + innerContentWidth - 3 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
-                    g.fillRect(totalContentInset + innerContentWidth - 1 * height_of_spiral, typeLineY + boxHeight + 1 + 0 * height_of_spiral, height_of_spiral, total_height_spiral - 1);
+                    g.fillRect(totalContentInset + innerContentWidth - 7 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 12 * height_of_spiral);
+                    g.fillRect(totalContentInset + innerContentWidth - 5 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 8 * height_of_spiral);
+                    g.fillRect(totalContentInset + innerContentWidth - 3 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 4 * height_of_spiral);
+                    g.fillRect(totalContentInset + innerContentWidth - 1 * height_of_spiral, typeLineY + boxHeight + 1 + 0 * height_of_spiral, height_of_spiral, backgroundHeight - 1);
                 }
             }
-            g.setColor(new Color(0xF5AD41));
-            g.drawRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, backgroundHeight);
         } else {
             g.fillRect(
                     x, typeLineY + boxHeight,
@@ -449,7 +453,7 @@ public class RetroCardRenderer extends CardRenderer {
     }
 
     // Draw the name line
-    protected void drawNameLine(Graphics2D g, CardPanelAttributes attribs, String baseName, String manaCost, int x, int y, int w, int h) {
+    protected void drawNameLine(Graphics2D g, CardPanelAttributes attribs, String baseName, String manaCost, int x, int y, int w) {
         // Width of the mana symbols
         int manaCostWidth;
         if (cardView.isAbility()) {
@@ -476,12 +480,11 @@ public class RetroCardRenderer extends CardRenderer {
             }
             if (breakIndex > 0) {
                 TextLayout layout = measure.getLayout(0, breakIndex);
-                int drawX = x;
                 int drawY = y + boxTextOffset + boxTextHeight - 1;
 
                 // Draw main text
                 g.setColor(getBoxTextColor(attribs));
-                layout.draw(g, drawX, drawY);
+                layout.draw(g, x, drawY);
             }
         }
 
@@ -492,17 +495,11 @@ public class RetroCardRenderer extends CardRenderer {
     }
 
     // Draw the type line (color indicator, types, and expansion symbol)
-    protected void drawTypeLine(Graphics2D g, CardPanelAttributes attribs, String baseTypeLine, int x, int y, int w, int h, boolean withSymbol) {
+    protected void drawTypeLine(Graphics2D g, CardPanelAttributes attribs, String baseTypeLine, int x, int y, int w, int h) {
         // Draw expansion symbol
         int expansionSymbolWidth = 0;
         if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_SET_SYMBOL, "false").equals("false")) {
-            if (cardView.isAbility()) {
-                expansionSymbolWidth = 0;
-            } else if (withSymbol) {
-                expansionSymbolWidth = drawExpansionSymbol(g, x, y, w, h);
-            }
-        } else {
-            expansionSymbolWidth = 0;
+            expansionSymbolWidth = drawExpansionSymbol(g, x, y, w, h);
         }
 
         // Draw type line text
@@ -530,59 +527,13 @@ public class RetroCardRenderer extends CardRenderer {
             if (breakIndex > 0) {
                 TextLayout layout = measure.getLayout(0, breakIndex);
                 g.setColor(getBoxTextColor(attribs));
-                layout.draw(g, x, y + (h - boxTextHeight) / 2 + boxTextHeight - 1);
+                layout.draw(g, x, y + (float) (h - boxTextHeight) / 2 + boxTextHeight - 1);
             }
         }
     }
 
-
-    public void paintOutlineTextByGlow(Graphics2D g, String text, Color color, int x, int y) {
-        GlowText label = new GlowText();
-        label.setGlow(Color.black, 6, 3);
-        label.setText(text);
-        label.setFont(g.getFont().deriveFont(Font.BOLD));
-        label.setForeground(color);
-        Dimension ptSize = label.getPreferredSize();
-        label.setSize(ptSize.width, ptSize.height);
-        g.drawImage(label.getGlowImage(), x, y, null);
-    }
-
-    public void paintOutlineTextByStroke(Graphics2D g, String text, Color color, int x, int y) {
-        // https://stackoverflow.com/a/35222059/1276632
-        Color outlineColor = Color.black;
-        Color fillColor = color;
-        BasicStroke outlineStroke = new BasicStroke(1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-
-        // remember original settings
-        Color originalColor = g.getColor();
-        Stroke originalStroke = g.getStroke();
-        RenderingHints originalHints = g.getRenderingHints();
-
-        // create a glyph vector from your text
-        GlyphVector glyphVector = g.getFont().createGlyphVector(g.getFontRenderContext(), text);
-        // get the shape object
-        Shape textShape = glyphVector.getOutline(x, y);
-
-        // activate anti aliasing for text rendering (if you want it to look nice)
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-
-        g.setColor(outlineColor);
-        g.setStroke(outlineStroke);
-        g.draw(textShape); // draw outline
-
-        g.setColor(fillColor);
-        g.fill(textShape); // fill the shape
-
-        // reset to original settings after painting
-        g.setColor(originalColor);
-        g.setStroke(originalStroke);
-        g.setRenderingHints(originalHints);
-    }
-
     // Draw the P/T and/or Loyalty boxes
-    protected void drawBottomRight(Graphics2D g, CardPanelAttributes attribs, Paint borderPaint, Color fill) {
+    protected void drawBottomRight(Graphics2D g, Paint borderPaint, Color fill) {
         // No bottom right for abilities
         if (cardView.isAbility()) {
             return;
@@ -809,9 +760,17 @@ public class RetroCardRenderer extends CardRenderer {
         return layout;
     }
 
-    protected void drawRulesText(Graphics2D g, List<TextboxRule> keywords, List<TextboxRule> rules, int x, int y, int w, int h, boolean forceRules) {
+    protected void drawRulesText(Graphics2D g, List<TextboxRule> keywords, List<TextboxRule> rules, int x, int y, int w, int h) {
         // Gather all rules to render
         List<TextboxRule> allRules = new ArrayList<>(rules);
+
+        // Lands have an inset frame and need to adjust their x and y
+        if (cardView.getCardTypes().contains(CardType.LAND)) {
+            x = x + frameInset;
+            y = y + frameInset;
+            h = h - frameInset;
+            w = w - frameInset;
+        }
 
         // Add the keyword rule if there are any keywords
         if (!keywords.isEmpty()) {
@@ -821,24 +780,9 @@ public class RetroCardRenderer extends CardRenderer {
         }
 
         // Basic mana draw mana symbol in textbox (for basic lands)
-        if (!forceRules && (allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.isLand())) {
-                int xPosOne = x + w / 2 - 9 * h / 8 + 1;
-                int xPosTwo = x + w / 2 - h - h / 8;
-                int radius = 9 * h / 4;
-                int yPos = y - 3 * h / 4;
-                if (allRules.size() == 1) {
-                    // Size of mana symbol = 9/4 * h, 3/4h above line
-                    if (allRules.get(0) instanceof TextboxBasicManaRule) {
-                        drawBasicManaSymbol(g, xPosOne, yPos, radius, radius, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
-                    } else {
-                        drawBasicManaSymbol(g, xPosTwo, yPos, radius, radius, cardView.getFrameColor().toString());
-                    }
-                } else {
-                    if (allRules.size() > 1) {
-                        drawBasicManaSymbol(g, xPosTwo, yPos, radius, radius, cardView.getFrameColor().toString());
-                    }
-                }
-                return;
+        if ((allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.isLand())) {
+            drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
+            return;
         }
 
         // Go through possible font sizes in descending order to find the best fit
@@ -889,19 +833,6 @@ public class RetroCardRenderer extends CardRenderer {
         int symbHeight = (int) (0.8 * h);
         int manaCostWidth = CardRendererUtils.getManaCostWidth(symbs, symbHeight);
         ManaSymbols.draw(g, symbs, x + (w - manaCostWidth) / 2, y + (h - symbHeight) / 2, symbHeight, RetroCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
-    }
-
-    private void drawBasicManaSymbol(Graphics2D g, int x, int y, int w, int h, String symbol) {
-        String symbs = symbol;
-        if (getSizedManaSymbol(symbol) != null) {
-            ManaSymbols.draw(g, symbs, x, y, w, RetroCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
-        }
-        if (symbol.length() == 2) {
-            String symbs2 = "" + symbol.charAt(1) + symbol.charAt(0);
-            if (getSizedManaSymbol(symbs2) != null) {
-                ManaSymbols.draw(g, symbs2, x, y, w, RetroCardRenderer.MANA_ICONS_TEXT_COLOR, 2);
-            }
-        }
     }
 
     // Get the first line of the textbox, the keyword string
@@ -1099,6 +1030,8 @@ public class RetroCardRenderer extends CardRenderer {
             return isTop ? new Color(117, 57, 25) : new Color(245, 146, 107);
         } else if (cardView.getCardTypes().contains(CardType.ARTIFACT)) {
             return isTop ? new Color(85, 68, 32) : new Color(152, 124, 107);
+        } else if (cardView.getCardTypes().contains(CardType.LAND)) {
+            return isTop ? new Color(73, 55, 30) : new Color(140, 107, 52);
         } else {
             return isTop ? new Color(139, 130, 130) : new Color(165, 165, 169);
         }
