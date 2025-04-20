@@ -224,8 +224,8 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Fleshtaker", 429, Rarity.UNCOMMON, mage.cards.f.Fleshtaker.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Forbidden Alchemy", 355, Rarity.UNCOMMON, mage.cards.f.ForbiddenAlchemy.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Forbidden Alchemy", 65, Rarity.UNCOMMON, mage.cards.f.ForbiddenAlchemy.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 296, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 297, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 296, Rarity.LAND, mage.cards.basiclands.Forest.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 297, Rarity.LAND, mage.cards.basiclands.Forest.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Furyblade Vampire", 155, Rarity.UNCOMMON, mage.cards.f.FurybladeVampire.class));
         cards.add(new SetCardInfo("Galvanic Iteration", 236, Rarity.RARE, mage.cards.g.GalvanicIteration.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galvanic Iteration", 430, Rarity.RARE, mage.cards.g.GalvanicIteration.class, RETRO_ART_USE_VARIOUS));
@@ -316,8 +316,8 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Intangible Virtue", 29, Rarity.UNCOMMON, mage.cards.i.IntangibleVirtue.class));
         cards.add(new SetCardInfo("Intrepid Provisioner", 205, Rarity.COMMON, mage.cards.i.IntrepidProvisioner.class));
         cards.add(new SetCardInfo("Invasion of Innistrad", 120, Rarity.RARE, mage.cards.i.InvasionOfInnistrad.class));
-        cards.add(new SetCardInfo("Island", 290, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 290, Rarity.LAND, mage.cards.basiclands.Island.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("It of the Horrid Swarm", 331, Rarity.COMMON, mage.cards.i.ItOfTheHorridSwarm.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("It of the Horrid Swarm", 6, Rarity.COMMON, mage.cards.i.ItOfTheHorridSwarm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace, Unraveler of Secrets", 70, Rarity.MYTHIC, mage.cards.j.JaceUnravelerOfSecrets.class));
@@ -384,8 +384,8 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Morbid Opportunist", 124, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morbid Opportunist", 388, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class,RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Morkrut Banshee", 125, Rarity.UNCOMMON, mage.cards.m.MorkrutBanshee.class));
-        cards.add(new SetCardInfo("Mountain", 294, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 295, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 294, Rarity.LAND, mage.cards.basiclands.Mountain.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 295, Rarity.LAND, mage.cards.basiclands.Mountain.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Murderous Compulsion", 126, Rarity.COMMON, mage.cards.m.MurderousCompulsion.class));
         cards.add(new SetCardInfo("Mystic Retrieval", 363, Rarity.UNCOMMON, mage.cards.m.MysticRetrieval.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Retrieval", 77, Rarity.UNCOMMON, mage.cards.m.MysticRetrieval.class, NON_FULL_USE_VARIOUS));
@@ -413,8 +413,8 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Pack Guardian", 416, Rarity.UNCOMMON, mage.cards.p.PackGuardian.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Perfected Form", 454, Rarity.UNCOMMON, mage.cards.p.PerfectedForm.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Perfected Form", 52, Rarity.UNCOMMON, mage.cards.p.PerfectedForm.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", 289, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 288, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 289, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Rally the Peasants", 347, Rarity.UNCOMMON, mage.cards.r.RallyThePeasants.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Rally the Peasants", 37, Rarity.UNCOMMON, mage.cards.r.RallyThePeasants.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ravager of the Fells", 241, Rarity.RARE, mage.cards.r.RavagerOfTheFells.class, NON_FULL_USE_VARIOUS));
@@ -493,8 +493,8 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Summary Dismissal", 368, Rarity.UNCOMMON, mage.cards.s.SummaryDismissal.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Summary Dismissal", 88, Rarity.UNCOMMON, mage.cards.s.SummaryDismissal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sundown Pass", 286, Rarity.RARE, mage.cards.s.SundownPass.class));
-        cards.add(new SetCardInfo("Swamp", 292, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", 293, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 292, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 293, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Syncopate", 89, Rarity.COMMON, mage.cards.s.Syncopate.class));
         cards.add(new SetCardInfo("Tamiyo's Journal", 272, Rarity.RARE, mage.cards.t.TamiyosJournal.class));
         cards.add(new SetCardInfo("Tamiyo, Field Researcher", 249, Rarity.MYTHIC, mage.cards.t.TamiyoFieldResearcher.class));
