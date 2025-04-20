@@ -379,7 +379,7 @@ public class RetroCardRenderer extends CardRenderer {
             g2.fill(top);
             g2.fill(left);
             g2.fill(right);
-            g2.draw(bottom);
+            g2.fill(bottom);
             g2.setColor(CardRendererUtils.abitdarker(topColor));
         }
         g2.setStroke(new BasicStroke(1.5f));
