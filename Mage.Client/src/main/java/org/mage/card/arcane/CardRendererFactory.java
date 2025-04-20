@@ -15,7 +15,7 @@ public class CardRendererFactory {
     public CardRenderer create(CardView card) {
         if (card.isSplitCard()) {
             return new ModernSplitCardRenderer(card);
-        } else if (card.getFrameStyle().equals(FrameStyle.RETRO) && PreferencesDialog.getRenderRetroFrames()) {
+        } else if (card.getFrameStyle().equals(FrameStyle.RETRO) || PreferencesDialog.getRenderRetroFrames()) {
             return new RetroCardRenderer(card);
         } else {
             return new ModernCardRenderer(card);

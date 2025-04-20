@@ -253,6 +253,9 @@ public class RetroCardRenderer extends CardRenderer {
 
             boolean shouldPreserveAspect = false;
             Rectangle2D sourceRect = ArtRect.RETRO.rect;
+            if (cardView.getFrameStyle() != FrameStyle.RETRO) {
+                sourceRect = new Rectangle2D.Double(sourceRect.getX(), sourceRect.getY() + .01, sourceRect.getWidth(), sourceRect.getHeight());
+            }
 
             if (cardView.getMageObjectType() == MageObjectType.SPELL) {
                 ArtRect rect = cardView.getArtRect();

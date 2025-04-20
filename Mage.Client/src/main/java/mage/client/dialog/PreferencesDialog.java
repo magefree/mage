@@ -2330,7 +2330,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbCardRenderImageFallback.setText("Render mode: MTGO style (off) or IMAGE style (on)");
         panelCardStyles.add(cbCardRenderImageFallback);
 
-        cbCardRenderRetroFrames.setText("Render retro frames (MTGO render mode will use old border if available)");
+        cbCardRenderRetroFrames.setText("Force retro frames (MTGO render mode will use old border for all cards)");
         panelCardStyles.add(cbCardRenderRetroFrames);
 
         cbCardRenderIconsForAbilities.setText("Enable card icons for abilities (example: flying, deathtouch)");
