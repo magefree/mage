@@ -44,7 +44,7 @@ public final class PsychicFrog extends CardImpl {
         // Exile three cards from your graveyard: Psychic Frog gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new ExileFromGraveCost(new TargetCardInYourGraveyard(3))
+                new ExileFromGraveCost(new TargetCardInYourGraveyard(3)).withSourceExileZone(false)
         ));
     }
 
