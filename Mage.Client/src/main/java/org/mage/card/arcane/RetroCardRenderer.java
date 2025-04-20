@@ -326,11 +326,8 @@ public class RetroCardRenderer extends CardRenderer {
         // Colors for visual effect (you can customize this)
         Color topColor = frameTopRightColor;
         Color leftColor = frameBottomLeftColor;
-        Color rightColor = frameTopRightColor;
-        Color bottomColor = frameBottomLeftColor;
 
         // Top trapezoid
-        g2.setColor(topColor);
         Path2D top = new Path2D.Double();
         top.moveTo(x, y);
         top.lineTo(x1, y);
@@ -339,7 +336,6 @@ public class RetroCardRenderer extends CardRenderer {
         top.closePath();
 
         // Left trapezoid
-        g2.setColor(leftColor);
         Path2D left = new Path2D.Double();
         left.moveTo(x, y);
         left.lineTo(xi0, yi0);
@@ -348,7 +344,6 @@ public class RetroCardRenderer extends CardRenderer {
         left.closePath();
 
         // Right trapezoid
-        g2.setColor(rightColor);
         Path2D right = new Path2D.Double();
         right.moveTo(x1, y);
         right.lineTo(x1, y1);
@@ -357,7 +352,6 @@ public class RetroCardRenderer extends CardRenderer {
         right.closePath();
 
         // Bottom trapezoid
-        g2.setColor(bottomColor);
         Path2D bottom = new Path2D.Double();
         bottom.moveTo(x, y1);
         bottom.lineTo(x1, y1);
@@ -376,9 +370,11 @@ public class RetroCardRenderer extends CardRenderer {
                 g2.setPaint(borderPaint);
             }
         } else {
+            g2.setColor(topColor);
             g2.fill(top);
-            g2.fill(left);
             g2.fill(right);
+            g2.setColor(leftColor);
+            g2.fill(left);
             g2.fill(bottom);
             g2.setColor(CardRendererUtils.abitdarker(topColor));
         }
