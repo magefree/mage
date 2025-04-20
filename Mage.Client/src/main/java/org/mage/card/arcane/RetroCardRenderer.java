@@ -382,6 +382,8 @@ public class RetroCardRenderer extends CardRenderer {
             g2.fill(bottom);
             g2.setColor(CardRendererUtils.abitdarker(topColor));
         }
+        x = x - 1;
+        y = y - 1;
         g2.setStroke(new BasicStroke(1.5f));
         g2.drawRect(x, y, x1 - x, y1 - y);
         g2.setStroke(new BasicStroke(1));
