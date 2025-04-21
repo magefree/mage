@@ -23,26 +23,25 @@ public final class Starter2000 extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
-        cards.add(new SetCardInfo("Angelic Blessing", 1, Rarity.COMMON, mage.cards.a.AngelicBlessing.class));
-        cards.add(new SetCardInfo("Breath of Life", 3, Rarity.UNCOMMON, mage.cards.b.BreathOfLife.class));
-        cards.add(new SetCardInfo("Durkwood Boars", 38, Rarity.COMMON, mage.cards.d.DurkwoodBoars.class));
-        cards.add(new SetCardInfo("Eager Cadet", 5, Rarity.COMMON, mage.cards.e.EagerCadet.class));
-        cards.add(new SetCardInfo("Giant Octopus", 14, Rarity.COMMON, mage.cards.g.GiantOctopus.class));
-        cards.add(new SetCardInfo("Hand of Death", 25, Rarity.COMMON, mage.cards.h.HandOfDeath.class));
-        cards.add(new SetCardInfo("Knight Errant", 7, Rarity.COMMON, mage.cards.k.KnightErrant.class));
-        cards.add(new SetCardInfo("Lava Axe", 31, Rarity.COMMON, mage.cards.l.LavaAxe.class));
-        cards.add(new SetCardInfo("Mons's Goblin Raiders", 32, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
-        cards.add(new SetCardInfo("Monstrous Growth", 41, Rarity.COMMON, mage.cards.m.MonstrousGrowth.class));
-        cards.add(new SetCardInfo("Moon Sprite", 42, Rarity.UNCOMMON, mage.cards.m.MoonSprite.class));
-        cards.add(new SetCardInfo("Ogre Warrior", 33, Rarity.COMMON, mage.cards.o.OgreWarrior.class));
-        cards.add(new SetCardInfo("Rhox", 43, Rarity.RARE, mage.cards.r.Rhox.class));
-        cards.add(new SetCardInfo("Royal Falcon", 8, Rarity.COMMON, mage.cards.r.RoyalFalcon.class));
-        cards.add(new SetCardInfo("Sea Eagle", 18, Rarity.COMMON, mage.cards.s.SeaEagle.class));
-        cards.add(new SetCardInfo("Time Ebb", 19, Rarity.COMMON, mage.cards.t.TimeEbb.class));
-        cards.add(new SetCardInfo("Trained Orgg", 37, Rarity.RARE, mage.cards.t.TrainedOrgg.class));
-        cards.add(new SetCardInfo("Vizzerdrix", 20, Rarity.RARE, mage.cards.v.Vizzerdrix.class));
-        cards.add(new SetCardInfo("Wild Griffin", 11, Rarity.COMMON, mage.cards.w.WildGriffin.class));
-        cards.add(new SetCardInfo("Willow Elf", 45, Rarity.COMMON, mage.cards.w.WillowElf.class));
-
+        cards.add(new SetCardInfo("Angelic Blessing", 1, Rarity.COMMON, mage.cards.a.AngelicBlessing.class, RETRO_ART));
+        cards.add(new SetCardInfo("Breath of Life", 3, Rarity.UNCOMMON, mage.cards.b.BreathOfLife.class, RETRO_ART));
+        cards.add(new SetCardInfo("Durkwood Boars", 38, Rarity.COMMON, mage.cards.d.DurkwoodBoars.class, RETRO_ART));
+        cards.add(new SetCardInfo("Eager Cadet", 5, Rarity.COMMON, mage.cards.e.EagerCadet.class, RETRO_ART));
+        cards.add(new SetCardInfo("Giant Octopus", 14, Rarity.COMMON, mage.cards.g.GiantOctopus.class, RETRO_ART));
+        cards.add(new SetCardInfo("Hand of Death", 25, Rarity.COMMON, mage.cards.h.HandOfDeath.class, RETRO_ART));
+        cards.add(new SetCardInfo("Knight Errant", 7, Rarity.COMMON, mage.cards.k.KnightErrant.class, RETRO_ART));
+        cards.add(new SetCardInfo("Lava Axe", 31, Rarity.COMMON, mage.cards.l.LavaAxe.class, RETRO_ART));
+        cards.add(new SetCardInfo("Mons's Goblin Raiders", 32, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class, RETRO_ART));
+        cards.add(new SetCardInfo("Monstrous Growth", 41, Rarity.COMMON, mage.cards.m.MonstrousGrowth.class, RETRO_ART));
+        cards.add(new SetCardInfo("Moon Sprite", 42, Rarity.UNCOMMON, mage.cards.m.MoonSprite.class, RETRO_ART));
+        cards.add(new SetCardInfo("Ogre Warrior", 33, Rarity.COMMON, mage.cards.o.OgreWarrior.class, RETRO_ART));
+        cards.add(new SetCardInfo("Rhox", 43, Rarity.RARE, mage.cards.r.Rhox.class, RETRO_ART));
+        cards.add(new SetCardInfo("Royal Falcon", 8, Rarity.COMMON, mage.cards.r.RoyalFalcon.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sea Eagle", 18, Rarity.COMMON, mage.cards.s.SeaEagle.class, RETRO_ART));
+        cards.add(new SetCardInfo("Time Ebb", 19, Rarity.COMMON, mage.cards.t.TimeEbb.class, RETRO_ART));
+        cards.add(new SetCardInfo("Trained Orgg", 37, Rarity.RARE, mage.cards.t.TrainedOrgg.class, RETRO_ART));
+        cards.add(new SetCardInfo("Vizzerdrix", 20, Rarity.RARE, mage.cards.v.Vizzerdrix.class, RETRO_ART));
+        cards.add(new SetCardInfo("Wild Griffin", 11, Rarity.COMMON, mage.cards.w.WildGriffin.class, RETRO_ART));
+        cards.add(new SetCardInfo("Willow Elf", 45, Rarity.COMMON, mage.cards.w.WillowElf.class, RETRO_ART));
     }
 }
