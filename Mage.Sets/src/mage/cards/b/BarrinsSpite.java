@@ -7,11 +7,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanentSameController;
+import mage.target.common.TargetPermanentSameController;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +30,7 @@ public final class BarrinsSpite extends CardImpl {
 
         // Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.
         this.getSpellAbility().addEffect(new BarrinsSpiteEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2));
+        this.getSpellAbility().addTarget(new TargetPermanentSameController(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private BarrinsSpite(final BarrinsSpite card) {

@@ -379,7 +379,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Toby, Beastie Befriender", 35, Rarity.RARE, mage.cards.t.TobyBeastieBefriender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toby, Beastie Befriender", 356, Rarity.RARE, mage.cards.t.TobyBeastieBefriender.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trapped in the Screen", 36, Rarity.COMMON, mage.cards.t.TrappedInTheScreen.class));
-        //cards.add(new SetCardInfo("Trial of Agony", 159, Rarity.UNCOMMON, mage.cards.t.TrialOfAgony.class));
+        cards.add(new SetCardInfo("Trial of Agony", 159, Rarity.UNCOMMON, mage.cards.t.TrialOfAgony.class));
         cards.add(new SetCardInfo("Tunnel Surveyor", 76, Rarity.COMMON, mage.cards.t.TunnelSurveyor.class));
         cards.add(new SetCardInfo("Turn Inside Out", 160, Rarity.COMMON, mage.cards.t.TurnInsideOut.class));
         cards.add(new SetCardInfo("Twist Reality", 77, Rarity.COMMON, mage.cards.t.TwistReality.class));
