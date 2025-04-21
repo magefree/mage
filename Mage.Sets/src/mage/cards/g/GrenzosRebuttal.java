@@ -71,7 +71,7 @@ class GrenzosRebuttalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID controllerId = source.getControllerId();
         Player controller = game.getPlayer(controllerId);
-        if (controller == null || !controller.canRespond()) {
+        if (controller == null) {
             return false;
         }
         List<Permanent> chosenPermanents = new ArrayList<>();
@@ -79,13 +79,9 @@ class GrenzosRebuttalEffect extends OneShotEffect {
         PlayerList playerList = game.getState().getPlayersInRange(controllerId, game, true);
 
         Player currentPlayer = game.getPlayer(playerList.get());
-        Player nextPlayer = null;
+        boolean firstIteration = true;
 
-        while (!playerList.get().equals(controllerId) || nextPlayer == null) {
-            nextPlayer = game.getPlayer(playerList.getNext());
-            if (nextPlayer == null) {
-                return false;
-            }
+        for (Player nextPlayer = game.getPlayer(playerList.getNext()); !currentPlayer.getId().equals(controllerId) || firstIteration; nextPlayer = game.getPlayer(playerList.getNext())) {
 
             if (currentPlayer != null) {
                 for (CardType cardType : cardTypes) {
@@ -108,6 +104,7 @@ class GrenzosRebuttalEffect extends OneShotEffect {
                     }
                 }
             }
+            firstIteration = false;
             currentPlayer = nextPlayer;
         }
 
