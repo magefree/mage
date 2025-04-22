@@ -144,7 +144,8 @@ public abstract class ExpansionSet implements Serializable {
         public boolean isRetroFrame() {
             return this.graphicInfo != null
                     && this.graphicInfo.getFrameStyle() != null
-                    && this.graphicInfo.getFrameStyle() == FrameStyle.RETRO;
+                    && (this.graphicInfo.getFrameStyle() == FrameStyle.RETRO
+                    || this.graphicInfo.getFrameStyle() == FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC);
         }
     }
 

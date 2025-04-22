@@ -164,7 +164,7 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Dauntless Cathar", 19, Rarity.COMMON, mage.cards.d.DauntlessCathar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dauntless Cathar", 339, Rarity.COMMON, mage.cards.d.DauntlessCathar.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Dawnhart Disciple", 191, Rarity.COMMON, mage.cards.d.DawnhartDisciple.class));
-        cards.add(new SetCardInfo("Deadeye Navigator", 492, Rarity.RARE, mage.cards.d.DeadeyeNavigator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Deadeye Navigator", 492, Rarity.RARE, mage.cards.d.DeadeyeNavigator.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Deadeye Navigator", 59, Rarity.RARE, mage.cards.d.DeadeyeNavigator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deadly Allure", 103, Rarity.UNCOMMON, mage.cards.d.DeadlyAllure.class));
         cards.add(new SetCardInfo("Deathcap Glade", 275, Rarity.RARE, mage.cards.d.DeathcapGlade.class));
