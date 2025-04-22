@@ -20,7 +20,7 @@ public class DCILegendMembership extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Counterspell", 1, Rarity.RARE, mage.cards.c.Counterspell.class));
-        cards.add(new SetCardInfo("Incinerate", 2, Rarity.RARE, mage.cards.i.Incinerate.class));
+        cards.add(new SetCardInfo("Counterspell", 1, Rarity.RARE, mage.cards.c.Counterspell.class, RETRO_ART));
+        cards.add(new SetCardInfo("Incinerate", 2, Rarity.RARE, mage.cards.i.Incinerate.class, RETRO_ART));
     }
 }

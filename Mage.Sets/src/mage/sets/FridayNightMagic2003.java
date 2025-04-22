@@ -20,15 +20,15 @@ public class FridayNightMagic2003 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Bottle Gnomes", 1, Rarity.RARE, mage.cards.b.BottleGnomes.class));
-        cards.add(new SetCardInfo("Capsize", 4, Rarity.RARE, mage.cards.c.Capsize.class));
-        cards.add(new SetCardInfo("Crystalline Sliver", 3, Rarity.RARE, mage.cards.c.CrystallineSliver.class));
-        cards.add(new SetCardInfo("Disenchant", 13, Rarity.RARE, mage.cards.d.Disenchant.class));
-        cards.add(new SetCardInfo("Goblin Bombardment", 6, Rarity.RARE, mage.cards.g.GoblinBombardment.class));
+        cards.add(new SetCardInfo("Bottle Gnomes", 1, Rarity.RARE, mage.cards.b.BottleGnomes.class, RETRO_ART));
+        cards.add(new SetCardInfo("Capsize", 4, Rarity.RARE, mage.cards.c.Capsize.class, RETRO_ART));
+        cards.add(new SetCardInfo("Crystalline Sliver", 3, Rarity.RARE, mage.cards.c.CrystallineSliver.class, RETRO_ART));
+        cards.add(new SetCardInfo("Disenchant", 13, Rarity.RARE, mage.cards.d.Disenchant.class, RETRO_ART));
+        cards.add(new SetCardInfo("Goblin Bombardment", 6, Rarity.RARE, mage.cards.g.GoblinBombardment.class, RETRO_ART));
         cards.add(new SetCardInfo("Krosan Tusker", 11, Rarity.RARE, mage.cards.k.KrosanTusker.class));
-        cards.add(new SetCardInfo("Muscle Sliver", 2, Rarity.RARE, mage.cards.m.MuscleSliver.class));
-        cards.add(new SetCardInfo("Priest of Titania", 5, Rarity.RARE, mage.cards.p.PriestOfTitania.class));
-        cards.add(new SetCardInfo("Scragnoth", 7, Rarity.RARE, mage.cards.s.Scragnoth.class));
+        cards.add(new SetCardInfo("Muscle Sliver", 2, Rarity.RARE, mage.cards.m.MuscleSliver.class, RETRO_ART));
+        cards.add(new SetCardInfo("Priest of Titania", 5, Rarity.RARE, mage.cards.p.PriestOfTitania.class, RETRO_ART));
+        cards.add(new SetCardInfo("Scragnoth", 7, Rarity.RARE, mage.cards.s.Scragnoth.class, RETRO_ART));
         cards.add(new SetCardInfo("Smother", 8, Rarity.RARE, mage.cards.s.Smother.class));
         cards.add(new SetCardInfo("Sparksmith", 10, Rarity.RARE, mage.cards.s.Sparksmith.class));
         cards.add(new SetCardInfo("Whipcorder", 9, Rarity.RARE, mage.cards.w.Whipcorder.class));

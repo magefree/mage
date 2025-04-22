@@ -641,6 +641,11 @@ public class CardView extends SimpleCardView {
                 artRect = ArtRect.FULL_LENGTH_RIGHT;
             }
 
+            // Retro border cards need different art cutout
+            if (card.getFrameStyle() == FrameStyle.RETRO) {
+                this.artRect = ArtRect.RETRO;
+            }
+
             // Frame color
             this.frameColor = card.getFrameColor(game).copy();
 

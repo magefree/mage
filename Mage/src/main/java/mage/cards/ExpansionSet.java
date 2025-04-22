@@ -39,6 +39,8 @@ public abstract class ExpansionSet implements Serializable {
     // TODO: find or implement really full art in m15 render mode (without card name header)
     public static final CardGraphicInfo NORMAL_ART = null;
     public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true); // TODO: rename to NORMAL_ART_USE_VARIOUS
+    public static final CardGraphicInfo RETRO_ART = new CardGraphicInfo(FrameStyle.RETRO, false);
+    public static final CardGraphicInfo RETRO_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.RETRO, true);
     public static final CardGraphicInfo FULL_ART = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, false);
     public static final CardGraphicInfo FULL_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, true);
 
@@ -137,6 +139,13 @@ public abstract class ExpansionSet implements Serializable {
             return this.graphicInfo != null
                     && this.graphicInfo.getFrameStyle() != null
                     && this.graphicInfo.getFrameStyle().isFullArt();
+        }
+
+        public boolean isRetroFrame() {
+            return this.graphicInfo != null
+                    && this.graphicInfo.getFrameStyle() != null
+                    && (this.graphicInfo.getFrameStyle() == FrameStyle.RETRO
+                    || this.graphicInfo.getFrameStyle() == FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC);
         }
     }
 

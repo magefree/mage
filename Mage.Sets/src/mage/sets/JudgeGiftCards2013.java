@@ -21,12 +21,12 @@ public class JudgeGiftCards2013 extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Bribery", 2, Rarity.RARE, mage.cards.b.Bribery.class));
-        cards.add(new SetCardInfo("Crucible of Worlds", 4, Rarity.RARE, mage.cards.c.CrucibleOfWorlds.class));
+        cards.add(new SetCardInfo("Crucible of Worlds", 4, Rarity.RARE, mage.cards.c.CrucibleOfWorlds.class, RETRO_ART));
         cards.add(new SetCardInfo("Genesis", 5, Rarity.RARE, mage.cards.g.Genesis.class));
         cards.add(new SetCardInfo("Imperial Recruiter", 3, Rarity.RARE, mage.cards.i.ImperialRecruiter.class));
         cards.add(new SetCardInfo("Overwhelming Forces", 6, Rarity.RARE, mage.cards.o.OverwhelmingForces.class));
         cards.add(new SetCardInfo("Show and Tell", 8, Rarity.RARE, mage.cards.s.ShowAndTell.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 1, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Vindicate", 7, Rarity.RARE, mage.cards.v.Vindicate.class));
-     }
+    }
 }

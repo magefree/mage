@@ -20,7 +20,7 @@ public class JudgeGiftCards2000 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Counterspell", 1, Rarity.RARE, mage.cards.c.Counterspell.class));
-        cards.add(new SetCardInfo("Vampiric Tutor", 2, Rarity.RARE, mage.cards.v.VampiricTutor.class));
+        cards.add(new SetCardInfo("Counterspell", 1, Rarity.RARE, mage.cards.c.Counterspell.class, RETRO_ART));
+        cards.add(new SetCardInfo("Vampiric Tutor", 2, Rarity.RARE, mage.cards.v.VampiricTutor.class, RETRO_ART));
      }
 }

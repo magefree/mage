@@ -152,7 +152,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Krenko's Command", 139, Rarity.COMMON, mage.cards.k.KrenkosCommand.class));
         cards.add(new SetCardInfo("Kronch Wrangler", 169, Rarity.COMMON, mage.cards.k.KronchWrangler.class));
         cards.add(new SetCardInfo("Lavinia of the Tenth", 199, Rarity.RARE, mage.cards.l.LaviniaOfTheTenth.class));
-        cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 284, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 284, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 36, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Law-Rune Enforcer", 64, Rarity.COMMON, mage.cards.l.LawRuneEnforcer.class));
         cards.add(new SetCardInfo("Lead Pipe", 9, Rarity.UNCOMMON, mage.cards.l.LeadPipe.class));
