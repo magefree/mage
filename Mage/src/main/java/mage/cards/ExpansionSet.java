@@ -140,6 +140,12 @@ public abstract class ExpansionSet implements Serializable {
                     && this.graphicInfo.getFrameStyle() != null
                     && this.graphicInfo.getFrameStyle().isFullArt();
         }
+
+        public boolean isRetroFrame() {
+            return this.graphicInfo != null
+                    && this.graphicInfo.getFrameStyle() != null
+                    && this.graphicInfo.getFrameStyle() == FrameStyle.RETRO;
+        }
     }
 
     private enum ExpansionSetComparator implements Comparator<ExpansionSet> {
