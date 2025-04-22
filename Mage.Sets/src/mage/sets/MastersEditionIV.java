@@ -1,6 +1,8 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.cards.FrameStyle;
 import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -50,10 +52,10 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Artifact Blast", 108, Rarity.COMMON, mage.cards.a.ArtifactBlast.class, RETRO_ART));
         cards.add(new SetCardInfo("Ashnod's Altar", 181, Rarity.RARE, mage.cards.a.AshnodsAltar.class, RETRO_ART));
         cards.add(new SetCardInfo("Atog", 109, Rarity.COMMON, mage.cards.a.Atog.class, RETRO_ART));
-        cards.add(new SetCardInfo("Badlands", 241, Rarity.RARE, mage.cards.b.Badlands.class, RETRO_ART));
+        cards.add(new SetCardInfo("Badlands", 241, Rarity.RARE, mage.cards.b.Badlands.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Balance", 6, Rarity.RARE, mage.cards.b.Balance.class, RETRO_ART));
         cards.add(new SetCardInfo("Basalt Monolith", 182, Rarity.UNCOMMON, mage.cards.b.BasaltMonolith.class, RETRO_ART));
-        cards.add(new SetCardInfo("Bayou", 242, Rarity.RARE, mage.cards.b.Bayou.class, RETRO_ART));
+        cards.add(new SetCardInfo("Bayou", 242, Rarity.RARE, mage.cards.b.Bayou.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Bee Sting", 144, Rarity.UNCOMMON, mage.cards.b.BeeSting.class, RETRO_ART));
         cards.add(new SetCardInfo("Bird Maiden", 110, Rarity.COMMON, mage.cards.b.BirdMaiden.class, RETRO_ART));
         cards.add(new SetCardInfo("Black Knight", 71, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class, RETRO_ART));
@@ -193,7 +195,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Phantasmal Forces", 55, Rarity.COMMON, mage.cards.p.PhantasmalForces.class, RETRO_ART));
         cards.add(new SetCardInfo("Phantasmal Terrain", 56, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class, RETRO_ART));
         cards.add(new SetCardInfo("Planar Gate", 221, Rarity.UNCOMMON, mage.cards.p.PlanarGate.class, RETRO_ART));
-        cards.add(new SetCardInfo("Plateau", 249, Rarity.RARE, mage.cards.p.Plateau.class, RETRO_ART));
+        cards.add(new SetCardInfo("Plateau", 249, Rarity.RARE, mage.cards.p.Plateau.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Power Artifact", 57, Rarity.RARE, mage.cards.p.PowerArtifact.class, RETRO_ART));
         cards.add(new SetCardInfo("Primal Clay", 222, Rarity.COMMON, mage.cards.p.PrimalClay.class, RETRO_ART));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 58, Rarity.UNCOMMON, mage.cards.p.ProdigalSorcerer.class, RETRO_ART));
@@ -210,13 +212,13 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Rock Hydra", 133, Rarity.RARE, mage.cards.r.RockHydra.class, RETRO_ART));
         cards.add(new SetCardInfo("Rockslide Ambush", 134, Rarity.COMMON, mage.cards.r.RockslideAmbush.class, RETRO_ART));
         cards.add(new SetCardInfo("Sandstorm", 164, Rarity.COMMON, mage.cards.s.Sandstorm.class, RETRO_ART));
-        cards.add(new SetCardInfo("Savannah", 250, Rarity.RARE, mage.cards.s.Savannah.class, RETRO_ART));
+        cards.add(new SetCardInfo("Savannah", 250, Rarity.RARE, mage.cards.s.Savannah.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Savannah Lions", 24, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class, RETRO_ART));
         cards.add(new SetCardInfo("Scarecrow", 225, Rarity.UNCOMMON, mage.cards.s.Scarecrow.class, RETRO_ART));
         cards.add(new SetCardInfo("Scarwood Bandits", 165, Rarity.RARE, mage.cards.s.ScarwoodBandits.class, RETRO_ART));
         cards.add(new SetCardInfo("Scavenger Folk", 166, Rarity.COMMON, mage.cards.s.ScavengerFolk.class, RETRO_ART));
         cards.add(new SetCardInfo("Scavenging Ghoul", 95, Rarity.UNCOMMON, mage.cards.s.ScavengingGhoul.class, RETRO_ART));
-        cards.add(new SetCardInfo("Scrubland", 251, Rarity.RARE, mage.cards.s.Scrubland.class, RETRO_ART));
+        cards.add(new SetCardInfo("Scrubland", 251, Rarity.RARE, mage.cards.s.Scrubland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Sea Serpent", 60, Rarity.COMMON, mage.cards.s.SeaSerpent.class, RETRO_ART));
         cards.add(new SetCardInfo("Sedge Troll", 135, Rarity.RARE, mage.cards.s.SedgeTroll.class, RETRO_ART));
         cards.add(new SetCardInfo("Sengir Vampire", 96, Rarity.UNCOMMON, mage.cards.s.SengirVampire.class, RETRO_ART));
@@ -244,7 +246,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Tutor", 169, Rarity.UNCOMMON, mage.cards.s.SylvanTutor.class, RETRO_ART));
         cards.add(new SetCardInfo("Symbol of Unsummoning", 65, Rarity.COMMON, mage.cards.s.SymbolOfUnsummoning.class, RETRO_ART));
         cards.add(new SetCardInfo("Tablet of Epityr", 230, Rarity.COMMON, mage.cards.t.TabletOfEpityr.class, RETRO_ART));
-        cards.add(new SetCardInfo("Taiga", 253, Rarity.RARE, mage.cards.t.Taiga.class, RETRO_ART));
+        cards.add(new SetCardInfo("Taiga", 253, Rarity.RARE, mage.cards.t.Taiga.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Talas Researcher", 66, Rarity.UNCOMMON, mage.cards.t.TalasResearcher.class, RETRO_ART));
         cards.add(new SetCardInfo("Tawnos's Wand", 231, Rarity.COMMON, mage.cards.t.TawnossWand.class, RETRO_ART));
         cards.add(new SetCardInfo("Tawnos's Weaponry", 232, Rarity.UNCOMMON, mage.cards.t.TawnossWeaponry.class, RETRO_ART));
@@ -260,9 +262,9 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Triassic Egg", 235, Rarity.RARE, mage.cards.t.TriassicEgg.class, RETRO_ART));
         cards.add(new SetCardInfo("Tropical Island", 254, Rarity.RARE, mage.cards.t.TropicalIsland.class, RETRO_ART));
         cards.add(new SetCardInfo("Tsunami", 171, Rarity.RARE, mage.cards.t.Tsunami.class, RETRO_ART));
-        cards.add(new SetCardInfo("Tundra", 255, Rarity.RARE, mage.cards.t.Tundra.class, RETRO_ART));
+        cards.add(new SetCardInfo("Tundra", 255, Rarity.RARE, mage.cards.t.Tundra.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Two-Headed Giant of Foriys", 139, Rarity.UNCOMMON, mage.cards.t.TwoHeadedGiantOfForiys.class, RETRO_ART));
-        cards.add(new SetCardInfo("Underground Sea", 256, Rarity.RARE, mage.cards.u.UndergroundSea.class, RETRO_ART));
+        cards.add(new SetCardInfo("Underground Sea", 256, Rarity.RARE, mage.cards.u.UndergroundSea.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Urza's Chalice", 236, Rarity.COMMON, mage.cards.u.UrzasChalice.class, RETRO_ART));
         cards.add(new SetCardInfo("Urza's Mine", "257a", Rarity.COMMON, mage.cards.u.UrzasMine.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Mine", "257b", Rarity.COMMON, mage.cards.u.UrzasMine.class, RETRO_ART_USE_VARIOUS));
@@ -279,7 +281,7 @@ public final class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Tower", "259d", Rarity.COMMON, mage.cards.u.UrzasTower.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Veteran Bodyguard", 32, Rarity.RARE, mage.cards.v.VeteranBodyguard.class, RETRO_ART));
         cards.add(new SetCardInfo("Vibrating Sphere", 238, Rarity.RARE, mage.cards.v.VibratingSphere.class, RETRO_ART));
-        cards.add(new SetCardInfo("Volcanic Island", 260, Rarity.RARE, mage.cards.v.VolcanicIsland.class, RETRO_ART));
+        cards.add(new SetCardInfo("Volcanic Island", 260, Rarity.RARE, mage.cards.v.VolcanicIsland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("War Mammoth", 172, Rarity.COMMON, mage.cards.w.WarMammoth.class, RETRO_ART));
         cards.add(new SetCardInfo("Warp Artifact", 100, Rarity.COMMON, mage.cards.w.WarpArtifact.class, RETRO_ART));
         cards.add(new SetCardInfo("Water Elemental", 70, Rarity.UNCOMMON, mage.cards.w.WaterElemental.class, RETRO_ART));

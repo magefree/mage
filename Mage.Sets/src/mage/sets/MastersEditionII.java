@@ -1,7 +1,9 @@
 
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -43,7 +45,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Aurochs", 153, Rarity.COMMON, mage.cards.a.Aurochs.class, RETRO_ART));
         cards.add(new SetCardInfo("Aysen Bureaucrats", 6, Rarity.COMMON, mage.cards.a.AysenBureaucrats.class, RETRO_ART));
         cards.add(new SetCardInfo("Aysen Crusader", 7, Rarity.UNCOMMON, mage.cards.a.AysenCrusader.class, RETRO_ART));
-        cards.add(new SetCardInfo("Badlands", 225, Rarity.RARE, mage.cards.b.Badlands.class, RETRO_ART));
+        cards.add(new SetCardInfo("Badlands", 225, Rarity.RARE, mage.cards.b.Badlands.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Balduvian Conjurer", 40, Rarity.COMMON, mage.cards.b.BalduvianConjurer.class, RETRO_ART));
         cards.add(new SetCardInfo("Balduvian Dead", 79, Rarity.UNCOMMON, mage.cards.b.BalduvianDead.class, RETRO_ART));
         cards.add(new SetCardInfo("Balduvian Hydra", 118, Rarity.RARE, mage.cards.b.BalduvianHydra.class, RETRO_ART));
@@ -203,7 +205,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Royal Decree", 31, Rarity.RARE, mage.cards.r.RoyalDecree.class, RETRO_ART));
         cards.add(new SetCardInfo("Royal Trooper", 32, Rarity.COMMON, mage.cards.r.RoyalTrooper.class, RETRO_ART));
         cards.add(new SetCardInfo("Ruins of Trokair", 234, Rarity.UNCOMMON, mage.cards.r.RuinsOfTrokair.class, RETRO_ART));
-        cards.add(new SetCardInfo("Savannah", 235, Rarity.RARE, mage.cards.s.Savannah.class, RETRO_ART));
+        cards.add(new SetCardInfo("Savannah", 235, Rarity.RARE, mage.cards.s.Savannah.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Screeching Drake", 63, Rarity.COMMON, mage.cards.s.ScreechingDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Drake", 64, Rarity.RARE, mage.cards.s.SeaDrake.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Spirit", 65, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class, RETRO_ART));
@@ -237,7 +239,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Sustaining Spirit", 36, Rarity.RARE, mage.cards.s.SustainingSpirit.class, RETRO_ART));
         cards.add(new SetCardInfo("Svyelunite Temple", 237, Rarity.UNCOMMON, mage.cards.s.SvyeluniteTemple.class, RETRO_ART));
         cards.add(new SetCardInfo("Swords to Plowshares", 37, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class, RETRO_ART));
-        cards.add(new SetCardInfo("Taiga", 238, Rarity.RARE, mage.cards.t.Taiga.class, RETRO_ART));
+        cards.add(new SetCardInfo("Taiga", 238, Rarity.RARE, mage.cards.t.Taiga.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Temporal Manipulation", 69, Rarity.RARE, mage.cards.t.TemporalManipulation.class, RETRO_ART));
         cards.add(new SetCardInfo("Thallid", 180, Rarity.COMMON, mage.cards.t.Thallid.class, RETRO_ART));
         cards.add(new SetCardInfo("Thallid Devourer", 181, Rarity.COMMON, mage.cards.t.ThallidDevourer.class, RETRO_ART));
@@ -247,8 +249,8 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Thunder Wall", 71, Rarity.UNCOMMON, mage.cards.t.ThunderWall.class, RETRO_ART));
         cards.add(new SetCardInfo("Time Bomb", 223, Rarity.RARE, mage.cards.t.TimeBomb.class, RETRO_ART));
         cards.add(new SetCardInfo("Tinder Wall", 184, Rarity.COMMON, mage.cards.t.TinderWall.class, RETRO_ART));
-        cards.add(new SetCardInfo("Tundra", 239, Rarity.RARE, mage.cards.t.Tundra.class, RETRO_ART));
-        cards.add(new SetCardInfo("Underground Sea", 240, Rarity.RARE, mage.cards.u.UndergroundSea.class, RETRO_ART));
+        cards.add(new SetCardInfo("Tundra", 239, Rarity.RARE, mage.cards.t.Tundra.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
+        cards.add(new SetCardInfo("Underground Sea", 240, Rarity.RARE, mage.cards.u.UndergroundSea.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Varchild's Crusader", 152, Rarity.COMMON, mage.cards.v.VarchildsCrusader.class, RETRO_ART));
         cards.add(new SetCardInfo("Viscerid Armor", 72, Rarity.COMMON, mage.cards.v.VisceridArmor.class, RETRO_ART));
         cards.add(new SetCardInfo("Viscerid Drone", 73, Rarity.UNCOMMON, mage.cards.v.VisceridDrone.class, RETRO_ART));

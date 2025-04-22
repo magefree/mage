@@ -1,6 +1,8 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -32,10 +34,10 @@ public class SummerMagicEdgar extends ExpansionSet {
         cards.add(new SetCardInfo("Aspect of Wolf", 186, Rarity.RARE, mage.cards.a.AspectOfWolf.class, RETRO_ART));
         cards.add(new SetCardInfo("Atog", 139, Rarity.COMMON, mage.cards.a.Atog.class, RETRO_ART));
         cards.add(new SetCardInfo("Bad Moon", 94, Rarity.RARE, mage.cards.b.BadMoon.class, RETRO_ART));
-        cards.add(new SetCardInfo("Badlands", 282, Rarity.RARE, mage.cards.b.Badlands.class, RETRO_ART));
+        cards.add(new SetCardInfo("Badlands", 282, Rarity.RARE, mage.cards.b.Badlands.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Balance", 3, Rarity.RARE, mage.cards.b.Balance.class, RETRO_ART));
         cards.add(new SetCardInfo("Basalt Monolith", 235, Rarity.UNCOMMON, mage.cards.b.BasaltMonolith.class, RETRO_ART));
-        cards.add(new SetCardInfo("Bayou", 283, Rarity.RARE, mage.cards.b.Bayou.class, RETRO_ART));
+        cards.add(new SetCardInfo("Bayou", 283, Rarity.RARE, mage.cards.b.Bayou.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Benalish Hero", 4, Rarity.COMMON, mage.cards.b.BenalishHero.class, RETRO_ART));
         cards.add(new SetCardInfo("Birds of Paradise", 187, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, RETRO_ART));
         cards.add(new SetCardInfo("Black Knight", 95, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class, RETRO_ART));
@@ -216,7 +218,7 @@ public class SummerMagicEdgar extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 292, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 293, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 294, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plateau", 284, Rarity.RARE, mage.cards.p.Plateau.class, RETRO_ART));
+        cards.add(new SetCardInfo("Plateau", 284, Rarity.RARE, mage.cards.p.Plateau.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Power Leak", 73, Rarity.COMMON, mage.cards.p.PowerLeak.class, RETRO_ART));
         cards.add(new SetCardInfo("Power Sink", 74, Rarity.COMMON, mage.cards.p.PowerSink.class, RETRO_ART));
         cards.add(new SetCardInfo("Power Surge", 170, Rarity.RARE, mage.cards.p.PowerSurge.class, RETRO_ART));
@@ -241,11 +243,11 @@ public class SummerMagicEdgar extends ExpansionSet {
         cards.add(new SetCardInfo("Royal Assassin", 125, Rarity.RARE, mage.cards.r.RoyalAssassin.class, RETRO_ART));
         cards.add(new SetCardInfo("Sacrifice", 126, Rarity.UNCOMMON, mage.cards.s.Sacrifice.class, RETRO_ART));
         cards.add(new SetCardInfo("Samite Healer", 38, Rarity.COMMON, mage.cards.s.SamiteHealer.class, RETRO_ART));
-        cards.add(new SetCardInfo("Savannah", 285, Rarity.RARE, mage.cards.s.Savannah.class, RETRO_ART));
+        cards.add(new SetCardInfo("Savannah", 285, Rarity.RARE, mage.cards.s.Savannah.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Savannah Lions", 39, Rarity.RARE, mage.cards.s.SavannahLions.class, RETRO_ART));
         cards.add(new SetCardInfo("Scathe Zombies", 127, Rarity.COMMON, mage.cards.s.ScatheZombies.class, RETRO_ART));
         cards.add(new SetCardInfo("Scavenging Ghoul", 128, Rarity.UNCOMMON, mage.cards.s.ScavengingGhoul.class, RETRO_ART));
-        cards.add(new SetCardInfo("Scrubland", 286, Rarity.RARE, mage.cards.s.Scrubland.class, RETRO_ART));
+        cards.add(new SetCardInfo("Scrubland", 286, Rarity.RARE, mage.cards.s.Scrubland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Scryb Sprites", 215, Rarity.COMMON, mage.cards.s.ScrybSprites.class, RETRO_ART));
         cards.add(new SetCardInfo("Sea Serpent", 78, Rarity.COMMON, mage.cards.s.SeaSerpent.class, RETRO_ART));
         cards.add(new SetCardInfo("Sedge Troll", 174, Rarity.RARE, mage.cards.s.SedgeTroll.class, RETRO_ART));
@@ -273,7 +275,7 @@ public class SummerMagicEdgar extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 299, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 300, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 41, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class, RETRO_ART));
-        cards.add(new SetCardInfo("Taiga", 287, Rarity.RARE, mage.cards.t.Taiga.class, RETRO_ART));
+        cards.add(new SetCardInfo("Taiga", 287, Rarity.RARE, mage.cards.t.Taiga.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Terror", 132, Rarity.COMMON, mage.cards.t.Terror.class, RETRO_ART));
         cards.add(new SetCardInfo("The Hive", 277, Rarity.RARE, mage.cards.t.TheHive.class, RETRO_ART));
         cards.add(new SetCardInfo("The Rack", 278, Rarity.UNCOMMON, mage.cards.t.TheRack.class, RETRO_ART));
@@ -283,11 +285,11 @@ public class SummerMagicEdgar extends ExpansionSet {
         cards.add(new SetCardInfo("Timber Wolves", 219, Rarity.RARE, mage.cards.t.TimberWolves.class, RETRO_ART));
         cards.add(new SetCardInfo("Titania's Song", 220, Rarity.RARE, mage.cards.t.TitaniasSong.class, RETRO_ART));
         cards.add(new SetCardInfo("Tranquility", 221, Rarity.COMMON, mage.cards.t.Tranquility.class, RETRO_ART));
-        cards.add(new SetCardInfo("Tropical Island", 288, Rarity.RARE, mage.cards.t.TropicalIsland.class, RETRO_ART));
+        cards.add(new SetCardInfo("Tropical Island", 288, Rarity.RARE, mage.cards.t.TropicalIsland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Tsunami", 222, Rarity.UNCOMMON, mage.cards.t.Tsunami.class, RETRO_ART));
-        cards.add(new SetCardInfo("Tundra", 289, Rarity.RARE, mage.cards.t.Tundra.class, RETRO_ART));
+        cards.add(new SetCardInfo("Tundra", 289, Rarity.RARE, mage.cards.t.Tundra.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Tunnel", 181, Rarity.UNCOMMON, mage.cards.t.Tunnel.class, RETRO_ART));
-        cards.add(new SetCardInfo("Underground Sea", 290, Rarity.RARE, mage.cards.u.UndergroundSea.class, RETRO_ART));
+        cards.add(new SetCardInfo("Underground Sea", 290, Rarity.RARE, mage.cards.u.UndergroundSea.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Unholy Strength", 133, Rarity.COMMON, mage.cards.u.UnholyStrength.class, RETRO_ART));
         cards.add(new SetCardInfo("Unstable Mutation", 86, Rarity.COMMON, mage.cards.u.UnstableMutation.class, RETRO_ART));
         cards.add(new SetCardInfo("Unsummon", 87, Rarity.COMMON, mage.cards.u.Unsummon.class, RETRO_ART));
@@ -296,7 +298,7 @@ public class SummerMagicEdgar extends ExpansionSet {
         cards.add(new SetCardInfo("Vesuvan Doppelganger", 88, Rarity.RARE, mage.cards.v.VesuvanDoppelganger.class, RETRO_ART));
         cards.add(new SetCardInfo("Veteran Bodyguard", 42, Rarity.RARE, mage.cards.v.VeteranBodyguard.class, RETRO_ART));
         cards.add(new SetCardInfo("Volcanic Eruption", 89, Rarity.RARE, mage.cards.v.VolcanicEruption.class, RETRO_ART));
-        cards.add(new SetCardInfo("Volcanic Island", 291, Rarity.RARE, mage.cards.v.VolcanicIsland.class, RETRO_ART));
+        cards.add(new SetCardInfo("Volcanic Island", 291, Rarity.RARE, mage.cards.v.VolcanicIsland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Wall of Air", 90, Rarity.UNCOMMON, mage.cards.w.WallOfAir.class, RETRO_ART));
         cards.add(new SetCardInfo("Wall of Bone", 134, Rarity.UNCOMMON, mage.cards.w.WallOfBone.class, RETRO_ART));
         cards.add(new SetCardInfo("Wall of Brambles", 224, Rarity.UNCOMMON, mage.cards.w.WallOfBrambles.class, RETRO_ART));

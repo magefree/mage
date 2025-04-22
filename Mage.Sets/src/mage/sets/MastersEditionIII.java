@@ -1,6 +1,8 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -43,7 +45,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Barktooth Warbeard", 144, Rarity.COMMON, mage.cards.b.BarktoothWarbeard.class, RETRO_ART));
         cards.add(new SetCardInfo("Barl's Cage", 190, Rarity.RARE, mage.cards.b.BarlsCage.class, RETRO_ART));
         cards.add(new SetCardInfo("Bartel Runeaxe", 145, Rarity.UNCOMMON, mage.cards.b.BartelRuneaxe.class, RETRO_ART));
-        cards.add(new SetCardInfo("Bayou", 204, Rarity.RARE, mage.cards.b.Bayou.class, RETRO_ART));
+        cards.add(new SetCardInfo("Bayou", 204, Rarity.RARE, mage.cards.b.Bayou.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Bazaar of Baghdad", 205, Rarity.RARE, mage.cards.b.BazaarOfBaghdad.class, RETRO_ART));
         cards.add(new SetCardInfo("Benthic Explorers", 29, Rarity.COMMON, mage.cards.b.BenthicExplorers.class, RETRO_ART));
         cards.add(new SetCardInfo("Black Vise", 191, Rarity.RARE, mage.cards.b.BlackVise.class, RETRO_ART));
@@ -176,7 +178,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 216, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 217, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 218, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plateau", 209, Rarity.RARE, mage.cards.p.Plateau.class, RETRO_ART));
+        cards.add(new SetCardInfo("Plateau", 209, Rarity.RARE, mage.cards.p.Plateau.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Princess Lucrezia", 166, Rarity.UNCOMMON, mage.cards.p.PrincessLucrezia.class, RETRO_ART));
         cards.add(new SetCardInfo("Raging Minotaur", 109, Rarity.COMMON, mage.cards.r.RagingMinotaur.class, RETRO_ART));
         cards.add(new SetCardInfo("Ragnar", 167, Rarity.UNCOMMON, mage.cards.r.Ragnar.class, RETRO_ART));
@@ -193,7 +195,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Rohgahh of Kher Keep", 172, Rarity.RARE, mage.cards.r.RohgahhOfKherKeep.class, RETRO_ART));
         cards.add(new SetCardInfo("Rolling Earthquake", 110, Rarity.RARE, mage.cards.r.RollingEarthquake.class, RETRO_ART));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 173, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class, RETRO_ART));
-        cards.add(new SetCardInfo("Scrubland", 210, Rarity.RARE, mage.cards.s.Scrubland.class, RETRO_ART));
+        cards.add(new SetCardInfo("Scrubland", 210, Rarity.RARE, mage.cards.s.Scrubland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Scryb Sprites", 132, Rarity.COMMON, mage.cards.s.ScrybSprites.class, RETRO_ART));
         cards.add(new SetCardInfo("Shu Cavalry", 23, Rarity.COMMON, mage.cards.s.ShuCavalry.class, RETRO_ART));
         cards.add(new SetCardInfo("Shu Elite Companions", 24, Rarity.COMMON, mage.cards.s.ShuEliteCompanions.class, RETRO_ART));
@@ -231,11 +233,11 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Torsten Von Ursus", 183, Rarity.COMMON, mage.cards.t.TorstenVonUrsus.class, RETRO_ART));
         cards.add(new SetCardInfo("Tracker", 136, Rarity.UNCOMMON, mage.cards.t.Tracker.class, RETRO_ART));
         cards.add(new SetCardInfo("Trip Wire", 137, Rarity.COMMON, mage.cards.t.TripWire.class, RETRO_ART));
-        cards.add(new SetCardInfo("Tropical Island", 213, Rarity.RARE, mage.cards.t.TropicalIsland.class, RETRO_ART));
+        cards.add(new SetCardInfo("Tropical Island", 213, Rarity.RARE, mage.cards.t.TropicalIsland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Tuknir Deathlock", 184, Rarity.UNCOMMON, mage.cards.t.TuknirDeathlock.class, RETRO_ART));
         cards.add(new SetCardInfo("Urborg", 214, Rarity.UNCOMMON, mage.cards.u.Urborg.class, RETRO_ART));
         cards.add(new SetCardInfo("Vaevictis Asmadi", 185, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class, RETRO_ART));
-        cards.add(new SetCardInfo("Volcanic Island", 215, Rarity.RARE, mage.cards.v.VolcanicIsland.class, RETRO_ART));
+        cards.add(new SetCardInfo("Volcanic Island", 215, Rarity.RARE, mage.cards.v.VolcanicIsland.class, new CardGraphicInfo(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC, false)));
         cards.add(new SetCardInfo("Voodoo Doll", 203, Rarity.RARE, mage.cards.v.VoodooDoll.class, RETRO_ART));
         cards.add(new SetCardInfo("Wall of Light", 27, Rarity.COMMON, mage.cards.w.WallOfLight.class, RETRO_ART));
         cards.add(new SetCardInfo("Wandering Mage", 186, Rarity.RARE, mage.cards.w.WanderingMage.class, RETRO_ART));
