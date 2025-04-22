@@ -13,6 +13,7 @@ import mage.abilities.effects.common.combat.CantAttackBlockUnlessConditionSource
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MenaceAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +25,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.events.ZoneChangeGroupEvent;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -69,7 +72,7 @@ public final class KetramoseTheNewDawn extends CardImpl {
     }
 
 }
-class KetramoseTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
+class KetramoseTriggeredAbility extends TriggeredAbilityImpl {
     KetramoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
         this.addEffect(new LoseLifeSourceControllerEffect(1));
@@ -81,21 +84,14 @@ class KetramoseTriggeredAbility extends TriggeredAbilityImpl implements BatchTri
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
-    }
-
-    @Override
-    public boolean checkEvent(ZoneChangeEvent event, Game game) {
-        if (event.getToZone() != Zone.EXILED) {
-            return false;
-        }
-        return event.getFromZone() == Zone.GRAVEYARD || event.getFromZone() == Zone.BATTLEFIELD;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return game.getActivePlayerId().equals(getControllerId())
-        && !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
+        && zEvent.getFromZone() == Zone.GRAVEYARD || zEvent.getFromZone() == Zone.BATTLEFIELD;
     }
 
     @Override
