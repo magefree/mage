@@ -309,7 +309,7 @@ public class RetroCardRenderer extends CardRenderer {
         // Draw the textbox rules
         drawRulesText(g, textboxKeywords, textboxRules,
                 innerContentStart + 2, typeLineY + boxHeight + 2,
-                innerContentWidth - 4, (int) ((cardHeight - borderWidth * 2) * 0.33f));
+                innerContentWidth - 4, (int) ((cardHeight - borderWidth * 2) * 0.32f));
 
         // Draw the bottom right stuff
         drawBottomRight(g, borderPaint, boxColor);
@@ -945,7 +945,9 @@ public class RetroCardRenderer extends CardRenderer {
                             4);
                 }
                 g.setColor(new Color(0, 0, 0, 128));
-                g.fillRect(x + 2, y + advance + 1, w - 2, 1);
+                if (y + advance + 1 <=  yPos) {
+                    g.fillRect(x + 2, y + advance + 1, w - 2, 1);
+                }
                 g.setColor(Color.black);
                 g.fillPolygon(symbol);
                 g.setColor(new Color(200, 200, 200));
