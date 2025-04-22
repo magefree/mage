@@ -132,7 +132,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Floodfarm Verge", 259, Rarity.RARE, mage.cards.f.FloodfarmVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Floodfarm Verge", 330, Rarity.RARE, mage.cards.f.FloodfarmVerge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Floodpits Drowner", 59, Rarity.UNCOMMON, mage.cards.f.FloodpitsDrowner.class));
-        cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 285, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 286, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Found Footage", 246, Rarity.COMMON, mage.cards.f.FoundFootage.class));
@@ -173,7 +173,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Insidious Fungus", 321, Rarity.UNCOMMON, mage.cards.i.InsidiousFungus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Intruding Soulrager", 218, Rarity.UNCOMMON, mage.cards.i.IntrudingSoulrager.class));
         cards.add(new SetCardInfo("Irreverent Gremlin", 142, Rarity.UNCOMMON, mage.cards.i.IrreverentGremlin.class));
-        cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 279, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 280, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jump Scare", 17, Rarity.COMMON, mage.cards.j.JumpScare.class));
@@ -194,10 +194,10 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Leyline of Mutation", 382, Rarity.RARE, mage.cards.l.LeylineOfMutation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leyline of Resonance", 143, Rarity.RARE, mage.cards.l.LeylineOfResonance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leyline of Resonance", 379, Rarity.RARE, mage.cards.l.LeylineOfResonance.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Leyline of the Void", 106, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Leyline of the Void", 376, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leyline of Transformation", 372, Rarity.RARE, mage.cards.l.LeylineOfTransformation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leyline of Transformation", 63, Rarity.RARE, mage.cards.l.LeylineOfTransformation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leyline of the Void", 106, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leyline of the Void", 376, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lionheart Glimmer", 19, Rarity.UNCOMMON, mage.cards.l.LionheartGlimmer.class));
         cards.add(new SetCardInfo("Live or Die", 107, Rarity.UNCOMMON, mage.cards.l.LiveOrDie.class));
         cards.add(new SetCardInfo("Living Phone", 20, Rarity.COMMON, mage.cards.l.LivingPhone.class));
@@ -215,7 +215,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Miasma Demon", 109, Rarity.UNCOMMON, mage.cards.m.MiasmaDemon.class));
         cards.add(new SetCardInfo("Midnight Mayhem", 222, Rarity.UNCOMMON, mage.cards.m.MidnightMayhem.class));
         cards.add(new SetCardInfo("Most Valuable Slayer", 144, Rarity.COMMON, mage.cards.m.MostValuableSlayer.class));
-        cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 275, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 283, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 284, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murder", 110, Rarity.COMMON, mage.cards.m.Murder.class));
@@ -247,7 +247,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Overlord of the Boilerbilges", 403, Rarity.MYTHIC, mage.cards.o.OverlordOfTheBoilerbilges.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overlord of the Floodpits", 373, Rarity.MYTHIC, mage.cards.o.OverlordOfTheFloodpits.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overlord of the Floodpits", 389, Rarity.MYTHIC, mage.cards.o.OverlordOfTheFloodpits.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Overlord of the Floodpits", 399, Rarity.MYTHIC, mage.cards.o.OverlordOfTheFloodpits.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Overlord of the Floodpits", 399, Rarity.MYTHIC, mage.cards.o.OverlordOfTheFloodpits.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overlord of the Floodpits", 68, Rarity.MYTHIC, mage.cards.o.OverlordOfTheFloodpits.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overlord of the Hauntwoods", 194, Rarity.MYTHIC, mage.cards.o.OverlordOfTheHauntwoods.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overlord of the Hauntwoods", 383, Rarity.MYTHIC, mage.cards.o.OverlordOfTheHauntwoods.class, NON_FULL_USE_VARIOUS));
@@ -265,7 +265,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Peer Past the Veil", 325, Rarity.RARE, mage.cards.p.PeerPastTheVeil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Piggy Bank", 148, Rarity.UNCOMMON, mage.cards.p.PiggyBank.class));
         cards.add(new SetCardInfo("Piranha Fly", 70, Rarity.COMMON, mage.cards.p.PiranhaFly.class));
-        cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 278, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Popular Egotist", 114, Rarity.UNCOMMON, mage.cards.p.PopularEgotist.class));
@@ -312,7 +312,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Stay Hidden, Stay Silent", 291, Rarity.UNCOMMON, mage.cards.s.StayHiddenStaySilent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stay Hidden, Stay Silent", 74, Rarity.UNCOMMON, mage.cards.s.StayHiddenStaySilent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strangled Cemetery", 268, Rarity.COMMON, mage.cards.s.StrangledCemetery.class));
-        cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 282, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terramorphic Expanse", 269, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
