@@ -395,7 +395,7 @@ public class RetroCardRenderer extends CardRenderer {
         if (cardView.getCardTypes().contains(CardType.LAND)) {
 
             // Analysis of LEA Duals (Scrubland) gives 16.5 height of unit of 'spirals' in the text area
-            int height_of_spiral = (int) Math.round(backgroundHeight / 16.5);
+            int height_of_spiral = (int) ((backgroundHeight - frameInset * 2) * 0.06);
 
             List<ObjectColor> twoColors = frameColors.getColors();
             g.setPaint(borderPaint);
@@ -418,29 +418,21 @@ public class RetroCardRenderer extends CardRenderer {
             }
             if (frameColors.getColorCount() == 2) {
                 if (isOriginalDual) {
-                    g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), true));
+                    for (int i = 0; i < 8; i++) {
+                        int offset = height_of_spiral * i;
+                        int inset = frameInset + offset;
+                        int width = innerContentWidth - frameInset * 2 - height_of_spiral * i * 2;
+                        int height = backgroundHeight - frameInset * 2 - height_of_spiral * i * 2;
 
-                    // Horizontal bars
-                    g.fillRect(x, typeLineY + boxHeight + 1, innerContentWidth - 2, height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, innerContentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, innerContentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, innerContentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
-
-                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + backgroundHeight - 7 * height_of_spiral, innerContentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + backgroundHeight - 5 * height_of_spiral, innerContentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + backgroundHeight - 3 * height_of_spiral, innerContentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
-                    g.fillRect(x, typeLineY + boxHeight + 1 + backgroundHeight - height_of_spiral, innerContentWidth - 2, height_of_spiral);
-
-                    // Vertical bars
-                    g.fillRect(x, typeLineY + boxHeight + 1, height_of_spiral, backgroundHeight - 1);
-                    g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 4 * height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 8 * height_of_spiral);
-                    g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 12 * height_of_spiral);
-
-                    g.fillRect(totalContentInset + innerContentWidth - 7 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 12 * height_of_spiral);
-                    g.fillRect(totalContentInset + innerContentWidth - 5 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 8 * height_of_spiral);
-                    g.fillRect(totalContentInset + innerContentWidth - 3 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, backgroundHeight - 1 - 4 * height_of_spiral);
-                    g.fillRect(totalContentInset + innerContentWidth - 1 * height_of_spiral, typeLineY + boxHeight + 1 + 0 * height_of_spiral, height_of_spiral, backgroundHeight - 1);
+                        boolean useFirstColor = (i % 2 == 0);
+                        g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), useFirstColor));
+                        g.fillRect(
+                                x + inset,
+                                typeLineY + boxHeight + 1 + inset,
+                                width,
+                                height
+                        );
+                    }
                 }
             }
         } else {
