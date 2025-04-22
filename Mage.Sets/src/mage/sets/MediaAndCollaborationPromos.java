@@ -42,7 +42,7 @@ public class MediaAndCollaborationPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Edict", "2024-5", Rarity.RARE, mage.cards.d.DiabolicEdict.class));
         cards.add(new SetCardInfo("Disenchant", "2022-1", Rarity.RARE, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Duress", "2025-7", Rarity.RARE, mage.cards.d.Duress.class));
-        cards.add(new SetCardInfo("Fireball", "1995-1", Rarity.COMMON, mage.cards.f.Fireball.class));
+        cards.add(new SetCardInfo("Fireball", "1995-1", Rarity.COMMON, mage.cards.f.Fireball.class, RETRO_ART));
         cards.add(new SetCardInfo("Frantic Search", "2022-4", Rarity.RARE, mage.cards.f.FranticSearch.class));
         cards.add(new SetCardInfo("Gingerbrute", "2023-3", Rarity.RARE, mage.cards.g.Gingerbrute.class, RETRO_ART));
         cards.add(new SetCardInfo("Gush", "2024-4", Rarity.RARE, mage.cards.g.Gush.class));
