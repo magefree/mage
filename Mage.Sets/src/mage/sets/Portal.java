@@ -46,7 +46,6 @@ public final class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Blaze", 118, Rarity.UNCOMMON, mage.cards.b.Blaze.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Blaze", "118s", Rarity.UNCOMMON, mage.cards.b.Blaze.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Blaze", "118+", Rarity.UNCOMMON, mage.cards.b.Blaze.class, RETRO_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Blaze", "118+s", Rarity.UNCOMMON, mage.cards.b.Blaze.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Blessed Reversal", 7, Rarity.RARE, mage.cards.b.BlessedReversal.class, RETRO_ART));
         cards.add(new SetCardInfo("Blinding Light", 8, Rarity.RARE, mage.cards.b.BlindingLight.class, RETRO_ART));
         cards.add(new SetCardInfo("Bog Imp", 81, Rarity.COMMON, mage.cards.b.BogImp.class, RETRO_ART));

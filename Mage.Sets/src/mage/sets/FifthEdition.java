@@ -183,7 +183,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Funeral March", 164, Rarity.COMMON, mage.cards.f.FuneralMarch.class, RETRO_ART));
         cards.add(new SetCardInfo("Fungusaur", 296, Rarity.RARE, mage.cards.f.Fungusaur.class, RETRO_ART));
         cards.add(new SetCardInfo("Fyndhorn Elder", 297, Rarity.UNCOMMON, mage.cards.f.FyndhornElder.class, RETRO_ART));
-        cards.add(new SetCardInfo("Game of Chaos", "232†", Rarity.RARE, mage.cards.g.GameOfChaos.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Game of Chaos", "232+", Rarity.RARE, mage.cards.g.GameOfChaos.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Game of Chaos", 232, Rarity.RARE, mage.cards.g.GameOfChaos.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Gaseous Form", 90, Rarity.COMMON, mage.cards.g.GaseousForm.class, RETRO_ART));
         cards.add(new SetCardInfo("Gauntlets of Chaos", 373, Rarity.RARE, mage.cards.g.GauntletsOfChaos.class, RETRO_ART));
@@ -227,14 +227,14 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ice Floe", 420, Rarity.UNCOMMON, mage.cards.i.IceFloe.class, RETRO_ART));
         cards.add(new SetCardInfo("Imposing Visage", 241, Rarity.COMMON, mage.cards.i.ImposingVisage.class, RETRO_ART));
         cards.add(new SetCardInfo("Incinerate", 242, Rarity.COMMON, mage.cards.i.Incinerate.class, RETRO_ART));
-        cards.add(new SetCardInfo("Inferno", "243†", Rarity.RARE, mage.cards.i.Inferno.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Inferno", "243+", Rarity.RARE, mage.cards.i.Inferno.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Inferno", 243, Rarity.RARE, mage.cards.i.Inferno.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Infinite Hourglass", 378, Rarity.RARE, mage.cards.i.InfiniteHourglass.class, RETRO_ART));
         cards.add(new SetCardInfo("Initiates of the Ebon Hand", "169s", Rarity.COMMON, mage.cards.i.InitiatesOfTheEbonHand.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Initiates of the Ebon Hand", 169, Rarity.COMMON, mage.cards.i.InitiatesOfTheEbonHand.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Instill Energy", 304, Rarity.UNCOMMON, mage.cards.i.InstillEnergy.class, RETRO_ART));
         cards.add(new SetCardInfo("Iron Star", 379, Rarity.UNCOMMON, mage.cards.i.IronStar.class, RETRO_ART));
-        cards.add(new SetCardInfo("Ironclaw Curse", "244†", Rarity.RARE, mage.cards.i.IronclawCurse.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ironclaw Curse", "244+", Rarity.RARE, mage.cards.i.IronclawCurse.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ironclaw Curse", 244, Rarity.RARE, mage.cards.i.IronclawCurse.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ironclaw Orcs", 245, Rarity.COMMON, mage.cards.i.IronclawOrcs.class, RETRO_ART));
         cards.add(new SetCardInfo("Ironroot Treefolk", 305, Rarity.COMMON, mage.cards.i.IronrootTreefolk.class, RETRO_ART));
@@ -285,7 +285,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Clash", 248, Rarity.RARE, mage.cards.m.ManaClash.class, RETRO_ART));
         cards.add(new SetCardInfo("Mana Flare", 249, Rarity.RARE, mage.cards.m.ManaFlare.class, RETRO_ART));
         cards.add(new SetCardInfo("Mana Vault", 388, Rarity.RARE, mage.cards.m.ManaVault.class, RETRO_ART));
-        cards.add(new SetCardInfo("Manabarbs", "250†", Rarity.RARE, mage.cards.m.Manabarbs.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Manabarbs", "250+", Rarity.RARE, mage.cards.m.Manabarbs.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Manabarbs", 250, Rarity.RARE, mage.cards.m.Manabarbs.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Marsh Viper", 315, Rarity.COMMON, mage.cards.m.MarshViper.class, RETRO_ART));
         cards.add(new SetCardInfo("Meekstone", 389, Rarity.RARE, mage.cards.m.Meekstone.class, RETRO_ART));
@@ -389,7 +389,7 @@ public final class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Shatterstorm", 266, Rarity.UNCOMMON, mage.cards.s.Shatterstorm.class, RETRO_ART));
         cards.add(new SetCardInfo("Shield Bearer", 62, Rarity.COMMON, mage.cards.s.ShieldBearer.class, RETRO_ART));
         cards.add(new SetCardInfo("Shield Wall", 63, Rarity.COMMON, mage.cards.s.ShieldWall.class, RETRO_ART));
-        cards.add(new SetCardInfo("Shivan Dragon", "267†", Rarity.RARE, mage.cards.s.ShivanDragon.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shivan Dragon", "267+", Rarity.RARE, mage.cards.s.ShivanDragon.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Shivan Dragon", 267, Rarity.RARE, mage.cards.s.ShivanDragon.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Shrink", 326, Rarity.COMMON, mage.cards.s.Shrink.class, RETRO_ART));
         cards.add(new SetCardInfo("Sibilant Spirit", 123, Rarity.RARE, mage.cards.s.SibilantSpirit.class, RETRO_ART));
