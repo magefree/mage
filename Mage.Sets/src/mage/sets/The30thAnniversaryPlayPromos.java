@@ -19,6 +19,7 @@ public class The30thAnniversaryPlayPromos extends ExpansionSet {
 
     private The30thAnniversaryPlayPromos() {
         super("30th Anniversary Play Promos", "P30A", ExpansionSet.buildDate(2022, 9, 2), SetType.PROMOTIONAL);
+        hasBasicLands = false;
 
 
         cards.add(new SetCardInfo("Acidic Slime", 17, Rarity.RARE, mage.cards.a.AcidicSlime.class, RETRO_ART));

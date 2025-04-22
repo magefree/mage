@@ -19,6 +19,7 @@ public class EternalWeekend extends ExpansionSet {
 
     private EternalWeekend() {
         super("Eternal Weekend", "PEWK", ExpansionSet.buildDate(2022, 11, 26), SetType.PROMOTIONAL);
+        hasBasicLands = false;
 
         cards.add(new SetCardInfo("Crop Rotation", "2024b", Rarity.RARE, mage.cards.c.CropRotation.class, RETRO_ART));
         cards.add(new SetCardInfo("Dragon's Rage Channeler", "2023b", Rarity.RARE, mage.cards.d.DragonsRageChanneler.class, RETRO_ART));

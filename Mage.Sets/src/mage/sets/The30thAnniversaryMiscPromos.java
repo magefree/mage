@@ -19,6 +19,7 @@ public class The30thAnniversaryMiscPromos extends ExpansionSet {
 
     private The30thAnniversaryMiscPromos() {
         super("30th Anniversary Misc Promos", "P30M", ExpansionSet.buildDate(2022, 9, 2), SetType.PROMOTIONAL);
+        hasBasicLands = false;
 
 
         cards.add(new SetCardInfo("Arcane Signet", "1F", Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));

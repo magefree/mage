@@ -44,8 +44,6 @@ public class WorldChampionshipDecks2001 extends ExpansionSet {
         cards.add(new SetCardInfo("Fact or Fiction", "ar57", Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class, RETRO_ART));
         cards.add(new SetCardInfo("Fire // Ice", "ar128", Rarity.UNCOMMON, mage.cards.f.FireIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire // Ice", "jt128", Rarity.UNCOMMON, mage.cards.f.FireIce.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Fire // Ice", "ar128", Rarity.UNCOMMON, mage.cards.f.FireIce.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Fire // Ice", "jt128", Rarity.UNCOMMON, mage.cards.f.FireIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fires of Yavimaya", "jt246", Rarity.UNCOMMON, mage.cards.f.FiresOfYavimaya.class, RETRO_ART));
         cards.add(new SetCardInfo("Flametongue Kavu", "jt60", Rarity.UNCOMMON, mage.cards.f.FlametongueKavu.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Flametongue Kavu", "tvdl60", Rarity.UNCOMMON, mage.cards.f.FlametongueKavu.class, RETRO_ART_USE_VARIOUS));
