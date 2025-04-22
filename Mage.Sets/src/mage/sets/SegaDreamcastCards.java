@@ -21,7 +21,7 @@ public final class SegaDreamcastCards extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Arden Angel", 1, Rarity.RARE, mage.cards.a.ArdenAngel.class));
-        cards.add(new SetCardInfo("Velukan Dragon", 10, Rarity.RARE, mage.cards.v.VelukanDragon.class));
+        cards.add(new SetCardInfo("Arden Angel", 1, Rarity.RARE, mage.cards.a.ArdenAngel.class, RETRO_ART));
+        cards.add(new SetCardInfo("Velukan Dragon", 10, Rarity.RARE, mage.cards.v.VelukanDragon.class, RETRO_ART));
     }
 }
