@@ -20,6 +20,6 @@ public class MagicPlayerRewards2001 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Wasteland", 1, Rarity.RARE, mage.cards.w.Wasteland.class));
+        cards.add(new SetCardInfo("Wasteland", 1, Rarity.RARE, mage.cards.w.Wasteland.class, RETRO_ART));
      }
 }
