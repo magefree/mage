@@ -203,6 +203,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Living Phone", 20, Rarity.COMMON, mage.cards.l.LivingPhone.class));
         cards.add(new SetCardInfo("Malevolent Chandelier", 252, Rarity.COMMON, mage.cards.m.MalevolentChandelier.class));
         cards.add(new SetCardInfo("Manifest Dread", 189, Rarity.COMMON, mage.cards.m.ManifestDread.class));
+        cards.add(new SetCardInfo("Marina Vendrell", 221, Rarity.RARE, mage.cards.m.MarinaVendrell.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marina Vendrell", 360, Rarity.RARE, mage.cards.m.MarinaVendrell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marina Vendrell's Grimoire", 308, Rarity.RARE, mage.cards.m.MarinaVendrellsGrimoire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marina Vendrell's Grimoire", 64, Rarity.RARE, mage.cards.m.MarinaVendrellsGrimoire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marvin, Murderous Mimic", 253, Rarity.RARE, mage.cards.m.MarvinMurderousMimic.class, NON_FULL_USE_VARIOUS));
