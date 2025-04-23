@@ -970,12 +970,12 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("The Master, Gallifrey's End", 427, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Master, Gallifrey's End", 543, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Master, Gallifrey's End", 749, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Mesmerist", 1019, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Mesmerist", 1135, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Mesmerist", 145, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Mesmerist", 428, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Mesmerist", 544, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Mesmerist", 750, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Mesmerist", 1019, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Mesmerist", 1135, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Mesmerist", 145, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Mesmerist", 428, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Mesmerist", 544, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Mesmerist", 750, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Multiplied", 1020, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Multiplied", 1136, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Multiplied", 146, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
