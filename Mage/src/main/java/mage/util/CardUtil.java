@@ -1131,10 +1131,10 @@ public final class CardUtil {
      * Also ensures that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
      * If this is the first attempt at triggering for a given ability targeting a given object,
      * this method records that in the game state for later checks by this same method, to not return the same object again.
-     * 
+     *
      * @param checkingReference must be unique for each usage (this.getId().toString() of the TriggeredAbility, or this.getKey() of the watcher)
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game  the Game from checkTrigger() or watch()
+     * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @param game              the Game from checkTrigger() or watch()
      * @return the StackObject which targeted the source, or null if already used or not found
      */
     public static StackObject findTargetingStackObject(String checkingReference, GameEvent event, Game game) {
@@ -2213,17 +2213,13 @@ public final class CardUtil {
         return sb.toString();
     }
 
-    public static <T> T getEffectValueFromAbility(Ability ability, String key, Class<T> clazz) {
-        return getEffectValueFromAbility(ability, key, clazz, null);
-    }
-
-    public static <T> T getEffectValueFromAbility(Ability ability, String key, Class<T> clazz, T defaultValue) {
+    public static <T> Optional<T> getEffectValueFromAbility(Ability ability, String key, Class<T> clazz) {
         return castStream(
                 ability.getAllEffects()
                         .stream()
                         .map(effect -> effect.getValue(key)),
                 clazz
-        ).findFirst().orElse(defaultValue);
+        ).findFirst();
     }
 
     public static <T> Stream<T> castStream(Collection<?> collection, Class<T> clazz) {

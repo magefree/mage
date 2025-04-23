@@ -152,9 +152,9 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 110, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Go for the Throat", 205, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Go for the Throat", 91, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Havi, the All-Father", 146, Rarity.RARE, mage.cards.h.HaviTheAllFather.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Havi, the All-Father", 237, Rarity.RARE, mage.cards.h.HaviTheAllFather.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Havi, the All-Father", 56, Rarity.RARE, mage.cards.h.HaviTheAllFather.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Havi, the All-Father", 146, Rarity.RARE, mage.cards.h.HaviTheAllFather.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Havi, the All-Father", 237, Rarity.RARE, mage.cards.h.HaviTheAllFather.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Havi, the All-Father", 56, Rarity.RARE, mage.cards.h.HaviTheAllFather.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haystack", 175, Rarity.UNCOMMON, mage.cards.h.Haystack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haystack", 5, Rarity.UNCOMMON, mage.cards.h.Haystack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haytham Kenway", 57, Rarity.RARE, mage.cards.h.HaythamKenway.class, NON_FULL_USE_VARIOUS));

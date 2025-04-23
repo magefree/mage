@@ -69,8 +69,7 @@ enum BroodcallerScourgePredicate implements ObjectSourcePlayerPredicate<Card> {
                 .getManaValue()
                 <= CardUtil
                 .getEffectValueFromAbility(
-                        input.getSource(), "damage",
-                        Integer.class, 0
-                );
+                        input.getSource(), "damage", Integer.class
+                ).orElse(0);
     }
 }
