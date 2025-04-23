@@ -13,21 +13,14 @@ import mage.abilities.effects.common.combat.CantAttackBlockUnlessConditionSource
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.events.ZoneChangeGroupEvent;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -54,7 +47,7 @@ public final class KetramoseTheNewDawn extends CardImpl {
 
         // Ketramose can't attack or block unless there are seven or more cards in exile.
         this.addAbility(new SimpleStaticAbility(
-            new CantAttackBlockUnlessConditionSourceEffect(new CardsInExileCondition(ComparisonType.OR_GREATER, 7))
+                new CantAttackBlockUnlessConditionSourceEffect(new CardsInExileCondition(ComparisonType.OR_GREATER, 7))
         ).addHint(CardsInExileCount.ALL.getHint()));
 
         // Whenever one or more cards are put into exile from graveyards and/or the battlefield during your turn, you draw a card and lose 1 life.
@@ -72,10 +65,13 @@ public final class KetramoseTheNewDawn extends CardImpl {
     }
 
 }
-class KetramoseTriggeredAbility extends TriggeredAbilityImpl {
+
+class KetramoseTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
+
     KetramoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
         this.addEffect(new LoseLifeSourceControllerEffect(1));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private KetramoseTriggeredAbility(final KetramoseTriggeredAbility ability) {
@@ -84,25 +80,31 @@ class KetramoseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.EXILED) {
+            return false;
+        }
+        return event.getFromZone() == Zone.GRAVEYARD || event.getFromZone() == Zone.BATTLEFIELD;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         return game.getActivePlayerId().equals(getControllerId())
-        && zEvent.getFromZone() == Zone.GRAVEYARD || zEvent.getFromZone() == Zone.BATTLEFIELD;
+                && !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override
-    public TriggeredAbility copy()
-    {
+    public TriggeredAbility copy() {
         return new KetramoseTriggeredAbility(this);
     }
 
     @Override
     public String getRule() {
         return "Whenever one or more cards are put into exile from graveyards"
-        + " and/or the battlefield during your turn, you draw a card and lose 1 life.";
+                + " and/or the battlefield during your turn, you draw a card and lose 1 life.";
     }
 }
