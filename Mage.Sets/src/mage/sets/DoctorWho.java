@@ -566,10 +566,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Nardole, Resourceful Cyborg", 956, Rarity.RARE, mage.cards.n.NardoleResourcefulCyborg.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("New New York", 592, Rarity.COMMON, mage.cards.n.NewNewYork.class));
         //cards.add(new SetCardInfo("North Pole Research Base", 593, Rarity.COMMON, mage.cards.n.NorthPoleResearchBase.class));
-        //cards.add(new SetCardInfo("Nyssa of Traken", 366, Rarity.RARE, mage.cards.n.NyssaOfTraken.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Nyssa of Traken", 51, Rarity.RARE, mage.cards.n.NyssaOfTraken.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Nyssa of Traken", 656, Rarity.RARE, mage.cards.n.NyssaOfTraken.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Nyssa of Traken", 957, Rarity.RARE, mage.cards.n.NyssaOfTraken.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nyssa of Traken", 366, Rarity.RARE, mage.cards.n.NyssaOfTraken.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nyssa of Traken", 51, Rarity.RARE, mage.cards.n.NyssaOfTraken.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nyssa of Traken", 656, Rarity.RARE, mage.cards.n.NyssaOfTraken.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nyssa of Traken", 957, Rarity.RARE, mage.cards.n.NyssaOfTraken.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ominous Cemetery", 189, Rarity.UNCOMMON, mage.cards.o.OminousCemetery.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ominous Cemetery", 794, Rarity.UNCOMMON, mage.cards.o.OminousCemetery.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Ood Sphere", 594, Rarity.COMMON, mage.cards.o.OodSphere.class));
