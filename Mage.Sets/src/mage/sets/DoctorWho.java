@@ -771,10 +771,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Stormcarved Coast", 308, Rarity.RARE, mage.cards.s.StormcarvedCoast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stormcarved Coast", 518, Rarity.RARE, mage.cards.s.StormcarvedCoast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stormcarved Coast", 899, Rarity.RARE, mage.cards.s.StormcarvedCoast.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strax, Sontaran Nurse", 1035, Rarity.RARE, mage.cards.s.StraxSontaranNurse.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strax, Sontaran Nurse", 160, Rarity.RARE, mage.cards.s.StraxSontaranNurse.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strax, Sontaran Nurse", 444, Rarity.RARE, mage.cards.s.StraxSontaranNurse.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strax, Sontaran Nurse", 765, Rarity.RARE, mage.cards.s.StraxSontaranNurse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strax, Sontaran Nurse", 1035, Rarity.RARE, mage.cards.s.StraxSontaranNurse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strax, Sontaran Nurse", 160, Rarity.RARE, mage.cards.s.StraxSontaranNurse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strax, Sontaran Nurse", 444, Rarity.RARE, mage.cards.s.StraxSontaranNurse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strax, Sontaran Nurse", 765, Rarity.RARE, mage.cards.s.StraxSontaranNurse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunbaked Canyon", 1110, Rarity.RARE, mage.cards.s.SunbakedCanyon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunbaked Canyon", 309, Rarity.RARE, mage.cards.s.SunbakedCanyon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunbaked Canyon", 519, Rarity.RARE, mage.cards.s.SunbakedCanyon.class, NON_FULL_USE_VARIOUS));
