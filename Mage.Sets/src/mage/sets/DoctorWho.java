@@ -103,8 +103,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Blasphemous Act", 224, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blasphemous Act", 472, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blasphemous Act", 815, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Blink", 116, Rarity.RARE, mage.cards.b.Blink.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Blink", 721, Rarity.RARE, mage.cards.b.Blink.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blink", 116, Rarity.RARE, mage.cards.b.Blink.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blink", 721, Rarity.RARE, mage.cards.b.Blink.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Bowie Base One", 571, Rarity.COMMON, mage.cards.b.BowieBaseOne.class));
         cards.add(new SetCardInfo("Canopy Vista", 1072, Rarity.RARE, mage.cards.c.CanopyVista.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Canopy Vista", 258, Rarity.RARE, mage.cards.c.CanopyVista.class, NON_FULL_USE_VARIOUS));
