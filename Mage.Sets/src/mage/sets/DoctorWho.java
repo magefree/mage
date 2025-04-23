@@ -692,10 +692,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Run for Your Life", 154, Rarity.RARE, mage.cards.r.RunForYourLife.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Run for Your Life", 438, Rarity.RARE, mage.cards.r.RunForYourLife.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Run for Your Life", 759, Rarity.RARE, mage.cards.r.RunForYourLife.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ryan Sinclair", 390, Rarity.RARE, mage.cards.r.RyanSinclair.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ryan Sinclair", 699, Rarity.RARE, mage.cards.r.RyanSinclair.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ryan Sinclair", 94, Rarity.RARE, mage.cards.r.RyanSinclair.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ryan Sinclair", 981, Rarity.RARE, mage.cards.r.RyanSinclair.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ryan Sinclair", 390, Rarity.RARE, mage.cards.r.RyanSinclair.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ryan Sinclair", 699, Rarity.RARE, mage.cards.r.RyanSinclair.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ryan Sinclair", 94, Rarity.RARE, mage.cards.r.RyanSinclair.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ryan Sinclair", 981, Rarity.RARE, mage.cards.r.RyanSinclair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sally Sparrow", 1030, Rarity.RARE, mage.cards.s.SallySparrow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sally Sparrow", 155, Rarity.RARE, mage.cards.s.SallySparrow.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sally Sparrow", 439, Rarity.RARE, mage.cards.s.SallySparrow.class, NON_FULL_USE_VARIOUS));
