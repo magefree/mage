@@ -101,7 +101,6 @@ class StruggleForProjectRadCountersTriggeredAbility extends TriggeredAbilityImpl
 
     public StruggleForProjectRadCountersTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
-        setTriggerPhrase("Whenever a player attacks you with one or more creatures, ");
     }
 
     private StruggleForProjectRadCountersTriggeredAbility(final StruggleForProjectRadCountersTriggeredAbility ability) {
@@ -141,5 +140,10 @@ class StruggleForProjectRadCountersTriggeredAbility extends TriggeredAbilityImpl
         effect.setTargetPointer(new FixedTarget(attackingPlayer.getId()));
         this.getEffects().add(effect);
         return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a player attacks you with one or more creatures, that player gets twice that many rad counters.";
     }
 }
