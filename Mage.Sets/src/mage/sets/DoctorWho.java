@@ -803,10 +803,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 201, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 212, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 803, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Sycorax Commander", 1036, Rarity.RARE, mage.cards.s.SycoraxCommander.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Sycorax Commander", 161, Rarity.RARE, mage.cards.s.SycoraxCommander.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Sycorax Commander", 445, Rarity.RARE, mage.cards.s.SycoraxCommander.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Sycorax Commander", 766, Rarity.RARE, mage.cards.s.SycoraxCommander.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sycorax Commander", 1036, Rarity.RARE, mage.cards.s.SycoraxCommander.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sycorax Commander", 161, Rarity.RARE, mage.cards.s.SycoraxCommander.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sycorax Commander", 445, Rarity.RARE, mage.cards.s.SycoraxCommander.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sycorax Commander", 766, Rarity.RARE, mage.cards.s.SycoraxCommander.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Talisman of Conviction", 247, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Talisman of Conviction", 838, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Talisman of Creativity", 248, Rarity.UNCOMMON, mage.cards.t.TalismanOfCreativity.class, NON_FULL_USE_VARIOUS));
