@@ -5,7 +5,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.MobilizeAbility;
 import mage.cards.CardImpl;
@@ -33,9 +35,9 @@ public final class StadiumHeadliner extends CardImpl {
         this.addAbility(new MobilizeAbility(1));
 
         // {1}{R}, Sacrifice this creature: It deals damage equal to the number of creatures you control to target creature.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(
-                SourcePermanentPowerValue.NOT_NEGATIVE, "it"
-        ), new ManaCostsImpl<>("{1}{R}"));
+        Effect effect = new DamageTargetEffect(CreaturesYouControlCount.instance);
+        effect.setText("It deals damage equal to the number of creatures you control to target creature");
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
