@@ -128,10 +128,13 @@ class SigurdJarlOfRavensthorpeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+        }
         return permanent != null
                 && permanent.hasSubtype(SubType.SAGA, game)
                 && permanent.isControlledBy(getControllerId())
-                && CounterType.P1P1.getName().equals(event.getData())
+                && CounterType.LORE.getName().equals(event.getData())
                 && isControlledBy(event.getPlayerId());
     }
 }
