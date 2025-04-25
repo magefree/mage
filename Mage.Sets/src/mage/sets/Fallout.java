@@ -680,10 +680,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Pre-War Formalwear", 369, Rarity.RARE, mage.cards.p.PreWarFormalwear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pre-War Formalwear", 549, Rarity.RARE, mage.cards.p.PreWarFormalwear.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pre-War Formalwear", 897, Rarity.RARE, mage.cards.p.PreWarFormalwear.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Preston Garvey, Minuteman", 425, Rarity.MYTHIC, mage.cards.p.PrestonGarveyMinuteman.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Preston Garvey, Minuteman", 536, Rarity.MYTHIC, mage.cards.p.PrestonGarveyMinuteman.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Preston Garvey, Minuteman", 8, Rarity.MYTHIC, mage.cards.p.PrestonGarveyMinuteman.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Preston Garvey, Minuteman", 953, Rarity.MYTHIC, mage.cards.p.PrestonGarveyMinuteman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Preston Garvey, Minuteman", 425, Rarity.MYTHIC, mage.cards.p.PrestonGarveyMinuteman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Preston Garvey, Minuteman", 536, Rarity.MYTHIC, mage.cards.p.PrestonGarveyMinuteman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Preston Garvey, Minuteman", 8, Rarity.MYTHIC, mage.cards.p.PrestonGarveyMinuteman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Preston Garvey, Minuteman", 953, Rarity.MYTHIC, mage.cards.p.PrestonGarveyMinuteman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Puresteel Paladin", 170, Rarity.RARE, mage.cards.p.PuresteelPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Puresteel Paladin", 456, Rarity.RARE, mage.cards.p.PuresteelPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Puresteel Paladin", 698, Rarity.RARE, mage.cards.p.PuresteelPaladin.class, NON_FULL_USE_VARIOUS));
