@@ -103,7 +103,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 272, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 273, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Goblin", 135, Rarity.UNCOMMON, mage.cards.f.FrenziedGoblin.class));
-        //cards.add(new SetCardInfo("Frenzied Gorespawn", 32, Rarity.RARE, mage.cards.f.FrenziedGorespawn.class));
+        cards.add(new SetCardInfo("Frenzied Gorespawn", 32, Rarity.RARE, mage.cards.f.FrenziedGorespawn.class));
         cards.add(new SetCardInfo("Fresh-Faced Recruit", 192, Rarity.COMMON, mage.cards.f.FreshFacedRecruit.class));
         cards.add(new SetCardInfo("Frostburn Weird", 193, Rarity.COMMON, mage.cards.f.FrostburnWeird.class));
         cards.add(new SetCardInfo("Fungal Rebirth", 163, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
