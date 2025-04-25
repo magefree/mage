@@ -986,10 +986,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Thirst for Knowledge", 708, Rarity.UNCOMMON, mage.cards.t.ThirstForKnowledge.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thought Vessel", 251, Rarity.COMMON, mage.cards.t.ThoughtVessel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thought Vessel", 779, Rarity.COMMON, mage.cards.t.ThoughtVessel.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Three Dog, Galaxy News DJ", 120, Rarity.RARE, mage.cards.t.ThreeDogGalaxyNewsDJ.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Three Dog, Galaxy News DJ", 430, Rarity.RARE, mage.cards.t.ThreeDogGalaxyNewsDJ.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Three Dog, Galaxy News DJ", 648, Rarity.RARE, mage.cards.t.ThreeDogGalaxyNewsDJ.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Three Dog, Galaxy News DJ", 958, Rarity.RARE, mage.cards.t.ThreeDogGalaxyNewsDJ.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Dog, Galaxy News DJ", 120, Rarity.RARE, mage.cards.t.ThreeDogGalaxyNewsDJ.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Dog, Galaxy News DJ", 430, Rarity.RARE, mage.cards.t.ThreeDogGalaxyNewsDJ.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Dog, Galaxy News DJ", 648, Rarity.RARE, mage.cards.t.ThreeDogGalaxyNewsDJ.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Three Dog, Galaxy News DJ", 958, Rarity.RARE, mage.cards.t.ThreeDogGalaxyNewsDJ.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrill-Kill Disciple", 394, Rarity.RARE, mage.cards.t.ThrillKillDisciple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrill-Kill Disciple", 596, Rarity.RARE, mage.cards.t.ThrillKillDisciple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thrill-Kill Disciple", 68, Rarity.RARE, mage.cards.t.ThrillKillDisciple.class, NON_FULL_USE_VARIOUS));
