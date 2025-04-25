@@ -40,6 +40,7 @@ public class KetramoseTheNewDawnTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkLife("exile single - after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20 - 1);
 
+        // exile multiple
         // must have two triggers: exile on cost and exile on resolve
         // exile on cost
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, Exile {this}");
