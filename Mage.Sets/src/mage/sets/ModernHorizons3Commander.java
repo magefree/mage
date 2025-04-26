@@ -121,6 +121,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 340, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 341, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Expedition Map", 292, Rarity.COMMON, mage.cards.e.ExpeditionMap.class));
+        cards.add(new SetCardInfo("Exterminator Magmarch", 72, Rarity.RARE, mage.cards.e.ExterminatorMagmarch.class));
         cards.add(new SetCardInfo("Faithless Looting", 211, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Farewell", 170, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Filigree Racer", 56, Rarity.RARE, mage.cards.f.FiligreeRacer.class));
