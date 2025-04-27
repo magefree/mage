@@ -2049,7 +2049,8 @@ public class TestPlayer implements Player {
         int numBlocked = blocked.size();
 
         // Can't block any more creatures
-        if (++numBlocked > blocker.getMaxBlocks()) {
+        // maxBlocks = 0 equals to "can block any number of creatures"
+        if (blocker.getMaxBlocks() > 0 && ++numBlocked > blocker.getMaxBlocks()) {
             return false;
         }
 

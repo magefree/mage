@@ -114,7 +114,7 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                                 // (This temporarily manipulates Blocking values to "test" how many blockers the creature has still left to assign)
                                 List<Permanent> spentBlockers = new ArrayList<>();
                                 for (Permanent possibleBlocker : list) {
-                                    if (possibleBlocker.getMaxBlocks() != 0 && possibleBlocker.getBlocking() >= possibleBlocker.getMaxBlocks()) {
+                                    if (possibleBlocker.getMaxBlocks() > 0 && possibleBlocker.getBlocking() >= possibleBlocker.getMaxBlocks()) {
                                         spentBlockers.add(possibleBlocker);
                                     }
                                 }
