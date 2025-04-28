@@ -16,7 +16,7 @@ import mage.client.cards.BigCard;
 import mage.client.game.PlayAreaPanel;
 import mage.client.game.PlayerPanelExt;
 import mage.client.themes.ThemeType;
-import mage.client.util.ClientEventType;
+import mage.client.util.*;
 import mage.client.util.Event;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.Listener;
@@ -424,6 +424,7 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createPermanentCard(game, playerYou.getId(), "RNA", "185", 0, 0, 0, true, false, null)); // Judith, the Scourge Diva
         cardViews.add(createHandCard(game, playerYou.getId(), "DIS", "153")); // Odds // Ends (split card)
         cardViews.add(createHandCard(game, playerYou.getId(), "ELD", "38")); // Animating Faerie (adventure card)
+        cardViews.add(createHandCard(game, playerYou.getId(), "LEA", "278")); // Bayou (retro frame)
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, false, false)); // face down
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", true, false, true)); // morphed
         cardViews.add(createFaceDownCard(game, playerOpponent.getId(), "ELD", "38", false, true, false)); // manifested
@@ -628,7 +629,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelRenderMode.setText("Render mode:");
 
-        comboRenderMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MTGO", "Image" }));
+        comboRenderMode.setModel(new javax.swing.DefaultComboBoxModel<>(CardRenderMode.toList()));
         comboRenderMode.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboRenderModeItemStateChanged(evt);

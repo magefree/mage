@@ -4,10 +4,7 @@ import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.components.KeyBindButton;
 import mage.client.themes.ThemeType;
-import mage.client.util.CardLanguage;
-import mage.client.util.ClientDefaultSettings;
-import mage.client.util.GUISizeHelper;
-import mage.client.util.ImageHelper;
+import mage.client.util.*;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -37,7 +34,6 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import java.util.stream.Collectors;
 
 import static mage.client.constants.Constants.AUTO_TARGET_NON_FEEL_BAD;
 import static mage.constants.Constants.*;
@@ -89,8 +85,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferredImageLaguage";
 
-    public static final String KEY_CARD_RENDERING_IMAGE_MODE = "cardRenderingFallback";
-    public static final String KEY_CARD_RENDERING_ENABLE_RETRO_FRAMES = "cardRenderingRetroFrames";
+    public static final String KEY_CARD_RENDERING_IMAGE_MODE = "cardRenderingMode";
     public static final String KEY_CARD_RENDERING_ICONS_FOR_ABILITIES = "cardRenderingIconsForAbilities";
     public static final String KEY_CARD_RENDERING_ICONS_FOR_PLAYABLE = "cardRenderingIconsForPlayable";
     public static final String KEY_CARD_RENDERING_REMINDER_TEXT = "cardRenderingReminderText";
@@ -761,6 +756,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
 
         cbPreferredImageLanguage.setModel(new DefaultComboBoxModel<>(CardLanguage.toList()));
+        cbCardRenderImageFallback.setModel(new DefaultComboBoxModel<>(CardRenderMode.toList()));
     }
 
     private void createSizeSetting(Integer position, String key, Integer defaultValue, boolean useExample, String name, String hint) {
@@ -962,14 +958,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbPreferredImageLanguage = new javax.swing.JComboBox<>();
         labelPreferredImageLanguage = new javax.swing.JLabel();
         panelCardStyles = new javax.swing.JPanel();
-        cbCardRenderImageFallback = new javax.swing.JCheckBox();
-        cbCardRenderRetroFrames = new javax.swing.JCheckBox();
         cbCardRenderIconsForAbilities = new javax.swing.JCheckBox();
         cbCardRenderIconsForPlayable = new javax.swing.JCheckBox();
         jSeparator1 = new javax.swing.JSeparator();
         cbCardRenderShowReminderText = new javax.swing.JCheckBox();
         cbCardRenderHideSetSymbol = new javax.swing.JCheckBox();
         cbCardRenderShowAbilityTextOverlay = new javax.swing.JCheckBox();
+        labelRenderMode = new javax.swing.JLabel();
+        cbCardRenderImageFallback = new javax.swing.JComboBox<>();
         tabPhases = new javax.swing.JPanel();
         jLabelHeadLine = new javax.swing.JLabel();
         jLabelYourTurn = new javax.swing.JLabel();
@@ -2279,7 +2275,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        cbPreferredImageLanguage.setMaximumRowCount(20);
         cbPreferredImageLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelPreferredImageLanguage.setText("Default images language:");
@@ -2305,7 +2300,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 .add(labelPreferredImageLanguage)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(cbPreferredImageLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 153, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                        .add(0, 480, Short.MAX_VALUE)))
+                        .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelCardImagesLayout.setVerticalGroup(
@@ -2325,29 +2320,59 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
 
         panelCardStyles.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card styles (restart xmage to apply new settings)"));
-        panelCardStyles.setLayout(new javax.swing.BoxLayout(panelCardStyles, javax.swing.BoxLayout.Y_AXIS));
-
-        cbCardRenderImageFallback.setText("Render mode: MTGO style (off) or IMAGE style (on)");
-        panelCardStyles.add(cbCardRenderImageFallback);
-
-        cbCardRenderRetroFrames.setText("Force retro frames (MTGO render mode will use old border for all cards)");
-        panelCardStyles.add(cbCardRenderRetroFrames);
 
         cbCardRenderIconsForAbilities.setText("Enable card icons for abilities (example: flying, deathtouch)");
-        panelCardStyles.add(cbCardRenderIconsForAbilities);
 
         cbCardRenderIconsForPlayable.setText("Enable card icons for playable abilities (example: if you can activate card's ability then show a special icon in the corner)");
-        panelCardStyles.add(cbCardRenderIconsForPlayable);
-        panelCardStyles.add(jSeparator1);
 
         cbCardRenderShowReminderText.setText("Show reminder text in rendered card textboxes");
-        panelCardStyles.add(cbCardRenderShowReminderText);
 
         cbCardRenderHideSetSymbol.setText("Hide set symbols on cards (more space on the type line for card types)");
-        panelCardStyles.add(cbCardRenderHideSetSymbol);
 
         cbCardRenderShowAbilityTextOverlay.setText("Show ability text as overlay in big card view");
-        panelCardStyles.add(cbCardRenderShowAbilityTextOverlay);
+
+        labelRenderMode.setText("Render Mode:");
+        labelRenderMode.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the modern frame<br> Forced Retro - Renders all cards in the retro frame");
+
+        cbCardRenderImageFallback.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCardRenderImageFallback.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the modern frame<br> Forced Retro - Renders all cards in the retro frame");
+
+        org.jdesktop.layout.GroupLayout panelCardStylesLayout = new org.jdesktop.layout.GroupLayout(panelCardStyles);
+        panelCardStyles.setLayout(panelCardStylesLayout);
+        panelCardStylesLayout.setHorizontalGroup(
+            panelCardStylesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(cbCardRenderIconsForAbilities)
+            .add(cbCardRenderIconsForPlayable)
+            .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 775, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(cbCardRenderShowReminderText)
+            .add(cbCardRenderHideSetSymbol)
+            .add(cbCardRenderShowAbilityTextOverlay)
+            .add(panelCardStylesLayout.createSequentialGroup()
+                .add(6, 6, 6)
+                .add(labelRenderMode)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cbCardRenderImageFallback, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        );
+        panelCardStylesLayout.setVerticalGroup(
+            panelCardStylesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelCardStylesLayout.createSequentialGroup()
+                .add(0, 0, 0)
+                .add(panelCardStylesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labelRenderMode)
+                    .add(cbCardRenderImageFallback, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(0, 0, 0)
+                .add(cbCardRenderIconsForAbilities)
+                .add(0, 0, 0)
+                .add(cbCardRenderIconsForPlayable)
+                .add(0, 0, 0)
+                .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, 0)
+                .add(cbCardRenderShowReminderText)
+                .add(0, 0, 0)
+                .add(cbCardRenderHideSetSymbol)
+                .add(0, 0, 0)
+                .add(cbCardRenderShowAbilityTextOverlay))
+        );
 
         org.jdesktop.layout.GroupLayout tabGuiImagesLayout = new org.jdesktop.layout.GroupLayout(tabGuiImages);
         tabGuiImages.setLayout(tabGuiImagesLayout);
@@ -2367,7 +2392,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(panelCardStyles, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("GUI Images", tabGuiImages);
@@ -3038,8 +3063,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbUseRandomBattleImage, KEY_BATTLEFIELD_IMAGE_RANDOM, "true", "false");
 
         // rendering
-        save(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_IMAGE_MODE, "true", "false");
-        save(prefs, dialog.cbCardRenderRetroFrames, KEY_CARD_RENDERING_ENABLE_RETRO_FRAMES, "true", "false");
+        save(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_IMAGE_MODE);
         save(prefs, dialog.cbCardRenderIconsForAbilities, KEY_CARD_RENDERING_ICONS_FOR_ABILITIES, "true", "false");
         save(prefs, dialog.cbCardRenderIconsForPlayable, KEY_CARD_RENDERING_ICONS_FOR_PLAYABLE, "true", "false");
         save(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true", "false");
@@ -3490,8 +3514,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.cbPreferredImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
-        load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_IMAGE_MODE, "true", "false");
-        load(prefs, dialog.cbCardRenderRetroFrames, KEY_CARD_RENDERING_ENABLE_RETRO_FRAMES, "true", "false");
+        dialog.cbCardRenderImageFallback.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_RENDERING_IMAGE_MODE, CardRenderMode.MTGO.toString()));
         load(prefs, dialog.cbCardRenderIconsForAbilities, KEY_CARD_RENDERING_ICONS_FOR_ABILITIES, "true", "true");
         load(prefs, dialog.cbCardRenderIconsForPlayable, KEY_CARD_RENDERING_ICONS_FOR_PLAYABLE, "true", "true");
         load(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true");
@@ -3815,15 +3838,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static int getRenderMode() {
-        if (getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_IMAGE_MODE, "false").equals("false")) {
-            return 0; // mtgo
-        } else {
-            return 1; // image
-        }
-    }
-
-    public static boolean getRenderRetroFrames() {
-        return (getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_ENABLE_RETRO_FRAMES, "true").endsWith("true"));
+        return CardRenderMode.fromString(getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_IMAGE_MODE, CardRenderMode.MTGO.toString())).ordinal();
     }
 
     public static boolean getRenderIconsForAbilities() {
@@ -4053,8 +4068,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbCardRenderHideSetSymbol;
     private javax.swing.JCheckBox cbCardRenderIconsForAbilities;
     private javax.swing.JCheckBox cbCardRenderIconsForPlayable;
-    private javax.swing.JCheckBox cbCardRenderImageFallback;
-    private javax.swing.JCheckBox cbCardRenderRetroFrames;
+    private javax.swing.JComboBox<String> cbCardRenderImageFallback;
     private javax.swing.JCheckBox cbCardRenderShowAbilityTextOverlay;
     private javax.swing.JCheckBox cbCardRenderShowReminderText;
     private javax.swing.JCheckBox cbConfirmEmptyManaPool;
@@ -4186,6 +4200,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel labelNextTurn;
     private javax.swing.JLabel labelPreferredImageLanguage;
     private javax.swing.JLabel labelPriorEnd;
+    private javax.swing.JLabel labelRenderMode;
     private javax.swing.JLabel labelSizeGroup1;
     private javax.swing.JLabel labelSizeGroup2;
     private javax.swing.JLabel labelSkipStep;

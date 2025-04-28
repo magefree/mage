@@ -105,8 +105,10 @@ public class CardPluginImpl implements CardPlugin {
                                     boolean isFoil, Dimension dimension, int renderMode, boolean needFullPermanentRender) {
         switch (renderMode) {
             case 0:
+            case 2:
+            case 3:
                 return new CardPanelRenderModeMTGO(view, gameId, loadImage, callback, isFoil, dimension,
-                        needFullPermanentRender);
+                        needFullPermanentRender, renderMode);
             case 1:
                 return new CardPanelRenderModeImage(view, gameId, loadImage, callback, isFoil, dimension,
                         needFullPermanentRender);
