@@ -97,6 +97,11 @@ class JaradGolgariLichLordTarget extends TargetSacrifice {
     }
 
     @Override
+    public JaradGolgariLichLordTarget copy() {
+        return new JaradGolgariLichLordTarget(this);
+    }
+
+    @Override
     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
         if (!super.canTarget(playerId, id, source, game)) {
             return false;
