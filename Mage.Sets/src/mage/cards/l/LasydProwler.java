@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class LasydProwler extends CardImpl {
 
-    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_LAND, null);
+    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_LANDS, null);
     private static final Hint hint = new ValueHint("Land cards in your graveyard", xValue);
 
     public LasydProwler(UUID ownerId, CardSetInfo setInfo) {

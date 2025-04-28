@@ -46,7 +46,7 @@ public final class TemurMonument extends CardImpl {
 
         // {3}{G}{U}{R}, {T}, Sacrifice this artifact: Create a 5/5 green Elephant creature token. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new CreateTokenEffect(new Elephant55Token(), 2), new ManaCostsImpl<>("{3}{G}{U}{R}")
+                new CreateTokenEffect(new Elephant55Token()), new ManaCostsImpl<>("{3}{G}{U}{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

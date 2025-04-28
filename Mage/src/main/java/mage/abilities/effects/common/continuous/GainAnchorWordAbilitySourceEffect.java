@@ -7,6 +7,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -22,7 +23,7 @@ public class GainAnchorWordAbilitySourceEffect extends ContinuousEffectImpl {
 
     public GainAnchorWordAbilitySourceEffect(Ability ability, ModeChoice modeChoice) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "&bull " + modeChoice + " &mdash; " + ability.getRule();
+        this.staticText = "&bull " + modeChoice + " &mdash; " + CardUtil.getTextWithFirstCharUpperCase(ability.getRule());
         this.ability = ability;
         this.modeChoice = modeChoice;
         this.ability.setRuleVisible(false);

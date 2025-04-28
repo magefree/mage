@@ -26,7 +26,7 @@ public class CreateTokenAttachSourceEffect extends CreateTokenEffect {
     public CreateTokenAttachSourceEffect(Token token, String innerConcat, boolean optional) {
         super(token);
         this.optional = optional;
-        staticText = staticText.concat(innerConcat + (optional ? " you may" : "") + " attach {this} to it");
+        staticText = staticText.concat(innerConcat + (optional ? ". You may" : "") + " attach {this} to it");
     }
 
     private CreateTokenAttachSourceEffect(final CreateTokenAttachSourceEffect effect) {

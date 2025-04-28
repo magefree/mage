@@ -46,7 +46,7 @@ class StillnessInMotionEffect extends OneShotEffect {
 
     StillnessInMotionEffect() {
         super(Outcome.Benefit);
-        staticText = "Then if you have no cards in your library, exile this enchantment " +
+        staticText = "Then if your library has no cards in it, exile this enchantment " +
                 "and put five cards from your graveyard on top of your library in any order";
     }
 

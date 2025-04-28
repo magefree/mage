@@ -1,8 +1,5 @@
 package mage.cards.t;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,21 +9,24 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.DelveAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+
 /**
- *
  * @author Grath
  */
 public final class TevalArbiterOfVirtue extends CardImpl {
@@ -39,7 +39,7 @@ public final class TevalArbiterOfVirtue extends CardImpl {
 
     public TevalArbiterOfVirtue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{U}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.DRAGON);
@@ -56,7 +56,7 @@ public final class TevalArbiterOfVirtue extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new DelveAbility(false), filter)));
 
         // Whenever you cast a spell, you lose life equal to its mana value.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new LoseLifeSourceControllerEffect(TevalArbiterOfVirtueValue.instance), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new LoseLifeSourceControllerEffect(TevalArbiterOfVirtueValue.instance).setText("you lose life equal to its mana value"), false));
     }
 
     private TevalArbiterOfVirtue(final TevalArbiterOfVirtue card) {

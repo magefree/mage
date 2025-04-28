@@ -9,6 +9,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -166,7 +167,7 @@ class AdventureCardSpellAbility extends SpellAbility {
                 + " "
                 + getManaCosts().getText()
                 + " &mdash; "
-                + super.getRule(false) // without cost
+                + CardUtil.getTextWithFirstCharUpperCase(super.getRule(false)) // without cost
                 + " <i>(Then exile this card. You may cast the creature later from exile.)</i>";
     }
 

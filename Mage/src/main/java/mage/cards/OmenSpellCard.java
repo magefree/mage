@@ -9,6 +9,7 @@ import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -151,7 +152,7 @@ class OmenCardSpellAbility extends SpellAbility {
                 + " "
                 + getManaCosts().getText()
                 + " &mdash; "
-                + super.getRule(false) // without cost
+                + CardUtil.getTextWithFirstCharUpperCase(super.getRule(false)) // without cost
                 + " <i>(Then shuffle this card into its owner's library.)</i>";
     }
 

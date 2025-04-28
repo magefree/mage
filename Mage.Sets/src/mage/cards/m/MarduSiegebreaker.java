@@ -18,7 +18,10 @@ import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.token.Token;
@@ -39,6 +42,12 @@ import java.util.UUID;
  */
 public final class MarduSiegebreaker extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("other target creature you control");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
     public MarduSiegebreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");
 
@@ -55,7 +64,7 @@ public final class MarduSiegebreaker extends CardImpl {
 
         // When this creature enters, exile up to one other target creature you control until this creature leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
-        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
 
         // Whenever this creature attacks, for each opponent, create a tapped token that's a copy of the exiled card attacking that opponent. At the beginning of your end step, sacrifice those tokens.
@@ -77,7 +86,7 @@ class MarduSiegebreakerEffect extends OneShotEffect {
     MarduSiegebreakerEffect() {
         super(Outcome.Benefit);
         staticText = "for each opponent, create a tapped token that's a copy of the exiled card " +
-                "attacking that opponent. At the beginning of your end step, sacrifice those tokens";
+                "attacking that opponent. At the beginning of your next end step, sacrifice those tokens";
     }
 
     private MarduSiegebreakerEffect(final MarduSiegebreakerEffect effect) {

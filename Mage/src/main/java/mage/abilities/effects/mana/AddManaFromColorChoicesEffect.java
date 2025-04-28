@@ -32,7 +32,7 @@ public class AddManaFromColorChoicesEffect extends ManaEffect {
                 .map(Mana::new)
                 .forEach(netMana::add);
         staticText = "add " + CardUtil
-                .concatWithOr(this.netMana.stream().map(s -> "{" + s + '}').collect(Collectors.toList()));
+                .concatWithOr(this.netMana.stream().map(Mana::toString).collect(Collectors.toList()));
     }
 
     private AddManaFromColorChoicesEffect(final AddManaFromColorChoicesEffect effect) {
