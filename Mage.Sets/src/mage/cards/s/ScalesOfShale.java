@@ -1,11 +1,10 @@
 package mage.cards.s;
 
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -26,20 +25,14 @@ import java.util.UUID;
  */
 public final class ScalesOfShale extends CardImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
-            new FilterControlledPermanent(SubType.LIZARD, "Lizard you control")
-    );
-    private static final Hint hint = new ValueHint("Lizards you control", xValue);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.LIZARD, "Lizards");
+    private static final Hint hint = new ValueHint("Lizards you control", new PermanentsOnBattlefieldCount(filter));
 
     public ScalesOfShale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // This spell costs {1} less to cast for each Lizard you control.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL,
-                new SpellCostReductionForEachSourceEffect(1, xValue).setCanWorksOnStackOnly(true)
-        ).setRuleAtTheTop(true).addHint(hint));
-
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).setRuleAtTheTop(true).addHint(hint));
 
         // Target creature gets +2/+0 and gains lifelink and indestructible until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
