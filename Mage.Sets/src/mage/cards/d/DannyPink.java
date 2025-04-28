@@ -71,7 +71,8 @@ class DannyPinkTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
     }
 
-    // We have to check for creatures entering with counters
+    // Non-token creatures entering with counters do not see the COUNTERS_ADDED event,
+    // so we check for etb event too.
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.COUNTERS_ADDED
@@ -80,22 +81,24 @@ class DannyPinkTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (!this.getSourceId().equals(event.getTargetId())) {
+            return false;
+        }
         Permanent permanent = game.getPermanent(event.getTargetId());
-        boolean entersWithCounters = false;
+        if (permanent == null) {
+           return false;
+        }
         // a non-token creature entering with counters does not see the COUNTERS_ADDED event.
         // therefore, we return true in either of two cases :
         // 1. a non-token creature enters with counters on it (no need to check the watcher)
         // 2. a COUNTERS_ADDED event occurs and the watcher is valid
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Counters counters = permanent.getCounters(game);
-            entersWithCounters = !counters.values().stream().mapToInt(Counter::getCount).noneMatch(x -> x > 0);
-            return entersWithCounters
-                    && !(permanent instanceof PermanentToken) 
-                    && this.getSourceId().equals(event.getTargetId());
+            return !counters.values().stream().mapToInt(Counter::getCount).noneMatch(x -> x > 0)
+                    && !(permanent instanceof PermanentToken);
         }
         if (event.getType() == GameEvent.EventType.COUNTERS_ADDED) {
-            return CountersAddedFirstTimeWatcher.checkEvent(event, permanent, game, 0)
-                    && this.getSourceId().equals(event.getTargetId());
+            return CountersAddedFirstTimeWatcher.checkEvent(event, permanent, game, 0);
         }
         return false;
     }
