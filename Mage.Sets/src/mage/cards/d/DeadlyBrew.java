@@ -53,7 +53,7 @@ class DeadlyBrewEffect extends OneShotEffect {
 
     DeadlyBrewEffect() {
         super(Outcome.Benefit);
-        staticText = "each player sacrifices a creature or planeswalker. If you sacrificed a permanent this way, " +
+        staticText = "each player sacrifices a creature or planeswalker of their choice. If you sacrificed a permanent this way, " +
                 "you may return another permanent card from your graveyard to your hand";
     }
 

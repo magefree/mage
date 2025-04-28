@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -9,7 +8,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -21,7 +19,7 @@ public class DiscardOntoBattlefieldEffect extends ReplacementEffectImpl {
 
     public DiscardOntoBattlefieldEffect() {
         super(Duration.EndOfGame, Outcome.PutCardInPlay);
-        staticText = "If a spell or ability an opponent controls causes you to discard {this}, put it onto the battlefield instead of putting it into your graveyard";
+        staticText = "If a spell or ability an opponent controls causes you to discard this card, put it onto the battlefield instead of putting it into your graveyard";
     }
 
     protected DiscardOntoBattlefieldEffect(final DiscardOntoBattlefieldEffect effect) {
@@ -40,30 +38,24 @@ public class DiscardOntoBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
-            if (zcEvent.getFromZone() == Zone.HAND && zcEvent.getToZone() == Zone.GRAVEYARD) {
-                StackObject spell = game.getStack().getStackObject(event.getSourceId());
-                if (spell != null && game.getOpponents(source.getControllerId()).contains(spell.getControllerId())) {
-                    return true;
-                }
-            }
+        if (!event.getTargetId().equals(source.getSourceId())) {
+            return false;
         }
-        return false;
+        ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
+        if (zcEvent.getFromZone() != Zone.HAND || zcEvent.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        StackObject spell = game.getStack().getStackObject(event.getSourceId());
+        return spell != null && game.getOpponents(source.getControllerId()).contains(spell.getControllerId());
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            Player owner = game.getPlayer(card.getOwnerId());
-            if (owner != null) {
-                if (owner.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    return true;
-                }
-            }
+        if (card == null) {
+            return false;
         }
-        return false;
+        Player owner = game.getPlayer(card.getOwnerId());
+        return owner != null && owner.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
-
 }

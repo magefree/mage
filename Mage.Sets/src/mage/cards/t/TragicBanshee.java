@@ -34,7 +34,7 @@ public final class TragicBanshee extends CardImpl {
                 new AddContinuousEffectToGame(new BoostTargetEffect(-13, -13)),
                 new AddContinuousEffectToGame(new BoostTargetEffect(-1, -1)),
                 MorbidCondition.instance, "target creature an opponent controls gets -1/-1 until end of turn. " +
-                "If a creature died this turn, that creature gets -13/-13 instead"
+                "If a creature died this turn, that creature gets -13/-13 until end of turn instead"
         ));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability.addHint(MorbidHint.instance).setAbilityWord(AbilityWord.MORBID));

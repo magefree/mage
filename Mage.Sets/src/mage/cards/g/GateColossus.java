@@ -44,7 +44,7 @@ public final class GateColossus extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD,
                 new PutOnLibrarySourceEffect(
-                        true, "put {this} from your graveyard on top of your library"
+                        true, "put this card from your graveyard on top of your library"
                 ), filter, true
         ));
     }
