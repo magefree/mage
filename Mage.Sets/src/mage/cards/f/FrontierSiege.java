@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -30,10 +30,9 @@ import java.util.UUID;
  */
 public final class FrontierSiege extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a creature with flying you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature you control with flying");
 
     static {
-        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
@@ -96,6 +95,7 @@ class FrontierSiegeFightEffect extends OneShotEffect {
 
     FrontierSiegeFightEffect() {
         super(Outcome.Damage);
+        staticText = "have it fight target creature you don't control";
     }
 
     private FrontierSiegeFightEffect(final FrontierSiegeFightEffect effect) {

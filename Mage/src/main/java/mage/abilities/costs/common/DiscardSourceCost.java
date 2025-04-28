@@ -12,22 +12,17 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DiscardSourceCost extends CostImpl {
 
-    private boolean nameCard = true;
-
-    public DiscardSourceCost() {}
-
-    public DiscardSourceCost(boolean nameCard){
-        this.nameCard = nameCard;
+    public DiscardSourceCost() {
+        super();
+        setText("discard this card");
     }
 
     public DiscardSourceCost(DiscardSourceCost cost) {
         super(cost);
-        nameCard = cost.nameCard;
     }
 
     @Override
@@ -41,19 +36,8 @@ public class DiscardSourceCost extends CostImpl {
         if (player != null) {
             Card card = player.getHand().get(source.getSourceId(), game);
             paid = player.discard(card, true, source, game);
-
         }
         return paid;
-    }
-
-    @Override
-    public String getText() {
-        if(nameCard) {
-            return "Discard {this}";
-        }
-        else{
-            return "Discard this card";
-        }
     }
 
     @Override

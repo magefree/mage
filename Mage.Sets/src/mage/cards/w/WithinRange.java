@@ -26,7 +26,7 @@ public final class WithinRange extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // When this enchantment enters, create two 1/1 red Warrior creature tokens.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RedWarriorToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RedWarriorToken(), 2)));
 
         // Whenever you attack, each opponent loses life equal to the number of creatures attacking them.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new WithinRangeEffect(), 1));

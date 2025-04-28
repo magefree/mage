@@ -27,7 +27,7 @@ public final class AlignedHeart extends CardImpl {
         // Flurry -- Whenever you cast your second spell each turn, put a rally counter on this enchantment. Then create a 1/1 white Monk creature token with prowess for each rally counter on it.
         Ability ability = new FlurryAbility(new AddCountersSourceEffect(CounterType.RALLY.createInstance()));
         ability.addEffect(new CreateTokenEffect(new MonasteryMentorToken(), xValue)
-                .setText("then create a 1/1 white Monk creature token with prowess for each rally counter on it"));
+                .setText("Then create a 1/1 white Monk creature token with prowess for each rally counter on it"));
         this.addAbility(ability);
     }
 

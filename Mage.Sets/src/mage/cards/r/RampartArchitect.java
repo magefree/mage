@@ -44,7 +44,7 @@ public final class RampartArchitect extends CardImpl {
 
         // Whenever a creature you control with defender dies, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
         this.addAbility(new DiesCreatureTriggeredAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
         ), true, filter));
     }
 

@@ -40,7 +40,7 @@ public final class BecomeTheAvalanche extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(xValue));
         this.getSpellAbility().addEffect(new BoostControlledEffect(
                 CardsInControllerHandCount.ANY, CardsInControllerHandCount.ANY, Duration.EndOfTurn
-        ));
+        ).setText("Then creatures you control get +X/+X until end of turn, where X is the number of cards in your hand"));
         this.getSpellAbility().addHint(hint);
     }
 

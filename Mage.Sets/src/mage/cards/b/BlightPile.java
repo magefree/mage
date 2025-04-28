@@ -33,7 +33,7 @@ public final class BlightPile extends CardImpl {
         filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
     private static final Hint hint = new ValueHint("Creatures with defender you control", xValue);
 
     public BlightPile(UUID ownerId, CardSetInfo setInfo) {
@@ -47,7 +47,11 @@ public final class BlightPile extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {2}{B}, {T}: Each opponent loses X life, where X is the number of creatures with defender you control.
-        Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(xValue), new ManaCostsImpl<>("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(
+                new LoseLifeOpponentsEffect(xValue)
+                        .setText("each opponent loses X life, where X is the number of creatures with defender you control"),
+                new ManaCostsImpl<>("{2}{B}")
+        );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability.addHint(hint));
     }

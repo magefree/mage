@@ -40,7 +40,7 @@ public final class FloralEvoker extends CardImpl {
                 new ReturnFromGraveyardToBattlefieldTargetEffect(true), new ManaCostsImpl<>("{G}")
         );
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE_A)));
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_LAND));
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_LAND_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 
