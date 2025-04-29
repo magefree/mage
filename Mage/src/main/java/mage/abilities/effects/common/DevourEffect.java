@@ -142,7 +142,7 @@ public class DevourEffect extends ReplacementEffectImpl {
             text += devourFactor;
         }
 
-        text += " <i>(As this enters, you may sacrifice any number of "
+        text += " <i>(As this creature enters, you may sacrifice any number of "
                 + filterMessage + "s. "
                 + "This creature enters with ";
 
