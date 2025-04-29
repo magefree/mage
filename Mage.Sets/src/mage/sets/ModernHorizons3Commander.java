@@ -35,8 +35,8 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("All Is Dust", 152, Rarity.MYTHIC, mage.cards.a.AllIsDust.class));
         cards.add(new SetCardInfo("Altar of the Goyf", 282, Rarity.UNCOMMON, mage.cards.a.AltarOfTheGoyf.class));
         cards.add(new SetCardInfo("Ancient Stirrings", 219, Rarity.COMMON, mage.cards.a.AncientStirrings.class));
-        cards.add(new SetCardInfo("Angelic Aberration", 39, Rarity.RARE, mage.cards.a.AngelicAberration.class));
         cards.add(new SetCardInfo("Angel of Invention", 166, Rarity.MYTHIC, mage.cards.a.AngelOfInvention.class));
+        cards.add(new SetCardInfo("Angelic Aberration", 39, Rarity.RARE, mage.cards.a.AngelicAberration.class));
         cards.add(new SetCardInfo("Anger", 208, Rarity.UNCOMMON, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Apex Devastator", 220, Rarity.MYTHIC, mage.cards.a.ApexDevastator.class));
         cards.add(new SetCardInfo("Arcane Denial", 176, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
@@ -139,8 +139,8 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Garruk, Apex Predator", 262, Rarity.MYTHIC, mage.cards.g.GarrukApexPredator.class));
         cards.add(new SetCardInfo("Glimmer of Genius", 187, Rarity.UNCOMMON, mage.cards.g.GlimmerOfGenius.class));
         cards.add(new SetCardInfo("Glimmerpost", 346, Rarity.COMMON, mage.cards.g.Glimmerpost.class));
-        cards.add(new SetCardInfo("Goldspan Dragon", 212, Rarity.MYTHIC, mage.cards.g.GoldspanDragon.class));
         cards.add(new SetCardInfo("Gluttonous Hellkite", 73, Rarity.RARE, mage.cards.g.GluttonousHellkite.class));
+        cards.add(new SetCardInfo("Goldspan Dragon", 212, Rarity.MYTHIC, mage.cards.g.GoldspanDragon.class));
         cards.add(new SetCardInfo("Gonti's Aether Heart", 294, Rarity.MYTHIC, mage.cards.g.GontisAetherHeart.class));
         cards.add(new SetCardInfo("Grapple with the Past", 230, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
         cards.add(new SetCardInfo("Graveshifter", 198, Rarity.UNCOMMON, mage.cards.g.Graveshifter.class));
@@ -248,8 +248,6 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Shivan Reef", 375, Rarity.RARE, mage.cards.s.ShivanReef.class));
         cards.add(new SetCardInfo("Shrine of the Forsaken Gods", 376, Rarity.RARE, mage.cards.s.ShrineOfTheForsakenGods.class));
         cards.add(new SetCardInfo("Siege-Gang Lieutenant", 61, Rarity.RARE, mage.cards.s.SiegeGangLieutenant.class));
-        cards.add(new SetCardInfo("Tempt with Mayhem", 62, Rarity.RARE, mage.cards.t.TemptWithMayhem.class));
-        cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 4, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class));
         cards.add(new SetCardInfo("Sifter of Skulls", 203, Rarity.RARE, mage.cards.s.SifterOfSkulls.class));
         cards.add(new SetCardInfo("Silverquill Lecturer", 44, Rarity.RARE, mage.cards.s.SilverquillLecturer.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 377, Rarity.COMMON, mage.cards.s.SimicGrowthChamber.class));
@@ -311,6 +309,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Twins of Discord", 37, Rarity.RARE, mage.cards.t.TwinsOfDiscord.class));
         cards.add(new SetCardInfo("Ugin's Insight", 196, Rarity.RARE, mage.cards.u.UginsInsight.class));
         cards.add(new SetCardInfo("Ugin, the Ineffable", 160, Rarity.RARE, mage.cards.u.UginTheIneffable.class));
+        cards.add(new SetCardInfo("Ulalek, Fused Atrocity", 4, Rarity.MYTHIC, mage.cards.u.UlalekFusedAtrocity.class));
         cards.add(new SetCardInfo("Ulamog's Crusher", 161, Rarity.COMMON, mage.cards.u.UlamogsCrusher.class));
         cards.add(new SetCardInfo("Ulamog's Dreadsire", 38, Rarity.RARE, mage.cards.u.UlamogsDreadsire.class));
         cards.add(new SetCardInfo("Ulamog's Nullifier", 275, Rarity.UNCOMMON, mage.cards.u.UlamogsNullifier.class));
