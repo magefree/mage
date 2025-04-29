@@ -105,20 +105,24 @@ public class RetroCardRenderer extends CardRenderer {
     // = cardWidth - 2 x totalContentInset
     protected int contentWidth;
 
-    // Width of art / text box
+    // dimensions of art / text box
     protected int innerContentWidth;
-    // X position of inside content
-    private int innerContentStart;
-
+    protected int artHeight;
 
     // How tall the name / type lines and P/T box are
-    protected static final float BOX_HEIGHT_FRAC = 0.065f; // x cardHeight
-    protected static final int BOX_HEIGHT_MIN = 16;
+    protected static final float BOX_HEIGHT_FRAC = 0.051f; // x cardHeight
+    protected static final float PT_BOX_HEIGHT_FRAC = 0.065f; // x cardHeight
+    protected static final int BOX_HEIGHT_MIN = 8;
     protected int boxHeight;
+    protected int ptBoxHeight;
 
     // How far down the card is the type line placed?
-    protected static final float TYPE_LINE_Y_FRAC = 0.52f; // x cardHeight
+    protected static final float TYPE_LINE_Y_FRAC = 0.525f; // x cardHeight
     protected int typeLineY;
+
+    // The left and right frame inset
+    protected static final float INSET_WIDTH_FRAC = .055f;
+    protected int insetWidth;
 
     // Possible sizes of rules text font
     protected static final int[] RULES_TEXT_FONT_SIZES = {24, 18, 15, 12, 9};
@@ -156,14 +160,18 @@ public class RetroCardRenderer extends CardRenderer {
 
         borderWidth = (int) Math.max(
                 BORDER_WIDTH_MIN,
-                0.042 * cardWidth);
+                0.048 * cardWidth);
 
         frameInset = (int) Math.max(
                 BORDER_WIDTH_MIN,
                 0.012 * cardWidth);
 
+        insetWidth = (int) Math.max(
+                BORDER_WIDTH_MIN,
+                INSET_WIDTH_FRAC * cardWidth);
+
         // Content inset, just equal to border width
-        contentInset = borderWidth - frameInset;
+        contentInset = borderWidth + insetWidth;
 
         // Total content inset helper
         totalContentInset = borderWidth + contentInset;
@@ -175,13 +183,19 @@ public class RetroCardRenderer extends CardRenderer {
         boxHeight = (int) Math.max(
                 BOX_HEIGHT_MIN,
                 BOX_HEIGHT_FRAC * cardHeight);
-
-        // Art / text box size
-        innerContentWidth = (int) (cardWidth * 0.81f);
-        innerContentStart = (int) (cardWidth * 0.095f);
+        ptBoxHeight = (int) Math.max(
+                BOX_HEIGHT_MIN * 2,
+                PT_BOX_HEIGHT_FRAC * cardHeight);
 
         // Type line at
         typeLineY = (int) (TYPE_LINE_Y_FRAC * cardHeight);
+
+        // Art / text box size
+        innerContentWidth = (int) (cardWidth * .8f);
+        if (innerContentWidth < 160) {
+            innerContentWidth += 2;
+        }
+        artHeight = typeLineY - (borderWidth + boxHeight);
 
         // Box text height
         boxTextHeight = getTextHeightForBoxHeight(boxHeight);
@@ -190,8 +204,8 @@ public class RetroCardRenderer extends CardRenderer {
         boxTextFontNarrow = new Font("Arial Narrow", Font.PLAIN, boxTextHeight);
 
         // Box text height
-        ptTextHeight = getPTTextHeightForLineHeight(boxHeight);
-        ptTextOffset = (boxHeight - ptTextHeight) / 2;
+        ptTextHeight = getPTTextHeightForLineHeight(ptBoxHeight);
+        ptTextOffset = (ptBoxHeight - ptTextHeight) / 2;
         ptTextFont = new Font("Arial", Font.BOLD, ptTextHeight);
 
         // Inset Frame Colors
@@ -251,7 +265,7 @@ public class RetroCardRenderer extends CardRenderer {
     protected void drawArt(Graphics2D g) {
         if (artImage != null) {
 
-            boolean shouldPreserveAspect = false;
+            boolean shouldPreserveAspect = true;
             Rectangle2D sourceRect = ArtRect.RETRO.rect;
             if (cardView.getFrameStyle() != FrameStyle.RETRO) {
                 sourceRect = new Rectangle2D.Double(sourceRect.getX(), sourceRect.getY() + .01, sourceRect.getWidth(), sourceRect.getHeight());
@@ -266,8 +280,8 @@ public class RetroCardRenderer extends CardRenderer {
 
             // Normal drawing of art from a source part of the card frame into the rect
             drawArtIntoRect(g,
-                    innerContentStart + frameInset, innerContentStart + frameInset * 2,
-                    innerContentWidth - frameInset * 2, typeLineY - borderWidth * 2 - frameInset,
+                    contentInset + frameInset, borderWidth + boxHeight + frameInset,
+                    innerContentWidth - frameInset * 2, artHeight - frameInset * 2,
                     sourceRect, shouldPreserveAspect);
 
         }
@@ -291,24 +305,24 @@ public class RetroCardRenderer extends CardRenderer {
         // Draw the textbox fill
         drawTextboxBackground(g, textboxPaint, frameColors, borderPaint, isOriginalDualLand());
 
-        drawInsetFrame(g, innerContentStart, innerContentStart + frameInset,
-                innerContentWidth, typeLineY - borderWidth * 2 + frameInset, borderPaint, cardView.getCardTypes().contains(CardType.LAND));
+        drawInsetFrame(g, contentInset, borderWidth + boxHeight,
+                innerContentWidth, artHeight, borderPaint, cardView.getCardTypes().contains(CardType.LAND));
 
         drawTypeLine(g, attribs, getCardTypeLine(),
-                innerContentStart, typeLineY + frameInset,
-                innerContentWidth, boxHeight + frameInset);
+                contentInset, typeLineY,
+                innerContentWidth, boxHeight);
 
         // Draw the transform circle
         int nameOffset = drawTransformationCircle(g, attribs, borderPaint);
 
         // Draw the name line
         drawNameLine(g, attribs, cardView.getDisplayName(), manaCostString,
-                innerContentStart + nameOffset, totalContentInset / 2 - frameInset,
-                contentWidth - nameOffset - borderWidth);
+                contentInset + nameOffset, borderWidth,
+                innerContentWidth);
 
         // Draw the textbox rules
         drawRulesText(g, textboxKeywords, textboxRules,
-                innerContentStart + 2, typeLineY + boxHeight + 2,
+                contentInset + 2, typeLineY + boxHeight + 2,
                 innerContentWidth - 4, (int) ((cardHeight - borderWidth * 2) * 0.32f));
 
         // Draw the bottom right stuff
@@ -390,7 +404,7 @@ public class RetroCardRenderer extends CardRenderer {
 
     private void drawTextboxBackground(Graphics2D g, Paint textboxPaint, ObjectColor frameColors, Paint borderPaint, boolean isOriginalDual) {
         g.setPaint(textboxPaint);
-        int x = innerContentStart;
+        int x = contentInset;
         int backgroundHeight = (int) ((cardHeight - borderWidth * 2) * 0.33f);
         if (cardView.getCardTypes().contains(CardType.LAND)) {
 
@@ -532,6 +546,8 @@ public class RetroCardRenderer extends CardRenderer {
             return;
         }
 
+        int contentInset = borderWidth - frameInset;
+
         // Where to start drawing the things
         int curY = cardHeight - (int) (0.03f * cardHeight);
 
@@ -559,8 +575,8 @@ public class RetroCardRenderer extends CardRenderer {
 
             // Draw PT box
             CardRendererUtils.drawRoundedBox(g,
-                    x, curY - boxHeight,
-                    partBoxWidth, boxHeight,
+                    x, curY - ptBoxHeight,
+                    partBoxWidth, ptBoxHeight,
                     contentInset,
                     borderPaint,
                     isVehicle ? BOX_VEHICLE : fill);
@@ -998,11 +1014,7 @@ public class RetroCardRenderer extends CardRenderer {
 
     // Get the text height for a given box height
     protected static int getTextHeightForBoxHeight(int h) {
-        if (h < 15) {
-            return h - 3;
-        } else {
-            return (int) Math.ceil(.6 * h);
-        }
+        return Math.max(10, (int) Math.ceil(.95 * h));
     }
 
     protected static int getPTTextHeightForLineHeight(int h) {
@@ -1056,8 +1068,6 @@ public class RetroCardRenderer extends CardRenderer {
     protected static BufferedImage getBackgroundTexture(ObjectColor colors, Collection<CardType> types) {
         if (types.contains(CardType.LAND)) {
             return BG_IMG_LAND;
-        } else if (types.contains(CardType.ARTIFACT)) {
-            return BG_IMG_ARTIFACT;
         } else if (colors.isMulticolored()) {
             return BG_IMG_GOLD;
         } else if (colors.isWhite()) {
@@ -1070,6 +1080,8 @@ public class RetroCardRenderer extends CardRenderer {
             return BG_IMG_RED;
         } else if (colors.isGreen()) {
             return BG_IMG_GREEN;
+        } else if (types.contains(CardType.ARTIFACT)) {
+            return BG_IMG_ARTIFACT;
         } else {
             // Colorless
             return BG_IMG_COLORLESS;
