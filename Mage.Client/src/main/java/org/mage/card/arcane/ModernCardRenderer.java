@@ -123,6 +123,7 @@ public class ModernCardRenderer extends CardRenderer {
     public static final Color ERROR_COLOR = new Color(255, 0, 255);
 
     static String SUB_TYPE_ADVENTURE = "Adventure";
+    static String SUB_TYPE_OMEN = "Omen";
 
     ///////////////////////////////////////////////////////////////////////////
     // Layout metrics for modern border cards
@@ -168,8 +169,8 @@ public class ModernCardRenderer extends CardRenderer {
     // Processed mana cost string
     protected String manaCostString;
 
-    // Is an adventure
-    protected boolean isAdventure = false;
+    // Is an adventure or omen
+    protected boolean isCardWithSpellOption = false;
 
     public ModernCardRenderer(CardView card) {
         // Pass off to parent
@@ -179,12 +180,13 @@ public class ModernCardRenderer extends CardRenderer {
         manaCostString = ManaSymbols.getClearManaCost(cardView.getManaCostStr());
 
         if (cardView.isSplitCard()) {
-            isAdventure = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE);
+            isCardWithSpellOption = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE)
+                                || cardView.getRightSplitTypeLine().contains(SUB_TYPE_OMEN);
         }
     }
 
-    protected boolean isAdventure() {
-        return isAdventure;
+    protected boolean isCardWithSpellOption() {
+        return isCardWithSpellOption;
     }
 
     @Override
@@ -316,7 +318,8 @@ public class ModernCardRenderer extends CardRenderer {
         } else if (isUnstableFullArtLand()) {
             rect = new Rectangle2D.Float(.0f, .0f, 1.0f, 1.0f);
         } else if (cardView.getArtRect() == ArtRect.FULL_LENGTH_LEFT ||
-                cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT) {
+                cardView.getArtRect() == ArtRect.FULL_LENGTH_RIGHT ||
+                cardView.getArtRect() == ArtRect.RETRO) {
             rect = cardView.getArtRect().rect;
         } else if (cardView.getFrameStyle().isFullArt() || (cardView.isToken())) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
@@ -660,7 +663,7 @@ public class ModernCardRenderer extends CardRenderer {
             drawRulesText(g, textboxKeywords, textboxRules,
                     contentWidth / 2 + totalContentInset + 4, totalContentInset + boxHeight + 2,
                     contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);
-        } else if (isAdventure) {
+        } else if (isCardWithSpellOption) {
             drawRulesText(g, textboxKeywords, textboxRules,
                     contentWidth / 2 + totalContentInset + 4, typeLineY + boxHeight + 2,
                     contentWidth / 2 - 8, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);

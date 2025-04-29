@@ -59,7 +59,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void prepareCost(Ability ability, Game game) {
         if (game.inCheckPlayableState()) {
             return;
         }
@@ -103,6 +103,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
             game.getState().setValue(sourceObject.getId() + "_type", maxSubType);
         } else {
             // human choose
+            // TODO: need early target cost instead dialog here
             Effect effect = new ChooseCreatureTypeEffect(Outcome.Benefit);
             effect.apply(game, ability);
         }

@@ -3,7 +3,6 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -73,7 +72,7 @@ class KotisTheFangkeeperEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        int xValue = GetXValue.instance.calculate(game, source, this);
+        int xValue = (Integer) getValue("damage");
         if (controller == null || player == null || xValue < 1) {
             return false;
         }

@@ -31,7 +31,7 @@ public final class MasumaroFirstToLive extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Masumaro, First to Live's power and toughness are each equal to twice the number of cards in your hand.
-        DynamicValue xValue= new MultipliedValue(CardsInControllerHandCount.instance, 2);
+        DynamicValue xValue= new MultipliedValue(CardsInControllerHandCount.ANY, 2);
         Effect effect = new SetBasePowerToughnessSourceEffect(xValue);
         effect.setText("{this}'s power and toughness are each equal to twice the number of cards in your hand");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));

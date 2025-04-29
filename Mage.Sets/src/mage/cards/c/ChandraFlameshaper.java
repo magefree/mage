@@ -19,14 +19,13 @@ import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class ChandraFlameshaper extends CardImpl {
 
     public ChandraFlameshaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{R}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(6);
@@ -37,13 +36,15 @@ public final class ChandraFlameshaper extends CardImpl {
         this.addAbility(plusTwoAbility);
 
         // +1: Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."
-        Ability[] extraAbilities = new Ability[2];
-        extraAbilities[0] = HasteAbility.getInstance();
-        extraAbilities[1] = new BeginningOfEndStepTriggeredAbility(
-                TargetController.NEXT, new SacrificeSourceEffect(), false
-        );
         Ability plusOneAbility = new LoyaltyAbility(
-                new CreateTokenCopyTargetEffect().addAdditionalAbilities(extraAbilities), 1
+                new CreateTokenCopyTargetEffect()
+                        .addAdditionalAbilities(
+                                HasteAbility.getInstance(),
+                                new BeginningOfEndStepTriggeredAbility(
+                                        TargetController.NEXT, new SacrificeSourceEffect(), false
+                                )).setText("create a token that's a copy of target creature you control, " +
+                                "except it has haste and \"At the beginning of the end step, sacrifice this token.\""),
+                1
         );
         plusOneAbility.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(plusOneAbility);

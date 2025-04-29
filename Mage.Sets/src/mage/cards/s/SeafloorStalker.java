@@ -60,7 +60,7 @@ enum SeafloorStalkerAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
             int count = PartyCount.instance.calculate(game, ability, null);

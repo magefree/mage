@@ -16,6 +16,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.TargetSpell;
 
 import java.util.UUID;
 
@@ -43,6 +44,7 @@ public final class SpectralDenial extends CardImpl {
 
         // Counter target spell unless its controller pays {X}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(GetXValue.instance));
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
     private SpectralDenial(final SpectralDenial card) {

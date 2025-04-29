@@ -6,7 +6,7 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterEnchantmentCard;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -14,8 +14,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ResurgentBelief extends CardImpl {
-
-    private static final FilterEnchantmentCard filter = new FilterEnchantmentCard("enchantment cards");
 
     public ResurgentBelief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "");
@@ -26,7 +24,7 @@ public final class ResurgentBelief extends CardImpl {
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{1}{W}"), this));
 
         // Return all enchantment cards from your graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(filter));
+        this.getSpellAbility().addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARD_ENCHANTMENTS));
     }
 
     private ResurgentBelief(final ResurgentBelief card) {

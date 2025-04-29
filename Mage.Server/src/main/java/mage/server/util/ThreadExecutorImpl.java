@@ -38,20 +38,17 @@ public class ThreadExecutorImpl implements ThreadExecutor {
      */
 
     public ThreadExecutorImpl(ConfigSettings config) {
-        //callExecutor = Executors.newCachedThreadPool();
         callExecutor = new CachedThreadPoolWithException();
         ((ThreadPoolExecutor) callExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) callExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) callExecutor).setThreadFactory(new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CALL_REQUEST));
 
-        //gameExecutor = Executors.newFixedThreadPool(config.getMaxGameThreads());
         gameExecutor = new FixedThreadPoolWithException(config.getMaxGameThreads());
         ((ThreadPoolExecutor) gameExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) gameExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) gameExecutor).setThreadFactory(new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_GAME));
 
-        //tourney = Executors.newFixedThreadPool(config.getMaxGameThreads() / GAMES_PER_TOURNEY_RATIO);
-        tourneyExecutor = new FixedThreadPoolWithException(config.getMaxGameThreads() / GAMES_PER_TOURNEY_RATIO);
+        tourneyExecutor = new FixedThreadPoolWithException(Math.max(2, config.getMaxGameThreads() / GAMES_PER_TOURNEY_RATIO));
         ((ThreadPoolExecutor) tourneyExecutor).setKeepAliveTime(60, TimeUnit.SECONDS);
         ((ThreadPoolExecutor) tourneyExecutor).allowCoreThreadTimeOut(true);
         ((ThreadPoolExecutor) tourneyExecutor).setThreadFactory(new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY));

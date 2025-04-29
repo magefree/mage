@@ -530,8 +530,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         }
                     }
 
-                    if (stackObject == null && (this instanceof AdventureCard)) {
-                        stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId(), false);
+                    if (stackObject == null && (this instanceof CardWithSpellOption)) {
+                        stackObject = game.getStack().getSpell(((CardWithSpellOption) this).getSpellCard().getId(), false);
                     }
 
                     if (stackObject == null) {
@@ -819,19 +819,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
+    public int removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
 
         if (amount <= 0) {
-            return;
+            return 0;
         }
 
         if (getCounters(game).getCount(counterName) <= 0) {
-            return;
+            return 0;
         }
 
         GameEvent removeCountersEvent = new RemoveCountersEvent(counterName, this, source, amount, isDamage);
         if (game.replaceEvent(removeCountersEvent)) {
-            return;
+            return 0;
         }
 
         int finalAmount = 0;
@@ -854,13 +854,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, isDamage);
         game.fireEvent(event);
+        return finalAmount;
     }
 
     @Override
-    public void removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
-        if (counter != null) {
-            removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
-        }
+    public int removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
+        return counter != null ? removeCounters(counter.getName(), counter.getCount(), source, game, isDamage) : 0;
     }
 
     @Override

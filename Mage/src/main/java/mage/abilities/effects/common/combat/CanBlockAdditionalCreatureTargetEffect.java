@@ -53,7 +53,9 @@ public class CanBlockAdditionalCreatureTargetEffect extends ContinuousEffectImpl
 
         // maxBlocks = 0 equals to "can block any number of creatures"
         if (amount > 0) {
-            target.setMaxBlocks(target.getMaxBlocks() + amount);
+            if (target.getMaxBlocks() > 0) {
+                target.setMaxBlocks(target.getMaxBlocks() + amount);
+            }
         } else {
             target.setMaxBlocks(0);
         }

@@ -4,10 +4,9 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -34,9 +33,8 @@ import java.util.UUID;
  */
 public final class MillicentRestlessRevenant extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SPIRIT);
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
-    private static final Hint hint = new ValueHint("Spirits you control", xValue);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SPIRIT, "Spirits");
+    private static final Hint hint = new ValueHint("Spirits you control", new PermanentsOnBattlefieldCount(filter));
 
     public MillicentRestlessRevenant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{U}");
@@ -48,9 +46,7 @@ public final class MillicentRestlessRevenant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // This spell costs {1} less to cast for each Spirit you control.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue)
-        ).addHint(hint));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).addHint(hint));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

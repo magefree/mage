@@ -20,6 +20,6 @@ public class JudgeGiftCards1999 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Memory Lapse", 1, Rarity.RARE, mage.cards.m.MemoryLapse.class));
+        cards.add(new SetCardInfo("Memory Lapse", 1, Rarity.RARE, mage.cards.m.MemoryLapse.class, RETRO_ART));
      }
 }

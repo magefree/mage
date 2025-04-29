@@ -4,6 +4,7 @@ import mage.cards.decks.Deck;
 import mage.constants.ManaType;
 import mage.constants.TableState;
 import mage.game.Table;
+import mage.game.draft.DraftPlayer;
 import mage.game.result.ResultProtos;
 import mage.game.tournament.TournamentPlayer;
 import mage.interfaces.callback.ClientCallback;
@@ -441,6 +442,15 @@ public class User {
             ccDraftStarted(entry.getValue().getDraft().getTableId(), entry.getValue().getDraft().getId(), entry.getKey());
             entry.getValue().init();
             entry.getValue().update();
+
+            // on reconnect must resend booster data to new player
+            // TODO: there are possible rare race conditions and user can get draft panel without game info, miss tourney panel, etc
+            // TODO: client side - it must show active panel like current game or draft instead tourney panel
+            DraftPlayer draftPlayer = entry.getValue().getDraftPlayer();
+            if (draftPlayer != null) {
+                draftPlayer.setBoosterNotLoaded();
+                entry.getValue().getDraft().boosterSendingStart();
+            }
         }
 
         // active constructing

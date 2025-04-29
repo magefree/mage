@@ -54,11 +54,8 @@ public class BecomesTargetAttachedTriggeredAbility extends TriggeredAbilityImpl 
         if (enchantment == null || enchantment.getAttachedTo() == null || !event.getTargetId().equals(enchantment.getAttachedTo())) {
             return false;
         }
-        StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
+        StackObject targetingObject = CardUtil.findTargetingStackObject(this.getId().toString(), event, game);
         if (targetingObject == null || !filter.match(targetingObject, getControllerId(), this, game)) {
-            return false;
-        }
-        if (CardUtil.checkTargetedEventAlreadyUsed(this.getId().toString(), targetingObject, event, game)) {
             return false;
         }
         switch (setTargetPointer) {

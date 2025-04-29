@@ -20,14 +20,14 @@ public class JudgeGiftCards2023 extends ExpansionSet {
         this.hasBoosters = false;
 
         cards.add(new SetCardInfo("Forest", 10, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Grindstone", 2, Rarity.RARE, mage.cards.g.Grindstone.class));
+        cards.add(new SetCardInfo("Grindstone", 2, Rarity.RARE, mage.cards.g.Grindstone.class, RETRO_ART));
         cards.add(new SetCardInfo("Island", 7, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 9, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Mycosynth Lattice", 3, Rarity.RARE, mage.cards.m.MycosynthLattice.class));
-        cards.add(new SetCardInfo("Painter's Servant", 1, Rarity.RARE, mage.cards.p.PaintersServant.class));
+        cards.add(new SetCardInfo("Mycosynth Lattice", 3, Rarity.RARE, mage.cards.m.MycosynthLattice.class, RETRO_ART));
+        cards.add(new SetCardInfo("Painter's Servant", 1, Rarity.RARE, mage.cards.p.PaintersServant.class, RETRO_ART));
         cards.add(new SetCardInfo("Plains", 6, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Retrofitter Foundry", 4, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
+        cards.add(new SetCardInfo("Retrofitter Foundry", 4, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class, RETRO_ART));
         cards.add(new SetCardInfo("Swamp", 8, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
-        cards.add(new SetCardInfo("Sword of War and Peace", 5, Rarity.MYTHIC, mage.cards.s.SwordOfWarAndPeace.class));
+        cards.add(new SetCardInfo("Sword of War and Peace", 5, Rarity.MYTHIC, mage.cards.s.SwordOfWarAndPeace.class, RETRO_ART));
     }
 }

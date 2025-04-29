@@ -215,7 +215,7 @@ public class ForetellAbility extends SpecialAction {
                                 game.getState().addOtherAbility(rightHalfCard, ability);
                             }
                         }
-                    } else if (card instanceof AdventureCard) {
+                    } else if (card instanceof CardWithSpellOption) {
                         if (foretellCost != null) {
                             Card creatureCard = card.getMainCard();
                             ForetellCostAbility ability = new ForetellCostAbility(foretellCost);
@@ -226,7 +226,7 @@ public class ForetellAbility extends SpecialAction {
                             game.getState().addOtherAbility(creatureCard, ability);
                         }
                         if (foretellSplitCost != null) {
-                            Card spellCard = ((AdventureCard) card).getSpellCard();
+                            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
                             ForetellCostAbility ability = new ForetellCostAbility(foretellSplitCost);
                             ability.setSourceId(spellCard.getId());
                             ability.setControllerId(source.getControllerId());
@@ -318,11 +318,11 @@ public class ForetellAbility extends SpecialAction {
                         } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
                             return ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                         }
-                    } else if (card instanceof AdventureCard) {
+                    } else if (card instanceof CardWithSpellOption) {
                         if (card.getMainCard().getName().equals(abilityName)) {
                             return card.getMainCard().getSpellAbility().canActivate(playerId, game);
-                        } else if (((AdventureCard) card).getSpellCard().getName().equals(abilityName)) {
-                            return ((AdventureCard) card).getSpellCard().getSpellAbility().canActivate(playerId, game);
+                        } else if (((CardWithSpellOption) card).getSpellCard().getName().equals(abilityName)) {
+                            return ((CardWithSpellOption) card).getSpellCard().getSpellAbility().canActivate(playerId, game);
                         }
                     }
                     return card.getSpellAbility().canActivate(playerId, game);
@@ -349,11 +349,11 @@ public class ForetellAbility extends SpecialAction {
                         } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
                             spellAbilityCopy = ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().copy();
                         }
-                    } else if (card instanceof AdventureCard) {
+                    } else if (card instanceof CardWithSpellOption) {
                         if (card.getMainCard().getName().equals(abilityName)) {
                             spellAbilityCopy = card.getMainCard().getSpellAbility().copy();
-                        } else if (((AdventureCard) card).getSpellCard().getName().equals(abilityName)) {
-                            spellAbilityCopy = ((AdventureCard) card).getSpellCard().getSpellAbility().copy();
+                        } else if (((CardWithSpellOption) card).getSpellCard().getName().equals(abilityName)) {
+                            spellAbilityCopy = ((CardWithSpellOption) card).getSpellCard().getSpellAbility().copy();
                         }
                     } else {
                         spellAbilityCopy = card.getSpellAbility().copy();

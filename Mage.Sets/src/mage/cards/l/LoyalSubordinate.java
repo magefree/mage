@@ -1,19 +1,19 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
-import mage.abilities.condition.common.CommanderInPlayCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class LoyalSubordinate extends CardImpl {
@@ -29,14 +29,9 @@ public final class LoyalSubordinate extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Lieutenant — At the beginning of combat on your turn, if you control your commander, each opponent loses 3 life.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new LoseLifeOpponentsEffect(3)
-                ), CommanderInPlayCondition.instance,
-                "<i>Lieutenant</i> &mdash; At the beginning of combat "
-                + "on your turn, if you control your commander, "
-                + "each opponent loses 3 life."
-        ));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new LoseLifeOpponentsEffect(3))
+                .withInterveningIf(ControlYourCommanderCondition.instance)
+                .setAbilityWord(AbilityWord.LIEUTENANT));
     }
 
     private LoyalSubordinate(final LoyalSubordinate card) {

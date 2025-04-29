@@ -549,9 +549,9 @@ public class ContinuousEffects implements Serializable {
                 // rules:
                 // 708.4. In every zone except the stack, the characteristics of a split card are those of its two halves combined.
                 idToCheck = ((SplitCardHalf) objectToCheck).getMainCard().getId();
-            } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
-                // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card
-                idToCheck = ((AdventureCardSpell) objectToCheck).getMainCard().getId();
+            } else if (!type.needPlayCardAbility() && objectToCheck instanceof CardWithSpellOption) {
+                // adventure/omen spell uses alternative characteristics for spell/stack, all other cases must use main card
+                idToCheck = ((CardWithSpellOption) objectToCheck).getMainCard().getId();
             } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacedCardHalf) {
                 // each mdf side uses own characteristics to check for playing, all other cases must use main card
                 // rules:
@@ -688,6 +688,8 @@ public class ContinuousEffects implements Serializable {
      * the battlefield for
      * {@link CostModificationEffect cost modification effects} and applies them
      * if necessary.
+     * <p>
+     * Warning, don't forget to call ability.adjustX before any cost modifications
      *
      * @param abilityToModify
      * @param game
@@ -695,6 +697,10 @@ public class ContinuousEffects implements Serializable {
     public void costModification(Ability abilityToModify, Game game) {
         List<CostModificationEffect> costEffects = getApplicableCostModificationEffects(game);
 
+        // add dynamic costs from X and other places
+        abilityToModify.adjustCostsPrepare(game);
+
+        abilityToModify.adjustCostsModify(game, CostModificationType.INCREASE_COST);
         for (CostModificationEffect effect : costEffects) {
             if (effect.getModificationType() == CostModificationType.INCREASE_COST) {
                 Set<Ability> abilities = costModificationEffects.getAbility(effect.getId());
@@ -706,6 +712,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
+        abilityToModify.adjustCostsModify(game, CostModificationType.REDUCE_COST);
         for (CostModificationEffect effect : costEffects) {
             if (effect.getModificationType() == CostModificationType.REDUCE_COST) {
                 Set<Ability> abilities = costModificationEffects.getAbility(effect.getId());
@@ -717,6 +724,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
+        abilityToModify.adjustCostsModify(game, CostModificationType.SET_COST);
         for (CostModificationEffect effect : costEffects) {
             if (effect.getModificationType() == CostModificationType.SET_COST) {
                 Set<Ability> abilities = costModificationEffects.getAbility(effect.getId());

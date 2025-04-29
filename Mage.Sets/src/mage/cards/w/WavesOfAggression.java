@@ -25,7 +25,7 @@ public final class WavesOfAggression extends CardImpl {
     }
 
     public WavesOfAggression(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R/W}{R/W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R/W}{R/W}");
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addEffect(new UntapAllEffect(filter));

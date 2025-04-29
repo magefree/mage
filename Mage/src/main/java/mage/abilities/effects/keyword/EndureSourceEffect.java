@@ -1,6 +1,8 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -15,13 +17,17 @@ import mage.util.CardUtil;
  */
 public class EndureSourceEffect extends OneShotEffect {
 
-    private final int amount;
+    private final DynamicValue amount;
 
     public EndureSourceEffect(int amount) {
         this(amount, "it");
     }
 
     public EndureSourceEffect(int amount, String selfText) {
+        this(StaticValue.get(amount), selfText);
+    }
+
+    public EndureSourceEffect(DynamicValue amount, String selfText) {
         super(Outcome.Benefit);
         staticText = selfText + " endures " + amount;
         this.amount = amount;
@@ -39,12 +45,23 @@ public class EndureSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        return doEndure(
+                source.getSourcePermanentOrLKI(game),
+                amount.calculate(game, source, this),
+                game, source
+        );
+    }
+
+    public static boolean doEndure(Permanent permanent, int amount, Game game, Ability source) {
+        if (permanent == null || amount < 1) {
             return false;
         }
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null && player.chooseUse(
+        Player controller = game.getPlayer(permanent.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        if (permanent.getZoneChangeCounter(game) == game.getState().getZoneChangeCounter(permanent.getId())
+                && controller.chooseUse(
                 Outcome.BoostCreature, "Put " + CardUtil.numberToText(amount, "a") + " +1/+1 counter" +
                         (amount > 1 ? "s" : "") + " on " + permanent.getName() + " or create " +
                         CardUtil.addArticle("" + amount) + ' ' + amount + '/' + amount + " Spirit token?",

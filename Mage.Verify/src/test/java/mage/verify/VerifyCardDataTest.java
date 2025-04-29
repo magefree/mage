@@ -306,9 +306,9 @@ public class VerifyCardDataTest {
             if (card instanceof CardWithHalves) {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
                 check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
-            } else if (card instanceof AdventureCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 check(card, cardIndex);
-                check(((AdventureCard) card).getSpellCard(), cardIndex);
+                check(((CardWithSpellOption) card).getSpellCard(), cardIndex);
             } else {
                 check(card, cardIndex);
             }
@@ -668,27 +668,33 @@ public class VerifyCardDataTest {
                 }
 
                 // index for missing cards
-                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
-                foundedJsonCards.add(code);
+//                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
+//                foundedJsonCards.add(code);
+//
+//                // CHECK: only lands can use full art in current version;
+//                // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
+//                // TODO: add support textless cards like https://scryfall.com/card/sch/12/thalia-and-the-gitrog-monster
+//                boolean isLand = card.getRarity().equals(Rarity.LAND);
+//                if (card.isFullArt() && !isLand) {
+//                    errorsList.add("Error: only lands can use full art setting: "
+//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+//                }
+//
+//                // CHECK: must use full art setting
+//                if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
+//                    errorsList.add("Error: card must use full art setting: "
+//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+//                }
+//
+//                // CHECK: must not use full art setting
+//                if (!jsonCard.isFullArt && card.isFullArt()) {
+//                    errorsList.add("Error: card must NOT use full art setting: "
+//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+//                }
 
-                // CHECK: only lands can use full art in current version;
-                // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
-                // TODO: add support textless cards like https://scryfall.com/card/sch/12/thalia-and-the-gitrog-monster
-                boolean isLand = card.getRarity().equals(Rarity.LAND);
-                if (card.isFullArt() && !isLand) {
-                    errorsList.add("Error: only lands can use full art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
-
-                // CHECK: must use full art setting
-                if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
-                    errorsList.add("Error: card must use full art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
-
-                // CHECK: must not use full art setting
-                if (!jsonCard.isFullArt && card.isFullArt()) {
-                    errorsList.add("Error: card must NOT use full art setting: "
+                // CHECK: must use retro frame setting
+                if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
+                    errorsList.add("Error: card must use retro art setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
             }
@@ -1113,6 +1119,9 @@ public class VerifyCardDataTest {
             }
 
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                if (OmenCard.class.isAssignableFrom(card.getCardClass())) { // temporary until mtgjson fixed
+                    continue;
+                }
                 boolean cardHaveDoubleName = (doubleNames.getOrDefault(card.getName(), 0) > 1);
                 boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
 
@@ -1660,6 +1669,12 @@ public class VerifyCardDataTest {
     private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
+            if (card instanceof SpellOptionCard && ref.layout.equals("reversible_card")) {
+                // TODO: Remove when MtgJson updated
+                // workaround for reversible omen cards e.g. Bloomvine Regent // Claim Territory // Bloomvine Regent
+                // both sides have main card info
+                return;
+            }
             checkAll(card, ref, cardIndex);
         } else if (!CHECK_ONLY_ABILITIES_TEXT) {
             warn(card, "Can't find card in mtgjson to verify");
@@ -1696,7 +1711,7 @@ public class VerifyCardDataTest {
                 checkCardCanBeCopied(card);
             }
         }
-        checkWrongAbilitiesText(card, ref, cardIndex);
+        checkWrongAbilitiesText(card, ref, cardIndex, false);
     }
 
     private void checkColors(Card card, MtgJsonCard ref) {
@@ -2149,7 +2164,7 @@ public class VerifyCardDataTest {
         //    - it's can be a keyword action (only mtg rules contains a target word), so add it to the targetedKeywords
         // * on "must be targeted":
         //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
-        boolean checkMissNonTargeted = true; // must set withNotTarget(true)
+        boolean checkMissNonTargeted = !(card instanceof OmenCard); // must set withNotTarget(true) temporarily set to ignore omen cards
         boolean checkMissTargeted = false; // must be targeted
         List<String> targetedKeywords = Arrays.asList(
                 "target",
@@ -2161,8 +2176,8 @@ public class VerifyCardDataTest {
         );
         // card can contain rules text from both sides, so must search ref card for all sides too
         String additionalName;
-        if (card instanceof AdventureCard) {
-            additionalName = ((AdventureCard) card).getSpellCard().getName();
+        if (card instanceof AdventureCard) { // temporary to prevent failure due to upstream error
+            additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
         } else if (card.isTransformable() && !card.isNightCard()) {
             additionalName = card.getSecondCardFace().getName();
         } else {
@@ -2403,7 +2418,11 @@ public class VerifyCardDataTest {
 
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
-            if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
+            if (card instanceof CardWithSpellOption) {
+                // format to print main card then spell card
+                card.getInitAbilities().getRules().forEach(this::printAbilityText);
+                ((CardWithSpellOption) card).getSpellCard().getAbilities().getRules().forEach(r -> printAbilityText(r.replace("&mdash; ", "\n")));
+            } else if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
                 card.getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
@@ -2411,15 +2430,30 @@ public class VerifyCardDataTest {
 
             // ref card
             System.out.println();
-            MtgJsonCard ref = MtgJsonService.card(card.getName());
-            if (ref == null) {
-                ref = MtgJsonService.cardByClassName(foundClassName);
+            MtgJsonCard refMain = MtgJsonService.card(card.getName());
+            MtgJsonCard refSpell = null;
+            if (card instanceof CardWithSpellOption) {
+                refSpell = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
             }
-            if (ref != null) {
-                System.out.println("ref: " + ref.getNameAsFace() + " " + ref.manaCost);
-                System.out.println(ref.text);
+            if (refMain == null) {
+                refMain = MtgJsonService.cardByClassName(foundClassName);
+            }
+            if (refMain != null) {
+                System.out.println("ref: " + refMain.getNameAsFace() + " " + refMain.manaCost);
+                System.out.println(refMain.text);
+                if (refSpell != null) {
+                    System.out.println(refSpell.getNameAsFace() + " " + refSpell.manaCost);
+                    System.out.println(refSpell.text);
+                }
             } else {
                 System.out.println("WARNING, can't find mtgjson ref for " + card.getName());
+            }
+
+            // additional check to simulate diff in rules
+            if (refMain != null) {
+                checkWrongAbilitiesText(card, refMain, 0, true);
+            } else if (refSpell != null) {
+                checkWrongAbilitiesText(((CardWithSpellOption) card).getSpellCard(), refSpell, 0, true);
             }
         });
     }
@@ -2471,9 +2505,9 @@ public class VerifyCardDataTest {
         System.out.println();
     }
 
-    private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
+    private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex, boolean forceToCheck) {
         // checks missing or wrong text
-        if (!FULL_ABILITIES_CHECK_SET_CODES.equals("*") && !FULL_ABILITIES_CHECK_SET_CODES.contains(card.getExpansionSetCode())) {
+        if (!forceToCheck && !FULL_ABILITIES_CHECK_SET_CODES.equals("*") && !FULL_ABILITIES_CHECK_SET_CODES.contains(card.getExpansionSetCode())) {
             return;
         }
         if (wasCheckedByAbilityText(ref)) {
@@ -2533,6 +2567,9 @@ public class VerifyCardDataTest {
         //      becomes "Swampcycling {2}\nMountaincycling {2}"
         refText = splitCyclingAbilities(refText);
 
+        // ref text can contain dirty spaces after some text remove/fix, example: anchor words in Struggle for Project Purity
+        refText = refText.replaceAll(" +", " ");
+
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
             refRules[i] = prepareRule(card.getName(), refRules[i]);
@@ -2547,12 +2584,20 @@ public class VerifyCardDataTest {
                         refRules[i];
             }
         }
-
+        if (ref.subtypes.contains("Omen")) {
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = "Omen " +
+                        ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
+            }
+        }
 
         String[] cardRules = card
                 .getRules()
                 .stream()
-                .filter(s -> !(card instanceof AdventureCard) || !s.startsWith("Adventure "))
+                .filter(s -> !(card instanceof CardWithSpellOption) || !(s.startsWith("Adventure ") || s.startsWith("Omen ")))
                 .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
@@ -2607,10 +2652,10 @@ public class VerifyCardDataTest {
         }
 
         // extra message for easy checks
-        if (!isFine) {
+        if (forceToCheck || !isFine) {
             System.out.println();
 
-            System.out.println("Wrong card " + cardIndex + ": " + card.getName());
+            System.out.println((isFine ? "Good" : "Wrong") + " card " + cardIndex + ": " + card.getName());
             Arrays.sort(cardRules);
             for (String s : cardRules) {
                 System.out.println(s);

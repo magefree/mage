@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -59,7 +58,7 @@ public final class DamiaSageOfStone extends CardImpl {
 class DamiaSageOfStoneTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     DamiaSageOfStoneTriggeredAbility() {
-        super(TargetController.YOU, new DrawCardSourceControllerEffect(new IntPlusDynamicValue(7, new MultipliedValue(CardsInControllerHandCount.instance, -1))), false);
+        super(TargetController.YOU, new DrawCardSourceControllerEffect(new IntPlusDynamicValue(7, new MultipliedValue(CardsInControllerHandCount.ANY, -1))), false);
     }
 
     private DamiaSageOfStoneTriggeredAbility(final DamiaSageOfStoneTriggeredAbility ability) {

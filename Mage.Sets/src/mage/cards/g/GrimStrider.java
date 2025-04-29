@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  *
@@ -29,7 +28,7 @@ public final class GrimStrider extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Grim Strider gets -1/-1 for each card in your hand.
-        DynamicValue count = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
+        DynamicValue count = new SignInversionDynamicValue(CardsInControllerHandCount.ANY);
         Effect effect = new BoostSourceEffect(count, count, Duration.WhileOnBattlefield);
         effect.setText("{this} gets -1/-1 for each card in your hand");
         this.addAbility(new SimpleStaticAbility(effect));

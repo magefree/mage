@@ -20,8 +20,8 @@ public class JudgeGiftCards1998 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Gaea's Cradle", 3, Rarity.RARE, mage.cards.g.GaeasCradle.class));
-        cards.add(new SetCardInfo("Lightning Bolt", 1, Rarity.RARE, mage.cards.l.LightningBolt.class));
-        cards.add(new SetCardInfo("Stroke of Genius", 2, Rarity.RARE, mage.cards.s.StrokeOfGenius.class));
+        cards.add(new SetCardInfo("Gaea's Cradle", 3, Rarity.RARE, mage.cards.g.GaeasCradle.class, RETRO_ART));
+        cards.add(new SetCardInfo("Lightning Bolt", 1, Rarity.RARE, mage.cards.l.LightningBolt.class, RETRO_ART));
+        cards.add(new SetCardInfo("Stroke of Genius", 2, Rarity.RARE, mage.cards.s.StrokeOfGenius.class, RETRO_ART));
      }
 }

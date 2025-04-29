@@ -2049,7 +2049,8 @@ public class TestPlayer implements Player {
         int numBlocked = blocked.size();
 
         // Can't block any more creatures
-        if (++numBlocked > blocker.getMaxBlocks()) {
+        // maxBlocks = 0 equals to "can block any number of creatures"
+        if (blocker.getMaxBlocks() > 0 && ++numBlocked > blocker.getMaxBlocks()) {
             return false;
         }
 
@@ -2927,6 +2928,7 @@ public class TestPlayer implements Player {
             for (String choice : choices) {
                 if (choice.startsWith("X=")) {
                     int xValue = Integer.parseInt(choice.substring(2));
+                    assertXMinMaxValue(game, ability, xValue, min, max);
                     choices.remove(choice);
                     return xValue;
                 }
@@ -2934,7 +2936,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
-                + "\nMessage: " + message);
+                + "\nMessage: " + message +  prepareXMaxInfo(min, max));
         return computerPlayer.announceXMana(min, max, message, game, ability);
     }
 
@@ -2944,14 +2946,32 @@ public class TestPlayer implements Player {
         if (!choices.isEmpty()) {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
+                assertXMinMaxValue(game, ability, xValue, min, max);
                 choices.remove(0);
                 return xValue;
             }
         }
 
         this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
-                + "\nMessage: " + message);
+                + "\nMessage: " + message + prepareXMaxInfo(min, max));
         return computerPlayer.announceXCost(min, max, message, game, ability, null);
+    }
+
+    private String prepareXMaxInfo(int min, int max) {
+        if (min == 0 && max == Integer.MAX_VALUE) {
+            return " (any value)";
+        } else {
+            return String.format(" (from %s to %s)",
+                    min,
+                    (max == Integer.MAX_VALUE) ? "any" : String.valueOf(max)
+            );
+        }
+    }
+
+    private void assertXMinMaxValue(Game game, Ability source, int xValue, int min, int max) {
+        if (xValue < min || xValue > max) {
+            Assert.fail("Found wrong X value = " + xValue + ", for " + CardUtil.getSourceName(game, source) + ", must" + prepareXMaxInfo(min, max));
+        }
     }
 
     @Override

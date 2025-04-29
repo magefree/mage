@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class DragonclawStrike extends CardImpl {
 
     public DragonclawStrike(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2/U}{2/R}{2/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2/G}{2/U}{2/R}");
 
         // Double the power and toughness of target creature you control until end of turn. Then it fights up to one target creature an opponent controls.
         this.getSpellAbility().addEffect(new DragonclawStrikeEffect());

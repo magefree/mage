@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -11,8 +10,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSource;
 
@@ -44,9 +41,11 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
 
     private final TargetSource target;
 
-    public DeflectingPalmEffect() {
+    DeflectingPalmEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
-        this.staticText = "The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, {this} deals that much damage to that source's controller";
+        this.staticText = "the next time a source of your choice would deal damage to you this turn, " +
+                "prevent that damage. If damage is prevented this way, " +
+                "{this} deals that much damage to that source's controller";
         this.target = new TargetSource();
     }
 
@@ -71,31 +70,23 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         this.used = true;
         this.discard(); // only one use
-        if (preventionData.getPreventedDamage() > 0) {
-            MageObject damageDealingObject = game.getObject(target.getFirstTarget());
-            UUID objectControllerId = null;
-            if (damageDealingObject instanceof Permanent) {
-                objectControllerId = ((Permanent) damageDealingObject).getControllerId();
-            } else if (damageDealingObject instanceof Ability) {
-                objectControllerId = ((Ability) damageDealingObject).getControllerId();
-            } else if (damageDealingObject instanceof Spell) {
-                objectControllerId = ((Spell) damageDealingObject).getControllerId();
-            }
-            if (objectControllerId != null) {
-                Player objectController = game.getPlayer(objectControllerId);
-                if (objectController != null) {
-                    objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), source, game);
-                }
-            }
+        if (preventionData.getPreventedDamage() < 1) {
+            return true;
         }
+        UUID objectControllerId = game.getControllerId(target.getFirstTarget());
+        Player objectController = game.getPlayer(objectControllerId);
+        if (objectController == null) {
+            return true;
+        }
+        objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), source, game);
         return true;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
-            return event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget());
-        }
-        return false;
+        return !this.used
+                && super.applies(event, source, game)
+                && event.getTargetId().equals(source.getControllerId())
+                && event.getSourceId().equals(target.getFirstTarget());
     }
 }

@@ -61,7 +61,7 @@ class KellanPlanarTrailblazerDetectiveEffect extends OneShotEffect {
     KellanPlanarTrailblazerDetectiveEffect() {
         super(Outcome.Benefit);
         staticText = "if {this} is a Scout, it becomes a Human Faerie Detective and gains "
-                + "\"Whenever this creature deals combat damage to a player, exile the top card of your library. "
+                + "\"Whenever {this} deals combat damage to a player, exile the top card of your library. "
                 + "You may play that card this turn.\"";
     }
 

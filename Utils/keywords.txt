@@ -25,6 +25,7 @@ Cycling|cost|
 Dash|manaString|
 Daybound|new|
 Deathtouch|instance|
+Decayed|new|
 Demonstrate|new|
 Delve|new|
 Dethrone|new|

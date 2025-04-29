@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
@@ -32,7 +31,7 @@ public final class OverbeingOfMyth extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Overbeing of Myth's power and toughness are each equal to the number of cards in your hand.
-        DynamicValue number = CardsInControllerHandCount.instance;
+        DynamicValue number = CardsInControllerHandCount.ANY;
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(number)));
 
         // At the beginning of your draw step, draw an additional card.

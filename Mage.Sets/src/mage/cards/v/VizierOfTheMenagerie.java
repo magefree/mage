@@ -57,7 +57,7 @@ class VizierOfTheMenagerieManaEffect extends AsThoughEffectImpl implements AsTho
 
     public VizierOfTheMenagerieManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may spend mana as though it were mana of any type to cast creature spells";
+        staticText = "You can spend mana of any type to cast creature spells";
     }
 
     private VizierOfTheMenagerieManaEffect(final VizierOfTheMenagerieManaEffect effect) {

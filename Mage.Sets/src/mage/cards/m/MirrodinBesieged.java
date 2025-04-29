@@ -1,22 +1,21 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.ModeChoiceSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.abilities.effects.common.continuous.GainAnchorWordAbilitySourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ModeChoice;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.token.MyrToken;
 import mage.players.Player;
@@ -29,33 +28,23 @@ import java.util.UUID;
  */
 public final class MirrodinBesieged extends CardImpl {
 
-    private static final String ruleTrigger1 = "&bull Mirran &mdash; Whenever you cast an artifact spell, " +
-            "create a 1/1 colorless Myr artifact creature token.";
-    private static final String ruleTrigger2 = "&bull Phyrexian &mdash; At the beginning of your end step, " +
-            "draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, " +
-            "target opponent loses the game.";
-    private static final FilterSpell filter = new FilterArtifactSpell();
-
     public MirrodinBesieged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // As Mirrodin Besieged enters the battlefield, choose Mirran or Phyrexian.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ChooseModeEffect("Mirran or Phyrexian?", "Mirran", "Phyrexian"),
-                null, "As {this} enters, choose Mirran or Phyrexian.", ""
-        ));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(ModeChoice.MIRRAN, ModeChoice.PHYREXIAN)));
 
         // • Mirran — Whenever you cast an artifact spell, create a 1/1 colorless Myr artifact creature token.
-        this.addAbility(new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(
-                new CreateTokenEffect(new MyrToken()), filter, false
-        ), new ModeChoiceSourceCondition("Mirran"), ruleTrigger1));
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(
+                new SpellCastControllerTriggeredAbility(
+                        new CreateTokenEffect(new MyrToken()), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false
+                ), ModeChoice.MIRRAN
+        )));
 
         // • Phyrexian — At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.
-        Ability ability = new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new MirrodinBesiegedEffect()
-        ), new ModeChoiceSourceCondition("Phyrexian"), ruleTrigger2);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new MirrodinBesiegedEffect());
         ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(ability, ModeChoice.PHYREXIAN)));
     }
 
     private MirrodinBesieged(final MirrodinBesieged card) {

@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -13,12 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -40,7 +37,7 @@ public final class FungalPlots extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new SaprolingToken()),
                 new ManaCostsImpl<>("{1}{G}"));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)).withSourceExileZone(false));
         this.addAbility(ability);
 
         // Sacrifice two Saprolings: You gain 2 life and draw a card.

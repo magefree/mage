@@ -74,7 +74,7 @@ class QuilledGreatwurmEffect extends AsThoughEffectImpl {
 
     QuilledGreatwurmEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        this.staticText = "you may cast {this} from your graveyard by removing six counters " +
+        this.staticText = "you may cast this card from your graveyard by removing six counters " +
                 "from among creatures you control in addition to paying its other costs";
     }
 

@@ -2183,6 +2183,7 @@ public class ScryfallImageSupportTokens {
             // WHO
             put("WHO/Alien", "https://api.scryfall.com/cards/twho/2?format=image");
             put("WHO/Alien Insect", "https://api.scryfall.com/cards/twho/19/en?format=image");
+            put("WHO/Alien Rhino", "https://api.scryfall.com/cards/twho/3/en?format=image");
             put("WHO/Alien Salamander", "https://api.scryfall.com/cards/twho/16?format=image");
             put("WHO/Alien Warrior", "https://api.scryfall.com/cards/twho/14?format=image");
             put("WHO/Beast", "https://api.scryfall.com/cards/twho/17?format=image");
@@ -2196,7 +2197,8 @@ public class ScryfallImageSupportTokens {
             put("WHO/Food/2", "https://api.scryfall.com/cards/twho/26?format=image");
             put("WHO/Food/3", "https://api.scryfall.com/cards/twho/27?format=image");
             put("WHO/Horse", "https://api.scryfall.com/cards/twho/4/en?format=image");
-            put("WHO/Human", "https://api.scryfall.com/cards/twho/5?format=image");
+            put("WHO/Human/1", "https://api.scryfall.com/cards/twho/6/en?format=image");
+            put("WHO/Human/2", "https://api.scryfall.com/cards/twho/5/en?format=image");
             put("WHO/Human Noble", "https://api.scryfall.com/cards/twho/7/en?format=image");
             put("WHO/Mark of the Rani", "https://api.scryfall.com/cards/twho/15?format=image");
             put("WHO/Soldier", "https://api.scryfall.com/cards/twho/8?format=image");

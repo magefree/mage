@@ -20,12 +20,12 @@ public class FridayNightMagic2001 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Carnophage", 10, Rarity.RARE, mage.cards.c.Carnophage.class));
-        cards.add(new SetCardInfo("Fireblast", 12, Rarity.RARE, mage.cards.f.Fireblast.class));
-        cards.add(new SetCardInfo("Impulse", 11, Rarity.RARE, mage.cards.i.Impulse.class));
-        cards.add(new SetCardInfo("Jackal Pup", 8, Rarity.RARE, mage.cards.j.JackalPup.class));
-        cards.add(new SetCardInfo("Ophidian", 7, Rarity.RARE, mage.cards.o.Ophidian.class));
-        cards.add(new SetCardInfo("Quirion Ranger", 9, Rarity.RARE, mage.cards.q.QuirionRanger.class));
-        cards.add(new SetCardInfo("Swords to Plowshares", 6, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Carnophage", 10, Rarity.RARE, mage.cards.c.Carnophage.class, RETRO_ART));
+        cards.add(new SetCardInfo("Fireblast", 12, Rarity.RARE, mage.cards.f.Fireblast.class, RETRO_ART));
+        cards.add(new SetCardInfo("Impulse", 11, Rarity.RARE, mage.cards.i.Impulse.class, RETRO_ART));
+        cards.add(new SetCardInfo("Jackal Pup", 8, Rarity.RARE, mage.cards.j.JackalPup.class, RETRO_ART));
+        cards.add(new SetCardInfo("Ophidian", 7, Rarity.RARE, mage.cards.o.Ophidian.class, RETRO_ART));
+        cards.add(new SetCardInfo("Quirion Ranger", 9, Rarity.RARE, mage.cards.q.QuirionRanger.class, RETRO_ART));
+        cards.add(new SetCardInfo("Swords to Plowshares", 6, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class, RETRO_ART));
      }
 }

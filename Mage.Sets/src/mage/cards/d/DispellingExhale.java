@@ -8,6 +8,7 @@ import mage.abilities.keyword.BeholdDragonAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.TargetSpell;
 
 import java.util.UUID;
 
@@ -29,6 +30,7 @@ public final class DispellingExhale extends CardImpl {
                 BeheldDragonCondition.instance, "counter target spell unless its controller pays {2}. " +
                 "If a Dragon was beheld, counter that spell unless its controller pays {4} instead"
         ));
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
     private DispellingExhale(final DispellingExhale card) {

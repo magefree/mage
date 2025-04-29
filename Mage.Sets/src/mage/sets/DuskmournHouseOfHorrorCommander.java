@@ -242,6 +242,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spinerock Knoll", 300, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spirit-Sister's Call", 232, Rarity.MYTHIC, mage.cards.s.SpiritSistersCall.class));
         cards.add(new SetCardInfo("Spiteful Visions", 233, Rarity.RARE, mage.cards.s.SpitefulVisions.class));
+        cards.add(new SetCardInfo("Star Athlete", 29, Rarity.RARE, mage.cards.s.StarAthlete.class));
         cards.add(new SetCardInfo("Starfield Mystic", 105, Rarity.RARE, mage.cards.s.StarfieldMystic.class));
         cards.add(new SetCardInfo("Stitcher's Supplier", 157, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Stormfist Crusader", 234, Rarity.RARE, mage.cards.s.StormfistCrusader.class));

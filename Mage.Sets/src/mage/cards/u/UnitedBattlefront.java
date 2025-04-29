@@ -32,7 +32,7 @@ public final class UnitedBattlefront extends CardImpl {
 
         // Look at the top seven cards of your library. Put up to two noncreature, nonland permanent cards with mana value 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                7, 1, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM
+                7, 2, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM
         ));
     }
 

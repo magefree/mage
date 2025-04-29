@@ -21,7 +21,7 @@ import mage.game.events.BlockerDeclaredEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanentSameController;
+import mage.target.common.TargetPermanentSameController;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +44,7 @@ public final class SorrowsPath extends CardImpl {
 
         // {T}: Choose two target blocking creatures an opponent controls. If each of those creatures could block all creatures that the other is blocking, remove both of them from combat. Each one then blocks all creatures the other was blocking.
         Ability ability = new SimpleActivatedAbility(new SorrowsPathSwitchBlockersEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanentSameController(2, filter));
+        ability.addTarget(new TargetPermanentSameController(filter));
         this.addAbility(ability);
 
         // Whenever Sorrow's Path becomes tapped, it deals 2 damage to you and each creature you control.

@@ -628,7 +628,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                 }
                 sb.append(" &mdash; ");
             } else {
-                sb.append("&bull  ");
+                sb.append("&bull ");
             }
             sb.append(mode.getEffects().getTextStartingUpperCase(mode));
             sb.append("<br>");

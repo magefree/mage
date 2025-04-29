@@ -127,7 +127,7 @@ class EyeOfSingularityTriggeredAbility extends TriggeredAbilityImpl {
         }
 
         if (permanent != null && !permanent.isBasic(game)) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+            getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
             return true;
         }
         return false;

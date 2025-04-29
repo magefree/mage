@@ -88,7 +88,7 @@ class AssimilationAegisEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        UUID exileId = CardUtil.getExileZoneId(game, source);
+        UUID exileId = CardUtil.getCardExileZoneId(game, source);
         TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD_CREATURE, exileId);
         target.withNotTarget(true);
         if (!target.choose(Outcome.Benefit, player.getId(), source.getId(), source, game)) {

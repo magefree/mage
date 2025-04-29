@@ -54,7 +54,7 @@ public class ScryfallApiCard {
             this.card_faces.forEach(ScryfallApiCardFace::prepareCompatibleData);
         }
 
-        // workaround for adventure card name fix:
+        // workaround for adventure/omen card name fix:
         // - scryfall: Ondu Knotmaster // Throw a Line
         // - xmage: Ondu Knotmaster
         if (this.layout.equals("adventure")) {
@@ -90,7 +90,24 @@ public class ScryfallApiCard {
         // - scryfall: Command Tower // Command Tower
         // - xmage: Command Tower (second side as diff card and direct link image), example: https://scryfall.com/card/rex/26/command-tower-command-tower
         if (this.layout.equals("reversible_card")) {
-            if (this.card_faces.get(0).layout == null || this.card_faces.get(0).layout.equals("normal")) {
+            if (false) {
+                // ignore
+            } else if (this.card_faces == null) {
+                // TODO: temporary fix, delete after scryfall site update
+                // broken adventure/omen card (scryfall changed it for some reason)
+                // Scavenger Regent // Exude Toxin
+                // https://scryfall.com/card/tdm/90/scavenger-regent-exude-toxin
+                if (this.name.contains("//")) {
+                    throw new IllegalArgumentException("Scryfall: unsupported data type, broken reversible_card must have same simple name"
+                            + this.set + " - " + this.collector_number + " - " + this.name);
+                }
+            } else if (this.card_faces.get(0).layout.equals("reversible_card")) {
+                // TODO: temporary fix, delete after scryfall site update
+                // broken adventure/omen card (scryfall changed it for some reason)
+                // Bloomvine Regent // Claim Territory
+                // https://scryfall.com/card/tdm/381/bloomvine-regent-claim-territory-bloomvine-regent
+                this.name = this.card_faces.get(0).name;
+            } else if (this.card_faces.get(0).layout == null || this.card_faces.get(0).layout.equals("normal")) {
                 // simple card
                 // Command Tower // Command Tower
                 // https://scryfall.com/card/rex/26/command-tower-command-tower
@@ -100,12 +117,12 @@ public class ScryfallApiCard {
                 }
                 this.name = this.card_faces.get(0).name;
             } else if (this.card_faces.get(0).layout.equals("adventure")) {
-                // adventure card
+                // adventure/omen card
                 // Bloomvine Regent // Claim Territory
                 // https://scryfall.com/card/tdm/381/bloomvine-regent-claim-territory-bloomvine-regent
                 this.name = this.card_faces.get(0).name;
                 if (this.card_faces.get(0).name.equals(this.card_faces.get(1).name)) {
-                    throw new IllegalArgumentException("Scryfall: unsupported data type, adventure's reversible_card must have diff names in faces "
+                    throw new IllegalArgumentException("Scryfall: unsupported data type, adventure/omen's reversible_card must have diff names in faces "
                             + this.set + " - " + this.collector_number + " - " + this.name);
                 }
             } else if (this.card_faces.get(0).layout.equals("token")) {

@@ -7,6 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
@@ -19,8 +20,8 @@ public final class SickeningDreams extends CardImpl {
     public SickeningDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        // As an additional cost to cast Sickening Dreams, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
+        // As an additional cost to cast this spell, discard X cards.
+        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, true));
 
         // Sickening Dreams deals X damage to each creature and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(GetXValue.instance, new FilterCreaturePermanent()));

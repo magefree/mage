@@ -29,7 +29,7 @@ public class Unsanctioned extends ExpansionSet {
         cards.add(new SetCardInfo("B-I-N-G-O", 61, Rarity.RARE, mage.cards.b.BINGO.class));
         //cards.add(new SetCardInfo("B.O.B. (Bevy of Beebles)", 18, Rarity.MYTHIC, mage.cards.b.BOBBevyOfBeebles.class));
         //cards.add(new SetCardInfo("Bat-", 32, Rarity.UNCOMMON, mage.cards.b.Bat.class));
-        cards.add(new SetCardInfo("Blast from the Past", 48, Rarity.RARE, mage.cards.b.BlastFromThePast.class));
+        cards.add(new SetCardInfo("Blast from the Past", 48, Rarity.RARE, mage.cards.b.BlastFromThePast.class, RETRO_ART));
         //cards.add(new SetCardInfo("Boomstacker", 49, Rarity.RARE, mage.cards.b.Boomstacker.class));
         cards.add(new SetCardInfo("Booster Tutor", 33, Rarity.UNCOMMON, mage.cards.b.BoosterTutor.class));
         //cards.add(new SetCardInfo("Bronze Calendar", 76, Rarity.UNCOMMON, mage.cards.b.BronzeCalendar.class));
@@ -46,7 +46,7 @@ public class Unsanctioned extends ExpansionSet {
         //cards.add(new SetCardInfo("Entirely Normal Armchair", 77, Rarity.UNCOMMON, mage.cards.e.EntirelyNormalArmchair.class));
         //cards.add(new SetCardInfo("Flavor Judge", 4, Rarity.RARE, mage.cards.f.FlavorJudge.class));
         cards.add(new SetCardInfo("Forest", 95, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 96, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 96, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         //cards.add(new SetCardInfo("Frankie Peanuts", 5, Rarity.RARE, mage.cards.f.FrankiePeanuts.class));
         cards.add(new SetCardInfo("Free-Range Chicken", 63, Rarity.COMMON, mage.cards.f.FreeRangeChicken.class));
         //cards.add(new SetCardInfo("GO TO JAIL", 6, Rarity.COMMON, mage.cards.g.GoToJail.class));
@@ -63,7 +63,7 @@ public class Unsanctioned extends ExpansionSet {
         //cards.add(new SetCardInfo("Infinity Elemental", 54, Rarity.MYTHIC, mage.cards.i.InfinityElemental.class));
         cards.add(new SetCardInfo("Inhumaniac", 41, Rarity.UNCOMMON, mage.cards.i.Inhumaniac.class));
         cards.add(new SetCardInfo("Island", 89, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Island", 90, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 90, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jack-in-the-Mox", 78, Rarity.RARE, mage.cards.j.JackInTheMox.class));
         cards.add(new SetCardInfo("Johnny, Combo Player", 23, Rarity.RARE, mage.cards.j.JohnnyComboPlayer.class));
         cards.add(new SetCardInfo("Jumbo Imp", 42, Rarity.UNCOMMON, mage.cards.j.JumboImp.class));
@@ -75,7 +75,7 @@ public class Unsanctioned extends ExpansionSet {
         //cards.add(new SetCardInfo("Mer Man", 25, Rarity.COMMON, mage.cards.m.MerMan.class));
         //cards.add(new SetCardInfo("Mother Kangaroo", 66, Rarity.COMMON, mage.cards.m.MotherKangaroo.class));
         cards.add(new SetCardInfo("Mountain", 93, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 94, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 94, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Old Fogey", 67, Rarity.RARE, mage.cards.o.OldFogey.class));
         //cards.add(new SetCardInfo("Old Guard", 11, Rarity.COMMON, mage.cards.o.OldGuard.class));
         //cards.add(new SetCardInfo("Ordinary Pony", 12, Rarity.COMMON, mage.cards.o.OrdinaryPony.class));
@@ -83,7 +83,7 @@ public class Unsanctioned extends ExpansionSet {
         cards.add(new SetCardInfo("Paper Tiger", 80, Rarity.COMMON, mage.cards.p.PaperTiger.class));
         //cards.add(new SetCardInfo("Pippa, Duchess of Dice", 68, Rarity.RARE, mage.cards.p.PippaDuchessOfDice.class));
         cards.add(new SetCardInfo("Plains", 87, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Plains", 88, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 88, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         //cards.add(new SetCardInfo("Pointy Finger of Doom", 81, Rarity.RARE, mage.cards.p.PointyFingerOfDoom.class));
         cards.add(new SetCardInfo("Poultrygeist", 43, Rarity.COMMON, mage.cards.p.Poultrygeist.class));
         //cards.add(new SetCardInfo("Richard Garfield, Ph.D.", 26, Rarity.RARE, mage.cards.r.RichardGarfieldPhD.class));
@@ -104,7 +104,7 @@ public class Unsanctioned extends ExpansionSet {
         //cards.add(new SetCardInfo("Super-Duper Death Ray", 59, Rarity.UNCOMMON, mage.cards.s.SuperDuperDeathRay.class));
         //cards.add(new SetCardInfo("Surgeon General Commander", 72, Rarity.MYTHIC, mage.cards.s.SurgeonGeneralCommander.class));
         cards.add(new SetCardInfo("Swamp", 91, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swamp", 92, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 92, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         //cards.add(new SetCardInfo("Sword of Dungeons & Dragons", 84, Rarity.MYTHIC, mage.cards.s.SwordOfDungeonsDragons.class));
         //cards.add(new SetCardInfo("Syr Cadian, Knight Owl", 15, Rarity.RARE, mage.cards.s.SyrCadianKnightOwl.class));
         cards.add(new SetCardInfo("Time Out", 28, Rarity.COMMON, mage.cards.t.TimeOut.class));

@@ -72,7 +72,7 @@ public class CallbackClientImpl implements CallbackClient {
         SwingUtilities.invokeLater(() -> {
             try {
                 if (DebugUtil.NETWORK_SHOW_CLIENT_CALLBACK_MESSAGES_LOG) {
-                    logger.info("message " + callback.getMessageId() + " - " + callback.getMethod().getType() + " - " + callback.getMethod());
+                    logger.info(callback.getInfo());
                 }
 
                 // process bad connection (events can income in wrong order, so outdated data must be ignored)

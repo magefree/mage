@@ -90,6 +90,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferredImageLaguage";
 
     public static final String KEY_CARD_RENDERING_IMAGE_MODE = "cardRenderingFallback";
+    public static final String KEY_CARD_RENDERING_ENABLE_RETRO_FRAMES = "cardRenderingRetroFrames";
     public static final String KEY_CARD_RENDERING_ICONS_FOR_ABILITIES = "cardRenderingIconsForAbilities";
     public static final String KEY_CARD_RENDERING_ICONS_FOR_PLAYABLE = "cardRenderingIconsForPlayable";
     public static final String KEY_CARD_RENDERING_REMINDER_TEXT = "cardRenderingReminderText";
@@ -962,6 +963,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelPreferredImageLanguage = new javax.swing.JLabel();
         panelCardStyles = new javax.swing.JPanel();
         cbCardRenderImageFallback = new javax.swing.JCheckBox();
+        cbCardRenderRetroFrames = new javax.swing.JCheckBox();
         cbCardRenderIconsForAbilities = new javax.swing.JCheckBox();
         cbCardRenderIconsForPlayable = new javax.swing.JCheckBox();
         jSeparator1 = new javax.swing.JSeparator();
@@ -2328,6 +2330,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbCardRenderImageFallback.setText("Render mode: MTGO style (off) or IMAGE style (on)");
         panelCardStyles.add(cbCardRenderImageFallback);
 
+        cbCardRenderRetroFrames.setText("Force retro frames (MTGO render mode will use old border for all cards)");
+        panelCardStyles.add(cbCardRenderRetroFrames);
+
         cbCardRenderIconsForAbilities.setText("Enable card icons for abilities (example: flying, deathtouch)");
         panelCardStyles.add(cbCardRenderIconsForAbilities);
 
@@ -2396,15 +2401,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         phases_stopSettings.add(cbStopAttack);
 
         cbStopBlockWithAny.setSelected(true);
-        cbStopBlockWithAny.setText("STOP skips on declare blockers if ANY blockers are available");
+        cbStopBlockWithAny.setText("STOP skips when attacked and on declare blockers if ANY blockers are available");
         cbStopBlockWithAny.setActionCommand("");
         phases_stopSettings.add(cbStopBlockWithAny);
 
-        cbStopBlockWithZero.setText("STOP skips on declare blockers if ZERO blockers are available");
+        cbStopBlockWithZero.setText("STOP skips when attacked if ZERO blockers are available");
         cbStopBlockWithZero.setActionCommand("");
         phases_stopSettings.add(cbStopBlockWithZero);
 
-        cbStopOnNewStackObjects.setText("Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)");
+        cbStopOnNewStackObjects.setText("Skip to STACK resolved (F10): stop on new objects added (on) or stop when stack empty (off)");
         cbStopOnNewStackObjects.setActionCommand("");
         cbStopOnNewStackObjects.setPreferredSize(new java.awt.Dimension(300, 25));
         phases_stopSettings.add(cbStopOnNewStackObjects);
@@ -3034,6 +3039,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         // rendering
         save(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_IMAGE_MODE, "true", "false");
+        save(prefs, dialog.cbCardRenderRetroFrames, KEY_CARD_RENDERING_ENABLE_RETRO_FRAMES, "true", "false");
         save(prefs, dialog.cbCardRenderIconsForAbilities, KEY_CARD_RENDERING_ICONS_FOR_ABILITIES, "true", "false");
         save(prefs, dialog.cbCardRenderIconsForPlayable, KEY_CARD_RENDERING_ICONS_FOR_PLAYABLE, "true", "false");
         save(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true", "false");
@@ -3485,6 +3491,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         // rendering settings
         load(prefs, dialog.cbCardRenderImageFallback, KEY_CARD_RENDERING_IMAGE_MODE, "true", "false");
+        load(prefs, dialog.cbCardRenderRetroFrames, KEY_CARD_RENDERING_ENABLE_RETRO_FRAMES, "true", "false");
         load(prefs, dialog.cbCardRenderIconsForAbilities, KEY_CARD_RENDERING_ICONS_FOR_ABILITIES, "true", "true");
         load(prefs, dialog.cbCardRenderIconsForPlayable, KEY_CARD_RENDERING_ICONS_FOR_PLAYABLE, "true", "true");
         load(prefs, dialog.cbCardRenderHideSetSymbol, KEY_CARD_RENDERING_SET_SYMBOL, "true");
@@ -3815,6 +3822,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
+    public static boolean getRenderRetroFrames() {
+        return (getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_ENABLE_RETRO_FRAMES, "true").endsWith("true"));
+    }
+
     public static boolean getRenderIconsForAbilities() {
         return (getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_ICONS_FOR_ABILITIES, "true").equals("true"));
     }
@@ -4043,6 +4054,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbCardRenderIconsForAbilities;
     private javax.swing.JCheckBox cbCardRenderIconsForPlayable;
     private javax.swing.JCheckBox cbCardRenderImageFallback;
+    private javax.swing.JCheckBox cbCardRenderRetroFrames;
     private javax.swing.JCheckBox cbCardRenderShowAbilityTextOverlay;
     private javax.swing.JCheckBox cbCardRenderShowReminderText;
     private javax.swing.JCheckBox cbConfirmEmptyManaPool;

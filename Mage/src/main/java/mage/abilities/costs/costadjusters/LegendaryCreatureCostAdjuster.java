@@ -29,10 +29,8 @@ public enum LegendaryCreatureCostAdjuster implements CostAdjuster {
     );
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int count = game.getBattlefield().count(
-                filter, ability.getControllerId(), ability, game
-        );
+    public void reduceCost(Ability ability, Game game) {
+        int count = game.getBattlefield().count(filter, ability.getControllerId(), ability, game);
         if (count > 0) {
             CardUtil.reduceCost(ability, count);
         }

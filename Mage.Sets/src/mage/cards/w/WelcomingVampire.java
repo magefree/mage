@@ -1,26 +1,27 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class WelcomingVampire extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("one or more other creatures with power 2 or less");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("one or more other creatures with power 2 or less");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -38,7 +39,7 @@ public final class WelcomingVampire extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever one or more other creatures with power 2 or less enter the battlefield under your control, draw a card. This ability triggers only once each turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter).setTriggersLimitEachTurn(1));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new DrawCardSourceControllerEffect(1), filter).setTriggersLimitEachTurn(1));
     }
 
     private WelcomingVampire(final WelcomingVampire card) {

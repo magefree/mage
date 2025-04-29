@@ -4,6 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.costs.CostImpl;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -130,7 +131,7 @@ enum CaptainAmericaFirstAvengerValue implements DynamicValue {
     }
 }
 
-class CaptainAmericaFirstAvengerUnattachCost extends EarlyTargetCost {
+class CaptainAmericaFirstAvengerUnattachCost extends CostImpl implements EarlyTargetCost {
 
     private static final FilterPermanent filter = new FilterEquipmentPermanent("equipment attached to this creature");
     private static final FilterPermanent subfilter = new FilterControlledPermanent("{this}");
