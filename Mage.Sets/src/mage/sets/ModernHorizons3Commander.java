@@ -205,6 +205,7 @@ public final class ModernHorizons3Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Oblivion Stone", 303, Rarity.RARE, mage.cards.o.OblivionStone.class));
         cards.add(new SetCardInfo("Omo, Queen of Vesuva", 2, Rarity.MYTHIC, mage.cards.o.OmoQueenOfVesuva.class));
         cards.add(new SetCardInfo("Opal Palace", 361, Rarity.COMMON, mage.cards.o.OpalPalace.class));
+        cards.add(new SetCardInfo("Overclocked Electromancer", 58, Rarity.RARE, mage.cards.o.OverclockedElectromancer.class));
         cards.add(new SetCardInfo("Overflowing Basin", 362, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Path of Ancestry", 363, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Planar Nexus", 80, Rarity.RARE, mage.cards.p.PlanarNexus.class));
