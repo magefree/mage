@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,11 +39,9 @@ public final class RenegadeRallier extends CardImpl {
 
         // <i>Revolt</i> &mdash; When Renegade Rallier enters the battlefield, if a permanent you controlled left the battlefield this turn,
         // return target permanent card with converted mana cost 2 or less from your graveyard to your battlefield.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), false),
-                RevoltCondition.instance, "When {this} enters, if a permanent you controlled " +
-                "left the battlefield this turn, return target permanent card with mana value 2 or less from your graveyard to the battlefield."
-        ).setAbilityWord(AbilityWord.REVOLT);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect())
+                .withInterveningIf(RevoltCondition.instance);
+        ability.setAbilityWord(AbilityWord.REVOLT);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
