@@ -802,7 +802,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     game.fireEvent(addedOneEvent);
                 } else {
                     finalAmount--;
-                    returnCode = false;
+                    returnCode = false; // restricted by ADD_COUNTER
                 }
             }
             if (finalAmount > 0) {
@@ -810,10 +810,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
             } else {
+                // TODO: must return true, cause it's not replaced here (rework Fangs of Kalonia and Spectacular Showdown)
+                // example from Devoted Druid
+                // If you can put counters on it, but that is modified by an effect (such as that of Vizier of Remedies),
+                // you can activate the ability even if paying the cost causes no counters to be put on Devoted Druid.
+                // (2018-12-07)
                 returnCode = false;
             }
         } else {
-            returnCode = false;
+            returnCode = false; // restricted by ADD_COUNTERS
         }
         return returnCode;
     }
