@@ -238,6 +238,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skaab Ruinator", 128, Rarity.MYTHIC, mage.cards.s.SkaabRuinator.class));
         cards.add(new SetCardInfo("Skola Grovedancer", 199, Rarity.COMMON, mage.cards.s.SkolaGrovedancer.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 299, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
+        cards.add(new SetCardInfo("Soaring Lightbringer", 11, Rarity.RARE, mage.cards.s.SoaringLightbringer.class));
         cards.add(new SetCardInfo("Sol Ring", 94, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 253, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Sphere of Safety", 104, Rarity.UNCOMMON, mage.cards.s.SphereOfSafety.class));
