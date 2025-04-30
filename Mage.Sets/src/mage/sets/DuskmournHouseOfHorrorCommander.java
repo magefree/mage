@@ -38,6 +38,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Auramancer", 97, Rarity.COMMON, mage.cards.a.Auramancer.class));
         cards.add(new SetCardInfo("Azorius Chancery", 261, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Signet", 240, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
+        cards.add(new SetCardInfo("Barbflare Gremlin", 26, Rarity.RARE, mage.cards.b.BarbflareGremlin.class));
         cards.add(new SetCardInfo("Barren Moor", 262, Rarity.UNCOMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Basilisk Collar", 241, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 131, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
