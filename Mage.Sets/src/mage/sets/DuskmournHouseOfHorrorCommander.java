@@ -23,6 +23,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aesi, Tyrant of Gyre Strait", 210, Rarity.MYTHIC, mage.cards.a.AesiTyrantOfGyreStrait.class));
         cards.add(new SetCardInfo("Aether Gale", 109, Rarity.RARE, mage.cards.a.AetherGale.class));
         cards.add(new SetCardInfo("Aminatou's Augury", 71, Rarity.RARE, mage.cards.a.AminatousAugury.class));
+        cards.add(new SetCardInfo("Ancient Cellarspawn", 16, Rarity.RARE, mage.cards.a.AncientCellarspawn.class));
         cards.add(new SetCardInfo("Arachnogenesis", 169, Rarity.RARE, mage.cards.a.Arachnogenesis.class));
         cards.add(new SetCardInfo("Arcane Denial", 110, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 259, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
