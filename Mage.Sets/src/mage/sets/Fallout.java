@@ -1020,8 +1020,8 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Vault 11: Voter's Dilemma", 649, Rarity.RARE, mage.cards.v.Vault11VotersDilemma.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 12: The Necropolis", 51, Rarity.RARE, mage.cards.v.Vault12TheNecropolis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 12: The Necropolis", 579, Rarity.RARE, mage.cards.v.Vault12TheNecropolis.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Vault 13: Dweller's Journey", 26, Rarity.RARE, mage.cards.v.Vault13DwellersJourney.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Vault 13: Dweller's Journey", 554, Rarity.RARE, mage.cards.v.Vault13DwellersJourney.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vault 13: Dweller's Journey", 26, Rarity.RARE, mage.cards.v.Vault13DwellersJourney.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vault 13: Dweller's Journey", 554, Rarity.RARE, mage.cards.v.Vault13DwellersJourney.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 21: House Gambit", 597, Rarity.RARE, mage.cards.v.Vault21HouseGambit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 21: House Gambit", 69, Rarity.RARE, mage.cards.v.Vault21HouseGambit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 75: Middle School", 27, Rarity.RARE, mage.cards.v.Vault75MiddleSchool.class, NON_FULL_USE_VARIOUS));
