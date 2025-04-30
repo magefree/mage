@@ -148,6 +148,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Grasp", 143, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Inkshield", 221, Rarity.RARE, mage.cards.i.Inkshield.class));
         cards.add(new SetCardInfo("Inscription of Abundance", 186, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
+        cards.add(new SetCardInfo("Into the Pit", 20, Rarity.RARE, mage.cards.i.IntoThePit.class));
         cards.add(new SetCardInfo("Ishkanah, Grafwidow", 187, Rarity.MYTHIC, mage.cards.i.IshkanahGrafwidow.class));
         cards.add(new SetCardInfo("Jungle Hollow", 285, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kaervek the Merciless", 222, Rarity.RARE, mage.cards.k.KaervekTheMerciless.class));
