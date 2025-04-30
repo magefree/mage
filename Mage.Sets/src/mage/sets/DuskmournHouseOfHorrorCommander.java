@@ -89,6 +89,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Deluge of Doom", 18, Rarity.RARE, mage.cards.d.DelugeOfDoom.class));
         cards.add(new SetCardInfo("Demolisher Spawn", 31, Rarity.RARE, mage.cards.d.DemolisherSpawn.class));
         cards.add(new SetCardInfo("Demon of Fate's Design", 137, Rarity.RARE, mage.cards.d.DemonOfFatesDesign.class));
+        cards.add(new SetCardInfo("Demonic Covenant", 19, Rarity.RARE, mage.cards.d.DemonicCovenant.class));
         cards.add(new SetCardInfo("Diabolic Vision", 87, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Dig Through Time", 115, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Dimir Aqueduct", 270, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
