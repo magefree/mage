@@ -222,6 +222,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rendmaw, Creaking Nest", 5, Rarity.MYTHIC, mage.cards.r.RendmawCreakingNest.class));
         cards.add(new SetCardInfo("Retreat to Coralhelm", 126, Rarity.UNCOMMON, mage.cards.r.RetreatToCoralhelm.class));
         cards.add(new SetCardInfo("Return to Dust", 102, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
+        cards.add(new SetCardInfo("Sadistic Shell Game", 24, Rarity.RARE, mage.cards.s.SadisticShellGame.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 194, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Sandwurm Convergence", 195, Rarity.RARE, mage.cards.s.SandwurmConvergence.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 196, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
