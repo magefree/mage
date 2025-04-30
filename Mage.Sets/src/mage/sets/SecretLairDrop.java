@@ -810,7 +810,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Elesh Norn, Grand Cenobite", 811, Rarity.MYTHIC, mage.cards.e.EleshNornGrandCenobite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seven Dwarves", 813, Rarity.RARE, mage.cards.s.SevenDwarves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seven Dwarves", 814, Rarity.RARE, mage.cards.s.SevenDwarves.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Seven Dwarves", 815, Rarity.COMMON, mage.cards.s.SevenDwarves.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Seven Dwarves", 815, Rarity.RARE, mage.cards.s.SevenDwarves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 820, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", "820*", Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Echo of Eons", 821, Rarity.RARE, mage.cards.e.EchoOfEons.class, RETRO_ART));
@@ -1517,7 +1517,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Admiral Beckett Brass", 1561, Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skithiryx, the Blight Dragon", 1562, Rarity.MYTHIC, mage.cards.s.SkithiryxTheBlightDragon.class));
         cards.add(new SetCardInfo("Kaalia of the Vast", 1563, Rarity.MYTHIC, mage.cards.k.KaaliaOfTheVast.class));
-        cards.add(new SetCardInfo("Angel of Despair", 1564, Rarity.UNCOMMON, mage.cards.a.AngelOfDespair.class));
+        cards.add(new SetCardInfo("Angel of Despair", 1564, Rarity.RARE, mage.cards.a.AngelOfDespair.class));
         cards.add(new SetCardInfo("Master of Cruelties", 1565, Rarity.MYTHIC, mage.cards.m.MasterOfCruelties.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 1566, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", "1566*", Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class, NON_FULL_USE_VARIOUS));
