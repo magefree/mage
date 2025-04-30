@@ -1016,8 +1016,8 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Vault 101: Birthday Party", 556, Rarity.RARE, mage.cards.v.Vault101BirthdayParty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 112: Sadistic Simulation", 123, Rarity.RARE, mage.cards.v.Vault112SadisticSimulation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 112: Sadistic Simulation", 651, Rarity.RARE, mage.cards.v.Vault112SadisticSimulation.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Vault 11: Voter's Dilemma", 121, Rarity.RARE, mage.cards.v.Vault11VotersDilemma.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Vault 11: Voter's Dilemma", 649, Rarity.RARE, mage.cards.v.Vault11VotersDilemma.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vault 11: Voter's Dilemma", 121, Rarity.RARE, mage.cards.v.Vault11VotersDilemma.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vault 11: Voter's Dilemma", 649, Rarity.RARE, mage.cards.v.Vault11VotersDilemma.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 12: The Necropolis", 51, Rarity.RARE, mage.cards.v.Vault12TheNecropolis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault 12: The Necropolis", 579, Rarity.RARE, mage.cards.v.Vault12TheNecropolis.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Vault 13: Dweller's Journey", 26, Rarity.RARE, mage.cards.v.Vault13DwellersJourney.class, NON_FULL_USE_VARIOUS));
