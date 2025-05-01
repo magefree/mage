@@ -180,9 +180,9 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Jackdaw", 167, Rarity.RARE, mage.cards.j.Jackdaw.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jackdaw", 239, Rarity.RARE, mage.cards.j.Jackdaw.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jackdaw", 58, Rarity.RARE, mage.cards.j.Jackdaw.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Jacob Frye", 132, Rarity.RARE, mage.cards.j.JacobFrye.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Jacob Frye", 207, Rarity.RARE, mage.cards.j.JacobFrye.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Jacob Frye", 27, Rarity.RARE, mage.cards.j.JacobFrye.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jacob Frye", 132, Rarity.RARE, mage.cards.j.JacobFrye.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jacob Frye", 207, Rarity.RARE, mage.cards.j.JacobFrye.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jacob Frye", 27, Rarity.RARE, mage.cards.j.JacobFrye.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kassandra, Eagle Bearer", 148, Rarity.MYTHIC, mage.cards.k.KassandraEagleBearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kassandra, Eagle Bearer", 240, Rarity.MYTHIC, mage.cards.k.KassandraEagleBearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kassandra, Eagle Bearer", 271, Rarity.MYTHIC, mage.cards.k.KassandraEagleBearer.class, NON_FULL_USE_VARIOUS));
