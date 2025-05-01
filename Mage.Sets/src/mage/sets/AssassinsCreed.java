@@ -268,9 +268,9 @@ public final class AssassinsCreed extends ExpansionSet {
         //cards.add(new SetCardInfo("Shaun & Rebecca, Agents", 152, Rarity.RARE, mage.cards.s.ShaunAndRebeccaAgents.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Shaun & Rebecca, Agents", 247, Rarity.RARE, mage.cards.s.ShaunAndRebeccaAgents.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Shaun & Rebecca, Agents", 64, Rarity.RARE, mage.cards.s.ShaunAndRebeccaAgents.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Shay Cormac", 153, Rarity.UNCOMMON, mage.cards.s.ShayCormac.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Shay Cormac", 248, Rarity.UNCOMMON, mage.cards.s.ShayCormac.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Shay Cormac", 65, Rarity.UNCOMMON, mage.cards.s.ShayCormac.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shay Cormac", 153, Rarity.UNCOMMON, mage.cards.s.ShayCormac.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shay Cormac", 248, Rarity.UNCOMMON, mage.cards.s.ShayCormac.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shay Cormac", 65, Rarity.UNCOMMON, mage.cards.s.ShayCormac.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sigurd, Jarl of Ravensthorpe", 154, Rarity.RARE, mage.cards.s.SigurdJarlOfRavensthorpe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sigurd, Jarl of Ravensthorpe", 249, Rarity.RARE, mage.cards.s.SigurdJarlOfRavensthorpe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sigurd, Jarl of Ravensthorpe", 66, Rarity.RARE, mage.cards.s.SigurdJarlOfRavensthorpe.class, NON_FULL_USE_VARIOUS));
