@@ -210,8 +210,8 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Mjolnir, Storm Hammer", 170, Rarity.RARE, mage.cards.m.MjolnirStormHammer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mjolnir, Storm Hammer", 258, Rarity.RARE, mage.cards.m.MjolnirStormHammer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mjolnir, Storm Hammer", 74, Rarity.RARE, mage.cards.m.MjolnirStormHammer.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Monastery Raid", 217, Rarity.UNCOMMON, mage.cards.m.MonasteryRaid.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Monastery Raid", 35, Rarity.UNCOMMON, mage.cards.m.MonasteryRaid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Monastery Raid", 217, Rarity.UNCOMMON, mage.cards.m.MonasteryRaid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Monastery Raid", 35, Rarity.UNCOMMON, mage.cards.m.MonasteryRaid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mortify", 243, Rarity.UNCOMMON, mage.cards.m.Mortify.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mortify", 96, Rarity.UNCOMMON, mage.cards.m.Mortify.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 107, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_USE_VARIOUS));
