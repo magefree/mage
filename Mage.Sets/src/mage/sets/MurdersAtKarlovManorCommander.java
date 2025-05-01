@@ -177,6 +177,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mirko, Obsessive Theorist", 316, Rarity.MYTHIC, mage.cards.m.MirkoObsessiveTheorist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirror Entity", 75, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mission Briefing", 110, Rarity.RARE, mage.cards.m.MissionBriefing.class));
+        cards.add(new SetCardInfo("Mob Verdict", 33, Rarity.RARE, mage.cards.m.MobVerdict.class));
         cards.add(new SetCardInfo("Morska, Undersea Sleuth", 3, Rarity.MYTHIC, mage.cards.m.MorskaUnderseaSleuth.class));
         cards.add(new SetCardInfo("Mossfire Valley", 274, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 275, Rarity.RARE, mage.cards.m.MosswortBridge.class));
