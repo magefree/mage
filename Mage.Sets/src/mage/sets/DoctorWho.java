@@ -437,10 +437,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Horizon Canopy", 878, Rarity.RARE, mage.cards.h.HorizonCanopy.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Hotel of Fears", 584, Rarity.COMMON, mage.cards.h.HotelOfFears.class));
         //cards.add(new SetCardInfo("Human-Time Lord Meta-Crisis", 585, Rarity.COMMON, mage.cards.h.HumanTimeLordMetaCrisis.class));
-        //cards.add(new SetCardInfo("Hunted by The Family", 361, Rarity.RARE, mage.cards.h.HuntedByTheFamily.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Hunted by The Family", 46, Rarity.RARE, mage.cards.h.HuntedByTheFamily.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Hunted by The Family", 651, Rarity.RARE, mage.cards.h.HuntedByTheFamily.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Hunted by The Family", 952, Rarity.RARE, mage.cards.h.HuntedByTheFamily.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hunted by The Family", 361, Rarity.RARE, mage.cards.h.HuntedByTheFamily.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hunted by The Family", 46, Rarity.RARE, mage.cards.h.HuntedByTheFamily.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hunted by The Family", 651, Rarity.RARE, mage.cards.h.HuntedByTheFamily.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hunted by The Family", 952, Rarity.RARE, mage.cards.h.HuntedByTheFamily.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ian Chesterton", 22, Rarity.RARE, mage.cards.i.IanChesterton.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ian Chesterton", 341, Rarity.RARE, mage.cards.i.IanChesterton.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ian Chesterton", 627, Rarity.RARE, mage.cards.i.IanChesterton.class, NON_FULL_USE_VARIOUS));
