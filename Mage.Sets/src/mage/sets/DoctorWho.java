@@ -1133,8 +1133,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Trenzalore Clocktower", 190, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trenzalore Clocktower", 463, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trenzalore Clocktower", 795, Rarity.RARE, mage.cards.t.TrenzaloreClocktower.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Trial of a Time Lord", 29, Rarity.RARE, mage.cards.t.TrialOfATimeLord.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Trial of a Time Lord", 634, Rarity.RARE, mage.cards.t.TrialOfATimeLord.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trial of a Time Lord", 29, Rarity.RARE, mage.cards.t.TrialOfATimeLord.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trial of a Time Lord", 634, Rarity.RARE, mage.cards.t.TrialOfATimeLord.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Truth or Consequences", 163, Rarity.UNCOMMON, mage.cards.t.TruthOrConsequences.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Truth or Consequences", 768, Rarity.UNCOMMON, mage.cards.t.TruthOrConsequences.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Twice Upon a Time", 61, Rarity.RARE, mage.cards.t.TwiceUponATime.class, NON_FULL_USE_VARIOUS));
