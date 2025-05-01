@@ -144,7 +144,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Ezio, Brash Novice", 145, Rarity.UNCOMMON, mage.cards.e.EzioBrashNovice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ezio, Brash Novice", 236, Rarity.UNCOMMON, mage.cards.e.EzioBrashNovice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ezio, Brash Novice", 55, Rarity.UNCOMMON, mage.cards.e.EzioBrashNovice.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Fall of the First Civilization", 4, Rarity.UNCOMMON, mage.cards.f.FallOfTheFirstCivilization.class));
+        cards.add(new SetCardInfo("Fall of the First Civilization", 4, Rarity.UNCOMMON, mage.cards.f.FallOfTheFirstCivilization.class));
         cards.add(new SetCardInfo("Fatal Push", 204, Rarity.UNCOMMON, mage.cards.f.FatalPush.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fatal Push", 90, Rarity.UNCOMMON, mage.cards.f.FatalPush.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fiery Islet", 112, Rarity.RARE, mage.cards.f.FieryIslet.class));
