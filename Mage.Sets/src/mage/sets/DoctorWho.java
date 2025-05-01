@@ -874,8 +874,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Beast, Deathless Prince", 719, Rarity.RARE, mage.cards.t.TheBeastDeathlessPrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Beast, Deathless Prince", 994, Rarity.RARE, mage.cards.t.TheBeastDeathlessPrince.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cave of Skulls", 573, Rarity.COMMON, mage.cards.t.TheCaveOfSkulls.class));
-        //cards.add(new SetCardInfo("The Caves of Androzani", 15, Rarity.RARE, mage.cards.t.TheCavesOfAndrozani.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Caves of Androzani", 620, Rarity.RARE, mage.cards.t.TheCavesOfAndrozani.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Caves of Androzani", 15, Rarity.RARE, mage.cards.t.TheCavesOfAndrozani.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Caves of Androzani", 620, Rarity.RARE, mage.cards.t.TheCavesOfAndrozani.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cheetah Planet", 574, Rarity.COMMON, mage.cards.t.TheCheetahPlanet.class));
         //cards.add(new SetCardInfo("The Curse of Fenric", 118, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Curse of Fenric", 723, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
