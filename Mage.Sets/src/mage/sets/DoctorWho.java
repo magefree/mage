@@ -887,8 +887,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Dalek Emperor", 406, Rarity.RARE, mage.cards.t.TheDalekEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Dalek Emperor", 725, Rarity.RARE, mage.cards.t.TheDalekEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Dalek Emperor", 997, Rarity.RARE, mage.cards.t.TheDalekEmperor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Day of the Doctor", 121, Rarity.RARE, mage.cards.t.TheDayOfTheDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Day of the Doctor", 726, Rarity.RARE, mage.cards.t.TheDayOfTheDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Day of the Doctor", 121, Rarity.RARE, mage.cards.t.TheDayOfTheDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Day of the Doctor", 726, Rarity.RARE, mage.cards.t.TheDayOfTheDoctor.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Dining Car", 578, Rarity.COMMON, mage.cards.t.TheDiningCar.class));
         //cards.add(new SetCardInfo("The Doctor's Childhood Barn", 579, Rarity.COMMON, mage.cards.t.TheDoctorsChildhoodBarn.class));
         //cards.add(new SetCardInfo("The Doctor's Tomb", 580, Rarity.COMMON, mage.cards.t.TheDoctorsTomb.class));
