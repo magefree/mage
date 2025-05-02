@@ -1150,10 +1150,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Vineglimmer Snarl", 329, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 532, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 920, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Vislor Turlough", 377, Rarity.RARE, mage.cards.v.VislorTurlough.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Vislor Turlough", 679, Rarity.RARE, mage.cards.v.VislorTurlough.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Vislor Turlough", 74, Rarity.RARE, mage.cards.v.VislorTurlough.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Vislor Turlough", 968, Rarity.RARE, mage.cards.v.VislorTurlough.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vislor Turlough", 377, Rarity.RARE, mage.cards.v.VislorTurlough.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vislor Turlough", 679, Rarity.RARE, mage.cards.v.VislorTurlough.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vislor Turlough", 74, Rarity.RARE, mage.cards.v.VislorTurlough.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vislor Turlough", 968, Rarity.RARE, mage.cards.v.VislorTurlough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vrestin, Menoptra Leader", 1042, Rarity.RARE, mage.cards.v.VrestinMenoptraLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vrestin, Menoptra Leader", 166, Rarity.RARE, mage.cards.v.VrestinMenoptraLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vrestin, Menoptra Leader", 451, Rarity.RARE, mage.cards.v.VrestinMenoptraLeader.class, NON_FULL_USE_VARIOUS));
