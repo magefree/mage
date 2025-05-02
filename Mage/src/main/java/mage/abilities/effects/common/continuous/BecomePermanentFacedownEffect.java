@@ -34,7 +34,7 @@ public class BecomePermanentFacedownEffect extends ContinuousEffectImpl {
                 cards.getCards(game)
                         .stream()
                         .map(card -> new MageObjectReference(card, game, 1))
-                        .collect(Collectors.toSet()), game
+                        .collect(Collectors.toSet())
         ));
     }
 
