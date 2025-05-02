@@ -801,9 +801,15 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
             boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
-            if (possibleTargetIds.isEmpty()
-                    || target.getTargets().size() >= target.getNumberOfTargets()) {
-                required = false;
+
+            // If there are no valid targets, eventually required = false and responseID = null.
+            // Skip to result of target prompt if auto-choosing is enabled.
+            if (possibleTargetIds.isEmpty()) {
+                if (game.getPlayerAutoTargetLevel(abilityControllerId) > 0) {
+                    return target.getTargets().size() >= target.getNumberOfTargets();
+                } else if (target.getTargets().size() >= target.getNumberOfTargets()) {
+                    required = false;
+                }
             }
 
             UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
@@ -898,9 +904,16 @@ public class HumanPlayer extends PlayerImpl {
                     possibleTargets.add(cardId);
                 }
             }
-            // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
-            if (required && possibleTargets.isEmpty()) {
-                required = false;
+
+            // If there are no valid targets, eventually required = false and responseID = null.
+            // Skip to result of target prompt if auto-choosing is enabled.
+            if (possibleTargets.isEmpty()) {
+                if (game.getPlayerAutoTargetLevel(abilityControllerId) > 0) {
+                    return target.getTargets().size() >= target.getNumberOfTargets();
+                } else if (required) {
+                    // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
+                    required = false;
+                }
             }
 
             UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
@@ -978,9 +991,16 @@ public class HumanPlayer extends PlayerImpl {
                     possibleTargets.add(cardId);
                 }
             }
-            // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
-            if (required && possibleTargets.isEmpty()) {
-                required = false;
+
+            // If there are no valid targets, eventually required = false and responseID = null.
+            // Skip to result of target prompt if auto-choosing is enabled.
+            if (possibleTargets.isEmpty()) {
+                if (game.getPlayerAutoTargetLevel(abilityControllerId) > 0) {
+                    return target.getTargets().size() >= target.getNumberOfTargets();
+                } else if (required) {
+                    // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
+                    required = false;
+                }
             }
 
             UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
@@ -1060,9 +1080,15 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
             boolean required = target.isRequired(source.getSourceId(), game);
-            if (possibleTargetIds.isEmpty()
-                    || target.getSize() >= target.getNumberOfTargets()) {
-                required = false;
+
+            // If there are no valid targets, eventually required = false and responseID = null.
+            // Skip to result of target prompt if auto-choosing is enabled.
+            if (possibleTargetIds.isEmpty()) {
+                if (game.getPlayerAutoTargetLevel(abilityControllerId) > 0) {
+                    return false;
+                } else if (target.getSize() >= target.getNumberOfTargets()) {
+                    required = false;
+                }
             }
 
             UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);

@@ -679,12 +679,7 @@ public abstract class TargetImpl implements Target {
         if (player == null) {
             return null;
         }
-        int playerAutoTargetLevel;
-        if (player.isHuman() && player.getControllingPlayersUserData(game) != null) { // Ensure that non-strictChooseMode ComputerPlayer will still use this ability
-            playerAutoTargetLevel = player.getControllingPlayersUserData(game).getAutoTargetLevel();
-        } else {
-            playerAutoTargetLevel = 2;
-        }
+        int playerAutoTargetLevel = game.getPlayerAutoTargetLevel(abilityControllerId);
         String abilityText = source.getRule(true).toLowerCase();
         boolean strictModeEnabled = player.getStrictChooseMode();
         boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() // Targets must be picked
