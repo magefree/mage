@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
@@ -46,7 +46,6 @@ public final class GlyphOfDelusion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addTarget(new GlyphOfDelusionSecondTarget());
         this.getSpellAbility().addEffect(new GlyphOfDelusionEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private GlyphOfDelusion(final GlyphOfDelusion card) {
@@ -65,10 +64,10 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
 
     public GlyphOfDelusionSecondTarget() {
         super();
-        setTargetName("target creature that target Wall blocked this turn");
+        withTargetName("target creature that target Wall blocked this turn");
     }
 
-    public GlyphOfDelusionSecondTarget(final GlyphOfDelusionSecondTarget target) {
+    private GlyphOfDelusionSecondTarget(final GlyphOfDelusionSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }
@@ -82,7 +81,7 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
                 MageObject targetSource = game.getObject(source);
                 if (targetSource != null) {
                     for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, source, game)) {
-                        if (!targets.containsKey(creature.getId()) && creature.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                        if (!targets.containsKey(creature.getId()) && creature.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                             if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), new MageObjectReference(firstTarget, game), game)) {
                                 possibleTargets.add(creature.getId());
                             }
@@ -108,12 +107,12 @@ class GlyphOfDelusionSecondTarget extends TargetPermanent {
 
 class GlyphOfDelusionEffect extends OneShotEffect {
 
-    public GlyphOfDelusionEffect() {
+    GlyphOfDelusionEffect() {
         super(Outcome.Detriment);
         this.staticText = "Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains \"This creature doesn't untap during your untap step if it has a glyph counter on it\" and \"At the beginning of your upkeep, remove a glyph counter from this creature.\"";
     }
 
-    public GlyphOfDelusionEffect(final GlyphOfDelusionEffect effect) {
+    private GlyphOfDelusionEffect(final GlyphOfDelusionEffect effect) {
         super(effect);
     }
 
@@ -129,14 +128,14 @@ class GlyphOfDelusionEffect extends OneShotEffect {
             if (targetPermanent != null) {
                 targetPermanent.addCounters(CounterType.GLYPH.createInstance(targetPermanent.getPower().getValue()), source.getControllerId(), source, game);
 
-                SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(),
+                SimpleStaticAbility ability = new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(),
                         new SourceHasCounterCondition(CounterType.GLYPH)).setText("This creature doesn't untap during your untap step if it has a glyph counter on it"));
                 GainAbilityTargetEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
                 effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect, source);
 
-                BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance()),
-                        TargetController.YOU, false);
+                BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance())
+                );
                 GainAbilityTargetEffect effect2 = new GainAbilityTargetEffect(ability2, Duration.Custom);
                 effect2.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect2, source);

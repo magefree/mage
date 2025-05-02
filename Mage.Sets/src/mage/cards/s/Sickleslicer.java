@@ -29,13 +29,13 @@ public final class Sickleslicer extends CardImpl {
         this.addAbility(new LivingWeaponAbility());
 
         // Equipped creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
 
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), false));
     }
 
-    public Sickleslicer (final Sickleslicer card) {
+    private Sickleslicer(final Sickleslicer card) {
         super(card);
     }
 

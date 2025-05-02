@@ -9,7 +9,7 @@
 [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 XMage allows you to play Magic against one or more online players or computer opponents. 
-It includes full rules enforcement for over **25 000** unique cards and more than 65 000 reprints from different editions. 
+It includes full rules enforcement for over **28 000** unique cards and more than 73 000 reprints from different editions. 
 You can also find custom sets like Star Wars. All regular sets have nearly all implemented cards.
 
 It supports single matches and tournaments with dozens of game modes like duel, multiplayer, standard, modern, commander, 
@@ -70,18 +70,21 @@ XMageLauncher in `Settings > Java > Server java options`.
 ## Troubleshooting / FAQ
 
 Github issues page contain [popular problems and fixes](https://github.com/magefree/mage/issues?q=is%3Aissue+label%3AFAQ+):
-* [Program freezes on startup (white/blue/black screen)](https://github.com/magefree/mage/issues/4461#issuecomment-361108597);
-* [Can't download images or it stops after some time](https://www.reddit.com/r/XMage/comments/agmcjf/new_xmage_release_with_ravnica_allegiance_rna/); 
-* [MacOS can't open launcher](https://www.reddit.com/r/XMage/comments/kf8l34/updated_java_on_osx_xmage_not_working/ggej8cq/)
-* [MacOS client freezes in GUI (on connect dialog, on new match)](https://github.com/magefree/mage/issues/4920#issuecomment-517944308);
-* [Ugly cards and GUI drawing in games](https://github.com/magefree/mage/issues/4626#issuecomment-374640070);
-* [No texts or small buttons in launcher](https://github.com/magefree/mage/issues/4126);
-* [Can't run client, could not open ...jvm.cfg](https://github.com/magefree/mage/issues/1272#issuecomment-529789018).
-
+* [Any: program freezes on startup (white/blue/black screen)](https://github.com/magefree/mage/issues/4461#issuecomment-361108597);
+* [Any: can't download images or it stops after some time](https://www.reddit.com/r/XMage/comments/agmcjf/new_xmage_release_with_ravnica_allegiance_rna/); 
+* [Any: can't run client, could not open ...jvm.cfg](https://github.com/magefree/mage/issues/1272#issuecomment-529789018);
+* [Any: no texts or small buttons in launcher](https://github.com/magefree/mage/issues/4126);
+* [Windows: ugly cards, buttons or other GUI drawing artifacts](https://github.com/magefree/mage/issues/4626#issuecomment-374640070);
+* [Windows: pixilated images, icons and texts](https://github.com/magefree/mage/issues/12768#issuecomment-2347125602);
+* [MacOS: can't run on M1/M2](https://github.com/magefree/mage/issues/8406#issuecomment-1011720728);
+* [MacOS: can't open launcher](https://www.reddit.com/r/XMage/comments/kf8l34/updated_java_on_osx_xmage_not_working/ggej8cq/);
+* [MacOS: client freezes in GUI (on connect dialog, on new match)](https://github.com/magefree/mage/issues/4920#issuecomment-517944308);
+* [Linux: run on non-standard OS or hardware like Raspberry Pi](https://github.com/magefree/mage/issues/11611#issuecomment-1879385151);
+* [Linux: ugly GUI and drawing artifacts](https://github.com/magefree/mage/issues/11611#issuecomment-1879396921);
 
 ## Performance tweaks
 
-If you have a good GPU, it's very likely you'll be able increase performance by **a lot** through extra Java flags.
+If you have a good GPU, it's very likely you'll be able to increase performance by **a lot** through extra Java flags.
 
 XMage runs on JRE 8, so [this link](https://docs.oracle.com/javase/8/docs/technotes/guides/2d/flags.html) should give you the available flags.
 
@@ -113,7 +116,7 @@ More info about [XRender](https://docs.oracle.com/javase/8/docs/technotes/guides
 This is not guaranteed to yield improvements, but it depends on your use-case. 
 If you have a lot of RAM to spare, you can increase the initial heap size for good measure.
 More details about [memory settings](https://stackoverflow.com/a/57839720/8401696):
-* `-Xms1G -Xmx2G`
+* `-Xmx2G`
 
 ## Developer
 

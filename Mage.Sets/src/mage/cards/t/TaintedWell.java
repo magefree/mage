@@ -39,7 +39,7 @@ public final class TaintedWell extends CardImpl {
         // When Tainted Well enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
         // Enchanted land is a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.SWAMP)));
+        this.addAbility(new SimpleStaticAbility(new BecomesBasicLandEnchantedEffect(SubType.SWAMP)));
     }
 
     private TaintedWell(final TaintedWell card) {

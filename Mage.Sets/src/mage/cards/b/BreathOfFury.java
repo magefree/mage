@@ -60,7 +60,7 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When enchanted creature deals combat damage to a player, ");
     }
 
-    public BreathOfFuryAbility(final BreathOfFuryAbility ability) {
+    private BreathOfFuryAbility(final BreathOfFuryAbility ability) {
         super(ability);
     }
 
@@ -95,12 +95,12 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
 
 class BreathOfFuryEffect extends OneShotEffect {
 
-    public BreathOfFuryEffect() {
+    BreathOfFuryEffect() {
         super(Outcome.Benefit);
         staticText = "sacrifice it and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
     }
 
-    public BreathOfFuryEffect(final BreathOfFuryEffect effect) {
+    private BreathOfFuryEffect(final BreathOfFuryEffect effect) {
         super(effect);
     }
 
@@ -120,7 +120,7 @@ class BreathOfFuryEffect extends OneShotEffect {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control that could be enchanted by " + enchantment.getName());
         filter.add(new CanBeEnchantedByPredicate(enchantment));
         Target target = new TargetControlledCreaturePermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         // It's important to check that the creature was successfully sacrificed here. Effects that prevent sacrifice will also prevent Breath of Fury's effect from working.
         // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.
         if (enchantedCreature != null && controller != null

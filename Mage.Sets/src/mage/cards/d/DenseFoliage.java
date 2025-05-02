@@ -24,7 +24,7 @@ public final class DenseFoliage extends CardImpl {
 
         // Creatures can't be the targets of spells.
         CantBeTargetedAllEffect cantTargetEffect = new CantBeTargetedAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, new FilterSpell("spells"), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, cantTargetEffect));
+        this.addAbility(new SimpleStaticAbility(cantTargetEffect));
     }
 
     private DenseFoliage(final DenseFoliage card) {

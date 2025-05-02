@@ -36,8 +36,8 @@ public final class AgentOfShauku extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}, Sacrifice a land: Target creature gets +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

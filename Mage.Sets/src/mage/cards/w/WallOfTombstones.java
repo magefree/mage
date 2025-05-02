@@ -2,11 +2,10 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +31,7 @@ public final class WallOfTombstones extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // At the beginning of your upkeep, change Wall of Tombstones’s base toughness to 1 plus the number of creature cards in your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WallOfTombstonesEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WallOfTombstonesEffect()));
 
     }
 
@@ -48,12 +47,12 @@ public final class WallOfTombstones extends CardImpl {
 
 class WallOfTombstonesEffect extends OneShotEffect {
 
-    public WallOfTombstonesEffect() {
+    WallOfTombstonesEffect() {
         super(Outcome.Detriment);
         this.staticText = "change {this}'s base toughness to 1 plus the number of creature cards in your graveyard";
     }
 
-    public WallOfTombstonesEffect(final WallOfTombstonesEffect effect) {
+    private WallOfTombstonesEffect(final WallOfTombstonesEffect effect) {
         super(effect);
     }
 
@@ -65,7 +64,7 @@ class WallOfTombstonesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int newToughness = CardUtil.overflowInc(1, new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE).calculate(game, source, this));
-        game.addEffect(new SetBasePowerToughnessSourceEffect(null, StaticValue.get(newToughness), Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+        game.addEffect(new SetBaseToughnessSourceEffect(newToughness, Duration.Custom), source);
         return true;
     }
 }

@@ -22,7 +22,7 @@ public final class Boompile extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {T}: Flip a coin. If you win the flip, destroy all nonland permanents.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new FlipCoinEffect(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents"))), new TapSourceCost()));
     }
 

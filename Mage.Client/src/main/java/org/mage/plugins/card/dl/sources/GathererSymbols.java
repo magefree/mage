@@ -8,15 +8,15 @@ import java.io.File;
 import java.util.Iterator;
 
 import static java.lang.String.format;
-import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
- * The class GathererSymbols.
+ * Download: mana symbols download from wizards web size
+ * <p>
+ * Warning, it's outdated source with low quality images. Use scryfall source as primary.
  *
- * @author Clemens Koza
- * @version V0.0 25.08.2010
+ * @author Clemens Koza, JayDi85
  */
 public class GathererSymbols implements Iterable<DownloadJob> {
 
@@ -33,8 +33,9 @@ public class GathererSymbols implements Iterable<DownloadJob> {
             "W/U", "U/B", "B/R", "R/G", "G/W", "W/B", "U/R", "B/G", "R/W", "G/U",
             "W/U/P", "U/B/P", "B/R/P", "R/G/P", "G/W/P", "W/B/P", "U/R/P", "B/G/P", "R/W/P", "G/U/P",
             "2/W", "2/U", "2/B", "2/R", "2/G",
+            "C/W", "C/U", "C/B", "C/R", "C/G",
             "WP", "UP", "BP", "RP", "GP",
-            "X", "S", "T", "Q", "C", "E", "P"};
+            "X", "S", "T", "Q", "C", "E", "H", "P"};
     private static final int minNumeric = 0, maxNumeric = 16;
 
     public GathererSymbols() {
@@ -98,7 +99,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                             case "GWP":
                             case "RGP":
                             case "RWP":
-                            case "P":
+                            case "H":
                                 // need replace to medium size
                                 modSizeIndex = 1;
                                 break;
@@ -118,14 +119,13 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                         case "S":
                             symbol = "snow";
                             break;
-                        case "P":
-                            symbol = "p";
+                        case "H":
+                            symbol = "h";
                             break;
                     }
 
                     String url = format(urlFmt, sizes[modSizeIndex], symbol);
-
-                    return new DownloadJob(sym, fromURL(url), toFile(dst));
+                    return new DownloadJob(sym, url, toFile(dst), false);
                 }
             }
         };

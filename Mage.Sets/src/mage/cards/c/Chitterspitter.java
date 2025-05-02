@@ -3,7 +3,7 @@ package mage.cards.c;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -19,13 +19,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SquirrelToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -47,10 +45,8 @@ public final class Chitterspitter extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoIfCostPaid(
                         new AddCountersSourceEffect(CounterType.ACORN.createInstance()),
-                        new SacrificeTargetCost(new TargetControlledPermanent(filter))
-                ),
-                TargetController.YOU,
-                false
+                        new SacrificeTargetCost(filter)
+                )
         ));
 
         // Squirrels you control get +1/+1 for each acorn counter on Chitterspitter.

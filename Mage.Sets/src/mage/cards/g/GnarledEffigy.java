@@ -23,7 +23,7 @@ public final class GnarledEffigy extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {4}, {tap}: Put a -1/-1 counter on target creature.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.M1M1.createInstance()),
                 new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());

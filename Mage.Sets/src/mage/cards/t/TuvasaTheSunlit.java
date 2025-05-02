@@ -11,7 +11,7 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -43,7 +43,6 @@ public final class TuvasaTheSunlit extends CardImpl {
         DynamicValue value
                 = new PermanentsOnBattlefieldCount(filter);
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(
                         value, value, Duration.WhileOnBattlefield
                 ).setText("{this} gets +1/+1 for each enchantment you control")
@@ -69,18 +68,12 @@ public final class TuvasaTheSunlit extends CardImpl {
 
 class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
-
     public TuvasaTheSunlitTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                filter, false, SetTargetPointer.SPELL);
+                StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false, SetTargetPointer.SPELL);
     }
 
-    public TuvasaTheSunlitTriggeredAbility(final TuvasaTheSunlitTriggeredAbility ability) {
+    private TuvasaTheSunlitTriggeredAbility(final TuvasaTheSunlitTriggeredAbility ability) {
         super(ability);
     }
 

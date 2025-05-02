@@ -24,7 +24,7 @@ public class UnpleasantDiscovery extends CardImpl {
                 .setText(" and mills two cards"));
     }
 
-    public UnpleasantDiscovery(final UnpleasantDiscovery card) {
+    private UnpleasantDiscovery(final UnpleasantDiscovery card) {
         super(card);
     }
 

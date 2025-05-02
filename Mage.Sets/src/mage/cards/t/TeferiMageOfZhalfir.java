@@ -35,10 +35,10 @@ public final class TeferiMageOfZhalfir extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Creature cards you own that aren't on the battlefield have flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeferiMageOfZhalfirAddFlashEffect()));
+        this.addAbility(new SimpleStaticAbility(new TeferiMageOfZhalfirAddFlashEffect()));
 
         // Each opponent can cast spells only any time they could cast a sorcery.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeferiMageOfZhalfirReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new TeferiMageOfZhalfirReplacementEffect()));
 
     }
 
@@ -54,12 +54,12 @@ public final class TeferiMageOfZhalfir extends CardImpl {
 
 class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
 
-    public TeferiMageOfZhalfirAddFlashEffect() {
+    TeferiMageOfZhalfirAddFlashEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Creature cards you own that aren't on the battlefield have flash";
     }
 
-    public TeferiMageOfZhalfirAddFlashEffect(final TeferiMageOfZhalfirAddFlashEffect effect) {
+    private TeferiMageOfZhalfirAddFlashEffect(final TeferiMageOfZhalfirAddFlashEffect effect) {
         super(effect);
     }
 
@@ -117,7 +117,7 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
         staticText = "Each opponent can cast spells only any time they could cast a sorcery";
     }
 
-    TeferiMageOfZhalfirReplacementEffect(final TeferiMageOfZhalfirReplacementEffect effect) {
+    private TeferiMageOfZhalfirReplacementEffect(final TeferiMageOfZhalfirReplacementEffect effect) {
         super(effect);
     }
 
@@ -142,11 +142,6 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
             return !game.canPlaySorcery(event.getPlayerId());
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

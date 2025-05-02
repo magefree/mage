@@ -3,7 +3,6 @@ package mage.cards.h;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -29,7 +28,7 @@ public final class Hivestone extends CardImpl {
         // Creatures you control are Slivers in addition to their other creature types.
         Effect effect = new BecomesSubtypeAllEffect(Duration.WhileOnBattlefield, Arrays.asList(SubType.SLIVER), filter, false);
         effect.setText("Creatures you control are Slivers in addition to their other creature types");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private Hivestone(final Hivestone card) {
@@ -37,7 +36,7 @@ public final class Hivestone extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public Hivestone copy() {
         return new Hivestone(this);
     }
 

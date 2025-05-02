@@ -1,8 +1,7 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,20 +9,13 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class Drought extends CardImpl {
@@ -32,13 +24,13 @@ public final class Drought extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // At the beginning of your upkeep, sacrifice Drought unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}"))));
 
         // Spells cost an additional "Sacrifice a Swamp" to cast for each black mana symbol in their mana costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DroughtAdditionalCostEffect(true)));
+        this.addAbility(new SimpleStaticAbility(new DroughtAdditionalCostEffect(true)));
 
         // Activated abilities cost an additional "Sacrifice a Swamp" to activate for each black mana symbol in their activation costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DroughtAdditionalCostEffect(false)));
+        this.addAbility(new SimpleStaticAbility(new DroughtAdditionalCostEffect(false)));
     }
 
     private Drought(final Drought card) {
@@ -66,7 +58,7 @@ class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
         this.appliesToSpells = appliesToSpells;
     }
 
-    DroughtAdditionalCostEffect(DroughtAdditionalCostEffect effect) {
+    private DroughtAdditionalCostEffect(final DroughtAdditionalCostEffect effect) {
         super(effect);
         appliesToSpells = effect.appliesToSpells;
     }
@@ -74,16 +66,14 @@ class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int blackSymbols = abilityToModify.getManaCosts().getMana().getBlack();
-        TargetControlledPermanent target = new TargetControlledPermanent(blackSymbols, blackSymbols, filter, true);
-        target.setRequired(false);
-        abilityToModify.addCost(new SacrificeTargetCost(target));
+        abilityToModify.addCost(new SacrificeTargetCost(blackSymbols, filter));
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return (appliesToSpells && abilityToModify.getAbilityType() == AbilityType.SPELL)
-                || (!appliesToSpells && (abilityToModify.getAbilityType() == AbilityType.ACTIVATED || abilityToModify.getAbilityType() == AbilityType.MANA));
+                || (!appliesToSpells && abilityToModify.isActivatedAbility());
     }
 
     @Override

@@ -32,7 +32,7 @@ public final class SalvageTitan extends CardImpl {
         this.toughness = new MageInt(4);
 
         // You may sacrifice three artifacts rather than pay Salvage Titan's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledArtifactPermanent("artifacts"), true))));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(3, StaticFilters.FILTER_PERMANENT_ARTIFACTS)));
 
         // Exile three artifact cards from your graveyard: Return Salvage Titan from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(3, StaticFilters.FILTER_CARD_ARTIFACTS))));

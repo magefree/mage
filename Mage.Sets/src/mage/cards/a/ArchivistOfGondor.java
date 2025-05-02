@@ -1,11 +1,12 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,11 +45,11 @@ public final class ArchivistOfGondor extends CardImpl {
                         SetTargetPointer.NONE, true
                 ), (game, source) -> game.getMonarchId() == null, "When your commander " +
                 "deals combat damage to a player, if there is no monarch, you become the monarch."
-        ));
+        ).addHint(MonarchHint.instance));
 
         // At the beginning of the monarch's end step, that player draws a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardTargetEffect(1), TargetController.MONARCH, false
+                TargetController.MONARCH, new DrawCardTargetEffect(1), false
         ));
     }
 

@@ -6,7 +6,6 @@ import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.players.Player;
 
 import java.util.Objects;
 
@@ -24,8 +23,7 @@ public enum CorruptedCondition implements Condition {
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .map(Player::getCounters)
-                .anyMatch(counters -> counters.getCount(CounterType.POISON) >= 3);
+                .anyMatch(player -> player.getCountersCount(CounterType.POISON) >= 3);
     }
 
     @Override

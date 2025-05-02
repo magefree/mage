@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,7 +33,7 @@ public final class SparkFiend extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SparkFiendEffect(), false));
 
         // At the beginning of your upkeep, roll two six-sided dice. If you rolled 7, sacrifice Spark Fiend. If you roll the noted total, don't roll dice for Spark Fiend during any of your following upkeeps. Otherwise, do nothing.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SparkFiendUpkeepEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SparkFiendUpkeepEffect()));
     }
 
     private SparkFiend(final SparkFiend card) {
@@ -49,12 +48,12 @@ public final class SparkFiend extends CardImpl {
 
 class SparkFiendEffect extends OneShotEffect {
 
-    public SparkFiendEffect() {
+    SparkFiendEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "roll two six-sided dice. If you rolled 2, 3, or 12, sacrifice Spark Fiend. If you rolled 7 or 11, don't roll dice for Spark Fiend during any of your following upkeeps. If you rolled any other total, note that total";
     }
 
-    public SparkFiendEffect(final SparkFiendEffect effect) {
+    private SparkFiendEffect(final SparkFiendEffect effect) {
         super(effect);
     }
 
@@ -92,12 +91,12 @@ class SparkFiendEffect extends OneShotEffect {
 
 class SparkFiendUpkeepEffect extends OneShotEffect {
 
-    public SparkFiendUpkeepEffect() {
+    SparkFiendUpkeepEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "roll two six-sided dice. If you rolled 7, sacrifice Spark Fiend. If you roll the noted total, don't roll dice for Spark Fiend during any of your following upkeeps. Otherwise, do nothing";
     }
 
-    public SparkFiendUpkeepEffect(final SparkFiendUpkeepEffect effect) {
+    private SparkFiendUpkeepEffect(final SparkFiendUpkeepEffect effect) {
         super(effect);
     }
 

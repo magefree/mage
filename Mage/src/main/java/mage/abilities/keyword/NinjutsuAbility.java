@@ -54,7 +54,7 @@ public class NinjutsuAbility extends ActivatedAbilityImpl {
     }
 
     public NinjutsuAbility(Cost cost, boolean commander) {
-        super(commander ? Zone.ALL : Zone.HAND, new NinjutsuEffect(), cost);
+        super(commander ? Zone.ALL : Zone.HAND, new NinjutsuEffect(commander), cost);
         this.addCost(new RevealNinjutsuCardCost(commander));
         this.addCost(new ReturnAttackerToHandTargetCost());
         this.commander = commander;
@@ -84,14 +84,18 @@ public class NinjutsuAbility extends ActivatedAbilityImpl {
 
 class NinjutsuEffect extends OneShotEffect {
 
-    public NinjutsuEffect() {
+    private final boolean commander;
+
+    NinjutsuEffect(boolean commander) {
         super(Outcome.PutCreatureInPlay);
+        this.commander = commander;
         this.staticText = "Put this card onto the battlefield "
                 + "from your hand tapped and attacking";
     }
 
-    protected NinjutsuEffect(final NinjutsuEffect effect) {
+    private NinjutsuEffect(final NinjutsuEffect effect) {
         super(effect);
+        this.commander = effect.commander;
     }
 
     @Override
@@ -102,11 +106,12 @@ class NinjutsuEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Card card = game.getCard(source.getSourceId());
+        if (controller == null || card == null) {
             return false;
         }
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
+        Zone cardZone = game.getState().getZone(card.getId());
+        if (cardZone == Zone.HAND || (commander && cardZone == Zone.COMMAND)) {
             controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
@@ -144,12 +149,13 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
     public ReturnAttackerToHandTargetCost(ReturnAttackerToHandTargetCost cost) {
         super(cost);
+        this.defendingPlayerId = cost.defendingPlayerId;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : targets.get(0).getTargets()) {
+        if (this.getTargets().choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 Player controller = game.getPlayer(controllerId);
                 if (permanent == null
@@ -165,7 +171,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

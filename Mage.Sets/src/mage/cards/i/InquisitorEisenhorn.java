@@ -36,7 +36,7 @@ public final class InquisitorEisenhorn extends CardImpl {
 
         // You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or
         // sorcery card this way, create Cherubael, a legendary 4/4 black Demon creature token with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InquisitorEisenhornReplacementEffect()), new CardsAmountDrawnThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new InquisitorEisenhornReplacementEffect()), new CardsAmountDrawnThisTurnWatcher());
 
         // Whenever Inquisitor Eisenhorn deals combat damage to a player, investigate that many times.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
@@ -57,13 +57,13 @@ public final class InquisitorEisenhorn extends CardImpl {
 
 class InquisitorEisenhornReplacementEffect extends ReplacementEffectImpl {
 
-    public InquisitorEisenhornReplacementEffect() {
+    InquisitorEisenhornReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         this.staticText = "You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or " +
                 "sorcery card this way, create Cherubael, a legendary 4/4 black Demon creature token with flying";
     }
 
-    public InquisitorEisenhornReplacementEffect(final InquisitorEisenhornReplacementEffect effect) {
+    private InquisitorEisenhornReplacementEffect(final InquisitorEisenhornReplacementEffect effect) {
         super(effect);
     }
 

@@ -27,7 +27,7 @@ public final class UramiToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected UramiToken(final UramiToken token) {
+    private UramiToken(final UramiToken token) {
         super(token);
     }
 

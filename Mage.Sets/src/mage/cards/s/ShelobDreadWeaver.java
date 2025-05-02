@@ -103,7 +103,7 @@ class ShelobDreadWeaverExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (player == null || permanent == null || card == null) {
             return false;
         }
@@ -122,7 +122,7 @@ class ShelobDreadWeaverCost extends CostImpl {
         this.text = "Put a creature card exiled with {this} into its owner's graveyard";
     }
 
-    public ShelobDreadWeaverCost(ShelobDreadWeaverCost cost) {
+    private ShelobDreadWeaverCost(final ShelobDreadWeaverCost cost) {
         super(cost);
     }
 
@@ -131,7 +131,7 @@ class ShelobDreadWeaverCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             TargetCardInExile target = new TargetCardInExile(new FilterCreatureCard(), CardUtil.getCardExileZoneId(game, ability));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
             if (cards != null
                     && !cards.isEmpty()
@@ -169,7 +169,7 @@ enum ShelobDreadWeaverAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         ability.addTarget(new TargetCardInExile(filter, CardUtil.getExileZoneId(game, ability)));

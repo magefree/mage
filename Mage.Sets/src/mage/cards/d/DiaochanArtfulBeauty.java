@@ -56,7 +56,7 @@ class DiaochanArtfulBeautyDestroyEffect extends OneShotEffect {
         this.staticText = "Destroy target creature of your choice, then destroy target creature of an opponent's choice";
     }
 
-    DiaochanArtfulBeautyDestroyEffect(final DiaochanArtfulBeautyDestroyEffect effect) {
+    private DiaochanArtfulBeautyDestroyEffect(final DiaochanArtfulBeautyDestroyEffect effect) {
         super(effect);
     }
 

@@ -40,7 +40,7 @@ public final class VolcanicStrength extends CardImpl {
         // Enchanted creature gets +2/+2 and has mountainwalk.
         Effect effect = new GainAbilityAttachedEffect(new MountainwalkAbility(), AttachmentType.AURA);
         effect.setText("and has mountainwalk");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));
         ability.addEffect(effect);
         this.addAbility(ability);
     }

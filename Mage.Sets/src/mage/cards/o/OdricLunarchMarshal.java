@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.*;
@@ -29,7 +29,7 @@ public final class OdricLunarchMarshal extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of each combat, creatures you control gain first strike until end of turn if a creature you control has first strike. The same is true for flying, deathtouch, double strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new OdricLunarchMarshalEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new OdricLunarchMarshalEffect(), false));
     }
 
     private OdricLunarchMarshal(final OdricLunarchMarshal card) {
@@ -80,7 +80,7 @@ class OdricLunarchMarshalEffect extends OneShotEffect {
         this.staticText = "creatures you control gain first strike until end of turn if a creature you control has first strike. The same is true for flying, deathtouch, double strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance.";
     }
 
-    OdricLunarchMarshalEffect(final OdricLunarchMarshalEffect effect) {
+    private OdricLunarchMarshalEffect(final OdricLunarchMarshalEffect effect) {
         super(effect);
     }
 

@@ -39,7 +39,7 @@ public final class SphinxOfTheChimes extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Discard two nonland cards with the same name: Draw four cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(4), new DiscardTwoNonlandCardsWithTheSameNameCost());
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(4), new DiscardTwoNonlandCardsWithTheSameNameCost());
         this.addAbility(ability);
 
     }
@@ -60,7 +60,7 @@ class DiscardTwoNonlandCardsWithTheSameNameCost extends DiscardTargetCost {
         super(new TargetTwoNonLandCardsWithSameNameInHand());
     }
 
-    public DiscardTwoNonlandCardsWithTheSameNameCost(DiscardTwoNonlandCardsWithTheSameNameCost cost) {
+    private DiscardTwoNonlandCardsWithTheSameNameCost(final DiscardTwoNonlandCardsWithTheSameNameCost cost) {
         super(cost);
     }
 
@@ -77,7 +77,7 @@ class TargetTwoNonLandCardsWithSameNameInHand extends TargetCardInHand {
         super(2, 2, new FilterNonlandCard("nonland cards with the same name"));
     }
 
-    public TargetTwoNonLandCardsWithSameNameInHand(final TargetTwoNonLandCardsWithSameNameInHand target) {
+    private TargetTwoNonLandCardsWithSameNameInHand(final TargetTwoNonLandCardsWithSameNameInHand target) {
         super(target);
     }
 

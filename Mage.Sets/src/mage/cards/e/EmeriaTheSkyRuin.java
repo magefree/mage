@@ -62,7 +62,7 @@ class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public EmeriaTheSkyRuinTriggeredAbility(final EmeriaTheSkyRuinTriggeredAbility ability) {
+    private EmeriaTheSkyRuinTriggeredAbility(final EmeriaTheSkyRuinTriggeredAbility ability) {
         super(ability);
     }
 

@@ -39,7 +39,7 @@ public class ZoriiBliss extends CardImpl {
         this.addAbility(attacksTriggeredAbility);
     }
 
-    public ZoriiBliss(final ZoriiBliss card) {
+    private ZoriiBliss(final ZoriiBliss card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class HeirloomBlade extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 1)));
 
         // Whenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it.
         // Put that card into your hand and the rest on the bottom of your library in a random order.
@@ -56,13 +56,13 @@ public final class HeirloomBlade extends CardImpl {
 
 class HeirloomBladeEffect extends OneShotEffect {
 
-    public HeirloomBladeEffect() {
+    HeirloomBladeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. "
                 + "Put that card into your hand and the rest on the bottom of your library in a random order";
     }
 
-    public HeirloomBladeEffect(final HeirloomBladeEffect effect) {
+    private HeirloomBladeEffect(final HeirloomBladeEffect effect) {
         super(effect);
     }
 

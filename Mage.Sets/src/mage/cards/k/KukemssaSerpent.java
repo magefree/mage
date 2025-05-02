@@ -42,11 +42,11 @@ public final class KukemssaSerpent extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Kukemssa Serpent can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
 
         // {U}, Sacrifice an Island: Target land an opponent controls becomes an Island until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.ISLAND), new ManaCostsImpl<>("{U}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filterControlledLand, true)));
+        Ability ability = new SimpleActivatedAbility(new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.ISLAND), new ManaCostsImpl<>("{U}"));
+        ability.addCost(new SacrificeTargetCost(filterControlledLand));
         ability.addTarget(new TargetLandPermanent(filterOpponentLand));
         this.addAbility(ability);
 

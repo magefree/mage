@@ -53,12 +53,12 @@ public final class TrevaTheRenewer extends CardImpl {
 
 class TrevaTheRenewerEffect extends OneShotEffect {
 
-    public TrevaTheRenewerEffect() {
+    TrevaTheRenewerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a color, then you gain 1 life for each permanent of that color.";
     }
 
-    public TrevaTheRenewerEffect(final TrevaTheRenewerEffect effect) {
+    private TrevaTheRenewerEffect(final TrevaTheRenewerEffect effect) {
         super(effect);
     }
 

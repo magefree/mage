@@ -36,10 +36,10 @@ public final class EnclaveCryptologist extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}{U}")));
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new TapSourceCost());
         Abilities<Ability> abilities1 = new AbilitiesImpl<>(ability);
 
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
         Abilities<Ability> abilities2 = new AbilitiesImpl<>(ability);
 
         this.addAbilities(LevelerCardBuilder.construct(
@@ -49,7 +49,7 @@ public final class EnclaveCryptologist extends LevelerCard {
         setMaxLevelCounters(3);
     }
 
-    public EnclaveCryptologist (final EnclaveCryptologist card) {
+    private EnclaveCryptologist(final EnclaveCryptologist card) {
         super(card);
     }
 

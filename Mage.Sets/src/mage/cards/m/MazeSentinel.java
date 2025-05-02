@@ -40,11 +40,11 @@ public final class MazeSentinel extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Multicolored creatures you control have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
     }
 
-    public MazeSentinel (final MazeSentinel card) {
+    private MazeSentinel(final MazeSentinel card) {
         super(card);
     }
 

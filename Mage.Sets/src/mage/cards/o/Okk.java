@@ -29,10 +29,10 @@ public final class Okk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Okk can't attack unless a creature with greater power also attacks.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OkkAttackEffect()));
+        this.addAbility(new SimpleStaticAbility(new OkkAttackEffect()));
 
         // Okk can't block unless a creature with greater power also blocks.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OkkBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new OkkBlockEffect()));
     }
 
     private Okk(final Okk card) {
@@ -54,7 +54,7 @@ class OkkAttackEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless a creature with greater power also attacks";
     }
 
-    public OkkAttackEffect(final OkkAttackEffect effect) {
+    private OkkAttackEffect(final OkkAttackEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class OkkBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block unless a creature with greater power also blocks.";
     }
 
-    public OkkBlockEffect(final OkkBlockEffect effect) {
+    private OkkBlockEffect(final OkkBlockEffect effect) {
         super(effect);
     }
 

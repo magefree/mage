@@ -39,12 +39,12 @@ public final class TimeWarp extends CardImpl {
 
 class TimeWarpEffect extends OneShotEffect {
 
-    public TimeWarpEffect() {
+    TimeWarpEffect() {
         super(Outcome.ExtraTurn);
         staticText = "Target player takes an extra turn after this one";
     }
 
-    public TimeWarpEffect(final TimeWarpEffect effect) {
+    private TimeWarpEffect(final TimeWarpEffect effect) {
         super(effect);
     }
 

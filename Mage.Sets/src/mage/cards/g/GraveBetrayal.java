@@ -2,6 +2,8 @@
 package mage.cards.g;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -53,9 +55,10 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
 
     public GraveBetrayalTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public GraveBetrayalTriggeredAbility(final GraveBetrayalTriggeredAbility ability) {
+    private GraveBetrayalTriggeredAbility(final GraveBetrayalTriggeredAbility ability) {
         super(ability);
     }
 
@@ -92,16 +95,21 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever a creature you don't control dies, return it to the battlefield under your control with an additional +1/+1 counter on it at the beginning of the next end step. That creature is a black Zombie in addition to its other colors and types.";
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class GraveBetrayalEffect extends OneShotEffect {
 
-    public GraveBetrayalEffect() {
+    GraveBetrayalEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = " return the creature to the battlefield under your control with an additional +1/+1 counter. That creature is a black Zombie in addition to its other colors and types";
     }
 
-    public GraveBetrayalEffect(final GraveBetrayalEffect effect) {
+    private GraveBetrayalEffect(final GraveBetrayalEffect effect) {
         super(effect);
     }
 
@@ -114,7 +122,7 @@ class GraveBetrayalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 ContinuousEffect effect = new GraveBetrayalReplacementEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
@@ -125,7 +133,6 @@ class GraveBetrayalEffect extends OneShotEffect {
         }
         return false;
     }
-
 }
 
 class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
@@ -134,7 +141,7 @@ class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    GraveBetrayalReplacementEffect(GraveBetrayalReplacementEffect effect) {
+    private GraveBetrayalReplacementEffect(final GraveBetrayalReplacementEffect effect) {
         super(effect);
     }
 
@@ -146,11 +153,6 @@ class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

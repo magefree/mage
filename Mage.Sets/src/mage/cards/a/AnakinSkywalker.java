@@ -45,13 +45,13 @@ public final class AnakinSkywalker extends CardImpl {
 
         // Sacrifice another creature: Target creature gets -1/-1 until end of turn. Activate this ability only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // If Anakin Skywalker would be destroyed, regenerate, then transform him instead.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnakinSkywalkerEffect()));
+        this.addAbility(new SimpleStaticAbility(new AnakinSkywalkerEffect()));
 
     }
 
@@ -72,7 +72,7 @@ class AnakinSkywalkerEffect extends ReplacementEffectImpl {
         staticText = "If {this} would die, regenerate and transform him instead";
     }
 
-    AnakinSkywalkerEffect(final AnakinSkywalkerEffect effect) {
+    private AnakinSkywalkerEffect(final AnakinSkywalkerEffect effect) {
         super(effect);
     }
 

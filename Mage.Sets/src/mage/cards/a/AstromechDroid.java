@@ -38,7 +38,7 @@ public final class AstromechDroid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target starship creature you control gets +1/+1 and gains vigilance until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(1, 1, Duration.EndOfTurn)
                     .setText("Target starship creature you control gets +1/+1"),
                 new TapSourceCost());

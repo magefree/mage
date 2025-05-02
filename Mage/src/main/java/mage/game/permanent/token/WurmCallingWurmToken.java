@@ -19,7 +19,7 @@ public final class WurmCallingWurmToken extends TokenImpl {
         toughness = new MageInt(0);
     }
 
-    protected WurmCallingWurmToken(final WurmCallingWurmToken token) {
+    private WurmCallingWurmToken(final WurmCallingWurmToken token) {
         super(token);
     }
 

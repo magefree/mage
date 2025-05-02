@@ -1,12 +1,9 @@
 package mage.cards.d;
 
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.common.EntersBattlefieldUntappedTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,14 +23,14 @@ import java.util.UUID;
 public final class DwarvenMine extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent(SubType.MOUNTAIN);
+            = new FilterControlledPermanent(SubType.MOUNTAIN, "other Mountains");
 
     static {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 3);
+    private static final YouControlPermanentCondition condition
+            = new YouControlPermanentCondition(filter, ComparisonType.OR_GREATER, 3);
 
     public DwarvenMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -44,10 +41,7 @@ public final class DwarvenMine extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // Dwarven Mine enters the battlefield tapped unless you control three or more other Mountains.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new TapSourceEffect(), condition),
-                "tapped unless you control three or more other Mountains"
-        ));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // When Dwarven Mine enters the battlefield untapped, create a 1/1 red Dwarf creature token.
         this.addAbility(new EntersBattlefieldUntappedTriggeredAbility(new CreateTokenEffect(new DwarfToken()), false));

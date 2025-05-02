@@ -38,12 +38,12 @@ public final class QuicksilverDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {U}: If target spell has only one target and that target is Quicksilver Dragon, change that spell's target to another creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new QuicksilverDragonEffect(), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new QuicksilverDragonEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
         
         // Morph {4}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{U}")));
     }
 
     private QuicksilverDragon(final QuicksilverDragon card) {
@@ -63,7 +63,7 @@ class QuicksilverDragonEffect extends OneShotEffect {
         this.staticText = "If target spell has only one target and that target is {this}, change that spell's target to another creature";
     }
     
-    QuicksilverDragonEffect(final QuicksilverDragonEffect effect) {
+    private QuicksilverDragonEffect(final QuicksilverDragonEffect effect) {
         super(effect);
     }
     

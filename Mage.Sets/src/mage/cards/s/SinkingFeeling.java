@@ -38,17 +38,17 @@ public final class SinkingFeeling extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
 
         // Enchanted creature has "{1}, Put a -1/-1 counter on this creature: Untap this creature.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{1}"));
+        Ability ability2 = new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl<>("{1}"));
         ability2.addCost(new PutCountersSourceCost(CounterType.M1M1.createInstance()).setText("put a -1/-1 counter on this creature"));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.AURA, Duration.Custom, "Enchanted creature has \"{1}, Put a -1/-1 counter on this creature: Untap this creature.\"")));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability2, AttachmentType.AURA, Duration.Custom, "Enchanted creature has \"{1}, Put a -1/-1 counter on this creature: Untap this creature.\"")));
 
     }
 

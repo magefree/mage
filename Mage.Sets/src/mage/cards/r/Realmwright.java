@@ -33,7 +33,7 @@ public final class Realmwright extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral)));
 
         // Lands you control are the chosen type in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RealmwrightEffect()));
+        this.addAbility(new SimpleStaticAbility(new RealmwrightEffect()));
     }
 
     private Realmwright(final Realmwright card) {
@@ -48,12 +48,12 @@ public final class Realmwright extends CardImpl {
 
 class RealmwrightEffect extends ContinuousEffectImpl {
 
-    public RealmwrightEffect() {
+    RealmwrightEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "Lands you control are the chosen type in addition to their other types";
     }
 
-    public RealmwrightEffect(final RealmwrightEffect effect) {
+    private RealmwrightEffect(final RealmwrightEffect effect) {
         super(effect);
     }
 
@@ -66,6 +66,11 @@ class RealmwrightEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
+        if (choice == null) {
+            discard();
+            return;
+        }
+
         switch (choice) {
             case PLAINS:
                 dependencyTypes.add(DependencyType.BecomePlains);

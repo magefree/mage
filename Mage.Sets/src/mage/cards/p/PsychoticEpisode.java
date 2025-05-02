@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -55,13 +54,13 @@ class PsychoticEpisodeEffect extends OneShotEffect {
         staticText = "Target player reveals their hand and the top card of their library. You choose a card revealed this way. That player puts the chosen card on the bottom of their library.";
     }
 
-    PsychoticEpisodeEffect(final PsychoticEpisodeEffect effect) {
+    private PsychoticEpisodeEffect(final PsychoticEpisodeEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (player != null && controller != null && sourceObject != null) {
@@ -70,14 +69,13 @@ class PsychoticEpisodeEffect extends OneShotEffect {
             Cards options = player.getHand().copy();
             Card topdeck = player.getLibrary().getFromTop(game);
             options.add(topdeck);
-            controller.lookAtCards("Top of Library (Psychotic Episode)", topdeck, game);
+            player.revealCards("Hand: " + sourceObject.getIdName(), player.getHand(), game);
+            player.revealCards("Top of Library: " + sourceObject.getIdName(), new CardsImpl(topdeck), game);
             if (controller.choose(Outcome.Discard, options, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
-                    CardsImpl cards = new CardsImpl();
-                    cards.add(card);
-                    player.revealCards(sourceObject.getIdName(), cards, game);
-                    player.putCardsOnBottomOfLibrary(cards, game, source, true);
+                    game.informPlayers(card.getLogName() + " was chosen.");
+                    player.putCardsOnBottomOfLibrary(card, game, source, true);
                 }
             }
             return true;

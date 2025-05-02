@@ -1,9 +1,9 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -31,11 +31,11 @@ public final class SithSorcerer extends CardImpl {
         // When Sith Sorcerer enters the battlefield, scry 2.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2)));
 
-        // <i>Hate</i> &mdash; When Sith Assassin enters the battlefield, if opponent lost life from source other than combat damage this turn, draw a card.
+        // <i>Hate</i> &mdash; When Sith Sorcerer enters the battlefield, if an opponent lost life from a source other than combat damage this turn, draw a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
+                new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 HateCondition.instance,
-                "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, draw a card.");
+                "<i>Hate</i> &mdash; When {this} dies, if an opponent lost life from a source other than combat damage this turn, draw a card.");
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
 
     }

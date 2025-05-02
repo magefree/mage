@@ -58,7 +58,7 @@ class BoneyardParleyEffect extends OneShotEffect {
                 + "and the rest into their owners' graveyards";
     }
 
-    BoneyardParleyEffect(final BoneyardParleyEffect effect) {
+    private BoneyardParleyEffect(final BoneyardParleyEffect effect) {
         super(effect);
     }
 

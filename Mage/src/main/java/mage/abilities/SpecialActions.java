@@ -1,5 +1,3 @@
-
-
 package mage.abilities;
 
 import java.util.LinkedHashMap;
@@ -7,6 +5,12 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
+ * Special actions to activate at any priority time (GUI has special button to show a special commands list)
+ * <p>
+ * Two types of action:
+ * - mana actions (auto-generated on each mana pay cycle, auto-clean)
+ * - another actions (manual added, manual removed - like one short effects)
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class SpecialActions extends AbilitiesImpl<SpecialAction> {
@@ -28,7 +32,7 @@ public class SpecialActions extends AbilitiesImpl<SpecialAction> {
         LinkedHashMap<UUID, SpecialAction> controlledBy = new LinkedHashMap<>();
         for (SpecialAction action : this) {
             if (action.isControlledBy(controllerId) && action.isManaAction() == manaAction) {
-                controlledBy.put(action.id, action);
+                controlledBy.put(action.getId(), action);
             }
         }
         return controlledBy;

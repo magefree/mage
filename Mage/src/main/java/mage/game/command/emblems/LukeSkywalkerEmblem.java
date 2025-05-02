@@ -19,7 +19,7 @@ public final class LukeSkywalkerEmblem extends Emblem {
     // -6: You get an emblem with "Prevent all damage that would be dealt to you during combat." Exile Luke Skywalker, the Last Jedi.
     public LukeSkywalkerEmblem() {
         super("Emblem Luke Skywalker");
-        this.getAbilities().add(new SimpleStaticAbility(Zone.BATTLEFIELD, new LukeSkywalkerEmblemEffect()));
+        this.getAbilities().add(new SimpleStaticAbility(new LukeSkywalkerEmblemEffect()));
     }
 
     private LukeSkywalkerEmblem(final LukeSkywalkerEmblem card) {

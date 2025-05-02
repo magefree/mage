@@ -2,6 +2,7 @@ package mage.abilities.keyword;
 
 import mage.MageObject;
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.icon.CardIcon;
@@ -9,10 +10,12 @@ import mage.abilities.icon.CardIconImpl;
 import mage.abilities.icon.CardIconType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * an abstract base class for hexproof abilities
@@ -21,11 +24,11 @@ import java.util.*;
  */
 public abstract class HexproofBaseAbility extends SimpleStaticAbility implements MageSingleton {
 
-    HexproofBaseAbility() {
+    protected HexproofBaseAbility() {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public abstract boolean checkObject(MageObject source, Game game);
+    public abstract boolean checkObject(MageObject sourceObject, Ability source, Game game);
 
     public static Set<HexproofBaseAbility> getFromColor(ObjectColor color) {
         Set<HexproofBaseAbility> abilities = new HashSet<>();

@@ -33,8 +33,8 @@ public final class FieryBombardment extends CardImpl {
 
         // Chroma - {2}, Sacrifice a creature: Fiery Bombardment deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.
         Effect effect = new FieryBombardmentEffect();
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{2}"));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetAnyTarget());
         ability.setAbilityWord(AbilityWord.CHROMA);
         this.addAbility(ability);
@@ -53,12 +53,12 @@ public final class FieryBombardment extends CardImpl {
 
 class FieryBombardmentEffect extends OneShotEffect {
 
-    public FieryBombardmentEffect() {
+    FieryBombardmentEffect() {
         super(Outcome.Benefit);
         staticText = "{this} deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.";
     }
 
-    public FieryBombardmentEffect(final FieryBombardmentEffect effect) {
+    private FieryBombardmentEffect(final FieryBombardmentEffect effect) {
         super(effect);
     }
 

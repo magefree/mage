@@ -32,12 +32,12 @@ public final class LatchkeyFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Prowl {2}{U}
-        this.addAbility(new ProwlAbility(this, "{2}{U}"));
+        this.addAbility(new ProwlAbility("{2}{U}"));
 
         // When Latchkey Faerie enters the battlefield, if its prowl cost was paid, draw a card.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ProwlCostWasPaidCondition.instance,
-                "When {this} enters the battlefield, if its prowl cost was paid, draw a card.")
+                "When {this} enters, if its prowl cost was paid, draw a card.")
                 .addHint(ProwlCostWasPaidHint.instance));
 
     }

@@ -1,9 +1,9 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author nickmyers
@@ -25,10 +27,9 @@ public final class BlinkmothUrn extends CardImpl {
     public BlinkmothUrn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // At the beginning of each player's precombat main phase, if
-        // Blinkmoth Urn is untapped, that player adds {1} to their
-        // mana pool for each artifact they control.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new BlinkmothUrnEffect(), TargetController.ANY, false));
+        // At the beginning of each player's precombat main phase, if Blinkmoth Urn is untapped, that player adds {C} for each artifact they control.
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(TargetController.EACH_PLAYER, new BlinkmothUrnEffect(), false)
+                        .withInterveningIf(SourceTappedCondition.UNTAPPED));
     }
 
     private BlinkmothUrn(final BlinkmothUrn card) {
@@ -44,12 +45,12 @@ public final class BlinkmothUrn extends CardImpl {
 
 class BlinkmothUrnEffect extends OneShotEffect {
 
-    public BlinkmothUrnEffect() {
+    BlinkmothUrnEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "if Blinkmoth Urn is untapped, that player adds {C} for each artifact they control";
+        this.staticText = "that player adds {C} for each artifact they control";
     }
 
-    public BlinkmothUrnEffect(final BlinkmothUrnEffect effect) {
+    private BlinkmothUrnEffect(final BlinkmothUrnEffect effect) {
         super(effect);
     }
 
@@ -64,9 +65,9 @@ class BlinkmothUrnEffect extends OneShotEffect {
         FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts you control");
         filter.add(new ControllerIdPredicate(game.getActivePlayerId()));
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null && !sourcePermanent.isTapped()) {
+        if (player != null && sourcePermanent != null) {
             player.getManaPool().addMana(Mana.ColorlessMana(
-                    game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).
+                    game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).
                     size()), game, source, false);
             return true;
         }

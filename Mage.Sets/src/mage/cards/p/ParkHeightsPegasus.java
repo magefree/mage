@@ -53,7 +53,7 @@ public final class ParkHeightsPegasus extends CardImpl {
 
 class ParkHeightsPegasusEffect extends OneShotEffect {
 
-    public ParkHeightsPegasusEffect() {
+    ParkHeightsPegasusEffect() {
         super(Outcome.DrawCard);
         this.staticText = "draw a card if you had two or more creatures enter the battlefield under your control this turn";
     }

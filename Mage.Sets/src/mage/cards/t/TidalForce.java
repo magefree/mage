@@ -4,7 +4,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class TidalForce extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of each upkeep, you may tap or untap target permanent.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new MayTapOrUntapTargetEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new MayTapOrUntapTargetEffect(), false);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

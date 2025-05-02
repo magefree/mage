@@ -36,7 +36,7 @@ public final class Bravado extends CardImpl {
         this.addAbility(ability);
 		
 		// Enchanted creature gets +1/+1 for each other creature you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BravadoBoostEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new BravadoBoostEnchantedEffect()));
     }
 
     private Bravado(final Bravado card) {
@@ -51,12 +51,12 @@ public final class Bravado extends CardImpl {
 
 class BravadoBoostEnchantedEffect extends ContinuousEffectImpl {
 
-    public BravadoBoostEnchantedEffect() {
+    BravadoBoostEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
 		staticText = "Enchanted creature gets +1/+1 for each other creature you control";
     }
 
-    public BravadoBoostEnchantedEffect(final BravadoBoostEnchantedEffect effect) {
+    private BravadoBoostEnchantedEffect(final BravadoBoostEnchantedEffect effect) {
         super(effect);
     }
 

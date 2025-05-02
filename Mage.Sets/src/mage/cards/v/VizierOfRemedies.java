@@ -28,7 +28,7 @@ public final class VizierOfRemedies extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If one or more -1/-1 counters would be put on a creature you control, that many -1/-1 counters minus one are put on it instead.
-        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VizierOfRemediesReplacementEffect()));
+        addAbility(new SimpleStaticAbility(new VizierOfRemediesReplacementEffect()));
 
     }
 
@@ -44,12 +44,12 @@ public final class VizierOfRemedies extends CardImpl {
 
 class VizierOfRemediesReplacementEffect extends ReplacementEffectImpl {
 
-    public VizierOfRemediesReplacementEffect() {
+    VizierOfRemediesReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If one or more -1/-1 counters would be put on a creature you control, that many -1/-1 counters minus one are put on it instead";
     }
 
-    public VizierOfRemediesReplacementEffect(final VizierOfRemediesReplacementEffect effect) {
+    private VizierOfRemediesReplacementEffect(final VizierOfRemediesReplacementEffect effect) {
         super(effect);
     }
 

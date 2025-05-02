@@ -50,7 +50,7 @@ public final class SavingGrace extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SavingGraceReplacementEffect(), false));
 
         // Enchanted creature gets +0/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, 3, Duration.WhileOnBattlefield)));
     }
 
     private SavingGrace(final SavingGrace card) {
@@ -70,7 +70,7 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
         staticText = "all damage that would be dealt this turn to you and permanents you control is dealt to enchanted creature instead.";
     }
 
-    SavingGraceReplacementEffect(final SavingGraceReplacementEffect effect) {
+    private SavingGraceReplacementEffect(final SavingGraceReplacementEffect effect) {
         super(effect);
     }
 
@@ -134,11 +134,6 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class AzorsElocutors extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AzorsElocutorsEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AzorsElocutorsEffect()));
 
         // Whenever a source deals damage to you, remove a filibuster counter from Azor's Elocutors.
         this.addAbility(new AzorsElocutorsTriggeredAbility());
@@ -55,7 +55,7 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a source deals damage to you, ");
     }
 
-    public AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
+    private AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -77,12 +77,12 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
 
 class AzorsElocutorsEffect extends OneShotEffect {
 
-    public AzorsElocutorsEffect() {
+    AzorsElocutorsEffect() {
         super(Outcome.Benefit);
         staticText = "put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game";
     }
 
-    public AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {
+    private AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {
         super(effect);
     }
 

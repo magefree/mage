@@ -51,7 +51,7 @@ public final class KoglaTheTitanApe extends CardImpl {
         // When Kogla, the Titan Ape enters the battlefield, it fights up to one target creature you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect()
                 .setText("it fights up to one target creature you don't control"));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);
 
         // Whenever Kogla attacks, destroy target artifact or enchantment defending player controls.

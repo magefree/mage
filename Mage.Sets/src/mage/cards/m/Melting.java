@@ -6,7 +6,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -21,7 +21,7 @@ public final class Melting extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // All lands are no longer snow.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeltingEffect()));
+        this.addAbility(new SimpleStaticAbility(new MeltingEffect()));
     }
 
     private Melting(final Melting card) {
@@ -36,14 +36,12 @@ public final class Melting extends CardImpl {
 
 class MeltingEffect extends ContinuousEffectImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-
-    public MeltingEffect() {
+    MeltingEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Detriment);
         this.staticText = "All lands are no longer snow";
     }
 
-    public MeltingEffect(final MeltingEffect effect) {
+    private MeltingEffect(final MeltingEffect effect) {
         super(effect);
     }
 
@@ -54,7 +52,7 @@ class MeltingEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game)) {
             permanent.removeSuperType(game, SuperType.SNOW);
         }
         return true;

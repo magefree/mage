@@ -10,6 +10,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.CommanderCardType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterMana;
 import mage.game.Game;
@@ -105,7 +106,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Choice choice = new ChoiceImpl();
+            Choice choice = new ChoiceImpl(false).setManaColorChoice(true);
             choice.setMessage("Pick a mana color");
             for (UUID commanderId : game.getCommandersIds(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)) {
                 Card commander = game.getCard(commanderId);
@@ -132,7 +133,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
-                    if (!controller.choose(outcome, choice, game)) {
+                    if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
                         return mana;
                     }
                 }

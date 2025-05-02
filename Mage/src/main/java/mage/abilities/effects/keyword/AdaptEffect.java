@@ -1,10 +1,8 @@
 package mage.abilities.effects.keyword;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -39,15 +37,7 @@ public class AdaptEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // Verify source object did not change zone and is on the battlefield
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (sourceObject == null) {
-            if (game.getState().getZone(source.getSourceId()).equals(Zone.BATTLEFIELD)
-                    && source.getSourceObjectZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) {
-                sourceObject = game.getPermanent(source.getSourceId());
-            }
-        }
-        Permanent permanent = ((Permanent) sourceObject);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

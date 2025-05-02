@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -20,7 +20,6 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -44,10 +43,10 @@ public final class FruitcakeElemental extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // At the end of your turn, Fruitcake Elemental deals 7 damage to you.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(7), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(7)));
 
         // {3}: Target player gains control of Fruitcake Elemental.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FruitcakeElementalEffect(), new ManaCostsImpl<>("{3}"));
+        Ability ability = new SimpleActivatedAbility(new FruitcakeElementalEffect(), new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetPlayer(1, 1, false));
         this.addAbility(ability);
     }
@@ -64,12 +63,12 @@ public final class FruitcakeElemental extends CardImpl {
 
 class FruitcakeElementalEffect extends OneShotEffect {
 
-    public FruitcakeElementalEffect() {
+    FruitcakeElementalEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player gains control of {this}.";
     }
 
-    public FruitcakeElementalEffect(final FruitcakeElementalEffect effect) {
+    private FruitcakeElementalEffect(final FruitcakeElementalEffect effect) {
         super(effect);
     }
 
@@ -94,11 +93,11 @@ class FruitcakeElementalEffect extends OneShotEffect {
 
 class FruitcakeElementalControlSourceEffect extends ContinuousEffectImpl {
 
-    public FruitcakeElementalControlSourceEffect() {
+    FruitcakeElementalControlSourceEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
-    public FruitcakeElementalControlSourceEffect(final FruitcakeElementalControlSourceEffect effect) {
+    private FruitcakeElementalControlSourceEffect(final FruitcakeElementalControlSourceEffect effect) {
         super(effect);
     }
 

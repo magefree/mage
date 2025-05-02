@@ -5,7 +5,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -38,13 +38,12 @@ public final class MegatronTyrant extends CardImpl {
         this.addAbility(new MoreThanMeetsTheEyeAbility(this, "{1}{R}{W}{B}"));
 
         // Your opponents can't cast spells during combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MegatronTyrantCantCastSpellsEffect()));
+        this.addAbility(new SimpleStaticAbility(new MegatronTyrantCantCastSpellsEffect()));
 
         // At the beginning of your postcombat main phase, you may convert Megatron. If you do, add {C} for each 1 life your opponents have lost this turn.
-        TriggeredAbility trigger = new BeginningOfPostCombatMainTriggeredAbility(
-            new TransformSourceEffect().setText("convert {this}"),
-            TargetController.YOU,
-            true
+        TriggeredAbility trigger = new BeginningOfPostcombatMainTriggeredAbility(
+                TargetController.YOU, new TransformSourceEffect().setText("convert {this}"),
+                true
         );
         trigger.addEffect(
             new DynamicManaEffect(
@@ -81,11 +80,6 @@ class MegatronTyrantCantCastSpellsEffect extends ContinuousRuleModifyingEffectIm
     @Override
     public MegatronTyrantCantCastSpellsEffect copy() {
         return new MegatronTyrantCantCastSpellsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -47,9 +47,7 @@ public final class GeneralTazri extends CardImpl {
         // {W}{U}{B}{R}{G}: Ally creatures you control get +X/+X until end of turn, where X is the number of colors among those creatures.
         DynamicValue xValue = new GeneralTazriColorCount();
         BoostControlledEffect effect = new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(SubType.ALLY, "Ally creatures"), false);
-        effect.setLockedIn(true);
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 effect,
                 new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
 

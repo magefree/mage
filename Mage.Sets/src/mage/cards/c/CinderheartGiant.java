@@ -75,7 +75,7 @@ class CinderheartGiantEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetOpponentsCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.setRandom(true);
         target.chooseTarget(outcome, player.getId(), source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());

@@ -28,13 +28,13 @@ public final class ViashivanDragon extends CardImpl {
         addAbility(FlyingAbility.getInstance());
 
         //{R}: Viashivan Dragon gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
         //{G}: Viashivan Dragon gets +/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G)));
 
     }
 
-    public ViashivanDragon(ViashivanDragon other){
+    private ViashivanDragon(final ViashivanDragon other){
         super(other);
     }
 

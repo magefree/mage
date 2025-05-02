@@ -7,6 +7,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 
+import java.util.UUID;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -39,11 +41,15 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-        if (stackObject != null) {
-            return stackObject.chooseNewTargets(game, source.getControllerId(), forceChange, onlyOneTarget, null);
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            StackObject stackObject = game.getStack().getStackObject(targetId);
+            if (stackObject != null) {
+                stackObject.chooseNewTargets(
+                        game, source.getControllerId(), forceChange, onlyOneTarget, null
+                );
+            }
         }
-        return false;
+        return true;
     }
 
     @Override

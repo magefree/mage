@@ -43,10 +43,10 @@ public final class ThelonOfHavenwood extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each Fungus creature gets +1/+1 for each spore counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThelonOfHavenwoodBoostEffect()));
+        this.addAbility(new SimpleStaticAbility(new ThelonOfHavenwoodBoostEffect()));
 
         // {B}{G}, Exile a Fungus card from a graveyard: Put a spore counter on each Fungus on the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.SPORE.createInstance(), filterPermanent), new ManaCostsImpl<>("{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersAllEffect(CounterType.SPORE.createInstance(), filterPermanent), new ManaCostsImpl<>("{B}{G}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInASingleGraveyard(1, 1, filterCard), "exile a Fungus card from a graveyard"));
         this.addAbility(ability);
     }
@@ -73,7 +73,7 @@ class ThelonOfHavenwoodBoostEffect extends ContinuousEffectImpl {
         staticText = "Each Fungus creature gets +1/+1 for each spore counter on it";
     }
 
-    ThelonOfHavenwoodBoostEffect(final ThelonOfHavenwoodBoostEffect effect) {
+    private ThelonOfHavenwoodBoostEffect(final ThelonOfHavenwoodBoostEffect effect) {
         super(effect);
     }
 

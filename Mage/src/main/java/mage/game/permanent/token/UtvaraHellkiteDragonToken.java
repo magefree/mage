@@ -20,7 +20,7 @@ public final class UtvaraHellkiteDragonToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected UtvaraHellkiteDragonToken(final UtvaraHellkiteDragonToken token) {
+    private UtvaraHellkiteDragonToken(final UtvaraHellkiteDragonToken token) {
         super(token);
     }
 

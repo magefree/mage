@@ -3,7 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -36,7 +35,7 @@ public final class BoardedWindow extends CardImpl {
 
         // At the beginning of each end step, if you were dealt 4 or more damage this turn, exile Boarded Window.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new ExileSourceEffect(), TargetController.ANY, BoardedWindowCondition.instance, false
+                TargetController.ANY, new ExileSourceEffect(), false, BoardedWindowCondition.instance
         ), new DamageDoneWatcher());
     }
 

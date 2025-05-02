@@ -29,7 +29,7 @@ public final class InquisitorsFlail extends CardImpl {
 
         // If equipped creature would deal combat damage, it deals double that damage instead.
         // If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InquisitorsFlailEffect()));
+        this.addAbility(new SimpleStaticAbility(new InquisitorsFlailEffect()));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
@@ -47,13 +47,13 @@ public final class InquisitorsFlail extends CardImpl {
 
 class InquisitorsFlailEffect extends ReplacementEffectImpl {
 
-    public InquisitorsFlailEffect() {
+    InquisitorsFlailEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If equipped creature would deal combat damage, it deals double that damage instead. \n"
                 + "If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead";
     }
 
-    public InquisitorsFlailEffect(final InquisitorsFlailEffect effect) {
+    private InquisitorsFlailEffect(final InquisitorsFlailEffect effect) {
         super(effect);
     }
 
@@ -82,11 +82,6 @@ class InquisitorsFlailEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

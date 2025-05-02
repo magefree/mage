@@ -489,6 +489,7 @@ public class RollDiceTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Box of Free-Range Goblins");
         setDieRollResult(playerA, 3); // normal roll
         setDieRollResult(playerA, 6); // additional roll
+
         // AI must choose max value due good outcome
         aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 

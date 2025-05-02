@@ -35,7 +35,7 @@ public final class BlindSpotGiant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Blind-Spot Giant can't attack or block unless you control another Giant.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CantAttackBlockUnlessConditionSourceEffect(new PermanentsOnTheBattlefieldCondition(filter))));
 
     }

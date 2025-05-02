@@ -7,8 +7,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -21,7 +21,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -41,10 +40,10 @@ public final class Duplicity extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DuplicityEffect(), false));
 
         // At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Duplicity into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuplicityExileHandEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuplicityExileHandEffect(), true));
 
         // At the beginning of your end step, discard a card.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DiscardControllerEffect(1), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardControllerEffect(1)));
 
         // When you lose control of Duplicity, put all cards exiled with Duplicity into their owner's graveyard.
         this.addAbility(new DuplicityEntersBattlefieldAbility(new CreateDelayedTriggeredAbilityEffect(new LoseControlDuplicity())));
@@ -63,12 +62,12 @@ public final class Duplicity extends CardImpl {
 
 class DuplicityEffect extends OneShotEffect {
 
-    public DuplicityEffect() {
+    DuplicityEffect() {
         super(Outcome.Exile);
         staticText = "exile the top five cards of your library face down";
     }
 
-    public DuplicityEffect(final DuplicityEffect effect) {
+    private DuplicityEffect(final DuplicityEffect effect) {
         super(effect);
     }
 
@@ -99,12 +98,12 @@ class DuplicityEffect extends OneShotEffect {
 
 class DuplicityExileHandEffect extends OneShotEffect {
 
-    public DuplicityExileHandEffect() {
+    DuplicityExileHandEffect() {
         super(Outcome.Exile);
         staticText = "you may exile all cards from your hand face down. If you do, put all other cards you own exiled with {this} into your hand";
     }
 
-    public DuplicityExileHandEffect(final DuplicityExileHandEffect effect) {
+    private DuplicityExileHandEffect(final DuplicityExileHandEffect effect) {
         super(effect);
     }
 
@@ -112,16 +111,17 @@ class DuplicityExileHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
-        if (controller != null
-                && sourceObject != null) {
-            if (!controller.getHand().isEmpty()) {
-                UUID exileId = source.getSourceId();
+        if (controller != null && sourceObject != null) {
+            UUID exileId = source.getSourceId();
+            Set<Card> cardsInExile = game.getExile().getExileZone(exileId).getCards(game);
+            if (controller.getHand().isEmpty()) {
+                controller.moveCards(cardsInExile, Zone.HAND, source, game);
+            } else {
                 Set<Card> cardsFromHandToExile = controller.getHand().getCards(game);
                 for (Card card : cardsFromHandToExile) {
                     controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getName());
                     card.setFaceDown(true, game);
                 }
-                Set<Card> cardsInExile = game.getExile().getExileZone(exileId).getCards(game);
                 Set<Card> cardsToReturnToHandFromExile = new HashSet<>();
                 for (Card card : cardsInExile) {
                     if (!cardsFromHandToExile.contains(card)) {
@@ -147,7 +147,7 @@ class LoseControlDuplicity extends DelayedTriggeredAbility {
         super(new PutExiledCardsInOwnersGraveyard(), Duration.EndOfGame, false);
     }
 
-    public LoseControlDuplicity(final LoseControlDuplicity ability) {
+    private LoseControlDuplicity(final LoseControlDuplicity ability) {
         super(ability);
     }
 
@@ -190,7 +190,7 @@ class PutExiledCardsInOwnersGraveyard extends OneShotEffect {
         staticText = " put all cards exiled with {this} into their owner's graveyard.";
     }
 
-    public PutExiledCardsInOwnersGraveyard(final PutExiledCardsInOwnersGraveyard effect) {
+    private PutExiledCardsInOwnersGraveyard(final PutExiledCardsInOwnersGraveyard effect) {
         super(effect);
     }
 
@@ -220,7 +220,7 @@ class DuplicityEntersBattlefieldAbility extends StaticAbility {
         super(Zone.ALL, new EntersBattlefieldEffect(effect, null, null, true, false));
     }
 
-    public DuplicityEntersBattlefieldAbility(final DuplicityEntersBattlefieldAbility ability) {
+    private DuplicityEntersBattlefieldAbility(final DuplicityEntersBattlefieldAbility ability) {
         super(ability);
     }
 

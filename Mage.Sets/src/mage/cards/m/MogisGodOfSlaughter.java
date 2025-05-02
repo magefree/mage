@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
@@ -15,8 +15,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -42,8 +41,8 @@ public final class MogisGodOfSlaughter extends CardImpl {
 
         // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new MogisGodOfSlaughterEffect(),
-                TargetController.OPPONENT, false, true
+                TargetController.OPPONENT, new MogisGodOfSlaughterEffect(),
+                false
         );
         this.addAbility(ability);
     }
@@ -83,8 +82,7 @@ class MogisGodOfSlaughterEffect extends OneShotEffect {
         if (game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, game.getActivePlayerId(), game) == 0) {
             return player.damage(2, source.getSourceId(), source, game) > 0;
         }
-        TargetPermanent target = new TargetControlledCreaturePermanent(1);
-        target.setNotTarget(true);
+        TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
         if (target.canChoose(player.getId(), source, game)
                 && player.chooseUse(Outcome.Detriment, "Sacrifice a creature to prevent 2 damage?", source, game)
                 && player.choose(Outcome.Sacrifice, target, source, game)) {

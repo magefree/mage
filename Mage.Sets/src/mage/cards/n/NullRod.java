@@ -22,7 +22,7 @@ public final class NullRod extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Activated abilities of artifacts can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NullRodCantActivateEffect()));
+        this.addAbility(new SimpleStaticAbility(new NullRodCantActivateEffect()));
     }
 
     private NullRod(final NullRod card) {
@@ -37,12 +37,12 @@ public final class NullRod extends CardImpl {
 
 class NullRodCantActivateEffect extends RestrictionEffect {
 
-    public NullRodCantActivateEffect() {
+    NullRodCantActivateEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Activated abilities of artifacts can't be activated";
     }
 
-    public NullRodCantActivateEffect(final NullRodCantActivateEffect effect) {
+    private NullRodCantActivateEffect(final NullRodCantActivateEffect effect) {
         super(effect);
     }
 

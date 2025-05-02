@@ -14,9 +14,10 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SearchLibraryPutInGraveyardEffect extends SearchEffect {
 
-    public SearchLibraryPutInGraveyardEffect() {
+    public SearchLibraryPutInGraveyardEffect(boolean textThatCard) {
         super(new TargetCardInLibrary(StaticFilters.FILTER_CARD), Outcome.Neutral);
-        staticText = "search your library for a card, put that card into your graveyard, then shuffle";
+        staticText = "search your library for a card, put " + (textThatCard ? "that card" : "it")
+                + " into your graveyard, then shuffle";
     }
 
     protected SearchLibraryPutInGraveyardEffect(final SearchLibraryPutInGraveyardEffect effect) {

@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 
 import java.util.UUID;
 
@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class MycosynthGolem extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Artifact creature spells you cast");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("Artifact creature spells you cast");
 
     static {
         filter.add(CardType.ARTIFACT.getPredicate());
@@ -36,7 +36,7 @@ public final class MycosynthGolem extends CardImpl {
         this.addAbility(new AffinityForArtifactsAbility());
 
         // Artifact creature spells you cast have affinity for artifacts.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new AffinityForArtifactsAbility(), filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new AffinityForArtifactsAbility(), filter)));
 
     }
 

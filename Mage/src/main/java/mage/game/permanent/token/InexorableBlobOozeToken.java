@@ -19,7 +19,7 @@ public final class InexorableBlobOozeToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected InexorableBlobOozeToken(final InexorableBlobOozeToken token) {
+    private InexorableBlobOozeToken(final InexorableBlobOozeToken token) {
         super(token);
     }
 

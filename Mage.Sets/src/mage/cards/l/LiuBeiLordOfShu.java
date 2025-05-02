@@ -43,7 +43,7 @@ public final class LiuBeiLordOfShu extends CardImpl {
         // Horsemanship
         this.addAbility(HorsemanshipAbility.getInstance());
         // Liu Bei, Lord of Shu gets +2/+2 as long as you control a permanent named Guan Yu, Sainted Warrior or a permanent named Zhang Fei, Fierce Warrior.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
             new PermanentsOnTheBattlefieldCondition(filter),
             "{this} gets +2/+2 as long as you control a permanent named Guan Yu, Sainted Warrior or a permanent named Zhang Fei, Fierce Warrior")));

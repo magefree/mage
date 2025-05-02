@@ -97,7 +97,7 @@ class QueenKaylaBinKroogTarget extends TargetCard {
 
     QueenKaylaBinKroogTarget() {
         super(0, 3, Zone.ALL, filter);
-        this.setNotTarget(true);
+        this.withNotTarget(true);
     }
 
     private QueenKaylaBinKroogTarget(final QueenKaylaBinKroogTarget target) {

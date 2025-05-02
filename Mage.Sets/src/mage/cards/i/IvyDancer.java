@@ -31,7 +31,7 @@ public final class IvyDancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Target creature gains forestwalk until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(new ForestwalkAbility(false), Duration.EndOfTurn),
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

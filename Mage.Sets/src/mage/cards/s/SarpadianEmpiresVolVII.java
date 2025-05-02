@@ -35,7 +35,7 @@ public final class SarpadianEmpiresVolVII extends CardImpl {
         // As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
         this.addAbility(new AsEntersBattlefieldAbility(new SarpadianEmpiresChooseTokenEffect()));
         // {3}, {T}: Create a 1/1 creature token of the chosen color and type.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SarpadianEmpiresCreateSelectedTokenEffect(), new ManaCostsImpl<>("{3}"));
+        Ability ability = new SimpleActivatedAbility(new SarpadianEmpiresCreateSelectedTokenEffect(), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -52,12 +52,12 @@ public final class SarpadianEmpiresVolVII extends CardImpl {
 
 class SarpadianEmpiresChooseTokenEffect extends OneShotEffect {
 
-    public SarpadianEmpiresChooseTokenEffect() {
+    SarpadianEmpiresChooseTokenEffect() {
         super(Outcome.Neutral);
         this.staticText = "choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling";
     }
 
-    public SarpadianEmpiresChooseTokenEffect(final SarpadianEmpiresChooseTokenEffect effect) {
+    private SarpadianEmpiresChooseTokenEffect(final SarpadianEmpiresChooseTokenEffect effect) {
         super(effect);
     }
 
@@ -90,12 +90,12 @@ class SarpadianEmpiresChooseTokenEffect extends OneShotEffect {
 
 class SarpadianEmpiresCreateSelectedTokenEffect extends OneShotEffect {
 
-    public SarpadianEmpiresCreateSelectedTokenEffect() {
+    SarpadianEmpiresCreateSelectedTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a 1/1 creature token of the chosen color and type";
     }
 
-    public SarpadianEmpiresCreateSelectedTokenEffect(final SarpadianEmpiresCreateSelectedTokenEffect effect) {
+    private SarpadianEmpiresCreateSelectedTokenEffect(final SarpadianEmpiresCreateSelectedTokenEffect effect) {
         super(effect);
     }
 

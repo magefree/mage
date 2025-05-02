@@ -40,7 +40,7 @@ public final class BloodswornSteward extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Commander creatures you control get +2/+2 and have haste.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter));
         Effect effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("and have haste");
         ability.addEffect(effect);

@@ -33,7 +33,7 @@ public final class EvilPresence extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted land is a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.SWAMP)));
+        this.addAbility(new SimpleStaticAbility(new BecomesBasicLandEnchantedEffect(SubType.SWAMP)));
     }
 
     private EvilPresence(final EvilPresence card) {

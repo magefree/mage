@@ -36,7 +36,7 @@ public final class SzadekLordOfSecrets extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // If Szadek, Lord of Secrets would deal combat damage to a player, instead put that many +1/+1 counters on Szadek and that player puts that many cards from the top of their library into their graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SzadekLordOfSecretsEffect()));
+        this.addAbility(new SimpleStaticAbility(new SzadekLordOfSecretsEffect()));
 
     }
 
@@ -57,7 +57,7 @@ class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
         staticText = "If {this} would deal combat damage to a player, instead put that many +1/+1 counters on {this} and that player mills that many cards";
     }
 
-    SzadekLordOfSecretsEffect(final SzadekLordOfSecretsEffect effect) {
+    private SzadekLordOfSecretsEffect(final SzadekLordOfSecretsEffect effect) {
         super(effect);
     }
 
@@ -92,11 +92,6 @@ class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

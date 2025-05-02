@@ -53,7 +53,7 @@ class DeadlyBrewEffect extends OneShotEffect {
 
     DeadlyBrewEffect() {
         super(Outcome.Benefit);
-        staticText = "each player sacrifices a creature or planeswalker. If you sacrificed a permanent this way, " +
+        staticText = "each player sacrifices a creature or planeswalker of their choice. If you sacrificed a permanent this way, " +
                 "you may return another permanent card from your graveyard to your hand";
     }
 
@@ -80,7 +80,7 @@ class DeadlyBrewEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!target.canChoose(playerId, source, game)) {
                 continue;
             }

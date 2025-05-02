@@ -29,7 +29,12 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
     }
 
     @Override
-    public void removeAllListener() {
+    public void removeListener(Listener<PlayerQueryEvent> listener) {
+        dispatcher.removeListener(listener);
+    }
+
+    @Override
+    public void removeAllListeners() {
         dispatcher.removeAllListener();
     }
 

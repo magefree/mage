@@ -27,7 +27,7 @@ public final class DreamHalls extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
 
         // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DreamHallsEffect()));
+        this.addAbility(new SimpleStaticAbility(new DreamHallsEffect()));
     }
 
     private DreamHalls(final DreamHalls card) {
@@ -56,7 +56,7 @@ class DreamHallsEffect extends ContinuousEffectImpl {
         staticText = "Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell";
     }
 
-    public DreamHallsEffect(final DreamHallsEffect effect) {
+    private DreamHallsEffect(final DreamHallsEffect effect) {
         super(effect);
     }
 

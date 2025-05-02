@@ -35,12 +35,12 @@ public final class DeepFreeze extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature has base power and toughness 0/4, has defender, loses all other abilities, and is a blue Wall in addition to its other colors and types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BecomesCreatureAttachedEffect(new DeepFreezeToken(),
                         "Enchanted creature has base power and toughness 0/4, has defender, loses all other abilities, and is a blue Wall in addition to its other colors and types",
                         Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES)
@@ -70,7 +70,7 @@ class DeepFreezeToken extends TokenImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public DeepFreezeToken(final DeepFreezeToken token) {
+    private DeepFreezeToken(final DeepFreezeToken token) {
         super(token);
     }
 

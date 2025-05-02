@@ -35,9 +35,9 @@ public final class DoomCannon extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Sacrifice)));
 
         // {3}, {T}, Sacrifice a creature of the chosen type: Doom Cannon deals 3 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new DoomCannonFilter())));
+        ability.addCost(new SacrificeTargetCost(new DoomCannonFilter()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
@@ -58,7 +58,7 @@ class DoomCannonFilter extends FilterControlledCreaturePermanent {
         super("a creature of the chosen type");
     }
 
-    public DoomCannonFilter(final DoomCannonFilter filter) {
+    private DoomCannonFilter(final DoomCannonFilter filter) {
         super(filter);
     }
 

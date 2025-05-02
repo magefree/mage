@@ -11,6 +11,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,17 +39,17 @@ public final class CrownOfGondor extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each creature you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(xValue, xValue)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, xValue)));
 
-        // When a legendary creature enters the battlefield under your control, if there is no monarch, you become the monarch.
+        // When a legendary creature you control enters, if there is no monarch, you become the monarch.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(
                         new BecomesMonarchSourceEffect(),
                         StaticFilters.FILTER_CREATURE_LEGENDARY
                 ),
                 MonarchIsNotSetCondition.instance,
-                "When a legendary creature enters the battlefield under your control, if there is no monarch, you become the monarch."
-        ));
+                "When a legendary creature you control enters, if there is no monarch, you become the monarch."
+        ).addHint(MonarchHint.instance));
 
         // Equip {4}. This ability costs {3} less to activate if you're the monarch.
         EquipAbility equip = new EquipAbility(4, false);
@@ -71,7 +72,7 @@ enum CrownOfGondorAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         if (MonarchIsSourceControllerCondition.instance.apply(game, ability)) {
             CardUtil.reduceCost(ability, 3);
         }

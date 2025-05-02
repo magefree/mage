@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.*;
 import mage.abilities.keyword.EnchantAbility;
@@ -36,8 +36,7 @@ public class TenuousTruce extends CardImpl {
 
         // At the beginning of enchanted opponent’s end step, you and that player each draw a card.
         Ability drawAbility = new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you "),
-                TargetController.ENCHANTED,
+                TargetController.ENCHANTED, new DrawCardSourceControllerEffect(1).setText("you "),
                 false);
         Effect enchantedPlayerDrawEffect = new DrawCardTargetEffect(1);
         enchantedPlayerDrawEffect.concatBy("and").setText("that player each draw a card");
@@ -68,7 +67,7 @@ class TenuousTruceAttackTriggeredAbility extends TriggeredAbilityImpl {
                 "or when they attack you or a planeswalker you control, ");
     }
 
-    TenuousTruceAttackTriggeredAbility(final TenuousTruceAttackTriggeredAbility ability) {
+    private TenuousTruceAttackTriggeredAbility(final TenuousTruceAttackTriggeredAbility ability) {
         super(ability);
     }
 

@@ -22,13 +22,13 @@ public final class KarnConstructToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(ArtifactYouControlCount.instance, ArtifactYouControlCount.instance, Duration.WhileOnBattlefield)
                         .setText("This creature gets +1/+1 for each artifact you control")
         ));
     }
 
-    protected KarnConstructToken(final KarnConstructToken token) {
+    private KarnConstructToken(final KarnConstructToken token) {
         super(token);
     }
 

@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -40,9 +41,10 @@ class ProperBurialTriggeredAbility extends TriggeredAbilityImpl {
 
     public ProperBurialTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public ProperBurialTriggeredAbility(final ProperBurialTriggeredAbility ability) {
+    private ProperBurialTriggeredAbility(final ProperBurialTriggeredAbility ability) {
         super(ability);
     }
 
@@ -75,5 +77,10 @@ class ProperBurialTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature you control dies, you gain life equal to that creature's toughness.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

@@ -79,18 +79,18 @@ enum PolukranosWorldEaterAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ((BecomesMonstrousSourceTriggeredAbility) ability).getMonstrosityValue();
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanentAmount(xValue, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetCreaturePermanentAmount(xValue, 0, xValue, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 }
 
 class PolukranosWorldEaterEffect extends OneShotEffect {
 
-    public PolukranosWorldEaterEffect() {
+    PolukranosWorldEaterEffect() {
         super(Outcome.Benefit);
         this.staticText = "it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos";
     }
 
-    public PolukranosWorldEaterEffect(final PolukranosWorldEaterEffect effect) {
+    private PolukranosWorldEaterEffect(final PolukranosWorldEaterEffect effect) {
         super(effect);
     }
 

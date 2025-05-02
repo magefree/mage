@@ -52,7 +52,7 @@ class PacksDisdainEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control";
     }
 
-    PacksDisdainEffect(final PacksDisdainEffect effect) {
+    private PacksDisdainEffect(final PacksDisdainEffect effect) {
         super(effect);
     }
 
@@ -64,10 +64,10 @@ class PacksDisdainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
+        Choice typeChoice = new ChoiceCreatureType(game, source);
         if (player != null
                 && player.choose(Outcome.UnboostCreature, typeChoice, game)) {
-            FilterControlledPermanent filter = new FilterControlledPermanent(SubType.byDescription(typeChoice.getChoice()));
+            FilterControlledPermanent filter = new FilterControlledPermanent(SubType.byDescription(typeChoice.getChoiceKey()));
             DynamicValue negativePermanentsCount = new PermanentsOnBattlefieldCount(filter, -1);
             ContinuousEffect effect = new BoostTargetEffect(negativePermanentsCount, negativePermanentsCount, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));

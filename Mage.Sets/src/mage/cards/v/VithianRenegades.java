@@ -32,7 +32,7 @@ public final class VithianRenegades extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VithianRenegades (final VithianRenegades card) {
+    private VithianRenegades(final VithianRenegades card) {
         super(card);
     }
 

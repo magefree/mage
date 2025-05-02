@@ -25,12 +25,16 @@ public final class AlchemyInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Cursebound Witch", 24, Rarity.UNCOMMON, mage.cards.c.CurseboundWitch.class));
         cards.add(new SetCardInfo("Expedition Supplier", 6, Rarity.RARE, mage.cards.e.ExpeditionSupplier.class));
         cards.add(new SetCardInfo("Faithful Disciple", 7, Rarity.UNCOMMON, mage.cards.f.FaithfulDisciple.class));
+        cards.add(new SetCardInfo("Forsaken Crossroads", 63, Rarity.RARE, mage.cards.f.ForsakenCrossroads.class));
+        cards.add(new SetCardInfo("Hollowhenge Wrangler", 51, Rarity.RARE, mage.cards.h.HollowhengeWrangler.class));
         cards.add(new SetCardInfo("Ishkanah, Broodmother", 52, Rarity.MYTHIC, mage.cards.i.IshkanahBroodmother.class));
         cards.add(new SetCardInfo("Key to the Archive", 59, Rarity.RARE, mage.cards.k.KeyToTheArchive.class));
         cards.add(new SetCardInfo("Kindred Denial", 18, Rarity.UNCOMMON, mage.cards.k.KindredDenial.class));
         cards.add(new SetCardInfo("Obsessive Collector", 19, Rarity.RARE, mage.cards.o.ObsessiveCollector.class));
+        cards.add(new SetCardInfo("Sanguine Brushstroke", 32, Rarity.RARE, mage.cards.s.SanguineBrushstroke.class));
         cards.add(new SetCardInfo("Soulstealer Axe", 60, Rarity.UNCOMMON, mage.cards.s.SoulstealerAxe.class));
         cards.add(new SetCardInfo("Suntail Squadron", 11, Rarity.RARE, mage.cards.s.SuntailSquadron.class));
         cards.add(new SetCardInfo("Tireless Angler", 23, Rarity.RARE, mage.cards.t.TirelessAngler.class));
+        cards.add(new SetCardInfo("Toralf's Disciple", 44, Rarity.RARE, mage.cards.t.ToralfsDisciple.class));
     }
 }

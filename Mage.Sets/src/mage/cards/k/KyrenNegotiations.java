@@ -31,7 +31,6 @@ public final class KyrenNegotiations extends CardImpl {
 
         // Tap an untapped creature you control: Kyren Negotiations deals 1 damage to target player.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))
         );

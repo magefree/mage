@@ -109,7 +109,7 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         Card cardToExile = game.getCard(target.getFirstTarget());
         if (!player.moveCardsToExile(cardToExile, source, game, false,
                 CardUtil.getCardExileZoneId(game, source),
-                CardUtil.createObjectRealtedWindowTitle(source, game, " (look and cast)"))) {
+                CardUtil.createObjectRelatedWindowTitle(source, game, " (look and cast)"))) {
             return false;
         }
         cardToExile.setFaceDown(true, game);
@@ -173,7 +173,7 @@ class VivienChampionOfTheWildsCastFromExileEffect extends AsThoughEffectImpl {
     private final UUID authorizedPlayerId;
 
     VivienChampionOfTheWildsCastFromExileEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.authorizedPlayerId = authorizedPlayerId;
     }
 

@@ -1,8 +1,7 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +22,7 @@ public final class IronMaiden extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of each opponent's upkeep, Iron Maiden deals X damage to that player, where X is the number of cards in their hand minus 4.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new IronMaidenEffect(), TargetController.OPPONENT, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new IronMaidenEffect(), false);
         this.addAbility(ability);
     }
 
@@ -42,16 +41,16 @@ class IronMaidenEffect extends OneShotEffect {
 
     private IronMaidenEffect(final IronMaidenEffect effect) {
         super(effect);
-        this.staticText = "Iron Maiden deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
     public IronMaidenEffect() {
         super(Outcome.Damage);
+        this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int amount = player.getHand().size() - 4;
             if (amount > 0) {

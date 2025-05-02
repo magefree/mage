@@ -3,18 +3,16 @@ package mage.cards.k;
 
 import java.util.UUID;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.SpiritWarriorToken;
 import mage.game.permanent.token.Token;
 
 /**
@@ -43,12 +41,12 @@ public final class KinTreeInvocation extends CardImpl {
 
 class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
 
-    public KinTreeInvocationCreateTokenEffect() {
+    KinTreeInvocationCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control";
     }
 
-    public KinTreeInvocationCreateTokenEffect(final KinTreeInvocationCreateTokenEffect effect) {
+    private KinTreeInvocationCreateTokenEffect(final KinTreeInvocationCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -71,30 +69,4 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
         return true;
     }
 
-}
-
-class SpiritWarriorToken extends TokenImpl {
-
-    public SpiritWarriorToken() {
-        this(1);
-    }
-
-    public SpiritWarriorToken(int x) {
-        super("Spirit Warrior Token", "X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control");
-        this.cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.SPIRIT);
-        this.subtype.add(SubType.WARRIOR);
-        this.color.setBlack(true);
-        this.color.setGreen(true);
-        this.power = new MageInt(x);
-        this.toughness = new MageInt(x);
-    }
-
-    public SpiritWarriorToken(final SpiritWarriorToken token) {
-        super(token);
-    }
-
-    public SpiritWarriorToken copy() {
-        return new SpiritWarriorToken(this);
-    }
 }

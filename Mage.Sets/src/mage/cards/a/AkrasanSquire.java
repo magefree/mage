@@ -26,7 +26,7 @@ public final class AkrasanSquire extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public AkrasanSquire (final AkrasanSquire card) {
+    private AkrasanSquire(final AkrasanSquire card) {
         super(card);
     }
 

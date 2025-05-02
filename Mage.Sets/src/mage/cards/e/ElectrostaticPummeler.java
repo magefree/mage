@@ -1,12 +1,10 @@
-
 package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayEnergyCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
@@ -22,8 +20,6 @@ import java.util.UUID;
  */
 public final class ElectrostaticPummeler extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public ElectrostaticPummeler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add(SubType.CONSTRUCT);
@@ -35,7 +31,7 @@ public final class ElectrostaticPummeler extends CardImpl {
 
         // Pay {E}{E}{E}: Electrostatic Pummeler gets +X/+X until end of turn, where X is its power.
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
-                xValue, xValue, Duration.EndOfTurn, true
+                SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn
         ).setText("{this} gets +X/+X until end of turn, where X is its power"), new PayEnergyCost(3)));
     }
 

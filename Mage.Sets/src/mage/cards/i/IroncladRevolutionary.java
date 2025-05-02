@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -33,7 +34,7 @@ public final class IroncladRevolutionary extends CardImpl {
 
         // When Ironclad Revolutionary enters the battlefield, you may sacrifice an artifact. If you do, put two +1/+1 counters on Ironclad Revolutionary and each opponent loses 2 life.
         DoIfCostPaid doEffect = new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true),
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         Effect effect = new LoseLifeOpponentsEffect(2);
         effect.setText("and each opponent loses 2 life");
         doEffect.addEffect(effect);

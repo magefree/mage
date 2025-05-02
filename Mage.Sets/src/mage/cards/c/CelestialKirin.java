@@ -53,12 +53,12 @@ public final class CelestialKirin extends CardImpl {
 
 class CelestialKirinEffect extends OneShotEffect {
 
-    public CelestialKirinEffect() {
+    CelestialKirinEffect() {
         super(Outcome.GainLife);
         this.staticText = "destroy all permanents with that spell's mana value";
     }
 
-    public CelestialKirinEffect(final CelestialKirinEffect effect) {
+    private CelestialKirinEffect(final CelestialKirinEffect effect) {
         super(effect);
     }
 

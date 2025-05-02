@@ -21,7 +21,7 @@ public final class KaldraToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    protected KaldraToken(final KaldraToken token) {
+    private KaldraToken(final KaldraToken token) {
         super(token);
     }
 

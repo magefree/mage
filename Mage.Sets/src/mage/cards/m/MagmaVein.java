@@ -37,8 +37,8 @@ public final class MagmaVein extends CardImpl {
 
 
         // {R}, Sacrifice a land: Magma Vein deals 1 damage to each creature without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter1), new ManaCostsImpl<>("{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        Ability ability = new SimpleActivatedAbility(new DamageAllEffect(1, filter1), new ManaCostsImpl<>("{R}"));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
         
     }

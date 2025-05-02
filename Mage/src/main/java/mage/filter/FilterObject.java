@@ -24,7 +24,7 @@ public class FilterObject<E extends MageObject> extends FilterImpl<E> {
         super(name);
     }
 
-    public FilterObject(FilterObject<E> filter) {
+    protected FilterObject(final FilterObject<E> filter) {
         super(filter);
     }
 }

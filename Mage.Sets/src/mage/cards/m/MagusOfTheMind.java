@@ -34,10 +34,10 @@ public final class MagusOfTheMind extends CardImpl {
         this.toughness = new MageInt(5);
 
         // U, T, Sacrifice Magus of the Mind: Shuffle your library, then exile the top X cards, where X is one plus the number of spells cast this turn. Until end of turn, you may play cards exiled this way without paying their mana costs.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagusOfTheMindEffect(), new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(new MagusOfTheMindEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability, new CastSpellLastTurnWatcher());
+        this.addAbility(ability);
     }
 
     private MagusOfTheMind(final MagusOfTheMind card) {
@@ -57,7 +57,7 @@ class MagusOfTheMindEffect extends OneShotEffect {
         this.staticText = "Shuffle your library, then exile the top X cards, where X is one plus the number of spells cast this turn. Until end of turn, you may play cards exiled this way without paying their mana costs";
     }
 
-    MagusOfTheMindEffect(final MagusOfTheMindEffect effect) {
+    private MagusOfTheMindEffect(final MagusOfTheMindEffect effect) {
         super(effect);
     }
 

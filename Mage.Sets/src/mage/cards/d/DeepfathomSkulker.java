@@ -41,7 +41,7 @@ public final class DeepfathomSkulker extends CardImpl {
         this.addAbility(new DeepfathomSkulkerTriggeredAbility());
         
         // {3}{C}: Target creature can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{3}{C}"));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{3}{C}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -62,7 +62,7 @@ class DeepfathomSkulkerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public DeepfathomSkulkerTriggeredAbility(final DeepfathomSkulkerTriggeredAbility ability) {
+    private DeepfathomSkulkerTriggeredAbility(final DeepfathomSkulkerTriggeredAbility ability) {
         super(ability);
     }
 

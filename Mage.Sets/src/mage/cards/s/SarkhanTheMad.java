@@ -69,7 +69,7 @@ class SarkhanTheMadRevealAndDrawEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    SarkhanTheMadRevealAndDrawEffect(SarkhanTheMadRevealAndDrawEffect effect) {
+    private SarkhanTheMadRevealAndDrawEffect(final SarkhanTheMadRevealAndDrawEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    SarkhanTheMadSacEffect(SarkhanTheMadSacEffect effect) {
+    private SarkhanTheMadSacEffect(final SarkhanTheMadSacEffect effect) {
         super(effect);
     }
 
@@ -149,7 +149,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    SarkhanTheMadDragonDamageEffect(SarkhanTheMadDragonDamageEffect effect) {
+    private SarkhanTheMadDragonDamageEffect(final SarkhanTheMadDragonDamageEffect effect) {
         super(effect);
     }
 

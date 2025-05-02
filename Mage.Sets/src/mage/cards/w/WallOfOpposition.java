@@ -31,7 +31,7 @@ public final class WallOfOpposition extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {1}: Wall of Opposition gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(1)));
     }
 
     private WallOfOpposition(final WallOfOpposition card) {

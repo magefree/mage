@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import mage.client.MageFrame;
 import mage.client.util.ClientDefaultSettings;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -18,6 +19,7 @@ public final class MagePreferences {
     private static final String KEY_EMAIL = "email";
     private static final String KEY_AUTO_CONNECT = "autoConnect";
     private static final String NODE_KEY_IGNORE_LIST = "ignoreListString";
+    private static final String NODE_KEY_RESTORE_SESSIONS_LIST = "restoreSessionsListString";
 
     private static String lastServerAddress = "";
     private static int lastServerPort = 0;
@@ -64,6 +66,7 @@ public final class MagePreferences {
             return userName;
         }
         // For clients older than 1.4.7, userName is stored without a serverAddress prefix.
+        // TODO: outdated code, can be removed, 2023-12-05
         return prefs().get(KEY_USER_NAME, "");
     }
 
@@ -141,6 +144,19 @@ public final class MagePreferences {
 
     private static Preferences ignoreListNode(String serverAddress) {
         return prefs().node(NODE_KEY_IGNORE_LIST).node(serverAddress);
+    }
+
+    private static Preferences restoreSessionsListNode(String serverAddress) {
+        return prefs().node(NODE_KEY_RESTORE_SESSIONS_LIST).node(serverAddress);
+    }
+
+    public static void saveRestoreSession(String serverAddress, String userName, String sessionId) {
+        restoreSessionsListNode(serverAddress).put(userName, sessionId);
+        restoreSessionsListNode(serverAddress).putLong("lastUpdated", new Date().getTime());
+    }
+
+    public static String findRestoreSession(String serverAddress, String userName) {
+        return restoreSessionsListNode(serverAddress).get(userName, "");
     }
 
     public static void saveLastServer() {

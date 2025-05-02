@@ -41,12 +41,12 @@ public final class Countermand extends CardImpl {
 
 class CountermandEffect extends OneShotEffect {
 
-    public CountermandEffect() {
+    CountermandEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell. Its controller puts the top four cards of their library into their graveyard";
+        staticText = "Counter target spell. Its controller mills four cards.";
     }
 
-    public CountermandEffect(final CountermandEffect effect) {
+    private CountermandEffect(final CountermandEffect effect) {
         super(effect);
     }
 
@@ -58,7 +58,7 @@ class CountermandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean countered = false;
-        StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject stackObject = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (game.getStack().counter(source.getFirstTarget(), source, game)) {
             countered = true;
         }

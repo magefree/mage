@@ -1,10 +1,9 @@
 package mage.cards.u;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealtDamageAttachedAndDiedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -15,16 +14,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author jeffwadsworth
@@ -44,7 +38,7 @@ public final class UnscytheKillerOfKings extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, create a 2/2 black Zombie creature token.
-        this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()));
+        this.addAbility(new DealtDamageAttachedAndDiedTriggeredAbility(new UnscytheEffect(), true));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
@@ -60,60 +54,14 @@ public final class UnscytheKillerOfKings extends CardImpl {
     }
 }
 
-class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
-
-    public UnscytheKillerOfKingsTriggeredAbility(Effect effect) {
-        super(Zone.ALL, effect, true);
-        setTriggerPhrase("Whenever a creature dealt damage by equipped creature this turn dies, ");
-    }
-
-    public UnscytheKillerOfKingsTriggeredAbility(final UnscytheKillerOfKingsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public UnscytheKillerOfKingsTriggeredAbility copy() {
-        return new UnscytheKillerOfKingsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!((ZoneChangeEvent) event).isDiesEvent()) {
-            return false;
-        }
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (!zEvent.getTarget().isCreature(game)) {
-            return false;
-        } // target token can't create Zombie
-        Permanent equipment = game.getPermanent(getSourceId());
-        // the currently equiped creature must have done damage to the dying creature
-        if (equipment == null || equipment.getAttachedTo() == null) {
-            return false;
-        }
-        boolean damageDealt = false;
-        for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
-            if (mor.refersTo(equipment.getAttachedTo(), game)) {
-                getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
 class UnscytheEffect extends OneShotEffect {
 
-    public UnscytheEffect() {
+    UnscytheEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may exile that card. If you do, create a 2/2 black Zombie creature token";
+        this.staticText = "exile that card. If you do, create a 2/2 black Zombie creature token";
     }
 
-    public UnscytheEffect(final UnscytheEffect effect) {
+    private UnscytheEffect(final UnscytheEffect effect) {
         super(effect);
     }
 
@@ -125,16 +73,13 @@ class UnscytheEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller == null || card == null) {
             return false;
         }
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card == null) {
-            return false;
-        }
-        if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD && controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true)) {
-            ZombieToken zombie = new ZombieToken();
-            return zombie.putOntoBattlefield(1, game, source, source.getControllerId());
+        if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD
+                && controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true)) {
+            return new ZombieToken().putOntoBattlefield(1, game, source, source.getControllerId());
         }
         return false;
     }

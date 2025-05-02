@@ -36,7 +36,7 @@ public final class SphinxsTutelage extends CardImpl {
         this.addAbility(ability);
 
         // {5}{U}: Draw a card, then discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{5}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{5}{U}")));
     }
 
     private SphinxsTutelage(final SphinxsTutelage card) {
@@ -51,12 +51,12 @@ public final class SphinxsTutelage extends CardImpl {
 
 class SphinxsTutelageEffect extends OneShotEffect {
 
-    public SphinxsTutelageEffect() {
+    SphinxsTutelageEffect() {
         super(Outcome.Benefit);
         this.staticText = "target opponent mills two cards. If two nonland cards that share a color were milled this way, repeat this process.";
     }
 
-    public SphinxsTutelageEffect(final SphinxsTutelageEffect effect) {
+    private SphinxsTutelageEffect(final SphinxsTutelageEffect effect) {
         super(effect);
     }
 

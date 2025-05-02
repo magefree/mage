@@ -43,7 +43,7 @@ public final class NaturesChosen extends CardImpl {
                 CardType.LAND.getPredicate()));
     }
 
-    private static final FilterCreaturePermanent filterWhiteUntappedCreature = new FilterCreaturePermanent(" if enchanted creature is white and is untapped");
+    private static final FilterCreaturePermanent filterWhiteUntappedCreature = new FilterCreaturePermanent("enchanted creature is white and untapped");
 
     static {
         filterWhiteUntappedCreature.add(new ColorPredicate(ObjectColor.WHITE));

@@ -1,7 +1,6 @@
 package mage.target.common;
 
 import mage.abilities.Ability;
-import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterAbility;
@@ -48,7 +47,7 @@ public class TargetActivatedAbility extends TargetObject {
         StackObject stackObject = game.getStack().getStackObject(id);
         return stackObject != null
                 && stackObject.getStackAbility() != null
-                && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
+                && stackObject.getStackAbility().isActivatedAbility()
                 && source != null
                 && filter.match(stackObject, source.getControllerId(), source, game);
     }
@@ -62,8 +61,9 @@ public class TargetActivatedAbility extends TargetObject {
     public boolean canChoose(UUID sourceControllerId, Game game) {
         for (StackObject stackObject : game.getStack()) {
             if (stackObject.getStackAbility() != null
-                    && stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
-                    && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())) {
+                    && stackObject.getStackAbility().isActivatedAbility()
+                    && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())
+            ) {
                 return true;
             }
         }
@@ -79,7 +79,7 @@ public class TargetActivatedAbility extends TargetObject {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility().getAbilityType() == AbilityType.ACTIVATED
+            if (stackObject.getStackAbility().isActivatedAbility()
                     && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getStackAbility().getControllerId())
                     && filter.match(stackObject, game)) {
                 possibleTargets.add(stackObject.getStackAbility().getId());

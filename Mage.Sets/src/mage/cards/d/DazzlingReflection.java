@@ -43,12 +43,12 @@ public final class DazzlingReflection extends CardImpl {
 
 class DazzlingReflectionEffect extends OneShotEffect {
 
-    public DazzlingReflectionEffect() {
+    DazzlingReflectionEffect() {
         super(Outcome.Benefit);
         this.staticText = "You gain life equal to target creature's power. The next time that creature would deal damage this turn, prevent that damage";
     }
 
-    public DazzlingReflectionEffect(final DazzlingReflectionEffect effect) {
+    private DazzlingReflectionEffect(final DazzlingReflectionEffect effect) {
         super(effect);
     }
 
@@ -76,12 +76,12 @@ class DazzlingReflectionEffect extends OneShotEffect {
 
 class DazzlingReflectionPreventEffect extends PreventionEffectImpl {
 
-    public DazzlingReflectionPreventEffect() {
+    DazzlingReflectionPreventEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         staticText = "The next time that creature would deal damage this turn, prevent that damage";
     }
 
-    public DazzlingReflectionPreventEffect(final DazzlingReflectionPreventEffect effect) {
+    private DazzlingReflectionPreventEffect(final DazzlingReflectionPreventEffect effect) {
         super(effect);
     }
 

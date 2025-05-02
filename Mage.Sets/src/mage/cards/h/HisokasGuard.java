@@ -67,7 +67,7 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl {
         this.ability = ShroudAbility.getInstance();
     }
 
-    public HisokasGuardGainAbilityTargetEffect(final HisokasGuardGainAbilityTargetEffect effect) {
+    private HisokasGuardGainAbilityTargetEffect(final HisokasGuardGainAbilityTargetEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }
@@ -79,6 +79,7 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         // remember the guarded creature
         Permanent guardedCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Permanent hisokasGuard = game.getPermanent(source.getSourceId());

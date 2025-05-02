@@ -12,12 +12,12 @@ import java.awt.*;
  */
 public class ConditionHint implements Hint {
 
-    private Condition condition;
-    private String trueText;
-    private Color trueColor;
-    private String falseText;
-    private Color falseColor;
-    private Boolean useIcons;
+    private final Condition condition;
+    private final String trueText;
+    private final Color trueColor;
+    private final String falseText;
+    private final Color falseColor;
+    private final boolean useIcons;
 
     public ConditionHint(Condition condition) {
         this(condition, condition.toString());
@@ -27,7 +27,7 @@ public class ConditionHint implements Hint {
         this(condition, textWithIcons, null, textWithIcons, null, true);
     }
 
-    public ConditionHint(Condition condition, String trueText, Color trueColor, String falseText, Color falseColor, Boolean useIcons) {
+    public ConditionHint(Condition condition, String trueText, Color trueColor, String falseText, Color falseColor, boolean useIcons) {
         this.condition = condition;
         this.trueText = CardUtil.getTextWithFirstCharUpperCase(trueText);
         this.trueColor = trueColor;
@@ -58,7 +58,7 @@ public class ConditionHint implements Hint {
     }
 
     @Override
-    public Hint copy() {
+    public ConditionHint copy() {
         return new ConditionHint(this);
     }
 }

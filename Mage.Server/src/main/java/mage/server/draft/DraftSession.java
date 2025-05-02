@@ -1,6 +1,7 @@
 package mage.server.draft;
 
 import mage.game.draft.Draft;
+import mage.game.draft.DraftPlayer;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.User;
@@ -52,11 +53,16 @@ public class DraftSession {
         if (!killed) {
             Optional<User> user = managerFactory.userManager().getUser(userId);
             if (user.isPresent()) {
+                int remaining;
                 if (futureTimeout != null && !futureTimeout.isDone()) {
-                    int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                    user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
-                            new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
+                    // picking already runs
+                    remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
+                } else {
+                    // picking not started yet
+                    remaining = draft.getPickTimeout();
                 }
+                user.get().fireCallback(new ClientCallback(ClientCallbackMethod.DRAFT_INIT, draft.getId(),
+                        new DraftClientMessage(getDraftView(), getDraftPickView(remaining))));
                 return true;
             }
         }
@@ -151,8 +157,12 @@ public class DraftSession {
         return new DraftPickView(draft.getPlayer(playerId), timeout);
     }
 
-    public UUID getDraftId() {
-        return draft.getId();
+    public DraftPlayer getDraftPlayer() {
+        return draft.getPlayer(playerId);
+    }
+
+    public Draft getDraft() {
+        return draft;
     }
 
     public UUID getMarkedCard() {

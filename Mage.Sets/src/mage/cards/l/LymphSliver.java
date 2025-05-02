@@ -32,8 +32,8 @@ public final class LymphSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // All Sliver creatures have absorb 1.
-        Ability absorb = new SimpleStaticAbility(Zone.BATTLEFIELD, new SliverAbsorbEffect());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(absorb,
+        Ability absorb = new SimpleStaticAbility(new SliverAbsorbEffect());
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(absorb,
                 Duration.WhileOnBattlefield, filter, "All Sliver creatures have absorb 1. <i>(If a source would deal damage to a Sliver, prevent 1 of that damage.)</i>")));
     }
 
@@ -49,12 +49,12 @@ public final class LymphSliver extends CardImpl {
 
 class SliverAbsorbEffect extends PreventionEffectImpl {
 
-    public SliverAbsorbEffect() {
+    SliverAbsorbEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "Absorb 1 <i>(If a source would deal damage to this creature, prevent 1 of that damage.</i>)";
     }
 
-    public SliverAbsorbEffect(SliverAbsorbEffect effect) {
+    private SliverAbsorbEffect(final SliverAbsorbEffect effect) {
         super(effect);
     }
 

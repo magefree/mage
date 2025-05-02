@@ -35,7 +35,7 @@ public final class HardenedScaleArmor extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
     }
 
     private HardenedScaleArmor(final HardenedScaleArmor card) {

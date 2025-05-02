@@ -1,6 +1,6 @@
 package mage.cards.g;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -23,7 +23,7 @@ public final class GrandCrescendo extends CardImpl {
 
         // Create X 1/1 green and white Citizen creature tokens. Creatures you control gain indestructible until end of turn.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new CitizenGreenWhiteToken(), ManacostVariableValue.REGULAR
+                new CitizenGreenWhiteToken(), GetXValue.instance
         ));
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn,

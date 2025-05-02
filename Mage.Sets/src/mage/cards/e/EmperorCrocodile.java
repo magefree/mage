@@ -47,7 +47,7 @@ class EmperorCrocodileStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public EmperorCrocodileStateTriggeredAbility(final EmperorCrocodileStateTriggeredAbility ability) {
+    private EmperorCrocodileStateTriggeredAbility(final EmperorCrocodileStateTriggeredAbility ability) {
         super(ability);
     }
 

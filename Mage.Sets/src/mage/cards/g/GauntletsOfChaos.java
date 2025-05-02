@@ -31,7 +31,7 @@ public final class GauntletsOfChaos extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {5}, Sacrifice Gauntlets of Chaos: Exchange control of target artifact, creature, or land you control and target permanent an opponent controls that shares one of those types with it. If those permanents are exchanged this way, destroy all Auras attached to them.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExchangeControlTargetEffect(Duration.EndOfGame,
+        Ability ability = new SimpleActivatedAbility(new ExchangeControlTargetEffect(Duration.EndOfGame,
                 "exchange control of target artifact, creature, or land you control and target permanent an opponent controls that shares one of those types with it."
                         + " If those permanents are exchanged this way, destroy all Auras attached to them", false, true, true),
                 new ManaCostsImpl<>("{5}")
@@ -61,10 +61,10 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate(),
                 CardType.LAND.getPredicate()));
-        setTargetName("artifact, creature, or land you control");
+        withTargetName("artifact, creature, or land you control");
     }
 
-    public GauntletsOfChaosFirstTarget(final GauntletsOfChaosFirstTarget target) {
+    private GauntletsOfChaosFirstTarget(final GauntletsOfChaosFirstTarget target) {
         super(target);
     }
 
@@ -90,7 +90,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
         MageObject targetSource = game.getObject(source);
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     for (CardType type : permanent.getCardType(game)) {
                         if (cardTypes.contains(type)) {
                             possibleTargets.add(permanent.getId());
@@ -131,10 +131,10 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
         super();
         this.filter = this.filter.copy();
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        setTargetName("permanent an opponent controls that shares one of those types with it");
+        withTargetName("permanent an opponent controls that shares one of those types with it");
     }
 
-    public GauntletsOfChaosSecondTarget(final GauntletsOfChaosSecondTarget target) {
+    private GauntletsOfChaosSecondTarget(final GauntletsOfChaosSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }
@@ -159,7 +159,7 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
             MageObject targetSource = game.getObject(source);
             if (targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                         if (permanent.shareTypes(firstTarget, game)) {
                             possibleTargets.add(permanent.getId());
                         }

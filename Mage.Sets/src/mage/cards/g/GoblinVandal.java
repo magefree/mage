@@ -66,7 +66,7 @@ class GoblinVandalTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, false );
     }
 
-    public GoblinVandalTriggeredAbility(final GoblinVandalTriggeredAbility ability) {
+    private GoblinVandalTriggeredAbility(final GoblinVandalTriggeredAbility ability) {
         super(ability);
     }
 

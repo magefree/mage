@@ -33,7 +33,7 @@ public final class Brainwash extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature can't attack unless its controller pays {3}.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessPaysAttachedEffect(new ManaCostsImpl<>("{3}"), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessPaysAttachedEffect(new ManaCostsImpl<>("{3}"), AttachmentType.AURA)));
 
     }
 

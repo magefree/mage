@@ -37,7 +37,6 @@ public final class UmezawasJitte extends CardImpl {
 
         // Remove a charge counter from Umezawa's Jitte: Choose one &mdash; Equipped creature gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostEquippedEffect(2, 2, Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
 

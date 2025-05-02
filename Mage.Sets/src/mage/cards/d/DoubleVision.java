@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,10 +41,10 @@ public final class DoubleVision extends CardImpl {
 class DoubleVisionCopyTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
     DoubleVisionCopyTriggeredAbility() {
-        super(new CopyTargetSpellEffect(true), new FilterInstantOrSorcerySpell(), false);
+        super(new CopyTargetStackObjectEffect(true), new FilterInstantOrSorcerySpell(), false);
     }
 
-    DoubleVisionCopyTriggeredAbility(DoubleVisionCopyTriggeredAbility ability) {
+    private DoubleVisionCopyTriggeredAbility(final DoubleVisionCopyTriggeredAbility ability) {
         super(ability);
     }
 

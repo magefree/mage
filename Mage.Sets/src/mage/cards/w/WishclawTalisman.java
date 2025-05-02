@@ -91,7 +91,7 @@ class WishclawTalismanEffect extends OneShotEffect {
             return false;
         }
         TargetPlayer target = new TargetOpponent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, target, source, game)) {
             return false;
         }

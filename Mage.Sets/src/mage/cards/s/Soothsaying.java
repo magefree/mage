@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.ShuffleLibrarySourceEffect;
@@ -24,12 +24,12 @@ public final class Soothsaying extends CardImpl {
 
 
         // {3}{U}{U}: Shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibrarySourceEffect(), new ManaCostsImpl<>("{3}{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new ShuffleLibrarySourceEffect(), new ManaCostsImpl<>("{3}{U}{U}")));
         
         // {X}: Look at the top X cards of your library, then put them back in any order.
-        Effect effect = new LookLibraryControllerEffect(ManacostVariableValue.REGULAR);
+        Effect effect = new LookLibraryControllerEffect(GetXValue.instance);
         effect.setText("Look at the top X cards of your library, then put them back in any order");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}")));
+        this.addAbility(new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{X}")));
     }
 
     private Soothsaying(final Soothsaying card) {

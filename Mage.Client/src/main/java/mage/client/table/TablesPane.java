@@ -1,4 +1,3 @@
-
 package mage.client.table;
 
 import java.util.UUID;
@@ -9,14 +8,14 @@ import mage.client.SessionHandler;
 import mage.client.plugins.impl.Plugins;
 
 /**
+ * Game GUI: lobby frame
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class TablesPane extends MagePane {
 
-    /**
-     * Creates new form TablesPane
-     */
+    UUID roomId = null;
+
     public TablesPane() {
         boolean initialized = false;
         if (Plugins.instance.isThemePluginLoaded()) {
@@ -47,11 +46,17 @@ public class TablesPane extends MagePane {
     public void showTables() {
         UUID roomId = SessionHandler.getSession().getMainRoomId();
         if (roomId != null) {
-            this.setTitle("Tables");
+            this.roomId = roomId;
+            this.setTitle("Server's lobby");
             tablesPanel.showTables(roomId);
             this.repaint();
         }
+    }
 
+    @Override
+    public boolean isActiveTable() {
+        // it's defalt server lobby, so don't count it as active
+        return false;
     }
 
     public void hideTables() {
@@ -110,6 +115,7 @@ public class TablesPane extends MagePane {
 
     @Override
     public void deactivated() {
+        super.deactivated();
         tablesPanel.stopTasks();
     }
 
@@ -117,5 +123,16 @@ public class TablesPane extends MagePane {
         if (tablesPanel != null) {
             tablesPanel.setTableFilter();
         }
+    }
+
+    @Override
+    public UUID getSortTableId() {
+        return null;
+    }
+
+    @Override
+    public int getSortOrder() {
+        // lobby must be first all the time
+        return 0;
     }
 }

@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -35,7 +35,7 @@ public final class BeledrosWitherbloom extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each upkeep, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new Pest11GainLifeToken()), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new CreateTokenEffect(new Pest11GainLifeToken()), false));
 
         // Pay 10 life: Untap all lands you control. Activate only once each turn.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(new UntapAllLandsControllerEffect()

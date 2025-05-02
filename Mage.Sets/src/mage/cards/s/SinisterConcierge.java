@@ -4,9 +4,9 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.costs.common.ExileSourceFromGraveCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.ExileSourceWithTimeCountersCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -46,12 +46,15 @@ public class SinisterConcierge extends CardImpl {
         // If you do, exile up to one target creature and put three time counters on it.
         // Each card exiled this way that doesn't have suspend gains suspend.
         // (For each card with suspend, its owner removes a time counter from it at the beginning of their upkeep.
-        // When the last is removed, they cast it without paying its mana cost. Those creature spells have haste.)
-        Ability ability = new DiesSourceTriggeredAbility(
+        // When the last is removed, they may cast it without paying its mana cost. Those creature spells have haste.)
+	Cost cost = new ExileSourceWithTimeCountersCost(3, false, true, Zone.GRAVEYARD);
+	// Paying the cost sends the Concierge to the right exile zone (Suspended cards of…) and gives it suspend.
+	cost.setText("exile it and put three time counters on it");
+	Ability ability = new DiesSourceTriggeredAbility(
                 new DoIfCostPaid(
                         new SinisterConciergeEffect(),
-                        new ExileSourceFromGraveCost()
-                ).setText("you may exile it and put three time counters on it")
+                        cost 
+                )
         );
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
@@ -70,11 +73,10 @@ public class SinisterConcierge extends CardImpl {
 class SinisterConciergeEffect extends OneShotEffect {
     public SinisterConciergeEffect() {
         super(Outcome.Removal);
-        this.staticText = "you may exile it and put three time counters on it. " +
-                "If you do, exile up to one target creature and put three time counters on it. " +
+        this.staticText = "exile up to one target creature and put three time counters on it. " +
                 "Each card exiled this way that doesn't have suspend gains suspend. " +
                 "<i>(For each card with suspend, its owner removes a time counter from it at the beginning of their upkeep. " +
-                "When the last is removed, they cast it without paying its mana cost. Those creature spells have haste.)</i>";
+                "When the last is removed, they may cast it without paying its mana cost. Those creature spells have haste.)</i>";
     }
 
     private SinisterConciergeEffect(final SinisterConciergeEffect effect) {
@@ -85,27 +87,23 @@ class SinisterConciergeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
-        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (controller == null || card == null || targetCreature == null) {
+        if (controller == null || card == null) {
             return false;
         }
 
-        // Put the time counters on the Sinister Concierge and give it Suspend
-        if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-            Effect addCountersSourceEffect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), StaticValue.get(3), false ,true);
-            boolean sourceCardShouldGetSuspend = addCountersSourceEffect.apply(game, source);
-
-            if (sourceCardShouldGetSuspend && !card.getAbilities(game).containsClass(SuspendAbility.class)) {
-                game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
-            }
+        Permanent targetCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (targetCreature == null){
+            return false;
         }
 
         // Exile, put time counters, and give suspend for target
-        Effect exileTarget = new ExileTargetEffect();
-        exileTarget.setTargetPointer(this.getTargetPointer());
+	Player controllerTarget = game.getPlayer(targetCreature.getControllerId());
+        UUID exileId = SuspendAbility.getSuspendExileId(controllerTarget.getId(), game);
+      	Effect exileTarget = new ExileTargetEffect(exileId, "Suspended cards of " + controllerTarget.getName());
+        exileTarget.setTargetPointer(this.getTargetPointer().copy());
         if (exileTarget.apply(game, source)) {
             Effect addCountersTargetEffect = new AddCountersTargetEffect(CounterType.TIME.createInstance(3));
-            addCountersTargetEffect.setTargetPointer(this.getTargetPointer());
+            addCountersTargetEffect.setTargetPointer(this.getTargetPointer().copy());
             boolean targetCardShouldGetSuspend = addCountersTargetEffect.apply(game, source);
 
             if (targetCardShouldGetSuspend && !targetCreature.getAbilities(game).containsClass(SuspendAbility.class)) {

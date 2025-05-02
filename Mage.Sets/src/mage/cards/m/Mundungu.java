@@ -36,7 +36,7 @@ public final class Mundungu extends CardImpl {
         costs.add(new GenericManaCost(1));
         costs.add(new PayLifeCost(1));
         costs.setText("{1} and 1 life");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(costs), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CounterUnlessPaysEffect(costs), new TapSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }

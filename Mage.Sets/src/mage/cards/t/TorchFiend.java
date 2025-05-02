@@ -30,7 +30,7 @@ public final class TorchFiend extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, Sacrifice Torch Fiend: Destroy target artifact.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

@@ -20,7 +20,7 @@ public final class SpawningPitToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected SpawningPitToken(final SpawningPitToken token) {
+    private SpawningPitToken(final SpawningPitToken token) {
         super(token);
     }
 

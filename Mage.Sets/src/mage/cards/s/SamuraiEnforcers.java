@@ -26,7 +26,7 @@ public final class SamuraiEnforcers extends CardImpl {
         this.addAbility(new BushidoAbility(2));
     }
 
-    public SamuraiEnforcers (final SamuraiEnforcers card) {
+    private SamuraiEnforcers(final SamuraiEnforcers card) {
         super(card);
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -44,8 +44,8 @@ public final class ValkyrieHarbinger extends CardImpl {
         // At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying and vigilance.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new AngelVigilanceToken()),
-                        TargetController.ANY, false
+                        TargetController.ANY, new CreateTokenEffect(new AngelVigilanceToken()),
+                        false
                 ), condition, "At the beginning of each end step, if you gained 4 or more life this turn, " +
                 "create a 4/4 white Angel creature token with flying and vigilance."
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());

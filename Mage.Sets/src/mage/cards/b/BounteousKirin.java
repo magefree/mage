@@ -50,12 +50,12 @@ public final class BounteousKirin extends CardImpl {
 
 class BounteousKirinEffect extends OneShotEffect {
 
-    public BounteousKirinEffect() {
+    BounteousKirinEffect() {
         super(Outcome.GainLife);
         this.staticText = "you may gain life equal to that spell's mana value";
     }
 
-    public BounteousKirinEffect(final BounteousKirinEffect effect) {
+    private BounteousKirinEffect(final BounteousKirinEffect effect) {
         super(effect);
     }
 

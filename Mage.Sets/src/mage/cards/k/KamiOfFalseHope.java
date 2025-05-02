@@ -28,7 +28,7 @@ public final class KamiOfFalseHope extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Kami of False Hope: Prevent all combat damage that would be dealt this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new SacrificeSourceCost());
         this.addAbility(ability);
     }
 

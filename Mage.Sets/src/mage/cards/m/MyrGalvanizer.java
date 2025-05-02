@@ -35,11 +35,11 @@ public final class MyrGalvanizer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Other Myr creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // {1}, {T}: Untap each other Myr you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new MyrGalvanizerEffect(), new TapSourceCost());
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
@@ -62,7 +62,7 @@ class MyrGalvanizerEffect extends OneShotEffect {
         staticText = "Untap each other Myr you control";
     }
 
-    MyrGalvanizerEffect(final MyrGalvanizerEffect effect) {
+    private MyrGalvanizerEffect(final MyrGalvanizerEffect effect) {
         super(effect);
     }
 

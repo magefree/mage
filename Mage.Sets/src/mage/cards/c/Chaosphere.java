@@ -38,10 +38,10 @@ public final class Chaosphere extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // Creatures with flying can block only creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChaosphereEffect()));
+        this.addAbility(new SimpleStaticAbility(new ChaosphereEffect()));
 
         // Creatures without flying have reach.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield, filterCreature, rule)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield, filterCreature, rule)));
 
     }
 
@@ -68,7 +68,7 @@ class ChaosphereEffect extends RestrictionEffect {
         staticText = "creatures with flying can block only creatures with flying";
     }
 
-    public ChaosphereEffect(final ChaosphereEffect effect) {
+    private ChaosphereEffect(final ChaosphereEffect effect) {
         super(effect);
     }
 

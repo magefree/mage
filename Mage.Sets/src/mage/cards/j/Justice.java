@@ -2,19 +2,19 @@ package mage.cards.j;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -33,10 +33,10 @@ public final class Justice extends CardImpl {
 
 
         // At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}"))));
 
         // Whenever a red creature or spell deals damage, Justice deals that much damage to that creature's or spell's controller.
-        this.addAbility(new JusticeTriggeredAbility(new JusticeEffect()));
+        this.addAbility(new JusticeTriggeredAbility());
     }
 
     private Justice(final Justice card) {
@@ -49,13 +49,13 @@ public final class Justice extends CardImpl {
     }
 }
 
-class JusticeTriggeredAbility extends TriggeredAbilityImpl {
+class JusticeTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
-    public JusticeTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
+    JusticeTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new JusticeEffect());
     }
 
-    public JusticeTriggeredAbility(final JusticeTriggeredAbility ability) {
+    private JusticeTriggeredAbility(final JusticeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -66,8 +66,7 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
-                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
     }
 
     @Override
@@ -92,11 +91,11 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
 
 class JusticeEffect extends OneShotEffect {
 
-    public JusticeEffect() {
+    JusticeEffect() {
         super(Outcome.Damage);
     }
 
-    public JusticeEffect(final JusticeEffect effect) {
+    private JusticeEffect(final JusticeEffect effect) {
         super(effect);
     }
 
@@ -108,7 +107,7 @@ class JusticeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Integer damageAmount = (Integer) this.getValue("damageAmount");
-        UUID targetId = this.targetPointer.getFirst(game, source);
+        UUID targetId = this.getTargetPointer().getFirst(game, source);
         if (damageAmount != null && targetId != null) {
             Player player = game.getPlayer(targetId);
             if (player != null) {

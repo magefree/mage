@@ -43,7 +43,7 @@ class PowerleechTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1));
     }
 
-    PowerleechTriggeredAbility(final PowerleechTriggeredAbility ability) {
+    private PowerleechTriggeredAbility(final PowerleechTriggeredAbility ability) {
         super(ability);
     }
 

@@ -36,9 +36,9 @@ public final class CouncilOfTheAbsolute extends CardImpl {
         // As Council of the Absolute enters the battlefield, name a card other than a creature or a land card.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_AND_NON_CREATURE_NAME)));
         // Your opponents can't cast the chosen card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CouncilOfTheAbsoluteReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new CouncilOfTheAbsoluteReplacementEffect()));
         // Spells with the chosen name cost 2 less for you to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CouncilOfTheAbsoluteCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new CouncilOfTheAbsoluteCostReductionEffect()));
 
     }
 
@@ -55,18 +55,13 @@ public final class CouncilOfTheAbsolute extends CardImpl {
 
 class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CouncilOfTheAbsoluteReplacementEffect() {
+    CouncilOfTheAbsoluteReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast spells with the chosen name";
     }
 
-    public CouncilOfTheAbsoluteReplacementEffect(final CouncilOfTheAbsoluteReplacementEffect effect) {
+    private CouncilOfTheAbsoluteReplacementEffect(final CouncilOfTheAbsoluteReplacementEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -101,7 +96,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
 
 class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl {
 
-    public CouncilOfTheAbsoluteCostReductionEffect() {
+    CouncilOfTheAbsoluteCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Spells with the chosen name you cast cost 2 less to cast";
     }

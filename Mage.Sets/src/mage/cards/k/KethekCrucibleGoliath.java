@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
 import mage.cards.CardImpl;
@@ -15,8 +15,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class KethekCrucibleGoliath extends CardImpl {
         // until you reveal a nonlegendary creature card with lesser mana value, put it onto the battlefield,
         // then put the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new KethekCrucibleGoliathEffect(), TargetController.YOU, false
+                new KethekCrucibleGoliathEffect()
         ));
     }
 
@@ -79,9 +78,7 @@ class KethekCrucibleGoliathEffect extends OneShotEffect {
             return false;
         }
         // May sacrifice another creature
-        TargetPermanent target = (TargetPermanent) new TargetControlledPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
-        ).withChooseHint("to sacrifice");
+        TargetSacrifice target = new TargetSacrifice(0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE);
         player.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {

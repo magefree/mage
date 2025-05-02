@@ -20,16 +20,16 @@ public class FridayNightMagic2000 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Giant Growth", 8, Rarity.RARE, mage.cards.g.GiantGrowth.class));
-        cards.add(new SetCardInfo("Llanowar Elves", 11, Rarity.RARE, mage.cards.l.LlanowarElves.class));
-        cards.add(new SetCardInfo("Longbow Archer", 3, Rarity.RARE, mage.cards.l.LongbowArcher.class));
-        cards.add(new SetCardInfo("Mind Warp", 5, Rarity.RARE, mage.cards.m.MindWarp.class));
-        cards.add(new SetCardInfo("Prodigal Sorcerer", 9, Rarity.RARE, mage.cards.p.ProdigalSorcerer.class));
-        cards.add(new SetCardInfo("River Boa", 1, Rarity.RARE, mage.cards.r.RiverBoa.class));
-        cards.add(new SetCardInfo("Shock", 6, Rarity.RARE, mage.cards.s.Shock.class));
-        cards.add(new SetCardInfo("Staunch Defenders", 12, Rarity.RARE, mage.cards.s.StaunchDefenders.class));
-        cards.add(new SetCardInfo("Stone Rain", 10, Rarity.RARE, mage.cards.s.StoneRain.class));
-        cards.add(new SetCardInfo("Terror", 2, Rarity.RARE, mage.cards.t.Terror.class));
-        cards.add(new SetCardInfo("Volcanic Geyser", 4, Rarity.RARE, mage.cards.v.VolcanicGeyser.class));
+        cards.add(new SetCardInfo("Giant Growth", 8, Rarity.RARE, mage.cards.g.GiantGrowth.class, RETRO_ART));
+        cards.add(new SetCardInfo("Llanowar Elves", 11, Rarity.RARE, mage.cards.l.LlanowarElves.class, RETRO_ART));
+        cards.add(new SetCardInfo("Longbow Archer", 3, Rarity.RARE, mage.cards.l.LongbowArcher.class, RETRO_ART));
+        cards.add(new SetCardInfo("Mind Warp", 5, Rarity.RARE, mage.cards.m.MindWarp.class, RETRO_ART));
+        cards.add(new SetCardInfo("Prodigal Sorcerer", 9, Rarity.RARE, mage.cards.p.ProdigalSorcerer.class, RETRO_ART));
+        cards.add(new SetCardInfo("River Boa", 1, Rarity.RARE, mage.cards.r.RiverBoa.class, RETRO_ART));
+        cards.add(new SetCardInfo("Shock", 6, Rarity.RARE, mage.cards.s.Shock.class, RETRO_ART));
+        cards.add(new SetCardInfo("Staunch Defenders", 12, Rarity.RARE, mage.cards.s.StaunchDefenders.class, RETRO_ART));
+        cards.add(new SetCardInfo("Stone Rain", 10, Rarity.RARE, mage.cards.s.StoneRain.class, RETRO_ART));
+        cards.add(new SetCardInfo("Terror", 2, Rarity.RARE, mage.cards.t.Terror.class, RETRO_ART));
+        cards.add(new SetCardInfo("Volcanic Geyser", 4, Rarity.RARE, mage.cards.v.VolcanicGeyser.class, RETRO_ART));
      }
 }

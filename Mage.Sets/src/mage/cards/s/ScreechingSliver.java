@@ -32,10 +32,10 @@ public final class ScreechingSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Slivers have "{T}: Target player puts the top card of their library into their graveyard."
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new MillCardsTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
                         allSliversFilter, "All Slivers have \"{T}: Target player mills a card.\"")));
     }

@@ -40,11 +40,13 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final List<Permanent> addedTokenPermanents;
     private final List<Ability> additionalAbilities;
     private final CardType additionalCardType;
-    private SubType additionalSubType;
+    private final List<SubType> additionalSubTypes = new ArrayList<>();
     private final UUID attackedPlayer;
+    private UUID attachedTo = null;
     private final boolean attacking;
     private boolean becomesArtifact;
-    private ObjectColor color;
+    private ObjectColor onlyColor;
+    private ObjectColor extraColor;
     private CounterType counter;
     private final boolean gainsFlying;
     private boolean hasHaste;
@@ -59,7 +61,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final int tokenPower;
     private final int tokenToughness;
     private boolean useLKI = false;
-    private PermanentModifier permanentModifier = null; // TODO: miss copy constructor? Make serializable?
+    private PermanentModifier permanentModifier = null;
 
     // TODO: These constructors are a mess. Copy effects need to be reworked altogether, hopefully clean it up then.
 
@@ -132,11 +134,13 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.addedTokenPermanents = new ArrayList<>(effect.addedTokenPermanents);
         this.additionalAbilities = new ArrayList<>(effect.additionalAbilities);
         this.additionalCardType = effect.additionalCardType;
-        this.additionalSubType = effect.additionalSubType;
+        this.additionalSubTypes.addAll(effect.additionalSubTypes);
         this.attackedPlayer = effect.attackedPlayer;
+        this.attachedTo = effect.attachedTo;
         this.attacking = effect.attacking;
         this.becomesArtifact = effect.becomesArtifact;
-        this.color = effect.color;
+        this.onlyColor = effect.onlyColor;
+        this.extraColor = effect.extraColor;
         this.counter = effect.counter;
         this.gainsFlying = effect.gainsFlying;
         this.hasHaste = effect.hasHaste;
@@ -151,6 +155,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.tokenPower = effect.tokenPower;
         this.tokenToughness = effect.tokenToughness;
         this.useLKI = effect.useLKI;
+        this.permanentModifier = effect.permanentModifier;
     }
 
     @Override
@@ -201,7 +206,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
 
         // create token and modify all attributes permanently (without game usage)
-        Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+        Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefield triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
         if (becomesArtifact) {
             token.addCardType(CardType.ARTIFACT);
@@ -234,11 +239,16 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.removeAllCreatureTypes();
             token.addSubType(onlySubType);
         }
-        if (additionalSubType != null) {
-            token.addSubType(additionalSubType);
+        if (!additionalSubTypes.isEmpty()) {
+            for (SubType additionalSubType : additionalSubTypes) {
+                token.addSubType(additionalSubType);
+            }
         }
-        if (color != null) {
-            token.setColor(color);
+        if (onlyColor != null) {
+            token.setColor(onlyColor);
+        }
+        if (extraColor != null) {
+            token.getColor().addColor(extraColor);
         }
         additionalAbilities.stream().forEach(token::addAbility);
         if (permanentModifier != null) {
@@ -264,14 +274,13 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             }
         }
 
-        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
+        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {
                 addedTokenPermanents.add(tokenPermanent);
-                // add counters if necessary ie Ochre Jelly
-                if (counter != null
-                        && numberOfCounters > 0) {
+                // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
+                if (counter != null && numberOfCounters > 0) {
                     tokenPermanent.addCounters(counter.createInstance(numberOfCounters), source.getControllerId(), source, game);
                 }
             }
@@ -320,8 +329,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return addedTokenPermanents;
     }
 
-    public CreateTokenCopyTargetEffect setAdditionalSubType(SubType additionalSubType) {
-        this.additionalSubType = additionalSubType;
+    public CreateTokenCopyTargetEffect withAdditionalSubType(SubType additionalSubType) {
+        this.additionalSubTypes.add(additionalSubType);
         return this;
     }
 
@@ -331,7 +340,12 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     public CreateTokenCopyTargetEffect setOnlyColor(ObjectColor color) {
-        this.color = color;
+        this.onlyColor = color;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect setExtraColor(ObjectColor extraColor) {
+        this.extraColor = extraColor;
         return this;
     }
 
@@ -386,6 +400,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         return this;
     }
 
+    public CreateTokenCopyTargetEffect setAttachedTo(UUID attachedTo) {
+        this.attachedTo = attachedTo;
+        return this;
+    }
+
     public void sacrificeTokensCreatedAtNextEndStep(Game game, Ability source) {
         this.removeTokensCreatedAtEndOf(game, source, PhaseStep.END_TURN, false);
     }
@@ -409,7 +428,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         } else {
             effect = new SacrificeTargetEffect("sacrifice the token copies", source.getControllerId());
         }
-        effect.setTargetPointer(new FixedTargets(addedTokenPermanents, game));
+        effect.setTargetPointer(new FixedTargets(new ArrayList<>(addedTokenPermanents), game));
 
         DelayedTriggeredAbility exileAbility;
 

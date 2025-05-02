@@ -53,7 +53,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of each of your main phases, if you haven't added mana with this ability this turn, ");
     }
 
-    CarpetOfFlowersTriggeredAbility(final CarpetOfFlowersTriggeredAbility ability) {
+    private CarpetOfFlowersTriggeredAbility(final CarpetOfFlowersTriggeredAbility ability) {
         super(ability);
     }
 
@@ -75,7 +75,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return !Boolean.TRUE.equals(game.getState().getValue(this.originalId.toString()
+        return !Boolean.TRUE.equals(game.getState().getValue(this.getOriginalId().toString()
                 + "addMana"
                 + game.getState().getZoneChangeCounter(sourceId)));
     }
@@ -84,7 +84,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
     public boolean resolve(Game game) {
         boolean value = super.resolve(game);
         if (value == true) {
-            game.getState().setValue(this.originalId.toString()
+            game.getState().setValue(this.getOriginalId().toString()
                             + "addMana"
                             + game.getState().getZoneChangeCounter(sourceId),
                     Boolean.TRUE);
@@ -94,7 +94,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public void reset(Game game) {
-        game.getState().setValue(this.originalId.toString()
+        game.getState().setValue(this.getOriginalId().toString()
                         + "addMana"
                         + game.getState().getZoneChangeCounter(sourceId),
                 Boolean.FALSE);
@@ -115,7 +115,7 @@ class CarpetOfFlowersEffect extends ManaEffect {
         staticText = "you may add X mana of any one color, where X is the number of Islands target opponent controls";
     }
 
-    CarpetOfFlowersEffect(final CarpetOfFlowersEffect effect) {
+    private CarpetOfFlowersEffect(final CarpetOfFlowersEffect effect) {
         super(effect);
     }
 

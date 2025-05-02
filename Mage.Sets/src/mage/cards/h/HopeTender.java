@@ -31,13 +31,13 @@ public final class HopeTender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}, {T}: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
         
         // {1}, {T}, Exert Hope Tender: Untap two target lands.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(1));
+        ability = new SimpleActivatedAbility(new UntapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         ability.addTarget(new TargetLandPermanent(2));

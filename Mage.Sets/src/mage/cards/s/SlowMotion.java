@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -41,7 +41,7 @@ public final class SlowMotion extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless they pay {2}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEquipedUnlessPaysEffect(new GenericManaCost(2)), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new SacrificeEquipedUnlessPaysEffect(new GenericManaCost(2)), false));
 
         // When Slow Motion is put into a graveyard from the battlefield, return Slow Motion to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
@@ -67,7 +67,7 @@ class SacrificeEquipedUnlessPaysEffect extends OneShotEffect {
         staticText = "that player sacrifices that creature unless they pay {2}";
     }
 
-    public SacrificeEquipedUnlessPaysEffect(final SacrificeEquipedUnlessPaysEffect effect) {
+    private SacrificeEquipedUnlessPaysEffect(final SacrificeEquipedUnlessPaysEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

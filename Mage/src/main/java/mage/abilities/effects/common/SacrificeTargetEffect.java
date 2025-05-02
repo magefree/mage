@@ -49,7 +49,7 @@ public class SacrificeTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null && (playerIdThatHasToSacrifice == null || playerIdThatHasToSacrifice.equals(permanent.getControllerId()))) {
                 permanent.sacrifice(source, game);

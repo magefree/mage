@@ -42,7 +42,7 @@ public final class SosukeSonOfSeshiro extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Other Snake creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
         // Whenever a Warrior you control deals combat damage to a creature, destroy that creature at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);
@@ -66,7 +66,7 @@ class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    SosukeSonOfSeshiroTriggeredAbility(final SosukeSonOfSeshiroTriggeredAbility ability) {
+    private SosukeSonOfSeshiroTriggeredAbility(final SosukeSonOfSeshiroTriggeredAbility ability) {
         super(ability);
     }
 

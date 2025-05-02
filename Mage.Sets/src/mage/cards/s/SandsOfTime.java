@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SkipUntapStepEffect;
@@ -29,10 +29,10 @@ public final class SandsOfTime extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Each player skips their untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipUntapStepEffect()));
 
         // At the beginning of each player's upkeep, that player simultaneously untaps each tapped artifact, creature, and land they control and taps each untapped artifact, creature, and land they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SandsOfTimeEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new SandsOfTimeEffect(), false));
     }
 
     private SandsOfTime(final SandsOfTime card) {
@@ -61,7 +61,7 @@ class SandsOfTimeEffect extends OneShotEffect {
         staticText = "that player simultaneously untaps each tapped artifact, creature, and land they control and taps each untapped artifact, creature, and land they control";
     }
 
-    public SandsOfTimeEffect(SandsOfTimeEffect copy) {
+    private SandsOfTimeEffect(final SandsOfTimeEffect copy) {
         super(copy);
     }
 
@@ -72,9 +72,9 @@ class SandsOfTimeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game)) {
                 if (permanent.isTapped()) {
                     permanent.untap(game);
                 } else {

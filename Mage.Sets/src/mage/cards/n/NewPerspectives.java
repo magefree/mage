@@ -31,7 +31,7 @@ public final class NewPerspectives extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(3)));
 
         // As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NewPerspectivesCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(new NewPerspectivesCostModificationEffect()));
     }
 
     private NewPerspectives(final NewPerspectives card) {
@@ -51,7 +51,7 @@ class NewPerspectivesCostModificationEffect extends CostModificationEffectImpl {
         this.staticText = "As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs";
     }
 
-    NewPerspectivesCostModificationEffect(final NewPerspectivesCostModificationEffect effect) {
+    private NewPerspectivesCostModificationEffect(final NewPerspectivesCostModificationEffect effect) {
         super(effect);
     }
 
@@ -70,9 +70,9 @@ class NewPerspectivesCostModificationEffect extends CostModificationEffectImpl {
         if (controller != null) {
             if (game.inCheckPlayableState()
                     || controller.chooseUse(Outcome.PlayForFree, "Pay {0} to cycle?", source, game)) {
-                abilityToModify.getCosts().clear();
-                abilityToModify.getManaCostsToPay().clear();
-                abilityToModify.getCosts().add(new CyclingDiscardCost());
+                abilityToModify.clearCosts();
+                abilityToModify.clearManaCostsToPay();
+                abilityToModify.addCost(new CyclingDiscardCost());
             }
             return true;
         }

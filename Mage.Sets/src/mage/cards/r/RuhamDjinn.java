@@ -34,7 +34,7 @@ public final class RuhamDjinn extends CardImpl {
 
         // 
         // Ruham Djinn gets -2/-2 as long as white is the most common color among all permanents or is tied for most common.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(-2, -2, Duration.WhileOnBattlefield),
                         new MostCommonColorCondition(new ObjectColor(ObjectColor.WHITE)),
                         "{this} gets -2/-2 as long as white is the most common color among all permanents or is tied for most common")));

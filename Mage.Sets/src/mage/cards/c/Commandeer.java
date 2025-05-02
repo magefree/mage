@@ -56,15 +56,15 @@ public final class Commandeer extends CardImpl {
 
 class CommandeerEffect extends OneShotEffect {
 
-    public CommandeerEffect() {
+    CommandeerEffect() {
         super(Outcome.Benefit);
         this.staticText = "Gain control of target noncreature spell. " +
                 "You may choose new targets for it. " +
                 "<i> (If that spell is an artifact, enchantment, or planeswalker, " +
-                "the permanent enters the battlefield under your control.)</i>";
+                "the permanent you control enters.)</i>";
     }
 
-    public CommandeerEffect(final CommandeerEffect effect) {
+    private CommandeerEffect(final CommandeerEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class CommandeerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (controller != null && spell != null) {
             spell.setControllerId(controller.getId());
             spell.chooseNewTargets(game, controller.getId(), false, false, null);

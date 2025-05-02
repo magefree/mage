@@ -33,7 +33,7 @@ public final class MizzixsMastery extends CardImpl {
         // For each card exiled this way, copy it, and you may cast the copy 
         // without paying its mana cost. Exile Mizzix's Mastery.
         this.getSpellAbility().addEffect(new ExileTargetCardCopyAndCastEffect(true).setText(
-                "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile Mizzix's Mastery."));
+                "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost"));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 new FilterInstantOrSorceryCard("card that's an instant or sorcery from your graveyard")));
         this.getSpellAbility().addEffect(new ExileSpellEffect());
@@ -57,14 +57,14 @@ public final class MizzixsMastery extends CardImpl {
 
 class MizzixsMasteryOverloadEffect extends OneShotEffect {
 
-    public MizzixsMasteryOverloadEffect() {
+    MizzixsMasteryOverloadEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Exile each card that's an instant or sorcery from "
                 + "your graveyard. For each card exiled this way, copy it, "
-                + "and you may cast the copy without paying its mana cost. Exile {this}";
+                + "and you may cast the copy without paying its mana cost";
     }
 
-    public MizzixsMasteryOverloadEffect(final MizzixsMasteryOverloadEffect effect) {
+    private MizzixsMasteryOverloadEffect(final MizzixsMasteryOverloadEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                             && !copiedCards.isEmpty()) {
                         TargetCard targetCard = new TargetCard(0, 1, Zone.EXILED,
                                 new FilterCard("copied card to cast without paying its mana cost?"));
-                        targetCard.setNotTarget(true);
+                        targetCard.withNotTarget(true);
                         if (controller.chooseTarget(Outcome.PlayForFree, copiedCards, targetCard, source, game)) {
                             Card selectedCard = game.getCard(targetCard.getFirstTarget());
                             if (selectedCard != null

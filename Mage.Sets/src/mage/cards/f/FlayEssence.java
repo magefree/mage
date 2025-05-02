@@ -41,7 +41,7 @@ public final class FlayEssence extends CardImpl {
 
 class FlayEssenceEffect extends OneShotEffect {
 
-    public FlayEssenceEffect() {
+    FlayEssenceEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target creature or planeswalker. You gain life equal to the number of counters on it";
     }

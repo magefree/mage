@@ -32,7 +32,7 @@ public final class BeguilerOfWills extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Gain control of target creature with power less than or equal to the number of creatures you control.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainControlTargetEffect(Duration.Custom),
                 new TapSourceCost());
         ability.addTarget(new BeguilerOfWillsTarget());
@@ -56,7 +56,7 @@ class BeguilerOfWillsTarget extends TargetPermanent {
         super(new FilterCreaturePermanent("creature with power less than or equal to the number of creatures you control"));
     }
 
-    public BeguilerOfWillsTarget(final BeguilerOfWillsTarget target) {
+    private BeguilerOfWillsTarget(final BeguilerOfWillsTarget target) {
         super(target);
     }
 

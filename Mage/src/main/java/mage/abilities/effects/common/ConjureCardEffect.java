@@ -65,7 +65,7 @@ public class ConjureCardEffect extends OneShotEffect {
         }
         Set<Card> cards = new HashSet<>();
         for (int i = 0; i < amount; i++) {
-            Card card = cardInfo.getCard();
+            Card card = cardInfo.createCard();
             cards.add(card);
         }
         game.loadCards(cards, source.getControllerId());
@@ -74,6 +74,9 @@ public class ConjureCardEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder("conjure ");
         sb.append(CardUtil.numberToText(amount, "a"));
         sb.append(' ');
@@ -85,6 +88,7 @@ public class ConjureCardEffect extends OneShotEffect {
         switch (zone) {
             case HAND:
             case GRAVEYARD:
+            case LIBRARY:
                 sb.append("into your");
                 break;
             case BATTLEFIELD:

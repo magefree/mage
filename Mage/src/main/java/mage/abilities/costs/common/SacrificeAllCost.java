@@ -1,14 +1,13 @@
 package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.SacrificeCost;
-import mage.constants.AbilityType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,22 +45,15 @@ public class SacrificeAllCost extends CostImpl implements SacrificeCost {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        UUID activator = controllerId;
-        if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
-            if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
-                activator = ((ActivatedAbilityImpl) ability).getActivatorId();
-            } else {
-                // Aktivator not filled?
-                activator = controllerId;
-            }
+        Player controller = game.getPlayer(controllerId);
+        if (controller == null){
+            return false;
         }
-
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
-            if (!game.getPlayer(activator).canPaySacrificeCost(permanent, source, controllerId, game)) {
+            if (!controller.canPaySacrificeCost(permanent, source, controllerId, game)) {
                 return false;
             }
         }
-
         return true;
     }
 

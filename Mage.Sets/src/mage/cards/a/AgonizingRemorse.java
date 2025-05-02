@@ -73,12 +73,12 @@ class AgonizingRemorseEffect extends OneShotEffect {
                 null, "Hand", "Graveyard", source, game)) {
             target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card in " 
                     + opponent.getName() + "'s hand"));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             cards = opponent.getHand();
         } else {
             target = new TargetCard(Zone.GRAVEYARD, new FilterCard("card in " 
                     + opponent.getName() + "'s graveyard"));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             cards = opponent.getGraveyard();
         }
         if (controller.choose(outcome, cards, target, source, game)) {

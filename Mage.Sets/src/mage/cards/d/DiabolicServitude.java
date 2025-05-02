@@ -1,6 +1,8 @@
 package mage.cards.d;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -57,12 +59,12 @@ public final class DiabolicServitude extends CardImpl {
 
 class DiabolicServitudeReturnCreatureEffect extends OneShotEffect {
 
-    public DiabolicServitudeReturnCreatureEffect() {
+    DiabolicServitudeReturnCreatureEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return target creature card from your graveyard to the battlefield";
     }
 
-    public DiabolicServitudeReturnCreatureEffect(final DiabolicServitudeReturnCreatureEffect effect) {
+    private DiabolicServitudeReturnCreatureEffect(final DiabolicServitudeReturnCreatureEffect effect) {
         super(effect);
     }
 
@@ -76,7 +78,7 @@ class DiabolicServitudeReturnCreatureEffect extends OneShotEffect {
         Card cardInGraveyard = game.getCard(getTargetPointer().getFirst(game, source));
         if (cardInGraveyard != null) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             effect.apply(game, source);
 
             game.getState().setValue(source.getSourceId().toString() + "returnedCreature", new MageObjectReference(cardInGraveyard.getId(), game));
@@ -91,9 +93,10 @@ class DiabolicServitudeCreatureDiesTriggeredAbility extends TriggeredAbilityImpl
 
     public DiabolicServitudeCreatureDiesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DiabolicServitudeExileCreatureEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public DiabolicServitudeCreatureDiesTriggeredAbility(final DiabolicServitudeCreatureDiesTriggeredAbility ability) {
+    private DiabolicServitudeCreatureDiesTriggeredAbility(final DiabolicServitudeCreatureDiesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -123,16 +126,21 @@ class DiabolicServitudeCreatureDiesTriggeredAbility extends TriggeredAbilityImpl
     public String getRule() {
         return "When the creature put onto the battlefield with {this} dies, exile it and return {this} to its owner's hand.";
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class DiabolicServitudeExileCreatureEffect extends OneShotEffect {
 
-    public DiabolicServitudeExileCreatureEffect() {
+    DiabolicServitudeExileCreatureEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile it and return {this} to its owner's hand";
     }
 
-    public DiabolicServitudeExileCreatureEffect(final DiabolicServitudeExileCreatureEffect effect) {
+    private DiabolicServitudeExileCreatureEffect(final DiabolicServitudeExileCreatureEffect effect) {
         super(effect);
     }
 
@@ -156,12 +164,12 @@ class DiabolicServitudeExileCreatureEffect extends OneShotEffect {
 
 class DiabolicServitudeSourceLeftBattlefieldEffect extends OneShotEffect {
 
-    public DiabolicServitudeSourceLeftBattlefieldEffect() {
+    DiabolicServitudeSourceLeftBattlefieldEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile the creature put onto the battlefield with {this}";
     }
 
-    public DiabolicServitudeSourceLeftBattlefieldEffect(final DiabolicServitudeSourceLeftBattlefieldEffect effect) {
+    private DiabolicServitudeSourceLeftBattlefieldEffect(final DiabolicServitudeSourceLeftBattlefieldEffect effect) {
         super(effect);
     }
 

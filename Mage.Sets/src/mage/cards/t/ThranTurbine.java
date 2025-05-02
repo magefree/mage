@@ -3,7 +3,8 @@ package mage.cards.t;
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.SpellAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
@@ -14,10 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -33,8 +31,8 @@ public final class ThranTurbine extends CardImpl {
 
         // At the beginning of your upkeep, you may add {C} or {C}{C}. 
         // You can't spend this mana to cast spells.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new ThranTurbineEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new ThranTurbineEffect(), true));
     }
 
     private ThranTurbine(final ThranTurbine card) {
@@ -49,12 +47,12 @@ public final class ThranTurbine extends CardImpl {
 
 class ThranTurbineEffect extends OneShotEffect {
 
-    public ThranTurbineEffect() {
+    ThranTurbineEffect() {
         super(Outcome.Benefit);
         staticText = "add {C}{C}. You can't spend this mana to cast spells";
     }
 
-    public ThranTurbineEffect(final ThranTurbineEffect effect) {
+    private ThranTurbineEffect(final ThranTurbineEffect effect) {
         super(effect);
     }
 
@@ -65,7 +63,7 @@ class ThranTurbineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
 
         if (player != null) {
             new AddConditionalColorlessManaEffect(2, new ThranTurbineManaBuilder()).apply(game, source);
@@ -101,6 +99,6 @@ class ThranTurbineManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
-        return !(source instanceof Spell);
+        return !(source instanceof SpellAbility && !source.isActivated());
     }
 }

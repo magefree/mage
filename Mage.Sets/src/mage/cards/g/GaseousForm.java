@@ -29,7 +29,7 @@ public final class GaseousForm extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Prevent all combat damage that would be dealt to and dealt by enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
     }
 
     private GaseousForm(final GaseousForm card) {

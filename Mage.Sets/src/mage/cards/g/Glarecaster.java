@@ -38,7 +38,7 @@ public final class Glarecaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {5}{W}: The next time damage would be dealt to Glarecaster and/or you this turn, that damage is dealt to any target instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GlarecasterEffect(), new ManaCostsImpl<>("{5}{W}"));
+        Ability ability = new SimpleActivatedAbility(new GlarecasterEffect(), new ManaCostsImpl<>("{5}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
@@ -69,7 +69,7 @@ class GlarecasterEffect extends RedirectionEffect {
         staticText = "The next time damage would be dealt to {this} and/or you this turn, that damage is dealt to any target instead";
     }
 
-    public GlarecasterEffect(final GlarecasterEffect effect) {
+    private GlarecasterEffect(final GlarecasterEffect effect) {
         super(effect);
         this.redirectToObject = effect.redirectToObject;
     }
@@ -100,12 +100,6 @@ class GlarecasterEffect extends RedirectionEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source
-    ) {
-        return true;
     }
 
 }

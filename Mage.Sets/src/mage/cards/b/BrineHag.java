@@ -51,12 +51,12 @@ public final class BrineHag extends CardImpl {
 
 class BrineHagEffect extends OneShotEffect {
 
-    public BrineHagEffect() {
+    BrineHagEffect() {
         super(Outcome.Detriment);
         this.staticText = "change the base power and toughness of all creatures that dealt damage to it this turn to 0/2";
     }
 
-    public BrineHagEffect(final BrineHagEffect effect) {
+    private BrineHagEffect(final BrineHagEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class BrineHagEffect extends OneShotEffect {
         if (!set.isEmpty()) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new PermanentReferenceInCollectionPredicate(set));
-            game.addEffect(new SetBasePowerToughnessAllEffect(0, 2, Duration.Custom, filter, true), source);
+            game.addEffect(new SetBasePowerToughnessAllEffect(0, 2, Duration.Custom, filter), source);
         }
         return true;
     }

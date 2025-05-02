@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -10,11 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
@@ -23,6 +17,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,12 +54,12 @@ public final class GenesisHydra extends CardImpl {
 
 class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
 
-    public GenesisHydraPutOntoBattlefieldEffect() {
+    GenesisHydraPutOntoBattlefieldEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "reveal the top X cards of your library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield. Then shuffle the rest into your library";
     }
 
-    public GenesisHydraPutOntoBattlefieldEffect(final GenesisHydraPutOntoBattlefieldEffect effect) {
+    private GenesisHydraPutOntoBattlefieldEffect(final GenesisHydraPutOntoBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -71,15 +68,14 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Object obj = getValue(CastSourceTriggeredAbility.SOURCE_CAST_SPELL_ABILITY);
         if (controller != null && obj instanceof SpellAbility) {
-            int count = ((SpellAbility) obj).getManaCostsToPay().getX();
+            int count = CardUtil.getSourceCostsTag(game, ((SpellAbility) obj), "X", 0);
             if (count > 0) {
                 Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, count));
                 controller.revealCards(source, cards, game);
                 FilterCard filter = new FilterPermanentCard("a nonland permanent card with mana value " + count + " or less to put onto the battlefield");
                 filter.add(Predicates.not(CardType.LAND.getPredicate()));
                 filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, count + 1));
-                TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
-                target1.setRequired(false);
+                TargetCard target1 = new TargetCard(0, 1, Zone.LIBRARY, filter);
                 if (cards.count(filter, source.getSourceId(), source, game) > 0) {
                     if (controller.choose(Outcome.PutCardInPlay, cards, target1, source, game)) {
                         Card card = cards.get(target1.getFirstTarget(), game);

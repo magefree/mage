@@ -78,6 +78,7 @@ class KayaTheInexorableTriggeredAbility extends TriggeredAbilityImpl {
 
     public KayaTheInexorableTriggeredAbility() {
         super(Zone.ALL, null, false);
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
     private KayaTheInexorableTriggeredAbility(KayaTheInexorableTriggeredAbility ability) {
@@ -105,22 +106,6 @@ class KayaTheInexorableTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        Permanent sourcePermanent = null;
-        if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
-            sourcePermanent = game.getPermanent(getSourceId());
-        } else {
-            if (game.getShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
-                sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
-            }
-        }
-        if (sourcePermanent == null) {
-            return false;
-        }
-        return hasSourceObjectAbility(game, sourcePermanent, event);
     }
 
     @Override

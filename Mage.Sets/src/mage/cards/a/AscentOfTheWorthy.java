@@ -87,7 +87,7 @@ class AscentOfTheWorthyEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }

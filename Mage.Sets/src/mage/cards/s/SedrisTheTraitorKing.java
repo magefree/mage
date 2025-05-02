@@ -30,7 +30,7 @@ public final class SedrisTheTraitorKing extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Each creature card in your graveyard has unearth {2}{B}.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SedrisTheTraitorKingEffect()));
+        this.addAbility(new SimpleStaticAbility(new SedrisTheTraitorKingEffect()));
     }
 
     private SedrisTheTraitorKing(final SedrisTheTraitorKing card) {
@@ -49,7 +49,7 @@ class SedrisTheTraitorKingEffect extends ContinuousEffectImpl {
         staticText = "Each creature card in your graveyard has unearth {2}{B}";
     }
 
-    SedrisTheTraitorKingEffect(final SedrisTheTraitorKingEffect effect) {
+    private SedrisTheTraitorKingEffect(final SedrisTheTraitorKingEffect effect) {
         super(effect);
     }
 

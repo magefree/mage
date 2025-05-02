@@ -36,7 +36,7 @@ public final class ChainersTormentNightmareToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    protected ChainersTormentNightmareToken(final ChainersTormentNightmareToken token) {
+    private ChainersTormentNightmareToken(final ChainersTormentNightmareToken token) {
         super(token);
     }
 

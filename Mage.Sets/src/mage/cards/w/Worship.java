@@ -22,7 +22,7 @@ public final class Worship extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WorshipReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new WorshipReplacementEffect()));
     }
 
     private Worship(final Worship card) {
@@ -37,12 +37,12 @@ public final class Worship extends CardImpl {
 
 class WorshipReplacementEffect extends ReplacementEffectImpl {
 
-    public WorshipReplacementEffect() {
+    WorshipReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
-    public WorshipReplacementEffect(final WorshipReplacementEffect effect) {
+    private WorshipReplacementEffect(final WorshipReplacementEffect effect) {
         super(effect);
     }
 
@@ -67,11 +67,6 @@ class WorshipReplacementEffect extends ReplacementEffectImpl {
                 event.setAmount(controller.getLife() - 1);
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

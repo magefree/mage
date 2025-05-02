@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -43,7 +43,7 @@ public final class NettlevineBlight extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted permanent has "At the beginning of your end step, sacrifice this permanent and attach Nettlevine Blight to a creature or land you control."
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new NettlevineBlightEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new NettlevineBlightEffect(), false));
 
     }
 
@@ -59,12 +59,12 @@ public final class NettlevineBlight extends CardImpl {
 
 class NettlevineBlightEffect extends OneShotEffect {
 
-    public NettlevineBlightEffect() {
+    NettlevineBlightEffect() {
         super(Outcome.Detriment);
         this.staticText = "sacrifice this permanent and attach {this} to a creature or land you control";
     }
 
-    public NettlevineBlightEffect(final NettlevineBlightEffect effect) {
+    private NettlevineBlightEffect(final NettlevineBlightEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class NettlevineBlightEffect extends OneShotEffect {
                 filter.add(new ControllerIdPredicate(newController.getId()));
                 filter.add(new CanBeEnchantedByPredicate(nettlevineBlight));
                 Target target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.canChoose(newController.getId(), source, game)
                         && newController.choose(outcome, target, source, game)) {
                     Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());

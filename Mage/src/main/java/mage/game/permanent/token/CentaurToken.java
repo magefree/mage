@@ -18,7 +18,7 @@ public final class CentaurToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected CentaurToken(final CentaurToken token) {
+    private CentaurToken(final CentaurToken token) {
         super(token);
     }
 

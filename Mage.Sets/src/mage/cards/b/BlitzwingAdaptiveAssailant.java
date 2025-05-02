@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -38,7 +38,7 @@ public final class BlitzwingAdaptiveAssailant extends CardImpl {
 
         // At the beginning of combat on your turn, choose flying or indestructible at random. Blitzwing gains that ability until end of turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new BlitzwingCruelTormentorEffect(), TargetController.YOU, false
+                new BlitzwingAdaptiveAssailantEffect()
         ));
 
         // Whenever Blitzwing deals combat damage to a player, convert it.

@@ -25,13 +25,13 @@ public final class SeerOfTheLastTomorrow extends CardImpl {
     public SeerOfTheLastTomorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
         // {U}, {T}, Discard a card: Target player puts the top three cards of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(3), new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(3), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPlayer());

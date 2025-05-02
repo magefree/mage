@@ -57,7 +57,7 @@ class MeadowboonEffect extends OneShotEffect {
         staticText = "put a +1/+1 counter on each creature target player controls";
     }
 
-    MeadowboonEffect(final MeadowboonEffect effect) {
+    private MeadowboonEffect(final MeadowboonEffect effect) {
         super(effect);
     }
 

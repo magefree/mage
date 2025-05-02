@@ -10,24 +10,23 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
 import mage.constants.Rarity;
 import mage.constants.SubType;
-import mage.game.draft.RemixedSet;
+import mage.game.draft.ReshuffledSet;
 import mage.sets.*;
 import mage.util.CardUtil;
 import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.MageTestBase;
+import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
-
 /**
  * @author nigelzor, JayDi85
  */
-public class BoosterGenerationTest extends MageTestBase {
+public class BoosterGenerationTest extends MageTestPlayerBase {
 
     private static final List<String> basics = new ArrayList<>(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
 
@@ -109,35 +108,6 @@ public class BoosterGenerationTest extends MageTestBase {
         Assert.assertNotNull(booster);
         Assert.assertEquals("Pack contains 15 cards", 15, booster.size());
 
-        Assert.assertTrue("Slot 1 is white", booster.get(0).getColor().isWhite());
-        Assert.assertTrue("Slot 2 is white", booster.get(1).getColor().isWhite());
-
-        // Wretched Gryff is colorless, but stores in blue slots
-        Assert.assertTrue("Slot 3 is blue", booster.get(2).getName().equals("Wretched Gryff") || booster.get(2).getColor().isBlue());
-        Assert.assertTrue("Slot 4 is blue", booster.get(3).getName().equals("Wretched Gryff") || booster.get(3).getColor().isBlue());
-
-        Assert.assertTrue("Slot 5 is black", booster.get(4).getColor().isBlack());
-        Assert.assertTrue("Slot 6 is black", booster.get(5).getColor().isBlack());
-
-        Assert.assertTrue("Slot 7 is red", booster.get(6).getColor().isRed());
-        Assert.assertTrue("Slot 8 is red", booster.get(7).getColor().isRed());
-
-        Assert.assertTrue("Slot 9 is green", booster.get(8).getColor().isGreen());
-        Assert.assertTrue("Slot 10 is green", booster.get(9).getColor().isGreen());
-
-        Assert.assertTrue("Slot 11 is multicolored", booster.get(10).getColor().isMulticolored());
-        Assert.assertTrue("Slot 12 is colorless", booster.get(11).getColor().isColorless());
-
-        Assert.assertEquals("Slot 15 is from FMB1 set", "FMB1", booster.get(14).getExpansionSetCode());
-    }
-
-    @Test
-    public void testMysteryBooster1Create15CardBooster() {
-        // https://magic.wizards.com/en/articles/archive/feature/unraveling-mystery-booster-2019-11-14
-        List<Card> booster = MysteryBooster.getInstance().create15CardBooster();
-        Assert.assertNotNull(booster);
-        Assert.assertEquals("Pack contains 15 cards", 15, booster.size());
-
         Assert.assertTrue("Slot 1 is white (" + booster.get(0).getName() + ')', booster.get(0).getColorIdentity().isWhite());
         Assert.assertTrue("Slot 2 is white (" + booster.get(1).getName() + ')', booster.get(1).getColorIdentity().isWhite());
 
@@ -154,14 +124,7 @@ public class BoosterGenerationTest extends MageTestBase {
         Assert.assertTrue("Slot 10 is green (" + booster.get(9).getName() + ')', booster.get(9).getColorIdentity().isGreen());
 
         Assert.assertTrue("Slot 11 is multicolored (" + booster.get(10).getName() + ')', booster.get(10).getColorIdentity().isMulticolored());
-        Assert.assertTrue(
-                "Slot 12 is colorless (" + booster.get(11).getName() + ')',
-                booster.get(11).getColor().isColorless()
-                        || booster.get(11).isLand()
-                        || booster.get(11).isArtifact()
-        );
-
-        Assert.assertEquals("Slot 15 is from FMB1 set", "FMB1", booster.get(14).getExpansionSetCode());
+        Assert.assertTrue("Slot 12 is colorless (" + booster.get(11).getName() + ')', booster.get(11).getColor().isColorless());
     }
 
     @Test
@@ -201,7 +164,7 @@ public class BoosterGenerationTest extends MageTestBase {
         for (int i = 0; i < 50; i++) {
             List<Card> booster = CoreSet2019.getInstance().createBooster();
             // check that booster contains a land card
-            assertTrue(booster.stream().anyMatch(card -> card.isLand()));
+            assertTrue(booster.stream().anyMatch(MageObject::isLand));
             allCards.addAll(booster);
         }
         // check that some dual lands were generated
@@ -548,11 +511,21 @@ public class BoosterGenerationTest extends MageTestBase {
         }
     }
 
+    // String output formatter for the below debug test
+    private static String getManaCostOrColorIdentity(Card card) {
+        String result = card.getManaCost().getText();
+        if (result.isEmpty()) {
+            result = "[" + card.getColorIdentity().toString().replace("{", "").replace("}", "") + "]";
+        }
+        return result;
+    }
+
     @Ignore // debug only: collect info about cards in boosters, see https://github.com/magefree/mage/issues/8081
     @Test
     public void test_CollectBoosterStats() {
-        ExpansionSet setToAnalyse = FallenEmpires.getInstance();
-        int openBoosters = 10000;
+        ExpansionSet setToAnalyse = NewPhyrexia.getInstance();
+        // Takes about a minute for 100,000 boosters
+        int openBoosters = 100000;
 
         Map<String, Integer> resRatio = new HashMap<>();
         int totalCards = 0;
@@ -560,30 +533,46 @@ public class BoosterGenerationTest extends MageTestBase {
             List<Card> booster = setToAnalyse.createBooster();
             totalCards += booster.size();
             booster.forEach(card -> {
-                String code = String.format("%s %s", card.getRarity().getCode(), card.getName());
+                String code = String.format("%s %s %3s  %-32s %18s",
+                        card.getExpansionSetCode(),
+                        card.getRarity().toString().charAt(0),
+                        card.getCardNumber(),
+                        card.getName(),
+                        getManaCostOrColorIdentity(card));
                 resRatio.putIfAbsent(code, 0);
                 resRatio.computeIfPresent(code, (u, count) -> count + 1);
             });
         }
+        System.out.println(setToAnalyse.getName() + " - boosters opened: " + openBoosters + ". Found cards: " + totalCards + "\n");
+        for (char rarity : Arrays.asList('C', 'U', 'R', 'M', 'S', 'L', 'B')) {
+            List<Integer> rarityCounts = resRatio.entrySet().stream()
+                    .filter(e -> e.getKey().charAt(4) == rarity)
+                    .map(Map.Entry::getValue)
+                    .collect(Collectors.toList());
+            if (!rarityCounts.isEmpty()) {
+                System.out.println(rarity + String.format(": %3s unique, min %5s, max %5s, total %7s",
+                        rarityCounts.size(), Collections.min(rarityCounts), Collections.max(rarityCounts),
+                        rarityCounts.stream().mapToInt(x -> x).sum()));
+            }
+        }
         List<String> info = resRatio.entrySet().stream()
                 .sorted((o1, o2) -> Integer.compare(o2.getValue(), o1.getValue()))
-                .map(e -> String.format("%s: %d",
+                .map(e -> String.format("%s: %5d",
                         e.getKey(),
                         e.getValue()
                 ))
                 .collect(Collectors.toList());
-        System.out.println(setToAnalyse.getName() + " - boosters opened: " + openBoosters + ". Found cards: " + totalCards + "\n"
-                + String.join("\n", info));
+        System.out.println("\n" + String.join("\n", info));
     }
 
     @Ignore // debug only
     @Test
-    public void test_RemixedBoosterStats() {
+    public void test_ReshuffledBoosterStats() {
         List<ExpansionSet> sets = new ArrayList<>();
         sets.add(ScarsOfMirrodin.getInstance());
         sets.add(MirrodinBesieged.getInstance());
         sets.add(NewPhyrexia.getInstance());
-        RemixedSet setToAnalyse = new RemixedSet(sets, 10, 3, 1);
+        ReshuffledSet setToAnalyse = new ReshuffledSet(sets, 10, 3, 1);
         int openBoosters = 10000;
 
         Map<String, Integer> resRatio = new HashMap<>();

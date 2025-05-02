@@ -48,12 +48,12 @@ public final class RagsRiches extends SplitCard {
 
 class RichesEffect extends OneShotEffect {
 
-    public RichesEffect() {
+    RichesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each opponent chooses a creature they control. You gain control of each of those creatures.";
+        this.staticText = "Each opponent chooses a creature they control. You gain control of those creatures.";
     }
 
-    public RichesEffect(final RichesEffect effect) {
+    private RichesEffect(final RichesEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class RichesEffect extends OneShotEffect {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
                         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                        target.setNotTarget(true);
+                        target.withNotTarget(true);
                         if (opponent.choose(Outcome.Detriment, target, source, game)) {
                             creaturesToSteal.add(target.getTargets().get(0));
                         }

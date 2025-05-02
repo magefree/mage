@@ -61,7 +61,7 @@ class LurkingSkirgeToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public LurkingSkirgeToken(final LurkingSkirgeToken token) {
+    private LurkingSkirgeToken(final LurkingSkirgeToken token) {
         super(token);
     }
 

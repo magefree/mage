@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
 import java.util.UUID;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class WaterkinShaman extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a creature with flying");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature you control with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
@@ -34,8 +34,8 @@ public final class WaterkinShaman extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever a creature with flying enters the battlefield under your control, Waterkin Shaman gets +1/+1 until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        // Whenever a creature with flying you control enters, Waterkin Shaman gets +1/+1 until end of turn.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter
         ));
     }

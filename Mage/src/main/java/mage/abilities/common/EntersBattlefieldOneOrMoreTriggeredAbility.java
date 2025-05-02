@@ -1,6 +1,6 @@
 package mage.abilities.common;
 
-import mage.MageItem;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -8,69 +8,60 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-
-import java.util.Objects;
-import java.util.stream.Stream;
 
 /**
  * "Whenever one or more {filter} enter the battlefield under {target controller} control,
  *
- * @author Alex-Vasile
+ * @author Alex-Vasile, xenohedron
  */
-public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbilityImpl {
+public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
-    private final FilterPermanent filterPermanent;
+    private final FilterPermanent filter;
     private final TargetController targetController;
 
     public EntersBattlefieldOneOrMoreTriggeredAbility(Effect effect, FilterPermanent filter, TargetController targetController) {
         super(Zone.BATTLEFIELD, effect);
-        this.filterPermanent = filter;
+        this.filter = filter;
         this.targetController = targetController;
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    private EntersBattlefieldOneOrMoreTriggeredAbility(final EntersBattlefieldOneOrMoreTriggeredAbility ability) {
+    protected EntersBattlefieldOneOrMoreTriggeredAbility(final EntersBattlefieldOneOrMoreTriggeredAbility ability) {
         super(ability);
-        this.filterPermanent = ability.filterPermanent;
+        this.filter = ability.filter;
         this.targetController = ability.targetController;
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.BATTLEFIELD) {
+            return false;
+        }
+        Permanent permanent = event.getTarget();
+        if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
+            return false;
+        }
+        switch (targetController) {
+            case YOU:
+                return isControlledBy(permanent.getControllerId());
+            case OPPONENT:
+                return game.getOpponents(getControllerId()).contains(permanent.getControllerId());
+            default:
+                throw new IllegalArgumentException("Unsupported TargetController in EntersBattlefieldOneOrMoreTriggeredAbility: " + targetController);
+        }
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        Player controller = game.getPlayer(this.controllerId);
-        if (zEvent.getToZone() != Zone.BATTLEFIELD || controller == null) {
-            return false;
-        }
-
-        switch (this.targetController) {
-            case YOU:
-                if (!controller.getId().equals(zEvent.getPlayerId())) {
-                    return false;
-                }
-                break;
-            case OPPONENT:
-                if (!controller.hasOpponent(zEvent.getPlayerId(), game)) {
-                    return false;
-                }
-                break;
-        }
-
-        return Stream.concat(
-                zEvent.getTokens().stream(),
-                zEvent.getCards().stream()
-                        .map(MageItem::getId)
-                        .map(game::getPermanent)
-                        .filter(Objects::nonNull)
-        ).anyMatch(permanent -> filterPermanent.match(permanent, this.controllerId, this, game));
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override
@@ -79,16 +70,20 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
     }
 
     private String generateTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("Whenever one or more " + this.filterPermanent.getMessage() + " enter the battlefield under ");
+        StringBuilder sb = new StringBuilder("Whenever one or more " + filter.getMessage());
         switch (targetController) {
             case YOU:
-                sb.append("your control, ");
+                if (filter.getMessage().contains("you control")) {
+                    sb.append(" enter, ");
+                } else {
+                    sb.append(" you control enter, ");
+                }
                 break;
             case OPPONENT:
-                sb.append("an opponent's control, ");
+                sb.append(" enter under an opponent's control, ");
                 break;
             default:
-                throw new UnsupportedOperationException();
+                throw new IllegalArgumentException("Unsupported TargetController in EntersBattlefieldOneOrMoreTriggeredAbility: " + targetController);
         }
         return sb.toString();
     }

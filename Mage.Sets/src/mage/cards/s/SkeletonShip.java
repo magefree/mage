@@ -35,7 +35,7 @@ public final class SkeletonShip extends CardImpl {
                 new SacrificeSourceEffect()));
 
         // {tap}: Put a -1/-1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

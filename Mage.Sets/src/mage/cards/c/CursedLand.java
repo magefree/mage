@@ -2,7 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -35,8 +34,9 @@ public final class CursedLand extends CardImpl {
         // At the beginning of the upkeep of enchanted land's controller, Cursed Land deals 1 damage to that player.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to that player");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect,
-            TargetController.CONTROLLER_ATTACHED_TO, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, effect,
+                false)
+                .setTriggerPhrase("At the beginning of the upkeep of enchanted land's controller, "));
     }
 
     private CursedLand(final CursedLand card) {

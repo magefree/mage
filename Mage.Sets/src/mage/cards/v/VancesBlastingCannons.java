@@ -1,11 +1,9 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -14,19 +12,15 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -40,11 +34,11 @@ public final class VancesBlastingCannons extends CardImpl {
         this.secondSideCardClazz = mage.cards.s.SpitfireBastion.class;
 
         // At the beginning of your upkeep, exile the top card of your library.  If it's a nonland card, you may cast that card this turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VancesBlastingCannonsExileEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VancesBlastingCannonsExileEffect()));
 
         // Whenever you cast your third spell in a turn, transform Vance's Blasting Cannons.
         this.addAbility(new TransformAbility());
-        this.addAbility(new VancesBlastingCannonsFlipTrigger(), new CastSpellLastTurnWatcher());
+        this.addAbility(new VancesBlastingCannonsFlipTrigger());
     }
 
     private VancesBlastingCannons(final VancesBlastingCannons card) {
@@ -59,12 +53,12 @@ public final class VancesBlastingCannons extends CardImpl {
 
 class VancesBlastingCannonsExileEffect extends OneShotEffect {
 
-    public VancesBlastingCannonsExileEffect() {
+    VancesBlastingCannonsExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top card of your library. If it's a nonland card, you may cast that card this turn";
     }
 
-    public VancesBlastingCannonsExileEffect(final VancesBlastingCannonsExileEffect effect) {
+    private VancesBlastingCannonsExileEffect(final VancesBlastingCannonsExileEffect effect) {
         super(effect);
     }
 
@@ -96,12 +90,12 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
 
 class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
 
-    public CastFromNonHandZoneTargetEffect(Duration duration) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
+    CastFromNonHandZoneTargetEffect(Duration duration) {
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
         staticText = "If it's a nonland card, you may cast that card this turn";
     }
 
-    public CastFromNonHandZoneTargetEffect(final CastFromNonHandZoneTargetEffect effect) {
+    private CastFromNonHandZoneTargetEffect(final CastFromNonHandZoneTargetEffect effect) {
         super(effect);
     }
 
@@ -134,7 +128,7 @@ class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new TransformSourceEffect(), true);
     }
 
-    public VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {
+    private VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {
         super(ability);
     }
 

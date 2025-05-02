@@ -30,13 +30,11 @@ public final class PyxisOfPandemonium extends CardImpl {
 
         // {T}: Each player exiles the top card of their library face down.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new PyxisOfPandemoniumExileEffect(),
                 new TapSourceCost()));
 
         // {7}, {T}, Sacrifice Pyxis of Pandemonium: Each player turns face up all cards they own exiled with Pyxis of Pandemonium, then puts all permanent cards among them onto the battlefield.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new PyxisOfPandemoniumPutOntoBattlefieldEffect(),
                 new GenericManaCost(7));
         ability.addCost(new TapSourceCost());
@@ -57,12 +55,12 @@ public final class PyxisOfPandemonium extends CardImpl {
 
 class PyxisOfPandemoniumExileEffect extends OneShotEffect {
 
-    public PyxisOfPandemoniumExileEffect() {
+    PyxisOfPandemoniumExileEffect() {
         super(Outcome.Detriment);
         this.staticText = "Each player exiles the top card of their library face down";
     }
 
-    public PyxisOfPandemoniumExileEffect(final PyxisOfPandemoniumExileEffect effect) {
+    private PyxisOfPandemoniumExileEffect(final PyxisOfPandemoniumExileEffect effect) {
         super(effect);
     }
 
@@ -110,13 +108,13 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
 
 class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
 
-    public PyxisOfPandemoniumPutOntoBattlefieldEffect() {
+    PyxisOfPandemoniumPutOntoBattlefieldEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Each player turns face up all cards they own exiled with {this}, "
                 + "then puts all permanent cards among them onto the battlefield";
     }
 
-    public PyxisOfPandemoniumPutOntoBattlefieldEffect(final PyxisOfPandemoniumPutOntoBattlefieldEffect effect) {
+    private PyxisOfPandemoniumPutOntoBattlefieldEffect(final PyxisOfPandemoniumPutOntoBattlefieldEffect effect) {
         super(effect);
     }
 

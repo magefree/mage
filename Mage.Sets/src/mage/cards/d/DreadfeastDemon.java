@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -10,11 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -43,10 +41,8 @@ public final class DreadfeastDemon extends CardImpl {
         // At the beginning of your end step, sacrifice a non-Demon creature. If you do, create a token that's a copy of Dreadfeast Demon.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenCopySourceEffect(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(filter)
-                ), null, false
-        ), TargetController.YOU, false));
+                new SacrificeTargetCost(filter), null, false
+        )));
     }
 
     private DreadfeastDemon(final DreadfeastDemon card) {

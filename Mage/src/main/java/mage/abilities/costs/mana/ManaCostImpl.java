@@ -2,6 +2,7 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.mana.ManaOptions;
@@ -46,6 +47,9 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     }
 
     @Override
+    abstract public ManaCostImpl copy();
+
+    @Override
     public Mana getPayment() {
         return payment;
     }
@@ -68,7 +72,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     }
 
     @Override
-    public ManaOptions getOptions() {
+    public final ManaOptions getOptions() {
         return getOptions(true);
     }
 
@@ -148,14 +152,15 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         return false;
     }
 
-    protected void assignColorless(Ability ability, Game game, ManaPool pool, int mana, Cost costToPay) {
+    protected boolean assignColorless(Ability ability, Game game, ManaPool pool, int mana, Cost costToPay) {
         int conditionalCount = pool.getConditionalCount(ability, game, null, costToPay);
-        while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
-            if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseColorless();
-            }
-            break;
+        if (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)
+                && pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+            this.payment.increaseColorless();
+            return true;
         }
+
+        return false;
     }
 
     protected boolean assignGeneric(Ability ability, Game game, ManaPool pool, int mana, FilterMana filterMana, Cost costToPay) {
@@ -250,6 +255,13 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             return true;
         }
         Player player = game.getPlayer(controllerId);
+        if (player == null) {
+            return false;
+        }
+
+        // no needs to call
+        //AbilityImpl.handlePhyrexianLikeEffects(game, source, ability, this);
+
         if (!player.getManaPool().isForcedToPay()) {
             assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);
         }
@@ -281,19 +293,21 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         switch (symbol) {
             case B:
                 this.options.add(Mana.BlackMana(1));
-                break;
+                return;
             case U:
                 this.options.add(Mana.BlueMana(1));
-                break;
+                return;
             case W:
                 this.options.add(Mana.WhiteMana(1));
-                break;
+                return;
             case R:
                 this.options.add(Mana.RedMana(1));
-                break;
+                return;
             case G:
                 this.options.add(Mana.GreenMana(1));
-                break;
+                return;
+            default:
+                this.options.add(Mana.ColorlessMana(1));
         }
     }
 

@@ -41,8 +41,8 @@ public final class IndulgentAristocrat extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // {2}, Sacrifice a creature: Put a +1/+1 counter on each Vampire you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new GenericManaCost(2));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

@@ -55,7 +55,7 @@ class DeusOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
 
-    public DeusOfCalamityTriggeredAbility(final DeusOfCalamityTriggeredAbility ability) {
+    private DeusOfCalamityTriggeredAbility(final DeusOfCalamityTriggeredAbility ability) {
         super(ability);
     }
 

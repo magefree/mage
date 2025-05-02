@@ -33,7 +33,7 @@ public final class MysticSubdual extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -73,11 +73,11 @@ class MysticSubdualEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
-            return true;
+            return false;
         }
         Permanent creature = game.getPermanent(permanent.getAttachedTo());
         if (creature == null) {
-            return true;
+            return false;
         }
         creature.removeAllAbilities(source.getSourceId(), game);
         return true;

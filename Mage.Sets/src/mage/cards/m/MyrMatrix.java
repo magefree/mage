@@ -33,12 +33,12 @@ public final class MyrMatrix extends CardImpl {
         public MyrMatrix (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new MyrToken()), new GenericManaCost(5)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new MyrToken()), new GenericManaCost(5)));
 
     }
 
-    public MyrMatrix (final MyrMatrix card) {
+    private MyrMatrix(final MyrMatrix card) {
         super(card);
     }
 

@@ -6,6 +6,7 @@ import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
@@ -21,7 +22,9 @@ public final class ThroughTheBreach extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.
-        this.getSpellAbility().addEffect(new PutCardIntoPlayWithHasteAndSacrificeEffect(StaticFilters.FILTER_CARD_CREATURE));
+        this.getSpellAbility().addEffect(new PutCardIntoPlayWithHasteAndSacrificeEffect(
+                StaticFilters.FILTER_CARD_CREATURE, Duration.Custom, "That creature", "that creature"
+        ));
 
         // Splice onto Arcane {2}{R}{R}
         this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, new ManaCostsImpl<>("{2}{R}{R}")));

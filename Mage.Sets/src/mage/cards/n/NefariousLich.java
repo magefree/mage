@@ -33,10 +33,10 @@ public final class NefariousLich extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}{B}");
 
         // If damage would be dealt to you, exile that many cards from your graveyard instead. If you can't, you lose the game.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NefariousLichDamageReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new NefariousLichDamageReplacementEffect()));
 
         // If you would gain life, draw that many cards instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NefariousLichLifeGainReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new NefariousLichLifeGainReplacementEffect()));
 
         // When Nefarious Lich leaves the battlefield, you lose the game.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false));
@@ -61,7 +61,7 @@ class NefariousLichDamageReplacementEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to you, exile that many cards from your graveyard instead. If you can't, you lose the game.";
     }
 
-    NefariousLichDamageReplacementEffect(final NefariousLichDamageReplacementEffect effect) {
+    private NefariousLichDamageReplacementEffect(final NefariousLichDamageReplacementEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -116,7 +116,7 @@ class NefariousLichLifeGainReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would gain life, draw that many cards instead";
     }
 
-    NefariousLichLifeGainReplacementEffect(final NefariousLichLifeGainReplacementEffect effect) {
+    private NefariousLichLifeGainReplacementEffect(final NefariousLichLifeGainReplacementEffect effect) {
         super(effect);
     }
 

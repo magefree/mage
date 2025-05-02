@@ -1,16 +1,14 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
+import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,22 +20,23 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author FenrisulfrX
  */
 public final class PaladinOfPrahv extends CardImpl {
 
     public PaladinOfPrahv(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // Whenever Paladin of Prahv deals damage, you gain that much life.
-        this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
-        
+        this.addAbility(new DealsDamageSourceTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)));
+
         // Forecast - {1}{W}, Reveal Paladin of Prahv from your hand: Whenever target creature deals damage this turn, you gain that much life.
         Ability ability = new ForecastAbility(new CreateDelayedTriggeredAbilityEffect(
                 new PaladinOfPrahvTriggeredAbility()), new ManaCostsImpl<>("{1}{W}"));
@@ -56,13 +55,13 @@ public final class PaladinOfPrahv extends CardImpl {
 }
 
 class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
-    
+
     public PaladinOfPrahvTriggeredAbility() {
         super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false);
         setTriggerPhrase("Whenever target creature deals damage this turn, ");
     }
 
-    public PaladinOfPrahvTriggeredAbility(final PaladinOfPrahvTriggeredAbility ability) {
+    private PaladinOfPrahvTriggeredAbility(final PaladinOfPrahvTriggeredAbility ability) {
         super(ability);
     }
 
@@ -73,7 +72,7 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
+        switch (event.getType()) {
             case DAMAGED_PERMANENT:
             case DAMAGED_PLAYER:
                 return true;

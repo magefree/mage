@@ -43,7 +43,7 @@ public final class FalkenrathGorger extends CardImpl {
          * from Falkenrath Gorger.
          */
         // Each Vampire creature card you own that isn't on the battlefield has madness. Its madness cost is equal to its mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FalkenrathGorgerEffect()));
+        this.addAbility(new SimpleStaticAbility(new FalkenrathGorgerEffect()));
     }
 
     private FalkenrathGorger(final FalkenrathGorger card) {
@@ -72,7 +72,7 @@ class FalkenrathGorgerEffect extends ContinuousEffectImpl {
         this.staticText = "Each Vampire creature card you own that isn't on the battlefield has madness. The madness cost is equal to its mana cost";
     }
 
-    public FalkenrathGorgerEffect(final FalkenrathGorgerEffect effect) {
+    private FalkenrathGorgerEffect(final FalkenrathGorgerEffect effect) {
         super(effect);
         this.madnessAbilities.putAll(effect.madnessAbilities);
     }

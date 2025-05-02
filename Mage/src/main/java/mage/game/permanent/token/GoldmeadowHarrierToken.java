@@ -27,13 +27,13 @@ public final class GoldmeadowHarrierToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    protected GoldmeadowHarrierToken(final GoldmeadowHarrierToken token) {
+    private GoldmeadowHarrierToken(final GoldmeadowHarrierToken token) {
         super(token);
     }
 

@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,13 +10,13 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -48,11 +48,10 @@ public final class KnightOfTheEbonLegion extends CardImpl {
         // At the beginning of your end step, if a player lost 4 or more life this turn, put a +1/+1 counter on Knight of the Ebon Legion.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        TargetController.YOU, false
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 ), KnightOfTheEbonLegionCondition.instance, "At the beginning of your end step, " +
                 "if a player lost 4 or more life this turn, put a +1/+1 counter on {this}."
-        ));
+        ).addHint(new ConditionHint(KnightOfTheEbonLegionCondition.instance, "A player lost 4 or more life this turn")));
     }
 
     private KnightOfTheEbonLegion(final KnightOfTheEbonLegion card) {

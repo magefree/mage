@@ -51,12 +51,12 @@ public final class GideonsDefeat extends CardImpl {
 
 class GideonsDefeatEffect extends OneShotEffect {
 
-    public GideonsDefeatEffect() {
+    GideonsDefeatEffect() {
         super(Outcome.Exile);
         staticText = "Exile target white creature that's attacking or blocking. If it was a Gideon planeswalker, you gain 5 life";
     }
 
-    public GideonsDefeatEffect(final GideonsDefeatEffect effect) {
+    private GideonsDefeatEffect(final GideonsDefeatEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class GideonsDefeatEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
             controller.moveCards(permanent, Zone.EXILED, source, game);
-            game.getState().processAction(game);
+            game.processAction();
             if (permanent.isPlaneswalker(game) && permanent.hasSubtype(SubType.GIDEON, game)) {
                 controller.gainLife(5, game, source);
             }

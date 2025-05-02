@@ -35,7 +35,7 @@ public final class HaazdaExonerator extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

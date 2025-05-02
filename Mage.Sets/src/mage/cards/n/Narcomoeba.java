@@ -1,16 +1,15 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromLibrarySourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,8 +26,11 @@ public final class Narcomoeba extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Narcomoeba is put into your graveyard from your library, you may put it onto the battlefield.
-        this.addAbility(new NarcomoebaAbility());
+        this.addAbility(new PutIntoGraveFromLibrarySourceTriggeredAbility(
+                new ReturnSourceFromGraveyardToBattlefieldEffect().setText("put it onto the battlefield"), true
+        ));
     }
 
     private Narcomoeba(final Narcomoeba card) {
@@ -38,27 +40,5 @@ public final class Narcomoeba extends CardImpl {
     @Override
     public Narcomoeba copy() {
         return new Narcomoeba(this);
-    }
-}
-
-
-class NarcomoebaAbility extends ZoneChangeTriggeredAbility {
-    public NarcomoebaAbility() {
-        super(Zone.LIBRARY, Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), "",  true);
-    }
-
-    public NarcomoebaAbility(final NarcomoebaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public NarcomoebaAbility copy() {
-        return new NarcomoebaAbility(this);
-    }
-
- 
-    @Override
-    public String getRule() {
-        return "When {this} is put into your graveyard from your library, you may put it onto the battlefield.";
     }
 }

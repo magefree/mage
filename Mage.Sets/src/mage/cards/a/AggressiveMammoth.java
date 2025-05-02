@@ -31,7 +31,6 @@ public final class AggressiveMammoth extends CardImpl {
 
         // Other creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
                         TrampleAbility.getInstance(),
                         Duration.WhileOnBattlefield,

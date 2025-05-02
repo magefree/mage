@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -47,13 +47,13 @@ public final class TravelingPlague extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each upkeep, put a plague counter on Traveling Plague.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PLAGUE.createInstance()), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new AddCountersSourceEffect(CounterType.PLAGUE.createInstance()), false));
 
         // Enchanted creature gets -1/-1 for each plague counter on Traveling Plague.
         DynamicValue boostValue = new MultipliedValue(new CountersSourceCount(CounterType.PLAGUE), -1);
         Effect effect = new BoostEnchantedEffect(boostValue, boostValue, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets -1/-1 for each plague counter on {this}");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // When enchanted creature leaves the battlefield, that creature's controller returns Traveling Plague from its owner's graveyard to the battlefield.
         this.addAbility(new TravelingPlagueTriggeredAbility());
@@ -77,7 +77,7 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When enchanted creature leaves the battlefield, ");
     }
 
-    public TravelingPlagueTriggeredAbility(final TravelingPlagueTriggeredAbility ability) {
+    private TravelingPlagueTriggeredAbility(final TravelingPlagueTriggeredAbility ability) {
         super(ability);
     }
 
@@ -112,12 +112,12 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
 
 class TravelingPlagueEffect extends OneShotEffect {
 
-    public TravelingPlagueEffect() {
+    TravelingPlagueEffect() {
         super(Outcome.Detriment);
         staticText = "that creature's controller returns {this} from its owner's graveyard to the battlefield";
     }
 
-    public TravelingPlagueEffect(final TravelingPlagueEffect effect) {
+    private TravelingPlagueEffect(final TravelingPlagueEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class TravelingPlagueEffect extends OneShotEffect {
                     && game.getState().getZone(travelingPlague.getId()) == Zone.GRAVEYARD // aura must come from the graveyard
                     && controllerOfEnchantedCreature != null) {
                 TargetPermanent target = new TargetPermanent(new FilterCreaturePermanent("creature to enchant with " + travelingPlague.getName()));
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (controllerOfEnchantedCreature.choose(Outcome.Detriment, target, source, game)) {
                     Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                     if (!targetPermanent.cantBeAttachedBy(travelingPlague, source, game, false)) {

@@ -71,13 +71,13 @@ public final class NissaStewardOfElements extends CardImpl {
 
 class NissaStewardOfElementsEffect extends OneShotEffect {
 
-    public NissaStewardOfElementsEffect() {
+    NissaStewardOfElementsEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "look at the top card of your library. If it's a land card or a creature card with mana value less than or equal "
                 + "to the number of loyalty counters on {this}, you may put that card onto the battlefield";
     }
 
-    public NissaStewardOfElementsEffect(final NissaStewardOfElementsEffect effect) {
+    private NissaStewardOfElementsEffect(final NissaStewardOfElementsEffect effect) {
         super(effect);
     }
 
@@ -122,7 +122,7 @@ class NissaStewardOfElementsToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
+    private NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
         super(token);
     }
 

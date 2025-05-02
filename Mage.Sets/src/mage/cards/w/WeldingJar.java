@@ -21,12 +21,12 @@ public final class WeldingJar extends CardImpl {
 
     public WeldingJar (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
 
-    public WeldingJar (final WeldingJar card) {
+    private WeldingJar(final WeldingJar card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public class UndyingAbility extends DiesSourceTriggeredAbility {
     }
 
     @Override
-    public DiesSourceTriggeredAbility copy() {
+    public UndyingAbility copy() {
         return new UndyingAbility(this);
     }
 

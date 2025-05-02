@@ -76,13 +76,12 @@ class Scarmaker extends TokenImpl {
 
         // Remove a ki counter from Scarmaker: Target creature gains fear until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public Scarmaker(final Scarmaker token) {
+    private Scarmaker(final Scarmaker token) {
         super(token);
     }
 

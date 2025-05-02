@@ -40,7 +40,7 @@ public final class HarmoniousArchon extends CardImpl {
 
         // Non-Archon creatures have base power and toughness 3/3.
         this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessAllEffect(
-                3, 3, Duration.WhileOnBattlefield, filter, true
+                3, 3, Duration.WhileOnBattlefield, filter
         )));
 
         // When Harmonious Archon enters the battlefield, create two 1/1 white Human creature tokens.

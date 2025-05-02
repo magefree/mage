@@ -36,7 +36,6 @@ public final class TezzeretsStrider extends CardImpl {
 
         // As long as you control a Tezzeret planeswalker, Tezzeret's Strider has menace.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 new MenaceAbility(true),

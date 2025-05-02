@@ -126,12 +126,12 @@ class NahiriHeirOfTheAncientsEffect extends OneShotEffect {
                             .collect(Collectors.toSet())
             ));
             TargetPermanent target = new TargetPermanent(tokenFilter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             tokenCreature = game.getPermanent(target.getFirstTarget());
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         tokenCreature.addAttachment(target.getFirstTarget(), source, game);
         return true;

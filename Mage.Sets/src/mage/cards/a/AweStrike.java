@@ -41,12 +41,12 @@ public final class AweStrike extends CardImpl {
 
 class AweStrikeEffect extends PreventionEffectImpl {
 
-    public AweStrikeEffect() {
+    AweStrikeEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         this.staticText = "The next time target creature would deal damage this turn, prevent that damage. You gain life equal to the damage prevented this way";
     }
 
-    public AweStrikeEffect(final AweStrikeEffect effect) {
+    private AweStrikeEffect(final AweStrikeEffect effect) {
         super(effect);
     }
 

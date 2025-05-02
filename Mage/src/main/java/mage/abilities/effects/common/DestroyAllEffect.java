@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -13,8 +12,8 @@ import mage.game.permanent.Permanent;
  */
 public class DestroyAllEffect extends OneShotEffect {
 
-    private FilterPermanent filter;
-    private boolean noRegen;
+    private final FilterPermanent filter;
+    private final boolean noRegen;
 
     public DestroyAllEffect(FilterPermanent filter) {
         this(filter, false);
@@ -24,11 +23,7 @@ public class DestroyAllEffect extends OneShotEffect {
         super(Outcome.DestroyPermanent);
         this.filter = filter;
         this.noRegen = noRegen;
-        if (noRegen) {
-            staticText = "destroy all " + filter.getMessage() + ". They can't be regenerated";
-        } else {
-            staticText = "destroy all " + filter.getMessage();
-        }
+        this.staticText = "destroy all " + filter.getMessage() + (noRegen ? ". They can't be regenerated" : "");
     }
 
     protected DestroyAllEffect(final DestroyAllEffect effect) {

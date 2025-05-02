@@ -17,7 +17,6 @@ import mage.target.targetpointer.FixedTarget;
 public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     protected final FilterSpell filter;
-    protected final String rule;
 
     // If either the cast spell or the card must be set as TargetPointer of effects.
     protected final SetTargetPointer setTargetPointer;
@@ -40,33 +39,27 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     public SpellCastControllerTriggeredAbility(Zone zone, Effect effect, FilterSpell filter,
                                                boolean optional, SetTargetPointer setTargetPointer) {
-        this(zone, effect, filter, optional, setTargetPointer, null, null);
+        this(zone, effect, filter, optional, setTargetPointer, null);
     }
 
 
     public SpellCastControllerTriggeredAbility(Zone zone, Effect effect, FilterSpell filter,
                                                boolean optional, SetTargetPointer setTargetPointer,
-                                               String rule, Zone fromZone) {
+                                               Zone fromZone) {
         super(zone, effect, optional);
         this.filter = filter == null ? StaticFilters.FILTER_SPELL_A : filter;
         this.setTargetPointer = setTargetPointer;
-        this.rule = rule;
         this.fromZone = fromZone == null ? Zone.ALL : fromZone;
         makeTriggerPhrase();
     }
 
     public static SpellCastControllerTriggeredAbility createWithFromZone(Effect effect, FilterSpell filter, boolean optional, Zone fromZone) {
-        return new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filter, optional, SetTargetPointer.NONE, null, fromZone);
-    }
-
-    public static SpellCastControllerTriggeredAbility createWithRule(Effect effect, FilterSpell filter, boolean optional, String rule) {
-        return new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filter, optional, SetTargetPointer.NONE, rule, null);
+        return new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filter, optional, SetTargetPointer.NONE, fromZone);
     }
 
     protected SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
-        this.rule = ability.rule;
         this.setTargetPointer = ability.setTargetPointer;
         this.fromZone = ability.fromZone;
     }
@@ -90,22 +83,18 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         this.getEffects().setValue("spellCast", spell);
         switch (setTargetPointer) {
             case NONE:
+            case PLAYER: // for subclasses only, needs to be handled there
                 break;
             case SPELL:
-                getEffects().setTargetPointer(new FixedTarget(spell.getId(), game));
+                getAllEffects().setTargetPointer(new FixedTarget(spell.getId(), game));
                 break;
             case CARD:
-                getEffects().setTargetPointer(new FixedTarget(spell.getCard().getId()));
+                getAllEffects().setTargetPointer(new FixedTarget(spell.getCard().getId()));
                 break;
             default:
-                throw new UnsupportedOperationException("Unexpected setTargetPointer " + setTargetPointer);
+                throw new UnsupportedOperationException("Unexpected setTargetPointer in SpellCastControllerTriggeredAbility: " + setTargetPointer);
         }
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        return rule != null ? rule : super.getRule();
     }
 
     @Override
@@ -114,7 +103,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private void makeTriggerPhrase() {
-        String text = "Whenever you cast " + filter.getMessage();
+        String text = getWhen() + "you cast " + filter.getMessage();
 
         switch (fromZone) {
             case ALL:
@@ -126,7 +115,6 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
                 text += " from your " + fromZone.toString().toLowerCase();
                 break;
         }
-
         setTriggerPhrase(text + ", ");
     }
 }

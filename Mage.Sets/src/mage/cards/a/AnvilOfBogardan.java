@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -26,10 +26,10 @@ public final class AnvilOfBogardan extends CardImpl {
 
         // Players have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, HandSizeModification.SET, TargetController.ANY);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // At the beginning of each player's draw step, that player draws an additional card, then discards a card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(Zone.BATTLEFIELD, new AnvilOfBogardanEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.EACH_PLAYER, new AnvilOfBogardanEffect(), false));
     }
     
     private AnvilOfBogardan(final AnvilOfBogardan card) {
@@ -44,7 +44,7 @@ public final class AnvilOfBogardan extends CardImpl {
 
 class AnvilOfBogardanEffect extends OneShotEffect {
     
-    public AnvilOfBogardanEffect(final AnvilOfBogardanEffect effect) {
+    private AnvilOfBogardanEffect(final AnvilOfBogardanEffect effect) {
         super(effect);
     }
     
@@ -55,7 +55,7 @@ class AnvilOfBogardanEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.drawCards(1, source, game);
             targetPlayer.discard(1, false, false, source, game);

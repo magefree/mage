@@ -36,7 +36,7 @@ public final class KorLineSlinger extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

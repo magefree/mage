@@ -98,7 +98,7 @@ class GixYawgmothPraetorTriggeredAbility extends TriggeredAbilityImpl {
 
 class GixYawgmothPraetorDrawEffect extends DoIfCostPaid {
 
-    public GixYawgmothPraetorDrawEffect() {
+    GixYawgmothPraetorDrawEffect() {
         super(new DrawCardTargetEffect(1), new PayLifeCost(1), "Pay 1 life and draw a card?");
         this.staticText = "its controller may pay 1 life. If they do, they draw a card";
     }
@@ -114,15 +114,15 @@ class GixYawgmothPraetorDrawEffect extends DoIfCostPaid {
 
     @Override
     protected Player getPayingPlayer(Game game, Ability source) {
-        return game.getPlayer(targetPointer.getFirst(game, source));
+        return game.getPlayer(getTargetPointer().getFirst(game, source));
     }
 }
 
 class GixYawgmothPraetorExileEffect extends OneShotEffect {
 
-    public GixYawgmothPraetorExileEffect() {
+    GixYawgmothPraetorExileEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Exile the top X cards of target opponent's library. You may play land cards and cast spells from among cards exiled this way without paying their mana costs.";
+        this.staticText = "Exile the top X cards of target opponent's library. You may play lands and cast spells from among cards exiled this way without paying their mana costs.";
     }
 
     private GixYawgmothPraetorExileEffect(final GixYawgmothPraetorExileEffect effect) {

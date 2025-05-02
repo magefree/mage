@@ -18,7 +18,7 @@ public final class RatToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected RatToken(final RatToken token) {
+    private RatToken(final RatToken token) {
         super(token);
     }
 

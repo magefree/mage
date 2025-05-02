@@ -7,9 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -18,15 +16,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SuitUp extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
 
     public SuitUp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
@@ -38,7 +27,7 @@ public final class SuitUp extends CardImpl {
         this.getSpellAbility().addEffect(new SetBasePowerToughnessTargetEffect(
                 4, 5, Duration.EndOfTurn
         ).setText("with base power and toughness 4/5"));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));

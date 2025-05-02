@@ -27,6 +27,8 @@ public final class ShepherdOfTheFlock extends AdventureCard {
         // Return target permanent you control to its owner’s hand.
         this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledPermanent());
+
+        this.finalizeAdventure();
     }
 
     private ShepherdOfTheFlock(final ShepherdOfTheFlock card) {

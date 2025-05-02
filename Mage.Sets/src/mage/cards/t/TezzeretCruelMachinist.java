@@ -69,12 +69,12 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
         permanent.getToughness().setModifiedBaseValue(5);
     };
 
-    public TezzeretCruelMachinistEffect() {
+    TezzeretCruelMachinistEffect() {
         super(Outcome.Benefit);
         this.staticText = "put any number of cards from your hand onto the battlefield face down. They're 5/5 artifact creatures";
     }
 
-    public TezzeretCruelMachinistEffect(final TezzeretCruelMachinistEffect effect) {
+    private TezzeretCruelMachinistEffect(final TezzeretCruelMachinistEffect effect) {
         super(effect);
     }
 

@@ -41,7 +41,7 @@ public final class BantSureblade extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control another multicolored permanent, {this} gets +1/+1"));

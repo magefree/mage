@@ -52,12 +52,12 @@ public final class DreamPillager extends CardImpl {
 
 class DreamPillagerEffect extends OneShotEffect {
 
-    public DreamPillagerEffect() {
+    DreamPillagerEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards";
     }
 
-    public DreamPillagerEffect(final DreamPillagerEffect effect) {
+    private DreamPillagerEffect(final DreamPillagerEffect effect) {
         super(effect);
     }
 

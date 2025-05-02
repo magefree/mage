@@ -30,7 +30,7 @@ public final class WeatherseedElf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target creature gains forestwalk until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(new ForestwalkAbility(false), Duration.EndOfTurn),
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
@@ -66,8 +66,7 @@ public final class CaptainNghathrod extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect()
                         .setText("choose target artifact or creature card in an opponent's graveyard that was put " +
-                                "there from their library this turn. Put it onto the battlefield under your control"),
-                TargetController.YOU, false
+                                "there from their library this turn. Put it onto the battlefield under your control")
         );
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter2));
         this.addAbility(ability, new CaptainNghathrodWatcher());

@@ -32,7 +32,7 @@ public final class MoltenFrame extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
-    public MoltenFrame (final MoltenFrame card) {
+    private MoltenFrame(final MoltenFrame card) {
         super(card);
     }
 

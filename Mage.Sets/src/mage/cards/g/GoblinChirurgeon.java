@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -22,6 +23,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class GoblinChirurgeon extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent(SubType.GOBLIN, "a Goblin");
+
     public GoblinChirurgeon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
         this.subtype.add(SubType.GOBLIN);
@@ -30,9 +33,9 @@ public final class GoblinChirurgeon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice a Goblin: Regenerate target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new RegenerateTargetEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent(SubType.GOBLIN,"a Goblin"))));
+                new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

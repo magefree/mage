@@ -52,7 +52,7 @@ class InTheEyeOfChaosEffect extends OneShotEffect {
         this.staticText = "counter it unless that player pays {X}, where X is its mana value";
     }
 
-    InTheEyeOfChaosEffect(final InTheEyeOfChaosEffect effect) {
+    private InTheEyeOfChaosEffect(final InTheEyeOfChaosEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,7 @@ class InTheEyeOfChaosEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject spell = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {

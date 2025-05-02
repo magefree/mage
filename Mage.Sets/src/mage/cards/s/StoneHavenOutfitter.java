@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -39,10 +38,11 @@ public final class StoneHavenOutfitter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Equipped creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // Whenever an equipped creature you control dies, draw a card.
-        this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter)
+                .setTriggerPhrase("Whenever an equipped creature you control dies, "));
     }
 
     private StoneHavenOutfitter(final StoneHavenOutfitter card) {

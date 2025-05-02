@@ -24,11 +24,11 @@ public final class NecrogenSpellbomb extends CardImpl {
 
     public NecrogenSpellbomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B));
+        Ability firstAbility = new SimpleActivatedAbility(new DiscardTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B));
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetPlayer());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        Ability secondAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         secondAbility.addCost(new SacrificeSourceCost());
         this.addAbility(secondAbility);
     }

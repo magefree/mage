@@ -46,7 +46,7 @@ class VeteranSoldierEffect extends OneShotEffect {
 
     VeteranSoldierEffect() {
         super(Outcome.Benefit);
-        staticText = "for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that player";
+        staticText = "for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that opponent";
     }
 
     private VeteranSoldierEffect(final VeteranSoldierEffect effect) {

@@ -74,7 +74,7 @@ class KothophedSoulHoarderTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature leaves an opponent's graveyard, ");
     }
 
-    public KothophedSoulHoarderTriggeredAbility(final KothophedSoulHoarderTriggeredAbility ability) {
+    private KothophedSoulHoarderTriggeredAbility(final KothophedSoulHoarderTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1,18 +1,18 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SacrificeAllTriggeredAbility;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +23,6 @@ public final class Bloodbriar extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("another permanent");
 
     static {
-        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(AnotherPredicate.instance);
     }
 
@@ -34,7 +33,9 @@ public final class Bloodbriar extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you sacrifice another permanent, put a +1/+1 counter on Bloodbriar.
-        this.addAbility(new SacrificeAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, TargetController.YOU, false));
+        this.addAbility(new SacrificePermanentTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
+        ));
     }
 
     private Bloodbriar(final Bloodbriar card) {

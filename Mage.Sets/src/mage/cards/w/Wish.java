@@ -48,7 +48,7 @@ public final class Wish extends CardImpl {
 
 class WishEffect extends OneShotEffect {
 
-    public WishEffect() {
+    WishEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may play a card you own from outside the game this turn";
     }
@@ -76,8 +76,8 @@ class WishEffect extends OneShotEffect {
 
 class WishPlayFromSideboardEffect extends AsThoughEffectImpl {
 
-    public WishPlayFromSideboardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit, true);
+    WishPlayFromSideboardEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 
     private WishPlayFromSideboardEffect(final WishPlayFromSideboardEffect effect) {
@@ -121,7 +121,7 @@ class WishWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if ((GameEvent.EventType.SPELL_CAST.equals(event.getType()) || GameEvent.EventType.LAND_PLAYED.equals(event.getType()))
                 && event.hasApprovingIdentifier(MageIdentifier.WishWatcher)) {
-            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            usedFrom.add(event.getApprovingObject().getApprovingMageObjectReference());
         }
     }
 

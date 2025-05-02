@@ -40,13 +40,13 @@ public final class DeviantGlee extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+1 and has "{R}: This creature gains trample until end of turn."
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(),Duration.EndOfTurn),new ManaCostsImpl<>("{R}"));
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
+        Ability gainedAbility = new SimpleActivatedAbility(new GainAbilitySourceEffect(TrampleAbility.getInstance(),Duration.EndOfTurn),new ManaCostsImpl<>("{R}"));
         ability2.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule));
         this.addAbility(ability2);
     }
 
-    public DeviantGlee (final DeviantGlee card) {
+    private DeviantGlee(final DeviantGlee card) {
         super(card);
     }
 

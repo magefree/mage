@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -15,7 +15,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.FoodToken;
-import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
@@ -38,7 +37,7 @@ public final class RoccoStreetChef extends CardImpl {
 
         // At the beginning of your end step, each player exiles the top card of their library. Until your next end step, each player may play the card they exiled this way.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new RoccoStreetChefEffect(), TargetController.YOU, false
+                new RoccoStreetChefEffect()
         ));
 
         // Whenever a player plays a land from exile or casts a spell from exile, you put a +1/+1 counter on target creature and create a Food token.
@@ -85,7 +84,7 @@ class RoccoStreetChefEffect extends OneShotEffect {
             }
             player.moveCards(card, Zone.EXILED, source, game);
             CardUtil.makeCardPlayable(
-                    game, source, card, Duration.UntilYourNextEndStep,
+                    game, source, card, false, Duration.UntilYourNextEndStep,
                     false, playerId, null
             );
         }

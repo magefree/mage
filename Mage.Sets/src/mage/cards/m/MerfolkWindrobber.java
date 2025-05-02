@@ -63,7 +63,7 @@ class MerfolkWindrobberTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MillCardsTargetEffect(1));
     }
 
-    public MerfolkWindrobberTriggeredAbility(final MerfolkWindrobberTriggeredAbility ability) {
+    private MerfolkWindrobberTriggeredAbility(final MerfolkWindrobberTriggeredAbility ability) {
         super(ability);
     }
 

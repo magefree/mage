@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -6,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -93,12 +91,13 @@ public final class SkullbriarTheWalkingGrave extends CardImpl {
 }
 
 class SkullbriarEffect extends ReplacementEffectImpl {
-    public SkullbriarEffect() {
+
+    SkullbriarEffect() {
         super(Duration.EndOfGame, Outcome.Benefit);
         staticText = "Counters remain on {this} as it moves to any zone other than a player's hand or library.";
     }
 
-    public SkullbriarEffect(SkullbriarEffect effect) {
+    private SkullbriarEffect(final SkullbriarEffect effect) {
         super(effect);
     }
 
@@ -118,7 +117,7 @@ class SkullbriarEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public SkullbriarEffect copy() {
         return new SkullbriarEffect(this);
     }
 }

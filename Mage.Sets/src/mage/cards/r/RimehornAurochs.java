@@ -49,13 +49,13 @@ public final class RimehornAurochs extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Rimehorn Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, "it"), false));
 
         // {2}{S}: Target creature blocks target creature this turn if able.
         Ability ability = new SimpleActivatedAbility(new RimehornAurochsEffect(), new ManaCostsImpl<>("{2}{S}"));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that must block")));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature that is to be blocked")));
-        this.addAbility(ability, new BlockedAttackerWatcher());
+        this.addAbility(ability);
     }
 
     private RimehornAurochs(final RimehornAurochs card) {
@@ -70,7 +70,7 @@ public final class RimehornAurochs extends CardImpl {
 
 class RimehornAurochsEffect extends RequirementEffect {
 
-    public RimehornAurochsEffect() {
+    RimehornAurochsEffect() {
         this(Duration.EndOfTurn);
     }
 
@@ -79,7 +79,7 @@ class RimehornAurochsEffect extends RequirementEffect {
         staticText = "Target creature blocks target creature this turn if able";
     }
 
-    public RimehornAurochsEffect(final RimehornAurochsEffect effect) {
+    private RimehornAurochsEffect(final RimehornAurochsEffect effect) {
         super(effect);
     }
 

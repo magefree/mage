@@ -18,7 +18,7 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
     public AllyEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setAbilityWord(AbilityWord.RALLY);
-        setTriggerPhrase("Whenever {this} or another Ally enters the battlefield under your control, ");
+        setTriggerPhrase("Whenever {this} or another Ally you control enters, ");
     }
 
     public AllyEntersBattlefieldTriggeredAbility(AllyEntersBattlefieldTriggeredAbility ability) {

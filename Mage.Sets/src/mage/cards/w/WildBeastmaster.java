@@ -1,17 +1,18 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,10 +31,8 @@ public final class WildBeastmaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Wild Beastmaster attacks, each other creature you control gets +X/+X until end of turn, where X is Wild Beastmaster's power.
-        SourcePermanentPowerCount creaturePower = new SourcePermanentPowerCount();
-        BoostControlledEffect effect = new BoostControlledEffect(creaturePower, creaturePower, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true, true);
+        BoostControlledEffect effect = new BoostControlledEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true);
         effect.setText(EFFECT_TEXT);
-        effect.setLockedIn(true);
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 

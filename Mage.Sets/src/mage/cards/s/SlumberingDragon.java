@@ -33,7 +33,7 @@ public final class SlumberingDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Slumbering Dragon can't attack or block unless it has five or more +1/+1 counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SlumberingDragonEffect()));
+        this.addAbility(new SimpleStaticAbility(new SlumberingDragonEffect()));
 
         // Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Slumbering Dragon.
         this.addAbility(new AttacksAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT, true));
@@ -51,12 +51,12 @@ public final class SlumberingDragon extends CardImpl {
 
 class SlumberingDragonEffect extends RestrictionEffect {
 
-    public SlumberingDragonEffect() {
+    SlumberingDragonEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless it has five or more +1/+1 counters on it";
     }
 
-    public SlumberingDragonEffect(final SlumberingDragonEffect effect) {
+    private SlumberingDragonEffect(final SlumberingDragonEffect effect) {
         super(effect);
     }
 

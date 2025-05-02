@@ -21,7 +21,7 @@ public final class AnotherSpiritToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected AnotherSpiritToken(final AnotherSpiritToken token) {
+    private AnotherSpiritToken(final AnotherSpiritToken token) {
         super(token);
     }
 

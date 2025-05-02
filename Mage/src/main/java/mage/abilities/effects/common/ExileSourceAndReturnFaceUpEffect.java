@@ -1,6 +1,6 @@
 package mage.abilities.effects.common;
 
-import mage.abilities.Pronoun;
+import mage.constants.Pronoun;
 import mage.constants.PutCards;
 
 /**

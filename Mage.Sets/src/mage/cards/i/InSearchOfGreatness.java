@@ -3,7 +3,7 @@ package mage.cards.i;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,7 +11,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
@@ -36,7 +35,7 @@ public final class InSearchOfGreatness extends CardImpl {
         // equal to 1 plus the highest converted mana cost among other permanents you control
         // without paying its mana cost. If you don't, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new InSearchOfGreatnessEffect(), TargetController.YOU, false
+                new InSearchOfGreatnessEffect()
         ));
     }
 
@@ -52,7 +51,7 @@ public final class InSearchOfGreatness extends CardImpl {
 
 class InSearchOfGreatnessEffect extends OneShotEffect {
 
-    public InSearchOfGreatnessEffect() {
+    InSearchOfGreatnessEffect() {
         super(Outcome.PlayForFree);
         staticText = "you may cast a permanent spell from your hand with mana value "
                 + "equal to 1 plus the highest mana value among other permanents you control "

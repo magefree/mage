@@ -6,13 +6,16 @@ import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.game.Game;
 import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
+
+    public LimitedTimesPerTurnActivatedAbility(Effect effect, Cost cost) {
+        this(Zone.BATTLEFIELD, effect, cost);
+    }
 
     public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
         this(zone, effect, cost, 1);
@@ -33,11 +36,6 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
         super(ability);
         this.maxActivationsPerTurn = ability.maxActivationsPerTurn;
         this.condition = ability.condition;
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        return super.resolve(game);
     }
 
     @Override

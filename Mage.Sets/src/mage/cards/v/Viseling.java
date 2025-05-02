@@ -2,7 +2,7 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class Viseling extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each opponent's upkeep, Viseling deals X damage to that player, where X is the number of cards in their hand minus 4.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ViselingEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new ViselingEffect(), false));
 
     }
 
@@ -45,12 +45,12 @@ public final class Viseling extends CardImpl {
 
 class ViselingEffect extends OneShotEffect {
 
-    public ViselingEffect() {
+    ViselingEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
-    public ViselingEffect(final ViselingEffect effect) {
+    private ViselingEffect(final ViselingEffect effect) {
         super(effect);
     }
 

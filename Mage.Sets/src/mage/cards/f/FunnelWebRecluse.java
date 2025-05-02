@@ -32,7 +32,7 @@ public final class FunnelWebRecluse extends CardImpl {
         // Morbid — When Funnel-Web Recluse enters the battlefield, if a creature died this turn, investigate.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new InvestigateEffect()),
-                MorbidCondition.instance, "<i>Morbid</i> &mdash; When {this} enters the battlefield, " +
+                MorbidCondition.instance, "<i>Morbid</i> &mdash; When {this} enters, " +
                 "if a creature died this turn, investigate. <i>(Create a colorless Clue artifact token " +
                 "with \"{2}, Sacrifice this artifact: Draw a card.\")</i>"
         ).addHint(MorbidHint.instance));

@@ -42,13 +42,13 @@ public final class GhostlyWings extends CardImpl {
         // Enchanted creature gets +1/+1 and has flying.
         Effect effect = new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +1/+1");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);
         this.addAbility(ability);
         // Discard a card: Return enchanted creature to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhostlyWingsReturnEffect(), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new GhostlyWingsReturnEffect(), new DiscardCardCost()));
 
     }
 
@@ -64,12 +64,12 @@ public final class GhostlyWings extends CardImpl {
 
 class GhostlyWingsReturnEffect extends OneShotEffect {
 
-    public GhostlyWingsReturnEffect() {
+    GhostlyWingsReturnEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return enchanted creature to its owner's hand";
     }
 
-    public GhostlyWingsReturnEffect(final GhostlyWingsReturnEffect effect) {
+    private GhostlyWingsReturnEffect(final GhostlyWingsReturnEffect effect) {
         super(effect);
     }
 

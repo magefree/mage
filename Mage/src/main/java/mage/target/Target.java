@@ -19,21 +19,26 @@ import java.util.UUID;
  */
 public interface Target extends Serializable {
 
-    boolean isChosen();
+    boolean isChosen(Game game);
 
-    boolean doneChoosing();
+    boolean doneChoosing(Game game);
 
     void clearChosen();
 
     boolean isNotTarget();
 
     /**
-     * controls if it will be checked, if the target can be targeted from source
+     * Mark it as non target (e.g. card's rules do not contain a "target" word)
+     * <p>
+     * Non targeted abilities are unaffected by protection/hexproof and other target related effects
+     * Non targeted spells can't be fizzled on resolve with invalid targets
+     * Non targeted spells chooses targets on resolve, targeted spells chooses targets on activate
+     * All costs must be non targeted
      *
-     * @param notTarget true = do not check for protection, false = check for
-     *                  protection
+     * @param notTarget
+     * @return
      */
-    void setNotTarget(boolean notTarget);
+    Target withNotTarget(boolean notTarget);
 
     // methods for targets
     boolean canChoose(UUID sourceControllerId, Ability source, Game game);
@@ -50,6 +55,9 @@ public interface Target extends Serializable {
 
     boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);
 
+    /**
+     * Add target from targeting methods like chooseTarget (will check and generate target events and effects)
+     */
     void addTarget(UUID id, Ability source, Game game);
 
     void addTarget(UUID id, int amount, Ability source, Game game);
@@ -68,12 +76,15 @@ public interface Target extends Serializable {
      */
     boolean canTarget(UUID id, Ability source, Game game);
 
-    boolean stillLegalTarget(UUID id, Ability source, Game game);
+    boolean stillLegalTarget(UUID playerId, UUID id, Ability source, Game game);
 
     boolean canTarget(UUID playerId, UUID id, Ability source, Game game);
 
     boolean isLegal(Ability source, Game game);
 
+    /**
+     * AI related code. Returns all possible different target combinations
+     */
     List<? extends Target> getTargetOptions(Ability source, Game game);
 
     boolean canChoose(UUID sourceControllerId, Game game);
@@ -82,6 +93,9 @@ public interface Target extends Serializable {
 
     boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game);
 
+    /**
+     * Add target from non targeting methods like choose
+     */
     void add(UUID id, Game game);
 
     void remove(UUID targetId);
@@ -93,14 +107,21 @@ public interface Target extends Serializable {
      */
     String getDescription();
 
-    String getMessage();
+    /**
+     * @return message displayed on choosing targets (can be dynamically changed on more target selected)
+     */
+    String getMessage(Game game);
 
     /**
      * @return single target name
      */
     String getTargetName();
 
-    void setTargetName(String name);
+    /**
+     * Overwrites the name automatically generated from the filter text.
+     * If you want to add additional info for usability, use `withChooseHint` instead.
+     */
+    Target withTargetName(String name);
 
     String getTargetedName(Game game);
 
@@ -134,6 +155,10 @@ public interface Target extends Serializable {
 
     boolean isRandom();
 
+    /**
+     * WARNING, if you need random choice then call it by target's choose method, not player's choose
+     * see https://github.com/magefree/mage/issues/11933
+     */
     void setRandom(boolean atRandom);
 
     UUID getFirstTarget();
@@ -160,6 +185,10 @@ public interface Target extends Serializable {
     // used for cards like Spellskite
     void setTargetAmount(UUID targetId, int amount, Game game);
 
+    /**
+     * Adds a clarification during target selection (in parentheses).
+     * Useful for abilities that have multiple targets and different effects.
+     */
     Target withChooseHint(String chooseHint);
 
     String getChooseHint();
@@ -180,7 +209,6 @@ public interface Target extends Serializable {
      * It will auto-choosen if all of the following criteria are met:
      * - The minimum and maximum number of targets is the same (i.e. effect does not have "up to" in its name)
      * - The number of valid targets is equal to the number of targets still left to be specified
-     *
      *
      * @param abilityControllerId
      * @param source

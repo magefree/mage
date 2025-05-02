@@ -39,7 +39,7 @@ public final class WallOfVipers extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {3}: Destroy Wall of Vipers and target creature it's blocking. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), new ManaCostsImpl<>("{3}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new DestroySourceEffect(), new ManaCostsImpl<>("{3}"));
         ability.addEffect(new DestroyTargetEffect(" and target creature it's blocking"));
         ability.addTarget(new TargetCreaturePermanent(new WallOfVipersFilter()));
         ability.setMayActivate(TargetController.ANY);
@@ -63,7 +63,7 @@ class WallOfVipersFilter extends FilterCreaturePermanent {
         super("creature {this} is blocking");
     }
     
-    public WallOfVipersFilter(final WallOfVipersFilter filter) {
+    private WallOfVipersFilter(final WallOfVipersFilter filter) {
         super(filter);
     }
     

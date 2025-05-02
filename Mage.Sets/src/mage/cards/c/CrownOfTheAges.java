@@ -41,7 +41,7 @@ public final class CrownOfTheAges extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {4}, {tap}: Attach target Aura attached to a creature to another creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfTheAgesEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new CrownOfTheAgesEffect(), new GenericManaCost(4));
         ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -59,12 +59,12 @@ public final class CrownOfTheAges extends CardImpl {
 
 class CrownOfTheAgesEffect extends OneShotEffect {
 
-    public CrownOfTheAgesEffect() {
+    CrownOfTheAgesEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Attach target Aura attached to a creature to another creature";
     }
 
-    public CrownOfTheAgesEffect(final CrownOfTheAgesEffect effect) {
+    private CrownOfTheAgesEffect(final CrownOfTheAgesEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class CrownOfTheAgesEffect extends OneShotEffect {
         filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
 
         Target chosenCreatureToAttachAura = new TargetPermanent(filterChoice);
-        chosenCreatureToAttachAura.setNotTarget(true);
+        chosenCreatureToAttachAura.withNotTarget(true);
 
         if (chosenCreatureToAttachAura.canChoose(source.getControllerId(), source, game)
                 && controller.choose(Outcome.Neutral, chosenCreatureToAttachAura, source, game)) {

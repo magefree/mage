@@ -38,7 +38,6 @@ public final class MonstrousStep extends CardImpl {
         // Target creature gets +7/+7 until end of turn. Up to one target creature blocks it this turn if able.
         this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7));
         this.getSpellAbility().addEffect(new MonstrousStepEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
 
         TargetPermanent target = new TargetCreaturePermanent();
         target.setTargetTag(1);

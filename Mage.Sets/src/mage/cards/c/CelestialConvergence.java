@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -11,8 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,11 +28,11 @@ public final class CelestialConvergence extends CardImpl {
 
         // Celestial Convergence enters the battlefield with seven omen counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.OMEN.createInstance(7));
-        this.addAbility(new EntersBattlefieldAbility(effect, "with seven omen counters"));
+        this.addAbility(new EntersBattlefieldAbility(effect, "with seven omen counters on it"));
 
         // At the beginning of your upkeep, remove an omen counter from Celestial Convergence. If there are no omen counters on Celestial Convergence, the player with the highest life total wins the game. If two or more players are tied for highest life total, the game is a draw.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.OMEN.createInstance(1)), TargetController.YOU, false);
+                new RemoveCounterSourceEffect(CounterType.OMEN.createInstance(1)));
         ability.addEffect(new CelestialConvergenceEffect());
         this.addAbility(ability);
     }
@@ -51,12 +49,12 @@ public final class CelestialConvergence extends CardImpl {
 
 class CelestialConvergenceEffect extends OneShotEffect {
 
-    public CelestialConvergenceEffect() {
+    CelestialConvergenceEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "If there are no omen counters on {this}, the player with the highest life total wins the game. If two or more players are tied for highest life total, the game is a draw";
     }
 
-    public CelestialConvergenceEffect(final CelestialConvergenceEffect effect) {
+    private CelestialConvergenceEffect(final CelestialConvergenceEffect effect) {
         super(effect);
     }
 

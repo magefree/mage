@@ -41,7 +41,7 @@ public final class RakdosLordOfRiots extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RakdosLordOfRiotsCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new RakdosLordOfRiotsCostReductionEffect()));
     }
 
     private RakdosLordOfRiots(final RakdosLordOfRiots card) {
@@ -56,18 +56,13 @@ public final class RakdosLordOfRiots extends CardImpl {
 
 class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RakdosLordOfRiotsCantCastEffect() {
+    RakdosLordOfRiotsCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You can't cast this spell unless an opponent lost life this turn";
     }
 
-    public RakdosLordOfRiotsCantCastEffect(final RakdosLordOfRiotsCantCastEffect effect) {
+    private RakdosLordOfRiotsCantCastEffect(final RakdosLordOfRiotsCantCastEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -96,7 +91,7 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn";
     }
 
-    RakdosLordOfRiotsCostReductionEffect(RakdosLordOfRiotsCostReductionEffect effect) {
+    private RakdosLordOfRiotsCostReductionEffect(final RakdosLordOfRiotsCostReductionEffect effect) {
         super(effect);
     }
 

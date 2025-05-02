@@ -19,10 +19,7 @@ import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -61,7 +58,7 @@ public final class BaruWurmspeaker extends CardImpl {
         ).setText("and have trample"));
         this.addAbility(ability);
 
-        // {7}{G}, {T}: Create a 4/4 green Wurm creature token. This ability costs {X} less to activate, whre X is the greatest power among Wurms you control.
+        // {7}{G}, {T}: Create a 4/4 green Wurm creature token. This ability costs {X} less to activate, where X is the greatest power among Wurms you control.
         ability = new SimpleActivatedAbility(new CreateTokenEffect(new Wurm44Token()), new ManaCostsImpl<>("{7}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new InfoEffect("this ability costs {X} less to activate, " +
@@ -116,7 +113,7 @@ enum BaruWurmspeakerAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         int value = BaruWurmspeakerValue.instance.calculate(game, ability, null);
         if (value > 0) {
             CardUtil.reduceCost(ability, value);

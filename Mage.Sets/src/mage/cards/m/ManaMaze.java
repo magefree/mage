@@ -1,27 +1,23 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ManaMaze extends CardImpl {
@@ -30,7 +26,7 @@ public final class ManaMaze extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Players can't cast spells that share a color with the spell most recently cast this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaMazeEffect()), new LastSpellCastWatcher());
+        this.addAbility(new SimpleStaticAbility(new ManaMazeEffect()), new LastSpellCastWatcher());
     }
 
     private ManaMaze(final ManaMaze card) {
@@ -50,7 +46,7 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't cast spells that share a color with the spell most recently cast this turn";
     }
 
-    ManaMazeEffect(final ManaMazeEffect effect) {
+    private ManaMazeEffect(final ManaMazeEffect effect) {
         super(effect);
     }
 
@@ -61,18 +57,17 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(event.getSourceId());
+        SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+        if (spellAbility == null) {
+            return false;
+        }
+        Card card = spellAbility.getCharacteristics(game);
         if (card != null) {
             LastSpellCastWatcher watcher = game.getState().getWatcher(LastSpellCastWatcher.class);
-            if (watcher != null && watcher.getLastSpellCast() != null) {
-                return !card.getColor(game).intersection(watcher.getLastSpellCast().getColor(game)).isColorless();
+            if (watcher != null && watcher.getLastSpellColor() != null) {
+                return !card.getColor(game).intersection(watcher.getLastSpellColor()).isColorless();
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 
@@ -84,7 +79,7 @@ class ManaMazeEffect extends ContinuousRuleModifyingEffectImpl {
 
 class LastSpellCastWatcher extends Watcher {
 
-    private Spell lastSpellCast = null;
+    private ObjectColor lastSpellColor = null;
 
     public LastSpellCastWatcher() {
         super(WatcherScope.GAME);
@@ -101,7 +96,7 @@ class LastSpellCastWatcher extends Watcher {
                 }
             }
             if (spell != null) {
-                lastSpellCast = spell;
+                this.lastSpellColor = spell.getColor(game);
             }
         }
     }
@@ -109,10 +104,10 @@ class LastSpellCastWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        lastSpellCast = null;
+        this.lastSpellColor = null;
     }
 
-    public Spell getLastSpellCast() {
-        return lastSpellCast;
+    public ObjectColor getLastSpellColor() {
+        return this.lastSpellColor;
     }
 }

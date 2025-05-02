@@ -1,12 +1,11 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ExchangeLifeTwoTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ public final class AxisOfMortality extends CardImpl {
 
         // At the beginning of your upkeep, you may have two target players exchange life totals.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ExchangeLifeTwoTargetEffect(), TargetController.YOU, true
+                new ExchangeLifeTwoTargetEffect(), true
         );
         ability.addTarget(new TargetPlayer(2));
         this.addAbility(ability);

@@ -27,7 +27,7 @@ public final class ReckonersBargain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
 
         // You gain life equal to the sacrificed permanent's mana value. Draw two cards.
         this.getSpellAbility().addEffect(new GainLifeEffect(

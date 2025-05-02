@@ -64,12 +64,12 @@ public final class FloatingShield extends CardImpl {
 
 class FloatingShieldEffect extends OneShotEffect {
 
-    public FloatingShieldEffect() {
+    FloatingShieldEffect() {
         super(Outcome.Protect);
         this.staticText = "target creature gains protection from the chosen color until end of turn";
     }
 
-    public FloatingShieldEffect(final FloatingShieldEffect effect) {
+    private FloatingShieldEffect(final FloatingShieldEffect effect) {
         super(effect);
     }
 

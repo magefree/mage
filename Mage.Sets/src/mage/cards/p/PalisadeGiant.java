@@ -48,7 +48,7 @@ public final class PalisadeGiant extends CardImpl {
         this.toughness = new MageInt(7);
 
         // All damage that would be dealt to you or another permanent you control is dealt to Palisade Giant instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PalisadeGiantReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new PalisadeGiantReplacementEffect()));
     }
 
     private PalisadeGiant(final PalisadeGiant card) {
@@ -68,7 +68,7 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
         staticText = "All damage that would be dealt to you and other permanents you control is dealt to {this} instead";
     }
 
-    PalisadeGiantReplacementEffect(final PalisadeGiantReplacementEffect effect) {
+    private PalisadeGiantReplacementEffect(final PalisadeGiantReplacementEffect effect) {
         super(effect);
     }
 
@@ -127,11 +127,6 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -14,7 +14,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -35,11 +35,11 @@ public final class HopeAgainstHope extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1 for each creature you control.
-        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent(), 1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
+        PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE, 1);
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
 
         // As long as enchanted creature is a Human, it has first strike.
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        SimpleStaticAbility ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA), new EnchantedCreatureSubtypeCondition(SubType.HUMAN),
                 "As long as enchanted creature is a Human, it has first strike"));
         this.addAbility(ability);

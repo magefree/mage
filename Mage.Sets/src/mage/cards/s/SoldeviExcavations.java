@@ -38,13 +38,13 @@ public final class SoldeviExcavations extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // If Soldevi Excavations would enter the battlefield, sacrifice an untapped Island instead. If you do, put Soldevi Excavations onto the battlefield. If you don't, put it into its owner's graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(filter))));
 
         // {tap}: Add {C}{U}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 0, 0, 0, 1), new TapSourceCost()));
 
         // {1}, {tap}: Scry 1.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(1, false), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

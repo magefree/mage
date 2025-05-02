@@ -30,7 +30,7 @@ public final class HighSeas extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Red creature spells and green creature spells cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
     }
 
     private HighSeas(final HighSeas card) {

@@ -1,5 +1,6 @@
 package mage.player.ai;
 
+import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -24,11 +25,13 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * plays randomly
+ * AI: helper class to simulate games with MCTS AI (each player replaced by simulated)
+ * <p>
+ * Plays randomly
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimulatedPlayerMCTS extends MCTSPlayer {
+public final class SimulatedPlayerMCTS extends MCTSPlayer {
 
     private boolean isSimulatedPlayer;
     private int actionCount = 0;
@@ -95,31 +98,16 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
                 if (amount > 0) {
                     ability = ability.copy();
-                    ability.getManaCostsToPay().add(new GenericManaCost(RandomUtil.nextInt(amount)));
+                    ability.addManaCostsToPay(new GenericManaCost(RandomUtil.nextInt(amount)));
                 }
             }
-            // check if ability kills player, if not then it's ok to play
-//            if (ability.isUsesStack()) {
-//                Game testSim = game.copy();
-//                activateAbility((ActivatedAbility) ability, testSim);
-//                StackObject testAbility = testSim.getStack().pop();
-//                testAbility.resolve(testSim);
-//                testSim.applyEffects();
-//                testSim.checkStateAndTriggered();
-//                if (!testSim.getPlayer(playerId).hasLost()) {
-//                    break;
-//                }
-//            }
-//            else {
             break;
-//            }
         }
         return ability;
     }
 
     @Override
     public boolean triggerAbility(TriggeredAbility source, Game game) {
-//        logger.info("trigger");
         if (source != null && source.canChooseTarget(game, playerId)) {
             Ability ability;
             List<Ability> options = getPlayableOptions(source, game);
@@ -153,8 +141,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         //useful only for two player games - will only attack first opponent
-//        logger.info("select attackers");
-        UUID defenderId = game.getOpponents(playerId).iterator().next();
+        UUID defenderId = game.getOpponents(playerId, true).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
@@ -177,7 +164,6 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
-//        logger.info("select blockers");
         int numGroups = game.getCombat().getGroups().size();
         if (numGroups == 0) {
             return;
@@ -356,11 +342,11 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
         if (this.isHuman()) {
-            return RandomUtil.nextInt(rEffects.size());
+            return RandomUtil.nextInt(effectsMap.size());
         }
-        return super.chooseReplacementEffect(rEffects, game);
+        return super.chooseReplacementEffect(effectsMap, objectsMap, game);
     }
 
     @Override
@@ -386,54 +372,6 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             return mode;
         }
         return super.chooseMode(modes, source, game);
-    }
-
-    @Override
-    public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
-        if (this.isHuman()) {
-            return attackers.get(RandomUtil.nextInt(attackers.size())).getId();
-        }
-        return super.chooseAttackerOrder(attackers, game);
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
-        if (this.isHuman()) {
-            return blockers.get(RandomUtil.nextInt(blockers.size())).getId();
-        }
-        return super.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
-    }
-
-    @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
-        if (this.isHuman()) {
-            int remainingDamage = damage;
-            UUID targetId;
-            int amount;
-            while (remainingDamage > 0) {
-                if (targets.size() == 1) {
-                    targetId = targets.get(0);
-                    amount = remainingDamage;
-                } else {
-                    targetId = targets.get(RandomUtil.nextInt(targets.size()));
-                    amount = RandomUtil.nextInt(damage + 1);
-                }
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    permanent.damage(amount, attackerId, source, game, false, true);
-                    remainingDamage -= amount;
-                } else {
-                    Player player = game.getPlayer(targetId);
-                    if (player != null) {
-                        player.damage(amount, attackerId, source, game);
-                        remainingDamage -= amount;
-                    }
-                }
-                targets.remove(targetId);
-            }
-        } else {
-            super.assignDamage(damage, targets, singleTargetName, attackerId, source, game);
-        }
     }
 
     @Override

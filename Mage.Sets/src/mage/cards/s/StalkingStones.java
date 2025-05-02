@@ -23,7 +23,7 @@ public final class StalkingStones extends CardImpl {
     public StalkingStones(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StalkingStonesToken(), CardType.LAND, Duration.WhileOnBattlefield)
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new StalkingStonesToken(), CardType.LAND, Duration.WhileOnBattlefield)
                 .setText("{this} becomes a 3/3 Elemental artifact creature that's still a land"), new GenericManaCost(6)));
     }
 
@@ -47,7 +47,7 @@ class StalkingStonesToken extends TokenImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
-    public StalkingStonesToken(final StalkingStonesToken token) {
+    private StalkingStonesToken(final StalkingStonesToken token) {
         super(token);
     }
 

@@ -24,7 +24,7 @@ public final class MoriokReaver extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public MoriokReaver (final MoriokReaver card) {
+    private MoriokReaver(final MoriokReaver card) {
         super(card);
     }
 

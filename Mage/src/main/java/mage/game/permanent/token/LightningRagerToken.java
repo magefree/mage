@@ -1,7 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -25,10 +25,10 @@ public final class LightningRagerToken extends TokenImpl {
 
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new SacrificeSourceEffect(), false));
     }
 
-    protected LightningRagerToken(final LightningRagerToken token) {
+    private LightningRagerToken(final LightningRagerToken token) {
         super(token);
     }
 

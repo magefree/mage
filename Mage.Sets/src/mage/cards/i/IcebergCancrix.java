@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class IcebergCancrix extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("another snow permanent");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -36,11 +36,9 @@ public final class IcebergCancrix extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        // Whenever another snow permanent enters the battlefield under your control, you may have target player put the top two cards of their library into their graveyard.
+        // Whenever another snow permanent you control enters, you may have target player put the top two cards of their library into their graveyard.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new MillCardsTargetEffect(2), filter,
-                true, "Whenever another snow permanent enters the battlefield under your control, " +
-                "you may have target player mill two cards."
+                Zone.BATTLEFIELD, new MillCardsTargetEffect(2), filter, true
         );
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

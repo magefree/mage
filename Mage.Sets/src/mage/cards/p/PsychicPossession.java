@@ -40,7 +40,7 @@ public final class PsychicPossession extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // Whenever enchanted opponent draws a card, you may draw a card.
         this.addAbility(new PsychicPossessionTriggeredAbility());
@@ -62,7 +62,7 @@ class PsychicPossessionTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public PsychicPossessionTriggeredAbility(final PsychicPossessionTriggeredAbility ability) {
+    private PsychicPossessionTriggeredAbility(final PsychicPossessionTriggeredAbility ability) {
         super(ability);
     }
 

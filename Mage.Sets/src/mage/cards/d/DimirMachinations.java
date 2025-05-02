@@ -53,7 +53,7 @@ class DimirMachinationsEffect extends OneShotEffect {
         this.staticText = "Look at the top three cards of target player's library. Exile any number of those cards, then put the rest back in any order";
     }
 
-    DimirMachinationsEffect(final DimirMachinationsEffect effect) {
+    private DimirMachinationsEffect(final DimirMachinationsEffect effect) {
         super(effect);
     }
 

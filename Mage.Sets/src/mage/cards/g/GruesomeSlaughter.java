@@ -1,11 +1,9 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -17,6 +15,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,9 +34,9 @@ public final class GruesomeSlaughter extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}");
 
         // Until end of turn, colorless creatures you control gain "{T}: This creature deals damage equal to its power to target creature."
-        Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
+        Effect effect = new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE);
         effect.setText("{this} deals damage equal to its power to target creature.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, filter);
         effect.setText("Until end of turn, colorless creatures you control gain \"{T}: This creature deals damage equal to its power to target creature.\"");

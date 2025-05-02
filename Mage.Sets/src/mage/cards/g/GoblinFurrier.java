@@ -30,7 +30,7 @@ public final class GoblinFurrier extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Prevent all damage that Goblin Furrier would deal to snow creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinFurrierPreventEffectEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GoblinFurrierPreventEffectEffect(Duration.WhileOnBattlefield)));
     }
 
     private GoblinFurrier(final GoblinFurrier card) {
@@ -45,12 +45,12 @@ public final class GoblinFurrier extends CardImpl {
 
 class GoblinFurrierPreventEffectEffect extends PreventionEffectImpl {
 
-    public GoblinFurrierPreventEffectEffect(Duration duration) {
+    GoblinFurrierPreventEffectEffect(Duration duration) {
         super(duration, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage that {this} would deal to snow creatures";
     }
 
-    public GoblinFurrierPreventEffectEffect(final GoblinFurrierPreventEffectEffect effect) {
+    private GoblinFurrierPreventEffectEffect(final GoblinFurrierPreventEffectEffect effect) {
         super(effect);
     }
 

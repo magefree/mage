@@ -35,7 +35,7 @@ public final class BullElephant extends CardImpl {
         ))));
     }
 
-    public BullElephant(BullElephant other) {
+    private BullElephant(final BullElephant other) {
         super(other);
     }
 

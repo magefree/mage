@@ -34,7 +34,7 @@ public final class SphinxOfNewPrahv extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Spells your opponents cast that target Sphinx of New Prahv cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(2, new FilterCard("Spells"), TargetController.OPPONENT))
         );
     }

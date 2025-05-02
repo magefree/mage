@@ -30,7 +30,7 @@ public final class SpikeshotElder extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpikeshotElderEffect(), new ManaCostsImpl<>("{1}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(new SpikeshotElderEffect(), new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
@@ -51,7 +51,7 @@ class SpikeshotElderEffect extends OneShotEffect {
         staticText = "{this} deals damage equal to its power to any target";
     }
 
-    public SpikeshotElderEffect(final SpikeshotElderEffect effect) {
+    private SpikeshotElderEffect(final SpikeshotElderEffect effect) {
         super(effect);
     }
 

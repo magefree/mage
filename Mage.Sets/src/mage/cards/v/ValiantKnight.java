@@ -35,7 +35,6 @@ public final class ValiantKnight extends CardImpl {
 
         // Other Knights you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         1, 1, Duration.WhileOnBattlefield,
                         filter, true

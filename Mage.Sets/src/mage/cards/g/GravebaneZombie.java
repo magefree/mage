@@ -34,7 +34,7 @@ public final class GravebaneZombie extends CardImpl {
         this.toughness = new MageInt(2);
 
         // If Gravebane Zombie would die, put Gravebane Zombie on top of its owner's library instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GravebaneZombieEffect()));
+        this.addAbility(new SimpleStaticAbility(new GravebaneZombieEffect()));
     }
 
     private GravebaneZombie(final GravebaneZombie card) {
@@ -54,7 +54,7 @@ class GravebaneZombieEffect extends ReplacementEffectImpl {
         staticText = "If {this} would die, put {this} on top of its owner's library instead";
     }
 
-    GravebaneZombieEffect(final GravebaneZombieEffect effect) {
+    private GravebaneZombieEffect(final GravebaneZombieEffect effect) {
         super(effect);
     }
 

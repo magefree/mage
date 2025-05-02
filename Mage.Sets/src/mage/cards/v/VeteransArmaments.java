@@ -30,21 +30,21 @@ public final class VeteransArmaments extends CardImpl {
     private static final DynamicValue xValue = new AttackingCreatureCount();
 
     public VeteransArmaments(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.SOLDIER);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
-        Ability gainedAbility = new AttacksOrBlocksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true), false);
+        Ability gainedAbility = new AttacksOrBlocksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn), false);
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has \"Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature.\"");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         this.addAbility(ability);
 
         // Whenever a Soldier creature enters the battlefield, you may attach Veteran's Armaments to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
-                filter, true, SetTargetPointer.PERMANENT, null));
+                filter, true, SetTargetPointer.PERMANENT));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));

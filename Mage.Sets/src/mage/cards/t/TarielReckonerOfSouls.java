@@ -37,7 +37,7 @@ public final class TarielReckonerOfSouls extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {T}: Choose a creature card at random from target opponent's graveyard. Put that card onto the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TarielReckonerOfSoulsEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TarielReckonerOfSoulsEffect(), new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
@@ -55,12 +55,12 @@ public final class TarielReckonerOfSouls extends CardImpl {
 
 class TarielReckonerOfSoulsEffect extends OneShotEffect {
 
-    public TarielReckonerOfSoulsEffect() {
+    TarielReckonerOfSoulsEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Choose a creature card at random from target opponent's graveyard. Put that card onto the battlefield under your control";
     }
 
-    public TarielReckonerOfSoulsEffect(final TarielReckonerOfSoulsEffect effect) {
+    private TarielReckonerOfSoulsEffect(final TarielReckonerOfSoulsEffect effect) {
         super(effect);
     }
 

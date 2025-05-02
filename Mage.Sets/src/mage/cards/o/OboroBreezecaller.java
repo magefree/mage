@@ -39,7 +39,7 @@ public final class OboroBreezecaller extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}, Return a land you control to its owner's hand: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

@@ -1,11 +1,13 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.condition.LockedInCondition;
+import mage.MageObjectReference;
+import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -14,22 +16,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.events.DamagedBatchBySourceEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2 & L_J
  */
 public final class VigorousCharge extends CardImpl {
-    
+
     private static final String staticText = "Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage";
 
     public VigorousCharge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Kicker {W} (You may pay an additional {W} as you cast this spell.)
         this.addAbility(new KickerAbility("{W}"));
@@ -37,8 +42,7 @@ public final class VigorousCharge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         // Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(new VigorousChargeTriggeredAbility(), Duration.EndOfTurn),
-        new LockedInCondition(KickedCondition.ONCE), staticText));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new VigorousChargeEffect(), KickedCondition.ONCE, staticText));
 
     }
 
@@ -52,14 +56,46 @@ public final class VigorousCharge extends CardImpl {
     }
 }
 
-class VigorousChargeTriggeredAbility extends TriggeredAbilityImpl {
 
-    public VigorousChargeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null);
+class VigorousChargeEffect extends OneShotEffect {
+
+    VigorousChargeEffect() {
+        super(Outcome.Benefit);
+        staticText = "Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage.";
     }
 
-    public VigorousChargeTriggeredAbility(final VigorousChargeTriggeredAbility ability) {
+    private VigorousChargeEffect(final VigorousChargeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public VigorousChargeEffect copy() {
+        return new VigorousChargeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent == null) {
+            return false;
+        }
+        game.addDelayedTriggeredAbility(new VigorousChargeTriggeredAbility(new MageObjectReference(permanent, game)), source);
+        return true;
+    }
+}
+
+class VigorousChargeTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedEvent> {
+
+    private final MageObjectReference mor;
+
+    VigorousChargeTriggeredAbility(MageObjectReference mor) {
+        super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false, false);
+        this.mor = mor;
+    }
+
+    private VigorousChargeTriggeredAbility(final VigorousChargeTriggeredAbility ability) {
         super(ability);
+        this.mor = ability.mor;
     }
 
     @Override
@@ -69,25 +105,20 @@ class VigorousChargeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
-                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedEvent damageEvent = (DamagedEvent) event;
-        if (damageEvent.isCombatDamage()) {
-            if (event.getSourceId().equals(this.sourceId)) {
-                this.getEffects().clear();
-                this.getEffects().add(new GainLifeEffect(damageEvent.getAmount()));
-                return true;
-            }
+        if (!mor.refersTo(event.getSourceId(), game) || !((DamagedBatchBySourceEvent) event).isCombatDamage()) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("damage", event.getAmount());
+        return true;
     }
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage, you gain that much life.";
+        return "Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage.";
     }
 }

@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -50,7 +50,7 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), true);
     }
 
-    PyromancerAscensionQuestTriggeredAbility(final PyromancerAscensionQuestTriggeredAbility ability) {
+    private PyromancerAscensionQuestTriggeredAbility(final PyromancerAscensionQuestTriggeredAbility ability) {
         super(ability);
     }
 
@@ -100,10 +100,10 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
 class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
 
     PyromancerAscensionCopyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(true), true);
+        super(Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(true), true);
     }
 
-    PyromancerAscensionCopyTriggeredAbility(final PyromancerAscensionCopyTriggeredAbility ability) {
+    private PyromancerAscensionCopyTriggeredAbility(final PyromancerAscensionCopyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -122,7 +122,7 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell, game)) {
-                Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
+                Permanent permanent = game.getPermanent(this.getSourceId());
                 if (permanent != null && permanent.getCounters(game).getCount(CounterType.QUEST) >= 2) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
                     return true;

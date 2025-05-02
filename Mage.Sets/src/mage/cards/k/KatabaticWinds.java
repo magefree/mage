@@ -34,7 +34,7 @@ public final class KatabaticWinds extends CardImpl {
         this.addAbility(PhasingAbility.getInstance());
 
         // Creatures with flying can't attack or block, and their activated abilities with {tap} in their costs can't be activated.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new KatabaticWindsRestrictionEffect());
+        Ability ability = new SimpleStaticAbility(new KatabaticWindsRestrictionEffect());
         ability.addEffect(new KatabaticWindsRuleModifyingEffect());
         this.addAbility(ability);
 
@@ -63,7 +63,7 @@ class KatabaticWindsRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures with flying can't attack or block";
     }
 
-    public KatabaticWindsRestrictionEffect(final KatabaticWindsRestrictionEffect effect) {
+    private KatabaticWindsRestrictionEffect(final KatabaticWindsRestrictionEffect effect) {
         super(effect);
     }
 
@@ -90,23 +90,18 @@ class KatabaticWindsRestrictionEffect extends RestrictionEffect {
 
 class KatabaticWindsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public KatabaticWindsRuleModifyingEffect() {
+    KatabaticWindsRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = ", and their activated abilities with {T} in their costs can't be activated";
     }
 
-    public KatabaticWindsRuleModifyingEffect(final KatabaticWindsRuleModifyingEffect effect) {
+    private KatabaticWindsRuleModifyingEffect(final KatabaticWindsRuleModifyingEffect effect) {
         super(effect);
     }
 
     @Override
     public KatabaticWindsRuleModifyingEffect copy() {
         return new KatabaticWindsRuleModifyingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

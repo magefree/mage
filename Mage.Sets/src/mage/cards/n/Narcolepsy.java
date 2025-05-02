@@ -3,7 +3,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -54,10 +54,10 @@ public final class Narcolepsy extends CardImpl {
 class NarcolepsyTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
     
     NarcolepsyTriggeredAbility() {
-        super(new NarcolepsyEffect(), TargetController.ANY, false);
+        super(TargetController.ANY, new NarcolepsyEffect(), false);
     }
     
-    NarcolepsyTriggeredAbility(final NarcolepsyTriggeredAbility ability) {
+    private NarcolepsyTriggeredAbility(final NarcolepsyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class NarcolepsyEffect extends OneShotEffect {
         super(Outcome.Tap);
     }
 
-    NarcolepsyEffect(final NarcolepsyEffect effect) {
+    private NarcolepsyEffect(final NarcolepsyEffect effect) {
         super(effect);
     }
 

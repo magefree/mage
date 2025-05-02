@@ -45,12 +45,12 @@ public final class Clamavus extends CardImpl {
 
 class ClamavusEffect extends ContinuousEffectImpl {
 
-    public ClamavusEffect() {
+    ClamavusEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.staticText = "each creature you control gets +1/+1 for each +1/+1 counter on it";
     }
 
-    public ClamavusEffect(final ClamavusEffect effect) {
+    private ClamavusEffect(final ClamavusEffect effect) {
         super(effect);
     }
 

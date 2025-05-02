@@ -3,8 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -20,8 +19,6 @@ import java.util.UUID;
  */
 public final class RecklessAmplimancer extends CardImpl {
 
-    private static final DynamicValue sourcePower = new SourcePermanentPowerCount();
-
     public RecklessAmplimancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
@@ -32,7 +29,7 @@ public final class RecklessAmplimancer extends CardImpl {
 
         // {4}{G}: Double Reckless Amplimancer's power and toughness until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
-                sourcePower, SourcePermanentToughnessValue.getInstance(), Duration.EndOfTurn, true
+                SourcePermanentPowerValue.ALLOW_NEGATIVE, SourcePermanentToughnessValue.instance, Duration.EndOfTurn
         ).setText("double {this}'s power and toughness until end of turn"), new ManaCostsImpl<>("{4}{G}")));
     }
 

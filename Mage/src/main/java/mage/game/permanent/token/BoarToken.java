@@ -18,7 +18,7 @@ public final class BoarToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected BoarToken(final BoarToken token) {
+    private BoarToken(final BoarToken token) {
         super(token);
     }
 

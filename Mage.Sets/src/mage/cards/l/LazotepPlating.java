@@ -31,9 +31,9 @@ public final class LazotepPlating extends CardImpl {
         Effect effect2 = new GainAbilityControlledEffect(
                 HexproofAbility.getInstance(), Duration.EndOfTurn
         );
-        effect.setText("You and permanents you control gain hexproof until end of turn.");
-        effect2.setText("");
-        this.getSpellAbility().addEffect(effect);
+        effect.setText("You");
+        effect2.setText("and permanents you control gain hexproof until end of turn");
+        this.getSpellAbility().addEffect(effect.concatBy("<br>"));
         this.getSpellAbility().addEffect(effect2);
     }
 

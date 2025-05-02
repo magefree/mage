@@ -4,8 +4,9 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,12 +41,9 @@ public final class WaspOfTheBitterEnd extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a Bolas planeswalker spell, you may sacrifice Wasp of the Bitter End. If you do, destroy target creature.
-        Ability ability = SpellCastControllerTriggeredAbility.createWithRule(
-                new SacrificeSourceEffect(),
-                filter, true,
-                "Whenever you cast a Bolas planeswalker spell, you may sacrifice {this}. If you do, destroy target creature."
-        );
-        ability.addEffect(new DestroyTargetEffect());
+        Ability ability = new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
+                new DestroyTargetEffect(), new SacrificeSourceCost()
+        ), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

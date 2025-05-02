@@ -29,7 +29,7 @@ public final class TwoHeadedSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Sliver creatures have menace. (They can't be blocked except by two or more creatures.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new MenaceAbility(),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS,
                 "All Sliver creatures have menace. <i>(They can't be blocked except by two or more creatures.)</i>")));

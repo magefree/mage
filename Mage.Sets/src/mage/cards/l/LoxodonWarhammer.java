@@ -28,7 +28,7 @@ public final class LoxodonWarhammer extends CardImpl {
         // Equipped creature gets +3/+0 and has trample and lifelink. (If the creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker. Damage dealt by the creature also causes its controller to gain that much life.)
         Effect effect = new BoostEquippedEffect(3, 0);
         effect.setText("Equipped creature gets +3/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has trample");
         ability.addEffect(effect);

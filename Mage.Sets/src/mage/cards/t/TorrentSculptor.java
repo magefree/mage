@@ -86,7 +86,7 @@ class TorrentSculptorEffect extends OneShotEffect {
             return false;
         }
         TargetCard targetCard = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
-        targetCard.setNotTarget(true);
+        targetCard.withNotTarget(true);
         player.choose(Outcome.Exile, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         if (card == null) {

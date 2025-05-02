@@ -3,6 +3,8 @@
 package mage.cards.v;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
@@ -29,7 +31,7 @@ public final class ViridianRevel extends CardImpl {
         this.addAbility(new ViridianRevelTriggeredAbility());
     }
 
-    public ViridianRevel (final ViridianRevel card) {
+    private ViridianRevel(final ViridianRevel card) {
         super(card);
     }
 
@@ -40,11 +42,13 @@ public final class ViridianRevel extends CardImpl {
 }
 
 class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl {
+
     ViridianRevelTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {
+    private ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {
         super(ability);
     }
 
@@ -74,5 +78,10 @@ class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

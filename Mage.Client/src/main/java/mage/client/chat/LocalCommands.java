@@ -37,7 +37,7 @@ public final class LocalCommands {
             return false;
         }
 
-        final String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
+        final String serverAddress = SessionHandler.getSession().getServerHost();
         Optional<String> response = Optional.empty();
 
         String command = st.nextToken();
@@ -69,6 +69,6 @@ public final class LocalCommands {
         final String text = new StringBuilder().append("<font color=yellow>").append(response).append("</font>").toString();
         ClientCallback chatMessage = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
                 new ChatMessage("", text, new Date(), null, ChatMessage.MessageColor.BLUE));
-        MageFrame.getInstance().processCallback(chatMessage);
+        MageFrame.getInstance().onCallback(chatMessage);
     }
 }

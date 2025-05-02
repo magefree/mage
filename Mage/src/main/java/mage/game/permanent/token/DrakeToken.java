@@ -22,7 +22,7 @@ public final class DrakeToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected DrakeToken(final DrakeToken token) {
+    private DrakeToken(final DrakeToken token) {
         super(token);
     }
 

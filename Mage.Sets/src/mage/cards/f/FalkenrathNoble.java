@@ -1,6 +1,8 @@
 package mage.cards.f;
 
 import mage.MageInt;
+import mage.MageObject;
+import mage.abilities.AbilityImpl;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -51,9 +53,10 @@ class FalkenrathNobleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
         this.addEffect(new GainLifeEffect(1));
         this.addTarget(new TargetPlayer());
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public FalkenrathNobleTriggeredAbility(final FalkenrathNobleTriggeredAbility ability) {
+    private FalkenrathNobleTriggeredAbility(final FalkenrathNobleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,5 +89,10 @@ class FalkenrathNobleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} or another creature dies, target player loses 1 life and you gain 1 life.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

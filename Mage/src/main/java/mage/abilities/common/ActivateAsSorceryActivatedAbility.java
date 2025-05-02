@@ -9,6 +9,8 @@ import mage.constants.Zone;
 
 public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
 
+    private boolean showActivateText = true;
+
     public ActivateAsSorceryActivatedAbility(Effect effect, Cost cost) {
         this(Zone.BATTLEFIELD, effect, cost);
     }
@@ -20,6 +22,7 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
 
     protected ActivateAsSorceryActivatedAbility(final ActivateAsSorceryActivatedAbility ability) {
         super(ability);
+        this.showActivateText = ability.showActivateText;
     }
 
     @Override
@@ -27,11 +30,25 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
         return new ActivateAsSorceryActivatedAbility(this);
     }
 
+    public ActivateAsSorceryActivatedAbility withShowActivateText(boolean showActivateText) {
+        this.showActivateText = showActivateText;
+        return this;
+    }
+
     @Override
     public String getRule() {
-        if (mayActivate == TargetController.OPPONENT) {
-            return super.getRule() + " Only your opponents may activate this ability and only as a sorcery.";
+        String superRule = super.getRule();
+        if (!showActivateText) {
+            return superRule;
         }
-        return super.getRule() + " Activate only as a sorcery.";
+
+        String newText = (mayActivate == TargetController.OPPONENT
+                ? " Only your opponents may activate this ability and only as a sorcery."
+                : " Activate only as a sorcery.");
+        if (superRule.endsWith("</i>")) {
+            return superRule.replaceFirst(" <i>", newText + " <i>");
+        } else {
+            return superRule + newText;
+        }
     }
 }

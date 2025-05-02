@@ -35,7 +35,7 @@ public final class VectisDominator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Tap target creature unless its controller pays 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VectisDominatorEffect(new PayLifeCost(2)), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new VectisDominatorEffect(new PayLifeCost(2)), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -60,7 +60,7 @@ class VectisDominatorEffect extends OneShotEffect {
         this.cost = cost;
     }
 
-    public VectisDominatorEffect(final VectisDominatorEffect effect) {
+    private VectisDominatorEffect(final VectisDominatorEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

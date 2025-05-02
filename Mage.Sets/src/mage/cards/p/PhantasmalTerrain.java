@@ -37,7 +37,7 @@ public final class PhantasmalTerrain extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral)));
 
         // Enchanted land is the chosen type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantasmalTerrainContinuousEffect()));
+        this.addAbility(new SimpleStaticAbility(new PhantasmalTerrainContinuousEffect()));
     }
 
     private PhantasmalTerrain(final PhantasmalTerrain card) {
@@ -69,6 +69,11 @@ public final class PhantasmalTerrain extends CardImpl {
         public void init(Ability source, Game game) {
             super.init(source, game);
             SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
+            if (choice == null) {
+                discard();
+                return;
+            }
+
             switch (choice) {
                 case FOREST:
                     dependencyTypes.add(DependencyType.BecomeForest);

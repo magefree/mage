@@ -41,7 +41,7 @@ public final class GrimPoppet extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(3)), "with three -1/-1 counters on it"));
 
         // Remove a -1/-1 counter from Grim Poppet: Put a -1/-1 counter on another target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new RemoveCountersSourceCost(CounterType.M1M1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         

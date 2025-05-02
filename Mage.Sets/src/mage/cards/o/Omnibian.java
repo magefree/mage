@@ -30,7 +30,7 @@ public final class Omnibian extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Target creature becomes a 3/3 Frog until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(
+        Ability ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(
                 new CreatureToken(3, 3, "Frog with base power and toughness 3/3", SubType.FROG),
                 false, false, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

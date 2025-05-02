@@ -23,12 +23,12 @@ public final class KiteShield extends CardImpl {
     public KiteShield (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         this.subtype.add(SubType.EQUIPMENT);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(0, 3)));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
 
     }
 
-    public KiteShield (final KiteShield card) {
+    private KiteShield(final KiteShield card) {
         super(card);
     }
 

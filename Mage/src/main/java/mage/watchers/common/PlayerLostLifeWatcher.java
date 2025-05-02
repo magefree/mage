@@ -21,6 +21,9 @@ public class PlayerLostLifeWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfLifeLostThisTurn = new HashMap<>();
     private final Map<UUID, Integer> amountOfLifeLostLastTurn = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public PlayerLostLifeWatcher() {
         super(WatcherScope.GAME);
     }
@@ -54,6 +57,19 @@ public class PlayerLostLifeWatcher extends Watcher {
             }
         }
         return amount;
+    }
+
+    public int getNumberOfOpponentsWhoLostLife(UUID playerId, Game game) {
+        int numPlayersLostLife = 0;
+        for (UUID opponentId : this.amountOfLifeLostThisTurn.keySet()) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null && opponent.hasOpponent(playerId, game)) {
+                if (this.amountOfLifeLostThisTurn.getOrDefault(opponentId, 0) > 0) {
+                    numPlayersLostLife++;
+                }
+            }
+        }
+        return numPlayersLostLife;
     }
 
     public int getLifeLostLastTurn(UUID playerId) {

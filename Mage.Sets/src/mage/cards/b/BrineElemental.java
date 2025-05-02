@@ -32,7 +32,7 @@ public final class BrineElemental extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Morph {5}{U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{U}{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{5}{U}{U}")));
 
         // When Brine Elemental is turned face up, each opponent skips their next untap step.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BrineElementalEffect()));
@@ -50,12 +50,12 @@ public final class BrineElemental extends CardImpl {
 
 class BrineElementalEffect extends OneShotEffect {
 
-    public BrineElementalEffect() {
+    BrineElementalEffect() {
         super(Outcome.Benefit);
         this.staticText = "each opponent skips their next untap step";
     }
 
-    public BrineElementalEffect(final BrineElementalEffect effect) {
+    private BrineElementalEffect(final BrineElementalEffect effect) {
         super(effect);
     }
 

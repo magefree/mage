@@ -28,7 +28,7 @@ public final class CrownOfEmpires extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {3}, {tap}: Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfEmpiresEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new CrownOfEmpiresEffect(), new GenericManaCost(3));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -46,18 +46,18 @@ public final class CrownOfEmpires extends CardImpl {
 
 class CrownOfEmpiresEffect extends OneShotEffect {
 
-    public CrownOfEmpiresEffect() {
+    CrownOfEmpiresEffect() {
         super(Outcome.Tap);
         staticText = "Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires";
     }
 
-    public CrownOfEmpiresEffect(CrownOfEmpiresEffect effect) {
+    private CrownOfEmpiresEffect(final CrownOfEmpiresEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         boolean scepter = false;
         boolean throne = false;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
@@ -87,12 +87,12 @@ class CrownOfEmpiresEffect extends OneShotEffect {
 
 class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
 
-    public CrownOfEmpiresControlEffect() {
+    CrownOfEmpiresControlEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.staticText = "Gain control of {this}";
     }
 
-    public CrownOfEmpiresControlEffect(final CrownOfEmpiresControlEffect effect) {
+    private CrownOfEmpiresControlEffect(final CrownOfEmpiresControlEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class CrownOfEmpiresControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
         if (permanent != null && controllerId != null) {
             return permanent.changeControllerId(controllerId, game, source);

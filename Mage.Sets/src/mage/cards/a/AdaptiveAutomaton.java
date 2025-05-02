@@ -38,9 +38,9 @@ public final class AdaptiveAutomaton extends CardImpl {
         ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
         this.addAbility(ability);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddChosenSubtypeEffect()));
+        this.addAbility(new SimpleStaticAbility(new AddChosenSubtypeEffect()));
         // Other creatures you control of the chosen type get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
     private AdaptiveAutomaton(final AdaptiveAutomaton card) {
@@ -52,4 +52,3 @@ public final class AdaptiveAutomaton extends CardImpl {
         return new AdaptiveAutomaton(this);
     }
 }
-

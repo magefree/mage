@@ -50,7 +50,7 @@ public final class VraskaGolgariQueen extends CardImpl {
         // +2: You may sacrifice another permanent. If you do, you gain 1 life and draw a card.
         DoIfCostPaid effect = new DoIfCostPaid(
                 new GainLifeEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter1))
+                new SacrificeTargetCost(filter1)
         );
         effect.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
         this.addAbility(new LoyaltyAbility(effect, 2));

@@ -6,8 +6,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.BecomeDayAsEntersAbility;
 import mage.abilities.common.BecomesDayOrNightTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -55,8 +54,6 @@ public final class VadrikAstralArchmage extends CardImpl {
 
 class VadrikAstralArchmageEffect extends CostModificationEffectImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     VadrikAstralArchmageEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "instant and sorcery spells you cast cost {X} less to cast, where X is {this}'s power";
@@ -68,7 +65,7 @@ class VadrikAstralArchmageEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, xValue.calculate(game, source, this));
+        CardUtil.reduceCost(abilityToModify, SourcePermanentPowerValue.NOT_NEGATIVE.calculate(game, source, this));
         return true;
     }
 

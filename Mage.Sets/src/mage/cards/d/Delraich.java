@@ -36,9 +36,7 @@ public final class Delraich extends CardImpl {
         this.toughness = new MageInt(6);
 
         // You may sacrifice three black creatures rather than pay Delraich's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(
-                new TargetControlledPermanent(3, 3, filter, false)
-        )));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(3, filter)));
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

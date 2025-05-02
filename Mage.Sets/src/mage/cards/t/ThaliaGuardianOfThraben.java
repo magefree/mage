@@ -35,7 +35,7 @@ public final class ThaliaGuardianOfThraben extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Noncreature spells cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
 
     }
 

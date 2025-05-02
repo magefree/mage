@@ -26,7 +26,7 @@ public final class RiftmarkedKnightToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected RiftmarkedKnightToken(final RiftmarkedKnightToken token) {
+    private RiftmarkedKnightToken(final RiftmarkedKnightToken token) {
         super(token);
     }
 

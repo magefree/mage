@@ -58,6 +58,7 @@ public abstract class RequirementEffect extends ContinuousEffectImpl {
 
     /**
      * Defines the defender a attacker has to attack
+     * TODO: WTF, it bugged, usage code need only players to attack, but effects return controller, source id, other broken data!!!
      *
      * @param source
      * @param game

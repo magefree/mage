@@ -46,13 +46,13 @@ public final class SydriGalvanicGenius extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SydriGalvanicGeniusEffect(), new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(new SydriGalvanicGeniusEffect(), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetPermanent(filterNonCreature));
         this.addAbility(ability);
 
         // {W}{B}: Target artifact creature gains deathtouch and lifelink until end of turn.
         Effect effect = new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, "Target artifact creature gains deathtouch");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}{B}"));
+        ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{W}{B}"));
         ability.addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, "and lifelink until end of turn"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -70,12 +70,13 @@ public final class SydriGalvanicGenius extends CardImpl {
 
 class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
 
-    public SydriGalvanicGeniusEffect() {
+    SydriGalvanicGeniusEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
-    public SydriGalvanicGeniusEffect(final SydriGalvanicGeniusEffect effect) {
+    private SydriGalvanicGeniusEffect(final SydriGalvanicGeniusEffect effect) {
         super(effect);
     }
 

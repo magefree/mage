@@ -37,7 +37,7 @@ public final class AmoeboidChangeling extends CardImpl {
         this.addAbility(ability);
 
         // {tap}: Target creature loses all creature types until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAllCreatureTypesTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new LoseAllCreatureTypesTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
 
         this.addAbility(ability);

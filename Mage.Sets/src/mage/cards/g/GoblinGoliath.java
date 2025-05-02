@@ -39,7 +39,7 @@ public final class GoblinGoliath extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 
         // {3}{R}, {T}: If a source you control would deal damage to an opponent this turn, it deals double that damage to that player instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinGoliathDamageEffect(), new ManaCostsImpl<>("{3}{R}"));
+        Ability ability = new SimpleActivatedAbility(new GoblinGoliathDamageEffect(), new ManaCostsImpl<>("{3}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -56,12 +56,12 @@ public final class GoblinGoliath extends CardImpl {
 
 class GoblinGoliathDamageEffect extends ReplacementEffectImpl {
 
-    public GoblinGoliathDamageEffect() {
+    GoblinGoliathDamageEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
         staticText = "If a source you control would deal damage to an opponent this turn, it deals double that damage to that player instead.";
     }
 
-    public GoblinGoliathDamageEffect(final GoblinGoliathDamageEffect effect) {
+    private GoblinGoliathDamageEffect(final GoblinGoliathDamageEffect effect) {
         super(effect);
     }
 
@@ -90,11 +90,6 @@ class GoblinGoliathDamageEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

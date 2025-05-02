@@ -26,10 +26,10 @@ public final class TemperedSteel extends CardImpl {
     public TemperedSteel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public TemperedSteel (final TemperedSteel card) {
+    private TemperedSteel(final TemperedSteel card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class EdgarMarkovsCoffinVampireToken extends TokenImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    protected EdgarMarkovsCoffinVampireToken(final EdgarMarkovsCoffinVampireToken token) {
+    private EdgarMarkovsCoffinVampireToken(final EdgarMarkovsCoffinVampireToken token) {
         super(token);
     }
 

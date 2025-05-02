@@ -55,7 +55,7 @@ class NornsInquisitorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    public NornsInquisitorTriggeredAbility(final NornsInquisitorTriggeredAbility ability) {
+    private NornsInquisitorTriggeredAbility(final NornsInquisitorTriggeredAbility ability) {
         super(ability);
     }
 

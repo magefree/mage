@@ -26,10 +26,14 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
      * each combat if able and attacks a player other than that player if able.
      */
     public GoadTargetEffect() {
-        super(Duration.UntilYourNextTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+        this(Duration.UntilYourNextTurn);
     }
 
-    private GoadTargetEffect(final GoadTargetEffect effect) {
+    public GoadTargetEffect(Duration duration) {
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+    }
+
+    protected GoadTargetEffect(final GoadTargetEffect effect) {
         super(effect);
     }
 
@@ -69,8 +73,7 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        return "goad target " + (!mode.getTargets().isEmpty() ? mode.getTargets().get(0).getTargetName() : " creature")
+        return "goad " + getTargetPointer().describeTargets(mode.getTargets(), "that creature")
                 + ". <i>(Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)</i>";
     }
 }

@@ -37,7 +37,7 @@ public final class MeriekeRiBerit extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Merieke Ri Berit doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // {tap}: Gain control of target creature for as long as you control Merieke Ri Berit. When Merieke Ri Berit leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated.
         Ability ability = new SimpleActivatedAbility(new GainControlTargetEffect(Duration.WhileControlled), new TapSourceCost());
@@ -58,12 +58,12 @@ public final class MeriekeRiBerit extends CardImpl {
 
 class MeriekeRiBeritCreateDelayedTriggerEffect extends OneShotEffect {
 
-    public MeriekeRiBeritCreateDelayedTriggerEffect() {
+    MeriekeRiBeritCreateDelayedTriggerEffect() {
         super(Outcome.Detriment);
         this.staticText = "When {this} leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated";
     }
 
-    public MeriekeRiBeritCreateDelayedTriggerEffect(final MeriekeRiBeritCreateDelayedTriggerEffect effect) {
+    private MeriekeRiBeritCreateDelayedTriggerEffect(final MeriekeRiBeritCreateDelayedTriggerEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class MeriekeRiBeritDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new DestroyTargetEffect(true), Duration.Custom, true);
     }
 
-    MeriekeRiBeritDelayedTriggeredAbility(MeriekeRiBeritDelayedTriggeredAbility ability) {
+    private MeriekeRiBeritDelayedTriggeredAbility(final MeriekeRiBeritDelayedTriggeredAbility ability) {
         super(ability);
     }
 

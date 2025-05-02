@@ -88,7 +88,7 @@ class TheRoyalScionsCreateReflexiveTriggerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         effect.apply(game, source);
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new DamageTargetEffect(CardsInControllerHandCount.instance), false,
+                new DamageTargetEffect(CardsInControllerHandCount.ANY), false,
                 "{this} deals damage to any target equal to the number of cards in your hand"
         );
         ability.addTarget(new TargetAnyTarget());

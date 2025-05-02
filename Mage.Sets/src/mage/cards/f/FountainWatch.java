@@ -28,7 +28,7 @@ public final class FountainWatch extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Artifacts and enchantments you control have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS, false)));
     }
 
     private FountainWatch(final FountainWatch card) {

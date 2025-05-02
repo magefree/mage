@@ -29,7 +29,7 @@ public final class SkyclawThrash extends CardImpl {
 
     public SkyclawThrash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);
@@ -51,12 +51,12 @@ public final class SkyclawThrash extends CardImpl {
 
 class SkyclawThrashEffect extends OneShotEffect {
 
-    public SkyclawThrashEffect() {
+    SkyclawThrashEffect() {
         super(Outcome.Benefit);
         this.staticText = "flip a coin. If you win the flip, {this} gets +1/+1 and gains flying until end of turn";
     }
 
-    public SkyclawThrashEffect(final SkyclawThrashEffect effect) {
+    private SkyclawThrashEffect(final SkyclawThrashEffect effect) {
         super(effect);
     }
 

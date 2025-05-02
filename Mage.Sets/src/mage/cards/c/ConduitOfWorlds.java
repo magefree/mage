@@ -4,10 +4,11 @@ import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.HaventCastSpellThisTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardControllerEffect;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +22,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.UUID;
 
@@ -40,7 +40,7 @@ public final class ConduitOfWorlds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{G}{G}");
 
         // You may play lands from your graveyard.
-        this.addAbility(new SimpleStaticAbility(new PlayLandsFromGraveyardControllerEffect()));
+        this.addAbility(new SimpleStaticAbility(PlayFromGraveyardControllerEffect.playLands()));
 
         // {T}: Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new ConduitOfWorldsEffect(), new TapSourceCost());
@@ -78,10 +78,7 @@ class ConduitOfWorldsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.getState()
-                .getWatcher(SpellsCastWatcher.class)
-                .getSpellsCastThisTurn(source.getControllerId())
-                .isEmpty()) {
+        if (!HaventCastSpellThisTurnCondition.instance.apply(game, source)) {
             return false;
         }
         Player player = game.getPlayer(source.getControllerId());
@@ -107,11 +104,11 @@ class ConduitOfWorldsEffect extends OneShotEffect {
 
 class ConduitOfWorldsCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ConduitOfWorldsCantCastEffect() {
+    ConduitOfWorldsCantCastEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 
-    public ConduitOfWorldsCantCastEffect(final ConduitOfWorldsCantCastEffect effect) {
+    private ConduitOfWorldsCantCastEffect(final ConduitOfWorldsCantCastEffect effect) {
         super(effect);
     }
 

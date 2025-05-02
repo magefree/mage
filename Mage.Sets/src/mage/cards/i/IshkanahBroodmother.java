@@ -11,6 +11,7 @@ import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ExpansionSet;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -19,8 +20,8 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,23 +31,28 @@ import java.util.UUID;
 public final class IshkanahBroodmother extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SPIDER, "Spiders");
-    private static final List<String> spellbook = Collections.unmodifiableList(Arrays.asList(
-            "Arachnoform",
-            "Brood Weaver",
-            "Drider",
-            // "Glowstone Recluse", mutate card
-            "Gnottvold Recluse",
-            "Hatchery Spider",
-            "Mammoth Spider",
-            "Netcaster Spider",
-            "Prey Upon",
-            "Sentinel Spider",
-            "Snarespinner",
-            "Spider Spawning",
-            "Spidery Grasp",
-            "Sporecap Spider",
-            "Twin-Silk Spider"
-    ));
+    private static final List<String> spellbook;
+
+    static {
+        spellbook = new ArrayList<>(Arrays.asList(
+                "Arachnoform",
+                "Brood Weaver",
+                "Drider",
+                "Glowstone Recluse", // mutate card
+                "Gnottvold Recluse",
+                "Hatchery Spider",
+                "Mammoth Spider",
+                "Netcaster Spider",
+                "Prey Upon",
+                "Sentinel Spider",
+                "Snarespinner",
+                "Spider Spawning",
+                "Spidery Grasp",
+                "Sporecap Spider",
+                "Twin-Silk Spider"
+        ));
+        spellbook.removeIf(card -> ExpansionSet.HIDE_MUTATE_CARDS && ExpansionSet.MUTATE_CARD_NAMES.contains(card));
+    }
 
     public IshkanahBroodmother(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

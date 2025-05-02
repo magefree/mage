@@ -32,7 +32,7 @@ public interface ManaCost extends Cost {
     ManaOptions getOptions();
 
     /**
-     * Return all options for paying the mana cost (this) while taking into accoutn if the player can pay life.
+     * Return all options for paying the mana cost (this) while taking into account if the player can pay life.
      * Used to correctly highlight (or not) spells with Phyrexian mana depending on if the player can pay life costs.
      * <p>
      * E.g. Tezzeret's Gambit has a cost of {3}{U/P}.

@@ -46,7 +46,7 @@ class KrarksOtherThumbEffect extends ReplacementEffectImpl {
         staticText = "if you would roll a die, instead roll two of those dice and ignore one of those results";
     }
 
-    KrarksOtherThumbEffect(final KrarksOtherThumbEffect effect) {
+    private KrarksOtherThumbEffect(final KrarksOtherThumbEffect effect) {
         super(effect);
     }
 
@@ -66,11 +66,6 @@ class KrarksOtherThumbEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

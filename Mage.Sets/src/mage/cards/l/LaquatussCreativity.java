@@ -45,7 +45,7 @@ class LaquatussCreativityEffect extends OneShotEffect {
         this.staticText = "Target player draws cards equal to the number of cards in their hand, then discards that many cards.";
     }
     
-    public LaquatussCreativityEffect(final LaquatussCreativityEffect effect) {
+    private LaquatussCreativityEffect(final LaquatussCreativityEffect effect) {
         super(effect);
     }
     

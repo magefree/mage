@@ -36,7 +36,7 @@ public final class RazorjawOni extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Black creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private RazorjawOni(final RazorjawOni card) {

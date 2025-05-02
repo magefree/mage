@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class MaraudingLooter extends CardImpl {
 
         // Raid - At the beginning of your end step, if you attacked this turn, you may draw a card. If you do, discard a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true), TargetController.YOU, false),
+                new BeginningOfEndStepTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true)),
                 RaidCondition.instance,
                 "At the beginning of your end step, "
                         + "if you attacked this turn, "

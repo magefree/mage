@@ -73,7 +73,7 @@ class SarkhanTheMasterlessDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature == null) {
             return false;
         }
@@ -91,6 +91,7 @@ class SarkhanTheMasterlessBecomeDragonEffect extends ContinuousEffectImpl {
     SarkhanTheMasterlessBecomeDragonEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Until end of turn, each planeswalker you control becomes a 4/4 red Dragon creature and gains flying.";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private SarkhanTheMasterlessBecomeDragonEffect(final SarkhanTheMasterlessBecomeDragonEffect effect) {

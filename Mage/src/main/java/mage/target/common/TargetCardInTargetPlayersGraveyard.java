@@ -12,12 +12,20 @@ import java.util.UUID;
  */
 public class TargetCardInTargetPlayersGraveyard extends TargetCardInGraveyard {
 
+    private final int targetPlayerIndex;
+
     public TargetCardInTargetPlayersGraveyard(int targets) {
+        this(targets, 0);
+    }
+
+    public TargetCardInTargetPlayersGraveyard(int targets, int targetPlayerIndex) {
         super(0, targets, StaticFilters.FILTER_CARD);
+        this.targetPlayerIndex = targetPlayerIndex;
     }
 
     private TargetCardInTargetPlayersGraveyard(final TargetCardInTargetPlayersGraveyard target) {
         super(target);
+        this.targetPlayerIndex = target.targetPlayerIndex;
     }
 
     @Override
@@ -26,7 +34,7 @@ public class TargetCardInTargetPlayersGraveyard extends TargetCardInGraveyard {
             return false;
         }
         Card card = game.getCard(id);
-        return card != null && card.isOwnedBy(source.getFirstTarget());
+        return card != null && card.isOwnedBy(source.getTargets().get(targetPlayerIndex).getFirstTarget());
     }
 
     @Override

@@ -29,7 +29,7 @@ public final class MosquitoGuard extends CardImpl {
         this.addAbility(new ReinforceAbility(1, new ManaCostsImpl<>("{1}{W}")));
     }
 
-    public MosquitoGuard (final MosquitoGuard card) {
+    private MosquitoGuard(final MosquitoGuard card) {
         super(card);
     }
 

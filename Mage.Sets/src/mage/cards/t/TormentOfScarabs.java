@@ -1,9 +1,13 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.costs.OrCost;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,20 +15,22 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author LevelX2, Susucr
  */
 public final class TormentOfScarabs extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent");
+
+    static {
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+    }
 
     public TormentOfScarabs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
@@ -40,7 +46,15 @@ public final class TormentOfScarabs extends CardImpl {
 
         // At the beginning of enchanted player's upkeep, that player loses 3 life unless they sacrifice a nonland permanent or discards a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TormentOfScarabsEffect(), TargetController.ENCHANTED, false
+                TargetController.ENCHANTED, new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(
+                        new LoseLifeTargetEffect(3),
+                        new OrCost(
+                                "sacrifice a nonland permanent or discard a card",
+                                new SacrificeTargetCost(filter),
+                                new DiscardCardCost()
+                        ),
+                        "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
+                ), false
         ));
     }
 
@@ -51,49 +65,5 @@ public final class TormentOfScarabs extends CardImpl {
     @Override
     public TormentOfScarabs copy() {
         return new TormentOfScarabs(this);
-    }
-}
-
-class TormentOfScarabsEffect extends OneShotEffect {
-
-    TormentOfScarabsEffect() {
-        super(Outcome.LoseLife);
-        this.staticText = "that player loses 3 life unless they sacrifice a nonland permanent or discard a card";
-    }
-
-    private TormentOfScarabsEffect(final TormentOfScarabsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TormentOfScarabsEffect copy() {
-        return new TormentOfScarabsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player enchantedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-        if (enchantedPlayer == null) {
-            return false;
-        }
-        int permanents = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_NON_LAND, enchantedPlayer.getId(), game);
-        if (permanents > 0 && enchantedPlayer.chooseUse(outcome, "Sacrifice a nonland permanent?",
-                "Otherwise you have to discard a card or lose 3 life.", "Sacrifice", "Discard or life loss", source, game)) {
-            Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-            if (enchantedPlayer.choose(outcome, target, source, game)) {
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    permanent.sacrifice(source, game);
-                    return true;
-                }
-            }
-        }
-        if (!enchantedPlayer.getHand().isEmpty() && enchantedPlayer.chooseUse(outcome, "Discard a card?",
-                "Otherwise you lose 3 life.", "Discard", "Lose 3 life", source, game)) {
-            enchantedPlayer.discardOne(false, false, source, game);
-            return true;
-        }
-        enchantedPlayer.loseLife(3, game, source, false);
-        return true;
     }
 }

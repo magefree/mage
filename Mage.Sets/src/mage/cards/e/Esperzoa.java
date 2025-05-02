@@ -4,14 +4,13 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
@@ -32,10 +31,10 @@ public final class Esperzoa extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         //At the beginning of your upkeep, return an artifact you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledArtifactPermanent()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledArtifactPermanent())));
     }
 
-    public Esperzoa (final Esperzoa card) {
+    private Esperzoa(final Esperzoa card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class TempleAltisaur extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If a source would deal damage to another Dinosaur you control, prevent all but 1 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TempleAltisaurPreventEffect()));
+        this.addAbility(new SimpleStaticAbility(new TempleAltisaurPreventEffect()));
     }
 
     private TempleAltisaur(final TempleAltisaur card) {
@@ -45,13 +45,13 @@ public final class TempleAltisaur extends CardImpl {
 
 class TempleAltisaurPreventEffect extends PreventionEffectImpl {
 
-    public TempleAltisaurPreventEffect() {
+    TempleAltisaurPreventEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "If a source would deal damage to another Dinosaur you control, prevent all but 1 of that damage";
         consumable = false;
     }
 
-    public TempleAltisaurPreventEffect(TempleAltisaurPreventEffect effect) {
+    private TempleAltisaurPreventEffect(final TempleAltisaurPreventEffect effect) {
         super(effect);
     }
 
@@ -63,11 +63,6 @@ class TempleAltisaurPreventEffect extends PreventionEffectImpl {
             preventDamageAction(event, source, game);
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

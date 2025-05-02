@@ -34,7 +34,7 @@ public final class SidewinderSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Sliver creatures have flanking.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(new FlankingAbility(), Duration.WhileOnBattlefield, filter, false)
                         .setText("all Sliver creatures have flanking")
         ));

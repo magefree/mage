@@ -20,7 +20,7 @@ public final class SpiritRedToken extends TokenImpl {
         addAbility(new MenaceAbility());
     }
 
-    protected SpiritRedToken(final SpiritRedToken token) {
+    private SpiritRedToken(final SpiritRedToken token) {
         super(token);
     }
 

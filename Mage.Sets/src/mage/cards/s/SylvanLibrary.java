@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class SylvanLibrary extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), TargetController.YOU, true),
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), true),
                 new SylvanLibraryCardsDrawnThisTurnWatcher());
 
     }
@@ -53,12 +53,12 @@ public final class SylvanLibrary extends CardImpl {
 
 class SylvanLibraryEffect extends OneShotEffect {
 
-    public SylvanLibraryEffect() {
+    SylvanLibraryEffect() {
         super(Outcome.LoseLife);
         this.staticText = "you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library";
     }
 
-    public SylvanLibraryEffect(final SylvanLibraryEffect effect) {
+    private SylvanLibraryEffect(final SylvanLibraryEffect effect) {
         super(effect);
     }
 

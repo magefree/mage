@@ -20,7 +20,7 @@ public final class GnomeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected GnomeToken(final GnomeToken token) {
+    private GnomeToken(final GnomeToken token) {
         super(token);
     }
 

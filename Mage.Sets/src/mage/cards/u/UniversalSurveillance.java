@@ -1,6 +1,6 @@
 package mage.cards.u;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ImproviseAbility;
 import mage.cards.CardImpl;
@@ -21,7 +21,7 @@ public final class UniversalSurveillance extends CardImpl {
         this.addAbility(new ImproviseAbility());
 
         // Draw X cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
     }
 
     private UniversalSurveillance(final UniversalSurveillance card) {

@@ -32,9 +32,9 @@ public final class ArmorOfFaith extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
         // {W}: Enchanted creature gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostEnchantedEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private ArmorOfFaith(final ArmorOfFaith card) {

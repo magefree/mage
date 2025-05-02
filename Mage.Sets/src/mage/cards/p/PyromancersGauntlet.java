@@ -27,7 +27,7 @@ public final class PyromancersGauntlet extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // If a red instant or sorcery spell you control or a red planeswalker you control would deal damage to a permanent or player, it deals that much damage plus 2 to that permanent or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PyromancersGauntletReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new PyromancersGauntletReplacementEffect()));
     }
 
     private PyromancersGauntlet(final PyromancersGauntlet card) {
@@ -47,7 +47,7 @@ class PyromancersGauntletReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a red instant or sorcery spell you control or a red planeswalker you control would deal damage to a permanent or player, it deals that much damage plus 2 to that permanent or player instead";
     }
 
-    PyromancersGauntletReplacementEffect(final PyromancersGauntletReplacementEffect effect) {
+    private PyromancersGauntletReplacementEffect(final PyromancersGauntletReplacementEffect effect) {
         super(effect);
     }
 

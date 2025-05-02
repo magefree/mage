@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -34,8 +34,8 @@ public final class TheChainVeil extends CardImpl {
 
         // At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeSourceControllerEffect(2), TargetController.YOU,
-                TheChainVeilCondition.instance, false
+                TargetController.YOU, new LoseLifeSourceControllerEffect(2),
+                false, TheChainVeilCondition.instance
         ), new ActivatedLoyaltyAbilityWatcher());
 
         // {4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.
@@ -90,12 +90,12 @@ class ActivatedLoyaltyAbilityWatcher extends Watcher {
 
 class TheChainVeilIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
 
-    public TheChainVeilIncreaseLoyaltyUseEffect() {
+    TheChainVeilIncreaseLoyaltyUseEffect() {
         super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities have been activated this turn";
     }
 
-    public TheChainVeilIncreaseLoyaltyUseEffect(final TheChainVeilIncreaseLoyaltyUseEffect effect) {
+    private TheChainVeilIncreaseLoyaltyUseEffect(final TheChainVeilIncreaseLoyaltyUseEffect effect) {
         super(effect);
     }
 

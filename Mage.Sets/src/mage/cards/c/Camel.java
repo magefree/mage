@@ -35,7 +35,7 @@ public final class Camel extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
 
         // As long as Camel is attacking, prevent all damage Deserts would deal to Camel and to creatures banded with Camel.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CamelEffect()));
+        this.addAbility(new SimpleStaticAbility(new CamelEffect()));
 
     }
 
@@ -62,7 +62,7 @@ class CamelEffect extends PreventionEffectImpl {
         staticText = "As long as {this} is attacking, prevent all damage Deserts would deal to {this} and to creatures banded with {this}";
     }
 
-    CamelEffect(final CamelEffect effect) {
+    private CamelEffect(final CamelEffect effect) {
         super(effect);
     }
 

@@ -40,7 +40,6 @@ public final class GoblinTrashmaster extends CardImpl {
 
         // Other Goblins you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         1, 1, Duration.WhileOnBattlefield,
                         filter, true
@@ -50,9 +49,7 @@ public final class GoblinTrashmaster extends CardImpl {
         // Sacrifice a Goblin: Destroy target artifact.
         Ability ability = new SimpleActivatedAbility(
                 new DestroyTargetEffect(),
-                new SacrificeTargetCost(
-                        new TargetControlledPermanent(filter2)
-                )
+                new SacrificeTargetCost(filter2)
         );
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

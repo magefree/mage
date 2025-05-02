@@ -39,7 +39,7 @@ public final class Cunning extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3, 3)));
 
         // When enchanted creature attacks or blocks, sacrifice Cunning at the beginning of the next cleanup step.
         this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(
@@ -59,12 +59,12 @@ public final class Cunning extends CardImpl {
 
 class SacrificeSourceBeginningCleanupStepEffect extends OneShotEffect {
 
-    public SacrificeSourceBeginningCleanupStepEffect() {
+    SacrificeSourceBeginningCleanupStepEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "sacrifice {this} at the beginning of the next cleanup step";
     }
 
-    public SacrificeSourceBeginningCleanupStepEffect(final SacrificeSourceBeginningCleanupStepEffect effect) {
+    private SacrificeSourceBeginningCleanupStepEffect(final SacrificeSourceBeginningCleanupStepEffect effect) {
         super(effect);
     }
 

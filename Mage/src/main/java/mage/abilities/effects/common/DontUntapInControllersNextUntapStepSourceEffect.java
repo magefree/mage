@@ -21,16 +21,12 @@ public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousR
 
     protected DontUntapInControllersNextUntapStepSourceEffect(final DontUntapInControllersNextUntapStepSourceEffect effect) {
         super(effect);
+        this.validForTurnNum = effect.validForTurnNum;
     }
 
     @Override
     public DontUntapInControllersNextUntapStepSourceEffect copy() {
         return new DontUntapInControllersNextUntapStepSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override
@@ -44,7 +40,8 @@ public class DontUntapInControllersNextUntapStepSourceEffect extends ContinuousR
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAP_STEP || event.getType() == GameEvent.EventType.UNTAP;
+        return event.getType() == GameEvent.EventType.UNTAP_STEP
+                || event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override

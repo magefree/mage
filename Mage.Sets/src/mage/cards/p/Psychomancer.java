@@ -57,6 +57,7 @@ class PsychomancerTriggeredAbility extends TriggeredAbilityImpl {
         this.setTriggerPhrase("Whenever {this} or another nontoken artifact you control is put " +
                 "into a graveyard from the battlefield or is put into exile from the battlefield, ");
         this.withFlavorWord("Harbinger of Despair");
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
     private PsychomancerTriggeredAbility(final PsychomancerTriggeredAbility ability) {
@@ -80,6 +81,7 @@ class PsychomancerTriggeredAbility extends TriggeredAbilityImpl {
                 && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED)
                 && zEvent.getTarget() != null
                 && (zEvent.getTargetId().equals(getSourceId())
-                || zEvent.getTarget().isArtifact(game) && !(zEvent.getTarget() instanceof PermanentToken));
+                || zEvent.getTarget().isArtifact(game) && !(zEvent.getTarget() instanceof PermanentToken)
+                && zEvent.getTarget().getControllerId().equals(getControllerId()));
     }
 }

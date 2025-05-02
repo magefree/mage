@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetAnyTarget;
@@ -32,9 +33,8 @@ public final class TroubledHealer extends CardImpl {
 
         // Sacrifice a land: Prevent the next 2 damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2),
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
+                new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

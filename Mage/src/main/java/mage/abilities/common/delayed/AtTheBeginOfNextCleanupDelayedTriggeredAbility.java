@@ -43,7 +43,7 @@ public class AtTheBeginOfNextCleanupDelayedTriggeredAbility extends DelayedTrigg
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder();
-        String text = modes.getText();
+        String text = getModes().getText();
         if (!text.isEmpty()) {
             sb.append(Character.toUpperCase(text.charAt(0)));
             if (text.endsWith(".")) {

@@ -2,14 +2,14 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,7 +30,7 @@ public final class EntrailsFeaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, you may exile a creature card from a graveyard. If you do, put a +1/+1 counter on Entrails Feaster. If you don't, tap Entrails Feaster.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new EntrailsFeasterEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new EntrailsFeasterEffect());
         this.addAbility(ability);
 
     }
@@ -47,14 +47,12 @@ public final class EntrailsFeaster extends CardImpl {
 
 class EntrailsFeasterEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public EntrailsFeasterEffect() {
         super(Outcome.Detriment);
         this.staticText = "you may exile a creature card from a graveyard. If you do, put a +1/+1 counter on {this}. If you don't, tap {this}";
     }
 
-    public EntrailsFeasterEffect(final EntrailsFeasterEffect effect) {
+    private EntrailsFeasterEffect(final EntrailsFeasterEffect effect) {
         super(effect);
     }
 
@@ -68,8 +66,8 @@ class EntrailsFeasterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && source.getSourceId() != null) {
             Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
-            TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-            target.setNotTarget(true);
+            TargetCardInGraveyard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD);
+            target.withNotTarget(true);
             if (target.canChoose(controller.getId(), source, game) && controller.chooseUse(outcome, "Exile a creature card from a graveyard?", source, game)) {
                 if (controller.choose(Outcome.Exile, target, source, game)) {
                     Card cardChosen = game.getCard(target.getFirstTarget());

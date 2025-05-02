@@ -56,7 +56,7 @@ public final class ManaformHellkite extends CardImpl {
 
 class ManaformHellkitEffect extends OneShotEffect {
 
-    public ManaformHellkitEffect() {
+    ManaformHellkitEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create an X/X red Dragon Illusion creature token with flying and haste, where X is the amount of mana spent to cast that spell. "
                 + "Exile that token at the beginning of the next end step";

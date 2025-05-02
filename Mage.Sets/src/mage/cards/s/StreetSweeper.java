@@ -64,7 +64,7 @@ class StreetSweeperDestroyEffect extends OneShotEffect {
         this.staticText = "destroy all Auras attached to target land";
     }
  
-    public StreetSweeperDestroyEffect(final StreetSweeperDestroyEffect effect) {
+    private StreetSweeperDestroyEffect(final StreetSweeperDestroyEffect effect) {
         super(effect);
     }
  

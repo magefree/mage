@@ -37,7 +37,7 @@ public final class MaskOfTheMimic extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // As an additional cost to cast Mask of the Mimic, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Search your library for a card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new MaskOfTheMimicEffect());
@@ -62,7 +62,7 @@ class MaskOfTheMimicEffect extends OneShotEffect {
                 + " put that card onto the battlefield, then shuffle.";
     }
 
-    MaskOfTheMimicEffect(final MaskOfTheMimicEffect effect) {
+    private MaskOfTheMimicEffect(final MaskOfTheMimicEffect effect) {
         super(effect);
     }
 

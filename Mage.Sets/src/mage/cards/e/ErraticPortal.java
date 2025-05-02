@@ -29,7 +29,7 @@ public final class ErraticPortal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {1}, {tap}: Return target creature to its owner's hand unless its controller pays {1}.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ErraticPortalEffect(new GenericManaCost(1)), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new ErraticPortalEffect(new GenericManaCost(1)), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -55,7 +55,7 @@ class ErraticPortalEffect extends OneShotEffect {
         this.cost = cost;
     }
 
-    public ErraticPortalEffect(final ErraticPortalEffect effect) {
+    private ErraticPortalEffect(final ErraticPortalEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

@@ -19,7 +19,7 @@ import java.util.*;
 public class MeleeAbility extends AttacksTriggeredAbility {
 
     public MeleeAbility() {
-        super(new BoostSourceEffect(MeleeDynamicValue.instance, MeleeDynamicValue.instance, Duration.EndOfTurn, true), false);
+        super(new BoostSourceEffect(MeleeDynamicValue.instance, MeleeDynamicValue.instance, Duration.EndOfTurn), false);
         this.addWatcher(new MeleeWatcher());
     }
 

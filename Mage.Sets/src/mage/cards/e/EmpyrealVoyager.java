@@ -29,10 +29,10 @@ public final class EmpyrealVoyager extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Whenever Empyreal Voyager deals combat damage to a player you get that many {E}
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new GetEnergyCountersControllerEffect(SavedDamageValue.MANY)
-                .setText("you get that many {E} <i>(energy counters)</i>."),
+                new GetEnergyCountersControllerEffect(SavedDamageValue.MANY),
                 false, true));
     }
 

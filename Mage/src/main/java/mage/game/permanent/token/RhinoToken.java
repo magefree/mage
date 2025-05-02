@@ -20,7 +20,7 @@ public final class RhinoToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
     }
 
-    protected RhinoToken(final RhinoToken token) {
+    private RhinoToken(final RhinoToken token) {
         super(token);
     }
 

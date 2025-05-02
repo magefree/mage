@@ -21,7 +21,7 @@ public final class TombspawnZombieToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected TombspawnZombieToken(final TombspawnZombieToken token) {
+    private TombspawnZombieToken(final TombspawnZombieToken token) {
         super(token);
     }
 

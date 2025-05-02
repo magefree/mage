@@ -34,9 +34,9 @@ public final class FalkenrathTorturer extends CardImpl {
 
         // Sacrifice a creature: Falkenrath Torturer gains flying until end of turn.
         // If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Torturer.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addEffect(new FalkenrathAristocratEffect());
         this.addAbility(ability);
     }
@@ -53,12 +53,12 @@ public final class FalkenrathTorturer extends CardImpl {
 
 class FalkenrathTorturerEffect extends OneShotEffect {
 
-    public FalkenrathTorturerEffect() {
+    FalkenrathTorturerEffect() {
         super(Outcome.DrawCard);
         this.staticText = "If the sacrificed creature was a Human, put a +1/+1 counter on {this}";
     }
 
-    public FalkenrathTorturerEffect(final FalkenrathTorturerEffect effect) {
+    private FalkenrathTorturerEffect(final FalkenrathTorturerEffect effect) {
         super(effect);
     }
 

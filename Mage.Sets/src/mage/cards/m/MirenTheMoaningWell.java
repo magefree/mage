@@ -35,9 +35,9 @@ public final class MirenTheMoaningWell extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {3}, {tap}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirenTheMoaningWellEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new MirenTheMoaningWellEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 
@@ -53,12 +53,12 @@ public final class MirenTheMoaningWell extends CardImpl {
 
 class MirenTheMoaningWellEffect extends OneShotEffect {
 
-    public MirenTheMoaningWellEffect() {
+    MirenTheMoaningWellEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }
 
-    public MirenTheMoaningWellEffect(final MirenTheMoaningWellEffect effect) {
+    private MirenTheMoaningWellEffect(final MirenTheMoaningWellEffect effect) {
         super(effect);
     }
 

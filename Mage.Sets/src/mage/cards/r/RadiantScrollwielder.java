@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -14,8 +14,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class RadiantScrollwielder extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("instant and sorcery spells you control");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("instant and sorcery spells you control");
 
     static {
         filter.add(Predicates.or(
@@ -57,7 +57,7 @@ public final class RadiantScrollwielder extends CardImpl {
 
         // At the beginning of your upkeep, exile an instant or sorcery card at random from your graveyard. You may cast it this turn. If a spell cast this way would be put into your graveyard, exile it instead.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new RadiantScrollwielderEffect(), TargetController.YOU, false
+                new RadiantScrollwielderEffect()
         ), new RadiantScrollwielderWatcher());
     }
 
@@ -95,7 +95,7 @@ class RadiantScrollwielderEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.setRandom(true);
         target.chooseTarget(outcome, player.getId(), source, game);
         Card card = game.getCard(target.getFirstTarget());
@@ -131,11 +131,6 @@ class RadiantScrollwielderReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
         return false;
@@ -164,12 +159,12 @@ class RadiantScrollwielderWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
         morMap.put(
                 new MageObjectReference(event.getSourceId(), game),
-                event.getAdditionalReference().getApprovingMageObjectReference()
+                event.getApprovingObject().getApprovingMageObjectReference()
         );
     }
 

@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -11,32 +9,20 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class PrimevalProtector extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public PrimevalProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}{G}");
@@ -51,7 +37,7 @@ public final class PrimevalProtector extends CardImpl {
         this.addAbility(ability);
 
         // When Primeval Protector enters the battlefield, put +1/+1 counter on each other creature you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE), false));
     }
 
     private PrimevalProtector(final PrimevalProtector card) {
@@ -77,7 +63,7 @@ class PrimevalProtectorCostReductionEffect extends CostModificationEffectImpl {
         staticText = "this spell costs {1} less to cast for each creature your opponents control";
     }
 
-    PrimevalProtectorCostReductionEffect(PrimevalProtectorCostReductionEffect effect) {
+    private PrimevalProtectorCostReductionEffect(final PrimevalProtectorCostReductionEffect effect) {
         super(effect);
     }
 

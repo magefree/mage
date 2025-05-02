@@ -18,11 +18,13 @@ public final class Jumpstart extends ExpansionSet {
     private Jumpstart() {
         super("Jumpstart", "JMP", ExpansionSet.buildDate(2020, 7, 17), SetType.SUPPLEMENTAL);
         this.blockName = "Jumpstart";
+        this.hasBoosters = false; // TODO: share code with JumpstartPoolGenerator and add single booster, see #13264
         this.hasBasicLands = true;
 
+        //cards.add(new SetCardInfo("A-Blood Artist", "A-206", Rarity.UNCOMMON, mage.cards.a.ABloodArtist.class));
         cards.add(new SetCardInfo("Act of Treason", 289, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
-        cards.add(new SetCardInfo("Aegis Turtle", 138, Rarity.COMMON, mage.cards.a.AegisTurtle.class));
         cards.add(new SetCardInfo("Aegis of the Heavens", 79, Rarity.UNCOMMON, mage.cards.a.AegisOfTheHeavens.class));
+        cards.add(new SetCardInfo("Aegis Turtle", 138, Rarity.COMMON, mage.cards.a.AegisTurtle.class));
         cards.add(new SetCardInfo("Aerial Assault", 80, Rarity.COMMON, mage.cards.a.AerialAssault.class));
         cards.add(new SetCardInfo("Aether Spellbomb", 456, Rarity.COMMON, mage.cards.a.AetherSpellbomb.class));
         cards.add(new SetCardInfo("Affa Guard Hound", 81, Rarity.UNCOMMON, mage.cards.a.AffaGuardHound.class));
@@ -403,7 +405,8 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Sarkhan's Unsealing", 361, Rarity.RARE, mage.cards.s.SarkhansUnsealing.class));
         cards.add(new SetCardInfo("Savage Stomp", 427, Rarity.UNCOMMON, mage.cards.s.SavageStomp.class));
         cards.add(new SetCardInfo("Scarecrone", 482, Rarity.RARE, mage.cards.s.Scarecrone.class));
-        cards.add(new SetCardInfo("Scholar of the Lost Trove", 14, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class));
+        cards.add(new SetCardInfo("Scholar of the Lost Trove", 14, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Scholar of the Lost Trove", 496, Rarity.RARE, mage.cards.s.ScholarOfTheLostTrove.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scourge of Nel Toth", 274, Rarity.RARE, mage.cards.s.ScourgeOfNelToth.class));
         cards.add(new SetCardInfo("Scroll of Avacyn", 483, Rarity.COMMON, mage.cards.s.ScrollOfAvacyn.class));
         cards.add(new SetCardInfo("Scrounging Bandar", 428, Rarity.COMMON, mage.cards.s.ScroungingBandar.class));
@@ -428,8 +431,8 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Sky Tether", 133, Rarity.UNCOMMON, mage.cards.s.SkyTether.class));
         cards.add(new SetCardInfo("Slate Street Ruffian", 279, Rarity.COMMON, mage.cards.s.SlateStreetRuffian.class));
         cards.add(new SetCardInfo("Somberwald Stag", 431, Rarity.UNCOMMON, mage.cards.s.SomberwaldStag.class));
-        cards.add(new SetCardInfo("Soul Salvage", 280, Rarity.COMMON, mage.cards.s.SoulSalvage.class));
         cards.add(new SetCardInfo("Soul of the Harvest", 432, Rarity.RARE, mage.cards.s.SoulOfTheHarvest.class));
+        cards.add(new SetCardInfo("Soul Salvage", 280, Rarity.COMMON, mage.cards.s.SoulSalvage.class));
         cards.add(new SetCardInfo("Spectral Sailor", 178, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Spiteful Prankster", 26, Rarity.UNCOMMON, mage.cards.s.SpitefulPrankster.class));
         cards.add(new SetCardInfo("Spitting Earth", 364, Rarity.COMMON, mage.cards.s.SpittingEarth.class));

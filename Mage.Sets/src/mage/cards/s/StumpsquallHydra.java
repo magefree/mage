@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetAmount;
-import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
+import mage.target.common.TargetPermanentAmount;
 
 import java.util.UUID;
 
@@ -91,13 +91,14 @@ class StumpsquallHydraEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
-        if (player == null || xValue < 1) {
+        int xValue = GetXValue.instance.calculate(game, source, this);
+        if (player == null || xValue < 1 || game.getBattlefield().count(filter, player.getId(), source, game) < 1) {
             return false;
         }
-        TargetAmount targetAmount = new TargetCreatureOrPlaneswalkerAmount(xValue, filter);
-        targetAmount.setNotTarget(true);
-        player.choose(outcome, targetAmount, source, game);
+
+        TargetAmount targetAmount = new TargetPermanentAmount(xValue, 1, filter);
+        targetAmount.withNotTarget(true);
+        targetAmount.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : targetAmount.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {

@@ -3,7 +3,7 @@ package mage.cards.h;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -41,7 +41,7 @@ public final class HaphazardBombardment extends CardImpl {
         FilterPermanent filter = new FilterPermanent("if two or more permanents you don't control have an aim counter on them");
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
         filter.add(CounterType.AIM.getPredicate());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new HaphazardBombardmentEndOfTurnEffect(), false),
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(new HaphazardBombardmentEndOfTurnEffect()),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, false),
                 "At the beginning of your end step, if two or more permanents you don't control have an aim counter on them, destroy one of those permanents at random"));
     }
@@ -58,12 +58,12 @@ public final class HaphazardBombardment extends CardImpl {
 
 class HaphazardBombardmentEffect extends OneShotEffect {
 
-    public HaphazardBombardmentEffect() {
+    HaphazardBombardmentEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose four nonenchantment permanents you don't control and put an aim counter on each of them";
     }
 
-    public HaphazardBombardmentEffect(final HaphazardBombardmentEffect effect) {
+    private HaphazardBombardmentEffect(final HaphazardBombardmentEffect effect) {
         super(effect);
     }
 
@@ -103,12 +103,12 @@ class HaphazardBombardmentEffect extends OneShotEffect {
 
 class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
 
-    public HaphazardBombardmentEndOfTurnEffect() {
+    HaphazardBombardmentEndOfTurnEffect() {
         super(Outcome.Benefit);
         this.staticText = "destroy one of those permanents at random";
     }
 
-    public HaphazardBombardmentEndOfTurnEffect(final HaphazardBombardmentEndOfTurnEffect effect) {
+    private HaphazardBombardmentEndOfTurnEffect(final HaphazardBombardmentEndOfTurnEffect effect) {
         super(effect);
     }
 

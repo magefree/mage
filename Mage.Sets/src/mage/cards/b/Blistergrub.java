@@ -32,7 +32,7 @@ public final class Blistergrub extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new LoseLifeOpponentsEffect(2), false));
     }
 
-    public Blistergrub (final Blistergrub card) {
+    private Blistergrub(final Blistergrub card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class HelmOfTheGods extends CardImpl {
         PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(filter);
         Effect effect = new BoostEquippedEffect(countEnchantments, countEnchantments);
         effect.setText("Equipped creature gets +1/+1 for each enchantment you control");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));

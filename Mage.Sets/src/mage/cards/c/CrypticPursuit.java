@@ -3,7 +3,6 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.keyword.ManifestEffect;
@@ -92,12 +91,12 @@ class CrypticPursuitExileAndPlayEffect extends OneShotEffect {
         return false;
     }
 
-    CrypticPursuitExileAndPlayEffect(final CrypticPursuitExileAndPlayEffect effect) {
+    private CrypticPursuitExileAndPlayEffect(final CrypticPursuitExileAndPlayEffect effect) {
         super(effect);
     }
 
     @Override
-    public Effect copy() {
+    public CrypticPursuitExileAndPlayEffect copy() {
         return new CrypticPursuitExileAndPlayEffect(this);
     }
 }

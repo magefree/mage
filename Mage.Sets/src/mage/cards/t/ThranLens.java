@@ -21,7 +21,7 @@ public final class ThranLens extends CardImpl {
     public ThranLens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         // All permanents are colorless.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThranLensEffect()));
+        this.addAbility(new SimpleStaticAbility(new ThranLensEffect()));
     }
 
     private ThranLens(final ThranLens card) {
@@ -37,7 +37,7 @@ public final class ThranLens extends CardImpl {
 }
  class ThranLensEffect extends ContinuousEffectImpl {
 
-    public ThranLensEffect()
+    ThranLensEffect()
     {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         staticText = "All permanents are colorless";

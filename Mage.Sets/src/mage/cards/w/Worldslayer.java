@@ -54,7 +54,7 @@ class WorldslayerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new WorldslayerEffect(), false);
     }
 
-    WorldslayerTriggeredAbility(final WorldslayerTriggeredAbility ability) {
+    private WorldslayerTriggeredAbility(final WorldslayerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -83,12 +83,12 @@ class WorldslayerTriggeredAbility extends TriggeredAbilityImpl {
 
 class WorldslayerEffect extends OneShotEffect {
 
-    public WorldslayerEffect() {
+    WorldslayerEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy all permanents other than {this}";
     }
 
-    public WorldslayerEffect(final WorldslayerEffect effect) {
+    private WorldslayerEffect(final WorldslayerEffect effect) {
         super(effect);
     }
 

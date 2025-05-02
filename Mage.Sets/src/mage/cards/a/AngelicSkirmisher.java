@@ -5,7 +5,7 @@ import java.util.*;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -39,7 +39,7 @@ public final class AngelicSkirmisher extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each combat, choose first strike, vigilance or lifelink. Creatures you control gain that ability until end of turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new AngelicSkirmisherEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, new AngelicSkirmisherEffect(), false);
         this.addAbility(ability);
     }
 
@@ -57,10 +57,10 @@ class AngelicSkirmisherEffect extends OneShotEffect {
 
     AngelicSkirmisherEffect() {
         super(Outcome.AddAbility);
-        staticText = "choose first strike, vigilance or lifelink. Creatures you control gain that ability until end of turn";
+        staticText = "choose first strike, vigilance, or lifelink. Creatures you control gain that ability until end of turn";
     }
 
-    AngelicSkirmisherEffect(final AngelicSkirmisherEffect effect) {
+    private AngelicSkirmisherEffect(final AngelicSkirmisherEffect effect) {
         super(effect);
     }
 

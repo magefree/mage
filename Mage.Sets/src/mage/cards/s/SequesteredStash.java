@@ -33,7 +33,7 @@ public final class SequesteredStash extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {4},{T}, Sacrifice Sequestered Stash: Put the top five cards of your library into your graveyard. Then you may put an artifact card from your graveyard on top of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsControllerEffect(5), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new MillCardsControllerEffect(5), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new SequesteredStashEffect());
@@ -53,12 +53,12 @@ public final class SequesteredStash extends CardImpl {
 
 class SequesteredStashEffect extends OneShotEffect {
 
-    public SequesteredStashEffect() {
+    SequesteredStashEffect() {
         super(Outcome.Benefit);
         this.staticText = "Then you may put an artifact card from your graveyard on top of your library";
     }
 
-    public SequesteredStashEffect(final SequesteredStashEffect effect) {
+    private SequesteredStashEffect(final SequesteredStashEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class SequesteredStashEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Put an artifact card from your graveyard to library?", source, game)
                 && controller.choose(outcome, target, source, game)) {

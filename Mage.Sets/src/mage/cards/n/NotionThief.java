@@ -37,7 +37,7 @@ public final class NotionThief extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // If an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NotionThiefReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
+        this.addAbility(new SimpleStaticAbility(new NotionThiefReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
 
     }
 
@@ -53,23 +53,18 @@ public final class NotionThief extends CardImpl {
 
 class NotionThiefReplacementEffect extends ReplacementEffectImpl {
 
-    public NotionThiefReplacementEffect() {
+    NotionThiefReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If an opponent would draw a card except the first one they draw in each of their draw steps, instead that player skips that draw and you draw a card";
     }
 
-    public NotionThiefReplacementEffect(final NotionThiefReplacementEffect effect) {
+    private NotionThiefReplacementEffect(final NotionThiefReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public NotionThiefReplacementEffect copy() {
         return new NotionThiefReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

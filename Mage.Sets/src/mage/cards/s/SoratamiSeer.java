@@ -37,7 +37,7 @@ public final class SoratamiSeer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {4}, Return two lands you control to their owner's hand: Discard all the cards in your hand, then draw that many cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardHandDrawSameNumberSourceEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new DiscardHandDrawSameNumberSourceEffect(), new GenericManaCost(4));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(2, 2, filter, false)));
         this.addAbility(ability);
     }

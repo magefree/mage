@@ -31,7 +31,7 @@ public final class ThornscapeApprentice extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, {tap}: Target creature gains first strike until end of turn.
-        SimpleActivatedAbility ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability1 = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}"));
         ability1.addCost(new TapSourceCost());
@@ -39,7 +39,7 @@ public final class ThornscapeApprentice extends CardImpl {
         this.addAbility(ability1);
 
         // {W}, {tap}: Tap target creature.
-        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
                 new TapTargetEffect(), new ManaCostsImpl<>("{W}"));
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());

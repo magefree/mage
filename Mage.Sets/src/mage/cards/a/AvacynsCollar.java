@@ -1,6 +1,7 @@
 
 package mage.cards.a;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -60,9 +61,10 @@ class AvacynsCollarTriggeredAbility extends TriggeredAbilityImpl {
 
     public AvacynsCollarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public AvacynsCollarTriggeredAbility(final AvacynsCollarTriggeredAbility ability) {
+    private AvacynsCollarTriggeredAbility(final AvacynsCollarTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,5 +92,10 @@ class AvacynsCollarTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

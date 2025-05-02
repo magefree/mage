@@ -12,6 +12,7 @@ import mage.abilities.decorator.ConditionalManaEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -35,7 +36,7 @@ public final class SarevoksTome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // When Sarevok's Tome enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // {T}: Add {C}. If you have the initiative, add {C}{C} instead.
         this.addAbility(new SimpleManaAbility(

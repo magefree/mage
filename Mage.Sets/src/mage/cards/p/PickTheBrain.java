@@ -3,10 +3,9 @@ package mage.cards.p;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +30,7 @@ public final class PickTheBrain extends CardImpl {
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, search that player's graveyard, hand, and library for any number of cards with the same name as the exiled card, exile those cards, then that player shuffles their library.
         this.getSpellAbility().addEffect(new PickTheBrainEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private PickTheBrain(final PickTheBrain card) {
@@ -46,7 +45,7 @@ public final class PickTheBrain extends CardImpl {
 
 class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public PickTheBrainEffect() {
+    PickTheBrainEffect() {
         super(true, "that card's controller", "all cards with the same name as that card");
         this.staticText = "Target opponent reveals their hand. You choose a nonland card from it and exile that card.<br><br>"
                 + "<i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, "
@@ -54,7 +53,7 @@ class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
                 + "with the same name as the exiled card, exile those cards, then that player shuffles";
     }
 
-    public PickTheBrainEffect(final PickTheBrainEffect effect) {
+    private PickTheBrainEffect(final PickTheBrainEffect effect) {
         super(effect);
     }
 

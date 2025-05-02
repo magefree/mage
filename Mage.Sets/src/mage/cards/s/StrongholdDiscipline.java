@@ -42,7 +42,7 @@ class StrongholdDisciplineEffect extends OneShotEffect {
         this.staticText = "Each player loses 1 life for each creature they control";
     }
 
-    StrongholdDisciplineEffect(final StrongholdDisciplineEffect effect) {
+    private StrongholdDisciplineEffect(final StrongholdDisciplineEffect effect) {
         super(effect);
     }
 

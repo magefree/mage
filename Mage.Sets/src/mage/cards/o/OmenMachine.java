@@ -4,7 +4,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -30,10 +30,10 @@ public final class OmenMachine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Players can't draw cards.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmenMachineEffect()));
+        this.addAbility(new SimpleStaticAbility(new OmenMachineEffect()));
 
         // At the beginning of each player's draw step, that player exiles the top card of their library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new OmenMachineEffect2(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.EACH_PLAYER, new OmenMachineEffect2(), false));
     }
 
     private OmenMachine(final OmenMachine card) {
@@ -48,18 +48,13 @@ public final class OmenMachine extends CardImpl {
 
 class OmenMachineEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OmenMachineEffect() {
+    OmenMachineEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
         staticText = "Players can't draw cards";
     }
 
-    public OmenMachineEffect(final OmenMachineEffect effect) {
+    private OmenMachineEffect(final OmenMachineEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -86,13 +81,13 @@ class OmenMachineEffect2 extends OneShotEffect {
         staticText = "that player exiles the top card of their library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able";
     }
 
-    public OmenMachineEffect2(final OmenMachineEffect2 effect) {
+    private OmenMachineEffect2(final OmenMachineEffect2 effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {

@@ -71,13 +71,13 @@ public final class LenaSelflessChampion extends CardImpl {
 
 class LenaSelflessChampionEffect extends OneShotEffect {
 
-    public LenaSelflessChampionEffect() {
+    LenaSelflessChampionEffect() {
         super(Outcome.Benefit);
         this.staticText = "Creatures you control with power less than "
                 + "{this}'s power gain indestructible until end of turn";
     }
 
-    public LenaSelflessChampionEffect(final LenaSelflessChampionEffect effect) {
+    private LenaSelflessChampionEffect(final LenaSelflessChampionEffect effect) {
         super(effect);
     }
 

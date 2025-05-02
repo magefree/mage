@@ -63,12 +63,12 @@ public final class TyvarJubilantBrawler extends CardImpl {
 
 class TyvarJubilantBrawlerHasteEffect extends AsThoughEffectImpl {
 
-    public TyvarJubilantBrawlerHasteEffect() {
+    TyvarJubilantBrawlerHasteEffect() {
         super(AsThoughEffectType.ACTIVATE_HASTE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "you may activate abilities of creatures you control as though those creatures had haste";
     }
 
-    public TyvarJubilantBrawlerHasteEffect(final TyvarJubilantBrawlerHasteEffect effect) {
+    private TyvarJubilantBrawlerHasteEffect(final TyvarJubilantBrawlerHasteEffect effect) {
         super(effect);
     }
 
@@ -122,7 +122,7 @@ class TyvarJubilantBrawlerReturnEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(0, 1, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         return card != null && player.moveCards(card, Zone.BATTLEFIELD, source, game);

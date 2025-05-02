@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
 
@@ -41,7 +40,7 @@ public final class ThievingSprite extends CardImpl {
         // When Thieving Sprite enters the battlefield, target player reveals X cards from their hand,
         // where X is the number of Faeries you control. You choose one of those cards.
         // That player discards that card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(TargetController.ANY, xValue).setText(rule));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(xValue).setText(rule));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

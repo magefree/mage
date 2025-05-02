@@ -25,11 +25,12 @@ public final class MasteryOfTheUnseen extends CardImpl {
 
         // Whenever a permanent you control is turned face up, you gain 1 life for each creature you control.
         this.addAbility(new TurnedFaceUpAllTriggeredAbility(
-                new GainLifeEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE)),
+                new GainLifeEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE))
+                        .setText("you gain 1 life for each creature you control"),
                 new FilterControlledPermanent("a permanent you control")));
 
         // {3}{W}: Manifest the top card of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManifestEffect(1), new ManaCostsImpl<>("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new ManifestEffect(1), new ManaCostsImpl<>("{3}{W}")));
     }
 
     private MasteryOfTheUnseen(final MasteryOfTheUnseen card) {

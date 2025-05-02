@@ -44,12 +44,12 @@ public final class DescentOfTheDragons extends CardImpl {
 
 class DescentOfTheDragonsEffect extends OneShotEffect {
 
-    public DescentOfTheDragonsEffect() {
+    DescentOfTheDragonsEffect() {
         super(Outcome.Benefit);
         staticText = "Destroy any number of target creatures. For each creature destroyed this way, its controller creates a 4/4 red Dragon creature token with flying";
     }
 
-    public DescentOfTheDragonsEffect(final DescentOfTheDragonsEffect effect) {
+    private DescentOfTheDragonsEffect(final DescentOfTheDragonsEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
                     }
                 }
             }
-            game.getState().processAction(game);
+            game.processAction();
             DragonToken dragonToken = new DragonToken();
             for (Map.Entry<UUID, Integer> amountTokensPerPlayer : playersWithTargets.entrySet()) {
                 dragonToken.putOntoBattlefield(amountTokensPerPlayer.getValue(), game, source, amountTokensPerPlayer.getKey());

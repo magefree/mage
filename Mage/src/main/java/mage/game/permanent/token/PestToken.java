@@ -18,7 +18,7 @@ public final class PestToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected PestToken(final PestToken token) {
+    private PestToken(final PestToken token) {
         super(token);
     }
 

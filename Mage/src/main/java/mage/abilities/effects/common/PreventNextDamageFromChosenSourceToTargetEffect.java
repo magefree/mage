@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -47,6 +43,7 @@ public class PreventNextDamageFromChosenSourceToTargetEffect extends PreventionE
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
@@ -60,7 +57,7 @@ public class PreventNextDamageFromChosenSourceToTargetEffect extends PreventionE
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-            if (event.getTargetId().equals(targetPointer.getFirst(game, source)) && event.getSourceId().equals(targetSource.getFirstTarget())) {
+            if (event.getTargetId().equals(getTargetPointer().getFirst(game, source)) && event.getSourceId().equals(targetSource.getFirstTarget())) {
                 return true;
             }
         }
@@ -69,9 +66,12 @@ public class PreventNextDamageFromChosenSourceToTargetEffect extends PreventionE
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder("The next time a ").append(targetSource.getFilter().getMessage());
-        sb.append(" of your choice would deal damage to target ");
-        sb.append(mode.getTargets().get(0).getTargetName());
+        sb.append(" of your choice would deal damage to ");
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "it"));
         if (duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         }

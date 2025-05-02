@@ -22,7 +22,7 @@ public class CantAttackTargetEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(targetPointer.getFirst(game, source));
+        return permanent.getId().equals(getTargetPointer().getFirst(game, source));
     }
 
     @Override

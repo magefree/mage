@@ -1,18 +1,18 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.DragonToken2;
 
 import java.util.UUID;
@@ -32,12 +32,12 @@ public final class SkylineDespot extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Skyline Despot enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // At the beginning of your upkeep, if you're the monarch, put a 5/5 red Dragon creature token with flying onto the battlefield.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new CreateTokenEffect(new DragonToken2()), TargetController.YOU, false
+                        new CreateTokenEffect(new DragonToken2()), false
                 ), MonarchIsSourceControllerCondition.instance, "At the beginning of your upkeep, " +
                 "if you're the monarch, create a 5/5 red Dragon creature token with flying."
         ));

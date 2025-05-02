@@ -40,7 +40,7 @@ public final class ShieldmageAdvocate extends CardImpl {
         // {tap}: Return target card from an opponent's graveyard to their hand. Prevent all damage that would be dealt to any target this turn by a source of your choice.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return target card from an opponent's graveyard to their hand");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
 
         effect = new ShieldmageAdvocateEffect();
         effect.setTargetPointer(new SecondTargetPointer());
@@ -70,7 +70,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
         this.targetSource = new TargetSource();
     }
     
-    public ShieldmageAdvocateEffect(final ShieldmageAdvocateEffect effect) {
+    private ShieldmageAdvocateEffect(final ShieldmageAdvocateEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
@@ -82,6 +82,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
@@ -94,7 +95,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(targetPointer.getFirst(game, source)) && event.getSourceId().equals(targetSource.getFirstTarget())) {
+            if (event.getTargetId().equals(getTargetPointer().getFirst(game, source)) && event.getSourceId().equals(targetSource.getFirstTarget())) {
                 return true;
             }
         }

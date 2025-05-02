@@ -31,7 +31,7 @@ public final class ManiacalRage extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and can't block.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         ability.addEffect(new CantBlockAttachedEffect(AttachmentType.AURA).setText("and can't block"));
         this.addAbility(ability);
     }

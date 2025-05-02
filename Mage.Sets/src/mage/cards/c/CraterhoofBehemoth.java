@@ -45,7 +45,7 @@ public final class CraterhoofBehemoth extends CardImpl {
         ).setText("creatures you control gain trample"));
         ability.addEffect(new BoostControlledEffect(
                 CreaturesYouControlCount.instance, CreaturesYouControlCount.instance,
-                Duration.EndOfTurn, filter, false, true
+                Duration.EndOfTurn, filter, false
         ).setText("and get +X/+X until end of turn, where X is the number of creatures you control"));
         ability.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability);

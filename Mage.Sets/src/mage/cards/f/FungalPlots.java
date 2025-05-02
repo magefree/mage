@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -13,12 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -37,17 +34,16 @@ public final class FungalPlots extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // {1}{G}, Exile a creature card from your graveyard: Create a 1/1 green Saproling creature token.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new SaprolingToken()),
                 new ManaCostsImpl<>("{1}{G}"));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)).withSourceExileZone(false));
         this.addAbility(ability);
 
         // Sacrifice two Saprolings: You gain 2 life and draw a card.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainLifeEffect(2),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter2, false))
+                new SacrificeTargetCost(2, filter2)
         );
         ability2.addEffect(new DrawCardSourceControllerEffect(1).setText("and draw a card"));
         this.addAbility(ability2);

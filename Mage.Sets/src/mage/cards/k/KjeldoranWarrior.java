@@ -28,7 +28,7 @@ public final class KjeldoranWarrior extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public KjeldoranWarrior (final KjeldoranWarrior card) {
+    private KjeldoranWarrior(final KjeldoranWarrior card) {
         super(card);
     }
 

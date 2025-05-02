@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -42,12 +41,12 @@ public final class DemonicHordes extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {tap}: Destroy target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(new FilterLandPermanent()));
         this.addAbility(ability);
 
         // At the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DemonicHordesEffect(new ManaCostsImpl<>("{B}{B}{B}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DemonicHordesEffect(new ManaCostsImpl<>("{B}{B}{B}"))));
     }
 
     private DemonicHordes(final DemonicHordes card) {
@@ -70,7 +69,7 @@ class DemonicHordesEffect extends OneShotEffect {
         staticText = "unless you pay {B}{B}{B}, tap {this} and sacrifice a land of an opponent's choice";
     }
 
-    public DemonicHordesEffect(final DemonicHordesEffect effect) {
+    private DemonicHordesEffect(final DemonicHordesEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }
@@ -92,14 +91,14 @@ class DemonicHordesEffect extends OneShotEffect {
             }
             demonicHordes.tap(source, game);
             Target choiceOpponent = new TargetOpponent();
-            choiceOpponent.setNotTarget(true);
+            choiceOpponent.withNotTarget(true);
             FilterLandPermanent filterLand = new FilterLandPermanent();
             filterLand.add(new ControllerIdPredicate(source.getControllerId()));
             if (controller.choose(Outcome.Neutral, choiceOpponent, source, game)) {
                 Player opponent = game.getPlayer(choiceOpponent.getFirstTarget());
                 if (opponent != null) {
                     Target chosenLand = new TargetLandPermanent(filterLand);
-                    chosenLand.setNotTarget(true);
+                    chosenLand.withNotTarget(true);
                     if (opponent.chooseTarget(Outcome.Sacrifice, chosenLand, source, game)) {
                         Permanent land = game.getPermanent(chosenLand.getFirstTarget());
                         if (land != null) {

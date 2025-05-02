@@ -8,12 +8,14 @@ import mage.constants.Outcome;
 import mage.constants.PutCards;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author xenohedron
@@ -23,6 +25,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
     private final boolean yourControl;
     private final boolean textThatCard;
     private final PutCards putCards;
+    private OneShotEffect afterEffect = null;
 
     public ExileThenReturnTargetEffect(boolean yourControl, boolean textThatCard) {
         this(yourControl, textThatCard, PutCards.BATTLEFIELD);
@@ -40,6 +43,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         this.putCards = effect.putCards;
         this.yourControl = effect.yourControl;
         this.textThatCard = effect.textThatCard;
+        this.afterEffect = effect.afterEffect == null ? null : effect.afterEffect.copy();
     }
 
     @Override
@@ -47,26 +51,35 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         return new ExileThenReturnTargetEffect(this);
     }
 
+    public ExileThenReturnTargetEffect withAfterEffect(OneShotEffect afterEffect) {
+        this.afterEffect = afterEffect;
+        return this;
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Set<Card> toFlicker = new LinkedHashSet<>();
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent == null) {
-                continue;
-            }
-            toFlicker.add(permanent);
+        if (controller == null) {
+            return false;
         }
-        if (controller == null || toFlicker.isEmpty()) {
+        Set<Card> toFlicker = getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        if (toFlicker.isEmpty()) {
             return false;
         }
         controller.moveCards(toFlicker, Zone.EXILED, source, game);
-        game.getState().processAction(game);
+        game.processAction();
         for (Card card : toFlicker) {
             putCards.moveCard(
                     yourControl ? controller : game.getPlayer(card.getOwnerId()),
                     card.getMainCard(), source, game, "card");
+        }
+        if (afterEffect != null) {
+            afterEffect.setTargetPointer(new FixedTargets(toFlicker, game));
+            afterEffect.apply(game, source);
         }
         return true;
     }
@@ -91,6 +104,9 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
             sb.append(this.yourControl ? "your" : "its owner's");
         }
         sb.append(" control");
+        if (afterEffect != null) {
+            sb.append(". ").append(CardUtil.getTextWithFirstCharUpperCase(afterEffect.getText(mode)));
+        }
         return sb.toString();
     }
 

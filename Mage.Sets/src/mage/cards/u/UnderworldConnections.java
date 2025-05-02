@@ -44,12 +44,12 @@ public final class UnderworldConnections extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land has "{T}, Pay 1 life: Draw a card."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
         gainedAbility.addCost(new PayLifeCost(1));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public UnderworldConnections (final UnderworldConnections card) {
+    private UnderworldConnections(final UnderworldConnections card) {
         super(card);
     }
 

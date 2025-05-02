@@ -37,7 +37,7 @@ public final class WitheringHex extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -47,7 +47,6 @@ public final class WitheringHex extends CardImpl {
         // Enchanted creature gets -1/-1 for each plague counter on Withering Hex.
         DynamicValue value = new MultipliedValue(new CountersSourceCount(CounterType.PLAGUE), -1);
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostEnchantedEffect(value, value, Duration.WhileOnBattlefield)
                         .setText("Enchanted creature gets -1/-1 for each plague counter on {this}.")
         ));

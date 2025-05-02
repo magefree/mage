@@ -20,6 +20,6 @@ public class MagicPlayerRewards2003 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Voidmage Prodigy", 1, Rarity.RARE, mage.cards.v.VoidmageProdigy.class));
+        cards.add(new SetCardInfo("Voidmage Prodigy", 1, Rarity.RARE, mage.cards.v.VoidmageProdigy.class, RETRO_ART));
      }
 }

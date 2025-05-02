@@ -1,12 +1,11 @@
 package mage.cards.u;
 
 import mage.ApprovingObject;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -60,7 +59,7 @@ public final class UvildaDeanOfPerfection extends ModalDoubleFacedCard {
 
         // At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast spells from among those exiled cards, and you many spend mana as though it were mana of any color to cast those spells.
         this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new NassariDeanOfExpressionEffect(), TargetController.YOU, false
+                new NassariDeanOfExpressionEffect()
         ));
 
         // Whenever you cast a spell from exile, put a +1/+1 counter on Nassari, Dean of Expression.
@@ -153,8 +152,8 @@ class UvildaDeanOfPerfectionGainAbilityEffect extends ContinuousEffectImpl {
         }
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        Zone.EXILED, new RemoveCounterSourceEffect(CounterType.HONE.createInstance()),
-                        TargetController.YOU, false
+                        Zone.EXILED, TargetController.YOU, new RemoveCounterSourceEffect(CounterType.HONE.createInstance()),
+                        false
                 ), UvildaDeanOfPerfectionCondition.instance, "At the beginning of your upkeep, " +
                 "if this card is exiled, remove a hone counter from it."
         );
@@ -195,10 +194,10 @@ class UvildaDeanOfPerfectionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        MageObject sourceObject = getSourceObjectIfItStillExists(game);
+        Card card = getSourceCardIfItStillExists(game);
         return event.getTargetId().equals(this.getSourceId())
-                && sourceObject instanceof Card
-                && ((Card) sourceObject).getCounters(game).getCount(CounterType.HONE) == 0
+                && card != null
+                && card.getCounters(game).getCount(CounterType.HONE) == 0
                 && event.getAmount() > 0
                 && event.getData().equals(CounterType.HONE.getName());
     }
@@ -238,11 +237,10 @@ class UvildaDeanOfPerfectionCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (player == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (player == null || card == null) {
             return false;
         }
-        Card card = (Card) sourceObject;
         if (!player.chooseUse(outcome, "Cast " + card.getName() + '?', source, game)) {
             return false;
         }
@@ -283,7 +281,7 @@ class NassariDeanOfExpressionEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        game.getOpponents(source.getControllerId())
+        game.getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
@@ -296,7 +294,7 @@ class NassariDeanOfExpressionEffect extends OneShotEffect {
             return false;
         }
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
         }
         return true;
     }

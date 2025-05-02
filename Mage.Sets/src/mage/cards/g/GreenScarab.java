@@ -48,11 +48,11 @@ public final class GreenScarab extends CardImpl {
 
         // Enchanted creature can't be blocked by green creatures.
         Effect effect = new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.AURA);
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         this.addAbility(ability);
                
         // Enchanted creature gets +2/+2 as long as an opponent controls a white permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield),
                 new OpponentControlsPermanentCondition(filter2),
                 "Enchanted creature gets +2/+2 as long as an opponent controls a green permanent")));

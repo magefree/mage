@@ -45,14 +45,14 @@ public final class ReversalOfFortune extends CardImpl {
 
 class ReversalOfFortuneEffect extends OneShotEffect {
 
-    public ReversalOfFortuneEffect() {
+    ReversalOfFortuneEffect() {
         super(Outcome.Copy);
         this.staticText = "Target opponent reveals their hand. You may copy an "
                 + "instant or sorcery card in it. If you do, you may cast the "
                 + "copy without paying its mana cost";
     }
 
-    public ReversalOfFortuneEffect(final ReversalOfFortuneEffect effect) {
+    private ReversalOfFortuneEffect(final ReversalOfFortuneEffect effect) {
         super(effect);
     }
 
@@ -74,8 +74,7 @@ class ReversalOfFortuneEffect extends OneShotEffect {
             opponent.revealCards("Reveal", revealedCards, game);
 
             //You may copy an instant or sorcery card in it
-            TargetCard target = new TargetCard(1, Zone.HAND, new FilterInstantOrSorceryCard());
-            target.setRequired(false);
+            TargetCard target = new TargetCard(0, 1, Zone.HAND, new FilterInstantOrSorceryCard());
             if (controller.choose(Outcome.PlayForFree, revealedCards, target, source, game)) {
                 Card card = revealedCards.get(target.getFirstTarget(), game);
                 //If you do, you may cast the copy without paying its mana cost

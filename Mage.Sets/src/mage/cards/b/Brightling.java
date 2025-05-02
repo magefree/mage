@@ -39,7 +39,6 @@ public final class Brightling extends CardImpl {
 
         // {W}: Brightling gains vigilance until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(
                         VigilanceAbility.getInstance(),
                         Duration.EndOfTurn
@@ -49,7 +48,6 @@ public final class Brightling extends CardImpl {
 
         // {W}: Brightling gains lifelink until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(
                         LifelinkAbility.getInstance(),
                         Duration.EndOfTurn
@@ -59,14 +57,12 @@ public final class Brightling extends CardImpl {
 
         // {W}: Return Brightling to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ReturnToHandSourceEffect(true),
                 new ColoredManaCost(ColoredManaSymbol.W)
         ));
 
         // {1}: Brightling gets +1/-1 or -1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BrightlingEffect(),
                 new GenericManaCost(1)
         ));
@@ -89,7 +85,7 @@ class BrightlingEffect extends OneShotEffect {
         this.staticText = "{this} gets +1/-1 or -1/+1 until end of turn";
     }
 
-    BrightlingEffect(final BrightlingEffect effect) {
+    private BrightlingEffect(final BrightlingEffect effect) {
         super(effect);
     }
 

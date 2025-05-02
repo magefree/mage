@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -29,7 +28,7 @@ public final class DescendantsPath extends CardImpl {
         // At the beginning of your upkeep, reveal the top card of your library. 
         // If it's a creature card that shares a creature type with a creature you control, 
         // you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescendantsPathEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescendantsPathEffect()));
     }
 
     private DescendantsPath(final DescendantsPath card) {
@@ -44,7 +43,7 @@ public final class DescendantsPath extends CardImpl {
 
 class DescendantsPathEffect extends OneShotEffect {
 
-    public DescendantsPathEffect() {
+    DescendantsPathEffect() {
         super(Outcome.Discard);
         this.staticText = "reveal the top card of your library. If it's a creature "
                 + "card that shares a creature type with a creature you control, "
@@ -52,7 +51,7 @@ class DescendantsPathEffect extends OneShotEffect {
                 "put it on the bottom of your library";
     }
 
-    public DescendantsPathEffect(final DescendantsPathEffect effect) {
+    private DescendantsPathEffect(final DescendantsPathEffect effect) {
         super(effect);
     }
 

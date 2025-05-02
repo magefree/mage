@@ -30,7 +30,7 @@ public final class SkillBorrower extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
         // As long as the top card of your library is an artifact or creature card, Skill Borrower has all activated abilities of that card.
         this.addAbility(new SkillBorrowerAbility());
     }
@@ -57,7 +57,7 @@ class SkillBorrowerAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new GainActivatedAbilitiesOfTopCardEffect(filter));
     }
 
-    public SkillBorrowerAbility(SkillBorrowerAbility ability) {
+    private SkillBorrowerAbility(final SkillBorrowerAbility ability) {
         super(ability);
     }
 
@@ -66,4 +66,3 @@ class SkillBorrowerAbility extends StaticAbility {
         return new SkillBorrowerAbility(this);
     }
 }
-

@@ -25,7 +25,7 @@ public final class Souldrinker extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new PayLifeCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new PayLifeCost(3)));
     }
 
     private Souldrinker(final Souldrinker card) {

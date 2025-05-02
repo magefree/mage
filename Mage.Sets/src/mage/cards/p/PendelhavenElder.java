@@ -40,7 +40,7 @@ public final class PendelhavenElder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Each 1/1 creature you control gets +1/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 2, Duration.EndOfTurn, filter, false)
+        this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(1, 2, Duration.EndOfTurn, filter, false)
                 .setText("Each 1/1 creature you control gets +1/+2 until end of turn."),
                 new TapSourceCost()
         ));

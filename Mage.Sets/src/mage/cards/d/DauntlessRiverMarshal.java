@@ -39,10 +39,10 @@ public final class DauntlessRiverMarshal extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Dauntless River Marshal gets +1/+1 as long as you control an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceWhileControlsEffect(filter, 1, 1)));
         
         // {3}{U}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

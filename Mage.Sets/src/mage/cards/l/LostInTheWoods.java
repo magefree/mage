@@ -39,12 +39,12 @@ public final class LostInTheWoods extends CardImpl {
 
 class LostInTheWoodsEffect extends OneShotEffect {
 
-    public LostInTheWoodsEffect() {
+    LostInTheWoodsEffect() {
         super(Outcome.PreventDamage);
         staticText = "reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library";
     }
 
-    public LostInTheWoodsEffect(final LostInTheWoodsEffect effect) {
+    private LostInTheWoodsEffect(final LostInTheWoodsEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class LostInTheWoodsEffect extends OneShotEffect {
 
             if (card != null) {
                 if (card.hasSubtype(SubType.FOREST, game)) {
-                    Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+                    Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                     if (permanent != null) {
                         permanent.removeFromCombat(game);
                     }

@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.common.AttachedToCreatureSourceTriggeredAbility;
+import mage.abilities.common.AsBecomesAttachedToCreatureSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -25,16 +25,16 @@ public final class SanctuaryBlade extends CardImpl {
 
     public SanctuaryBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        
+
         this.subtype.add(SubType.EQUIPMENT);
 
         // As Sanctuary Blade becomes attached to a creature, choose a color.
-        this.addAbility(new AttachedToCreatureSourceTriggeredAbility(new ChooseColorEffect(Outcome.Benefit), false));
+        this.addAbility(new AsBecomesAttachedToCreatureSourceAbility(new ChooseColorEffect(Outcome.Benefit), "choose a color."));
 
         // Equipped creature gets +2/+0 and has protection from the last chosen color.
         Effect boostEffect = new BoostEquippedEffect(2, 0);
         boostEffect.concatBy(".");
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
+        SimpleStaticAbility ability = new SimpleStaticAbility(boostEffect);
         ProtectionChosenColorAttachedEffect protectionEfect = new ProtectionChosenColorAttachedEffect(false);
         protectionEfect.setText("and has protection from the last chosen color.");
         ability.addEffect(protectionEfect);

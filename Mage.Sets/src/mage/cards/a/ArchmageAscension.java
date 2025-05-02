@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -32,8 +32,8 @@ public final class ArchmageAscension extends CardImpl {
         // At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)),
-                        TargetController.EACH_PLAYER, true
+                        TargetController.EACH_PLAYER, new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)),
+                        true
                 ), ArchmageAscensionCondition.instance, "At the beginning of each end step, " +
                 "if you drew two or more cards this turn, you may put a quest counter on {this}."
         ), new CardsAmountDrawnThisTurnWatcher());
@@ -78,11 +78,6 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
     @Override
     public ArchmageAscensionReplacementEffect copy() {
         return new ArchmageAscensionReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

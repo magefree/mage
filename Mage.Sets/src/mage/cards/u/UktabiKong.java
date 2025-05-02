@@ -46,7 +46,7 @@ public final class UktabiKong extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(new FilterArtifactPermanent("artifacts")), false));
 
         // Tap two untapped Apes you control: Create a 1/1 green Ape creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new UktabiKongApeToken()), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new UktabiKongApeToken()), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
     }
 
     private UktabiKong(final UktabiKong card) {

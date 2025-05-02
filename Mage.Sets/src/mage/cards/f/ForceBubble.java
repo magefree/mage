@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
@@ -21,7 +21,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -34,13 +33,13 @@ public final class ForceBubble extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // If damage would be dealt to you, put that many depletion counters on Force Bubble instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForceBubbleReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ForceBubbleReplacementEffect()));
 
         // When there are four or more depletion counters on Force Bubble, sacrifice it.
         this.addAbility(new ForceBubbleStateTriggeredAbility());
 
         // At the beginning of each end step, remove all depletion counters from Force Bubble.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.DEPLETION), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new RemoveAllCountersSourceEffect(CounterType.DEPLETION), false));
     }
 
     private ForceBubble(final ForceBubble card) {
@@ -60,7 +59,7 @@ class ForceBubbleReplacementEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to you, put that many depletion counters on {this} instead";
     }
 
-    ForceBubbleReplacementEffect(final ForceBubbleReplacementEffect effect) {
+    private ForceBubbleReplacementEffect(final ForceBubbleReplacementEffect effect) {
         super(effect);
     }
 
@@ -93,7 +92,7 @@ class ForceBubbleStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public ForceBubbleStateTriggeredAbility(final ForceBubbleStateTriggeredAbility ability) {
+    private ForceBubbleStateTriggeredAbility(final ForceBubbleStateTriggeredAbility ability) {
         super(ability);
     }
 

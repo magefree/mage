@@ -2,14 +2,13 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -25,7 +24,7 @@ public final class MortalCombat extends CardImpl {
 
         // At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect()),
                 new TwentyGraveyardCreatureCondition(),
                 "At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game."));
     }

@@ -55,7 +55,7 @@ class OpalCaryatidSoldierToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public OpalCaryatidSoldierToken(final OpalCaryatidSoldierToken token) {
+    private OpalCaryatidSoldierToken(final OpalCaryatidSoldierToken token) {
         super(token);
     }
 

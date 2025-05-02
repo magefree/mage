@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -34,7 +34,7 @@ public final class PlarggAndNassari extends CardImpl {
 
         // At the beginning of your upkeep, each player exiles cards from the top of their library until they exile a nonland card. An opponent chooses a nonland card exiled this way. You may cast up to two spells from among the other cards exiled this way without paying their mana costs.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new PlarggAndNassariEffect(), TargetController.YOU, false
+                new PlarggAndNassariEffect()
         ));
     }
 
@@ -102,7 +102,7 @@ class PlarggAndNassariEffect extends OneShotEffect {
         Player opponent = getOpponent(controller, source, game);
         if (opponent != null) {
             TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD_NON_LAND);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             opponent.choose(outcome, cards, target, source, game);
             cards.remove(game.getCard(target.getFirstTarget()));
         }

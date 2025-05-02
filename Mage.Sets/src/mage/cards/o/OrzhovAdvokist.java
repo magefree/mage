@@ -3,7 +3,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.cards.CardImpl;
@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -43,7 +42,7 @@ public final class OrzhovAdvokist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or a planeswalker you control until your next turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OrzhovAdvokistEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OrzhovAdvokistEffect()));
     }
 
     private OrzhovAdvokist(final OrzhovAdvokist card) {
@@ -58,13 +57,13 @@ public final class OrzhovAdvokist extends CardImpl {
 
 class OrzhovAdvokistEffect extends OneShotEffect {
 
-    public OrzhovAdvokistEffect() {
+    OrzhovAdvokistEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player may put two +1/+1 counters on a creature they control. "
                 + "If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn";
     }
 
-    public OrzhovAdvokistEffect(final OrzhovAdvokistEffect effect) {
+    private OrzhovAdvokistEffect(final OrzhovAdvokistEffect effect) {
         super(effect);
     }
 

@@ -17,12 +17,11 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.CaribouToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -30,7 +29,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class CaribouRange extends CardImpl {
 
-    static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Caribou token");
+    static FilterControlledPermanent filter = new FilterControlledPermanent("a Caribou token");
 
     static {
         filter.add(TokenPredicate.TRUE);
@@ -48,14 +47,14 @@ public final class CaribouRange extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted land has "{W}{W}, {T}: Create a 0/1 white Caribou creature token."
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CaribouToken()), new ManaCostsImpl<>("{W}{W}"));
+        ability = new SimpleActivatedAbility(new CreateTokenEffect(new CaribouToken()), new ManaCostsImpl<>("{W}{W}"));
         ability.addCost(new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{W}{W}, {T}: Create a 0/1 white Caribou creature token.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
         // Sacrifice a Caribou token: You gain 1 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(1),
+                new SacrificeTargetCost(filter)));
     }
 
     private CaribouRange(final CaribouRange card) {

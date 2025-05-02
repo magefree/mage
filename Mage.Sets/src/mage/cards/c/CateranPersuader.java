@@ -41,8 +41,8 @@ public final class CateranPersuader extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, {T}: Search your library for a Mercenary permanent card with converted mana cost 1 or less and put it onto the battlefield. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
     }
 

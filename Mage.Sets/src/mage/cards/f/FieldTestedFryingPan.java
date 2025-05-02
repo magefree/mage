@@ -1,12 +1,10 @@
 package mage.cards.f;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.effects.common.CreateTokenAttachSourceEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -18,7 +16,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.game.Game;
 import mage.game.permanent.token.FoodToken;
 import mage.game.permanent.token.HalflingToken;
 
@@ -42,8 +39,8 @@ public final class FieldTestedFryingPan extends CardImpl {
         // Equipped creature has "Whenever you gain life, this creature gets +X/+X until end of turn, where X is the amount of life you gained."
         TriggeredAbility equippedTrigger = new GainLifeControllerTriggeredAbility(
                 new BoostSourceEffect(
-                        FieldTestedFryingPanValue.instance,
-                        FieldTestedFryingPanValue.instance,
+                        SavedGainedLifeValue.MANY,
+                        SavedGainedLifeValue.MANY,
                         Duration.EndOfTurn
                 ).setText("this creature gets +X/+X until end of turn, where X is the amount of life you gained.")
         );
@@ -62,29 +59,5 @@ public final class FieldTestedFryingPan extends CardImpl {
     @Override
     public FieldTestedFryingPan copy() {
         return new FieldTestedFryingPan(this);
-    }
-}
-
-enum FieldTestedFryingPanValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return (Integer) effect.getValue("gainedLife");
-    }
-
-    @Override
-    public FieldTestedFryingPanValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return "X";
     }
 }

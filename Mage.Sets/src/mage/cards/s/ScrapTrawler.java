@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -56,9 +57,10 @@ class ScrapTrawlerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
         getEffects().get(0).setText("return to your hand target artifact card in your graveyard with lesser mana value");
         setTriggerPhrase("Whenever {this} or another artifact you control is put into a graveyard from the battlefield, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public ScrapTrawlerTriggeredAbility(final ScrapTrawlerTriggeredAbility ability) {
+    private ScrapTrawlerTriggeredAbility(final ScrapTrawlerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -89,5 +91,10 @@ class ScrapTrawlerTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

@@ -28,11 +28,6 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public DontUntapInControllersUntapStepEnchantedEffect copy() {
         return new DontUntapInControllersUntapStepEnchantedEffect(this);
     }

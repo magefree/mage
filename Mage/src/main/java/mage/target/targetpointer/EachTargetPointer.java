@@ -15,11 +15,7 @@ import java.util.stream.Collectors;
 
 public class EachTargetPointer extends TargetPointerImpl {
 
-    private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
-
-    public static EachTargetPointer getInstance() {
-        return new EachTargetPointer();
-    }
+    private final Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
 
     public EachTargetPointer() {
         super();
@@ -27,15 +23,16 @@ public class EachTargetPointer extends TargetPointerImpl {
 
     protected EachTargetPointer(final EachTargetPointer targetPointer) {
         super(targetPointer);
-
-        this.zoneChangeCounter = new HashMap<>();
-        for (Map.Entry<UUID, Integer> entry : targetPointer.zoneChangeCounter.entrySet()) {
-            this.zoneChangeCounter.put(entry.getKey(), entry.getValue());
-        }
+        this.zoneChangeCounter.putAll(targetPointer.zoneChangeCounter);
     }
 
     @Override
     public void init(Game game, Ability source) {
+        if (isInitialized()) {
+            return;
+        }
+        this.setInitialized();
+
         if (!source.getTargets().isEmpty()) {
             for (UUID target : source
                     .getTargets()
@@ -97,17 +94,6 @@ public class EachTargetPointer extends TargetPointerImpl {
     @Override
     public EachTargetPointer copy() {
         return new EachTargetPointer(this);
-    }
-
-    @Override
-    public FixedTarget getFixedTarget(Game game, Ability source) {
-        this.init(game, source);
-        UUID firstId = getFirst(game, source);
-        if (firstId != null) {
-            return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
-        }
-        return null;
-
     }
 
     @Override

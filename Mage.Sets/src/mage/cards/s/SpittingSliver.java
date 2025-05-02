@@ -34,7 +34,7 @@ public final class SpittingSliver extends CardImpl {
 
         // All Sliver creatures have first strike.
         Ability gainedAbility = FirstStrikeAbility.getInstance();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter, "All Sliver creatures have first strike.")));
     }
 

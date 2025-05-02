@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInTargetPlayerHandCount;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class DreambornMuse extends CardImpl {
         // At the beginning of each player's upkeep, that player puts the top X cards of their library into their graveyard, where X is the number of cards in their hand.
         MillCardsTargetEffect effect = new MillCardsTargetEffect(CardsInTargetPlayerHandCount.instance);
         effect.setText("that player mills X cards, where X is the number of cards in their hand");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, effect, false));
     }
 
     private DreambornMuse(final DreambornMuse card) {

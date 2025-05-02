@@ -41,10 +41,10 @@ public final class KefnetTheMindful extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // Kefnet the Mindful can't attack or block unless you have seven or more cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KefnetTheMindfulRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new KefnetTheMindfulRestrictionEffect()));
 
         // {3}{U}: Draw a card, then you may return a land you control to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KefnetTheMindfulEffect(), new ManaCostsImpl<>("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(new KefnetTheMindfulEffect(), new ManaCostsImpl<>("{3}{U}"));
         this.addAbility(ability);
 
     }
@@ -61,12 +61,12 @@ public final class KefnetTheMindful extends CardImpl {
 
 class KefnetTheMindfulRestrictionEffect extends RestrictionEffect {
 
-    public KefnetTheMindfulRestrictionEffect() {
+    KefnetTheMindfulRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless you have seven or more cards in your hand";
     }
 
-    public KefnetTheMindfulRestrictionEffect(final KefnetTheMindfulRestrictionEffect effect) {
+    private KefnetTheMindfulRestrictionEffect(final KefnetTheMindfulRestrictionEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class KefnetTheMindfulEffect extends OneShotEffect {
         staticText = "Draw a card, then you may return a land you control to its owner's hand";
     }
 
-    KefnetTheMindfulEffect(final KefnetTheMindfulEffect effect) {
+    private KefnetTheMindfulEffect(final KefnetTheMindfulEffect effect) {
         super(effect);
     }
 

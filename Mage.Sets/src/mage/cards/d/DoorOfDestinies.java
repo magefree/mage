@@ -36,7 +36,7 @@ public final class DoorOfDestinies extends CardImpl {
         this.addAbility(new AddCounterAbility());
 
         // Creatures you control of the chosen type get +1/+1 for each charge counter on Door of Destinies.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostCreatureEffectEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoostCreatureEffectEffect()));
     }
 
     private DoorOfDestinies(final DoorOfDestinies card) {
@@ -55,7 +55,7 @@ class AddCounterAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), false);
     }
 
-    public AddCounterAbility(final AddCounterAbility ability) {
+    private AddCounterAbility(final AddCounterAbility ability) {
         super(ability);
     }
 
@@ -91,12 +91,12 @@ class AddCounterAbility extends TriggeredAbilityImpl {
 
 class BoostCreatureEffectEffect extends ContinuousEffectImpl {
 
-    public BoostCreatureEffectEffect() {
+    BoostCreatureEffectEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Creatures you control of the chosen type get +1/+1 for each charge counter on {this}";
     }
 
-    public BoostCreatureEffectEffect(final BoostCreatureEffectEffect effect) {
+    private BoostCreatureEffectEffect(final BoostCreatureEffectEffect effect) {
         super(effect);
     }
 

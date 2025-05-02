@@ -31,7 +31,7 @@ public final class CommandBeacon extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {T}, Sacrifice Command Beacon: Put your commander into your hand from the command zone.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CommandBeaconEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CommandBeaconEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -53,7 +53,7 @@ class CommandBeaconEffect extends OneShotEffect {
         this.staticText = "Put your commander into your hand from the command zone";
     }
 
-    CommandBeaconEffect(final CommandBeaconEffect effect) {
+    private CommandBeaconEffect(final CommandBeaconEffect effect) {
         super(effect);
     }
 

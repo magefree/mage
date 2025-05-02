@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -43,12 +43,12 @@ public final class AethermagesTouch extends CardImpl {
 
 class AethermagesTouchEffect extends OneShotEffect {
 
-    public AethermagesTouchEffect() {
+    AethermagesTouchEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Reveal the top four cards of your library. You may put a creature card from among them onto the battlefield. It gains \"At the beginning of your end step, return this creature to its owner's hand.\" Then put the rest of the cards revealed this way on the bottom of your library in any order";
     }
 
-    public AethermagesTouchEffect(final AethermagesTouchEffect effect) {
+    private AethermagesTouchEffect(final AethermagesTouchEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class AethermagesTouchEffect extends OneShotEffect {
                             // It gains \"At the beginning of your end step, return this creature to its owner's hand.\"
                             Permanent permanent = game.getPermanent(card.getId());
                             if (permanent != null) {
-                                Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), TargetController.YOU, null, false);
+                                Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new ReturnToHandSourceEffect(true), false, null);
                                 ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
                                 effect.setTargetPointer(new FixedTarget(permanent, game));
                                 game.addEffect(effect, source);

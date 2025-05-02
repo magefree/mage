@@ -1,13 +1,15 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
@@ -24,8 +26,8 @@ public final class LolthSpiderQueenEmblem extends Emblem {
     public LolthSpiderQueenEmblem() {
         super("Emblem Lolth");
         this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
-                new DealCombatDamageControlledTriggeredAbility(
-                        Zone.COMMAND, new LolthSpiderQueenEmblemEffect(), true, true
+                new OneOrMoreCombatDamagePlayerTriggeredAbility(
+                        Zone.COMMAND, new LolthSpiderQueenEmblemEffect(), StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.PLAYER, false
                 ), LolthSpiderQueenEmblemCondition.instance, "Whenever an opponent " +
                 "is dealt combat damage by one or more creatures you control, " +
                 "if that player lost less than 8 life this turn, they lose life equal to the difference."

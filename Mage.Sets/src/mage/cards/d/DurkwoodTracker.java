@@ -56,7 +56,7 @@ class DurkwoodTrackerEffect extends OneShotEffect {
                 + "That creature deals damage equal to its power to {this}";
     }
 
-    DurkwoodTrackerEffect(final DurkwoodTrackerEffect effect) {
+    private DurkwoodTrackerEffect(final DurkwoodTrackerEffect effect) {
         super(effect);
     }
 

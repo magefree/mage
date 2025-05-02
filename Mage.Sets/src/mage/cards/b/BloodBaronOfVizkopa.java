@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class BloodBaronOfVizkopa extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLACK));
 
         // As long as you have 30 or more life and an opponent has 10 or less life, Blood Baron of Vizkopa gets +6/+6 and has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodBaronOfVizkopaEffect()));
+        this.addAbility(new SimpleStaticAbility(new BloodBaronOfVizkopaEffect()));
     }
 
     private BloodBaronOfVizkopa(final BloodBaronOfVizkopa card) {
@@ -47,7 +46,7 @@ public final class BloodBaronOfVizkopa extends CardImpl {
 
 class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
-    public BloodBaronOfVizkopaEffect() {
+    BloodBaronOfVizkopaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "As long as you have 30 or more life and an opponent has 10 or less life, {this} gets +6/+6 and has flying";
     }
@@ -63,10 +62,14 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (!conditionState(source, game)) { return false; }
+        if (!conditionState(source, game)) {
+            return false;
+        }
 
         Permanent creature = game.getPermanent(source.getSourceId());
-        if (creature == null) { return false; }
+        if (creature == null) {
+            return false;
+        }
 
         switch (layer) {
             case PTChangingEffects_7:
@@ -89,19 +92,15 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
 
     private boolean conditionState(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
-
-        if (controller.getLife() < 30) { return false; }
-
-        for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            if (!controller.hasOpponent(opponentId, game)) { return false; }
-
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) { return false; }
-
-            return opponent.getLife() < 11;
+        if (controller == null || controller.getLife() < 30) {
+            return false;
         }
-
+        for (UUID opponentId : game.getOpponents(controller.getId())) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null && opponent.isInGame() && opponent.getLife() <= 10) {
+                return true;
+            }
+        }
         return false;
     }
 

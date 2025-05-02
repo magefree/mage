@@ -81,6 +81,7 @@ class GrandMasterOfFlowersEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "as long as {this} has seven or more loyalty counters on him, " +
                 "he's a 7/7 Dragon God creature with flying and indestructible";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private GrandMasterOfFlowersEffect(final GrandMasterOfFlowersEffect effect) {

@@ -43,7 +43,7 @@ public final class SengirNosferatu extends CardImpl {
         // {1}{B}, Exile Sengir Nosferatu: Create a 1/2 black Bat creature token with flying. It has "{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control."
         Effect effect = new CreateTokenEffect(new SengirNosferatuBatToken(), 1);
         effect.setText("Create a 1/2 black Bat creature token with flying. It has \"{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.\"");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }
@@ -70,7 +70,7 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public ReturnSengirNosferatuEffect(final ReturnSengirNosferatuEffect effect) {
+    private ReturnSengirNosferatuEffect(final ReturnSengirNosferatuEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInExile(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(controller.getId(), source, game)) {
             return false;
         }

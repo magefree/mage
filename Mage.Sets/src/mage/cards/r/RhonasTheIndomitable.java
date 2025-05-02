@@ -46,12 +46,12 @@ public final class RhonasTheIndomitable extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // Rhonas, the Indomitable can't attack or block unless you control another creature with power 4 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RhonasTheIndomitableRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new RhonasTheIndomitableRestrictionEffect()));
 
         // {2}{G}: Another target creature gets +2/+0 and gains trample until end of turn.
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setText("Another target creature gets +2/+0");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{2}{G}"));
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);
@@ -71,12 +71,12 @@ public final class RhonasTheIndomitable extends CardImpl {
 
 class RhonasTheIndomitableRestrictionEffect extends RestrictionEffect {
 
-    public RhonasTheIndomitableRestrictionEffect() {
+    RhonasTheIndomitableRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless you control another creature with power 4 or greater";
     }
 
-    public RhonasTheIndomitableRestrictionEffect(final RhonasTheIndomitableRestrictionEffect effect) {
+    private RhonasTheIndomitableRestrictionEffect(final RhonasTheIndomitableRestrictionEffect effect) {
         super(effect);
     }
 

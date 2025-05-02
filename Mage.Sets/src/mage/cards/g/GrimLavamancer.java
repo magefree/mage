@@ -33,7 +33,7 @@ public final class GrimLavamancer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         ability.addTarget(new TargetAnyTarget());

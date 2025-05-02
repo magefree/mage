@@ -44,7 +44,7 @@ class CampaignOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new GainLifeEffect(1));
     }
 
-    public CampaignOfVengeanceTriggeredAbility(final CampaignOfVengeanceTriggeredAbility ability) {
+    private CampaignOfVengeanceTriggeredAbility(final CampaignOfVengeanceTriggeredAbility ability) {
         super(ability);
     }
 

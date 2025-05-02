@@ -45,7 +45,7 @@ class PetalsOfInsightEffect extends OneShotEffect {
         this.staticText = "Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return {this} to its owner's hand. Otherwise, draw three cards";
     }
 
-    PetalsOfInsightEffect(final PetalsOfInsightEffect effect) {
+    private PetalsOfInsightEffect(final PetalsOfInsightEffect effect) {
         super(effect);
     }
 

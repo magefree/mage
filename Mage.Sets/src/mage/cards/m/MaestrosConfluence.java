@@ -39,7 +39,7 @@ public final class MaestrosConfluence extends CardImpl {
         // Choose three. You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
 
         // • Return target monocolored instant or sorcery card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

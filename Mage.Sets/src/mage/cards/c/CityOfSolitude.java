@@ -26,7 +26,7 @@ public final class CityOfSolitude extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Players can cast spells and activate abilities only during their own turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CityOfSolitudeEffect()));
+        this.addAbility(new SimpleStaticAbility(new CityOfSolitudeEffect()));
     }
 
     private CityOfSolitude(final CityOfSolitude card) {
@@ -46,7 +46,7 @@ class CityOfSolitudeEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can cast spells and activate abilities only during their own turns";
     }
 
-    CityOfSolitudeEffect(final CityOfSolitudeEffect effect) {
+    private CityOfSolitudeEffect(final CityOfSolitudeEffect effect) {
         super(effect);
     }
 

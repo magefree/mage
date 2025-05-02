@@ -1,24 +1,21 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
+import mage.abilities.effects.common.ShuffleYourGraveyardIntoLibraryEffect;
 import mage.cards.Card;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SagaChapter;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +35,10 @@ public final class TheMendingOfDominaria extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new TheMendingOfDominariaFirstEffect());
 
         // III — Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new TheMendingOfDominariaSecondEffect());
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
+                new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARD_LANDS),
+                new ShuffleYourGraveyardIntoLibraryEffect().concatBy(", then")
+        );
         this.addAbility(sagaAbility);
     }
 
@@ -54,12 +54,12 @@ public final class TheMendingOfDominaria extends CardImpl {
 
 class TheMendingOfDominariaFirstEffect extends OneShotEffect {
 
-    public TheMendingOfDominariaFirstEffect() {
+    TheMendingOfDominariaFirstEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Mill two cards, then you may return a creature card from your graveyard to your hand";
     }
 
-    public TheMendingOfDominariaFirstEffect(final TheMendingOfDominariaFirstEffect effect) {
+    private TheMendingOfDominariaFirstEffect(final TheMendingOfDominariaFirstEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class TheMendingOfDominariaFirstEffect extends OneShotEffect {
         }
         new MillCardsControllerEffect(2).apply(game, source);
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
                 && controller.choose(Outcome.ReturnToHand, target, source, game)) {
@@ -86,38 +86,5 @@ class TheMendingOfDominariaFirstEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-class TheMendingOfDominariaSecondEffect extends OneShotEffect {
-
-    TheMendingOfDominariaSecondEffect() {
-        super(Outcome.PutCardInPlay);
-        this.staticText = "Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library";
-    }
-
-    TheMendingOfDominariaSecondEffect(final TheMendingOfDominariaSecondEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TheMendingOfDominariaSecondEffect copy() {
-        return new TheMendingOfDominariaSecondEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.moveCards(
-                    controller.getGraveyard().getCards(new FilterLandCard(), source.getControllerId(), source, game),
-                    Zone.BATTLEFIELD, source, game, false, false, false, null
-            );
-            for (Card card : controller.getGraveyard().getCards(game)) {
-                controller.moveCardToLibraryWithInfo(card, source, game, Zone.GRAVEYARD, true, true);
-            }
-            controller.shuffleLibrary(source, game);
-        }
-        return false;
     }
 }

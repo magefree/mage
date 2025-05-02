@@ -7,38 +7,43 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.Card;
-import mage.cards.LevelerCard;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
 import java.util.UUID;
 
 /**
  * Static permanent on the battlefield. There are possible multiple permanents per one card,
- * so be carefull for targets (ids are different) and ZCC (zcc is static for permanent).
+ * so be carefully for targets (ids are different) and ZCC (zcc is static for permanent).
  *
  * @author BetaSteward_at_googlemail.com
  */
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class PermanentCard extends PermanentImpl {
 
-    protected int maxLevelCounters;
-    // A copy of the origin card that was cast (this is not the original card, so it's possible to change some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
+    // blueprint e.g. a copy of the original card that was cast
+    // (this is not the original card, so it's possible to change some attribute before it enters the battlefield)
+    // TODO: wtf, it modified on getCard/getBasicMageObject/getMainCard() and other places, e.g. on bestow -- must be fixed!
     protected Card card;
-    // the number this permanent instance had
+
+    protected int maxLevelCounters;
     protected int zoneChangeCounter;
 
     public PermanentCard(Card card, UUID controllerId, Game game) {
-        super(card.getId(), card.getOwnerId(), controllerId, card.getName());
+        super(card.getId(), card.getOwnerId(), controllerId, card.getName()); // card id
+        // TODO: wtf, must research - is it possible to have diff ids for same card id?!
+        //  ETB with counters depends on card id, not permanent id
+        // TODO: ETB with counters works with tokens?! Must research
+
+        // runtime check: must use real card only inside
+        if (card instanceof PermanentCard) {
+            throw new IllegalArgumentException("Wrong code usage: can't use PermanentCard inside another PermanentCard");
+        }
 
         // usage check: you must put to play only real card's part
-        // if you use it in test code then call CardUtil.getDefaultCardSideForBattlefield for default side
+        // if you use it in test code or for permanent's copy effects then call CardUtil.getDefaultCardSideForBattlefield for default side
         // it's a basic check and still allows to create permanent from instant or sorcery
         boolean goodForBattlefield = true;
         if (card instanceof ModalDoubleFacedCard) {
@@ -49,8 +54,14 @@ public class PermanentCard extends PermanentImpl {
                 goodForBattlefield = false;
             }
         }
+
+        // face down cards allows in any forms (only face up restricted for non-permanents)
+        if (card.isFaceDown(game)) {
+            goodForBattlefield = true;
+        }
+
         if (!goodForBattlefield) {
-            throw new IllegalArgumentException("ERROR, can't create permanent card from split or mdf: " + card.getName());
+            throw new IllegalArgumentException("Wrong code usage: can't create permanent card from split or mdf: " + card.getName());
         }
 
         this.card = card;
@@ -72,11 +83,13 @@ public class PermanentCard extends PermanentImpl {
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
+
+        // if transformed on ETB
         if (card.isTransformable()) {
             if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null
                     || NightboundAbility.checkCard(this, game)) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
-                TransformAbility.transformPermanent(this, getSecondCardFace(), game, null);
+                TransformAbility.transformPermanent(this, game, null);
             }
         }
     }
@@ -99,6 +112,7 @@ public class PermanentCard extends PermanentImpl {
     }
 
     protected void copyFromCard(final Card card, final Game game) {
+        // TODO: must research - is it copy all fields or something miss
         this.name = card.getName();
         this.abilities.clear();
         if (this.faceDown) {
@@ -116,7 +130,7 @@ public class PermanentCard extends PermanentImpl {
         this.abilities.setSourceId(objectId);
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
-        this.color = card.getColor(null).copy();
+        this.color = card.getColor(game).copy();
         this.frameColor = card.getFrameColor(game).copy();
         this.frameStyle = card.getFrameStyle();
         this.manaCost = card.getManaCost().copy();
@@ -126,11 +140,13 @@ public class PermanentCard extends PermanentImpl {
         this.subtype.copyFrom(card.getSubtype());
         this.supertype.clear();
         this.supertype.addAll(card.getSuperType());
+        this.rarity = card.getRarity();
 
         this.setExpansionSetCode(card.getExpansionSetCode());
+        this.setUsesVariousArt(card.getUsesVariousArt());
         this.setCardNumber(card.getCardNumber());
-        this.rarity = card.getRarity();
-        this.usesVariousArt = card.getUsesVariousArt();
+        this.setImageFileName(card.getImageFileName());
+        this.setImageNumber(card.getImageNumber());
 
         if (card.getSecondCardFace() != null) {
             this.secondSideCardClazz = card.getSecondCardFace().getClass();
@@ -144,7 +160,7 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
-    public MageObject getBasicMageObject(Game game) {
+    public MageObject getBasicMageObject() {
         return card;
     }
 
@@ -163,11 +179,24 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public boolean turnFaceUp(Ability source, Game game, UUID playerId) {
+        if (!this.getBasicMageObject().isPermanent()){
+            // 701.34g. If a manifested permanent that's represented by an instant or sorcery card would turn face up,
+            //   its controller reveals it and leaves it face down. Abilities that trigger whenever a permanent
+            //   is turned face up won't trigger.
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {
+                player.revealCards(source, new CardsImpl(this), game);
+            }
+            return false;
+        }
         if (super.turnFaceUp(source, game, playerId)) {
+            // TODO: miss types, abilities, color and other things for restore?!
             power.setModifiedBaseValue(power.getBaseValue());
             toughness.setModifiedBaseValue(toughness.getBaseValue());
             setManifested(false);
             setMorphed(false);
+            setDisguised(false);
+            setCloaked(false);
             return true;
         }
         return false;
@@ -206,22 +235,20 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        // TODO: wtf, permanent must not change ZCC at all, is it buggy here?!
         card.updateZoneChangeCounter(game, event);
         zoneChangeCounter = card.getZoneChangeCounter(game);
     }
 
     @Override
     public void setZoneChangeCounter(int value, Game game) {
+        // TODO: wtf, why it sync card only without permanent zcc, is it buggy here?!
+        // TODO: miss zoneChangeCounter = card.getZoneChangeCounter(game); ?
         card.setZoneChangeCounter(value, game);
     }
 
     @Override
     public Card getMainCard() {
         return card.getMainCard();
-    }
-
-    @Override
-    public String toString() {
-        return card.toString();
     }
 }

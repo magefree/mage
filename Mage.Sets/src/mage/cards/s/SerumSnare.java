@@ -37,7 +37,7 @@ public class SerumSnare extends CardImpl {
 
 class SerumSnareEffect extends OneShotEffect {
 
-    public SerumSnareEffect() {
+    SerumSnareEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return target nonland permanent to its owner's hand. If that permanent had mana value 3 or less, proliferate. " +
                 "<i>(Choose any number of permanents and/or players, then give each another counter of each kind already there.)</i>";

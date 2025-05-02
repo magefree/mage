@@ -39,7 +39,7 @@ public final class TreacherousLink extends CardImpl {
         this.addAbility(ability);
 
         // All damage that would be dealt to enchanted creature is dealt to its controller instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TreacherousLinkEffect()));
+        this.addAbility(new SimpleStaticAbility(new TreacherousLinkEffect()));
     }
 
     private TreacherousLink(final TreacherousLink card) {
@@ -54,12 +54,12 @@ public final class TreacherousLink extends CardImpl {
 
 class TreacherousLinkEffect extends ReplacementEffectImpl {
 
-    public TreacherousLinkEffect() {
+    TreacherousLinkEffect() {
         super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
         staticText = "All damage that would be dealt to enchanted creature is dealt to its controller instead";
     }
 
-    public TreacherousLinkEffect(final TreacherousLinkEffect effect) {
+    private TreacherousLinkEffect(final TreacherousLinkEffect effect) {
         super(effect);
     }
 
@@ -71,11 +71,6 @@ class TreacherousLinkEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -95,12 +90,7 @@ class TreacherousLinkEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         Player controller = game.getPlayer(source.getControllerId());
         DamageEvent damageEvent = (DamageEvent) event;
         if (controller != null && enchantment != null) {

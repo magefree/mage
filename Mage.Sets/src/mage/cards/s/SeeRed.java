@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.RaidCondition;
@@ -47,7 +47,7 @@ public final class SeeRed extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+1 and has first strike.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has first strike");
         ability.addEffect(effect);
@@ -55,7 +55,7 @@ public final class SeeRed extends CardImpl {
 
         // At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice See Red.
         ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfYourEndStepTriggeredAbility(new SacrificeSourceEffect(), false),
+                new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect()),
                 new InvertCondition(RaidCondition.instance),
                 "At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice {this}."
         );

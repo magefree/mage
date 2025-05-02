@@ -51,7 +51,7 @@ class ThousandYearStormAbility extends SpellCastControllerTriggeredAbility {
         this.stormCountInfo = null;
     }
 
-    public ThousandYearStormAbility(final ThousandYearStormAbility ability) {
+    private ThousandYearStormAbility(final ThousandYearStormAbility ability) {
         super(ability);
         this.stormCountInfo = ability.stormCountInfo;
     }
@@ -109,7 +109,7 @@ class ThousandYearStormEffect extends OneShotEffect {
         this.staticText = "copy it for each other instant and sorcery spell you've cast before it this turn. You may choose new targets for the copies";
     }
 
-    public ThousandYearStormEffect(final ThousandYearStormEffect effect) {
+    private ThousandYearStormEffect(final ThousandYearStormEffect effect) {
         super(effect);
         this.stormCount = effect.stormCount;
     }

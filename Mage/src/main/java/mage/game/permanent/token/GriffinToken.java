@@ -22,7 +22,7 @@ public final class GriffinToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected GriffinToken(final GriffinToken token) {
+    private GriffinToken(final GriffinToken token) {
         super(token);
     }
 

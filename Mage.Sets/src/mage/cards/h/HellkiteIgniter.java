@@ -42,12 +42,12 @@ public final class HellkiteIgniter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         // {1}{R}: Hellkite Igniter gets +X/+0 until end of turn, where X is the number of artifacts you control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(
                         new PermanentsOnBattlefieldCount(filter),
                         StaticValue.get(0),
-                        Duration.EndOfTurn,
-                        true),
+                        Duration.EndOfTurn
+                ),
                 new ManaCostsImpl<>("{1}{R}")));
     }
 

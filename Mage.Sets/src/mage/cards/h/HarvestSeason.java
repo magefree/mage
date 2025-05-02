@@ -58,7 +58,7 @@ class HarvestSeasonEffect extends OneShotEffect {
                 + " put those cards onto the battlefield tapped, then shuffle.";
     }
 
-    HarvestSeasonEffect(final HarvestSeasonEffect effect) {
+    private HarvestSeasonEffect(final HarvestSeasonEffect effect) {
         super(effect);
     }
 

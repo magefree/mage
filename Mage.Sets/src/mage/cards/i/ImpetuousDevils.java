@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -42,7 +42,7 @@ public final class ImpetuousDevils extends CardImpl {
         this.addAbility(new ImpetuousDevilsAbility());
 
         // At the beginning of the end step, sacrifice Impetuous Devils.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new SacrificeSourceEffect(), false));
     }
 
     private ImpetuousDevils(final ImpetuousDevils card) {
@@ -61,7 +61,7 @@ class ImpetuousDevilsAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat), false);
     }
 
-    public ImpetuousDevilsAbility(final ImpetuousDevilsAbility ability) {
+    private ImpetuousDevilsAbility(final ImpetuousDevilsAbility ability) {
         super(ability);
     }
 

@@ -13,7 +13,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class PrismaticBoon extends CardImpl {
         // Choose a color. X target creatures gain protection from the chosen color until end of turn.
         this.getSpellAbility().addEffect(new PrismaticBoonEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(XTargetsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private PrismaticBoon(final PrismaticBoon card) {

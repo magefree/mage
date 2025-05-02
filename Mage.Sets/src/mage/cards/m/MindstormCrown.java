@@ -1,13 +1,12 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -26,7 +25,7 @@ public final class MindstormCrown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your upkeep, draw a card if you had no cards in hand at the beginning of this turn. If you had a card in hand, Mindstorm Crown deals 1 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MindstormCrownEffect(), TargetController.YOU, false), new MindstormCrownWatcher());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MindstormCrownEffect()), new MindstormCrownWatcher());
     }
 
     private MindstormCrown(final MindstormCrown card) {
@@ -46,7 +45,7 @@ class MindstormCrownEffect extends OneShotEffect {
         this.staticText = "draw a card if you had no cards in hand at the beginning of this turn. If you had a card in hand, {this} deals 1 damage to you";
     }
 
-    MindstormCrownEffect(final MindstormCrownEffect effect) {
+    private MindstormCrownEffect(final MindstormCrownEffect effect) {
         super(effect);
     }
 

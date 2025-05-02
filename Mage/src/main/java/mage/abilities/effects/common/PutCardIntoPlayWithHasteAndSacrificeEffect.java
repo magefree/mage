@@ -26,17 +26,14 @@ public class PutCardIntoPlayWithHasteAndSacrificeEffect extends OneShotEffect {
     private final FilterCard filter;
     private final Duration duration;
 
-    public PutCardIntoPlayWithHasteAndSacrificeEffect(FilterCard filter) {
-        this(filter, Duration.Custom);
-    }
-
-    public PutCardIntoPlayWithHasteAndSacrificeEffect(FilterCard filter, Duration duration) {
-        super(Outcome.Benefit);
+    public PutCardIntoPlayWithHasteAndSacrificeEffect(FilterCard filter, Duration duration, String objectName, String objectName2) {
+        super(Outcome.PutCreatureInPlay);
         this.filter = filter;
         this.duration = duration;
         this.staticText = "you may put " + CardUtil.addArticle(filter.getMessage()) +
-                (" from your hand onto the battlefield. It gains haste " + duration).trim() +
-                ". Sacrifice that " + filter.getMessage() + " at the beginning of the next end step";
+                " from your hand onto the battlefield. " + objectName +
+                " gains haste" + (duration.toString().isEmpty() ? "" : ' ' + duration.toString()) +
+                ". Sacrifice " + objectName2 + " at the beginning of the next end step";
     }
 
     private PutCardIntoPlayWithHasteAndSacrificeEffect(final PutCardIntoPlayWithHasteAndSacrificeEffect effect) {

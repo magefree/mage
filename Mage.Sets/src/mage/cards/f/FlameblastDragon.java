@@ -58,7 +58,7 @@ class FlameblastDragonEffect extends OneShotEffect {
         staticText = "you may pay {X}{R}. If you do, {this} deals X damage to any target";
     }
 
-    FlameblastDragonEffect(final FlameblastDragonEffect effect) {
+    private FlameblastDragonEffect(final FlameblastDragonEffect effect) {
         super(effect);
     }
 

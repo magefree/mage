@@ -40,7 +40,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
-        for (UUID playerId : targetPointer.getTargets(game, source)) {
+        for (UUID playerId : getTargetPointer().getTargets(game, source)) {
             Player player = game.getPlayer(playerId);
             if (player != null
                     && player.loseLife(amount.calculate(game, source, this), game, source, false) > 0) {
@@ -52,19 +52,13 @@ public class LoseLifeTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        String message = amount.getMessage();
-
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        } else {
-            sb.append("that player");
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         sb.append(" loses ");
-        if (message.isEmpty() || !message.equals("1")) {
+        String message = amount.getMessage();
+        if (!message.equals("1")) {
             sb.append(amount).append(' ');
         }
         sb.append("life");

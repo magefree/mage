@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -15,7 +15,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -36,7 +36,7 @@ public final class LordOfThePit extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LordOfThePitEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LordOfThePitEffect()));
     }
 
     private LordOfThePit(final LordOfThePit card) {
@@ -51,12 +51,12 @@ public final class LordOfThePit extends CardImpl {
 
 class LordOfThePitEffect extends OneShotEffect {
 
-    public LordOfThePitEffect() {
+    LordOfThePitEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice a creature other than {this}. If you can't, {this} deals 7 damage to you.";
     }
 
-    public LordOfThePitEffect(final LordOfThePitEffect effect) {
+    private LordOfThePitEffect(final LordOfThePitEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class LordOfThePitEffect extends OneShotEffect {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than " + sourcePermanent.getName());
         filter.add(AnotherPredicate.instance);
 
-        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+        Target target = new TargetSacrifice(filter);
         if (target.canChoose(player.getId(), source, game)) {
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());

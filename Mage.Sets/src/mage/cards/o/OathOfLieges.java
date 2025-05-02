@@ -1,7 +1,7 @@
 package mage.cards.o;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayTargetPlayerEffect;
@@ -32,7 +32,7 @@ public final class OathOfLieges extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // At the beginning of each player's upkeep, that player chooses target player who controls more lands than they do and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfLiegesEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new OathOfLiegesEffect(), false).withTargetPointerSet(false);
         ability.setTargetAdjuster(OathOfLiegesAdjuster.instance);
         this.addAbility(ability);
     }
@@ -69,13 +69,13 @@ enum OathOfLiegesAdjuster implements TargetAdjuster {
 
 class OathOfLiegesEffect extends OneShotEffect {
 
-    public OathOfLiegesEffect() {
+    OathOfLiegesEffect() {
         super(Outcome.Benefit);
         this.staticText = "that player chooses target player who controls more lands than they do and is their opponent. "
                 + "The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle";
     }
 
-    public OathOfLiegesEffect(final OathOfLiegesEffect effect) {
+    private OathOfLiegesEffect(final OathOfLiegesEffect effect) {
         super(effect);
     }
 

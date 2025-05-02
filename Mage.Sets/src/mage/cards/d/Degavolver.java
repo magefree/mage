@@ -39,19 +39,19 @@ public final class Degavolver extends CardImpl {
         kickerAbility.addKickerCost("{R}");
         this.addAbility(kickerAbility);
 
-        // If Degavolver was kicked with its {1}{B} kicker, it enters the battlefield with two +1/+1 counters on it and with "Pay 3 life: Regenerate Degavolver."
+        // If Degavolver was kicked with its {1}{B} kicker, it enters with two +1/+1 counters on it and with "Pay 3 life: Regenerate Degavolver."
         EntersBattlefieldAbility ability1 = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2),false),
-                new KickedCostCondition("{1}{B}"), "If Degavolver was kicked with its {1}{B} kicker, it enters the battlefield with two +1/+1 counters on it and with \"Pay 3 life: Regenerate Degavolver.\"",
-                "{this} enters the battlefield with two +1/+1 counters on it and with \"Pay 3 life: Regenerate Degavolver.\"");
-        ((EntersBattlefieldEffect)ability1.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(3)), Duration.WhileOnBattlefield));
+                new KickedCostCondition("{1}{B}"), "If Degavolver was kicked with its {1}{B} kicker, it enters with two +1/+1 counters on it and with \"Pay 3 life: Regenerate Degavolver.\"",
+                "{this} enters with two +1/+1 counters on it and with \"Pay 3 life: Regenerate Degavolver.\"");
+        ((EntersBattlefieldEffect)ability1.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(new RegenerateSourceEffect(), new PayLifeCost(3)), Duration.WhileOnBattlefield));
         this.addAbility(ability1);
 
-        // If Degavolver was kicked with its {R} kicker, it enters the battlefield with a +1/+1 counter on it and with first strike.
+        // If Degavolver was kicked with its {R} kicker, it enters with a +1/+1 counter on it and with first strike.
         EntersBattlefieldAbility ability2 = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition("{R}"),
-                "If Degavolver was kicked with its {R} kicker, it enters the battlefield with a +1/+1 counter on it and with first strike.",
-                "{this} enters the battlefield with a +1/+1 counter on it and with first strike");
+                "If Degavolver was kicked with its {R} kicker, it enters with a +1/+1 counter on it and with first strike.",
+                "{this} enters with a +1/+1 counter on it and with first strike");
         ((EntersBattlefieldEffect)ability2.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability2);
     }

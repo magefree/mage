@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -21,17 +20,18 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class MirrorOfFate extends CardImpl {
 
     public MirrorOfFate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {tap}, Sacrifice Mirror of Fate: Choose up to seven face-up exiled cards you own. Exile all the cards from your library, then put the chosen cards on top of your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new MirrorOfFateEffect(),
                 new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
@@ -50,12 +50,12 @@ public final class MirrorOfFate extends CardImpl {
 
 class MirrorOfFateEffect extends OneShotEffect {
 
-    public MirrorOfFateEffect() {
+    MirrorOfFateEffect() {
         super(Outcome.Neutral);
         this.staticText = "Choose up to seven face-up exiled cards you own. Exile all the cards from your library, then put the chosen cards on top of your library";
     }
 
-    public MirrorOfFateEffect(final MirrorOfFateEffect effect) {
+    private MirrorOfFateEffect(final MirrorOfFateEffect effect) {
         super(effect);
     }
 
@@ -96,15 +96,16 @@ class FaceUpPredicate implements Predicate<Card> {
     }
 }
 
+// TODO: cleanup. there should be no need for custom Target there.
 class MirrorOfFateTarget extends TargetCardInExile {
 
     public MirrorOfFateTarget() {
-        super(0, 7, new FilterCard(), null);
+        super(0, 7, new FilterCard());
         filter.add(new FaceUpPredicate());
         this.targetName = "face-up exiled cards you own";
     }
 
-    public MirrorOfFateTarget(final MirrorOfFateTarget target) {
+    private MirrorOfFateTarget(final MirrorOfFateTarget target) {
         super(target);
     }
 

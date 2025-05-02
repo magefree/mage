@@ -90,7 +90,7 @@ class CelestialJudgmentEffect extends OneShotEffect {
             FilterPermanent filter = new FilterCreaturePermanent("creature with power " + entry.getKey() + " to save");
             filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, entry.getKey()));
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             toKeep.add(target.getFirstTarget());
         }

@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.HumanSoldierToken;
@@ -37,7 +36,7 @@ public final class LossarnachCaptain extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // Whenever Lossarnach Captain or another Human enters the battlefield under your control, tap target creature an opponent controls.
+        // Whenever Lossarnach Captain or another Human you control enters, tap target creature an opponent controls.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new TapTargetEffect(), filter, false, true
         );
@@ -46,7 +45,7 @@ public final class LossarnachCaptain extends CardImpl {
 
         // At the beginning of your upkeep, create a 1/1 white Human Soldier creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new HumanSoldierToken()), TargetController.YOU, false
+                new CreateTokenEffect(new HumanSoldierToken())
         ));
     }
 

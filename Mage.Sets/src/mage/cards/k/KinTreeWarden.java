@@ -29,9 +29,9 @@ public final class KinTreeWarden extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}: Regenerate Kin-Tree Warden
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new GenericManaCost(2)));
         // Morph {G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{G}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{G}")));
     }
 
     private KinTreeWarden(final KinTreeWarden card) {

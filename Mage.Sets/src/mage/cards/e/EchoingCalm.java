@@ -44,7 +44,7 @@ class EchoingCalmEffect extends OneShotEffect {
         staticText = "Destroy target enchantment and all other enchantments with the same name as that enchantment";
     }
 
-    EchoingCalmEffect(final EchoingCalmEffect effect) {
+    private EchoingCalmEffect(final EchoingCalmEffect effect) {
         super(effect);
     }
 

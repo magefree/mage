@@ -35,7 +35,7 @@ public class BecomeBlockedTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<MageObjectReference> morSet = new HashSet<>();
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {
                 continue;

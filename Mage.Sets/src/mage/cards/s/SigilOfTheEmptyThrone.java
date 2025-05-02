@@ -1,5 +1,3 @@
-
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -8,7 +6,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.AngelToken;
 
 /**
@@ -17,17 +15,11 @@ import mage.game.permanent.token.AngelToken;
  */
 public final class SigilOfTheEmptyThrone extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
-
     public SigilOfTheEmptyThrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");
 
 
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AngelToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AngelToken()), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
     }
 
     private SigilOfTheEmptyThrone(final SigilOfTheEmptyThrone card) {

@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -28,20 +28,20 @@ public final class CephalidIllusionist extends CardImpl {
 
     public CephalidIllusionist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever Cephalid Illusionist becomes the target of a spell or ability, put the top three cards of your library into your graveyard.
-        this.addAbility(new SourceBecomesTargetTriggeredAbility(new MillCardsControllerEffect(3)));
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new MillCardsControllerEffect(3)));
         
         // {2}{U}, {tap}: Prevent all combat damage that would be dealt to
         Effect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt to");
         // and dealt by target creature you control this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{2}{U}"));
         effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("and dealt by target creature you control this turn.");
         ability.addEffect(effect);

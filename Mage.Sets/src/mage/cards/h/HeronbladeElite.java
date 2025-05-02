@@ -4,8 +4,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.DynamicManaAbility;
@@ -31,8 +30,6 @@ public final class HeronbladeElite extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public HeronbladeElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
@@ -44,14 +41,14 @@ public final class HeronbladeElite extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Heronblade Elite.
+        // Whenever another Human you control enters, put a +1/+1 counter on Heronblade Elite.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));
 
         // {T}: Add X mana of any one color, where X is Heronblade Elite's power.
         this.addAbility(new DynamicManaAbility(
-                Mana.AnyMana(1), xValue, new TapSourceCost(), "Add X mana "
+                Mana.AnyMana(1), SourcePermanentPowerValue.NOT_NEGATIVE, new TapSourceCost(), "Add X mana "
                 + "of any one color, where X is {this}'s power", true
         ));
     }

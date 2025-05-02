@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -31,7 +31,7 @@ public final class Borborygmos extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Whenever Borborygmos deals combat damage to a player, put a +1/+1 counter on each creature you control.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE), false));
     }
 
     private Borborygmos(final Borborygmos card) {

@@ -40,14 +40,14 @@ public final class SanityGrinding extends CardImpl {
 
 class SanityGrindingEffect extends OneShotEffect {
 
-    public SanityGrindingEffect() {
+    SanityGrindingEffect() {
         super(Outcome.Neutral);
         staticText = "<i>Chroma</i> &mdash; Reveal the top ten cards of your library. " +
                 "For each blue mana symbol in the mana costs of the revealed cards, target opponent mills a card. " +
                 "Then put the cards you revealed this way on the bottom of your library in any order";
     }
 
-    public SanityGrindingEffect(final SanityGrindingEffect effect) {
+    private SanityGrindingEffect(final SanityGrindingEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class ChromaSanityGrindingCount implements DynamicValue {
         this.revealed = revealed;
     }
 
-    public ChromaSanityGrindingCount(final ChromaSanityGrindingCount dynamicValue) {
+    private ChromaSanityGrindingCount(final ChromaSanityGrindingCount dynamicValue) {
         this.revealed = dynamicValue.revealed;
     }
 

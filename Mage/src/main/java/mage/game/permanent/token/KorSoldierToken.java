@@ -19,7 +19,7 @@ public final class KorSoldierToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected KorSoldierToken(final KorSoldierToken token) {
+    private KorSoldierToken(final KorSoldierToken token) {
         super(token);
     }
 

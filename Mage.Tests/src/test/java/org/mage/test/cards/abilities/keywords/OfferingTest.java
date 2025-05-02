@@ -19,7 +19,7 @@ public class OfferingTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, nezumiPatron);
         setChoice(playerA, true);
-        addTarget(playerA, kurosTaken);
+        setChoice(playerA, kurosTaken);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -64,7 +64,7 @@ public class OfferingTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, patron);
         setChoice(playerA, true);
-        addTarget(playerA, "Akki Drillmaster");
+        setChoice(playerA, "Akki Drillmaster");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -90,7 +90,7 @@ public class OfferingTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, patron);
         setChoice(playerA, true);
-        addTarget(playerA, "Boros Recruit");
+        setChoice(playerA, "Boros Recruit");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -117,7 +117,7 @@ public class OfferingTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, patron);
         setChoice(playerA, true);
-        addTarget(playerA, "Boggart Ram-Gang");
+        setChoice(playerA, "Boggart Ram-Gang");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -138,7 +138,7 @@ public class OfferingTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blast-Furnace Hellkite");
         setChoice(playerA, true); // use offering
-        addTarget(playerA, "Ancient Den");
+        setChoice(playerA, "Ancient Den");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

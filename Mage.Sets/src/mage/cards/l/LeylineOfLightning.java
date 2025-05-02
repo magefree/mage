@@ -49,7 +49,7 @@ class LeylineOfLightningEffect extends DamageTargetEffect {
         this.staticText = "you may pay {1}. If you do, {this} deals 1 damage to target player or planeswalker.";
     }
 
-    LeylineOfLightningEffect(final LeylineOfLightningEffect effect) {
+    private LeylineOfLightningEffect(final LeylineOfLightningEffect effect) {
         super(effect);
     }
 

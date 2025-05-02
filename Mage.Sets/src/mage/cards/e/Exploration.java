@@ -21,7 +21,7 @@ public final class Exploration extends CardImpl {
 
 
         // You may play an additional land on each of your turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
 				new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
     }
 

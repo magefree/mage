@@ -28,10 +28,9 @@ public final class Foil extends CardImpl {
     public Foil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
-
         // You may discard an Island card and another card rather than pay Foil's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filter)));
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCard("another card"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCard("another card"))).setText("another card"));
         this.addAbility(ability);
 
         // Counter target spell.

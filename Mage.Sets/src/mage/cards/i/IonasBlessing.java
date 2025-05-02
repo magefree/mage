@@ -44,7 +44,7 @@ public final class IonasBlessing extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2, has vigilance, and can block an additional creature.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has vigilance");
         ability.addEffect(effect);
@@ -64,12 +64,12 @@ public final class IonasBlessing extends CardImpl {
 
 class IonasBlessingEffect extends ContinuousEffectImpl {
 
-    public IonasBlessingEffect() {
+    IonasBlessingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = ", and can block an additional creature each combat";
     }
 
-    public IonasBlessingEffect(final IonasBlessingEffect effect) {
+    private IonasBlessingEffect(final IonasBlessingEffect effect) {
         super(effect);
     }
 

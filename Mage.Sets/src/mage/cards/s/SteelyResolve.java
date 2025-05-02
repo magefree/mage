@@ -28,7 +28,7 @@ public final class SteelyResolve extends CardImpl {
         // As Steely Resolve enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.AddAbility)));
         // Creatures of the chosen type have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterSteelyResolve())));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterSteelyResolve())));
     }
 
     private SteelyResolve(final SteelyResolve card) {
@@ -44,10 +44,10 @@ public final class SteelyResolve extends CardImpl {
 class FilterSteelyResolve extends FilterCreaturePermanent {
 
     public FilterSteelyResolve() {
-        super("All creatures of the chosen type");
+        super("creatures of the chosen type");
     }
 
-    public FilterSteelyResolve(final FilterSteelyResolve filter) {
+    private FilterSteelyResolve(final FilterSteelyResolve filter) {
         super(filter);
     }
 

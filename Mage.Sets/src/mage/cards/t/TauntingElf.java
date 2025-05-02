@@ -25,7 +25,7 @@ public final class TauntingElf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All creatures able to block Taunting Elf do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAllSourceEffect()));
     }
 
     private TauntingElf(final TauntingElf card) {

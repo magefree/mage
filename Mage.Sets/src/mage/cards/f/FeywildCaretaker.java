@@ -1,11 +1,12 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.HaveInitiativeCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,9 +34,9 @@ public final class FeywildCaretaker extends CardImpl {
 
         // At the beginning of your end step, if you have the initiative, create a 1/1 blue Faerie Dragon creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new FaerieDragonToken()), TargetController.YOU,
-                HaveInitiativeCondition.instance, false
-        ));
+                TargetController.YOU, new CreateTokenEffect(new FaerieDragonToken()),
+                false, HaveInitiativeCondition.instance
+        ).addHint(InitiativeHint.instance));
     }
 
     private FeywildCaretaker(final FeywildCaretaker card) {

@@ -2,11 +2,9 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ParleyCount;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
@@ -55,9 +53,7 @@ public class PhabineBosssConfidant extends CardImpl {
         //          Then creatures you control get +1/+1 until end of turn for each nonland card revealed this way.
         //          Then each player draws a card.
         Ability parleyAbility = new BeginningOfCombatTriggeredAbility(
-                new PhabineBosssConfidantParleyEffect(),
-                TargetController.YOU,
-                false
+                new PhabineBosssConfidantParleyEffect()
         );
         Effect drawCardAllEffect = new DrawCardAllEffect(1);
         drawCardAllEffect.concatBy("Then");
@@ -109,7 +105,7 @@ class PhabineBosssConfidantParleyEffect extends OneShotEffect {
         if (landCount > 0) {
             Token citizenToken = new CitizenGreenWhiteToken();
             citizenToken.putOntoBattlefield(landCount, game, source, source.getControllerId(), false, false);
-            game.applyEffects();
+            game.processAction();
         }
 
         if (nonLandCount > 0) {

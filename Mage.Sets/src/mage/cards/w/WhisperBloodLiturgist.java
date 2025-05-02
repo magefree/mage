@@ -35,10 +35,10 @@ public final class WhisperBloodLiturgist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect()
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("Return target creature card from your graveyard to the battlefield"),
                  new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, new FilterControlledCreaturePermanent("creatures"), true)));
+        ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_CREATURES));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

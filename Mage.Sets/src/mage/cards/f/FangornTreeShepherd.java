@@ -77,7 +77,7 @@ class FangornTreeShepherdEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int amount = (Integer) getValue("attackers");
+        int amount = (Integer) getValue(AttacksWithCreaturesTriggeredAbility.VALUEKEY_NUMBER_ATTACKERS);
         if (player != null && amount > 0) {
             player.getManaPool().addMana(Mana.GreenMana(2 * amount), game, source);
             return true;

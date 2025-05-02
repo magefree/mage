@@ -20,7 +20,7 @@ public final class CaribouToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected CaribouToken(final CaribouToken token) {
+    private CaribouToken(final CaribouToken token) {
         super(token);
     }
 

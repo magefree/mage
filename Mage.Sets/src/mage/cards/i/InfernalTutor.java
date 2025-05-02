@@ -56,12 +56,12 @@ public final class InfernalTutor extends CardImpl {
 
 class InfernalTutorEffect extends OneShotEffect {
 
-    public InfernalTutorEffect() {
+    InfernalTutorEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle";
     }
 
-    public InfernalTutorEffect(final InfernalTutorEffect effect) {
+    private InfernalTutorEffect(final InfernalTutorEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class InfernalTutorEffect extends OneShotEffect {
                 Card cardToReveal = null;
                 if (controller.getHand().size() > 1) {
                     Target target = new TargetCardInHand(StaticFilters.FILTER_CARD);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         cardToReveal = game.getCard(target.getFirstTarget());
                     }

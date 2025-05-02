@@ -52,7 +52,7 @@ class EmbersmithEffect extends OneShotEffect {
         staticText = "you may pay {1}. If you do, {this} deals 1 damage to any target";
     }
 
-    EmbersmithEffect(final EmbersmithEffect effect) {
+    private EmbersmithEffect(final EmbersmithEffect effect) {
         super(effect);
     }
 

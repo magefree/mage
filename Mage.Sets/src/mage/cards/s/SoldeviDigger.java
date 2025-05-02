@@ -25,7 +25,7 @@ public final class SoldeviDigger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {2}: Put the top card of your graveyard on the bottom of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoldeviDiggerEffect(), new ManaCostsImpl<>("{2}")));
+        this.addAbility(new SimpleActivatedAbility(new SoldeviDiggerEffect(), new ManaCostsImpl<>("{2}")));
     }
 
     private SoldeviDigger(final SoldeviDigger card) {
@@ -40,12 +40,12 @@ public final class SoldeviDigger extends CardImpl {
 
 class SoldeviDiggerEffect extends OneShotEffect {
 
-    public SoldeviDiggerEffect() {
+    SoldeviDiggerEffect() {
         super(Outcome.Benefit);
         this.staticText = "put the top card of your graveyard on the bottom of your library";
     }
 
-    public SoldeviDiggerEffect(final SoldeviDiggerEffect effect) {
+    private SoldeviDiggerEffect(final SoldeviDiggerEffect effect) {
         super(effect);
     }
 

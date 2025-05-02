@@ -41,7 +41,7 @@ public final class FistsOfIronwood extends CardImpl {
         // When Fists of Ironwood enters the battlefield, create two 1/1 green Saproling creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SaprolingToken(), 2), false));
         // Enchanted creature has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private FistsOfIronwood(final FistsOfIronwood card) {

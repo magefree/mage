@@ -4,8 +4,8 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,10 +43,10 @@ public final class MelekIzzetParagon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
         // You may cast instant and sorcery spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
         // Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.
         this.addAbility(new MelekIzzetParagonTriggeredAbility());
@@ -65,10 +65,10 @@ public final class MelekIzzetParagon extends CardImpl {
 class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl {
 
     public MelekIzzetParagonTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), false);
+        super(Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(), false);
     }
 
-    public MelekIzzetParagonTriggeredAbility(final MelekIzzetParagonTriggeredAbility ability) {
+    private MelekIzzetParagonTriggeredAbility(final MelekIzzetParagonTriggeredAbility ability) {
         super(ability);
     }
 

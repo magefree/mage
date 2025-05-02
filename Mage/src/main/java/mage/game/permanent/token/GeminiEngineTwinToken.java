@@ -19,7 +19,7 @@ public final class GeminiEngineTwinToken extends TokenImpl {
         this.toughness = new MageInt(toughness);
     }
 
-    protected GeminiEngineTwinToken(final GeminiEngineTwinToken token) {
+    private GeminiEngineTwinToken(final GeminiEngineTwinToken token) {
         super(token);
     }
 

@@ -3,8 +3,10 @@ package mage.abilities.keyword;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -21,6 +23,9 @@ public class GravestormAbility extends TriggeredAbilityImpl {
     public GravestormAbility() {
         super(Zone.STACK, new GravestormEffect());
         this.addWatcher(new GravestormWatcher());
+        this.addHint(new ValueHint(
+                "Permanents put into graveyards from the battlefield this turn", PermanentsDestroyedThisTurnValue.instance
+        ));
     }
 
     private GravestormAbility(final GravestormAbility ability) {
@@ -93,5 +98,24 @@ class GravestormEffect extends OneShotEffect {
     @Override
     public GravestormEffect copy() {
         return new GravestormEffect(this);
+    }
+}
+
+enum PermanentsDestroyedThisTurnValue implements DynamicValue {
+    instance;
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return game.getState().getWatcher(GravestormWatcher.class).getGravestormCount();
+    }
+
+    @Override
+    public PermanentsDestroyedThisTurnValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
     }
 }

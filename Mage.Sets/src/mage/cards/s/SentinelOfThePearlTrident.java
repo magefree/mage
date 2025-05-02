@@ -73,7 +73,7 @@ class SentinelOfThePearlTridentEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    SentinelOfThePearlTridentEffect(SentinelOfThePearlTridentEffect effect) {
+    private SentinelOfThePearlTridentEffect(final SentinelOfThePearlTridentEffect effect) {
         super(effect);
     }
 

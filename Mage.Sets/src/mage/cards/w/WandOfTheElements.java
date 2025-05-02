@@ -34,13 +34,13 @@ public final class WandOfTheElements extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {T}, Sacrifice an Island: Create a 2/2 blue Elemental creature token with flying.
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WandOfTheElementsFirstToken()), new TapSourceCost());
-        firstAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(islandFilter)));
+        Ability firstAbility = new SimpleActivatedAbility(new CreateTokenEffect(new WandOfTheElementsFirstToken()), new TapSourceCost());
+        firstAbility.addCost(new SacrificeTargetCost(islandFilter));
         this.addAbility(firstAbility);
 
         // {T}, Sacrifice a Mountain: Create a 3/3 red Elemental creature token.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WandOfTheElementsSecondToken()), new TapSourceCost());
-        secondAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(mountainFilter)));
+        Ability secondAbility = new SimpleActivatedAbility(new CreateTokenEffect(new WandOfTheElementsSecondToken()), new TapSourceCost());
+        secondAbility.addCost(new SacrificeTargetCost(mountainFilter));
         this.addAbility(secondAbility);
 
     }

@@ -25,7 +25,7 @@ public final class EonHub extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
         
         // Players skip their upkeep steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUpkeepStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipUpkeepStepEffect()));
     }
     
     private EonHub(final EonHub card) {
@@ -46,7 +46,7 @@ class SkipUpkeepStepEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players skip their upkeep steps";
     }
     
-    public SkipUpkeepStepEffect(final SkipUpkeepStepEffect effect) {
+    private SkipUpkeepStepEffect(final SkipUpkeepStepEffect effect) {
         super(effect);
     }
     

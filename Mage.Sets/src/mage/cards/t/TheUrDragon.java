@@ -43,7 +43,7 @@ public final class TheUrDragon extends CardImpl {
         // <i>Eminence</i> &mdash; As long as The Ur-Dragon is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filter, 1);
         effect.setText("As long as {this} is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ability.setAbilityWord(AbilityWord.EMINENCE);
         this.addAbility(ability);
         effect = new SpellsCostReductionControllerEffect(filter, 1);
@@ -74,7 +74,7 @@ class TheUrDragonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public TheUrDragonTriggeredAbility(final TheUrDragonTriggeredAbility ability) {
+    private TheUrDragonTriggeredAbility(final TheUrDragonTriggeredAbility ability) {
         super(ability);
     }
 

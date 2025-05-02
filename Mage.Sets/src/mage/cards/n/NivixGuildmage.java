@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,10 +43,10 @@ public final class NivixGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{U}{R}: Draw a card, then discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{1}{U}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{1}{U}{R}")));
         
         // {2}{U}{R}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new ManaCostsImpl<>("{2}{U}{R}"));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }

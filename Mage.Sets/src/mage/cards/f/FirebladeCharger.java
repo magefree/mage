@@ -2,11 +2,11 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -18,14 +18,11 @@ import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
-import mage.abilities.common.DiesSourceTriggeredAbility;
 
 /**
  * @author TheElk801
  */
 public final class FirebladeCharger extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
 
     public FirebladeCharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
@@ -43,7 +40,7 @@ public final class FirebladeCharger extends CardImpl {
 
         // When Fireblade Charger dies, it deals damage equal to its power to any target.
         Ability ability = new DiesSourceTriggeredAbility(
-                new DamageTargetEffect(xValue).setText("it deals damage equal to its power to any target")
+                new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("it deals damage equal to its power to any target")
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

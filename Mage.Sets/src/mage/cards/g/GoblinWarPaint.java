@@ -41,7 +41,7 @@ public final class GoblinWarPaint extends CardImpl {
         // Enchanted creature gets +2/+2 and has haste.
         Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has haste");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));
         ability.addEffect(effect);
         this.addAbility(ability);
     }

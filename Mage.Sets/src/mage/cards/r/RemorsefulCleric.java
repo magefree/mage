@@ -32,7 +32,7 @@ public final class RemorsefulCleric extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice Contrite Cleric: Exile all cards in target player's graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllTargetPlayerEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileGraveyardAllTargetPlayerEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

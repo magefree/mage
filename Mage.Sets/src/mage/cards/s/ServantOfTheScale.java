@@ -57,12 +57,12 @@ public final class ServantOfTheScale extends CardImpl {
 
 class ServantOfTheScaleEffect extends OneShotEffect {
 
-    public ServantOfTheScaleEffect() {
+    ServantOfTheScaleEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "put X +1/+1 counters on target creature you control, where X is the number of +1/+1 counters on {this}";
     }
 
-    public ServantOfTheScaleEffect(final ServantOfTheScaleEffect effect) {
+    private ServantOfTheScaleEffect(final ServantOfTheScaleEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class ServantOfTheScaleEffect extends OneShotEffect {
             int amount = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (amount > 0) {
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount));
-                effect.setTargetPointer(targetPointer);
+                effect.setTargetPointer(this.getTargetPointer().copy());
                 effect.apply(game, source);
             }
             return true;

@@ -40,12 +40,12 @@ public final class KikusShadow extends CardImpl {
 
 class KikusShadowEffect extends OneShotEffect {
 
-    public KikusShadowEffect() {
+    KikusShadowEffect() {
         super(Outcome.Damage);
         this.staticText = "Target creature deals damage to itself equal to its power";
     }
 
-    public KikusShadowEffect(final KikusShadowEffect effect) {
+    private KikusShadowEffect(final KikusShadowEffect effect) {
         super(effect);
     }
 

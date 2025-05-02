@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.Mana;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,8 +37,8 @@ public final class TheFlux extends CardImpl {
         // II, III, IV, V -- Exile the top card of your library. You may play that card this turn.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_V,
-                new ExileTopXMayPlayUntilEndOfTurnEffect(
-                        1, false, Duration.EndOfTurn
+                new ExileTopXMayPlayUntilEffect(
+                        1, Duration.EndOfTurn
                 )
         );
 

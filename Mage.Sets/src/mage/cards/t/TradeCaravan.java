@@ -4,7 +4,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
@@ -18,7 +18,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.PhaseStep;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
@@ -44,7 +43,7 @@ public final class TradeCaravan extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, put a currency counter on Trade Caravan.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CURRENCY.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CURRENCY.createInstance())));
         // Remove two currency counters from Trade Caravan: Untap target basic land. Activate this ability only during an opponent's upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new RemoveCountersSourceCost(CounterType.CURRENCY.createInstance(2)), 
                 new CompoundCondition(OnOpponentsTurnCondition.instance, new IsStepCondition(PhaseStep.UPKEEP, false)), 

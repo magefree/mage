@@ -24,7 +24,7 @@ public final class ElfDruidToken extends TokenImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    protected ElfDruidToken(final ElfDruidToken token) {
+    private ElfDruidToken(final ElfDruidToken token) {
         super(token);
     }
 

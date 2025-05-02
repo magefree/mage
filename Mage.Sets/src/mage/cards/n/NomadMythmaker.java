@@ -44,7 +44,7 @@ public final class NomadMythmaker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, {tap}: Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NomadMythmakerEffect(), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new NomadMythmakerEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(1, FILTER));
         this.addAbility(ability);
@@ -63,12 +63,12 @@ public final class NomadMythmaker extends CardImpl {
 
 class NomadMythmakerEffect extends OneShotEffect {
 
-    public NomadMythmakerEffect() {
+    NomadMythmakerEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.";
     }
 
-    public NomadMythmakerEffect(final NomadMythmakerEffect effect) {
+    private NomadMythmakerEffect(final NomadMythmakerEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class NomadMythmakerEffect extends OneShotEffect {
         }
         FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("Choose a creature you control");
         TargetControlledPermanent target = new TargetControlledPermanent(FILTER);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null

@@ -51,12 +51,12 @@ public final class WitchMawNephilim extends CardImpl {
 
 class WitchMawNephilimEffect extends OneShotEffect {
 
-    public WitchMawNephilimEffect() {
+    WitchMawNephilimEffect() {
         super(Outcome.AddAbility);
         this.staticText = "it gains trample until end of turn if its power is 10 or greater";
     }
 
-    public WitchMawNephilimEffect(final WitchMawNephilimEffect effect) {
+    private WitchMawNephilimEffect(final WitchMawNephilimEffect effect) {
         super(effect);
     }
 

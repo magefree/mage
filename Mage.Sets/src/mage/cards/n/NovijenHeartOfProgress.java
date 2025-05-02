@@ -33,7 +33,7 @@ public final class NovijenHeartOfProgress extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {G}{U}, {T}: Put a +1/+1 counter on each creature that entered the battlefield this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NovijenHeartOfProgressEffect(), new ManaCostsImpl<>("{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(new NovijenHeartOfProgressEffect(), new ManaCostsImpl<>("{G}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -50,12 +50,12 @@ public final class NovijenHeartOfProgress extends CardImpl {
 
 class NovijenHeartOfProgressEffect extends OneShotEffect {
 
-    public NovijenHeartOfProgressEffect() {
+    NovijenHeartOfProgressEffect() {
         super(Outcome.BoostCreature);
         staticText = "put a +1/+1 counter on each creature that entered the battlefield this turn";
     }
 
-    public NovijenHeartOfProgressEffect(final NovijenHeartOfProgressEffect effect) {
+    private NovijenHeartOfProgressEffect(final NovijenHeartOfProgressEffect effect) {
         super(effect);
     }
 

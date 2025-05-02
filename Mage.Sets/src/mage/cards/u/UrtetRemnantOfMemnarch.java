@@ -3,7 +3,7 @@ package mage.cards.u;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -17,7 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.MyrToken;
 
 import java.util.UUID;
@@ -28,7 +28,7 @@ import java.util.UUID;
 public final class UrtetRemnantOfMemnarch extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a Myr spell");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.MYR);
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.MYR);
 
     static {
         filter.add(SubType.MYR.getPredicate());
@@ -46,7 +46,7 @@ public final class UrtetRemnantOfMemnarch extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MyrToken()), filter, false));
 
         //At the beginning of combat on your turn, untap each Myr you control.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new UntapAllControllerEffect(filter2, "untap each Myr you control"), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new UntapAllControllerEffect(filter2, "untap each Myr you control")));
 
         // {W}{U}{B}{R}{G}, {T}: Put three +1/+1 counters on each Myr you control. Activate only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(3), filter2), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), MyTurnCondition.instance);

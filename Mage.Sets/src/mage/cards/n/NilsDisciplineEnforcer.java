@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -40,7 +40,7 @@ public final class NilsDisciplineEnforcer extends CardImpl {
 
         // At the beginning of your end step, for each player, put a +1/+1 counter on up to one target creature that player controls.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new NilsDisciplineEnforcerCountersEffect(), TargetController.YOU, false
+                new NilsDisciplineEnforcerCountersEffect()
         );
         ability.setTargetAdjuster(NilsDisciplineEnforcerAdjuster.instance);
         this.addAbility(ability);

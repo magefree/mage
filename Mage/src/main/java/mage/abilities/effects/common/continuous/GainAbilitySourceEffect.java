@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -18,12 +19,10 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
 
     protected Ability ability;
     // shall a card gain the ability (otherwise permanent)
-    private boolean onCard;
+    private final boolean onCard;
 
     /**
      * Add ability with Duration.WhileOnBattlefield
-     *
-     * @param ability
      */
     public GainAbilitySourceEffect(Ability ability) {
         this(ability, Duration.WhileOnBattlefield);
@@ -34,19 +33,12 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard) {
-        this(ability, duration, onCard, false);
-        staticText = "{this} gains " + ability.getRule()
-                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
-    }
-
-    public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard, boolean noStaticText) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.onCard = onCard;
-        if (noStaticText) {
-            staticText = null;
-        }
-
+        this.staticText = "{this} " + (duration == Duration.WhileOnBattlefield ? "has" : "gains") +
+                ' ' + CardUtil.stripReminderText(ability.getRule()) +
+                (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
         this.generateGainAbilityDependencies(ability, null);
     }
 
@@ -72,7 +64,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
                 return;
             }
         }
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             Permanent permanent = game.getPermanentEntering(source.getSourceId());
             if (permanent != null) {
                 affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1, game));
@@ -86,7 +78,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         if (onCard) {
             Card card;
-            if (affectedObjectsSet) {
+            if (getAffectedObjectsSet()) {
                 card = affectedObjectList.get(0).getCard(game);
             } else {
                 card = game.getCard(source.getSourceId());
@@ -98,7 +90,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
             }
         } else {
             Permanent permanent;
-            if (affectedObjectsSet) {
+            if (getAffectedObjectsSet()) {
                 permanent = affectedObjectList.get(0).getPermanent(game);
             } else {
                 permanent = game.getPermanent(source.getSourceId());

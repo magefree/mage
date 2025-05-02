@@ -20,7 +20,7 @@ public final class TitanForgeGolemToken extends TokenImpl {
         toughness = new MageInt(9);
     }
 
-    protected TitanForgeGolemToken(final TitanForgeGolemToken token) {
+    private TitanForgeGolemToken(final TitanForgeGolemToken token) {
         super(token);
     }
 

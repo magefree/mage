@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,6 +27,7 @@ import mage.target.common.TargetControlledPermanent;
 import mage.util.MultiAmountMessage;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -96,21 +96,21 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
         }
 
         List<Counter> counters = new ArrayList<>(fromPermanent.getCounters(game).values());
-        counters.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
+        counters.sort(Comparator.comparing(Counter::getName));
 
         List<MultiAmountMessage> messages = counters.stream()
                 .map(c -> new MultiAmountMessage(c.getName() + " (" + c.getCount() + ")", 0, c.getCount()))
                 .collect(Collectors.toList());
-        int max = messages.stream().map(m -> m.max).reduce(0, Integer::sum);
+        int totalMin = 0;
+        int totalMax = messages.stream().mapToInt(m -> m.max).sum();
 
         int total;
         List<Integer> choices;
         do {
-            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, 0,
-                    max, MultiAmountType.COUNTERS, game);
-
-            total = choices.stream().reduce(0, Integer::sum);
-        } while (total < 0);
+            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, totalMin,
+                    totalMax, MultiAmountType.COUNTERS, game);
+            total = choices.stream().mapToInt(x -> x).sum();
+        } while (total < totalMin && controller.canRespond());
 
         // Move the counters. Make sure some counters were actually moved.
         for (int i = 0; i < choices.size(); i++) {
@@ -134,7 +134,7 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public ResourcefulDefenseMoveCounterEffect copy() {
         return new ResourcefulDefenseMoveCounterEffect(this);
     }
 }
@@ -150,6 +150,7 @@ class ResourcefulDefenseTriggeredAbility extends LeavesBattlefieldAllTriggeredAb
         super(ability);
     }
 
+    @Override
     public ResourcefulDefenseTriggeredAbility copy() {
         return new ResourcefulDefenseTriggeredAbility(this);
     }

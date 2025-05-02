@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -39,7 +38,7 @@ public final class MissDemeanor extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of each other player's upkeep, you may compliment that player on their game play. If you don't, sacrifice Miss Demeanour.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MissDemeanorEffect(), TargetController.NOT_YOU, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.NOT_YOU, new MissDemeanorEffect(), false));
     }
 
     private MissDemeanor(final MissDemeanor card) {
@@ -54,12 +53,12 @@ public final class MissDemeanor extends CardImpl {
 
 class MissDemeanorEffect extends OneShotEffect {
 
-    public MissDemeanorEffect() {
+    MissDemeanorEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "you may compliment that player on their game play. If you don't, sacrifice {this}";
     }
 
-    public MissDemeanorEffect(final MissDemeanorEffect effect) {
+    private MissDemeanorEffect(final MissDemeanorEffect effect) {
         super(effect);
     }
 

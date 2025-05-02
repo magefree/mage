@@ -33,12 +33,12 @@ public final class CarnageGladiator extends CardImpl {
         this.addAbility(new CarnageGladiatorTriggeredAbility());
 
         // {1}{B}{R}: Renegerate Carnage Gladiator.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),new ManaCostsImpl<>("{1}{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(),new ManaCostsImpl<>("{1}{B}{R}")));
 
 
     }
 
-    public CarnageGladiator (final CarnageGladiator card) {
+    private CarnageGladiator(final CarnageGladiator card) {
         super(card);
     }
 
@@ -55,7 +55,7 @@ class CarnageGladiatorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
     }
 
-    public CarnageGladiatorTriggeredAbility(final CarnageGladiatorTriggeredAbility ability) {
+    private CarnageGladiatorTriggeredAbility(final CarnageGladiatorTriggeredAbility ability) {
         super(ability);
     }
 

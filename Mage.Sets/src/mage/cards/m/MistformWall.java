@@ -33,7 +33,7 @@ public final class MistformWall extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Mistform Wall has defender as long as it's a Wall.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield),
                 new SourceHasSubtypeCondition(SubType.WALL),
                 "{this} has defender as long as it's a Wall"

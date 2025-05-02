@@ -1,7 +1,7 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -31,8 +31,8 @@ public class KayaTheInexorableEmblem extends Emblem {
 
         super("Emblem Kaya");
         this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
-                Zone.COMMAND, new KayaTheInexorableEmblemEffect(),
-                TargetController.YOU, true, false
+                Zone.COMMAND, TargetController.YOU, new KayaTheInexorableEmblemEffect(),
+                true
         ));
     }
 

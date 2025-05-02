@@ -1,10 +1,9 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.costs.Cost;
@@ -26,14 +25,12 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -58,10 +55,7 @@ public final class TourachsGate extends CardImpl {
         filterAttackingCreatures.add(TargetController.YOU.getControllerPredicate());
     }
 
-    private static final FilterControlledCreaturePermanent filterThrull = new FilterControlledCreaturePermanent("a Thrull");
-    static {
-        filterThrull.add(SubType.THRULL.getPredicate());
-    }
+    private static final FilterControlledPermanent filterThrull = new FilterControlledPermanent(SubType.THRULL, "a Thrull");
 
     public TourachsGate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
@@ -75,11 +69,11 @@ public final class TourachsGate extends CardImpl {
         this.addAbility(ability);
 
         // Sacrifice a Thrull: Put three time counters on Tourach's Gate.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.TIME.createInstance(3)), 
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filterThrull, true))));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)), 
+                new SacrificeTargetCost(filterThrull)));
         
         // At the beginning of your upkeep, remove a time counter from Tourach's Gate. If there are no time counters on Tourach's Gate, sacrifice it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TourachsGateUpkeepEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TourachsGateUpkeepEffect()));
 
         // Tap enchanted land: Attacking creatures you control get +2/-1 until end of turn. Activate this ability only if enchanted land is untapped.
         Cost cost = new TapAttachedCost();
@@ -105,7 +99,7 @@ class TourachsGateUpkeepEffect extends OneShotEffect {
         staticText = "remove a time counter from {this}. If there are no time counters on {this}, sacrifice it";
     }
 
-    TourachsGateUpkeepEffect(final TourachsGateUpkeepEffect effect) {
+    private TourachsGateUpkeepEffect(final TourachsGateUpkeepEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class WeequayBeastmaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Monstrosity abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbilitiesCostReductionControllerEffect(MonstrosityAbility.class, "Monstrosity")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(MonstrosityAbility.class, "Monstrosity")));
 
         // Whenever a creature you control becomes monstrous, put an additional +1/+1 counter on that creature.
         this.addAbility(new BecomesMonstrousTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())));

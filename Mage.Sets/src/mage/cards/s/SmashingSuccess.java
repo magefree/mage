@@ -48,7 +48,7 @@ public final class SmashingSuccess extends CardImpl {
 
 class SmashingSuccessEffect extends OneShotEffect {
 
-    public SmashingSuccessEffect() {
+    SmashingSuccessEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Destroy target artifact or land. If an artifact is destroyed this way, create a Treasure token.";
     }
@@ -65,7 +65,7 @@ class SmashingSuccessEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null && permanent.isPhasedIn() && !permanent.isPhasedOutIndirectly()) {
+        if (permanent != null && permanent.isPhasedIn()) {
             if (permanent.isArtifact(game)) {
                 if (permanent.destroy(source, game, false)) {
                     Token token = new TreasureToken();

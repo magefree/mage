@@ -38,7 +38,7 @@ public final class MartyrsOfKorlis extends CardImpl {
                 SourceTappedCondition.UNTAPPED,
                 null);
         effect.setText("{this} redirects artifact damage from controller as long as it's untapped");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private MartyrsOfKorlis(final MartyrsOfKorlis card) {
@@ -53,11 +53,11 @@ public final class MartyrsOfKorlis extends CardImpl {
 
 class RedirectArtifactDamageFromPlayerToSourceEffect extends RedirectionEffect {
 
-    public RedirectArtifactDamageFromPlayerToSourceEffect(Duration duration) {
+    RedirectArtifactDamageFromPlayerToSourceEffect(Duration duration) {
         super(duration);
     }
 
-    public RedirectArtifactDamageFromPlayerToSourceEffect(final RedirectArtifactDamageFromPlayerToSourceEffect effect) {
+    private RedirectArtifactDamageFromPlayerToSourceEffect(final RedirectArtifactDamageFromPlayerToSourceEffect effect) {
         super(effect);
     }
 

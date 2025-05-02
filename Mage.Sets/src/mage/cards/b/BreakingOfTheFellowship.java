@@ -1,7 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -20,8 +18,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Susucr
  */
 public final class BreakingOfTheFellowship extends CardImpl {
@@ -50,12 +49,12 @@ public final class BreakingOfTheFellowship extends CardImpl {
 
 class BreakingOfTheFellowshipEffect extends OneShotEffect {
 
-    public BreakingOfTheFellowshipEffect() {
+    BreakingOfTheFellowshipEffect() {
         super(Outcome.Damage);
         this.staticText = "Target creature an opponent controls deals damage equal to its power to another target creature that player controls";
     }
 
-    public BreakingOfTheFellowshipEffect(final BreakingOfTheFellowshipEffect effect) {
+    private BreakingOfTheFellowshipEffect(final BreakingOfTheFellowshipEffect effect) {
         super(effect);
     }
 
@@ -85,7 +84,7 @@ class BreakingOfTheFellowshipFirstTarget extends TargetCreaturePermanent {
         super(1, 1, filter, false);
     }
 
-    public BreakingOfTheFellowshipFirstTarget(final BreakingOfTheFellowshipFirstTarget target) {
+    private BreakingOfTheFellowshipFirstTarget(final BreakingOfTheFellowshipFirstTarget target) {
         super(target);
     }
 
@@ -113,7 +112,7 @@ class BreakingOfTheFellowshipFirstTarget extends TargetCreaturePermanent {
             int possibleTargets = 0;
             MageObject sourceObject = game.getObject(source.getId());
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllingPlayerId, game)) {
-                if (permanent.canBeTargetedBy(sourceObject, controllerId, game)) {
+                if (permanent.canBeTargetedBy(sourceObject, controllerId, source, game)) {
                     possibleTargets++;
                 }
             }
@@ -130,7 +129,7 @@ class BreakingOfTheFellowshipFirstTarget extends TargetCreaturePermanent {
                 int possibleTargets = 0;
                 MageObject sourceObject = game.getObject(source);
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                    if (permanent.canBeTargetedBy(sourceObject, controllingPlayerId, game)) {
+                    if (permanent.canBeTargetedBy(sourceObject, controllingPlayerId, source, game)) {
                         possibleTargets++;
                     }
                 }

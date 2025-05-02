@@ -16,6 +16,7 @@ import java.util.UUID;
 /**
  * Spend mana as any color to cast targeted card. Will not affected after any card movements or blinks.
  * Affects to all card's parts
+ * TODO: AnyType and AnyColor are confused there.
  *
  * @author JayDi85
  */

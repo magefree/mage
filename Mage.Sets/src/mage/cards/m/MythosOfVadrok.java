@@ -11,7 +11,6 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -34,7 +33,7 @@ public final class MythosOfVadrok extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
         // Mythos of Vadrok deals 5 damage divided as you choose among any number of target creatures and/or planeswalkers. If {W}{U} was spent to cast this spell, until your next turn, those permanents can't attack or block and their activated abilities can't be activated.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(5));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalkerAmount(5));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new MythosOfVadrokEffect(), condition, "If {W}{U} was spent to cast this spell, " +
@@ -81,7 +80,7 @@ class MythosOfVadrokRestrictionEffect extends RestrictionEffect {
         super(Duration.UntilYourNextTurn, Outcome.UnboostCreature);
     }
 
-    MythosOfVadrokRestrictionEffect(final MythosOfVadrokRestrictionEffect effect) {
+    private MythosOfVadrokRestrictionEffect(final MythosOfVadrokRestrictionEffect effect) {
         super(effect);
     }
 
@@ -97,7 +96,7 @@ class MythosOfVadrokRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

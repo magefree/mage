@@ -3,7 +3,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.AttackedThisTurnSourceCondition;
@@ -15,10 +15,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -40,10 +38,9 @@ public final class ErgRaiders extends CardImpl {
                 "{this} deals 2 damage to you unless it came under your control this turn"
         );
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(effect, TargetController.YOU, false),
+                new BeginningOfEndStepTriggeredAbility(effect),
                 new InvertCondition(AttackedThisTurnSourceCondition.instance),
                 "At the beginning of your end step, if {this} didn't attack this turn, {this} deals 2 damage to you unless it came under your control this turn.");
-        ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
     }
 

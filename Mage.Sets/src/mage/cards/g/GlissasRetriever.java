@@ -80,7 +80,7 @@ enum GlissasRetrieverAdjuster implements TargetAdjuster {
         int amount = 0;
         for (UUID opponentId : game.getOpponents(ability.getControllerId(), true)) {
             Player player = game.getPlayer(opponentId);
-            if (player != null && player.getCounters().getCount(CounterType.POISON) >= 3) {
+            if (player != null && player.getCountersCount(CounterType.POISON) >= 3) {
                 amount++;
             }
         }

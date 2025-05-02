@@ -3,7 +3,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -26,7 +25,7 @@ public final class IntoTheWilds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // At the beginning of your upkeep, look at the top card of your library. If it's a land card, you may put it onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IntoTheWildsEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IntoTheWildsEffect()));
 
     }
 
@@ -42,12 +41,12 @@ public final class IntoTheWilds extends CardImpl {
 
 class IntoTheWildsEffect extends OneShotEffect {
 
-    public IntoTheWildsEffect() {
+    IntoTheWildsEffect() {
         super(Outcome.PutLandInPlay);
         this.staticText = "look at the top card of your library. If it's a land card, you may put it onto the battlefield";
     }
 
-    public IntoTheWildsEffect(final IntoTheWildsEffect effect) {
+    private IntoTheWildsEffect(final IntoTheWildsEffect effect) {
         super(effect);
     }
 

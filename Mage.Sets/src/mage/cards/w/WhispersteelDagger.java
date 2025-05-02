@@ -4,6 +4,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -15,14 +16,13 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.ManaPoolItem;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author TheElk801
@@ -62,7 +62,7 @@ public final class WhispersteelDagger extends CardImpl {
 class WhispersteelDaggerCastFromExileEffect extends AsThoughEffectImpl {
 
     WhispersteelDaggerCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "you may cast a creature spell from that player's graveyard this turn";
     }
 
@@ -155,10 +155,10 @@ class WhispersteelDaggerWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            if (event.getAdditionalReference() == null) {
+            if (event.getApprovingObject() == null) {
                 return;
             }
-            morMap.computeIfAbsent(event.getAdditionalReference().getApprovingMageObjectReference(), m -> new HashMap<>())
+            morMap.computeIfAbsent(event.getApprovingObject().getApprovingMageObjectReference(), m -> new HashMap<>())
                     .computeIfAbsent(game.getOwnerId(event.getSourceId()), m -> new HashMap<>())
                     .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
             return;

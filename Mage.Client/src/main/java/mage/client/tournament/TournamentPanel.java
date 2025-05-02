@@ -108,9 +108,8 @@ public class TournamentPanel extends javax.swing.JPanel {
     public void cleanUp() {
         this.stopTasks();
         if (this.chatPanel1 != null) {
-            this.chatPanel1.disconnect();
+            this.chatPanel1.cleanUp();
         }
-
     }
 
     public void changeGUISize() {
@@ -120,11 +119,11 @@ public class TournamentPanel extends javax.swing.JPanel {
     private void setGUISize() {
         tablePlayers.getTableHeader().setFont(GUISizeHelper.tableFont);
         tablePlayers.setFont(GUISizeHelper.tableFont);
-        tablePlayers.setRowHeight(GUISizeHelper.getTableRowHeight());
+        tablePlayers.setRowHeight(GUISizeHelper.tableRowHeight);
 
         tableMatches.getTableHeader().setFont(GUISizeHelper.tableFont);
         tableMatches.setFont(GUISizeHelper.tableFont);
-        tableMatches.setRowHeight(GUISizeHelper.getTableRowHeight());
+        tableMatches.setRowHeight(GUISizeHelper.tableRowHeight);
 
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
@@ -185,7 +184,9 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     public void hideTournament() {
         stopTasks();
-        this.chatPanel1.disconnect();
+        if (this.chatPanel1 != null) {
+            this.chatPanel1.cleanUp();
+        }
         this.saveDividerLocations();
         TableUtil.saveColumnWidthAndOrderToPrefs(tablePlayers, KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH, KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER);
         TableUtil.saveColumnWidthAndOrderToPrefs(tableMatches, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
@@ -443,7 +444,6 @@ public class TournamentPanel extends javax.swing.JPanel {
         );
 
         jSplitPane2.setResizeWeight(1.0);
-        jSplitPane2.setToolTipText("");
 
         jSplitPane1.setDividerLocation(230);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);

@@ -36,7 +36,7 @@ public final class LuminousBonds extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 
     }
 

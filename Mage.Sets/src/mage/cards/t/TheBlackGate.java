@@ -41,10 +41,10 @@ public final class TheBlackGate extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GATE);
 
-        // As The Black Gate enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As The Black Gate enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         this.addAbility(new AsEntersBattlefieldAbility(
                 new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
-                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+                "you may pay 3 life. If you don't, it enters tapped"
         ));
 
         // {T}: Add {B}.
@@ -53,7 +53,7 @@ public final class TheBlackGate extends CardImpl {
         // {1}{B}, {T}: Choose a player with the most life or tied for most life. Target creature can't be blocked by creatures that player controls this turn.
         ActivatedAbility ability = new SimpleActivatedAbility(
                 new BlackGateEffect(),
-                new ManaCostsImpl("{1}{B}")
+                new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -127,7 +127,7 @@ class BlackGateEffect extends OneShotEffect {
         }
 
         TargetPlayer target = new TargetPlayer(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!controller.choose(Outcome.Detriment, target, source, game)) {
             return false;
         }

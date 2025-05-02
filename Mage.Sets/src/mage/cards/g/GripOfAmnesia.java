@@ -43,7 +43,7 @@ public final class GripOfAmnesia extends CardImpl {
 
 class GripOfAmnesiaEffect extends OneShotEffect {
 
-    public GripOfAmnesiaEffect() {
+    GripOfAmnesiaEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell unless its controller exiles all cards from their graveyard";
     }

@@ -39,7 +39,7 @@ public final class SerraAscendant extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // As long as you have 30 or more life, Serra Ascendant gets +5/+5 and has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SerraAscendantEffect()));
+        this.addAbility(new SimpleStaticAbility(new SerraAscendantEffect()));
     }
 
     private SerraAscendant(final SerraAscendant card) {
@@ -55,12 +55,12 @@ public final class SerraAscendant extends CardImpl {
 
 class SerraAscendantEffect extends ContinuousEffectImpl {
 
-    public SerraAscendantEffect() {
+    SerraAscendantEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "As long as you have 30 or more life, {this} gets +5/+5 and has flying";
     }
 
-    public SerraAscendantEffect(final SerraAscendantEffect effect) {
+    private SerraAscendantEffect(final SerraAscendantEffect effect) {
         super(effect);
     }
 

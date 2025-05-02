@@ -30,7 +30,7 @@ public final class HallsOfMist extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new GenericManaCost(1)));
 
         // Creatures that attacked during their controller's last turn can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfAttackedLastTurnAllEffect()), new AttackedLastTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new CantAttackIfAttackedLastTurnAllEffect()), new AttackedLastTurnWatcher());
     }
 
     private HallsOfMist(final HallsOfMist card) {
@@ -45,12 +45,12 @@ public final class HallsOfMist extends CardImpl {
 
 class CantAttackIfAttackedLastTurnAllEffect extends RestrictionEffect {
 
-    public CantAttackIfAttackedLastTurnAllEffect() {
+    CantAttackIfAttackedLastTurnAllEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Creatures that attacked during their controller's last turn can't attack";
     }
 
-    public CantAttackIfAttackedLastTurnAllEffect(final CantAttackIfAttackedLastTurnAllEffect effect) {
+    private CantAttackIfAttackedLastTurnAllEffect(final CantAttackIfAttackedLastTurnAllEffect effect) {
         super(effect);
     }
 

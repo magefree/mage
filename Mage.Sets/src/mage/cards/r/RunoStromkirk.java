@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
@@ -47,7 +47,7 @@ public final class RunoStromkirk extends CardImpl {
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If a creature card with mana value 6 or greater is revealed this way, transform Runo Stromkirk.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new RunoStromkirkEffect(), TargetController.YOU, false
+                new RunoStromkirkEffect()
         ));
     }
 

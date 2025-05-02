@@ -64,7 +64,7 @@ enum GethsSummonsAdjuster implements TargetAdjuster {
         // corrupted opponents' graveyards
         for (UUID opponentId : game.getOpponents(ability.getControllerId(), true)) {
             Player opponent = game.getPlayer(opponentId);
-            if (opponent == null || opponent.getCounters().getCount(CounterType.POISON) < 3) {
+            if (opponent == null || opponent.getCountersCount(CounterType.POISON) < 3) {
                 continue;
             }
             FilterCard filter = new FilterCard("creature card from " + opponent.getLogName() + "'s graveyard");
@@ -78,7 +78,7 @@ enum GethsSummonsAdjuster implements TargetAdjuster {
 
 class GethsSummonsEffect extends OneShotEffect {
 
-    public GethsSummonsEffect() {
+    GethsSummonsEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return up to one target creature card from your graveyard to the battlefield.<br>" +
                 AbilityWord.CORRUPTED.formatWord() + "For each opponent who has three or more poison counters " +
@@ -86,7 +86,7 @@ class GethsSummonsEffect extends OneShotEffect {
                 "the battlefield under your control";
     }
 
-    public GethsSummonsEffect(final GethsSummonsEffect effect) {
+    private GethsSummonsEffect(final GethsSummonsEffect effect) {
         super(effect);
     }
 

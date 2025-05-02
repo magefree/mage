@@ -45,13 +45,13 @@ public final class MoltenPsyche extends CardImpl {
 
 class MoltenPsycheEffect extends OneShotEffect {
 
-    public MoltenPsycheEffect() {
+    MoltenPsycheEffect() {
         super(Outcome.Neutral);
         staticText = "Each player shuffles the cards from their hand into their library, then draws that many cards.\n"
                 + "<i>Metalcraft</i> &mdash; If you control three or more artifacts, {this} deals damage to each opponent equal to the number of cards that player has drawn this turn.";
     }
 
-    public MoltenPsycheEffect(final MoltenPsycheEffect effect) {
+    private MoltenPsycheEffect(final MoltenPsycheEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class MoltenPsycheEffect extends OneShotEffect {
                 }
             }
 
-            game.getState().processAction(game); // so effects from creatures that were on the battlefield won't trigger from draw action
+            game.processAction(); // so effects from creatures that were on the battlefield won't trigger from draw action
 
             for (UUID playerId : cardsToDraw.keySet()) {
                 Player player = game.getPlayer(playerId);

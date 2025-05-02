@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -12,11 +12,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class SigardasSplendor extends CardImpl {
 
         // At the beginning of your upkeep, draw a card if your life total is greater than or equal to the last noted life total for Sigarda's Splendor. Then note your life total.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SigardasSplendorDrawEffect(), TargetController.YOU, false
+                new SigardasSplendorDrawEffect()
         ).addHint(SigardasSplendorHint.instance));
 
         // Whenever you cast a white spell, you gain 1 life.
@@ -55,9 +55,8 @@ public final class SigardasSplendor extends CardImpl {
         return new SigardasSplendor(this);
     }
 
-    static String getKey(Ability source, int offset) {
-        return "SigardasSplendor_" + source.getControllerId() + "_" + source.getSourceId()
-                + "_" + (source.getSourceObjectZoneChangeCounter() + offset);
+    static String getKey(Game game, Ability source, int offset) {
+        return "SigardasSplendor_" + source.getSourceId() + "_" + (offset + CardUtil.getActualSourceObjectZoneChangeCounter(game, source));
     }
 }
 
@@ -69,7 +68,7 @@ enum SigardasSplendorHint implements Hint {
         if (ability.getSourcePermanentIfItStillExists(game) == null) {
             return null;
         }
-        Object object = game.getState().getValue(SigardasSplendor.getKey(ability, 0));
+        Object object = game.getState().getValue(SigardasSplendor.getKey(game, ability, 0));
         return "Last noted life total: " + (object != null ? (Integer) object : "None");
     }
 
@@ -101,7 +100,8 @@ class SigardasSplendorNoteEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        game.getState().setValue(SigardasSplendor.getKey(source, -1), player.getLife());
+        game.informPlayers(player.getLogName() + " notes their life total of " + player.getLife());
+        game.getState().setValue(SigardasSplendor.getKey(game, source, 1), player.getLife());
         return true;
     }
 }
@@ -129,12 +129,13 @@ class SigardasSplendorDrawEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        String key = SigardasSplendor.getKey(source, 0);
+        String key = SigardasSplendor.getKey(game, source, 0);
         Object object = game.getState().getValue(key);
         int notedLife = object instanceof Integer ? (Integer) object : Integer.MIN_VALUE;
         if (player.getLife() >= notedLife) {
             player.drawCards(1, source, game);
         }
+        game.informPlayers(player.getLogName() + " notes their life total of " + player.getLife());
         game.getState().setValue(key, player.getLife());
         return true;
     }

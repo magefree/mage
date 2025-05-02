@@ -24,7 +24,7 @@ public final class GoblinScoutsToken extends TokenImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    protected GoblinScoutsToken(final GoblinScoutsToken token) {
+    private GoblinScoutsToken(final GoblinScoutsToken token) {
         super(token);
     }
 

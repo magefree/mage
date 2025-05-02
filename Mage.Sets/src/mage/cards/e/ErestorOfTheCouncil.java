@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.FinishVotingTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +33,9 @@ public final class ErestorOfTheCouncil extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever players finish voting, each opponent who voted for a choice you voted for creates a Treasure token. You scry X, where X is the number of opponents who voted for a choice you didn't vote for. Draw a card.
-        this.addAbility(new FinishVotingTriggeredAbility(new ErestorOfTheCouncilEffect()));
+        Ability ability = new FinishVotingTriggeredAbility(new ErestorOfTheCouncilEffect());
+        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        this.addAbility(ability);
     }
 
     private ErestorOfTheCouncil(final ErestorOfTheCouncil card) {
@@ -50,7 +53,7 @@ class ErestorOfTheCouncilEffect extends OneShotEffect {
     ErestorOfTheCouncilEffect() {
         super(Outcome.Benefit);
         staticText = "each opponent who voted for a choice you voted for creates a Treasure token. You scry X, " +
-                "where X is the number of opponents who voted for a choice you didn't vote for. Draw a card";
+                "where X is the number of opponents who voted for a choice you didn't vote for";
     }
 
     private ErestorOfTheCouncilEffect(final ErestorOfTheCouncilEffect effect) {

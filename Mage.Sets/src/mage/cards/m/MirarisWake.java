@@ -24,7 +24,7 @@ public final class MirarisWake extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{W}");
 
         // Creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
 
         // Whenever you tap a land for mana, add one mana of any type that land produced.
         AddManaOfAnyTypeProducedEffect effect = new AddManaOfAnyTypeProducedEffect();

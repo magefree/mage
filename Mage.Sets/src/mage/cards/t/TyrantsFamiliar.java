@@ -1,13 +1,10 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.LieutenantAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -19,6 +16,8 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author emerald000
@@ -46,11 +45,14 @@ public final class TyrantsFamiliar extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Lieutenant - As long as you control your commander, Tyrant's Familiar gets +2/+2 and has "Whenever Tyrant's Familiar attacks, it deals 7 damage to target creature defending player controls."
-        Ability gainedAbility = new AttacksTriggeredAbility(new DamageTargetEffect(7, "it"), false);
-        gainedAbility.addTarget(new TargetPermanent(filter));
-        ContinuousEffect effect = new GainAbilitySourceEffect(gainedAbility);
-        effect.setText("and has \"Whenever {this} attacks, it deals 7 damage to target creature defending player controls.\"");
-        this.addAbility(new LieutenantAbility(effect));
+        Ability ability = new AttacksTriggeredAbility(
+                new DamageTargetEffect(7, "it"), false
+        );
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(new LieutenantAbility(
+                new GainAbilitySourceEffect(ability), "and has \"Whenever {this} attacks, " +
+                "it deals 7 damage to target creature defending player controls.\""
+        ));
     }
 
     private TyrantsFamiliar(final TyrantsFamiliar card) {

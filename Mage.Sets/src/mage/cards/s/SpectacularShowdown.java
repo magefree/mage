@@ -84,6 +84,8 @@ class SpectacularShowdownOverloadEffect extends OneShotEffect {
 
     SpectacularShowdownOverloadEffect() {
         super(Outcome.Benefit);
+        staticText = "put a double strike counter on each creature, " +
+                "then goad each creature that had a double strike counter put on it this way";
     }
 
     private SpectacularShowdownOverloadEffect(final SpectacularShowdownOverloadEffect effect) {

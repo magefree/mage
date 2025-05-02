@@ -32,7 +32,7 @@ public final class ViscidLemures extends CardImpl {
         // {0}: Viscid Lemures gets -1/-0 and gains swampwalk until end of turn.
         Effect effect = new BoostSourceEffect(-1, 0, Duration.EndOfTurn);
         effect.setText("{this} gets -1/-0");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(0));
         effect = new GainAbilitySourceEffect(new SwampwalkAbility(), Duration.EndOfTurn);
         effect.setText("and gains swampwalk until end of turn. <i>(It can't be blocked as long as defending player controls a Swamp.)</i>");
         ability.addEffect(effect);

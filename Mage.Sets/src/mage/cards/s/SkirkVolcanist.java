@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -34,10 +33,10 @@ public final class SkirkVolcanist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Morph-Sacrifice two Mountains.
-        this.addAbility(new MorphAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, filter))));
+        this.addAbility(new MorphAbility(this, new SacrificeTargetCost(2, filter)));
         
         // When Skirk Volcanist is turned face up, it deals 3 damage divided as you choose among one, two, or three target creatures.
-        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DamageMultiEffect(3, "it"));
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DamageMultiEffect("it"));
         ability.addTarget(new TargetCreaturePermanentAmount(3));
         this.addAbility(ability);
     }

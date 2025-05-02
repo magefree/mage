@@ -36,7 +36,7 @@ public final class CogworkAssembler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {7}: Create a token that's a copy of target artifact. That token gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CogworkAssemblerCreateTokenEffect(), new GenericManaCost(7));
+        Ability ability = new SimpleActivatedAbility(new CogworkAssemblerCreateTokenEffect(), new GenericManaCost(7));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }
@@ -58,7 +58,7 @@ class CogworkAssemblerCreateTokenEffect extends OneShotEffect {
         this.staticText = "Create a token that's a copy of target artifact. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    CogworkAssemblerCreateTokenEffect(final CogworkAssemblerCreateTokenEffect effect) {
+    private CogworkAssemblerCreateTokenEffect(final CogworkAssemblerCreateTokenEffect effect) {
         super(effect);
     }
 

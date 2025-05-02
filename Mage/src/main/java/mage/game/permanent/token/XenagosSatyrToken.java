@@ -22,7 +22,7 @@ public final class XenagosSatyrToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected XenagosSatyrToken(final XenagosSatyrToken token) {
+    private XenagosSatyrToken(final XenagosSatyrToken token) {
         super(token);
     }
 

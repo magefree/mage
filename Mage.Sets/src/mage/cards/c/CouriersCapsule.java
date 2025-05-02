@@ -24,13 +24,13 @@ public final class CouriersCapsule extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{U}");
 
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 
-    public CouriersCapsule (final CouriersCapsule card) {
+    private CouriersCapsule(final CouriersCapsule card) {
         super(card);
     }
 

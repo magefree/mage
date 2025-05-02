@@ -30,7 +30,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped) {
-        this(tapped, true);
+        this(tapped, false);
     }
 
     public ReturnSourceFromGraveyardToBattlefieldEffect(boolean tapped, boolean ownerControl) {
@@ -96,7 +96,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("return {this} from your graveyard to the battlefield");
+        StringBuilder sb = new StringBuilder("return this card from your graveyard to the battlefield");
         if (tapped) {
             sb.append(" tapped");
         }

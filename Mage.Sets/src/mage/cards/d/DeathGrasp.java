@@ -3,7 +3,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -21,12 +21,12 @@ public final class DeathGrasp extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{W}{B}");
 
 
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public DeathGrasp (final DeathGrasp card) {
+    private DeathGrasp(final DeathGrasp card) {
         super(card);
     }
 

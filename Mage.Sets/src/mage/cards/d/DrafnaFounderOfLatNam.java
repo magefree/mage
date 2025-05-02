@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +49,7 @@ public final class DrafnaFounderOfLatNam extends CardImpl {
         this.addAbility(ability);
 
         // {3}, {T}: Copy target artifact spell you control.
-        ability = new SimpleActivatedAbility(new CopyTargetSpellEffect(false, false, false), new GenericManaCost(3));
+        ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(false, false, false), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

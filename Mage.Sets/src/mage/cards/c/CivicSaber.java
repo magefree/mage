@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -12,14 +11,12 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
  
 /**
  *
@@ -32,7 +29,7 @@ public final class CivicSaber extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
  
         // Equipped creature gets +1/+0 for each of its colors.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new CivicSaberColorCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(new CivicSaberColorCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
@@ -47,15 +44,15 @@ public final class CivicSaber extends CardImpl {
         return new CivicSaber(this);
     }
 }
- 
+
 class CivicSaberColorCount implements DynamicValue {
- 
-    public CivicSaberColorCount() {
+
+    CivicSaberColorCount() {
     }
- 
-    public CivicSaberColorCount(final CivicSaberColorCount dynamicValue) {
+
+    private CivicSaberColorCount(final CivicSaberColorCount dynamicValue) {
     }
- 
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
@@ -68,9 +65,9 @@ class CivicSaberColorCount implements DynamicValue {
         }
         return count;
     }
- 
+
     @Override
-    public DynamicValue copy() {
+    public CivicSaberColorCount copy() {
         return new CivicSaberColorCount(this);
     }
  
@@ -84,4 +81,3 @@ class CivicSaberColorCount implements DynamicValue {
         return "of its colors";
     }
 }
- 

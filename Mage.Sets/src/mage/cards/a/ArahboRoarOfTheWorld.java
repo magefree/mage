@@ -1,13 +1,11 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldOrCommandZoneCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -54,19 +52,18 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Eminence &mdash; At the beginning of combat on your turn, if Arahbo, Roar of the World is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(Zone.ALL, new BoostTargetEffect(3, 3, Duration.EndOfTurn), TargetController.YOU, false, false),
-                SourceOnBattlefieldOrCommandZoneCondition.instance,
-                "At the beginning of combat on your turn, if {this} is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.");
+        Ability ability = new BeginningOfCombatTriggeredAbility(Zone.ALL,
+                TargetController.YOU, new BoostTargetEffect(3, 3, Duration.EndOfTurn),
+                false).withInterveningIf(
+                SourceOnBattlefieldOrCommandZoneCondition.instance);
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.setAbilityWord(AbilityWord.EMINENCE);
         this.addAbility(ability);
 
         // Whenever another Cat you control attacks, you may pay {1}{G}{W}. If you do, it gains trample and gets +X/+X until end of turn, where X is its power.
-//        Effect effect = new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl<>("{1}{G}{W}"));
-        ability = new AttacksCreatureYouControlTriggeredAbility(
-                new DoIfCostPaid(new ArahboEffect(), new ManaCostsImpl<>("{1}{G}{W}")), false, filter2, true);
-        this.addAbility(ability);
+        this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new DoIfCostPaid(
+                new ArahboEffect(), new ManaCostsImpl<>("{1}{G}{W}")
+        ), false, filter2, true));
     }
 
     private ArahboRoarOfTheWorld(final ArahboRoarOfTheWorld card) {
@@ -81,12 +78,12 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
 
 class ArahboEffect extends OneShotEffect {
 
-    public ArahboEffect() {
+    ArahboEffect() {
         super(Outcome.Benefit);
         this.staticText = "it gains trample and gets +X/+X until end of turn, where X is its power";
     }
 
-    public ArahboEffect(final ArahboEffect effect) {
+    private ArahboEffect(final ArahboEffect effect) {
         super(effect);
     }
 
@@ -97,7 +94,7 @@ class ArahboEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (creature != null && creature.isCreature(game)) {
             int pow = creature.getPower().getValue();
             ContinuousEffect effect = new BoostTargetEffect(pow, pow, Duration.EndOfTurn);

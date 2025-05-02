@@ -65,7 +65,7 @@ class InfiniteAuthorityTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, ");
     }
 
-    InfiniteAuthorityTriggeredAbility(final InfiniteAuthorityTriggeredAbility ability) {
+    private InfiniteAuthorityTriggeredAbility(final InfiniteAuthorityTriggeredAbility ability) {
         super(ability);
     }
 
@@ -113,7 +113,7 @@ class InfiniteAuthorityEffect extends OneShotEffect {
         staticText = "destroy the other creature at end of combat. At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature";
     }
 
-    InfiniteAuthorityEffect(final InfiniteAuthorityEffect effect) {
+    private InfiniteAuthorityEffect(final InfiniteAuthorityEffect effect) {
         super(effect);
     }
 

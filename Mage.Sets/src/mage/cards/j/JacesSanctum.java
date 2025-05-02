@@ -37,10 +37,10 @@ public final class JacesSanctum extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
 
         // Instant and sorcery spells you cast cost {1} less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
         
         // Whenever you cast an instant or sorcery spell, scry 1.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), filter2, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1, false), filter2, false));
     }
 
     private JacesSanctum(final JacesSanctum card) {

@@ -73,7 +73,20 @@ public class TournamentSession {
             setupTimeout(timeout);
             managerFactory.userManager().getUser(userId).ifPresent(user -> {
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                user.ccConstruct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
+
+                // can be called on reconnection, so make sure tournament still active
+                Deck lastDeck = tournament.getPlayer(playerId).getDeck();
+                if (!tournament.isDoneConstructing() && lastDeck != null) {
+                    user.ccConstruct(lastDeck, tableId, null, remaining);
+                } else {
+                    logger.error("Found bad state on reconnection: player has tournament session, but don't have deck"
+                            + ", deck " + lastDeck
+                            + ", user " + user.getName()
+                            + ", state " + tournament.getTournamentState()
+                            + ", t type " + tournament.getTournamentType()
+                            + ", t id " + tournament.getId()
+                    );
+                }
             });
         }
     }
@@ -83,8 +96,8 @@ public class TournamentSession {
         tournament.submitDeck(playerId, deck);
     }
 
-    public boolean updateDeck(Deck deck) {
-        return tournament.updateDeck(playerId, deck);
+    public void updateDeck(Deck deck, boolean ignoreMainBasicLands) {
+        tournament.updateDeck(playerId, deck, ignoreMainBasicLands);
     }
 
     public void setKilled() {

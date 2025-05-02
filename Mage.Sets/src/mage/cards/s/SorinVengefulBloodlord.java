@@ -4,8 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -16,15 +14,12 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetPlayerOrPlaneswalker;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -45,7 +40,7 @@ public final class SorinVengefulBloodlord extends CardImpl {
                 new GainAbilityControlledEffect(
                         LifelinkAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A
-                ), MyTurnCondition.instance, "As long as it's your turn, " +
+                ), MyTurnCondition.instance, "During your turn, " +
                 "creatures and planeswalkers you control have lifelink"
         )).addHint(MyTurnHint.instance));
 
@@ -59,7 +54,8 @@ public final class SorinVengefulBloodlord extends CardImpl {
                 "Return target creature card with mana value X from your graveyard to the battlefield"
         ));
         ability.addEffect(new SorinVengefulBloodlordEffect());
-        ability.setTargetAdjuster(SorinVengefulBloodlordAdjuster.instance);
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 
@@ -70,24 +66,6 @@ public final class SorinVengefulBloodlord extends CardImpl {
     @Override
     public SorinVengefulBloodlord copy() {
         return new SorinVengefulBloodlord(this);
-    }
-}
-
-enum SorinVengefulBloodlordAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = 0;
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                xValue = ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
-        FilterCard filter = new FilterCreatureCard("creature card with mana value " + xValue + " or less");
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
     }
 }
 

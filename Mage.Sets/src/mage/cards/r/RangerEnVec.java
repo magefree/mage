@@ -31,7 +31,7 @@ public final class RangerEnVec extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.G)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
     private RangerEnVec(final RangerEnVec card) {

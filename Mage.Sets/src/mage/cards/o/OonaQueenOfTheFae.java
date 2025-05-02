@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.token.OonaQueenFaerieRogueToken;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -35,7 +36,7 @@ public final class OonaQueenOfTheFae extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}{UB}: Choose a color. Target opponent exiles the top X cards of their library. For each card of the chosen color exiled this way, create a 1/1 blue and black Faerie Rogue creature token with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OonaQueenOfTheFaeEffect(), new ManaCostsImpl<>("{X}{U/B}"));
+        Ability ability = new SimpleActivatedAbility(new OonaQueenOfTheFaeEffect(), new ManaCostsImpl<>("{X}{U/B}"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -52,12 +53,12 @@ public final class OonaQueenOfTheFae extends CardImpl {
 
 class OonaQueenOfTheFaeEffect extends OneShotEffect {
 
-    public OonaQueenOfTheFaeEffect() {
+    OonaQueenOfTheFaeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Choose a color. Target opponent exiles the top X cards of their library. For each card of the chosen color exiled this way, create a 1/1 blue and black Faerie Rogue creature token with flying";
     }
 
-    public OonaQueenOfTheFaeEffect(final OonaQueenOfTheFaeEffect effect) {
+    private OonaQueenOfTheFaeEffect(final OonaQueenOfTheFaeEffect effect) {
         super(effect);
     }
 
@@ -76,7 +77,7 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
         }
         int cardsWithColor = 0;
         Cards cardsToExile = new CardsImpl();
-        cardsToExile.addAllCards(opponent.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        cardsToExile.addAllCards(opponent.getLibrary().getTopCards(game, CardUtil.getSourceCostsTag(game, source, "X", 0)));
 
         for (Card card : cardsToExile.getCards(game)) {
             if (card != null && card.getColor(game).contains(choice.getColor())) {

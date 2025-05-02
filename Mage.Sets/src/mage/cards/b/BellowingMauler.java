@@ -3,7 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -11,12 +11,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -33,7 +31,7 @@ public final class BellowingMauler extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your end step, each player loses 4 life unless they sacrifice a nontoken creature.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new BellowingMaulerEffect(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BellowingMaulerEffect()));
     }
 
     private BellowingMauler(final BellowingMauler card) {
@@ -48,7 +46,7 @@ public final class BellowingMauler extends CardImpl {
 
 class BellowingMaulerEffect extends OneShotEffect {
 
-    public BellowingMaulerEffect() {
+    BellowingMaulerEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each player loses 4 life unless they sacrifice a nontoken creature";
     }
@@ -68,10 +66,10 @@ class BellowingMaulerEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 boolean sacrificed = false;
-                TargetPermanent target = new TargetPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, true);
+                TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
                 if (target.canChoose(playerId, source, game)
                         && player.chooseUse(Outcome.Sacrifice, "Sacrifice a nontoken creature or lose 4 life?", null, "Sacrifice", "Lose 4 life", source, game)) {
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                    player.choose(Outcome.Sacrifice, target, source, game);
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     sacrificed = permanent != null && permanent.sacrifice(source, game);
                 }

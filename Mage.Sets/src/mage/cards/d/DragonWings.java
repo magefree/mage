@@ -47,12 +47,12 @@ public final class DragonWings extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
         // Cycling {1}{U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
         
         // When a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Breath from your graveyard to the battlefield attached to that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonWingsEffect(), filter, true, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonWingsEffect(), filter, true, SetTargetPointer.PERMANENT));
     }
 
     private DragonWings(final DragonWings card) {
@@ -72,7 +72,7 @@ class DragonWingsEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonWingsEffect(final DragonWingsEffect effect) {
+    private DragonWingsEffect(final DragonWingsEffect effect) {
         super(effect);
     }
     
@@ -83,7 +83,7 @@ class DragonWingsEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceCard = (Card) source.getSourceObjectIfItStillExists(game);
+        Card sourceCard = source.getSourceCardIfItStillExists(game);
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceCard != null && permanent != null && controller != null) {
@@ -96,4 +96,3 @@ class DragonWingsEffect extends OneShotEffect {
         return false;
     }
 }
-

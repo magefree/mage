@@ -3,7 +3,6 @@ package mage.cards.c;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
@@ -17,8 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -48,12 +47,12 @@ public final class ChainOfSilence extends CardImpl {
 
 class ChainOfSilenceEffect extends OneShotEffect {
 
-    public ChainOfSilenceEffect() {
+    ChainOfSilenceEffect() {
         super(Outcome.PreventDamage);
         this.staticText = "Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
-    public ChainOfSilenceEffect(final ChainOfSilenceEffect effect) {
+    private ChainOfSilenceEffect(final ChainOfSilenceEffect effect) {
         super(effect);
     }
 
@@ -71,11 +70,11 @@ class ChainOfSilenceEffect extends OneShotEffect {
         }
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            ContinuousEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn);
+            ContinuousEffect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, false);
             game.addEffect(effect, source);
             Player player = game.getPlayer(permanent.getControllerId());
-            TargetControlledPermanent target = new TargetControlledPermanent(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ')'), true);
-            if (player != null && player.chooseTarget(Outcome.Sacrifice, target, source, game)) {
+            TargetSacrifice target = new TargetSacrifice(0, 1, new FilterControlledLandPermanent("a land to sacrifice (to be able to copy " + sourceObject.getName() + ')'));
+            if (player != null && player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent land = game.getPermanent(target.getFirstTarget());
                 if (land != null && land.sacrifice(source, game)) {
                     if (player.chooseUse(outcome, "Copy the spell?", source, game)) {

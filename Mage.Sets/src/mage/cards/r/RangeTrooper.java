@@ -43,7 +43,7 @@ public final class RangeTrooper extends CardImpl {
         // Trooper creatures you control have "When this creature enters that battlefield, you may exile target creature. Return that creature to the battlefield at the beginning of the next end step."
         Ability ability = new EntersBattlefieldTriggeredAbility(new RangeTrooperEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)));
     }
 
@@ -59,12 +59,12 @@ public final class RangeTrooper extends CardImpl {
 
 class RangeTrooperEffect extends OneShotEffect {
 
-    public RangeTrooperEffect() {
+    RangeTrooperEffect() {
         super(Outcome.Detriment);
         staticText = "exile target creature. Return that creature to the battlefield at the beginning of the next end step";
     }
 
-    public RangeTrooperEffect(final RangeTrooperEffect effect) {
+    private RangeTrooperEffect(final RangeTrooperEffect effect) {
         super(effect);
     }
 

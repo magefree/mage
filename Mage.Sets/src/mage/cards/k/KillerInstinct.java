@@ -4,7 +4,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -19,7 +19,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +36,7 @@ public final class KillerInstinct extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{G}");
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a creature card, put it onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KillerInstinctEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KillerInstinctEffect()));
     }
 
     private KillerInstinct(final KillerInstinct card) {
@@ -57,7 +56,7 @@ class KillerInstinctEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a creature card, put it onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.";
     }
 
-    KillerInstinctEffect(final KillerInstinctEffect effect) {
+    private KillerInstinctEffect(final KillerInstinctEffect effect) {
         super(effect);
     }
 
@@ -85,12 +84,12 @@ class KillerInstinctEffect extends OneShotEffect {
         if (card.isCreature(game) && player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             Permanent permanent = game.getPermanent(card.getId());
             if (permanent != null) {
-                FixedTarget ft = new FixedTarget(permanent, game);
+                FixedTarget blueprintTarget = new FixedTarget(permanent, game);
                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                effect.setTargetPointer(ft);
+                effect.setTargetPointer(blueprintTarget.copy());
                 game.addEffect(effect, source);
                 Effect sacrificeEffect = new SacrificeTargetEffect("Sacrifice it at the beginning of the next end step", source.getControllerId());
-                sacrificeEffect.setTargetPointer(ft);
+                sacrificeEffect.setTargetPointer(blueprintTarget.copy());
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
             }
             return true;

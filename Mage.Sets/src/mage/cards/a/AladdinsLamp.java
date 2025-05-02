@@ -1,14 +1,16 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -18,6 +20,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,14 +34,10 @@ public final class AladdinsLamp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{10}");
 
         // {X}, {T}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AladdinsLampEffect(), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(new AladdinsLampEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
-        for (Object cost : ability.getManaCosts()) {
-            if (cost instanceof VariableManaCost) {
-                ((VariableManaCost) cost).setMinX(1);
-                break;
-            }
-        }
+        ability.setCostAdjuster(AladdinsLampCostAdjuster.instance);
+
         this.addAbility(ability);
     }
 
@@ -52,12 +53,12 @@ public final class AladdinsLamp extends CardImpl {
 
 class AladdinsLampEffect extends ReplacementEffectImpl {
 
-    public AladdinsLampEffect() {
+    AladdinsLampEffect() {
         super(Duration.EndOfTurn, Outcome.DrawCard);
         staticText = "The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.";
     }
 
-    public AladdinsLampEffect(final AladdinsLampEffect effect) {
+    private AladdinsLampEffect(final AladdinsLampEffect effect) {
         super(effect);
     }
 
@@ -73,14 +74,14 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         controller.lookAtCards(source, null, cards, game);
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to stay at the top of library"));
         if (controller.choose(outcome, cards, target, source, game)) {
             cards.remove(target.getFirstTarget());
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-        game.getState().processAction(game);
+        game.processAction();
         controller.drawCards(1, source, game, event);
         discard();
         return true;
@@ -94,5 +95,19 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId());
+    }
+}
+
+enum AladdinsLampCostAdjuster implements CostAdjuster {
+    instance;
+
+    @Override
+    public void prepareX(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller == null) {
+            return;
+        }
+
+        ability.setVariableCostsMinMax(1, Math.max(1, controller.getLibrary().size()));
     }
 }

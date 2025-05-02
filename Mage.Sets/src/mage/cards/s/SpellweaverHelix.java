@@ -66,7 +66,7 @@ class SpellweaverHelixImprintEffect extends OneShotEffect {
         this.staticText = "you may exile two target sorcery cards from a single graveyard";
     }
 
-    SpellweaverHelixImprintEffect(final SpellweaverHelixImprintEffect effect) {
+    private SpellweaverHelixImprintEffect(final SpellweaverHelixImprintEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class SpellweaverHelixTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SpellweaverHelixCastEffect(), false);
     }
 
-    SpellweaverHelixTriggeredAbility(final SpellweaverHelixTriggeredAbility ability) {
+    private SpellweaverHelixTriggeredAbility(final SpellweaverHelixTriggeredAbility ability) {
         super(ability);
     }
 
@@ -161,7 +161,7 @@ class SpellweaverHelixCastEffect extends OneShotEffect {
         this.staticText = "you may copy the other. If you do, you may cast the copy without paying its mana cost";
     }
 
-    SpellweaverHelixCastEffect(final SpellweaverHelixCastEffect effect) {
+    private SpellweaverHelixCastEffect(final SpellweaverHelixCastEffect effect) {
         super(effect);
         this.spellName = effect.spellName;
     }

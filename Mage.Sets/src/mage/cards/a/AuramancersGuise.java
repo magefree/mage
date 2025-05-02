@@ -43,7 +43,7 @@ public final class AuramancersGuise extends CardImpl {
         DynamicValue ptBoost = new EnchantedCreatureAurasCount();
         BoostEnchantedEffect effect = new BoostEnchantedEffect(ptBoost, ptBoost, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2 for each Aura attached to it");
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(effect);
         ability2.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA).setText("and has vigilance"));
         this.addAbility(ability2);
     }
@@ -63,7 +63,7 @@ class EnchantedCreatureAurasCount implements DynamicValue {
     public EnchantedCreatureAurasCount() {
     }
 
-    public EnchantedCreatureAurasCount(final EnchantedCreatureAurasCount dynamicValue) {
+    private EnchantedCreatureAurasCount(final EnchantedCreatureAurasCount dynamicValue) {
     }
 
     @Override

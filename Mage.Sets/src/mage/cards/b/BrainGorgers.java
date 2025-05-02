@@ -52,12 +52,12 @@ public final class BrainGorgers extends CardImpl {
 
 class BrainGorgersCounterSourceEffect extends OneShotEffect {
 
-    public BrainGorgersCounterSourceEffect() {
+    BrainGorgersCounterSourceEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "any player may sacrifice a creature. If a player does, counter {this}";
     }
 
-    public BrainGorgersCounterSourceEffect(final BrainGorgersCounterSourceEffect effect) {
+    private BrainGorgersCounterSourceEffect(final BrainGorgersCounterSourceEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class BrainGorgersCounterSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null) {
-            SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+            SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 cost.clearPaid();
                 Player player = game.getPlayer(playerId);

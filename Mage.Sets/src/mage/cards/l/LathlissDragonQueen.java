@@ -48,13 +48,12 @@ public final class LathlissDragonQueen extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another nontoken Dragon enters the battlefield under your control, create a 5/5 red Dragon creature token with flying.
+        // Whenever another nontoken Dragon you control enters, create a 5/5 red Dragon creature token with flying.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CreateTokenEffect(new DragonToken2()), filter
         ));
         // {1}{R}: Dragons you control get +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         1, 0, Duration.EndOfTurn,
                         filter2, false

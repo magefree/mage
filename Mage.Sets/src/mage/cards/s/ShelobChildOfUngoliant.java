@@ -1,22 +1,19 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.WardAbility;
+import mage.abilities.token.FoodAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -149,9 +146,10 @@ class ShelobChildOfUngoliantTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
         this.addWatcher(new ShelobChildOfUngoliantWatcher());
         this.setTriggerPhrase("Whenever another creature dealt damage this turn by a Spider you controlled dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public ShelobChildOfUngoliantTriggeredAbility(final ShelobChildOfUngoliantTriggeredAbility ability) {
+    private ShelobChildOfUngoliantTriggeredAbility(final ShelobChildOfUngoliantTriggeredAbility ability) {
         super(ability);
     }
 
@@ -189,17 +187,22 @@ class ShelobChildOfUngoliantTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class ShelobChildOfUngoliantEffect extends OneShotEffect {
 
-    public ShelobChildOfUngoliantEffect() {
+    ShelobChildOfUngoliantEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of that creature, except it's a Food artifact with " +
             "\"{2}, {T}, Sacrifice this artifact: You gain 3 life,\" and it loses all other card types.";
     }
 
-    public ShelobChildOfUngoliantEffect(final ShelobChildOfUngoliantEffect effect) {
+    private ShelobChildOfUngoliantEffect(final ShelobChildOfUngoliantEffect effect) {
         super(effect);
     }
 
@@ -211,7 +214,7 @@ class ShelobChildOfUngoliantEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent copyFrom = targetPointer.getFirstTargetPermanentOrLKI(game, source);
+        Permanent copyFrom = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if(controller == null || copyFrom == null) {
             return false;
         }
@@ -225,12 +228,7 @@ class ShelobChildOfUngoliantEffect extends OneShotEffect {
                 token.addSubType(SubType.FOOD);
 
                 // {2}, {T}, Sacrifice this artifact: You gain 3 life.
-                Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new GenericManaCost(2));
-                ability.addCost(new TapSourceCost());
-                SacrificeSourceCost cost = new SacrificeSourceCost();
-                cost.setText("Sacrifice this artifact");
-                ability.addCost(cost);
-                token.addAbility(ability);
+                token.addAbility(new FoodAbility(false));
             }).apply(game, source);
     }
 }

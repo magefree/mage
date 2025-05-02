@@ -2,7 +2,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
@@ -13,6 +12,9 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +30,7 @@ public final class BlackSunsZenith extends CardImpl {
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
 
-    public BlackSunsZenith (final BlackSunsZenith card) {
+    private BlackSunsZenith(final BlackSunsZenith card) {
         super(card);
     }
 
@@ -45,13 +47,13 @@ class BlackSunsZenithEffect extends OneShotEffect {
         staticText = "Put X -1/-1 counters on each creature";
     }
 
-    BlackSunsZenithEffect(final BlackSunsZenithEffect effect) {
+    private BlackSunsZenithEffect(final BlackSunsZenithEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
+        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
             if (permanent != null && permanent.isCreature(game)) {
                 permanent.addCounters(CounterType.M1M1.createInstance(amount), source.getControllerId(), source, game);

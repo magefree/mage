@@ -29,7 +29,7 @@ public final class BloodcrazedGoblin extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodcrazedGoblinEffect()));
+        this.addAbility(new SimpleStaticAbility(new BloodcrazedGoblinEffect()));
     }
 
     private BloodcrazedGoblin(final BloodcrazedGoblin card) {
@@ -45,12 +45,12 @@ public final class BloodcrazedGoblin extends CardImpl {
 
 class BloodcrazedGoblinEffect extends RestrictionEffect {
 
-    public BloodcrazedGoblinEffect() {
+    BloodcrazedGoblinEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless an opponent has been dealt damage this turn";
     }
 
-    public BloodcrazedGoblinEffect(final BloodcrazedGoblinEffect effect) {
+    private BloodcrazedGoblinEffect(final BloodcrazedGoblinEffect effect) {
         super(effect);
     }
 

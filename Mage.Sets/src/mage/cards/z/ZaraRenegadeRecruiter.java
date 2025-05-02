@@ -78,7 +78,7 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || player == null || player.getHand().isEmpty()) {
             return false;
         }
@@ -111,7 +111,7 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
             filter.getPlayerFilter().add(new PlayerIdPredicate(player.getId()));
             filter.getPermanentFilter().add(new ControllerIdPredicate(player.getId()));
             TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             controller.choose(outcome, target, source, game);
             defenderId = target.getFirstTarget();
         }

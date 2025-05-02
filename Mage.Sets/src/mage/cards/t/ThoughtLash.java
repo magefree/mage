@@ -38,7 +38,7 @@ public final class ThoughtLash extends CardImpl {
         this.addAbility(new ThoughtLashTriggeredAbility());
 
         // Exile the top card of your library: Prevent the next 1 damage that would be dealt to you this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, 1), new ExileFromTopOfLibraryCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new PreventDamageToControllerEffect(Duration.EndOfTurn, 1), new ExileFromTopOfLibraryCost(1)));
     }
 
     private ThoughtLash(final ThoughtLash card) {
@@ -57,7 +57,7 @@ class ThoughtLashTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ThoughtLashExileLibraryEffect(), false);
     }
 
-    ThoughtLashTriggeredAbility(final ThoughtLashTriggeredAbility ability) {
+    private ThoughtLashTriggeredAbility(final ThoughtLashTriggeredAbility ability) {
         super(ability);
     }
 
@@ -89,7 +89,7 @@ class ThoughtLashExileLibraryEffect extends OneShotEffect {
         this.staticText = "that player exiles all cards from their library";
     }
 
-    ThoughtLashExileLibraryEffect(final ThoughtLashExileLibraryEffect effect) {
+    private ThoughtLashExileLibraryEffect(final ThoughtLashExileLibraryEffect effect) {
         super(effect);
     }
 

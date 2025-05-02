@@ -21,7 +21,7 @@ public final class SquirrelPoweredScheme extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // Increase the result of each die you roll by 2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SquirrelPoweredSchemeEffect()));
+        this.addAbility(new SimpleStaticAbility(new SquirrelPoweredSchemeEffect()));
     }
 
     private SquirrelPoweredScheme(final SquirrelPoweredScheme card) {
@@ -41,7 +41,7 @@ class SquirrelPoweredSchemeEffect extends ReplacementEffectImpl {
         staticText = "Increase the result of each die you roll by 2";
     }
 
-    SquirrelPoweredSchemeEffect(final SquirrelPoweredSchemeEffect effect) {
+    private SquirrelPoweredSchemeEffect(final SquirrelPoweredSchemeEffect effect) {
         super(effect);
     }
 
@@ -60,11 +60,6 @@ class SquirrelPoweredSchemeEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

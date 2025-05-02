@@ -3,6 +3,7 @@ package mage.cards.z;
 import mage.MageInt;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +31,8 @@ public final class ZaltoFireGiantDuke extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Zalto, Fire Giant Duke is dealt damage, venture into the dungeon.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(new VentureIntoTheDungeonEffect(), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new VentureIntoTheDungeonEffect(), false)
+                .addHint(CurrentDungeonHint.instance));
     }
 
     private ZaltoFireGiantDuke(final ZaltoFireGiantDuke card) {

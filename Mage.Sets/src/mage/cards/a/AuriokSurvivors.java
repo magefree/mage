@@ -60,13 +60,13 @@ class AuriokSurvivorsEffect extends OneShotEffect {
         staticText = "If you do, you may attach it to {this}";
     }
 
-    AuriokSurvivorsEffect(final AuriokSurvivorsEffect effect) {
+    private AuriokSurvivorsEffect(final AuriokSurvivorsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent p = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (p != null && player != null && sourcePermanent != null) {

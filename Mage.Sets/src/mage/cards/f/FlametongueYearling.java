@@ -4,10 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MultikickerAbility;
@@ -25,8 +23,6 @@ import java.util.UUID;
  */
 public final class FlametongueYearling extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public FlametongueYearling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");
 
@@ -43,7 +39,7 @@ public final class FlametongueYearling extends CardImpl {
         ), "with a +1/+1 counter on it for each time it was kicked"));
 
         // When Flametongue Yearling enters the battlefield, it deals damage equal to its power to target creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue)
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("it deals damage equal to its power to target creature"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

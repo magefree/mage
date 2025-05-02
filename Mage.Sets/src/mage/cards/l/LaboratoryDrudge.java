@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -32,10 +32,10 @@ public final class LaboratoryDrudge extends CardImpl {
 
         // At the beginning of each end step, draw a card if you've cast a spell from a graveyard or activated an ability of a card in a graveyard this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ConditionalOneShotEffect(
+                TargetController.ANY, new ConditionalOneShotEffect(
                         new DrawCardSourceControllerEffect(1), LaboratoryDrudgeCondition.instance,
                         "draw a card if you've cast a spell from a graveyard or activated an ability of a card in a graveyard this turn"
-                ), TargetController.ANY, false
+                ), false
         ), new LaboratoryDrudgeWatcher());
     }
 

@@ -46,12 +46,12 @@ public final class ConsecratedByBlood extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +2/+2 and has flying and "Sacrifice two other creatures: Regenerate this creature."
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);
-        effect = new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-           new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true))), AttachmentType.AURA);
+        effect = new GainAbilityAttachedEffect(new SimpleActivatedAbility(new RegenerateSourceEffect(),
+           new SacrificeTargetCost(2, filter)), AttachmentType.AURA);
         effect.setText("and \"Sacrifice two other creatures: Regenerate this creature.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

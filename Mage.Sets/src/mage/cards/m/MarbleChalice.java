@@ -20,10 +20,10 @@ public final class MarbleChalice extends CardImpl {
     public MarbleChalice (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}{W}");
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(1), new TapSourceCost()));
     }
 
-    public MarbleChalice (final MarbleChalice card) {
+    private MarbleChalice(final MarbleChalice card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class FirstMateRagavanToken extends TokenImpl {
         this.cardType.add(CardType.CREATURE);
     }
 
-    protected FirstMateRagavanToken(final FirstMateRagavanToken token) {
+    private FirstMateRagavanToken(final FirstMateRagavanToken token) {
         super(token);
     }
 

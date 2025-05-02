@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -16,7 +15,7 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
 
     public ReturnSourceFromGraveyardToHandEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "return {this} from your graveyard to your hand";
+        staticText = "return this card from your graveyard to your hand";
     }
 
     protected ReturnSourceFromGraveyardToHandEffect(final ReturnSourceFromGraveyardToHandEffect effect) {
@@ -31,9 +30,9 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        Card card = source.getSourceCardIfItStillExists(game);
         return controller != null
-                && sourceObject instanceof Card
-                && controller.moveCards((Card) sourceObject, Zone.HAND, source, game);
+                && card != null
+                && controller.moveCards(card, Zone.HAND, source, game);
     }
 }

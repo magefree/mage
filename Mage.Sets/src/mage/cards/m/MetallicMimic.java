@@ -37,10 +37,10 @@ public final class MetallicMimic extends CardImpl {
         // Metallic Mimic is the chosen type in addition to its other types.
         ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddChosenSubtypeEffect()));
+        this.addAbility(new SimpleStaticAbility(new AddChosenSubtypeEffect()));
 
         // Each other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MetallicMimicReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new MetallicMimicReplacementEffect()));
 
     }
 
@@ -63,7 +63,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
         setCharacterDefining(true);
     }
 
-    MetallicMimicReplacementEffect(MetallicMimicReplacementEffect effect) {
+    private MetallicMimicReplacementEffect(final MetallicMimicReplacementEffect effect) {
         super(effect);
     }
 
@@ -83,11 +83,6 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
             SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
             return subType != null && enteringCreature.hasSubtype(subType, game);
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

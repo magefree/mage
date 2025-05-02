@@ -16,6 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetPlaneswalkerPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -65,7 +66,7 @@ enum ConfrontThePastAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         if (ability.getEffects().size() == 1
                 && ability.getEffects().get(0) instanceof  ReturnFromGraveyardToBattlefieldTargetEffect) {
-            int xValue = ability.getManaCostsToPay().getX();
+            int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
             ability.getTargets().clear();
             FilterPermanentCard filter = new FilterPermanentCard("planeswalker card with mana value X or less");
             filter.add(CardType.PLANESWALKER.getPredicate());
@@ -82,7 +83,7 @@ class ConfrontThePastLoyaltyEffect extends OneShotEffect {
         staticText = "remove twice X loyalty counters from target planeswalker an opponent controls";
     }
 
-    public ConfrontThePastLoyaltyEffect(ConfrontThePastLoyaltyEffect effect) {
+    private ConfrontThePastLoyaltyEffect(final ConfrontThePastLoyaltyEffect effect) {
         super(effect);
     }
 
@@ -93,7 +94,7 @@ class ConfrontThePastLoyaltyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Permanent target = game.getPermanent(source.getFirstTarget());
         target.removeCounters(CounterType.LOYALTY.createInstance(xValue * 2), source, game);
         return true;

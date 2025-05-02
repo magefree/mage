@@ -35,7 +35,7 @@ public final class SpringbloomDruid extends CardImpl {
                 ), true
                 ).setText("search your library for up to two basic land cards, " +
                         "put them onto the battlefield tapped, then shuffle"
-                ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)
+                ), new SacrificeTargetCost(StaticFilters.FILTER_LAND)
         )));
     }
 

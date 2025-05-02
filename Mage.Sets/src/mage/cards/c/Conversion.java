@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -12,6 +12,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -31,12 +32,11 @@ public final class Conversion extends CardImpl {
         // At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(
-                        new ManaCostsImpl<>("{W}{W}")),
-                TargetController.YOU,
-                false));
+                        new ManaCostsImpl<>("{W}{W}"))
+        ));
 
         // All Mountains are Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConversionEffect()));
+        this.addAbility(new SimpleStaticAbility(new ConversionEffect()));
 
     }
 
@@ -56,7 +56,7 @@ public final class Conversion extends CardImpl {
             this.staticText = "All Mountains are Plains";
         }
 
-        ConversionEffect(final ConversionEffect effect) {
+        private ConversionEffect(final ConversionEffect effect) {
             super(effect);
         }
 
@@ -72,7 +72,7 @@ public final class Conversion extends CardImpl {
 
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-            for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND, game)) {
+            for (Permanent land : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (land.hasSubtype(SubType.MOUNTAIN, game)) {

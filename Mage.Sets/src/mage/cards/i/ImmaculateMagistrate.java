@@ -34,7 +34,7 @@ public final class ImmaculateMagistrate extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Put a +1/+1 counter on target creature for each Elf you control.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new ImmaculateMagistrateEffect(),
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -61,7 +61,7 @@ class ImmaculateMagistrateEffect extends OneShotEffect {
         this.staticText = "Put a +1/+1 counter on target creature for each Elf you control";
     }
 
-    public ImmaculateMagistrateEffect(final ImmaculateMagistrateEffect effect) {
+    private ImmaculateMagistrateEffect(final ImmaculateMagistrateEffect effect) {
         super(effect);
     }
 

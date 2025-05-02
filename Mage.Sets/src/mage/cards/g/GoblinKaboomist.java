@@ -4,7 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.LandMineToken;
@@ -35,7 +34,7 @@ public final class GoblinKaboomist extends CardImpl {
         // At the beginning of your upkeep, create a colorless artifact token named Land Mine
         // with "{R}, Sacrifice this artifact: This artifact deals 2 damage to target attacking creature without flying."
         // Then flip a coin.  If you lose the flip, Goblin Kaboomist deals 2 damage to itself.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new LandMineToken()), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new LandMineToken()));
         ability.addEffect(new GoblinKaboomistFlipCoinEffect());
         this.addAbility(ability);
     }
@@ -52,12 +51,12 @@ public final class GoblinKaboomist extends CardImpl {
 
 class GoblinKaboomistFlipCoinEffect extends OneShotEffect {
 
-    public GoblinKaboomistFlipCoinEffect() {
+    GoblinKaboomistFlipCoinEffect() {
         super(Outcome.Damage);
         staticText = "Then flip a coin. If you lose the flip, {this} deals 2 damage to itself";
     }
 
-    public GoblinKaboomistFlipCoinEffect(final GoblinKaboomistFlipCoinEffect effect) {
+    private GoblinKaboomistFlipCoinEffect(final GoblinKaboomistFlipCoinEffect effect) {
         super(effect);
     }
 

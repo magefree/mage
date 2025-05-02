@@ -29,7 +29,7 @@ public final class SvogthosTheRestlessTomb extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {3}{B}{G}: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with "This creature's power and toughness are each equal to the number of creature cards in your graveyard." It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SvogthosToken(), CardType.LAND, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{3}{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new SvogthosToken(), CardType.LAND, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{3}{B}{G}"));
         this.addAbility(ability);
     }
 
@@ -55,9 +55,9 @@ class SvogthosToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
         CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(count, Duration.WhileOnBattlefield)));
     }
-    public SvogthosToken(final SvogthosToken token) {
+    private SvogthosToken(final SvogthosToken token) {
         super(token);
     }
 

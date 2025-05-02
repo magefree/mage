@@ -33,7 +33,7 @@ public final class MemoryJar extends CardImpl {
         // {T}, Sacrifice Memory Jar: Each player exiles all cards from their hand face down and draws seven cards.
         // At the beginning of the next end step, each player discards their hand and returns to their hand each
         //card they exiled this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MemoryJarEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new MemoryJarEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

@@ -358,7 +358,7 @@ public final class Battlebond extends ExpansionSet {
                 //Check if the pack already contains a partner pair
                 if (partnerAllowed) {
                     //Added card always replaces an uncommon card
-                    Card card = CardRepository.instance.findCardWithPreferredSetAndNumber(partnerName, sourceCard.getExpansionSetCode(), null).getCard();
+                    Card card = CardRepository.instance.findCardWithPreferredSetAndNumber(partnerName, sourceCard.getExpansionSetCode(), null).createCard();
                     if (i < max) {
                         booster.add(card);
                     } else {

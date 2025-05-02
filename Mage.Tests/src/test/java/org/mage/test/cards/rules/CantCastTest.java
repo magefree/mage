@@ -124,8 +124,7 @@ public class CantCastTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
 
@@ -137,7 +136,7 @@ public class CantCastTest extends CardTestPlayerBase {
             }
         }
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertHandCount(playerA, "Pine Walker", 1);
     }
 

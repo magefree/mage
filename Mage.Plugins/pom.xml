@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.50</version>
+        <version>1.4.57</version>
     </parent>
 
     <artifactId>mage-plugins</artifactId>
@@ -18,5 +18,9 @@
     <modules>
         <module>Mage.Counter.Plugin</module>
     </modules>
+
+    <properties>
+        <root.dir>${project.basedir}/..</root.dir>
+    </properties>
 
 </project>

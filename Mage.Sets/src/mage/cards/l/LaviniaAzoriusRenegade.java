@@ -39,7 +39,7 @@ public final class LaviniaAzoriusRenegade extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each opponent can't cast noncreature spells with converted mana cost greater than the number of lands that player controls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LaviniaAzoriusRenegadeReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new LaviniaAzoriusRenegadeReplacementEffect()));
 
         // Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.
         this.addAbility(new SpellCastOpponentNoManaSpentTriggeredAbility(new CounterTargetEffect().setText("counter that spell")));
@@ -62,7 +62,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
         staticText = "Each opponent can't cast noncreature spells with mana value greater than the number of lands that player controls.";
     }
 
-    LaviniaAzoriusRenegadeReplacementEffect(final LaviniaAzoriusRenegadeReplacementEffect effect) {
+    private LaviniaAzoriusRenegadeReplacementEffect(final LaviniaAzoriusRenegadeReplacementEffect effect) {
         super(effect);
     }
 

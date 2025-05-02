@@ -20,7 +20,7 @@ public final class RhonassLastStandToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    protected RhonassLastStandToken(final RhonassLastStandToken token) {
+    private RhonassLastStandToken(final RhonassLastStandToken token) {
         super(token);
     }
 

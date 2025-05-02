@@ -18,7 +18,7 @@ public final class MarduStrikeLeaderWarriorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected MarduStrikeLeaderWarriorToken(final MarduStrikeLeaderWarriorToken token) {
+    private MarduStrikeLeaderWarriorToken(final MarduStrikeLeaderWarriorToken token) {
         super(token);
     }
 

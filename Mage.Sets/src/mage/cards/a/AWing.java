@@ -39,7 +39,7 @@ public final class AWing extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
 
         // {1}:Remove A-wing from combat. It must attack on your next combat if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveFromCombatSourceEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new RemoveFromCombatSourceEffect(), new GenericManaCost(1));
         ability.addEffect(new AWingAttacksNextCombatIfAbleSourceEffect());
         this.addAbility(ability);
     }
@@ -66,7 +66,7 @@ class AWingAttacksNextCombatIfAbleSourceEffect extends RequirementEffect {
         staticText = "It must attack on your next combat if able";
     }
 
-    public AWingAttacksNextCombatIfAbleSourceEffect(final AWingAttacksNextCombatIfAbleSourceEffect effect) {
+    private AWingAttacksNextCombatIfAbleSourceEffect(final AWingAttacksNextCombatIfAbleSourceEffect effect) {
         super(effect);
         this.turnNumber = effect.turnNumber;
         this.phaseCount = effect.phaseCount;
@@ -76,6 +76,7 @@ class AWingAttacksNextCombatIfAbleSourceEffect extends RequirementEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         turnNumber = game.getTurnNum();
         phaseCount = game.getPhase().getCount();
     }

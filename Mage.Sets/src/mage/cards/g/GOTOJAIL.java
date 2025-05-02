@@ -53,12 +53,12 @@ public final class GOTOJAIL extends CardImpl {
 
 class GoToJailExileEffect extends OneShotEffect {
 
-    public GoToJailExileEffect() {
+    GoToJailExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile target creature an opponent controls until {this} leaves the battlefield.";
     }
 
-    public GoToJailExileEffect(final GoToJailExileEffect effect) {
+    private GoToJailExileEffect(final GoToJailExileEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class GoToJailExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
 
         // If GO TO JAIL leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
@@ -96,7 +96,7 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
-    public GoToJailTriggeredAbility(final GoToJailTriggeredAbility ability) {
+    private GoToJailTriggeredAbility(final GoToJailTriggeredAbility ability) {
         super(ability);
     }
 
@@ -118,12 +118,12 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
 
 class GoToJailUpkeepEffect extends OneShotEffect {
 
-    public GoToJailUpkeepEffect() {
+    GoToJailUpkeepEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "that player rolls two six-sided dice. If they roll doubles, sacrifice {this}";
     }
 
-    public GoToJailUpkeepEffect(final GoToJailUpkeepEffect effect) {
+    private GoToJailUpkeepEffect(final GoToJailUpkeepEffect effect) {
         super(effect);
     }
 

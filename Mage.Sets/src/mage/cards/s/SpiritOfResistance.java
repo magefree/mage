@@ -34,7 +34,7 @@ public final class SpiritOfResistance extends CardImpl {
                 new PreventDamageToControllerEffect(Duration.WhileOnBattlefield),
                 SpiritOfResistanceCondition.instance);
         effect.setText("As long as you control a permanent of each color, prevent all damage that would be dealt to you.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private SpiritOfResistance(final SpiritOfResistance card) {

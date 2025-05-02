@@ -21,7 +21,7 @@ public final class MinorDemonToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected MinorDemonToken(final MinorDemonToken token) {
+    private MinorDemonToken(final MinorDemonToken token) {
         super(token);
     }
 

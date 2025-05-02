@@ -26,7 +26,7 @@ public final class DevotedRetainer extends CardImpl {
         this.addAbility(new BushidoAbility(1));
     }
 
-    public DevotedRetainer (final DevotedRetainer card) {
+    private DevotedRetainer(final DevotedRetainer card) {
         super(card);
     }
 

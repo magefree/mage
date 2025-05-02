@@ -26,7 +26,8 @@ public final class RunAfoul extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Target opponent sacrifices a creature with flying.
-        this.getSpellAbility().addEffect(new SacrificeEffect(filter, 1, "Target opponent"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(filter, 1, "Target opponent")
+                .setText("target opponent sacrifices a creature of their choice with flying"));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 

@@ -26,10 +26,10 @@ public final class Vigilance extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         this.addAbility(new EnchantAbility(auraTarget));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Vigilance (final Vigilance card) {
+    private Vigilance(final Vigilance card) {
         super(card);
     }
 

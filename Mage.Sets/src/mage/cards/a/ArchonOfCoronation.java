@@ -6,6 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +35,7 @@ public final class ArchonOfCoronation extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Archon of Coronation enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // As long as you're the monarch, damage doesn't cause you to lose life.
         this.addAbility(new SimpleStaticAbility(new ArchonOfCoronationEffect()));
@@ -76,11 +77,6 @@ class ArchonOfCoronationEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId())
                 && source.isControlledBy(game.getMonarchId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

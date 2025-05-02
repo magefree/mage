@@ -37,7 +37,7 @@ public final class ExquisiteArchangel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // If you would lose the game, instead exile Exquisite Archangel and your life total becomes equal to your starting life total.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExquisiteArchangelEffect()));
+        this.addAbility(new SimpleStaticAbility(new ExquisiteArchangelEffect()));
 
     }
 
@@ -53,23 +53,18 @@ public final class ExquisiteArchangel extends CardImpl {
 
 class ExquisiteArchangelEffect extends ReplacementEffectImpl {
 
-    public ExquisiteArchangelEffect() {
+    ExquisiteArchangelEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would lose the game, instead exile {this} and your life total becomes equal to your starting life total";
     }
 
-    public ExquisiteArchangelEffect(final ExquisiteArchangelEffect effect) {
+    private ExquisiteArchangelEffect(final ExquisiteArchangelEffect effect) {
         super(effect);
     }
 
     @Override
     public ExquisiteArchangelEffect copy() {
         return new ExquisiteArchangelEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

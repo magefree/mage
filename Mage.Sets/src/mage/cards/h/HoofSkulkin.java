@@ -35,7 +35,7 @@ public final class HoofSkulkin extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(3));
         ability.addTarget(new TargetCreaturePermanent(filterGreenCreature));
         this.addAbility(ability);
     }

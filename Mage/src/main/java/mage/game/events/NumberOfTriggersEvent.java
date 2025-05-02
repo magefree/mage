@@ -1,8 +1,6 @@
 package mage.game.events;
 
-import mage.abilities.Ability;
-
-import java.util.UUID;
+import mage.abilities.TriggeredAbility;
 
 /**
  * Raise events for normal triggers, ignore state based triggers from StateTriggeredAbility
@@ -12,14 +10,20 @@ import java.util.UUID;
 public class NumberOfTriggersEvent extends GameEvent {
 
     private final GameEvent sourceEvent;
+    private final TriggeredAbility sourceTrigger;
 
-    public NumberOfTriggersEvent(Ability triggeredAbility, GameEvent sourceEvent) {
+    public NumberOfTriggersEvent(TriggeredAbility triggeredAbility, GameEvent sourceEvent) {
         super(GameEvent.EventType.NUMBER_OF_TRIGGERS, null, triggeredAbility, triggeredAbility.getControllerId());
         this.sourceEvent = sourceEvent;
+        this.sourceTrigger = triggeredAbility;
         this.amount = 1; // Number of times to trigger. Panharmonicon can change this.
     }
 
     public GameEvent getSourceEvent() {
         return sourceEvent;
+    }
+
+    public TriggeredAbility getSourceTrigger() {
+        return sourceTrigger;
     }
 }

@@ -32,7 +32,7 @@ public final class WardOfBones extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Each opponent who controls more creatures than you can't play creature cards. The same is true for artifacts, enchantments, and lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardOfBonesEffect()));
+        this.addAbility(new SimpleStaticAbility(new WardOfBonesEffect()));
 
     }
 
@@ -48,25 +48,20 @@ public final class WardOfBones extends CardImpl {
 
 class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WardOfBonesEffect() {
+    WardOfBonesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each opponent who controls more creatures than you can't cast creature spells. "
                 + "The same is true for artifacts and enchantments.<br><br>"
                 + "Each opponent who controls more lands than you can't play lands.";
     }
 
-    public WardOfBonesEffect(final WardOfBonesEffect effect) {
+    private WardOfBonesEffect(final WardOfBonesEffect effect) {
         super(effect);
     }
 
     @Override
     public WardOfBonesEffect copy() {
         return new WardOfBonesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -29,7 +29,7 @@ public final class UrDrago extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Creatures with swampwalk can be blocked as though they didn't have swampwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UrDragoEffect()));
+        this.addAbility(new SimpleStaticAbility(new UrDragoEffect()));
     }
 
     private UrDrago(final UrDrago card) {
@@ -44,12 +44,12 @@ public final class UrDrago extends CardImpl {
 
 class UrDragoEffect extends AsThoughEffectImpl {
 
-    public UrDragoEffect() {
+    UrDragoEffect() {
         super(AsThoughEffectType.BLOCK_SWAMPWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with swampwalk can be blocked as though they didn't have swampwalk";
     }
 
-    public UrDragoEffect(final UrDragoEffect effect) {
+    private UrDragoEffect(final UrDragoEffect effect) {
         super(effect);
     }
 

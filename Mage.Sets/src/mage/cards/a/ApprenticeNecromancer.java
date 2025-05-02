@@ -41,7 +41,7 @@ public final class ApprenticeNecromancer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}, Sacrifice Apprentice Necromancer: Return target creature card from your graveyard to the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ApprenticeNecromancerEffect(), new ColoredManaCost(ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(new ApprenticeNecromancerEffect(), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
@@ -60,12 +60,12 @@ public final class ApprenticeNecromancer extends CardImpl {
 
 class ApprenticeNecromancerEffect extends OneShotEffect {
 
-    public ApprenticeNecromancerEffect() {
+    ApprenticeNecromancerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return target creature card from your graveyard to the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice it";
     }
 
-    public ApprenticeNecromancerEffect(final ApprenticeNecromancerEffect effect) {
+    private ApprenticeNecromancerEffect(final ApprenticeNecromancerEffect effect) {
         super(effect);
     }
 

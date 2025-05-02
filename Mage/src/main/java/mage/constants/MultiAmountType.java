@@ -8,19 +8,27 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum MultiAmountType {
+public class MultiAmountType {
 
-    MANA("Add mana", "Distribute mana among colors"),
-    DAMAGE("Assign damage", "Assign damage among targets"),
-    P1P1("Add +1/+1 counters", "Distribute +1/+1 counters among creatures"),
-    COUNTERS("Choose counters", "Move counters");
+    public static final MultiAmountType MANA = new MultiAmountType("Add mana", "Distribute mana among colors");
+    public static final MultiAmountType DAMAGE = new MultiAmountType("Assign damage", "Assign damage among targets");
+
+    public static final MultiAmountType P1P1 = new MultiAmountType("Add +1/+1 counters", "Distribute +1/+1 counters among creatures");
+    public static final MultiAmountType COUNTERS = new MultiAmountType("Choose counters", "Move counters");
+    public static final MultiAmountType CHEAT_LANDS = new MultiAmountType("Choose lands", "Add lands to your battlefield", true);
 
     private final String title;
     private final String header;
+    private final boolean canCancel; // choice dialog will return null instead default values
 
-    MultiAmountType(String title, String header) {
+    public MultiAmountType(String title, String header) {
+        this(title, header, false);
+    }
+
+    public MultiAmountType(String title, String header, boolean canCancel) {
         this.title = title;
         this.header = header;
+        this.canCancel = canCancel;
     }
 
     public String getTitle() {
@@ -31,15 +39,19 @@ public enum MultiAmountType {
         return header;
     }
 
-    public static List<Integer> prepareDefaltValues(List<MultiAmountMessage> constraints, int min, int max) {
+    public boolean isCanCancel() {
+        return canCancel;
+    }
+
+    public static List<Integer> prepareDefaultValues(List<MultiAmountMessage> constraints, int min, int max) {
         // default values must be assigned from first to last by minimum values
-        List<Integer> res = constraints.stream().map(m -> m.min > Integer.MIN_VALUE ? m.min : (0 < max ? 0 : max))
+        List<Integer> res = constraints.stream().map(m -> m.defaultValue > Integer.MIN_VALUE ? m.defaultValue : Math.min(0, max))
                 .collect(Collectors.toList());
         if (res.isEmpty()) {
             return res;
         }
 
-        int total = res.stream().reduce(0, Integer::sum);
+        int total = res.stream().mapToInt(x -> x).sum();
 
         // Fill values until we reach the overall minimum. Do this by filling values up until either their max or however much is leftover, starting with the first option.
         if (min > 0 && total < min) {
@@ -74,7 +86,7 @@ public enum MultiAmountType {
 
         // Total should fall between the sum of all of the minimum values and max (in the case that everything was filled with default_value).
         // So, we'll never start with too much.
-        int total = res.stream().reduce(0, Integer::sum);
+        int total = res.stream().mapToInt(x -> x).sum();
 
         // So add some values evenly until we hit max
         while (total < max) {
@@ -129,7 +141,7 @@ public enum MultiAmountType {
         return res;
     }
 
-    public static boolean isGoodValues(List<Integer> values, List<MultiAmountMessage> constraints, int min, int max) {
+    public static boolean isGoodValues(List<Integer> values, List<MultiAmountMessage> constraints, int totalMin, int totalMax) {
         if (values.size() != constraints.size()) {
             return false;
         }
@@ -145,7 +157,7 @@ public enum MultiAmountType {
             currentSum += value;
         }
 
-        return currentSum >= min && currentSum <= max;
+        return currentSum >= totalMin && currentSum <= totalMax;
     }
 
     public static List<Integer> parseAnswer(String answerToParse, List<MultiAmountMessage> constraints, int min,
@@ -163,7 +175,7 @@ public enum MultiAmountType {
         // data check
         if (returnDefaultOnError && !isGoodValues(res, constraints, min, max)) {
             // on broken data - return default
-            return prepareDefaltValues(constraints, min, max);
+            return prepareDefaultValues(constraints, min, max);
         }
 
         return res;

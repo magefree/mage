@@ -20,7 +20,7 @@ public final class PentaviteToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected PentaviteToken(final PentaviteToken token) {
+    private PentaviteToken(final PentaviteToken token) {
         super(token);
     }
 

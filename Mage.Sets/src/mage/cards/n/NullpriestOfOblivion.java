@@ -40,10 +40,10 @@ public final class NullpriestOfOblivion extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // When Nullpriest of Oblivion enters the battlefield, if it was kicked, return target creature card from your graveyard to the battlefield.
+        // When this creature enters the battlefield, if it was kicked, return target creature card from your graveyard to the battlefield.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()),
-                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When this creature enters, if it was kicked, " +
                 "return target creature card from your graveyard to the battlefield."
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

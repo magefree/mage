@@ -4,7 +4,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 /**
@@ -32,13 +31,16 @@ public final class Vebulid extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Vebulid enters the battlefield with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
+                "with a +1/+1 counter on it"));
 
         // At the beginning of your upkeep, you may put a +1/+1 counter on Vebulid.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
 
         // When Vebulid attacks or blocks, destroy it at end of combat.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroySourceEffect())), false));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheEndOfCombatDelayedTriggeredAbility(new DestroySourceEffect()))
+                .setText("destroy it at end of combat"), false));
     }
 
     private Vebulid(final Vebulid card) {

@@ -39,7 +39,7 @@ public final class TezzeretsTouch extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
+        this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
                 new CreatureToken(5, 5, "5/5 creature"),"Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types", Duration.WhileOnBattlefield)));
 
         // When enchanted artifact is put into a graveyard, return that card to its owner's hand.

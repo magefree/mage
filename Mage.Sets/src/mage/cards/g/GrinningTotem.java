@@ -54,14 +54,14 @@ public final class GrinningTotem extends CardImpl {
 
 class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 
-    public GrinningTotemSearchAndExileEffect() {
+    GrinningTotemSearchAndExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles. " +
                 "Until the beginning of your next upkeep, you may play that card. " +
                 "At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard";
     }
 
-    public GrinningTotemSearchAndExileEffect(final GrinningTotemSearchAndExileEffect effect) {
+    private GrinningTotemSearchAndExileEffect(final GrinningTotemSearchAndExileEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
         if (card != null) {
             UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
             you.moveCardsToExile(card, source, game, true, exileZoneId, CardUtil.getSourceName(game, source));
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextUpkeepStep, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.UntilYourNextUpkeepStep, false);
             game.addDelayedTriggeredAbility(new GrinningTotemDelayedTriggeredAbility(exileZoneId), source);
         }
         targetOpponent.shuffleLibrary(source, game);
@@ -101,7 +101,7 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.exileZoneId = exileZoneId;
     }
 
-    public GrinningTotemDelayedTriggeredAbility(final GrinningTotemDelayedTriggeredAbility ability) {
+    private GrinningTotemDelayedTriggeredAbility(final GrinningTotemDelayedTriggeredAbility ability) {
         super(ability);
         this.exileZoneId = ability.exileZoneId;
     }
@@ -142,7 +142,7 @@ class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
         this.exileZoneId = exileZoneId;
     }
 
-    public GrinningTotemPutIntoGraveyardEffect(final GrinningTotemPutIntoGraveyardEffect effect) {
+    private GrinningTotemPutIntoGraveyardEffect(final GrinningTotemPutIntoGraveyardEffect effect) {
         super(effect);
         this.exileZoneId = effect.exileZoneId;
     }

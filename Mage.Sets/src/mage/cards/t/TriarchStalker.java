@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -41,7 +41,7 @@ public final class TriarchStalker extends CardImpl {
 
         // Targeting Relay — At the beginning of combat on your turn, choose an opponent.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new TriarchStalkerEffect(), TargetController.YOU, false
+                new TriarchStalkerEffect()
         ).withFlavorWord("Targeting Relay"));
 
         // Creatures attacking the last chosen player have menace.
@@ -92,7 +92,7 @@ class TriarchStalkerEffect extends OneShotEffect {
             return false;
         }
         TargetOpponent target = new TargetOpponent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Player chosenPlayer = game.getPlayer(target.getFirstTarget());
         if (chosenPlayer == null) {

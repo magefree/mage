@@ -3,7 +3,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,8 +12,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.*;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -30,7 +30,7 @@ import mage.target.common.TargetOpponent;
  */
 public final class LonisCryptozoologist extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.CLUE, "Clues");
 
     static {
@@ -48,8 +48,8 @@ public final class LonisCryptozoologist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Whenever another nontoken creature enters the battlefield under your control, investigate.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), filter, false, null, true));
+        // Whenever another nontoken creature you control enters, investigate.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new InvestigateEffect(), filter));
 
         // {T}, Sacrifice X Clues: Target opponent reveals the top X cards of their library.
         // You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control.
@@ -72,7 +72,7 @@ public final class LonisCryptozoologist extends CardImpl {
 
 class LonisCryptozoologistEffect extends OneShotEffect {
 
-    public LonisCryptozoologistEffect() {
+    LonisCryptozoologistEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Target opponent reveals the top X cards of their library."
                 + " You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control."

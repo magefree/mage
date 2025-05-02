@@ -61,12 +61,12 @@ public final class NicolBolasTheDeceiver extends CardImpl {
 
 class NicolBolasTheDeceiverFirstEffect extends OneShotEffect {
 
-    public NicolBolasTheDeceiverFirstEffect() {
+    NicolBolasTheDeceiverFirstEffect() {
         super(Outcome.Damage);
         staticText = "Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card";
     }
 
-    public NicolBolasTheDeceiverFirstEffect(final NicolBolasTheDeceiverFirstEffect effect) {
+    private NicolBolasTheDeceiverFirstEffect(final NicolBolasTheDeceiverFirstEffect effect) {
         super(effect);
     }
 

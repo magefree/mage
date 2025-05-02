@@ -48,7 +48,7 @@ class RiteOfFlameManaEffect extends ManaEffect {
         staticText = "Add {R}{R}, then add {R} for each card named Rite of Flame in each graveyard";
     }
 
-    RiteOfFlameManaEffect(final RiteOfFlameManaEffect effect) {
+    private RiteOfFlameManaEffect(final RiteOfFlameManaEffect effect) {
         super(effect);
     }
 

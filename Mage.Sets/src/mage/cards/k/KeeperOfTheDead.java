@@ -49,7 +49,7 @@ public final class KeeperOfTheDead extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}, {T}: Choose target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability. Destroy target nonblack creature they control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeeperOfTheDeadEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new KeeperOfTheDeadEffect(), new TapSourceCost());
         ability.addCost(new ManaCostsImpl<>("{B}"));
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         ability.addTarget(new KeeperOfTheDeadCreatureTarget());
@@ -99,7 +99,7 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
         super(1, 1, new FilterCreaturePermanent("nonblack creature that player controls"), false);
     }
 
-    public KeeperOfTheDeadCreatureTarget(final KeeperOfTheDeadCreatureTarget target) {
+    private KeeperOfTheDeadCreatureTarget(final KeeperOfTheDeadCreatureTarget target) {
         super(target);
     }
 
@@ -148,12 +148,12 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
 
 class KeeperOfTheDeadEffect extends OneShotEffect {
 
-    public KeeperOfTheDeadEffect() {
+    KeeperOfTheDeadEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target nonblack creature contolled by target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability";
     }
 
-    public KeeperOfTheDeadEffect(final KeeperOfTheDeadEffect effect) {
+    private KeeperOfTheDeadEffect(final KeeperOfTheDeadEffect effect) {
         super(effect);
     }
 

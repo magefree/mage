@@ -26,7 +26,7 @@ public final class ChimericSphere extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {2}: Until end of turn, Chimeric Sphere becomes a 2/1 Construct artifact creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(2, 1, "2/1 Construct artifact creature with flying")
                         .withSubType(SubType.CONSTRUCT)
                         .withType(CardType.ARTIFACT)
@@ -34,7 +34,7 @@ public final class ChimericSphere extends CardImpl {
                 CardType.ARTIFACT, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{2}")));
 
         // {2}: Until end of turn, Chimeric Sphere becomes a 3/2 Construct artifact creature without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        Ability ability = new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(3, 2, "3/2 Construct artifact creature")
                         .withSubType(SubType.CONSTRUCT)
                         .withType(CardType.ARTIFACT),

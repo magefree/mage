@@ -27,7 +27,7 @@ public final class CoverOfDarkness extends CardImpl {
         // As Cover of Darkness enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.AddAbility)));
         // Creatures of the chosen type have fear.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCoverOfDarkness())));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCoverOfDarkness())));
     }
 
     private CoverOfDarkness(final CoverOfDarkness card) {
@@ -45,10 +45,10 @@ class FilterCoverOfDarkness extends FilterCreaturePermanent {
     private SubType subType = null;
 
     public FilterCoverOfDarkness() {
-        super("All creatures of the chosen type");
+        super("creatures of the chosen type");
     }
 
-    public FilterCoverOfDarkness(final FilterCoverOfDarkness filter) {
+    private FilterCoverOfDarkness(final FilterCoverOfDarkness filter) {
         super(filter);
         this.subType = filter.subType;
     }

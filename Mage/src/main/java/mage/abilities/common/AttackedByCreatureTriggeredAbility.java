@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -42,7 +43,7 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.filter = filter;
-        setTriggerPhrase("Whenever " + filter.getMessage() + " attacks you, ");
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " attacks you, ");
     }
 
     protected AttackedByCreatureTriggeredAbility(final AttackedByCreatureTriggeredAbility ability) {

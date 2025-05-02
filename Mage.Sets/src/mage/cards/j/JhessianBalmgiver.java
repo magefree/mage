@@ -32,11 +32,11 @@ public final class JhessianBalmgiver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Prevent the next 1 damage that would be dealt to any target this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // {tap}: Target creature can't be blocked this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

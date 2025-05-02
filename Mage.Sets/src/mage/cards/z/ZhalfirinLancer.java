@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class ZhalfirinLancer extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent(SubType.KNIGHT, "another Knight");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.KNIGHT, "another Knight");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -36,7 +36,7 @@ public final class ZhalfirinLancer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever another Knight enters the battlefield under your control, Zhalfirin Lancer gets +1/+1 and gains vigilance until end of turn.
+        // Whenever another Knight you control enters, Zhalfirin Lancer gets +1/+1 and gains vigilance until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                         .setText("{this} gets +1/+1"), filter

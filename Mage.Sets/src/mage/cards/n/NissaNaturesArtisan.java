@@ -10,6 +10,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.*;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -42,7 +43,7 @@ public final class NissaNaturesArtisan extends CardImpl {
                 5, 5, Duration.EndOfTurn
         ).setText("creatures you control get +5/+5"), -12);
         ability.addEffect(new GainAbilityControlledEffect(
-                TrampleAbility.getInstance(), Duration.EndOfTurn
+                TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and gain trample until end of turn"));
         this.addAbility(ability);
     }
@@ -59,13 +60,13 @@ public final class NissaNaturesArtisan extends CardImpl {
 
 class NissaNaturesArtisanEffect extends OneShotEffect {
 
-    public NissaNaturesArtisanEffect() {
+    NissaNaturesArtisanEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "Reveal the top two cards of your library. Put all land cards "
                 + "from among them onto the battlefield and the rest into your hand";
     }
 
-    public NissaNaturesArtisanEffect(final NissaNaturesArtisanEffect effect) {
+    private NissaNaturesArtisanEffect(final NissaNaturesArtisanEffect effect) {
         super(effect);
     }
 

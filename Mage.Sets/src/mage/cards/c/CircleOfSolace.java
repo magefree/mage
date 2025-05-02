@@ -26,7 +26,7 @@ public final class CircleOfSolace extends CardImpl {
         // As Circle of Solace enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Neutral)));
         // {1}{W}: The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CircleOfSolaceEffect(), new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new CircleOfSolaceEffect(), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private CircleOfSolace(final CircleOfSolace card) {
@@ -41,7 +41,7 @@ public final class CircleOfSolace extends CardImpl {
 
 class CircleOfSolaceEffect extends PreventionEffectImpl {
 
-    public CircleOfSolaceEffect() {
+    CircleOfSolaceEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
         this.staticText = "The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.";
     }
@@ -67,7 +67,7 @@ class CircleOfSolaceEffect extends PreventionEffectImpl {
         return false;
     }
 
-    public CircleOfSolaceEffect(CircleOfSolaceEffect effect) {
+    private CircleOfSolaceEffect(final CircleOfSolaceEffect effect) {
         super(effect);
     }
 

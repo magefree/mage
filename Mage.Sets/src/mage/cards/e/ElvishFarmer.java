@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -14,12 +14,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -40,12 +38,12 @@ public final class ElvishFarmer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, put a spore counter on Elvish Farmer.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance())));
         // Remove three spore counters from Elvish Farmer: Create a 1/1 green Saproling creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         // Sacrifice a Saproling: You gain 2 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2),
-            new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(2),
+            new SacrificeTargetCost(filter)));
     }
 
     private ElvishFarmer(final ElvishFarmer card) {

@@ -33,7 +33,7 @@ public final class PiousInterdiction extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -41,7 +41,7 @@ public final class PiousInterdiction extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
 
         // Enchanted creature can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
     }
 
     private PiousInterdiction(final PiousInterdiction card) {

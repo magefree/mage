@@ -41,7 +41,7 @@ public final class EmeriaShepherd extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, you may return target nonland permanent card from your graveyard to your hand.
+        // <i>Landfall</i> &mdash; Whenever a land you control enters, you may return target nonland permanent card from your graveyard to your hand.
         // If that land is a Plains, you may return that nonland permanent card to the battlefield instead.
         Ability ability = new LandfallAbility(Zone.BATTLEFIELD, new EmeriaShepherdReturnToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
@@ -60,12 +60,12 @@ public final class EmeriaShepherd extends CardImpl {
 
 class EmeriaShepherdReturnToHandTargetEffect extends OneShotEffect {
 
-    public EmeriaShepherdReturnToHandTargetEffect() {
+    EmeriaShepherdReturnToHandTargetEffect() {
         super(Outcome.ReturnToHand);
         staticText = "you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead";
     }
 
-    public EmeriaShepherdReturnToHandTargetEffect(final EmeriaShepherdReturnToHandTargetEffect effect) {
+    private EmeriaShepherdReturnToHandTargetEffect(final EmeriaShepherdReturnToHandTargetEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class EmeriaShepherdReturnToHandTargetEffect extends OneShotEffect {
                 && controller.chooseUse(Outcome.PutCardInPlay, "Put the card to battlefield instead?", source, game)) {
             toZone = Zone.BATTLEFIELD;
         }
-        return controller.moveCards(new CardsImpl(targetPointer.getTargets(game, source)), toZone, source, game);
+        return controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)), toZone, source, game);
     }
 
 }

@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import mage.MageInt;
@@ -12,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -31,8 +29,6 @@ public final class WoodlurkerMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    private static final String rule = "Whenever you cast a spell that's both black and green, {this} has base power and toughness 4/5 until end of turn and gains wither until end of turn.";
-
     public WoodlurkerMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B/G}");
         this.subtype.add(SubType.SHAPESHIFTER);
@@ -43,11 +39,12 @@ public final class WoodlurkerMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both black and green, Woodlurker Mimic has base power and toughness 4/5 until end of turn and gains wither until end of turn.
-        Ability ability = SpellCastControllerTriggeredAbility.createWithRule(
-                new SetBasePowerToughnessSourceEffect(4, 5, Duration.EndOfTurn, SubLayer.SetPT_7b),
-                filter, false, rule
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new SetBasePowerToughnessSourceEffect(4, 5, Duration.EndOfTurn),
+                filter, false
         );
-        ability.addEffect(new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.EndOfTurn, false, true));
+        ability.addEffect(new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains wither until end of turn"));
         this.addAbility(ability);
 
     }

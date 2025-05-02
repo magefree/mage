@@ -39,12 +39,12 @@ public final class DiminishingReturns extends CardImpl {
 
 class DiminishingReturnsEffect extends OneShotEffect {
 
-    public DiminishingReturnsEffect() {
+    DiminishingReturnsEffect() {
         super(Outcome.Neutral);
         staticText = "You exile the top ten cards of your library. Then each player draws up to seven cards.";
     }
 
-    public DiminishingReturnsEffect(final DiminishingReturnsEffect effect) {
+    private DiminishingReturnsEffect(final DiminishingReturnsEffect effect) {
         super(effect);
     }
 
@@ -53,7 +53,7 @@ class DiminishingReturnsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.moveCards(controller.getLibrary().getTopCards(game, 10), Zone.EXILED, source, game);
-            game.getState().processAction(game);
+            game.processAction();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

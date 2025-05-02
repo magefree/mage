@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class Temper extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{1}{W}");
 
         // Prevent the next X damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
-        this.getSpellAbility().addEffect(new TemperPreventDamageTargetEffect(ManacostVariableValue.REGULAR, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new TemperPreventDamageTargetEffect(GetXValue.instance, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -55,7 +55,7 @@ class TemperPreventDamageTargetEffect extends PreventionEffectImpl {
         staticText = "Prevent the next X damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature";
     }
 
-    public TemperPreventDamageTargetEffect(final TemperPreventDamageTargetEffect effect) {
+    private TemperPreventDamageTargetEffect(final TemperPreventDamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.dVal = effect.dVal;
@@ -65,11 +65,6 @@ class TemperPreventDamageTargetEffect extends PreventionEffectImpl {
     @Override
     public TemperPreventDamageTargetEffect copy() {
         return new TemperPreventDamageTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

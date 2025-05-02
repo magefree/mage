@@ -40,7 +40,7 @@ public final class HarshDeceiver extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}: Look at the top card of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new LookLibraryControllerEffect(), new GenericManaCost(1)));
 
         // {2}: Reveal the top card of your library. If it's a land card, untap {this} and it gets +1/+1 until end of turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new HarshDeceiverEffect(), new ManaCostsImpl<>("{2}")));
@@ -58,12 +58,12 @@ public final class HarshDeceiver extends CardImpl {
 
 class HarshDeceiverEffect extends OneShotEffect {
 
-    public HarshDeceiverEffect() {
+    HarshDeceiverEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Reveal the top card of your library. If it's a land card, untap {this} and it gets +1/+1 until end of turn";
     }
 
-    public HarshDeceiverEffect(final HarshDeceiverEffect effect) {
+    private HarshDeceiverEffect(final HarshDeceiverEffect effect) {
         super(effect);
     }
 

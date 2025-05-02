@@ -36,11 +36,11 @@ public final class KjeldoranOutpost extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // If Kjeldoran Outpost would enter the battlefield, sacrifice a Plains instead. If you do, put Kjeldoran Outpost onto the battlefield. If you don't, put it into its owner's graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(filter))));
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         // {1}{W}, {tap}: Create a 1/1 white Soldier creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

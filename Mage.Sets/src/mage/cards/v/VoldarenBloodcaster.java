@@ -2,7 +2,7 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -51,7 +51,7 @@ public final class VoldarenBloodcaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Voldaren Bloodcaster or another nontoken creature you control dies, create a Blood token.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new BloodToken()), false, filter
         ));
 

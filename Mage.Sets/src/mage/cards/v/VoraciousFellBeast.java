@@ -11,26 +11,25 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class VoraciousFellBeast extends CardImpl {
 
     public VoraciousFellBeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        
+
         this.subtype.add(SubType.DRAKE);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
@@ -60,10 +59,10 @@ class VoraciousFellBeastEffect extends OneShotEffect {
     VoraciousFellBeastEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each opponent sacrifices a creature. " +
-            "Create a Food token for each creature sacrificed this way";
+                "Create a Food token for each creature sacrificed this way";
     }
 
-    VoraciousFellBeastEffect(final VoraciousFellBeastEffect effect) {
+    private VoraciousFellBeastEffect(final VoraciousFellBeastEffect effect) {
         super(effect);
     }
 
@@ -86,10 +85,9 @@ class VoraciousFellBeastEffect extends OneShotEffect {
                 continue;
             }
 
-            TargetControlledCreaturePermanent target =
-                new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (target.canChoose(player.getId(), source, game)) {
-                while (!target.isChosen() && player.canRespond()) {
+                while (!target.isChosen(game) && player.canRespond()) {
                     player.choose(Outcome.Sacrifice, target, source, game);
                 }
                 perms.addAll(target.getTargets());
@@ -107,7 +105,7 @@ class VoraciousFellBeastEffect extends OneShotEffect {
             }
         }
         if (sacrificeCount > 0) {
-            game.getState().processAction(game);
+            game.processAction();
             new CreateTokenEffect(new FoodToken(), sacrificeCount).apply(game, source);
         }
         return true;

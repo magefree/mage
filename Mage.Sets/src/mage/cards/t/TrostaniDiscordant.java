@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -40,8 +40,7 @@ public final class TrostaniDiscordant extends CardImpl {
 
         // At the beginning of your end step, each player gains control of all creatures they own.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GainControlAllOwnedEffect(StaticFilters.FILTER_PERMANENT_CREATURES),
-                TargetController.YOU, false
+                new GainControlAllOwnedEffect(StaticFilters.FILTER_PERMANENT_CREATURES)
         ));
     }
 

@@ -23,7 +23,7 @@ public final class TyrantsMachine extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {4}, {T}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

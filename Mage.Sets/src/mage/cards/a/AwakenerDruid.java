@@ -52,12 +52,12 @@ public final class AwakenerDruid extends CardImpl {
 
 class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
 
-    public AwakenerDruidBecomesCreatureEffect() {
+    AwakenerDruidBecomesCreatureEffect() {
         super(new AwakenerDruidToken(), false, true, Duration.WhileOnBattlefield);
         this.staticText = "target Forest becomes a 4/5 green Treefolk creature for as long as {this} remains on the battlefield. It's still a land";
     }
 
-    public AwakenerDruidBecomesCreatureEffect(final AwakenerDruidBecomesCreatureEffect effect) {
+    private AwakenerDruidBecomesCreatureEffect(final AwakenerDruidBecomesCreatureEffect effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class AwakenerDruidToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(5);
     }
-    public AwakenerDruidToken(final AwakenerDruidToken token) {
+    private AwakenerDruidToken(final AwakenerDruidToken token) {
         super(token);
     }
 

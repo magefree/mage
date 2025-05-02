@@ -11,13 +11,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -44,7 +38,7 @@ public final class Toymaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, {tap}, Discard a card: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ToymakerEffect(), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new ToymakerEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPermanent(filter));
@@ -63,12 +57,13 @@ public final class Toymaker extends CardImpl {
 
 class ToymakerEffect extends ContinuousEffectImpl {
 
-    public ToymakerEffect() {
+    ToymakerEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
-    public ToymakerEffect(final ToymakerEffect effect) {
+    private ToymakerEffect(final ToymakerEffect effect) {
         super(effect);
     }
 

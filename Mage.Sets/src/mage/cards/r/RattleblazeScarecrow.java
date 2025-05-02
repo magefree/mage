@@ -45,11 +45,11 @@ public final class RattleblazeScarecrow extends CardImpl {
 
         // Rattleblaze Scarecrow has persist as long as you control a black creature.
         ContinuousEffect effect = new GainAbilitySourceEffect(new PersistAbility(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new PermanentsOnTheBattlefieldCondition(filter), rule)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(effect, new PermanentsOnTheBattlefieldCondition(filter), rule)));
 
         // Rattleblaze Scarecrow has haste as long as you control a red creature.
         ContinuousEffect effect2 = new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter2), rule2)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter2), rule2)));
 
     }
 

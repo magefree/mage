@@ -25,7 +25,7 @@ public final class DarksteelCitadel extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public DarksteelCitadel (final DarksteelCitadel card) {
+    private DarksteelCitadel(final DarksteelCitadel card) {
         super(card);
     }
 

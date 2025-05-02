@@ -30,11 +30,11 @@ public final class BloodScrivener  extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If you would draw a card while you have no cards in hand, instead draw two cards and lose 1 life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodScrivenerReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new BloodScrivenerReplacementEffect()));
 
     }
 
-    public BloodScrivener (final BloodScrivener card) {
+    private BloodScrivener(final BloodScrivener card) {
         super(card);
     }
 
@@ -47,23 +47,18 @@ public final class BloodScrivener  extends CardImpl {
 
 class BloodScrivenerReplacementEffect extends ReplacementEffectImpl {
 
-    public BloodScrivenerReplacementEffect() {
+    BloodScrivenerReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card while you have no cards in hand, instead you draw two cards and you lose 1 life";
     }
 
-    public BloodScrivenerReplacementEffect(final BloodScrivenerReplacementEffect effect) {
+    private BloodScrivenerReplacementEffect(final BloodScrivenerReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public BloodScrivenerReplacementEffect copy() {
         return new BloodScrivenerReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -85,11 +80,7 @@ class BloodScrivenerReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(event.getPlayerId());
-            if(player != null) {
-                if (player.getHand().isEmpty()) {
-                    return true;
-                }
-            }
+            return player != null && player.getHand().isEmpty();
         }
         return false;
     }

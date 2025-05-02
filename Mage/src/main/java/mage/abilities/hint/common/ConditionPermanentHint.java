@@ -3,7 +3,6 @@ package mage.abilities.hint.common;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.game.Game;
 
 import java.awt.*;
@@ -23,7 +22,7 @@ public class ConditionPermanentHint extends ConditionHint {
         super(condition, textWithIcons);
     }
 
-    public ConditionPermanentHint(Condition condition, String trueText, Color trueColor, String falseText, Color falseColor, Boolean useIcons) {
+    public ConditionPermanentHint(Condition condition, String trueText, Color trueColor, String falseText, Color falseColor, boolean useIcons) {
         super(condition, trueText, trueColor, falseText, falseColor, useIcons);
     }
 
@@ -36,12 +35,11 @@ public class ConditionPermanentHint extends ConditionHint {
         if (game.getPermanent(ability.getSourceId()) == null) {
             return "";
         }
-
         return super.getText(game, ability);
     }
 
     @Override
-    public Hint copy() {
+    public ConditionPermanentHint copy() {
         return new ConditionPermanentHint(this);
     }
 }

@@ -31,13 +31,13 @@ public final class EsperBattlemage extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // {W}, {tap}: Prevent the next 2 damage that would be dealt to you this turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new PreventDamageToControllerEffect(Duration.EndOfTurn, 2),
                 new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {B}, {tap}: Target creature gets -1/-1 until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(-1, -1, Duration.EndOfTurn),
                 new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new TapSourceCost());

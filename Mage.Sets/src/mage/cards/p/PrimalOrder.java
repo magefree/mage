@@ -1,15 +1,13 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -25,7 +23,7 @@ public final class PrimalOrder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // At the beginning of each player's upkeep, Primal Order deals damage to that player equal to the number of nonbasic lands they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PrimalOrderDamageTargetEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new PrimalOrderDamageTargetEffect(), false));
     }
 
     private PrimalOrder(final PrimalOrder card) {
@@ -47,15 +45,15 @@ class PrimalOrderDamageTargetEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to that player equal to the number of nonbasic lands they control";
     }
 
-    public PrimalOrderDamageTargetEffect(PrimalOrderDamageTargetEffect copy) {
+    private PrimalOrderDamageTargetEffect(final PrimalOrderDamageTargetEffect copy) {
         super(copy);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            int damage = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game).size();
+            int damage = game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game).size();
             player.damage(damage, source.getSourceId(), source, game);
             return true;
         }

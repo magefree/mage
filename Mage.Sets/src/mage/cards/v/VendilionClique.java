@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -66,18 +65,17 @@ class VendilionCliqueEffect extends OneShotEffect {
         staticText = "look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of their library, then draws a card";
     }
 
-    VendilionCliqueEffect(final VendilionCliqueEffect effect) {
+    private VendilionCliqueEffect(final VendilionCliqueEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (player != null && controller != null && sourceObject != null) {
-            TargetCard targetCard = new TargetCard(Zone.ALL, new FilterNonlandCard());
-            targetCard.setRequired(false);
+            TargetCard targetCard = new TargetCard(0, 1, Zone.ALL, new FilterNonlandCard());
             if (controller.choose(Outcome.Discard, player.getHand(), targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {

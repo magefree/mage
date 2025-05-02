@@ -37,7 +37,7 @@ public final class ClockworkDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(6)), "with six +1/+1 counters on it"));
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkDragonEffect(), false));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(3)));
     }
 
     private ClockworkDragon(final ClockworkDragon card) {
@@ -57,7 +57,7 @@ class ClockworkDragonEffect extends OneShotEffect {
         staticText = "remove a +1/+1 counter from {this} at end of combat";
     }
 
-    ClockworkDragonEffect(final ClockworkDragonEffect effect) {
+    private ClockworkDragonEffect(final ClockworkDragonEffect effect) {
         super(effect);
     }
 

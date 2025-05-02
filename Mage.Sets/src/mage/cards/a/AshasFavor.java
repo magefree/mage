@@ -45,7 +45,7 @@ public final class AshasFavor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AshasFavor(final AshasFavor card) {
+    private AshasFavor(final AshasFavor card) {
         super(card);
     }
 

@@ -48,13 +48,13 @@ public final class MindwrackLiege extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Other blue creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // Other red creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
 
         // {UR}{UR}{UR}{UR}: You may put a blue or red creature card from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter3), new ManaCostsImpl<>("{U/R}{U/R}{U/R}{U/R}")));
+        this.addAbility(new SimpleActivatedAbility(new PutCardFromHandOntoBattlefieldEffect(filter3), new ManaCostsImpl<>("{U/R}{U/R}{U/R}{U/R}")));
     }
 
     private MindwrackLiege(final MindwrackLiege card) {

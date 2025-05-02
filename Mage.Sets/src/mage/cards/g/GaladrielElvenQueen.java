@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,8 +38,8 @@ public final class GaladrielElvenQueen extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         Zone.BATTLEFIELD,
-                        new GaladrielElvenQueenEffect(),
-                        TargetController.YOU, false, false
+                        TargetController.YOU, new GaladrielElvenQueenEffect(),
+                        false
                 ),
                 GaladrielElvenQueenCondition.instance,
                 "At the beginning of combat on your turn, if another Elf entered the battlefield under "
@@ -167,7 +167,7 @@ class GaladrielElvenQueenEffect extends OneShotEffect {
             game.temptWithTheRing(controller.getId());
 
             // make sure the new ringbearer has been chosen.
-            game.getState().processAction(game);
+            game.processAction();
             controller = game.getPlayer(source.getControllerId());
             if (controller == null) {
                 return false;

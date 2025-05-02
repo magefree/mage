@@ -39,7 +39,7 @@ public final class Desertion extends CardImpl {
 
 class DesertionEffect extends OneShotEffect {
 
-    public DesertionEffect() {
+    DesertionEffect() {
         super(Outcome.Detriment);
         staticText = "counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard";
     }
@@ -55,7 +55,7 @@ class DesertionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject spell = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }

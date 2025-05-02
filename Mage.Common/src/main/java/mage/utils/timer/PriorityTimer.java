@@ -8,6 +8,9 @@ import mage.interfaces.Action;
 import org.apache.log4j.Logger;
 
 /**
+ * Priority timer for both server and client sides
+ * Client side version used for GUI-avatars redraw
+ *
  * @author noxx
  */
 public class PriorityTimer extends TimerTask {

@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
@@ -63,7 +63,7 @@ public final class TadeasJuniperAscendant extends CardImpl {
         ));
 
         // Whenever one or more creatures you control deal combat damage to a player, draw a card.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(
                 new DrawCardSourceControllerEffect(1)
         ));
     }
@@ -110,7 +110,7 @@ class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
 
     TadeasJuniperAscendantEvasionEffect(TargetPointer targetPointer) {
         super(Duration.EndOfCombat);
-        this.targetPointer = targetPointer;
+        this.setTargetPointer(targetPointer);
         staticText = "and can't be blocked by creatures with greater power";
     }
 
@@ -120,7 +120,7 @@ class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

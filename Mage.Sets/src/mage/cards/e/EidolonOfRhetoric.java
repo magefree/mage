@@ -26,7 +26,7 @@ public final class EidolonOfRhetoric extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Each player can't cast more than one spell each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));   
+        this.addAbility(new SimpleStaticAbility(new CantCastMoreThanOneSpellEffect(TargetController.ANY)));   
     }
 
     private EidolonOfRhetoric(final EidolonOfRhetoric card) {

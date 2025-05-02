@@ -33,7 +33,7 @@ public final class LegacyOfTheBeloved extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
 
         // As an additional cost to cast Legacy of the Beloved, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Search you library for up to two creatures cards that each have a lower converted mana cost that sacrificied creature's converted mana cost, reveal them and put them onto the battlefield, then shuffle you library.
         this.getSpellAbility().addEffect(new LegacyOfTheBelovedEffect());
@@ -58,7 +58,7 @@ class LegacyOfTheBelovedEffect extends OneShotEffect {
         this.staticText = "Search you library for up to two creatures cards that each have a lower mana value that sacrificied creature's mana value, reveal them and put them onto the battlefield, then shuffle you library";
     }
 
-    public LegacyOfTheBelovedEffect(final LegacyOfTheBelovedEffect effect) {
+    private LegacyOfTheBelovedEffect(final LegacyOfTheBelovedEffect effect) {
         super(effect);
     }
 

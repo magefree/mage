@@ -59,6 +59,7 @@ public final class PrecursorGolem extends CardImpl {
 }
 
 class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
+    // TODO: could be reworked to use SpellCastAllTriggeredAbility like Vesuvan Duplimancy.
 
     PrecursorGolemCopyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PrecursorGolemCopySpellEffect(), false);

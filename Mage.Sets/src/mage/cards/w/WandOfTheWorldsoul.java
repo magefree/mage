@@ -28,7 +28,7 @@ public final class WandOfTheWorldsoul extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {T}: The next spell you cast this turn has convoke.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new NextSpellCastHasAbilityEffect(new ConvokeAbility()),
                 new TapSourceCost()));
     }

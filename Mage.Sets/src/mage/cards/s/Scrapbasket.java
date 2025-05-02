@@ -32,7 +32,7 @@ public final class Scrapbasket extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}: Scrapbasket becomes all colors until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesAllColorsEffect(), new ManaCostsImpl<>("{1}")));
+        this.addAbility(new SimpleActivatedAbility(new BecomesAllColorsEffect(), new ManaCostsImpl<>("{1}")));
         
     }
 
@@ -48,12 +48,12 @@ public final class Scrapbasket extends CardImpl {
 
 class BecomesAllColorsEffect extends ContinuousEffectImpl {
 
-    public BecomesAllColorsEffect() {
+    BecomesAllColorsEffect() {
         super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Neutral);
         staticText = "{this} becomes all colors until end of turn";
     }
 
-    public BecomesAllColorsEffect(final BecomesAllColorsEffect effect) {
+    private BecomesAllColorsEffect(final BecomesAllColorsEffect effect) {
         super(effect);
     }
 

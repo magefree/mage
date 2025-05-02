@@ -3,7 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -17,7 +17,7 @@ import mage.filter.predicate.mageobject.SharesCardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
 /**
@@ -37,7 +37,7 @@ public final class BraidsArisenNightmare extends CardImpl {
         // At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker.
         // If you do, each opponent may sacrifice a permanent that shares a card type with it.
         // For each opponent who doesn't, that player loses 2 life and you draw a card.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new BraidsArisenNightmareEffect(), true));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BraidsArisenNightmareEffect(), true));
     }
 
     private BraidsArisenNightmare(final BraidsArisenNightmare card) {
@@ -86,11 +86,11 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+        TargetSacrifice target = new TargetSacrifice(filter);
         if (!target.canChoose(controller.getId(), source, game)) {
             return false;
         }
-        controller.chooseTarget(Outcome.Sacrifice, target, source, game);
+        controller.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
             return false;
@@ -115,14 +115,14 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
     }
 
     private boolean braidsSacrifice(Player opponent, FilterControlledPermanent opponentFilter, Game game, Ability source) {
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, opponentFilter, true);
+        TargetSacrifice target = new TargetSacrifice(opponentFilter);
         if (!target.canChoose(opponent.getId(), source, game)) {
             return false;
         }
         if (!opponent.chooseUse(Outcome.Sacrifice, "Sacrifice " + CardUtil.addArticle(opponentFilter.getMessage()) + '?', source, game)) {
             return false;
         }
-        opponent.chooseTarget(Outcome.Sacrifice, target, source, game);
+        opponent.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.sacrifice(source, game);
     }

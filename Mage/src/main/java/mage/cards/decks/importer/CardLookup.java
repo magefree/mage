@@ -7,6 +7,9 @@ import mage.cards.repository.CardRepository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Deck import: helper class to mock cards repository
+ */
 public class CardLookup {
 
     public static final CardLookup instance = new CardLookup();
@@ -20,6 +23,10 @@ public class CardLookup {
     }
 
     public Optional<CardInfo> lookupCardInfo(String name, String set) {
+        if (set == null) {
+            return lookupCardInfo(name);
+        }
+
         Optional<CardInfo> result = lookupCardInfo(new CardCriteria().name(name).setCodes(set))
                 .stream()
                 .findAny();
@@ -45,7 +52,7 @@ public class CardLookup {
             if (result.isPresent()) {
                 return result;
             }
-        } catch (NumberFormatException ignored) {
+        } catch (NumberFormatException ignore) {
             /* ignored */
         }
 

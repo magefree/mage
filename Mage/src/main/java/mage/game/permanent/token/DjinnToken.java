@@ -22,7 +22,7 @@ public final class DjinnToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected DjinnToken(final DjinnToken token) {
+    private DjinnToken(final DjinnToken token) {
         super(token);
     }
 

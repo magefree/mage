@@ -1,19 +1,18 @@
 package mage.abilities.meta;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.Hint;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -37,17 +36,36 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public OrTriggeredAbility(Zone zone, Effect effect, boolean optional, String ruleTrigger, TriggeredAbility... abilities) {
         super(zone, effect, optional);
         this.ruleTrigger = ruleTrigger;
-        this.replaceRuleText = false;
+        this.withRuleTextReplacement(false);
         Collections.addAll(this.triggeredAbilities, abilities);
         for (TriggeredAbility ability : triggeredAbilities) {
             //Remove useless data
             ability.getEffects().clear();
 
-            for(Watcher watcher : ability.getWatchers()) {
+            for (Watcher watcher : ability.getWatchers()) {
                 super.addWatcher(watcher);
+            }
+
+            if (ability.isLeavesTheBattlefieldTrigger()) {
+                setLeavesTheBattlefieldTrigger(true);
             }
         }
         setTriggerPhrase(generateTriggerPhrase());
+
+        // runtime check: enters and sacrifice must use Zone.ALL, see https://github.com/magefree/mage/issues/12826
+        boolean haveEnters = false;
+        boolean haveSacrifice = false;
+        for (Ability ability : abilities) {
+            if (ability.getRule().toLowerCase(Locale.ENGLISH).contains("enters")) {
+                haveEnters = true;
+            }
+            if (ability.getRule().toLowerCase(Locale.ENGLISH).contains("sacrifice")) {
+                haveSacrifice = true;
+            }
+        }
+        if (zone != Zone.ALL && haveEnters && haveSacrifice) {
+            throw new IllegalArgumentException("Wrong code usage: on enters and sacrifice OrTriggeredAbility must use Zone.ALL");
+        }
     }
 
     public OrTriggeredAbility(OrTriggeredAbility ability) {
@@ -72,9 +90,13 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean toRet = false;
         for (TriggeredAbility ability : triggeredAbilities) {
+            for (Effect e : getEffects()) { //Add effects to the sub-abilities so that they can set target pointers
+                ability.addEffect(e);
+            }
             if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)) {
                 toRet = true;
             }
+            ability.getEffects().clear(); //Remove afterwards, ensures that they remain synced even with copying
         }
         return toRet;
     }
@@ -118,5 +140,27 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         for (TriggeredAbility ability : triggeredAbilities) {
             ability.addWatcher(watcher);
         }
+    }
+
+    @Override
+    public List<Hint> getHints() {
+        List<Hint> res = new ArrayList<>(super.getHints());
+        this.triggeredAbilities.forEach(a -> res.addAll(a.getHints()));
+        return res;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        boolean res = false;
+        for (TriggeredAbility ability : triggeredAbilities) {
+            // TODO: call full inner trigger instead like ability.isInUseableZone()?! Need research why it fails
+            if (ability.isLeavesTheBattlefieldTrigger()) {
+                // TODO: leaves battlefield and die are not same! Is it possible make a diff logic?
+                res |= TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+            } else {
+                res |= super.isInUseableZone(game, sourceObject, event);
+            }
+        }
+        return res;
     }
 }

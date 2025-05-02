@@ -36,7 +36,7 @@ public final class ChargingTuskodon extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // If Charging Tuskodon would deal combat damage to a player, it deals double that damage to that player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChargingTuskodonEffect()));
+        this.addAbility(new SimpleStaticAbility(new ChargingTuskodonEffect()));
     }
 
     private ChargingTuskodon(final ChargingTuskodon card) {
@@ -51,12 +51,12 @@ public final class ChargingTuskodon extends CardImpl {
 
 class ChargingTuskodonEffect extends ReplacementEffectImpl {
 
-    public ChargingTuskodonEffect() {
+    ChargingTuskodonEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If {this} would deal combat damage to a player, it deals double that damage to that player instead";
     }
 
-    public ChargingTuskodonEffect(final ChargingTuskodonEffect effect) {
+    private ChargingTuskodonEffect(final ChargingTuskodonEffect effect) {
         super(effect);
     }
 
@@ -73,11 +73,6 @@ class ChargingTuskodonEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.getSourceId().equals(event.getSourceId()) && ((DamageEvent) event).isCombatDamage();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

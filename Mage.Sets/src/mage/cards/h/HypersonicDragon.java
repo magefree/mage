@@ -38,7 +38,7 @@ public final class HypersonicDragon extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // You may cast sorcery spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private HypersonicDragon(final HypersonicDragon card) {

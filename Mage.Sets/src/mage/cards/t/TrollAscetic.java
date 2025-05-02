@@ -27,10 +27,10 @@ public final class TrollAscetic extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(HexproofAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{G}")));
     }
 
-    public TrollAscetic (final TrollAscetic card) {
+    private TrollAscetic(final TrollAscetic card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class CabarettiConfluence extends CardImpl {
         // Choose three. You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
 
         // • Create a token that's a copy of target creature you control. It gains haste. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new CabarettiConfluenceEffect());

@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FadingAbility;
 import mage.cards.CardImpl;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -34,7 +33,7 @@ public final class TangleWire extends CardImpl {
         // Fading 4
         this.addAbility(new FadingAbility(4, this));
         // At the beginning of each player's upkeep, that player taps an untapped artifact, creature, or land they control for each fade counter on Tangle Wire.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new TangleWireEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new TangleWireEffect(), false));
     }
 
     private TangleWire(final TangleWire card) {
@@ -62,13 +61,13 @@ class TangleWireEffect extends OneShotEffect {
         staticText = "that player taps an untapped artifact, creature, or land they control for each fade counter on Tangle Wire";
     }
 
-    TangleWireEffect(final TangleWireEffect effect) {
+    private TangleWireEffect(final TangleWireEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player == null || permanent == null) {
             return false;
@@ -79,7 +78,7 @@ class TangleWireEffect extends OneShotEffect {
         int amount = Math.min(counterCount, targetCount);
 
         Target target = new TargetControlledPermanent(amount, amount, filter, true);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
 
         if (amount > 0 && player.chooseTarget(Outcome.Tap, target, source, game)) {
             boolean abilityApplied = false;

@@ -40,7 +40,7 @@ public final class GenjuOfTheSpires extends CardImpl {
         this.addAbility(ability);
 
         // {2}: Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
         this.addAbility(ability2);
 
         // When enchanted Mountain is put into a graveyard, you may return Genju of the Spires from your graveyard to your hand.
@@ -69,7 +69,7 @@ public final class GenjuOfTheSpires extends CardImpl {
             power = new MageInt(6);
             toughness = new MageInt(1);
         }
-        public SpiritToken(final SpiritToken token) {
+        private SpiritToken(final SpiritToken token) {
             super(token);
         }
 

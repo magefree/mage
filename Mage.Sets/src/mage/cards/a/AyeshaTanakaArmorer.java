@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -9,7 +8,6 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -17,13 +15,9 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.card.ManaValueLessThanOrEqualToSourcePowerPredicate;
 import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
-import mage.game.Game;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -37,7 +31,7 @@ public final class AyeshaTanakaArmorer extends CardImpl {
     private static final FilterPermanent filter2 = new FilterControlledArtifactPermanent();
 
     static {
-        filter.add(AyeshaTanakaArmorerPredicate.instance);
+        filter.add(ManaValueLessThanOrEqualToSourcePowerPredicate.instance);
         filter2.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
@@ -72,20 +66,5 @@ public final class AyeshaTanakaArmorer extends CardImpl {
     @Override
     public AyeshaTanakaArmorer copy() {
         return new AyeshaTanakaArmorer(this);
-    }
-}
-
-enum AyeshaTanakaArmorerPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        return Optional
-                .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
-                .map(MageObject::getPower)
-                .map(MageInt::getValue)
-                .map(p -> input.getObject().getManaValue() <= p)
-                .orElse(false);
     }
 }

@@ -1,9 +1,8 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOpponentTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -18,6 +17,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,11 +50,11 @@ public final class PrisonTerm extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
 
         // Whenever a creature enters the battlefield under an opponent's control, you may attach Prison Term to that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new PrisonTermEffect(), filter, true, SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield under an opponent's control, you may attach Prison Term to that creature."));
+        this.addAbility(new EntersBattlefieldOpponentTriggeredAbility(
+                Zone.BATTLEFIELD, new PrisonTermEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE, true, SetTargetPointer.PERMANENT));
     }
 
     private PrisonTerm(final PrisonTerm card) {
@@ -69,11 +69,12 @@ public final class PrisonTerm extends CardImpl {
 
 class PrisonTermEffect extends OneShotEffect {
 
-    public PrisonTermEffect() {
+    PrisonTermEffect() {
         super(Outcome.Detriment);
+        staticText = "attach {this} to that creature";
     }
 
-    public PrisonTermEffect(final PrisonTermEffect effect) {
+    private PrisonTermEffect(final PrisonTermEffect effect) {
         super(effect);
     }
 

@@ -58,7 +58,7 @@ class KaaliaOfTheVastAttacksAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new KaaliaOfTheVastEffect(), false);
     }
 
-    public KaaliaOfTheVastAttacksAbility(final KaaliaOfTheVastAttacksAbility ability) {
+    private KaaliaOfTheVastAttacksAbility(final KaaliaOfTheVastAttacksAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
         this.staticText = "put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent.";
     }
 
-    public KaaliaOfTheVastEffect(final KaaliaOfTheVastEffect effect) {
+    private KaaliaOfTheVastEffect(final KaaliaOfTheVastEffect effect) {
         super(effect);
     }
 

@@ -25,7 +25,7 @@ public final class Parapet extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame)));
         this.addAbility(new SacrificeIfCastAtInstantTimeTriggeredAbility());
         // Creatures you control get +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield)));
     }
 
     private Parapet(final Parapet card) {

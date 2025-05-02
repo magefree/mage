@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformTargetEffect;
 import mage.abilities.effects.keyword.IncubateEffect;
@@ -81,7 +81,7 @@ class ProgenitorExarchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
+        int xValue = GetXValue.instance.calculate(game, source, this);
         if (xValue < 1) {
             return false;
         }

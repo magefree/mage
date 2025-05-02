@@ -51,7 +51,7 @@ class OddOrEvenEffect extends OneShotEffect {
         this.staticText = "Destroy each creature with an " + (odd ? "odd" : "even") + " number of words in its name. (Hyphenated words are one word.)";
     }
 
-    public OddOrEvenEffect(final OddOrEvenEffect effect) {
+    private OddOrEvenEffect(final OddOrEvenEffect effect) {
         super(effect);
         this.odd = effect.odd;
     }
@@ -65,7 +65,7 @@ class OddOrEvenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                 // Check the number of words in the name (based on number of spaces)
                 if (creature != null) {
                     String name = creature.getName();

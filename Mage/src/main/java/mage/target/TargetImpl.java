@@ -34,13 +34,13 @@ public abstract class TargetImpl implements Target {
     protected boolean chosen = false;
     // is the target handled as targeted spell/ability (notTarget = true is used for not targeted effects like e.g. sacrifice)
     protected boolean notTarget = false;
-    protected boolean atRandom = false;
+    protected boolean atRandom = false; // for inner choose logic
     protected UUID targetController = null; // if null the ability controller is the targetController
     protected UUID abilityController = null; // only used if target controller != ability controller
 
     protected int targetTag; // can be set if other target check is needed (AnotherTargetPredicate)
     protected String chooseHint = null; // UI choose hints after target name
-    protected boolean shouldReportEvents = true;
+    protected boolean shouldReportEvents = true; // generates TARGET and TARGETED events (can be disabled in non targeting mode, e.g. on target change)
 
     @Override
     public abstract TargetImpl copy();
@@ -103,35 +103,64 @@ public abstract class TargetImpl implements Target {
         StringBuilder sb = new StringBuilder();
         int min = getMinNumberOfTargets();
         int max = getMaxNumberOfTargets();
+        String targetName = getTargetName();
         if (min > 0 && max == Integer.MAX_VALUE) {
             sb.append(CardUtil.numberToText(min));
             sb.append(" or more ");
-        } else if (!getTargetName().startsWith("X") && (min != 1 || max != 1)) {
-            if (min < max && max != Integer.MAX_VALUE) {
-                if (min == 1 && max == 2) {
-                    sb.append("one or ");
-                } else if (min == 1 && max == 3) {
-                    sb.append("one, two, or ");
-                } else {
-                    sb.append("up to ");
+        } else if (!targetName.startsWith("X ") && (min != 1 || max != 1)) {
+            targetName = targetName.replace("another", "other"); //If non-singular, use "other" instead of "another"
+
+            if (getUseAnyNumber()) {
+                sb.append(("any number of "));
+            } else {
+                if (min < max && max != Integer.MAX_VALUE) {
+                    if (min == 1 && max == 2) {
+                        sb.append("one or ");
+                    } else if (min == 1 && max == 3) {
+                        sb.append("one, two, or ");
+                    } else {
+                        sb.append("up to ");
+                    }
                 }
+                sb.append(CardUtil.numberToText(max));
+                sb.append(' ');
             }
-            sb.append(CardUtil.numberToText(max));
-            sb.append(' ');
         }
-        if (!isNotTarget() && !getTargetName().contains("target ") && !getTargetName().endsWith("any target")) {
+        boolean addTargetWord = false;
+        if (!isNotTarget()) {
+            addTargetWord = true;
+            if (targetName.contains("target ")) {
+                addTargetWord = false;
+            } else if (targetName.endsWith("any target")
+                    || targetName.endsWith("any other target")
+                    || targetName.endsWith("targets")) {
+                addTargetWord = false;
+            }
+            // endsWith needs to be specific.
+            // e.g. "spell with a single target" => need to prefix with "target ".
+        }
+        if (addTargetWord) {
             sb.append("target ");
         }
         if (isNotTarget() && min == 1 && max == 1) {
-            sb.append(CardUtil.addArticle(getTargetName()));
+            sb.append(CardUtil.addArticle(targetName));
         } else {
-            sb.append(getTargetName());
+            sb.append(targetName);
         }
         return sb.toString();
     }
 
+    /**
+     * Used for generating text description. Needed so that subclasses may override.
+     */
+    protected boolean getUseAnyNumber() {
+        int min = getMinNumberOfTargets();
+        int max = getMaxNumberOfTargets();
+        return min == 0 && max == Integer.MAX_VALUE;
+    }
+
     @Override
-    public String getMessage() {
+    public String getMessage(Game game) {
         // UI choose message
         String suffix = "";
         if (this.chooseHint != null) {
@@ -165,8 +194,9 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public void setTargetName(String name) {
+    public TargetImpl withTargetName(String name) {
         this.targetName = name;
+        return this;
     }
 
     @Override
@@ -191,7 +221,9 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean isRequired(Ability ability) {
-        return ability == null || ability.isActivated() || !(ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType() == AbilityType.ACTIVATED);
+        return ability == null
+                || ability.isActivated()
+                || !(ability.getAbilityType() == AbilityType.SPELL || ability.getAbilityType().isActivatedAbility());
     }
 
     @Override
@@ -201,7 +233,7 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean isChosen() {
+    public boolean isChosen(Game game) {
         if (getMaxNumberOfTargets() == 0 && getNumberOfTargets() == 0) {
             return true;
         }
@@ -209,7 +241,7 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean doneChoosing() {
+    public boolean doneChoosing(Game game) {
         return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets();
     }
 
@@ -318,7 +350,7 @@ public abstract class TargetImpl implements Target {
                 return chosen;
             }
             chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen() && !doneChoosing());
+        } while (!isChosen(game) && !doneChoosing(game));
         return chosen;
     }
 
@@ -353,7 +385,7 @@ public abstract class TargetImpl implements Target {
                 }
             } else {
                 // Try to autochoosen
-                UUID autoChosenId = required ? tryToAutoChoose(playerId, source, game) : null;
+                UUID autoChosenId = tryToAutoChoose(playerId, source, game);
                 if (autoChosenId != null) {
                     addTarget(autoChosenId, source, game);
                 } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player
@@ -361,7 +393,7 @@ public abstract class TargetImpl implements Target {
                 }
             }
             chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen() && !doneChoosing());
+        } while (!isChosen(game) && !doneChoosing(game));
 
         return chosen;
     }
@@ -392,7 +424,7 @@ public abstract class TargetImpl implements Target {
                 illegalTargets.add(targetId);
                 continue;
             }
-            if (!stillLegalTarget(targetId, source, game)) {
+            if (!stillLegalTarget(source.getControllerId(), targetId, source, game)) {
                 illegalTargets.add(targetId);
             }
         }
@@ -414,13 +446,6 @@ public abstract class TargetImpl implements Target {
         return !targets.isEmpty();
     }
 
-    /**
-     * Returns all possible different target combinations
-     *
-     * @param source
-     * @param game
-     * @return
-     */
     @Override
     public List<? extends TargetImpl> getTargetOptions(Ability source, Game game) {
         List<TargetImpl> options = new ArrayList<>();
@@ -529,13 +554,14 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public boolean stillLegalTarget(UUID id, Ability source, Game game) {
-        return canTarget(id, source, game);
+    public boolean stillLegalTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        return canTarget(controllerId, id, source, game);
     }
 
     @Override
-    public void setNotTarget(boolean notTarget) {
+    public TargetImpl withNotTarget(boolean notTarget) {
         this.notTarget = notTarget;
+        return this;
     }
 
     @Override
@@ -662,10 +688,10 @@ public abstract class TargetImpl implements Target {
         String abilityText = source.getRule(true).toLowerCase();
         boolean strictModeEnabled = player.getStrictChooseMode();
         boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() // Targets must be picked
-                                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
-                                && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
-                                && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
-                                && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching
+                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
+                && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
+                && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
+                && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching
 
 
         if (canAutoChoose) {

@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,7 +35,7 @@ public final class AberrantResearcher extends CardImpl {
 
         // At the beginning of your upkeep, put the top card of your library into your graveyard. If it's an instant or sorcery card, transform Aberrant Researcher.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AberrantResearcherEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AberrantResearcherEffect()));
     }
 
     private AberrantResearcher(final AberrantResearcher card) {
@@ -50,12 +50,12 @@ public final class AberrantResearcher extends CardImpl {
 
 class AberrantResearcherEffect extends OneShotEffect {
 
-    public AberrantResearcherEffect() {
+    AberrantResearcherEffect() {
         super(Outcome.Benefit);
         staticText = "mill a card. If an instant or sorcery card was milled this way, transform {this}";
     }
 
-    public AberrantResearcherEffect(final AberrantResearcherEffect effect) {
+    private AberrantResearcherEffect(final AberrantResearcherEffect effect) {
         super(effect);
     }
 

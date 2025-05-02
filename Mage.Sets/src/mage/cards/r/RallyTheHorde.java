@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.RallyTheHordeWarriorToken;
+import mage.game.permanent.token.RedWarriorToken;
 import mage.players.Player;
 
 /**
@@ -40,12 +40,12 @@ public final class RallyTheHorde extends CardImpl {
 
 class RallyTheHordeEffect extends OneShotEffect {
 
-    public RallyTheHordeEffect() {
+    RallyTheHordeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land card, repeat this process. Create a 1/1 red Warrior creature token for each nonland card exiled this way.";
     }
 
-    public RallyTheHordeEffect(final RallyTheHordeEffect effect) {
+    private RallyTheHordeEffect(final RallyTheHordeEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class RallyTheHordeEffect extends OneShotEffect {
                     nonLandCardsExiled += nonLands;
                 }
             }
-            return new CreateTokenEffect(new RallyTheHordeWarriorToken(), nonLandCardsExiled).apply(game, source);
+            return new CreateTokenEffect(new RedWarriorToken(), nonLandCardsExiled).apply(game, source);
 
         }
         return false;

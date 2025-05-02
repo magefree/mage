@@ -30,11 +30,11 @@ public final class DegaDisciple extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));
+        Ability firstAbility = new SimpleActivatedAbility(new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));
         firstAbility.addCost(new TapSourceCost());
         firstAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability secondAbility = new SimpleActivatedAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
         secondAbility.addCost(new TapSourceCost());
         secondAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(secondAbility);

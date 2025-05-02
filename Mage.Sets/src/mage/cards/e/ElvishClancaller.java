@@ -44,7 +44,6 @@ public final class ElvishClancaller extends CardImpl {
 
         // Other Elves you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         1, 1, Duration.WhileOnBattlefield,
                         filter, true
@@ -53,7 +52,6 @@ public final class ElvishClancaller extends CardImpl {
 
         // {4}{G}{G}, {T}: Search your library for a card named Elvish Clancaller, put it onto the battlefield, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(
                         new TargetCardInLibrary(filter2),
                         false

@@ -49,19 +49,19 @@ public final class Marjhan extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Marjhan doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // {U}{U}, Sacrifice a creature: Untap Marjhan. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new UntapSourceEffect(), new ManaCostsImpl<>("{U}{U}"), new IsStepCondition(PhaseStep.UPKEEP), null);
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
 
         // Marjhan can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
 
         // {U}{U}: Marjhan gets -1/-0 until end of turn and deals 1 damage to target attacking creature without flying.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{U}{U}"));
+        ability = new SimpleActivatedAbility(new BoostSourceEffect(-1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{U}{U}"));
         ability.addEffect(new DamageTargetEffect(1, "and"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

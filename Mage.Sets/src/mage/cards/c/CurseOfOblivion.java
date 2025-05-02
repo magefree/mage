@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -25,14 +25,14 @@ public final class CurseOfOblivion extends CardImpl {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, that player exiles two cards from their graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ExileFromZoneTargetEffect(
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ENCHANTED, new ExileFromZoneTargetEffect(
                 Zone.GRAVEYARD, StaticFilters.FILTER_CARD_CARDS, 2, false
-        ).setText("that player exiles two cards from their graveyard"), TargetController.ENCHANTED, false));
+        ), false));
     }
 
     private CurseOfOblivion(final CurseOfOblivion card) {

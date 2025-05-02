@@ -28,10 +28,10 @@ public final class SharpenedPitchfork extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // As long as equipped creature is a Human, it gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));

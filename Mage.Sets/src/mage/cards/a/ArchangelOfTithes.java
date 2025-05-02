@@ -35,10 +35,10 @@ public final class ArchangelOfTithes extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as Archangel of Tithes is untapped, creatures can't attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchangelOfTithesPayManaToAttackAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new ArchangelOfTithesPayManaToAttackAllEffect()));
 
         // As long as Archangel of Tithes is attacking, creatures can't block unless their controller pays {1} for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchangelOfTithesPayManaToBlockAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new ArchangelOfTithesPayManaToBlockAllEffect()));
     }
 
     private ArchangelOfTithes(final ArchangelOfTithes card) {
@@ -58,7 +58,7 @@ class ArchangelOfTithesPayManaToAttackAllEffect extends CantAttackYouUnlessPayAl
         staticText = "As long as {this} is untapped, creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.";
     }
 
-    ArchangelOfTithesPayManaToAttackAllEffect(ArchangelOfTithesPayManaToAttackAllEffect effect) {
+    private ArchangelOfTithesPayManaToAttackAllEffect(final ArchangelOfTithesPayManaToAttackAllEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class ArchangelOfTithesPayManaToBlockAllEffect extends CantBlockUnlessPayManaAll
         staticText = "As long as {this} is attacking, creatures can't block unless their controller pays {1} for each of those creatures.";
     }
 
-    ArchangelOfTithesPayManaToBlockAllEffect(ArchangelOfTithesPayManaToBlockAllEffect effect) {
+    private ArchangelOfTithesPayManaToBlockAllEffect(final ArchangelOfTithesPayManaToBlockAllEffect effect) {
         super(effect);
     }
 

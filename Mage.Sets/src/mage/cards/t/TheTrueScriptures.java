@@ -13,14 +13,11 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.Collection;
@@ -49,7 +46,8 @@ public final class TheTrueScriptures extends CardImpl {
                 ability -> {
                     ability.addEffect(new DestroyTargetEffect().setTargetPointer(new EachTargetPointer())
                             .setText("for each opponent, destroy up to one target creature or planeswalker that player controls"));
-                    ability.setTargetAdjuster(TheTrueScripturesAdjuster.instance);
+                    ability.addTarget(new TargetCreatureOrPlaneswalker(0,1));
+                    ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
                 }
         );
 
@@ -76,26 +74,6 @@ public final class TheTrueScriptures extends CardImpl {
     @Override
     public TheTrueScriptures copy() {
         return new TheTrueScriptures(this);
-    }
-}
-
-enum TheTrueScripturesAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID playerId : game.getOpponents(ability.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent(
-                    "creature or planswalker controlled by " + player.getName()
-            );
-            filter.add(new ControllerIdPredicate(playerId));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
     }
 }
 

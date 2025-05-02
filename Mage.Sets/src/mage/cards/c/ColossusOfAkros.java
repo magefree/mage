@@ -43,7 +43,6 @@ public final class ColossusOfAkros extends CardImpl {
         this.addAbility(new MonstrosityAbility("{10}", 10));
         // As long as Colossus of Akros is monstrous, it has trample and can attack as though it didn't have defender.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                 MonstrousCondition.instance,
                 "As long as {this} is monstrous, it has trample"));

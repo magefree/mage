@@ -34,7 +34,7 @@ public final class DronepackKindred extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // {1}: Dronepack Kindred gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(1)));
     }
 
     private DronepackKindred(final DronepackKindred card) {

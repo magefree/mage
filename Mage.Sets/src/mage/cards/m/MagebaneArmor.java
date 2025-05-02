@@ -33,7 +33,7 @@ public final class MagebaneArmor extends CardImpl {
         // Equipped creature gets +2/+4 and loses flying.
         this.addAbility(new MagebaneArmorAbility());
         // Prevent all noncombat damage that would be dealt to equipped creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MagebaneArmorPreventionEffect()));
+        this.addAbility(new SimpleStaticAbility(new MagebaneArmorPreventionEffect()));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
@@ -55,7 +55,7 @@ class MagebaneArmorAbility extends StaticAbility {
         this.addEffect(new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT));
     }
 
-    public MagebaneArmorAbility(MagebaneArmorAbility ability) {
+    private MagebaneArmorAbility(final MagebaneArmorAbility ability) {
         super(ability);
     }
 
@@ -72,23 +72,18 @@ class MagebaneArmorAbility extends StaticAbility {
 
 class MagebaneArmorPreventionEffect extends PreventionEffectImpl {
 
-    public MagebaneArmorPreventionEffect() {
+    MagebaneArmorPreventionEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "Prevent all noncombat damage that would be dealt to equipped creature";
     }
 
-    public MagebaneArmorPreventionEffect(final MagebaneArmorPreventionEffect effect) {
+    private MagebaneArmorPreventionEffect(final MagebaneArmorPreventionEffect effect) {
         super(effect);
     }
 
     @Override
     public MagebaneArmorPreventionEffect copy() {
         return new MagebaneArmorPreventionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -6,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.turn.SkipNextTurnSourceEffect;
@@ -33,15 +31,14 @@ public final class UnstableHulk extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Morph {3}{R}{R} 
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{R}{R}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{R}{R}")));
     
-        //When Unstable Hulk is turned face up, it gets +6/+6 and gains trample until end of turn. You skip your next turn.
-        Effect effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect);
-        effect = new BoostSourceEffect(6,6,Duration.EndOfTurn);
-        ability.addEffect(effect);
-        effect = new SkipNextTurnSourceEffect();
-        ability.addEffect(effect);
+        // When Unstable Hulk is turned face up, it gets +6/+6 and gains trample until end of turn. You skip your next turn.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new BoostSourceEffect(6,6,Duration.EndOfTurn)
+                .setText("it gets +6/+6"));
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gains trample until end of turn"));
+        ability.addEffect(new SkipNextTurnSourceEffect());
         this.addAbility(ability);
     
     }

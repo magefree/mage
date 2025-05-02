@@ -44,12 +44,12 @@ public final class EwokAmbush extends CardImpl {
 
 class EwokAmbushCreateTokenEffect extends OneShotEffect {
 
-    public EwokAmbushCreateTokenEffect() {
+    EwokAmbushCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create two 1/1 green Ewok creature tokens. Those tokens gain haste until end of turn";
     }
 
-    public EwokAmbushCreateTokenEffect(final EwokAmbushCreateTokenEffect effect) {
+    private EwokAmbushCreateTokenEffect(final EwokAmbushCreateTokenEffect effect) {
         super(effect);
     }
 

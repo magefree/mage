@@ -1,6 +1,7 @@
 package mage.client.game;
 
 import mage.client.SessionHandler;
+import mage.client.cards.BigCard;
 import mage.client.components.MageTextArea;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
@@ -11,7 +12,6 @@ import mage.client.util.audio.AudioManager;
 import mage.constants.TurnPhase;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import static mage.client.game.FeedbackPanel.FeedbackMode.QUESTION;
 import static mage.constants.PlayerAction.*;
 
 /**
- * Panel with buttons that copy the state of feedback panel.
+ * Game GUI: helper component for feedback panel - implements all feedback logic here
  *
  * @author ayrat, JayDi85
  */
@@ -32,8 +32,7 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
     private javax.swing.JButton btnUndo;
-    //private javax.swing.JButton btnEndTurn;
-    //private javax.swing.JButton btnStopTimer;
+
     private JScrollPane textAreaScrollPane;
     private MageTextArea dialogTextArea;
     JPanel mainPanel;
@@ -63,7 +62,9 @@ public class HelperPanel extends JPanel {
 
     // originalId of feedback causing ability
     private UUID originalId;
-    private String message;
+    private String basicMessage; // normal size
+    private String secondaryMessage; // smaller size
+    private String autoAnswerMessage; // Filtered version of message which is used for remembering answers to text
 
     private UUID gameId;
     private boolean gameNeedFeedback = false;
@@ -89,8 +90,9 @@ public class HelperPanel extends JPanel {
         initComponents();
     }
 
-    public void init(UUID gameId) {
+    public void init(UUID gameId, BigCard bigCard) {
         this.gameId = gameId;
+        this.dialogTextArea.setGameData(gameId, bigCard);
     }
 
     public void changeGUISize() {
@@ -99,38 +101,15 @@ public class HelperPanel extends JPanel {
 
     private void setGUISize() {
         //this.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
-        textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
-        textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
+        textAreaScrollPane.setMaximumSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
+        textAreaScrollPane.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameFeedbackPanelMaxHeight));
 
-//        dialogTextArea.setMaximumSize(new Dimension(getParent().getWidth(), Integer.MAX_VALUE));
-//        dialogTextArea.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogAreaTextHeight));
-//        buttonContainer.setPreferredSize(new Dimension(getParent().getWidth(), GUISizeHelper.gameDialogButtonHeight + 4));
-//        buttonContainer.setMinimumSize(new Dimension(160, GUISizeHelper.gameDialogButtonHeight + 20));
-//        buttonContainer.setMaximumSize(new Dimension(Integer.MAX_VALUE, GUISizeHelper.gameDialogButtonHeight + 4));
-        btnLeft.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnRight.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnSpecial.setFont(GUISizeHelper.gameDialogAreaFont);
-        btnUndo.setFont(GUISizeHelper.gameDialogAreaFont);
+        btnLeft.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnRight.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnSpecial.setFont(GUISizeHelper.gameFeedbackPanelFont);
+        btnUndo.setFont(GUISizeHelper.gameFeedbackPanelFont);
 
-        // update text fonts
-        if (message != null) {
-            int pos1 = this.message.indexOf("font-size:");
-
-            if (pos1 > 0) {
-                int pos2 = this.message.indexOf("font-size:", pos1 + 10);
-
-                String newMessage;
-                if (pos2 > 0) {
-                    // 2 sizes: big + small // TODO: 2 sizes for compatibility only? On 04.02.2018 can't find two size texts (JayDi85)
-                    newMessage = this.message.substring(0, pos1 + 10) + GUISizeHelper.gameDialogAreaFontSizeBig + this.message.substring(pos1 + 12);
-                    newMessage = newMessage.substring(0, pos1 + 10) + GUISizeHelper.gameDialogAreaFontSizeSmall + newMessage.substring(pos1 + 12);
-                } else {
-                    // 1 size: small
-                    newMessage = this.message.substring(0, pos1 + 10) + GUISizeHelper.gameDialogAreaFontSizeSmall + this.message.substring(pos1 + 12);
-                }
-                setBasicMessage(newMessage);
-            }
-        }
+        this.redrawMessages();
 
         autoSizeButtonsAndFeedbackState();
 
@@ -143,13 +122,13 @@ public class HelperPanel extends JPanel {
     private void initComponents() {
         initPopupMenuTriggerOrder();
 
-        this.setBorder(new EmptyBorder(5, 5, 5, 5));
-        this.setLayout(new GridLayout(0, 1));
+        this.setLayout(new BorderLayout());
         this.setOpaque(false);
+
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(0, 1));
         mainPanel.setOpaque(false);
-        this.add(mainPanel);
+        this.add(mainPanel, BorderLayout.CENTER);
 
         dialogTextArea = new MageTextArea();
         dialogTextArea.setText("<Empty>");
@@ -342,7 +321,6 @@ public class HelperPanel extends JPanel {
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN = new Color(0, 0, 255, 50);
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE = new Color(255, 0, 0, 50);
         Color ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER = new Color(0, 255, 0, 50);
-        int FEEDBACK_COLORIZING_MODE = PreferencesDialog.getBattlefieldFeedbackColorizingMode();
 
         // cleanup current settings to default (flow layout - different sizes)
         this.buttonGrid.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTONS_H_GAP, 0));
@@ -365,42 +343,23 @@ public class HelperPanel extends JPanel {
         // color panel on player's feedback waiting
         if (this.gameNeedFeedback) {
 
-            // wait player's action
-            switch (FEEDBACK_COLORIZING_MODE) {
-                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_DISABLE:
-                    // disabled
-                    this.mainPanel.setOpaque(false);
-                    this.mainPanel.setBorder(null);
-                    break;
-
-                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_ONE_COLOR:
-                    // one color
-                    this.mainPanel.setOpaque(true);
-                    this.mainPanel.setBackground(ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER);
-                    break;
-
-                case Constants.BATTLEFIELD_FEEDBACK_COLORIZING_MODE_ENABLE_BY_MULTICOLOR:
-                    // multicolor
-                    this.mainPanel.setOpaque(true);
-                    Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
-                    if (this.gameTurnPhase != null) {
-                        switch (this.gameTurnPhase) {
-                            case PRECOMBAT_MAIN:
-                            case POSTCOMBAT_MAIN:
-                                backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
-                                break;
-                            case COMBAT:
-                                backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    this.mainPanel.setBackground(backColor);
-                    break;
-                default:
-                    break;
+            // wait player's action - colorize feedback panel (depends on current phase)
+            this.mainPanel.setOpaque(true);
+            Color backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_OTHER;
+            if (this.gameTurnPhase != null) {
+                switch (this.gameTurnPhase) {
+                    case PRECOMBAT_MAIN:
+                    case POSTCOMBAT_MAIN:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_MAIN;
+                        break;
+                    case COMBAT:
+                        backColor = ACTIVE_FEEDBACK_BACKGROUND_COLOR_BATTLE;
+                        break;
+                    default:
+                        break;
+                }
             }
+            this.mainPanel.setBackground(backColor);
         } else {
             // inform about other players
             this.mainPanel.setOpaque(false);
@@ -430,10 +389,12 @@ public class HelperPanel extends JPanel {
         }
 
         // search max const size
-        int constButtonSizeW = GUISizeHelper.gameDialogButtonWidth * 200 / 100;
+        // TODO: research and test sizing - need improve (e.g. for long messages)?
+        int constButtonSizeW = GUISizeHelper.gameFeedbackPanelButtonWidth * 200 / 100;
         int constGridSizeW = buttons.size() * constButtonSizeW + BUTTONS_H_GAP * (buttons.size() - 1);
-        int constGridSizeH = Math.round(GUISizeHelper.gameDialogButtonHeight * 150 / 100);
+        int constGridSizeH = Math.round(GUISizeHelper.gameFeedbackPanelButtonHeight * 150 / 100);
 
+        // TODO: remove due gui scale and user customizable settings?
         if (needButtonSizeW < constButtonSizeW) {
             // same size mode (grid)
             GridLayout gl = new GridLayout(1, buttons.size(), BUTTONS_H_GAP, 0);
@@ -457,13 +418,22 @@ public class HelperPanel extends JPanel {
         this.originalId = originalId;
     }
 
-    public void setBasicMessage(String message) {
-        this.message = message;
-        this.dialogTextArea.setText(message, this.getWidth());
+    public void setMessages(String basicMessage, String secondaryMessage) {
+        this.basicMessage = basicMessage;
+        this.secondaryMessage = secondaryMessage;
+        redrawMessages();
     }
 
-    public void setTextArea(String message) {
-        this.dialogTextArea.setText(message, this.getWidth());
+    private void redrawMessages() {
+        String panelText = this.basicMessage;
+        if (this.secondaryMessage != null) {
+            panelText += "<div style='font-size:" + GUISizeHelper.gameFeedbackPanelExtraMessageFontSize + "pt'>" + secondaryMessage + "</div>";
+        }
+        this.dialogTextArea.setText(panelText, this.getWidth());
+    }
+
+    public void setAutoAnswerMessage(String autoAnswerMessage) {
+        this.autoAnswerMessage = autoAnswerMessage;
     }
 
     @Override
@@ -523,19 +493,23 @@ public class HelperPanel extends JPanel {
     public void handleAutoAnswerPopupMenuEvent(ActionEvent e) {
         switch (e.getActionCommand()) {
             case CMD_AUTO_ANSWER_ID_YES:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId, originalId.toString() + '#' + message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_YES, gameId,
+                        originalId.toString() + '#' + autoAnswerMessage);
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_ID_NO:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId, originalId.toString() + '#' + message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_ID_NO, gameId,
+                        originalId.toString() + '#' + autoAnswerMessage);
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_NAME_YES:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_YES, gameId, message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_YES, gameId,
+                        autoAnswerMessage);
                 clickButton(btnLeft);
                 break;
             case CMD_AUTO_ANSWER_NAME_NO:
-                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_NO, gameId, message);
+                SessionHandler.sendPlayerAction(REQUEST_AUTO_ANSWER_TEXT_NO, gameId,
+                        autoAnswerMessage);
                 clickButton(btnRight);
                 break;
             case CMD_AUTO_ANSWER_RESET_ALL:

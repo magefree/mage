@@ -72,7 +72,7 @@ class RashmiAndRagavanTriggeredAbility extends SpellCastControllerTriggeredAbili
         this.addEffect(new RashmiAndRagavanEffect());
     }
 
-    RashmiAndRagavanTriggeredAbility(RashmiAndRagavanTriggeredAbility ability) {
+    private RashmiAndRagavanTriggeredAbility(final RashmiAndRagavanTriggeredAbility ability) {
         super(ability);
     }
 
@@ -115,7 +115,7 @@ class RashmiAndRagavanEffect extends OneShotEffect {
                 + "you may cast it this turn";
     }
 
-    RashmiAndRagavanEffect(final RashmiAndRagavanEffect effect) {
+    private RashmiAndRagavanEffect(final RashmiAndRagavanEffect effect) {
         super(effect);
     }
 

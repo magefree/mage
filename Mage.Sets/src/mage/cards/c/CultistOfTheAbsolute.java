@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.SacrificeControllerEffect;
@@ -47,8 +47,8 @@ public final class CultistOfTheAbsolute extends CardImpl {
         ).setText(", \"Ward&mdash;Pay 3 life,\""));
         ability.addEffect(new GainAbilityAllEffect(
                 new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, null
-                ), TargetController.YOU, false),
+                        StaticFilters.FILTER_PERMANENT_CREATURE, 1, null
+                )),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
         ).setText("and \"At the beginning of your upkeep, sacrifice a creature.\""));
         this.addAbility(ability);

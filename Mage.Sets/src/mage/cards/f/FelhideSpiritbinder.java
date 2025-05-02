@@ -55,12 +55,12 @@ public final class FelhideSpiritbinder extends CardImpl {
 
 class FelhideSpiritbinderEffect extends OneShotEffect {
 
-    public FelhideSpiritbinderEffect() {
+    FelhideSpiritbinderEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of another target creature except it's an enchantment in addition to its other types. It gains haste. Exile it at the beginning of the next end step";
     }
 
-    public FelhideSpiritbinderEffect(final FelhideSpiritbinderEffect effect) {
+    private FelhideSpiritbinderEffect(final FelhideSpiritbinderEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class FelhideSpiritbinderEffect extends OneShotEffect {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (permanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, CardType.ENCHANTMENT, true);
-            effect.setTargetPointer(getTargetPointer());
+            effect.setTargetPointer(this.getTargetPointer().copy());
             if (effect.apply(game, source)) {
                 for (Permanent tokenPermanent : effect.getAddedPermanents()) {
                     ExileTargetEffect exileEffect = new ExileTargetEffect();

@@ -10,32 +10,47 @@ package mage.constants;
  * @author alexander-novo
  */
 public enum MatchBufferTime {
-    NONE(0, "None"),
-    SEC__05(5, "5 Seconds"),
-    SEC__10(10, "10 Seconds"),
-    SEC__15(15, "15 Seconds"),
-    SEC__20(20, "20 Seconds"),
-    SEC__25(25, "25 Seconds"),
-    SEC__30(30, "30 Seconds");
+    NONE(0),
+    SEC__01(1),
+    SEC__02(2),
+    SEC__03(3),
+    SEC__05(5),
+    SEC__10(10),
+    SEC__15(15),
+    SEC__20(20),
+    SEC__25(25),
+    SEC__30(30);
 
-    private final int matchSeconds;
-    private final String name;
+    private final int bufferSecs;
 
-    MatchBufferTime(int matchSeconds, String name) {
-        this.matchSeconds = matchSeconds;
-        this.name = name;
+    MatchBufferTime(int bufferSecs) {
+        this.bufferSecs = bufferSecs;
     }
 
-    public int getBufferTime() {
-        return matchSeconds;
+    public int getBufferSecs() {
+        return bufferSecs;
     }
 
     public String getName() {
-        return name;
+        if (this == NONE){
+            return "None";
+        } else if (this == SEC__01){
+            return "1 Second";
+        } else {
+            return bufferSecs + " Seconds";
+        }
     }
 
     @Override
     public String toString() {
-        return name;
+        return getName();
+    }
+
+    public String getShortName() {
+        if (this == NONE){
+            return "None";
+        } else {
+            return bufferSecs + "s";
+        }
     }
 }

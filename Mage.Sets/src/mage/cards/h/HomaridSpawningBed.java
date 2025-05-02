@@ -34,9 +34,9 @@ public final class HomaridSpawningBed extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
 
         // {1}{U}{U}, Sacrifice a blue creature: create X 1/1 blue Camarid creature tokens, where X is the sacrificed creature's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CamaridToken(), SacrificeCostManaValue.CREATURE),
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new CamaridToken(), SacrificeCostManaValue.CREATURE),
                 new ManaCostsImpl<>("{1}{U}{U}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

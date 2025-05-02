@@ -42,9 +42,9 @@ public final class SithEvoker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}, {B}, Sacrifice a creature: You gain life equal to that creature's power or toughness.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SithEvokerEffect(), new ManaCostsImpl<>("{B}"));
+        Ability ability = new SimpleActivatedAbility(new SithEvokerEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         this.addAbility(ability);
     }
@@ -73,7 +73,7 @@ class SithEvokerEffect extends OneShotEffect {
         staticText = "You gain life equal to that creature's power or toughness";
     }
 
-    public SithEvokerEffect(final SithEvokerEffect effect) {
+    private SithEvokerEffect(final SithEvokerEffect effect) {
         super(effect);
     }
 

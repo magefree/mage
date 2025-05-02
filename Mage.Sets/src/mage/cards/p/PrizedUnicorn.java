@@ -25,7 +25,7 @@ public final class PrizedUnicorn extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAllSourceEffect()));
     }
 
     private PrizedUnicorn(final PrizedUnicorn card) {

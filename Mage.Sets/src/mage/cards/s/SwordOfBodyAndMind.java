@@ -63,7 +63,7 @@ class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl {
         this.addEffect(new MillCardsTargetEffect(10));
     }
 
-    public SwordOfBodyAndMindAbility(final SwordOfBodyAndMindAbility ability) {
+    private SwordOfBodyAndMindAbility(final SwordOfBodyAndMindAbility ability) {
         super(ability);
     }
 

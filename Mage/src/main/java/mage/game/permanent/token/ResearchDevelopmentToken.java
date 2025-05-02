@@ -18,7 +18,7 @@ public final class ResearchDevelopmentToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected ResearchDevelopmentToken(final ResearchDevelopmentToken token) {
+    private ResearchDevelopmentToken(final ResearchDevelopmentToken token) {
         super(token);
     }
 

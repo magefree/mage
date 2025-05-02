@@ -8,13 +8,17 @@ Classic Sixth Edition|6ED|
 Seventh Edition|7ED|
 Eighth Edition|8ED|
 Ninth Edition|9ED|
+Alchemy: Dominaria|YDMU|
 Alchemy: Innistrad|Y22|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
+Aetherdrift|DFT|
+Aetherdrift Commander|DRC|
 Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|
 Alliances|ALL|
+Arena Beginner Set|ANB|
 Asia Pacific Land Program|APAC|
 Apocalypse|APC|
 Alara Reborn|ARB|
@@ -23,6 +27,7 @@ Arena League|ARENA|
 Arabian Nights|ARN|
 Anthologies|ATH|
 Antiquities|ATQ|
+Assassin's Creed|ACR|
 Avacyn Restored|AVR|
 Battle for Zendikar|BFZ|
 Battlebond|BBD|
@@ -30,15 +35,17 @@ Born of the Gods|BNG|
 Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
-Commander 2013 Edition|C13|
-Commander 2014 Edition|C14|
-Commander 2015 Edition|C15|
-Commander 2016 Edition|C16|
-Commander 2017 Edition|C17|
-Commander 2018 Edition|C18|
-Commander 2019 Edition|C19|
-Commander 2020 Edition|C20|
-Commander 2021 Edition|C21|
+Bloomburrow|BLB|
+Bloomburrow Commander|BLC|
+Commander 2013|C13|
+Commander 2014|C14|
+Commander 2015|C15|
+Commander 2016|C16|
+Commander 2017|C17|
+Commander 2018|C18|
+Commander 2019|C19|
+Commander 2020|C20|
+Commander 2021|C21|
 Commander Legends|CMR|
 Commander Legends: Battle for Baldur's Gate|CLB|
 Champions of Kamigawa|CHK|
@@ -55,10 +62,10 @@ Conflux|CON|
 Coldsnap|CSP|
 Doctor Who|WHO|
 Duel Decks: Jace vs. Chandra|DD2|
-Duel Decks: Anthology, Divine vs. Demonic|DVD|
-Duel Decks: Anthology, Elves vs. Goblins|EVG|
-Duel Decks: Anthology, Garruk vs. Liliana|GVL|
-Duel Decks: Anthology, Jace vs. Chandra|JVC|
+Duel Decks Anthology: Divine vs. Demonic|DVD|
+Duel Decks Anthology: Elves vs. Goblins|EVG|
+Duel Decks Anthology: Garruk vs. Liliana|GVL|
+Duel Decks Anthology: Jace vs. Chandra|JVC|
 Duel Decks: Divine vs. Demonic|DDC|
 Duel Decks: Garruk vs. Liliana|DDD|
 Duel Decks: Phyrexia vs. the Coalition|DDE|
@@ -78,6 +85,8 @@ Duel Decks: Nissa vs. Ob Nixilis|DDR|
 Duel Decks: Mind vs. Might|DDS|
 Duel Decks: Merfolk vs. Goblins|DDT|
 Duels of the Planeswalkers|DPA|
+Duskmourn: House of Horror|DSK|
+Duskmourn: House of Horror Commander|DSC|
 Dragon's Maze|DGM|
 Dissension|DIS|
 Dark Ascension|DKA|
@@ -100,11 +109,16 @@ Duel Decks: Elves vs. Inventors|DDU|
 Pro Tour Promos|PPRO|
 Exodus|EXO|
 Zendikar Expeditions|EXP|
+Fallout|PIP|
 Fallen Empires|FEM|
+Final Fantasy|FIN|
+Final Fantasy Commander|FIC|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
+Foundations|FDN|
+Foundations Jumpstar|J25|
 Future Sight|FUT|
-Global Series: Jiang Yanggu & Mu Yanling|GS1|
+Global Series Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
 Guilds of Ravnica|GRN|
 Grand Prix|PGPX|
@@ -121,6 +135,8 @@ Iconic Masters|IMA|
 Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
+The Lost Caverns of Ixalan|LCI|
+The Lost Caverns of Ixalan Commander|LCC|
 Innistrad: Midnight Hunt|MID|
 Midnight Hunt Commander|MIC|
 Innistrad: Crimson Vow|VOW|
@@ -157,6 +173,7 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+Marvel's Spider-Man Eternal|SPE|
 March of the Machine|MOM|
 March of the Machine Commander|MOC|
 March of the Machine: The Aftermath|MAT|
@@ -173,6 +190,8 @@ Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|
 Modern Horizons 2|MH2|
+Modern Horizons 3|MH3|
+Modern Horizons 3 Commander|M3C|
 Modern Masters 2015|MM2|
 Modern Masters 2017|MM3|
 Modern Masters|MMA|
@@ -181,16 +200,23 @@ Morningtide|MOR|
 Magic Player Rewards|MPRP|
 Masterpiece Series|MPS|
 Mirrodin|MRD|
+Murders at Karlov Manor|MKM|
+Murders at Karlov Manor Commander|MKC|
+Mystery Booster 2|MB2|
+Ravnica: Clue Edition|CLU|
 Nemesis|NEM|
 New Phyrexia|NPH|
 Odyssey|ODY|
 Oath of the Gatewatch|OGW|
 Onslaught|ONS|
+Outlaws of Thunder Junction|OTJ|
+Outlaws of Thunder Junction Commander|OTC|
+The Big Score|BIG|
 Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|
 Phyrexia: All Will Be One Commander|ONC|
 Portal Second Age|P02|
-Planechase 2012 Edition|PC2|
+Planechase 2012|PC2|
 Planechase Anthology|PCA|
 Prophecy|PCY|
 Premium Deck Series: Fire and Lightning|PD2|
@@ -202,14 +228,18 @@ Prerelease Events|PPRE|
 Portal Three Kingdoms|PTK|
 Ravnica Allegiance|RNA|
 Ravnica: City of Guilds|RAV|
+Jurassic World Collection|REX|
 Rivals of Ixalan|RIX|
 Rise of the Eldrazi|ROE|
 Return to Ravnica|RTR|
+Sega Dreamcast Cards|PSDG|
 Starter 2000|S00|
 Starter 1999|S99|
+Starter Commander Decks|SCD|
 Strixhaven: School of Mages|STX|
 Scourge|SCG|
 Secret Lair|SLD|
+Secret Lair Showdown|SLP|
 Shadowmoor|SHM|
 Shadows over Innistrad|SOI|
 Saviors of Kamigawa|SOK|
@@ -217,7 +247,10 @@ Scars of Mirrodin|SOM|
 Streets of New Capenna|SNC|
 New Capenna Commander|NCC|
 Stronghold|STH|
+Special Guests|SPG|
 Super Series|SUS|
+Tarkir: Dragonstorm|TDM|
+Tarkir: Dragonstorm Commander|TDC|
 Theros|THS|
 Theros Beyond Death|THB|
 The Brothers' War|BRO|
@@ -226,7 +259,7 @@ Tempest|TMP|
 Throne of Eldraine|ELD|
 Torment|TOR|
 Tempest Remastered|TPR|
-Time Spiral "Timeshifted"|TSB|
+Time Spiral Timeshifted|TSB|
 Time Spiral|TSP|
 Transformers|BOT|
 Urza's Destiny|UDS|
@@ -237,7 +270,7 @@ Unhinged|UNH|
 Unfinity|UNF|
 Urza's Saga|USG|
 Unstable|UST|
-HASCON Promo 2017|H17|
+HasCon 2017|H17|
 From the Vault: Exiled|V09|
 From the Vault: Relics|V10|
 From the Vault: Legends|V11|
@@ -259,6 +292,7 @@ Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
 Weatherlight|WTH|
 Wilds of Eldraine|WOE|
+Wilds of Eldraine Commander|WOC|
 Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|
@@ -266,4 +300,4 @@ Zendikar Rising|ZNR|
 Zendikar Rising Commander|ZNC|
 Star Wars|SWS|
 Happy Holidays|HHO|
-Warhammer 40,000|40K|
+Warhammer 40,000 Commander|40K|

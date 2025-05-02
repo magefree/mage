@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import java.util.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
  * <p>
  * this class is used to build a list of all possible mana combinations it can
  * be used to find all the ways to pay a mana cost or all the different mana
@@ -25,6 +24,8 @@ import java.util.*;
  * <p>
  * A LinkedHashSet is used to get the performance benefits of automatic de-duplication of the Mana
  * to avoid performance issues related with manual de-duplication (see https://github.com/magefree/mage/issues/7710).
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ManaOptions extends LinkedHashSet<Mana> {
 
@@ -378,54 +379,69 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     /**
      * Performs the simulation of a mana ability with costs
      *
-     * @param cost               cost to use the ability
-     * @param manaToAdd          one mana variation that can be added by using
-     *                           this ability
-     * @param onlyManaCosts      flag to know if the costs are mana costs only
-     * @param currentMana        the mana available before the usage of the
-     *                           ability
-     * @param oldManaWasReplaced returns the info if the new complete mana does
-     *                           replace the current mana completely
+     * @param cost          cost to use the ability
+     * @param manaToAdd     one mana variation that can be added by using
+     *                      this ability
+     * @param onlyManaCosts flag to know if the costs are mana costs only (will try to use ability multiple times)
+     * @param startingMana  the mana available before the usage of the
+     *                      ability
+     * @return true if the new complete mana does replace the current mana completely
      */
-    private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, final Mana currentMana, ManaAbility manaAbility, Game game) {
+    private boolean subtractCostAddMana(Mana cost, Mana manaToAdd, boolean onlyManaCosts, final Mana startingMana, ManaAbility manaAbility, Game game) {
         boolean oldManaWasReplaced = false; // True if the newly created mana includes all mana possibilities of the old
         boolean repeatable = manaToAdd != null  // TODO: re-write "only replace to any with mana costs only will be repeated if able"
                 && onlyManaCosts
-                && (manaToAdd.getAny() > 0 || manaToAdd.countColored() > 0)
-                && manaToAdd.count() > 0;
-        boolean newCombinations;
+                && manaToAdd.countColored() > 0;
+        boolean canHaveBetterValues;
 
-        Mana newMana = new Mana();
-        Mana currentManaCopy = new Mana();
+        Mana possibleMana = new Mana();
+        Mana improvedMana = new Mana();
 
-        for (Mana payCombination : ManaOptions.getPossiblePayCombinations(cost, currentMana)) {
-            currentManaCopy.setToMana(currentMana); // copy start mana because in iteration it will be updated
-            do { // loop for multiple usage if possible
-                newCombinations = false;
+        // simulate multiple calls of mana abilities and replace mana pool by better values
+        // example: {G}: Add one mana of any color
+        for (Mana possiblePay : ManaOptions.getPossiblePayCombinations(cost, startingMana)) {
+            improvedMana.setToMana(startingMana);
+            do {
+                // loop until all mana replaced by better values
+                canHaveBetterValues = false;
 
-                newMana.setToMana(currentManaCopy);
-                newMana.subtract(payCombination);
-                // Get the mana to iterate over.
-                // If manaToAdd is specified add it, otherwise add the mana produced by the mana ability
-                List<Mana> manasToAdd = (manaToAdd != null) ? Collections.singletonList(manaToAdd) : manaAbility.getNetMana(game, newMana);
-                for (Mana mana : manasToAdd) {
-                    newMana.add(mana);
-                    if (this.contains(newMana)) {
+                // it's impossible to analyse all payment order (pay {R} for {1}, {Any} for {G}, etc)
+                // so use simple cost simulation by subtract
+                possibleMana.setToMana(improvedMana);
+                possibleMana.subtract(possiblePay);
+                if (!possibleMana.isValid()) {
+                    //if (possibleMana.canPayMana(possiblePay)) {
+                    // TODO: canPayMana/includesMana uses better pay logic, so subtract can be improved somehow
+                    //logger.warn("found un-supported payment combination: pool " + possibleMana + ", cost " + possiblePay);
+                    //}
+                    continue;
+                }
+
+                // find resulting mana (it can have multiple options)
+                List<Mana> addingManaOptions = (manaToAdd != null) ? Collections.singletonList(manaToAdd) : manaAbility.getNetMana(game, possibleMana);
+                for (Mana addingMana : addingManaOptions) {
+                    // TODO: is it bugged on addingManaOptions.size() > 1 (adding multiple times)?
+                    possibleMana.add(addingMana);
+
+                    // already found that combination before
+                    if (this.contains(possibleMana)) {
                         continue;
                     }
 
-                    this.add(newMana.copy()); // add the new combination
-                    newCombinations = true; // repeat the while as long there are new combinations and usage is repeatable
+                    // found new combination - add it to final options
+                    this.add(possibleMana.copy());
+                    canHaveBetterValues = true;
 
-                    if (newMana.isMoreValuableThan(currentManaCopy)) {
-                        oldManaWasReplaced = true; // the new mana includes all possible mana of the old one, so no need to add it after return
-                        if (!currentMana.equalManaValue(currentManaCopy)) {
-                            this.removeEqualMana(currentManaCopy);
+                    // remove old worse options
+                    if (possibleMana.isMoreValuableThan(improvedMana)) {
+                        oldManaWasReplaced = true;
+                        if (!startingMana.equalManaValue(improvedMana)) {
+                            this.removeEqualMana(improvedMana);
                         }
                     }
-                    currentManaCopy.setToMana(newMana);
+                    improvedMana.setToMana(possibleMana);
                 }
-            } while (repeatable && newCombinations && currentManaCopy.includesMana(payCombination));
+            } while (repeatable && canHaveBetterValues && improvedMana.includesMana(possiblePay));
         }
         return oldManaWasReplaced;
     }

@@ -42,7 +42,6 @@ public final class StonehewerGiant extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // {1}{W}, {tap}: Search your library for an Equipment card and put it onto the battlefield. Attach it to a creature you control. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new StonehewerGiantEffect(),
                 new ManaCostsImpl<>("{1}{W}")
         );
@@ -63,12 +62,12 @@ public final class StonehewerGiant extends CardImpl {
 
 class StonehewerGiantEffect extends OneShotEffect {
 
-    public StonehewerGiantEffect() {
+    StonehewerGiantEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle";
     }
 
-    public StonehewerGiantEffect(final StonehewerGiantEffect effect) {
+    private StonehewerGiantEffect(final StonehewerGiantEffect effect) {
         super(effect);
     }
 
@@ -93,7 +92,7 @@ class StonehewerGiantEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent equipment = game.getPermanent(card.getId());
                 Target targetCreature = new TargetControlledCreaturePermanent();
-                targetCreature.setNotTarget(true);
+                targetCreature.withNotTarget(true);
                 if (equipment != null && controller.choose(Outcome.BoostCreature, targetCreature, source, game)) {
                     Permanent permanent = game.getPermanent(targetCreature.getFirstTarget());
                     permanent.addAttachment(equipment.getId(), source, game);

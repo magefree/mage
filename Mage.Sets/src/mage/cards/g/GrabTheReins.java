@@ -13,13 +13,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -42,12 +43,12 @@ public final class GrabTheReins extends CardImpl {
         effect.setText("and it gains haste");
         this.getSpellAbility().addEffect(effect);
         TargetCreaturePermanent target = new TargetCreaturePermanent();
-        target.setTargetName("a creature to take control of");
+        target.withTargetName("a creature to take control of");
         this.getSpellAbility().addTarget(target);
         // or sacrifice a creature, then Grab the Reins deals damage equal to that creature's power to any target.
         Mode mode = new Mode(new GrabTheReinsEffect());
         TargetAnyTarget target2 = new TargetAnyTarget();
-        target2.setTargetName("a creature or player to damage");
+        target2.withTargetName("a creature or player to damage");
         mode.addTarget(target2);
         this.getSpellAbility().getModes().addMode(mode);
 
@@ -67,27 +68,25 @@ public final class GrabTheReins extends CardImpl {
 
 class GrabTheReinsEffect extends OneShotEffect {
 
-    public GrabTheReinsEffect() {
+    GrabTheReinsEffect() {
         super(Outcome.Damage);
         staticText = "sacrifice a creature. {this} deals damage equal to that creature's power to any target";
     }
 
-    public GrabTheReinsEffect(final GrabTheReinsEffect effect) {
+    private GrabTheReinsEffect(final GrabTheReinsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         UUID controllerId = source.getControllerId();
-        Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
-        target.setTargetName("a creature to sacrifice");
+        Target target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_A_CREATURE);
         if (!target.canChoose(controllerId, source, game)) {
             return false;
         }
         Player player = game.getPlayer(controllerId);
         if (player != null) {
-            player.chooseTarget(Outcome.Sacrifice, target, source, game);
+            player.choose(Outcome.Sacrifice, target, source, game);
             Permanent creatureToSacrifice = game.getPermanent(target.getTargets().get(0));
             int amount = creatureToSacrifice.getPower().getValue();
             if (!creatureToSacrifice.sacrifice(source, game)) {

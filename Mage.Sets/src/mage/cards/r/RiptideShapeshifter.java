@@ -33,7 +33,7 @@ public final class RiptideShapeshifter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{U}{U}, Sacrifice Riptide Shapeshifter: Choose a creature type. Reveal cards from the top of your library until you reveal a creature card of that type. Put that card onto the battlefield and shuffle the rest into your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RiptideShapeshifterEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new RiptideShapeshifterEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -55,7 +55,7 @@ class RiptideShapeshifterEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. Reveal cards from the top of your library until you reveal a creature card of that type. Put that card onto the battlefield and shuffle the rest into your library";
     }
 
-    RiptideShapeshifterEffect(final RiptideShapeshifterEffect effect) {
+    private RiptideShapeshifterEffect(final RiptideShapeshifterEffect effect) {
         super(effect);
     }
 
@@ -69,13 +69,13 @@ class RiptideShapeshifterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Choice choice = new ChoiceCreatureType(sourceObject);
+            Choice choice = new ChoiceCreatureType(game, source);
             if (!controller.choose(Outcome.BoostCreature, choice, game)) {
                 return false;
             }
             Cards revealedCards = new CardsImpl();
             for (Card card : controller.getLibrary().getCards(game)) {
-                if (card.isCreature(game) && card.hasSubtype(SubType.byDescription(choice.getChoice()), game)) {
+                if (card.isCreature(game) && card.hasSubtype(SubType.byDescription(choice.getChoiceKey()), game)) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     break;
                 }

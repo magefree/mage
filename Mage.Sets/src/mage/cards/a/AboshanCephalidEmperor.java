@@ -28,29 +28,29 @@ import java.util.UUID;
  */
 public final class AboshanCephalidEmperor extends CardImpl {
 
-    static final FilterControlledPermanent filter1 = new FilterControlledPermanent("untapped Cephalid you control");
+    static final FilterControlledPermanent filter1 = new FilterControlledPermanent("untapped Octopus you control");
     static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures without flying");
 
     static {
-        filter1.add(SubType.CEPHALID.getPredicate());
+        filter1.add(SubType.OCTOPUS.getPredicate());
         filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
     public AboshanCephalidEmperor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CEPHALID, SubType.NOBLE);
+        this.subtype.add(SubType.OCTOPUS, SubType.NOBLE);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Tap an untapped Cephalid you control: Tap target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledPermanent(1, filter1)));
+        // Tap an untapped Octopus you control: Tap target permanent.
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapTargetCost(new TargetControlledPermanent(1, filter1)));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
         // {U}{U}{U}: Tap all creatures without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(filter2), new ManaCostsImpl<>("{U}{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new TapAllEffect(filter2), new ManaCostsImpl<>("{U}{U}{U}")));
     }
 
     private AboshanCephalidEmperor(final AboshanCephalidEmperor card) {

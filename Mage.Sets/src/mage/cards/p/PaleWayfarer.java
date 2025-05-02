@@ -45,7 +45,7 @@ public final class PaleWayfarer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{W}{W}, {untap}: Target creature gains protection from the color of its controller's choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PaleWayfarerEffect(), new ManaCostsImpl<>("{2}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(new PaleWayfarerEffect(), new ManaCostsImpl<>("{2}{W}{W}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -64,12 +64,12 @@ public final class PaleWayfarer extends CardImpl {
 
 class PaleWayfarerEffect extends OneShotEffect {
 
-    public PaleWayfarerEffect() {
+    PaleWayfarerEffect() {
         super(Outcome.BoostCreature);
         staticText = "Target creature gains protection from the color of its controller's choice until end of turn";
     }
 
-    public PaleWayfarerEffect(final PaleWayfarerEffect effect) {
+    private PaleWayfarerEffect(final PaleWayfarerEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class ProtectionChosenColorTargetEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    public ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
+    private ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
         super(effect);
         if (effect.chosenColor != null) {
             this.chosenColor = effect.chosenColor.copy();

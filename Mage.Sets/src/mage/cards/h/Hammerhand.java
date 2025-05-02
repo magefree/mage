@@ -49,7 +49,7 @@ public final class Hammerhand extends CardImpl {
         // Enchanted creature gets +1/+1 and has haste.
         Effect effect = new BoostEnchantedEffect(1, 1);
         effect.setText("Enchanted creature gets +1/+1");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has haste");
         ability.addEffect(effect);

@@ -46,12 +46,12 @@ public final class Feint extends CardImpl {
 
 class FeintEffect extends OneShotEffect {
 
-    public FeintEffect() {
+    FeintEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "tap all creatures blocking target attacking creature";
     }
 
-    public FeintEffect(final FeintEffect effect) {
+    private FeintEffect(final FeintEffect effect) {
         super(effect);
     }
 

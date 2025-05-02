@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -28,8 +27,8 @@ public final class LumberingSatyr extends CardImpl {
         this.toughness = new MageInt(4);
 
         // All creatures have forestwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                new GainAbilityAllEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        this.addAbility(new SimpleStaticAbility(
+                new GainAbilityAllEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
     }
 
     private LumberingSatyr(final LumberingSatyr card) {

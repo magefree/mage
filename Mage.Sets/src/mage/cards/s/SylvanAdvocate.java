@@ -49,7 +49,7 @@ public final class SylvanAdvocate extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), ComparisonType.MORE_THAN, 5), rule1);
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent(), ComparisonType.MORE_THAN, 5), rule2);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         ability.addEffect(effect2);
         this.addAbility(ability);
     }

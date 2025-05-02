@@ -18,7 +18,7 @@ public final class SlugToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected SlugToken(final SlugToken token) {
+    private SlugToken(final SlugToken token) {
         super(token);
     }
 

@@ -53,7 +53,7 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of each opponent's upkeep, ");
     }
 
-    public GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
+    private GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,12 +86,12 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
 
 class GrandMoffTarkinEffect extends OneShotEffect {
 
-    public GrandMoffTarkinEffect() {
+    GrandMoffTarkinEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "destroy target creature that that player controls unless that player pays 2 life. If a player pays life this way, draw a card";
     }
 
-    public GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {
+    private GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class GrandMoffTarkinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature == null) {
             return false;
         }

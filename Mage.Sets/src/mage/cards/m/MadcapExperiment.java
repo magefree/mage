@@ -38,12 +38,12 @@ public final class MadcapExperiment extends CardImpl {
 
 class MadcapExperimentEffect extends OneShotEffect {
 
-    public MadcapExperimentEffect() {
+    MadcapExperimentEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. {this} deals damage to you equal to the number of cards revealed this way";
     }
 
-    public MadcapExperimentEffect(final MadcapExperimentEffect effect) {
+    private MadcapExperimentEffect(final MadcapExperimentEffect effect) {
         super(effect);
     }
 

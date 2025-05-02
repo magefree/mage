@@ -31,7 +31,7 @@ public final class ThoughtDevourer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Your maximum hand size is reduced by four.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(4, Duration.WhileOnBattlefield, HandSizeModification.REDUCE)));
     }
 

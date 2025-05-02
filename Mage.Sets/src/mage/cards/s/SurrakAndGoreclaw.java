@@ -51,12 +51,12 @@ public final class SurrakAndGoreclaw extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURES, true
         )));
 
-        // Whenever another nontoken creature enters the battlefield under your control, put a +1/+1 counter on it. It gains haste until end of turn.
+        // Whenever another nontoken creature you control enters, put a +1/+1 counter on it. It gains haste until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                         .setText("put a +1/+1 counter on it"),
-                filter, false, SetTargetPointer.PERMANENT, null
+                filter, false, SetTargetPointer.PERMANENT
         );
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
                 .setText("it gains haste until end of turn"));

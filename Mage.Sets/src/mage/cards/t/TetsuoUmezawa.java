@@ -47,9 +47,9 @@ public final class TetsuoUmezawa extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Tetsuo Umezawa can't be the target of Aura spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TetsuoUmezawaEffect()));
+        this.addAbility(new SimpleStaticAbility(new TetsuoUmezawaEffect()));
         // {U}{B}{B}{R}, {tap}: Destroy target tapped or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{U}{B}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{U}{B}{B}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(creatureFilter));
         this.addAbility(ability);
@@ -67,12 +67,12 @@ public final class TetsuoUmezawa extends CardImpl {
 
 class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TetsuoUmezawaEffect() {
+    TetsuoUmezawaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of Aura spells";
     }
 
-    public TetsuoUmezawaEffect(final TetsuoUmezawaEffect effect) {
+    private TetsuoUmezawaEffect(final TetsuoUmezawaEffect effect) {
         super(effect);
     }
 
@@ -84,11 +84,6 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TARGET;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

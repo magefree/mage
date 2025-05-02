@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class GiltLeafAmbush extends CardImpl {
 
     public GiltLeafAmbush(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{2}{G}");
         this.subtype.add(SubType.ELF);
 
         // Create two 1/1 green Elf Warrior creature tokens into play. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn
@@ -46,12 +46,12 @@ public final class GiltLeafAmbush extends CardImpl {
 
 class GiltLeafAmbushCreateTokenEffect extends OneShotEffect {
 
-    public GiltLeafAmbushCreateTokenEffect() {
+    GiltLeafAmbushCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create two 1/1 green Elf Warrior creature tokens. Clash with an opponent. If you win, those creatures gain deathtouch until end of turn";
     }
 
-    public GiltLeafAmbushCreateTokenEffect(final GiltLeafAmbushCreateTokenEffect effect) {
+    private GiltLeafAmbushCreateTokenEffect(final GiltLeafAmbushCreateTokenEffect effect) {
         super(effect);
     }
 

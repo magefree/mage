@@ -37,7 +37,7 @@ public final class OraclesAttendants extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {tap}: All damage that would be dealt to target creature this turn by a source of your choice is dealt to Oracle's Attendants instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OraclesAttendantsReplacementEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new OraclesAttendantsReplacementEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -62,7 +62,7 @@ class OraclesAttendantsReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "All damage that would be dealt to target creature this turn by a source of your choice is dealt to {this} instead";
     }
     
-    public OraclesAttendantsReplacementEffect(final OraclesAttendantsReplacementEffect effect) {
+    private OraclesAttendantsReplacementEffect(final OraclesAttendantsReplacementEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
@@ -74,6 +74,7 @@ class OraclesAttendantsReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 

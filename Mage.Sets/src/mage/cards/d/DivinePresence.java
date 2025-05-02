@@ -24,7 +24,7 @@ public final class DivinePresence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // If a source would deal 4 or more damage to a creature or player, that source deals 3 damage to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DivinePresenceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DivinePresenceEffect()));
     }
 
     private DivinePresence(final DivinePresence card) {
@@ -39,12 +39,12 @@ public final class DivinePresence extends CardImpl {
 
 class DivinePresenceEffect extends ReplacementEffectImpl {
 
-    public DivinePresenceEffect() {
+    DivinePresenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "If a source would deal 4 or more damage to a permanent or player, that source deals 3 damage to that permanent or player instead.";
     }
 
-    public DivinePresenceEffect(final DivinePresenceEffect effect) {
+    private DivinePresenceEffect(final DivinePresenceEffect effect) {
         super(effect);
     }
 
@@ -62,11 +62,6 @@ class DivinePresenceEffect extends ReplacementEffectImpl {
             default:
                 return false;
         }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

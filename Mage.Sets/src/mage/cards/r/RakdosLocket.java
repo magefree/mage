@@ -28,7 +28,7 @@ public final class RakdosLocket extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {B/R}{B/R}{B/R}{B/R}, {T}, Sacrifice Rakdos Locket: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{B/R}{B/R}{B/R}{B/R}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{B/R}{B/R}{B/R}{B/R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

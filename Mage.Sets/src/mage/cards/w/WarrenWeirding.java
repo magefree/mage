@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class WarrenWeirding extends CardImpl {
 
     public WarrenWeirding(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{1}{B}");
         this.subtype.add(SubType.GOBLIN);
 
         // Target player sacrifices a creature. If a Goblin is sacrificed this way, that player creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn.
@@ -61,7 +61,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
                 "creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn";
     }
 
-    WarrenWeirdingEffect(WarrenWeirdingEffect effect) {
+    private WarrenWeirdingEffect(final WarrenWeirdingEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {

@@ -2,8 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
+import mage.abilities.*;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -20,7 +19,6 @@ import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
-import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
@@ -77,9 +75,11 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
         return deck
                 .stream()
                 .filter(MageObject::isPermanent)
-                .map(MageObject::getAbilities)
-                .flatMap(Collection::stream)
-                .anyMatch(ActivatedAbility.class::isInstance);
+                .allMatch(card -> card
+                        .getAbilities()
+                        .stream()
+                        .anyMatch(ability -> ability.isActivatedAbility())
+                );
     }
 }
 
@@ -110,7 +110,7 @@ class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return abilityToModify.getAbilityType() == AbilityType.ACTIVATED
+        return abilityToModify.isNonManaActivatedAbility()
                 && abilityToModify.isControlledBy(source.getControllerId());
     }
 

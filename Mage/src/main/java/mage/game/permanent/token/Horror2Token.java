@@ -18,7 +18,7 @@ public final class Horror2Token extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected Horror2Token(final Horror2Token token) {
+    private Horror2Token(final Horror2Token token) {
         super(token);
     }
 

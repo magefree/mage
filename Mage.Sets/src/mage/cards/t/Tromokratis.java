@@ -42,10 +42,10 @@ public final class Tromokratis extends CardImpl {
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
                 new InvertCondition(new SourceMatchesFilterCondition(new FilterAttackingOrBlockingCreature())),
                 "{this} has hexproof unless it's attacking or blocking");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Tromokratis can't be blocked unless all creatures defending player controls block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedUnlessAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedUnlessAllEffect()));
     }
 
     private Tromokratis(final Tromokratis card) {
@@ -67,7 +67,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
         staticText = "{this} can't be blocked unless all creatures defending player controls block it";
     }
 
-    public CantBeBlockedUnlessAllEffect(final CantBeBlockedUnlessAllEffect effect) {
+    private CantBeBlockedUnlessAllEffect(final CantBeBlockedUnlessAllEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
         // check if all creatures of defender are able to block this permanent
         // permanent.canBlock() can't be used because causing recursive call
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, blocker.getControllerId(), game)) {
-            if (permanent.isTapped() && null == game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, blocker.getControllerId(), game)) {
+            if (permanent.isTapped() && game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, null, blocker.getControllerId(), game).isEmpty()) {
                 return false;
             }
             // check blocker restrictions

@@ -13,14 +13,15 @@ import mage.game.stack.StackObject;
 public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public CycleTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.ALL, effect, "When you cycle {this}, ", optional);
+        super(Zone.ALL, effect, "When you cycle this card, ", optional);
+        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
     }
 
     public CycleTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
-    public CycleTriggeredAbility(CycleTriggeredAbility ability) {
+    protected CycleTriggeredAbility(CycleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -31,14 +32,15 @@ public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            StackObject object = game.getStack().getStackObject(event.getSourceId());
-            if (object != null && object.getStackAbility() instanceof CyclingAbility) {
-                this.getEffects().setValue("cycleCosts", object.getStackAbility().getCosts());
-                return true;
-            }
+        if (!event.getSourceId().equals(this.getSourceId())) {
+            return false;
         }
-        return false;
+        StackObject object = game.getStack().getStackObject(event.getSourceId());
+        if (object == null || !(object.getStackAbility() instanceof CyclingAbility)) {
+            return false;
+        }
+        this.getEffects().setValue("cycleCosts", object.getStackAbility().getCosts());
+        return true;
     }
 
     @Override

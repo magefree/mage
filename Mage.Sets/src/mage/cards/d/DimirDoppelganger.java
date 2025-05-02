@@ -37,7 +37,7 @@ public final class DimirDoppelganger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{U}{B}: Exile target creature card from a graveyard. Dimir Doppelganger becomes a copy of that card, except it has this ability.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl<>("{1}{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DimirDoppelgangerEffect(), new ManaCostsImpl<>("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         this.addAbility(ability);
 
@@ -60,7 +60,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
         staticText = "Exile target creature card from a graveyard. {this} becomes a copy of that card, except it has this ability";
     }
 
-    DimirDoppelgangerEffect(final DimirDoppelgangerEffect effect) {
+    private DimirDoppelgangerEffect(final DimirDoppelgangerEffect effect) {
         super(effect);
     }
 
@@ -86,9 +86,8 @@ class DimirDoppelgangerEffect extends OneShotEffect {
                 CopyApplier applier = new DimirDoppelgangerCopyApplier();
                 applier.apply(game, newBluePrint, source, dimirDoppelganger.getId());
                 CopyEffect copyEffect = new CopyEffect(Duration.Custom, newBluePrint, dimirDoppelganger.getId());
-                copyEffect.newId();
                 copyEffect.setApplier(applier);
-                Ability newAbility = source.copy();
+                Ability newAbility = source.copy(); // TODO: why it copy new ability instead source? Some cards use it, some miss
                 copyEffect.init(newAbility, game);
                 game.addEffect(copyEffect, newAbility);
             }
@@ -102,7 +101,7 @@ class DimirDoppelgangerCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DimirDoppelgangerEffect(), new ManaCostsImpl<>("{1}{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DimirDoppelgangerEffect(), new ManaCostsImpl<>("{1}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
         blueprint.getAbilities().add(ability);
         return true;

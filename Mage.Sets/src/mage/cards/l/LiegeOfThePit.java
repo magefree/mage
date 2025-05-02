@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -17,7 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -37,9 +37,9 @@ public final class LiegeOfThePit extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature other than Liege of the Pit. If you can't, Liege of the Pit deals 7 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LiegeOfThePitEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LiegeOfThePitEffect()));
         // Morph {B}{B}{B}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{B}{B}{B}{B}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{B}{B}{B}{B}")));
     }
 
     private LiegeOfThePit(final LiegeOfThePit card) {
@@ -55,12 +55,12 @@ public final class LiegeOfThePit extends CardImpl {
 
 class LiegeOfThePitEffect extends OneShotEffect {
 
-    public LiegeOfThePitEffect() {
+    LiegeOfThePitEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice a creature other than {this}. If you can't, {this} deals 7 damage to you.";
     }
 
-    public LiegeOfThePitEffect(final LiegeOfThePitEffect effect) {
+    private LiegeOfThePitEffect(final LiegeOfThePitEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class LiegeOfThePitEffect extends OneShotEffect {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than " + sourcePermanent.getName());
         filter.add(AnotherPredicate.instance);
 
-        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+        Target target = new TargetSacrifice(filter);
         if (target.canChoose(player.getId(), source, game)) {
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());

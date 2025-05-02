@@ -2,16 +2,15 @@ package org.mage.plugins.card.dl;
 
 import org.mage.plugins.card.dl.beans.properties.Property;
 import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
-import org.mage.plugins.card.utils.CardImageUtils;
 
 import javax.swing.*;
-import java.io.*;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
- * Downloader job to download one resource
+ * Download: download job to load one resource, used for symbols
  *
  * @author Clemens Koza, JayDi85
  */
@@ -22,17 +21,27 @@ public class DownloadJob extends AbstractLaternaBean {
     }
 
     private final String name;
-    private Source source;
+    private String url;
     private final Destination destination;
+    private final boolean forceToDownload; // download image everytime, do not keep old image
     private final Property<State> state = properties.property("state", State.NEW);
     private final Property<String> message = properties.property("message");
     private final Property<Exception> error = properties.property("error");
     private final BoundedRangeModel progress = new DefaultBoundedRangeModel();
 
-    public DownloadJob(String name, Source source, Destination destination) {
+    public DownloadJob(String name, String url, Destination destination, boolean forceToDownload) {
         this.name = name;
-        this.source = source;
+        this.url = url;
         this.destination = destination;
+        this.forceToDownload = forceToDownload;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**
@@ -78,7 +87,7 @@ public class DownloadJob extends AbstractLaternaBean {
      */
     public void setError(String message, Exception error) {
         if (message == null) {
-            message = "Download of " + name + " from " + source.toString() + " caused error: " + error.toString();
+            message = "Download: " + name + " from " + url + " caused error - " + error;
         }
         this.state.setValue(State.ABORTED);
         this.error.setValue(error);
@@ -143,81 +152,12 @@ public class DownloadJob extends AbstractLaternaBean {
         return name;
     }
 
-    public Source getSource() {
-        return source;
-    }
-
-    public void setSource(Source source) {
-        this.source = source;
-    }
-
     public Destination getDestination() {
         return destination;
     }
 
-    public static Source fromURL(final String url) {
-        return fromURL(CardImageUtils.getProxyFromPreferences(), url);
-    }
-
-    public static Source fromURL(final URL url) {
-        return fromURL(CardImageUtils.getProxyFromPreferences(), url);
-    }
-
-    public static Source fromURL(final Proxy proxy, final String url) {
-        return new Source() {
-            private URLConnection c;
-
-            public URLConnection getConnection() throws IOException {
-                if (c == null) {
-                    c = proxy == null ? new URL(url).openConnection() : new URL(url).openConnection(proxy);
-                }
-                return c;
-            }
-
-            @Override
-            public InputStream open() throws IOException {
-                return getConnection().getInputStream();
-            }
-
-            @Override
-            public int length() throws IOException {
-                return getConnection().getContentLength();
-            }
-
-            @Override
-            public String toString() {
-                return proxy != null ? proxy.type().toString() + ' ' : url;
-            }
-
-        };
-    }
-
-    public static Source fromURL(final Proxy proxy, final URL url) {
-        return new Source() {
-            private URLConnection c;
-
-            public URLConnection getConnection() throws IOException {
-                if (c == null) {
-                    c = proxy == null ? url.openConnection() : url.openConnection(proxy);
-                }
-                return c;
-            }
-
-            @Override
-            public InputStream open() throws IOException {
-                return getConnection().getInputStream();
-            }
-
-            @Override
-            public int length() throws IOException {
-                return getConnection().getContentLength();
-            }
-
-            @Override
-            public String toString() {
-                return proxy != null ? proxy.type().toString() + ' ' : String.valueOf(url);
-            }
-        };
+    public boolean isForceToDownload() {
+        return forceToDownload;
     }
 
     public static Destination toFile(final String file) {
@@ -256,13 +196,6 @@ public class DownloadJob extends AbstractLaternaBean {
                 }
             }
         };
-    }
-
-    public interface Source {
-
-        InputStream open() throws IOException;
-
-        int length() throws IOException;
     }
 
     public interface Destination {

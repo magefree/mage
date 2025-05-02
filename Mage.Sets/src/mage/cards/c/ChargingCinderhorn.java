@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -39,8 +39,8 @@ public final class ChargingCinderhorn extends CardImpl {
         ChargingCinderhornDamageTargetEffect effect = new ChargingCinderhornDamageTargetEffect();
         effect.setText("put a fury counter on {this}. Then {this} deals damage equal to the number of fury counters on it to that player");
         BeginningOfEndStepTriggeredAbility ability
-                = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, new ChargingCinderhornCondition(), false);
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+                = new BeginningOfEndStepTriggeredAbility(TargetController.ANY, effect, false, new ChargingCinderhornCondition());
+        this.addAbility(ability);
     }
 
     private ChargingCinderhorn(final ChargingCinderhorn card) {
@@ -73,11 +73,11 @@ class ChargingCinderhornCondition implements Condition {
 
 class ChargingCinderhornDamageTargetEffect extends OneShotEffect {
 
-    public ChargingCinderhornDamageTargetEffect() {
+    ChargingCinderhornDamageTargetEffect() {
         super(Outcome.Damage);
     }
 
-    public ChargingCinderhornDamageTargetEffect(ChargingCinderhornDamageTargetEffect copy) {
+    private ChargingCinderhornDamageTargetEffect(final ChargingCinderhornDamageTargetEffect copy) {
         super(copy);
     }
 
@@ -95,7 +95,7 @@ class ChargingCinderhornDamageTargetEffect extends OneShotEffect {
         }
 
         DynamicValue amount = new CountersSourceCount(CounterType.FURY);
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.damage(amount.calculate(game, source, this), source.getSourceId(), source, game);
             return true;

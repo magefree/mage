@@ -62,7 +62,7 @@ public final class IymrithDesertDoom extends CardImpl {
 
 class IymrithDesertDoomEffect extends OneShotEffect {
 
-    public IymrithDesertDoomEffect() {
+    IymrithDesertDoomEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Then if you have fewer than three cards in hand, draw cards equal to the difference";
     }

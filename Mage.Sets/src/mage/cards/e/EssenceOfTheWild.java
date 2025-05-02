@@ -26,7 +26,7 @@ public final class EssenceOfTheWild extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Creatures you control enter the battlefield as a copy of Essence of the Wild.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EssenceOfTheWildEffect()));
+        this.addAbility(new SimpleStaticAbility(new EssenceOfTheWildEffect()));
     }
 
     private EssenceOfTheWild(final EssenceOfTheWild card) {
@@ -41,12 +41,12 @@ public final class EssenceOfTheWild extends CardImpl {
 
 class EssenceOfTheWildEffect extends ReplacementEffectImpl {
 
-    public EssenceOfTheWildEffect() {
+    EssenceOfTheWildEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Copy, false);
         staticText = "Creatures you control enter the battlefield as a copy of {this}";
     }
 
-    public EssenceOfTheWildEffect(EssenceOfTheWildEffect effect) {
+    private EssenceOfTheWildEffect(final EssenceOfTheWildEffect effect) {
         super(effect);
     }
 

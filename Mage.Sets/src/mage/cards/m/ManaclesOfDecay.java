@@ -30,16 +30,16 @@ public final class ManaclesOfDecay extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         
         // Enchanted creature can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAttachedEffect(AttachmentType.AURA)));
         // {B}: Enchanted creature gets -1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new BoostEnchantedEffect(-1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
         // {R}: Enchanted creature can't block this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new CantBlockAttachedEffect(AttachmentType.AURA, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
 
     }
 

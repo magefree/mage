@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -36,7 +35,7 @@ public final class InnocentTraveler extends CardImpl {
         // At the beginning of your upkeep, any opponent may sacrifice a creature. If no one does, transform Innocent Traveler.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new InnocentTravelerEffect(), TargetController.YOU, false
+                new InnocentTravelerEffect()
         ));
     }
 
@@ -78,7 +77,7 @@ class InnocentTravelerEffect extends OneShotEffect {
             }
 
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!target.canChoose(opponent.getId(), source, game)
                     || !opponent.chooseUse(Outcome.AIDontUseIt, "Sacrifice a creature?", source, game)
                     || !opponent.choose(Outcome.Sacrifice, target, source, game)) {

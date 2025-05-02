@@ -28,7 +28,7 @@ public final class PlanewideCelebration extends CardImpl {
         // Choose four. You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(4);
         this.getSpellAbility().getModes().setMaxModes(4);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
 
         // • Create a 2/2 Citizen creature token that's all colors.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PlanewideCelebrationToken()));

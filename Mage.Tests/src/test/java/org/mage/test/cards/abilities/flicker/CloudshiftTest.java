@@ -8,6 +8,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -60,8 +61,10 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Cloudshift");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Knight of Meadowgrain");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Knight of Meadowgrain"); // clone has name of copied permanent
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Heirs of Stromkirk");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -119,6 +122,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addTarget(playerB, "Timberland Guide");
         attack(2, playerB, "Fervent Cathar");
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Cloudshift", "Timberland Guide");
+        addTarget(playerA, "Timberland Guide"); // where to put counter
         block(2, playerA, "Timberland Guide", "Fervent Cathar");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
@@ -135,7 +139,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
     @Test
     public void testThatCardIsHandledAsNewInstanceAfterCloudshift() {
-        // Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // Whenever another creature you control enters, you gain life equal to that creature's toughness.
         // {1}{G}{W}, {T}: Populate. (Create a tokenonto the battlefield that's a copy of a creature token you control.)
         addCard(Zone.BATTLEFIELD, playerA, "Trostani, Selesnya's Voice");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
@@ -174,7 +178,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
         attack(3, playerA, "Silvercoat Lion");
 
-        activateAbility(3, PhaseStep.END_COMBAT, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull  Equipped creature gets");
+        activateAbility(3, PhaseStep.END_COMBAT, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull Equipped creature gets");
         setModeChoice(playerA, "1");
         castSpell(3, PhaseStep.END_COMBAT, playerA, "Cloudshift", "Silvercoat Lion", "Remove a charge counter from");
 
@@ -211,7 +215,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
         attack(3, playerA, "Silvercoat Lion");
 
-        activateAbility(4, PhaseStep.DRAW, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull  Equipped creature gets");
+        activateAbility(4, PhaseStep.DRAW, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull Equipped creature gets");
         setModeChoice(playerA, "1");
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Flickerwisp");
         addTarget(playerB, "Silvercoat Lion");
@@ -313,8 +317,10 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "Silvercoat Lion");
-        // Silvercoat Lion is autochosen
+        setChoice(playerA, true); // yes to flicker
+        addTarget(playerA, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -355,6 +361,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flickerwisp");
         addTarget(playerA, "Flickerwisp");
         addTarget(playerA, "Courser of Kruphix");
+        setChoice(playerA, "At the beginning"); // order triggers
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -388,6 +395,89 @@ public class CloudshiftTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 2 + 1);
         assertPermanentCount(playerA, "Umara Wizard", 1); // must return as first side
         assertPermanentCount(playerA, "Umara Skyfalls", 0);
+
+    }
+
+    // Reported bug: #9839
+    private static final String cloudshift = "Cloudshift";
+    private static final String mist = "Turn to Mist";
+    private static final String kor = "Lone Missionary"; // 2/1 ETB gain 4 life
+    private static final String lignify = "Lignify"; // {1}{G} Aura - enchanted creature loses all abilities and is a 0/4 Treefolk
+
+    @Test
+    @Ignore("Failing, see #9839, perhaps due to game.getState.processAction(game) not cleaning up Permanent::removeAllAbilities in time")
+    public void testEntersTriggerNotSuppressed() {
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah", 3);
+        addCard(Zone.BATTLEFIELD, playerA, kor);
+        addCard(Zone.HAND, playerA, lignify);
+        addCard(Zone.HAND, playerA, cloudshift);
+
+        checkPT("Kor", 1, PhaseStep.UPKEEP, playerA, kor, 2, 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lignify, kor);
+        checkPT("Treefolk", 1, PhaseStep.BEGIN_COMBAT, playerA, kor, 0, 4);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, cloudshift, kor);
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, cloudshift, 1);
+        assertGraveyardCount(playerA, lignify, 1);
+        assertPowerToughness(playerA, kor, 2, 1);
+        assertLife(playerA, 24);
+
+    }
+
+    @Test
+    @Ignore("Failing, see #9839, perhaps due to game.getState.processAction(game) not cleaning up MageObject::removeAllSubTypes in time")
+    public void testEntersSubtype() {
+        String mystic = "Elvish Mystic";
+        String vanguard = "Elvish Vanguard"; // Whenever another Elf enters the battlefield, put a +1/+1 counter on Elvish Vanguard.
+
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah", 3);
+        addCard(Zone.BATTLEFIELD, playerA, mystic);
+        addCard(Zone.BATTLEFIELD, playerA, vanguard);
+        addCard(Zone.BATTLEFIELD, playerA, "Orchard Warden"); // Whenever another Treefolk creature you control enters, you may gain life equal to that creature’s toughness.
+        addCard(Zone.HAND, playerA, lignify);
+        addCard(Zone.HAND, playerA, cloudshift);
+
+        checkPT("Elf", 1, PhaseStep.UPKEEP, playerA, mystic, 1, 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lignify, mystic);
+        checkPT("Treefolk", 1, PhaseStep.BEGIN_COMBAT, playerA, mystic, 0, 4);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, cloudshift, mystic);
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, cloudshift, 1);
+        assertGraveyardCount(playerA, lignify, 1);
+        assertPowerToughness(playerA, mystic, 1, 1);
+        assertPowerToughness(playerA, vanguard, 2, 2); // received a counter when mystic entered
+
+    }
+
+    @Test
+    public void testEntersTriggerNotSuppressedDelayed() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3); // not sure why duals aren't working... hybrid?
+        addCard(Zone.BATTLEFIELD, playerA, kor);
+        addCard(Zone.HAND, playerA, lignify);
+        addCard(Zone.HAND, playerA, mist);
+
+        checkPT("Kor", 1, PhaseStep.UPKEEP, playerA, kor, 2, 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lignify, kor);
+        checkPT("Treefolk", 1, PhaseStep.BEGIN_COMBAT, playerA, kor, 0, 4);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, mist, kor);
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, mist, 1);
+        assertGraveyardCount(playerA, lignify, 1);
+        assertPowerToughness(playerA, kor, 2, 1);
+        assertLife(playerA, 24);
 
     }
 

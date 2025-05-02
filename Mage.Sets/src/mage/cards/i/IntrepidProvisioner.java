@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -12,9 +11,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -22,7 +21,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class IntrepidProvisioner extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.HUMAN, "another target Human you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.HUMAN, "another target Human you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -39,7 +38,7 @@ public final class IntrepidProvisioner extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // When Intrepid Provisioner enters the battlefield, another target Human you control gets +2/+2 until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), false);
-        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
     }

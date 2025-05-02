@@ -43,7 +43,7 @@ class WarpedDevotionTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), false);
     }
 
-    public WarpedDevotionTriggeredAbility(final WarpedDevotionTriggeredAbility ability) {
+    private WarpedDevotionTriggeredAbility(final WarpedDevotionTriggeredAbility ability) {
         super(ability);
     }
 

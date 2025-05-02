@@ -42,13 +42,13 @@ public final class GremlinMine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {1}, {tap}, Sacrifice Gremlin Mine: Gremlin Mine deals 4 damage to target artifact creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(4, "it"), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent(filterCreature));
         this.addAbility(ability);
         // {1}, {tap}, Sacrifice Gremlin Mine: Remove up to four charge counters from target noncreature artifact.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GremlinMineEffect(), new ManaCostsImpl<>("{1}"));
+        ability = new SimpleActivatedAbility(new GremlinMineEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetArtifactPermanent(filterNonCreature));
@@ -67,12 +67,12 @@ public final class GremlinMine extends CardImpl {
 
 class GremlinMineEffect extends OneShotEffect {
 
-    public GremlinMineEffect() {
+    GremlinMineEffect() {
         super(Outcome.Detriment);
         this.staticText = "Remove up to four charge counters from target noncreature artifact";
     }
 
-    public GremlinMineEffect(GremlinMineEffect effect) {
+    private GremlinMineEffect(final GremlinMineEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class GremlinMineEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             int existingCount = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (existingCount > 0) {
-                Choice choice = new ChoiceImpl();
+                Choice choice = new ChoiceImpl(false);
                 choice.setMessage("Select number of charge counters to remove:");
                 for (Integer i = 0; i <= existingCount; i++) {
                     choice.getChoices().add(i.toString());

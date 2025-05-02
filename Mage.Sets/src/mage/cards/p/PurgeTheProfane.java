@@ -22,7 +22,7 @@ public final class PurgeTheProfane extends CardImpl {
         // Target opponent discards two cards and you gain 2 life.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getSpellAbility().addEffect(new GainLifeEffect(2).concatBy("and"));
     }
 
     private PurgeTheProfane(final PurgeTheProfane card) {

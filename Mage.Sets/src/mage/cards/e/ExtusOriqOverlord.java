@@ -62,7 +62,7 @@ public final class ExtusOriqOverlord extends ModalDoubleFacedCard {
         // Awaken the Blood Avatar
         // Sorcery
         // As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed this way.
-        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true);
+        Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE, true);
         cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures. " +
                 "This spell costs {2} less to cast for each creature sacrificed this way");
         this.getRightHalfCard().getSpellAbility().addCost(cost);
@@ -71,9 +71,9 @@ public final class ExtusOriqOverlord extends ModalDoubleFacedCard {
         this.getRightHalfCard().addAbility(ability);
 
         // Each opponent sacrifices a creature. Create a 3/6 black and red Avatar creature token with haste and "Whenever this creature attacks, it deals 3 damage to each opponent."
-        this.getRightHalfCard().getSpellAbility().addEffect(new SacrificeOpponentsEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        ));
+        this.getRightHalfCard().getSpellAbility().addEffect(
+                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE)
+        );
         this.getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new BloodAvatarToken()));
     }
 

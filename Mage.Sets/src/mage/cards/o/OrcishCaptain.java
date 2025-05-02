@@ -37,7 +37,7 @@ public final class OrcishCaptain extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}: Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrcishCaptainEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new OrcishCaptainEffect(), new GenericManaCost(1));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -54,12 +54,12 @@ public final class OrcishCaptain extends CardImpl {
 
 class OrcishCaptainEffect extends OneShotEffect {
 
-    public OrcishCaptainEffect() {
+    OrcishCaptainEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn";
     }
 
-    public OrcishCaptainEffect(OrcishCaptainEffect effect) {
+    private OrcishCaptainEffect(final OrcishCaptainEffect effect) {
         super(effect);
     }
 

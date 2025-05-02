@@ -30,10 +30,10 @@ public final class Lifelink extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Lifelink (final Lifelink card) {
+    private Lifelink(final Lifelink card) {
         super(card);
     }
 

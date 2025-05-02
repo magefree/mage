@@ -38,12 +38,12 @@ public final class Fumigate extends CardImpl {
 
 class FumigateEffect extends OneShotEffect {
 
-    public FumigateEffect() {
+    FumigateEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures. You gain 1 life for each creature destroyed this way";
     }
 
-    public FumigateEffect(final FumigateEffect effect) {
+    private FumigateEffect(final FumigateEffect effect) {
         super(effect);
     }
 
@@ -57,13 +57,13 @@ class FumigateEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int destroyedCreature = 0;
-            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                 if (creature.destroy(source, game, false)) {
                     destroyedCreature++;
                 }
             }
             if (destroyedCreature > 0) {
-                game.getState().processAction(game);
+                game.processAction();
                 controller.gainLife(destroyedCreature, game, source);
             }
             return true;

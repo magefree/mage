@@ -41,11 +41,11 @@ public class AerialExtortionist extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AerialExtortionistExileEffect(),
                 false,
-                "Whenever Aerial Extortionist enters the battlefield or deals combat damage to a player, ",
+                "Whenever {this} enters the battlefield or deals combat damage to a player, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new DealsCombatDamageToAPlayerTriggeredAbility(null, false)
         );
-        exileAbility.addTarget(new TargetNonlandPermanent());
+        exileAbility.addTarget(new TargetNonlandPermanent(0, 1));
         this.addAbility(exileAbility);
 
         // Whenever another player casts a spell from anywhere other than their hand, draw a card.
@@ -64,13 +64,13 @@ public class AerialExtortionist extends CardImpl {
 
 class AerialExtortionistExileEffect extends OneShotEffect {
 
-    public AerialExtortionistExileEffect() {
+    AerialExtortionistExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile up to one target nonland permanent. " +
                 "For as long as that card remains exiled, its owner may cast it";
     }
 
-    public AerialExtortionistExileEffect(final AerialExtortionistExileEffect effect) {
+    private AerialExtortionistExileEffect(final AerialExtortionistExileEffect effect) {
         super(effect);
     }
 

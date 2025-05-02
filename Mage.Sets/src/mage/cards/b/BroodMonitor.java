@@ -28,8 +28,7 @@ public final class BroodMonitor extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // When Brood Monitor enters the battlefield, create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
-        Effect effect = new CreateTokenEffect(new EldraziScionToken(), 3);
-        effect.setText("create three 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C}.\"");
+        Effect effect = new CreateTokenEffect(new EldraziScionToken(), 3).withTextOptions(true);
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
     }

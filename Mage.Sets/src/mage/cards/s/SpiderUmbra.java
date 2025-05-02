@@ -7,7 +7,7 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -39,7 +39,7 @@ public final class SpiderUmbra extends CardImpl {
                 ReachAbility.getInstance(), AttachmentType.AURA
         ).setText("and has reach"));
         this.addAbility(ability);
-        this.addAbility(new TotemArmorAbility());
+        this.addAbility(new UmbraArmorAbility());
     }
 
     private SpiderUmbra(final SpiderUmbra card) {

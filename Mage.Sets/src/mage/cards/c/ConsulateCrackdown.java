@@ -56,7 +56,7 @@ class ConsulateCracksownExileEffect extends OneShotEffect {
         this.staticText = "exile all artifacts your opponents control until {this} leaves the battlefield";
     }
 
-    ConsulateCracksownExileEffect(final ConsulateCracksownExileEffect effect) {
+    private ConsulateCracksownExileEffect(final ConsulateCracksownExileEffect effect) {
         super(effect);
     }
 

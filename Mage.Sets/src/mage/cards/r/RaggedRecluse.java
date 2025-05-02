@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.ControllerDiscardedThisTurnCondition;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.hint.common.ControllerDiscardedHint;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.watchers.common.DiscardedCardWatcher;
 
 import java.util.UUID;
@@ -33,8 +32,8 @@ public final class RaggedRecluse extends CardImpl {
         // At the beginning of your end step, if you discarded a card this turn, transform Ragged Recluse.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(), TargetController.YOU,
-                ControllerDiscardedThisTurnCondition.instance, false
+                TargetController.YOU, new TransformSourceEffect(),
+                false, ControllerDiscardedThisTurnCondition.instance
         ).addHint(ControllerDiscardedHint.instance), new DiscardedCardWatcher());
     }
 

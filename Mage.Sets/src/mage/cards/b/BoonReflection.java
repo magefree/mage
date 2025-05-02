@@ -24,7 +24,7 @@ public final class BoonReflection extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // If you would gain life, you gain twice that much life instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoonReflectionEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoonReflectionEffect()));
     }
 
     private BoonReflection(final BoonReflection card) {
@@ -39,23 +39,18 @@ public final class BoonReflection extends CardImpl {
 
 class BoonReflectionEffect extends ReplacementEffectImpl {
 
-    public BoonReflectionEffect() {
+    BoonReflectionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would gain life, you gain twice that much life instead";
     }
 
-    public BoonReflectionEffect(final BoonReflectionEffect effect) {
+    private BoonReflectionEffect(final BoonReflectionEffect effect) {
         super(effect);
     }
 
     @Override
     public BoonReflectionEffect copy() {
         return new BoonReflectionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

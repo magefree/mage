@@ -34,7 +34,7 @@ public class ForceLift extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForceLift(final ForceLift card) {
+    private ForceLift(final ForceLift card) {
         super(card);
     }
 
@@ -53,7 +53,7 @@ class ForceLiftEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    ForceLiftEffect(ForceLiftEffect effect) {
+    private ForceLiftEffect(final ForceLiftEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class ForceLiftReturnFromExileEffect extends OneShotEffect {
         staticText = "return that card to the battlefield under its owner's control";
     }
 
-    public ForceLiftReturnFromExileEffect(final ForceLiftReturnFromExileEffect effect) {
+    private ForceLiftReturnFromExileEffect(final ForceLiftReturnFromExileEffect effect) {
         super(effect);
         this.objectToReturn = effect.objectToReturn;
     }

@@ -58,13 +58,13 @@ public final class GreyHostReinforcements extends CardImpl {
 
 class GreyHostReinforcementsEffect extends OneShotEffect {
 
-    public GreyHostReinforcementsEffect() {
+    GreyHostReinforcementsEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile target player's graveyard. Put a number of +1/+1 counters " +
                 "on {this} equal to the number of creature cards exiled this way";
     }
 
-    public GreyHostReinforcementsEffect(final GreyHostReinforcementsEffect effect) {
+    private GreyHostReinforcementsEffect(final GreyHostReinforcementsEffect effect) {
         super(effect);
     }
 

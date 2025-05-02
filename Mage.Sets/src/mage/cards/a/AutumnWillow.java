@@ -32,7 +32,7 @@ public final class AutumnWillow extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // {G}: Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AutumnWillowEffect(), new ManaCostsImpl<>("{G}"));
+        Ability ability = new SimpleActivatedAbility(new AutumnWillowEffect(), new ManaCostsImpl<>("{G}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -49,12 +49,12 @@ public final class AutumnWillow extends CardImpl {
 
 class AutumnWillowEffect extends AsThoughEffectImpl {
 
-    public AutumnWillowEffect() {
+    AutumnWillowEffect() {
         super(AsThoughEffectType.SHROUD, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud";
     }
 
-    public AutumnWillowEffect(final AutumnWillowEffect effect) {
+    private AutumnWillowEffect(final AutumnWillowEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,9 @@ class AutumnWillowEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!affectedControllerId.equals(source.getFirstTarget())) { return false; }
+        if (!affectedControllerId.equals(source.getFirstTarget())) {
+            return false;
+        }
         Permanent creature = game.getPermanent(sourceId);
 
         return creature != null &&sourceId.equals(source.getSourceId());

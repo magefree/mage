@@ -68,7 +68,7 @@ while (<DIR_LISTING>)
         my $line = $_;
 
         # Eg: Set Trigraph
-        #super("Commander 2016 Edition", "C16", ExpansionSet.buildDate(2016, 11, 11), SetType.SUPPLEMENTAL);
+        #super("Commander 2016", "C16", ExpansionSet.buildDate(2016, 11, 11), SetType.SUPPLEMENTAL);
         $line =~ s/\\\"/'/img;
         if ($line =~ m/super\("[^"]*?", "([^"]*?)", ExpansionSet.buildDate.*/img)
         {

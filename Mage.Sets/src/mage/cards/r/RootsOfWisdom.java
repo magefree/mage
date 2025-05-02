@@ -74,7 +74,7 @@ class RootsOfWisdomEffect extends OneShotEffect {
         }
         player.millCards(3, source, game);
         TargetCard targetCard = new TargetCardInYourGraveyard(filter);
-        targetCard.setNotTarget(true);
+        targetCard.withNotTarget(true);
         if (targetCard.canChoose(source.getControllerId(), source, game)
                 && player.choose(outcome, targetCard, source, game)) {
             Card card = player.getGraveyard().get(targetCard.getFirstTarget(), game);

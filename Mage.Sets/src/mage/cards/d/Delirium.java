@@ -29,7 +29,7 @@ public final class Delirium extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new ControllerIsActivePlayerPredicate());
+        filter.add(ControllerIsActivePlayerPredicate.instance);
     }
 
     public Delirium(UUID ownerId, CardSetInfo setInfo) {
@@ -58,12 +58,12 @@ public final class Delirium extends CardImpl {
 
 class DeliriumEffect extends OneShotEffect {
 
-    public DeliriumEffect() {
+    DeliriumEffect() {
         super(Outcome.Damage);
         this.staticText = "that creature deals damage equal to its power to the player";
     }
 
-    public DeliriumEffect(DeliriumEffect effect) {
+    private DeliriumEffect(final DeliriumEffect effect) {
         super(effect);
     }
 

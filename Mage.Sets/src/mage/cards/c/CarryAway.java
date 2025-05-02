@@ -42,7 +42,7 @@ public final class CarryAway extends CardImpl {
         ability = new EntersBattlefieldTriggeredAbility(new CarryAwayEffect());
         this.addAbility(ability);
         // You control enchanted Equipment.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("Equipment")));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect("Equipment")));
     }
 
     private CarryAway(final CarryAway card) {
@@ -57,12 +57,12 @@ public final class CarryAway extends CardImpl {
 
 class CarryAwayEffect extends OneShotEffect {
 
-    public CarryAwayEffect() {
+    CarryAwayEffect() {
         super(Outcome.Detriment);
         this.staticText = "unattach enchanted Equipment.";
     }
 
-    public CarryAwayEffect(final CarryAwayEffect effect) {
+    private CarryAwayEffect(final CarryAwayEffect effect) {
         super(effect);
     }
 

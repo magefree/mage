@@ -40,7 +40,7 @@ public final class RecklessBushwhacker extends CardImpl {
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn, true), false);
         ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES, true));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, SurgedCondition.instance,
-                "When {this} enters the battlefield, if its surge cost was paid, other creatures you control get +1/+0 and gain haste until end of turn."));
+                "When {this} enters, if its surge cost was paid, other creatures you control get +1/+0 and gain haste until end of turn."));
 
     }
 

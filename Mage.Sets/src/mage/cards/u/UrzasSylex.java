@@ -111,7 +111,7 @@ class UrzasSylexEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetPermanent(6, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             toKeep.addAll(target.getTargets());
         }

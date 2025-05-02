@@ -3,7 +3,7 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -30,8 +30,8 @@ public final class JynErsoAndCassianAndor extends CardImpl {
         // At the beginning of combat on your turn, target creature gets +1/+0 and gains haste until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(1, 0, Duration.EndOfTurn)
-                    .setText("target creature gets +1/+0"),
-                TargetController.YOU, false);
+                    .setText("target creature gets +1/+0")
+        );
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains haste until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());

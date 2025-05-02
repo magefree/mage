@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.AsThoughEffect;
@@ -32,7 +32,7 @@ public final class FuriousRise extends CardImpl {
         // At the beginning of your end step, if you control a creature with power 4 or greater, exile the top card of your library.
         // You may play that card until you exile another card with Furious Rise.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new FuriousRiseEffect(), TargetController.YOU, false), FerociousCondition.instance,
+                new FuriousRiseEffect()), FerociousCondition.instance,
                 "At the beginning of your end step, if you control a creature with power 4 or greater, exile the top card of your library. You may play that card until you exile another card with {this}."));
     }
 
@@ -48,12 +48,12 @@ public final class FuriousRise extends CardImpl {
 
 class FuriousRiseEffect extends OneShotEffect {
 
-    public FuriousRiseEffect() {
+    FuriousRiseEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top card of your library. You may play that card until you exile another card with Furious Rise";
     }
 
-    public FuriousRiseEffect(final FuriousRiseEffect effect) {
+    private FuriousRiseEffect(final FuriousRiseEffect effect) {
         super(effect);
     }
 
@@ -101,11 +101,11 @@ class FuriousRiseEffect extends OneShotEffect {
 
 class FuriousRisePlayEffect extends AsThoughEffectImpl {
 
-    public FuriousRisePlayEffect() {
+    FuriousRisePlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
     }
 
-    public FuriousRisePlayEffect(final FuriousRisePlayEffect effect) {
+    private FuriousRisePlayEffect(final FuriousRisePlayEffect effect) {
         super(effect);
     }
 

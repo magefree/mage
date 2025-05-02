@@ -41,7 +41,7 @@ public final class OgreJailbreaker extends CardImpl {
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter));
         effect.setText("{this} can attack as though it didn't have defender as long as you control a Gate");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

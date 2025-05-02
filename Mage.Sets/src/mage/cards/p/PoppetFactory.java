@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -32,7 +32,7 @@ public final class PoppetFactory extends CardImpl {
 
         // At the beginning of your upkeep, you may transform Poppet Factory.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TransformSourceEffect(), TargetController.YOU, true
+                new TransformSourceEffect(), true
         ));
     }
 

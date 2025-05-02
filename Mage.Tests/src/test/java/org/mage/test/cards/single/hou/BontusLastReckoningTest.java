@@ -10,16 +10,18 @@ public class BontusLastReckoningTest extends CardTestPlayerBase {
     private String reckoning = "Bontu's Last Reckoning";
 
     @Test
-    public void testDelayedUntap(){
+    public void testDelayedUntap() {
+        setStrictChooseMode(true);
+
         String pouncer = "Adorned Pouncer";
         String angel = "Angel of Condemnation";
         addCard(Zone.HAND, playerA, reckoning);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
         addCard(Zone.BATTLEFIELD, playerA, pouncer);
-       addCard(Zone.BATTLEFIELD, playerB, angel);
+        addCard(Zone.BATTLEFIELD, playerB, angel);
         addCard(Zone.BATTLEFIELD, playerB, "Island");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN,playerA, reckoning);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, reckoning);
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
 

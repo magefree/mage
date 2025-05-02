@@ -61,7 +61,7 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
         this.onlyFromNonHand = onlyFromNonHand;
-        setTriggerPhrase("Whenever an opponent casts "
+        setTriggerPhrase(getWhen() + "an opponent casts "
                 + filter.getMessage()
                 + (onlyFromNonHand ? " from anywhere other than their hand" : "")
                 + ", ");

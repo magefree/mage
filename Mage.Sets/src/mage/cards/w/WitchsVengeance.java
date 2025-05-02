@@ -60,12 +60,12 @@ class WitchsVengeanceEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        ChoiceCreatureType choice = new ChoiceCreatureType();
+        ChoiceCreatureType choice = new ChoiceCreatureType(game, source);
         if (!player.choose(outcome, choice, game)) {
             return false;
         }
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(SubType.byDescription(choice.getChoice()).getPredicate());
+        filter.add(SubType.byDescription(choice.getChoiceKey()).getPredicate());
         game.addEffect(new BoostAllEffect(
                 -3, -3, Duration.EndOfTurn, filter, false
         ), source);

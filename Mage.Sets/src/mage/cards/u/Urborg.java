@@ -37,7 +37,7 @@ public final class Urborg extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {tap}: Target creature loses first strike or swampwalk until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrborgEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UrborgEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -59,7 +59,7 @@ class UrborgEffect extends OneShotEffect {
         this.staticText = "Target creature loses first strike or swampwalk until end of turn.";
     }
 
-    UrborgEffect(final UrborgEffect effect) {
+    private UrborgEffect(final UrborgEffect effect) {
         super(effect);
     }
 

@@ -27,7 +27,7 @@ public final class BileUrchin extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Sacrifice Bile Urchin: Target player loses 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(1), new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

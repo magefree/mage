@@ -13,8 +13,10 @@ public abstract class CommandObjectImpl implements CommandObject {
     private UUID id;
     private String name = "";
 
-    private String expansionSetCode;
-    private String cardNumber;
+    private String expansionSetCode = "";
+    private boolean usesVariousArt = false;
+    private String cardNumber = "";
+    private String imageFileName = "";
     private int imageNumber;
 
     public CommandObjectImpl(String name) {
@@ -26,7 +28,9 @@ public abstract class CommandObjectImpl implements CommandObject {
         this.id = object.id;
         this.name = object.name;
         this.expansionSetCode = object.expansionSetCode;
+        this.usesVariousArt = object.usesVariousArt;
         this.cardNumber = object.cardNumber;
+        this.imageFileName = object.imageFileName;
         this.imageNumber = object.imageNumber;
     }
 
@@ -46,6 +50,16 @@ public abstract class CommandObjectImpl implements CommandObject {
     }
 
     @Override
+    public boolean getUsesVariousArt() {
+        return usesVariousArt;
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        this.usesVariousArt = usesVariousArt;
+    }
+
+    @Override
     public String getCardNumber() {
         return cardNumber;
     }
@@ -53,6 +67,16 @@ public abstract class CommandObjectImpl implements CommandObject {
     @Override
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    @Override
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 
     @Override

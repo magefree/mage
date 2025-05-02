@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -56,24 +55,20 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("any number of creatures with total power 12 or greater");
 
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public PhyrexianDreadnoughtSacrificeCost() {
         this.addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true));
         this.text = "sacrifice any number of creatures with total power 12 or greater";
     }
 
-    public PhyrexianDreadnoughtSacrificeCost(final PhyrexianDreadnoughtSacrificeCost cost) {
+    private PhyrexianDreadnoughtSacrificeCost(final PhyrexianDreadnoughtSacrificeCost cost) {
         super(cost);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         int sumPower = 0;
-        if (targets.choose(Outcome.Sacrifice, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : targets.get(0).getTargets()) {
+        if (this.getTargets().choose(Outcome.Sacrifice, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null && permanent.sacrifice(source, game)) {
                     sumPower += permanent.getPower().getValue();
@@ -89,9 +84,7 @@ class PhyrexianDreadnoughtSacrificeCost extends CostImpl {
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         int sumPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controllerId, game)) {
-            if (!permanent.getId().equals(source.getSourceId())) {
-                sumPower += permanent.getPower().getValue();
-            }
+            sumPower += permanent.getPower().getValue();
         }
         return sumPower >= 12;
     }

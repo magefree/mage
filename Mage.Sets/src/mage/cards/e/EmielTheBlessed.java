@@ -13,10 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -28,13 +25,6 @@ import java.util.UUID;
  */
 public final class EmielTheBlessed extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public EmielTheBlessed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
@@ -45,16 +35,14 @@ public final class EmielTheBlessed extends CardImpl {
 
         // {3}: Exile another target creature you control, then return it to the battlefield under its owner's control.
         Ability ability = new SimpleActivatedAbility(new ExileThenReturnTargetEffect(false, false), new GenericManaCost(3));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 
-        // Whenever another creature enters the battlefield under your control, you may pay {G/W}. 
+        // Whenever another creature you control enters, you may pay {G/W}.
         // If you do, put a +1/+1 counter on it. If it's a Unicorn, put two +1/+1 counters on it instead.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new DoIfCostPaid(new EmielTheBlessedEffect(), new ManaCostsImpl<>("{G/W}")),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT,
-                "Whenever another creature enters the battlefield under your control, you may pay {G/W}. "
-                        + "If you do, put a +1/+1 counter on it. If it's a Unicorn, put two +1/+1 counters on it instead."
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         ));
     }
 
@@ -72,6 +60,7 @@ class EmielTheBlessedEffect extends OneShotEffect {
 
     EmielTheBlessedEffect() {
         super(Outcome.Benefit);
+        staticText = "put a +1/+1 counter on it. If it's a Unicorn, put two +1/+1 counters on it instead.";
     }
 
     private EmielTheBlessedEffect(final EmielTheBlessedEffect effect) {

@@ -35,11 +35,11 @@ public final class RelicRunner extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Relic Runner can't be blocked if you've cast an historic spell this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.WhileOnBattlefield),
                         new CastHistoricSpellThisTurnCondition(),
-                        "{this} can't be blocked if you've cast an historic spell this turn. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"
+                        "{this} can't be blocked if you've cast a historic spell this turn. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"
                 )
         ));
     }

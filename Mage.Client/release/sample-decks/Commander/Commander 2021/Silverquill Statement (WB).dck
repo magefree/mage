@@ -1,0 +1,80 @@
+1 [8ED:118] Ambition's Cost
+1 [RTR:1] Angel of Serenity
+1 [ELD:331] Arcane Signet
+1 [C21:35] Author of Shadows
+1 [ONS:312] Barren Moor
+1 [MKC:225] Bloodthirsty Blade
+1 [WWK:132] Bojuka Bog
+1 [C21:364] Bold Plagiarist
+1 [VOC:79] Boreas Charger
+1 [DMU:244] Caves of Koilos
+1 [FRF:8] Citadel Siege
+1 [C21:14] Combat Calligrapher
+1 [ELD:333] Command Tower
+1 [M3C:287] Coveted Jewel
+1 [OTC:129] Cunning Rhetoric
+1 [SCD:74] Curse of Disturbance
+1 [EVE:85] Deathbringer Liege
+1 [DTK:96] Deathbringer Regent
+1 [GPT:141] Debtors' Knell
+1 [MKC:60] Duelist's Heritage
+1 [FRF:12] Elite Scaleguard
+1 [CON:142] Exotic Orchard
+1 [OTC:133] Fain, the Broker
+1 [CLB:845] Felisa, Fang of Silverquill
+1 [STX:188] Fracture
+1 [CHK:10] Ghostly Prison
+1 [GTC:13] Gideon, Champion of Justice
+1 [C21:17] Guardian Archon
+1 [RAV:22] Hunted Lammasu
+1 [C21:368] Incarnation Technique
+1 [C21:146] Infernal Offering
+1 [C21:398] Inkshield
+1 [C21:369] Keen Duelist
+1 [ORI:21] Knight of the White Orchid
+1 [C21:223] Magister of Worth
+1 [CLU:65] Martial Impetus
+1 [SOK:162] Mikokoro, Center of the Sea
+1 [10E:335] Mind Stone
+1 [M3C:358] Myriad Landscape
+1 [RTR:71] Necropolis Regent
+1 [C21:20] Nils, Discipline Enforcer
+1 [ONS:46] Oblation
+1 [M3C:361] Opal Palace
+1 [CMM:832] Oreskos Explorer
+1 [MKC:77] Orzhov Advokist
+1 [CLU:241] Orzhov Basilica
+1 [CLU:225] Orzhov Signet
+1 [CLU:118] Parasitic Impetus
+1 [C21:256] Pendant of Prosperity
+14 [OTJ:272] Plains
+1 [MKC:79] Promise of Loyalty
+1 [ORI:250] Rogue's Passage
+1 [C21:22] Scholarship Sponsor
+1 [ONS:324] Secluded Steppe
+1 [STX:26] Secret Rendezvous
+1 [MKC:82] Selfless Squire
+1 [STX:273] Silverquill Campus
+1 [SUM:274] Sol Ring
+1 [MKC:85] Soul Snare
+1 [RAV:271] Spectral Searchlight
+1 [MKC:86] Stalking Leonin
+1 [C21:371] Stinging Study
+1 [C21:80] Study Hall
+1 [DTK:41] Sunscorch Regent
+10 [OTJ:274] Swamp
+1 [TOR:140] Tainted Field
+1 [M21:255] Temple of Silence
+1 [SCG:143] Temple of the False God
+1 [C21:405] Tempting Contract
+1 [DGM:108] Teysa, Envoy of Ghosts
+1 [MOC:212] Together Forever
+1 [ORI:38] Tragic Arrogance
+1 [KTK:210] Utter End
+1 [C21:274] Victory Chimes
+1 [MKC:89] Vow of Duty
+1 [RIX:30] Zetalpa, Primal Dawn
+1 [10E:60] Windborn Muse
+SB: 1 [OTC:217] Breena, the Demagogue
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,55)|([ELD:331],[MKC:225],[M3C:287],[10E:335],[CLU:225],[C21:256],[SUM:274],[RAV:271],[C21:405],[C21:274])([RTR:1],[C21:35],[C21:364],[VOC:79],[C21:14],[EVE:85],[DTK:96],[FRF:12],[OTC:133],[CLB:845],[C21:17],[RAV:22],[C21:369],[ORI:21],[C21:223],[RTR:71],[C21:20],[CMM:832],[MKC:77],[C21:22],[MKC:82],[MKC:86],[DTK:41],[DGM:108],[RIX:30],[10E:60])([FRF:8],[OTC:129],[SCD:74],[GPT:141],[MKC:60],[CHK:10],[CLU:65],[CLU:118],[MKC:85],[MOC:212],[MKC:89])([STX:188],[C21:398],[ONS:46],[C21:371],[KTK:210])([ONS:312],[WWK:132],[DMU:244],[ELD:333],[CON:142],[SOK:162],[M3C:358],[M3C:361],[CLU:241],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[ORI:250],[ONS:324],[STX:273],[C21:80],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[TOR:140],[M21:255],[SCG:143])([GTC:13])([8ED:118],[C21:368],[C21:146],[MKC:79],[STX:26],[ORI:38])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([OTC:217])

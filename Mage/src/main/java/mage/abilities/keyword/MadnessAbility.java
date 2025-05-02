@@ -120,11 +120,6 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
@@ -136,12 +131,15 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        // TODO, deal with deprecated call
-        if (controller.moveCards(card, Zone.EXILED, source, game)) {
-            game.applyEffects(); // needed to add Madness ability to cards (e.g. by Falkenrath Gorger)
-            GameEvent gameEvent = new MadnessCardExiledEvent(card.getId(), source, controller.getId());
-            game.fireEvent(gameEvent);
+        if (!controller.moveCards(card, Zone.EXILED, source, game)) {
+            return false;
         }
+
+        // needed to add Madness ability to cards (e.g. by Falkenrath Gorger)
+        game.processAction();
+
+        GameEvent gameEvent = new MadnessCardExiledEvent(card.getId(), source, controller.getId());
+        game.fireEvent(gameEvent);
 
         return true;
     }
@@ -267,7 +265,7 @@ class MadnessCastEffect extends OneShotEffect {
         ManaCosts<ManaCost> costRef = castByMadness.getManaCostsToPay();
         castByMadness.setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
         castByMadness.setSpellAbilityCastMode(SpellAbilityCastMode.MADNESS);
-        castByMadness.getCosts().clear();
+        castByMadness.clearCosts();
         castByMadness.addCost(new PayLifeCost(this.lifeCost));
         costRef.clear();
         costRef.add(madnessCost);

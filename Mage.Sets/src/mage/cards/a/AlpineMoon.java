@@ -30,7 +30,7 @@ public final class AlpineMoon extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NONBASIC_LAND_NAME)));
 
         // Lands your opponents control with the chosen name lose all land types and abilities, and they gain "{T}: Add one mana of any color."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AlpineMoonEffect()));
+        this.addAbility(new SimpleStaticAbility(new AlpineMoonEffect()));
     }
 
     private AlpineMoon(final AlpineMoon card) {
@@ -59,7 +59,7 @@ class AlpineMoonEffect extends ContinuousEffectImpl {
                 + "and they gain \"{T}: Add one mana of any color.\"";
     }
 
-    public AlpineMoonEffect(final AlpineMoonEffect effect) {
+    private AlpineMoonEffect(final AlpineMoonEffect effect) {
         super(effect);
     }
 

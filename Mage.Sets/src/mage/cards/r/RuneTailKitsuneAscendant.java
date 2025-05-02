@@ -52,7 +52,7 @@ class RuneTailKitsuneAscendantFlipAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new FlipSourceEffect(new RuneTailEssence()));
     }
 
-    public RuneTailKitsuneAscendantFlipAbility(final RuneTailKitsuneAscendantFlipAbility ability) {
+    private RuneTailKitsuneAscendantFlipAbility(final RuneTailKitsuneAscendantFlipAbility ability) {
         super(ability);
     }
 
@@ -87,11 +87,11 @@ class RuneTailEssence extends TokenImpl {
         color.setWhite(true);
 
         // Prevent all damage that would be dealt to creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES)));
     }
 
-    public RuneTailEssence(final RuneTailEssence token) {
+    private RuneTailEssence(final RuneTailEssence token) {
         super(token);
     }
 

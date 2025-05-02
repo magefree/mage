@@ -37,7 +37,7 @@ public final class KnightOfNewAlara extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each other multicolored creature you control gets +1/+1 for each of its colors.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KnightOfNewAlaraEffect()));
+        this.addAbility(new SimpleStaticAbility(new KnightOfNewAlaraEffect()));
 
     }
 
@@ -63,7 +63,7 @@ class KnightOfNewAlaraEffect extends ContinuousEffectImpl {
         staticText = "Each other multicolored creature you control gets +1/+1 for each of its colors";
     }
 
-    public KnightOfNewAlaraEffect(final KnightOfNewAlaraEffect effect) {
+    private KnightOfNewAlaraEffect(final KnightOfNewAlaraEffect effect) {
         super(effect);
     }
 

@@ -33,9 +33,9 @@ public class ReturnToHandFromGraveyardCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (targets.choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
+            if (this.getTargets().choose(Outcome.ReturnToHand, controllerId, source.getSourceId(), source, game)) {
                 Set<Card> cardsToMove = new LinkedHashSet<>();
-                for (UUID targetId : targets.get(0).getTargets()) {
+                for (UUID targetId : this.getTargets().get(0).getTargets()) {
                     mage.cards.Card targetCard = game.getCard(targetId);
                     if (targetCard == null) {
                         return false;
@@ -52,7 +52,7 @@ public class ReturnToHandFromGraveyardCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

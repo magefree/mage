@@ -49,13 +49,13 @@ public final class WoodSage extends CardImpl {
 
 class WoodSageEffect extends OneShotEffect {
 
-    public WoodSageEffect() {
+    WoodSageEffect() {
         super(Outcome.DrawCard);
         this.staticText = "choose a creature card name. Reveal the top four cards of your library " +
                 "and put all of them with that name into your hand. Put the rest into your graveyard";
     }
 
-    public WoodSageEffect(final WoodSageEffect effect) {
+    private WoodSageEffect(final WoodSageEffect effect) {
         super(effect);
     }
 

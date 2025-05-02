@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.ArrayList;
@@ -19,9 +18,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.BlockerDeclaredEvent;
@@ -60,12 +59,16 @@ public final class Camouflage extends CardImpl {
 
 class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CamouflageEffect() {
+    CamouflageEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = "This turn, instead of declaring blockers, each defending player chooses any number of creatures they control and divides them into a number of piles equal to the number of attacking creatures for whom that player is the defending player. Creatures they control that can block additional creatures may likewise be put into additional piles. Assign each pile to a different one of those attacking creatures at random. Each creature in a pile that can block the creature that pile is assigned to does so";
+        staticText = "This turn, instead of declaring blockers, each defending player chooses any number of creatures " +
+                "they control and divides them into a number of piles equal to the number of attacking creatures for " +
+                "whom that player is the defending player. Creatures those players control that can block additional creatures " +
+                "may likewise be put into additional piles. Assign each pile to a different one of those attacking " +
+                "creatures at random. Each creature in a pile that can block the creature that pile is assigned to does so";
     }
 
-    public CamouflageEffect(final CamouflageEffect effect) {
+    private CamouflageEffect(final CamouflageEffect effect) {
         super(effect);
     }
 
@@ -111,11 +114,11 @@ class CamouflageEffect extends ContinuousRuleModifyingEffectImpl {
                                 // (This temporarily manipulates Blocking values to "test" how many blockers the creature has still left to assign)
                                 List<Permanent> spentBlockers = new ArrayList<>();
                                 for (Permanent possibleBlocker : list) {
-                                    if (possibleBlocker.getMaxBlocks() != 0 && possibleBlocker.getBlocking() >= possibleBlocker.getMaxBlocks()) {
+                                    if (possibleBlocker.getMaxBlocks() > 0 && possibleBlocker.getBlocking() >= possibleBlocker.getMaxBlocks()) {
                                         spentBlockers.add(possibleBlocker);
                                     }
                                 }
-                                filter.add(Predicates.not(new PermanentInListPredicate(spentBlockers)));
+                                filter.add(Predicates.not(new PermanentReferenceInCollectionPredicate(spentBlockers, game)));
                             }
                             if (defender.chooseUse(Outcome.Neutral, "Make a new blocker pile? If not, all remaining piles stay empty. (remaining piles: " + (attackerCount - masterList.size()) + ')', source, game)) {
                                 Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);

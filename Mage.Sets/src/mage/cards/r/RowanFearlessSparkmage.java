@@ -3,14 +3,11 @@ package mage.cards.r;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.GainControlAllEffect;
+import mage.abilities.effects.common.continuous.GainControlAllUntapGainHasteEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -53,14 +50,7 @@ public final class RowanFearlessSparkmage extends CardImpl {
         this.addAbility(ability);
 
         // −9: Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
-        ability = new LoyaltyAbility(new GainControlAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES), -9);
-        ability.addEffect(new UntapAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES).setText("untap them"));
-        ability.addEffect(new GainAbilityAllEffect(
-                HasteAbility.getInstance(),
-                Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURES,
-                "they gain haste until end of turn"
-        ));
+        ability = new LoyaltyAbility(new GainControlAllUntapGainHasteEffect(StaticFilters.FILTER_PERMANENT_CREATURES), -9);
         this.addAbility(ability);
     }
 

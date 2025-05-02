@@ -4,8 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,7 +34,7 @@ public final class AvenMimeomancer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, you may put a feather counter on target creature. If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FEATHER.createInstance()), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.FEATHER.createInstance()), true);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new AvenEffect());
         ability.addEffect(new AvenEffect2());
@@ -54,12 +53,12 @@ public final class AvenMimeomancer extends CardImpl {
 
 class AvenEffect extends ContinuousEffectImpl {
 
-    public AvenEffect() {
+    AvenEffect() {
         super(Duration.Custom, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.staticText = "If you do, that creature has base power and toughness 3/1 and has flying for as long as it has a feather counter on it";
     }
 
-    public AvenEffect(final AvenEffect effect) {
+    private AvenEffect(final AvenEffect effect) {
         super(effect);
     }
 
@@ -95,7 +94,7 @@ class AvenEffect2 extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.BoostCreature);
     }
 
-    public AvenEffect2(final AvenEffect2 effect) {
+    private AvenEffect2(final AvenEffect2 effect) {
         super(effect);
     }
 

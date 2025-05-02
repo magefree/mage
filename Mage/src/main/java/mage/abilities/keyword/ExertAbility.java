@@ -1,8 +1,4 @@
-
 package mage.abilities.keyword;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -23,6 +19,9 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author LevelX2
  */
@@ -38,17 +37,20 @@ public class ExertAbility extends SimpleStaticAbility {
         super(Zone.BATTLEFIELD, new ExertReplacementEffect(exertOnlyOncePerTurn));
         ruleText = (exertOnlyOncePerTurn
                 ? "If {this} hasn't been exerted this turn, you may exert it"
-                : "You may exert {this}") + " as it attacks. ";
+                : "You may exert {this}") + " as it attacks.";
         if (ability != null) {
             this.addSubAbility(ability);
-            ruleText += "When you do,";
+            ruleText += " When you do,";
             ability.getEffects().forEach(effect -> {
-                ruleText += " " + effect.getText(ability.getModes().getMode());
+                if (!effect.getConcatPrefix().isEmpty()) {
+                    ruleText += " " + effect.getConcatPrefix();
+                }
+                ruleText += " " + effect.getText(ability.getModes().getMode()).replaceFirst("^\\{this\\}", "it");
             });
-            ruleText += ". ";
+            ruleText += ".";
             ability.setRuleVisible(false);
         }
-        ruleText += "<i>(An exerted creature won't untap during your next untap step.)</i>";
+        ruleText += " <i>(An exerted creature won't untap during your next untap step.)</i>";
         if (exertOnlyOncePerTurn) {
             getWatchers().add(new ExertedThisTurnWatcher());
         }
@@ -81,7 +83,7 @@ class ExertReplacementEffect extends ReplacementEffectImpl {
         this.exertOnlyOncePerTurn = exertOnlyOncePerTurn;
     }
 
-    public ExertReplacementEffect(ExertReplacementEffect effect) {
+    private ExertReplacementEffect(ExertReplacementEffect effect) {
         super(effect);
         this.exertOnlyOncePerTurn = effect.exertOnlyOncePerTurn;
     }
@@ -94,11 +96,6 @@ class ExertReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getSourceId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class SpellbindingSoprano extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("instant and sorcery spells");
+    private static final FilterCard filter = new FilterCard("instant and sorcery spells you cast this turn");
 
     static {
         filter.add(Predicates.or(

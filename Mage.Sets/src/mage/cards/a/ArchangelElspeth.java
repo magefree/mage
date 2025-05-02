@@ -2,8 +2,8 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -16,9 +16,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.PermanentPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.SoldierLifelinkToken;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -27,6 +25,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ArchangelElspeth extends CardImpl {
+
+    private static final FilterCard filter = new FilterNonlandCard("nonland permanent cards with mana value 3 or less");
+
+    static {
+        filter.add(PermanentPredicate.instance);
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
+    }
 
     public ArchangelElspeth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
@@ -47,7 +52,7 @@ public final class ArchangelElspeth extends CardImpl {
         this.addAbility(ability);
 
         // -6: Return all nonland permanent cards with mana value 3 or less from your graveyard to the battlefield.
-        this.addAbility(new LoyaltyAbility(new ArchangelElspethEffect(), -6));
+        this.addAbility(new LoyaltyAbility(new ReturnFromYourGraveyardToBattlefieldAllEffect(filter), -6));
     }
 
     private ArchangelElspeth(final ArchangelElspeth card) {
@@ -57,35 +62,5 @@ public final class ArchangelElspeth extends CardImpl {
     @Override
     public ArchangelElspeth copy() {
         return new ArchangelElspeth(this);
-    }
-}
-
-class ArchangelElspethEffect extends OneShotEffect {
-
-    private static final FilterCard filter = new FilterNonlandCard();
-
-    static {
-        filter.add(PermanentPredicate.instance);
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
-    }
-
-    ArchangelElspethEffect() {
-        super(Outcome.Benefit);
-        staticText = "return all nonland permanent cards with mana value 3 or less from your graveyard to the battlefield";
-    }
-
-    private ArchangelElspethEffect(final ArchangelElspethEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArchangelElspethEffect copy() {
-        return new ArchangelElspethEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.moveCards(player.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
     }
 }

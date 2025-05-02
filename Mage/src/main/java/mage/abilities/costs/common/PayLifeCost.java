@@ -35,16 +35,20 @@ public class PayLifeCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        Player player = game.getPlayer(controllerId);
+        if (player == null) {
+            return false;
+        }
         //118.4. If a cost or effect allows a player to pay an amount of life greater than 0,
         //the player may do so only if their life total is greater than or equal to the
         //amount of the payment. If a player pays life, the payment is subtracted from their
         //life total; in other words, the player loses that much life. (Players can always pay 0 life.)
         int lifeToPayAmount = amount.calculate(game, ability, null);
         // Paying 0 life is not considered paying any life.
-        if (lifeToPayAmount > 0 && !game.getPlayer(controllerId).canPayLifeCost(ability)) {
+        if (lifeToPayAmount > 0 && !player.canPayLifeCost(ability)) {
             return false;
         }
-        return game.getPlayer(controllerId).getLife() >= lifeToPayAmount || lifeToPayAmount == 0;
+        return player.getLife() >= lifeToPayAmount || lifeToPayAmount == 0;
     }
 
     @Override

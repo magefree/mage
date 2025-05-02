@@ -2,6 +2,7 @@ package mage.game;
 
 import mage.MageException;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
@@ -14,14 +15,17 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
+import mage.abilities.effects.keyword.FinalityCounterEffect;
 import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.effects.keyword.StunCounterEffect;
+import mage.abilities.hint.common.DayNightHint;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
-import mage.actions.impl.MageAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -41,7 +45,10 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
+import mage.game.command.emblems.EmblemOfCard;
+import mage.game.command.emblems.RadiationEmblem;
 import mage.game.command.emblems.TheRingEmblem;
+import mage.game.command.emblems.XmageHelperEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -63,11 +70,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
-import mage.util.GameLog;
-import mage.util.MessageToClient;
-import mage.util.MultiAmountMessage;
-import mage.util.RandomUtil;
+import mage.util.*;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
 import mage.watchers.common.*;
@@ -77,6 +80,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -96,8 +100,12 @@ public abstract class GameImpl implements Game {
 
     private transient Object customData; // temporary data, used in AI simulations
     private transient Player losingPlayer; // temporary data, used in AI simulations
-    protected boolean simulation = false;
-    protected boolean checkPlayableState = false;
+
+    protected boolean simulation = false; // for inner simulations (game without user messages)
+    protected boolean aiGame = false; // for inner simulations (ai game, debug only)
+    protected boolean checkPlayableState = false; // for inner playable calculations (game without user dialogs)
+
+    protected AtomicInteger totalErrorsCount = new AtomicInteger(); // for debug only: error stats
 
     protected final UUID id;
 
@@ -120,7 +128,7 @@ public abstract class GameImpl implements Game {
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
 
     protected GameState state;
-    private transient Stack<Integer> savedStates = new Stack<>();
+    private transient Stack<Integer> savedStates = new Stack<>(); // bookmarks - 0-base refs to gameStates
     protected transient GameStates gameStates = new GameStates();
 
     // game states to allow player rollback
@@ -159,7 +167,7 @@ public abstract class GameImpl implements Game {
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize, int startingHandSize) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int minimumDeckSize, int startingLife, int startingHandSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
@@ -176,57 +184,27 @@ public abstract class GameImpl implements Game {
     protected GameImpl(final GameImpl game) {
         //this.customData = game.customData; // temporary data, no need on game copy
         //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
+        this.aiGame = game.aiGame;
         this.simulation = game.simulation;
         this.checkPlayableState = game.checkPlayableState;
 
         this.id = game.id;
+        this.totalErrorsCount.set(game.totalErrorsCount.get());
 
         this.ready = game.ready;
         //this.tableEventSource = game.tableEventSource; // client-server part, not need on copy/simulations
         //this.playerQueryEventSource = game.playerQueryEventSource; // client-server part, not need on copy/simulations
 
-        for (Entry<UUID, Card> entry : game.gameCards.entrySet()) {
-            this.gameCards.put(entry.getKey(), entry.getValue().copy());
-        }
-        for (Entry<UUID, MeldCard> entry : game.meldCards.entrySet()) {
-            this.meldCards.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.gameCards = CardUtil.deepCopyObject(game.gameCards);
+        this.meldCards = CardUtil.deepCopyObject(game.meldCards);
 
-        // lki
-        for (Entry<Zone, Map<UUID, MageObject>> entry : game.lki.entrySet()) {
-            Map<UUID, MageObject> lkiMap = new HashMap<>();
-            for (Entry<UUID, MageObject> entryMap : entry.getValue().entrySet()) {
-                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
-            }
-            this.lki.put(entry.getKey(), lkiMap);
-        }
-        // lkiCardState
-        for (Entry<Zone, Map<UUID, CardState>> entry : game.lkiCardState.entrySet()) {
-            Map<UUID, CardState> lkiMap = new HashMap<>();
-            for (Entry<UUID, CardState> entryMap : entry.getValue().entrySet()) {
-                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
-            }
-            this.lkiCardState.put(entry.getKey(), lkiMap);
-        }
-        // lkiExtended
-        for (Entry<UUID, Map<Integer, MageObject>> entry : game.lkiExtended.entrySet()) {
-            Map<Integer, MageObject> lkiMap = new HashMap<>();
-            for (Entry<Integer, MageObject> entryMap : entry.getValue().entrySet()) {
-                lkiMap.put(entryMap.getKey(), entryMap.getValue().copy());
-            }
-            this.lkiExtended.put(entry.getKey(), lkiMap);
-        }
-        // lkiShortLiving
-        for (Entry<Zone, Set<UUID>> entry : game.lkiShortLiving.entrySet()) {
-            this.lkiShortLiving.put(entry.getKey(), new HashSet<>(entry.getValue()));
-        }
+        this.lki = CardUtil.deepCopyObject(game.lki);
+        this.lkiCardState = CardUtil.deepCopyObject(game.lkiCardState);
+        this.lkiExtended = CardUtil.deepCopyObject(game.lkiExtended);
+        this.lkiShortLiving = CardUtil.deepCopyObject(game.lkiShortLiving);
 
-        for (Entry<UUID, Permanent> entry : game.permanentsEntering.entrySet()) {
-            this.permanentsEntering.put(entry.getKey(), entry.getValue().copy());
-        }
-        for (Entry<UUID, Counters> entry : game.enterWithCounters.entrySet()) {
-            this.enterWithCounters.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.permanentsEntering = CardUtil.deepCopyObject(game.permanentsEntering);
+        this.enterWithCounters = CardUtil.deepCopyObject(game.enterWithCounters);
 
         this.state = game.state.copy();
         // client-server part, not need on copy/simulations:
@@ -275,13 +253,19 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void setSimulation(boolean simulation) {
-        this.simulation = simulation;
+    public Game createSimulationForAI() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).aiGame = true;
+        return res;
     }
 
     @Override
-    public void setCheckPlayableState(boolean checkPlayableState) {
-        this.checkPlayableState = checkPlayableState;
+    public Game createSimulationForPlayableCalc() {
+        Game res = this.copy();
+        ((GameImpl) res).simulation = true;
+        ((GameImpl) res).checkPlayableState = true;
+        return res;
     }
 
     @Override
@@ -316,11 +300,16 @@ public abstract class GameImpl implements Game {
     public void loadCards(Set<Card> cards, UUID ownerId) {
         for (Card card : cards) {
             if (card instanceof PermanentCard) {
+                // TODO: impossible use case, can be deleted?
+                // trying to put permanent card to battlefield
                 card = ((PermanentCard) card).getCard();
             }
 
-            // init each card by parts... if you add new type here then getInitAbilities must be
-            // implemented too (it allows to split abilities between card and parts)
+            // usage hints:
+            // - each card and parts must be initialized here before usage
+            // - it add card/part to starting zone, assign abilities and init watchers
+            // - warning, if you add new type here then getInitAbilities must be
+            //   implemented too (it allows to split abilities between card and parts)
 
             // main card
             card.setOwnerId(ownerId);
@@ -345,10 +334,18 @@ public abstract class GameImpl implements Game {
                 Card rightCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
-            } else if (card instanceof AdventureCard) {
-                Card spellCard = ((AdventureCard) card).getSpellCard();
+            } else if (card instanceof CardWithSpellOption) {
+                Card spellCard = ((CardWithSpellOption) card).getSpellCard();
                 spellCard.setOwnerId(ownerId);
                 addCardToState(spellCard);
+            } else if (card.isTransformable() && card.getSecondCardFace() != null) {
+                Card nightCard = card.getSecondCardFace();
+                nightCard.setOwnerId(ownerId);
+                addCardToState(nightCard);
+            } else if (card.getMeldsToClazz() != null) {
+                // meld card will be added and init on meld effect resolve, so ignore it here
+                // TODO: rework meld logic cause card with watchers must be added on game init
+                //  (possible bugs: miss watcher related data in meld cards/rules/hints)
             }
         }
     }
@@ -446,6 +443,11 @@ public abstract class GameImpl implements Game {
             for (Designation designation : state.getDesignations()) {
                 if (designation.getId().equals(objectId)) {
                     return designation;
+                }
+            }
+            for (Emblem emblem : state.getHelperEmblems()) {
+                if (emblem.getId().equals(objectId)) {
+                    return emblem;
                 }
             }
             // can be an ability of a sacrificed Token trying to get it's source object
@@ -559,14 +561,14 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void ventureIntoDungeon(UUID playerId, boolean undercity) {
+    public void ventureIntoDungeon(UUID playerId, boolean isEnterToUndercity) {
         if (playerId == null) {
             return;
         }
         if (replaceEvent(GameEvent.getEvent(GameEvent.EventType.VENTURE, playerId, null, playerId))) {
             return;
         }
-        this.getOrCreateDungeon(playerId, undercity).moveToNextRoom(playerId, this);
+        this.getOrCreateDungeon(playerId, isEnterToUndercity).moveToNextRoom(playerId, this);
         fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
     }
 
@@ -582,8 +584,10 @@ public abstract class GameImpl implements Game {
         if (emblem != null) {
             return emblem;
         }
+
         TheRingEmblem newEmblem = new TheRingEmblem(playerId);
         state.addCommandObject(newEmblem);
+
         return newEmblem;
     }
 
@@ -713,12 +717,6 @@ public abstract class GameImpl implements Game {
             // SyrCarahTheBoldTest.java for an example of when this check is relevant.
             if (obj instanceof Spell) {
                 spell = (Spell) obj;
-            } else if (obj != null) {
-                logger.error(String.format(
-                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                                obj.getClass().getName(), obj.getName()),
-                        new Throwable()
-                );
             }
         }
         return spell;
@@ -734,6 +732,16 @@ public abstract class GameImpl implements Game {
         Permanent permanent = state.getPermanent(permanentId);
         if (permanent == null) {
             permanent = (Permanent) this.getLastKnownInformation(permanentId, Zone.BATTLEFIELD);
+        }
+        return permanent;
+    }
+
+    @Override
+    public Permanent getPermanentOrLKIBattlefield(MageObjectReference permanentRef) {
+        UUID id = permanentRef.getSourceId();
+        Permanent permanent = state.getPermanent(id);
+        if (permanent == null || state.getZoneChangeCounter(id) != permanentRef.getZoneChangeCounter()) {
+            permanent = (Permanent) this.getLastKnownInformation(id, Zone.BATTLEFIELD, permanentRef.getZoneChangeCounter());
         }
         return permanent;
     }
@@ -804,33 +812,70 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void setConcedingPlayer(UUID playerId) {
-        Player player = null;
-        if (state.getChoosingPlayerId() != null) {
-            player = getPlayer(state.getChoosingPlayerId());
-        } else if (state.getPriorityPlayerId() != null) {
-            player = getPlayer(state.getPriorityPlayerId());
+        // request to concede a player (can be called for any player at any moment by concede button, connection fail, etc)
+        // warning, it's important to process real concede in game thread only (on priority)
+
+        // concede queue (who requested concede)
+        if (!concedingPlayers.contains(playerId)) {
+            concedingPlayers.add(playerId);
         }
-        if (player != null) {
-            if (!player.hasLeft() && player.isHuman()) {
-                if (!concedingPlayers.contains(playerId)) {
-                    logger.debug("Game over for player Id: " + playerId + " gameId " + getId());
-                    concedingPlayers.add(playerId);
-                    player.signalPlayerConcede();
-                }
-            } else {
-                // no asynchronous action so check directly
-                concedingPlayers.add(playerId);
-                checkConcede();
+
+        Player currentPriorityPlayer = null;
+        if (state.getPriorityPlayerId() != null) {
+            currentPriorityPlayer = getPlayer(state.getPriorityPlayerId()); // started game
+        } else if (state.getChoosingPlayerId() != null) {
+            currentPriorityPlayer = getPlayer(state.getChoosingPlayerId()); // not started game
+        }
+
+        // if something wrong with a game - it's not started, freeze, etc
+        if (currentPriorityPlayer == null) {
+            // try to stop
+            logger.warn("Game don't have priority player - checking game end: " + this);
+            if (!ThreadUtils.isRunGameThread()) {
+                // TODO: if server has that logs then it must be researched and fixed
+                logger.error("Non-game thread can't concede or end games - someone called it from freeze game?");
             }
-        } else {
-            checkConcede();
+            checkConcede(false);
             checkIfGameIsOver();
+            return;
+        }
+
+        // if someone requested concede
+        if (currentPriorityPlayer.getId().equals(playerId)) {
+            // concede for itself
+            // stop current player dialog and execute concede
+            currentPriorityPlayer.signalPlayerConcede(true);
+        } else if (currentPriorityPlayer.getTurnControlledBy().equals(playerId)) {
+            // concede for itself while controlling another player
+            // stop current player dialog and execute concede
+            currentPriorityPlayer.signalPlayerConcede(true);
+        } else {
+            // concede for another player
+            // allow current player to continue and check concede on any next priority
+            currentPriorityPlayer.signalPlayerConcede(false);
+        }
+
+        // game thread can call concede directly
+        if (ThreadUtils.isRunGameThread()) {
+            // example: forced lost due state base actions check
+            checkConcede();
         }
     }
 
     public void checkConcede() {
-        while (!concedingPlayers.isEmpty()) {
-            leave(concedingPlayers.removeFirst());
+        checkConcede(true);
+    }
+
+    public void checkConcede(boolean mustRunInGameThread) {
+        // must run in game thread all the time
+        if (mustRunInGameThread) {
+            ThreadUtils.ensureRunInGameThread();
+        }
+
+        UUID playerId = concedingPlayers.poll();
+        while (playerId != null) {
+            leave(playerId);
+            playerId = concedingPlayers.poll();
         }
     }
 
@@ -936,14 +981,27 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void removeBookmark(int bookmark
-    ) {
+    public void removeBookmark(int bookmark) {
         if (!simulation) {
             if (bookmark != 0) {
                 while (savedStates.size() > bookmark) {
                     savedStates.pop();
                 }
                 gameStates.remove(bookmark);
+            }
+        }
+    }
+
+    @Override
+    public void removeBookmark_v2(int bookmark) {
+        if (!simulation) {
+            if (bookmark != 0) {
+                while (savedStates.size() >= bookmark) {
+                    int outdatedIndex = savedStates.pop();
+                    while (gameStates.getSize() - 1 >= outdatedIndex) {
+                        gameStates.remove(gameStates.getSize() - 1);
+                    }
+                }
             }
         }
     }
@@ -1171,6 +1229,9 @@ public abstract class GameImpl implements Game {
         // Apply stun counter mechanic
         state.addAbility(new SimpleStaticAbility(Zone.ALL, new StunCounterEffect()), null);
 
+        // Apply finality counter mechanic
+        state.addAbility(new SimpleStaticAbility(Zone.ALL, new FinalityCounterEffect()), null);
+
         // Handle companions
         Map<Player, Card> playerCompanionMap = new HashMap<>();
         for (Player player : state.getPlayers().values()) {
@@ -1216,7 +1277,7 @@ public abstract class GameImpl implements Game {
         Player choosingPlayer = null;
         if (startingPlayerId == null) {
             TargetPlayer targetPlayer = new TargetPlayer();
-            targetPlayer.setTargetName("starting player");
+            targetPlayer.withTargetName("starting player");
             if (choosingPlayerId != null) {
                 choosingPlayer = this.getPlayer(choosingPlayerId);
                 if (choosingPlayer != null && !choosingPlayer.canRespond()) {
@@ -1267,7 +1328,7 @@ public abstract class GameImpl implements Game {
                 player.initLife(this.getStartingLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(startingHandSize, null, this);
+                mulligan.drawHand(startingHandSize, player, this);
             }
         }
 
@@ -1321,20 +1382,42 @@ public abstract class GameImpl implements Game {
             addPlane(plane, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
         }
+
+        if (!gameOptions.perPlayerEmblemCards.isEmpty()) {
+            for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+                for (DeckCardInfo info : gameOptions.perPlayerEmblemCards) {
+                    Card card = EmblemOfCard.cardFromDeckInfo(info);
+                    Emblem emblem = new EmblemOfCard(card);
+                    addEmblem(emblem, card, playerId);
+                    for (Ability ability : emblem.getAbilities()) {
+                        state.addAbility(ability, null, emblem);
+                    }
+                }
+            }
+        }
+
+        if (!gameOptions.globalEmblemCards.isEmpty()) {
+            for (DeckCardInfo info : gameOptions.globalEmblemCards) {
+                Card card = EmblemOfCard.cardFromDeckInfo(info);
+                Emblem emblem = new EmblemOfCard(card);
+                addEmblem(emblem, card, startingPlayerId);
+                for (Ability ability : emblem.getAbilities()) {
+                    state.addAbility(ability, null, emblem);
+                }
+            }
+        }
+
+        initGameDefaultHelperEmblems();
     }
 
     public void initGameDefaultWatchers() {
         List<Watcher> newWatchers = new ArrayList<>();
-        newWatchers.add(new MorbidWatcher());
         newWatchers.add(new CastSpellLastTurnWatcher());
-        newWatchers.add(new CastSpellYourLastTurnWatcher());
         newWatchers.add(new PlayerLostLifeWatcher());
-        newWatchers.add(new PlayerLostLifeNonCombatWatcher());
+        newWatchers.add(new FirstStrikeWatcher()); // required for combat code
         newWatchers.add(new BlockedAttackerWatcher());
-        newWatchers.add(new DamageDoneWatcher());
-        newWatchers.add(new PlanarRollWatcher());
+        newWatchers.add(new PlanarRollWatcher()); // needed for RollDiceTest (planechase code needs improves)
         newWatchers.add(new AttackedThisTurnWatcher());
-        newWatchers.add(new PlayersAttackedThisTurnWatcher());
         newWatchers.add(new CardsDrawnThisTurnWatcher());
         newWatchers.add(new ManaSpentToCastWatcher());
         newWatchers.add(new ManaPaidSourceWatcher());
@@ -1344,6 +1427,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CreaturesDiedWatcher());
         newWatchers.add(new TemptedByTheRingWatcher());
         newWatchers.add(new SpellsCastWatcher());
+        newWatchers.add(new AttackedOrBlockedThisCombatWatcher()); // required for tests
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -1358,12 +1442,31 @@ public abstract class GameImpl implements Game {
     public void initPlayerDefaultWatchers(UUID playerId) {
         PlayerDamagedBySourceWatcher playerDamagedBySourceWatcher = new PlayerDamagedBySourceWatcher();
         playerDamagedBySourceWatcher.setControllerId(playerId);
-
         getState().addWatcher(playerDamagedBySourceWatcher);
 
         BloodthirstWatcher bloodthirstWatcher = new BloodthirstWatcher();
         bloodthirstWatcher.setControllerId(playerId);
         getState().addWatcher(bloodthirstWatcher);
+    }
+
+    /**
+     * Add source of some global effects (as hidden emblems), so users will see good image in stack and logs
+     */
+    public void initGameDefaultHelperEmblems() {
+
+        // Rad Counter's trigger source
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            // This is not a real emblem. Just a fake source for the
+            // inherent trigger ability related to Rad counters
+            // Faking a source just to display something on the stack ability.
+            state.addHelperEmblem(new RadiationEmblem(), playerId);
+        }
+
+        // global card hints for better UX
+        for (UUID playerId : state.getPlayerList(startingPlayerId)) {
+            state.addHelperEmblem(new XmageHelperEmblem().withCardHint("storm counter", StormAbility.getHint()), playerId);
+            state.addHelperEmblem(new XmageHelperEmblem().withCardHint("day or night", DayNightHint.instance), playerId);
+        }
     }
 
     protected void sendStartMessage(Player choosingPlayer, Player startingPlayer) {
@@ -1409,6 +1512,10 @@ public abstract class GameImpl implements Game {
             player.endOfTurn(this);
         }
         state.resetWatchers();
+        // Could be done any time as long as the stack is empty
+        // Tags are stored in the game state as a spell resolves into a permanent
+        // and must be kept while any abilities with that permanent as a source could resolve
+        state.cleanupPermanentCostsTags(this);
     }
 
     protected UUID pickChoosingPlayer() {
@@ -1568,9 +1675,13 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
-        int errorContinueCounter = 0;
+        if (!this.isSimulation() && this.inCheckPlayableState()) {
+            throw new IllegalStateException("Wrong code usage. Only simulation games can be in CheckPlayableState");
+        }
+
+        int priorityErrorsCount = 0;
         infiniteLoopCounter = 0;
-        int rollbackBookmark = 0;
+        int rollbackBookmarkOnPriorityStart = 0;
         clearAllBookmarks();
         try {
             applyEffects();
@@ -1585,8 +1696,8 @@ public abstract class GameImpl implements Game {
                 Player player;
                 while (!isPaused() && !checkIfGameIsOver()) {
                     try {
-                        if (rollbackBookmark == 0) {
-                            rollbackBookmark = bookmarkState();
+                        if (rollbackBookmarkOnPriorityStart == 0) {
+                            rollbackBookmarkOnPriorityStart = bookmarkState();
                         }
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
@@ -1636,65 +1747,67 @@ public abstract class GameImpl implements Game {
                                 return;
                             }
                         }
-                    } catch (Exception ex) {
-                        logger.fatal("Game exception gameId: " + getId(), ex);
-                        if ((ex instanceof NullPointerException)
-                                && errorContinueCounter == 0 && ex.getStackTrace() != null) {
-                            logger.fatal(ex.getStackTrace());
-                        }
-                        this.fireErrorEvent("Game exception occurred: ", ex);
+                    } catch (Exception e) {
+                        // INNER error - can continue to execute
+                        this.totalErrorsCount.incrementAndGet();
+                        logger.fatal("Game error: " + getId() + " - " + this, e);
+                        this.fireErrorEvent("Game error occurred: ", e);
 
-                        // stack info
-                        String info = this.getStack().stream().map(MageObject::toString).collect(Collectors.joining("\n"));
-                        logger.info(String.format("\nStack before error %d: \n%s\n", this.getStack().size(), info));
+                        // additional info
+                        logger.info("---");
+                        logger.info("Game state on error: " + this);
+                        String info = this.getStack()
+                                .stream()
+                                .map(o -> "* " + o.toString())
+                                .collect(Collectors.joining("\n"));
+                        logger.info(String.format("Stack on error %d: \n%s\n", this.getStack().size(), info));
+                        logger.info("---");
 
                         // too many errors - end game
-                        if (errorContinueCounter > 15) {
-                            throw new MageException("Iterated player priority after game exception too often, game ends! Last error:\n "
-                                    + ex.getMessage());
+                        if (priorityErrorsCount > 15) {
+                            throw new MageException("Too many errors, game will be end. Last error: " + e);
                         }
 
-                        // rollback game to prev state
-                        GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
-                        rollbackBookmark = 0;
-
+                        // rollback to prev state
+                        GameState restoredState = restoreState(rollbackBookmarkOnPriorityStart, "Game error: " + e);
+                        rollbackBookmarkOnPriorityStart = 0;
                         if (restoredState != null) {
-                            this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, ex.getMessage()));
+                            this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, e));
                         } else {
-                            logger.error("Can't auto-restore to prev state.");
+                            logger.error("Can't auto-restore to prev state");
                         }
 
+                        // count total errors
                         Player activePlayer = this.getPlayer(getActivePlayerId());
                         if (activePlayer != null && !activePlayer.isTestsMode()) {
-                            errorContinueCounter++;
+                            // real game - try to continue
+                            priorityErrorsCount++;
                             continue;
                         } else {
+                            // tests - try to fail fast
                             throw new MageException(UNIT_TESTS_ERROR_TEXT);
                         }
-                    } finally {
-                        setCheckPlayableState(false);
                     }
                     state.getPlayerList().getNext();
                 }
             }
-        } catch (Exception ex) {
-            logger.fatal("Game exception " + ex.getMessage(), ex);
-            this.fireErrorEvent("Game exception occurred: ", ex);
+        } catch (Exception e) {
+            // OUTER error - game must end (too many errors also come here)
+            this.totalErrorsCount.incrementAndGet();
+            logger.fatal("Game end on critical error: " + e, e);
+            this.fireErrorEvent("Game end on critical error: " + e, e);
             this.end();
 
-            // don't catch game errors in unit tests, so test framework can process it (example: errors in AI simulations)
-            if (ex.getMessage() != null && ex.getMessage().equals(UNIT_TESTS_ERROR_TEXT)) {
-                //this.getContinuousEffects().traceContinuousEffects(this);
+            // re-raise error in unit tests, so framework can catch it (example: errors in AI simulations)
+            if (UNIT_TESTS_ERROR_TEXT.equals(e.getMessage())) {
                 throw new IllegalStateException(UNIT_TESTS_ERROR_TEXT);
             }
         } finally {
             resetLKI();
             clearAllBookmarks();
-            setCheckPlayableState(false);
         }
     }
 
-    //resolve top StackObject
     protected void resolve() {
         StackObject top = null;
         try {
@@ -1704,7 +1817,6 @@ public abstract class GameImpl implements Game {
         } finally {
             if (top != null) {
                 state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
-                rememberLKI(top.getSourceId(), Zone.STACK, top);
                 checkInfiniteLoop(top.getSourceId());
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
@@ -1827,8 +1939,15 @@ public abstract class GameImpl implements Game {
 
     @Override
     public synchronized void applyEffects() {
-        resetShortLivingLKI();
         state.applyEffects(this);
+    }
+
+    @Override
+    public void processAction() {
+        state.handleSimultaneousEvent(this);
+        resetShortLivingLKI();
+        applyEffects();
+        state.getTriggers().checkStateTriggers(this);
     }
 
     @Override
@@ -1850,21 +1969,20 @@ public abstract class GameImpl implements Game {
 
     /**
      * @param emblem
-     * @param sourceObject
+     * @param sourceObject can be null
      * @param toPlayerId   controller and owner of the emblem
      */
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
         Emblem newEmblem = emblem.copy();
-        newEmblem.setSourceObject(sourceObject);
+        newEmblem.setSourceObjectAndInitImage(sourceObject);
         newEmblem.setControllerId(toPlayerId);
         newEmblem.assignNewId();
         newEmblem.getAbilities().newId();
         for (Ability ability : newEmblem.getAbilities()) {
             ability.setSourceId(newEmblem.getId());
         }
-
-        state.addCommandObject(newEmblem); // TODO: generate image for emblem here?
+        state.addCommandObject(newEmblem);
     }
 
     /**
@@ -1885,7 +2003,7 @@ public abstract class GameImpl implements Game {
             }
         }
         Plane newPlane = plane.copy();
-        newPlane.setSourceObject();
+        newPlane.setSourceObjectAndInitImage();
         newPlane.setControllerId(toPlayerId);
         newPlane.assignNewId();
         newPlane.getAbilities().newId();
@@ -1893,12 +2011,13 @@ public abstract class GameImpl implements Game {
             ability.setSourceId(newPlane.getId());
         }
         state.addCommandObject(newPlane);
+
         informPlayers("You have planeswalked to " + newPlane.getLogName());
 
         // Fire off the planeswalked event
-        GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
+        GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), (Ability) null, newPlane.getId(), 0, true);
         if (!replaceEvent(event)) {
-            GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
+            GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), (Ability) null, newPlane.getId(), 0, true);
             fireEvent(ge);
         }
 
@@ -1952,17 +2071,27 @@ public abstract class GameImpl implements Game {
         // if it was no copy of copy take the target itself
         if (newBluePrint == null) {
             newBluePrint = copyFromPermanent.copy();
+
+            // reset to original characteristics
             newBluePrint.reset(this);
 
-            //getState().addCard(permanent);
-            if (copyFromPermanent.isMorphed()
-                    || copyFromPermanent.isManifested()
-                    || copyFromPermanent.isFaceDown(this)) {
-                MorphAbility.setPermanentToFaceDownCreature(newBluePrint, copyFromPermanent, this);
+            // workaround to find real copyable characteristics of transformed/facedown/etc permanents
+
+            BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(this, copyFromPermanent);
+            if (faceDownType != null) {
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(this, null, newBluePrint, faceDownType, null);
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
+                TransformAbility.transformPermanent(newBluePrint, this, source);
+            }
+            if (copyFromPermanent.isPrototyped()) {
+                Abilities<Ability> abilities = copyFromPermanent.getAbilities();
+                for (Ability ability : abilities) {
+                    if (ability instanceof PrototypeAbility) {
+                        ((PrototypeAbility) ability).prototypePermanent(newBluePrint, this);
+                    }
+                }
             }
         }
         if (applier != null) {
@@ -1972,11 +2101,10 @@ public abstract class GameImpl implements Game {
         // save original copy link (handle copy of copies too)
         newBluePrint.setCopy(true, (copyFromPermanent.getCopyFrom() != null ? copyFromPermanent.getCopyFrom() : copyFromPermanent));
 
-        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
-        newEffect.newId();
-        newEffect.setApplier(applier);
+        CopyEffect newCopyEffect = new CopyEffect(duration, newBluePrint, copyToPermanentId);
+        newCopyEffect.setApplier(applier);
         Ability newAbility = source.copy();
-        newEffect.init(newAbility, this);
+        newCopyEffect.init(newAbility, this);
 
         // If there are already copy effects with duration = Custom to the same object, remove the existing effects because they no longer have any effect
         if (duration == Duration.Custom) {
@@ -1990,7 +2118,7 @@ public abstract class GameImpl implements Game {
                 }
             }
         }
-        state.addEffect(newEffect, newAbility);
+        state.addEffect(newCopyEffect, newAbility);
         return newBluePrint;
     }
 
@@ -2020,12 +2148,16 @@ public abstract class GameImpl implements Game {
         }
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
+            // 605.4a  A triggered mana ability doesn’t go on the stack, so it can’t be targeted,
+            // countered, or otherwise responded to. Rather, it resolves immediately after the mana
+            // ability that triggered it, without waiting for priority.
             Ability manaAbility = ability.copy();
             if (manaAbility.getSourceObjectZoneChangeCounter() == 0) {
                 manaAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
             }
-            manaAbility.activate(this, false);
-            manaAbility.resolve(this);
+            if (manaAbility.activate(this, false)) {
+                manaAbility.resolve(this);
+            }
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
@@ -2036,6 +2168,46 @@ public abstract class GameImpl implements Game {
                 newAbility.setSourcePermanentTransformCount(this);
             }
             newAbility.setTriggerEvent(triggeringEvent);
+
+            // TODO: non-stack delayed triggers are xmage's workaround to support specific cards
+            //  instead replacement effects usage. That triggers must be executed immediately like mana abilities
+            //  or be reworked, cause current code do not support rule "nothing happens between the two events,
+            //  including state-based actions"
+            //
+            // Search related cards by "usesStack = false".
+            // See conflicting tests in StateBaseTriggeredAbilityTest and BanisherPriestTest
+            //
+            // example 1:
+            // Grasp of Fate: exile ... until Grasp of Fate leaves the battlefield
+            // The exiled cards return to the battlefield immediately after Grasp of Fate leaves the battlefield. Nothing
+            // happens between the two events, including state-based actions.
+            // (2015-11-04)
+            //
+            // example 2:
+            // Banisher Priest: exile ... until Banisher Priest leaves the battlefield
+            // Banisher Priest's ability causes a zone change with a duration, a new style of ability that's
+            // somewhat reminiscent of older cards like Oblivion Ring. However, unlike Oblivion Ring, cards
+            // like Banisher Priest have a single ability that creates two one-shot effects: one that exiles
+            // the creature when the ability resolves, and another that returns the exiled card to the battlefield
+            // immediately after Banisher Priest leaves the battlefield.
+            // (2013-07-01)
+            // The exiled card returns to the battlefield immediately after Banisher Priest leaves the battlefield.
+            // Nothing happens between the two events, including state-based actions. The two creatures aren't on
+            // the battlefield at the same time. For example, if the returning creature is a Clone, it can't enter
+            // the battlefield as a copy of Banisher Priest.
+            // (2013-07-01)
+            //
+            //
+            /* possible code:
+            if (newAbility.isUsesStack()) {
+                state.addTriggeredAbility(newAbility);
+            } else {
+                if (newAbility.activate(this, false)) {
+                    newAbility.resolve(this);
+                }
+            }//*/
+
+            // original code
             state.addTriggeredAbility(newAbility);
         }
     }
@@ -2046,11 +2218,27 @@ public abstract class GameImpl implements Game {
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
         }
-        // return addDelayedTriggeredAbility(delayedAbility);
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
         if (source != null) {
-            newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+            // Relevant ruling:
+            // 603.7e If an activated or triggered ability creates a delayed triggered ability,
+            // the source of that delayed triggered ability is the same as the source of that other ability.
+            // The controller of that delayed triggered ability is the player who controlled that other ability as it resolved.
+            // 603.7f If a static ability generates a replacement effect which causes a delayed triggered ability to be created,
+            // the source of that delayed triggered ability is the object with that static ability.
+            // The controller of that delayed triggered ability is the same as the controller of that object at the time
+            // the replacement effect was applied.
+            //
+            // There are two possibility for the zcc:
+            // 1/ the source is an Ability with a valid (not 0) zcc, and we must use the same.
+            int zcc = source.getSourceObjectZoneChangeCounter();
+            if (zcc == 0) {
+                // 2/ the source has not a valid zcc (it is most likely a StaticAbility instantiated at beginning of game)
+                //    we use the source objects's zcc
+                zcc = getState().getZoneChangeCounter(source.getSourceId());
+            }
+            newAbility.setSourceObjectZoneChangeCounter(zcc);
             newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.init(this);
@@ -2060,26 +2248,33 @@ public abstract class GameImpl implements Game {
 
     @Override
     public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source) {
+        return fireReflexiveTriggeredAbility(reflexiveAbility, source, false);
+    }
+
+    @Override
+    public UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source, boolean fireAsSimultaneousEvent) {
         UUID uuid = this.addDelayedTriggeredAbility(reflexiveAbility, source);
-        this.fireEvent(GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source, source.getControllerId()));
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.OPTION_USED, source.getOriginalId(), source, source.getControllerId());
+        if (fireAsSimultaneousEvent) {
+            this.getState().addSimultaneousEvent(event, this);
+        } else {
+            this.fireEvent(event);
+        }
         return uuid;
     }
 
     /**
-     * 116.5. Each time a player would get priority, the game first performs all
+     * 117.5. Each time a player would get priority, the game first performs all
      * applicable state-based actions as a single event (see rule 704,
      * “State-Based Actions”), then repeats this process until no state-based
      * actions are performed. Then triggered abilities are put on the stack (see
      * rule 603, “Handling Triggered Abilities”). These steps repeat in order
      * until no further state-based actions are performed and no abilities
      * trigger. Then the player who would have received priority does so.
-     *
-     * @return
      */
     @Override
     public boolean checkStateAndTriggered() {
         boolean somethingHappened = false;
-        //20091005 - 115.5
         while (!isPaused() && !checkIfGameIsOver()) {
             if (!checkStateBasedActions()) {
                 // nothing happened so check triggers
@@ -2088,7 +2283,7 @@ public abstract class GameImpl implements Game {
                     break;
                 }
             }
-            this.getState().processAction(this); // needed e.g if boost effects end and cause creatures to die
+            processAction(); // needed e.g if boost effects end and cause creatures to die
             somethingHappened = true;
         }
         checkConcede();
@@ -2098,10 +2293,8 @@ public abstract class GameImpl implements Game {
     /**
      * Sets the waiting triggered abilities (if there are any) to the stack in
      * the chosen order by player
-     *
-     * @return
      */
-    public boolean checkTriggered() {
+    boolean checkTriggered() {
         boolean played = false;
         state.getTriggers().checkStateTriggers(this);
         for (UUID playerId : state.getPlayerList(state.getActivePlayerId())) {
@@ -2139,15 +2332,13 @@ public abstract class GameImpl implements Game {
     }
 
     /**
-     * 116.5. Each time a player would get priority, the game first performs all
+     * 117.5. Each time a player would get priority, the game first performs all
      * applicable state-based actions as a single event (see rule 704,
      * “State-Based Actions”), then repeats this process until no state-based
      * actions are performed. Then triggered abilities are put on the stack (see
      * rule 603, “Handling Triggered Abilities”). These steps repeat in order
      * until no further state-based actions are performed and no abilities
      * trigger. Then the player who would have received priority does so.
-     *
-     * @return
      */
     protected boolean checkStateBasedActions() {
         boolean somethingHappened = false;
@@ -2157,7 +2348,7 @@ public abstract class GameImpl implements Game {
             if (!player.hasLost()
                     && ((player.getLife() <= 0 && player.canLoseByZeroOrLessLife())
                     || player.getLibrary().isEmptyDraw()
-                    || player.getCounters().getCount(CounterType.POISON) >= 10)) {
+                    || player.getCountersCount(CounterType.POISON) >= 10)) {
                 player.lost(this);
             }
         }
@@ -2307,7 +2498,7 @@ public abstract class GameImpl implements Game {
                 }
 
                 case EXILED: {
-                    getExile().removeCard(copiedCard, this);
+                    getExile().removeCard(copiedCard);
                     break;
                 }
 
@@ -2331,6 +2522,7 @@ public abstract class GameImpl implements Game {
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
+        Map<UUID, Map<UUID, Set<Permanent>>> roleMap = new HashMap<>();
         List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
             if (perm.isCreature(this)) {
@@ -2510,6 +2702,11 @@ public abstract class GameImpl implements Game {
                         }
                     }
                 }
+                if (perm.hasSubtype(SubType.ROLE, this) && state.getZone(perm.getId()) == Zone.BATTLEFIELD) {
+                    roleMap.computeIfAbsent(perm.getControllerId(), x -> new HashMap<>())
+                            .computeIfAbsent(perm.getAttachedTo(), x -> new HashSet<>())
+                            .add(perm);
+                }
             }
             // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number
             // and it isn't the source of a chapter ability that has triggered but not yet left the stack, that Saga's controller sacrifices it.
@@ -2665,6 +2862,13 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
+
+            // Start Your Engines // Max Speed
+            if (perm.getAbilities(this).containsClass(StartYourEnginesAbility.class)) {
+                Optional.ofNullable(perm.getControllerId())
+                        .map(this::getPlayer)
+                        .ifPresent(player -> player.initSpeed(this));
+            }
         }
         //201300713 - 704.5k
         // If a player controls two or more legendary permanents with the same name, that player
@@ -2686,8 +2890,8 @@ public abstract class GameImpl implements Game {
                     continue;
                 }
                 Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                targetLegendaryToKeep.setNotTarget(true);
-                targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
+                targetLegendaryToKeep.withNotTarget(true);
+                targetLegendaryToKeep.withTargetName(legend.getName() + " to keep (Legendary Rule)?");
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                     if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
@@ -2733,6 +2937,29 @@ public abstract class GameImpl implements Game {
             }
         }
 
+        if (!roleMap.isEmpty()) {
+            List<Set<Permanent>> rolesToHandle = roleMap.values()
+                    .stream()
+                    .map(Map::values)
+                    .flatMap(Collection::stream)
+                    .filter(s -> s.size() > 1)
+                    .collect(Collectors.toList());
+            if (!rolesToHandle.isEmpty()) {
+                for (Set<Permanent> roleSet : rolesToHandle) {
+                    int newest = roleSet
+                            .stream()
+                            .mapToInt(Permanent::getCreateOrder)
+                            .max()
+                            .orElse(-1);
+                    roleSet.removeIf(permanent -> permanent.getCreateOrder() == newest);
+                    for (Permanent permanent : roleSet) {
+                        movePermanentToGraveyardWithInfo(permanent);
+                        somethingHappened = true;
+                    }
+                }
+            }
+        }
+
         // Daybound/Nightbound permanents should be transformed according to day/night
         // This is not a state-based action but it's unclear where else to put it
         if (hasDayNight()) {
@@ -2771,13 +2998,27 @@ public abstract class GameImpl implements Game {
         }
         String message;
         if (this.canPlaySorcery(playerId)) {
-            message = "Play spells and abilities.";
+            message = "Play spells and abilities";
         } else {
-            message = "Play instants and activated abilities.";
+            message = "Play instants and activated abilities";
         }
-        playerQueryEventSource.select(playerId, message);
+
+        message += getControllingPlayerHint(playerId);
+
+        Player player = this.getPlayer(playerId);
+        playerQueryEventSource.select(player.getTurnControlledBy(), message);
         getState().clearLookedAt();
         getState().clearRevealed();
+    }
+
+    private String getControllingPlayerHint(UUID playerId) {
+        Player player = this.getPlayer(playerId);
+        Player controllingPlayer = this.getPlayer(player.getTurnControlledBy());
+        if (player != controllingPlayer) {
+            return " (as " + player.getLogName() + ")";
+        } else {
+            return "";
+        }
     }
 
     @Override
@@ -2785,7 +3026,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.select(playerId, message);
+        playerQueryEventSource.select(playerId, message + getControllingPlayerHint(playerId));
     }
 
     @Override
@@ -2793,7 +3034,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.select(playerId, message, options);
+        playerQueryEventSource.select(playerId, message + getControllingPlayerHint(playerId), options);
     }
 
     @Override
@@ -2801,7 +3042,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.playMana(playerId, message, options);
+        playerQueryEventSource.playMana(playerId, message + getControllingPlayerHint(playerId), options);
     }
 
     @Override
@@ -2809,7 +3050,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.playXMana(playerId, message);
+        playerQueryEventSource.playXMana(playerId, message + getControllingPlayerHint(playerId));
     }
 
     @Override
@@ -2822,7 +3063,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.ask(playerId, message.getMessage(), source, addMessageToOptions(message, options));
+        playerQueryEventSource.ask(playerId, message.getMessage() + getControllingPlayerHint(playerId), source, addMessageToOptions(message, options));
     }
 
     @Override
@@ -2834,7 +3075,7 @@ public abstract class GameImpl implements Game {
         if (object != null) {
             objectName = object.getName();
         }
-        playerQueryEventSource.chooseAbility(playerId, message, objectName, choices);
+        playerQueryEventSource.chooseAbility(playerId, message + getControllingPlayerHint(playerId), objectName, choices);
     }
 
     @Override
@@ -2842,7 +3083,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.chooseMode(playerId, message, modes);
+        playerQueryEventSource.chooseMode(playerId, message + getControllingPlayerHint(playerId), modes);
     }
 
     @Override
@@ -2850,7 +3091,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message.getMessage(), targets, required, addMessageToOptions(message, options));
+        playerQueryEventSource.target(playerId, message.getMessage() + getControllingPlayerHint(playerId), targets, required, addMessageToOptions(message, options));
     }
 
     @Override
@@ -2858,7 +3099,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message.getMessage(), cards, required, addMessageToOptions(message, options));
+        playerQueryEventSource.target(playerId, message.getMessage() + getControllingPlayerHint(playerId), cards, required, addMessageToOptions(message, options));
     }
 
     /**
@@ -2871,7 +3112,7 @@ public abstract class GameImpl implements Game {
      */
     @Override
     public void fireSelectTargetTriggeredAbilityEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
-        playerQueryEventSource.target(playerId, message, abilities);
+        playerQueryEventSource.target(playerId, message + getControllingPlayerHint(playerId), abilities);
     }
 
     @Override
@@ -2879,7 +3120,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message, perms, required);
+        playerQueryEventSource.target(playerId, message + getControllingPlayerHint(playerId), perms, required);
     }
 
     @Override
@@ -2887,7 +3128,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.amount(playerId, message, min, max);
+        playerQueryEventSource.amount(playerId, message + getControllingPlayerHint(playerId), min, max);
     }
 
     @Override
@@ -2912,7 +3153,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.choosePile(playerId, message, pile1, pile2);
+        playerQueryEventSource.choosePile(playerId, message + getControllingPlayerHint(playerId), pile1, pile2);
     }
 
     @Override
@@ -2935,6 +3176,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.INFO, message, this);
     }
 
@@ -2943,6 +3185,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.STATUS, message, withTime, withTurnInfo, this);
     }
 
@@ -2951,7 +3194,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        logger.trace("fireUpdatePlayersEvent");
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
         getState().clearLookedAt();
         getState().clearRevealed();
@@ -2962,13 +3205,25 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        logger.trace("fireGameEndIfo");
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.END_GAME_INFO, null, this);
     }
 
     @Override
     public void fireErrorEvent(String message, Exception ex) {
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.ERROR, message, ex, this);
+    }
+
+    private void makeSureCalledOutsideLayerEffects() {
+        // very slow, enable/comment it for debug or load/stability tests only
+        // TODO: enable check and remove/rework all wrong usages
+        if (true) return;
+        Arrays.stream(Thread.currentThread().getStackTrace()).forEach(e -> {
+            if (e.toString().contains("GameState.applyEffects")) {
+                throw new IllegalStateException("Wrong code usage: client side events can't be called from layers effects (wrong informPlayers usage?)");
+            }
+        });
     }
 
     @Override
@@ -2978,8 +3233,6 @@ public abstract class GameImpl implements Game {
 
     /**
      * Return a list of all players ignoring the range of visible players
-     *
-     * @return
      */
     @Override
     public PlayerList getPlayerList() {
@@ -3117,7 +3370,7 @@ public abstract class GameImpl implements Game {
             }
         }
         for (Card card : toOutside) {
-            rememberLKI(card.getId(), Zone.BATTLEFIELD, card);
+            rememberLKI(Zone.BATTLEFIELD, card);
         }
         // needed to send event that permanent leaves the battlefield to allow non stack effects to execute
         player.moveCards(toOutside, Zone.OUTSIDE, null, this);
@@ -3296,11 +3549,6 @@ public abstract class GameImpl implements Game {
 
     }
 
-    protected void removeCreaturesFromCombat() {
-        //20091005 - 511.3
-        getCombat().endCombat(this);
-    }
-
     @Override
     public ContinuousEffects getContinuousEffects() {
         return state.getContinuousEffects();
@@ -3378,7 +3626,7 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public boolean getShortLivingLKI(UUID objectId, Zone zone) {
+    public boolean checkShortLivingLKI(UUID objectId, Zone zone) {
         Set<UUID> idSet = lkiShortLiving.get(zone);
         if (idSet != null) {
             return idSet.contains(objectId);
@@ -3389,12 +3637,12 @@ public abstract class GameImpl implements Game {
     /**
      * Remembers object state to be used as Last Known Information.
      *
-     * @param objectId
      * @param zone
      * @param object
      */
     @Override
-    public void rememberLKI(UUID objectId, Zone zone, MageObject object) {
+    public void rememberLKI(Zone zone, MageObject object) {
+        UUID objectId = object.getId();
         if (object instanceof Permanent || object instanceof StackObject) {
             MageObject copy = object.copy();
 
@@ -3422,7 +3670,7 @@ public abstract class GameImpl implements Game {
 
     /**
      * Reset objects stored for Last Known Information. (Happens if all effects
-     * are applied und stack is empty)
+     * are applied and stack is empty)
      */
     @Override
     public void resetLKI() {
@@ -3436,6 +3684,16 @@ public abstract class GameImpl implements Game {
     @Override
     public void resetShortLivingLKI() {
         lkiShortLiving.clear();
+    }
+
+    @Override
+    public int getTotalErrorsCount() {
+        return this.totalErrorsCount.get();
+    }
+
+    @Override
+    public int getTotalEffectsCount() {
+        return this.getContinuousEffects().getTotalEffectsCount();
     }
 
     @Override
@@ -3459,15 +3717,9 @@ public abstract class GameImpl implements Game {
                             if (command.getValue().contains("life:")) {
                                 String[] s = command.getValue().split(":");
                                 if (s.length == 2) {
-                                    try {
-                                        int amount = Integer.parseInt(s[1]);
-                                        player.setLife(amount, this, null);
-                                        logger.debug("Setting player's life: ");
-                                    } catch (NumberFormatException e) {
-                                        logger.fatal("error setting life", e);
-                                    }
+                                    int amount = Integer.parseInt(s[1]);
+                                    player.setLife(amount, this, null);
                                 }
-
                             }
                             break;
                     }
@@ -3482,18 +3734,36 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command) {
+    public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
+        return state.getPermanentCostsTags();
+    }
+
+    @Override
+    public void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source) {
+        state.storePermanentCostsTags(permanentMOR, source);
+    }
+
+    @Override
+    public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PutToBattlefieldInfo> battlefield, List<Card> graveyard, List<Card> command, List<Card> exiled) {
         // fake test ability for triggers and events
         Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
         fakeSourceAbilityTemplate.setControllerId(ownerId);
 
         Player player = getPlayer(ownerId);
         if (player != null) {
+            // init cards
             loadCards(ownerId, library);
             loadCards(ownerId, hand);
-            loadCards(ownerId, battlefield);
+            loadCards(ownerId, battlefield
+                    .stream()
+                    .map(PutToBattlefieldInfo::getCard)
+                    .collect(Collectors.toList())
+            );
             loadCards(ownerId, graveyard);
             loadCards(ownerId, command);
+            loadCards(ownerId, exiled);
+
+            // move cards to zones
 
             for (Card card : library) {
                 player.getLibrary().putOnTop(card, this);
@@ -3519,10 +3789,15 @@ public abstract class GameImpl implements Game {
                 throw new IllegalArgumentException("Command zone supports in commander test games");
             }
 
-            for (PermanentCard permanentCard : battlefield) {
+            for (Card card : exiled) {
+                card.setZone(Zone.EXILED, this);
+                getExile().add(card);
+            }
+
+            for (PutToBattlefieldInfo info : battlefield) {
                 Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
-                fakeSourceAbility.setSourceId(permanentCard.getId());
-                CardUtil.putCardOntoBattlefieldWithEffects(fakeSourceAbility, this, permanentCard, player);
+                fakeSourceAbility.setSourceId(info.getCard().getId());
+                CardUtil.putCardOntoBattlefieldWithEffects(fakeSourceAbility, this, info.getCard(), player, info.isTapped());
             }
 
             applyEffects();
@@ -3539,13 +3814,8 @@ public abstract class GameImpl implements Game {
 
     @Override
     public boolean endTurn(Ability source) {
-        getTurn().endTurn(this, getActivePlayerId(), source);
+        getTurn().endTurn(this, source);
         return true;
-    }
-
-    @Override
-    public int doAction(Ability source, MageAction action) {
-        return action.doAction(source, this);
     }
 
     @Override
@@ -3622,6 +3892,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void initTimer(UUID playerId) {
         if (priorityTime > 0) {
+            makeSureCalledOutsideLayerEffects();
             tableEventSource.fireTableEvent(EventType.INIT_TIMER, playerId, null, this);
         }
     }
@@ -3629,6 +3900,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void resumeTimer(UUID playerId) {
         if (priorityTime > 0) {
+            makeSureCalledOutsideLayerEffects();
             tableEventSource.fireTableEvent(EventType.RESUME_TIMER, playerId, null, this);
         }
     }
@@ -3636,6 +3908,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void pauseTimer(UUID playerId) {
         if (priorityTime > 0) {
+            makeSureCalledOutsideLayerEffects();
             tableEventSource.fireTableEvent(EventType.PAUSE_TIMER, playerId, null, this);
         }
     }
@@ -3728,6 +4001,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public synchronized void rollbackTurns(int turnsToRollback) {
+        // TODO: need async command
         if (gameOptions.rollbackTurnsAllowed && !executingRollback) {
             int turnToGoTo = getTurnNum() - turnsToRollback;
             if (turnToGoTo < 1 || !gameStatesRollBack.containsKey(turnToGoTo)) {
@@ -3738,8 +4012,9 @@ public abstract class GameImpl implements Game {
                 for (Player playerObject : getPlayers().values()) {
                     if (playerObject.isHuman() && playerObject.canRespond()) {
                         playerObject.resetStoredBookmark(this);
-                        playerObject.abort();
                         playerObject.resetPlayerPassedActions();
+                        playerObject.abort();
+
                     }
                 }
                 fireUpdatePlayersEvent();
@@ -3901,11 +4176,29 @@ public abstract class GameImpl implements Game {
     @Override
     public String toString() {
         Player activePayer = this.getPlayer(this.getActivePlayerId());
+
+        // show non-standard game state (not part of the real game, e.g. AI or mana calculation)
+        List<String> simInfo = new ArrayList<>();
+        if (this.simulation) {
+            simInfo.add("SIMULATION");
+        }
+        if (this.aiGame) {
+            simInfo.add("AI");
+        }
+        if (this.checkPlayableState) {
+            simInfo.add("PLAYABLE CALC");
+        }
+        if (!ThreadUtils.isRunGameThread()) {
+            simInfo.add("NOT GAME THREAD");
+        }
+
         StringBuilder sb = new StringBuilder()
+                .append(!simInfo.isEmpty() ? "!!!" + String.join(", ", simInfo) + "!!! " : "")
                 .append(this.getGameType().toString())
                 .append("; ").append(CardUtil.getTurnInfo(this))
                 .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))
-                .append("; stack: ").append(this.getStack().toString());
+                .append("; stack: ").append(this.getStack().toString())
+                .append(this.getState().isGameOver() ? "; FINISHED: " + this.getWinner() : "");
         return sb.toString();
     }
 }

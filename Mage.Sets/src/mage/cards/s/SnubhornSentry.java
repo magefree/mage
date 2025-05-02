@@ -37,7 +37,7 @@ public final class SnubhornSentry extends CardImpl {
         ContinuousEffect boostSource = new BoostSourceEffect(3, 0, Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, CitysBlessingCondition.instance,
                 "{this} gets +3/+0 as long as you have the city's blessing");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(CitysBlessingHint.instance);
+        Ability ability = new SimpleStaticAbility(effect).addHint(CitysBlessingHint.instance);
         this.addAbility(ability);
     }
 

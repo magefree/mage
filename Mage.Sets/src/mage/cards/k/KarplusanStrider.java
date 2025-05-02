@@ -31,7 +31,7 @@ public final class KarplusanStrider extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Karplusan Strider can't be the target of blue or black spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KarplusanStriderEffect()));
+        this.addAbility(new SimpleStaticAbility(new KarplusanStriderEffect()));
     }
 
     private KarplusanStrider(final KarplusanStrider card) {
@@ -51,18 +51,13 @@ class KarplusanStriderEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "{this} can't be the target of blue or black spells";
     }
 
-    KarplusanStriderEffect(final KarplusanStriderEffect effect) {
+    private KarplusanStriderEffect(final KarplusanStriderEffect effect) {
         super(effect);
     }
 
     @Override
     public KarplusanStriderEffect copy() {
         return new KarplusanStriderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

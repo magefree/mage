@@ -33,12 +33,12 @@ public final class DarksteelMutation extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BecomesCreatureAttachedEffect(new DarksteelMutationInsectToken(),
                         "Enchanted creature is an Insect artifact creature with base power and toughness 0/1 and has indestructible, and it loses all other abilities, card types, and creature types.",
                         Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ALL_BUT_COLOR)));
@@ -67,7 +67,7 @@ class DarksteelMutationInsectToken extends TokenImpl {
 
         this.addAbility(IndestructibleAbility.getInstance());
     }
-    public DarksteelMutationInsectToken(final DarksteelMutationInsectToken token) {
+    private DarksteelMutationInsectToken(final DarksteelMutationInsectToken token) {
         super(token);
     }
 

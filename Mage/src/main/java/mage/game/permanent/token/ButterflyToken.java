@@ -20,7 +20,7 @@ public final class ButterflyToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected ButterflyToken(final ButterflyToken token) {
+    private ButterflyToken(final ButterflyToken token) {
         super(token);
     }
 

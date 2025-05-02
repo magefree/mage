@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.ConditionHint;
@@ -32,8 +32,7 @@ public final class LudevicNecroAlchemist extends CardImpl {
 
         // At the beginning of each player's end step, that player may draw a card if a player other than you lost life this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LudevicNecroAlchemistEffect(),
-                TargetController.EACH_PLAYER,
+                TargetController.EACH_PLAYER, new LudevicNecroAlchemistEffect(),
                 false)
                 .addHint(new ConditionHint(LudevicNecroAlchemistCondition.instance, "Player other than you lost life this turn")));
 
@@ -77,12 +76,12 @@ enum LudevicNecroAlchemistCondition implements Condition {
 
 class LudevicNecroAlchemistEffect extends OneShotEffect {
 
-    public LudevicNecroAlchemistEffect() {
+    LudevicNecroAlchemistEffect() {
         super(Outcome.DrawCard);
         staticText = "that player may draw a card if a player other than you lost life this turn";
     }
 
-    public LudevicNecroAlchemistEffect(final LudevicNecroAlchemistEffect effect) {
+    private LudevicNecroAlchemistEffect(final LudevicNecroAlchemistEffect effect) {
         super(effect);
     }
 

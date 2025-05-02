@@ -38,18 +38,18 @@ public final class MulDayaChannelers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
         // As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new TopLibraryCardTypeCondition(CardType.CREATURE), rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // As long as the top card of your library is a land card, Mul Daya Channelers has "T: Add two mana of any one color."
         SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
         effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(manaAbility, Duration.WhileOnBattlefield),
                 new TopLibraryCardTypeCondition(CardType.LAND),
                 "As long as the top card of your library is a land card, Mul Daya Channelers has \"{T}: Add two mana of any one color.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

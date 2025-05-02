@@ -33,11 +33,11 @@ public final class Guile extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Guile can't be blocked except by three or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByOneEffect(3)));
 
         // If a spell or ability you control would counter a spell, instead exile that 
         // spell and you may play that card without paying its mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GuileReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new GuileReplacementEffect()));
 
         // When Guile is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
@@ -61,18 +61,13 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
                 + "instead exile that spell and you may play that card without paying its mana cost";
     }
 
-    GuileReplacementEffect(final GuileReplacementEffect effect) {
+    private GuileReplacementEffect(final GuileReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public GuileReplacementEffect copy() {
         return new GuileReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

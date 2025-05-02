@@ -58,12 +58,12 @@ public final class BlizzardSpecter extends CardImpl {
 
 class ReturnToHandEffect extends OneShotEffect {
 
-    public ReturnToHandEffect() {
+    ReturnToHandEffect() {
         super(Outcome.ReturnToHand);
         staticText = "That player returns a permanent they control to its owner's hand";
     }
 
-    public ReturnToHandEffect(final ReturnToHandEffect effect) {
+    private ReturnToHandEffect(final ReturnToHandEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class ReturnToHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer == null) {
             return false;
         }

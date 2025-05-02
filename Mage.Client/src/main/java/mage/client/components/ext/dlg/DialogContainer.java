@@ -81,7 +81,7 @@ public class DialogContainer extends JPanel {
             case EMBLEMS: {
                 backgroundColor = new Color(0, 0, 50, 110);
                 alpha = 0;
-                ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commander, Emblems and Planes)");
+                ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commanders, Emblems, and Planes)");
                 add(dlg);
                 dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
                 dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
@@ -112,44 +112,46 @@ public class DialogContainer extends JPanel {
         int arc = 30;
 
         Graphics2D g2 = (Graphics2D) g.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        try {
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        if (shadow != null) {
-            int xOffset = (shadow.getWidth() - w) / 2;
-            int yOffset = (shadow.getHeight() - h) / 2;
-            g2.drawImage(shadow, x - xOffset, y - yOffset, null);
+            if (shadow != null) {
+                int xOffset = (shadow.getWidth() - w) / 2;
+                int yOffset = (shadow.getHeight() - h) / 2;
+                g2.drawImage(shadow, x - xOffset, y - yOffset, null);
+            }
+
+            // ////////////////////////////////////////////////////////////////
+            // fill content
+
+            /**
+             * Add white translucent substrate
+             */
+            if (alpha != 0) {
+                g2.setColor(new Color(255, 255, 255, alpha));
+                g2.fillRoundRect(x, y, w, h, arc, arc);
+            }
+
+            if (!isGradient) {
+                g2.setColor(backgroundColor);
+                g2.fillRoundRect(x, y, w, h, arc, arc);
+            } else {
+                RoundRectangle2D r = new RoundRectangle2D.Float(x, y, w, h, arc, arc);
+                g2.setPaint(tp);
+                g2.fill(r);
+            }
+            // ////////////////////////////////////////////////////////////////
+
+            // ////////////////////////////////////////////////////////////////
+            // draw border
+            g2.setStroke(new BasicStroke(3f));
+            g2.setColor(Color.BLACK);
+            //g2.setColor(Color.GRAY);
+            g2.drawRoundRect(x, y, w, h, arc, arc);
+            // ////////////////////////////////////////////////////////////////
+        } finally {
+            g2.dispose();
         }
-
-        // ////////////////////////////////////////////////////////////////
-        // fill content
-
-        /**
-         * Add white translucent substrate
-         */
-        if (alpha != 0) {
-            g2.setColor(new Color(255, 255, 255, alpha));
-            g2.fillRoundRect(x, y, w, h, arc, arc);
-        }
-
-        if (!isGradient) {
-            g2.setColor(backgroundColor);
-            g2.fillRoundRect(x, y, w, h, arc, arc);
-        } else {
-            RoundRectangle2D r = new RoundRectangle2D.Float(x, y, w, h, arc, arc);
-            g2.setPaint(tp);
-            g2.fill(r);
-        }
-        // ////////////////////////////////////////////////////////////////
-
-        // ////////////////////////////////////////////////////////////////
-        // draw border
-        g2.setStroke(new BasicStroke(3f));
-        g2.setColor(Color.BLACK);
-        //g2.setColor(Color.GRAY);
-        g2.drawRoundRect(x, y, w, h, arc, arc);
-        // ////////////////////////////////////////////////////////////////
-
-        g2.dispose();
     }
 
     public void showDialog(boolean bShow) {

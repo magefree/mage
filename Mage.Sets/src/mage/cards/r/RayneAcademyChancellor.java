@@ -2,7 +2,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.TargetOfOpponentsSpellOrAbilityTriggeredAbility;
+import mage.abilities.common.BecomesTargetControllerTriggeredAbility;
 import mage.abilities.condition.common.EnchantedSourceCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -10,8 +10,10 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -38,7 +40,8 @@ public final class RayneAcademyChancellor extends CardImpl {
                 new EnchantedSourceCondition(),
                 "you may draw a card. You may draw an additional card if {this} is enchanted"
         );
-        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(drawEffect, true, false));
+        this.addAbility(new BecomesTargetControllerTriggeredAbility(drawEffect,
+                StaticFilters.FILTER_CONTROLLED_A_PERMANENT, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS, SetTargetPointer.NONE, true));
     }
 
     private RayneAcademyChancellor(final RayneAcademyChancellor card) {

@@ -39,7 +39,7 @@ public final class StromgaldCabal extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}, Pay 1 life: Counter target white spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new TapSourceCost());
         ability.addCost(new PayLifeCost(1));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

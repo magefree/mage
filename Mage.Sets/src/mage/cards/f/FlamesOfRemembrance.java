@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -35,10 +35,10 @@ public final class FlamesOfRemembrance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
 
         // At the beggining of your upkeep, you may exile a card from your graveyard. If you do, put a lore counter on Flames of Remembrance.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.LORE.createInstance()), new ExileFromGraveCost(new TargetCardInYourGraveyard()), null, true), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.LORE.createInstance()), new ExileFromGraveCost(new TargetCardInYourGraveyard()), null, true)));
 
         // Sacrifice Flames of Remembrance: Exile top X cards of your library, where X is the number of lore counters on Flames of Remembrance. Until end of turn you play cards exile this way.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlamesOfRemembranceExileEffect(new CountersSourceCount(CounterType.LORE)), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new FlamesOfRemembranceExileEffect(new CountersSourceCount(CounterType.LORE)), new SacrificeSourceCost()));
     }
 
     private FlamesOfRemembrance(final FlamesOfRemembrance card) {
@@ -61,7 +61,7 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
         this.staticText = "Exile top X cards of your library, where X is the number of lore counters on {this}. Until end of turn you play cards exile this way";
     }
 
-    public FlamesOfRemembranceExileEffect(final FlamesOfRemembranceExileEffect effect) {
+    private FlamesOfRemembranceExileEffect(final FlamesOfRemembranceExileEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -77,7 +77,7 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
         if (controller != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, amount.calculate(game, source, this)));
             if (!cards.isEmpty()) {
-                controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, ""));
+                controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, ""));
                 ContinuousEffect effect = new FlamesOfRemembranceMayPlayExiledEffect();
                 effect.setTargetPointer(new FixedTargets(cards, game));
                 game.addEffect(effect, source);
@@ -91,11 +91,11 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
 
 class FlamesOfRemembranceMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public FlamesOfRemembranceMayPlayExiledEffect() {
+    FlamesOfRemembranceMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 
-    public FlamesOfRemembranceMayPlayExiledEffect(final FlamesOfRemembranceMayPlayExiledEffect effect) {
+    private FlamesOfRemembranceMayPlayExiledEffect(final FlamesOfRemembranceMayPlayExiledEffect effect) {
         super(effect);
     }
 

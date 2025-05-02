@@ -44,7 +44,7 @@ public final class UnlivingPsychopath extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {B}: Unliving Psychopath gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
 
         // {B}, {tap}: Destroy target creature with power less than Unliving Psychopath's power.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.B));

@@ -45,7 +45,7 @@ public final class AvenWindGuide extends CardImpl {
                                 Duration.WhileOnBattlefield,
                                 StaticFilters.FILTER_CREATURE_TOKENS);
         effect.setText("Creature tokens you control have flying");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityControlledEffect(
                         VigilanceAbility.getInstance(),
                         Duration.WhileOnBattlefield,

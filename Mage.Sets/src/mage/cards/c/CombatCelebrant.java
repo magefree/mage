@@ -28,7 +28,7 @@ public final class CombatCelebrant extends CardImpl {
 
         // If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
         BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES, null, false));
-        ability.addEffect(new AdditionalCombatPhaseEffect("and after this phase, there is an additional combat phase"));
+        ability.addEffect(new AdditionalCombatPhaseEffect().concatBy("and"));
         this.addAbility(new ExertAbility(ability, true));
     }
 

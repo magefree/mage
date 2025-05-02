@@ -33,7 +33,7 @@ public final class MephidrossVampire extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Each creature you control is a Vampire in addition to its other creature types and has "Whenever this creature deals damage to a creature, put a +1/+1 counter on this creature."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MephidrossVampireEffect()));
+        this.addAbility(new SimpleStaticAbility(new MephidrossVampireEffect()));
 
     }
 
@@ -57,7 +57,7 @@ class MephidrossVampireEffect extends ContinuousEffectImpl {
         this.addDependedToType(DependencyType.BecomeCreature);
     }
 
-    MephidrossVampireEffect(final MephidrossVampireEffect effect) {
+    private MephidrossVampireEffect(final MephidrossVampireEffect effect) {
         super(effect);
     }
 

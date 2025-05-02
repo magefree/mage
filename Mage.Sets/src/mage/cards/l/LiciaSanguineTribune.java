@@ -74,7 +74,7 @@ class LiciaSanguineTribuneCostReductionEffect extends CostModificationEffectImpl
         staticText = "this spell costs {1} less to cast for each 1 life you gained this turn.";
     }
 
-    LiciaSanguineTribuneCostReductionEffect(LiciaSanguineTribuneCostReductionEffect effect) {
+    private LiciaSanguineTribuneCostReductionEffect(final LiciaSanguineTribuneCostReductionEffect effect) {
         super(effect);
     }
 

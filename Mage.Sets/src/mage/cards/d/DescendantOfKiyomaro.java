@@ -33,7 +33,7 @@ public final class DescendantOfKiyomaro extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as you have more cards in hand than each opponent, Descendant of Kiyomaro gets +1/+2 and has "Whenever this creature deals combat damage, you gain 3 life."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1,2, Duration.WhileOnBattlefield),
                 MoreCardsInHandThanOpponentsCondition.instance,
                 "As long as you have more cards in hand than each opponent, {this} gets +1/+2"));

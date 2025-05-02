@@ -4,7 +4,6 @@ import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
-import mage.players.Player;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
 
@@ -22,7 +21,8 @@ public abstract class EffectImpl implements Effect {
     protected EffectType effectType;
 
     // read related docs about static and dynamic targets in ContinuousEffectImpl.affectedObjectsSet
-    protected TargetPointer targetPointer = new FirstTargetPointer();
+    // warning, do not change it directly, use setTargetPointer instead
+    private TargetPointer targetPointer = new FirstTargetPointer();
 
     protected String staticText = "";
     protected Map<String, Object> values;
@@ -31,6 +31,8 @@ public abstract class EffectImpl implements Effect {
     public EffectImpl(Outcome outcome) {
         this.id = UUID.randomUUID();
         this.outcome = outcome;
+
+        initNewTargetPointer();
     }
 
     protected EffectImpl(final EffectImpl effect) {
@@ -48,6 +50,11 @@ public abstract class EffectImpl implements Effect {
             }
         }
     }
+
+    /**
+     * Init target pointer by default (see TargetPointer for details)
+     */
+    abstract public void initNewTargetPointer();
 
     @Override
     public UUID getId() {
@@ -82,7 +89,13 @@ public abstract class EffectImpl implements Effect {
 
     @Override
     public Effect setTargetPointer(TargetPointer targetPointer) {
+        if (targetPointer == null) {
+            // first target pointer is default
+            throw new IllegalArgumentException("Wrong code usage: target pointer can't be set to null: " + this);
+        }
+
         this.targetPointer = targetPointer;
+        initNewTargetPointer();
         return this;
     }
 
@@ -104,12 +117,6 @@ public abstract class EffectImpl implements Effect {
             if (values == null) {
                 values = new HashMap<>();
             }
-        }
-        if (value instanceof Player) {
-            // If Player are set as value, there might be PlayerImpl serialized in ClientMessage's GameView.
-            // That does cause the message's data to not be unzippable, since the PlayerImpl class are not
-            // client-side.
-            throw new IllegalArgumentException("Players should not be set as value, set the UUID instead.");
         }
         values.put(key, value);
     }

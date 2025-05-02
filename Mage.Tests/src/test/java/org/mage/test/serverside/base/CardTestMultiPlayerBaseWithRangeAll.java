@@ -17,7 +17,7 @@ public abstract class CardTestMultiPlayerBaseWithRangeAll extends CardTestPlayer
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new FreeForAll(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
+        Game game = new FreeForAll(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, "PlayerA");
         playerB = createPlayer(game, "PlayerB");

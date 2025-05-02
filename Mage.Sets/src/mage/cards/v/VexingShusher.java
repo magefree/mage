@@ -38,7 +38,7 @@ public final class VexingShusher extends CardImpl {
         // Vexing Shusher can't be countered.
         this.addAbility(new CantBeCounteredSourceAbility());
         // {R/G}: Target spell can't be countered.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VexingShusherCantCounterTargetEffect(), new ManaCostsImpl<>("{R/G}"));
+        Ability ability = new SimpleActivatedAbility(new VexingShusherCantCounterTargetEffect(), new ManaCostsImpl<>("{R/G}"));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
@@ -55,23 +55,18 @@ public final class VexingShusher extends CardImpl {
 
 class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public VexingShusherCantCounterTargetEffect() {
+    VexingShusherCantCounterTargetEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Target spell can't be countered";
     }
 
-    public VexingShusherCantCounterTargetEffect(final VexingShusherCantCounterTargetEffect effect) {
+    private VexingShusherCantCounterTargetEffect(final VexingShusherCantCounterTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public VexingShusherCantCounterTargetEffect copy() {
         return new VexingShusherCantCounterTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -90,7 +85,7 @@ class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getTargetId().equals(targetPointer.getFirst(game, source));
+        return event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 
 }

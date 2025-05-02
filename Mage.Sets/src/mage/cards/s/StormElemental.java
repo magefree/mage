@@ -44,13 +44,13 @@ public final class StormElemental extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {U}, Exile the top card of your library: Tap target creature with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new ExileTopCardLibraryCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
         // {U}, Exile the top card of your library: If the exiled card is a snow land, Storm Elemental gets +1/+1 until end of turn.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StormElementalEffect(), new ManaCostsImpl<>("{U}"));
+        Ability ability2 = new SimpleActivatedAbility(new StormElementalEffect(), new ManaCostsImpl<>("{U}"));
         ability2.addCost(new ExileTopCardLibraryCost());
         this.addAbility(ability2);
     }
@@ -78,7 +78,7 @@ class StormElementalEffect extends OneShotEffect {
         this.staticText = "If the exiled card is a snow land, {this} gets +1/+1 until end of turn";
     }
 
-    public StormElementalEffect(final StormElementalEffect effect) {
+    private StormElementalEffect(final StormElementalEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class ExileTopCardLibraryCost extends CostImpl {
         this.text = "Exile the top card of your library";
     }
 
-    public ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
+    private ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
         super(cost);
         this.card = cost.getCard();
     }

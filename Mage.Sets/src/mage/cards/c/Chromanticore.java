@@ -42,7 +42,7 @@ public final class Chromanticore extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         // Enchanted creature gets +4/+4 and has flying, first strike, vigilance, trample and lifelink.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4,4));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(4,4));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);

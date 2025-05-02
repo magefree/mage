@@ -53,7 +53,7 @@ public final class DjeruWithEyesOpen extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
 
         // If a source would deal damage to a planeswalker you control, prevent 1 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DjeruWithEyesOpenPreventEffect()));
+        this.addAbility(new SimpleStaticAbility(new DjeruWithEyesOpenPreventEffect()));
     }
 
     private DjeruWithEyesOpen(final DjeruWithEyesOpen card) {
@@ -68,18 +68,13 @@ public final class DjeruWithEyesOpen extends CardImpl {
 
 class DjeruWithEyesOpenPreventEffect extends PreventionEffectImpl {
 
-    public DjeruWithEyesOpenPreventEffect() {
+    DjeruWithEyesOpenPreventEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If a source would deal damage to a planeswalker you control, prevent 1 of that damage";
     }
 
-    public DjeruWithEyesOpenPreventEffect(DjeruWithEyesOpenPreventEffect effect) {
+    private DjeruWithEyesOpenPreventEffect(final DjeruWithEyesOpenPreventEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

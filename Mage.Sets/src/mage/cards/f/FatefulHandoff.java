@@ -42,7 +42,7 @@ public final class FatefulHandoff extends CardImpl {
 
 class FatefulHandoffEffect extends OneShotEffect {
 
-    public FatefulHandoffEffect() {
+    FatefulHandoffEffect() {
         super(Outcome.Benefit);
         this.staticText = "Draw cards equal to the mana value of target artifact or creature you control. An opponent gains control of that permanent.";
     }

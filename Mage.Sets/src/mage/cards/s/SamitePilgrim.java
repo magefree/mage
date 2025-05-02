@@ -30,7 +30,7 @@ public final class SamitePilgrim extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Domain - {T}: Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SamitePilgrimPreventDamageToTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SamitePilgrimPreventDamageToTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability.addHint(DomainHint.instance));
@@ -48,12 +48,12 @@ public final class SamitePilgrim extends CardImpl {
 
 class SamitePilgrimPreventDamageToTargetEffect extends PreventionEffectImpl {
 
-    public SamitePilgrimPreventDamageToTargetEffect() {
+    SamitePilgrimPreventDamageToTargetEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, true);
         staticText = "Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.";
     }
 
-    public SamitePilgrimPreventDamageToTargetEffect(final SamitePilgrimPreventDamageToTargetEffect effect) {
+    private SamitePilgrimPreventDamageToTargetEffect(final SamitePilgrimPreventDamageToTargetEffect effect) {
         super(effect);
     }
 
@@ -66,11 +66,6 @@ class SamitePilgrimPreventDamageToTargetEffect extends PreventionEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         amountToPrevent = DomainValue.REGULAR.calculate(game, source, this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

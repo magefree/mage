@@ -4,13 +4,12 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -26,7 +25,7 @@ public final class Triskaidekaphobia extends CardImpl {
 
         // At the beginning of your upkeep, choose one - Each player with exactly 13 life loses the game, then each player gains 1 life.
         // Each player with exactly 13 life loses the game, then each player loses 1 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TriskaidekaphobiaGainLifeEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TriskaidekaphobiaGainLifeEffect());
         Mode mode = new Mode(new TriskaidekaphobiaLoseLifeEffect());
         ability.addMode(mode);
         this.addAbility(ability);
@@ -44,12 +43,12 @@ public final class Triskaidekaphobia extends CardImpl {
 
 class TriskaidekaphobiaGainLifeEffect extends OneShotEffect {
 
-    public TriskaidekaphobiaGainLifeEffect() {
+    TriskaidekaphobiaGainLifeEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player with exactly 13 life loses the game, then each player gains 1 life";
     }
 
-    public TriskaidekaphobiaGainLifeEffect(final TriskaidekaphobiaGainLifeEffect effect) {
+    private TriskaidekaphobiaGainLifeEffect(final TriskaidekaphobiaGainLifeEffect effect) {
         super(effect);
     }
 
@@ -83,12 +82,12 @@ class TriskaidekaphobiaGainLifeEffect extends OneShotEffect {
 
 class TriskaidekaphobiaLoseLifeEffect extends OneShotEffect {
 
-    public TriskaidekaphobiaLoseLifeEffect() {
+    TriskaidekaphobiaLoseLifeEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player with exactly 13 life loses the game, then each player loses 1 life";
     }
 
-    public TriskaidekaphobiaLoseLifeEffect(final TriskaidekaphobiaLoseLifeEffect effect) {
+    private TriskaidekaphobiaLoseLifeEffect(final TriskaidekaphobiaLoseLifeEffect effect) {
         super(effect);
     }
 

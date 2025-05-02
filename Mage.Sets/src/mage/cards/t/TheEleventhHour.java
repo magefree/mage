@@ -46,10 +46,7 @@ public final class TheEleventhHour extends CardImpl {
         // II -- Create a Food token and a 1/1 white Human creature token with "Doctor spells you cast cost 1 less to cast."
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II,
-                new CreateTokenEffect(new FoodToken()),
-                new CreateTokenEffect(new TheEleventhHourToken())
-                        .setText("and a 1/1 white Human creature token with " +
-                                "\"Doctor spells you cast cost 1 less to cast.\"")
+                new CreateTokenEffect(new FoodToken()).withAdditionalTokens(new TheEleventhHourToken())
         );
 
         // III -- Create a token that's a copy of target creature, except it's a legendary Alien named Prisoner Zero.

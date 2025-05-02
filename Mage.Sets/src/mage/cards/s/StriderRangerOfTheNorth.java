@@ -32,7 +32,7 @@ public final class StriderRangerOfTheNorth extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Landfall -- Whenever a land enters the battlefield under your control,
+        // Landfall -- Whenever a land you control enters,
         // target creature gets +1/+1 until end of turn.
         // Then if that creature has power 4 or greater, it gains first strike until end of turn.
 
@@ -65,7 +65,7 @@ class StriderRangerOfTheNorthEffect extends OneShotEffect {
                 "or greater, it gains first strike until end of turn.";
     }
 
-    StriderRangerOfTheNorthEffect(final StriderRangerOfTheNorthEffect effect) {
+    private StriderRangerOfTheNorthEffect(final StriderRangerOfTheNorthEffect effect) {
         super(effect);
     }
 

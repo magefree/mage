@@ -40,10 +40,10 @@ public final class Stamina extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
 
         // Sacrifice Stamina: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateAttachedEffect(AttachmentType.AURA), new SacrificeSourceCost()));
     }
 
     private Stamina(final Stamina card) {

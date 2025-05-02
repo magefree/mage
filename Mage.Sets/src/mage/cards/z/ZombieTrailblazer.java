@@ -42,13 +42,13 @@ public final class ZombieTrailblazer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap an untapped Zombie you control: Target land becomes a Swamp until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.SWAMP), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
 
         // Tap an untapped Zombie you control: Target creature gains swampwalk until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(new SwampwalkAbility(false), Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

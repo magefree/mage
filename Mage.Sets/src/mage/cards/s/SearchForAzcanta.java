@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,8 +30,7 @@ public final class SearchForAzcanta extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may put it into your graveyard. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(1, false),
-                TargetController.YOU, false
+                new SurveilEffect(1, false)
         );
         ability.addEffect(new SearchForAzcantaEffect());
         this.addAbility(new TransformAbility());
@@ -51,12 +49,12 @@ public final class SearchForAzcanta extends CardImpl {
 
 class SearchForAzcantaEffect extends OneShotEffect {
 
-    public SearchForAzcantaEffect() {
+    SearchForAzcantaEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Then if you have seven or more cards in your graveyard, you may transform {this}.";
     }
 
-    public SearchForAzcantaEffect(final SearchForAzcantaEffect effect) {
+    private SearchForAzcantaEffect(final SearchForAzcantaEffect effect) {
         super(effect);
     }
 

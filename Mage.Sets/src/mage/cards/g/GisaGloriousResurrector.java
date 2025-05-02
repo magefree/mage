@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -44,7 +44,7 @@ public final class GisaGloriousResurrector extends CardImpl {
 
         // At the beginning of your upkeep, put all creature cards exiled with Gisa, Glorious Resurrector onto the battlefield under your control. They gain decayed.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new GisaGloriousResurrectorReturnEffect(), TargetController.YOU, false
+                new GisaGloriousResurrectorReturnEffect()
         ));
     }
 

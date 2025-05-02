@@ -21,7 +21,7 @@ public final class RukhEggBirdToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected RukhEggBirdToken(final RukhEggBirdToken token) {
+    private RukhEggBirdToken(final RukhEggBirdToken token) {
         super(token);
     }
 

@@ -20,12 +20,12 @@ public class OminousRoostBirdToken extends TokenImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    protected OminousRoostBirdToken(final OminousRoostBirdToken token) {
+    private OminousRoostBirdToken(final OminousRoostBirdToken token) {
         super(token);
     }
 
     @Override
-    public Token copy() {
+    public OminousRoostBirdToken copy() {
         return new OminousRoostBirdToken(this);
     }
 }

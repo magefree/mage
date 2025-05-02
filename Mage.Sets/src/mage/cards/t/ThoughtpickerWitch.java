@@ -41,8 +41,8 @@ public final class ThoughtpickerWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, Sacrifice a creature: Look at the top two cards of target opponent's library, then exile one of them.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThoughtpickerWitchEffect(), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(new ThoughtpickerWitchEffect(), new GenericManaCost(1));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -64,7 +64,7 @@ class ThoughtpickerWitchEffect extends OneShotEffect {
         this.staticText = "Look at the top two cards of target opponent's library, then exile one of them";
     }
 
-    ThoughtpickerWitchEffect(final ThoughtpickerWitchEffect effect) {
+    private ThoughtpickerWitchEffect(final ThoughtpickerWitchEffect effect) {
         super(effect);
     }
 

@@ -9,9 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -20,15 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SevenTailMentor extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterControlledPermanent("creature or Vehicle you control");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
 
     public SevenTailMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -42,7 +31,7 @@ public final class SevenTailMentor extends CardImpl {
         Ability ability = new EntersBattlefieldOrDiesSourceTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false
         );
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_VEHICLE));
         this.addAbility(ability);
     }
 

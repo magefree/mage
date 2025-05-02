@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -31,17 +31,17 @@ public final class TheImmortalSun extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Players can't activate planeswalkers' loyalty abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheImmortalSunCantActivateEffect()));
+        this.addAbility(new SimpleStaticAbility(new TheImmortalSunCantActivateEffect()));
 
         // At the beginning of your draw step, draw an additional card.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1)
-                .setText("draw an additional card"), TargetController.YOU, false));
+                .setText("draw an additional card"), false));
 
         // Spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterCard("Spells"), 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(new FilterCard("Spells"), 1)));
 
         // Creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
     }
 
     private TheImmortalSun(final TheImmortalSun card) {
@@ -56,23 +56,18 @@ public final class TheImmortalSun extends CardImpl {
 
 class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TheImmortalSunCantActivateEffect() {
+    TheImmortalSunCantActivateEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't activate planeswalkers' loyalty abilities";
     }
 
-    public TheImmortalSunCantActivateEffect(final TheImmortalSunCantActivateEffect effect) {
+    private TheImmortalSunCantActivateEffect(final TheImmortalSunCantActivateEffect effect) {
         super(effect);
     }
 
     @Override
     public TheImmortalSunCantActivateEffect copy() {
         return new TheImmortalSunCantActivateEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -85,16 +80,19 @@ class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent == null) {
-                return false;
-            }
-            if (permanent.isPlaneswalker(game)) {
-                Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                return ability.isPresent() && (ability.get() instanceof LoyaltyAbility);
-            }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        if (permanent.isPlaneswalker(game)) {
+            Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+            return ability.isPresent() && (ability.get() instanceof LoyaltyAbility);
         }
         return false;
     }

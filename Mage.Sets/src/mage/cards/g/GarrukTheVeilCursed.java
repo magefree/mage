@@ -20,7 +20,6 @@ import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.WolfTokenWithDeathtouch;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -51,9 +50,7 @@ public final class GarrukTheVeilCursed extends CardImpl {
                         StaticFilters.FILTER_CARD_CREATURE_A
                 ), true),
                 null,
-                new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                )),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 false
         ), -1));
 

@@ -53,12 +53,12 @@ public final class TIESilencer extends CardImpl {
 
 class TIESilencerEffect extends OneShotEffect {
 
-    public TIESilencerEffect() {
+    TIESilencerEffect() {
         super(Outcome.Damage);
         staticText = "it deals 1 damage to defending player and 1 damage to up to one target creature that player controls";
     }
 
-    public TIESilencerEffect(final TIESilencerEffect effect) {
+    private TIESilencerEffect(final TIESilencerEffect effect) {
         super(effect);
     }
 

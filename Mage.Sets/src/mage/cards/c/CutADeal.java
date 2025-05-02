@@ -53,7 +53,7 @@ class CutADealEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int count = game
-                .getOpponents(source.getControllerId())
+                .getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

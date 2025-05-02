@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -60,10 +59,10 @@ public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
 
     protected String getText() {
         StringBuilder sb = new StringBuilder("that player returns ");
-        if (!filter.getMessage().startsWith("another")) {
-            sb.append(CardUtil.numberToText(number, "a"));
+        if (!filter.getMessage().startsWith("another") && !filter.getMessage().startsWith("a ")) {
+            sb.append(CardUtil.numberToText(number, "a")).append(' ');
         }
-        sb.append(' ').append(filter.getMessage());
+        sb.append(filter.getMessage());
         sb.append(" they control");
         if (number > 1) {
             sb.append(" to their owner's hand");

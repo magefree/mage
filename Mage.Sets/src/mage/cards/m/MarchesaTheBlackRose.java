@@ -3,6 +3,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -44,7 +45,7 @@ public final class MarchesaTheBlackRose extends CardImpl {
         this.addAbility(new DethroneAbility());
 
         // Other creatures you control have dethrone.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(new DethroneAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true)));
 
         // Whenever a creature you control with a +1/+1 counter on it dies, return that card to the battlefield under your control at the beginning of the next end step.
@@ -67,9 +68,10 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
     public MarchesaTheBlackRoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MarchesaTheBlackRoseEffect());
         setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
+    private MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -100,6 +102,11 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class MarchesaTheBlackRoseEffect extends OneShotEffect {
@@ -109,7 +116,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
         this.staticText = "return that card to the battlefield under your control at the beginning of the next end step.";
     }
 
-    MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
+    private MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
         super(effect);
     }
 
@@ -125,7 +132,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
             Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
             effect.setText("return that card to the battlefield under your control at the beginning of the next end step");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            delayedAbility.getEffects().get(0).setTargetPointer(getTargetPointer());
+            delayedAbility.getEffects().get(0).setTargetPointer(this.getTargetPointer().copy());
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }

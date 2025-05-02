@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -9,7 +9,6 @@ import mage.abilities.effects.keyword.TheRingTemptsYouEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -26,7 +25,7 @@ public final class CallOfTheRing extends CardImpl {
 
         // At the beginning of your upkeep, the Ring tempts you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TheRingTemptsYouEffect(), TargetController.YOU, false
+                new TheRingTemptsYouEffect()
         ));
 
         // Whenever you choose a creature as your Ring-bearer, you may pay 2 life. If you do, draw a card.

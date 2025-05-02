@@ -30,7 +30,7 @@ public final class Phytohydra extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If damage would be dealt to Phytohydra, put that many +1/+1 counters on it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhytohydraEffect()));
+        this.addAbility(new SimpleStaticAbility(new PhytohydraEffect()));
     }
 
     private Phytohydra(final Phytohydra card) {
@@ -49,7 +49,7 @@ class PhytohydraEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to {this}, put that many +1/+1 counters on it instead";
     }
 
-    PhytohydraEffect(final PhytohydraEffect effect) {
+    private PhytohydraEffect(final PhytohydraEffect effect) {
         super(effect);
     }
 
@@ -71,11 +71,6 @@ class PhytohydraEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

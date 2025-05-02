@@ -38,7 +38,7 @@ public final class RegalCaracal extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Cats you control get +1/+1 and have lifelink.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true));
         GainAbilityControlledEffect effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
         effect.setText("and have lifelink");
         ability.addEffect(effect);

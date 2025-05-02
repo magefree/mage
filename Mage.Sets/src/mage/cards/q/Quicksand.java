@@ -34,7 +34,7 @@ public final class Quicksand extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new ColorlessManaAbility());
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(-1, -2, Duration.EndOfTurn),
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));

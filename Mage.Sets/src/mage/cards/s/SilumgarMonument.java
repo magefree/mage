@@ -31,7 +31,7 @@ public final class SilumgarMonument extends CardImpl {
         this.addAbility(new BlackManaAbility());
         
         // {4}{U}{B}: Silumgar Monument becomes a 4/4 blue and black Dragon artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect
             (new OjutaiMonumentToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{U}{B}")));
     }
 
@@ -56,7 +56,7 @@ public final class SilumgarMonument extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
-        public OjutaiMonumentToken(final OjutaiMonumentToken token) {
+        private OjutaiMonumentToken(final OjutaiMonumentToken token) {
             super(token);
         }
     

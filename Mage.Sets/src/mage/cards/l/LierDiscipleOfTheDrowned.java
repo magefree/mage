@@ -65,11 +65,6 @@ class LierDiscipleOfTheDrownedCounteredEffect extends ContinuousRuleModifyingEff
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.COUNTER;
     }
@@ -82,13 +77,13 @@ class LierDiscipleOfTheDrownedCounteredEffect extends ContinuousRuleModifyingEff
 
 class LierDiscipleOfTheDrownedFlashbackEffect extends ContinuousEffectImpl {
 
-    public LierDiscipleOfTheDrownedFlashbackEffect() {
+    LierDiscipleOfTheDrownedFlashbackEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Each instant and sorcery card in your graveyard has flashback. " +
                 "The flashback cost is equal to that card's mana cost";
     }
 
-    public LierDiscipleOfTheDrownedFlashbackEffect(final LierDiscipleOfTheDrownedFlashbackEffect effect) {
+    private LierDiscipleOfTheDrownedFlashbackEffect(final LierDiscipleOfTheDrownedFlashbackEffect effect) {
         super(effect);
     }
 

@@ -48,7 +48,7 @@ public class Droidsmith extends CardImpl {
         )));
     }
 
-    public Droidsmith(final Droidsmith card) {
+    private Droidsmith(final Droidsmith card) {
         super(card);
     }
 

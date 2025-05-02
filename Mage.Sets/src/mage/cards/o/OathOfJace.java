@@ -3,7 +3,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -31,7 +30,7 @@ public final class OathOfJace extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(3, 2), false));
 
         // At the beginning of your upkeep, scry X, where X is the number of planeswalkers you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OathOfJaceEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OathOfJaceEffect()));
 
     }
 
@@ -47,12 +46,12 @@ public final class OathOfJace extends CardImpl {
 
 class OathOfJaceEffect extends OneShotEffect {
 
-    public OathOfJaceEffect() {
+    OathOfJaceEffect() {
         super(Outcome.DrawCard);
         this.staticText = "scry X, where X is the number of planeswalkers you control";
     }
 
-    public OathOfJaceEffect(final OathOfJaceEffect effect) {
+    private OathOfJaceEffect(final OathOfJaceEffect effect) {
         super(effect);
     }
 

@@ -27,7 +27,7 @@ public final class StripMine extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T}, Sacrifice Strip Mine: Destroy target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

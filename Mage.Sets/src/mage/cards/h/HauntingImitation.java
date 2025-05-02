@@ -76,9 +76,9 @@ class HauntingImitationEffect extends OneShotEffect {
         }
         if (cards.isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-            if (player != null && sourceObject instanceof Card) {
-                player.moveCards((Card) sourceObject, Zone.HAND, source, game);
+            Card card = source.getSourceCardIfItStillExists(game);
+            if (player != null && card != null) {
+                player.moveCards(card, Zone.HAND, source, game);
             }
             return true;
         }
@@ -86,7 +86,7 @@ class HauntingImitationEffect extends OneShotEffect {
                 source.getControllerId(), null, false, 1, false,
                 false, null, 1, 1, true
         );
-        effect.setAdditionalSubType(SubType.SPIRIT);
+        effect.withAdditionalSubType(SubType.SPIRIT);
         for (Card card : cards.getCards(game)) {
             effect.setSavedPermanent(new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game));
             effect.apply(game, source);

@@ -4,7 +4,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.AttachEffect;
@@ -14,7 +14,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -37,16 +37,15 @@ public final class MarkOfTheOni extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
         // At the beginning of the end step, if you control no Demons, sacrifice Mark of the Oni.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
-                new SacrificeSourceEffect(),
-                TargetController.NEXT,
-                new PermanentsOnTheBattlefieldCondition(
-                        new FilterControlledCreaturePermanent(SubType.DEMON, "if you control no Demons"),
-                        ComparisonType.FEWER_THAN, 1),
-                false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.NEXT, new SacrificeSourceEffect(),
+                false, new PermanentsOnTheBattlefieldCondition(
+                        new FilterControlledPermanent(SubType.DEMON, "if you control no Demons"),
+                        ComparisonType.FEWER_THAN, 1)
+        ));
     }
 
     private MarkOfTheOni(final MarkOfTheOni card) {

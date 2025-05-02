@@ -66,13 +66,13 @@ public final class VraskaRegalGorgon extends CardImpl {
 
 class VraskaRegalGorgonEffect extends OneShotEffect {
 
-    public VraskaRegalGorgonEffect() {
+    VraskaRegalGorgonEffect() {
         super(Outcome.Benefit);
         this.staticText = "For each creature card in your graveyard, "
                 + "put a +1/+1 counter on each creature you control.";
     }
 
-    public VraskaRegalGorgonEffect(final VraskaRegalGorgonEffect effect) {
+    private VraskaRegalGorgonEffect(final VraskaRegalGorgonEffect effect) {
         super(effect);
     }
 

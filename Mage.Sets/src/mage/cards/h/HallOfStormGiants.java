@@ -38,14 +38,14 @@ public final class HallOfStormGiants extends CardImpl {
 
         // If you control two or more other lands, Hall of Storm Giants enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldAbility(
-                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters the battlefield tapped.", null
+                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters tapped.", null
         ));
 
         // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
 
         // {5}{U}: Until end of turn, Hall of Storm Giants becomes a 7/7 blue Giant creature with ward {3}. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(7, 7, "7/7 blue Giant creature with ward {3}")
                         .withColor("U")
                         .withSubType(SubType.GIANT)

@@ -73,7 +73,7 @@ class SiegeDragonAttacksTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SiegeDragonDamageEffect());
     }
 
-    public SiegeDragonAttacksTriggeredAbility(final SiegeDragonAttacksTriggeredAbility ability) {
+    private SiegeDragonAttacksTriggeredAbility(final SiegeDragonAttacksTriggeredAbility ability) {
         super(ability);
     }
 
@@ -106,11 +106,11 @@ class SiegeDragonAttacksTriggeredAbility extends TriggeredAbilityImpl {
 
 class SiegeDragonDamageEffect extends OneShotEffect {
 
-    public SiegeDragonDamageEffect() {
+    SiegeDragonDamageEffect() {
         super(Outcome.Damage);
     }
     
-    public SiegeDragonDamageEffect(final SiegeDragonDamageEffect effect) {
+    private SiegeDragonDamageEffect(final SiegeDragonDamageEffect effect) {
         super(effect);
     }
 

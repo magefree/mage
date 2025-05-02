@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -37,7 +36,7 @@ public final class Fettergeist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice Fettergeist unless you pay {1} for each other creature you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FettergeistUnlessPaysEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FettergeistUnlessPaysEffect()));
 
     }
 
@@ -64,7 +63,7 @@ class FettergeistUnlessPaysEffect extends OneShotEffect {
         staticText = "sacrifice {this} unless you pay {1} for each other creature you control.";
     }
 
-    public FettergeistUnlessPaysEffect(final FettergeistUnlessPaysEffect effect) {
+    private FettergeistUnlessPaysEffect(final FettergeistUnlessPaysEffect effect) {
         super(effect);
     }
 
@@ -93,4 +92,3 @@ class FettergeistUnlessPaysEffect extends OneShotEffect {
     }
 
 }
-

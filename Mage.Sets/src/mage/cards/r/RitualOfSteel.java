@@ -44,7 +44,7 @@ public final class RitualOfSteel extends CardImpl {
                 .setText("draw a card at the beginning of the next turn's upkeep")));
         
         // Enchanted creature gets +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0,2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0,2, Duration.WhileOnBattlefield)));
     }
 
     private RitualOfSteel(final RitualOfSteel card) {

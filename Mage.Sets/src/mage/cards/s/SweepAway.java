@@ -41,19 +41,19 @@ public final class SweepAway extends CardImpl {
 
 class SweepAwayEffect extends OneShotEffect {
 
-    public SweepAwayEffect() {
+    SweepAwayEffect() {
         super(Outcome.Benefit);
         staticText = "Return target creature to its owner's hand. If that creature is attacking, you may put it on top of its owner's library instead";
     }
 
-    public SweepAwayEffect(final SweepAwayEffect effect) {
+    private SweepAwayEffect(final SweepAwayEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null && controller != null) {
             if (permanent.isAttacking()) {
                 if (controller.chooseUse(Outcome.Neutral, "Put " + permanent.getIdName() + " on top of its owner's library (otherwise return to hand)?", source, game)) {

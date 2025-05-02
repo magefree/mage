@@ -55,7 +55,7 @@ class ScentOfIvyEffect extends OneShotEffect {
                 + "Target creature gets +X/+X until end of turn, where X is the number of cards revealed this way";
     }
 
-    public ScentOfIvyEffect(final ScentOfIvyEffect effect) {
+    private ScentOfIvyEffect(final ScentOfIvyEffect effect) {
         super(effect);
     }
 

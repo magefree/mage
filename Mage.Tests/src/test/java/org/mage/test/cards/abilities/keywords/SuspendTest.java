@@ -29,6 +29,9 @@ public class SuspendTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Epochrasite");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Epochrasite");
 
+        setChoice(playerA, true); // choose yes to cast
+
+        setStrictChooseMode(true);
         setStopAt(7, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -37,6 +40,40 @@ public class SuspendTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Epochrasite", 4, 4);
         assertAbility(playerA, "Epochrasite", HasteAbility.getInstance(), true);
 
+    }
+
+    /**
+     * Tests bug that was mentioned in suspend ability, but does not appear to still be an issue.
+     * Epochrasite being unable to be cast after casting from suspend and returning to hand.
+     */
+    @Test
+    public void test_Single_Epochrasite_Recast_After_Suspend() {
+        // Bug was mentioned in suspend ability, but does not appear to still be an issue
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        // Epochrasite enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand.
+        // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
+        addCard(Zone.HAND, playerA, "Epochrasite", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+        addCard(Zone.HAND, playerB, "Boomerang", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Epochrasite");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Epochrasite");
+        castSpell(7, PhaseStep.DRAW, playerB, "Boomerang", "Epochrasite");
+        castSpell(7, PhaseStep.PRECOMBAT_MAIN, playerA, "Epochrasite");
+
+
+        setChoice(playerA, true); // choose yes to cast
+
+        setStrictChooseMode(true);
+        setStopAt(7, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertPermanentCount(playerA, "Epochrasite", 1); // returned on turn 7 and cast again after going to hand
+        assertPowerToughness(playerA, "Epochrasite", 1, 1);
+        assertAbility(playerA, "Epochrasite", HasteAbility.getInstance(), false);
     }
 
     /**
@@ -55,6 +92,9 @@ public class SuspendTest extends CardTestPlayerBase {
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend");
         setChoice(playerA, "Silvercoat Lion");
 
+        setChoice(playerA, true); // choose yes to cast
+
+        setStrictChooseMode(true);
         setStopAt(11, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -87,6 +127,9 @@ public class SuspendTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Delay", "Silvercoat Lion");
 
+        setChoice(playerA, true); // choose yes to cast
+
+        setStrictChooseMode(true);
         setStopAt(7, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -109,6 +152,7 @@ public class SuspendTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -128,6 +172,7 @@ public class SuspendTest extends CardTestPlayerBase {
         checkPlayableAbility("Can't cast directly", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ancestral", false);
 //        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ancestral Vision", playerA);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -150,6 +195,7 @@ public class SuspendTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Suppression Field", 1);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -183,8 +229,10 @@ public class SuspendTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Knowledge Pool");
 
+        setChoice(playerA, true); // choose yes to cast
         addTarget(playerA, playerB);
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -226,6 +274,7 @@ public class SuspendTest extends CardTestPlayerBase {
         checkExileCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1);
 
         // 3 time counters removes on upkeep (3, 5, 7) and cast again
+        setChoice(playerA, true); // choose yes to cast
         addTarget(playerA, playerB);
         checkLife("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 3);
         checkGraveyardCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", 1);
@@ -259,6 +308,8 @@ public class SuspendTest extends CardTestPlayerBase {
         checkExileCount("after counter", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wear // Tear", 1);
 
         // 3 time counters removes on upkeep (3, 5, 7) and cast again
+        setChoice(playerA, true); // choose yes to cast
+        setChoice(playerA, "Cast Wear");
         addTarget(playerA, "Bident of Thassa");
         checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bident of Thassa", 0);
         checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bow of Nylea", 1);
@@ -300,6 +351,7 @@ public class SuspendTest extends CardTestPlayerBase {
         checkExileCount("after counter", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Wear // Tear", 1);
 
         // 3 time counters removes on upkeep (3, 5, 7) and cast again (fused cards can't be played from exile zone, so select split spell only)
+        setChoice(playerA, true); // choose yes to cast
         setChoice(playerA, "Cast Wear");
         addTarget(playerA, "Bident of Thassa");
         checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bident of Thassa", 0);

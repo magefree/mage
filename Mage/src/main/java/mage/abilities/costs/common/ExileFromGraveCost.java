@@ -26,9 +26,10 @@ public class ExileFromGraveCost extends CostImpl {
 
     private final List<Card> exiledCards = new ArrayList<>();
     private boolean setTargetPointer = false;
+    private boolean useSourceExileZone = true;
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1) {
             this.text = "exile "
@@ -46,19 +47,19 @@ public class ExileFromGraveCost extends CostImpl {
     }
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target, String text) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = text;
     }
 
     public ExileFromGraveCost(TargetCardInASingleGraveyard target, String text) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = text;
     }
 
     public ExileFromGraveCost(TargetCardInASingleGraveyard target) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = "exile " + target.getDescription();
     }
@@ -72,14 +73,15 @@ public class ExileFromGraveCost extends CostImpl {
         super(cost);
         this.exiledCards.addAll(cost.getExiledCards());
         this.setTargetPointer = cost.setTargetPointer;
+        this.useSourceExileZone = cost.useSourceExileZone;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
-            if (targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
-                for (UUID targetId : targets.get(0).getTargets()) {
+            if (this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
+                for (UUID targetId : this.getTargets().get(0).getTargets()) {
                     Card card = game.getCard(targetId);
                     if (card == null
                             || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
@@ -89,13 +91,25 @@ public class ExileFromGraveCost extends CostImpl {
                 }
                 Cards cardsToExile = new CardsImpl();
                 cardsToExile.addAllCards(exiledCards);
+
+
+                UUID exileZoneId = null;
+                String exileZoneName = "";
+                if (useSourceExileZone) {
+                    exileZoneId = CardUtil.getExileZoneId(game, source);
+                    exileZoneName = CardUtil.getSourceName(game, source);
+                }
                 controller.moveCardsToExile(
-                        cardsToExile.getCards(game), source, game, true,
-                        CardUtil.getExileZoneId(game, source),
-                        CardUtil.getSourceName(game, source)
+                        cardsToExile.getCards(game),
+                        source,
+                        game,
+                        true,
+                        exileZoneId,
+                        exileZoneName
                 );
+
                 if (setTargetPointer) {
-                    source.getEffects().setTargetPointer(new FixedTargets(cardsToExile, game));
+                    source.getEffects().setTargetPointer(new FixedTargets(cardsToExile.getCards(game), game));
                 }
                 paid = true;
             }
@@ -106,7 +120,7 @@ public class ExileFromGraveCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override
@@ -116,5 +130,13 @@ public class ExileFromGraveCost extends CostImpl {
 
     public List<Card> getExiledCards() {
         return exiledCards;
+    }
+
+    /**
+     * Put exiled cards to source zone, so next linked ability can find it
+     */
+    public ExileFromGraveCost withSourceExileZone(boolean useSourceExileZone) {
+        this.useSourceExileZone = useSourceExileZone;
+        return this;
     }
 }

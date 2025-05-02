@@ -40,7 +40,7 @@ public final class RuinationGuide extends CardImpl {
         // Ingest
         this.addAbility(new IngestAbility());
         // Other colorless creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
     }
 
     private RuinationGuide(final RuinationGuide card) {

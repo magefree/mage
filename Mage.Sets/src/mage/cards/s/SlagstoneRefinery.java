@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -40,6 +41,7 @@ class SlagstoneRefineryTriggeredAbility extends TriggeredAbilityImpl {
 
     SlagstoneRefineryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new PowerstoneToken(), 1, true));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private SlagstoneRefineryTriggeredAbility(final SlagstoneRefineryTriggeredAbility ability) {
@@ -78,5 +80,10 @@ class SlagstoneRefineryTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever {this} or another nontoken artifact you control is put into a graveyard from the battlefield " +
                 "or is put into exile from the battlefield, create a tapped Powerstone token.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

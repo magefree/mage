@@ -33,7 +33,7 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
         this.thisOr = thisOr;
         setAbilityWord(AbilityWord.CONSTELLATION);
         setTriggerPhrase("Whenever " + (thisOr ? "{this} or another" : "an")
-                + " enchantment enters the battlefield under your control, ");
+                + " enchantment you control enters, ");
     }
 
     protected ConstellationAbility(final ConstellationAbility ability) {

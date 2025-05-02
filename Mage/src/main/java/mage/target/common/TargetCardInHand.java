@@ -34,7 +34,7 @@ public class TargetCardInHand extends TargetCard {
 
     public TargetCardInHand(int minNumTargets, int maxNumTargets, FilterCard filter) {
         super(minNumTargets, maxNumTargets, Zone.HAND, filter);
-        setNotTarget(true);
+        withNotTarget(true);
     }
 
     protected TargetCardInHand(final TargetCardInHand target) {

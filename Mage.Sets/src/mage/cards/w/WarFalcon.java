@@ -34,7 +34,7 @@ public final class WarFalcon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // War Falcon can't attack unless you control a Knight or a Soldier.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WarFalconEffect()));
+        this.addAbility(new SimpleStaticAbility(new WarFalconEffect()));
     }
 
     private WarFalcon(final WarFalcon card) {
@@ -62,7 +62,7 @@ class WarFalconEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control a Knight or a Soldier";
     }
 
-    public WarFalconEffect(final WarFalconEffect effect) {
+    private WarFalconEffect(final WarFalconEffect effect) {
         super(effect);
     }
 
@@ -84,4 +84,3 @@ class WarFalconEffect extends RestrictionEffect {
         return false;
     }
 }
-

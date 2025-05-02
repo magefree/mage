@@ -42,7 +42,7 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
 
     private Step extraStep;
     private PhaseStep skipStep;
-
+    private PhaseStep skipAllButExtraStep; // for extra phase skipping all but a specific step.
     private TurnPhase afterPhase;
     private PhaseStep afterStep;
 
@@ -66,6 +66,7 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
             this.extraStep = mod.extraStep.copy();
         }
         this.skipStep = mod.skipStep;
+        this.skipAllButExtraStep = mod.skipAllButExtraStep;
         this.afterPhase = mod.afterPhase;
         this.afterStep = mod.afterStep;
         if (mod.subsequentTurnMod != null) {
@@ -124,6 +125,18 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
 
     public TurnMod withExtraPhase(TurnPhase extraPhase) {
         return withExtraPhase(extraPhase, null);
+    }
+
+    /**
+     * Adds an extra step in a new extra phase after this one.
+     * All steps that are not the right one are skipped in the extra phase.
+     * e.g. [[Obeka, Splitter of Seconds]]
+     */
+    public TurnMod withExtraStepInExtraPhase(PhaseStep extraStep, TurnPhase extraPhase) {
+        this.extraPhase = extraPhase;
+        this.skipAllButExtraStep = extraStep;
+        lock();
+        return this;
     }
 
     public TurnMod withExtraPhase(TurnPhase extraPhase, TurnPhase addAfterPhase) {
@@ -190,6 +203,10 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
 
     public TurnPhase getSkipPhase() {
         return skipPhase;
+    }
+
+    public PhaseStep getSkipAllButExtraStep() {
+        return skipAllButExtraStep;
     }
 
     public PhaseStep getSkipStep() {

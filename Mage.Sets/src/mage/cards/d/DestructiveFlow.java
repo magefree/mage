@@ -2,7 +2,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,8 +20,8 @@ public final class DestructiveFlow extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{R}{G}");
 
         // At the beginning of each player's upkeep, that player sacrifices a nonbasic land.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(FilterLandPermanent.nonbasicLand(), 1, "that player"),
-            TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new SacrificeEffect(FilterLandPermanent.nonbasicLand(), 1, "that player"),
+                false));
 
     }
 

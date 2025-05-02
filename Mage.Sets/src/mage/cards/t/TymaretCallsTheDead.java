@@ -94,7 +94,7 @@ class TymaretCallsTheDeadFirstEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return true;
         }

@@ -10,15 +10,12 @@ import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
-import mage.target.TargetObject;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -32,16 +29,25 @@ public class RemoveCounterCost extends CostImpl {
     private final CounterType counterTypeToRemove;
     protected final int countersToRemove;
 
+    /**
+     * Remove one counter of any type from the target
+     */
     public RemoveCounterCost(Target target) {
         this(target, null);
     }
 
+    /**
+     * Remove one counter of the specified type from the target
+     */
     public RemoveCounterCost(Target target, CounterType counterTypeToRemove) {
         this(target, counterTypeToRemove, 1);
     }
 
+    /**
+     * Remove a number of counters of the specified type from the target
+     */
     public RemoveCounterCost(Target target, CounterType counterTypeToRemove, int countersToRemove) {
-        this.target = target;
+        this.target = target.withNotTarget(true); // cost is never targeted
         this.counterTypeToRemove = counterTypeToRemove;
         this.countersToRemove = countersToRemove;
 
@@ -72,11 +78,12 @@ public class RemoveCounterCost extends CostImpl {
 
         Outcome outcome;
         if (target instanceof TargetPermanent) {
-            outcome = Outcome.UnboostCreature;
-        } else if (target instanceof TargetCard) {  // For Mari, the Killing Quill
+            outcome = Outcome.AIDontUseIt;
+        } else if (target instanceof TargetCard) {
+            // Mari, the Killing Quill - AI can safely use it all the time
             outcome = Outcome.Neutral;
         } else {
-            throw new RuntimeException(
+            throw new IllegalArgumentException(
                     "Wrong target type provided for RemoveCounterCost. Provided " + target.getClass() + ". " +
                             "From ability " + ability);
         }
@@ -117,7 +124,7 @@ public class RemoveCounterCost extends CostImpl {
                 }
                 choice.setChoices(choices);
                 choice.setMessage("Choose a counter to remove from " + targetObject.getLogName());
-                if (!controller.choose(Outcome.UnboostCreature, choice, game)) {
+                if (!controller.choose(outcome, choice, game)) {
                     return false;
                 }
                 counterName = choice.getChoice();
@@ -129,7 +136,7 @@ public class RemoveCounterCost extends CostImpl {
                 int numberOfCountersSelected = 1;
                 if (countersLeft > 1 && countersOnPermanent > 1) {
                     numberOfCountersSelected = controller.getAmount(1, Math.min(countersLeft, countersOnPermanent),
-                            "Remove how many counters from " + targetObject.getIdName(), game);
+                            "Choose how many counters (" + counterName + ") to remove from " + targetObject.getLogName() + " as payment", game);
                 }
                 targetObject.removeCounters(counterName, numberOfCountersSelected, source, game);
                 countersRemoved += numberOfCountersSelected;

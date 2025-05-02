@@ -16,7 +16,7 @@ public final class GlobalSeriesJiangYangguAndMuYanling extends ExpansionSet {
     }
 
     private GlobalSeriesJiangYangguAndMuYanling() {
-        super("Global Series: Jiang Yanggu & Mu Yanling", "GS1", ExpansionSet.buildDate(2018, 6, 22), SetType.SUPPLEMENTAL);
+        super("Global Series Jiang Yanggu & Mu Yanling", "GS1", ExpansionSet.buildDate(2018, 6, 22), SetType.SUPPLEMENTAL);
         this.blockName = "Global Series";
         this.hasBasicLands = true;
 

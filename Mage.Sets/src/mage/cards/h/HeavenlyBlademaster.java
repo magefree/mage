@@ -56,7 +56,6 @@ public final class HeavenlyBlademaster extends CardImpl {
                 new AuraAttachedCount(1)
         );
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         totalAmount, totalAmount, Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_CREATURES, true
@@ -91,7 +90,7 @@ class HeavenlyBlademasterEffect extends OneShotEffect {
         staticText = "you may attach any number of Auras and Equipment you control to it";
     }
 
-    public HeavenlyBlademasterEffect(final HeavenlyBlademasterEffect effect) {
+    private HeavenlyBlademasterEffect(final HeavenlyBlademasterEffect effect) {
         super(effect);
     }
 

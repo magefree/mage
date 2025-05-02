@@ -50,10 +50,9 @@ public final class SkyfirePhoenix extends CardImpl {
 class SkyfirePhoenixTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
     SkyfirePhoenixTriggeredAbility() {
-        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                StaticFilters.FILTER_SPELL, false, SetTargetPointer.NONE,
-                "When you cast your commander, return {this} from your graveyard to the battlefield.",
-                null);
+        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
+                StaticFilters.FILTER_SPELL, false, SetTargetPointer.NONE);
+        setTriggerPhrase("When you cast your commander, ");
     }
 
     private SkyfirePhoenixTriggeredAbility(final SkyfirePhoenixTriggeredAbility ability) {

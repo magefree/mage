@@ -28,7 +28,7 @@ public final class FelidarCub extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice Felidar Cub: Destroy target enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }

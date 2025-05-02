@@ -2,7 +2,6 @@ package mage.cards.d;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileFromHandCost;
@@ -19,6 +18,7 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -61,12 +61,12 @@ public final class DisruptingShoal extends CardImpl {
 
 class DisruptingShoalCounterTargetEffect extends OneShotEffect {
 
-    public DisruptingShoalCounterTargetEffect() {
+    DisruptingShoalCounterTargetEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target spell if its mana value is X";
     }
 
-    public DisruptingShoalCounterTargetEffect(final DisruptingShoalCounterTargetEffect effect) {
+    private DisruptingShoalCounterTargetEffect(final DisruptingShoalCounterTargetEffect effect) {
         super(effect);
     }
 
@@ -77,14 +77,14 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null && isManaValueEqual(source, spell.getManaValue())) {
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+        if (spell != null && isManaValueEqual(source, spell.getManaValue(), game)) {
             return game.getStack().counter(source.getFirstTarget(), source, game);
         }
         return false;
     }
 
-    private boolean isManaValueEqual(Ability sourceAbility, int amount) {
+    private boolean isManaValueEqual(Ability sourceAbility, int amount, Game game) {
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost.isPaid() && cost instanceof ExileFromHandCost) {
                 for (Card card : ((ExileFromHandCost) cost).getCards()) {
@@ -94,6 +94,6 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect {
             }
         }
         // No alternate costs payed so compare to X value
-        return sourceAbility.getManaCostsToPay().getX() == amount;
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0) == amount;
     }
 }

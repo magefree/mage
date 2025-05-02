@@ -34,13 +34,13 @@ public final class TwoHeadedDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{R}: Two-Headed Dragon gets +2/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,0, Duration.EndOfTurn),new ManaCostsImpl<>("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2,0, Duration.EndOfTurn),new ManaCostsImpl<>("{1}{R}")));
 
         // Menace (This creature can't be blocked except by two or more creatures.)
         this.addAbility(new MenaceAbility());
 
         // Two-Headed Dragon can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect()));
 
     }
 

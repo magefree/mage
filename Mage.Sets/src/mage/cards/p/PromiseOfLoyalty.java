@@ -72,7 +72,7 @@ class PromiseOfLoyaltyEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
@@ -99,11 +99,11 @@ class PromiseOfLoyaltyEffect extends OneShotEffect {
 
 class PromiseOfLoyaltyAttackEffect extends RestrictionEffect {
 
-    public PromiseOfLoyaltyAttackEffect() {
+    PromiseOfLoyaltyAttackEffect() {
         super(Duration.Custom);
     }
 
-    public PromiseOfLoyaltyAttackEffect(final PromiseOfLoyaltyAttackEffect effect) {
+    private PromiseOfLoyaltyAttackEffect(final PromiseOfLoyaltyAttackEffect effect) {
         super(effect);
     }
 

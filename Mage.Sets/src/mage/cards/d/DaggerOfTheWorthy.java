@@ -1,4 +1,3 @@
-    
 package mage.cards.d;
 
 import java.util.UUID;
@@ -15,7 +14,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 
 /**
  *
@@ -29,9 +27,10 @@ public final class DaggerOfTheWorthy extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0 and has afflict 1. (Whenever it becomes blocked, defending player loses 1 life.)
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2,0));
-        ability.addEffect(new GainAbilityAttachedEffect(new AfflictAbility(1), AttachmentType.EQUIPMENT));
-        addAbility(ability);
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2,0));
+        ability.addEffect(new GainAbilityAttachedEffect(new AfflictAbility(1), AttachmentType.EQUIPMENT)
+                .setText("and has afflict 1"));
+        this.addAbility(ability);
         
         // Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

@@ -2,6 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
@@ -20,7 +21,8 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedBatchAllEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -72,7 +74,7 @@ public final class ZurgoAndOjutai extends CardImpl {
     }
 }
 
-class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl {
+class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
     ZurgoAndOjutaiTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
@@ -91,28 +93,28 @@ class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH
-                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ALL;
+    }
+
+    @Override
+    public boolean checkEvent(DamagedEvent event, Game game) {
+        if (!event.isCombatDamage()) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        Permanent defender = game.getPermanent(event.getTargetId());
+        return permanent != null
+                && permanent.hasSubtype(SubType.DRAGON, game)
+                && permanent.isControlledBy(getControllerId())
+                && ((defender != null && defender.isBattle(game)) || game.getPlayer(event.getTargetId()) != null);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchEvent dEvent = (DamagedBatchEvent) event;
-        List<Permanent> permanents = dEvent
-                .getEvents()
+        List<Permanent> permanents = getFilteredEvents((DamagedBatchAllEvent) event, game)
                 .stream()
-                .map(e -> {
-                    Permanent permanent = game.getPermanent(e.getSourceId());
-                    Permanent defender = game.getPermanent(e.getTargetId());
-                    if (permanent != null
-                            && permanent.hasSubtype(SubType.DRAGON, game)
-                            && permanent.isControlledBy(this.getControllerId())
-                            && ((defender != null && defender.isBattle(game))
-                            || game.getPlayer(e.getTargetId()) != null)) {
-                        return permanent;
-                    }
-                    return null;
-                })
+                .map(GameEvent::getSourceId)
+                .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         if (permanents.isEmpty()) {

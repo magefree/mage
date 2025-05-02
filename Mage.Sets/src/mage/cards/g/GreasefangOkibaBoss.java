@@ -3,7 +3,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -44,7 +44,7 @@ public final class GreasefangOkibaBoss extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of combat on your turn, return target Vehicle card from your graveyard to the battlefield. It gains haste. Return it your hand at beginning of the next end step.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new GreasefangOkibaBossEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new GreasefangOkibaBossEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
@@ -61,7 +61,7 @@ public final class GreasefangOkibaBoss extends CardImpl {
 
 class GreasefangOkibaBossEffect extends OneShotEffect {
 
-    public GreasefangOkibaBossEffect() {
+    GreasefangOkibaBossEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "return target Vehicle card from your graveyard to the battlefield. It gains haste. Return it to its owner's hand at the beginning of your next end step";
     }

@@ -16,6 +16,10 @@ public class Legacy extends Constructed {
                 setCodes.add(set.getCode());
             }
         }
+        // All attractions & sticker cards are banned. (to add if/when implemented)
+        // this also includes the mtgo replacement "Name Sticker" Goblin.
+        banned.add("\"Name Sticker\" Goblin");
+
         banned.add("Ancestral Recall");
         banned.add("Arcum's Astrolabe");
         banned.add("Balance");
@@ -33,6 +37,7 @@ public class Legacy extends Constructed {
         banned.add("Frantic Search");
         banned.add("Gitaxian Probe");
         banned.add("Goblin Recruiter");
+        banned.add("Grief");
         banned.add("Gush");
         banned.add("Hermit Druid");
         banned.add("Imperial Seal");
@@ -54,20 +59,24 @@ public class Legacy extends Constructed {
         banned.add("Necropotence");
         banned.add("Oath of Druids");
         banned.add("Oko, Thief of Crowns");
+        banned.add("Psychic Frog");
         banned.add("Ragavan, Nimble Pilferer");
         banned.add("Sensei's Divining Top");
         banned.add("Skullclamp");
         banned.add("Sol Ring");
+        banned.add("Sowing Mycospawn");
         banned.add("Strip Mine");
         banned.add("Survival of the Fittest");
-        banned.add("Timetwister");
         banned.add("Time Vault");
         banned.add("Time Walk");
+        banned.add("Timetwister");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");
+        banned.add("Troll of Khazad-dum");
         banned.add("Underworld Breach");
         banned.add("Vampiric Tutor");
+        banned.add("Vexing Bauble");
         banned.add("Wheel of Fortune");
         banned.add("Windfall");
         banned.add("Wrenn and Six");

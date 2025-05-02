@@ -18,10 +18,10 @@ import java.util.List;
  *
  * @author North
  */
-public class MockCard extends CardImpl {
+public class MockCard extends CardImpl implements MockableCard {
 
-    static public String ADVENTURE_NAME_SEPARATOR = " // ";
-    static public String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
+    public static String CARD_WITH_SPELL_OPTION_NAME_SEPARATOR = " // ";
+    public static String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
 
     // Needs to be here, as it is normally calculated from the
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
@@ -34,22 +34,23 @@ public class MockCard extends CardImpl {
     protected List<String> manaCostLeftStr;
     protected List<String> manaCostRightStr;
     protected List<String> manaCostStr;
-    protected String adventureSpellName;
+    protected String spellOptionName; // adventure/omen spell name
     protected boolean isModalDoubleFacedCard;
     protected int manaValue;
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
         this.setExpansionSetCode(card.getSetCode());
+        this.setUsesVariousArt(card.usesVariousArt());
         this.setCardNumber(card.getCardNumber());
+        this.setImageFileName(""); // use default
+        this.setImageNumber(0);
         this.power = mageIntFromString(card.getPower());
         this.toughness = mageIntFromString(card.getToughness());
         this.rarity = card.getRarity();
         this.cardType = card.getTypes();
         this.subtype = card.getSubTypes();
         this.supertype = card.getSupertypes();
-
-        this.usesVariousArt = card.usesVariousArt();
 
         //this.manaCost = new ManaCostsImpl<>(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
         this.manaCostLeftStr = card.getManaCosts(CardInfo.ManaCostSide.LEFT);
@@ -70,12 +71,12 @@ public class MockCard extends CardImpl {
             this.secondSideCard = new MockCard(CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber()));
         }
 
-        if (card.isAdventureCard()) {
-            this.adventureSpellName = card.getAdventureSpellName();
+        if (card.isCardWithSpellOption()) {
+            this.spellOptionName = card.getSpellOptionCardName();
         }
 
         if (card.isModalDoubleFacedCard()) {
-            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.getCard();
+            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.createCard();
             CardInfo mdfSecondSide = new CardInfo(mdfCard.getRightHalfCard());
             this.secondSideCard = new MockCard(mdfSecondSide);
             this.isModalDoubleFacedCard = true;
@@ -100,7 +101,7 @@ public class MockCard extends CardImpl {
         this.manaCostLeftStr = new ArrayList<>(card.manaCostLeftStr);
         this.manaCostRightStr = new ArrayList<>(card.manaCostRightStr);
         this.manaCostStr = new ArrayList<>(card.manaCostStr);
-        this.adventureSpellName = card.adventureSpellName;
+        this.spellOptionName = card.spellOptionName;
         this.isModalDoubleFacedCard = card.isModalDoubleFacedCard;
         this.manaValue = card.manaValue;
     }
@@ -154,10 +155,10 @@ public class MockCard extends CardImpl {
             return getName();
         }
 
-        if (adventureSpellName != null) {
-            return getName() + ADVENTURE_NAME_SEPARATOR + adventureSpellName;
+        if (spellOptionName != null) {
+            return getName() + CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionName;
         } else if (isModalDoubleFacedCard) {
-            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.secondSideCard.getName();
+            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.getSecondCardFace().getName();
         } else {
             return getName();
         }

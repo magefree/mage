@@ -29,9 +29,9 @@ public final class GaddockTeeg extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Noncreature spells with converted mana cost 4 or greater can't be cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GaddockTeegReplacementEffect4()));
+        this.addAbility(new SimpleStaticAbility(new GaddockTeegReplacementEffect4()));
         // Noncreature spells with {X} in their mana costs can't be cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GaddockTeegReplacementEffectX()));
+        this.addAbility(new SimpleStaticAbility(new GaddockTeegReplacementEffectX()));
     }
 
     private GaddockTeeg(final GaddockTeeg card) {
@@ -51,13 +51,8 @@ class GaddockTeegReplacementEffect4 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Noncreature spells with mana value 4 or greater can't be cast";
     }
 
-    public GaddockTeegReplacementEffect4(final GaddockTeegReplacementEffect4 effect) {
+    private GaddockTeegReplacementEffect4(final GaddockTeegReplacementEffect4 effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -88,13 +83,8 @@ class GaddockTeegReplacementEffectX extends ContinuousRuleModifyingEffectImpl {
         staticText = "Noncreature spells with {X} in their mana costs can't be cast";
     }
 
-    public GaddockTeegReplacementEffectX(final GaddockTeegReplacementEffectX effect) {
+    private GaddockTeegReplacementEffectX(final GaddockTeegReplacementEffectX effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

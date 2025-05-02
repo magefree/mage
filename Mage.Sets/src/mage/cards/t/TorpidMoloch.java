@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -33,9 +34,8 @@ public final class TorpidMoloch extends CardImpl {
         
         // Sacrifice three lands: Torpid Moloch loses defender until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn), 
-                new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("lands"), true))));
+                new SacrificeTargetCost(3, StaticFilters.FILTER_LANDS)));
     }
 
     private TorpidMoloch(final TorpidMoloch card) {

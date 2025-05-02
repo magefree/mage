@@ -35,12 +35,12 @@ public final class BasandraBattleSeraph extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Players can't cast spells during combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BasandraBattleSeraphEffect()));
+        this.addAbility(new SimpleStaticAbility(new BasandraBattleSeraphEffect()));
 
         // {R}: Target creature attacks this turn if able.
         Effect effect = new AttacksIfAbleTargetEffect(Duration.EndOfTurn);
         effect.setOutcome(Outcome.Detriment);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
@@ -59,22 +59,17 @@ public final class BasandraBattleSeraph extends CardImpl {
 class BasandraBattleSeraphEffect extends ContinuousRuleModifyingEffectImpl {
     
     public BasandraBattleSeraphEffect() {
-        super(Duration.EndOfTurn, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Players can't cast spells during combat";
     }
     
-    public BasandraBattleSeraphEffect(final BasandraBattleSeraphEffect effect) {
+    private BasandraBattleSeraphEffect(final BasandraBattleSeraphEffect effect) {
         super(effect);
     }
     
     @Override
     public BasandraBattleSeraphEffect copy() {
         return new BasandraBattleSeraphEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
     
     @Override

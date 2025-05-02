@@ -56,12 +56,12 @@ public final class SehtsTiger extends CardImpl {
 
 class SehtsTigerEffect extends OneShotEffect {
 
-    public SehtsTigerEffect() {
+    SehtsTigerEffect() {
         super(Outcome.Protect);
         staticText = "you gain protection from the color of your choice until end of turn. <i>(You can't be targeted, dealt damage, or enchanted by anything of the chosen color.)</i>";
     }
 
-    public SehtsTigerEffect(final SehtsTigerEffect effect) {
+    private SehtsTigerEffect(final SehtsTigerEffect effect) {
         super(effect);
     }
 

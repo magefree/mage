@@ -20,7 +20,7 @@ public final class SpikeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected SpikeToken(final SpikeToken token) {
+    private SpikeToken(final SpikeToken token) {
         super(token);
     }
 

@@ -4,10 +4,9 @@ import java.util.UUID;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +35,7 @@ public final class InvasiveSurgery extends CardImpl {
         // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, search the graveyard, hand, and library of that spell's controller for any number of cards with the same name as that spell, exile those cards, then that player shuffles their library.
         this.getSpellAbility().addEffect(new InvasiveSurgeryEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private InvasiveSurgery(final InvasiveSurgery card) {
@@ -51,7 +50,7 @@ public final class InvasiveSurgery extends CardImpl {
 
 class InvasiveSurgeryEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public InvasiveSurgeryEffect() {
+    InvasiveSurgeryEffect() {
         super(true, "that spell's controller", "all cards with the same name as that spell");
         this.staticText = "Counter target sorcery spell.<br><br>"
                 + "<i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, "
@@ -59,7 +58,7 @@ class InvasiveSurgeryEffect extends SearchTargetGraveyardHandLibraryForCardNameA
                 + "with the same name as that spell, exile those cards, then that player shuffles";
     }
 
-    public InvasiveSurgeryEffect(final InvasiveSurgeryEffect effect) {
+    private InvasiveSurgeryEffect(final InvasiveSurgeryEffect effect) {
         super(effect);
     }
 

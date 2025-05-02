@@ -1,25 +1,23 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
 import mage.target.TargetSpell;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,12 +49,12 @@ public final class LeagueGuildmage extends CardImpl {
 
         // {X}{R}, {T}: Copy target instant or sorcery spell you control with converted mana cost X. You may choose new targets for the copy.
         ability = new SimpleActivatedAbility(
-                new CopyTargetSpellEffect(),
+                new CopyTargetStackObjectEffect(),
                 new ManaCostsImpl<>("{X}{R}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));
-        ability.setTargetAdjuster(LeagueGuildmageAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 
@@ -67,19 +65,5 @@ public final class LeagueGuildmage extends CardImpl {
     @Override
     public LeagueGuildmage copy() {
         return new LeagueGuildmage(this);
-    }
-}
-
-enum LeagueGuildmageAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterSpell spellFilter = new FilterInstantOrSorcerySpell("instant or sorcery you control with mana value " + xValue);
-        spellFilter.add(TargetController.YOU.getControllerPredicate());
-        spellFilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetSpell(spellFilter));
     }
 }

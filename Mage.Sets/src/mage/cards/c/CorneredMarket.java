@@ -1,7 +1,7 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.Card;
@@ -19,6 +19,8 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -30,7 +32,7 @@ public final class CorneredMarket extends CardImpl {
 
         // Players can't cast spells with the same name as a nontoken permanent.
         // Players can't play nonbasic lands with the same name as a nontoken permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CorneredMarketReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new CorneredMarketReplacementEffect()));
 
     }
 
@@ -58,7 +60,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 + "<br> Players can't play nonbasic lands with the same name as a nontoken permanent.";
     }
 
-    CorneredMarketReplacementEffect(final CorneredMarketReplacementEffect effect) {
+    private CorneredMarketReplacementEffect(final CorneredMarketReplacementEffect effect) {
         super(effect);
     }
 
@@ -70,7 +72,11 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(event.getSourceId());
+        SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+        if (spellAbility == null) {
+            return false;
+        }
+        Card card = spellAbility.getCharacteristics(game);
         if (card != null) {
             Spell spell = game.getState().getStack().getSpell(event.getSourceId());
             // Face Down cast spell (Morph creature) has no name
@@ -81,7 +87,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             // play land check
             if (card.isLand(game)
                     && !card.isBasic(game)) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (permanent != null) {
                         if (CardUtil.haveSameNames(card, permanent.getName(), game)) {
                             return true;
@@ -92,7 +98,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             }
             // cast spell check
             if (spell != null) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (permanent != null) {
                         if (CardUtil.haveSameNames(card, permanent.getName(), game)) {
                             return true;
@@ -101,11 +107,6 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 }
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

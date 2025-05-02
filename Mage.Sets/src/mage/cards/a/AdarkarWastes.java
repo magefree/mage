@@ -2,16 +2,12 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 /**
  *
@@ -24,10 +20,10 @@ public final class AdarkarWastes extends CardImpl {
 
         this.addAbility(new ColorlessManaAbility());
 
-        Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new TapSourceCost());
+        Ability whiteManaAbility = new WhiteManaAbility();
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);
-        Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new TapSourceCost());
+        Ability blueManaAbility = new BlueManaAbility();
         blueManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blueManaAbility);
     }

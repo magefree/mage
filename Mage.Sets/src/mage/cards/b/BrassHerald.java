@@ -37,7 +37,7 @@ public final class BrassHerald extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BrassHeraldEntersEffect()));
 
         // Creatures of the chosen type get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, false)));
     }
 
     private BrassHerald(final BrassHerald card) {
@@ -52,12 +52,12 @@ public final class BrassHerald extends CardImpl {
 
 class BrassHeraldEntersEffect extends OneShotEffect {
 
-    public BrassHeraldEntersEffect() {
+    BrassHeraldEntersEffect() {
         super(Outcome.Benefit);
         this.staticText = "reveal the top four cards of your library. Put all creature cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order";
     }
 
-    public BrassHeraldEntersEffect(final BrassHeraldEntersEffect effect) {
+    private BrassHeraldEntersEffect(final BrassHeraldEntersEffect effect) {
         super(effect);
     }
 

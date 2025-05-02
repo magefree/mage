@@ -10,6 +10,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -27,10 +28,10 @@ public final class UbaMask extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // If a player would draw a card, that player exiles that card face up instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UbaMaskReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new UbaMaskReplacementEffect()));
 
         // Each player may play cards they exiled with Uba Mask this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UbaMaskPlayEffect()), new UbaMaskExiledCardsWatcher());
+        this.addAbility(new SimpleStaticAbility(new UbaMaskPlayEffect()), new UbaMaskExiledCardsWatcher());
     }
 
     private UbaMask(final UbaMask card) {
@@ -50,7 +51,7 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If a player would draw a card, that player exiles that card face up instead";
     }
 
-    UbaMaskReplacementEffect(final UbaMaskReplacementEffect effect) {
+    private UbaMaskReplacementEffect(final UbaMaskReplacementEffect effect) {
         super(effect);
     }
 
@@ -66,7 +67,17 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
         if (player != null && sourceObject != null) {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
-                if (player.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
+                UUID exileId = CardUtil.getExileZoneId(
+                        player.getId().toString()
+                                + "-" + game.getState().getTurnNum()
+                                + "-" + sourceObject.getIdName()
+                                + "-" + sourceObject.getZoneChangeCounter(game), game
+                );
+                String exileName = sourceObject.getIdName() + " play on turn " + game.getState().getTurnNum()
+                        + " for " + player.getName();
+                game.getExile().createZone(exileId, exileName).setCleanupOnEndTurn(true);
+
+                if (player.moveCardsToExile(card, source, game, true, exileId, exileName)) {
                     UbaMaskExiledCardsWatcher watcher = game.getState().getWatcher(UbaMaskExiledCardsWatcher.class);
                     if (watcher != null) {
                         watcher.addExiledCard(event.getPlayerId(), card, game);
@@ -90,12 +101,12 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
 
 class UbaMaskPlayEffect extends AsThoughEffectImpl {
 
-    public UbaMaskPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+    UbaMaskPlayEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each player may play lands and cast spells from among cards they exiled with {this} this turn";
     }
 
-    public UbaMaskPlayEffect(final UbaMaskPlayEffect effect) {
+    private UbaMaskPlayEffect(final UbaMaskPlayEffect effect) {
         super(effect);
     }
 
@@ -119,8 +130,17 @@ class UbaMaskPlayEffect extends AsThoughEffectImpl {
             UbaMaskExiledCardsWatcher watcher = game.getState().getWatcher(UbaMaskExiledCardsWatcher.class);
             if (watcher != null) {
                 List<MageObjectReference> exiledThisTurn = watcher.getUbaMaskExiledCardsThisTurn(affectedControllerId);
+                UUID exileId = CardUtil.getExileZoneId(
+                            affectedControllerId
+                                + "-" + game.getState().getTurnNum()
+                                + "-" + source.getSourceObject(game).getIdName()
+                                + "-" + source.getSourceObject(game).getZoneChangeCounter(game), game
+                );
+                ExileZone exileZone = game.getExile().getExileZone(exileId);
                 return exiledThisTurn != null
-                        && exiledThisTurn.contains(new MageObjectReference(card, game));
+                        && exiledThisTurn.contains(new MageObjectReference(card, game))
+                        && exileZone != null
+                        && exileZone.contains(objectId);
             }
         }
         return false;

@@ -49,7 +49,7 @@ class DesolationTwinOnCastAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you cast this spell, ");
     }
 
-    DesolationTwinOnCastAbility(DesolationTwinOnCastAbility ability) {
+    private DesolationTwinOnCastAbility(final DesolationTwinOnCastAbility ability) {
         super(ability);
     }
 

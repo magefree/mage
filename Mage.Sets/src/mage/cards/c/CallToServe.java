@@ -35,11 +35,11 @@ public final class CallToServe extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+2, has flying, and is an Angel in addition to its other types.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has flying");
         ability.addEffect(effect);
-        effect = new AddCardSubtypeAttachedEffect(SubType.ANGEL, Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect = new AddCardSubtypeAttachedEffect(SubType.ANGEL, AttachmentType.AURA);
         effect.setText(", and is an Angel in addition to its other types");
         ability.addEffect(effect);
         this.addAbility(ability);

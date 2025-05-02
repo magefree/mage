@@ -26,10 +26,10 @@ public final class VotaryOfTheConclave extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
-    public VotaryOfTheConclave (final VotaryOfTheConclave card) {
+    private VotaryOfTheConclave(final VotaryOfTheConclave card) {
         super(card);
     }
 

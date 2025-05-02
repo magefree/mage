@@ -35,7 +35,7 @@ public final class GoblinCaves extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         this.addAbility(new EnchantAbility(auraTarget));
         // As long as enchanted land is a basic Mountain, Goblin creatures get +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false),
                 new AttachedToBasicMountainCondition(),
                 "As long as enchanted land is a basic Mountain, Goblin creatures get +0/+2"

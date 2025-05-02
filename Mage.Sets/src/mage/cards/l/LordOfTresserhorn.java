@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -37,7 +36,7 @@ public final class LordOfTresserhorn extends CardImpl {
 
         // When Lord of Tresserhorn enters the battlefield, you lose 2 life, you sacrifice two creatures, and target opponent draws two cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(2), false);
-        ability.addEffect(new SacrificeControllerEffect(new FilterControlledCreaturePermanent("creatures"), 2, "you"));
+        ability.addEffect(new SacrificeControllerEffect(new FilterControlledCreaturePermanent("creatures"), 2, ", you"));
         Effect effect = new DrawCardTargetEffect(2);
         effect.setText(", and target opponent draws two cards");
         ability.addEffect(effect);
@@ -45,7 +44,7 @@ public final class LordOfTresserhorn extends CardImpl {
         this.addAbility(ability);
 
         // {B}: Regenerate Lord of Tresserhorn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private LordOfTresserhorn(final LordOfTresserhorn card) {

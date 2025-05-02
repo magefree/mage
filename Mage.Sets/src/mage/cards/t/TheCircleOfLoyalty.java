@@ -6,11 +6,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,17 +26,14 @@ import java.util.UUID;
  */
 public final class TheCircleOfLoyalty extends CardImpl {
 
+    private static final FilterControlledPermanent filterKnight = new FilterControlledPermanent(SubType.KNIGHT, "Knights");
     private static final FilterSpell filterLegendary = new FilterSpell("a legendary spell");
 
     static {
         filterLegendary.add(SuperType.LEGENDARY.getPredicate());
     }
 
-    static final FilterControlledPermanent filterKnight = new FilterControlledPermanent("Knight you control");
-
-    static {
-        filterKnight.add(SubType.KNIGHT.getPredicate());
-    }
+    private static final Hint hint = new ValueHint("Knights you control", new PermanentsOnBattlefieldCount(filterKnight));
 
     public TheCircleOfLoyalty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}{W}{W}");
@@ -44,10 +41,7 @@ public final class TheCircleOfLoyalty extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {1} less to cast for each Knight you control.
-        DynamicValue xValue = new PermanentsOnBattlefieldCount(filterKnight);
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue)
-        ).addHint(new ValueHint("Knight you control", xValue)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filterKnight)).addHint(hint));
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(

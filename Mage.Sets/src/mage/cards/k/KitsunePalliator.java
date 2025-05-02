@@ -33,7 +33,7 @@ public final class KitsunePalliator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Prevent the next 1 damage that would be dealt to each creature and each player this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KitsunePalliatorEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new KitsunePalliatorEffect(), new TapSourceCost()));
     }
 
     private KitsunePalliator(final KitsunePalliator card) {
@@ -48,12 +48,12 @@ public final class KitsunePalliator extends CardImpl {
 
 class KitsunePalliatorEffect extends OneShotEffect {
 
-    public KitsunePalliatorEffect() {
+    KitsunePalliatorEffect() {
         super(Outcome.PreventDamage);
         this.staticText = "Prevent the next 1 damage that would be dealt to each creature and each player this turn";
     }
 
-    public KitsunePalliatorEffect(final KitsunePalliatorEffect effect) {
+    private KitsunePalliatorEffect(final KitsunePalliatorEffect effect) {
         super(effect);
     }
 

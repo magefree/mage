@@ -49,7 +49,7 @@ class GenestealerLocusTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(0, 1, Duration.EndOfTurn), false);
     }
 
-    public GenestealerLocusTriggeredAbility(final GenestealerLocusTriggeredAbility ability) {
+    private GenestealerLocusTriggeredAbility(final GenestealerLocusTriggeredAbility ability) {
         super(ability);
     }
 

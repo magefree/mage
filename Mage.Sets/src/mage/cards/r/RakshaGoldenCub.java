@@ -52,7 +52,7 @@ public final class RakshaGoldenCub extends CardImpl {
         effect2.setText("and have double strike");
         
         
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         ability.addEffect(effect2);
         
         this.addAbility(ability);

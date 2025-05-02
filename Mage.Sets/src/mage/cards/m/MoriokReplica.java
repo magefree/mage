@@ -32,7 +32,7 @@ public final class MoriokReplica extends CardImpl {
         // {1}{B}, Sacrifice Moriok Replica: You draw two cards and you lose 2 life.
         Effect effect = new DrawCardSourceControllerEffect(2);
         effect.setText("You draw two cards");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{B}"));
         effect = new LoseLifeSourceControllerEffect(2);
         effect.setText("and you lose 2 life");
         ability.addCost(new SacrificeSourceCost());
@@ -40,7 +40,7 @@ public final class MoriokReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoriokReplica (final MoriokReplica card) {
+    private MoriokReplica(final MoriokReplica card) {
         super(card);
     }
 

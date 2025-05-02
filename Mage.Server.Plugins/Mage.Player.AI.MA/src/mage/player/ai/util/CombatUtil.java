@@ -1,16 +1,19 @@
 package mage.player.ai.util;
 
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.combat.Combat;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.turn.CombatDamageStep;
 import mage.game.turn.EndOfCombatStep;
-import mage.game.turn.FirstCombatDamageStep;
 import mage.game.turn.Step;
+import mage.player.ai.GameStateEvaluator2;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
@@ -41,7 +44,7 @@ public final class CombatUtil {
             }
         }
 
-        sortByPower(blockableAttackers, true);
+        sortByPower(blockableAttackers, false); // most powerfull go to first
 
         // imagine that most powerful will be blocked as 1-vs-1
         List<Permanent> attackersThatWontBeBlocked = new ArrayList<>(blockableAttackers);
@@ -58,7 +61,7 @@ public final class CombatUtil {
             return blockableAttackers;
         }
 
-        if (sumPoisonDamage(attackersThatWontBeBlocked, defender) >= 10 - defender.getCounters().getCount(CounterType.POISON)) {
+        if (sumPoisonDamage(attackersThatWontBeBlocked, defender) >= 10 - defender.getCountersCount(CounterType.POISON)) {
             blockableAttackers.addAll(unblockableAttackers);
             return blockableAttackers;
         }
@@ -84,29 +87,28 @@ public final class CombatUtil {
     }
 
     public static void sortByPower(List<Permanent> permanents, final boolean ascending) {
-        Collections.sort(permanents, new Comparator<Permanent>() {
-            @Override
-            public int compare(Permanent o1, Permanent o2) {
-                if (ascending) {
-                    return o2.getPower().getValue() - o1.getPower().getValue();
-                } else {
-                    return o1.getPower().getValue() - o2.getPower().getValue();
-                }
-            }
-        });
+        permanents.sort(Comparator.comparingInt(p -> p.getPower().getValue()));
+        if (!ascending) {
+            Collections.reverse(permanents);
+        }
     }
 
-    public static Permanent getWorstCreature(List<Permanent> creatures) {
-        if (creatures.isEmpty()) {
-            return null;
-        }
-        Collections.sort(creatures, new Comparator<Permanent>() {
-            @Override
-            public int compare(Permanent o1, Permanent o2) {
-                return o2.getPower().getValue() - o1.getPower().getValue();
+    public static Permanent getWorstCreature(List<Permanent>... lists) {
+        for (List<Permanent> list : lists) {
+            if (!list.isEmpty()) {
+                list.sort(Comparator.comparingInt(p -> p.getPower().getValue()));
+                return list.get(0);
             }
-        });
-        return creatures.get(0);
+        }
+        return null;
+    }
+
+    public static void removeWorstCreature(Permanent permanent, List<Permanent>... lists) {
+        for (List<Permanent> list : lists) {
+            if (!list.isEmpty()) {
+                list.remove(permanent);
+            }
+        }
     }
 
     private static int sumDamage(List<Permanent> attackersThatWontBeBlocked, Player defender) {
@@ -156,25 +158,100 @@ public final class CombatUtil {
         return canBlock;
     }
 
-    public static CombatInfo blockWithGoodTrade(Game game, List<Permanent> attackers, List<Permanent> blockers) {
-
+    /**
+     * AI related code, find better block combination for attackers
+     */
+    public static CombatInfo blockWithGoodTrade2(Game game, List<Permanent> attackers, List<Permanent> blockers) {
         UUID attackerId = game.getCombat().getAttackingPlayerId();
         UUID defenderId = game.getCombat().getDefenders().iterator().next();
         if (attackerId == null || defenderId == null) {
-            log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
             return new CombatInfo();
         }
 
+        // TODO: implement full game simulations of all possible combinations (e.g. multiblockers support)
+
         CombatInfo combatInfo = new CombatInfo();
         for (Permanent attacker : attackers) {
-            //TODO: handle attackers with "can't be blocked except"
-            List<Permanent> possibleBlockers = getPossibleBlockers(game, attacker, blockers);
-            List<Permanent> survivedBlockers = getBlockersThatWillSurvive(game, attackerId, defenderId, attacker, possibleBlockers);
-            if (!survivedBlockers.isEmpty()) {
-                Permanent blocker = getWorstCreature(survivedBlockers);
+            // simple combat simulation (1 vs 1)
+            List<Permanent> allBlockers = getPossibleBlockers(game, attacker, blockers);
+            List<SurviveInfo> blockerStats = getBlockersThatWillSurvive2(game, attackerId, defenderId, attacker, allBlockers);
+            Map<Permanent, Integer> blockingDiffScore = new HashMap<>();
+            Map<Permanent, Integer> nonBlockingDiffScore = new HashMap<>();
+            blockerStats.forEach(s -> {
+                blockingDiffScore.put(s.getBlocker(), s.getDiffBlockingScore());
+                nonBlockingDiffScore.put(s.getBlocker(), s.getDiffNonblockingScore());
+            });
+
+            // split blockers by usage priority
+            List<Permanent> survivedAndKillBlocker = new ArrayList<>();
+            List<Permanent> survivedBlockers = new ArrayList<>();
+            List<Permanent> diedBlockers = new ArrayList<>();
+            blockerStats.forEach(stats -> {
+                if (stats.isAttackerDied() && !stats.isBlockerDied()) {
+                    survivedAndKillBlocker.add(stats.getBlocker());
+                } else if (!stats.isBlockerDied()) {
+                    survivedBlockers.add(stats.getBlocker());
+                } else {
+                    diedBlockers.add(stats.getBlocker());
+                }
+            });
+
+            int blockedCount = 0;
+
+            // find good blocker
+            Permanent blocker = getWorstCreature(survivedAndKillBlocker, survivedBlockers);
+            if (blocker != null) {
                 combatInfo.addPair(attacker, blocker);
-                blockers.remove(blocker);
+                removeWorstCreature(blocker, blockers, survivedAndKillBlocker, survivedBlockers);
+                blockedCount++;
             }
+
+            // find good sacrifices (chump blocks also supported due bad game score on loose)
+            // TODO: add chump blocking support here?
+            // TODO: there are many triggers on damage, attack, etc - it can't be processed without real game simulations
+            if (blocker == null) {
+                blocker = getWorstCreature(diedBlockers);
+                if (blocker != null) {
+                    int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
+                    int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
+                    if (diffBlockingScore >= 0 || diffBlockingScore > diffNonBlockingScore) {
+                        // it's good - can sacrifice and get better game state, also protect from game loose
+                        combatInfo.addPair(attacker, blocker);
+                        removeWorstCreature(blocker, blockers, diedBlockers);
+                        blockedCount++;
+                    }
+                }
+            }
+
+            // find blockers for restrictions
+            while (true) {
+                if (blockers.isEmpty()) {
+                    break;
+                }
+
+                // TODO: add multiple use case support with min/max blockedBy conditional and other
+                //   see all possible use cases in checkBlockRestrictions, checkBlockRequirementsAfter and checkBlockRestrictionsAfter
+
+                // effects support: can't be blocked except by xxx or more creatures
+                if (blockedCount > 0 && attacker.getMinBlockedBy() > blockedCount) {
+                    // it already has 1 blocker (killer in best use case), so no needs in second killer
+                    blocker = getWorstCreature(survivedBlockers, survivedAndKillBlocker, diedBlockers);
+                    if (blocker != null) {
+                        combatInfo.addPair(attacker, blocker);
+                        removeWorstCreature(blocker, blockers, survivedBlockers, survivedAndKillBlocker, diedBlockers);
+                        blockedCount++;
+                        continue; // try to find next required blocker
+                    } else {
+                        // invalid configuration, must stop
+                        break;
+                    }
+                }
+
+                // no more active restrictions
+                break;
+            }
+
+            // no more blockers to use
             if (blockers.isEmpty()) {
                 break;
             }
@@ -183,36 +260,43 @@ public final class CombatUtil {
         return combatInfo;
     }
 
-    private static List<Permanent> getBlockersThatWillSurvive(Game game, UUID attackerId, UUID defenderId, Permanent attacker, List<Permanent> possibleBlockers) {
-        List<Permanent> blockers = new ArrayList<>();
+    /**
+     * Game simulations to find all survived/killer blocker
+     */
+    private static List<SurviveInfo> getBlockersThatWillSurvive2(Game game, UUID attackerId, UUID defenderId, Permanent attacker, List<Permanent> possibleBlockers) {
+        List<SurviveInfo> res = new ArrayList<>();
         for (Permanent blocker : possibleBlockers) {
-            SurviveInfo info = willItSurvive(game, attackerId, defenderId, attacker, blocker);
-            //if (info.isAttackerDied() && !info.isBlockerDied()) {
-            if (info != null) {
-                if (info.isAttackerDied()) {
-                    blockers.add(blocker);
-                } else if (!info.isBlockerDied()) {
-                    blockers.add(blocker);
-                }
+            // TODO: enable willItSurviveSimulation and check stability
+            SurviveInfo info = willItSurviveSimple(game, attackerId, defenderId, attacker, blocker);
+            if (info == null) {
+                continue;
             }
+            info.setBlocker(blocker);
+            res.add(info);
         }
-        return blockers;
+        return res;
     }
 
-    public static SurviveInfo willItSurvive(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
-        Game sim = game.copy();
-
-        Combat combat = sim.getCombat();
-        combat.setAttacker(attackingPlayerId);
-        combat.setDefenders(sim);
-
+    public static SurviveInfo willItSurviveSimulation(Game originalGame, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
+        Game sim = originalGame.createSimulationForAI();
         if (blocker == null || attacker == null || sim.getPlayer(defendingPlayerId) == null) {
             return null;
         }
 
+        // TODO: need code research, possible bugs in miss prepare code due real combat logic
+        // TODO: bugged, miss combat.clear code (possible bugs - wrong blocker declare by AI on multiple options?)
+        Combat combat = sim.getCombat();
+        combat.setAttacker(attackingPlayerId);
+        combat.setDefenders(sim);
+        int startScore = GameStateEvaluator2.evaluate(defendingPlayerId, sim).getTotalScore();
+
+        // real game simulation
+        // TODO: need debug and testing, old code from 2012
+        //   must have infinite/freeze protection (e.g. limit stack resolves)
+
+        // declare
         sim.getPlayer(defendingPlayerId).declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), sim);
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
-
         sim.checkStateAndTriggered();
         while (!sim.getStack().isEmpty()) {
             sim.getStack().resolve(sim);
@@ -220,142 +304,119 @@ public final class CombatUtil {
         }
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
 
-        simulateStep(sim, new FirstCombatDamageStep());
-        simulateStep(sim, new CombatDamageStep());
+        // combat
+        simulateStep(sim, new CombatDamageStep(true));
+        simulateStep(sim, new CombatDamageStep(false));
         simulateStep(sim, new EndOfCombatStep());
-        // The following commented out call produces random freezes.
-        //sim.checkStateAndTriggered();
-        while (!sim.getStack().isEmpty()) {
-            sim.getStack().resolve(sim);
-            sim.applyEffects();
-        }
 
-        return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), !sim.getBattlefield().containsPermanent(blocker.getId()));
-    }
-
-    public static SurviveInfo getCombatInfo(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker) {
-        Game sim = game.copy();
-
-        Combat combat = sim.getCombat();
-        combat.setAttacker(attackingPlayerId);
-        combat.setDefenders(sim);
-
-        UUID defenderId = sim.getCombat().getDefenders().iterator().next();
-        boolean triggered = false;
-
-        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
-
+        // after
         sim.checkStateAndTriggered();
         while (!sim.getStack().isEmpty()) {
-            triggered = true;
-            sim.getStack().resolve(sim);
-            sim.applyEffects();
-        }
-        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
-
-        simulateStep(sim, new FirstCombatDamageStep());
-        simulateStep(sim, new CombatDamageStep());
-        simulateStep(sim, new EndOfCombatStep());
-        // The following commented out call produces random freezes.
-        //sim.checkStateAndTriggered();
-        while (!sim.getStack().isEmpty()) {
-            triggered = true;
             sim.getStack().resolve(sim);
             sim.applyEffects();
         }
 
-        return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), false, sim.getPlayer(defenderId), triggered);
+        int endBlockingScore = GameStateEvaluator2.evaluate(defendingPlayerId, sim).getTotalScore();
+        int endNonBlockingScore = startScore; // TODO: implement
+        return new SurviveInfo(
+                !sim.getBattlefield().containsPermanent(attacker.getId()),
+                !sim.getBattlefield().containsPermanent(blocker.getId()),
+                endBlockingScore - startScore,
+                endNonBlockingScore - startScore
+        );
     }
 
-    protected static void simulateStep(Game game, Step step) {
-        game.getPhase().setStep(step);
-        if (!step.skipStep(game, game.getActivePlayerId())) {
-            step.beginStep(game, game.getActivePlayerId());
-            // The following commented out call produces random freezes.
-            //game.checkStateAndTriggered();
-            while (!game.getStack().isEmpty()) {
-                game.getStack().resolve(game);
-                game.applyEffects();
-            }
-            step.endStep(game, game.getActivePlayerId());
-        }
-    }
-
-    public static boolean canBlock(Game game, Permanent blocker) {
-        boolean canBlock = true;
-        if (!blocker.isTapped()) {
-            try {
-                canBlock = blocker.canBlock(null, game);
-            } catch (Exception e) {
-                //e.printStackTrace();
-            }
-        }
-        return canBlock;
-    }
-
-    public static CombatInfo blockWithGoodTrade2(Game game, List<Permanent> attackers, List<Permanent> blockers) {
-
-        UUID attackerId = game.getCombat().getAttackingPlayerId();
-        UUID defenderId = game.getCombat().getDefenders().iterator().next();
-        if (attackerId == null || defenderId == null) {
-            log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
-            return new CombatInfo();
-        }
-
-        CombatInfo combatInfo = new CombatInfo();
-        for (Permanent attacker : attackers) {
-            //TODO: handle attackers with "can't be blocked except"
-            List<Permanent> possibleBlockers = getPossibleBlockers(game, attacker, blockers);
-            List<Permanent> survivedBlockers = getBlockersThatWillSurvive2(game, attackerId, defenderId, attacker, possibleBlockers);
-            if (!survivedBlockers.isEmpty()) {
-                Permanent blocker = getWorstCreature(survivedBlockers);
-                combatInfo.addPair(attacker, blocker);
-                blockers.remove(blocker);
-            }
-            if (blockers.isEmpty()) {
-                break;
-            }
-        }
-
-        return combatInfo;
-    }
-
-    private static List<Permanent> getBlockersThatWillSurvive2(Game game, UUID attackerId, UUID defenderId, Permanent attacker, List<Permanent> possibleBlockers) {
-        List<Permanent> blockers = new ArrayList<>();
-        for (Permanent blocker : possibleBlockers) {
-            SurviveInfo info = willItSurvive2(game, attackerId, defenderId, attacker, blocker);
-            //if (info.isAttackerDied() && !info.isBlockerDied()) {
-            if (info != null) {
-                if (info.isAttackerDied()) {
-                    blockers.add(blocker);
-                } else if (!info.isBlockerDied()) {
-                    blockers.add(blocker);
-                }
-            }
-        }
-        return blockers;
-    }
-
-    public static SurviveInfo willItSurvive2(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
-
-        Game sim = game.copy();
-
-        Combat combat = sim.getCombat();
-        combat.setAttacker(attackingPlayerId);
-        combat.setDefenders(sim);
-
+    public static SurviveInfo willItSurviveSimple(Game originalGame, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
+        Game sim = originalGame.createSimulationForAI();
         if (blocker == null || attacker == null || sim.getPlayer(defendingPlayerId) == null) {
             return null;
         }
 
+        Combat combat = sim.getCombat();
+        combat.setAttacker(attackingPlayerId);
+        combat.setDefenders(sim);
+
+        Game simNonBlocking = sim.copy();
+
+        // attacker tapped before attack, it will add additional score to blocker, but it must be ignored
+        // so blocker will block same creature with same score without penalty
+        int startScore = GameStateEvaluator2.evaluate(defendingPlayerId, sim, false).getTotalScore();
+
+        // fake combat simulation (simple damage simulation)
+        Permanent simAttacker = sim.getPermanent(attacker.getId());
+        Permanent simBlocker = sim.getPermanent(blocker.getId());
+        if (simAttacker == null || simBlocker == null) {
+            throw new IllegalArgumentException("Broken sim game, can't find attacker or blocker");
+        }
+        // don't ask about that hacks - just replace to real combat simulation someday (another hack but with full stack resolve)
+        // first damage step
+        simulateCombatDamage(sim, simBlocker, simAttacker, true);
+        simulateCombatDamage(sim, simAttacker, simBlocker, true);
+        simAttacker.applyDamage(sim);
+        simBlocker.applyDamage(sim);
+        sim.checkStateAndTriggered();
+        sim.processAction();
+        // second damage step
+        if (sim.getPermanent(simBlocker.getId()) != null && sim.getPermanent(simAttacker.getId()) != null) {
+            simulateCombatDamage(sim, simBlocker, simAttacker, false);
+            simulateCombatDamage(sim, simAttacker, simBlocker, false);
+            simAttacker.applyDamage(sim);
+            simBlocker.applyDamage(sim);
+            sim.checkStateAndTriggered();
+            sim.processAction();
+        }
+
+        /* old manual PT compare
         if (attacker.getPower().getValue() >= blocker.getToughness().getValue()) {
             sim.getBattlefield().removePermanent(blocker.getId());
         }
         if (attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
             sim.getBattlefield().removePermanent(attacker.getId());
         }
+         */
 
-        return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), !sim.getBattlefield().containsPermanent(blocker.getId()));
+        // fake non-block simulation
+        simNonBlocking.getPlayer(defendingPlayerId).damage(
+                attacker.getPower().getValue(),
+                attacker.getId(),
+                null,
+                simNonBlocking,
+                true,
+                true
+        );
+        simNonBlocking.checkStateAndTriggered();
+        simNonBlocking.processAction();
+
+        int endBlockingScore = GameStateEvaluator2.evaluate(defendingPlayerId, sim, false).getTotalScore();
+        int endNonBlockingScore = GameStateEvaluator2.evaluate(defendingPlayerId, simNonBlocking, false).getTotalScore();
+        return new SurviveInfo(
+                !sim.getBattlefield().containsPermanent(attacker.getId()),
+                !sim.getBattlefield().containsPermanent(blocker.getId()),
+                endBlockingScore - startScore,
+                endNonBlockingScore - startScore
+        );
     }
 
+    private static void simulateCombatDamage(Game sim, Permanent fromCreature, Permanent toCreature, boolean isFirstDamageStep) {
+        Ability fakeAbility = new SimpleStaticAbility(null);
+        if (CombatGroup.dealsDamageThisStep(fromCreature, isFirstDamageStep, sim)) {
+            fakeAbility.setSourceId(fromCreature.getId());
+            fakeAbility.setControllerId(fromCreature.getControllerId());
+            toCreature.damage(fromCreature.getPower().getValue(), fromCreature.getId(), fakeAbility, sim, true, true);
+        }
+    }
+
+    private static void simulateStep(Game sim, Step step) {
+        sim.getPhase().setStep(step);
+        if (!step.skipStep(sim, sim.getActivePlayerId())) {
+            step.beginStep(sim, sim.getActivePlayerId());
+            // The following commented out call produces random freezes.
+            //game.checkStateAndTriggered();
+            while (!sim.getStack().isEmpty()) {
+                sim.getStack().resolve(sim);
+                sim.applyEffects();
+            }
+            step.endStep(sim, sim.getActivePlayerId());
+        }
+    }
 }

@@ -32,7 +32,7 @@ public final class DauntingDefender extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If a source would deal damage to a Cleric creature you control, prevent 1 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DauntingDefenderEffect(1)));
+        this.addAbility(new SimpleStaticAbility(new DauntingDefenderEffect(1)));
     }
 
     private DauntingDefender(final DauntingDefender card) {
@@ -47,18 +47,13 @@ public final class DauntingDefender extends CardImpl {
 
 class DauntingDefenderEffect extends PreventionEffectImpl {
 
-    public DauntingDefenderEffect(int amount) {
+    DauntingDefenderEffect(int amount) {
         super(Duration.WhileOnBattlefield, amount, false, false);
         this.staticText = "If a source would deal damage to a Cleric creature you control, prevent " + amount + " of that damage";
     }
 
-    public DauntingDefenderEffect(DauntingDefenderEffect effect) {
+    private DauntingDefenderEffect(final DauntingDefenderEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

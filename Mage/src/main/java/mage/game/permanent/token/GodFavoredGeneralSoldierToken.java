@@ -20,7 +20,7 @@ public final class GodFavoredGeneralSoldierToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected GodFavoredGeneralSoldierToken(final GodFavoredGeneralSoldierToken token) {
+    private GodFavoredGeneralSoldierToken(final GodFavoredGeneralSoldierToken token) {
         super(token);
     }
 

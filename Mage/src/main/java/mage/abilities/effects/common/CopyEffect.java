@@ -81,8 +81,12 @@ public class CopyEffect extends ContinuousEffectImpl {
         }
         Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent == null) {
+            if (!game.checkShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
+                discard();
+                return false;
+            }
+            // As long as the permanent is still in the short living LKI continue to copy to get triggered abilities to TriggeredAbilities for dies events.
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
-            // As long as the permanent is still in the LKI continue to copy to get triggered abilities to TriggeredAbilities for dies events.
             if (permanent == null) {
                 discard();
                 return false;
@@ -119,11 +123,11 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.removeAllAbilities(source.getSourceId(), game);
         if (copyFromObject instanceof Permanent) {
             for (Ability ability : ((Permanent) copyFromObject).getAbilities(game)) {
-                permanent.addAbility(ability, getSourceId(), game);
+                permanent.addAbility(ability, getSourceId(), game, true);
             }
         } else {
             for (Ability ability : copyFromObject.getAbilities()) {
-                permanent.addAbility(ability, getSourceId(), game);
+                permanent.addAbility(ability, getSourceId(), game, true);
             }
         }
 
@@ -146,6 +150,7 @@ public class CopyEffect extends ContinuousEffectImpl {
             //permanent.setSecondCardFace(targetPermanent.getSecondCardFace());
             permanent.setFlipCard(targetPermanent.isFlipCard());
             permanent.setFlipCardName(targetPermanent.getFlipCardName());
+            permanent.setPrototyped(targetPermanent.isPrototyped());
         }
 
         CardUtil.copySetAndCardNumber(permanent, copyFromObject);

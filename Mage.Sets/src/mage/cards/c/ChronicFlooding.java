@@ -59,7 +59,7 @@ class ChronicFloodingAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MillCardsTargetEffect(3));
     }
  
-    ChronicFloodingAbility(final ChronicFloodingAbility ability) {
+    private ChronicFloodingAbility(final ChronicFloodingAbility ability) {
         super(ability);
     }
 

@@ -23,7 +23,7 @@ public final class CoatOfArms extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CoatOfArmsEffect()));
+        this.addAbility(new SimpleStaticAbility(new CoatOfArmsEffect()));
     }
 
     private CoatOfArms(final CoatOfArms card) {
@@ -38,12 +38,12 @@ public final class CoatOfArms extends CardImpl {
 
 class CoatOfArmsEffect extends ContinuousEffectImpl {
 
-    public CoatOfArmsEffect() {
+    CoatOfArmsEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.staticText = "Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it";
     }
 
-    public CoatOfArmsEffect(final CoatOfArmsEffect effect) {
+    private CoatOfArmsEffect(final CoatOfArmsEffect effect) {
         super(effect);
     }
 

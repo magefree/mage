@@ -39,7 +39,7 @@ public final class CavalryMaster extends CardImpl {
         this.addAbility(new FlankingAbility());
         // Other creatures you control with flanking have flanking.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new GainAbilityAllEffect(new FlankingAbility(), Duration.WhileOnBattlefield, filter, true)
+                new GainAbilityAllEffect(new FlankingAbility(), Duration.WhileOnBattlefield, filter, true)
                         .setText("Other creatures you control with flanking have flanking.")
         ));
     }

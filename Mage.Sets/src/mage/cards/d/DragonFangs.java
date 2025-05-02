@@ -46,11 +46,11 @@ public final class DragonFangs extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +1/+1 and has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
                
         // When a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Fangs from your graveyard to the battlefield attached to that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonFangsEffect(), filter, true, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonFangsEffect(), filter, true, SetTargetPointer.PERMANENT));
     }
 
     private DragonFangs(final DragonFangs card) {
@@ -70,7 +70,7 @@ class DragonFangsEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonFangsEffect(final DragonFangsEffect effect) {
+    private DragonFangsEffect(final DragonFangsEffect effect) {
         super(effect);
     }
     
@@ -81,7 +81,7 @@ class DragonFangsEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceCard = (Card) source.getSourceObjectIfItStillExists(game);
+        Card sourceCard = source.getSourceCardIfItStillExists(game);
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceCard != null && permanent != null && controller != null) {
@@ -94,4 +94,3 @@ class DragonFangsEffect extends OneShotEffect {
         return false;
     }
 }
-

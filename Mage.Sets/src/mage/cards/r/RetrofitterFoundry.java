@@ -38,7 +38,6 @@ public final class RetrofitterFoundry extends CardImpl {
 
         // {3}: Untap Retrofitter Foundry.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new UntapSourceEffect(),
                 new GenericManaCost(3))
         );
@@ -57,7 +56,7 @@ public final class RetrofitterFoundry extends CardImpl {
                 new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter1)));
+        ability.addCost(new SacrificeTargetCost(filter1));
         this.addAbility(ability);
 
         // {T}, Sacrifice a Thopter: Create a 4/4 colorless Construct artifact creature token.
@@ -65,7 +64,7 @@ public final class RetrofitterFoundry extends CardImpl {
                 new CreateTokenEffect(new Construct4Token()),
                 new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
     }
 

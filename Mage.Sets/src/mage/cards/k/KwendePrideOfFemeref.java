@@ -47,7 +47,7 @@ public final class KwendePrideOfFemeref extends CardImpl {
         ContinuousEffect effect = new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
         effect.setText("Creatures you control with first strike have double strike");
         effect.setDependedToType(DependencyType.AddingAbility); // effects that add first strike need to be executed first
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private KwendePrideOfFemeref(final KwendePrideOfFemeref card) {

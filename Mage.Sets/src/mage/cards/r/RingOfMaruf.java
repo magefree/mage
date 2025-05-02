@@ -30,7 +30,7 @@ public final class RingOfMaruf extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {5}, {Tap}, Exile Ring of Maruf: The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RingOfMarufEffect(), new ManaCostsImpl<>("{5}"));
+        Ability ability = new SimpleActivatedAbility(new RingOfMarufEffect(), new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         ability.addHint(OpenSideboardHint.instance);
@@ -49,12 +49,12 @@ public final class RingOfMaruf extends CardImpl {
 
 class RingOfMarufEffect extends ReplacementEffectImpl {
 
-    public RingOfMarufEffect() {
+    RingOfMarufEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.";
+        staticText = "The next time you would draw a card this turn, instead put a card you own from outside the game into your hand";
     }
 
-    public RingOfMarufEffect(final RingOfMarufEffect effect) {
+    private RingOfMarufEffect(final RingOfMarufEffect effect) {
         super(effect);
     }
 

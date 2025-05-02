@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -19,7 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.CatToken2;
 
@@ -29,6 +28,11 @@ import mage.game.permanent.token.CatToken2;
  */
 public final class PrideSovereign extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CAT, "other Cat you control");
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
     public PrideSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
@@ -37,12 +41,10 @@ public final class PrideSovereign extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Pride Sovereign gets +1/+1 for each other Cat you control.
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.CAT, "other Cat you control");
-        filter.add(AnotherPredicate.instance);
         DynamicValue otherCats = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(otherCats, otherCats, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(otherCats, otherCats, Duration.WhileOnBattlefield)));
         // {W}, {t}, Exert Pride Sovereign: Create two 1/1 white Cat creature tokens with lifelink.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CatToken2(), 2), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new CatToken2(), 2), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         this.addAbility(ability);

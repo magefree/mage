@@ -36,7 +36,7 @@ public final class SoulScarMage extends CardImpl {
         this.addAbility(new ProwessAbility());
 
         // If a source you control would deal noncombat damage to a creature an opponent controls, put that many -1/-1 counters on that creature instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SoulScarMageDamageReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new SoulScarMageDamageReplacementEffect()));
     }
 
     private SoulScarMage(final SoulScarMage card) {
@@ -51,12 +51,12 @@ public final class SoulScarMage extends CardImpl {
 
 class SoulScarMageDamageReplacementEffect extends ReplacementEffectImpl {
 
-    public SoulScarMageDamageReplacementEffect() {
+    SoulScarMageDamageReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a source you control would deal noncombat damage to a creature an opponent controls, put that many -1/-1 counters on that creature instead.";
     }
 
-    public SoulScarMageDamageReplacementEffect(final SoulScarMageDamageReplacementEffect effect) {
+    private SoulScarMageDamageReplacementEffect(final SoulScarMageDamageReplacementEffect effect) {
         super(effect);
     }
 

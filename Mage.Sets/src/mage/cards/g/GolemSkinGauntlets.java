@@ -1,8 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,13 +11,12 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +30,7 @@ public final class GolemSkinGauntlets extends CardImpl {
 
         // Equipped creature gets +1/+0 for each Equipment attached to it.
         // Equip 2 (2: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new GolemSkinGauntletsAttachedCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(new GolemSkinGauntletsAttachedCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
@@ -51,10 +48,10 @@ public final class GolemSkinGauntlets extends CardImpl {
 // compare to Goblin Gaveleer
 class GolemSkinGauntletsAttachedCount implements DynamicValue {
 
-    public GolemSkinGauntletsAttachedCount() {
+    GolemSkinGauntletsAttachedCount() {
     }
 
-    public GolemSkinGauntletsAttachedCount(final GolemSkinGauntletsAttachedCount dynamicValue) {
+    private GolemSkinGauntletsAttachedCount(final GolemSkinGauntletsAttachedCount dynamicValue) {
     }
 
     @Override
@@ -78,7 +75,7 @@ class GolemSkinGauntletsAttachedCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public GolemSkinGauntletsAttachedCount copy() {
         return new GolemSkinGauntletsAttachedCount(this);
     }
 

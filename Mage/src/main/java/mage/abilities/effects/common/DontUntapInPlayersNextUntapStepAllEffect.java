@@ -47,11 +47,6 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         MageObject mageObject = game.getObject(source);
         Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
@@ -63,7 +58,8 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAP_STEP || event.getType() == GameEvent.EventType.UNTAP;
+        return event.getType() == GameEvent.EventType.UNTAP_STEP
+                || event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override

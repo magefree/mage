@@ -86,21 +86,22 @@ class GoldberryRiverDaughterFromEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent fromPermanent = game.getPermanent(source.getFirstTarget());
         Permanent toPermanent = game.getPermanent(source.getSourceId());
-
-        // Create a set of all of the unique counter types on the target permanent that aren't on Goldberry
-        Set<Counter> fromCounters = new HashSet<Counter>(fromPermanent.getCounters(game).values());
-        fromCounters.removeAll(toPermanent.getCounters(game).values());
-
-        if (fromPermanent == null
-                || toPermanent == null
-                || controller == null
-                || fromCounters.size() == 0) {
+        if (controller == null
+                || fromPermanent == null
+                || toPermanent == null) {
             return false;
         }
 
-        for (Counter counter : fromCounters) {
-            fromPermanent.removeCounters(counter.getName(), 1, source, game);
-            toPermanent.addCounters(CounterType.findByName(counter.getName()).createInstance(1),
+        // Create a set of all of the unique counter types on the target permanent that aren't on Goldberry
+        Set<String> fromCounters = new HashSet<>(fromPermanent.getCounters(game).keySet());
+        fromCounters.removeAll(toPermanent.getCounters(game).keySet());
+        if (fromCounters.size() == 0) {
+            return false;
+        }
+
+        for (String counter : fromCounters) {
+            fromPermanent.removeCounters(counter, 1, source, game);
+            toPermanent.addCounters(CounterType.findByName(counter).createInstance(1),
                     source.getControllerId(), source, game);
         }
         return true;
@@ -136,21 +137,22 @@ class GoldberryRiverDaughterToEffect extends OneShotEffect {
         }
 
         List<Counter> counters = new ArrayList<>(fromPermanent.getCounters(game).values());
-        counters.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
+        counters.sort(Comparator.comparing(Counter::getName));
 
         List<MultiAmountMessage> messages = counters.stream()
                 .map(c -> new MultiAmountMessage(c.getName() + " (" + c.getCount() + ")", 0, c.getCount()))
                 .collect(Collectors.toList());
-        int max = messages.stream().map(m -> m.max).reduce(0, Integer::sum);
+        int totalMin = 1;
+        int totalMax = messages.stream().mapToInt(m -> m.max).sum();
 
         int total;
         List<Integer> choices;
         do {
-            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, 1,
-                    max, MultiAmountType.COUNTERS, game);
+            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, totalMin,
+                    totalMax, MultiAmountType.COUNTERS, game);
 
-            total = choices.stream().reduce(0, Integer::sum);
-        } while (total < 1);
+            total = choices.stream().mapToInt(x -> x).sum();
+        } while (total < totalMin && controller.canRespond());
 
         // Move the counters. Make sure some counters were actually moved.
         boolean movedCounters = false;

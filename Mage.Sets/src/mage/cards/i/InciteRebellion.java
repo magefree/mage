@@ -45,7 +45,7 @@ class InciteRebellionEffect extends OneShotEffect {
         this.staticText = "For each player, {this} deals damage to that player and each creature that player controls equal to the number of creatures they control";
     }
 
-    public InciteRebellionEffect(final InciteRebellionEffect effect) {
+    private InciteRebellionEffect(final InciteRebellionEffect effect) {
         super(effect);
     }
 

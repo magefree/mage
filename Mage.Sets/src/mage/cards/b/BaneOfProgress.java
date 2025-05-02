@@ -58,7 +58,7 @@ class BaneOfProgressEffect extends OneShotEffect {
         this.staticText = "destroy all artifacts and enchantments. Put a +1/+1 counter on {this} for each permanent destroyed this way";
     }
 
-    public BaneOfProgressEffect(final BaneOfProgressEffect effect) {
+    private BaneOfProgressEffect(final BaneOfProgressEffect effect) {
         super(effect);
     }
 

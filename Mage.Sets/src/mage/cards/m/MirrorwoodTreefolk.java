@@ -31,7 +31,7 @@ public final class MirrorwoodTreefolk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{R}{W}: The next time damage would be dealt to Mirrorwood Treefolk this turn, that damage is dealt to any target instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorwoodTreefolkEffect(), new ManaCostsImpl<>("{2}{R}{W}"));
+        Ability ability = new SimpleActivatedAbility(new MirrorwoodTreefolkEffect(), new ManaCostsImpl<>("{2}{R}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
@@ -55,7 +55,7 @@ class MirrorwoodTreefolkEffect extends RedirectionEffect {
         staticText = "The next time damage would be dealt to {this} this turn, that damage is dealt to any target instead";
     }
 
-    public MirrorwoodTreefolkEffect(final MirrorwoodTreefolkEffect effect) {
+    private MirrorwoodTreefolkEffect(final MirrorwoodTreefolkEffect effect) {
         super(effect);
         this.redirectToObject = effect.redirectToObject;
     }
@@ -85,11 +85,6 @@ class MirrorwoodTreefolkEffect extends RedirectionEffect {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
 }

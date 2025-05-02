@@ -30,7 +30,7 @@ public final class CrookedScales extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {4}, {tap}: Flip a coin. If you win the flip, destroy target creature an opponent controls. If you lose the flip, destroy target creature you control unless you pay {3} and repeat this process.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrookedScalesEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new CrookedScalesEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
@@ -54,7 +54,7 @@ class CrookedScalesEffect extends OneShotEffect {
         this.staticText = "Flip a coin. If you win the flip, destroy target creature an opponent controls. If you lose the flip, destroy target creature you control unless you pay {3} and repeat this process";
     }
 
-    CrookedScalesEffect(final CrookedScalesEffect effect) {
+    private CrookedScalesEffect(final CrookedScalesEffect effect) {
         super(effect);
     }
 

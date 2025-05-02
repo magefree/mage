@@ -24,7 +24,7 @@ public final class BaruFistOfKrosaToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    protected BaruFistOfKrosaToken(final BaruFistOfKrosaToken token) {
+    private BaruFistOfKrosaToken(final BaruFistOfKrosaToken token) {
         super(token);
     }
 
@@ -32,4 +32,3 @@ public final class BaruFistOfKrosaToken extends TokenImpl {
         return new BaruFistOfKrosaToken(this);
     }
 }
-

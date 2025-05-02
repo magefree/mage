@@ -75,12 +75,12 @@ class AutumnTailKitsuneSage extends TokenImpl {
         toughness = new MageInt(5);
 
         // {1}: Attach target Aura attached to a creature to another creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AutumnTailEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new AutumnTailEffect(), new GenericManaCost(1));
         ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public AutumnTailKitsuneSage(final AutumnTailKitsuneSage token) {
+    private AutumnTailKitsuneSage(final AutumnTailKitsuneSage token) {
         super(token);
     }
 
@@ -91,12 +91,12 @@ class AutumnTailKitsuneSage extends TokenImpl {
 
 class AutumnTailEffect extends OneShotEffect {
 
-    public AutumnTailEffect() {
+    AutumnTailEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Attach target Aura attached to a creature to another creature";
     }
 
-    public AutumnTailEffect(final AutumnTailEffect effect) {
+    private AutumnTailEffect(final AutumnTailEffect effect) {
         super(effect);
     }
 

@@ -4,11 +4,16 @@ import mage.constants.Rarity;
 
 import java.util.List;
 
+/**
+ * MTGJSON v5: card class
+ * <p>
+ * Contains card related data nd only used fields, if you need more for tests then just add it here
+ * <p>
+ * API docs <a href="https://mtgjson.com/data-models/card/card-set/">here</a>
+ *
+ * @author JayDi85
+ */
 public final class MtgJsonCard {
-    // v5 support
-    // https://mtgjson.com/data-models/card-atomic/
-    // contains only used fields, if you need more for tests then just add it here
-
     public String name;
     public String asciiName; // mtgjson uses it for some cards like El-Hajjaj
     public String number; // from sets source only, see https://mtgjson.com/data-models/card-set/
@@ -25,7 +30,7 @@ public final class MtgJsonCard {
     public List<String> types;
     public List<String> subtypes;
 
-    public String text; // rules splits by \n
+    public String text; // rules splits by \n, can be null on empty abilities list
 
     public String loyalty;
     public String defense;
@@ -35,6 +40,7 @@ public final class MtgJsonCard {
     public Integer edhrecRank;
     public String layout;
     public boolean isFullArt;
+    public String frameVersion;
     public List<String> printings; // set codes with that card
 
     @Override
@@ -44,7 +50,6 @@ public final class MtgJsonCard {
     }
 
     /**
-     *
      * @return single side name like Ice from Fire // Ice
      */
     public String getNameAsFace() {
@@ -53,7 +58,6 @@ public final class MtgJsonCard {
     }
 
     /**
-     *
      * @return full card name like Fire // Ice
      */
     public String getNameAsFull() {

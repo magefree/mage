@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -12,8 +13,8 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerBatchEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
@@ -56,7 +57,7 @@ public final class MalcolmKeenEyedNavigator extends CardImpl {
     }
 }
 
-class MalcolmKeenEyedNavigatorTriggeredAbility extends TriggeredAbilityImpl {
+class MalcolmKeenEyedNavigatorTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     MalcolmKeenEyedNavigatorTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -68,24 +69,28 @@ class MalcolmKeenEyedNavigatorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
+    }
+
+    @Override
+    public boolean checkEvent(DamagedPlayerEvent event, Game game) {
+        if (!game.getOpponents(getControllerId()).contains(event.getTargetId())) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return permanent != null
+                && permanent.isControlledBy(getControllerId())
+                && permanent.hasSubtype(SubType.PIRATE, game);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerBatchEvent dEvent = (DamagedPlayerBatchEvent) event;
         Set<UUID> opponents = new HashSet<>();
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
-            Permanent permanent = game.getPermanent(damagedEvent.getSourceId());
-            if (permanent == null
-                    || !permanent.isControlledBy(getControllerId())
-                    || !permanent.hasSubtype(SubType.PIRATE, game)
-                    || !game.getOpponents(getControllerId()).contains(damagedEvent.getTargetId())) {
-                continue;
-            }
-            opponents.add(damagedEvent.getTargetId());
-        }
-        if (opponents.size() < 1) {
+        getFilteredEvents((DamagedBatchForPlayersEvent) event, game)
+                .stream()
+                .map(GameEvent::getTargetId)
+                .forEach(opponents::add);
+        if (opponents.isEmpty()) {
             return false;
         }
         this.getEffects().clear();

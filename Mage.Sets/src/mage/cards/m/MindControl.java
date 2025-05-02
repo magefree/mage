@@ -35,7 +35,7 @@ public final class MindControl extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
     }
 
@@ -48,4 +48,3 @@ public final class MindControl extends CardImpl {
         return new MindControl(this);
     }
 }
-

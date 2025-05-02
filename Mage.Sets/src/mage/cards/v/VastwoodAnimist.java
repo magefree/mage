@@ -35,7 +35,7 @@ public final class VastwoodAnimist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VastwoodAnimistEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new VastwoodAnimistEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
     }
@@ -63,7 +63,7 @@ class VastwoodAnimistEffect extends OneShotEffect {
         this.staticText = "Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.";
     }
 
-    public VastwoodAnimistEffect(final VastwoodAnimistEffect effect) {
+    private VastwoodAnimistEffect(final VastwoodAnimistEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class VastwoodAnimistEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int amount = new PermanentsOnBattlefieldCount(filterAllies).calculate(game, source, this);
         ContinuousEffect effect = new BecomesCreatureTargetEffect(new VastwoodAnimistElementalToken(amount), false, true, Duration.EndOfTurn);
-        effect.setTargetPointer(targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         game.addEffect(effect, source);
         return false;
     }
@@ -91,7 +91,7 @@ class VastwoodAnimistElementalToken extends TokenImpl {
         power = new MageInt(amount);
         toughness = new MageInt(amount);
     }
-    public VastwoodAnimistElementalToken(final VastwoodAnimistElementalToken token) {
+    private VastwoodAnimistElementalToken(final VastwoodAnimistElementalToken token) {
         super(token);
     }
 

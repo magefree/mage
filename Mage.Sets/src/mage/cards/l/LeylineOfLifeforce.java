@@ -30,7 +30,7 @@ public final class LeylineOfLifeforce extends CardImpl {
         this.addAbility(LeylineAbility.getInstance());
         
         // Creature spells can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfLifeforceEffect()));
+        this.addAbility(new SimpleStaticAbility(new LeylineOfLifeforceEffect()));
     }
 
     private LeylineOfLifeforce(final LeylineOfLifeforce card) {
@@ -50,7 +50,7 @@ class LeylineOfLifeforceEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Creature spells can't be countered";
     }
 
-    LeylineOfLifeforceEffect(final LeylineOfLifeforceEffect effect) {
+    private LeylineOfLifeforceEffect(final LeylineOfLifeforceEffect effect) {
         super(effect);
     }
 
@@ -59,11 +59,6 @@ class LeylineOfLifeforceEffect extends ContinuousRuleModifyingEffectImpl {
         return new LeylineOfLifeforceEffect(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.COUNTER;

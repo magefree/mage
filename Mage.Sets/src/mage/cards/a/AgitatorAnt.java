@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.cards.CardImpl;
@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -38,7 +37,7 @@ public final class AgitatorAnt extends CardImpl {
 
         // At the beginning of your end step, each player may put two +1/+1 counters on a creature they control. Goad each creature that had counters put on it this way.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AgitatorAntEffect(), TargetController.YOU, false
+                new AgitatorAntEffect()
         ));
     }
 
@@ -85,7 +84,7 @@ class AgitatorAntEffect extends OneShotEffect {
                 continue;
             }
             TargetPermanent targetPermanent = new TargetControlledCreaturePermanent(0, 1);
-            targetPermanent.setNotTarget(true);
+            targetPermanent.withNotTarget(true);
             player.choose(Outcome.BoostCreature, targetPermanent, source, game);
             Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());
             if (permanent == null || !permanent.addCounters(CounterType.P1P1.createInstance(2), player.getId(), source, game)) {

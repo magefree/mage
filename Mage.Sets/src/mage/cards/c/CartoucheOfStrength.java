@@ -47,7 +47,7 @@ public final class CartoucheOfStrength extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 and has trample.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has trample");
         ability.addEffect(effect);
@@ -70,13 +70,13 @@ public final class CartoucheOfStrength extends CardImpl {
  */
 class FightEnchantedTargetEffect extends OneShotEffect {
 
-    public FightEnchantedTargetEffect() {
+    FightEnchantedTargetEffect() {
         super(Outcome.Damage);
         this.staticText = "you may have enchanted creature fight target creature an opponent controls. " +
                 "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
-    public FightEnchantedTargetEffect(final FightEnchantedTargetEffect effect) {
+    private FightEnchantedTargetEffect(final FightEnchantedTargetEffect effect) {
         super(effect);
     }
 

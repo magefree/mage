@@ -26,7 +26,7 @@ public final class Squeeze extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Sorcery spells cost {3} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostIncreasingAllEffect(3, filter, TargetController.ANY))
         );
     }

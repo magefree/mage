@@ -60,7 +60,7 @@ public final class ValkiGodOfLies extends ModalDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new ValkiGodOfLiesRevealExileEffect()));
 
         // X: Choose a creature card exiled with Valki with converted mana cost X. Valki becomes a copy of that card.
-        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ValkiGodOfLiesCopyExiledEffect(), new ManaCostsImpl<>("{X}")));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(new ValkiGodOfLiesCopyExiledEffect(), new ManaCostsImpl<>("{X}")));
 
         // 2.
         // Tibalt, Cosmic Impostor
@@ -122,7 +122,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
                 opponent.revealCards(source, opponent.getHand(), game);
                 TargetCard targetToExile = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
                 targetToExile.withChooseHint("card to exile");
-                targetToExile.setNotTarget(true);
+                targetToExile.withNotTarget(true);
                 if (opponent.getHand().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0 &&
                         controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, source, game)) {
                     Card targetedCardToExile = game.getCard(targetToExile.getFirstTarget());
@@ -145,12 +145,12 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
 
 class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
 
-    public ValkiGodOfLiesCopyExiledEffect() {
+    ValkiGodOfLiesCopyExiledEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose a creature card exiled with Valki with mana value X. Valki becomes a copy of that card.";
     }
 
-    public ValkiGodOfLiesCopyExiledEffect(final ValkiGodOfLiesCopyExiledEffect effect) {
+    private ValkiGodOfLiesCopyExiledEffect(final ValkiGodOfLiesCopyExiledEffect effect) {
         super(effect);
     }
 
@@ -167,7 +167,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
                 && Valki != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             FilterCard filter = new FilterCard();
-            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, CardUtil.getSourceCostsTag(game, source, "X", 0)));
             TargetCardInExile target = new TargetCardInExile(filter, exileId);
             Cards cards = game.getExile().getExileZone(exileId);
             if (cards != null
@@ -193,7 +193,7 @@ class ExileTopCardEachPlayersLibrary extends OneShotEffect {
         this.staticText = "Exile the top card of each player's library";
     }
 
-    public ExileTopCardEachPlayersLibrary(final ExileTopCardEachPlayersLibrary effect) {
+    private ExileTopCardEachPlayersLibrary(final ExileTopCardEachPlayersLibrary effect) {
         super(effect);
     }
 
@@ -229,12 +229,12 @@ class ExileTopCardEachPlayersLibrary extends OneShotEffect {
 
 class ExileTargetArtifactOrCreatureEffect extends OneShotEffect {
 
-    public ExileTargetArtifactOrCreatureEffect() {
+    ExileTargetArtifactOrCreatureEffect() {
         super(Outcome.Detriment);
         this.staticText = "Exile target artifact or creature";
     }
 
-    public ExileTargetArtifactOrCreatureEffect(final ExileTargetArtifactOrCreatureEffect effect) {
+    private ExileTargetArtifactOrCreatureEffect(final ExileTargetArtifactOrCreatureEffect effect) {
         super(effect);
     }
 
@@ -267,7 +267,7 @@ class ExileAllCardsFromAllGraveyards extends OneShotEffect {
         this.staticText = "Exile all graveyards. Add {R}{R}{R}";
     }
 
-    public ExileAllCardsFromAllGraveyards(final ExileAllCardsFromAllGraveyards effect) {
+    private ExileAllCardsFromAllGraveyards(final ExileAllCardsFromAllGraveyards effect) {
         super(effect);
     }
 

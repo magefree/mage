@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.RedElementalToken;
 
 import java.util.UUID;
@@ -23,7 +23,7 @@ import java.util.UUID;
 public final class ScamperingScorcher extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent(SubType.ELEMENTAL, "Elementals");
+            = new FilterControlledPermanent(SubType.ELEMENTAL, "Elementals");
 
     public ScamperingScorcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

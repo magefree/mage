@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -44,7 +44,7 @@ public final class ArcheryTraining extends CardImpl {
         // At the beginning of your upkeep, you may put an arrow counter on Archery Training.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(
                 CounterType.ARROW.createInstance(), true
-        ), TargetController.YOU, true));
+        ), true));
 
         // Enchanted creature has "{tap}: This creature deals X damage to target attacking or blocking creature, where X is the number of arrow counters on Archery Training."
         this.addAbility(new SimpleStaticAbility(new ArcheryTrainingEffect()));

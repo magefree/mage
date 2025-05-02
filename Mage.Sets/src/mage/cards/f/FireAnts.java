@@ -23,7 +23,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class FireAnts extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature without flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature without flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
@@ -37,7 +37,7 @@ public final class FireAnts extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Fire Ants deals 1 damage to each other creature without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DamageAllEffect(1, filter), new TapSourceCost()));
     }
 
     private FireAnts(final FireAnts card) {

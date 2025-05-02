@@ -1,17 +1,19 @@
 package org.mage.plugins.card.dl.sources;
 
+import mage.client.remote.XmageURLConnection;
+import org.jsoup.Jsoup;
+import org.mage.plugins.card.dl.DownloadJob;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.mage.plugins.card.dl.DownloadJob;
-import org.mage.plugins.card.utils.CardImageUtils;
-
 
 import static org.mage.card.arcane.ManaSymbols.getSymbolFileNameAsSVG;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
@@ -44,8 +46,9 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             "W/U", "U/B", "B/R", "R/G", "G/W", "W/B", "U/R", "B/G", "R/W", "G/U",
             "W/U/P", "U/B/P", "B/R/P", "R/G/P", "G/W/P", "W/B/P", "U/R/P", "B/G/P", "R/W/P", "G/U/P",
             "2/W", "2/U", "2/B", "2/R", "2/G",
+            "C/W", "C/U", "C/B", "C/R", "C/G",
             "WP", "UP", "BP", "RP", "GP",
-            "X", "S", "T", "Q", "C", "E", "P"};
+            "X", "S", "T", "Q", "C", "E", "H", "P"};
 
     @Override
     public Iterator<DownloadJob> iterator() {
@@ -63,7 +66,8 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
         try {
             sourceData = new String(Files.readAllBytes(Paths.get(sourcePath)));
         } catch (IOException e) {
-            LOGGER.error("Can't open file to parse data: " + sourcePath + " , reason: " + e.getMessage());
+            LOGGER.error("Can't open file to parse svg data: " + sourcePath + ", reason: " + e);
+            return;
         }
 
         // gen symbols list
@@ -105,7 +109,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             if (destFile.exists() && (destFile.length() > 0)) {
                 continue;
             }
-            try(FileOutputStream stream  = new FileOutputStream(destFile)) {
+            try (FileOutputStream stream = new FileOutputStream(destFile)) {
                 // base64 transform
                 String data64 = foundedData.get(searchCode);
                 Base64.Decoder dec = Base64.getDecoder();
@@ -127,10 +131,11 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
 
         // listener for data parse after download complete
         private class ScryfallDownloadOnFinishedListener implements PropertyChangeListener {
+
             private String downloadedFile;
 
-            public ScryfallDownloadOnFinishedListener(String ADestFile) {
-                this.downloadedFile = ADestFile;
+            public ScryfallDownloadOnFinishedListener(String downloadedFile) {
+                this.downloadedFile = downloadedFile;
             }
 
             @Override
@@ -150,10 +155,15 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
         }
 
         @Override
-        public void onPreparing() throws Exception {
+        public void onPreparing() {
+            // parse help page and find real URL with svg icons on it
             this.cssUrl = "";
 
-            org.jsoup.nodes.Document doc = CardImageUtils.downloadHtmlDocument(CSS_SOURCE_URL);
+            // download
+            String sourceData = XmageURLConnection.downloadText(CSS_SOURCE_URL);
+            org.jsoup.nodes.Document doc = Jsoup.parse(sourceData);
+
+            // process
             org.jsoup.select.Elements cssList = doc.select(CSS_SOURCE_SELECTOR);
             if (cssList.size() == 1) {
                 this.cssUrl = cssList.first().attr("href");
@@ -162,20 +172,18 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             if (this.cssUrl.isEmpty()) {
                 throw new IllegalStateException("Can't find stylesheet url from scryfall colors page.");
             } else {
-                this.setSource(fromURL(this.cssUrl));
+                this.setUrl(this.cssUrl);
             }
         }
 
-        private String destFile = "";
-
         public ScryfallSymbolsDownloadJob() {
-            // download init
-            super("Scryfall symbols source", fromURL(""), toFile(DOWNLOAD_TEMP_FILE)); // url setup on preparing stage
-            this.destFile = DOWNLOAD_TEMP_FILE;
-            this.addPropertyChangeListener(STATE_PROP_NAME, new ScryfallDownloadOnFinishedListener(this.destFile));
+            // download init (real url will be added on prepare)
+            super("Scryfall symbols source", "", toFile(DOWNLOAD_TEMP_FILE), true); // url setup on preparing stage
+            String destFile = DOWNLOAD_TEMP_FILE;
+            this.addPropertyChangeListener(STATE_PROP_NAME, new ScryfallDownloadOnFinishedListener(destFile));
 
-            // clear dest file (always download new data)
-            File file = new File(this.destFile);
+            // duplicate a forceToDownload param above, but it's ok to clear temp file anyway
+            File file = new File(destFile);
             if (file.exists()) {
                 file.delete();
             }

@@ -20,7 +20,7 @@ public final class FrogToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected FrogToken(final FrogToken token) {
+    private FrogToken(final FrogToken token) {
         super(token);
     }
 

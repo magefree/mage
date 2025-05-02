@@ -42,7 +42,7 @@ public final class TunnelVision extends CardImpl {
 
 class TunnelVisionEffect extends OneShotEffect {
 
-    public TunnelVisionEffect() {
+    TunnelVisionEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target player reveals cards from the top of their library "
                 + "until a card with that name is revealed. If it is, that player puts "
@@ -51,7 +51,7 @@ class TunnelVisionEffect extends OneShotEffect {
                 + "Otherwise, the player shuffles";
     }
 
-    public TunnelVisionEffect(final TunnelVisionEffect effect) {
+    private TunnelVisionEffect(final TunnelVisionEffect effect) {
         super(effect);
     }
 

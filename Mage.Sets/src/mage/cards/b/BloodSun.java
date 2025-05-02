@@ -1,9 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,20 +8,17 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BloodSun extends CardImpl {
@@ -36,7 +30,7 @@ public final class BloodSun extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
         // All lands lose all abilities except mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodSunEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BloodSunEffect(Duration.WhileOnBattlefield)));
     }
 
     private BloodSun(final BloodSun card) {
@@ -51,7 +45,7 @@ public final class BloodSun extends CardImpl {
 
 class BloodSunEffect extends ContinuousEffectImpl {
 
-    public BloodSunEffect(Duration duration) {
+    BloodSunEffect(Duration duration) {
         super(duration, Outcome.LoseAbility);
         staticText = "all lands lose all abilities except mana abilities";
     }
@@ -69,13 +63,13 @@ class BloodSunEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, player.getId(), source, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LANDS, player.getId(), source, game)) {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
                         List<Ability> toRemove = new ArrayList<>();
-                        permanent.getAbilities().forEach(a -> {
-                            if (a.getAbilityType() != AbilityType.MANA) {
-                                toRemove.add(a);
+                        permanent.getAbilities().forEach(ability -> {
+                            if (!ability.getAbilityType().isManaAbility()) {
+                                toRemove.add(ability);
                             }
                         });
                         permanent.removeAbilities(toRemove, source.getSourceId(), game);

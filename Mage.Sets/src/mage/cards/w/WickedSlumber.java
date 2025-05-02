@@ -96,11 +96,13 @@ class WickedSlumberEffect extends OneShotEffect {
         ));
         for (int i = 0; i < 2; i++) {
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
-            target.withChooseHint("to add a stun counter to");
+            target.withNotTarget(true);
+            target.withChooseHint("to add the " + (i == 0 ? "first" : "second") + " stun counter to");
             player.choose(outcome, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            permanent.addCounters(CounterType.STUN.createInstance(), source, game);
+            if (permanent != null) {
+                permanent.addCounters(CounterType.STUN.createInstance(), source, game);
+            }
         }
         return true;
     }

@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -29,7 +30,7 @@ public final class CircleOfDreamsDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Add {G} for each creature you control.
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), xValue));
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), xValue).addHint(new ValueHint("Creatures you control", xValue)));
     }
 
     private CircleOfDreamsDruid(final CircleOfDreamsDruid card) {

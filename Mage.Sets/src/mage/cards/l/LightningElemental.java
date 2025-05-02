@@ -25,7 +25,7 @@ public final class LightningElemental extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public LightningElemental (final LightningElemental card) {
+    private LightningElemental(final LightningElemental card) {
         super(card);
     }
 

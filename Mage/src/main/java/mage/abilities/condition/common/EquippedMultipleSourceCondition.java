@@ -20,11 +20,11 @@ public enum EquippedMultipleSourceCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         int countEquipped = 0;
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
-                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                Permanent attached = game.getPermanent(uuid);
                 if (attached != null && attached.hasSubtype(SubType.EQUIPMENT, game)) {
                     countEquipped++;
                     if (countEquipped >= 2) {

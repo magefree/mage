@@ -40,7 +40,6 @@ public final class TahngarthsRage extends CardImpl {
 
         // Enchanted creature gets +3/+0 as long as it's attacking. Otherwise, it gets -2/-1.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield),
                         new BoostEnchantedEffect(-2, -1, Duration.WhileOnBattlefield),

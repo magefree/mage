@@ -45,12 +45,12 @@ public final class HourOfNeed extends CardImpl {
 
 class HourOfNeedExileEffect extends OneShotEffect {
 
-    public HourOfNeedExileEffect() {
+    HourOfNeedExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile any number of target creatures. For each creature exiled this way, its controller creates a 4/4 blue Sphinx creature token with flying";
     }
 
-    public HourOfNeedExileEffect(final HourOfNeedExileEffect effect) {
+    private HourOfNeedExileEffect(final HourOfNeedExileEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class HourOfNeedExileEffect extends OneShotEffect {
         if (tokenCounts.values().stream().noneMatch(i -> (i > 0))) {
             return false;
         }
-        game.getState().processAction(game);
+        game.processAction();
         Token token = new HourOfNeedSphinxToken();
         for (Map.Entry<UUID, Integer> playerTokenCount : tokenCounts.entrySet()) {
             token.putOntoBattlefield(playerTokenCount.getValue(), game, source, playerTokenCount.getKey());

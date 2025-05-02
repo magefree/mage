@@ -11,7 +11,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -42,13 +42,13 @@ public final class RadhaHeartOfKeld extends CardImpl {
         // As long as it's your turn, Radha, Heart of Keld has first strike.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "As long as it's your turn, {this} has first strike."
+                MyTurnCondition.instance, "During your turn, {this} has first strike."
         )).addHint(MyTurnHint.instance));
 
         // You may look at the top card of your library any time, and you may play lands from the top of your library.
         LookAtTopCardOfLibraryAnyTimeEffect lookEffect = new LookAtTopCardOfLibraryAnyTimeEffect();
         lookEffect.setText("You may look at the top card of your library any time");
-        PlayTheTopCardEffect playEffect = new PlayTheTopCardEffect(TargetController.YOU, filter, false);
+        PlayFromTopOfLibraryEffect playEffect = new PlayFromTopOfLibraryEffect(filter);
         playEffect.setText(", and you may play lands from the top of your library");
 
         SimpleStaticAbility lookAndPlayAbility = new SimpleStaticAbility(lookEffect);
@@ -57,7 +57,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
 
         // 4RG: Radha gets +X/+X until end of turn, where X is the number of lands you control.
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
-        BoostSourceEffect bse = new BoostSourceEffect(controlledLands, controlledLands, Duration.EndOfTurn, true);
+        BoostSourceEffect bse = new BoostSourceEffect(controlledLands, controlledLands, Duration.EndOfTurn);
         bse.setText("Radha gets +X/+X until end of turn, where X is the number of lands you control");
         this.addAbility(new SimpleActivatedAbility(bse, new ManaCostsImpl<>("{4}{R}{G}")));
     }

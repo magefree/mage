@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -17,11 +17,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -44,9 +42,8 @@ public final class HollowbornBarghest extends CardImpl {
         // At the beginning of your upkeep, if you have no cards in hand, each opponent loses 2 life.
         Condition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(
-                new HollowbornBarghestEffect(),
-                TargetController.YOU,
-                false);
+                new HollowbornBarghestEffect()
+        );
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 condition,
@@ -68,12 +65,12 @@ public final class HollowbornBarghest extends CardImpl {
 
 class HollowbornBarghestEffect extends OneShotEffect {
 
-    public HollowbornBarghestEffect() {
+    HollowbornBarghestEffect() {
         super(Outcome.Benefit);
         staticText = "Each opponent loses 2 life";
     }
 
-    public HollowbornBarghestEffect(final HollowbornBarghestEffect effect) {
+    private HollowbornBarghestEffect(final HollowbornBarghestEffect effect) {
         super(effect);
     }
 
@@ -101,7 +98,7 @@ class HollowbornBarghestTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
     }
 
-    public HollowbornBarghestTriggeredAbility(final HollowbornBarghestTriggeredAbility ability) {
+    private HollowbornBarghestTriggeredAbility(final HollowbornBarghestTriggeredAbility ability) {
         super(ability);
     }
 

@@ -40,12 +40,12 @@ public final class RighteousFury extends CardImpl {
 
 class RighteousFuryEffect extends OneShotEffect {
 
-    public RighteousFuryEffect() {
+    RighteousFuryEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all tapped creatures. You gain 2 life for each creature destroyed this way";
     }
 
-    public RighteousFuryEffect(final RighteousFuryEffect effect) {
+    private RighteousFuryEffect(final RighteousFuryEffect effect) {
         super(effect);
     }
 
@@ -61,13 +61,13 @@ class RighteousFuryEffect extends OneShotEffect {
             int destroyedCreature = 0;
             FilterCreaturePermanent filter = new FilterCreaturePermanent("all tapped creatures");
             filter.add(TappedPredicate.TAPPED);
-            for(Permanent creature: game.getState().getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
+            for(Permanent creature: game.getBattlefield().getActivePermanents(filter, controller.getId(), game)) {
                 if (creature.destroy(source, game, false)) {
                     destroyedCreature++;
                 }
             }
             if (destroyedCreature > 0) {
-                game.getState().processAction(game);
+                game.processAction();
                 new GainLifeEffect(destroyedCreature * 2).apply(game, source);
             }
             return true;

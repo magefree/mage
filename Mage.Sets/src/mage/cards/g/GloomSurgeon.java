@@ -26,7 +26,7 @@ public final class GloomSurgeon extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If combat damage would be dealt to Gloom Surgeon, prevent that damage and exile that many cards from the top of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GloomSurgeonEffect()));
+        this.addAbility(new SimpleStaticAbility(new GloomSurgeonEffect()));
     }
 
     private GloomSurgeon(final GloomSurgeon card) {
@@ -46,7 +46,7 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
         staticText = "If combat damage would be dealt to {this}, prevent that damage and exile that many cards from the top of your library";
     }
 
-    GloomSurgeonEffect(final GloomSurgeonEffect effect) {
+    private GloomSurgeonEffect(final GloomSurgeonEffect effect) {
         super(effect);
     }
 

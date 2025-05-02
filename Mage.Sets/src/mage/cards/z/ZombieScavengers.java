@@ -25,7 +25,7 @@ public final class ZombieScavengers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Exile the top creature card of your graveyard: Regenerate Zombie Scavengers.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ExileTopCreatureCardOfGraveyardCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ExileTopCreatureCardOfGraveyardCost(1)));
     }
 
     private ZombieScavengers(final ZombieScavengers card) {

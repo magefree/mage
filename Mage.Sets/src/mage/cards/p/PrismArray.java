@@ -30,17 +30,17 @@ public final class PrismArray extends CardImpl {
         // <i>Converge</i> &mdash; Prism Array enters the battlefield with a crystal counter on it for each color of mana spent to cast it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.CRYSTAL.createInstance(), ColorsOfManaSpentToCastCount.getInstance(), true),
-                null, "<i>Converge</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.", null));
+                null, "<i>Converge</i> &mdash; {this} enters with a +1/+1 counter on it for each color of mana spent to cast it.", null));
 
         // Remove a crystal counter from Prism Array: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new TapTargetEffect(),
                 new RemoveCountersSourceCost(CounterType.CRYSTAL.createInstance(1)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {W}{U}{B}{R}{G}: Scry 3.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(3), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new ScryEffect(3), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
     }
 
     private PrismArray(final PrismArray card) {

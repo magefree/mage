@@ -1,11 +1,8 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.effects.common.combat.BlocksIfAbleAllEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.BlocksThisTurnMarkerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +29,6 @@ public final class PredatoryRampage extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
         // Each creature your opponents control blocks this turn if able.
         this.getSpellAbility().addEffect(new BlocksIfAbleAllEffect(filter, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(BlocksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, filter, ""));
     }
 
     private PredatoryRampage(final PredatoryRampage card) {

@@ -43,7 +43,7 @@ public final class SpitefulMotives extends CardImpl {
         // Enchanted creature gets +3/+0 and has first strike.
         Effect effect = new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +3/+0");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has first strike");
         ability.addEffect(effect);

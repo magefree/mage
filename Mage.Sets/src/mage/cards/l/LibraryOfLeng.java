@@ -28,10 +28,10 @@ public final class LibraryOfLeng extends CardImpl {
 
         // You have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);
-        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        addAbility(new SimpleStaticAbility(effect));
 
         // If an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.
-        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LibraryOfLengEffect()));
+        addAbility(new SimpleStaticAbility(new LibraryOfLengEffect()));
 
     }
 
@@ -55,7 +55,7 @@ class LibraryOfLengEffect extends ReplacementEffectImpl {
         staticText = "If an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard";
     }
 
-    public LibraryOfLengEffect(final LibraryOfLengEffect effect) {
+    private LibraryOfLengEffect(final LibraryOfLengEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
         this.zoneChangeCounter = effect.zoneChangeCounter;

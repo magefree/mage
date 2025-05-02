@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -16,12 +15,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritToken;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -29,11 +28,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class SekkiSeasonsGuide extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Spirits");
-
-    static {
-        filter.add(SubType.SPIRIT.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SPIRIT, "Spirits");
 
     public SekkiSeasonsGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}{G}");
@@ -47,13 +42,13 @@ public final class SekkiSeasonsGuide extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(8)), "with eight +1/+1 counters on it"));
 
         // If damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and create that many 1/1 colorless Spirit creature tokens.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SekkiSeasonsGuideEffect()));
+        this.addAbility(new SimpleStaticAbility(new SekkiSeasonsGuideEffect()));
 
         // Sacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
-                new SacrificeTargetCost(new TargetControlledPermanent(8, 8, filter, true))));
+                new SacrificeTargetCost(new TargetSacrifice(8, filter))));
     }
 
     private SekkiSeasonsGuide(final SekkiSeasonsGuide card) {
@@ -68,23 +63,18 @@ public final class SekkiSeasonsGuide extends CardImpl {
 
 class SekkiSeasonsGuideEffect extends PreventionEffectImpl {
 
-    public SekkiSeasonsGuideEffect() {
+    SekkiSeasonsGuideEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
         staticText = "If damage would be dealt to {this}, prevent that damage, remove that many +1/+1 counters from {this}, and create that many 1/1 colorless Spirit creature tokens";
     }
 
-    public SekkiSeasonsGuideEffect(final SekkiSeasonsGuideEffect effect) {
+    private SekkiSeasonsGuideEffect(final SekkiSeasonsGuideEffect effect) {
         super(effect);
     }
 
     @Override
     public SekkiSeasonsGuideEffect copy() {
         return new SekkiSeasonsGuideEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

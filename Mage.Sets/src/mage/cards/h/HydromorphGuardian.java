@@ -25,7 +25,7 @@ import mage.target.TargetSpell;
  */
 public final class HydromorphGuardian extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("spell that targets one or more creatures you control");
+    private static final FilterSpell filter = new FilterSpell("spell that targets a creature you control");
 
     static {
         filter.add(new TargetsPermanentPredicate(new FilterControlledCreaturePermanent()));
@@ -38,7 +38,7 @@ public final class HydromorphGuardian extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, Sacrifice Hydromorph Guardian: Counter target spell that targets one or more creatures you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

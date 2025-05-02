@@ -15,6 +15,7 @@ public class DiesSourceTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public DiesSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, Zone.GRAVEYARD, effect, "When {this} dies, ", optional);
+        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
     }
 
     public DiesSourceTriggeredAbility(Effect effect) {
@@ -41,7 +42,7 @@ public class DiesSourceTriggeredAbility extends ZoneChangeTriggeredAbility {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

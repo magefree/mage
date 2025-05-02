@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,8 +37,8 @@ public final class SagesRowDenizen extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever another blue creature enters the battlefield under your control, target player puts the top two cards of their library into their graveyard.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(2), filter, false, null, true);
+        // Whenever another blue creature you control enters, target player puts the top two cards of their library into their graveyard.
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(2), filter, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

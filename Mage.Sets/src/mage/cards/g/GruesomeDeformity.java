@@ -36,7 +36,7 @@ public final class GruesomeDeformity extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has intimidate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private GruesomeDeformity(final GruesomeDeformity card) {

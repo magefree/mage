@@ -102,14 +102,14 @@ class HofriGhostforgeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (player == null || card == null) {
             return false;
         }
         player.moveCards(card, Zone.EXILED, source, game);
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId());
         effect.setTargetPointer(new FixedTarget(card, game));
-        effect.setAdditionalSubType(SubType.SPIRIT);
+        effect.withAdditionalSubType(SubType.SPIRIT);
         effect.addAdditionalAbilities(new ZoneChangeTriggeredAbility(
                 Zone.ALL, Zone.BATTLEFIELD, null, new HofriGhostforgeReturnEffect(card, game),
                 "When this creature leaves the battlefield, ", false

@@ -1,9 +1,8 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeEffect;
@@ -13,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -38,23 +36,23 @@ public final class NaturesWrath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
 
         // At the beginning of your upkeep, sacrifice Nature's Wrath unless you pay {G}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}"))));
 
         // Whenever a player puts an Island or blue permanent onto the battlefield, they sacrifice an Island or blue permanent.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new SacrificeEffect(filterBlue, 1, ""),
+                new SacrificeEffect(filterBlue, 1, "that player"),
                 filterBlue,
-                false, SetTargetPointer.PLAYER, 
-                "Whenever a player puts an Island or blue permanent onto the battlefield, they sacrifice an Island or blue permanent."));
+                false, SetTargetPointer.PLAYER
+        ).setTriggerPhrase("Whenever a player puts an Island or blue permanent onto the battlefield, "));
 
         // Whenever a player puts a Swamp or black permanent onto the battlefield, they sacrifice a Swamp or black permanent.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new SacrificeEffect(filterBlack, 1, ""),
+                new SacrificeEffect(filterBlack, 1, "that player"),
                 filterBlack,
-                false, SetTargetPointer.PLAYER, 
-                "Whenever a player puts a Swamp or black permanent onto the battlefield, they sacrifice a Swamp or black permanent."));
+                false, SetTargetPointer.PLAYER
+        ).setTriggerPhrase("Whenever a player puts a Swamp or black permanent onto the battlefield, "));
     }
 
     private NaturesWrath(final NaturesWrath card) {

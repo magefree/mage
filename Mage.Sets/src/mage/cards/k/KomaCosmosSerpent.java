@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -22,7 +22,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KomasCoilToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -50,13 +49,13 @@ public final class KomaCosmosSerpent extends CardImpl {
 
         // At the beginning of each upkeep, create a 3/3 blue Serpent creature token named Koma's Coil.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new KomasCoilToken()), TargetController.EACH_PLAYER, false, false
+                TargetController.ANY, new CreateTokenEffect(new KomasCoilToken()), false
         ));
 
         // Sacrifice another Serpent: Choose one —
         // • Tap target permanent. Its activated abilities can't be activated this turn.
         Ability ability = new SimpleActivatedAbility(
-                new TapTargetEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new TapTargetEffect(), new SacrificeTargetCost(filter)
         );
         ability.addEffect(new KomaCosmosSerpentEffect());
         ability.addTarget(new TargetPermanent());
@@ -78,7 +77,7 @@ public final class KomaCosmosSerpent extends CardImpl {
 
 class KomaCosmosSerpentEffect extends RestrictionEffect {
 
-    public KomaCosmosSerpentEffect() {
+    KomaCosmosSerpentEffect() {
         super(Duration.EndOfTurn);
         staticText = "Its activated abilities can't be activated this turn";
     }

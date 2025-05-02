@@ -59,7 +59,7 @@ public class AddConditionalManaEffect extends ManaEffect {
             }
             return maxAvailableMana;
         }
-        return super.getNetMana(game, source); //To change body of generated methods, choose Tools | Templates.
+        return super.getNetMana(game, source);
     }
 
     @Override

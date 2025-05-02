@@ -5,7 +5,6 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -14,7 +13,7 @@ import mage.target.targetpointer.FixedTarget;
 
 public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean setTargetPointer;
+    private final boolean setTargetPointer;
 
     public TurnedFaceUpSourceTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -30,6 +29,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
         this.setWorksFaceDown(true);
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("When {this} is turned face up, ");
+        this.withRuleTextReplacement(true);
     }
 
     protected TurnedFaceUpSourceTriggeredAbility(final TurnedFaceUpSourceTriggeredAbility ability) {
@@ -44,7 +44,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TURNEDFACEUP;
+        return event.getType() == GameEvent.EventType.TURNED_FACE_UP;
     }
 
     @Override

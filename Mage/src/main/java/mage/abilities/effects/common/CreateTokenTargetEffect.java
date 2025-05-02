@@ -35,7 +35,11 @@ public class CreateTokenTargetEffect extends OneShotEffect {
     }
 
     public CreateTokenTargetEffect(Token token, DynamicValue amount) {
-        this(token, amount, false, false);
+        this(token, amount, false);
+    }
+
+    public CreateTokenTargetEffect(Token token, DynamicValue amount, boolean tapped) {
+        this(token, amount, tapped, false);
     }
 
     public CreateTokenTargetEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {
@@ -63,7 +67,7 @@ public class CreateTokenTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
         if (value > 0) {
-            return token.putOntoBattlefield(value, game, source, targetPointer.getFirst(game, source), tapped, attacking, (UUID) getValue("playerToAttack"));
+            return token.putOntoBattlefield(value, game, source, getTargetPointer().getFirst(game, source), tapped, attacking, (UUID) getValue("playerToAttack"));
         }
         return true;
     }

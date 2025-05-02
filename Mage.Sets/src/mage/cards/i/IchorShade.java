@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -35,8 +35,8 @@ public final class IchorShade extends CardImpl {
 
         // At the beginning of your end step, if an artifact or creature was put into a graveyard from the battlefield this turn, put a +1/+1 counter on Ichor Shade.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, IchorShadeCondition.instance, false
+                TargetController.YOU, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, IchorShadeCondition.instance
         ), new IchorShadeWatcher());
     }
 
@@ -75,14 +75,13 @@ class IchorShadeWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.ZONE_CHANGE) {
             return;
         }
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (!zEvent.isDiesEvent()) {
+            return;
+        }
+        Permanent permanent = zEvent.getTarget();
         if (permanent != null && (permanent.isArtifact(game) || permanent.isCreature(game))) {
             condition = true;
         }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
     }
 }

@@ -12,7 +12,7 @@ public final class ScrapToken extends TokenImpl {
         cardType.add(CardType.ARTIFACT);
     }
 
-    protected ScrapToken(final ScrapToken token) {
+    private ScrapToken(final ScrapToken token) {
         super(token);
     }
 

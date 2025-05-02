@@ -69,12 +69,12 @@ public final class NestingGrounds extends CardImpl {
 
 class NestingGroundsEffect extends OneShotEffect {
 
-    public NestingGroundsEffect() {
+    NestingGroundsEffect() {
         super(Outcome.AIDontUseIt);
         this.staticText = "Move a counter from target permanent you control onto another target permanent";
     }
 
-    public NestingGroundsEffect(final NestingGroundsEffect effect) {
+    private NestingGroundsEffect(final NestingGroundsEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class NestingGroundsEffect extends OneShotEffect {
             return true;
         }
 
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceImpl(false);
         Set<String> possibleChoices = new LinkedHashSet<>(fromPermanent.getCounters(game).keySet());
         choice.setChoices(possibleChoices);
         choice.setMessage("Choose a counter");

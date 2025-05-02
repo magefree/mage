@@ -32,7 +32,7 @@ public final class RabidWombat extends CardImpl {
 
         // Rabid Wombat gets +2/+2 for each Aura attached to it.
         AuraAttachedCount count = new AuraAttachedCount(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
 
     }
 

@@ -107,7 +107,10 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, toReveal));
         controller.revealCards(source, cards, game);
 
-        Player separatingPlayer = this.getExecutingPlayer(controller, game, source, playerWhoSeparates, "separate the revealed cards");
+        Player separatingPlayer = getExecutingPlayer(controller, game, source, playerWhoSeparates, "separate the revealed cards");
+        if (separatingPlayer == null) {
+            return false;
+        }
         TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, filter);
         List<Card> pile1 = new ArrayList<>();
         separatingPlayer.choose(Outcome.Neutral, cards, target, source, game);
@@ -117,10 +120,12 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .forEach(pile1::add);
         cards.removeIf(target.getTargets()::contains);
-        List<Card> pile2 = new ArrayList<>();
-        pile2.addAll(cards.getCards(game));
+        List<Card> pile2 = new ArrayList<>(cards.getCards(game));
 
-        Player choosingPlayer = this.getExecutingPlayer(controller, game, source, playerWhoChooses, "choose the piles");
+        Player choosingPlayer = getExecutingPlayer(controller, game, source, playerWhoChooses, "choose the piles");
+        if (choosingPlayer == null) {
+            return false;
+        }
         boolean choice = choosingPlayer.choosePile(outcome, "Choose a pile to put into hand.", pile1, pile2, game);
 
         Zone pile1Zone = choice ? Zone.HAND : targetZone;

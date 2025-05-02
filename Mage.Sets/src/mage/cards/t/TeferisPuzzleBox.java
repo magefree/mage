@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class TeferisPuzzleBox extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // At the beginning of each player's draw step, that player puts the cards in their hand on the bottom of their library in any order, then draws that many cards.
-        Ability ability = new BeginningOfDrawTriggeredAbility(new TeferisPuzzleBoxEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfDrawTriggeredAbility(TargetController.EACH_PLAYER, new TeferisPuzzleBoxEffect(), false);
         this.addAbility(ability);
     }
 
@@ -40,18 +40,18 @@ public final class TeferisPuzzleBox extends CardImpl {
 
 class TeferisPuzzleBoxEffect extends OneShotEffect {
 
-    public TeferisPuzzleBoxEffect() {
+    TeferisPuzzleBoxEffect() {
         super(Outcome.Neutral);
         staticText = "that player puts the cards in their hand on the bottom of their library in any order, then draws that many cards";
     }
 
-    public TeferisPuzzleBoxEffect(final TeferisPuzzleBoxEffect effect) {
+    private TeferisPuzzleBoxEffect(final TeferisPuzzleBoxEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int count = player.getHand().size();
             player.putCardsOnBottomOfLibrary(player.getHand(), game, source, true);

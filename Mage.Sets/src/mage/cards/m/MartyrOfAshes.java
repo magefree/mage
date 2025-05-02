@@ -50,7 +50,7 @@ public final class MartyrOfAshes extends CardImpl {
         // {2}, Reveal X red cards from your hand, Sacrifice Martyr of Ashes: Martyr of Ashes deals X damage to each creature without flying.
         Effect effect = new DamageAllEffect(RevealTargetFromHandCostCount.instance, filterCreature);
         effect.setText("Martyr of Ashes deals X damage to each creature without flying.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(2));
         ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, Integer.MAX_VALUE, filterHand)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

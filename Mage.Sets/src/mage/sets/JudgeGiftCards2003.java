@@ -20,8 +20,8 @@ public class JudgeGiftCards2003 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Argothian Enchantress", 2, Rarity.RARE, mage.cards.a.ArgothianEnchantress.class));
-        cards.add(new SetCardInfo("Intuition", 1, Rarity.RARE, mage.cards.i.Intuition.class));
-        cards.add(new SetCardInfo("Living Death", 3, Rarity.RARE, mage.cards.l.LivingDeath.class));
+        cards.add(new SetCardInfo("Argothian Enchantress", 2, Rarity.RARE, mage.cards.a.ArgothianEnchantress.class, RETRO_ART));
+        cards.add(new SetCardInfo("Intuition", 1, Rarity.RARE, mage.cards.i.Intuition.class, RETRO_ART));
+        cards.add(new SetCardInfo("Living Death", 3, Rarity.RARE, mage.cards.l.LivingDeath.class, RETRO_ART));
      }
 }

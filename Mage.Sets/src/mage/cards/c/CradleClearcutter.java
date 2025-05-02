@@ -2,8 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -18,8 +17,6 @@ import java.util.UUID;
  */
 public final class CradleClearcutter extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public CradleClearcutter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
 
@@ -32,7 +29,7 @@ public final class CradleClearcutter extends CardImpl {
 
         // {T}: Add an amount of {G} equal to Cradle Clearcutter's power.
         this.addAbility(new DynamicManaAbility(
-                Mana.GreenMana(1), xValue, "Add an amount of {G} equal to {this}'s power."
+                Mana.GreenMana(1), SourcePermanentPowerValue.NOT_NEGATIVE, "Add an amount of {G} equal to {this}'s power."
         ));
     }
 

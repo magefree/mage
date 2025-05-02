@@ -46,7 +46,7 @@ class WhiskAwayEffect extends OneShotEffect {
         staticText = "Put target attacking or blocking creature on top of its owner's library";
     }
 
-    WhiskAwayEffect(final WhiskAwayEffect effect) {
+    private WhiskAwayEffect(final WhiskAwayEffect effect) {
         super(effect);
     }
 

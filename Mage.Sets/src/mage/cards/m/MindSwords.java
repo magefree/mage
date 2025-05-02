@@ -43,7 +43,7 @@ public final class MindSwords extends CardImpl {
 
         // If you control a Swamp, you may sacrifice a creature rather than pay Mind Swords's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 new PermanentsOnTheBattlefieldCondition(filterSwamp), null
         ));
 
@@ -68,7 +68,7 @@ class MindSwordsEffect extends OneShotEffect {
         this.staticText = "Each player exiles two cards from their hand.";
     }
 
-    MindSwordsEffect(final MindSwordsEffect effect) {
+    private MindSwordsEffect(final MindSwordsEffect effect) {
         super(effect);
     }
 

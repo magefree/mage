@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
@@ -25,7 +25,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class ThrashOfRaptors extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Dinosaur");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Dinosaur");
 
     static {
         filter.add(SubType.DINOSAUR.getPredicate());
@@ -40,7 +40,7 @@ public final class ThrashOfRaptors extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as you control another Dinosaur, Thrash of Raptors gets +2/+0 and has trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control another Dinosaur, {this} gets +2/+0"));

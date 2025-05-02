@@ -77,11 +77,9 @@ class RingwraithsEffect extends OneShotEffect {
         return Optional
                 .ofNullable(getTargetPointer().getFirst(game, source))
                 .map(game::getPermanent)
-                .filter(Objects::nonNull)
                 .filter(permanent -> permanent.isLegendary(game))
                 .map(Controllable::getControllerId)
                 .map(game::getPlayer)
-                .filter(Objects::nonNull)
                 .map(player -> player.loseLife(3, game, source, false) > 0)
                 .orElse(false);
     }

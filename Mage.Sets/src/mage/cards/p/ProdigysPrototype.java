@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.PilotToken;
+import mage.game.permanent.token.PilotCrewToken;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public final class ProdigysPrototype extends CardImpl {
 
         // Whenever one or more Vehicles you control attack, create a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater."
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(
-                new CreateTokenEffect(new PilotToken()), 1, filter
+                new CreateTokenEffect(new PilotCrewToken()), 1, filter
         ).setTriggerPhrase("Whenever one or more Vehicles you control attack, "));
 
         // Crew 2

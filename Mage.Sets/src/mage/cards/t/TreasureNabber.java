@@ -89,8 +89,6 @@ class TreasureNabberAbility extends TriggeredAbilityImpl {
 
 class TreasureNabberEffect extends ContinuousEffectImpl {
 
-    protected FixedTargets fixedTargets;
-
     TreasureNabberEffect() {
         super(Duration.UntilEndOfYourNextTurn, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.staticText = "gain control of that artifact until the end of your next turn";
@@ -98,7 +96,6 @@ class TreasureNabberEffect extends ContinuousEffectImpl {
 
     private TreasureNabberEffect(final TreasureNabberEffect effect) {
         super(effect);
-        this.fixedTargets = effect.fixedTargets;
     }
 
     @Override
@@ -115,9 +112,5 @@ class TreasureNabberEffect extends ContinuousEffectImpl {
             return true;
         }
         return false;
-    }
-
-    public void setTargets(List<Permanent> targetedPermanents, Game game) {
-        this.fixedTargets = new FixedTargets(targetedPermanents, game);
     }
 }

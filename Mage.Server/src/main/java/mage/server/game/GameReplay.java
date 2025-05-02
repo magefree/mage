@@ -1,25 +1,23 @@
-
-
 package mage.server.game;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInput;
-import java.util.UUID;
-import java.util.zip.GZIPInputStream;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.GameStates;
 import mage.server.Main;
 import mage.util.CopierObjectInputStream;
-import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
-
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInput;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.UUID;
+import java.util.zip.GZIPInputStream;
 
 /**
+ * Replay system, outdated and not used. TODO: delete
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -59,33 +57,19 @@ public class GameReplay {
     }
 
     private Game loadGame(UUID gameId) {
-        InputStream file = null;
-        InputStream buffer = null;
-        InputStream gzip = null;
-        ObjectInput input = null;
-        try{
-            file = new FileInputStream("saved/" + gameId.toString() + ".game");
-            buffer = new BufferedInputStream(file);
-            gzip = new GZIPInputStream(buffer);
-            input = new CopierObjectInputStream(Main.classLoader, gzip);
+        try (InputStream file = Files.newInputStream(Paths.get("saved/" + gameId.toString() + ".game"));
+             InputStream buffer = new BufferedInputStream(file);
+             InputStream gzip = new GZIPInputStream(buffer);
+             ObjectInput input = new CopierObjectInputStream(Main.classLoader, gzip)) {
             Game loadGame = (Game) input.readObject();
             GameStates states = (GameStates) input.readObject();
             loadGame.loadGameStates(states);
             return loadGame;
-
-        }
-        catch(ClassNotFoundException ex) {
-            logger.fatal("Cannot load game. Class not found.", ex);
-        }
-        catch(IOException ex) {
-            logger.fatal("Cannot load game:" + gameId, ex);
-        } finally {
-            StreamUtils.closeQuietly(file);
-            StreamUtils.closeQuietly(buffer);
-            StreamUtils.closeQuietly(input);
-            StreamUtils.closeQuietly(gzip);
+        } catch (ClassNotFoundException e) {
+            logger.fatal("Cannot load game. Class not found.", e);
+        } catch (IOException e) {
+            logger.fatal("Cannot load game:" + gameId, e);
         }
         return null;
     }
-
 }

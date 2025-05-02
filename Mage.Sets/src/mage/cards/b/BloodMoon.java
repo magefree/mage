@@ -23,7 +23,7 @@ public final class BloodMoon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Nonbasic lands are Mountains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodMoonEffect()));
+        this.addAbility(new SimpleStaticAbility(new BloodMoonEffect()));
     }
 
     private BloodMoon(final BloodMoon card) {
@@ -50,7 +50,7 @@ public final class BloodMoon extends CardImpl {
             this.dependendToTypes.add(DependencyType.BecomeNonbasicLand);
         }
 
-        BloodMoonEffect(final BloodMoonEffect effect) {
+        private BloodMoonEffect(final BloodMoonEffect effect) {
             super(effect);
         }
 

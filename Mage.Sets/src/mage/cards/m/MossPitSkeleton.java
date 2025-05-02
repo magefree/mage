@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -35,10 +36,10 @@ public final class MossPitSkeleton extends CardImpl {
         // Kicker {3}
         this.addAbility(new KickerAbility("{3}"));
 
-        // If Moss-Pit Skeleton was kicked, it enters the battlefield with three +1/+1 counters on it.
+        // If Moss-Pit Skeleton was kicked, it enters with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), KickedCondition.ONCE,
-                "If {this} was kicked, it enters the battlefield with three +1/+1 counters on it.", ""
+                "If {this} was kicked, it enters with three +1/+1 counters on it.", ""
         ));
 
         // Whenever one or more +1/+1 counters are put on a creature you control, if Moss-Pit Skeleton is in your graveyard, you may put Moss-Pit Skeleton on top of your library.
@@ -58,10 +59,12 @@ public final class MossPitSkeleton extends CardImpl {
 class MossPitSkeletonTriggeredAbility extends TriggeredAbilityImpl {
 
     MossPitSkeletonTriggeredAbility() {
-        super(Zone.GRAVEYARD, new PutOnLibrarySourceEffect(true), true);
+        super(Zone.GRAVEYARD, new PutOnLibrarySourceEffect(true).setText("put {this} on top of your library"), true);
+        this.withInterveningIf(SourceInGraveyardCondition.instance);
+        setTriggerPhrase("Whenever one or more +1/+1 counters are put on a creature you control, ");
     }
 
-    MossPitSkeletonTriggeredAbility(final MossPitSkeletonTriggeredAbility ability) {
+    private MossPitSkeletonTriggeredAbility(final MossPitSkeletonTriggeredAbility ability) {
         super(ability);
     }
 
@@ -89,14 +92,4 @@ class MossPitSkeletonTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        return game.getState().getZone(getSourceId()) == Zone.GRAVEYARD;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more +1/+1 counters are put on a creature you control, " +
-                "if {this} is in your graveyard, you may put {this} on top of your library.";
-    }
 }

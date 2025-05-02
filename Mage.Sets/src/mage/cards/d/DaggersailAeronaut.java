@@ -31,7 +31,7 @@ public final class DaggersailAeronaut extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                         FlyingAbility.getInstance(), Duration.WhileOnBattlefield
-                ), MyTurnCondition.instance, "As long as it's your turn, {this} has flying.")
+                ), MyTurnCondition.instance, "During your turn, {this} has flying.")
         ).addHint(MyTurnHint.instance));
     }
 

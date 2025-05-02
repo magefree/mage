@@ -44,7 +44,7 @@ public final class PulsemageAdvocate extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Return three target cards from an opponent's graveyard to their hand. Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PulsemageAdvocateEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PulsemageAdvocateEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(3, 3, filter));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
@@ -67,7 +67,7 @@ class PulsemageAdvocateEffect extends OneShotEffect {
         this.staticText = "Return three target cards from an opponent's graveyard to their hand. Return target creature card from your graveyard to the battlefield";
     }
 
-    PulsemageAdvocateEffect(final PulsemageAdvocateEffect effect) {
+    private PulsemageAdvocateEffect(final PulsemageAdvocateEffect effect) {
         super(effect);
     }
 

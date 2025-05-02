@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,7 +16,9 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,19 +43,19 @@ public final class SynodArtificer extends CardImpl {
         // {X}, {tap}: Tap X target noncreature artifacts.
         Effect tapEffect = new TapTargetEffect();
         tapEffect.setText("Tap X target noncreature artifacts.");
-        Ability tapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, tapEffect, new ManaCostsImpl<>("{X}"));
+        Ability tapAbility = new SimpleActivatedAbility(tapEffect, new ManaCostsImpl<>("{X}"));
         tapAbility.addCost(new TapSourceCost());
-        tapAbility.setTargetAdjuster(XTargetsAdjuster.instance);
         tapAbility.addTarget(new TargetPermanent(filter));
+        tapAbility.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(tapAbility);
 
         // {X}, {tap}: Untap X target noncreature artifacts.
         Effect untapEffect = new UntapTargetEffect();
         untapEffect.setText("Untap X target noncreature artifacts.");
-        Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, untapEffect, new ManaCostsImpl<>("{X}"));
+        Ability untapAbility = new SimpleActivatedAbility(untapEffect, new ManaCostsImpl<>("{X}"));
         untapAbility.addCost(new TapSourceCost());
-        untapAbility.setTargetAdjuster(XTargetsAdjuster.instance);
         untapAbility.addTarget(new TargetPermanent(filter));
+        untapAbility.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(untapAbility);
     }
 

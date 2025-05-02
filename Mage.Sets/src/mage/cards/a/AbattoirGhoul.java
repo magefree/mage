@@ -46,12 +46,12 @@ public final class AbattoirGhoul extends CardImpl {
 
 class AbattoirGhoulEffect extends OneShotEffect {
 
-    public AbattoirGhoulEffect() {
+    AbattoirGhoulEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to that creature's toughness";
     }
 
-    public AbattoirGhoulEffect(final AbattoirGhoulEffect effect) {
+    private AbattoirGhoulEffect(final AbattoirGhoulEffect effect) {
         super(effect);
     }
 

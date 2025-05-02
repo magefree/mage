@@ -39,7 +39,6 @@ public final class RhonassStalwart extends CardImpl {
 
         // You may exert Rhonas's Stalwart as it attacks. When you do, it gets +1/+1 until end of turn and can't be blocked by creatures with power 2 or less this turn.
         Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("it gets +1/+1");
         BecomesExertSourceTriggeredAbility ability = new BecomesExertSourceTriggeredAbility(effect);
         effect = new CantBeBlockedByAllSourceEffect(filter, Duration.EndOfTurn);
         effect.setText("and can't be blocked by creatures with power 2 or less this turn");

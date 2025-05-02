@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -15,13 +15,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -35,9 +33,9 @@ public final class PlagueBoiler extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // At the beginning of your upkeep, put a plague counter on Plague Boiler.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PLAGUE.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.PLAGUE.createInstance())));
         // {1}{B}{G}: Put a plague counter on Plague Boiler or remove a plague counter from it.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlagueBoilerEffect(), new ManaCostsImpl<>("{1}{B}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new PlagueBoilerEffect(), new ManaCostsImpl<>("{1}{B}{G}")));
         // When Plague Boiler has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.
         this.addAbility(new PlagueBoilerTriggeredAbility());
 
@@ -55,12 +53,12 @@ public final class PlagueBoiler extends CardImpl {
 
 class PlagueBoilerEffect extends OneShotEffect {
 
-    public PlagueBoilerEffect() {
+    PlagueBoilerEffect() {
         super(Outcome.Detriment);
         this.staticText = "Put a plague counter on {this} or remove a plague counter from it";
     }
 
-    public PlagueBoilerEffect(final PlagueBoilerEffect effect) {
+    private PlagueBoilerEffect(final PlagueBoilerEffect effect) {
         super(effect);
     }
 
@@ -91,7 +89,7 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} has three or more plague counters on it, ");
     }
 
-    public PlagueBoilerTriggeredAbility(final PlagueBoilerTriggeredAbility ability) {
+    private PlagueBoilerTriggeredAbility(final PlagueBoilerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -119,12 +117,12 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
 
 class PlagueBoilerSacrificeDestroyEffect extends OneShotEffect {
 
-    public PlagueBoilerSacrificeDestroyEffect() {
+    PlagueBoilerSacrificeDestroyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "sacrifice it. If you do, destroy all nonland permanents";
     }
 
-    public PlagueBoilerSacrificeDestroyEffect(final PlagueBoilerSacrificeDestroyEffect effect) {
+    private PlagueBoilerSacrificeDestroyEffect(final PlagueBoilerSacrificeDestroyEffect effect) {
         super(effect);
     }
 

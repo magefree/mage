@@ -38,7 +38,7 @@ public final class RishadanPawnshop extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Shuffle target nontoken permanent you control into its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RishadanPawnshopShuffleIntoLibraryEffect(), new ManaCostsImpl<>("{2}"));
+        Ability ability = new SimpleActivatedAbility(new RishadanPawnshopShuffleIntoLibraryEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -57,12 +57,12 @@ public final class RishadanPawnshop extends CardImpl {
 
 class RishadanPawnshopShuffleIntoLibraryEffect extends OneShotEffect {
 
-    public RishadanPawnshopShuffleIntoLibraryEffect() {
+    RishadanPawnshopShuffleIntoLibraryEffect() {
         super(Outcome.Detriment);
         this.staticText = "The owner of target nontoken permanent you control shuffles it into their library";
     }
 
-    public RishadanPawnshopShuffleIntoLibraryEffect(final RishadanPawnshopShuffleIntoLibraryEffect effect) {
+    private RishadanPawnshopShuffleIntoLibraryEffect(final RishadanPawnshopShuffleIntoLibraryEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class RishadanPawnshopShuffleIntoLibraryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {

@@ -28,7 +28,7 @@ public final class SpectersShroud extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
         // Whenever equipped creature deals combat damage to a player, that player discards a card.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DiscardTargetEffect(1), "equipped creature", false, true, true));
         // Equip {1}

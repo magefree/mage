@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.keyword.IncubateEffect;
@@ -40,7 +40,7 @@ public final class GlissaHeraldOfPredation extends CardImpl {
         // At the beginning of combat on your turn, choose one --
         // * Incubate 2 twice.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new GlissaHeraldOfPredationIncubateEffect(), TargetController.YOU, false
+                new GlissaHeraldOfPredationIncubateEffect()
         );
 
         // * Transform all Incubator tokens you control.

@@ -35,7 +35,7 @@ public final class TasigurTheGoldenFang extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
 
         // {2}{G/U}{G/U}: Put the top two cards of your library into your graveyard, then return a nonland card of an opponent's choice from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(new MillCardsControllerEffect(2), new ManaCostsImpl<>("{2}{G/U}{G/U}"));
@@ -88,7 +88,7 @@ class TasigurTheGoldenFangEffect extends OneShotEffect {
                     FilterNonlandCard filter = new FilterNonlandCard("nonland card from " + controller.getLogName() + " graveyard");
                     filter.add(new OwnerIdPredicate(controller.getId()));
                     Target target = new TargetCardInGraveyard(filter);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     opponent.chooseTarget(outcome, target, source, game);
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

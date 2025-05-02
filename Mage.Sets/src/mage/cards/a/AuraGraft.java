@@ -101,7 +101,7 @@ class AuraGraftMoveAuraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent enchantment = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (enchantment == null || controller == null) {
             return false;
@@ -116,7 +116,7 @@ class AuraGraftMoveAuraEffect extends OneShotEffect {
         filter.add(new AuraGraftAuraCanEnchantPredicate(enchantment)); // extracts Targets from Aura spell ability
         filter.add(new CanBeEnchantedByPredicate(enchantment)); // checks for protection
         Target target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(controller.getId(), source, game)
                 && controller.choose(outcome, target, source, game)) {
             Permanent newAttachment = game.getPermanent(target.getFirstTarget());

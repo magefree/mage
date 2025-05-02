@@ -32,7 +32,7 @@ public final class DarkSphere extends CardImpl {
         
 
         // {tap}, Sacrifice Dark Sphere: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DarkSpherePreventionEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DarkSpherePreventionEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -58,7 +58,7 @@ class DarkSpherePreventionEffect extends ReplacementEffectImpl {
         this.targetSource = new TargetSource(new FilterObject("source of your choice"));
     }
     
-    public DarkSpherePreventionEffect(final DarkSpherePreventionEffect effect) {
+    private DarkSpherePreventionEffect(final DarkSpherePreventionEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
@@ -70,6 +70,7 @@ class DarkSpherePreventionEffect extends ReplacementEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 

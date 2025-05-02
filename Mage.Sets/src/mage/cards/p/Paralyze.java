@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,9 +38,9 @@ public final class Paralyze extends CardImpl {
         // When Paralyze enters the battlefield, tap enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
         // At the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If they do, untap the creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ParalyzeEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new ParalyzeEffect(), false));
     }
 
     private Paralyze(final Paralyze card) {
@@ -55,11 +55,11 @@ public final class Paralyze extends CardImpl {
 
 class ParalyzeEffect extends DoIfCostPaid {
 
-    public ParalyzeEffect() {
+    ParalyzeEffect() {
         super(new UntapAttachedEffect(), new GenericManaCost(4));
     }
 
-    public ParalyzeEffect(final ParalyzeEffect effect) {
+    private ParalyzeEffect(final ParalyzeEffect effect) {
         super(effect);
     }
 
@@ -82,6 +82,6 @@ class ParalyzeEffect extends DoIfCostPaid {
 
     @Override
     public String getText(Mode mode) {
-        return "that player may " + CardUtil.addCostVerb(cost.getText()) + ". If they do, " + executingEffects.getText(mode);
+        return "that player may " + CardUtil.addCostVerb(cost.getText()) + ". If the player does, untap the creature.";
     }
 }

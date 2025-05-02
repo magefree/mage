@@ -67,7 +67,7 @@ public final class KotoseTheSilentSpider extends CardImpl {
 
 class KotoseTheSilentSpiderEffect extends OneShotEffect {
 
-    public KotoseTheSilentSpiderEffect() {
+    KotoseTheSilentSpiderEffect() {
         super(Outcome.Exile);
         this.staticText = "exile target card other than a basic land card from an opponent's graveyard. " +
                 "Search that player's graveyard, hand, and library for any number of cards with the same name " +
@@ -75,7 +75,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
                 "play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it";
     }
 
-    public KotoseTheSilentSpiderEffect(final KotoseTheSilentSpiderEffect effect) {
+    private KotoseTheSilentSpiderEffect(final KotoseTheSilentSpiderEffect effect) {
         super(effect);
     }
 
@@ -129,7 +129,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
         KotoseTheSilentSpiderWatcher.addCards(source, cardSet, game);
         for (Card exiledCard : cardSet) {
             CardUtil.makeCardPlayable(
-                    game, source, exiledCard, Duration.WhileControlled, true,
+                    game, source, exiledCard, false, Duration.WhileControlled, true,
                     null, new KotoseTheSilentSpiderCondition(exiledCard, game)
             );
         }
@@ -170,7 +170,7 @@ class KotoseTheSilentSpiderWatcher extends Watcher {
             morMap.values().removeIf(Set::isEmpty);
             return;
         }
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
         Spell spell = game.getSpell(event.getTargetId());
@@ -178,7 +178,7 @@ class KotoseTheSilentSpiderWatcher extends Watcher {
             return;
         }
         morMap.getOrDefault(
-                event.getAdditionalReference().getApprovingMageObjectReference(), Collections.emptySet()
+                event.getApprovingObject().getApprovingMageObjectReference(), Collections.emptySet()
         ).removeIf(set -> set
                 .stream()
                 .anyMatch(mor -> mor.getSourceId().equals(spell.getMainCard().getId())

@@ -41,10 +41,10 @@ public final class VoidMaw extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // If another creature would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidMawEffect()));
+        this.addAbility(new SimpleStaticAbility(new VoidMawEffect()));
 
         // Put a card exiled with Void Maw into its owner's graveyard: Void Maw gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new VoidMawCost()));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), new VoidMawCost()));
     }
 
     private VoidMaw(final VoidMaw card) {
@@ -59,23 +59,18 @@ public final class VoidMaw extends CardImpl {
 
 class VoidMawEffect extends ReplacementEffectImpl {
 
-    public VoidMawEffect() {
+    VoidMawEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If another creature would die, exile it instead";
     }
 
-    public VoidMawEffect(final VoidMawEffect effect) {
+    private VoidMawEffect(final VoidMawEffect effect) {
         super(effect);
     }
 
     @Override
     public VoidMawEffect copy() {
         return new VoidMawEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -127,7 +122,7 @@ class VoidMawCost extends CostImpl {
         this.text = "Put a card exiled with {this} into its owner's graveyard";
     }
 
-    public VoidMawCost(VoidMawCost cost) {
+    private VoidMawCost(final VoidMawCost cost) {
         super(cost);
     }
 
@@ -136,7 +131,7 @@ class VoidMawCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             TargetCardInExile target = new TargetCardInExile(new FilterCard(), CardUtil.getCardExileZoneId(game, ability));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
             if (cards != null
                     && !cards.isEmpty()

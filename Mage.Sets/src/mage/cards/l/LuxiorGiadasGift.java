@@ -98,6 +98,7 @@ class LuxiorGiadasGiftEffect extends ContinuousEffectImpl {
     LuxiorGiadasGiftEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "equipped permanent isn't a planeswalker and is a creature in addition to its other types";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private LuxiorGiadasGiftEffect(final LuxiorGiadasGiftEffect effect) {

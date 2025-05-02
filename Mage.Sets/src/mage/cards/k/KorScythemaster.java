@@ -29,7 +29,7 @@ public final class KorScythemaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kor Scythemaster has first strike as long as its attacking.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.instance, "{this} has first strike as long as it's attacking")));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.instance, "{this} has first strike as long as it's attacking")));
     }
 
     private KorScythemaster(final KorScythemaster card) {

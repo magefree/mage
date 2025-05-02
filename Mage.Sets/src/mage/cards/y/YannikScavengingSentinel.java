@@ -13,7 +13,6 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -86,7 +85,7 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
@@ -99,12 +98,11 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         if (game.getState().getZone(permanent.getId()) != Zone.BATTLEFIELD) {
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                    new DistributeCountersEffect(
-                            CounterType.P1P1, power, false, ""
-                    ), false, "distribute X +1/+1 counters among any number of target creatures, " +
+                    new DistributeCountersEffect(), false,
+                    "distribute X +1/+1 counters among any number of target creatures, " +
                     "where X is the exiled creature's power"
             );
-            ability.addTarget(new TargetCreaturePermanentAmount(power));
+            ability.addTarget(new TargetCreaturePermanentAmount(power, 0, power));
             game.fireReflexiveTriggeredAbility(ability, source);
         }
         return true;

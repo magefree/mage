@@ -3,12 +3,13 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,20 +50,25 @@ public final class SolKanarTheTainted extends CardImpl {
         // At the beginning of your end step, choose one that hasn't been chosen --
         // * Draw a card.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                new DrawCardSourceControllerEffect(1)
         );
-        ability.getModes().setEachModeOnlyOnce(true);
+        ability.setModeTag("draw");
+        ability.getModes().setLimitUsageByOnce(false);
 
         // * Each opponent loses 2 life and you gain 2 life.
         ability.addMode(new Mode(new LoseLifeOpponentsEffect(2))
-                .addEffect(new GainLifeEffect(2).concatBy("and")));
+                .addEffect(new GainLifeEffect(2).concatBy("and"))
+                .setModeTag("opponents lose life and you gain life"));
 
         // * Sol'Kanar the Tainted deals 3 damage to up to one other target creature or planeswalker.
         ability.addMode(new Mode(new DamageTargetEffect(3))
-                .addTarget(new TargetPermanent(0, 1, filter)));
+                .addTarget(new TargetPermanent(0, 1, filter))
+                .setModeTag("deals damage"));
 
         // * Exile Sol'Kanar, then return it to the battlefield under an opponent's control.
-        ability.addMode(new Mode(new SolKanarTheTaintedEffect()));
+        ability.addMode(new Mode(new SolKanarTheTaintedEffect()).setModeTag("exile then return"));
+
+        ability.addHint(ModesAlreadyUsedHint.instance);
         this.addAbility(ability);
     }
 

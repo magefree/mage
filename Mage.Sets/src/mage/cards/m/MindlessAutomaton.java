@@ -34,12 +34,12 @@ public final class MindlessAutomaton extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),"with two +1/+1 counters on it"));
         
         // {1}, Discard a card: Put a +1/+1 counter on Mindless Automaton.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
         
         // Remove two +1/+1 counters from Mindless Automaton: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
     private MindlessAutomaton(final MindlessAutomaton card) {

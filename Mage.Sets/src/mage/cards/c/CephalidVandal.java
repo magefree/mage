@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -27,14 +26,14 @@ public final class CephalidVandal extends CardImpl {
 
     public CephalidVandal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, put a shred counter on Cephalid Vandal. Then put the top card of your library into your graveyard for each shred counter on Cephalid Vandal.
         Effect effect = new CephalidVandalEffect();
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SHRED.createInstance(), false), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SHRED.createInstance(), false));
         ability.addEffect(effect);
         this.addAbility(ability);
     }
@@ -51,12 +50,12 @@ public final class CephalidVandal extends CardImpl {
 
 class CephalidVandalEffect extends OneShotEffect {
 
-    public CephalidVandalEffect() {
+    CephalidVandalEffect() {
         super(Outcome.Neutral);
         staticText = "Then mill a card for each shred counter on {this}";
     }
 
-    public CephalidVandalEffect(final CephalidVandalEffect effect) {
+    private CephalidVandalEffect(final CephalidVandalEffect effect) {
         super(effect);
     }
 

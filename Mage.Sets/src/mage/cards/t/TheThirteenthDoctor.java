@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -28,7 +28,7 @@ public final class TheThirteenthDoctor extends CardImpl {
     private static final FilterSpell filter
             = new FilterSpell("a spell from anywhere other than your hand");
     private static final FilterPermanent filter2
-            = new FilterControlledCreaturePermanent("creature you control with a counter on it");
+            = new FilterControlledCreaturePermanent("each creature you control with a counter on it");
 
     static {
         filter.add(Predicates.not(new CastFromZonePredicate(Zone.HAND)));
@@ -49,11 +49,11 @@ public final class TheThirteenthDoctor extends CardImpl {
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()), filter, false
         );
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability.withFlavorWord("Paradox"));
+        this.addAbility(ability.setAbilityWord(AbilityWord.PARADOX));
 
         // Team TARDIS -- At the beginning of your end step, untap each creature you control with a counter on it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new UntapAllEffect(filter2), TargetController.YOU, false
+                new UntapAllEffect(filter2)
         ).withFlavorWord("Team TARDIS"));
 
     }

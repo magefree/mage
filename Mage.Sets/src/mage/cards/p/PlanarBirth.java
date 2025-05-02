@@ -45,7 +45,7 @@ class PlanarBirthEffect extends OneShotEffect {
         this.staticText = "Return all basic land cards from all graveyards to the battlefield tapped under their owners' control";
     }
 
-    PlanarBirthEffect(final PlanarBirthEffect effect) {
+    private PlanarBirthEffect(final PlanarBirthEffect effect) {
         super(effect);
     }
 

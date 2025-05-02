@@ -4,7 +4,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.Cost;
@@ -21,7 +21,6 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -43,11 +42,11 @@ public final class EbonPraetor extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, put a -2/-2 counter on Ebon Praetor.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M2M2.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M2M2.createInstance())));
 
         // Sacrifice a creature: Remove a -2/-2 counter from Ebon Praetor. If the sacrificed creature was a Thrull, put a +1/+0 counter on Ebon Praetor. Activate this ability only during your upkeep and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.M2M2.createInstance()),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), 1, new IsStepCondition(PhaseStep.UPKEEP));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE), 1, new IsStepCondition(PhaseStep.UPKEEP));
         ability.addEffect(new EbonPraetorEffect());
         this.addAbility(ability);
     }
@@ -64,12 +63,12 @@ public final class EbonPraetor extends CardImpl {
 
 class EbonPraetorEffect extends OneShotEffect {
 
-    public EbonPraetorEffect() {
+    EbonPraetorEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "If the sacrificed creature was a Thrull, put a +1/+0 counter on {this}";
     }
 
-    public EbonPraetorEffect(final EbonPraetorEffect effect) {
+    private EbonPraetorEffect(final EbonPraetorEffect effect) {
         super(effect);
     }
 

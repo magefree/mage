@@ -24,7 +24,8 @@ public final class UnderworldFires extends CardImpl {
                 new FilterCreatureOrPlaneswalkerPermanent("creature and each planeswalker")));
 
         // If a permanent dealt damage this way would die this turn, exile it instead.
-        this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn)
+                .setText("If a permanent dealt damage this way would die this turn, exile it instead"));
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 

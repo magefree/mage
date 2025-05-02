@@ -48,12 +48,12 @@ public final class PathbreakerIbex extends CardImpl {
 
 class PathbreakerIbexEffect extends OneShotEffect {
 
-    public PathbreakerIbexEffect() {
+    PathbreakerIbexEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "creatures you control gain trample and get +X/+X until end of turn, where X is the greatest power among creatures you control";
     }
 
-    public PathbreakerIbexEffect(final PathbreakerIbexEffect effect) {
+    private PathbreakerIbexEffect(final PathbreakerIbexEffect effect) {
         super(effect);
     }
 

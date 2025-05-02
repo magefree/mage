@@ -46,7 +46,7 @@ class ClearTheLandEffect extends OneShotEffect {
         this.staticText = "Each player reveals the top five cards of their library, puts all land cards revealed this way onto the battlefield tapped, and exiles the rest.";
     }
     
-    public ClearTheLandEffect(final ClearTheLandEffect effect) {
+    private ClearTheLandEffect(final ClearTheLandEffect effect) {
         super(effect);
     }
     

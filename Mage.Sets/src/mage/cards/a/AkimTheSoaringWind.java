@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -100,11 +99,11 @@ enum AkimTheSoaringWindCondition implements Condition {
 
 class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
 
-    public AkimTheSoaringTokenAbility() {
+    AkimTheSoaringTokenAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BirdToken(), 1), false);
     }
 
-    public AkimTheSoaringTokenAbility(final AkimTheSoaringTokenAbility ability) {
+    private AkimTheSoaringTokenAbility(final AkimTheSoaringTokenAbility ability) {
         super(ability);
     }
 
@@ -124,7 +123,7 @@ class AkimTheSoaringTokenAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public AkimTheSoaringTokenAbility copy() {
         return new AkimTheSoaringTokenAbility(this);
     }
 

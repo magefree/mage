@@ -3,17 +3,19 @@ package mage.abilities.costs.mana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.MinMaxVariableCost;
 import mage.abilities.costs.VariableCostType;
+import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.ManaPool;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public final class VariableManaCost extends ManaCostImpl implements VariableCost {
+public class VariableManaCost extends ManaCostImpl implements MinMaxVariableCost {
 
     // variable mana cost usage on 2019-06-20:
     // 1. as X value in spell/ability cast (announce X, set VariableManaCost as paid and add generic mana to pay instead)
@@ -23,7 +25,7 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
     protected int xInstancesCount; // number of {X} instances in cost like {X} or {X}{X}
     protected int xValue = 0; // final X value after announce and replace events
     protected int xPay = 0; // final/total need pay after announce and replace events (example: {X}{X}, X=3, xPay = 6)
-    protected boolean wasAnnounced = false;
+    protected boolean wasAnnounced = false; // X was announced by player or auto-defined by CostAdjuster
 
     protected FilterMana filter; // mana filter that can be used for that cost
     protected int minX = 0;
@@ -60,6 +62,18 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
     }
 
     @Override
+    public ManaOptions getOptions(boolean canPayLifeCost) {
+        ManaOptions res = new ManaOptions();
+
+        // limit mana options for better performance
+        CardUtil.distributeValues(10, getMinX(), getMaxX()).forEach(value -> {
+            res.add(Mana.GenericMana(value));
+        });
+
+        return res;
+    }
+
+    @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
         // X mana cost always pays as generic mana
         this.assignGeneric(ability, game, pool, xPay, filter, costToPay);
@@ -84,6 +98,10 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
         if (paid) return true;
 
         return this.isColorlessPaid(xPay);
+    }
+
+    public boolean wasAnnounced() {
+        return this.wasAnnounced;
     }
 
     @Override
@@ -122,18 +140,22 @@ public final class VariableManaCost extends ManaCostImpl implements VariableCost
         return this.xInstancesCount;
     }
 
+    @Override
     public int getMinX() {
         return minX;
     }
 
+    @Override
     public void setMinX(int minX) {
         this.minX = minX;
     }
 
+    @Override
     public int getMaxX() {
         return maxX;
     }
 
+    @Override
     public void setMaxX(int maxX) {
         this.maxX = maxX;
     }

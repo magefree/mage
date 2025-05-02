@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -38,14 +38,14 @@ public final class ObuunMulDayaAncestor extends CardImpl {
 
         // At the beginning of combat on your turn, up to one target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is Obuun's power. It's still a land.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new ObuunMulDayaAncestorEffect(), TargetController.YOU, false
+                new ObuunMulDayaAncestorEffect()
         );
         ability.addTarget(new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, false
         ));
         this.addAbility(ability);
 
-        // Landfall - Whenever a land enters the battlefield under your control, put a +1/+1 counter on target creature.
+        // Landfall - Whenever a land you control enters, put a +1/+1 counter on target creature.
         ability = new LandfallAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

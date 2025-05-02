@@ -37,7 +37,7 @@ public final class NantukoMentor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}, {tap}: Target creature gets +X/+X until end of turn, where X is that creature's power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NantukoMentorEffect(), new ManaCostsImpl<>("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new NantukoMentorEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -55,12 +55,12 @@ public final class NantukoMentor extends CardImpl {
 
 class NantukoMentorEffect extends OneShotEffect {
 
-    public NantukoMentorEffect() {
+    NantukoMentorEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target creature gets +X/+X until end of turn, where X is that creature's power";
     }
 
-    public NantukoMentorEffect(final NantukoMentorEffect effect) {
+    private NantukoMentorEffect(final NantukoMentorEffect effect) {
         super(effect);
     }
 

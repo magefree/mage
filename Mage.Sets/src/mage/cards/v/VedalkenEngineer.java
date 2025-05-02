@@ -94,7 +94,7 @@ class VedalkenEngineerEffect extends ManaEffect {
         staticText = "Add " + CardUtil.numberToText(amount) + " mana of any one color. " + manaBuilder.getRule();
     }
 
-    public VedalkenEngineerEffect(final VedalkenEngineerEffect effect) {
+    private VedalkenEngineerEffect(final VedalkenEngineerEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.manaBuilder = effect.manaBuilder;

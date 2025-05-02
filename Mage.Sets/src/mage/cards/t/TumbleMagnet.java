@@ -27,11 +27,10 @@ public final class TumbleMagnet extends CardImpl {
 
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)),
-                "{this} enters the battlefield with three charge counters on it"
+                "with three charge counters on it"
         ));
 
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new TapTargetEffect(),
                 new TapSourceCost()
         );

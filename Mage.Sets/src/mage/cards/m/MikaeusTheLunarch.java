@@ -16,9 +16,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -26,13 +24,6 @@ import java.util.UUID;
  * @author nantuko
  */
 public final class MikaeusTheLunarch extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("other creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public MikaeusTheLunarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{W}");
@@ -47,11 +38,11 @@ public final class MikaeusTheLunarch extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // {T}: Put a +1/+1 counter on Mikaeus.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new TapSourceCost()));
 
         // {T}, Remove a +1/+1 counter from Mikaeus: Put a +1/+1 counter on each other creature you control.
         Ability ability = new SimpleActivatedAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new TapSourceCost()
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE), new TapSourceCost()
         );
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability);

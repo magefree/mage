@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.BuybackAbility;
@@ -11,6 +10,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.WurmCallingWurmToken;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,18 +41,18 @@ public final class Wurmcalling extends CardImpl {
 
 class WurmcallingEffect extends OneShotEffect {
 
-    public WurmcallingEffect() {
+    WurmcallingEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create an X/X green Wurm creature token";
     }
 
-    public WurmcallingEffect(WurmcallingEffect ability) {
+    private WurmcallingEffect(final WurmcallingEffect ability) {
         super(ability);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int count = source.getManaCostsToPay().getX();
+        int count = CardUtil.getSourceCostsTag(game, source, "X", 0);
         WurmCallingWurmToken token = new WurmCallingWurmToken();
         token.setPower(count);
         token.setToughness(count);

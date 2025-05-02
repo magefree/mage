@@ -37,7 +37,7 @@ public final class BlessingOfTheNephilim extends CardImpl {
         // Enchanted creature gets +1/+1 for each of its colors.
         DynamicValue numberOfColors = new EnchantedCreatureColorsCount();
         Effect effect = new BoostEnchantedEffect(numberOfColors, numberOfColors, Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private BlessingOfTheNephilim(final BlessingOfTheNephilim card) {
@@ -55,7 +55,7 @@ class EnchantedCreatureColorsCount implements DynamicValue {
     public EnchantedCreatureColorsCount() {
     }
 
-    public EnchantedCreatureColorsCount(final EnchantedCreatureColorsCount dynamicValue) {
+    private EnchantedCreatureColorsCount(final EnchantedCreatureColorsCount dynamicValue) {
     }
 
     @Override

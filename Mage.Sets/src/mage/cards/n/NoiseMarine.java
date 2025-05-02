@@ -6,6 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,6 +39,7 @@ public final class NoiseMarine extends CardImpl {
                 new DamageTargetEffect(NoiseMarineValue.instance, "it")
         );
         ability.addTarget(new TargetAnyTarget());
+        ability.addHint(new ValueHint("Number of spells you've cast this turn", NoiseMarineValue.instance));
         this.addAbility(ability.withFlavorWord("Sonic Blaster"));
     }
 

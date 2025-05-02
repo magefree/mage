@@ -45,7 +45,7 @@ public class TargetCardInLibrary extends TargetCard {
         // with a certain card type or color, that player isn't required to find some or all of those cards
         // even if they're present in that zone.
         this.setRequired(!filter.hasPredicates());
-        this.setNotTarget(true);
+        this.withNotTarget(true);
         this.librarySearchLimit = Integer.MAX_VALUE;
     }
 
@@ -85,7 +85,7 @@ public class TargetCardInLibrary extends TargetCard {
                 return chosen;
             }
             chosen = targets.size() >= getMinNumberOfTargets();
-        } while (!isChosen() && !doneChoosing());
+        } while (!isChosen(game) && !doneChoosing(game));
         return chosen;
     }
 

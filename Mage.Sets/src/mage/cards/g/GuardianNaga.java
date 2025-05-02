@@ -25,7 +25,7 @@ public final class GuardianNaga extends AdventureCard {
     public GuardianNaga(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{5}{W}{W}", "Banishing Coils", "{2}{W}");
 
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
@@ -35,13 +35,15 @@ public final class GuardianNaga extends AdventureCard {
         // As long as it's your turn, prevent all damage that would be dealt to Guardian Naga.
         this.addAbility(new SimpleStaticAbility(new ConditionalPreventionEffect(
                 new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield), MyTurnCondition.instance,
-                "as long as it's your turn, prevent all damage that would be dealt to {this}"
+                "during your turn, prevent all damage that would be dealt to {this}"
         )));
 
         // Banishing Coils
         // Exile target artifact or enchantment.
         this.getSpellCard().getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+
+        this.finalizeAdventure();
     }
 
     private GuardianNaga(final GuardianNaga card) {

@@ -14,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.SeedGuardianToken;
+import mage.game.permanent.token.ElementalXXGreenToken;
 import mage.players.Player;
 
 /**
@@ -47,12 +47,12 @@ public final class SeedGuardian extends CardImpl {
 
 class SeedGuardianEffect extends OneShotEffect {
 
-    public SeedGuardianEffect() {
+    SeedGuardianEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create an X/X green Elemental creature token, where X is the number of creature cards in your graveyard";
     }
 
-    public SeedGuardianEffect(final SeedGuardianEffect effect) {
+    private SeedGuardianEffect(final SeedGuardianEffect effect) {
         super(effect);
     }
 
@@ -66,7 +66,7 @@ class SeedGuardianEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int creaturesInGraveyard = controller.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
-            return new CreateTokenEffect(new SeedGuardianToken(creaturesInGraveyard)).apply(game, source);
+            return new CreateTokenEffect(new ElementalXXGreenToken(creaturesInGraveyard)).apply(game, source);
         }
         return false;
     }

@@ -51,12 +51,12 @@ public final class SingeMindOgre extends CardImpl {
 
 class SingeMindOgreEffect extends OneShotEffect {
 
-    public SingeMindOgreEffect() {
+    SingeMindOgreEffect() {
         super(Outcome.LoseLife);
         this.staticText = "target player reveals a card at random from their hand, then loses life equal to that card's mana value";
     }
 
-    public SingeMindOgreEffect(final SingeMindOgreEffect effect) {
+    private SingeMindOgreEffect(final SingeMindOgreEffect effect) {
         super(effect);
     }
 

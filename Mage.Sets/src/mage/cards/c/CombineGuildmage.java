@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.EntersWithCountersControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,10 +15,9 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
@@ -43,9 +42,10 @@ public final class CombineGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{G}, {T}: This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
-        Ability ability = new SimpleActivatedAbility(
-                new CombineGuildmageReplacementEffect(), new ManaCostsImpl<>("{1}{G}")
-        );
+        Ability ability = new SimpleActivatedAbility(new EntersWithCountersControlledEffect(
+                Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE,
+                CounterType.P1P1.createInstance(), false
+        ), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -66,48 +66,6 @@ public final class CombineGuildmage extends CardImpl {
     @Override
     public CombineGuildmage copy() {
         return new CombineGuildmage(this);
-    }
-}
-
-class CombineGuildmageReplacementEffect extends ReplacementEffectImpl {
-
-    CombineGuildmageReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.BoostCreature);
-        this.staticText = "This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it";
-    }
-
-    private CombineGuildmageReplacementEffect(CombineGuildmageReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.isControlledBy(source.getControllerId()) && permanent.isCreature(game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (target != null) {
-            target.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-        }
-        return false;
-    }
-
-    @Override
-    public CombineGuildmageReplacementEffect copy() {
-        return new CombineGuildmageReplacementEffect(this);
     }
 }
 

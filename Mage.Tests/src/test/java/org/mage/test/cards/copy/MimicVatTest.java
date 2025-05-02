@@ -10,10 +10,10 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * {3}
  * Artifact
  * Imprint — Whenever a nontoken creature dies, you may exile that card.
- *           If you do, return each other card exiled with Mimic Vat to its owner’s graveyard.
+ * If you do, return each other card exiled with Mimic Vat to its owner’s graveyard.
  * {3}, {T}: Create a token that’s a copy of a card exiled with Mimic Vat.
- *           It gains haste.
- *           Exile it at the beginning of the next end step.
+ * It gains haste.
+ * Exile it at the beginning of the next end step.
  *
  * @author LevelX2
  */
@@ -77,17 +77,23 @@ public class MimicVatTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
+        // prepare copy
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph", true);
-        setChoice(playerA, true);
-        setChoice(playerA, "Silvercoat Lion");
+        setChoice(playerA, true); // pay 2 life
+        setChoice(playerA, true); // copy on etb
+        setChoice(playerA, "Silvercoat Lion"); // copy
 
+        // sacrifice and exile a copy
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice a creature");
-        setChoice(playerA, true);
-
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token that's a copy of a card exiled with ");
-        setChoice(playerA, true);
         setChoice(playerA, "Silvercoat Lion");
+        setChoice(playerA, true);
 
+        // create copy of exiled Metamorph
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token that's a copy of a card exiled with ");
+        setChoice(playerA, true); // copy on etb
+        setChoice(playerA, "Silvercoat Lion"); // copy
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -125,6 +131,7 @@ public class MimicVatTest extends CardTestPlayerBase {
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token that's a copy of a card exiled with ");
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 

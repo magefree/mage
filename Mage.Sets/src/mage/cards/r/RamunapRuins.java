@@ -48,10 +48,10 @@ public final class RamunapRuins extends CardImpl {
         this.addAbility(manaAbility);
 
         // {2}{R}{R}, {t}, Sacrifice a Desert: Ramunap Ruins deals 2 damage to each opponent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT),
+        Ability ability = new SimpleActivatedAbility(new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT),
                 new ManaCostsImpl<>("{2}{R}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

@@ -22,10 +22,11 @@ public final class MonstrousOnslaught extends CardImpl {
 
         // Monstrous Onslaught deals X damage divided as you choose among any number of target creatures, where X is the greatest power among creatures you control as you cast Monstrous Onslaught.
         DynamicValue xValue = GreatestPowerAmongControlledCreaturesValue.instance;
-        Effect effect = new DamageMultiEffect(xValue);
+        Effect effect = new DamageMultiEffect();
         effect.setText("{this} deals X damage divided as you choose among any number of target creatures, where X is the greatest power among creatures you control as you cast this spell");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue));
+        this.getSpellAbility().addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
     }
 
     private MonstrousOnslaught(final MonstrousOnslaught card) {

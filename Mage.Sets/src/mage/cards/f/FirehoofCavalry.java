@@ -34,7 +34,7 @@ public final class FirehoofCavalry extends CardImpl {
         // {3}{R}: Firehoof Cavalry gets +2/+0 and gains trample until end of turn.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+0");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{R}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{3}{R}"));
         effect = new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains trample until end of turn");
         ability.addEffect(effect);

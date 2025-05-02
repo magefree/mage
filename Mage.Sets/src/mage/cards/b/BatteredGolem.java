@@ -28,7 +28,7 @@ public final class BatteredGolem extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Battered Golem doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // Whenever an artifact enters the battlefield, you may untap Battered Golem.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new FilterArtifactPermanent("an artifact"), true));
     }

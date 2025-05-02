@@ -33,11 +33,11 @@ public final class OviyaPashiriSageLifecrafter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{G}, {T}: Create a 1/1 colorless Servo artifact creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ServoToken(), 1), new ManaCostsImpl<>("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new ServoToken(), 1), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {4}{G}, {T}: Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OviyaPashiriSageLifecrafterEffect(), new ManaCostsImpl<>("{4}{G}"));
+        ability = new SimpleActivatedAbility(new OviyaPashiriSageLifecrafterEffect(), new ManaCostsImpl<>("{4}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability);
@@ -55,12 +55,12 @@ public final class OviyaPashiriSageLifecrafter extends CardImpl {
 
 class OviyaPashiriSageLifecrafterEffect extends OneShotEffect {
 
-    public OviyaPashiriSageLifecrafterEffect() {
+    OviyaPashiriSageLifecrafterEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control";
     }
 
-    public OviyaPashiriSageLifecrafterEffect(final OviyaPashiriSageLifecrafterEffect effect) {
+    private OviyaPashiriSageLifecrafterEffect(final OviyaPashiriSageLifecrafterEffect effect) {
         super(effect);
     }
 

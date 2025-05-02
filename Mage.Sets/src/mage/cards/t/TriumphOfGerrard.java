@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class TriumphOfGerrard extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("creture you control with the greatest power");
+            = new FilterControlledCreaturePermanent("creature you control with the greatest power");
 
     static {
         filter.add(GreatestPowerControlledPredicate.instance);

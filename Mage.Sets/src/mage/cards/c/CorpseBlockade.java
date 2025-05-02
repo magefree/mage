@@ -35,9 +35,8 @@ public final class CorpseBlockade extends CardImpl {
 
         // Sacrifice another creature: Corpse Blockade gains deathtouch until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
     }
 
     private CorpseBlockade(final CorpseBlockade card) {

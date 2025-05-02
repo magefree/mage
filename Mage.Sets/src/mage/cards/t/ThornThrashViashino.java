@@ -24,7 +24,7 @@ public final class ThornThrashViashino extends CardImpl {
 
     public ThornThrashViashino(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(2);
@@ -34,7 +34,7 @@ public final class ThornThrashViashino extends CardImpl {
         this.addAbility(new DevourAbility(2));
 
         // {G}: Thorn-Thrash Viashino gains trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),new ManaCostsImpl<>("{G}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),new ManaCostsImpl<>("{G}")));
     }
 
     private ThornThrashViashino(final ThornThrashViashino card) {

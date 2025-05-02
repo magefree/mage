@@ -41,7 +41,7 @@ public final class EntanglingVines extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
         
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
     private EntanglingVines(final EntanglingVines card) {

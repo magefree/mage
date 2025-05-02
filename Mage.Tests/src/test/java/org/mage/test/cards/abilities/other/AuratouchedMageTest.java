@@ -55,11 +55,11 @@ public class AuratouchedMageTest extends CardTestPlayerBase {
         // prepare mage's ETB trigger
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Auratouched Mage");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);  // Wait for Auratouched Mage to ETB
-        checkStackObject("prepare etb", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "When {this} enters the battlefield", 1);
+        checkStackObject("prepare etb", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "When {this} enters", 1);
 
         // make mage as artifact before ETB resolve
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Argent Mutation", "Auratouched Mage");
-        checkStackObject("prepare artifact", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "When {this} enters the battlefield", 1);
+        checkStackObject("prepare artifact", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "When {this} enters", 1);
         checkStackObject("prepare artifact", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Argent Mutation", 1);
 
         // on etb resolve: search aura and attach it to mage

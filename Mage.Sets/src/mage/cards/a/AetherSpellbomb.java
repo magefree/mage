@@ -24,13 +24,13 @@ public final class AetherSpellbomb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         //{U}, Sacrifice Aether Spellbomb: Return target creature to its owner's hand.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{U}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         //{1}, Sacrifice Aether Spellbomb: Draw a card.
-        SimpleActivatedAbility drawCardAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        SimpleActivatedAbility drawCardAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         drawCardAbility.addCost(new SacrificeSourceCost());
         this.addAbility(drawCardAbility);
 

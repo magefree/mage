@@ -24,7 +24,7 @@ public final class Quagmire extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // Creatures with swampwalk can be blocked as though they didn't have swampwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new QuagmireEffect()));
+        this.addAbility(new SimpleStaticAbility(new QuagmireEffect()));
     }
 
     private Quagmire(final Quagmire card) {
@@ -39,12 +39,12 @@ public final class Quagmire extends CardImpl {
 
 class QuagmireEffect extends AsThoughEffectImpl {
 
-    public QuagmireEffect() {
+    QuagmireEffect() {
         super(AsThoughEffectType.BLOCK_SWAMPWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with swampwalk can be blocked as though they didn't have swampwalk";
     }
 
-    public QuagmireEffect(final QuagmireEffect effect) {
+    private QuagmireEffect(final QuagmireEffect effect) {
         super(effect);
     }
 

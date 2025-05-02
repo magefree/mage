@@ -39,7 +39,7 @@ public final class SoltariGuerrillas extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
 
         // {0}: The next time Soltari Guerrillas would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoltariGuerrillasReplacementEffect(), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(new SoltariGuerrillasReplacementEffect(), new GenericManaCost(0));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -61,7 +61,7 @@ class SoltariGuerrillasReplacementEffect extends PreventionEffectImpl {
         staticText = "The next time {this} would deal combat damage to an opponent this turn, it deals that damage to target creature instead";
     }
 
-    SoltariGuerrillasReplacementEffect(final SoltariGuerrillasReplacementEffect effect) {
+    private SoltariGuerrillasReplacementEffect(final SoltariGuerrillasReplacementEffect effect) {
         super(effect);
     }
 
@@ -94,11 +94,6 @@ class SoltariGuerrillasReplacementEffect extends PreventionEffectImpl {
             discard(); // (only once)
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -36,13 +35,13 @@ public final class CaptainsHook extends CardImpl {
         // Equipped creature gets +2/+0
         Effect effect = new BoostEquippedEffect(2, 0);
         effect.setText("Equipped creature gets +2/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         // has menace,
         effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT);
         effect.setText(", has menace");
         ability.addEffect(effect);
         //, and is a Pirate in addition to its other creature types
-        effect = new AddCardSubtypeAttachedEffect(SubType.PIRATE, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT);
+        effect = new AddCardSubtypeAttachedEffect(SubType.PIRATE, AttachmentType.EQUIPMENT);
         effect.setText(", and is a Pirate in addition to its other creature types");
         ability.addEffect(effect);
         this.addAbility(ability);

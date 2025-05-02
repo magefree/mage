@@ -29,7 +29,7 @@ public final class TwilekSeductress extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {this} must be blocked it if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // Whenever {this} becomes blocked by a creature, put a bounty counter on that creature
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), false));

@@ -38,7 +38,7 @@ public final class VolitionReins extends CardImpl {
         // When Volition Reins enters the battlefield, if enchanted permanent is tapped, untap it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapVolitionReinsEffect()));
         // You control enchanted permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("permanent")));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect("permanent")));
     }
 
     private VolitionReins(final VolitionReins card) {
@@ -57,7 +57,7 @@ public final class VolitionReins extends CardImpl {
             staticText = "if enchanted permanent is tapped, untap it";
         }
 
-        public UntapVolitionReinsEffect(final UntapVolitionReinsEffect effect) {
+        private UntapVolitionReinsEffect(final UntapVolitionReinsEffect effect) {
             super(effect);
         }
 

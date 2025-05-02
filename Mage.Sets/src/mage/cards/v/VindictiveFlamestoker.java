@@ -65,7 +65,7 @@ enum VindictiveFlamestokerAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         int amount = Optional
                 .ofNullable(ability.getSourcePermanentIfItStillExists(game))
                 .filter(Objects::nonNull)

@@ -3,8 +3,6 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
@@ -14,7 +12,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -42,12 +39,12 @@ public final class StolenGoods extends CardImpl {
 
 class StolenGoodsEffect extends OneShotEffect {
 
-    public StolenGoodsEffect() {
+    StolenGoodsEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost";
     }
 
-    public StolenGoodsEffect(final StolenGoodsEffect effect) {
+    private StolenGoodsEffect(final StolenGoodsEffect effect) {
         super(effect);
     }
 
@@ -58,7 +55,7 @@ class StolenGoodsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent == null) {
             return false;
         }
@@ -66,15 +63,17 @@ class StolenGoodsEffect extends OneShotEffect {
         do {
             card = opponent.getLibrary().getFromTop(game);
             if (card == null) {
-                continue;
+                break;
             }
             if (card.isLand(game)) {
-                opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                if (!opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, null))) {
+                    break;
+                }
             } else {
                 PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card, TargetController.YOU, Duration.EndOfTurn, true, false, true);
                 break;
             }
-        } while (card != null && card.isLand(game));
+        } while (card.isLand(game));
 
         return true;
     }

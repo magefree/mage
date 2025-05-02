@@ -8,7 +8,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 /**
  * @author mzulch
@@ -17,14 +16,22 @@ public class CanBlockAdditionalCreatureTargetEffect extends ContinuousEffectImpl
 
     protected int amount;
 
+    /**
+     * Need to set text manually
+     * Target can block an additional creature this turn
+     */
     public CanBlockAdditionalCreatureTargetEffect() {
         this(Duration.EndOfTurn, 1);
     }
 
+    /**
+     * Need to set text manually
+     * @param duration of effect
+     * @param amount 0 = any number
+     */
     public CanBlockAdditionalCreatureTargetEffect(Duration duration, int amount) {
         super(duration, Outcome.Benefit);
         this.amount = amount;
-        staticText = setText();
     }
 
     protected CanBlockAdditionalCreatureTargetEffect(final CanBlockAdditionalCreatureTargetEffect effect) {
@@ -46,7 +53,9 @@ public class CanBlockAdditionalCreatureTargetEffect extends ContinuousEffectImpl
 
         // maxBlocks = 0 equals to "can block any number of creatures"
         if (amount > 0) {
-            target.setMaxBlocks(target.getMaxBlocks() + amount);
+            if (target.getMaxBlocks() > 0) {
+                target.setMaxBlocks(target.getMaxBlocks() + amount);
+            }
         } else {
             target.setMaxBlocks(0);
         }
@@ -57,24 +66,6 @@ public class CanBlockAdditionalCreatureTargetEffect extends ContinuousEffectImpl
     @Override
     public boolean apply(Game game, Ability source) {
         return false;
-    }
-
-    private String setText() {
-        String text = "target can block ";
-        switch (amount) {
-            case 0:
-                text += "any number of creatures";
-                break;
-            default:
-                text += CardUtil.numberToText(amount, "an") + " additional creature" + (amount > 1 ? "s" : "");
-        }
-        if (duration == Duration.EndOfTurn) {
-            text += " this turn";
-        }
-        if (duration == Duration.WhileOnBattlefield) {
-            text += " each combat";
-        }
-        return text;
     }
 
     @Override

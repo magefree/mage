@@ -28,7 +28,7 @@ public final class PowerConduit extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {tap}, Remove a counter from a permanent you control: Choose one - Put a charge counter on target artifact; or put a +1/+1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability.addCost(new RemoveCounterCost(new TargetControlledPermanent(1, 1, new FilterControlledPermanent(), true)));
         ability.addTarget(new TargetArtifactPermanent());
         Mode mode = new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));

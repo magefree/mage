@@ -42,7 +42,7 @@ class OrimsPrayerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public OrimsPrayerTriggeredAbility(final OrimsPrayerTriggeredAbility ability) {
+    private OrimsPrayerTriggeredAbility(final OrimsPrayerTriggeredAbility ability) {
         super(ability);
     }
 

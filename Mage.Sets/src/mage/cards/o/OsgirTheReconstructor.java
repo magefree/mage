@@ -7,13 +7,10 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -25,22 +22,17 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author Arketec
  */
 public final class OsgirTheReconstructor extends CardImpl {
@@ -57,9 +49,9 @@ public final class OsgirTheReconstructor extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // {1}, Sacrifice an artifact: Target creature you control gets +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         this.addAbility(ability);
 
         // {X},{T}, Exile an artifact with mana value X from your graveyard: Create two tokens that are copies of the exiled card. Activate only as
@@ -88,15 +80,15 @@ enum OsgirTheReconstructorCostAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+    public void prepareCost(Ability ability, Game game) {
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller == null) {
             return;
         }
-        FilterCard filter = new FilterArtifactCard("an artifact card with mana value "+xValue+" from your graveyard");
+        FilterCard filter = new FilterArtifactCard("an artifact card with mana value " + xValue + " from your graveyard");
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        for (Cost cost: ability.getCosts()) {
+        for (Cost cost : ability.getCosts()) {
             if (cost instanceof ExileFromGraveCost) {
                 cost.getTargets().set(0, new TargetCardInYourGraveyard(filter));
             }
@@ -106,12 +98,12 @@ enum OsgirTheReconstructorCostAdjuster implements CostAdjuster {
 
 class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
 
-    public OsgirTheReconstructorCreateArtifactTokensEffect() {
+    OsgirTheReconstructorCreateArtifactTokensEffect() {
         super(Outcome.Benefit);
         this.staticText = "Create two tokens that are copies of the exiled card.";
     }
 
-    public OsgirTheReconstructorCreateArtifactTokensEffect(final OsgirTheReconstructorCreateArtifactTokensEffect effect)  {
+    private OsgirTheReconstructorCreateArtifactTokensEffect(final OsgirTheReconstructorCreateArtifactTokensEffect effect) {
         super(effect);
     }
 
@@ -134,11 +126,11 @@ class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
         effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
         effect.apply(game, source);
 
-        return  true;
+        return true;
     }
 
     @Override
-    public OsgirTheReconstructorCreateArtifactTokensEffect  copy() {
+    public OsgirTheReconstructorCreateArtifactTokensEffect copy() {
         return new OsgirTheReconstructorCreateArtifactTokensEffect(this);
     }
 }

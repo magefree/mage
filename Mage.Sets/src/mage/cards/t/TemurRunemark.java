@@ -49,9 +49,9 @@ public final class TemurRunemark extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         // Enchanted creature has trample as long as you control a blue or red permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA),
                 new PermanentsOnTheBattlefieldCondition(filter), "Enchanted creature has trample as long as you control a blue or red permanent")));
     }

@@ -52,7 +52,7 @@ public final class RiseOfTheHobgoblins extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RiseOfTheHobgoblinsEffect()));
 
         // {RW}: Red creatures and white creatures you control gain first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter), new ManaCostsImpl<>("{R/W}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter), new ManaCostsImpl<>("{R/W}")));
 
     }
 
@@ -68,12 +68,12 @@ public final class RiseOfTheHobgoblins extends CardImpl {
 
 class RiseOfTheHobgoblinsEffect extends OneShotEffect {
 
-    public RiseOfTheHobgoblinsEffect() {
+    RiseOfTheHobgoblinsEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens";
     }
 
-    public RiseOfTheHobgoblinsEffect(final RiseOfTheHobgoblinsEffect effect) {
+    private RiseOfTheHobgoblinsEffect(final RiseOfTheHobgoblinsEffect effect) {
         super(effect);
     }
 

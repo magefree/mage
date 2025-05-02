@@ -91,13 +91,14 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
             return false;
         }
         makeToken(player, game, source);
+        game.processAction();
         distributeCounters(player, game, source);
         return true;
     }
 
     private void makeToken(Player player, Game game, Ability source) {
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.withChooseHint("to copy");
         if (!target.canChoose(player.getId(), source, game)) {
             return;
@@ -113,10 +114,10 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
         if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game) < 1) {
             return;
         }
-        TargetPermanentAmount target = new TargetCreaturePermanentAmount(3);
-        target.setNotTarget(true);
+        TargetPermanentAmount target = new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURE);
+        target.withNotTarget(true);
         target.withChooseHint("to distribute counters");
-        player.choose(outcome, target, source, game);
+        target.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : target.getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {

@@ -1,5 +1,7 @@
 package mage.client.dialog;
 
+import mage.client.cards.BigCard;
+import mage.client.components.MageTextArea;
 import mage.constants.ColoredManaSymbol;
 import mage.util.MultiAmountMessage;
 
@@ -11,15 +13,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
+ * Game GUI: dialog to distribute values between multiple items
+ * (used for some cards and add lands in cheat menu, search by MultiAmountMessage)
  *
- * @author weirddan455
+ * @author weirddan455, JayDi85
  */
 public class PickMultiNumberDialog extends MageDialog {
 
-    private List<JLabel> labelList = null;
+    private boolean cancel;
+    private PickMultiNumberCallback callback = null;
+
+    private UUID gameId = null;
+    private BigCard bigCard = null;
+    
+    private List<MageTextArea> infoList = null;
     private List<JSpinner> spinnerList = null;
 
     public PickMultiNumberDialog() {
@@ -27,14 +38,29 @@ public class PickMultiNumberDialog extends MageDialog {
         this.setModal(true);
     }
 
-    public void showDialog(List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options) {
-        this.header.setText((String) options.get("header"));
-        this.header.setHorizontalAlignment(SwingConstants.CENTER);
+    public interface PickMultiNumberCallback {
+        void onChoiceDone();
+    }
+
+    public void init(UUID gameId, BigCard bigCard) {
+        this.gameId = gameId;
+        this.bigCard = bigCard;
+    }
+
+    public void showDialog(List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options, PickMultiNumberCallback callback) {
+        this.cancel = false;
+        this.callback = callback;
+
+        this.header.setText("<html>" + ManaSymbols.replaceSymbolsWithHTML((String) options.get("header"), ManaSymbols.Type.DIALOG));
         this.setTitle((String) options.get("title"));
 
-        if (labelList != null) {
-            for (JLabel label : labelList) {
-                jPanel1.remove(label);
+        boolean canCancel = options.get("canCancel") != null && (boolean) options.get("canCancel");
+        btnCancel.setVisible(canCancel);
+
+        // clean
+        if (infoList != null) {
+            for (MageTextArea info : infoList) {
+                jPanel1.remove(info);
             }
         }
         if (spinnerList != null) {
@@ -42,14 +68,15 @@ public class PickMultiNumberDialog extends MageDialog {
                 jPanel1.remove(spinner);
             }
         }
+
         int size = messages.size();
-        labelList = new ArrayList<>(size);
+        infoList = new ArrayList<>(size);
         spinnerList = new ArrayList<>(size);
         jPanel1.setLayout(new GridBagLayout());
-        GridBagConstraints labelC = new GridBagConstraints();
-        GridBagConstraints spinnerC = new GridBagConstraints();
         for (int i = 0; i < size; i++) {
-            JLabel label = new JLabel();
+            MageTextArea info = new MageTextArea();
+            info.enableTextLabelMode();
+            info.setGameData(this.gameId, this.bigCard);
 
             // mana mode
             String manaText = null;
@@ -72,24 +99,23 @@ public class PickMultiNumberDialog extends MageDialog {
                     break;
             }
             if (manaText != null) {
-                label.setText("<html>" + manaText);
-                Image image = ManaSymbols.getSizedManaSymbol(input);
-                if (image != null) {
-                    label.setIcon(new ImageIcon(image));
-                }
+                // mana mode
+                info.setText("{" + input + "}" + "&nbsp;" + manaText);
             } else {
                 // text mode
-                label.setText("<html>" + input);
+                info.setText(input);
             }
 
-            labelC.weightx = 0.5;
-            labelC.gridx = 0;
-            labelC.gridy = i;
-            jPanel1.add(label, labelC);
-            labelList.add(label);
+            GridBagConstraints infoC = new GridBagConstraints();
+            infoC.weightx = 0.5;
+            infoC.gridx = 0;
+            infoC.gridy = i;
+            jPanel1.add(info, infoC);
+            infoList.add(info);
 
             JSpinner spinner = new JSpinner();
-            spinner.setModel(new SpinnerNumberModel(0, messages.get(i).min, messages.get(i).max, 1));
+            spinner.setModel(new SpinnerNumberModel(messages.get(i).defaultValue, messages.get(i).min, messages.get(i).max, 1));
+            GridBagConstraints spinnerC = new GridBagConstraints();
             spinnerC.weightx = 0.5;
             spinnerC.gridx = 1;
             spinnerC.gridy = i;
@@ -101,7 +127,6 @@ public class PickMultiNumberDialog extends MageDialog {
             spinnerList.add(spinner);
         }
         this.counterText.setText("0 out of 0");
-        this.counterText.setHorizontalAlignment(SwingConstants.CENTER);
 
         updateControls(min, max, messages);
 
@@ -124,7 +149,7 @@ public class PickMultiNumberDialog extends MageDialog {
         counterText.setText(totalChosenAmount + " out of " + max);
 
         chooseEnabled &= totalChosenAmount >= min && totalChosenAmount <= max;
-        chooseButton.setEnabled(chooseEnabled);
+        btnOk.setEnabled(chooseEnabled);
     }
 
     public String getMultiAmount() {
@@ -133,6 +158,17 @@ public class PickMultiNumberDialog extends MageDialog {
                 .map(spinner -> ((Number) spinner.getValue()).intValue())
                 .map(String::valueOf)
                 .collect(Collectors.joining(" "));
+    }
+    
+    public boolean isCancel() {
+        return cancel;
+    }
+
+    private void doClose() {
+        this.hideDialog();
+        if (this.callback != null) {
+            this.callback.onChoiceDone();
+        }
     }
 
     /**
@@ -144,82 +180,103 @@ public class PickMultiNumberDialog extends MageDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        chooseButton = new javax.swing.JButton();
-        header = new javax.swing.JLabel();
-        counterText = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
+        panelCommands = new javax.swing.JPanel();
+        btnOk = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        panelHeader = new javax.swing.JPanel();
+        header = new javax.swing.JLabel();
+        counterText = new javax.swing.JLabel();
 
-        chooseButton.setText("Choose");
-        chooseButton.setEnabled(false);
-        chooseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chooseButtonActionPerformed(evt);
-            }
-        });
-
-        header.setText("Header");
-
-        counterText.setText("Counter");
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGap(0, 598, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
+            .addGap(0, 828, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(jPanel1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(counterText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(chooseButton)
-                        .addGap(0, 172, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        btnOk.setText("Choose");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelCommandsLayout = new javax.swing.GroupLayout(panelCommands);
+        panelCommands.setLayout(panelCommandsLayout);
+        panelCommandsLayout.setHorizontalGroup(
+            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommandsLayout.createSequentialGroup()
+                .addContainerGap(257, Short.MAX_VALUE)
+                .addComponent(btnOk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancel)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        panelCommandsLayout.setVerticalGroup(
+            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommandsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(header)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(counterText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chooseButton)
+                .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOk)
+                    .addComponent(btnCancel))
                 .addContainerGap())
         );
+
+        getRootPane().setDefaultButton(btnOk);
+
+        getContentPane().add(panelCommands, java.awt.BorderLayout.SOUTH);
+
+        panelHeader.setLayout(new java.awt.BorderLayout());
+
+        header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        header.setText("Header 12312321312312");
+        panelHeader.add(header, java.awt.BorderLayout.NORTH);
+
+        counterText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        counterText.setText("Counter 213123 213 213123213 123 123213123123123");
+        panelHeader.add(counterText, java.awt.BorderLayout.SOUTH);
+
+        getContentPane().add(panelHeader, java.awt.BorderLayout.NORTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void chooseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseButtonActionPerformed
-        this.hideDialog();
-    }//GEN-LAST:event_chooseButtonActionPerformed
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        this.cancel = false;
+        doClose();
+    }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.cancel = true;
+        doClose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton chooseButton;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnOk;
     private javax.swing.JLabel counterText;
     private javax.swing.JLabel header;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panelCommands;
+    private javax.swing.JPanel panelHeader;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,6 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.common.TargetAnyTargetAmount;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,9 +31,9 @@ public final class AvacynsJudgment extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // Avacyn's Judgment deals 2 damage divided as you choose among any number of target creatures and/or players. If Avacyn's Judgment's madness cost was paid, it deals X damage divided as you choose among those creatures and/or players instead.
+        // Avacyn's Judgment deals 2 damage divided as you choose among any number of targets. If this spell's madness cost was paid, it deals X damage divided as you choose among those creatures and/or players instead.
         DynamicValue xValue = new AvacynsJudgmentManacostVariableValue();
-        Effect effect = new DamageMultiEffect(xValue);
+        Effect effect = new DamageMultiEffect();
         effect.setText("{this} deals 2 damage divided as you choose among any number of targets. If this spell's madness cost was paid, it deals X damage divided as you choose among those permanents and/or players instead.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
@@ -55,7 +57,7 @@ class AvacynsJudgmentManacostVariableValue implements DynamicValue {
         if (manaCosts.getVariableCosts().isEmpty()) {
             return 2;
         }
-        return sourceAbility.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
     }
 
     @Override

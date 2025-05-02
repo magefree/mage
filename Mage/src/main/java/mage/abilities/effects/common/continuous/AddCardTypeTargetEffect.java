@@ -21,12 +21,17 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
 
     public AddCardTypeTargetEffect(Duration duration, CardType... addedCardType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+        if (addedCardType.length == 0) {
+            throw new IllegalArgumentException("AddCardTypeTargetEffect should be called with at least one card type.");
+        }
         for (CardType cardType : addedCardType) {
             this.addedCardTypes.add(cardType);
             if (cardType == CardType.ENCHANTMENT) {
                 dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
             } else if (cardType == CardType.ARTIFACT) {
                 dependencyTypes.add(DependencyType.ArtifactAddingRemoving);
+            } else if (cardType == CardType.LAND) {
+                dependencyTypes.add(DependencyType.BecomeNonbasicLand);
             }
         }
 
@@ -40,7 +45,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
             if (target != null) {
                 for (CardType cardType : addedCardTypes) {

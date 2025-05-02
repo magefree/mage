@@ -26,7 +26,7 @@ public final class FurnaceOfRath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}{R}");
 
         // If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FurnaceOfRathEffect()));
+        this.addAbility(new SimpleStaticAbility(new FurnaceOfRathEffect()));
     }
 
     private FurnaceOfRath(final FurnaceOfRath card) {
@@ -41,12 +41,12 @@ public final class FurnaceOfRath extends CardImpl {
 
 class FurnaceOfRathEffect extends ReplacementEffectImpl {
 
-    public FurnaceOfRathEffect() {
+    FurnaceOfRathEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead";
     }
 
-    public FurnaceOfRathEffect(final FurnaceOfRathEffect effect) {
+    private FurnaceOfRathEffect(final FurnaceOfRathEffect effect) {
         super(effect);
     }
 

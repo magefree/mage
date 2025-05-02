@@ -49,11 +49,6 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Zone fromZone = ((ZoneChangeEvent) event).getFromZone();
         Card card = game.getCard(event.getTargetId());
@@ -112,7 +107,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
             if (target != null) {
                 target.withChooseHint("to attach " + card.getName() + " to");
-                target.setNotTarget(true); // always not target because this way it's not handled targeted
+                target.withNotTarget(true); // always not target because this way it's not handled targeted
                 target.clearChosen(); // necessary if e.g. aura is blinked multiple times
             }
 

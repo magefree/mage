@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
@@ -12,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -25,11 +24,10 @@ import java.util.UUID;
  */
 public final class CaetusSeaTyrantOfSegovia extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature spells you cast");
+    private static final FilterNonlandCard filter = new FilterNonlandCard("noncreature spells you cast");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(Predicates.not(new AbilityPredicate(ConvokeAbility.class))); // So there are not redundant copies being added to each card
     }
 
@@ -48,7 +46,7 @@ public final class CaetusSeaTyrantOfSegovia extends CardImpl {
 
         // At the beginning of your end step, untap up to four target creatures.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new UntapTargetEffect(), TargetController.YOU, false
+                new UntapTargetEffect()
         );
         ability.addTarget(new TargetCreaturePermanent(0, 4));
         this.addAbility(ability);

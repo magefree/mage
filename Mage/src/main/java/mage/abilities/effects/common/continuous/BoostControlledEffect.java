@@ -27,7 +27,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     private DynamicValue toughness;
     protected FilterCreaturePermanent filter;
     protected boolean excludeSource;
-    protected boolean lockedIn = false;
 
     public BoostControlledEffect(int power, int toughness, Duration duration) {
         this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_CREATURES, false);
@@ -46,30 +45,18 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     }
 
     public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, excludeSource, true);
-    }
-
-    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-        this(power, toughness, duration, filter, excludeSource, false);
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, excludeSource);
     }
 
     /**
-     * @param power
-     * @param toughness
-     * @param duration
-     * @param filter        AnotherPredicate is not working, you need to use the
-     *                      excludeSource option
-     * @param lockedIn      if true, power and toughness will be calculated only
-     *                      once, when the ability resolves
-     * @param excludeSource
+     * Note: use excludeSource rather than AnotherPredicate
      */
-    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, boolean lockedIn) {
+    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filter = (filter == null ? StaticFilters.FILTER_PERMANENT_CREATURES : filter);
         this.excludeSource = excludeSource;
-        this.lockedIn = lockedIn;
         setText();
     }
 
@@ -79,7 +66,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         this.toughness = effect.toughness;
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
-        this.lockedIn = effect.lockedIn;
     }
 
     @Override
@@ -90,15 +76,13 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (perm.isControlledBy(source.getControllerId())
                         && !(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
-        }
-        if (this.lockedIn) {
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
         }
@@ -106,7 +90,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
                 Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {
@@ -135,17 +119,13 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         if (excludeSource && !each && !message.startsWith("all")) {
             sb.append("other ");
         }
-        sb.append(filter.getMessage()).append(" you control ");
-        sb.append(each ? "gets " : "get ");
+        sb.append(filter.getMessage());
+        if (!filter.getMessage().endsWith("you control") && !filter.getMessage().contains("you control that's")) {
+            sb.append(" you control");
+        }
+        sb.append(each ? " gets " : " get ");
         sb.append(CardUtil.getBoostText(power, toughness, duration));
         staticText = sb.toString();
     }
 
-    public void setRule(String rule) {
-        staticText = rule;
-    }
-
-    public void setLockedIn(boolean lockedIn) {
-        this.lockedIn = lockedIn;
-    }
 }

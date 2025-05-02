@@ -40,12 +40,12 @@ public final class TimeStretch extends CardImpl {
 
 class TimeStretchEffect extends OneShotEffect {
 
-    public TimeStretchEffect() {
+    TimeStretchEffect() {
         super(Outcome.ExtraTurn);
         staticText = "Target player takes two extra turns after this one";
     }
 
-    public TimeStretchEffect(final TimeStretchEffect effect) {
+    private TimeStretchEffect(final TimeStretchEffect effect) {
         super(effect);
     }
 

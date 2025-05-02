@@ -47,12 +47,12 @@ public final class LilianasDefeat extends CardImpl {
 
 class LilianasDefeatEffect extends OneShotEffect {
 
-    public LilianasDefeatEffect() {
+    LilianasDefeatEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target black creature or black planeswalker. If that permanent was a Liliana planeswalker, her controller loses 3 life";
     }
 
-    public LilianasDefeatEffect(final LilianasDefeatEffect effect) {
+    private LilianasDefeatEffect(final LilianasDefeatEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class LilianasDefeatEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (player != null && permanent != null) {
             permanent.destroy(source, game, true);
-            game.getState().processAction(game);
+            game.processAction();
             if (permanent.isPlaneswalker(game) && permanent.hasSubtype(SubType.LILIANA, game)) {
                 Player permanentController = game.getPlayer(permanent.getControllerId());
                 if (permanentController != null) {

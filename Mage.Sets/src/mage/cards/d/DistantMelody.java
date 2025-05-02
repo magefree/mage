@@ -47,7 +47,7 @@ class DistantMelodyEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. Draw a card for each permanent you control of that type";
     }
 
-    DistantMelodyEffect(final DistantMelodyEffect effect) {
+    private DistantMelodyEffect(final DistantMelodyEffect effect) {
         super(effect);
     }
 
@@ -59,10 +59,10 @@ class DistantMelodyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
+        Choice typeChoice = new ChoiceCreatureType(game, source);
         if (controller != null && controller.choose(Outcome.BoostCreature, typeChoice, game)) {
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-            filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+            filter.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
             return new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)).apply(game, source);
         }
         return false;

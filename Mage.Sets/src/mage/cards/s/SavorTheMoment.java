@@ -41,12 +41,12 @@ public final class SavorTheMoment extends CardImpl {
 
 class SkipNextUntapStepSourceControllerEffect extends OneShotEffect {
 
-    public SkipNextUntapStepSourceControllerEffect() {
+    SkipNextUntapStepSourceControllerEffect() {
         super(Outcome.Detriment);
         this.staticText = "Skip the untap step of that turn";
     }
 
-    public SkipNextUntapStepSourceControllerEffect(SkipNextUntapStepSourceControllerEffect effect) {
+    private SkipNextUntapStepSourceControllerEffect(final SkipNextUntapStepSourceControllerEffect effect) {
         super(effect);
     }
 

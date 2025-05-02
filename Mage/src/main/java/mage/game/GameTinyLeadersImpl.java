@@ -34,8 +34,8 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
     // (see rule 504, "Draw Step") of his or her first turn.
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 50, 7);
+    public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 50, startLife, startHandSize);
     }
 
     protected GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
@@ -77,7 +77,6 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                         watcher.addCardInfoToCommander(this);
                         this.getState().addAbility(ability, null);
                     } else {
-                        // GameWorker.call processing errors and write it in magediag.log by defalt
                         // Test use case: create tiny game with random generated deck - game freezes with empty battlefield
                         throw new IllegalStateException("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
                     }
@@ -122,7 +121,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                 default:
                     CardInfo cardInfo = CardRepository.instance.findCard(commanderName);
                     if (cardInfo != null) {
-                        commander = cardInfo.getCard();
+                        commander = cardInfo.createCard();
                     }
             }
         }

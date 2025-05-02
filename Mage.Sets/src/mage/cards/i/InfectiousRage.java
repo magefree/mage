@@ -41,7 +41,7 @@ public final class InfectiousRage extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, -1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, -1)));
         
         // When enchanted creature dies, choose a creature at random Infectious Rage can enchant.
         // Return Infectious Rage to the battlefield attached to that creature.
@@ -61,12 +61,12 @@ public final class InfectiousRage extends CardImpl {
 
 class InfectiousRageReattachEffect extends OneShotEffect {
 
-    public InfectiousRageReattachEffect() {
+    InfectiousRageReattachEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "choose a creature at random {this} can enchant. Return {this} to the battlefield attached to that creature.";
     }
 
-    public InfectiousRageReattachEffect(final InfectiousRageReattachEffect effect) {
+    private InfectiousRageReattachEffect(final InfectiousRageReattachEffect effect) {
         super(effect);
     }
 

@@ -22,7 +22,7 @@ public class SkulkAbility extends StaticAbility {
     }
 
     @Override
-    public Ability copy() {
+    public SkulkAbility copy() {
         return new SkulkAbility(this);
     }
 

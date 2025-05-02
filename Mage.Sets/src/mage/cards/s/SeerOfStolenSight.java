@@ -2,6 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.MageItem;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -53,6 +54,7 @@ class SeerOfStolenSightTriggeredAbility extends TriggeredAbilityImpl {
     SeerOfStolenSightTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SurveilEffect(1));
         setTriggerPhrase("Whenever one or more artifacts and/or creatures you control are put into a graveyard from the battlefield, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private SeerOfStolenSightTriggeredAbility(final SeerOfStolenSightTriggeredAbility ability) {
@@ -84,5 +86,10 @@ class SeerOfStolenSightTriggeredAbility extends TriggeredAbilityImpl {
                 .filter(permanent -> permanent.isArtifact(game) || permanent.isCreature(game))
                 .map(Controllable::getControllerId)
                 .anyMatch(this::isControlledBy);
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

@@ -1,13 +1,9 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -15,7 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,14 +35,11 @@ public final class AkutaBornOfAsh extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // At the beginning of your upkeep, if you have more cards in hand than each opponent, you may sacrifice a Swamp. If you do, return Akuta, Born of Ash from your graveyard to the battlefield.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                    new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filterSwamp))),
-                    TargetController.YOU, false),
-                MoreCardsInHandThanOpponentsCondition.instance,
-                "At the beginning of your upkeep, if you have more cards in hand than each opponent, you may sacrifice a Swamp. If you do, return {this} from your graveyard to the battlefield.");
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
+                TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new SacrificeTargetCost(filterSwamp)),
+                false).withInterveningIf(MoreCardsInHandThanOpponentsCondition.instance));
     }
 
     private AkutaBornOfAsh(final AkutaBornOfAsh card) {
@@ -57,4 +51,3 @@ public final class AkutaBornOfAsh extends CardImpl {
         return new AkutaBornOfAsh(this);
     }
 }
-

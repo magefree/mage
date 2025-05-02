@@ -3,7 +3,6 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -17,7 +16,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -59,15 +57,11 @@ public final class CurseOfVengeance extends CardImpl {
 
 class CurseOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
 
-    public CurseOfVengeanceTriggeredAbility() {
+    CurseOfVengeanceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.SPITE.createInstance(), Outcome.Detriment), false);
     }
 
-    public CurseOfVengeanceTriggeredAbility(Effect effect, boolean optional, String text) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public CurseOfVengeanceTriggeredAbility(final CurseOfVengeanceTriggeredAbility ability) {
+    private CurseOfVengeanceTriggeredAbility(final CurseOfVengeanceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -92,7 +86,7 @@ class CurseOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted player casts a spell, put a spite counter on {this}";
+        return "Whenever enchanted player casts a spell, put a spite counter on {this}.";
     }
 
     @Override
@@ -103,11 +97,12 @@ class CurseOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
 
 class CurseOfVengeancePlayerLosesTriggeredAbility extends TriggeredAbilityImpl {
 
-    public CurseOfVengeancePlayerLosesTriggeredAbility() {
+    CurseOfVengeancePlayerLosesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfVengeanceDrawLifeEffect(), false);
+        setTriggerPhrase("When enchanted player loses the game, ");
     }
 
-    public CurseOfVengeancePlayerLosesTriggeredAbility(final CurseOfVengeancePlayerLosesTriggeredAbility ability) {
+    private CurseOfVengeancePlayerLosesTriggeredAbility(final CurseOfVengeancePlayerLosesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -127,22 +122,17 @@ class CurseOfVengeancePlayerLosesTriggeredAbility extends TriggeredAbilityImpl {
         return sourceObject != null && sourceObject.isAttachedTo(event.getPlayerId());
     }
 
-    @Override
-    public String getRule() {
-        return "When enchanted player loses the game, you gain X life and "
-                + "draw X cards, where X is the number of spite counters on {this}";
-    }
 }
 
 class CurseOfVengeanceDrawLifeEffect extends OneShotEffect {
 
-    public CurseOfVengeanceDrawLifeEffect() {
+    CurseOfVengeanceDrawLifeEffect() {
         super(Outcome.Benefit);
         staticText = "you gain X life and draw X cards, where X is the "
                 + "number of spite counters on {this}";
     }
 
-    public CurseOfVengeanceDrawLifeEffect(final CurseOfVengeanceDrawLifeEffect effect) {
+    private CurseOfVengeanceDrawLifeEffect(final CurseOfVengeanceDrawLifeEffect effect) {
         super(effect);
     }
 

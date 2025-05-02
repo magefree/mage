@@ -31,8 +31,8 @@ public final class DarkheartSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Slivers have "Sacrifice this permanent: You gain 3 life."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(3), new SacrificeSourceCost());
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(ability,
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS,
                         "All Slivers have \"Sacrifice this permanent: You gain 3 life.\"")));

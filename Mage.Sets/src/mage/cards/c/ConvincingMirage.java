@@ -38,7 +38,7 @@ public final class ConvincingMirage extends CardImpl {
         // Enchanted land is the chosen type.
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConvincingMirageContinousEffect()));
+        this.addAbility(new SimpleStaticAbility(new ConvincingMirageContinousEffect()));
     }
 
     private ConvincingMirage(final ConvincingMirage card) {
@@ -53,12 +53,12 @@ public final class ConvincingMirage extends CardImpl {
 
 class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
 
-    public ConvincingMirageContinousEffect() {
+    ConvincingMirageContinousEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "Enchanted land is the chosen type";
     }
 
-    public ConvincingMirageContinousEffect(final ConvincingMirageContinousEffect effect) {
+    private ConvincingMirageContinousEffect(final ConvincingMirageContinousEffect effect) {
         super(effect);
     }
 
@@ -71,6 +71,11 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + ChooseBasicLandTypeEffect.VALUE_KEY));
+        if (choice == null) {
+            discard();
+            return;
+        }
+
         switch (choice) {
             case FOREST:
                 dependencyTypes.add(DependencyType.BecomeForest);

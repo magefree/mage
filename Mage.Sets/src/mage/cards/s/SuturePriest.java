@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ public final class SuturePriest extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another creature enters the battlefield under your control, you may gain 1 life.
+        // Whenever another creature you control enters, you may gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1),
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true));
 
@@ -59,7 +58,7 @@ class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
     }
 
-    SuturePriestSecondTriggeredAbility(final SuturePriestSecondTriggeredAbility ability) {
+    private SuturePriestSecondTriggeredAbility(final SuturePriestSecondTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,6 +89,6 @@ class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.";
+        return "Whenever a creature an opponent controls enters, you may have that player lose 1 life.";
     }
 }

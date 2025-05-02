@@ -38,7 +38,7 @@ public final class Disappear extends CardImpl {
         this.addAbility(ability);
 
         // {U}: Return enchanted creature and Disappear to their owners' hands.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DisappearEffect(), new ManaCostsImpl<>("{U}")));
+        this.addAbility(new SimpleActivatedAbility(new DisappearEffect(), new ManaCostsImpl<>("{U}")));
         
     }
 
@@ -54,12 +54,12 @@ public final class Disappear extends CardImpl {
 
 class DisappearEffect extends OneShotEffect {
 
-    public DisappearEffect() {
+    DisappearEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return enchanted creature and {this} to their owners' hands";
     }
 
-    public DisappearEffect(final DisappearEffect effect) {
+    private DisappearEffect(final DisappearEffect effect) {
         super(effect);
     }
 

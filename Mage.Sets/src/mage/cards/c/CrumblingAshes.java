@@ -3,13 +3,11 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.Target;
@@ -32,7 +30,7 @@ public final class CrumblingAshes extends CardImpl {
 
 
         // At the beginning of your upkeep, destroy target creature with a -1/-1 counter on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroyTargetEffect());
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);

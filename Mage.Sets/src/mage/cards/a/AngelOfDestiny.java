@@ -3,9 +3,9 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.MoreThanStartingLifeTotalCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -49,8 +49,8 @@ public final class AngelOfDestiny extends CardImpl {
         // At the beginning of your end step, if you have at least 15 life more than your starting life total, each player Angel of Destiny attacked this turn loses the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new AngelOfDestinyLoseEffect(), TargetController.YOU, false
-                ), AngelOfDestinyCondition.instance, "At the beginning of your end step, " +
+                        new AngelOfDestinyLoseEffect()
+                ), MoreThanStartingLifeTotalCondition.FIFTEEN, "At the beginning of your end step, " +
                 "if you have at least 15 life more than your starting life total, " +
                 "each player {this} attacked this turn loses the game."
         ), new AngelOfDestinyWatcher());
@@ -63,16 +63,6 @@ public final class AngelOfDestiny extends CardImpl {
     @Override
     public AngelOfDestiny copy() {
         return new AngelOfDestiny(this);
-    }
-}
-
-enum AngelOfDestinyCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getLife() >= game.getStartingLife() + 15;
     }
 }
 
@@ -95,7 +85,7 @@ class AngelOfDestinyGainLifeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         int damage = (int) getValue("damage");
         if (controller != null) {
             controller.gainLife(damage, game, source);

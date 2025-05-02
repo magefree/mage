@@ -28,6 +28,8 @@ public final class GarenbrigCarver extends AdventureCard {
         // Target creature gets +2/+2 until end of turn.
         this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private GarenbrigCarver(final GarenbrigCarver card) {

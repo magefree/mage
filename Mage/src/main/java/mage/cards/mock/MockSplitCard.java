@@ -18,7 +18,8 @@ import java.util.List;
 /**
  * @author North
  */
-public class MockSplitCard extends SplitCard {
+public class MockSplitCard extends SplitCard implements MockableCard {
+
     public MockSplitCard(CardInfo card) {
         super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity()),
                 card.getTypes().toArray(new CardType[0]),
@@ -33,7 +34,6 @@ public class MockSplitCard extends SplitCard {
 
         this.frameColor = card.getFrameColor();
         this.frameStyle = card.getFrameStyle();
-        this.usesVariousArt = card.usesVariousArt();
 
         this.color = card.getColor();
         this.flipCard = card.isFlipCard();
@@ -119,8 +119,7 @@ public class MockSplitCard extends SplitCard {
         // so a MockSplitCard must ignore it (duplicate fix)
         Abilities<Ability> sourceAbilities = this.getAbilities();
         return CardUtil.getCardRulesWithAdditionalInfo(
-                this.getId(),
-                this.getName(),
+                this,
                 sourceAbilities,
                 sourceAbilities
         );

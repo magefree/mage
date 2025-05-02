@@ -27,7 +27,7 @@ public final class ConjurersBauble extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {tap}, Sacrifice Conjurer's Bauble: Put up to one target card from your graveyard on the bottom of your library. Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false, rule), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(false, rule), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD));
         ability.addEffect(new DrawCardSourceControllerEffect(1));

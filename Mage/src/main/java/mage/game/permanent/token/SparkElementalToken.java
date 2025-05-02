@@ -1,7 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -24,10 +24,10 @@ public final class SparkElementalToken extends TokenImpl {
 
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SacrificeSourceEffect(), false));
     }
 
-    protected SparkElementalToken(final SparkElementalToken token) {
+    private SparkElementalToken(final SparkElementalToken token) {
         super(token);
     }
 

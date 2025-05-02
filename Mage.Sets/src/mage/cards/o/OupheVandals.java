@@ -42,7 +42,7 @@ public final class OupheVandals extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, Sacrifice Ouphe Vandals: Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OupheVandalsEffect(), new ManaCostsImpl<>("{G}"));
+        Ability ability = new SimpleActivatedAbility(new OupheVandalsEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetActivatedAbility(filter));
         this.addAbility(ability);
@@ -60,12 +60,12 @@ public final class OupheVandals extends CardImpl {
 
 class OupheVandalsEffect extends OneShotEffect {
 
-    public OupheVandalsEffect() {
+    OupheVandalsEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield.";
     }
 
-    public OupheVandalsEffect(final OupheVandalsEffect effect) {
+    private OupheVandalsEffect(final OupheVandalsEffect effect) {
         super(effect);
     }
 

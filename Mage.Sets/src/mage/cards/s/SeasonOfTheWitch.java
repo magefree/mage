@@ -6,8 +6,8 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
@@ -39,11 +39,10 @@ public final class SeasonOfTheWitch extends CardImpl {
         // At the beginning of your upkeep, sacrifice Season of the Witch unless you pay 2 life.
         Cost cost = new PayLifeCost(2);
         cost.setText("2 life");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(cost), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(cost)));
 
         // At the beginning of the end step, destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new SeasonOfTheWitchEffect(), TargetController.ANY, false);
-        ability.addWatcher(new AttackedThisTurnWatcher());
+        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SeasonOfTheWitchEffect(), false);
         ability.addWatcher(new CouldAttackThisTurnWatcher());
         this.addAbility(ability);
     }
@@ -65,7 +64,7 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
         this.staticText = "destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack";
     }
 
-    SeasonOfTheWitchEffect(final SeasonOfTheWitchEffect effect) {
+    private SeasonOfTheWitchEffect(final SeasonOfTheWitchEffect effect) {
         super(effect);
     }
 
@@ -78,7 +77,7 @@ class SeasonOfTheWitchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
         if (activePlayer != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 // Noncreature cards are safe.
                 if (!permanent.isCreature(game)) {
                     continue;

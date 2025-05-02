@@ -6,7 +6,6 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -51,13 +50,13 @@ public class LukkaBoundToRuin extends CardImpl {
 
         // −4: Lukka deals X damage divided as you choose among any number of target creatures and/or planeswalkers,
         // where X is the greatest power among creatures you controlled as you activated this ability.
-        DynamicValue xValue = GreatestPowerAmongControlledCreaturesValue.instance;
-        DamageMultiEffect damageMultiEffect = new DamageMultiEffect(xValue);
+        DamageMultiEffect damageMultiEffect = new DamageMultiEffect();
         damageMultiEffect.setText("Lukka deals X damage divided as you choose " +
                 "among any number of target creatures and/or planeswalkers, " +
-                "where X is the greatest power among creatures you controlled as you activated this ability.");
+                "where X is the greatest power among creatures you control as you activate this ability.");
         ability = new LoyaltyAbility(damageMultiEffect, -4);
         ability.setTargetAdjuster(LukkaBoundToRuinAdjuster.instance);
+        ability.addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
         this.addAbility(ability);
     }
 
@@ -135,9 +134,6 @@ enum LukkaBoundToRuinAdjuster implements TargetAdjuster {
         // Maximum targets is equal to the damage - as each target need to be assigned at least 1 damage
         ability.getTargets().clear();
         int xValue = GreatestPowerAmongControlledCreaturesValue.instance.calculate(game, ability, null);
-        TargetCreatureOrPlaneswalkerAmount targetCreatureOrPlaneswalkerAmount = new TargetCreatureOrPlaneswalkerAmount(xValue);
-        targetCreatureOrPlaneswalkerAmount.setMinNumberOfTargets(0);
-        targetCreatureOrPlaneswalkerAmount.setMaxNumberOfTargets(xValue);
-        ability.addTarget(targetCreatureOrPlaneswalkerAmount);
+        ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(xValue, 0, xValue));
     }
 }

@@ -31,7 +31,7 @@ public final class OranRiefTheVastwood extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OranRiefTheVastwoodEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new OranRiefTheVastwoodEffect(), new TapSourceCost()));
     }
 
     private OranRiefTheVastwood(final OranRiefTheVastwood card) {
@@ -47,12 +47,12 @@ public final class OranRiefTheVastwood extends CardImpl {
 
 class OranRiefTheVastwoodEffect extends OneShotEffect {
 
-    public OranRiefTheVastwoodEffect() {
+    OranRiefTheVastwoodEffect() {
         super(Outcome.BoostCreature);
         staticText = "Put a +1/+1 counter on each green creature that entered the battlefield this turn";
     }
 
-    public OranRiefTheVastwoodEffect(final OranRiefTheVastwoodEffect effect) {
+    private OranRiefTheVastwoodEffect(final OranRiefTheVastwoodEffect effect) {
         super(effect);
     }
 

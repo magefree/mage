@@ -21,7 +21,8 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     public CostsImpl() {
     }
 
-    public CostsImpl(final CostsImpl<T> costs) {
+    protected CostsImpl(final CostsImpl<T> costs) {
+        this.ensureCapacity(costs.size());
         for (Cost cost : costs) {
             this.add((T) cost.copy());
         }
@@ -156,17 +157,15 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 
     @Override
     public Targets getTargets() {
-        Targets targets = new Targets();
+        Targets res = new Targets();
         for (T cost : this) {
-            if (cost.getTargets() != null) {
-                targets.addAll(cost.getTargets());
-            }
+            res.addAll(cost.getTargets());
         }
-        return targets;
+        return res.withReadOnly();
     }
 
     @Override
-    public Costs<T> copy() {
+    public CostsImpl<T> copy() {
         return new CostsImpl(this);
     }
 }

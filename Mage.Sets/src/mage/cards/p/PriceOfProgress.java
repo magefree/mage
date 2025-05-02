@@ -44,7 +44,7 @@ class PriceOfProgressEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to each player equal to twice the number of nonbasic lands that player controls";
     }
 
-    public PriceOfProgressEffect(final PriceOfProgressEffect effect) {
+    private PriceOfProgressEffect(final PriceOfProgressEffect effect) {
         super(effect);
     }
 

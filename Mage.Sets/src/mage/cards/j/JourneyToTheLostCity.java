@@ -1,12 +1,11 @@
 package mage.cards.j;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -35,7 +34,7 @@ public final class JourneyToTheLostCity extends CardImpl {
         // 10-19 | Create a 2/2 green Wolf creature token, then put a +1/+1 counter on it for each creature card among those cards.
         // 20 | Put all permanent cards exiled with Journey to the Lost City onto the battlefield, then sacrifice it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new JourneyToTheLostCityEffect(), TargetController.YOU, false
+                new JourneyToTheLostCityEffect()
         ));
     }
 
@@ -94,8 +93,8 @@ class JourneyToTheLostCityEffect extends RollDieWithResultTableEffect {
             return false;
         }
         if (amount <= 9) {
-            TargetCard target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_LAND, null);
-            target.setNotTarget(true);
+            TargetCard target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_LAND);
+            target.withNotTarget(true);
             player.choose(outcome, cards, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             return card != null && player.moveCards(card, Zone.BATTLEFIELD, source, game);

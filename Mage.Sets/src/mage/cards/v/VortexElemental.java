@@ -38,10 +38,10 @@ public final class VortexElemental extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}: Put Vortex Elemental and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle their libraries.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new VortexElementalEffect(), new ManaCostsImpl<>("{U}")));
+        this.addAbility(new SimpleActivatedAbility(new VortexElementalEffect(), new ManaCostsImpl<>("{U}")));
 
         // {3}{U}{U}: Target creature blocks Vortex Elemental this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl<>("{3}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl<>("{3}{U}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -58,12 +58,12 @@ public final class VortexElemental extends CardImpl {
 
 class VortexElementalEffect extends OneShotEffect {
 
-    public VortexElementalEffect() {
+    VortexElementalEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put {this} and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle";
     }
 
-    public VortexElementalEffect(final VortexElementalEffect effect) {
+    private VortexElementalEffect(final VortexElementalEffect effect) {
         super(effect);
     }
 

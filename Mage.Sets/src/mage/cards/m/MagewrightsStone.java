@@ -11,7 +11,6 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -36,7 +35,7 @@ public final class MagewrightsStone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {1}, {T}: Untap target creature that has an activated ability with {T} in its cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
@@ -64,10 +63,8 @@ class HasAbilityWithTapSymbolPredicate implements Predicate<MageObject> {
         }
 
         for (Ability ability : abilities) {
-            if ((ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.MANA) && !ability.getCosts().isEmpty()) {
-                if (ability.hasTapCost()) {
-                        return true;
-                }
+            if (ability.isActivatedAbility() && ability.hasTapCost()) {
+                return true;
             }
         }
         return false;

@@ -23,7 +23,7 @@ public final class Skyshaper extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Sacrifice Skyshaper: Creatures you control gain flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilityControlledEffect(
                         FlyingAbility.getInstance(), 
                         Duration.EndOfTurn, 

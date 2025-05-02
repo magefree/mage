@@ -9,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -20,12 +19,7 @@ import java.util.UUID;
  */
 public final class HagraDiabolist extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Allies you control");
-
-    static {
-        filter.add(SubType.ALLY.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ALLY, "Allies you control");
 
     public HagraDiabolist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

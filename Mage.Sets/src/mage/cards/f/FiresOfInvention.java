@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -11,9 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.card.ManaValueLessThanControlledLandCountPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.common.CastSpellLastTurnWatcher;
@@ -29,7 +26,7 @@ public final class FiresOfInvention extends CardImpl {
             = new FilterCard("spells with mana value less than or equal to the number of lands you control");
 
     static {
-        filter.add(FiresOfInventionPredicate.instance);
+        filter.add(ManaValueLessThanControlledLandCountPredicate.instance);
     }
 
     public FiresOfInvention(UUID ownerId, CardSetInfo setInfo) {
@@ -49,16 +46,6 @@ public final class FiresOfInvention extends CardImpl {
     @Override
     public FiresOfInvention copy() {
         return new FiresOfInvention(this);
-    }
-}
-
-enum FiresOfInventionPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        return input.getObject().getManaValue() <=
-                game.getBattlefield().countAll(StaticFilters.FILTER_LAND, game.getControllerId(input.getSourceId()), game);
     }
 }
 

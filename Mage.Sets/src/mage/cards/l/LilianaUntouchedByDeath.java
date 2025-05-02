@@ -5,15 +5,15 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -28,6 +28,11 @@ public final class LilianaUntouchedByDeath extends CardImpl {
     private static final DynamicValue xValue = new SignInversionDynamicValue(
             new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ZOMBIE, "Zombies you control"), null)
     );
+
+    private static final FilterNonlandCard filter = new FilterNonlandCard("Zombie spells");
+    static {
+        filter.add(SubType.ZOMBIE.getPredicate());
+    }
 
     public LilianaUntouchedByDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{B}");
@@ -44,8 +49,9 @@ public final class LilianaUntouchedByDeath extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // -3: You may cast Zombie cards from your graveyard this turn.
-        this.addAbility(new LoyaltyAbility(new LilianaUntouchedByDeathGraveyardEffect(), -3));
+        // -3: You may cast Zombie spells from your graveyard this turn.
+        this.addAbility(new LoyaltyAbility(new PlayFromGraveyardControllerEffect(filter, Duration.EndOfTurn)
+                .setText("You may cast Zombie spells from your graveyard this turn"), -3));
     }
 
     private LilianaUntouchedByDeath(final LilianaUntouchedByDeath card) {
@@ -60,12 +66,12 @@ public final class LilianaUntouchedByDeath extends CardImpl {
 
 class LilianaUntouchedByDeathEffect extends OneShotEffect {
 
-    public LilianaUntouchedByDeathEffect() {
+    LilianaUntouchedByDeathEffect() {
         super(Outcome.Benefit);
-        this.staticText = "mill three cards. If at least one of them is a Zombie card, each opponent loses 2 life and you gain 2 life";
+        this.staticText = "mill three cards. If at least one Zombie card is milled this way, each opponent loses 2 life and you gain 2 life";
     }
 
-    public LilianaUntouchedByDeathEffect(final LilianaUntouchedByDeathEffect effect) {
+    private LilianaUntouchedByDeathEffect(final LilianaUntouchedByDeathEffect effect) {
         super(effect);
     }
 
@@ -89,41 +95,5 @@ class LilianaUntouchedByDeathEffect extends OneShotEffect {
             player.gainLife(2, game, source);
         }
         return true;
-    }
-}
-
-class LilianaUntouchedByDeathGraveyardEffect extends AsThoughEffectImpl {
-
-    public LilianaUntouchedByDeathGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast Zombie cards from your graveyard this turn";
-    }
-
-    public LilianaUntouchedByDeathGraveyardEffect(final LilianaUntouchedByDeathGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public LilianaUntouchedByDeathGraveyardEffect copy() {
-        return new LilianaUntouchedByDeathGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null
-                    && card.hasSubtype(SubType.ZOMBIE, game)
-                    && card.isOwnedBy(source.getControllerId())
-                    && game.getState().getZone(objectId) == Zone.GRAVEYARD) {
-                return true;
-            }
-        }
-        return false;
     }
 }

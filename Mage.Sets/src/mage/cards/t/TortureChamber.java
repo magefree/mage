@@ -1,8 +1,8 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveAllCountersSourceCost;
@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,11 +32,11 @@ public final class TortureChamber extends CardImpl {
 
         // At the beginning of your upkeep, put a pain counter on Torture Chamber.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.PAIN.createInstance()), TargetController.YOU, false
+                new AddCountersSourceEffect(CounterType.PAIN.createInstance())
         ));
 
         // At the beginning of your end step, Torture Chamber deals damage to you equal to the number of pain counters on it.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new TortureChamberEffect1(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TortureChamberEffect1()));
 
         // {1}, {tap}, Remove all pain counters from Torture Chamber: Torture Chamber deals damage to target creature equal to the number of pain counters removed this way.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
@@ -66,7 +65,7 @@ class TortureChamberEffect1 extends OneShotEffect {
         this.staticText = "{this} deals damage to you equal to the number of pain counters on it";
     }
 
-    public TortureChamberEffect1(final TortureChamberEffect1 effect) {
+    private TortureChamberEffect1(final TortureChamberEffect1 effect) {
         super(effect);
     }
 
@@ -95,7 +94,7 @@ class TortureChamberEffect2 extends OneShotEffect {
         this.staticText = "{this} deals damage to target creature equal to the number of pain counters removed this way";
     }
 
-    public TortureChamberEffect2(final TortureChamberEffect2 effect) {
+    private TortureChamberEffect2(final TortureChamberEffect2 effect) {
         super(effect);
     }
 

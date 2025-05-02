@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
 import mage.constants.*;
@@ -38,7 +38,7 @@ public final class AwakenedAwareness extends CardImpl {
 
         // When Awakened Awareness enters the battlefield, put X +1/+1 counters on enchanted permanent.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), ManacostVariableValue.ETB, "enchanted permanent")
+                new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), GetXValue.instance, "enchanted permanent")
         ));
 
         // As long as enchanted permanent is a creature, it has base power and toughness 1/1.
@@ -57,7 +57,7 @@ public final class AwakenedAwareness extends CardImpl {
 
 class AwakenedAwarenessEffect extends ContinuousEffectImpl {
 
-    public AwakenedAwarenessEffect() {
+    AwakenedAwarenessEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.UnboostCreature);
         this.staticText = "As long as enchanted permanent is a creature, it has base power and toughness 1/1";
     }

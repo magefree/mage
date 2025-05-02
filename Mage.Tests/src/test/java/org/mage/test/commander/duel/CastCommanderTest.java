@@ -77,7 +77,7 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
        
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Patron of the Orochi");
         setChoice(playerA, true);
-        addTarget(playerA, "Coiled Tinviper");
+        setChoice(playerA, "Coiled Tinviper");
 
         setStrictChooseMode(true);
         

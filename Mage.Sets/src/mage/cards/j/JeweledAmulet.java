@@ -66,7 +66,7 @@ class JeweledAmuletAddCounterEffect extends OneShotEffect {
         this.staticText = "Note the type of mana spent to pay this activation cost. Activate only if there are no charge counters on {this}";
     }
 
-    public JeweledAmuletAddCounterEffect(final JeweledAmuletAddCounterEffect effect) {
+    private JeweledAmuletAddCounterEffect(final JeweledAmuletAddCounterEffect effect) {
         super(effect);
         manaUsedString = effect.manaUsedString;
     }
@@ -100,7 +100,7 @@ class JeweledAmuletAddManaEffect extends ManaEffect {
         staticText = "Add one mana of {this}'s last noted type";
     }
 
-    JeweledAmuletAddManaEffect(JeweledAmuletAddManaEffect effect) {
+    private JeweledAmuletAddManaEffect(final JeweledAmuletAddManaEffect effect) {
         super(effect);
         storedMana = effect.storedMana == null ? null : effect.storedMana.copy();
     }

@@ -38,12 +38,12 @@ public final class PainsReward extends CardImpl {
 
 class PainsRewardEffect extends OneShotEffect {
 
-    public PainsRewardEffect() {
+    PainsRewardEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Each player may bid life. You start the bidding with a bid of any number. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and draws four cards";
     }
 
-    public PainsRewardEffect(final PainsRewardEffect effect) {
+    private PainsRewardEffect(final PainsRewardEffect effect) {
         super(effect);
     }
 

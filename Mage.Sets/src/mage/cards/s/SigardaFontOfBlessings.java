@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -51,9 +51,7 @@ public final class SigardaFontOfBlessings extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast Angel spells and Human spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(
-                TargetController.YOU, filter, false
-        )));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
     }
 
     private SigardaFontOfBlessings(final SigardaFontOfBlessings card) {

@@ -31,7 +31,7 @@ public final class ForiysianInterceptor extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Foriysian Interceptor can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect()));
     }
 
     private ForiysianInterceptor(final ForiysianInterceptor card) {

@@ -35,12 +35,12 @@ public final class BrimstoneMage extends LevelerCard {
 
         this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{3}{R}")));
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         abilities1.add(ability);
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         abilities2.add(ability);
 
@@ -51,7 +51,7 @@ public final class BrimstoneMage extends LevelerCard {
         setMaxLevelCounters(3);
     }
 
-    public BrimstoneMage (final BrimstoneMage card) {
+    private BrimstoneMage(final BrimstoneMage card) {
         super(card);
     }
 

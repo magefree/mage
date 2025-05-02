@@ -3,7 +3,7 @@ package mage.cards.o;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class OathOfScholars extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // At the beginning of each player's upkeep, that player chooses target player who has more cards in hand than they do and is their opponent. The first player may discard their hand and draw three cards.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfScholarsEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new OathOfScholarsEffect(), false).withTargetPointerSet(false);
         ability.setTargetAdjuster(OathOfScholarsAdjuster.instance);
         this.addAbility(ability);
     }
@@ -89,12 +89,12 @@ class OathOfScholarsPredicate implements ObjectSourcePlayerPredicate<Player> {
 
 class OathOfScholarsEffect extends OneShotEffect {
 
-    public OathOfScholarsEffect() {
+    OathOfScholarsEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "that player chooses target player who has more cards in hand than they do and is their opponent. The first player may discard their hand and draw three cards";
     }
 
-    public OathOfScholarsEffect(OathOfScholarsEffect effect) {
+    private OathOfScholarsEffect(final OathOfScholarsEffect effect) {
         super(effect);
     }
 

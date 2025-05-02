@@ -68,7 +68,7 @@ class LilianaTheNecromancerEffect extends OneShotEffect {
         this.staticText = "Put up to two creature cards from graveyards onto the battlefield under your control";
     }
 
-    public LilianaTheNecromancerEffect(final LilianaTheNecromancerEffect effect) {
+    private LilianaTheNecromancerEffect(final LilianaTheNecromancerEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class LilianaTheNecromancerEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInGraveyard(0, 2, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, target, source, game)) {
             return false;
         }

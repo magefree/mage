@@ -1,5 +1,3 @@
-
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -22,11 +20,11 @@ public final class VaultSkyward extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UntapTargetEffect());
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap it"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public VaultSkyward (final VaultSkyward card) {
+    private VaultSkyward(final VaultSkyward card) {
         super(card);
     }
 

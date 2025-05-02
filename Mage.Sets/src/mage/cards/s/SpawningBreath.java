@@ -19,10 +19,10 @@ public final class SpawningBreath extends CardImpl {
     public SpawningBreath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-
+        // Spawning Breath deals 1 damage to any target. Create a 0/1 colorless Eldrazi Spawn creature token. It has “Sacrifice this creature: Add {C}.”
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()).withTextOptions(true));
     }
 
     private SpawningBreath(final SpawningBreath card) {

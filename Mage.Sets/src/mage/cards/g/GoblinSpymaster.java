@@ -4,7 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class GoblinSpymaster extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of each opponent's end step, that player creates a 1/1 red Goblin creature token with "Creatures you control attack each combat if able."
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new SpyMasterGoblinCreateTokenEffect(), TargetController.OPPONENT, null, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.OPPONENT, new SpyMasterGoblinCreateTokenEffect(), false, null));
     }
 
     private GoblinSpymaster(final GoblinSpymaster card) {
@@ -48,12 +48,12 @@ public final class GoblinSpymaster extends CardImpl {
 
 class SpyMasterGoblinCreateTokenEffect extends OneShotEffect {
 
-    public SpyMasterGoblinCreateTokenEffect() {
+    SpyMasterGoblinCreateTokenEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player creates a 1/1 red Goblin creature token with \"Creatures you control attack each combat if able.\"";
     }
 
-    public SpyMasterGoblinCreateTokenEffect(final SpyMasterGoblinCreateTokenEffect effect) {
+    private SpyMasterGoblinCreateTokenEffect(final SpyMasterGoblinCreateTokenEffect effect) {
         super(effect);
     }
 

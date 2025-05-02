@@ -33,7 +33,7 @@ public final class AccursedWitch extends CardImpl {
         this.secondSideCardClazz = mage.cards.i.InfectiousCurse.class;
 
         // Spells your opponents cast that target Accursed Witch cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(-1, new FilterCard("Spells"), TargetController.OPPONENT))
         );
 
@@ -73,7 +73,7 @@ class AccursedWitchReturnTransformedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player attachTo = game.getPlayer(targetPointer.getFirst(game, source));
+        Player attachTo = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || !(game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) || attachTo == null) {
             return false;
         }

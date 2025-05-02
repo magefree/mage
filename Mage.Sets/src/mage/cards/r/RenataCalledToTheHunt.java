@@ -1,19 +1,18 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.EntersWithCountersControlledEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -38,7 +37,9 @@ public final class RenataCalledToTheHunt extends CardImpl {
         ).addHint(DevotionCount.G.getHint()));
 
         // Each other creature you control enters the battlefield with an additional +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(new RenataCalledToTheHuntReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new EntersWithCountersControlledEffect(
+                StaticFilters.FILTER_PERMANENT_CREATURE, CounterType.P1P1.createInstance(), true
+        )));
     }
 
     private RenataCalledToTheHunt(final RenataCalledToTheHunt card) {
@@ -48,45 +49,5 @@ public final class RenataCalledToTheHunt extends CardImpl {
     @Override
     public RenataCalledToTheHunt copy() {
         return new RenataCalledToTheHunt(this);
-    }
-}
-
-class RenataCalledToTheHuntReplacementEffect extends ReplacementEffectImpl {
-
-    RenataCalledToTheHuntReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Each other creature you control enters the battlefield with an additional +1/+1 counter on it.";
-    }
-
-    private RenataCalledToTheHuntReplacementEffect(final RenataCalledToTheHuntReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        return creature != null
-                && creature.isCreature(game)
-                && !source.getSourceId().equals(creature.getId())
-                && creature.isControlledBy(source.getControllerId());
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-        }
-        return false;
-    }
-
-    @Override
-    public RenataCalledToTheHuntReplacementEffect copy() {
-        return new RenataCalledToTheHuntReplacementEffect(this);
     }
 }

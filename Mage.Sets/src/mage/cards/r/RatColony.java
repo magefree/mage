@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
@@ -23,7 +23,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class RatColony extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Rat you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("other Rat you control");
 
     static {
         filter.add(SubType.RAT.getPredicate());
@@ -38,9 +38,9 @@ public final class RatColony extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Rat Colony gets +1/+0 for each other Rat you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter),
-                        StaticValue.get(0), Duration.WhileOnBattlefield, false)));
+                        StaticValue.get(0), Duration.WhileOnBattlefield)));
 
         // A deck can have any number of cards named Rat Colony.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("A deck can have any number of cards named Rat Colony.")));

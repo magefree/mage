@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -30,7 +29,7 @@ public final class AcquisitionsExpert extends CardImpl {
 
         // When Acquisitions Expert enters the battlefield, target opponent reveals a number of cards from their hand equal to the number of creatures in your party. You choose one of those cards. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DiscardCardYouChooseTargetEffect(TargetController.OPPONENT, PartyCount.instance)
+                new DiscardCardYouChooseTargetEffect(PartyCount.instance)
                         .setText("target opponent reveals a number of cards from their hand " +
                                 "equal to the number of creatures in your party. You choose one of those cards. " +
                                 "That player discards that card. " + PartyCount.getReminder())

@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class ObeliskOfUndoing extends CardImpl {
     
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("permanent you both own and control");
         
     static {
         filter.add(TargetController.YOU.getOwnerPredicate());
@@ -32,7 +31,7 @@ public final class ObeliskOfUndoing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {6}, {tap}: Return target permanent you both own and control to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{6}"));
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{6}"));
         ability.addCost(new TapSourceCost());        
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);

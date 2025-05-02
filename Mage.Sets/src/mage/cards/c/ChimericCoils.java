@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public final class ChimericCoils extends CardImpl {
     public ChimericCoils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // {X}{1}: Chimeric Coils becomes an X/X Construct artifact creature. Sacrifice it at the beginning of thhe next end step.
+        // {X}{1}: Chimeric Coils becomes an X/X Construct artifact creature. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(new ChimericCoilsEffect(), new ManaCostsImpl<>("{X}{1}"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect())));
         this.addAbility(ability);
@@ -41,12 +42,13 @@ public final class ChimericCoils extends CardImpl {
 
 class ChimericCoilsEffect extends ContinuousEffectImpl {
 
-    public ChimericCoilsEffect() {
+    ChimericCoilsEffect() {
         super(Duration.Custom, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
-    public ChimericCoilsEffect(final ChimericCoilsEffect effect) {
+    private ChimericCoilsEffect(final ChimericCoilsEffect effect) {
         super(effect);
     }
 
@@ -74,7 +76,7 @@ class ChimericCoilsEffect extends ContinuousEffectImpl {
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    int xValue = source.getManaCostsToPay().getX();
+                    int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
                     permanent.getPower().setModifiedBaseValue(xValue);
                     permanent.getToughness().setModifiedBaseValue(xValue);
                 }

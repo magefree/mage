@@ -32,7 +32,7 @@ public final class TeferisSentinel extends CardImpl {
         FilterControlledPermanent filter = new FilterControlledPermanent();
         filter.add(CardType.PLANESWALKER.getPredicate());
         filter.add(SubType.TEFERI.getPredicate());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(4, 0, Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter),

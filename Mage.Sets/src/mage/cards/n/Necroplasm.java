@@ -4,8 +4,8 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DredgeAbility;
@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -37,10 +36,10 @@ public final class Necroplasm extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, put a +1/+1 counter on Necroplasm.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
         
         // At the beginning of your end step, destroy each creature with converted mana cost equal to the number of +1/+1 counters on Necroplasm.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new NecroplasmEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new NecroplasmEffect()));
         
         // Dredge 2
         this.addAbility(new DredgeAbility(2));
@@ -63,7 +62,7 @@ class NecroplasmEffect extends OneShotEffect {
         this.staticText = "destroy each creature with mana value equal to the number of +1/+1 counters on {this}.";
     }
     
-    NecroplasmEffect(final NecroplasmEffect effect) {
+    private NecroplasmEffect(final NecroplasmEffect effect) {
         super(effect);
     }
     

@@ -24,7 +24,7 @@ public final class OboroPalaceInTheClouds extends CardImpl {
         // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
         // {1}: Return Oboro, Palace in the Clouds to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new GenericManaCost(1)));
     }
 
     private OboroPalaceInTheClouds(final OboroPalaceInTheClouds card) {

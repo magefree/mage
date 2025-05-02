@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -24,8 +24,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ThoughtSponge extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
 
     public ThoughtSponge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -46,7 +44,7 @@ public final class ThoughtSponge extends CardImpl {
 
         // When Thought Sponge dies, draw cards equal to its power.
         this.addAbility(new DiesSourceTriggeredAbility(
-                new DrawCardSourceControllerEffect(xValue).setText("draw cards equal to its power")
+                new DrawCardSourceControllerEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("draw cards equal to its power")
         ));
     }
 

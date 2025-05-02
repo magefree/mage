@@ -1,9 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -22,6 +19,10 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -39,7 +40,7 @@ public final class GiltspireAvenger extends CardImpl {
         this.addAbility(new ExaltedAbility());
 
         // {T}: Destroy target creature that dealt damage to you this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new GiltspireAvengerTarget());
         this.addAbility(ability);
 
@@ -62,7 +63,7 @@ class GiltspireAvengerTarget extends TargetPermanent {
         targetName = "creature that dealt damage to you this turn";
     }
 
-    public GiltspireAvengerTarget(final GiltspireAvengerTarget target) {
+    private GiltspireAvengerTarget(final GiltspireAvengerTarget target) {
         super(target);
     }
 
@@ -99,7 +100,7 @@ class GiltspireAvengerTarget extends TargetPermanent {
         MageObject targetSource = game.getObject(source);
         PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, sourceControllerId);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
+            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)
                     && watcher != null && watcher.hasSourceDoneDamage(permanent.getId(), game)) {
                 count++;
                 if (count >= remainingTargets) {

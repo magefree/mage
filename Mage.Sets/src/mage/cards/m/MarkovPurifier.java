@@ -1,8 +1,9 @@
 package mage.cards.m;
 
 import java.util.UUID;
+
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -14,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
- *
  * @author weirddan455
  */
 public final class MarkovPurifier extends CardImpl {
@@ -32,9 +32,8 @@ public final class MarkovPurifier extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, you may pay {2}. If you do, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(2)),
-                TargetController.YOU, new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0), false
+                TargetController.YOU, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(2)),
+                false, new YouGainedLifeCondition()
         ), new PlayerGainedLifeWatcher());
     }
 

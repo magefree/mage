@@ -1,5 +1,3 @@
-
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -17,11 +15,10 @@ import mage.target.TargetPermanent;
  */
 public final class RainOfSalt extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterLandPermanent();
+    private static final FilterPermanent filter = new FilterLandPermanent("lands");
 
     public RainOfSalt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
-
 
         // Destroy two target lands.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

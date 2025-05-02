@@ -18,7 +18,7 @@ public final class Kraken99Token extends TokenImpl {
         toughness = new MageInt(9);
     }
 
-    protected Kraken99Token(final Kraken99Token token) {
+    private Kraken99Token(final Kraken99Token token) {
         super(token);
     }
 

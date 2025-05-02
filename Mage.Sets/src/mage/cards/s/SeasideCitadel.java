@@ -25,7 +25,7 @@ public final class SeasideCitadel extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SeasideCitadel (final SeasideCitadel card) {
+    private SeasideCitadel(final SeasideCitadel card) {
         super(card);
     }
 

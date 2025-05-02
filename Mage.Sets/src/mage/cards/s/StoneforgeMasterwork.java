@@ -33,7 +33,7 @@ public final class StoneforgeMasterwork extends CardImpl {
         StoneforgeMasterworkDynamicValue countEnchantments = new StoneforgeMasterworkDynamicValue();
         Effect effect = new BoostEquippedEffect(countEnchantments, countEnchantments);
         effect.setText("Equipped creature gets +1/+1 for each other creature you control that shares a creature type with it");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));

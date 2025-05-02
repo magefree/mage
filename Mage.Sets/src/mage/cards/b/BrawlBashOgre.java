@@ -36,9 +36,7 @@ public final class BrawlBashOgre extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(
                 new DoIfCostPaid(
                         new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-                        ))
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
                 ), false
         ));
     }

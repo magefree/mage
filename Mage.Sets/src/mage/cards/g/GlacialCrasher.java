@@ -32,7 +32,7 @@ public final class GlacialCrasher extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Glacial Crasher can't attack unless there is a Mountain on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlacialCrasherEffect()));
+        this.addAbility(new SimpleStaticAbility(new GlacialCrasherEffect()));
     }
 
     private GlacialCrasher(final GlacialCrasher card) {
@@ -59,7 +59,7 @@ class GlacialCrasherEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless there is a Mountain on the battlefield";
     }
 
-    public GlacialCrasherEffect(final GlacialCrasherEffect effect) {
+    private GlacialCrasherEffect(final GlacialCrasherEffect effect) {
         super(effect);
     }
 

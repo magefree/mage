@@ -39,7 +39,7 @@ public final class YoseiTheMorningStar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Yosei, the Morning Star dies, target player skips their next untap step. Tap up to five target permanents that player controls.
-        Ability ability = new DiesSourceTriggeredAbility(new SkipNextPlayerUntapStepEffect("target"));
+        Ability ability = new DiesSourceTriggeredAbility(new SkipNextPlayerUntapStepEffect("target player"));
         ability.addTarget(new TargetPlayer());
         ability.addTarget(new YoseiTheMorningStarTarget());
         ability.addEffect(new TapTargetEffect().setTargetPointer(new SecondTargetPointer()));
@@ -64,7 +64,7 @@ class YoseiTheMorningStarTarget extends TargetPermanent {
         super(0, 5, filterTemplate, false);
     }
 
-    public YoseiTheMorningStarTarget(final YoseiTheMorningStarTarget target) {
+    private YoseiTheMorningStarTarget(final YoseiTheMorningStarTarget target) {
         super(target);
     }
 

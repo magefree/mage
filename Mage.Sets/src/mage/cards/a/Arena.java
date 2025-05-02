@@ -28,7 +28,7 @@ public final class Arena extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {3}, {tap}: Tap target creature you control and target creature of an opponent's choice they control. Those creatures fight each other.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ArenaEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new ArenaEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterControlledCreaturePermanent(), false));
@@ -53,7 +53,7 @@ class ArenaEffect extends OneShotEffect {
                 "Those creatures fight each other. <i>(Each deals damage equal to its power to the other.)</i>";
     }
 
-    ArenaEffect(final ArenaEffect effect) {
+    private ArenaEffect(final ArenaEffect effect) {
         super(effect);
     }
 

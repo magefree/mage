@@ -1,18 +1,15 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.CardTypeAssignment;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardAndOrCardInLibrary;
 
 import java.util.UUID;
 
@@ -63,7 +60,7 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
-        TargetCard target = new GiftOfTheGargantuanTarget();
+        TargetCard target = new TargetCardAndOrCardInLibrary(CardType.CREATURE, CardType.LAND);
         player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl();
         toHand.addAll(target.getTargets());
@@ -72,51 +69,5 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
         cards.removeAll(toHand);
         player.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
-    }
-}
-
-class GiftOfTheGargantuanTarget extends TargetCardInLibrary {
-
-    private static final FilterCard filter
-            = new FilterCard("a creature card and/or a land card");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-    }
-
-    private static final CardTypeAssignment cardTypeAssigner
-            = new CardTypeAssignment(CardType.CREATURE, CardType.LAND);
-
-    GiftOfTheGargantuanTarget() {
-        super(0, 2, filter);
-    }
-
-    private GiftOfTheGargantuanTarget(final GiftOfTheGargantuanTarget target) {
-        super(target);
-    }
-
-    @Override
-    public GiftOfTheGargantuanTarget copy() {
-        return new GiftOfTheGargantuanTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        if (this.getTargets().isEmpty()) {
-            return true;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(card);
-        return cardTypeAssigner.getRoleCount(cards, game) >= cards.size();
     }
 }

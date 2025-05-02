@@ -43,7 +43,7 @@ public final class KahoMinamoHistorian extends CardImpl {
 
         // {X}, {tap}: You may cast a card with converted mana cost X exiled with 
         // Kaho without paying its mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new KahoMinamoHistorianCastEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -72,7 +72,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
         this.staticText = "search your library for up to three instant cards, exile them, then shuffle";
     }
 
-    public KahoMinamoHistorianEffect(final KahoMinamoHistorianEffect effect) {
+    private KahoMinamoHistorianEffect(final KahoMinamoHistorianEffect effect) {
         super(effect);
     }
 
@@ -103,13 +103,13 @@ class KahoMinamoHistorianEffect extends SearchEffect {
 
 class KahoMinamoHistorianCastEffect extends OneShotEffect {
 
-    public KahoMinamoHistorianCastEffect() {
+    KahoMinamoHistorianCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast a spell with mana value X " +
                 "from among cards exiled with {this} without paying its mana cost";
     }
 
-    public KahoMinamoHistorianCastEffect(final KahoMinamoHistorianCastEffect effect) {
+    private KahoMinamoHistorianCastEffect(final KahoMinamoHistorianCastEffect effect) {
         super(effect);
     }
 
@@ -132,7 +132,7 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
         }
 
         FilterCard filter = new FilterCard();
-        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         return CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, filter);
     }
 }

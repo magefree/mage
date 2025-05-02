@@ -45,7 +45,7 @@ public final class RevokePrivileges extends CardImpl {
         // Enchanted creature can't attack, block, or crew Vehicles.
         Effect effect = new CantAttackBlockAttachedEffect(AttachmentType.AURA);
         effect.setText("Enchanted creature can't attack, block");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         ability.addEffect(new RevokePrivilegeCantCrewEffect());
         this.addAbility(ability);
 
@@ -63,12 +63,12 @@ public final class RevokePrivileges extends CardImpl {
 
 class RevokePrivilegeCantCrewEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RevokePrivilegeCantCrewEffect() {
+    RevokePrivilegeCantCrewEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = ", or crew Vehicles";
     }
 
-    public RevokePrivilegeCantCrewEffect(final RevokePrivilegeCantCrewEffect effect) {
+    private RevokePrivilegeCantCrewEffect(final RevokePrivilegeCantCrewEffect effect) {
         super(effect);
     }
 

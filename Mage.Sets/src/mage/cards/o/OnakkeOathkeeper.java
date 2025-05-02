@@ -24,6 +24,8 @@ import java.util.UUID;
  */
 public final class OnakkeOathkeeper extends CardImpl {
 
+    private static final FilterPlaneswalkerCard filter = new FilterPlaneswalkerCard("planeswalker card from your graveyard");
+
     public OnakkeOathkeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
@@ -47,7 +49,7 @@ public final class OnakkeOathkeeper extends CardImpl {
             Zone.GRAVEYARD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{4}{W}{W}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterPlaneswalkerCard()));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 

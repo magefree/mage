@@ -32,7 +32,7 @@ public final class MantellianSavrip extends CardImpl {
         this.addAbility(new MonstrosityAbility("{5}{G}{G}", 2));
 
         // Creatures with power less than Mantellian Savrip's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MantellianSavripRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new MantellianSavripRestrictionEffect()));
 
     }
 
@@ -48,12 +48,12 @@ public final class MantellianSavrip extends CardImpl {
 
 class MantellianSavripRestrictionEffect extends RestrictionEffect {
 
-    public MantellianSavripRestrictionEffect() {
+    MantellianSavripRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Creatures with power less than {this}'s power can't block it";
     }
 
-    public MantellianSavripRestrictionEffect(final MantellianSavripRestrictionEffect effect) {
+    private MantellianSavripRestrictionEffect(final MantellianSavripRestrictionEffect effect) {
         super(effect);
     }
 

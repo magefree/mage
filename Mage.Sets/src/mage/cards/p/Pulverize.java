@@ -29,7 +29,7 @@ public final class Pulverize extends CardImpl {
 
 
         // You may sacrifice two Mountains rather than pay Pulverize's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
+        this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(2, filter)));
         
         // Destroy all artifacts.
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACTS));

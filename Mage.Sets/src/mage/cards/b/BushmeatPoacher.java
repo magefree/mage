@@ -36,7 +36,7 @@ public final class BushmeatPoacher extends CardImpl {
         // {1}, {T}, Sacrifice another creature: You gain life equal to that creature's toughness. Draw a card.
         Ability ability = new SimpleActivatedAbility(new BushmeatPoacherEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

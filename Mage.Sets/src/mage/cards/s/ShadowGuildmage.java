@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -32,15 +31,15 @@ public final class ShadowGuildmage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {tap}: Put target creature you control on top of its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         
         // {R}, {tap}: Shadow Guildmage deals 1 damage to any target and 1 damage to you.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new DamageControllerEffect(1));
+        ability.addEffect(new DamageControllerEffect(1).setText("and 1 damage to you"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

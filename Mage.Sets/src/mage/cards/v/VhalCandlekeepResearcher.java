@@ -13,7 +13,6 @@ import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -52,7 +51,7 @@ public final class VhalCandlekeepResearcher extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public VhalCandlekeepResearcher copy() {
         return new VhalCandlekeepResearcher(this);
     }
 }
@@ -66,7 +65,7 @@ class VhalCandlekeepResearcherManaEffect extends ManaEffect {
         this.staticText = "Add an amount of {C} equal to {this}'s toughness. This mana can't be spent to cast spells from your hand.";
     }
 
-    VhalCandlekeepResearcherManaEffect(final VhalCandlekeepResearcherManaEffect effect) {
+    private VhalCandlekeepResearcherManaEffect(final VhalCandlekeepResearcherManaEffect effect) {
         super(effect);
     }
 

@@ -3,7 +3,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.Effect;
@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
@@ -42,7 +41,7 @@ public final class PhantasmalSphere extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, put a +1/+1 counter on Phantasmal Sphere, then sacrifice Phantasmal Sphere unless you pay {1} for each +1/+1 counter on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         Effect effect = new SacrificeSourceUnlessPaysEffect(new CountersSourceCount(CounterType.P1P1));
         effect.setText("then sacrifice {this} unless you pay {1} for each +1/+1 counter on it.");
         ability.addEffect(effect);
@@ -67,14 +66,14 @@ public final class PhantasmalSphere extends CardImpl {
 
 class PhantasmalSphereEffect extends OneShotEffect {
 
-    public PhantasmalSphereEffect() {
+    PhantasmalSphereEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "target opponent creates an X/X blue Orb creature token "
                 + "with flying, where X is the number "
                 + "of +1/+1 counters on {this}";
     }
 
-    public PhantasmalSphereEffect(final PhantasmalSphereEffect effect) {
+    private PhantasmalSphereEffect(final PhantasmalSphereEffect effect) {
         super(effect);
     }
 
@@ -111,7 +110,7 @@ class PhantasmalSphereToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public PhantasmalSphereToken(final PhantasmalSphereToken token) {
+    private PhantasmalSphereToken(final PhantasmalSphereToken token) {
         super(token);
     }
 

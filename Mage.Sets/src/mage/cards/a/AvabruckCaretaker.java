@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.HexproofAbility;
@@ -10,11 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -23,13 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AvabruckCaretaker extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AvabruckCaretaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
@@ -47,9 +37,9 @@ public final class AvabruckCaretaker extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AddCountersTargetEffect(
                         CounterType.P1P1.createInstance(2)
-                ), TargetController.YOU, false
+                )
         );
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 
         // Daybound

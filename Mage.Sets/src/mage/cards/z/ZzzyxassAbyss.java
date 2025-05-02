@@ -6,14 +6,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -31,7 +30,7 @@ public final class ZzzyxassAbyss extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
         // At the beginning of your upkeep, destroy all nonland permanents with the first name alphabetically among nonland permanents.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ZzzyxassAbyssEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ZzzyxassAbyssEffect()));
     }
 
     private ZzzyxassAbyss(final ZzzyxassAbyss card) {
@@ -47,12 +46,12 @@ public final class ZzzyxassAbyss extends CardImpl {
 
 class ZzzyxassAbyssEffect extends OneShotEffect {
 
-    public ZzzyxassAbyssEffect() {
+    ZzzyxassAbyssEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all nonland permanents with the first name alphabetically among nonland permanents";
     }
 
-    public ZzzyxassAbyssEffect(final ZzzyxassAbyssEffect effect) {
+    private ZzzyxassAbyssEffect(final ZzzyxassAbyssEffect effect) {
         super(effect);
     }
 

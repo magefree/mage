@@ -36,7 +36,7 @@ public final class SteelSquirrel extends CardImpl {
         this.addAbility(new SteelSquirrelTriggeredAbility());
 
         // 6: Roll a six-sided die.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(null, 6), new GenericManaCost(6));
+        Ability ability = new SimpleActivatedAbility(new RollDiceEffect(6), new GenericManaCost(6));
         this.addAbility(ability);
     }
 
@@ -57,7 +57,7 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you roll a 5 or higher on a die, ");
     }
 
-    public SteelSquirrelTriggeredAbility(final SteelSquirrelTriggeredAbility ability) {
+    private SteelSquirrelTriggeredAbility(final SteelSquirrelTriggeredAbility ability) {
         super(ability);
     }
 
@@ -75,7 +75,7 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DieRolledEvent drEvent = (DieRolledEvent) event;
         // silver border card must look for "result" instead "natural result"
-        if (this.isControlledBy(event.getPlayerId()) && drEvent.getResult() < 5) {
+        if (this.isControlledBy(event.getTargetId()) && drEvent.getResult() < 5) {
             return false;
         }
 
@@ -86,12 +86,12 @@ class SteelSquirrelTriggeredAbility extends TriggeredAbilityImpl {
 
 class SteelSquirrelEffect extends OneShotEffect {
 
-    public SteelSquirrelEffect() {
+    SteelSquirrelEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} gets +X/+X until end of turn, where X is the result";
     }
 
-    public SteelSquirrelEffect(final SteelSquirrelEffect effect) {
+    private SteelSquirrelEffect(final SteelSquirrelEffect effect) {
         super(effect);
     }
 

@@ -37,7 +37,7 @@ public final class StupefyingTouch extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
         // Enchanted creature's activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantActivateAbilitiesAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantActivateAbilitiesAttachedEffect()));
     }
 
     private StupefyingTouch(final StupefyingTouch card) {
@@ -52,12 +52,12 @@ public final class StupefyingTouch extends CardImpl {
 
 class CantActivateAbilitiesAttachedEffect extends RestrictionEffect {
 
-    public CantActivateAbilitiesAttachedEffect() {
+    CantActivateAbilitiesAttachedEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature's activated abilities can't be activated";
     }
 
-    public CantActivateAbilitiesAttachedEffect(final CantActivateAbilitiesAttachedEffect effect) {
+    private CantActivateAbilitiesAttachedEffect(final CantActivateAbilitiesAttachedEffect effect) {
         super(effect);
     }
 

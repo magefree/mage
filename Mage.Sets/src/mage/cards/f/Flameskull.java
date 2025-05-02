@@ -1,7 +1,6 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -73,12 +72,12 @@ class FlameskullEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (player == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (player == null || card == null) {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getFromTop(game));
-        cards.add((Card) sourceObject);
+        cards.add(card);
         player.moveCards(cards, Zone.EXILED, source, game);
         game.addEffect(new FlameskullPlayEffect(cards, game), source);
         return true;
@@ -132,10 +131,10 @@ class FlameskullWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.SPELL_CAST
-                || event.getAdditionalReference() == null) {
+                || event.getApprovingObject() == null) {
             return;
         }
-        MageObjectReference mor = event.getAdditionalReference().getApprovingMageObjectReference();
+        MageObjectReference mor = event.getApprovingObject().getApprovingMageObjectReference();
         Spell spell = game.getSpell(event.getTargetId());
         if (mor == null || spell == null) {
             return;

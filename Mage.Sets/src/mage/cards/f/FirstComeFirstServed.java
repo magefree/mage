@@ -34,7 +34,7 @@ public final class FirstComeFirstServed extends CardImpl {
 
         // Each attacking or blocking creature with the lowest collector number among attacking or blocking creatures has first strike.
         GainAbilityAllEffect gainEffect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, gainEffect));
+        this.addAbility(new SimpleStaticAbility(gainEffect));
     }
 
     private FirstComeFirstServed(final FirstComeFirstServed card) {

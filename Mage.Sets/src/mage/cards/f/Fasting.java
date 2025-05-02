@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -33,12 +32,12 @@ public final class Fasting extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // At the beginning of your upkeep, put a hunger counter on Fasting. Then destroy Fasting if it has five or more hunger counters on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.HUNGER.createInstance()), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.HUNGER.createInstance()));
         ability.addEffect(new ConditionalOneShotEffect(new DestroySourceEffect(), new SourceHasCounterCondition(CounterType.HUNGER, 5), "Then destroy {this} if it has five or more hunger counters on it"));
         this.addAbility(ability);
 
         // If you would begin your draw step, you may skip that step instead. If you do, you gain 2 life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FastingReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new FastingReplacementEffect()));
         
         // When you draw a card, destroy Fasting.
         this.addAbility(new DrawCardControllerTriggeredAbility(new DestroySourceEffect(), false));
@@ -57,23 +56,18 @@ public final class Fasting extends CardImpl {
 
 class FastingReplacementEffect extends ReplacementEffectImpl {
 
-    public FastingReplacementEffect() {
+    FastingReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "If you would begin your draw step, you may skip that step instead. If you do, you gain 2 life";
     }
 
-    public FastingReplacementEffect(final FastingReplacementEffect effect) {
+    private FastingReplacementEffect(final FastingReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public FastingReplacementEffect copy() {
         return new FastingReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

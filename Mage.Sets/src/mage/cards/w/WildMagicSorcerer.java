@@ -34,7 +34,7 @@ public final class WildMagicSorcerer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // The first spell you cast from exile each turn has cascade.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect()),
                 new WildMagicSorcererWatcher());
     }
@@ -58,7 +58,7 @@ class WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect extends Continuo
         staticText = "The first spell you cast from exile each turn has cascade";
     }
 
-    public WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect(final WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect effect) {
+    private WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect(final WildMagicSorcererGainCascadeFirstSpellCastFromExileEffect effect) {
         super(effect);
     }
 

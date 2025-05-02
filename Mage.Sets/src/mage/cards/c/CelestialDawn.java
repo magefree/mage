@@ -33,14 +33,14 @@ public final class CelestialDawn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
 
         // Lands you control are Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CelestialDawnToPlainsEffect()));
+        this.addAbility(new SimpleStaticAbility(new CelestialDawnToPlainsEffect()));
 
         // Nonland cards you own that aren't on the battlefield, spells you control, and nonland permanents you control are white.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CelestialDawnToWhiteEffect()));
+        this.addAbility(new SimpleStaticAbility(new CelestialDawnToWhiteEffect()));
 
         // You may spend white mana as though it were mana of any color.
         // You may spend other mana only as though it were colorless mana.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CelestialDawnSpendAnyManaEffect());
+        Ability ability = new SimpleStaticAbility(new CelestialDawnSpendAnyManaEffect());
         ability.addEffect(new CelestialDawnSpendColorlessManaEffect());
         this.addAbility(ability);
 
@@ -65,7 +65,7 @@ class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
         this.staticText = "Lands you control are Plains";
     }
 
-    CelestialDawnToPlainsEffect(final CelestialDawnToPlainsEffect effect) {
+    private CelestialDawnToPlainsEffect(final CelestialDawnToPlainsEffect effect) {
         super(effect);
     }
 
@@ -183,7 +183,7 @@ class CelestialDawnSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
         staticText = "You may spend white mana as though it were mana of any color";
     }
 
-    public CelestialDawnSpendAnyManaEffect(final CelestialDawnSpendAnyManaEffect effect) {
+    private CelestialDawnSpendAnyManaEffect(final CelestialDawnSpendAnyManaEffect effect) {
         super(effect);
     }
 
@@ -218,7 +218,7 @@ class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl implement
         staticText = "You may spend other mana only as though it were colorless mana";
     }
 
-    public CelestialDawnSpendColorlessManaEffect(final CelestialDawnSpendColorlessManaEffect effect) {
+    private CelestialDawnSpendColorlessManaEffect(final CelestialDawnSpendColorlessManaEffect effect) {
         super(effect);
     }
 

@@ -76,9 +76,9 @@ public final class GiadaFontOfHope extends CardImpl {
 
 class GiadaFontOfHopeEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public GiadaFontOfHopeEntersBattlefieldEffect() {
+    GiadaFontOfHopeEntersBattlefieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Each other Angel you control enters the battlefield with an additional +1/+1 counter on it for each Angel you already control.";
+        staticText = "Each other Angel you control enters with an additional +1/+1 counter on it for each Angel you already control.";
     }
 
     private GiadaFontOfHopeEntersBattlefieldEffect(GiadaFontOfHopeEntersBattlefieldEffect effect) {

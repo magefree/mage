@@ -33,11 +33,11 @@ public abstract class Emblem extends CommandObjectImpl {
     private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private UUID controllerId;
-    private MageObject sourceObject;
+    protected MageObject sourceObject; // can be null
     private boolean copy;
     private MageObject copyFrom; // copied card INFO (used to call original adjusters)
-    private FrameStyle frameStyle;
-    private Abilities<Ability> abilites = new AbilitiesImpl<>();
+    protected FrameStyle frameStyle;
+    private Abilities<Ability> abilities = new AbilitiesImpl<>();
 
     public Emblem(String name) {
         super(name);
@@ -49,8 +49,8 @@ public abstract class Emblem extends CommandObjectImpl {
         this.controllerId = emblem.controllerId;
         this.sourceObject = emblem.sourceObject;
         this.copy = emblem.copy;
-        this.copyFrom = (emblem.copyFrom != null ? emblem.copyFrom : null);
-        this.abilites = emblem.abilites.copy();
+        this.copyFrom = emblem.copyFrom;
+        this.abilities = emblem.abilities.copy();
     }
 
     @Override
@@ -58,17 +58,22 @@ public abstract class Emblem extends CommandObjectImpl {
         return frameStyle;
     }
 
-    public void setSourceObject(MageObject sourceObject) {
+    public void setSourceObjectAndInitImage(MageObject sourceObject) {
         this.sourceObject = sourceObject;
 
         // choose set code due source
-        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), sourceObject.getExpansionSetCode());
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(
+                this.getClass().getName(),
+                this.sourceObject == null ? null : this.sourceObject.getExpansionSetCode()
+        );
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
             this.setCardNumber("");
+            this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());
         } else {
-            // how-to fix: add emblem to the tokens-database
+            // how-to fix: add emblem to tokens-database.txt
             throw new IllegalArgumentException("Wrong code usage: can't find token info for the emblem: " + this.getClass().getName());
         }
     }
@@ -93,7 +98,12 @@ public abstract class Emblem extends CommandObjectImpl {
 
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
-        this.abilites.setControllerId(controllerId);
+        this.abilities.setControllerId(controllerId);
+    }
+
+    @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
     }
 
     @Override
@@ -142,7 +152,7 @@ public abstract class Emblem extends CommandObjectImpl {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return abilites;
+        return abilities;
     }
 
     @Override
@@ -168,6 +178,11 @@ public abstract class Emblem extends CommandObjectImpl {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
+    }
+
+    @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
@@ -231,8 +246,21 @@ public abstract class Emblem extends CommandObjectImpl {
     public void setIsAllCreatureTypes(Game game, boolean value) {
     }
 
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+    }
+
     public void discardEffects() {
-        for (Ability ability : abilites) {
+        for (Ability ability : abilities) {
             for (Effect effect : ability.getEffects()) {
                 if (effect instanceof ContinuousEffect) {
                     ((ContinuousEffect) effect).discard();

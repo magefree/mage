@@ -45,11 +45,11 @@ public final class MyojinOfLifesWeb extends CardImpl {
         // Myojin of Life's Web enters the battlefield with a divinity counter on it if you cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), CastFromHandSourcePermanentCondition.instance, ""), "with a divinity counter on it if you cast it from your hand"));
         // Myojin of Life's Web has indestructible as long as it has a divinity counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                         new SourceHasCounterCondition(CounterType.DIVINITY), "{this} has indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Life's Web: Put any number of creature cards from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyojinOfLifesWebPutCreatureOnBattlefieldEffect(), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));
+        Ability ability = new SimpleActivatedAbility(new MyojinOfLifesWebPutCreatureOnBattlefieldEffect(), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));
 
         this.addAbility(ability);
     }
@@ -66,12 +66,12 @@ public final class MyojinOfLifesWeb extends CardImpl {
 
 class MyojinOfLifesWebPutCreatureOnBattlefieldEffect extends OneShotEffect {
 
-    public MyojinOfLifesWebPutCreatureOnBattlefieldEffect() {
+    MyojinOfLifesWebPutCreatureOnBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put any number of creature cards from your hand onto the battlefield";
     }
 
-    public MyojinOfLifesWebPutCreatureOnBattlefieldEffect(final MyojinOfLifesWebPutCreatureOnBattlefieldEffect effect) {
+    private MyojinOfLifesWebPutCreatureOnBattlefieldEffect(final MyojinOfLifesWebPutCreatureOnBattlefieldEffect effect) {
         super(effect);
     }
 

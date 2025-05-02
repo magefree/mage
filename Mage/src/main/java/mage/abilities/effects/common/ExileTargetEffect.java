@@ -30,7 +30,7 @@ public class ExileTargetEffect extends OneShotEffect {
     private String exileZone = null;
     private UUID exileId = null;
     private boolean toSourceExileZone = false; // exile the targets to a source object specific exile zone (takes care of zone change counter)
-    private boolean withName = true;
+    private boolean withName = true; // for face down - allows to hide card name in game logs before real face down apply
 
     public ExileTargetEffect(String effectText) {
         this();
@@ -75,6 +75,7 @@ public class ExileTargetEffect extends OneShotEffect {
         return this;
     }
 
+    // TODO: replace to withHiddenName and instructions to use
     public void setWithName(boolean withName) {
         this.withName = withName;
     }

@@ -22,7 +22,7 @@ public final class PenumbraSpiderToken extends TokenImpl {
         addAbility(ReachAbility.getInstance());
     }
 
-    protected PenumbraSpiderToken(final PenumbraSpiderToken token) {
+    private PenumbraSpiderToken(final PenumbraSpiderToken token) {
         super(token);
     }
 

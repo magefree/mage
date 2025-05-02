@@ -58,7 +58,7 @@ public class DiscardTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID targetPlayerId : targetPointer.getTargets(game, source)) {
+        for (UUID targetPlayerId : getTargetPointer().getTargets(game, source)) {
             Player player = game.getPlayer(targetPlayerId);
             if (player != null) {
                 player.discard(amount.calculate(game, source, this), randomDiscard, false, source, game);

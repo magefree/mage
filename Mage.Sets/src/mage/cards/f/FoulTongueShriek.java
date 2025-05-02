@@ -40,12 +40,12 @@ public final class FoulTongueShriek extends CardImpl {
 
 class FoulTongueShriekEffect extends OneShotEffect {
 
-    public FoulTongueShriekEffect() {
+    FoulTongueShriekEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent loses 1 life for each attacking creature you control. You gain that much life";
     }
 
-    public FoulTongueShriekEffect(final FoulTongueShriekEffect effect) {
+    private FoulTongueShriekEffect(final FoulTongueShriekEffect effect) {
         super(effect);
     }
 

@@ -36,7 +36,7 @@ public class PutIntoGraveFromAnywhereSourceAbility extends SimpleStaticAbility {
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public PutIntoGraveFromAnywhereSourceAbility copy() {
         return new PutIntoGraveFromAnywhereSourceAbility(this);
     }
 
@@ -105,11 +105,6 @@ class PutIntoGraveFromAnywhereEffect extends ReplacementEffectImpl {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

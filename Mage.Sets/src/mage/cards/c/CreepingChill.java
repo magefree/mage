@@ -1,6 +1,6 @@
 package mage.cards.c;
 
-import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromLibrarySourceTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -30,7 +29,12 @@ public final class CreepingChill extends CardImpl {
         );
 
         // When Creeping Chill is put into your graveyard from your library, you may exile it. If you do, Creeping Chill deals 3 damage to each opponent and you gain 3 life.
-        this.addAbility(new CreepingChillAbility());
+        this.addAbility(new PutIntoGraveFromLibrarySourceTriggeredAbility(
+                new DoIfCostPaid(
+                        new DamagePlayersEffect(3, TargetController.OPPONENT),
+                        new ExileSourceFromGraveCost().setText("exile it")
+                ).addEffect(new GainLifeEffect(3).concatBy("and"))
+        ));
     }
 
     private CreepingChill(final CreepingChill card) {
@@ -40,35 +44,5 @@ public final class CreepingChill extends CardImpl {
     @Override
     public CreepingChill copy() {
         return new CreepingChill(this);
-    }
-}
-
-class CreepingChillAbility extends ZoneChangeTriggeredAbility {
-
-    public CreepingChillAbility() {
-        super(
-                Zone.LIBRARY, Zone.GRAVEYARD,
-                new DoIfCostPaid(
-                        new DamagePlayersEffect(3, TargetController.OPPONENT),
-                        new ExileSourceFromGraveCost()
-                ).addEffect(new GainLifeEffect(3)),
-                "", false
-        );
-    }
-
-    public CreepingChillAbility(final CreepingChillAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CreepingChillAbility copy() {
-        return new CreepingChillAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} is put into your graveyard from your library, "
-                + "you may exile it. If you do, {this} deals 3 damage "
-                + "to each opponent and you gain 3 life.";
     }
 }

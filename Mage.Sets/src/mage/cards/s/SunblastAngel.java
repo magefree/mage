@@ -38,7 +38,7 @@ public final class SunblastAngel extends CardImpl {
         addAbility(new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(tappedFilter), false));
     }
 
-    public SunblastAngel (final SunblastAngel card) {
+    private SunblastAngel(final SunblastAngel card) {
         super(card);
     }
 

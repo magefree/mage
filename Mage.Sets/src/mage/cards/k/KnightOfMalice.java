@@ -36,14 +36,14 @@ public final class KnightOfMalice extends CardImpl {
         addAbility(HexproofFromWhiteAbility.getInstance());
 
         //Knight of Malice gets +1/+0 as long as any player controls a white permanent.
-        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 new AnyPlayerControlsCondition(filter),
                 "{this} gets +1/+0 as long as any player controls a white permanent.")));
 
     }
 
-    public KnightOfMalice(final KnightOfMalice knightOfGrace) {
+    private KnightOfMalice(final KnightOfMalice knightOfGrace) {
         super(knightOfGrace);
     }
 

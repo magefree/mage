@@ -33,7 +33,7 @@ public final class IronclawOrcs extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ironclaw Orcs can't block creatures with power 2 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockCreaturesSourceEffect(filter)));
     }
 
     private IronclawOrcs(final IronclawOrcs card) {

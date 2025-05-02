@@ -28,7 +28,7 @@ public final class PatchworkGnomes extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Discard a card: Regenerate Patchwork Gnomes.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card")))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card")))));
     }
 
     private PatchworkGnomes(final PatchworkGnomes card) {

@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -36,8 +36,7 @@ public final class SenTriplets extends CardImpl {
         // This turn, that player can't cast spells or activate abilities and plays with their hand revealed.
         // You may play cards from that player's hand this turn.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new SenTripletsRuleModifyingEffect(),
-                TargetController.YOU, false, false
+                new SenTripletsRuleModifyingEffect()
         );
         ability.addEffect(new SenTripletsOpponentRevealsHandEffect());
         ability.addEffect(new SenTripletsPlayFromOpponentsHandEffect());
@@ -57,7 +56,7 @@ public final class SenTriplets extends CardImpl {
 
 class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SenTripletsRuleModifyingEffect() {
+    SenTripletsRuleModifyingEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "choose target opponent. This turn, that player can't cast spells or activate abilities";
     }
@@ -69,11 +68,6 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public SenTripletsRuleModifyingEffect copy() {
         return new SenTripletsRuleModifyingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -101,7 +95,7 @@ class SenTripletsRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
 class SenTripletsOpponentRevealsHandEffect extends ContinuousEffectImpl {
 
-    public SenTripletsOpponentRevealsHandEffect() {
+    SenTripletsOpponentRevealsHandEffect() {
         super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "and plays with their hand revealed";
     }
@@ -127,12 +121,12 @@ class SenTripletsOpponentRevealsHandEffect extends ContinuousEffectImpl {
 
 class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
 
-    public SenTripletsPlayFromOpponentsHandEffect() {
+    SenTripletsPlayFromOpponentsHandEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play lands and cast spells from that player's hand this turn";
     }
 
-    public SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {
+    private SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {
         super(effect);
     }
 

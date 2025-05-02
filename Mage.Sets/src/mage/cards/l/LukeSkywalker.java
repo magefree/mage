@@ -46,7 +46,7 @@ public final class LukeSkywalker extends CardImpl {
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
 
         // Remove all +1/+1 counters from Luke Skywalker: Luke gains hexproof until end of turn. Activate this ability only if at least one +1/+1 counter is removed this way.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), new LukeSkywalkerCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), new LukeSkywalkerCost()));
     }
 
     private LukeSkywalker(final LukeSkywalker card) {
@@ -66,7 +66,7 @@ class LukeSkywalkerCost extends CostImpl {
         this.text = "Remove all +1/+1 counters from {this}";
     }
 
-    public LukeSkywalkerCost(LukeSkywalkerCost cost) {
+    private LukeSkywalkerCost(final LukeSkywalkerCost cost) {
         super(cost);
     }
 

@@ -32,7 +32,6 @@ public final class RushbladeCommander extends CardImpl {
 
         // Warrior creatures your team controls have haste.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(
                         HasteAbility.getInstance(),
                         Duration.WhileOnBattlefield,

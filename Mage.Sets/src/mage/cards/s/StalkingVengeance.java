@@ -48,12 +48,12 @@ public final class StalkingVengeance extends CardImpl {
 
 class StalkingVengeanceDamageEffect extends OneShotEffect {
 
-    public StalkingVengeanceDamageEffect() {
+    StalkingVengeanceDamageEffect() {
         super(Outcome.Damage);
         this.staticText = "it deals damage equal to its power to target player or planeswalker";
     }
 
-    public StalkingVengeanceDamageEffect(final StalkingVengeanceDamageEffect effect) {
+    private StalkingVengeanceDamageEffect(final StalkingVengeanceDamageEffect effect) {
         super(effect);
     }
 

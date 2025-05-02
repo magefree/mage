@@ -76,12 +76,12 @@ public class AminatouTheFateshifter extends CardImpl {
 
 class AminatouPlusEffect extends OneShotEffect {
 
-    public AminatouPlusEffect() {
+    AminatouPlusEffect() {
         super(Outcome.DrawCard);
         staticText = "draw a card, then put a card from your hand on top of your library";
     }
 
-    public AminatouPlusEffect(final AminatouPlusEffect effect) {
+    private AminatouPlusEffect(final AminatouPlusEffect effect) {
         super(effect);
     }
 
@@ -116,13 +116,13 @@ class AminatouPlusEffect extends OneShotEffect {
 
 class AminatouUltimateEffect extends OneShotEffect {
 
-    public AminatouUltimateEffect() {
+    AminatouUltimateEffect() {
         super(Outcome.Benefit);
         staticText = "Choose left or right. Each player gains control of all nonland permanents other than Aminatou,"
                 + " the Fateshifter controlled by the next player in the chosen direction.";
     }
 
-    public AminatouUltimateEffect(final AminatouUltimateEffect effect) {
+    private AminatouUltimateEffect(final AminatouUltimateEffect effect) {
         super(effect);
     }
 
@@ -163,7 +163,7 @@ class AminatouUltimateEffect extends OneShotEffect {
                 }
                 FilterNonlandPermanent nextPlayerNonlandPermanentsFilter = new FilterNonlandPermanent();
                 nextPlayerNonlandPermanentsFilter.add(new ControllerIdPredicate(nextPlayer));
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(nextPlayerNonlandPermanentsFilter, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(nextPlayerNonlandPermanentsFilter, source.getControllerId(), source, game)) {
                     if (permanent.getId().equals(source.getSourceId())) {
                         continue;
                     }

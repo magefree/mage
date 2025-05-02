@@ -30,10 +30,10 @@ public final class CursedRonin extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new BushidoAbility(1));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public CursedRonin (final CursedRonin card) {
+    private CursedRonin(final CursedRonin card) {
         super(card);
     }
 

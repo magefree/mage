@@ -45,7 +45,7 @@ public final class RaffCapashenShipsMage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // You may cast historic spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)
                         .setText("You may cast historic spells as though they had flash. <i>(Artifacts, legendaries, and Sagas are historic.)</i>")));
     }

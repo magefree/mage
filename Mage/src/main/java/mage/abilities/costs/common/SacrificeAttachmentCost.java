@@ -48,6 +48,14 @@ public class SacrificeAttachmentCost extends UseAttachedCost implements Sacrific
     }
 
     @Override
+    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        if (!super.canPay(ability, source, controllerId, game)) {
+            return false;
+        }
+        return game.getPermanent(source.getSourceId()).canBeSacrificed();
+    }
+
+    @Override
     public SacrificeAttachmentCost copy() {
         return new SacrificeAttachmentCost(this);
     }

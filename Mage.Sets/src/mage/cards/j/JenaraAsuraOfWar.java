@@ -32,10 +32,10 @@ public final class JenaraAsuraOfWar extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{W}")));
     }
 
-    public JenaraAsuraOfWar (final JenaraAsuraOfWar card) {
+    private JenaraAsuraOfWar(final JenaraAsuraOfWar card) {
         super(card);
     }
 

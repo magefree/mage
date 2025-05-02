@@ -1,8 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
@@ -27,7 +26,7 @@ public final class ColdSnap extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // At the beginning of each player's upkeep, Cold Snap deals damage to that player equal to the number of snow lands they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ColdSnapDamageTargetEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new ColdSnapDamageTargetEffect(), false));
     }
 
     private ColdSnap(final ColdSnap card) {
@@ -53,15 +52,15 @@ class ColdSnapDamageTargetEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to that player equal to the number of snow lands they control";
     }
 
-    public ColdSnapDamageTargetEffect(ColdSnapDamageTargetEffect copy) {
+    private ColdSnapDamageTargetEffect(final ColdSnapDamageTargetEffect copy) {
         super(copy);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            int damage = game.getBattlefield().getAllActivePermanents(filter, targetPointer.getFirst(game, source), game).size();
+            int damage = game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game).size();
             player.damage(damage, source.getSourceId(), source, game);
             return true;
         }

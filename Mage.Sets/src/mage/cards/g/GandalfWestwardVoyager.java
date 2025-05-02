@@ -14,9 +14,7 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author Susucr
@@ -75,7 +73,7 @@ class GandalfWestwardVoyagerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpellOrLKIStack(targetPointer.getFirst(game, source));
+        Spell spell = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
         List<CardType> typesSpell = spell == null ? new ArrayList<>() : spell.getCardType(game);
 
         boolean foundCard = false;
@@ -93,7 +91,7 @@ class GandalfWestwardVoyagerEffect extends OneShotEffect {
             // each opponent reveals the top card of their library.
             player.revealCards(source, " — " + player.getName(), new CardsImpl(card), game, true);
 
-            List<CardType> types = card.getCardType(game);
+            Set<CardType> types = new HashSet<>(card.getCardType(game));
             types.retainAll(typesSpell);
             foundCard |= !types.isEmpty();
         }

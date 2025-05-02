@@ -19,7 +19,7 @@ public class BecomesTappedAttachedTriggeredAbility extends TriggeredAbilityImpl 
 
     public BecomesTappedAttachedTriggeredAbility(Effect effect, String description, boolean isOptional) {
         super(Zone.BATTLEFIELD, effect, isOptional);
-        setTriggerPhrase("Whenever " + description + " becomes tapped, ");
+        setTriggerPhrase(getWhen() + description + " becomes tapped, ");
     }
 
     protected BecomesTappedAttachedTriggeredAbility(final BecomesTappedAttachedTriggeredAbility ability) {

@@ -51,7 +51,7 @@ public final class JoragaWarcaller extends CardImpl {
 
         
         // Other Elf creatures you control get +1/+1 for each +1/+1 counter on Joraga Warcaller.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new BoostAllEffect( new CountersSourceCount(CounterType.P1P1), new CountersSourceCount(CounterType.P1P1), Duration.WhileOnBattlefield, filter, true, rule)));
         
     }

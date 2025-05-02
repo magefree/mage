@@ -33,7 +33,7 @@ public final class CracklingPerimeter extends CardImpl {
 
 
         // Tap an untapped Gate you control: Crackling Perimeter deals 1 damage to each opponent.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), new TapTargetCost(new TargetControlledPermanent(filter))));
     }
 
     private CracklingPerimeter(final CracklingPerimeter card) {

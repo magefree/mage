@@ -35,13 +35,13 @@ public final class HornedHelm extends CardImpl {
         // Equipped creature gets +1/+1 and has trample.
         Effect effect = new BoostEquippedEffect(1, 1);
         effect.setText("Equipped creature gets +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has trample");
         ability.addEffect(effect);
         this.addAbility(ability);
         // {G}{G}: Attach Horned Helm to target creature you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl<>("{G}{G}"));
+        ability = new SimpleActivatedAbility(new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl<>("{G}{G}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         // Equip {1}

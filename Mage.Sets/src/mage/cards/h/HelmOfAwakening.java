@@ -18,7 +18,7 @@ public final class HelmOfAwakening extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Spells cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionAllEffect(1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionAllEffect(1)));
     }
 
     private HelmOfAwakening(final HelmOfAwakening card) {

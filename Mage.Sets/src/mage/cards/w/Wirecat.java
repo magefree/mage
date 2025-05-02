@@ -28,7 +28,7 @@ public final class Wirecat extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Wirecat can't attack or block if an enchantment is on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WirecatEffect()));
+        this.addAbility(new SimpleStaticAbility(new WirecatEffect()));
     }
 
     private Wirecat(final Wirecat card) {
@@ -47,7 +47,7 @@ public final class Wirecat extends CardImpl {
             staticText = "{this} can't attack or block if an enchantment is on the battlefield";
         }
 
-        public WirecatEffect(final WirecatEffect effect) {
+        private WirecatEffect(final WirecatEffect effect) {
             super(effect);
         }
 

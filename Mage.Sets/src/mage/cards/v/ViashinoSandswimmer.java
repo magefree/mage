@@ -27,12 +27,12 @@ public final class ViashinoSandswimmer extends CardImpl {
 
     public ViashinoSandswimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // {R}: Flip a coin. If you win the flip, return Viashino Sandswimmer to its owner's hand. If you lose the flip, sacrifice Viashino Sandswimmer.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoSandswimmerEffect(), new ManaCostsImpl<>("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new ViashinoSandswimmerEffect(), new ManaCostsImpl<>("{R}")));
     }
 
     private ViashinoSandswimmer(final ViashinoSandswimmer card) {
@@ -47,12 +47,12 @@ public final class ViashinoSandswimmer extends CardImpl {
 
 class ViashinoSandswimmerEffect extends OneShotEffect {
 
-    public ViashinoSandswimmerEffect() {
+    ViashinoSandswimmerEffect() {
         super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, return {this} to its owner's hand. If you lose the flip, sacrifice {this}";
     }
 
-    public ViashinoSandswimmerEffect(ViashinoSandswimmerEffect effect) {
+    private ViashinoSandswimmerEffect(final ViashinoSandswimmerEffect effect) {
         super(effect);
     }
 

@@ -63,12 +63,12 @@ public final class BishopOfBinding extends CardImpl {
 
 class BishopOfBindingExileEffect extends OneShotEffect {
 
-    public BishopOfBindingExileEffect() {
+    BishopOfBindingExileEffect() {
         super(Outcome.Exile);
         this.staticText = "exile target creature an opponent controls until {this} leaves the battlefield";
     }
 
-    public BishopOfBindingExileEffect(final BishopOfBindingExileEffect effect) {
+    private BishopOfBindingExileEffect(final BishopOfBindingExileEffect effect) {
         super(effect);
     }
 

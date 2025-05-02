@@ -63,14 +63,15 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean returnValue = false;
-        List<UUID> targetedPermanentIds = new ArrayList<>(0);
+        List<UUID> targetedPermanentIds = new ArrayList<>();
         Player player = game.getPlayer(this.getControllerId());
         if (player != null) {
             if (event.getPlayerId().equals(this.getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null) {
                     SpellAbility spellAbility = spell.getSpellAbility();
-                    for (Mode mode : spellAbility.getModes().values()) {
+                    for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                        Mode mode = spellAbility.getModes().get(modeId);
                         for (Target target : mode.getTargets()) {
                             if (!target.isNotTarget()) {
                                 for (UUID targetId : target.getTargets()) {
@@ -118,7 +119,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
 class DackFaydenEmblemEffect extends ContinuousEffectImpl {
 
-    protected FixedTargets fixedTargets;
+    protected FixedTargets fixedTargets = new FixedTargets(new ArrayList<>());
 
     DackFaydenEmblemEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
@@ -127,7 +128,7 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
 
     DackFaydenEmblemEffect(final DackFaydenEmblemEffect effect) {
         super(effect);
-        this.fixedTargets = effect.fixedTargets;
+        this.fixedTargets = effect.fixedTargets.copy();
     }
 
     @Override
@@ -147,6 +148,6 @@ class DackFaydenEmblemEffect extends ContinuousEffectImpl {
     }
 
     public void setTargets(List<Permanent> targetedPermanents, Game game) {
-        this.fixedTargets = new FixedTargets(targetedPermanents, game);
+        this.fixedTargets = new FixedTargets(new ArrayList<>(targetedPermanents), game);
     }
 }

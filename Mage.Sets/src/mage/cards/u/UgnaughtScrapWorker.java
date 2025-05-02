@@ -27,12 +27,12 @@ public final class UgnaughtScrapWorker extends CardImpl {
     public UgnaughtScrapWorker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
         this.subtype.add(SubType.UGNAUGHT);
-        this.subtype.add(SubType.ARTIFICIER);
+        this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Droid spell cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        // Droid spells you cast cost {1} less to cast.
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private UgnaughtScrapWorker(final UgnaughtScrapWorker card) {

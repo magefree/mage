@@ -3,6 +3,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
@@ -55,9 +56,10 @@ class NecroskitterTriggeredAbility extends TriggeredAbilityImpl {
 
     public NecroskitterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToBattlefieldUnderYourControlTargetEffect(), true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public NecroskitterTriggeredAbility(NecroskitterTriggeredAbility ability) {
+    private NecroskitterTriggeredAbility(final NecroskitterTriggeredAbility ability) {
         super(ability);
     }
 
@@ -91,5 +93,10 @@ class NecroskitterTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature an opponent controls with a -1/-1 counter on it dies, you may return that card to the battlefield under your control.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

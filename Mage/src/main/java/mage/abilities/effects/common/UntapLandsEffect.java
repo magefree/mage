@@ -63,7 +63,7 @@ public class UntapLandsEffect extends OneShotEffect {
             if (upTo) {
                 tappedLands = game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game).size();
             } else {
-                tappedLands = game.getBattlefield().getAllActivePermanents(filter, game).size();
+                tappedLands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).size();
             }
             TargetLandPermanent target = new TargetLandPermanent(upTo ? 0 : Math.min(tappedLands, amount), amount, filter, true);
             if (target.canChoose(source.getControllerId(), source, game)) {

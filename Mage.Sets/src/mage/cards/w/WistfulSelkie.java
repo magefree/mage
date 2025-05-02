@@ -28,7 +28,7 @@ public final class WistfulSelkie extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public WistfulSelkie (final WistfulSelkie card) {
+    private WistfulSelkie(final WistfulSelkie card) {
         super(card);
     }
 

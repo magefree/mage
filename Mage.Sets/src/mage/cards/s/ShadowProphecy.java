@@ -22,7 +22,7 @@ public final class ShadowProphecy extends CardImpl {
 
         // Domain - Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put up to two of them into your hand and the rest into your graveyard. You lose 2 life.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                DomainValue.REGULAR, 2, PutCards.HAND, PutCards.GRAVEYARD
+                DomainValue.REGULAR, 2, PutCards.HAND, PutCards.GRAVEYARD, true
         ));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);

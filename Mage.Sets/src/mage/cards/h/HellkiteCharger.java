@@ -61,7 +61,7 @@ class HellkiteChargerEffect extends OneShotEffect {
         staticText = "you may pay {5}{R}{R}. If you do, untap all attacking creatures and after this phase, there is an additional combat phase";
     }
 
-    HellkiteChargerEffect(final HellkiteChargerEffect effect) {
+    private HellkiteChargerEffect(final HellkiteChargerEffect effect) {
         super(effect);
     }
 

@@ -21,7 +21,7 @@ public final class TyranidWarriorToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
     }
 
-    protected TyranidWarriorToken(final TyranidWarriorToken token) {
+    private TyranidWarriorToken(final TyranidWarriorToken token) {
         super(token);
     }
 

@@ -33,7 +33,7 @@ public final class WatchersOfTheDead extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Exile Watchers of the Dead: Each opponent chooses 2 cards in their graveyard and exiles the rest.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WatchersOfTheDeadEffect(), new ExileSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new WatchersOfTheDeadEffect(), new ExileSourceCost()));
 
     }
 
@@ -49,12 +49,12 @@ public final class WatchersOfTheDead extends CardImpl {
 
 class WatchersOfTheDeadEffect extends OneShotEffect {
 
-    public WatchersOfTheDeadEffect() {
+    WatchersOfTheDeadEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each opponent chooses 2 cards in their graveyard and exiles the rest";
+        this.staticText = "Each opponent chooses two cards in their graveyard and exiles the rest";
     }
 
-    public WatchersOfTheDeadEffect(final WatchersOfTheDeadEffect effect) {
+    private WatchersOfTheDeadEffect(final WatchersOfTheDeadEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class WatchersOfTheDeadEffect extends OneShotEffect {
                 if (opponent != null
                         && !opponent.equals(controller)) {
                     TargetCard target = new TargetCardInYourGraveyard(2, 2, new FilterCard());
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     Cards cardsInGraveyard = opponent.getGraveyard();
                     if (cardsInGraveyard.size() > 1) {
                         opponent.choose(outcome, cardsInGraveyard, target, source, game);

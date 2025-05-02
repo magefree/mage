@@ -20,7 +20,7 @@ public final class GoldForgeGarrisonGolemToken extends TokenImpl {
 
     }
 
-    protected GoldForgeGarrisonGolemToken(final GoldForgeGarrisonGolemToken token) {
+    private GoldForgeGarrisonGolemToken(final GoldForgeGarrisonGolemToken token) {
         super(token);
     }
 

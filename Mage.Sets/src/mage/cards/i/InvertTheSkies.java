@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -12,10 +11,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
@@ -43,7 +42,7 @@ public final class InvertTheSkies extends CardImpl {
                 "Creatures your opponents control lose flying until end of turn if {G} was spent to cast this spell,"));
 
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
+                new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES),
                 new LockedInCondition(ManaWasSpentCondition.BLUE),
                 "and creatures you control gain flying until end of turn if {U} was spent to cast this spell"));
 

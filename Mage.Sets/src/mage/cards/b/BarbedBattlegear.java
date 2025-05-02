@@ -26,13 +26,13 @@ public final class BarbedBattlegear extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +4/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, -1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(4, -1)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.Neutral, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
-    public BarbedBattlegear (final BarbedBattlegear card) {
+    private BarbedBattlegear(final BarbedBattlegear card) {
         super(card);
     }
 

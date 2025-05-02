@@ -34,7 +34,7 @@ public final class StitchersGraft extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 3)));
 
         // Whenever equipped creature attacks, it doesn't untap during its controller's next untap step.
         this.addAbility(new StitchersGraftTriggeredAbility());
@@ -64,7 +64,7 @@ class StitchersGraftTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect());
     }
 
-    public StitchersGraftTriggeredAbility(final StitchersGraftTriggeredAbility ability) {
+    private StitchersGraftTriggeredAbility(final StitchersGraftTriggeredAbility ability) {
         super(ability);
     }
 

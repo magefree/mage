@@ -22,7 +22,7 @@ public final class PharikaSnakeToken extends TokenImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    protected PharikaSnakeToken(final PharikaSnakeToken token) {
+    private PharikaSnakeToken(final PharikaSnakeToken token) {
         super(token);
     }
 

@@ -1,14 +1,9 @@
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.ConditionalMana;
 import mage.MageInt;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -16,15 +11,14 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
-import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.abilities.mana.conditional.ManaCondition;
+import mage.abilities.mana.builder.common.ActivatedAbilityManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -46,7 +40,7 @@ public final class CrypticTrilobite extends CardImpl {
         // Remove a +1/+1 counter from Cryptic Trilobite: Add {C}{C}. Spend this mana only to activate abilities.        
         this.addAbility(new ConditionalColorlessManaAbility(
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance()),
-                2, new CrypticTrilobiteManaBuilder(),
+                2, new ActivatedAbilityManaBuilder(),
                 new CountersSourceCount(CounterType.P1P1)
         ));
 
@@ -65,45 +59,5 @@ public final class CrypticTrilobite extends CardImpl {
     @Override
     public CrypticTrilobite copy() {
         return new CrypticTrilobite(this);
-    }
-}
-
-class CrypticTrilobiteManaBuilder extends ConditionalManaBuilder {
-
-    @Override
-    public ConditionalMana build(Object... options) {
-        return new CrypticTrilobiteConditionalMana(this.mana);
-    }
-
-    @Override
-    public String getRule() {
-        return "Spend this mana only to activate abilities";
-    }
-}
-
-class CrypticTrilobiteConditionalMana extends ConditionalMana {
-
-    CrypticTrilobiteConditionalMana(Mana mana) {
-        super(mana);
-        staticText = "Spend this mana only to activate abilities";
-        addCondition(new CrypticTrilobiteManaCondition());
-    }
-}
-
-class CrypticTrilobiteManaCondition extends ManaCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source != null) {
-            // ex: SimpleManaAbility is an ACTIVATED ability, but it is categorized as a MANA ability
-            return source.getAbilityType() == AbilityType.MANA
-                    || source.getAbilityType() == AbilityType.ACTIVATED;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, UUID originalId, Cost costsToPay) {
-        return apply(game, source);
     }
 }

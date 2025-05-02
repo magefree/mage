@@ -2,8 +2,7 @@ package mage.cards.s;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -81,7 +80,7 @@ class ShiftingShadowGainEffect extends ContinuousEffectImpl {
         }
         permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
         permanent.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ShiftingShadowEffect(aura, game), TargetController.YOU, false
+                new ShiftingShadowEffect(aura, game)
         ), source.getSourceId(), game);
         return true;
     }
@@ -124,7 +123,7 @@ class ShiftingShadowEffect extends OneShotEffect {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             permanent.destroy(source, game);
-            game.getState().processAction(game);
+            game.processAction();
         }
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {

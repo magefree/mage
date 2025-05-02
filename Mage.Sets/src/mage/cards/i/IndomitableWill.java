@@ -32,10 +32,10 @@ public final class IndomitableWill extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
     }
 
-    public IndomitableWill (final IndomitableWill card) {
+    private IndomitableWill(final IndomitableWill card) {
         super(card);
     }
 

@@ -33,12 +33,12 @@ public final class FledglingMawcor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {tap}: Fledgling Mawcor deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         
         // Morph {U}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{U}{U}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{U}{U}")));
     }
 
     private FledglingMawcor(final FledglingMawcor card) {

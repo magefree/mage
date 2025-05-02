@@ -37,7 +37,7 @@ public final class JacquesLeVert extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Green creatures you control get +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0,2, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(0,2, Duration.WhileOnBattlefield, filter)));
     }
 
     private JacquesLeVert(final JacquesLeVert card) {

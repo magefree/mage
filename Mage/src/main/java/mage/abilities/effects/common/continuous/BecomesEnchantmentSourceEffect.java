@@ -14,7 +14,7 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl {
 
     public BecomesEnchantmentSourceEffect() {
         super(Duration.Custom, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.AddAbility);
-        staticText = "{this} becomes an Enchantment";
+        staticText = "{this} becomes an enchantment";
         dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
     }
 
@@ -43,7 +43,6 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl {
         permanent.removeAllCardTypes(game);
         permanent.addCardType(game, CardType.ENCHANTMENT);
         permanent.retainAllEnchantmentSubTypes(game);
-        permanent.setIsAllCreatureTypes(game, false);
         return true;
     }
 }

@@ -50,7 +50,7 @@ public final class TerashisGrasp extends CardImpl {
             staticText = "You gain life equal to its mana value";
         }
 
-        public TerashisGraspEffect(TerashisGraspEffect effect) {
+        private TerashisGraspEffect(final TerashisGraspEffect effect) {
             super(effect);
         }
 

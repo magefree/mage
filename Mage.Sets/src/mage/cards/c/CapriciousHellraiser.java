@@ -54,7 +54,7 @@ public class CapriciousHellraiser extends CardImpl {
 
 class CapriciousHellraiserEffect extends OneShotEffect {
 
-    public CapriciousHellraiserEffect() {
+    CapriciousHellraiserEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile three cards at random from your graveyard. Choose a noncreature, nonland card from " +
                 "among them and copy it. You may cast the copy without paying its mana cost";

@@ -36,8 +36,7 @@ public final class RaggedVeins extends CardImpl {
 
         // Whenever enchanted creature is dealt damage, its controller loses that much life.
         this.addAbility(new DealtDamageAttachedTriggeredAbility(
-                new LoseLifeControllerAttachedEffect(SavedDamageValue.MUCH),
-                false
+                new LoseLifeControllerAttachedEffect(SavedDamageValue.MUCH)
         ));
     }
 

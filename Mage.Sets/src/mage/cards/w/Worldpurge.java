@@ -46,12 +46,12 @@ public final class Worldpurge extends CardImpl {
 
 class WorldpurgeEffect extends OneShotEffect {
 
-    public WorldpurgeEffect() {
+    WorldpurgeEffect() {
         super(Outcome.Discard);
         this.staticText = "Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana";
     }
 
-    public WorldpurgeEffect(final WorldpurgeEffect effect) {
+    private WorldpurgeEffect(final WorldpurgeEffect effect) {
         super(effect);
     }
 

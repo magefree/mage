@@ -4,15 +4,20 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
+import mage.view.GameView;
+import mage.view.PermanentView;
+import mage.view.PlayerView;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author levelX2
+ * @author levelX2, JayDi85
  */
 public class MorphTest extends CardTestPlayerBase {
+
+    // DisguiseTest contains additional rules generation tests for face down
 
     /**
      * Tests if a creature with Morph is cast normal, it behaves as normal
@@ -31,7 +36,6 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, false); // cast it normal as 5/5
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -49,14 +53,13 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
 
     }
 
@@ -68,10 +71,9 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
-        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
+        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         setStopAt(3, PhaseStep.END_TURN);
@@ -79,7 +81,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertLife(playerB, 18);
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerA, "Pine Walker", 1);
         assertPowerToughness(playerA, "Pine Walker", 5, 5);
         assertTapped("Pine Walker", false);
@@ -99,13 +101,11 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven", TestPlayer.NO_TARGET, "Pine Walker", StackClause.WHILE_NOT_ON_STACK);
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven using Morph", TestPlayer.NO_TARGET, "Pine Walker", StackClause.WHILE_NOT_ON_STACK);
 
-        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
-        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
+        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
+        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{1}{G}{U}: Turn this face-down permanent face up.");
         setChoice(playerA, false); // Don't use return permanent to hand effect
 
@@ -117,7 +117,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Pine Walker", 0);
         assertHandCount(playerA, "Icefeather Aven", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertPermanentCount(playerA, "Icefeather Aven", 1);
         assertTapped("Icefeather Aven", true);
 
@@ -141,15 +141,14 @@ public class MorphTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Soldier of the Pantheon", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ponyback Brigade");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ponyback Brigade using Morph");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerB, 20); // and not 21
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertPermanentCount(playerB, "Soldier of the Pantheon", 1);
 
     }
@@ -169,17 +168,17 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Clever Impersonator", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
     }
 
     /**
@@ -195,12 +194,11 @@ public class MorphTest extends CardTestPlayerBase {
         // Doomwake Giant  {4}{B}
         // Creature - Giant
         // 4/6
-        // Constellation - When Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
+        // Constellation - When Doomwake Giant or another enchantment you control enters, creatures your opponents control get -1/-1 until end of turn.
         addCard(Zone.HAND, playerB, "Doomwake Giant", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Doomwake Giant");
 
@@ -214,7 +212,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Pine Walker", 0);
         assertHandCount(playerB, "Doomwake Giant", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerB, "Doomwake Giant", 1);
         assertPermanentCount(playerA, "Pine Walker", 1);
         assertPowerToughness(playerA, "Pine Walker", 4, 4);
@@ -237,12 +235,11 @@ public class MorphTest extends CardTestPlayerBase {
         // Doomwake Giant  {4}{B}
         // Creature - Giant
         // 4/6
-        // Constellation - When Doomwake Giant or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
+        // Constellation - When Doomwake Giant or another enchantment you control enters, creatures your opponents control get -1/-1 until end of turn.
         addCard(Zone.HAND, playerB, "Doomwake Giant", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ponyback Brigade");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ponyback Brigade using Morph");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Doomwake Giant");
 
@@ -255,7 +252,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Ponyback Brigade", 0);
         assertHandCount(playerB, "Doomwake Giant", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerA, "Goblin Token", 3);
         assertPowerToughness(playerA, "Goblin Token", 1, 1, Filter.ComparisonScope.Any);
         assertPermanentCount(playerB, "Doomwake Giant", 1);
@@ -278,8 +275,7 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler using Morph");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{G}{U}: Turn this face-down permanent face up.");
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, "Sagu Mauler");
@@ -315,8 +311,7 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Disdainful Stroke");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler using Morph");
 
         checkPlayableAbility("Can't Disdainful Stroke Sagu", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Disdainful", false);
 
@@ -328,7 +323,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Sagu Mauler", 0);
         assertHandCount(playerB, "Disdainful Stroke", 1); // can't be cast
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
     }
 
@@ -352,13 +347,11 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Echoing Decay");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler", TestPlayer.NO_TARGET, "Sagu Mauler", StackClause.WHILE_NOT_ON_STACK);
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler using Morph");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler using Morph", TestPlayer.NO_TARGET, "Sagu Mauler", StackClause.WHILE_NOT_ON_STACK);
 
         // showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Echoing Decay", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Echoing Decay", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         // showBattlefield("A battle after", 1, PhaseStep.END_TURN, playerA);
         setStopAt(1, PhaseStep.END_TURN);
@@ -371,7 +364,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Sagu Mauler", 0);
         assertHandCount(playerB, "Echoing Decay", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertGraveyardCount(playerA, "Sagu Mauler", 1);
     }
 
@@ -389,8 +382,7 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Counterspell", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury using Morph");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Akroma, Angel of Fury");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -415,11 +407,10 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Swords to Plowshares", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birchlore Rangers");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birchlore Rangers using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Swords to Plowshares", "");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Swords to Plowshares", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -432,7 +423,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Birchlore Rangers")) {
-                Assert.assertEquals("Birchlore Rangers has to be face up in exile", false, card.isFaceDown(currentGame));
+                Assert.assertFalse("Birchlore Rangers has to be face up in exile", card.isFaceDown(currentGame));
                 break;
             }
         }
@@ -455,11 +446,10 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -472,7 +462,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Ashcloud Phoenix")) {
-                Assert.assertEquals("Ashcloud Phoenix has to be face up in graveyard", false, card.isFaceDown(currentGame));
+                Assert.assertFalse("Ashcloud Phoenix has to be face up in graveyard", card.isFaceDown(currentGame));
                 break;
             }
         }
@@ -496,11 +486,10 @@ public class MorphTest extends CardTestPlayerBase {
         // (This creature deals combat damage before creatures without first strike, it can't be blocked as long as defending player controls a Forest, and attacking doesn't cause this creature to tap.)
         addCard(Zone.BATTLEFIELD, playerB, "Mirri, Cat Warrior");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix using Morph");
 
         attack(2, playerB, "Mirri, Cat Warrior");
-        block(2, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), "Mirri, Cat Warrior");
+        block(2, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), "Mirri, Cat Warrior");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -509,7 +498,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Ashcloud Phoenix")) {
-                Assert.assertEquals("Ashcloud Phoenix has to be face up in graveyard", false, card.isFaceDown(currentGame));
+                Assert.assertFalse("Ashcloud Phoenix has to be face up in graveyard", card.isFaceDown(currentGame));
                 break;
             }
         }
@@ -536,29 +525,24 @@ public class MorphTest extends CardTestPlayerBase {
 
         setStrictChooseMode(true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
-//        showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
-//        showBattlefield("B battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury using Morph");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Supplant Form");
-        addTarget(playerB, EmptyNames.FACE_DOWN_CREATURE.toString());
+        addTarget(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
-//        showBattlefield("A battle end", 1, PhaseStep.END_TURN, playerA);
-//        showBattlefield("B battle end", 1, PhaseStep.END_TURN, playerB);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 20);
 
         assertHandCount(playerA, "Akroma, Angel of Fury", 1);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerA, "Akroma, Angel of Fury", 0);
         assertGraveyardCount(playerB, "Supplant Form", 1);
 
         assertPermanentCount(playerB, "Akroma, Angel of Fury", 0);
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_TOKEN.toString(), 1);
-        assertPowerToughness(playerB, EmptyNames.FACE_DOWN_TOKEN.toString(), 2, 2);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_TOKEN.getTestCommand(), 1);
+        assertPowerToughness(playerB, EmptyNames.FACE_DOWN_TOKEN.getTestCommand(), 2, 2);
     }
 
     /**
@@ -576,15 +560,14 @@ public class MorphTest extends CardTestPlayerBase {
         // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, that player loses 10 life.
         addCard(Zone.BATTLEFIELD, playerB, "Dragonlord Kolaghan", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury using Morph");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
     }
 
@@ -606,10 +589,9 @@ public class MorphTest extends CardTestPlayerBase {
          */
         addCard(Zone.BATTLEFIELD, playerB, "Linvala, Keeper of Silence", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
-        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
+        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         setStopAt(3, PhaseStep.END_TURN);
@@ -617,7 +599,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertLife(playerB, 18);
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerA, "Pine Walker", 1);
         assertPowerToughness(playerA, "Pine Walker", 5, 5);
         assertTapped("Pine Walker", false);
@@ -656,7 +638,6 @@ public class MorphTest extends CardTestPlayerBase {
 
         // try cast as normal -- must not work
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rattleclaw Mystic");
-        setChoice(playerB, false);
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
 
@@ -671,7 +652,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Reflector Mage", 1);
         assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
         assertHandCount(playerB, "Rattleclaw Mystic", 1); // can't play
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0); // don't try as morph
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0); // don't try as morph
     }
 
     @Test
@@ -695,8 +676,7 @@ public class MorphTest extends CardTestPlayerBase {
         addTarget(playerA, "Rattleclaw Mystic");
 
         // try cast as morph - must work
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rattleclaw Mystic");
-        setChoice(playerB, true); // try cast as morph
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rattleclaw Mystic using Morph");
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -705,7 +685,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Reflector Mage", 1);
         assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
         assertHandCount(playerB, "Rattleclaw Mystic", 0); // able cast as morph
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     /**
@@ -736,13 +716,11 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rattleclaw Mystic");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rattleclaw Mystic using Morph");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Reflector Mage");
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Rattleclaw Mystic");
-        setChoice(playerA, false); // cast it face down as 2/2 creature
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
@@ -781,8 +759,7 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
 
         // 1. Cast Vesuvan as face-down
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Vesuvan Shapeshifter");
-        setChoice(playerB, true); // cast as face-down
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Vesuvan Shapeshifter using Morph");
 
         // 2. Moth Vesuvan and copy brine
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{1}{U}: Turn this face-down permanent");
@@ -796,7 +773,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Brine Elemental", 1);
         assertPermanentCount(playerB, "Brine Elemental", 1);
-        Assert.assertTrue("Skip next turn has to be added to TurnMods", currentGame.getState().getTurnMods().size() == 1);
+        Assert.assertEquals("Skip next turn has to be added to TurnMods", 1, currentGame.getState().getTurnMods().size());
     }
 
     /**
@@ -823,8 +800,7 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Fatal Push"); // Instant {B}
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Fatal Push");
 
@@ -833,7 +809,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Fatal Push", 1);
         assertGraveyardCount(playerA, "Pine Walker", 1);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
 
     }
 
@@ -861,13 +837,12 @@ public class MorphTest extends CardTestPlayerBase {
         // Whenever one or more Dragons you control attack, draw that many cards, then you may put a permanent card from your hand onto the battlefield
         addCard(Zone.BATTLEFIELD, playerA, "The Ur-Dragon", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon using Morph");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertHandCount(playerA, 0);
 
         assertTappedCount("Island", true, 3);
@@ -899,11 +874,10 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
@@ -941,8 +915,7 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Akroma, Angel of Fury");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury using Morph");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{R}{R}{R}: Turn this face-down permanent face up.");
 
@@ -962,7 +935,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", true);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern");
-        setChoice(playerA, false); // no morph (canPay for generic/colored mana returns true all the time, so xmage ask about face down cast)
+        // no morph (canPay for generic/colored mana returns true all the time, so xmage ask about face down cast)
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -979,20 +952,18 @@ public class MorphTest extends CardTestPlayerBase {
 
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", true);
         checkPlayableAbility("morph must be replaced by play ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Morph", false);
-        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern");
-        setChoice(playerA, true); // morph
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
     public void test_LandWithMorph_MorphAfterLand() {
-        removeAllCardsFromHand(playerA);
 
         // Morph {2}
         addCard(Zone.HAND, playerA, "Zoetic Cavern");
@@ -1000,14 +971,12 @@ public class MorphTest extends CardTestPlayerBase {
         //
         addCard(Zone.HAND, playerA, "Island", 1);
 
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", true);
         // play land first
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Island");
 
-        // morph ability (play as face down) calls from playLand method, so it visible for play land command
-        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", true);
-        checkPlayableAbility("morph must be replaced by play ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Morph", false);
-        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern");
-        setChoice(playerA, true); // morph
+        checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", false);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -1015,7 +984,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Island", 1);
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -1031,15 +1000,14 @@ public class MorphTest extends CardTestPlayerBase {
 
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Zoetic Cavern", true);
         checkPlayableAbility("morph must be replaced by play ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Morph", false);
-        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern");
-        setChoice(playerA, true); // morph
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -1074,14 +1042,13 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Nylea, Keen-Eyed");
 
         checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", true);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender");
-        setChoice(playerA, true); // morph
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender using Morph");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -1095,15 +1062,14 @@ public class MorphTest extends CardTestPlayerBase {
         // Face-down creature spells you cast cost {1} less to cast.
         addCard(Zone.BATTLEFIELD, playerA, "Dream Chisel");
 
-        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", true);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender");
-        setChoice(playerA, true); // morph
+        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender using Morph", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender using Morph");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -1118,22 +1084,233 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Kadena, Slinking Sorcerer");
 
         // creature one - get cost reduce
-        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", true);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender");
-        setChoice(playerA, true); // morph
+        checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender using Morph", true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // creature two - do not get cost reduce
-        checkPlayableAbility("can't by no reduce", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", false);
+        checkPlayableAbility("can't by no reduce", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender using Morph", false);
 
         // on next turn it can cost reduce again
-        checkPlayableAbility("can't by not your turn", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", false);
-        checkPlayableAbility("can", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender", true);
+        checkPlayableAbility("can't by not your turn", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender using Morph", false);
+        checkPlayableAbility("can", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Willbender using Morph", true);
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+    }
+
+    @Test
+    public void test_MorphIsColorlessFlash() {
+        // creature
+        // Morph {4}{G}
+        addCard(Zone.HAND, playerA, "Pine Walker", 1);
+        // land
+        // Morph {2}
+        addCard(Zone.HAND, playerA, "Zoetic Cavern", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        //
+        // You may cast colorless spells and artifact spells as though they had flash.
+        addCard(Zone.BATTLEFIELD, playerA, "Liberator, Urza's Battlethopter", 1);
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Pine Walker using Morph");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Zoetic Cavern using Morph");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
+    }
+
+    @Test
+    public void testLoseAbilities() {
+        addCard(Zone.HAND, playerA, "Monastery Flock");
+        addCard(Zone.HAND, playerA, "Tamiyo's Compleation");
+        addCard(Zone.BATTLEFIELD, playerA, "Secret Plans"); // face-down creatures get +0/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Tamiyo's Compleation", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
+
+        checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}: Turn this", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), true);
+        assertAttachedTo(playerA, "Tamiyo's Compleation", EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), true);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
+    }
+
+    @Test
+    public void testBecomeTreasure() {
+        addCard(Zone.HAND, playerA, "Sage-Eye Harrier"); // 1/5 Flying, Morph 3W
+        addCard(Zone.HAND, playerA, "Minimus Containment"); // 2W Aura
+        // Enchant nonland permanent
+        // Enchanted permanent is a Treasure artifact with “{T},Sacrifice this artifact: Add one mana of any color,”
+        // and it loses all other abilities. (If it was a creature, it’s no longer a creature.)
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sage-Eye Harrier using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{3}{W}: Turn this", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
+
+        checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}{W}: Turn this", false);
+
+        checkPlayableAbility("treasure", 1, PhaseStep.END_TURN, playerA, "{T}, Sacrifice ", true);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertSubtype(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), SubType.TREASURE);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.CREATURE, false);
+        assertAttachedTo(playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), true);
+    }
+
+    @Test
+    public void testMycosynthAfter() {
+        addCard(Zone.HAND, playerA, "Monastery Flock");
+        addCard(Zone.HAND, playerA, "Mycosynth Lattice");
+        addCard(Zone.BATTLEFIELD, playerA, "Secret Plans"); // face-down creatures get +0/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mycosynth Lattice");
+
+        checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}: Turn this", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.CREATURE, true);
+        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), SubType.BIRD);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
+    }
+
+    @Test
+    public void testMycosynthBefore() {
+        addCard(Zone.HAND, playerA, "Monastery Flock");
+        addCard(Zone.BATTLEFIELD, playerA, "Mycosynth Lattice");
+        addCard(Zone.BATTLEFIELD, playerA, "Secret Plans"); // face-down creatures get +0/+1
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
+
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
+        checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.CREATURE, true);
+        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), SubType.BIRD);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
+    }
+
+    private void assertMorphedFaceDownColor(String info, String needColor) {
+        Permanent permanent = currentGame.getBattlefield().getAllPermanents()
+                .stream()
+                .filter(Permanent::isMorphed)
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(info + ", server side: can't find morphed permanent", permanent);
+        Assert.assertEquals(info + ", server side: wrong name", EmptyNames.FACE_DOWN_CREATURE.getObjectName(), permanent.getName());
+        Assert.assertEquals(info + ", server side: wrong color", needColor, permanent.getColor(currentGame).toString());
+
+        // client side - controller
+        GameView gameView = getGameView(playerA);
+        PermanentView permanentView = gameView.getMyPlayer().getBattlefield().values()
+                .stream()
+                .filter(PermanentView::isMorphed)
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(info + ", client side - controller: can't find morphed permanent", permanentView);
+        Assert.assertEquals(info + ", client side - controller: wrong name", "Morph: Zoetic Cavern", permanentView.getName());
+        Assert.assertEquals(info + ", client side - controller: wrong color", needColor, permanentView.getColor().toString());
+
+        // client side - opponent
+        gameView = getGameView(playerB);
+        PlayerView playerView = gameView.getPlayers().stream().filter(p -> p.getName().equals(playerA.getName())).findFirst().orElse(null);
+        Assert.assertNotNull(playerView);
+        permanentView = playerView.getBattlefield().values()
+                .stream()
+                .filter(PermanentView::isMorphed)
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(info + ", client side - opponent: can't find morphed permanent", permanentView);
+        Assert.assertEquals(info + ", client side - opponent: wrong name", "Morph", permanentView.getName());
+        Assert.assertEquals(info + ", client side - opponent: wrong color", needColor, permanentView.getColor().toString());
+    }
+
+    @Test
+    public void test_Morph_MustGetColor() {
+        // Morph {2}
+        addCard(Zone.HAND, playerA, "Zoetic Cavern");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        //
+        // As Painter's Servant enters the battlefield, choose a color.
+        // All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
+        addCard(Zone.HAND, playerA, "Painter's Servant"); // {2}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // prepare face down
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zoetic Cavern using Morph");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        runCode("face down before color", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            assertMorphedFaceDownColor(info, "");
+        });
+
+        // add effect with new green color for a face down
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Painter's Servant");
+        setChoice(playerA, "Green");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        runCode("face down with G color", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            assertMorphedFaceDownColor(info, "G");
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_Morph_HoodedHydra() {
+        // Morph {2}
+        addCard(Zone.HAND, playerA, "Hooded Hydra");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3+5);
+
+        // prepare face down
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hooded Hydra using Morph");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}{G}{G}: Turn this face-down permanent face up.");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Hooded Hydra", 1);
+        assertPowerToughness(playerA, "Hooded Hydra", 5, 5);
     }
 }

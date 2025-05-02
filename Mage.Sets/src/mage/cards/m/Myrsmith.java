@@ -45,12 +45,12 @@ public final class Myrsmith extends CardImpl {
 
 class MyrsmithEffect extends CreateTokenEffect {
 
-    public MyrsmithEffect() {
+    MyrsmithEffect() {
         super(new MyrToken());
         staticText = "you may pay {1}. If you do, create a 1/1 colorless Myr artifact creature token";
     }
 
-    public MyrsmithEffect(final MyrsmithEffect effect) {
+    private MyrsmithEffect(final MyrsmithEffect effect) {
         super(effect);
     }
 

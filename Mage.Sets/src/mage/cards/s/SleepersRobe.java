@@ -39,7 +39,7 @@ public final class SleepersRobe extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has fear.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
 
         // Whenever enchanted creature deals combat damage to an opponent, you may draw a card.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature", true, false, true, TargetController.OPPONENT));

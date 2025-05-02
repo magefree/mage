@@ -35,7 +35,7 @@ public final class NimbusNaiad extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Enchanted creature gets +2/+2 and has flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2,2));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);

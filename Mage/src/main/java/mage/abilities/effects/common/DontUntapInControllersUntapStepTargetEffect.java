@@ -39,11 +39,6 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UNTAP;
     }
@@ -53,7 +48,7 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
         if (game.getTurnStepType() != PhaseStep.UNTAP) {
             return false;
         }
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             if (!event.getTargetId().equals(targetId)) {
                 continue;
             }

@@ -1,10 +1,7 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
@@ -13,27 +10,22 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class OppressiveRays extends CardImpl {
 
     public OppressiveRays(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -44,10 +36,10 @@ public final class OppressiveRays extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block unless its controller pays {3}.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysAttachedEffect(new ManaCostsImpl<>("{3}"), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockUnlessPaysAttachedEffect(new ManaCostsImpl<>("{3}"), AttachmentType.AURA)));
 
         // Activated abilities of enchanted creature cost {3} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OppressiveRaysCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(new OppressiveRaysCostModificationEffect()));
     }
 
     private OppressiveRays(final OppressiveRays card) {
@@ -67,7 +59,7 @@ class OppressiveRaysCostModificationEffect extends CostModificationEffectImpl {
         staticText = "Activated abilities of enchanted creature cost {3} more to activate";
     }
 
-    OppressiveRaysCostModificationEffect(OppressiveRaysCostModificationEffect effect) {
+    private OppressiveRaysCostModificationEffect(final OppressiveRaysCostModificationEffect effect) {
         super(effect);
     }
 
@@ -80,13 +72,9 @@ class OppressiveRaysCostModificationEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         Permanent creature = game.getPermanent(abilityToModify.getSourceId());
-        if (creature != null && creature.getAttachments().contains(source.getSourceId())) {
-            if (abilityToModify instanceof ActivatedAbility
-                    && !(abilityToModify instanceof SpellAbility)) {
-                return true;
-            }
-        }
-        return false;
+        return creature != null
+                && creature.getAttachments().contains(source.getSourceId())
+                && abilityToModify.isActivatedAbility();
     }
 
     @Override

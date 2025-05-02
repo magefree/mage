@@ -27,13 +27,13 @@ public final class LandMineToken extends TokenImpl {
     public LandMineToken() {
         super("Land Mine", "colorless artifact token named Land Mine with \"{R}, Sacrifice this artifact: This artifact deals 2 damage to target attacking creature without flying.\"");
         cardType.add(CardType.ARTIFACT);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-    protected LandMineToken(final LandMineToken token) {
+    private LandMineToken(final LandMineToken token) {
         super(token);
     }
 

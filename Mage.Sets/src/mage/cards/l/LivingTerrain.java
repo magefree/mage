@@ -34,7 +34,7 @@ public final class LivingTerrain extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted land is a 5/6 green Treefolk creature that's still a land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
+        this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
                 new TreefolkToken(), "Enchanted land is a 5/6 green Treefolk creature that's still a land", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR)));
     }
 
@@ -57,7 +57,7 @@ class TreefolkToken extends TokenImpl {
             power = new MageInt(5);
             toughness = new MageInt(6);
         }
-    public TreefolkToken(final TreefolkToken token) {
+    private TreefolkToken(final TreefolkToken token) {
         super(token);
     }
 

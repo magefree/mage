@@ -62,7 +62,7 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
         this.addTarget(new TargetPlayer());
     }
 
-    public MistbindCliqueAbility(MistbindCliqueAbility ability) {
+    private MistbindCliqueAbility(final MistbindCliqueAbility ability) {
         super(ability);
     }
 

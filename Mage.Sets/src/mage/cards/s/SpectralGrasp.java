@@ -40,15 +40,15 @@ public final class SpectralGrasp extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature can't attack you or a planeswalker you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackControllerAttachedEffect(AttachmentType.AURA, true)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackControllerAttachedEffect(AttachmentType.AURA, true)));
 
         // Enchanted creature can't block creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttachedEffect(AttachmentType.AURA, Duration.WhileOnBattlefield, filter)));
 
     }
 

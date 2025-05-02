@@ -8,18 +8,18 @@ import mage.game.Game;
 import java.util.List;
 
 /**
- * Removes abilities that require only discard a card for activation.
+ * AI: removes abilities that AI don't know how to use
  *
  * @author LevelX2
  */
 public class OutcomeOptimizer extends BaseTreeOptimizer {
 
     @Override
-    public void filter(Game game, List<Ability> actions) {
+    public void filter(Game game, List<Ability> actions, List<Ability> actionsToRemove) {
         for (Ability ability : actions) {
             for (Effect effect : ability.getEffects()) {
                 if (ability.getCustomOutcome() == Outcome.AIDontUseIt || effect.getOutcome() == Outcome.AIDontUseIt) {
-                    removeAbility(ability);
+                    actionsToRemove.add(ability);
                     break;
                 }
             }

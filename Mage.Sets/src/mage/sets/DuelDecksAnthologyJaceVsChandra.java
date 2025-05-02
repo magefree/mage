@@ -17,7 +17,7 @@ public final class DuelDecksAnthologyJaceVsChandra extends ExpansionSet {
     }
 
     private DuelDecksAnthologyJaceVsChandra() {
-        super("Duel Decks: Anthology, Jace vs. Chandra", "JVC", ExpansionSet.buildDate(2014, 12, 5),
+        super("Duel Decks Anthology: Jace vs. Chandra", "JVC", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = true;

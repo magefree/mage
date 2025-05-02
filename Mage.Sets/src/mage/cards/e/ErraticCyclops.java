@@ -52,7 +52,7 @@ class ErraticCyclopsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public ErraticCyclopsTriggeredAbility(final ErraticCyclopsTriggeredAbility ability) {
+    private ErraticCyclopsTriggeredAbility(final ErraticCyclopsTriggeredAbility ability) {
         super(ability);
     }
 

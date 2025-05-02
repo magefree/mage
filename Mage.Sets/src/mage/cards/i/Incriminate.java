@@ -1,22 +1,24 @@
 package mage.cards.i;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanentSameController;
+import mage.target.common.TargetPermanentSameController;
+import mage.target.common.TargetSacrifice;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
-import mage.target.TargetPermanent;
 
 /**
  * @author TheElk801
@@ -28,7 +30,7 @@ public final class Incriminate extends CardImpl {
 
         // Choose two target creatures controlled by the same player. That player sacrifices one of them.
         this.getSpellAbility().addEffect(new IncriminateEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2));
+        this.getSpellAbility().addTarget(new TargetPermanentSameController(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private Incriminate(final Incriminate card) {
@@ -71,10 +73,9 @@ class IncriminateEffect extends OneShotEffect {
                 || player == null) {
             return false;
         }
-        filter.add(mage.filter.predicate.Predicates.or(permanentIdPredicates));
-        TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+        filter.add(Predicates.or(permanentIdPredicates));
+        TargetSacrifice target = new TargetSacrifice(filter);
+        player.choose(Outcome.Sacrifice, target, source, game);
         Permanent sacrificeCreature = game.getPermanent(target.getFirstTarget());
         return sacrificeCreature != null
                 && sacrificeCreature.sacrifice(source, game);

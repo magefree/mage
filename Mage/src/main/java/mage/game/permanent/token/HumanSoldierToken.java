@@ -16,7 +16,7 @@ public final class HumanSoldierToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected HumanSoldierToken(final HumanSoldierToken token) {
+    private HumanSoldierToken(final HumanSoldierToken token) {
         super(token);
     }
 

@@ -45,12 +45,12 @@ public final class Counterbalance extends CardImpl {
 
 class CounterbalanceEffect extends OneShotEffect {
 
-    public CounterbalanceEffect() {
+    CounterbalanceEffect() {
         super(Outcome.Neutral);
         this.staticText = "you may reveal the top card of your library. If you do, counter that spell if it has the same mana value as the revealed card";
     }
 
-    public CounterbalanceEffect(final CounterbalanceEffect effect) {
+    private CounterbalanceEffect(final CounterbalanceEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class CounterbalanceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            Spell spell = (Spell) game.getStack().getStackObject(targetPointer.getFirst(game, source));
+            Spell spell = (Spell) game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
             if (spell != null) {
                 Card topcard = controller.getLibrary().getFromTop(game);
                 if (topcard != null) {

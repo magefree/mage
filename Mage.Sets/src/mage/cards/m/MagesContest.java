@@ -42,12 +42,12 @@ public final class MagesContest extends CardImpl {
 
 class MagesContestEffect extends OneShotEffect {
 
-    public MagesContestEffect() {
+    MagesContestEffect() {
         super(Outcome.Detriment);
         this.staticText = "You and target spell's controller bid life. You start the bidding with a bid of 1. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid. If you win the bidding, counter that spell";
     }
 
-    public MagesContestEffect(final MagesContestEffect effect) {
+    private MagesContestEffect(final MagesContestEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class MagesContestEffect extends OneShotEffect {
                             break;
                         }
                     }
-                } while (!Objects.equals(currentPlayer, winner));
+                } while (you.canRespond() && spellController.canRespond() && !Objects.equals(currentPlayer, winner));
                 game.informPlayers(winner.getLogName() + " has won the contest with a high bid of " + highBid + " life");
                 winner.loseLife(highBid, game, source, false);
                 if (winner == you) {

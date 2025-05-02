@@ -8,14 +8,15 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.target.Target;
-import mage.util.TargetAddress;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -29,8 +30,14 @@ public final class VesuvanDuplimancy extends CardImpl {
     private static final FilterSpell filter
             = new FilterSpell("a spell that targets only a single artifact or creature you control");
 
+    private static final FilterPermanent subfilter = new FilterControlledPermanent("artifact or creature you control");
+
     static {
-        filter.add(VesuvanDuplimancyPredicate.instance);
+        subfilter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+        filter.add(new HasOnlySingleTargetPermanentPredicate(subfilter));
     }
 
     public VesuvanDuplimancy(UUID ownerId, CardSetInfo setInfo) {
@@ -47,36 +54,6 @@ public final class VesuvanDuplimancy extends CardImpl {
     @Override
     public VesuvanDuplimancy copy() {
         return new VesuvanDuplimancy(this);
-    }
-}
-
-enum VesuvanDuplimancyPredicate implements ObjectSourcePlayerPredicate<Spell> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Spell> input, Game game) {
-        Spell spell = input.getObject();
-        if (spell == null) {
-            return false;
-        }
-        UUID singleTarget = null;
-        for (TargetAddress addr : TargetAddress.walk(spell)) {
-            Target targetInstance = addr.getTarget(spell);
-            for (UUID targetId : targetInstance.getTargets()) {
-                if (singleTarget == null) {
-                    singleTarget = targetId;
-                } else if (!singleTarget.equals(targetId)) {
-                    return false;
-                }
-            }
-        }
-        if (singleTarget == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(singleTarget);
-        return permanent != null
-                && permanent.isControlledBy(input.getPlayerId())
-                && (permanent.isCreature(game) || permanent.isArtifact(game));
     }
 }
 

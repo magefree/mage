@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -14,14 +13,15 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class Gravecrawler extends CardImpl {
 
     public Gravecrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);
@@ -54,11 +54,11 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl {
     }
 
     public GravecrawlerPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may cast {this} from your graveyard as long as you control a Zombie";
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        staticText = "You may cast this card from your graveyard as long as you control a Zombie";
     }
 
-    public GravecrawlerPlayEffect(final GravecrawlerPlayEffect effect) {
+    private GravecrawlerPlayEffect(final GravecrawlerPlayEffect effect) {
         super(effect);
     }
 

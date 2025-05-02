@@ -16,11 +16,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -29,8 +29,8 @@ import java.util.UUID;
  */
 public final class NemataPrimevalWarden extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Saprolings");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Saproling");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Saprolings");
 
     static {
         filter.add(SubType.SAPROLING.getPredicate());
@@ -52,17 +52,17 @@ public final class NemataPrimevalWarden extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new NemataPrimevalWardenEffect()));
 
         // {G}, Sacrifice a Saproling: Nemata, Primeval Warden gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
 
         // {1}{B}, Sacrifice 2 Saprolings: Draw a card.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability2 = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
                 new ManaCostsImpl<>("{1}{B}"));
-        ability2.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, filter2, false)));
+        ability2.addCost(new SacrificeTargetCost(2, filter2));
         this.addAbility(ability2);
     }
 

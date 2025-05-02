@@ -39,7 +39,7 @@ public final class LightningTalons extends CardImpl {
 
         Effect effect2 = new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield);
         effect2.setText("Enchanted creature gets +3/+0");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield));
         effect2 = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect2.setText("and has first strike");
         ability.addEffect(effect2);

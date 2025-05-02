@@ -29,7 +29,7 @@ public final class AnHavvaConstable extends CardImpl {
         this.toughness = new MageInt(1);
 
         // An-Havva Constable's toughness is equal to 1 plus the number of green creatures on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnHavvaConstableEffect()));
+        this.addAbility(new SimpleStaticAbility(new AnHavvaConstableEffect()));
     }
 
     private AnHavvaConstable(final AnHavvaConstable card) {
@@ -44,12 +44,12 @@ public final class AnHavvaConstable extends CardImpl {
 
 class AnHavvaConstableEffect extends ContinuousEffectImpl {
 
-    public AnHavvaConstableEffect() {
+    AnHavvaConstableEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, Outcome.BoostCreature);
         staticText = "{this}'s toughness is equal to 1 plus the number of green creatures on the battlefield";
     }
 
-    public AnHavvaConstableEffect(final AnHavvaConstableEffect effect) {
+    private AnHavvaConstableEffect(final AnHavvaConstableEffect effect) {
         super(effect);
     }
 
@@ -61,10 +61,14 @@ class AnHavvaConstableEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (mageObject == null) { return false; }
+        if (mageObject == null) {
+            return false;
+        }
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures");
         filter.add(new ColorPredicate(ObjectColor.GREEN));

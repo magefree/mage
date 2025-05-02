@@ -19,7 +19,7 @@ public final class TreefolkShamanToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    protected TreefolkShamanToken(final TreefolkShamanToken token) {
+    private TreefolkShamanToken(final TreefolkShamanToken token) {
         super(token);
     }
 

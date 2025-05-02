@@ -35,7 +35,7 @@ public final class VileDeacon extends CardImpl {
 
         // Whenever Vile Deacon attacks, it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter);
-        Effect effect = new BoostSourceEffect(amount, amount, Duration.EndOfTurn, true);
+        Effect effect = new BoostSourceEffect(amount, amount, Duration.EndOfTurn);
         effect.setText("it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield");
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }

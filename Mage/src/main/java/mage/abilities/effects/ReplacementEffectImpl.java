@@ -1,4 +1,3 @@
-
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
@@ -24,7 +23,7 @@ public abstract class ReplacementEffectImpl extends ContinuousEffectImpl impleme
     // continuous effects from any other source that would affect it.
     protected boolean selfScope;
 
-    public ReplacementEffectImpl(Duration duration, Outcome outcome) {
+    protected ReplacementEffectImpl(Duration duration, Outcome outcome) {
         this(duration, outcome, true);
     }
 
@@ -34,7 +33,7 @@ public abstract class ReplacementEffectImpl extends ContinuousEffectImpl impleme
      * @param selfScope - is only relevant while permanents entering the
      *                  battlefield events
      */
-    public ReplacementEffectImpl(Duration duration, Outcome outcome, boolean selfScope) {
+    protected ReplacementEffectImpl(Duration duration, Outcome outcome, boolean selfScope) {
         super(duration, outcome);
         this.effectType = EffectType.REPLACEMENT;
         this.selfScope = selfScope;
@@ -51,8 +50,8 @@ public abstract class ReplacementEffectImpl extends ContinuousEffectImpl impleme
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not used for replacemnt effect.");
+    public final boolean apply(Game game, Ability source) {
+        throw new UnsupportedOperationException("Wrong code usage: apply() not used for replacement effect.");
     }
 
 }

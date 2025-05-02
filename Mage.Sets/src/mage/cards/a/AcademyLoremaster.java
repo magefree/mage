@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class AcademyLoremaster extends CardImpl {
 
         // At the beginning of each player's draw step, that player may draw an additional card. If they do, spells they cast this turn cost {2} more to cast.
         this.addAbility(new BeginningOfDrawTriggeredAbility(
-                new AcademyLoremasterEffect(), TargetController.ANY, false
+                TargetController.EACH_PLAYER, new AcademyLoremasterEffect(), false
         ));
     }
 

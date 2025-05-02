@@ -5,7 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -18,6 +18,7 @@ import mage.game.permanent.token.PurphorossInterventionToken;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -26,7 +27,7 @@ import java.util.UUID;
  */
 public final class PurphorossIntervention extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(GetXValue.instance, 2);
 
     public PurphorossIntervention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
@@ -71,7 +72,7 @@ class PurphorossInterventionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token token = new PurphorossInterventionToken(source.getManaCostsToPay().getX());
+        Token token = new PurphorossInterventionToken(CardUtil.getSourceCostsTag(game, source, "X", 0));
         token.putOntoBattlefield(1, game, source, source.getControllerId());
         token.getLastAddedTokenIds()
                 .stream()

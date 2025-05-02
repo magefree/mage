@@ -39,7 +39,7 @@ public final class CauldronFamiliar extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
-                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD)
         ));
     }
 

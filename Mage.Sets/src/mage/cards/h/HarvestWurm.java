@@ -28,7 +28,7 @@ public final class HarvestWurm extends CardImpl {
 
         // When Harvest Wurm enters the battlefield, sacrifice it unless you return a basic land card from your graveyard to your hand.
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_BASIC_LAND_A);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandFromGraveyardCost(target))));
     }
 

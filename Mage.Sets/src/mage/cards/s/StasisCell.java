@@ -36,10 +36,10 @@ public final class StasisCell extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
         
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
         
         // {3}{U}: Attach Stasis Cell to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "Attach {this} to target creature"), new ManaCostsImpl<>("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(new AttachEffect(Outcome.Detriment, "Attach {this} to target creature"), new ManaCostsImpl<>("{3}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

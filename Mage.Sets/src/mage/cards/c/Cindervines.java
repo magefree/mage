@@ -32,7 +32,7 @@ public final class Cindervines extends CardImpl {
         // Whenever an opponent casts a noncreature spell, Cindervines deals 1 damage to that player.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that player"),
-                StaticFilters.FILTER_SPELL_NON_CREATURE, false, SetTargetPointer.PLAYER
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, SetTargetPointer.PLAYER
         ));
 
         // {1}, Sacrifice Cindervines: Destroy target artifact or enchantment. Cindervines deals 2 damage to that permanent's controller.

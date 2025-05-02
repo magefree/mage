@@ -30,7 +30,7 @@ public final class TeferisMoat extends CardImpl {
         // As Teferi's Moat enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // Creatures of the chosen color without flying can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeferisMoatRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new TeferisMoatRestrictionEffect()));
     }
 
     private TeferisMoat(final TeferisMoat card) {
@@ -50,7 +50,7 @@ class TeferisMoatRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures of the chosen color without flying can't attack you";
     }
 
-    TeferisMoatRestrictionEffect(final TeferisMoatRestrictionEffect effect) {
+    private TeferisMoatRestrictionEffect(final TeferisMoatRestrictionEffect effect) {
         super(effect);
     }
 

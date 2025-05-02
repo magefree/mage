@@ -39,7 +39,7 @@ public final class DrownerOfSecrets extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Tap an untapped Merfolk you control: Target player puts the top card of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

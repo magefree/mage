@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.costs.Cost;
@@ -13,6 +13,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.combat.TargetPlayerCantAttackYouEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -36,21 +37,19 @@ public final class ChampionsOfMinasTirith extends CardImpl {
         this.toughness = new MageInt(6);
 
         // When Champions of Minas Tirith enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // At the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, where X is the number of cards in their hand. If they don't, they can't attack you this combat.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         Zone.BATTLEFIELD,
-                        new ChampionsOfMinasTirithEffect(),
-                        TargetController.OPPONENT,
-                        false,
-                        true
+                        TargetController.OPPONENT, new ChampionsOfMinasTirithEffect(),
+                        false
                 ),
                 MonarchIsSourceControllerCondition.instance,
                 "At the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, "
                         + "where X is the number of cards in their hand. If they don't, they can't attack you this combat."
-        ));
+        ).addHint(MonarchHint.instance));
     }
 
     private ChampionsOfMinasTirith(final ChampionsOfMinasTirith card) {
@@ -89,7 +88,7 @@ class ChampionsOfMinasTirithEffect extends OneShotEffect {
                 new TargetPlayerCantAttackYouEffect(Duration.EndOfCombat),
                 ManaUtil.createManaCost(CardsInTargetPlayerHandCount.instance, game, source, this),
                 "Pay to be able to attack " + player.getName() + " this combat?"
-        ).setTargetPointer(targetPointer).apply(game, source);
+        ).setTargetPointer(this.getTargetPointer().copy()).apply(game, source);
     }
 }
 
@@ -110,6 +109,6 @@ class ChampionsOfMinasTirithDoIfCostPaid extends DoIfCostPaid {
 
     @Override
     protected Player getPayingPlayer(Game game, Ability source) {
-        return game.getPlayer(targetPointer.getFirst(game, source));
+        return game.getPlayer(getTargetPointer().getFirst(game, source));
     }
 }

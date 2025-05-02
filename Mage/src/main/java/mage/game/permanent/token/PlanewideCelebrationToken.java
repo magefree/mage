@@ -23,7 +23,7 @@ public final class PlanewideCelebrationToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected PlanewideCelebrationToken(final PlanewideCelebrationToken token) {
+    private PlanewideCelebrationToken(final PlanewideCelebrationToken token) {
         super(token);
     }
 

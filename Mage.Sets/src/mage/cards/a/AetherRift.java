@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -30,7 +29,7 @@ public final class AetherRift extends CardImpl {
 
 
         // At the beginning of your upkeep, discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AetherRiftEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AetherRiftEffect()));
 
     }
 
@@ -46,12 +45,12 @@ public final class AetherRift extends CardImpl {
 
 class AetherRiftEffect extends OneShotEffect {
 
-    public AetherRiftEffect() {
+    AetherRiftEffect() {
         super(Outcome.Benefit);
         this.staticText = "discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life";
     }
 
-    public AetherRiftEffect(final AetherRiftEffect effect) {
+    private AetherRiftEffect(final AetherRiftEffect effect) {
         super(effect);
     }
 

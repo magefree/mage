@@ -47,7 +47,7 @@ public final class InscribedTablet extends CardImpl {
 
 class InscribedTabletEffect extends OneShotEffect {
 
-    public InscribedTabletEffect() {
+    InscribedTabletEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top five cards of your library. " +
                 "Put a land card from among them into your hand and the rest on the bottom of your library in a random order. " +

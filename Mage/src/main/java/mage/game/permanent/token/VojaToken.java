@@ -22,7 +22,7 @@ public final class VojaToken extends TokenImpl {
         this.toughness = new MageInt(2);
     }
 
-    protected VojaToken(final VojaToken token) {
+    private VojaToken(final VojaToken token) {
         super(token);
     }
 

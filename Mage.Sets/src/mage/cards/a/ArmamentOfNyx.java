@@ -47,7 +47,7 @@ public final class ArmamentOfNyx extends CardImpl {
         this.addAbility(ability);
         Condition condition = new AttachedToMatchesFilterCondition(filter);
         // Enchanted creature has double strike as long as it's an enchantment. Otherwise, prevent all damage that would be dealt by enchanted creature
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield),
                 condition, "Enchanted creature has double strike as long as it's an enchantment"));
         ReplacementEffect effect = new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false);

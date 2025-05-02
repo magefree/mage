@@ -42,7 +42,7 @@ class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(4), false);
     }
 
-    EbonyOwlNetsukeTriggeredAbility(final EbonyOwlNetsukeTriggeredAbility ability) {
+    private EbonyOwlNetsukeTriggeredAbility(final EbonyOwlNetsukeTriggeredAbility ability) {
         super(ability);
     }
 

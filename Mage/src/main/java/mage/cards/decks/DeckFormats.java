@@ -72,6 +72,8 @@ public enum DeckFormats {
         return res;
     }
 
+    // TODO: need refactor and remove all that methods to 1-3 versions only
+
     public static void writeDeck(String file, DeckCardLists deck) throws IOException {
         writeDeck(new File(file), deck);
     }

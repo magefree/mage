@@ -55,7 +55,7 @@ public final class KrrikSonOfYawgmoth extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // For each {B} in a cost, you may pay 2 life rather than pay that mana.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KrrikSonOfYawgmothPhyrexianEffect()));
+        this.addAbility(new SimpleStaticAbility(new KrrikSonOfYawgmothPhyrexianEffect()));
 
         // Whenever you cast a black spell, put a +1/+1 counter on K'rrik, Son of Yawgmoth.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filterSpell, false));
@@ -73,12 +73,12 @@ public final class KrrikSonOfYawgmoth extends CardImpl {
 
 class KrrikSonOfYawgmothPhyrexianEffect extends ContinuousEffectImpl {
 
-    public KrrikSonOfYawgmothPhyrexianEffect() {
+    KrrikSonOfYawgmothPhyrexianEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         this.staticText = "for each {B} in a cost, you may pay 2 life rather than pay that mana";
     }
 
-    public KrrikSonOfYawgmothPhyrexianEffect(final KrrikSonOfYawgmothPhyrexianEffect effect) {
+    private KrrikSonOfYawgmothPhyrexianEffect(final KrrikSonOfYawgmothPhyrexianEffect effect) {
         super(effect);
     }
 

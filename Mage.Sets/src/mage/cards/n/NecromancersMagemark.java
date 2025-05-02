@@ -51,11 +51,11 @@ public final class NecromancersMagemark extends CardImpl {
         this.addAbility(ability);
 
         // Creatures you control that are enchanted get +1/+1.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
+        ability = new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
         this.addAbility(ability);
 
         // If a creature you control that's enchanted would die, return it to its owner's hand instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NecromancersMagemarkEffect()));
+        this.addAbility(new SimpleStaticAbility(new NecromancersMagemarkEffect()));
     }
 
     private NecromancersMagemark(final NecromancersMagemark card) {
@@ -70,23 +70,18 @@ public final class NecromancersMagemark extends CardImpl {
 
 class NecromancersMagemarkEffect extends ReplacementEffectImpl {
 
-    public NecromancersMagemarkEffect() {
+    NecromancersMagemarkEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a creature you control that's enchanted would die, return it to its owner's hand instead";
     }
 
-    public NecromancersMagemarkEffect(final NecromancersMagemarkEffect effect) {
+    private NecromancersMagemarkEffect(final NecromancersMagemarkEffect effect) {
         super(effect);
     }
 
     @Override
     public NecromancersMagemarkEffect copy() {
         return new NecromancersMagemarkEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

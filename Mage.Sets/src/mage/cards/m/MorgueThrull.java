@@ -25,7 +25,7 @@ public final class MorgueThrull extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice Morgue Thrull: Put the top three cards of your library into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsControllerEffect(3), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new MillCardsControllerEffect(3), new SacrificeSourceCost()));
     }
 
     private MorgueThrull(final MorgueThrull card) {

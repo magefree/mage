@@ -22,7 +22,7 @@ public final class MetallurgicSummoningsConstructToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    protected MetallurgicSummoningsConstructToken(final MetallurgicSummoningsConstructToken token) {
+    private MetallurgicSummoningsConstructToken(final MetallurgicSummoningsConstructToken token) {
         super(token);
     }
 

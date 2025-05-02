@@ -1,30 +1,32 @@
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
-import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -70,7 +72,7 @@ public final class OrcusPrinceOfUndeath extends CardImpl {
 
 class OrcusPrinceOfUndeathBoostEffect extends OneShotEffect {
 
-    public OrcusPrinceOfUndeathBoostEffect() {
+    OrcusPrinceOfUndeathBoostEffect() {
         super(Outcome.UnboostCreature);
         this.staticText = "Each other creature gets -X/-X until end of turn. You lose X life";
     }
@@ -90,7 +92,7 @@ class OrcusPrinceOfUndeathBoostEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
+        int xValue = GetXValue.instance.calculate(game, source, this);
         game.addEffect(new BoostAllEffect(-xValue, -xValue, Duration.EndOfTurn, true), source);
         controller.loseLife(xValue, game, source, false);
         return true;
@@ -101,7 +103,7 @@ class OrcusPrinceOfUndeathTarget extends TargetCardInYourGraveyard {
 
     private final int xValue;
 
-    public OrcusPrinceOfUndeathTarget(int xValue, FilterCreatureCard filter) {
+    OrcusPrinceOfUndeathTarget(int xValue, FilterCreatureCard filter) {
         super(0, xValue, filter);
         this.xValue = xValue;
     }
@@ -117,22 +119,28 @@ class OrcusPrinceOfUndeathTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, xValue, game);
+    }
+
+    @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        int maxManaValue = this.xValue;
-        for (UUID targetId : this.getTargets()) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                maxManaValue -= card.getManaValue();
-            }
-        }
-        for (UUID possibleTargetId : super.possibleTargets(sourceControllerId, source, game)) {
-            Card card = game.getCard(possibleTargetId);
-            if (card != null && card.getManaValue() <= maxManaValue) {
-                possibleTargets.add(possibleTargetId);
-            }
-        }
-        return possibleTargets;
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, xValue, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getManaValue)
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 }
 
@@ -141,7 +149,7 @@ enum OrcusPrinceOfUndeathAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ManacostVariableValue.ETB.calculate(game, ability, null);
+        int xValue = GetXValue.instance.calculate(game, ability, null);
         FilterCreatureCard filter = new FilterCreatureCard("creature cards with total mana value " + xValue + " or less from your graveyard");
         for (Mode mode : ability.getModes().values()) {
             boolean setTarget = false;

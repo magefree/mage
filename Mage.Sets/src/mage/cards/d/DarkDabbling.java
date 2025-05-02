@@ -46,12 +46,12 @@ public final class DarkDabbling extends CardImpl {
 
 class DarkDabblingEffect extends OneShotEffect {
 
-    public DarkDabblingEffect() {
+    DarkDabblingEffect() {
         super(Outcome.Benefit);
         this.staticText = "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control";
     }
 
-    public DarkDabblingEffect(final DarkDabblingEffect effect) {
+    private DarkDabblingEffect(final DarkDabblingEffect effect) {
         super(effect);
     }
 

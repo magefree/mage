@@ -21,7 +21,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 public final class BanewhipPunisher extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a -1/-1 counter on it");    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that has a -1/-1 counter on it");
     
     static {
         filter.add(CounterType.M1M1.getPredicate());
@@ -39,14 +39,14 @@ public final class BanewhipPunisher extends CardImpl {
         this.addAbility(etbAbility);
         
         // {B}, sacrifice Banewhip Punisher: Destroy target creature that has a -1/-1 counter on it.
-        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{B}"));
+        Ability destroyAbility = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{B}"));
         destroyAbility.addCost(new SacrificeSourceCost());
         destroyAbility.addTarget(new TargetPermanent(filter));
         this.addAbility(destroyAbility);
         
     }
 
-    public BanewhipPunisher(final BanewhipPunisher banewhipPunisher) {
+    private BanewhipPunisher(final BanewhipPunisher banewhipPunisher) {
         super(banewhipPunisher);
     }
 

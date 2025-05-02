@@ -30,10 +30,10 @@ public final class GoblinGoon extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Goblin Goon can't attack unless you control more creatures than defending player.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinGoonCantAttackEffect()));
+        this.addAbility(new SimpleStaticAbility(new GoblinGoonCantAttackEffect()));
 
         // Goblin Goon can't block unless you control more creatures than attacking player.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinGoonCantBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new GoblinGoonCantBlockEffect()));
     }
 
     private GoblinGoon(final GoblinGoon card) {
@@ -53,7 +53,7 @@ class GoblinGoonCantAttackEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control more creatures than defending player";
     }
 
-    GoblinGoonCantAttackEffect(final GoblinGoonCantAttackEffect effect) {
+    private GoblinGoonCantAttackEffect(final GoblinGoonCantAttackEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class GoblinGoonCantBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block unless you control more creatures than attacking player";
     }
 
-    GoblinGoonCantBlockEffect(final GoblinGoonCantBlockEffect effect) {
+    private GoblinGoonCantBlockEffect(final GoblinGoonCantBlockEffect effect) {
         super(effect);
     }
 

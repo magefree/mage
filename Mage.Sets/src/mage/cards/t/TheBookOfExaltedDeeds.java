@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
@@ -10,24 +9,23 @@ import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continuous.CantLoseGameSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.permanent.token.Angel33Token;
 import mage.target.TargetPermanent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
-import mage.game.permanent.token.Angel33Token;
 
 /**
  * @author TheElk801
@@ -46,7 +44,7 @@ public final class TheBookOfExaltedDeeds extends CardImpl {
         // At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new Angel33Token()), TargetController.YOU, false
+                        new CreateTokenEffect(new Angel33Token())
                 ), condition, "At the beginning of your end step, "
                 + "if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying."
         ).addHint(hint), new PlayerGainedLifeWatcher());
@@ -56,7 +54,7 @@ public final class TheBookOfExaltedDeeds extends CardImpl {
                 new AddCountersTargetEffect(CounterType.ENLIGHTENED.createInstance()), new ManaCostsImpl<>("{W}{W}{W}")
         );
         ability.addEffect(new GainAbilityTargetEffect(
-                new SimpleStaticAbility(new TheBookOfExaltedDeedsEffect()), Duration.Custom,
+                new SimpleStaticAbility(new CantLoseGameSourceControllerEffect()), Duration.Custom,
                 "It gains \"You can't lose the game and your opponents can't win the game.\""
         ));
         ability.addCost(new TapSourceCost());
@@ -72,38 +70,5 @@ public final class TheBookOfExaltedDeeds extends CardImpl {
     @Override
     public TheBookOfExaltedDeeds copy() {
         return new TheBookOfExaltedDeeds(this);
-    }
-}
-
-class TheBookOfExaltedDeedsEffect extends ContinuousRuleModifyingEffectImpl {
-
-    TheBookOfExaltedDeedsEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
-        staticText = "You can't lose the game and your opponents can't win the game";
-    }
-
-    private TheBookOfExaltedDeedsEffect(final TheBookOfExaltedDeedsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TheBookOfExaltedDeedsEffect copy() {
-        return new TheBookOfExaltedDeedsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case WINS:
-                return game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
-            case LOSES:
-                return source.isControlledBy(event.getPlayerId());
-        }
-        return false;
     }
 }

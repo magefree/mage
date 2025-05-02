@@ -27,7 +27,7 @@ public final class VictoryChimes extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Untap Victory Chimes during each other player's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapSourceDuringEachOtherPlayersUntapStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new UntapSourceDuringEachOtherPlayersUntapStepEffect()));
 
         // {T}: A player of your choice adds {C}.
         ManaEffect effect = new VictoryChimesManaEffect("chosen player");
@@ -50,12 +50,12 @@ public final class VictoryChimes extends CardImpl {
 
 class VictoryChimesManaEffect extends ManaEffect {
 
-    public VictoryChimesManaEffect(String textManaPoolOwner) {
+    VictoryChimesManaEffect(String textManaPoolOwner) {
         super();
         this.staticText = "a player of your choice adds {C}";
     }
 
-    public VictoryChimesManaEffect(final VictoryChimesManaEffect effect) {
+    private VictoryChimesManaEffect(final VictoryChimesManaEffect effect) {
         super(effect);
     }
 

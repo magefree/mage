@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -32,10 +33,10 @@ public final class AggressiveMining extends CardImpl {
 
 
         // You can't play lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AggressiveMiningEffect()));
+        this.addAbility(new SimpleStaticAbility(new AggressiveMiningEffect()));
         
         // Sacrifice a land: Draw two cards.  Activate this ability only once each turn.
-        Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")));
+        Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_LAND);
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), cost));
     }
 
@@ -51,23 +52,18 @@ public final class AggressiveMining extends CardImpl {
 
 class AggressiveMiningEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public AggressiveMiningEffect() {
+    AggressiveMiningEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "You can't play lands";
     }
     
-    public AggressiveMiningEffect(final AggressiveMiningEffect effect) {
+    private AggressiveMiningEffect(final AggressiveMiningEffect effect) {
         super(effect);
     }
 
     @Override
     public AggressiveMiningEffect copy() {
         return new AggressiveMiningEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

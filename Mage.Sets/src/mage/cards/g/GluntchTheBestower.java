@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -40,9 +40,7 @@ public final class GluntchTheBestower extends CardImpl {
 
         // At the beginning of your end step, choose a player. They put two +1/+1 counters on a creature they control. Choose a second player to draw a card. Then choose a third player to create two Treasure tokens.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-            new GluntchTheBestowerEffect(),
-            TargetController.YOU,
-            false
+                new GluntchTheBestowerEffect()
         ));
     }
 
@@ -86,8 +84,8 @@ class GluntchTheBestowerEffect extends OneShotEffect {
         //
 
         TargetPlayer playerChoice = new TargetPlayer();
-        playerChoice.setNotTarget(true);
-        playerChoice.setTargetName("a player that will put two +1/+1 counters on a creature they control");
+        playerChoice.withNotTarget(true);
+        playerChoice.withTargetName("a player that will put two +1/+1 counters on a creature they control");
         controller.choose(Outcome.BoostCreature, playerChoice, source, game);
 
         UUID firstChosenPlayerId = playerChoice.getFirstTarget();
@@ -98,8 +96,8 @@ class GluntchTheBestowerEffect extends OneShotEffect {
 
         game.informPlayers(firstChosenPlayer.getLogName() + " has been chosen for the first effect.");
         TargetPermanent targetChosenCreature = new TargetControlledCreaturePermanent();
-        targetChosenCreature.setNotTarget(true);
-        playerChoice.setTargetName("a creature you control to add two +1/+1 counters on it");
+        targetChosenCreature.withNotTarget(true);
+        playerChoice.withTargetName("a creature you control to add two +1/+1 counters on it");
         firstChosenPlayer.choose(Outcome.BoostCreature, targetChosenCreature, source, game);
 
         Permanent chosenCreature = game.getPermanent(targetChosenCreature.getFirstTarget());
@@ -115,8 +113,8 @@ class GluntchTheBestowerEffect extends OneShotEffect {
         FilterPlayer filterNotFirst = new FilterPlayer();
         filterNotFirst.add(Predicates.not(new PlayerIdPredicate(firstChosenPlayerId)));
         playerChoice = new TargetPlayer(filterNotFirst);
-        playerChoice.setNotTarget(true);
-        playerChoice.setTargetName("a player that will draw a card");
+        playerChoice.withNotTarget(true);
+        playerChoice.withTargetName("a player that will draw a card");
         controller.choose(Outcome.DrawCard, playerChoice, source, game);
 
         UUID secondChosenPlayerId = playerChoice.getFirstTarget();
@@ -137,8 +135,8 @@ class GluntchTheBestowerEffect extends OneShotEffect {
         filterNotFirstNorSecond.add(Predicates.not(new PlayerIdPredicate(firstChosenPlayerId)));
         filterNotFirstNorSecond.add(Predicates.not(new PlayerIdPredicate(secondChosenPlayerId)));
         playerChoice = new TargetPlayer(filterNotFirstNorSecond);
-        playerChoice.setNotTarget(true);
-        playerChoice.setTargetName("a player that will create two Treasure tokens");
+        playerChoice.withNotTarget(true);
+        playerChoice.withTargetName("a player that will create two Treasure tokens");
         controller.choose(Outcome.DrawCard, playerChoice, source, game);
 
         UUID thirdChosenPlayerId = playerChoice.getFirstTarget();

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class ArchfiendOfDepravity extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ArchfiendOfDepravityEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.OPPONENT, new ArchfiendOfDepravityEffect(), false));
     }
 
     private ArchfiendOfDepravity(final ArchfiendOfDepravity card) {
@@ -52,12 +52,12 @@ public final class ArchfiendOfDepravity extends CardImpl {
 
 class ArchfiendOfDepravityEffect extends OneShotEffect {
 
-    public ArchfiendOfDepravityEffect() {
+    ArchfiendOfDepravityEffect() {
         super(Outcome.Benefit); // AI should select two creatures if possible so it has to be a benefit
         this.staticText = "that player chooses up to two creatures they control, then sacrifices the rest";
     }
 
-    public ArchfiendOfDepravityEffect(final ArchfiendOfDepravityEffect effect) {
+    private ArchfiendOfDepravityEffect(final ArchfiendOfDepravityEffect effect) {
         super(effect);
     }
 

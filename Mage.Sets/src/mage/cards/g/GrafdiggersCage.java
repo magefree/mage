@@ -27,10 +27,10 @@ public final class GrafdiggersCage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Creature cards can't enter the battlefield from graveyards or libraries.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrafdiggersCageEffect()));
+        this.addAbility(new SimpleStaticAbility(new GrafdiggersCageEffect()));
 
         // Players can't cast cards in graveyards or libraries.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrafdiggersCageEffect2()));
+        this.addAbility(new SimpleStaticAbility(new GrafdiggersCageEffect2()));
     }
 
     private GrafdiggersCage(final GrafdiggersCage card) {
@@ -45,12 +45,12 @@ public final class GrafdiggersCage extends CardImpl {
 
 class GrafdiggersCageEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public GrafdiggersCageEffect() {
+    GrafdiggersCageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creature cards in graveyards and libraries can't enter the battlefield";
     }
 
-    public GrafdiggersCageEffect(final GrafdiggersCageEffect effect) {
+    private GrafdiggersCageEffect(final GrafdiggersCageEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class GrafdiggersCageEffect2 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't cast spells from graveyards or libraries";
     }
 
-    public GrafdiggersCageEffect2(final GrafdiggersCageEffect2 effect) {
+    private GrafdiggersCageEffect2(final GrafdiggersCageEffect2 effect) {
         super(effect);
     }
 

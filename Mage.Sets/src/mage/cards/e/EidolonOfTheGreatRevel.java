@@ -53,7 +53,7 @@ class EidolonOfTheGreatRevelTriggeredAbility extends TriggeredAbilityImpl {
     }
 
 
-    public EidolonOfTheGreatRevelTriggeredAbility(final EidolonOfTheGreatRevelTriggeredAbility abiltity) {
+    private EidolonOfTheGreatRevelTriggeredAbility(final EidolonOfTheGreatRevelTriggeredAbility abiltity) {
         super(abiltity);
     }
 

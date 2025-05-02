@@ -45,12 +45,12 @@ public final class TheGreatAurora extends CardImpl {
 
 class TheGreatAuroraEffect extends OneShotEffect {
 
-    public TheGreatAuroraEffect() {
+    TheGreatAuroraEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield";
     }
 
-    public TheGreatAuroraEffect(final TheGreatAuroraEffect effect) {
+    private TheGreatAuroraEffect(final TheGreatAuroraEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
                 }
             }
 
-            game.getState().processAction(game); // so effects from creatures that were on the battlefield won't trigger from draw or put into play
+            game.processAction(); // so effects from creatures that were on the battlefield won't trigger from draw or put into play
 
             // Draw cards
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

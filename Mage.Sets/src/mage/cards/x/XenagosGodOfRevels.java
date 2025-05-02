@@ -2,7 +2,7 @@ package mage.cards.x;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
@@ -14,9 +14,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -27,13 +25,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class XenagosGodOfRevels extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public XenagosGodOfRevels(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{R}{G}");
@@ -53,13 +44,13 @@ public final class XenagosGodOfRevels extends CardImpl {
         // At the beginning of combat on your turn, another target creature you control gains haste and gets +X/+X until end of turn, where X is that creature's power.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(
+                TargetController.YOU, new GainAbilityTargetEffect(
                         HasteAbility.getInstance(), Duration.EndOfTurn
                 ).setText("another target creature you control gains haste"),
-                TargetController.YOU, false, false
+                false
         );
         ability.addEffect(new XenagosGodOfRevelsEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 
@@ -98,7 +89,7 @@ class XenagosGodOfRevelsEffect extends OneShotEffect {
         int power = targetCreature.getPower().getValue();
         game.addEffect(new BoostTargetEffect(
                 power, power, Duration.EndOfTurn
-        ).setTargetPointer(this.getTargetPointer()), source);
+        ).setTargetPointer(this.getTargetPointer().copy()), source);
         return false;
     }
 }

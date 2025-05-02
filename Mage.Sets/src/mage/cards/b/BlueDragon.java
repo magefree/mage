@@ -71,7 +71,7 @@ public final class BlueDragon extends CardImpl {
 
 class BlueDragonEffect extends ContinuousEffectImpl {
 
-    public BlueDragonEffect() {
+    BlueDragonEffect() {
         super(Duration.UntilYourNextTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.UnboostCreature);
         this.staticText = "until your next turn, target creature an opponent controls gets -3/-0, up to one other target creature gets -2/-0, and up to one other target creature gets -1/-0";
     }

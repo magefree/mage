@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.abilities.common.SimpleStaticAbility;
@@ -21,7 +20,7 @@ import java.util.UUID;
  */
 public final class AncestralMask extends CardImpl {
 
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("each other enchantment on the battlefield");
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("other enchantment on the battlefield");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -39,7 +38,7 @@ public final class AncestralMask extends CardImpl {
 
         // Enchanted creature gets +2/+2 for each other enchantment on the battlefield.
         PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(filter, 2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(countEnchantments, countEnchantments, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(countEnchantments, countEnchantments, Duration.WhileOnBattlefield)));
     }
 
     private AncestralMask(final AncestralMask card) {

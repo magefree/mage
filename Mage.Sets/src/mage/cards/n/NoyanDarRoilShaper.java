@@ -68,12 +68,12 @@ public final class NoyanDarRoilShaper extends CardImpl {
 
 class NoyanDarEffect extends OneShotEffect {
 
-    public NoyanDarEffect() {
+    NoyanDarEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "put three +1/+1 counters on target land you control. If you do, that land becomes a 0/0 Elemental creature with haste that's still a land.";
     }
 
-    public NoyanDarEffect(final NoyanDarEffect effect) {
+    private NoyanDarEffect(final NoyanDarEffect effect) {
         super(effect);
     }
 
@@ -89,12 +89,12 @@ class NoyanDarEffect extends OneShotEffect {
             targetId = target.getFirstTarget();
         }
         if (targetId != null) {
-            FixedTarget fixedTarget = new FixedTarget(targetId, game);
+            FixedTarget blueprintTarget = new FixedTarget(targetId, game);
             ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.EndOfGame);
-            continuousEffect.setTargetPointer(fixedTarget);
+            continuousEffect.setTargetPointer(blueprintTarget.copy());
             game.addEffect(continuousEffect, source);
             Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(3));
-            effect.setTargetPointer(fixedTarget);
+            effect.setTargetPointer(blueprintTarget.copy());
             return effect.apply(game, source);
         }
         return true;
@@ -114,7 +114,7 @@ class AwakenElementalToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public AwakenElementalToken(final AwakenElementalToken token) {
+    private AwakenElementalToken(final AwakenElementalToken token) {
         super(token);
     }
 

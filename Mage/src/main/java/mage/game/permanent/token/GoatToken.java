@@ -18,7 +18,7 @@ public final class GoatToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected GoatToken(final GoatToken token) {
+    private GoatToken(final GoatToken token) {
         super(token);
     }
 

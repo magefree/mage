@@ -41,11 +41,11 @@ public final class SlaughterGames extends CardImpl {
 
 class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public SlaughterGamesEffect() {
+    SlaughterGamesEffect() {
         super(true, "target opponent's", "any number of cards with that name");
     }
 
-    public SlaughterGamesEffect(final SlaughterGamesEffect effect) {
+    private SlaughterGamesEffect(final SlaughterGamesEffect effect) {
         super(effect);
     }
 
@@ -55,7 +55,7 @@ class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAn
         if (cardName == null) {
             return false;
         }
-        return super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
+        return super.applySearchAndExile(game, source, cardName, getTargetPointer().getFirst(game, source));
     }
 
     @Override

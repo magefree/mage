@@ -11,6 +11,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.FoodToken;
 import mage.game.permanent.token.GiantOpportunityToken;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public final class GiantOpportunity extends CardImpl {
         this.getSpellAbility().addEffect(new DoIfCostPaid(
                 new CreateTokenEffect(new GiantOpportunityToken()),
                 new CreateTokenEffect(new FoodToken(), 3),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, filter))
+                new SacrificeTargetCost(2, filter)
         ).setText("You may sacrifice two Foods. If you do, create a 7/7 green Giant creature token. " +
                 "Otherwise, create three Food tokens."));
     }

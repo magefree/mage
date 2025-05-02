@@ -1,5 +1,3 @@
-
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -22,8 +20,14 @@ public final class ThunderStrike extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(
+                new BoostTargetEffect(2, 0, Duration.EndOfTurn)
+                        .setText("target creature gets +2/+0")
+        );
+        this.getSpellAbility().addEffect(
+                new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
+                        .setText("and gains first strike until end of turn")
+        );
     }
 
     private ThunderStrike(final ThunderStrike card) {

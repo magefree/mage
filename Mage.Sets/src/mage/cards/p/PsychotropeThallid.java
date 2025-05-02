@@ -1,10 +1,9 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -16,12 +15,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -29,10 +26,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class PsychotropeThallid extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Saproling");
-    static {
-        filter.add(SubType.SAPROLING.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SAPROLING, "a Saproling");
 
     public PsychotropeThallid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
@@ -41,15 +35,15 @@ public final class PsychotropeThallid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, put a spore counter on Psychotrope Thallid.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance())));
         // Remove three spore counters from Psychotrope Thallid: Create a 1/1 green Saproling creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CreateTokenEffect(new SaprolingToken()),
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         // {1}, Sacrifice a Saproling: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false)));
+                new SacrificeTargetCost(filter));
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
     }

@@ -35,7 +35,7 @@ public final class HeliodsPunishment extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -43,7 +43,7 @@ public final class HeliodsPunishment extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TASK.createInstance(4)), "with four task counters on it"));
 
         // Enchanted creature can't attack or block. It loses all abilities and has "{T}: Remove a task counter from Heliod's Punishment. Then if it has no task counters on it, destroy Heliod's Punishment."
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA));
+        ability = new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA));
         ability.addEffect(new HeliodsPunishmentLoseAllAbilitiesEnchantedEffect());
         this.addAbility(ability);
     }
@@ -60,12 +60,12 @@ public final class HeliodsPunishment extends CardImpl {
 
 class HeliodsPunishmentLoseAllAbilitiesEnchantedEffect extends ContinuousEffectImpl {
 
-    public HeliodsPunishmentLoseAllAbilitiesEnchantedEffect() {
+    HeliodsPunishmentLoseAllAbilitiesEnchantedEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         staticText = "It loses all abilities and has \"{T}: Remove a task counter from {this}. Then if it has no task counters on it, destroy {this}.\"";
     }
 
-    public HeliodsPunishmentLoseAllAbilitiesEnchantedEffect(final HeliodsPunishmentLoseAllAbilitiesEnchantedEffect effect) {
+    private HeliodsPunishmentLoseAllAbilitiesEnchantedEffect(final HeliodsPunishmentLoseAllAbilitiesEnchantedEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class HeliodsPunishmentEffect extends OneShotEffect {
         sourceEnchantmentId = null;
     }
 
-    public HeliodsPunishmentEffect(final HeliodsPunishmentEffect effect) {
+    private HeliodsPunishmentEffect(final HeliodsPunishmentEffect effect) {
         super(effect);
         this.sourceEnchantmentId = effect.sourceEnchantmentId;
     }

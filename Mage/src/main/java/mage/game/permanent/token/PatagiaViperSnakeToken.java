@@ -21,7 +21,7 @@ public final class PatagiaViperSnakeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected PatagiaViperSnakeToken(final PatagiaViperSnakeToken token) {
+    private PatagiaViperSnakeToken(final PatagiaViperSnakeToken token) {
         super(token);
     }
 

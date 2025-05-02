@@ -3,7 +3,6 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EmergeAbility;
@@ -30,7 +29,7 @@ public final class MockeryOfNature extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Emerge {7}{G}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{7}{G}")));
+        this.addAbility(new EmergeAbility(this, "{7}{G}"));
         
         // When you cast Mockery of Nature, you may destroy target artifact or enchantment.
         Ability ability = new CastSourceTriggeredAbility(new DestroyTargetEffect(), true);

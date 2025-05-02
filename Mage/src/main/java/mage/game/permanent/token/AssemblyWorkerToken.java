@@ -19,7 +19,7 @@ public final class AssemblyWorkerToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected AssemblyWorkerToken(final AssemblyWorkerToken token) {
+    private AssemblyWorkerToken(final AssemblyWorkerToken token) {
         super(token);
     }
 

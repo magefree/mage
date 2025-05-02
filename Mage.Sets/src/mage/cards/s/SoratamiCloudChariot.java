@@ -28,7 +28,7 @@ public final class SoratamiCloudChariot extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {2}: Target creature you control gains flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);    
         
@@ -36,7 +36,7 @@ public final class SoratamiCloudChariot extends CardImpl {
         Effect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt to");
         // and dealt by target creature you control this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}"));
+        ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{2}"));
         effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("and dealt by target creature you control this turn.");
         ability.addEffect(effect);

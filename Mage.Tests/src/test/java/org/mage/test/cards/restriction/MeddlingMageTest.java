@@ -82,15 +82,14 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         setChoice(playerA, "Ainok Tracker"); // name a spell that can't be cast
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ainok Tracker");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ainok Tracker using Morph");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Meddling Mage", 1);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertHandCount(playerA, "Meddling Mage", 0);
         assertHandCount(playerA, "Ainok Tracker", 0);
     }

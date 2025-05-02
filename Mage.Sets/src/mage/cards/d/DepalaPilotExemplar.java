@@ -38,12 +38,12 @@ public final class DepalaPilotExemplar extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Dwarves you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.DWARF, "Dwarves"), true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.DWARF, "Dwarves"), true)));
 
         // Each Vehicle you control gets +1/+1 as long as it's a creature.
         Effect effect = new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.VEHICLE, "Vehicle"));
         effect.setText("Each Vehicle you control gets +1/+1 as long as it's a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Whenever Depala, Pilot Exemplar becomes tapped, you may pay {X}. If you do, reveal the top X cards of your library, put all Dwarf and Vehicle cards from among them into your hand, then put the rest on the bottom of your library in a random order.
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new DepalaPilotExemplarEffect(), true));
@@ -72,7 +72,7 @@ class DepalaPilotExemplarEffect extends OneShotEffect {
         this.staticText = "pay {X}. If you do, reveal the top X cards of your library, put all Dwarf and Vehicle cards from among them into your hand, then put the rest on the bottom of your library in a random order";
     }
 
-    DepalaPilotExemplarEffect(final DepalaPilotExemplarEffect effect) {
+    private DepalaPilotExemplarEffect(final DepalaPilotExemplarEffect effect) {
         super(effect);
     }
 

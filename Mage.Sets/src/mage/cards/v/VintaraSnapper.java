@@ -37,7 +37,7 @@ public final class VintaraSnapper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Vintara Snapper has shroud as long as you control no untapped lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new ConditionalContinuousEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(),
             Duration.WhileOnBattlefield), new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
             "{this} has shroud as long as you control no untapped lands")));

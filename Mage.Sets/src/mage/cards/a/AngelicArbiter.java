@@ -34,10 +34,10 @@ public final class AngelicArbiter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Each opponent who cast a spell this turn can't attack with creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterCantAttackTargetEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new AngelicArbiterCantAttackTargetEffect(Duration.WhileOnBattlefield)));
 
         // Each opponent who attacked with a creature this turn can't cast spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect2()), new PlayerAttackedWatcher());
+        this.addAbility(new SimpleStaticAbility(new AngelicArbiterEffect2()), new PlayerAttackedWatcher());
     }
 
     private AngelicArbiter(final AngelicArbiter card) {
@@ -53,12 +53,12 @@ public final class AngelicArbiter extends CardImpl {
 
 class AngelicArbiterCantAttackTargetEffect extends RestrictionEffect {
 
-    public AngelicArbiterCantAttackTargetEffect(Duration duration) {
+    AngelicArbiterCantAttackTargetEffect(Duration duration) {
         super(duration);
         staticText = "Each opponent who cast a spell this turn can't attack with creatures";
     }
 
-    public AngelicArbiterCantAttackTargetEffect(final AngelicArbiterCantAttackTargetEffect effect) {
+    private AngelicArbiterCantAttackTargetEffect(final AngelicArbiterCantAttackTargetEffect effect) {
         super(effect);
     }
 
@@ -89,18 +89,13 @@ class AngelicArbiterEffect2 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Each opponent who attacked with a creature this turn can't cast spells";
     }
 
-    public AngelicArbiterEffect2(final AngelicArbiterEffect2 effect) {
+    private AngelicArbiterEffect2(final AngelicArbiterEffect2 effect) {
         super(effect);
     }
 
     @Override
     public AngelicArbiterEffect2 copy() {
         return new AngelicArbiterEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

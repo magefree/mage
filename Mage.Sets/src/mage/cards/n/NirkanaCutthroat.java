@@ -46,7 +46,7 @@ public final class NirkanaCutthroat extends LevelerCard {
         setMaxLevelCounters(3);
     }
 
-    public NirkanaCutthroat (final NirkanaCutthroat card) {
+    private NirkanaCutthroat(final NirkanaCutthroat card) {
         super(card);
     }
 

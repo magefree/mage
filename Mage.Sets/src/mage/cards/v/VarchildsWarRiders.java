@@ -59,7 +59,7 @@ class OpponentCreateSurvivorTokenCost extends CostImpl {
         this.text = "Have an opponent create a 1/1 red Survivor creature token";
     }
 
-    public OpponentCreateSurvivorTokenCost(OpponentCreateSurvivorTokenCost cost) {
+    private OpponentCreateSurvivorTokenCost(final OpponentCreateSurvivorTokenCost cost) {
         super(cost);
     }
 

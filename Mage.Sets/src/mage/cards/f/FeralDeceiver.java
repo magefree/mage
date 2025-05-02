@@ -41,7 +41,7 @@ public final class FeralDeceiver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}: Look at the top card of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new LookLibraryControllerEffect(), new GenericManaCost(1)));
 
         // {2}: Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new FeralDeceiverEffect(), new ManaCostsImpl<>("{2}")));
@@ -59,12 +59,12 @@ public final class FeralDeceiver extends CardImpl {
 
 class FeralDeceiverEffect extends OneShotEffect {
 
-    public FeralDeceiverEffect() {
+    FeralDeceiverEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn";
     }
 
-    public FeralDeceiverEffect(final FeralDeceiverEffect effect) {
+    private FeralDeceiverEffect(final FeralDeceiverEffect effect) {
         super(effect);
     }
 

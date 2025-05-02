@@ -34,7 +34,7 @@ public final class VulshokGauntlets extends CardImpl {
         // Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
         Effect effect = new BoostEquippedEffect(4, 2);
         effect.setText("Equipped creature gets +4/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new VulshokGauntletsEffect();
         effect.setText("and has doesn't untap during its controller's untap step");
         ability.addEffect(effect);
@@ -56,12 +56,12 @@ public final class VulshokGauntlets extends CardImpl {
 
 class VulshokGauntletsEffect extends ReplacementEffectImpl {
 
-    public VulshokGauntletsEffect() {
+    VulshokGauntletsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Equipped creature doesn't untap during its controller's untap step";
     }
 
-    public VulshokGauntletsEffect(final VulshokGauntletsEffect effect) {
+    private VulshokGauntletsEffect(final VulshokGauntletsEffect effect) {
         super(effect);
     }
 

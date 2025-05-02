@@ -10,17 +10,15 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -81,12 +79,11 @@ class DanseMacabreEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null || game.getBattlefield().count(
-                    StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, source.getControllerId(), source, game
+                    StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, playerId, source, game
             ) < 1) {
                 continue;
             }
-            TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
-            target.setNotTarget(true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent == null) {
@@ -103,10 +100,10 @@ class DanseMacabreEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return true;
         }
-        FilterCard filterCard = new FilterCard("card put into a graveyard this way");
+        FilterCard filterCard = new FilterCreatureCard("creature card put into a graveyard this way");
         filterCard.add(Predicates.or(
                 cards.stream()
-                        .map(cardId -> new CardIdPredicate(cardId))
+                        .map(CardIdPredicate::new)
                         .collect(Collectors.toSet())
         ));
         TargetCardInGraveyard target;
@@ -117,7 +114,7 @@ class DanseMacabreEffect extends OneShotEffect {
         } else {
             return true;
         }
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(Outcome.PutCreatureInPlay, target, source, game);
         controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;

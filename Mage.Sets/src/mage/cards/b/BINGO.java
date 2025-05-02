@@ -52,7 +52,7 @@ public final class BINGO extends CardImpl {
 
         // B-I-N-G-O gets +9/+9 for each set of three numbers in a row with chip counters on them.
         BingoCount count = new BingoCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
     private BINGO(final BINGO card) {
@@ -67,12 +67,12 @@ public final class BINGO extends CardImpl {
 
 class BingoEffect extends OneShotEffect {
 
-    public BingoEffect() {
+    BingoEffect() {
         super(Outcome.Neutral);
         staticText = "put a chip counter on its mana value";
     }
 
-    public BingoEffect(final BingoEffect effect) {
+    private BingoEffect(final BingoEffect effect) {
         super(effect);
     }
 
@@ -122,7 +122,7 @@ class BingoCount implements DynamicValue {
     public BingoCount() {
     }
 
-    public BingoCount(final BingoCount countersCount) {
+    private BingoCount(final BingoCount countersCount) {
     }
 
     @Override

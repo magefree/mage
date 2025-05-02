@@ -34,7 +34,7 @@ public final class SiegeBehemoth extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
 
         // As long as Siege Behemoth is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SiegeBehemothEffect()));
+        this.addAbility(new SimpleStaticAbility(new SiegeBehemothEffect()));
     }
 
     private SiegeBehemoth(final SiegeBehemoth card) {
@@ -49,12 +49,12 @@ public final class SiegeBehemoth extends CardImpl {
 
 class SiegeBehemothEffect extends AsThoughEffectImpl {
 
-    public SiegeBehemothEffect() {
+    SiegeBehemothEffect() {
         super(AsThoughEffectType.DAMAGE_NOT_BLOCKED, Duration.WhileOnBattlefield, Outcome.Damage);
         this.staticText = "As long as {this} is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked";
     }
 
-    public SiegeBehemothEffect(SiegeBehemothEffect effect) {
+    private SiegeBehemothEffect(final SiegeBehemothEffect effect) {
         super(effect);
     }
 

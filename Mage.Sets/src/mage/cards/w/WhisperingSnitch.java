@@ -54,7 +54,7 @@ class WhisperingSnitchTriggeredAbility extends TriggeredAbilityImpl {
         this.addWatcher(new WhisperingSnitchWatcher());
     }
 
-    public WhisperingSnitchTriggeredAbility(final WhisperingSnitchTriggeredAbility ability) {
+    private WhisperingSnitchTriggeredAbility(final WhisperingSnitchTriggeredAbility ability) {
         super(ability);
     }
 

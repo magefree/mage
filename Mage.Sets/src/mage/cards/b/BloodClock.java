@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class BloodClock extends CardImpl {
 
         // At the beginning of each player's upkeep, that player returns a permanent they control to its owner's hand unless they pay 2 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new BloodClockEffect(), TargetController.ANY, false, true
+                TargetController.EACH_PLAYER, new BloodClockEffect(), false
         ));
     }
 
@@ -60,7 +60,7 @@ class BloodClockEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player == null) {
             return false;
         }
@@ -72,7 +72,7 @@ class BloodClockEffect extends OneShotEffect {
             return true;
         }
         Target target = new TargetControlledPermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(player.getId(), source, game)
                 || !player.chooseTarget(outcome, target, source, game)) {
             return false;

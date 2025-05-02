@@ -47,7 +47,7 @@ public final class RampagingRaptor extends CardImpl {
 
         // {2}{R}: Rampaging Raptor gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")
         ));
 
         // Whenever Rampaging Raptor deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls or battle that player protects.

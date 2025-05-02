@@ -38,13 +38,13 @@ public final class FormOfTheSquirrel extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new FormOfTheSquirrelCreateTokenEffect()));
 
         // Creatures can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackYouAllEffect(Duration.WhileOnBattlefield)));
 
         // You have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(ShroudAbility.getInstance())));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(ShroudAbility.getInstance())));
 
         // You can't cast spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FormOfTheSquirrelCantCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new FormOfTheSquirrelCantCastEffect()));
     }
 
     private FormOfTheSquirrel(final FormOfTheSquirrel card) {
@@ -59,12 +59,12 @@ public final class FormOfTheSquirrel extends CardImpl {
 
 class FormOfTheSquirrelCreateTokenEffect extends OneShotEffect {
 
-    public FormOfTheSquirrelCreateTokenEffect() {
+    FormOfTheSquirrelCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create a 1/1 green Squirrel creature token. You lose the game when that creature leaves the battlefield";
     }
 
-    public FormOfTheSquirrelCreateTokenEffect(final FormOfTheSquirrelCreateTokenEffect effect) {
+    private FormOfTheSquirrelCreateTokenEffect(final FormOfTheSquirrelCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class FormOfTheSquirrelCantCastEffect extends ContinuousRuleModifyingEffectImpl 
         staticText = "You can't cast spells";
     }
 
-    public FormOfTheSquirrelCantCastEffect(final FormOfTheSquirrelCantCastEffect effect) {
+    private FormOfTheSquirrelCantCastEffect(final FormOfTheSquirrelCantCastEffect effect) {
         super(effect);
     }
 
@@ -111,12 +111,12 @@ class FormOfTheSquirrelCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL && event.getPlayerId().equals(source.getControllerId());
+        return event.getPlayerId().equals(source.getControllerId());
     }
 }

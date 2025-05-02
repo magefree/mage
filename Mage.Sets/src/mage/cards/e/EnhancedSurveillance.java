@@ -1,13 +1,11 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ExileSourceCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
+import mage.abilities.effects.common.ShuffleYourGraveyardIntoLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,7 +14,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,12 +28,12 @@ public final class EnhancedSurveillance extends CardImpl {
 
         // You may look at an additional two cards each time you surveil.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new EnhancedSurveillanceReplacementEffect()
+                new EnhancedSurveillanceReplacementEffect()
         ));
 
         // Exile Enhanced Surveillance: Shuffle your graveyard into your library.
         this.addAbility(new SimpleActivatedAbility(
-                new EnhancedSurveillanceShuffleEffect(), new ExileSourceCost()
+                new ShuffleYourGraveyardIntoLibraryEffect(), new ExileSourceCost()
         ));
     }
 
@@ -50,13 +49,13 @@ public final class EnhancedSurveillance extends CardImpl {
 
 class EnhancedSurveillanceReplacementEffect extends ReplacementEffectImpl {
 
-    public EnhancedSurveillanceReplacementEffect() {
+    EnhancedSurveillanceReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may look at an additional "
                 + "two cards each time you surveil.";
     }
 
-    public EnhancedSurveillanceReplacementEffect(final EnhancedSurveillanceReplacementEffect effect) {
+    private EnhancedSurveillanceReplacementEffect(final EnhancedSurveillanceReplacementEffect effect) {
         super(effect);
     }
 
@@ -78,36 +77,6 @@ class EnhancedSurveillanceReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setAmount(event.getAmount() + 2);
-        return false;
-    }
-}
-
-class EnhancedSurveillanceShuffleEffect extends OneShotEffect {
-
-    public EnhancedSurveillanceShuffleEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Shuffle your graveyard into your library";
-    }
-
-    public EnhancedSurveillanceShuffleEffect(final EnhancedSurveillanceShuffleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EnhancedSurveillanceShuffleEffect copy() {
-        return new EnhancedSurveillanceShuffleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (Card card : controller.getGraveyard().getCards(game)) {
-                controller.moveCardToLibraryWithInfo(card, source, game, Zone.GRAVEYARD, true, true);
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
-        }
         return false;
     }
 }

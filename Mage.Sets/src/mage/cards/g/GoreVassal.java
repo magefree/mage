@@ -33,7 +33,7 @@ public final class GoreVassal extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Gore Vassal: Put a -1/-1 counter on target creature. Then if that creature's toughness is 1 or greater, regenerate it.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.M1M1.createInstance()),
                 new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -69,12 +69,12 @@ class GoreVassalEffect extends RegenerateTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature == null || creature.getToughness().getValue() < 1) {
             this.discard();
-            return;
         }
-        super.init(source, game);
     }
 
 }

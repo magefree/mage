@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class DeepGnomeTerramancer extends CardImpl {
 
     public DeepGnomeTerramancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.GNOME, SubType.WIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -35,7 +35,7 @@ public final class DeepGnomeTerramancer extends CardImpl {
         // Whenever one or more lands enter the battlefield under an opponent's control
         // without being played, you may search your library for a Plains card, put it
         // onto the battlefield tapped, then shuffle. Do this only once each turn.
-        this.addAbility(new DeepGnomeTerramancerTriggeredAbility().setDoOnlyOnceEachTurn(true), new PlayLandWatcher());
+        this.addAbility(new DeepGnomeTerramancerTriggeredAbility().setDoOnlyOnceEachTurn(true).withFlavorWord("Mold Earth"), new PlayLandWatcher());
     }
 
     private DeepGnomeTerramancer(final DeepGnomeTerramancer card) {
@@ -59,7 +59,7 @@ class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
         addEffect(new SearchLibraryPutInPlayEffect(target, true));
     }
 
-    DeepGnomeTerramancerTriggeredAbility(DeepGnomeTerramancerTriggeredAbility ability) {
+    private DeepGnomeTerramancerTriggeredAbility(final DeepGnomeTerramancerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,7 +81,7 @@ class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        if (watcher.wasLandPlayed(land.getId())) { // Land was played
+        if (watcher.wasLandPlayed(land, game)) { // Land was played
             return false;
         }
 

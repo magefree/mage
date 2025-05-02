@@ -45,7 +45,7 @@ public final class MonkeyMonkeyMonkey extends CardImpl {
         
         // Monkey Monkey Monkey gets +1/+1 for each nonland permanent whose name begins with the chosen letter.
         MonkeyMonkeyMonkeyCount count = new MonkeyMonkeyMonkeyCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
 
     }
 
@@ -61,12 +61,12 @@ public final class MonkeyMonkeyMonkey extends CardImpl {
 
 class ChooseLetterEffect extends OneShotEffect {
 
-    public ChooseLetterEffect() {
+    ChooseLetterEffect() {
         super(Outcome.Benefit);
         staticText = "choose a letter";
     }
 
-    public ChooseLetterEffect(final ChooseLetterEffect effect) {
+    private ChooseLetterEffect(final ChooseLetterEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class MonkeyMonkeyMonkeyCount implements DynamicValue {
     public MonkeyMonkeyMonkeyCount() {
     }
 
-    public MonkeyMonkeyMonkeyCount(final MonkeyMonkeyMonkeyCount countersCount) {
+    private MonkeyMonkeyMonkeyCount(final MonkeyMonkeyMonkeyCount countersCount) {
     }
 
     @Override

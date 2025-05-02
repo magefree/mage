@@ -65,12 +65,12 @@ public final class NacatlWarPride extends CardImpl {
 
 class NacatlWarPrideEffect extends OneShotEffect {
 
-    public NacatlWarPrideEffect() {
+    NacatlWarPrideEffect() {
         super(Outcome.Benefit);
-        this.staticText = "create X tokens that are copies of {this} tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step";
+        this.staticText = "create X tokens that are copies of {this} and that are tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step";
     }
 
-    public NacatlWarPrideEffect(final NacatlWarPrideEffect effect) {
+    private NacatlWarPrideEffect(final NacatlWarPrideEffect effect) {
         super(effect);
     }
 
@@ -108,9 +108,9 @@ class NacatlWarPrideEffect extends OneShotEffect {
         copies.addAll(effect.getAddedPermanents());
         
         if (!copies.isEmpty()) {
-            FixedTargets fixedTargets = new FixedTargets(copies, game);
+            FixedTargets blueprintTarget = new FixedTargets(copies, game);
             ExileTargetEffect exileEffect = new ExileTargetEffect();
-            exileEffect.setTargetPointer(fixedTargets).setText("exile the tokens");
+            exileEffect.setTargetPointer(blueprintTarget.copy()).setText("exile the tokens");
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
             return true;
         }

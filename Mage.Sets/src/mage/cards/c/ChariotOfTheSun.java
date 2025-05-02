@@ -55,12 +55,12 @@ public final class ChariotOfTheSun extends CardImpl {
 
 class ChariotOfTheSunEffect extends ContinuousEffectImpl {
 
-    public ChariotOfTheSunEffect() {
+    ChariotOfTheSunEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.UnboostCreature);
         staticText = "and has base toughness 1";
     }
 
-    public ChariotOfTheSunEffect(final ChariotOfTheSunEffect effect) {
+    private ChariotOfTheSunEffect(final ChariotOfTheSunEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class ChariotOfTheSunEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
             this.discard();
             return false;

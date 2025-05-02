@@ -1,16 +1,21 @@
 package mage.abilities.decorator;
 
+import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.hint.Hint;
 import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +44,9 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
         this.ability = ability;
         this.condition = condition;
         this.abilityText = text;
+        if (ability.isLeavesTheBattlefieldTrigger()) {
+            this.setLeavesTheBattlefieldTrigger(true);
+        }
     }
 
     protected ConditionalTriggeredAbility(final ConditionalTriggeredAbility triggered) {
@@ -70,7 +78,9 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
         if (abilityText == null || abilityText.isEmpty()) {
             return ability.getRule();
         }
-        return abilityText;
+        return (flavorWord != null ? CardUtil.italicizeWithEmDash(flavorWord) : "") +
+                (abilityWord != null ? abilityWord.formatWord() : "") +
+                abilityText + (abilityText.endsWith(".") || abilityText.endsWith("\"") || abilityText.endsWith(">") ? "" : ".");
     }
 
     @Override
@@ -99,6 +109,13 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public List<Hint> getHints() {
+        List<Hint> res = new ArrayList<>(super.getHints());
+        res.addAll(ability.getHints());
+        return res;
+    }
+
+    @Override
     public Effects getEffects(Game game, EffectType effectType) {
         return ability.getEffects(game, effectType);
     }
@@ -108,4 +125,19 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
         return ability.isOptional();
     }
 
+    @Override
+    public Ability withFlavorWord(String flavorWord) {
+        ability.withFlavorWord(flavorWord);
+        return this;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        if (isLeavesTheBattlefieldTrigger()) {
+            // TODO: leaves battlefield and die are not same! Is it possible make a diff logic?
+            return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+        } else {
+            return super.isInUseableZone(game, sourceObject, event);
+        }
+    }
 }

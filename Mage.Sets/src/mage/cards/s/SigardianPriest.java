@@ -37,7 +37,7 @@ public final class SigardianPriest extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}, {T}: Tap target non-Human creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(1, 1, filter, false));
         this.addAbility(ability);

@@ -1,9 +1,9 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -46,7 +46,7 @@ public final class NahirisResolve extends CardImpl {
 
         // At the beginning of your end step, exile any number of nontoken artifacts and/or creatures you control. Return those cards to the battlefield under their owner's control at the beginning of your next upkeep.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new NahirisResolveExileEffect(), TargetController.YOU, false
+                new NahirisResolveExileEffect()
         ));
     }
 
@@ -101,7 +101,7 @@ class NahirisResolveExileEffect extends OneShotEffect {
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
-        game.addDelayedTriggeredAbility(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(
+        game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(
                 new NahirisResolveReturnEffect().setTargetPointer(new FixedTargets(cards, game))
         ), source);
         return true;

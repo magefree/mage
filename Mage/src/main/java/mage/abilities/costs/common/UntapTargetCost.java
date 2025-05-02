@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.constants.Outcome;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -25,7 +26,7 @@ public class UntapTargetCost extends CostImpl {
         this.text = makeText(target);
 
         // It will never target as part of a cost
-        this.target.setNotTarget(true);
+        this.target.withNotTarget(true);
     }
 
     protected UntapTargetCost(final UntapTargetCost cost) {
@@ -45,7 +46,10 @@ public class UntapTargetCost extends CostImpl {
                 return false;
             }
 
-            if (permanent.untap(game)) {
+            // 118.11 - if a stun counter replaces the untap, the cost has still been paid.
+            // Fear of Sleep Paralysis ruling - if the stun counter can't be removed, the untap cost hasn't been paid.
+            int stunCount = permanent.getCounters(game).getCount(CounterType.STUN);
+            if (permanent.untap(game) || (stunCount > 0 && permanent.getCounters(game).getCount(CounterType.STUN) < stunCount)) {
                 untapped.add(targetId);
             }
 

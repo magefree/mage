@@ -4,14 +4,11 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -50,7 +47,7 @@ public final class MeriaScholarOfAntiquity extends CardImpl {
 
         // Tap two untapped nontoken artifacts you control: Exile the top card of your library. You may play it this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1),
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn).withTextOptions("it", true),
                 new TapTargetCost(new TargetControlledPermanent(2, filter))
         ));
     }

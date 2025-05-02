@@ -35,7 +35,7 @@ public final class FaadiyahSeer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Draw a card and reveal it. If it isn't a land card, discard it.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FaadiyahSeerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new FaadiyahSeerEffect(), new TapSourceCost()));
     }
 
     private FaadiyahSeer(final FaadiyahSeer card) {
@@ -57,7 +57,7 @@ class FaadiyahSeerEffect extends OneShotEffect {
         this.staticText = "Draw a card and reveal it. If it isn't a land card, discard it";
     }
 
-    public FaadiyahSeerEffect(final FaadiyahSeerEffect effect) {
+    private FaadiyahSeerEffect(final FaadiyahSeerEffect effect) {
         super(effect);
     }
 

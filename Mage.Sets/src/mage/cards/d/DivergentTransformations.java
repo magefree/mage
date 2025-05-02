@@ -44,13 +44,13 @@ public final class DivergentTransformations extends CardImpl {
 
 class DivergentTransformationsEffect extends OneShotEffect {
 
-    public DivergentTransformationsEffect() {
+    DivergentTransformationsEffect() {
         super(Outcome.Detriment);
         this.staticText = "Exile two target creatures. For each of those creatures, its controller reveals cards from the top of their library "
                 + "until they reveal a creature card, puts that card onto the battlefield, then shuffles the rest into their library";
     }
 
-    public DivergentTransformationsEffect(final DivergentTransformationsEffect effect) {
+    private DivergentTransformationsEffect(final DivergentTransformationsEffect effect) {
         super(effect);
     }
 

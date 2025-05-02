@@ -42,7 +42,7 @@ public final class BlessedRespite extends CardImpl {
 
 class BlessedRespiteEffect extends OneShotEffect {
 
-    public BlessedRespiteEffect() {
+    BlessedRespiteEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target player shuffles their graveyard into their library";
     }

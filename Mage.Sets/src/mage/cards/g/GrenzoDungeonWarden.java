@@ -41,7 +41,7 @@ public final class GrenzoDungeonWarden extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // {2}: Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to Grenzo's power, put it onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrenzoDungeonWardenEffect(), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new GrenzoDungeonWardenEffect(), new GenericManaCost(2)));
     }
 
     private GrenzoDungeonWarden(final GrenzoDungeonWarden card) {
@@ -61,7 +61,7 @@ class GrenzoDungeonWardenEffect extends OneShotEffect {
         this.staticText = "Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to {this}'s power, put it onto the battlefield";
     }
 
-    GrenzoDungeonWardenEffect(final GrenzoDungeonWardenEffect effect) {
+    private GrenzoDungeonWardenEffect(final GrenzoDungeonWardenEffect effect) {
         super(effect);
     }
 

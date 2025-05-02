@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -40,7 +39,7 @@ public final class WortBoggartAuntie extends CardImpl {
 
         // At the beginning of your upkeep, you may return target Goblin card from your graveyard to your hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, true
+                new ReturnFromGraveyardToHandTargetEffect(), true
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

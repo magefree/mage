@@ -40,11 +40,11 @@ public final class MazeRusher extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Multicolored creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
     }
 
-    public MazeRusher (final MazeRusher card) {
+    private MazeRusher(final MazeRusher card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class KumanosBlessing extends CardImpl {
         this.addAbility(ability);
 
         // If a creature dealt damage by enchanted creature this turn would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KumanosBlessingEffect()), new DamagedByEnchantedWatcher());
+        this.addAbility(new SimpleStaticAbility(new KumanosBlessingEffect()), new DamagedByEnchantedWatcher());
 
     }
 
@@ -59,12 +59,12 @@ public final class KumanosBlessing extends CardImpl {
 
 class KumanosBlessingEffect extends ReplacementEffectImpl {
 
-    public KumanosBlessingEffect() {
+    KumanosBlessingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a creature dealt damage by enchanted creature this turn would die, exile it instead";
     }
 
-    public KumanosBlessingEffect(final KumanosBlessingEffect effect) {
+    private KumanosBlessingEffect(final KumanosBlessingEffect effect) {
         super(effect);
     }
 

@@ -13,6 +13,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -37,7 +38,7 @@ public final class SavvyHunter extends CardImpl {
         // Sacrifice two Foods: Draw a card.
         this.addAbility(new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, filter))
+                new SacrificeTargetCost(2, filter)
         ));
     }
 

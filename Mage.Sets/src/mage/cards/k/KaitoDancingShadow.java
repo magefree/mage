@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,7 +39,7 @@ public final class KaitoDancingShadow extends CardImpl {
         this.setStartingLoyalty(3);
 
         // Whenever one or more creatures you control deal combat damage to a player, you may return one of them to its owner's hand. If you do, you may activate loyalty abilities of Kaito twice this turn rather than only once.
-        Ability ability = new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new KaitoDancingShadowEffect(), true);
+        Ability ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(new KaitoDancingShadowEffect(), SetTargetPointer.PLAYER);
         ability.addWatcher(new DamagedPlayerThisCombatWatcher());
         this.addAbility(ability);
 
@@ -88,7 +88,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
         if (watcher == null) {
             return false;
         }
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || damagedPlayer == null) {
             return false;
@@ -97,7 +97,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
         filter.add(new PermanentReferenceInCollectionPredicate(
                 watcher.getPermanents(controller.getId(),damagedPlayer.getId())));
         TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-        target.setTargetName("creature to return to hand?");
+        target.withTargetName("creature to return to hand?");
         if (target.chooseTarget(Outcome.ReturnToHand, source.getControllerId(), source, game)) {
             Card card = game.getPermanent(target.getFirstTarget());
             if (card != null) {
@@ -114,11 +114,11 @@ class KaitoDancingShadowEffect extends OneShotEffect {
 
 class KaitoDancingShadowIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
 
-    public KaitoDancingShadowIncreaseLoyaltyUseEffect() {
+    KaitoDancingShadowIncreaseLoyaltyUseEffect() {
         super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
     }
 
-    public KaitoDancingShadowIncreaseLoyaltyUseEffect(final KaitoDancingShadowIncreaseLoyaltyUseEffect effect) {
+    private KaitoDancingShadowIncreaseLoyaltyUseEffect(final KaitoDancingShadowIncreaseLoyaltyUseEffect effect) {
         super(effect);
     }
 
@@ -143,4 +143,3 @@ class KaitoDancingShadowIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
         return layer == Layer.RulesEffects;
     }
 }
-

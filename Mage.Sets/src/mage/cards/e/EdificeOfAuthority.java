@@ -33,7 +33,7 @@ public final class EdificeOfAuthority extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {1}, {T}: Target creature can't attack this turn. Put a brick counter on Edifice of Authority.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AddCountersSourceEffect(CounterType.BRICK.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
@@ -60,7 +60,7 @@ public final class EdificeOfAuthority extends CardImpl {
 
 class EdificeOfAuthorityEffect extends OneShotEffect {
 
-    public EdificeOfAuthorityEffect() {
+    EdificeOfAuthorityEffect() {
         super(Outcome.LoseAbility);
     }
 
@@ -69,7 +69,7 @@ class EdificeOfAuthorityEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public EdificeOfAuthorityEffect(final EdificeOfAuthorityEffect effect) {
+    private EdificeOfAuthorityEffect(final EdificeOfAuthorityEffect effect) {
         super(effect);
     }
 
@@ -88,12 +88,12 @@ class EdificeOfAuthorityEffect extends OneShotEffect {
 
 class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
 
-    public EdificeOfAuthorityRestrictionEffect() {
+    EdificeOfAuthorityRestrictionEffect() {
         super(Duration.Custom);
         staticText = "";
     }
 
-    public EdificeOfAuthorityRestrictionEffect(final EdificeOfAuthorityRestrictionEffect effect) {
+    private EdificeOfAuthorityRestrictionEffect(final EdificeOfAuthorityRestrictionEffect effect) {
         super(effect);
     }
 
@@ -128,7 +128,7 @@ class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

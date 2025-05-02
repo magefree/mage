@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesSourceTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MiracleAbility;
@@ -32,8 +32,8 @@ public final class TriumphOfSaintKatherine extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // Praesidium Protectiva -- When Triumph of Saint Katherine dies, exile it and the top six cards of your library in a face-down pile. If you do, shuffle that pile and put it back on top of your library.
-        this.addAbility(new DiesSourceTriggeredAbility(new TriumphOfSaintKatherineEffect()).withFlavorWord("Praesidium Protectiva"));
+        // Praesidium Protectiva -- When Triumph of Saint Katherine is put into your graveyard from the battlefield, exile it and the top six cards of your library in a face-down pile. If you do, shuffle that pile and put it back on top of your library.
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new TriumphOfSaintKatherineEffect(), false, true).withFlavorWord("Praesidium Protectiva"));
 
         // Miracle {1}{W}
         this.addAbility(new MiracleAbility("{1}{W}"));

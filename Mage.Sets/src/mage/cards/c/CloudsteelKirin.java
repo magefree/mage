@@ -3,15 +3,15 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.continuous.CantLoseGameSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReconfigureAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -36,7 +36,7 @@ public final class CloudsteelKirin extends CardImpl {
                 FlyingAbility.getInstance(), AttachmentType.EQUIPMENT
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
-                new SimpleStaticAbility(new CloudsteelKirinEffect()), AttachmentType.EQUIPMENT
+                new SimpleStaticAbility(new CantLoseGameSourceControllerEffect()), AttachmentType.EQUIPMENT
         ).setText("and \"You can't lose the game and your opponents can't win the game.\""));
         this.addAbility(ability);
 
@@ -51,38 +51,5 @@ public final class CloudsteelKirin extends CardImpl {
     @Override
     public CloudsteelKirin copy() {
         return new CloudsteelKirin(this);
-    }
-}
-
-class CloudsteelKirinEffect extends ContinuousRuleModifyingEffectImpl {
-
-    CloudsteelKirinEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, false, false);
-        staticText = "You can't lose the game and your opponents can't win the game";
-    }
-
-    private CloudsteelKirinEffect(final CloudsteelKirinEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CloudsteelKirinEffect copy() {
-        return new CloudsteelKirinEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case WINS:
-                return game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
-            case LOSES:
-                return source.isControlledBy(event.getPlayerId());
-        }
-        return false;
     }
 }

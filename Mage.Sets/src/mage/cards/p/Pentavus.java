@@ -44,13 +44,13 @@ public final class Pentavus extends CardImpl {
                 "with five +1/+1 counters on it"));
 
         // {1}, Remove a +1/+1 counter from Pentavus: Create a 1/1 colorless Pentavite artifact creature token with flying.
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PentaviteToken(), 1), new GenericManaCost(1));
+        Ability firstAbility = new SimpleActivatedAbility(new CreateTokenEffect(new PentaviteToken(), 1), new GenericManaCost(1));
         firstAbility.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(firstAbility);
 
         // {1}, Sacrifice a Pentavite: Put a +1/+1 counter on Pentavus.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(1));
-        secondAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability secondAbility = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(1));
+        secondAbility.addCost(new SacrificeTargetCost(filter));
         this.addAbility(secondAbility);
     }
 

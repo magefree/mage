@@ -44,13 +44,13 @@ public final class Sunforger extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +4/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostEquippedEffect(4, 0, Duration.WhileOnBattlefield)));
 
         // {R}{W}, Unattach Sunforger: Search your library for a red or white 
         // instant card with converted mana cost 4 or less and cast that card 
         // without paying its mana cost. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new SunforgerEffect(), new ManaCostsImpl<>("{R}{W}"));
         ability.addCost(new SunforgerUnattachCost(this.getName()));
         this.addAbility(ability);
@@ -72,14 +72,14 @@ public final class Sunforger extends CardImpl {
 
 class SunforgerEffect extends OneShotEffect {
 
-    public SunforgerEffect() {
+    SunforgerEffect() {
         super(Outcome.PlayForFree);
         staticText = "Search your library for a red or white instant "
                 + "card with mana value 4 or less and cast that "
                 + "card without paying its mana cost. Then shuffle";
     }
 
-    public SunforgerEffect(final SunforgerEffect effect) {
+    private SunforgerEffect(final SunforgerEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class SunforgerUnattachCost extends CostImpl {
         this.text = "Unattach " + name;
     }
 
-    public SunforgerUnattachCost(final SunforgerUnattachCost cost) {
+    private SunforgerUnattachCost(final SunforgerUnattachCost cost) {
         super(cost);
     }
 

@@ -52,7 +52,7 @@ public final class AnafenzaTheForemost extends CardImpl {
         this.addAbility(ability);
 
         // If a nontoken creature an opponent owns would die or a creature card not on the battlefield would be put into an opponent's graveyard, exile that card instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnafenzaTheForemostEffect()));
+        this.addAbility(new SimpleStaticAbility(new AnafenzaTheForemostEffect()));
     }
 
     private AnafenzaTheForemost(final AnafenzaTheForemost card) {
@@ -67,23 +67,18 @@ public final class AnafenzaTheForemost extends CardImpl {
 
 class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
 
-    public AnafenzaTheForemostEffect() {
+    AnafenzaTheForemostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a nontoken creature an opponent owns would die or a creature card not on the battlefield would be put into an opponent's graveyard, exile that card instead";
     }
 
-    public AnafenzaTheForemostEffect(final AnafenzaTheForemostEffect effect) {
+    private AnafenzaTheForemostEffect(final AnafenzaTheForemostEffect effect) {
         super(effect);
     }
 
     @Override
     public AnafenzaTheForemostEffect copy() {
         return new AnafenzaTheForemostEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

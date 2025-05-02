@@ -31,10 +31,10 @@ public final class Gloom extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // White spells cost {3} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(3, filter, TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(3, filter, TargetController.ANY)));
 
         // Activated abilities of white enchantments cost {3} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GloomCostIncreaseEffect()));
+        this.addAbility(new SimpleStaticAbility(new GloomCostIncreaseEffect()));
     }
 
     private Gloom(final Gloom card) {
@@ -54,7 +54,7 @@ class GloomCostIncreaseEffect extends CostModificationEffectImpl {
         staticText = "Activated abilities of white enchantments cost {3} more to activate.";
     }
 
-    GloomCostIncreaseEffect(GloomCostIncreaseEffect effect) {
+    private GloomCostIncreaseEffect(final GloomCostIncreaseEffect effect) {
         super(effect);
     }
 
@@ -66,15 +66,11 @@ class GloomCostIncreaseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        boolean isWhiteEnchantment = false;
-        boolean isActivated = abilityToModify.getAbilityType() == AbilityType.ACTIVATED;
-        if (isActivated) {
-            MageObject permanent = game.getPermanent(abilityToModify.getSourceId());
-            if (permanent != null) {
-                isWhiteEnchantment = permanent.isEnchantment(game) && permanent.getColor(game).isWhite();
-            }
+        if (!abilityToModify.isActivatedAbility()) {
+            return false;
         }
-        return isActivated && isWhiteEnchantment;
+        MageObject permanent = game.getPermanent(abilityToModify.getSourceId());
+        return permanent != null && permanent.isEnchantment(game) && permanent.getColor(game).isWhite();
     }
 
     @Override

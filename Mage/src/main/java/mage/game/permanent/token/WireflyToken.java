@@ -20,7 +20,7 @@ public final class WireflyToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected WireflyToken(final WireflyToken token) {
+    private WireflyToken(final WireflyToken token) {
         super(token);
     }
 

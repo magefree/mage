@@ -20,7 +20,7 @@ public final class TrooperToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected TrooperToken(final TrooperToken token) {
+    private TrooperToken(final TrooperToken token) {
         super(token);
     }
 

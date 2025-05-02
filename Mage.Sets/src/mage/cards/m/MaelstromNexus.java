@@ -30,7 +30,7 @@ public final class MaelstromNexus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
 
         // The first spell you cast each turn has cascade.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaelstromNexusGainCascadeFirstSpellEffect()), new FirstSpellCastThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new MaelstromNexusGainCascadeFirstSpellEffect()), new FirstSpellCastThisTurnWatcher());
     }
 
     private MaelstromNexus(final MaelstromNexus card) {
@@ -52,7 +52,7 @@ class MaelstromNexusGainCascadeFirstSpellEffect extends ContinuousEffectImpl {
         staticText = "The first spell you cast each turn has cascade";
     }
 
-    public MaelstromNexusGainCascadeFirstSpellEffect(final MaelstromNexusGainCascadeFirstSpellEffect effect) {
+    private MaelstromNexusGainCascadeFirstSpellEffect(final MaelstromNexusGainCascadeFirstSpellEffect effect) {
         super(effect);
     }
 

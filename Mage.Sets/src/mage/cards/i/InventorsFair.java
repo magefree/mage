@@ -67,7 +67,7 @@ class InventorsFairAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1));
     }
 
-    public InventorsFairAbility(final InventorsFairAbility ability) {
+    private InventorsFairAbility(final InventorsFairAbility ability) {
         super(ability);
     }
 

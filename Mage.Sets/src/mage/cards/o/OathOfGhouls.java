@@ -3,7 +3,7 @@ package mage.cards.o;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class OathOfGhouls extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // At the beginning of each player's upkeep, that player chooses target player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent. The first player may return a creature card from their graveyard to their hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfGhoulsEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new OathOfGhoulsEffect(), false).withTargetPointerSet(false);
         ability.setTargetAdjuster(OathOfGhoulsAdjuster.instance);
         this.addAbility(ability);
     }
@@ -97,12 +97,12 @@ class OathOfGhoulsPredicate implements ObjectSourcePlayerPredicate<Player> {
 
 class OathOfGhoulsEffect extends OneShotEffect {
 
-    public OathOfGhoulsEffect() {
+    OathOfGhoulsEffect() {
         super(Outcome.Benefit);
         staticText = "that player chooses target player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent. The first player may return a creature card from their graveyard to their hand";
     }
 
-    public OathOfGhoulsEffect(OathOfGhoulsEffect effect) {
+    private OathOfGhoulsEffect(final OathOfGhoulsEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class OathOfGhoulsEffect extends OneShotEffect {
         FilterCard filter = new FilterCreatureCard("creature card");
         filter.add(new OwnerIdPredicate(firstPlayer.getId()));
         Target target = new TargetCardInGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(firstPlayer.getId(), source, game)
                 && firstPlayer.chooseUse(outcome, "Return a creature card from your graveyard to your hand?", source, game)
                 && firstPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game)) {

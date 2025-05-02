@@ -42,9 +42,9 @@ public final class StratusWalk extends CardImpl {
         // When Stratus Walk enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
         // Enchanted creature can block only creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockOnlyFlyingAttachedEffect(AttachmentType.AURA)));
         
     }
 

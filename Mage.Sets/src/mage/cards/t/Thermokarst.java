@@ -39,12 +39,12 @@ public final class Thermokarst extends CardImpl {
 
 class ThermokarstEffect extends OneShotEffect {
 
-    public ThermokarstEffect() {
+    ThermokarstEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target land. If that land was a snow land, you gain 1 life.";
     }
 
-    public ThermokarstEffect(final ThermokarstEffect effect) {
+    private ThermokarstEffect(final ThermokarstEffect effect) {
         super(effect);
     }
 

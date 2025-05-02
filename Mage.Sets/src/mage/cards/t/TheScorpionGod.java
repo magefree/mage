@@ -3,6 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -49,7 +50,7 @@ public final class TheScorpionGod extends CardImpl {
         this.addAbility(new TheScorpionGodTriggeredAbility());
 
         // {1}{B}{R}: Put a -1/-1 counter on another target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl<>("{1}{B}{R}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl<>("{1}{B}{R}"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
 
@@ -71,9 +72,10 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
 
     public TheScorpionGodTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public TheScorpionGodTriggeredAbility(TheScorpionGodTriggeredAbility ability) {
+    private TheScorpionGodTriggeredAbility(final TheScorpionGodTriggeredAbility ability) {
         super(ability);
     }
 
@@ -105,6 +107,11 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever a creature with a -1/-1 counter on it dies, draw a card.";
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class TheScorpionGodEffect extends OneShotEffect {
@@ -116,7 +123,7 @@ class TheScorpionGodEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    TheScorpionGodEffect(TheScorpionGodEffect effect) {
+    private TheScorpionGodEffect(final TheScorpionGodEffect effect) {
         super(effect);
     }
 

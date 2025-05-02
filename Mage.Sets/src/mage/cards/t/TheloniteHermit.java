@@ -39,10 +39,10 @@ public final class TheloniteHermit extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Saproling creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // Morph {3}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{G}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{G}{G}")));
 
         // When Thelonite Hermit is turned face up, create four 1/1 green Saproling creature tokens.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new CreateTokenEffect(new SaprolingToken(), 4)));

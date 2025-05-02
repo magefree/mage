@@ -24,7 +24,7 @@ public final class PhyrexianWurmToken extends TokenImpl {
         addAbility(new ToxicAbility(1));
     }
 
-    protected PhyrexianWurmToken(final PhyrexianWurmToken token) {
+    private PhyrexianWurmToken(final PhyrexianWurmToken token) {
         super(token);
     }
 

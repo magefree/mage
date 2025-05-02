@@ -42,7 +42,7 @@ class MisersCageTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
     }
 
-    MisersCageTriggeredAbility(final MisersCageTriggeredAbility ability) {
+    private MisersCageTriggeredAbility(final MisersCageTriggeredAbility ability) {
         super(ability);
     }
 

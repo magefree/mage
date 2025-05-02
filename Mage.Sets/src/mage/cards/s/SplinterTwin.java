@@ -44,8 +44,8 @@ public final class SplinterTwin extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has "{tap}: Create a token that's a copy of this creature, except it has haste. Exile it at the beginning of the next end step."
-        SimpleActivatedAbility gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SplinterTwinEffect(), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
+        SimpleActivatedAbility gainedAbility = new SimpleActivatedAbility(new SplinterTwinEffect(), new TapSourceCost());
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 
     private SplinterTwin(final SplinterTwin card) {
@@ -60,12 +60,12 @@ public final class SplinterTwin extends CardImpl {
 
 class SplinterTwinEffect extends OneShotEffect {
 
-    public SplinterTwinEffect() {
+    SplinterTwinEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a token that's a copy of this creature, except it has haste. Exile that token at the beginning of the next end step";
     }
 
-    public SplinterTwinEffect(final SplinterTwinEffect effect) {
+    private SplinterTwinEffect(final SplinterTwinEffect effect) {
         super(effect);
     }
 

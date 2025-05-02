@@ -34,13 +34,12 @@ public final class SoundTheCallToken extends TokenImpl {
 
         DynamicValue value = new CardsInAllGraveyardsCount(filter);
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)
                         .setText("This creature gets +1/+1 for each card named Sound the Call in each graveyard.")
         ));
     }
 
-    protected SoundTheCallToken(final SoundTheCallToken token) {
+    private SoundTheCallToken(final SoundTheCallToken token) {
         super(token);
     }
 

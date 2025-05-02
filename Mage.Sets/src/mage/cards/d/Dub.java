@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -41,11 +40,11 @@ public final class Dub extends CardImpl {
 
         // Enchanted creature gets +2/+2, has first strike, and is a Knight in addition to its other types.
         Effect effect = new BoostEnchantedEffect(2, 2);
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has first strike");
         ability.addEffect(effect);
-        effect = new AddCardSubtypeAttachedEffect(SubType.KNIGHT, Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect = new AddCardSubtypeAttachedEffect(SubType.KNIGHT, AttachmentType.AURA);
         effect.setText(", and is a Knight in addition to its other types");
         ability.addEffect(effect);
         this.addAbility(ability);

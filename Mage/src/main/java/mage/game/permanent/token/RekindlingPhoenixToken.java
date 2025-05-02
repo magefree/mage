@@ -2,7 +2,7 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -25,7 +25,7 @@ public final class RekindlingPhoenixToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(1);
 
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect());
         ability.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect().setText("and return target card named Rekindling Phoenix from your graveyard to the battlefield"));
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn"));
         FilterCard filter = new FilterCard("card named Rekindling Phoenix from your graveyard");
@@ -35,7 +35,7 @@ public final class RekindlingPhoenixToken extends TokenImpl {
     }
 
 
-    protected RekindlingPhoenixToken(final RekindlingPhoenixToken token) {
+    private RekindlingPhoenixToken(final RekindlingPhoenixToken token) {
         super(token);
     }
 

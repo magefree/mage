@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -38,8 +39,8 @@ public final class GravespawnSovereign extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Tap five untapped Zombies you control: Put target creature card from a graveyard onto the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter, true)));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter, true)));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
 
     }

@@ -29,7 +29,7 @@ public final class CallousGiant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If a source would deal 3 or less damage to Callous Giant, prevent that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CallousGiantEffect()));
+        this.addAbility(new SimpleStaticAbility(new CallousGiantEffect()));
     }
 
     private CallousGiant(final CallousGiant card) {
@@ -44,23 +44,18 @@ public final class CallousGiant extends CardImpl {
 
 class CallousGiantEffect extends PreventionEffectImpl {
 
-    public CallousGiantEffect() {
+    CallousGiantEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "If a source would deal 3 or less damage to {this}, prevent that damage.";
     }
 
-    public CallousGiantEffect(final CallousGiantEffect effect) {
+    private CallousGiantEffect(final CallousGiantEffect effect) {
         super(effect);
     }
 
     @Override
     public CallousGiantEffect copy() {
         return new CallousGiantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

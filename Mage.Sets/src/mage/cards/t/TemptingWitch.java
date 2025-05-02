@@ -41,7 +41,7 @@ public final class TemptingWitch extends CardImpl {
                 new LoseLifeTargetEffect(3), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

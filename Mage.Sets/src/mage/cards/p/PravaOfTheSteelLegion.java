@@ -44,7 +44,7 @@ public final class PravaOfTheSteelLegion extends CardImpl {
         // As long as it's your turn, creature tokens you control get +1/+4.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostControlledEffect(
                 1, 4, Duration.WhileOnBattlefield, filter
-        ), MyTurnCondition.instance, "as long as it's your turn, creature tokens you control get +1/+4")));
+        ), MyTurnCondition.instance, "during your turn, creature tokens you control get +1/+4")));
 
         // {3}{W}: Create a 1/1 white Soldier creature token.
         this.addAbility(new SimpleActivatedAbility(

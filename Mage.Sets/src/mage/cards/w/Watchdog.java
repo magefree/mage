@@ -33,9 +33,9 @@ public final class Watchdog extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Watchdog blocks each turn if able.
-        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
+        addAbility(new SimpleStaticAbility(new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
         // As long as Watchdog is untapped, all creatures attacking you get -1/-0.
-        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, new WatchdogFilter(), false), SourceTappedCondition.UNTAPPED, "As long as {this} is untapped, all creatures attacking you get -1/-0")));
     }
 
@@ -55,7 +55,7 @@ class WatchdogFilter extends FilterAttackingCreature {
         super("creatures attacking you");
     }
 
-    public WatchdogFilter(final WatchdogFilter filter) {
+    private WatchdogFilter(final WatchdogFilter filter) {
         super(filter);
     }
 

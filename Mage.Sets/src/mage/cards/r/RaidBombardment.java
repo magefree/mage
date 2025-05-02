@@ -43,7 +43,7 @@ class RaidBombardmentTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    public RaidBombardmentTriggeredAbility(final RaidBombardmentTriggeredAbility ability) {
+    private RaidBombardmentTriggeredAbility(final RaidBombardmentTriggeredAbility ability) {
         super(ability);
     }
 

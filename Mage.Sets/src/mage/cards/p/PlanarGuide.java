@@ -39,7 +39,7 @@ public final class PlanarGuide extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{W}, Exile Planar Guide: Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlanarGuideExileEffect(), new ManaCostsImpl<>("{3}{W}"));
+        Ability ability = new SimpleActivatedAbility(new PlanarGuideExileEffect(), new ManaCostsImpl<>("{3}{W}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }
@@ -56,12 +56,12 @@ public final class PlanarGuide extends CardImpl {
 
 class PlanarGuideExileEffect extends OneShotEffect {
 
-    public PlanarGuideExileEffect() {
+    PlanarGuideExileEffect() {
         super(Outcome.Detriment);
         staticText = "Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }
 
-    public PlanarGuideExileEffect(final PlanarGuideExileEffect effect) {
+    private PlanarGuideExileEffect(final PlanarGuideExileEffect effect) {
         super(effect);
     }
 
@@ -93,12 +93,12 @@ class PlanarGuideExileEffect extends OneShotEffect {
 
 class PlanarGuideReturnFromExileEffect extends OneShotEffect {
 
-    public PlanarGuideReturnFromExileEffect() {
+    PlanarGuideReturnFromExileEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }
 
-    public PlanarGuideReturnFromExileEffect(final PlanarGuideReturnFromExileEffect effect) {
+    private PlanarGuideReturnFromExileEffect(final PlanarGuideReturnFromExileEffect effect) {
         super(effect);
     }
 

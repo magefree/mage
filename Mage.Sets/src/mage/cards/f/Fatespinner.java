@@ -5,7 +5,7 @@ import java.util.*;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
@@ -32,8 +32,8 @@ public final class Fatespinner extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new FatespinnerChooseEffect(),
-                TargetController.OPPONENT, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new FatespinnerChooseEffect(),
+                false));
     }
 
     private Fatespinner(final Fatespinner card) {
@@ -61,7 +61,7 @@ class FatespinnerChooseEffect extends OneShotEffect {
         staticText = "that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.";
     }
 
-    public FatespinnerChooseEffect(final FatespinnerChooseEffect effect) {
+    private FatespinnerChooseEffect(final FatespinnerChooseEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class FatespinnerSkipEffect extends ReplacementEffectImpl {
         this.phase = phase;
     }
 
-    public FatespinnerSkipEffect(final FatespinnerSkipEffect effect) {
+    private FatespinnerSkipEffect(final FatespinnerSkipEffect effect) {
         super(effect);
         this.phase = effect.phase;
     }
@@ -106,11 +106,6 @@ class FatespinnerSkipEffect extends ReplacementEffectImpl {
     @Override
     public FatespinnerSkipEffect copy() {
         return new FatespinnerSkipEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

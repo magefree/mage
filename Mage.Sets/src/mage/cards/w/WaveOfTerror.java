@@ -3,7 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
@@ -33,7 +33,7 @@ public final class WaveOfTerror extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // At the beginning of your draw step, destroy each creature with converted mana cost equal to the number of age counters on Wave of Terror. They can't be regenerated.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new WaveOfTerrorEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new WaveOfTerrorEffect(), false));
     }
 
     private WaveOfTerror(final WaveOfTerror card) {
@@ -53,7 +53,7 @@ class WaveOfTerrorEffect extends OneShotEffect {
         this.staticText = "destroy each creature with mana value equal to the number of age counters on {this}. They can't be regenerated.";
     }
 
-    WaveOfTerrorEffect(final WaveOfTerrorEffect effect) {
+    private WaveOfTerrorEffect(final WaveOfTerrorEffect effect) {
         super(effect);
     }
 

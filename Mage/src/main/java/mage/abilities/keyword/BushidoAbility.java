@@ -7,7 +7,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -23,7 +22,7 @@ public class BushidoAbility extends BlocksOrBlockedSourceTriggeredAbility {
     }
 
     public BushidoAbility(DynamicValue value) {
-        super(new BoostSourceEffect(value, value, Duration.EndOfTurn, true));
+        super(new BoostSourceEffect(value, value, Duration.EndOfTurn));
         this.value = value;
         rule = (
                 value instanceof StaticValue ?

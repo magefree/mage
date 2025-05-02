@@ -1,25 +1,26 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.EntersWithCountersControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
  */
 public final class DearlyDeparted extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.HUMAN, "Human creature");
 
     public DearlyDeparted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
@@ -31,7 +32,9 @@ public final class DearlyDeparted extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new DearlyDepartedEntersBattlefieldEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new EntersWithCountersControlledEffect(
+                filter, CounterType.P1P1.createInstance(), false
+        ).setText("as long as {this} is in your graveyard, each Human creature you control enters with an additional +1/+1 counter on it")));
     }
 
     private DearlyDeparted(final DearlyDeparted card) {
@@ -42,45 +45,4 @@ public final class DearlyDeparted extends CardImpl {
     public DearlyDeparted copy() {
         return new DearlyDeparted(this);
     }
-}
-
-class DearlyDepartedEntersBattlefieldEffect extends ReplacementEffectImpl {
-
-    public DearlyDepartedEntersBattlefieldEffect() {
-        super(Duration.WhileInGraveyard, Outcome.BoostCreature);
-        staticText = "As long as {this} is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
-    }
-
-    public DearlyDepartedEntersBattlefieldEffect(DearlyDepartedEntersBattlefieldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (permanent != null && permanent.isControlledBy(source.getControllerId()) && permanent.hasSubtype(SubType.HUMAN, game)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (target != null) {
-            target.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-        }
-        return false;
-    }
-
-    @Override
-    public DearlyDepartedEntersBattlefieldEffect copy() {
-        return new DearlyDepartedEntersBattlefieldEffect(this);
-    }
-
 }

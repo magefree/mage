@@ -33,7 +33,7 @@ public final class FireServant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FireServantEffect()));
+        this.addAbility(new SimpleStaticAbility(new FireServantEffect()));
     }
 
     private FireServant(final FireServant card) {
@@ -49,12 +49,12 @@ public final class FireServant extends CardImpl {
 
 class FireServantEffect extends ReplacementEffectImpl {
 
-    public FireServantEffect() {
+    FireServantEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a red instant or sorcery spell you control would deal damage, it deals double that damage instead";
     }
 
-    public FireServantEffect(final FireServantEffect effect) {
+    private FireServantEffect(final FireServantEffect effect) {
         super(effect);
     }
 
@@ -76,11 +76,6 @@ class FireServantEffect extends ReplacementEffectImpl {
                 spell.isControlledBy(source.getControllerId()) &&
                 spell.getColor(game).isRed() &&
                 spell.isInstantOrSorcery(game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

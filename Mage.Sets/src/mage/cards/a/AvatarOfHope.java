@@ -32,7 +32,7 @@ public final class AvatarOfHope extends CardImpl {
 
         // If you have 3 or less life, Avatar of Hope costs {6} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(6, AvatarOfHopeCondition.instance)
-                .setText("if you have 3 or less life, Avatar of Hope costs {6} less to cast"))
+                .setText("if you have 3 or less life, this spell costs {6} less to cast"))
                 .addHint(new ConditionHint(AvatarOfHopeCondition.instance))
         );
 
@@ -40,7 +40,7 @@ public final class AvatarOfHope extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Avatar of Hope can block any number of creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(0)));
     }
 
     private AvatarOfHope(final AvatarOfHope card) {

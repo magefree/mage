@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -31,14 +32,12 @@ public final class Thaumatog extends CardImpl {
 
         // Sacrifice a land: Thaumatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land")))));
+                new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
         // Sacrifice an enchantment: Thaumatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledEnchantmentPermanent("enchantment")))));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ENCHANTMENT)));
     }
 
     private Thaumatog(final Thaumatog card) {

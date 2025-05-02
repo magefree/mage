@@ -39,6 +39,6 @@ public class ForgeAnewTest extends CardTestPlayerBase {
         execute();
         
         // Make sure it is attached
-        assertIsAttachedTo(playerA, EQUIPMENT, CREATURE);
+        assertAttachedTo(playerA, EQUIPMENT, CREATURE, true);
     }
 }

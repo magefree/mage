@@ -30,7 +30,7 @@ public final class DesperateCastaways extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Desperate Castaways can't attack unless you control an artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DesperateCastawaysEffect()));
+        this.addAbility(new SimpleStaticAbility(new DesperateCastawaysEffect()));
     }
 
     private DesperateCastaways(final DesperateCastaways card) {
@@ -45,12 +45,12 @@ public final class DesperateCastaways extends CardImpl {
 
 class DesperateCastawaysEffect extends RestrictionEffect {
 
-    public DesperateCastawaysEffect() {
+    DesperateCastawaysEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless you control an artifact";
     }
 
-    public DesperateCastawaysEffect(final DesperateCastawaysEffect effect) {
+    private DesperateCastawaysEffect(final DesperateCastawaysEffect effect) {
         super(effect);
     }
 

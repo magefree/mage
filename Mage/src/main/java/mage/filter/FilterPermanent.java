@@ -4,6 +4,8 @@ import mage.abilities.Ability;
 import mage.constants.SubType;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -62,11 +64,20 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
+
+        // verify check
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class);
+
         extraPredicates.add(predicate);
     }
 
     @Override
     public FilterPermanent copy() {
         return new FilterPermanent(this);
+    }
+
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
     }
 }

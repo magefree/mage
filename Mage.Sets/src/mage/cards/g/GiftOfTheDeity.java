@@ -43,12 +43,12 @@ public final class GiftOfTheDeity extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // As long as enchanted creature is black, it gets +1/+1 and has deathtouch.
-        SimpleStaticAbility blackAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "As long as enchanted creature is black, it gets +1/+1"));
+        SimpleStaticAbility blackAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "As long as enchanted creature is black, it gets +1/+1"));
         blackAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "and has deathtouch"));
         this.addAbility(blackAbility);
         // As long as enchanted creature is green, it gets +1/+1 and all creatures able to block it do so.
         SimpleStaticAbility greenAbility;
-        greenAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.GREEN),
+        greenAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.GREEN),
             "As long as enchanted creature is green, it gets +1/+1"));
         Effect effect = new ConditionalRequirementEffect(new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.GREEN));
         effect.setText("and all creatures able to block it do so");

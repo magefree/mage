@@ -30,7 +30,7 @@ public final class TitheTaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // During your turn, spells your opponents cast cost {1} more to cast and abilities your opponents activate cost {1} more to activate unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TitheTakerCostReductionEffect())
+        this.addAbility(new SimpleStaticAbility(new TitheTakerCostReductionEffect())
                 .addHint(MyTurnHint.instance));
 
         // Afterlife 1
@@ -65,7 +65,7 @@ class TitheTakerCostReductionEffect extends CostModificationEffectImpl {
             SpellAbility spellAbility = (SpellAbility) abilityToModify;
             CardUtil.adjustCost(spellAbility, -1);
         }
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED) {
+        if (abilityToModify.isNonManaActivatedAbility()) {
             CardUtil.increaseCost(abilityToModify, 1);
         }
         return true;
@@ -73,14 +73,9 @@ class TitheTakerCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!MyTurnCondition.instance.apply(game, source)) {
-            return false;
-        }
-        if (!(abilityToModify.getAbilityType() == AbilityType.SPELL)
-                && !(abilityToModify.getAbilityType() == AbilityType.ACTIVATED)) {
-            return false;
-        }
-        return game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId());
+        return MyTurnCondition.instance.apply(game, source)
+                && (abilityToModify.getAbilityType() == AbilityType.SPELL || abilityToModify.isNonManaActivatedAbility())
+                && game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId());
     }
 
     @Override

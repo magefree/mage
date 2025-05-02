@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class FeedThePack extends CardImpl {
 
 
         // At the beginning of your end step, you may sacrifice a nontoken creature. If you do, create X 2/2 green Wolf creature tokens, where X is the sacrificed creature's toughness.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new FeedThePackEffect(), true));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new FeedThePackEffect(), true));
     }
 
     private FeedThePack(final FeedThePack card) {
@@ -55,7 +55,7 @@ class FeedThePackEffect extends OneShotEffect {
         this.staticText = "sacrifice a nontoken creature. If you do, create X 2/2 green Wolf creature tokens, where X is the sacrificed creature's toughness";
     }
 
-    public FeedThePackEffect(final FeedThePackEffect effect) {
+    private FeedThePackEffect(final FeedThePackEffect effect) {
         super(effect);
     }
 

@@ -15,7 +15,7 @@ import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -31,7 +31,7 @@ public final class MidnightRitual extends CardImpl {
         // For each creature card exiled this way, create a 2/2 black Zombie creature token.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(new MidnightRitualEffect());
-        this.getSpellAbility().setTargetAdjuster(MidnightRitualAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private MidnightRitual(final MidnightRitual card) {
@@ -44,24 +44,14 @@ public final class MidnightRitual extends CardImpl {
     }
 }
 
-enum MidnightRitualAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(ability.getManaCostsToPay().getX(), StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-    }
-}
-
 class MidnightRitualEffect extends OneShotEffect {
 
-    public MidnightRitualEffect() {
+    MidnightRitualEffect() {
         super(Outcome.Neutral);
         this.staticText = "Exile X target creature cards from your graveyard. For each creature card exiled this way, create a 2/2 black Zombie creature token";
     }
 
-    public MidnightRitualEffect(final MidnightRitualEffect effect) {
+    private MidnightRitualEffect(final MidnightRitualEffect effect) {
         super(effect);
     }
 
@@ -77,7 +67,7 @@ class MidnightRitualEffect extends OneShotEffect {
             Cards cardsToExile = new CardsImpl(getTargetPointer().getTargets(game, source));
             controller.moveCards(cardsToExile, Zone.EXILED, source, game);
             if (!cardsToExile.isEmpty()) {
-                game.getState().processAction(game);
+                game.processAction();
                 new ZombieToken().putOntoBattlefield(cardsToExile.size(), game, source, controller.getId());
             }
             return true;

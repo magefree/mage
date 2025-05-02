@@ -3,14 +3,13 @@ package mage.cards.c;
 import java.util.UUID;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -18,7 +17,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.InsectToken;
 
 /**
- *
  * @author weirddan455
  */
 public final class CrawlingInfestation extends CardImpl {
@@ -27,7 +25,7 @@ public final class CrawlingInfestation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of your upkeep, you may mill two cards.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MillCardsControllerEffect(2), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MillCardsControllerEffect(2), true));
 
         // Whenever one or more creature cards are put into your graveyard from anywhere during your turn, create a 1/1 green Insect creature token. This ability triggers only once each turn.
         this.addAbility(new CrawlingInfestationTriggeredAbility());
@@ -47,7 +45,7 @@ class CrawlingInfestationTriggeredAbility extends TriggeredAbilityImpl {
 
     public CrawlingInfestationTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken()));
-        this.setTriggersOnceEachTurn(true);
+        this.setTriggersLimitEachTurn(1);
         setTriggerPhrase("Whenever one or more creature cards are put into your graveyard from anywhere during your turn, ");
     }
 

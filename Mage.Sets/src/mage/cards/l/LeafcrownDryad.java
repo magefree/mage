@@ -36,7 +36,7 @@ public final class LeafcrownDryad extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Enchanted creature gets +2/+2 and has reach.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2,2));
         Effect effect = new GainAbilityAttachedEffect(ReachAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has reach");
         ability.addEffect(effect);

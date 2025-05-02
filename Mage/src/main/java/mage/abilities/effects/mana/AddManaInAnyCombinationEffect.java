@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class AddManaInAnyCombinationEffect extends ManaEffect {
 
-    private ArrayList<ColoredManaSymbol> manaSymbols = new ArrayList<>();
+    private List<ColoredManaSymbol> manaSymbols = new ArrayList<>();
     private final DynamicValue amount;
     private final DynamicValue netAmount;
 
@@ -43,21 +43,6 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         this.amount = amount;
         this.staticText = setText();
         this.netAmount = netAmount;
-    }
-
-    public AddManaInAnyCombinationEffect(int amount, String text) {
-        this(amount);
-        this.staticText = text;
-    }
-
-    public AddManaInAnyCombinationEffect(int amount, String text, ColoredManaSymbol... coloredManaSymbols) {
-        this(amount, coloredManaSymbols);
-        this.staticText = text;
-    }
-
-    public AddManaInAnyCombinationEffect(DynamicValue amount, DynamicValue netAmount, String text, ColoredManaSymbol... coloredManaSymbols) {
-        this(amount, netAmount, coloredManaSymbols);
-        this.staticText = text;
     }
 
     protected AddManaInAnyCombinationEffect(final AddManaInAnyCombinationEffect effect) {
@@ -132,7 +117,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
 
         // Ask player for color distribution
         int manaAmount = amount.calculate(game, source, this);
-        List<Integer> manaList = player.getMultiAmount(this.outcome, manaStrings, manaAmount, manaAmount, MultiAmountType.MANA, game);
+        List<Integer> manaList = player.getMultiAmount(this.outcome, manaStrings, 0, manaAmount, manaAmount, MultiAmountType.MANA, game);
 
         // Convert choices to mana
         for (int i = 0; i < size; i++) {

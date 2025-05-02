@@ -64,7 +64,7 @@ class ScabClanBerserkerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
 
-    public ScabClanBerserkerTriggeredAbility(final ScabClanBerserkerTriggeredAbility abiltity) {
+    private ScabClanBerserkerTriggeredAbility(final ScabClanBerserkerTriggeredAbility abiltity) {
         super(abiltity);
     }
 

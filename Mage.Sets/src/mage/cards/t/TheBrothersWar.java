@@ -114,7 +114,7 @@ class TheBrothersWarRequirementEffect extends RequirementEffect {
         this.defendingPlayerId = defender.getId();
     }
 
-    public TheBrothersWarRequirementEffect(final TheBrothersWarRequirementEffect effect) {
+    private TheBrothersWarRequirementEffect(final TheBrothersWarRequirementEffect effect) {
         super(effect);
         this.attackingPlayerId = effect.attackingPlayerId;
         this.defendingPlayerId = effect.defendingPlayerId;

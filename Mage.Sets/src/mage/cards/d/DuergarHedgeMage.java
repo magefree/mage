@@ -30,8 +30,8 @@ public final class DuergarHedgeMage extends CardImpl {
         filter.add(SubType.MOUNTAIN.getPredicate());
         filter2.add(SubType.PLAINS.getPredicate());
     }
-    private static final String rule1 = "When {this} enters the battlefield, if you control two or more Mountains, you may destroy target artifact.";
-    private static final String rule2 = "When {this} enters the battlefield, if you control two or more Plains, you may destroy target enchantment.";
+    private static final String rule1 = "When {this} enters, if you control two or more Mountains, you may destroy target artifact.";
+    private static final String rule2 = "When {this} enters, if you control two or more Plains, you may destroy target enchantment.";
 
     public DuergarHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}");

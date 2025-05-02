@@ -20,7 +20,7 @@ public class UndauntedAbility extends SimpleStaticAbility {
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public UndauntedAbility copy() {
         return new UndauntedAbility(this);
     }
 

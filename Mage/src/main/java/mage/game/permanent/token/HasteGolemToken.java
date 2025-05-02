@@ -24,7 +24,7 @@ public final class HasteGolemToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected HasteGolemToken(final HasteGolemToken token) {
+    private HasteGolemToken(final HasteGolemToken token) {
         super(token);
     }
 

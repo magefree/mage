@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MorphAbility;
@@ -13,8 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,10 +30,10 @@ public final class SkittishValesk extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, turn Skittish Valesk face down.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SkittishValeskEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SkittishValeskEffect()));
 
         // Morph {5}{R}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{5}{R}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{5}{R}")));
     }
 
     private SkittishValesk(final SkittishValesk card) {
@@ -50,12 +48,12 @@ public final class SkittishValesk extends CardImpl {
 
 class SkittishValeskEffect extends OneShotEffect {
 
-    public SkittishValeskEffect() {
+    SkittishValeskEffect() {
         super(Outcome.Neutral);
         staticText = "flip a coin. If you lose the flip, turn {this} face down";
     }
 
-    public SkittishValeskEffect(SkittishValeskEffect effect) {
+    private SkittishValeskEffect(final SkittishValeskEffect effect) {
         super(effect);
     }
 

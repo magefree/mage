@@ -26,7 +26,7 @@ public final class GiantCrab extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U)));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
     private GiantCrab(final GiantCrab card) {

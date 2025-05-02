@@ -30,7 +30,7 @@ public final class FesteringGoblinToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    protected FesteringGoblinToken(final FesteringGoblinToken token) {
+    private FesteringGoblinToken(final FesteringGoblinToken token) {
         super(token);
     }
 

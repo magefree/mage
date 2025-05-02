@@ -153,7 +153,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             // Create the day night button
             dayNightButton = new JButton("");
             dayNightButton.setSize(32, 32);
-            dayNightButton.setToolTipText("This permanent is a double faced card. To see the another face card, push this button or move mouse wheel down while hovering over it.");
+            dayNightButton.setToolTipText("This permanent is a double faced card. To see the card's other face, push this button or move mouse wheel down while hovering over it.");
             BufferedImage day = ImageManagerImpl.instance.getDayImage();
             dayNightButton.setIcon(new ImageIcon(day));
             dayNightButton.addActionListener(e -> {
@@ -375,13 +375,12 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     protected void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) (g.create());
-
-        // Deferr to subclasses
-        paintCard(g2d);
-
-        // Done, dispose of the context
-        g2d.dispose();
+        Graphics2D g2 = (Graphics2D) g.create();
+        try {
+            paintCard(g2);
+        } finally {
+            g2.dispose();
+        }
     }
 
     @Override
@@ -608,6 +607,11 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             return;
         }
 
+        // ignore all additional mouse buttons
+        if (!SwingUtilities.isLeftMouseButton(e)) {
+            return;
+        }
+
         // double clicks processing, see https://stackoverflow.com/questions/4051659/identifying-double-click-in-java
         // logic: run timer to reset clicks counter
         mouseClicksCount = e.getClickCount();
@@ -739,7 +743,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         data.setComponent(this);
         data.setCard(this.getGameCard());
         data.setGameId(this.gameId);
-        callback.mouseWheelMoved(e, data);
+        callback.mouseWheelMoved(e.getWheelRotation(), data);
     }
 
     /**
@@ -849,7 +853,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         // VIEW mode (user can change card side at any time by n/d button)
         this.guiTransformed = !this.guiTransformed;
 
-        if (dayNightButton != null) { // if transformbable card is copied, button can be null
+        if (dayNightButton != null) { // if transformable card is copied, button can be null
             BufferedImage image = this.isTransformed() ? ImageManagerImpl.instance.getNightImage() : ImageManagerImpl.instance.getDayImage();
             dayNightButton.setIcon(new ImageIcon(image));
         }

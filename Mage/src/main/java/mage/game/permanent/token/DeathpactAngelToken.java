@@ -37,14 +37,14 @@ public final class DeathpactAngelToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{3}{W}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{3}{W}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
-    protected DeathpactAngelToken(final DeathpactAngelToken token) {
+    private DeathpactAngelToken(final DeathpactAngelToken token) {
         super(token);
     }
 

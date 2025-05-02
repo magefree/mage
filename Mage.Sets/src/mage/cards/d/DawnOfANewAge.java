@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -37,7 +36,7 @@ public final class DawnOfANewAge extends CardImpl {
         );
 
         // At the beginning of your end step, remove a hope counter from Dawn of a New Age. If you do, draw a card. Then if Dawn of a New Age has no hope counters on it, sacrifice it and you gain 4 life.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DawnOfANewAgeEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DawnOfANewAgeEffect()));
     }
 
     private DawnOfANewAge(final DawnOfANewAge card) {
@@ -52,7 +51,7 @@ public final class DawnOfANewAge extends CardImpl {
 
 class DawnOfANewAgeEffect extends OneShotEffect {
 
-    public DawnOfANewAgeEffect() {
+    DawnOfANewAgeEffect() {
         super(Outcome.Sacrifice);
         staticText = "remove a hope counter from {this}. If you do, draw a card. Then if {this} has no hope counters on it, sacrifice it and you gain 4 life";
     }

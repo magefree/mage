@@ -4,7 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,7 +33,7 @@ public final class GhazbanOgre extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Ghazbán Ogre.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GhazbanOgreEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GhazbanOgreEffect()));
 
     }
 
@@ -50,12 +49,12 @@ public final class GhazbanOgre extends CardImpl {
 
 class GhazbanOgreEffect extends OneShotEffect {
 
-    public GhazbanOgreEffect() {
+    GhazbanOgreEffect() {
         super(Outcome.GainControl);
         this.staticText = "the player with the most life gains control of {this}";
     }
 
-    public GhazbanOgreEffect(final GhazbanOgreEffect effect) {
+    private GhazbanOgreEffect(final GhazbanOgreEffect effect) {
         super(effect);
     }
 

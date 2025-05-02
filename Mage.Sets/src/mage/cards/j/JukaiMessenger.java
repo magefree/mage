@@ -26,7 +26,7 @@ public final class JukaiMessenger extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public JukaiMessenger (final JukaiMessenger card) {
+    private JukaiMessenger(final JukaiMessenger card) {
         super(card);
     }
 

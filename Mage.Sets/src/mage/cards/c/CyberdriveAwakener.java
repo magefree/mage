@@ -70,6 +70,7 @@ class CyberdriveAwakenerEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "until end of turn, each noncreature artifact you control " +
                 "becomes an artifact creature with base power and toughness 4/4";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private CyberdriveAwakenerEffect(final CyberdriveAwakenerEffect effect) {

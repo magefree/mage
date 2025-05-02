@@ -1,7 +1,7 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -17,7 +17,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,8 +26,8 @@ import mage.players.Player;
  */
 public final class BridgeFromBelow extends CardImpl {
 
-    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Whenever a nontoken creature is put into your graveyard from the battlefield");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("When a creature is put into an opponent's graveyard from the battlefield");
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Whenever a nontoken creature is put into your graveyard from the battlefield, ");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("When a creature is put into an opponent's graveyard from the battlefield, ");
 
     static {
         filter1.add(TargetController.YOU.getOwnerPredicate());
@@ -59,13 +60,15 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
 
     private final FilterCreaturePermanent filter;
 
-    public BridgeFromBelowAbility(Effect effect, FilterCreaturePermanent filter) {
+    BridgeFromBelowAbility(Effect effect, FilterCreaturePermanent filter) {
         super(Zone.GRAVEYARD, effect, false);
         this.filter = filter;
-        setTriggerPhrase(filter.getMessage() + ", if {this} is in your graveyard, ");
+        this.withInterveningIf(SourceInGraveyardCondition.instance);
+        setTriggerPhrase(filter.getMessage());
+        setLeavesTheBattlefieldTrigger(true); // it's not required for Bridge from Below, but better to keep same code style and verify pass
     }
 
-    public BridgeFromBelowAbility(BridgeFromBelowAbility ability) {
+    private BridgeFromBelowAbility(final BridgeFromBelowAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }
@@ -82,19 +85,11 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (!zEvent.isDiesEvent()) { return false; }
-
         Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-        if (permanent == null) { return false; }
-
+        if (permanent == null || !((ZoneChangeEvent) event).isDiesEvent()) {
+            return false;
+        }
         return filter.match(permanent, controllerId, this, game);
     }
 
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        Player controller = game.getPlayer(this.getControllerId());
-        return controller != null
-                && controller.getGraveyard().contains(this.getSourceId());
-    }
 }

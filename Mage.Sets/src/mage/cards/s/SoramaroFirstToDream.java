@@ -38,11 +38,11 @@ public final class SoramaroFirstToDream extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Soramaro, First to Dream's power and toughness are each equal to the number of cards in your hand.
-         DynamicValue xValue= CardsInControllerHandCount.instance;
+         DynamicValue xValue= CardsInControllerHandCount.ANY;
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
 
         // {4}, Return a land you control to its owner's hand: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(4));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         this.addAbility(ability);

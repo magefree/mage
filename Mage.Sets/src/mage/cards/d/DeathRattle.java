@@ -29,7 +29,7 @@ public final class DeathRattle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}");
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
 
         // Destroy target nongreen creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

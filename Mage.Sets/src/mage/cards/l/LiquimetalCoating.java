@@ -24,12 +24,12 @@ public final class LiquimetalCoating extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {T}: Target permanent becomes an artifact in addition to its other types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT), new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
 
-    public LiquimetalCoating (final LiquimetalCoating card) {
+    private LiquimetalCoating(final LiquimetalCoating card) {
         super(card);
     }
 

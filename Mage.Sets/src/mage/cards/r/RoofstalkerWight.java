@@ -27,10 +27,10 @@ public final class RoofstalkerWight extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
     }
 
-    public RoofstalkerWight (final RoofstalkerWight card) {
+    private RoofstalkerWight(final RoofstalkerWight card) {
         super(card);
     }
 

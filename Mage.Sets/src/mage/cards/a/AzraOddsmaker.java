@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -16,13 +16,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -43,7 +43,7 @@ public final class AzraOddsmaker extends CardImpl {
                 new DoIfCostPaid(
                         new AzraOddsmakerEffect(),
                         new DiscardCardCost()
-                ), TargetController.YOU, false
+                )
         ));
     }
 
@@ -59,12 +59,12 @@ public final class AzraOddsmaker extends CardImpl {
 
 class AzraOddsmakerEffect extends OneShotEffect {
 
-    public AzraOddsmakerEffect() {
+    AzraOddsmakerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a creature. Whenever that creature deals combat damage to a player this turn, you draw two cards";
     }
 
-    public AzraOddsmakerEffect(final AzraOddsmakerEffect effect) {
+    private AzraOddsmakerEffect(final AzraOddsmakerEffect effect) {
         super(effect);
     }
 
@@ -81,13 +81,15 @@ class AzraOddsmakerEffect extends OneShotEffect {
         }
         Permanent permanent = null;
         TargetCreaturePermanent target = new TargetCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (player.choose(Outcome.DrawCard, target, source, game)) {
             permanent = game.getPermanent(target.getFirstTarget());
         }
         if (permanent == null) {
             return false;
         }
+        game.informPlayers(player.getLogName() + " chose " + permanent.getLogName() + ". "
+                + CardUtil.getSourceLogName(game, source));
         game.addDelayedTriggeredAbility(new AzraOddsmakerDelayedTriggeredAbility(
                 new MageObjectReference(permanent, game),
                 permanent.getName()
@@ -107,7 +109,7 @@ class AzraOddsmakerDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.creatureName = creatureName;
     }
 
-    public AzraOddsmakerDelayedTriggeredAbility(final AzraOddsmakerDelayedTriggeredAbility ability) {
+    private AzraOddsmakerDelayedTriggeredAbility(final AzraOddsmakerDelayedTriggeredAbility ability) {
         super(ability);
         this.mor = ability.mor;
         this.creatureName = ability.creatureName;

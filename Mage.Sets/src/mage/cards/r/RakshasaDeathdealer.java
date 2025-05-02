@@ -22,16 +22,15 @@ public final class RakshasaDeathdealer extends CardImpl {
 
     public RakshasaDeathdealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");
-        this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // {B}{G}: Rakshasa Deathdealer gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2,Duration.EndOfTurn), new ManaCostsImpl<>("{B}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2,2,Duration.EndOfTurn), new ManaCostsImpl<>("{B}{G}")));
         // {B}{G}: Regenerate Rakshasa Deathdealer.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}{G}")));
     }
 
     private RakshasaDeathdealer(final RakshasaDeathdealer card) {

@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -14,15 +14,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -40,7 +38,7 @@ public final class XathridDemon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature other than Xathrid Demon, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap Xathrid Demon and you lose 7 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new XathridDemonEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new XathridDemonEffect()));
     }
 
     private XathridDemon(final XathridDemon card) {
@@ -55,12 +53,12 @@ public final class XathridDemon extends CardImpl {
 
 class XathridDemonEffect extends OneShotEffect {
 
-    public XathridDemonEffect() {
+    XathridDemonEffect() {
         super(Outcome.Damage);
         this.staticText = "sacrifice a creature other than {this}, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap {this} and you lose 7 life";
     }
 
-    public XathridDemonEffect(final XathridDemonEffect effect) {
+    private XathridDemonEffect(final XathridDemonEffect effect) {
         super(effect);
     }
 
@@ -83,7 +81,7 @@ class XathridDemonEffect extends OneShotEffect {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature other than " + sourcePermanent.getName());
         filter.add(AnotherPredicate.instance);
 
-        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+        TargetSacrifice target = new TargetSacrifice(filter);
         if (target.canChoose(controller.getId(), source, game)) {
             controller.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());

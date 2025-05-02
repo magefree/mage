@@ -30,9 +30,7 @@ public final class LokhustHeavyDestroyer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Enmitic Exterminator -- When Lokhust Heavy Destroyer enters the battlefield, each plater sacrifices a creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(
-                1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        )).withFlavorWord("Enmitic Exterminator"));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE)).withFlavorWord("Enmitic Exterminator"));
 
         // Unearth {5}{B}{B}{B}
         this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{5}{B}{B}{B}")));

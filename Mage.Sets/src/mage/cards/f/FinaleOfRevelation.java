@@ -12,6 +12,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public final class FinaleOfRevelation extends CardImpl {
         this.getSpellAbility().addEffect(new FinaleOfRevelationEffect());
 
         // Exile Finale of Revelation.
-        this.getSpellAbility().addEffect(new ExileSpellEffect());
+        this.getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));
     }
 
     private FinaleOfRevelation(final FinaleOfRevelation card) {
@@ -63,7 +64,7 @@ class FinaleOfRevelationEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         if (xValue < 10) {
             player.drawCards(xValue, source, game);

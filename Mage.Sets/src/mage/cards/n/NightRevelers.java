@@ -32,7 +32,7 @@ public final class NightRevelers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Night Revelers has haste as long as an opponent controls a Human.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HasteAbility.getInstance()),
                 new OpponentControlsPermanentCondition(filter),
                 "{this} has haste as long as an opponent controls a Human.")));

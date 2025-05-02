@@ -41,7 +41,7 @@ public final class PhyrexianDevourer extends CardImpl {
         this.addAbility(new PhyrexianDevourerStateTriggeredAbility());
 
         // Exile the top card of your library: Put X +1/+1 counters on Phyrexian Devourer, where X is the exiled card's converted mana cost.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianDevourerEffect(), new ExileTopCardLibraryCost()));
+        this.addAbility(new SimpleActivatedAbility(new PhyrexianDevourerEffect(), new ExileTopCardLibraryCost()));
 
     }
 
@@ -61,7 +61,7 @@ class PhyrexianDevourerStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public PhyrexianDevourerStateTriggeredAbility(final PhyrexianDevourerStateTriggeredAbility ability) {
+    private PhyrexianDevourerStateTriggeredAbility(final PhyrexianDevourerStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -85,12 +85,12 @@ class PhyrexianDevourerStateTriggeredAbility extends StateTriggeredAbility {
 
 class PhyrexianDevourerEffect extends OneShotEffect {
 
-    public PhyrexianDevourerEffect() {
+    PhyrexianDevourerEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Put X +1/+1 counters on {this}, where X is the exiled card's mana value";
     }
 
-    public PhyrexianDevourerEffect(final PhyrexianDevourerEffect effect) {
+    private PhyrexianDevourerEffect(final PhyrexianDevourerEffect effect) {
         super(effect);
     }
 
@@ -129,7 +129,7 @@ class ExileTopCardLibraryCost extends CostImpl {
         this.text = "Exile the top card of your library";
     }
 
-    public ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
+    private ExileTopCardLibraryCost(final ExileTopCardLibraryCost cost) {
         super(cost);
         this.card = cost.getCard();
     }

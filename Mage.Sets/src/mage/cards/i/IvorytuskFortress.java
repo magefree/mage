@@ -26,7 +26,7 @@ public final class IvorytuskFortress extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Untap each creature you control with a +1/+1 counter on it during each other player's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new UntapAllDuringEachOtherPlayersUntapStepEffect(StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)));
     }
 

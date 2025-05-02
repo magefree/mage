@@ -63,7 +63,7 @@ public final class AAT1 extends CardImpl {
             setTriggerPhrase("Whenever a repair counter is removed from a creature card in your graveyard ");
         }
 
-        public AAT1TriggeredAbility(AAT1TriggeredAbility ability) {
+        private AAT1TriggeredAbility(final AAT1TriggeredAbility ability) {
             super(ability);
         }
 
@@ -76,7 +76,7 @@ public final class AAT1 extends CardImpl {
         public boolean checkTrigger(GameEvent event, Game game) {
             Card card = game.getCard(event.getTargetId());
             if (card != null
-                    && event.getPlayerId().equals(game.getControllerId(sourceId))
+                    && card.getOwnerId().equals(game.getControllerId(sourceId))
                     && card.isCreature(game)
                     && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
                     && event.getData().equals(CounterType.REPAIR.getName())) {

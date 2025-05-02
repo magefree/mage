@@ -18,7 +18,7 @@ public final class Demon33Token extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected Demon33Token(final Demon33Token token) {
+    private Demon33Token(final Demon33Token token) {
         super(token);
     }
 

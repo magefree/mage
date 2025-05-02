@@ -20,6 +20,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -42,8 +43,8 @@ public final class JeweledSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice two lands: Jeweled Spirit gains protection from artifacts or from the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JeweledSpiritEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), true))));
+        this.addAbility(new SimpleActivatedAbility(new JeweledSpiritEffect(),
+                new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS)));
     }
 
     private JeweledSpirit(final JeweledSpirit card) {
@@ -58,12 +59,12 @@ public final class JeweledSpirit extends CardImpl {
 
 class JeweledSpiritEffect extends OneShotEffect {
 
-    public JeweledSpiritEffect() {
+    JeweledSpiritEffect() {
         super(Outcome.AddAbility);
         this.staticText = "{this} gains protection from artifacts or from the color of your choice until end of turn";
     }
 
-    public JeweledSpiritEffect(final JeweledSpiritEffect effect) {
+    private JeweledSpiritEffect(final JeweledSpiritEffect effect) {
         super(effect);
     }
 

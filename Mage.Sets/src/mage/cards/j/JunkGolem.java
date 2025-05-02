@@ -4,7 +4,7 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 /**
@@ -38,8 +37,8 @@ public final class JunkGolem extends CardImpl {
         // At the beginning of your upkeep, sacrifice Junk Golem unless you remove a +1/+1 counter from it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(
-                        new RemoveCountersSourceCost(CounterType.P1P1.createInstance())
-                ), TargetController.YOU, false
+                        new RemoveCountersSourceCost(CounterType.P1P1.createInstance()).setText("remove a +1/+1 counter from it")
+                )
         ));
 
         // {1}, Discard a card: Put a +1/+1 counter on Junk Golem.

@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -19,18 +19,16 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.Objects;
 import java.util.UUID;
 
 /**
- *
  * @author anonymous
  */
 public final class CurseOfTheCabal extends CardImpl {
@@ -62,12 +60,12 @@ public final class CurseOfTheCabal extends CardImpl {
 
 class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
 
-    public CurseOfTheCabalSacrificeEffect() {
+    CurseOfTheCabalSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Target player sacrifices half the permanents they control, rounded down.";
     }
 
-    public CurseOfTheCabalSacrificeEffect(final CurseOfTheCabalSacrificeEffect effect) {
+    private CurseOfTheCabalSacrificeEffect(final CurseOfTheCabalSacrificeEffect effect) {
         super(effect);
     }
 
@@ -84,9 +82,9 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
             if (amount < 1) {
                 return true;
             }
-            Target target = new TargetControlledPermanent(amount, amount, StaticFilters.FILTER_CONTROLLED_PERMANENT, true);
+            Target target = new TargetSacrifice(amount, StaticFilters.FILTER_CONTROLLED_PERMANENT);
             if (target.canChoose(targetPlayer.getId(), source, game)) {
-                while (!target.isChosen() 
+                while (!target.isChosen(game)
                         && target.canChoose(targetPlayer.getId(), source, game) && targetPlayer.canRespond()) {
                     targetPlayer.choose(Outcome.Sacrifice, target, source, game);
                 }
@@ -106,9 +104,9 @@ class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalIntervenin
 
     public CurseOfTheCabalInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(
-                Zone.EXILED, new CurseOfTheCabalTriggeredAbilityConditionalDelay(),
-                TargetController.ANY, false, true
-        ),
+                        Zone.EXILED, TargetController.ANY, new CurseOfTheCabalTriggeredAbilityConditionalDelay(),
+                        false
+                ),
                 SuspendedCondition.instance,
                 "At the beginning of each player's upkeep, if {this} is suspended, "
                         + "that player may sacrifice a permanent. If the player does, "
@@ -118,7 +116,7 @@ class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalIntervenin
         // counters aren't placed
     }
 
-    public CurseOfTheCabalInterveningIfTriggeredAbility(final CurseOfTheCabalInterveningIfTriggeredAbility effect) {
+    private CurseOfTheCabalInterveningIfTriggeredAbility(final CurseOfTheCabalInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
@@ -138,7 +136,7 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
     public boolean apply(Game game, Ability source) {
         UUID activePlayerId = game.getActivePlayerId();
         Player target = game.getPlayer(activePlayerId);
-        Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent()));
+        Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT);
         if (target == null) {
             return false;
         }
@@ -150,7 +148,7 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
         return true;
     }
 
-    public CurseOfTheCabalTriggeredAbilityConditionalDelay(final CurseOfTheCabalTriggeredAbilityConditionalDelay effect) {
+    private CurseOfTheCabalTriggeredAbilityConditionalDelay(final CurseOfTheCabalTriggeredAbilityConditionalDelay effect) {
         super(effect);
     }
 

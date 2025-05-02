@@ -1,18 +1,19 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class AttendantOfVraska extends CardImpl {
         // When Attendant of Vraska dies, if you control a Vraska planeswalker, you gain life equal to Attendant of Vraska's power.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesSourceTriggeredAbility(new GainLifeEffect(
-                        new SourcePermanentPowerCount()
+                        SourcePermanentPowerValue.NOT_NEGATIVE
                 ), false), new PermanentsOnTheBattlefieldCondition(filter),
                 "When {this} dies, if you control a Vraska planeswalker, "
                 + "you gain life equal to {this}'s power."

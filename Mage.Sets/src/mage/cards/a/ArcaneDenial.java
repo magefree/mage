@@ -53,13 +53,13 @@ public final class ArcaneDenial extends CardImpl {
 
 class ArcaneDenialEffect extends OneShotEffect {
 
-    public ArcaneDenialEffect() {
+    ArcaneDenialEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Its controller may draw up to two cards "
                 + "at the beginning of the next turn's upkeep";
     }
 
-    public ArcaneDenialEffect(final ArcaneDenialEffect effect) {
+    private ArcaneDenialEffect(final ArcaneDenialEffect effect) {
         super(effect);
     }
 

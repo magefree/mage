@@ -96,9 +96,9 @@ class CyclingZeroCostEffect extends CostModificationEffectImpl {
         if (player == null || !player.chooseUse(outcome, "Pay {0} to cycle this card?", source, game)) {
             return true;
         }
-        abilityToModify.getManaCostsToPay().clear();
+        abilityToModify.clearManaCostsToPay();
         abilityToModify.getCosts().removeIf(cost -> !CyclingDiscardCost.class.isInstance(cost));
-        abilityToModify.getManaCostsToPay().add(new GenericManaCost(0));
+        abilityToModify.addManaCostsToPay(new GenericManaCost(0));
         return true;
     }
 

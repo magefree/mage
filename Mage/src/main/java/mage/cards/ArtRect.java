@@ -7,11 +7,14 @@ import java.awt.geom.Rectangle2D;
  */
 public enum ArtRect {
     NORMAL(new Rectangle2D.Double(.079f, .11f, .84f, .42f)),
+    RETRO(new Rectangle2D.Double(.12f, .11f, .76f, .43f)),
     AFTERMATH_TOP(new Rectangle2D.Double(0.075, 0.113, 0.832, 0.227)),
     AFTERMATH_BOTTOM(new Rectangle2D.Double(0.546, 0.562, 0.272, 0.346)),
     SPLIT_LEFT(new Rectangle2D.Double(0.152, 0.539, 0.386, 0.400)),
     SPLIT_RIGHT(new Rectangle2D.Double(0.152, 0.058, 0.386, 0.400)),
-    SPLIT_FUSED(null);
+    SPLIT_FUSED(null),
+    FULL_LENGTH_LEFT(new Rectangle2D.Double(0.069, 0.11, 0.426, 0.727)),
+    FULL_LENGTH_RIGHT(new Rectangle2D.Double(0.497, 0.11, 0.426, 0.727));
 
     public final Rectangle2D rect;
 

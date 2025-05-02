@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
@@ -43,25 +42,33 @@ public class GetEnergyCountersControllerEffect extends OneShotEffect {
     }
 
     private void setText() {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return;
         }
-
+        if (value.toString().equals("that many")) {
+            staticText = "you get that many {E} <i>(energy counters)</i>.";
+            return;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("you get ");
-        int val = 1;
+        int val;
         if (value instanceof StaticValue) {
             val = ((StaticValue) value).getValue();
+        } else {
+            val = 1;
         }
-        for (int i = 0; i < val; i++) {
-            sb.append("{E}");
+        if (val < 6) {
+            for (int i = 0; i < val; i++) {
+                sb.append("{E}");
+            }
+        } else {
+            sb.append(CardUtil.numberToText(val));
+            sb.append(" {E}");
         }
         sb.append(" <i>(");
-        sb.append(CardUtil.numberToText(val, "an"));
-        sb.append(" energy counter");
-        sb.append(val > 1 ? "s" : "");
+        sb.append(CardUtil.getSimpleCountersText(val, "an", "energy"));
         sb.append(")</i>");
-        if ((value instanceof StaticValue)) {
+        if (value instanceof StaticValue) {
             sb.append('.');
         } else {
             sb.append(" for each ");

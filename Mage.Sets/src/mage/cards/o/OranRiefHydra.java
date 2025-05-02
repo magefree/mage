@@ -53,14 +53,14 @@ public final class OranRiefHydra extends CardImpl {
 class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final String text = "<i>Landfall</i> &mdash; Whenever a "
-            + "land enters the battlefield under your control, put a +1/+1 counter on {this}. "
+            + "land you control enters, put a +1/+1 counter on {this}. "
             + "If that land is a Forest, put two +1/+1 counters on {this} instead.";
 
     public OranRiefHydraTriggeredAbility() {
         super(Zone.BATTLEFIELD, new OranRiefHydraEffect());
     }
 
-    public OranRiefHydraTriggeredAbility(final OranRiefHydraTriggeredAbility ability) {
+    private OranRiefHydraTriggeredAbility(final OranRiefHydraTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,11 +101,11 @@ class OranRiefHydraTriggeredAbility extends TriggeredAbilityImpl {
 
 class OranRiefHydraEffect extends OneShotEffect {
 
-    public OranRiefHydraEffect() {
+    OranRiefHydraEffect() {
         super(Outcome.BoostCreature);
     }
 
-    public OranRiefHydraEffect(final OranRiefHydraEffect effect) {
+    private OranRiefHydraEffect(final OranRiefHydraEffect effect) {
         super(effect);
     }
 

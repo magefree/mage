@@ -38,12 +38,12 @@ public final class DismalFailure extends CardImpl {
 
 class DismalFailureEffect extends OneShotEffect {
 
-    public DismalFailureEffect() {
+    DismalFailureEffect() {
         super(Outcome.Neutral);
         this.staticText = "Counter target spell. Its controller discards a card";
     }
 
-    public DismalFailureEffect(final DismalFailureEffect effect) {
+    private DismalFailureEffect(final DismalFailureEffect effect) {
         super(effect);
     }
 

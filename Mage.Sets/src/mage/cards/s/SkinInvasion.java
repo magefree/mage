@@ -44,7 +44,7 @@ public final class SkinInvasion extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature attacks each combat if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
 
         // When enchanted creature dies, return Skin Invasion to the battlefield transformed under your control.
@@ -64,12 +64,12 @@ public final class SkinInvasion extends CardImpl {
 
 class SkinInvasionEffect extends OneShotEffect {
 
-    public SkinInvasionEffect() {
+    SkinInvasionEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "return {this} to the battlefield transformed under your control";
     }
 
-    public SkinInvasionEffect(final SkinInvasionEffect effect) {
+    private SkinInvasionEffect(final SkinInvasionEffect effect) {
         super(effect);
     }
 

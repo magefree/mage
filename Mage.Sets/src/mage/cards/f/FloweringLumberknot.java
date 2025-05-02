@@ -29,7 +29,7 @@ public final class FloweringLumberknot extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Flowering Lumberknot can't attack or block unless it's paired with a creature with soulbond.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FloweringLumberknotEffect()));
+        this.addAbility(new SimpleStaticAbility(new FloweringLumberknotEffect()));
     }
 
     private FloweringLumberknot(final FloweringLumberknot card) {
@@ -44,12 +44,12 @@ public final class FloweringLumberknot extends CardImpl {
 
 class FloweringLumberknotEffect extends RestrictionEffect {
 
-    public FloweringLumberknotEffect() {
+    FloweringLumberknotEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless it's paired with a creature with soulbond";
     }
 
-    public FloweringLumberknotEffect(final FloweringLumberknotEffect effect) {
+    private FloweringLumberknotEffect(final FloweringLumberknotEffect effect) {
         super(effect);
     }
 

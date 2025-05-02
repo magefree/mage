@@ -35,7 +35,7 @@ public final class KiorasFollower extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Untap another target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

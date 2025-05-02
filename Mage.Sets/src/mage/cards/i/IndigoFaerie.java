@@ -39,7 +39,7 @@ public final class IndigoFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {U}: Target permanent becomes blue in addition to its other colors until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBlueTargetEffect(), new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(new BecomesBlueTargetEffect(), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         
@@ -57,12 +57,12 @@ public final class IndigoFaerie extends CardImpl {
 
 class BecomesBlueTargetEffect extends ContinuousEffectImpl {
 
-    public BecomesBlueTargetEffect() {
+    BecomesBlueTargetEffect() {
         super(Duration.EndOfTurn, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Neutral);
         staticText = "Target permanent becomes blue in addition to its other colors until end of turn";
     }
 
-    public BecomesBlueTargetEffect(final BecomesBlueTargetEffect effect) {
+    private BecomesBlueTargetEffect(final BecomesBlueTargetEffect effect) {
         super(effect);
     }
 

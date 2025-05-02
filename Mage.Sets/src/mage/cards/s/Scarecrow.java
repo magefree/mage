@@ -35,7 +35,7 @@ public final class Scarecrow extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {6}, {T}: Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScarecrowEffect(), new GenericManaCost(6));
+        Ability ability = new SimpleActivatedAbility(new ScarecrowEffect(), new GenericManaCost(6));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -63,7 +63,7 @@ class ScarecrowEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you this turn by creatures with flying";
     }
 
-    ScarecrowEffect(final ScarecrowEffect effect) {
+    private ScarecrowEffect(final ScarecrowEffect effect) {
         super(effect);
     }
 

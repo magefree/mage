@@ -26,7 +26,7 @@ public final class Statecraft extends CardImpl {
 
 
         // Prevent all combat damage that would be dealt to and dealt by creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StatecraftPreventionEffect()));
+        this.addAbility(new SimpleStaticAbility(new StatecraftPreventionEffect()));
     }
 
     private Statecraft(final Statecraft card) {
@@ -48,7 +48,7 @@ class StatecraftPreventionEffect extends PreventionEffectImpl {
         this.staticText = "Prevent all combat damage that would be dealt to and dealt by creatures you control";
     }
 
-    StatecraftPreventionEffect(final StatecraftPreventionEffect effect) {
+    private StatecraftPreventionEffect(final StatecraftPreventionEffect effect) {
         super(effect);
     }
 

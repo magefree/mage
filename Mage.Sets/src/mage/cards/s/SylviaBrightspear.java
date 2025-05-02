@@ -40,7 +40,7 @@ public final class SylviaBrightspear extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Dragons your team controls have double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
     private SylviaBrightspear(final SylviaBrightspear card) {

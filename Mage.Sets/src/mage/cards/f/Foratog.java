@@ -35,8 +35,8 @@ public final class Foratog extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, Sacrifice a Forest: Foratog gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

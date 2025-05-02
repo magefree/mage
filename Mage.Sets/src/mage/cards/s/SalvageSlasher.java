@@ -33,7 +33,7 @@ public final class SalvageSlasher extends CardImpl {
         BoostSourceEffect effect = new BoostSourceEffect(new CardsInControllerGraveyardCount(new FilterArtifactCard()),
                 StaticValue.get(0),
                 Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private SalvageSlasher(final SalvageSlasher card) {

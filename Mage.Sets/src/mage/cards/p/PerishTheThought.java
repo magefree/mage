@@ -49,7 +49,7 @@ class PerishTheThoughtEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals their hand. You choose a card from it. That player shuffles that card into their library";
     }
 
-    public PerishTheThoughtEffect(final PerishTheThoughtEffect effect) {
+    private PerishTheThoughtEffect(final PerishTheThoughtEffect effect) {
         super(effect);
     }
 
@@ -68,7 +68,7 @@ class PerishTheThoughtEffect extends OneShotEffect {
                 Player you = game.getPlayer(source.getControllerId());
                 if (you != null) {
                     TargetCard target = new TargetCard(Zone.HAND, filter);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (you.choose(Outcome.Neutral, targetOpponent.getHand(), target, source, game)) {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);
                         if (chosenCard != null) {

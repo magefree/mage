@@ -7,13 +7,14 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author noxx
  */
 public class ExquisiteBloodTest extends CardTestPlayerBase {
 
     @Test
-    public void BasicCardTest() {
+    public void basicCardTest() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
@@ -45,10 +46,12 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
     }
 
     /**
-     *  Ajani, Inspiring leader does not trigger Exquisite Blood + Defiant Bloodlord #6464
+     * Ajani, Inspiring leader does not trigger Exquisite Blood + Defiant Bloodlord #6464
      */
     @Test
     public void triggerCascadeTest() {
+        setStrictChooseMode(true);
+
         // +2: You gain 2 life. Put two +1/+1 counters on up to one target creature.
         // −3: Exile target creature. Its controller gains 2 life.
         // −10: Creatures you control gain flying and double strike until end of turn.        
@@ -57,14 +60,12 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
         // Flying
         // Whenever you gain life, target opponent loses that much life.
         addCard(Zone.BATTLEFIELD, playerA, "Defiant Bloodlord", 1); // Creature 4/5 {5}{B}{B}        
-        
+
         // Whenever an opponent loses life, you gain that much life.
         addCard(Zone.BATTLEFIELD, playerA, "Exquisite Blood", 1); // Enchantment {4}{B}
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2:", "Defiant Bloodlord");
         addTarget(playerA, playerB);  // Target opponent of Defiant Bloodlord triggered ability (looping until opponent is dead)
-        addTarget(playerA, playerB);  
-        addTarget(playerA, playerB);  
         addTarget(playerA, playerB);
         addTarget(playerA, playerB);
         addTarget(playerA, playerB);
@@ -72,7 +73,9 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
         addTarget(playerA, playerB);
         addTarget(playerA, playerB);
         addTarget(playerA, playerB);
-        
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -82,15 +85,17 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
 
         assertLife(playerB, 0); // Player B is dead, game ends
         assertLife(playerA, 40);
-        
-        
+
+
     }
 
     /**
-     *  Ajani, Inspiring leader does not trigger Exquisite Blood + Defiant Bloodlord #6464
+     * Ajani, Inspiring leader does not trigger Exquisite Blood + Defiant Bloodlord #6464
      */
     @Test
     public void triggerCascadeAjaniSecondAbilityTest() {
+        setStrictChooseMode(true);
+
         // +2: You gain 2 life. Put two +1/+1 counters on up to one target creature.
         // −3: Exile target creature. Its controller gains 2 life.
         // −10: Creatures you control gain flying and double strike until end of turn.        
@@ -100,14 +105,12 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
         // Flying
         // Whenever you gain life, target opponent loses that much life.
         addCard(Zone.BATTLEFIELD, playerA, "Defiant Bloodlord", 1); // Creature 4/5 {5}{B}{B}        
-        
+
         // Whenever an opponent loses life, you gain that much life.
         addCard(Zone.BATTLEFIELD, playerA, "Exquisite Blood", 1); // Enchantment {4}{B}
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:", "Silvercoat Lion");
         addTarget(playerA, playerB);  // Target opponent of Defiant Bloodlord triggered ability (looping until opponent is dead)
-        addTarget(playerA, playerB);  
-        addTarget(playerA, playerB);  
         addTarget(playerA, playerB);
         addTarget(playerA, playerB);
         addTarget(playerA, playerB);
@@ -115,7 +118,9 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
         addTarget(playerA, playerB);
         addTarget(playerA, playerB);
         addTarget(playerA, playerB);
-        
+        addTarget(playerA, playerB);
+        addTarget(playerA, playerB);
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -126,7 +131,28 @@ public class ExquisiteBloodTest extends CardTestPlayerBase {
 
         assertLife(playerB, 0); // Player B is dead, game ends
         assertLife(playerA, 40);
-        
-        
+
+
+    }
+
+    @Test
+    public void attackWithTwoCreatures() {
+        setStrictChooseMode(true);
+
+        // Whenever an opponent loses life, you gain that much life.
+        addCard(Zone.BATTLEFIELD, playerA, "Exquisite Blood", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
+
+        attack(1, playerA, "Elite Vanguard", playerB);
+        attack(1, playerA, "Memnite", playerB);
+
+        // no trigger stacking, only 1 trigger
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 2 - 1);
+        assertLife(playerA, 20 + 3);
     }
 }

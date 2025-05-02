@@ -7,7 +7,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -15,11 +14,16 @@ import mage.players.Player;
  */
 public class DamageTargetControllerEffect extends OneShotEffect {
 
-    protected DynamicValue amount;
-    protected boolean preventable;
+    protected final DynamicValue amount;
+    protected final boolean preventable;
+    protected final String name;
 
     public DamageTargetControllerEffect(int amount) {
         this(StaticValue.get(amount), true);
+    }
+
+    public DamageTargetControllerEffect(int amount, String name) {
+        this(StaticValue.get(amount), true, name);
     }
 
     public DamageTargetControllerEffect(int amount, boolean preventable) {
@@ -30,16 +34,26 @@ public class DamageTargetControllerEffect extends OneShotEffect {
         this(amount, true);
     }
 
+    public DamageTargetControllerEffect(DynamicValue amount, String name) {
+        this(amount, true, name);
+    }
+
     public DamageTargetControllerEffect(DynamicValue amount, boolean preventable) {
+        this(amount, preventable, "creature");
+    }
+
+    public DamageTargetControllerEffect(DynamicValue amount, boolean preventable, String name) {
         super(Outcome.Damage);
         this.amount = amount;
         this.preventable = preventable;
+        this.name = name;
     }
 
     protected DamageTargetControllerEffect(final DamageTargetControllerEffect effect) {
         super(effect);
-        amount = effect.amount.copy();
-        preventable = effect.preventable;
+        this.amount = effect.amount.copy();
+        this.preventable = effect.preventable;
+        this.name = effect.name;
     }
 
     @Override
@@ -49,12 +63,9 @@ public class DamageTargetControllerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (permanent != null) {
-            Player targetController = game.getPlayer(permanent.getControllerId());
-            if (targetController != null) {
-                targetController.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, preventable);
-            }
+        Player targetController = getTargetPointer().getControllerOfFirstTargetOrLKI(game, source);
+        if (targetController != null) {
+            targetController.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, preventable);
             return true;
         }
         return false;
@@ -65,11 +76,12 @@ public class DamageTargetControllerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        String text = "{this} deals " + amount.getMessage() + " damage to target "
-                + mode.getTargets().get(0).getTargetName() + "'s controller";
-        if (!preventable) {
-            text += ". The damage can't be prevented";
+        String message = amount.getMessage();
+        if (message.isEmpty()) {
+            message = amount.toString();
         }
-        return text;
+        return "{this} deals " + message + " damage to that "
+                + name + "'s controller"
+                + (preventable ? "" : ". The damage can't be prevented");
     }
 }

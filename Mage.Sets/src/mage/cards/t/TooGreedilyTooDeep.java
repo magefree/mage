@@ -23,14 +23,12 @@ import java.util.UUID;
  */
 public final class TooGreedilyTooDeep extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
-
     public TooGreedilyTooDeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{R}");
 
         // Put target creature card from a graveyard onto the battlefield under your control. That creature deals damage equal to its power to each other creature.
         this.getSpellAbility().addEffect(new TooGreedilyTooDeepEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
     }
 
     private TooGreedilyTooDeep(final TooGreedilyTooDeep card) {
@@ -45,12 +43,12 @@ public final class TooGreedilyTooDeep extends CardImpl {
 
 class TooGreedilyTooDeepEffect extends OneShotEffect {
 
-    public TooGreedilyTooDeepEffect() {
+    TooGreedilyTooDeepEffect() {
         super(Outcome.Benefit);
         this.staticText = "put target creature card from a graveyard onto the battlefield under your control. That creature deals damage equal to its power to each other creature";
     }
 
-    public TooGreedilyTooDeepEffect(final TooGreedilyTooDeepEffect effect) {
+    private TooGreedilyTooDeepEffect(final TooGreedilyTooDeepEffect effect) {
         super(effect);
     }
 
@@ -67,10 +65,10 @@ class TooGreedilyTooDeepEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        game.getState().processAction(game);
+        game.processAction();
         Permanent returnedCreature = game.getPermanent(card.getId());
         if (returnedCreature != null && returnedCreature.getPower().getValue() > 0) {
-            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 if (!creature.getId().equals(returnedCreature.getId())) {
                     creature.damage(returnedCreature.getPower().getValue(), returnedCreature.getId(), source, game, false, true);
                 }

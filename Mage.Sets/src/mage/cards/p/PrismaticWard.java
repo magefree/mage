@@ -46,7 +46,7 @@ public final class PrismaticWard extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // Prevent all damage that would be dealt to enchanted creature by sources of the chosen color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrismaticWardPreventDamageEffect()));
+        this.addAbility(new SimpleStaticAbility(new PrismaticWardPreventDamageEffect()));
     }
 
     private PrismaticWard(final PrismaticWard card) {
@@ -61,12 +61,12 @@ public final class PrismaticWard extends CardImpl {
 
 class PrismaticWardPreventDamageEffect extends PreventionEffectImpl {
 
-    public PrismaticWardPreventDamageEffect() {
+    PrismaticWardPreventDamageEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage that would be dealt to enchanted creature by sources of the chosen color.";
     }
 
-    public PrismaticWardPreventDamageEffect(final PrismaticWardPreventDamageEffect effect) {
+    private PrismaticWardPreventDamageEffect(final PrismaticWardPreventDamageEffect effect) {
         super(effect);
     }
 

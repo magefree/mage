@@ -25,7 +25,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class EldraziConscription extends CardImpl {
 
     public EldraziConscription (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{8}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ENCHANTMENT},"{8}");
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.AURA);
 
@@ -37,7 +37,7 @@ public final class EldraziConscription extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +10/+10 and has trample and annihilator 2        
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(10, 10, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(10, 10, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has trample");
         ability.addEffect(effect);
@@ -47,7 +47,7 @@ public final class EldraziConscription extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EldraziConscription (final EldraziConscription card) {
+    private EldraziConscription(final EldraziConscription card) {
         super(card);
     }
 

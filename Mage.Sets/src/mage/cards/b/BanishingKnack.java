@@ -28,7 +28,7 @@ public final class BanishingKnack extends CardImpl {
     public BanishingKnack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn)
                 .setText("Until end of turn, target creature gains \"{T}: Return target nonland permanent to its owner's hand.\"")

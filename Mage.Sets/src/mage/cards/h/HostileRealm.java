@@ -41,11 +41,11 @@ public final class HostileRealm extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land has "{T}: Target creature can't block this turn."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(new CantBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{T}: Target creature can't block this turn.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private HostileRealm(final HostileRealm card) {

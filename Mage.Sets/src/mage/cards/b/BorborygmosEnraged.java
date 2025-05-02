@@ -42,7 +42,7 @@ public final class BorborygmosEnraged extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, StaticFilters.FILTER_CARD_LANDS, Zone.GRAVEYARD), false, false));
 
         //Discard a land card: Borborygmos Enraged deals 3 damage to any target
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_LAND_A)));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_LAND_A)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

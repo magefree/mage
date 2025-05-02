@@ -33,10 +33,10 @@ public final class IronclawCurse extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets 0/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, -1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, -1, Duration.WhileOnBattlefield)));
 
         // Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IronclawCurseEffect()));
+        this.addAbility(new SimpleStaticAbility(new IronclawCurseEffect()));
     }
 
     private IronclawCurse(final IronclawCurse card) {
@@ -51,12 +51,12 @@ public final class IronclawCurse extends CardImpl {
 
 class IronclawCurseEffect extends CantBlockAttachedEffect {
 
-    public IronclawCurseEffect() {
+    IronclawCurseEffect() {
         super(AttachmentType.AURA);
         this.staticText = "Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness";
     }
 
-    public IronclawCurseEffect(final IronclawCurseEffect effect) {
+    private IronclawCurseEffect(final IronclawCurseEffect effect) {
         super(effect);
     }
 
@@ -70,12 +70,7 @@ class IronclawCurseEffect extends CantBlockAttachedEffect {
         if (attacker == null) {
             return true;
         }
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }

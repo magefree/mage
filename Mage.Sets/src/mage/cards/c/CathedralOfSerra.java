@@ -31,7 +31,7 @@ public final class CathedralOfSerra extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // White legendary creatures you control have "bands with other legendary creatures."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new BandsWithOtherAbility(SuperType.LEGENDARY), Duration.WhileOnBattlefield, filter)
                 .withForceQuotes()
         ));

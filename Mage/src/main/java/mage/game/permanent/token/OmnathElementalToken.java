@@ -20,7 +20,7 @@ public final class OmnathElementalToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    protected OmnathElementalToken(final OmnathElementalToken token) {
+    private OmnathElementalToken(final OmnathElementalToken token) {
         super(token);
     }
 

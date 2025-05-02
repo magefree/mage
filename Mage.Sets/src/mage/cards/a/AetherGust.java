@@ -35,9 +35,9 @@ public final class AetherGust extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Choose target spell or permanent that's red or green. Its owner puts it on the top or bottom of their library.
-        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(
+        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(true).setText(
                 "choose target spell or permanent that's red or green. " +
-                        "Its owner puts it on the top or bottom of their library"
+                        "Its owner puts it on their choice of the top or bottom of their library"
         ));
         this.getSpellAbility().addTarget(new TargetSpellOrPermanent(filter));
     }

@@ -1,8 +1,8 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
@@ -16,11 +16,14 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,12 +62,12 @@ public final class SowerOfDiscord extends CardImpl {
 
 class SowerOfDiscordEntersBattlefieldEffect extends OneShotEffect {
 
-    public SowerOfDiscordEntersBattlefieldEffect() {
+    SowerOfDiscordEntersBattlefieldEffect() {
         super(Outcome.Damage);
         staticText = "choose two players";
     }
 
-    public SowerOfDiscordEntersBattlefieldEffect(final SowerOfDiscordEntersBattlefieldEffect effect) {
+    private SowerOfDiscordEntersBattlefieldEffect(final SowerOfDiscordEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -107,13 +110,13 @@ class SowerOfDiscordEntersBattlefieldEffect extends OneShotEffect {
 
 }
 
-class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl {
+class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
-    public SowerOfDiscordTriggeredAbility() {
+    SowerOfDiscordTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public SowerOfDiscordTriggeredAbility(final SowerOfDiscordTriggeredAbility ability) {
+    private SowerOfDiscordTriggeredAbility(final SowerOfDiscordTriggeredAbility ability) {
         super(ability);
     }
 
@@ -124,7 +127,7 @@ class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override

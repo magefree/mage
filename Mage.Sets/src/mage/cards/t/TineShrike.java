@@ -28,7 +28,7 @@ public final class TineShrike extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public TineShrike (final TineShrike card) {
+    private TineShrike(final TineShrike card) {
         super(card);
     }
 

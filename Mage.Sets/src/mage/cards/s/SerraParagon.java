@@ -64,7 +64,7 @@ class SerraParagonPlayEffect extends AsThoughEffectImpl {
                 "\"When this permanent is put into a graveyard from the battlefield, exile it and you gain 2 life.\"";
     }
 
-    SerraParagonPlayEffect(final SerraParagonPlayEffect effect) {
+    private SerraParagonPlayEffect(final SerraParagonPlayEffect effect) {
         super(effect);
     }
 
@@ -193,7 +193,7 @@ class SerraParagonWatcher extends Watcher {
                 || event.getType() == GameEvent.EventType.LAND_PLAYED)
                 && event.hasApprovingIdentifier(MageIdentifier.SerraParagonWatcher)) {
             map.computeIfAbsent(
-                    event.getAdditionalReference()
+                    event.getApprovingObject()
                             .getApprovingMageObjectReference(),
                     x -> new HashSet<>()
             ).add(event.getPlayerId());

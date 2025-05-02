@@ -29,13 +29,9 @@ public final class WindriderWizard extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast an instant, sorcery, or Wizard spell, you may draw a card. If you do, discard a card.
-        this.addAbility(SpellCastControllerTriggeredAbility.createWithRule(
+        this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DrawDiscardControllerEffect(1, 1, true),
-                StaticFilters.FILTER_SPELL_INSTANT_SORCERY_WIZARD,
-                false,
-                "Whenever you cast an instant, sorcery, or Wizard spell, you may draw a card. "
-                        + "If you do, discard a card.")
-        );
+                StaticFilters.FILTER_SPELL_INSTANT_SORCERY_WIZARD, false));
     }
 
     private WindriderWizard(final WindriderWizard card) {

@@ -32,7 +32,7 @@ public final class ObstinateFamiliar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If you would draw a card, you may skip that draw instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ObstinateFamiliarReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ObstinateFamiliarReplacementEffect()));
     }
 
     private ObstinateFamiliar(final ObstinateFamiliar card) {
@@ -47,23 +47,18 @@ public final class ObstinateFamiliar extends CardImpl {
 
 class ObstinateFamiliarReplacementEffect extends ReplacementEffectImpl {
 
-    public ObstinateFamiliarReplacementEffect() {
+    ObstinateFamiliarReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card, you may skip that draw instead";
     }
 
-    public ObstinateFamiliarReplacementEffect(final ObstinateFamiliarReplacementEffect effect) {
+    private ObstinateFamiliarReplacementEffect(final ObstinateFamiliarReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public ObstinateFamiliarReplacementEffect copy() {
         return new ObstinateFamiliarReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

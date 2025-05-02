@@ -33,7 +33,7 @@ public final class StoneGiant extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         // {tap}: Target creature you control with toughness less than Stone Giant's power gains flying until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
                 new TapSourceCost());
         ability.addTarget(new StoneGiantTarget());
@@ -58,7 +58,7 @@ class StoneGiantTarget extends TargetPermanent {
         super(new FilterControlledCreaturePermanent("creature you control with toughness less than {this}'s power"));
     }
 
-    public StoneGiantTarget(final StoneGiantTarget target) {
+    private StoneGiantTarget(final StoneGiantTarget target) {
         super(target);
     }
 

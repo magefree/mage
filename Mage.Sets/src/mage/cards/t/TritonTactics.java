@@ -51,13 +51,13 @@ public final class TritonTactics extends CardImpl {
 
 class TritonTacticsUntapEffect extends OneShotEffect {
 
-    public TritonTacticsUntapEffect() {
+    TritonTacticsUntapEffect() {
         super(Outcome.Untap);
         staticText = "untap those creatures. At this turn's next end of combat, tap each creature that was blocked " +
                 "by one of those creatures this turn and it doesn't untap during its controller's next untap step";
     }
 
-    public TritonTacticsUntapEffect(final TritonTacticsUntapEffect effect) {
+    private TritonTacticsUntapEffect(final TritonTacticsUntapEffect effect) {
         super(effect);
     }
 

@@ -2,7 +2,8 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -40,10 +41,9 @@ public final class FaramirPrinceOfIthilien extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your end step, choose an opponent.
-        // At the beginning of that player's next end step,
-        // you draw a card if they didn't attack you that turn.
+        // At the beginning of that player's next end step, you draw a card if they didn't attack you that turn.
         // Otherwise, create three 1/1 white Human Soldier creature tokens.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new FaramirPrinceOfIthilienEffect(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new FaramirPrinceOfIthilienEffect()));
     }
 
     private FaramirPrinceOfIthilien(final FaramirPrinceOfIthilien card) {
@@ -67,7 +67,7 @@ class FaramirPrinceOfIthilienEffect extends OneShotEffect {
             "Otherwise, create three 1/1 white Human Soldier creature tokens.";
     }
 
-    FaramirPrinceOfIthilienEffect(final FaramirPrinceOfIthilienEffect effect) {
+    private FaramirPrinceOfIthilienEffect(final FaramirPrinceOfIthilienEffect effect) {
         super(effect);
     }
 
@@ -92,11 +92,12 @@ class FaramirPrinceOfIthilienEffect extends OneShotEffect {
 
         Effect effect = new FaramirPrinceOfIthilienDelayedEffect();
         effect.setTargetPointer(new FixedTarget(opponent.getId(), game));
-        game.addDelayedTriggeredAbility(
-            new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(
+        DelayedTriggeredAbility delayed = new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(
                 effect,
                 opponent.getId()
-            ), source);
+        );
+        delayed.addWatcher(new PlayersAttackedThisTurnWatcher());
+        game.addDelayedTriggeredAbility(delayed, source);
 
         return true;
     }
@@ -111,7 +112,7 @@ class FaramirPrinceOfIthilienDelayedEffect extends OneShotEffect {
             "Otherwise, create three 1/1 white Human Soldier creature tokens.";
     }
 
-    FaramirPrinceOfIthilienDelayedEffect(final FaramirPrinceOfIthilienDelayedEffect effect) {
+    private FaramirPrinceOfIthilienDelayedEffect(final FaramirPrinceOfIthilienDelayedEffect effect) {
         super(effect);
     }
 
@@ -123,7 +124,7 @@ class FaramirPrinceOfIthilienDelayedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         PlayersAttackedThisTurnWatcher watcher = game.getState().getWatcher(PlayersAttackedThisTurnWatcher.class);
-        if(watcher == null){
+        if (watcher == null) {
             return false;
         }
 
@@ -131,11 +132,11 @@ class FaramirPrinceOfIthilienDelayedEffect extends OneShotEffect {
         UUID targetId = getTargetPointer().getFirst(game, source);
 
         Player controller = game.getPlayer(controllerId);
-        if(controller == null){
+        if (controller == null) {
             return false;
         }
 
-        if(watcher.hasPlayerAttackedPlayer(targetId, controllerId)){
+        if (watcher.hasPlayerAttackedPlayer(targetId, controllerId)) {
             return new CreateTokenEffect(new HumanSoldierToken(), 3).apply(game, source);
         } else {
             return new DrawCardSourceControllerEffect(1).apply(game, source);

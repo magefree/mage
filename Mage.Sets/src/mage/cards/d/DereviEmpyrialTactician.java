@@ -69,7 +69,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public DereviEmpyrialTacticianTriggeredAbility(DereviEmpyrialTacticianTriggeredAbility ability) {
+    private DereviEmpyrialTacticianTriggeredAbility(final DereviEmpyrialTacticianTriggeredAbility ability) {
         super(ability);
     }
 
@@ -99,7 +99,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} enters the battlefield or a creature you control deals combat damage to a player, you may tap or untap target permanent.";
+        return "Whenever {this} enters or a creature you control deals combat damage to a player, you may tap or untap target permanent.";
     }
 
     @Override
@@ -123,7 +123,7 @@ class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
         return super.canActivate(playerId, game);
     }
 
-    public DereviEmpyrialTacticianAbility(DereviEmpyrialTacticianAbility ability) {
+    private DereviEmpyrialTacticianAbility(final DereviEmpyrialTacticianAbility ability) {
         super(ability);
     }
 
@@ -136,12 +136,12 @@ class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
 
 class PutCommanderOnBattlefieldEffect extends OneShotEffect {
 
-    public PutCommanderOnBattlefieldEffect() {
+    PutCommanderOnBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put Derevi onto the battlefield from the command zone";
     }
 
-    public PutCommanderOnBattlefieldEffect(final PutCommanderOnBattlefieldEffect effect) {
+    private PutCommanderOnBattlefieldEffect(final PutCommanderOnBattlefieldEffect effect) {
         super(effect);
     }
 

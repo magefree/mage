@@ -19,7 +19,7 @@ public final class PhyrexianGermToken extends TokenImpl {
         toughness = new MageInt(0);
     }
 
-    protected PhyrexianGermToken(final PhyrexianGermToken token) {
+    private PhyrexianGermToken(final PhyrexianGermToken token) {
         super(token);
     }
 

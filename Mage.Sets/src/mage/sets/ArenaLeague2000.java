@@ -20,16 +20,16 @@ public class ArenaLeague2000 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
-        cards.add(new SetCardInfo("Chill", 4, Rarity.RARE, mage.cards.c.Chill.class));
-        cards.add(new SetCardInfo("Duress", 2, Rarity.RARE, mage.cards.d.Duress.class));
-        cards.add(new SetCardInfo("Enlightened Tutor", 6, Rarity.RARE, mage.cards.e.EnlightenedTutor.class));
-        cards.add(new SetCardInfo("Forest", 12, Rarity.LAND, mage.cards.basiclands.Forest.class));
-        cards.add(new SetCardInfo("Island", 9, Rarity.LAND, mage.cards.basiclands.Island.class));
-        cards.add(new SetCardInfo("Mountain", 11, Rarity.LAND, mage.cards.basiclands.Mountain.class));
-        cards.add(new SetCardInfo("Pillage", 5, Rarity.RARE, mage.cards.p.Pillage.class));
-        cards.add(new SetCardInfo("Plains", 8, Rarity.LAND, mage.cards.basiclands.Plains.class));
-        cards.add(new SetCardInfo("Stupor", 7, Rarity.RARE, mage.cards.s.Stupor.class));
-        cards.add(new SetCardInfo("Swamp", 10, Rarity.LAND, mage.cards.basiclands.Swamp.class));
-        cards.add(new SetCardInfo("Uktabi Orangutan", 3, Rarity.RARE, mage.cards.u.UktabiOrangutan.class));
+        cards.add(new SetCardInfo("Chill", 4, Rarity.RARE, mage.cards.c.Chill.class, RETRO_ART));
+        cards.add(new SetCardInfo("Duress", 2, Rarity.RARE, mage.cards.d.Duress.class, RETRO_ART));
+        cards.add(new SetCardInfo("Enlightened Tutor", 6, Rarity.RARE, mage.cards.e.EnlightenedTutor.class, RETRO_ART));
+        cards.add(new SetCardInfo("Forest", 12, Rarity.LAND, mage.cards.basiclands.Forest.class, RETRO_ART));
+        cards.add(new SetCardInfo("Island", 9, Rarity.LAND, mage.cards.basiclands.Island.class, RETRO_ART));
+        cards.add(new SetCardInfo("Mountain", 11, Rarity.LAND, mage.cards.basiclands.Mountain.class, RETRO_ART));
+        cards.add(new SetCardInfo("Pillage", 5, Rarity.RARE, mage.cards.p.Pillage.class, RETRO_ART));
+        cards.add(new SetCardInfo("Plains", 8, Rarity.LAND, mage.cards.basiclands.Plains.class, RETRO_ART));
+        cards.add(new SetCardInfo("Stupor", 7, Rarity.RARE, mage.cards.s.Stupor.class, RETRO_ART));
+        cards.add(new SetCardInfo("Swamp", 10, Rarity.LAND, mage.cards.basiclands.Swamp.class, RETRO_ART));
+        cards.add(new SetCardInfo("Uktabi Orangutan", 3, Rarity.RARE, mage.cards.u.UktabiOrangutan.class, RETRO_ART));
      }
 }

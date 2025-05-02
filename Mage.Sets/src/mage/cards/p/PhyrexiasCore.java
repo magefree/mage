@@ -31,9 +31,9 @@ public final class PhyrexiasCore extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         this.addAbility(new ColorlessManaAbility());
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new GainLifeEffect(1), new TapSourceCost());
         ability.addCost(new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

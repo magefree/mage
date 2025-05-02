@@ -14,11 +14,13 @@ public class FilterPermanentThisOrAnother extends FilterPermanent {
     public FilterPermanentThisOrAnother(FilterPermanent otherFilter, boolean onlyControlled) {
         this(otherFilter, onlyControlled, generateFilterMessage(otherFilter));
     }
+
     public FilterPermanentThisOrAnother(FilterPermanent otherFilter, boolean onlyControlled, String name) {
         super(name);
         this.otherFilter = otherFilter;
         this.onlyControlled = onlyControlled;
     }
+
     @Override
     public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
         if (!super.match(permanent, playerId, source, game)) {

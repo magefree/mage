@@ -45,8 +45,8 @@ public final class ScourgeOfSkolaVale extends CardImpl {
         effect.setText("with two +1/+1 counters on it");
         this.addAbility(new EntersBattlefieldAbility(effect));
         // {T}, Sacrifice another creature: Put a number of +1/+1 counters on Scourge of Skola Vale equal to the sacrificed creature's toughness.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScourgeOfSkolaValeEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        Ability ability = new SimpleActivatedAbility(new ScourgeOfSkolaValeEffect(), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 
@@ -62,12 +62,12 @@ public final class ScourgeOfSkolaVale extends CardImpl {
 
 class ScourgeOfSkolaValeEffect extends OneShotEffect {
 
-    public ScourgeOfSkolaValeEffect() {
+    ScourgeOfSkolaValeEffect() {
         super(Outcome.GainLife);
         this.staticText = "Put a number of +1/+1 counters on {this} equal to the sacrificed creature's toughness";
     }
 
-    public ScourgeOfSkolaValeEffect(final ScourgeOfSkolaValeEffect effect) {
+    private ScourgeOfSkolaValeEffect(final ScourgeOfSkolaValeEffect effect) {
         super(effect);
     }
 

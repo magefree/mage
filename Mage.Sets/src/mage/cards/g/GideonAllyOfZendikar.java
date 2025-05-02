@@ -70,7 +70,7 @@ class GideonAllyOfZendikarToken extends TokenImpl {
 
         addAbility(IndestructibleAbility.getInstance());
     }
-    public GideonAllyOfZendikarToken(final GideonAllyOfZendikarToken token) {
+    private GideonAllyOfZendikarToken(final GideonAllyOfZendikarToken token) {
         super(token);
     }
 

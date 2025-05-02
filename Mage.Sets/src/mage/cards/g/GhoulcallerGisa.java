@@ -39,9 +39,9 @@ public final class GhoulcallerGisa extends CardImpl {
         // {B}, {tap}, Sacrifice another creature: create X 2/2 black Zombie creature tokens, where X is the sacrificed creature's power.
         Effect effect = new CreateTokenEffect(new ZombieToken(), SacrificeCostCreaturesPower.instance);
         effect.setText("create X 2/2 black Zombie creature tokens, where X is the sacrificed creature's power");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{B}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

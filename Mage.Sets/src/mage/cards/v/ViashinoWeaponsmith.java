@@ -19,7 +19,7 @@ public final class ViashinoWeaponsmith extends CardImpl {
 
     public ViashinoWeaponsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

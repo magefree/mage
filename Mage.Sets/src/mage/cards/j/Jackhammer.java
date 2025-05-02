@@ -29,7 +29,7 @@ public final class Jackhammer extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 

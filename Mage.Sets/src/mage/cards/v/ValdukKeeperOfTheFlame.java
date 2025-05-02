@@ -4,7 +4,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.dynamicvalue.common.AuraAttachedCount;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.OneShotEffect;
@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Elemental31TrampleHasteToken;
@@ -36,7 +35,7 @@ public final class ValdukKeeperOfTheFlame extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of combat on your turn, for each Aura and Equipment attached to Valduk, Keeper of the Flame, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new ValdukKeeperOfTheFlameEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new ValdukKeeperOfTheFlameEffect()));
     }
 
     private ValdukKeeperOfTheFlame(final ValdukKeeperOfTheFlame card) {
@@ -51,12 +50,12 @@ public final class ValdukKeeperOfTheFlame extends CardImpl {
 
 class ValdukKeeperOfTheFlameEffect extends OneShotEffect {
 
-    public ValdukKeeperOfTheFlameEffect() {
+    ValdukKeeperOfTheFlameEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "for each Aura and Equipment attached to {this}, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step";
     }
 
-    public ValdukKeeperOfTheFlameEffect(final ValdukKeeperOfTheFlameEffect effect) {
+    private ValdukKeeperOfTheFlameEffect(final ValdukKeeperOfTheFlameEffect effect) {
         super(effect);
     }
 

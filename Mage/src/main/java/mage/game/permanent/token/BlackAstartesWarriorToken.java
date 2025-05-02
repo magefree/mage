@@ -21,7 +21,7 @@ public final class BlackAstartesWarriorToken extends TokenImpl {
         addAbility(new MenaceAbility());
     }
 
-    protected BlackAstartesWarriorToken(final BlackAstartesWarriorToken token) {
+    private BlackAstartesWarriorToken(final BlackAstartesWarriorToken token) {
         super(token);
     }
 

@@ -36,7 +36,7 @@ public final class RubblebeltMaaka extends CardImpl {
 
     }
 
-    public RubblebeltMaaka (final RubblebeltMaaka card) {
+    private RubblebeltMaaka(final RubblebeltMaaka card) {
         super(card);
     }
 

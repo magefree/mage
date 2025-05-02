@@ -52,12 +52,12 @@ public final class SageOfHours extends CardImpl {
 
 class SageOfHoursEffect extends OneShotEffect {
 
-    public SageOfHoursEffect() {
+    SageOfHoursEffect() {
         super(Outcome.AIDontUseIt); // AI uses it endless therefore deactivated
         this.staticText = "For each five counters removed this way, take an extra turn after this one";
     }
 
-    public SageOfHoursEffect(final SageOfHoursEffect effect) {
+    private SageOfHoursEffect(final SageOfHoursEffect effect) {
         super(effect);
     }
 

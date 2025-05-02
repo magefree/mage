@@ -39,7 +39,7 @@ public final class IonaShieldOfEmeria extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // Your opponents can't cast spells of the chosen color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IonaShieldOfEmeriaReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new IonaShieldOfEmeriaReplacementEffect()));
 
     }
 
@@ -60,7 +60,7 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifyingEffectI
         staticText = "Your opponents can't cast spells of the chosen color";
     }
 
-    IonaShieldOfEmeriaReplacementEffect(final IonaShieldOfEmeriaReplacementEffect effect) {
+    private IonaShieldOfEmeriaReplacementEffect(final IonaShieldOfEmeriaReplacementEffect effect) {
         super(effect);
     }
 

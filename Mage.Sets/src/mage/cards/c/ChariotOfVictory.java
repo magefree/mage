@@ -30,7 +30,7 @@ public final class ChariotOfVictory extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has first strike, trample, and haste.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText(", trample,");
         ability.addEffect(effect);

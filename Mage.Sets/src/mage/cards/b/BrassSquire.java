@@ -39,7 +39,7 @@ public final class BrassSquire extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Attach target Equipment you control to target creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EquipEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new EquipEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(filter));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
@@ -57,12 +57,12 @@ public final class BrassSquire extends CardImpl {
 
 class EquipEffect extends OneShotEffect {
 
-    public EquipEffect() {
+    EquipEffect() {
         super(Outcome.BoostCreature);
         staticText = "Attach target Equipment you control to target creature you control";
     }
 
-    public EquipEffect(final EquipEffect effect) {
+    private EquipEffect(final EquipEffect effect) {
         super(effect);
     }
 

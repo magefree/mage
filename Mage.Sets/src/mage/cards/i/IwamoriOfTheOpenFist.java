@@ -64,7 +64,7 @@ class IwamoriOfTheOpenFistEffect extends OneShotEffect {
         this.staticText = "each opponent may put a legendary creature card from their hand onto the battlefield";
     }
 
-    public IwamoriOfTheOpenFistEffect(final IwamoriOfTheOpenFistEffect effect) {
+    private IwamoriOfTheOpenFistEffect(final IwamoriOfTheOpenFistEffect effect) {
         super(effect);
     }
 

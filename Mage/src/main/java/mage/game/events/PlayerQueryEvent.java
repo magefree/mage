@@ -38,8 +38,8 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         PLAY_X_MANA,
         AMOUNT,
         MULTI_AMOUNT,
-        PICK_CARD,
-        CONSTRUCT,
+        DRAFT_PICK_CARD,
+        TOURNAMENT_CONSTRUCT,
         CHOOSE_PILE,
         PERSONAL_MESSAGE
     }
@@ -224,11 +224,11 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
     }
 
     public static PlayerQueryEvent pickCard(UUID playerId, String message, List<Card> booster, int time) {
-        return new PlayerQueryEvent(playerId, message, booster, QueryType.PICK_CARD, time);
+        return new PlayerQueryEvent(playerId, message, booster, QueryType.DRAFT_PICK_CARD, time);
     }
 
     public static PlayerQueryEvent construct(UUID playerId, String message, int time) {
-        return new PlayerQueryEvent(playerId, message, QueryType.CONSTRUCT, time);
+        return new PlayerQueryEvent(playerId, message, QueryType.TOURNAMENT_CONSTRUCT, time);
     }
 
     public static PlayerQueryEvent informPersonal(UUID playerId, String message) {

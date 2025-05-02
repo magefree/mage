@@ -21,7 +21,7 @@ public final class DorotheasRetributionSpiritToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected DorotheasRetributionSpiritToken(final DorotheasRetributionSpiritToken token) {
+    private DorotheasRetributionSpiritToken(final DorotheasRetributionSpiritToken token) {
         super(token);
     }
 

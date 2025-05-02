@@ -14,7 +14,7 @@ import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.permanent.DefendingPlayerControlsNoSourcePredicate;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.BlockerDeclaredEvent;
@@ -125,11 +125,11 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             return false;
         }
         FilterAttackingCreature filter = new FilterAttackingCreature("creature attacking " + targetsController.getLogName());
-        filter.add(new PermanentInListPredicate(list));
+        filter.add(new PermanentReferenceInCollectionPredicate(list, game));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(controller.getId(), source, game)) {
-            while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+            while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                 controller.chooseTarget(outcome, target, source, game);
             }
         } else {
@@ -169,21 +169,6 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
             game.fireEvent(new BlockerDeclaredEvent(chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, permanent.getId(), source, null));
         }
-        CombatGroup blockGroup = findBlockingGroup(permanent, game); // a new blockingGroup is formed, so it's necessary to find it again
-        if (blockGroup != null) {
-            blockGroup.pickAttackerOrder(permanent.getControllerId(), game);
-        }
         return true;
-    }
-
-    private CombatGroup findBlockingGroup(Permanent blocker, Game game) {
-        if (game.getCombat().blockingGroupsContains(blocker.getId())) { // if (blocker.getBlocking() > 1) {
-            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-                if (group.getBlockers().contains(blocker.getId())) {
-                    return group;
-                }
-            }
-        }
-        return null;
     }
 }

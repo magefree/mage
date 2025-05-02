@@ -55,7 +55,7 @@ class RiverKelpieTriggeredAbility extends TriggeredAbilityImpl {
         return new RiverKelpieTriggeredAbility(this);
     }
 
-    public RiverKelpieTriggeredAbility(final RiverKelpieTriggeredAbility ability) {
+    private RiverKelpieTriggeredAbility(final RiverKelpieTriggeredAbility ability) {
         super(ability);
     }
 
@@ -76,7 +76,7 @@ class RiverKelpieTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} or another permanent enters the battlefield from a graveyard, draw a card.";
+        return "Whenever {this} or another permanent enters from a graveyard, draw a card.";
     }
 }
 
@@ -86,7 +86,7 @@ class RiverKelpieTriggeredAbility2 extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public RiverKelpieTriggeredAbility2(final RiverKelpieTriggeredAbility2 ability) {
+    private RiverKelpieTriggeredAbility2(final RiverKelpieTriggeredAbility2 ability) {
         super(ability);
     }
 

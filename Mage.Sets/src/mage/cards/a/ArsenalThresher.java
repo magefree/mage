@@ -39,7 +39,7 @@ public final class ArsenalThresher extends CardImpl {
 
         // As Arsenal Thresher enters the battlefield, you may reveal any number of other artifact cards from your hand. Arsenal Thresher enters the battlefield with a +1/+1 counter on it for each card revealed this way.
         this.addAbility(new AsEntersBattlefieldAbility(new ArsenalThresherEffect(),
-                "you may reveal any number of other artifact cards from your hand. {this} enters the battlefield with a +1/+1 counter on it for each card revealed this way"));
+                "you may reveal any number of other artifact cards from your hand. {this} enters with a +1/+1 counter on it for each card revealed this way"));
     }
 
     private ArsenalThresher(final ArsenalThresher card) {
@@ -54,11 +54,11 @@ public final class ArsenalThresher extends CardImpl {
 
 class ArsenalThresherEffect extends OneShotEffect {
 
-    public ArsenalThresherEffect() {
+    ArsenalThresherEffect() {
         super(Outcome.Benefit);
     }
 
-    public ArsenalThresherEffect(final ArsenalThresherEffect effect) {
+    private ArsenalThresherEffect(final ArsenalThresherEffect effect) {
         super(effect);
     }
 
@@ -77,18 +77,13 @@ class ArsenalThresherEffect extends OneShotEffect {
         FilterArtifactCard filter = new FilterArtifactCard();
         filter.add(AnotherPredicate.instance);
         if (controller.chooseUse(Outcome.Benefit, "Reveal other artifacts in your hand?", source, game)) {
-            Cards cards = new CardsImpl();
-            if (controller.getHand().count(filter, source.getControllerId(), source, game) > 0) {
-                TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-                if (controller.choose(Outcome.Benefit, target, source, game)) {
-                    for (UUID uuid : target.getTargets()) {
-                        cards.add(controller.getHand().get(uuid, game));
-                    }
-                    if (arsenalThresher != null) {
-                        controller.revealCards(arsenalThresher.getIdName(), cards, game);
-                        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
-                        arsenalThresher.addCounters(CounterType.P1P1.createInstance(cards.size()), source.getControllerId(), source, game, appliedEffects);
-                    }
+            TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
+            if (controller.choose(Outcome.Benefit, target, source, game)) {
+                Cards cards = new CardsImpl(target.getTargets());
+                if (arsenalThresher != null) {
+                    controller.revealCards(arsenalThresher.getIdName(), cards, game);
+                    List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects"); // the basic event is the EntersBattlefieldEvent, so use already applied replacement effects from that event
+                    arsenalThresher.addCounters(CounterType.P1P1.createInstance(cards.size()), source.getControllerId(), source, game, appliedEffects);
                 }
             }
             return true;

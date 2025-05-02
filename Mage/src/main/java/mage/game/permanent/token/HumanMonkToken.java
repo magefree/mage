@@ -21,7 +21,7 @@ public final class HumanMonkToken extends TokenImpl {
         addAbility(new GreenManaAbility());
     }
 
-    protected HumanMonkToken(final HumanMonkToken token) {
+    private HumanMonkToken(final HumanMonkToken token) {
         super(token);
     }
 

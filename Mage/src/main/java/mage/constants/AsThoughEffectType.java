@@ -35,7 +35,9 @@ public enum AsThoughEffectType {
     // 3. Target must points to mainCard, but checking goes for every card's parts and characteristics from objectId (split, adventure)
     // 4. You must implement/override an applies method with "Ability affectedAbility" (e.g. check multiple play/cast abilities from all card's parts)
     // TODO: search all PLAY_FROM_NOT_OWN_HAND_ZONE and CAST_AS_INSTANT effects and add support of mainCard and objectId
-    PLAY_FROM_NOT_OWN_HAND_ZONE(true, true),
+    PLAY_FROM_NOT_OWN_HAND_ZONE(true, true), // for play lands & cast spells
+    CAST_FROM_NOT_OWN_HAND_ZONE(true, true), // for cast spells
+    CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE(true, true),
     CAST_AS_INSTANT(true, true),
     //
     ACTIVATE_AS_INSTANT(true, false),
@@ -57,7 +59,10 @@ public enum AsThoughEffectType {
     //
     // ALLOW_FORETELL_ANYTIME:
     // For Cosmos Charger effect
-    ALLOW_FORETELL_ANYTIME;
+    ALLOW_FORETELL_ANYTIME,
+    // ALLOW_EXHAUST_ACTIVE_ABILITY:
+    // Elvish Refueler effect allows Exhaust on your turn as though it hasn't been activated
+    ALLOW_EXHAUST_PER_TURN(true, false);
 
     private final boolean needAffectedAbility; // mark what AsThough check must be called for specific ability, not full object (example: spell check)
     private final boolean needPlayCardAbility; // mark what AsThough check must be called for play/cast abilities

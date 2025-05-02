@@ -31,8 +31,7 @@ public final class TimidDrake extends CardImpl {
         // When another creature enters the battlefield, return Timid Drake to its owner's hand.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true),
-                StaticFilters.FILTER_ANOTHER_CREATURE, false,
-                "When another creature enters the battlefield, return {this} to its owner's hand."
+                StaticFilters.FILTER_ANOTHER_CREATURE, false
         ));
     }
 

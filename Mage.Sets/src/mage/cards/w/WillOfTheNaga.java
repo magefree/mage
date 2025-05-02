@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -20,7 +19,8 @@ public final class WillOfTheNaga extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
+
         // Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));

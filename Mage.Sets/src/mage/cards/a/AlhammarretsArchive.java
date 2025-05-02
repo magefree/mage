@@ -24,10 +24,10 @@ public final class AlhammarretsArchive extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // If you would gain life, you gain twice that much life instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AlhammarretsArchiveEffect()));
+        this.addAbility(new SimpleStaticAbility(new AlhammarretsArchiveEffect()));
 
         // If you draw a card except the first one you draw in each of your draw steps, draw two cards instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AlhammarretsArchiveReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
+        this.addAbility(new SimpleStaticAbility(new AlhammarretsArchiveReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
     }
 
     private AlhammarretsArchive(final AlhammarretsArchive card) {
@@ -87,11 +87,6 @@ class AlhammarretsArchiveReplacementEffect extends ReplacementEffectImpl {
     @Override
     public AlhammarretsArchiveReplacementEffect copy() {
         return new AlhammarretsArchiveReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

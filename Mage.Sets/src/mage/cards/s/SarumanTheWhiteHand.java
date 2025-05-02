@@ -73,7 +73,7 @@ public final class SarumanTheWhiteHand extends CardImpl {
 
 class SarumanTheWhiteHandEffect extends OneShotEffect {
 
-    public SarumanTheWhiteHandEffect() {
+    SarumanTheWhiteHandEffect() {
         super(Outcome.Benefit);
         staticText = "amass Orcs X, where X is that spell's mana value";
     }

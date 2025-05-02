@@ -28,7 +28,7 @@ public final class OliviasDragoon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Discard a card: Olivia's Dragoon gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
     }
 
     private OliviasDragoon(final OliviasDragoon card) {

@@ -4,12 +4,11 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -32,7 +31,7 @@ public final class GuildFeud extends CardImpl {
         // then puts the rest into their graveyard. You do the same with the top three
         // cards of your library. If two creatures are put onto the battlefield this way,
         // those creatures fight each other.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GuildFeudEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GuildFeudEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -49,18 +48,18 @@ public final class GuildFeud extends CardImpl {
 
 class GuildFeudEffect extends OneShotEffect {
 
-    public GuildFeudEffect() {
+    GuildFeudEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "target opponent reveals the top three cards of their library, may put a creature card from among them onto the battlefield, then puts the rest into their graveyard. You do the same with the top three cards of your library. If two creatures are put onto the battlefield this way, those creatures fight each other";
     }
 
-    public GuildFeudEffect(final GuildFeudEffect effect) {
+    private GuildFeudEffect(final GuildFeudEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         Permanent opponentCreature = null;
         Permanent controllerCreature = null;

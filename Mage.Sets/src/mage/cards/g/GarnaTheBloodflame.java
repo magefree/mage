@@ -51,7 +51,7 @@ public final class GarnaTheBloodflame extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GarnaTheBloodflameEffect(), false), new GarnaTheBloodflameWatcher());
 
         // Other creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true)));
     }
 
@@ -72,7 +72,7 @@ class GarnaTheBloodflameEffect extends OneShotEffect {
         staticText = "return to your hand all creature cards in your graveyard that were put there from anywhere this turn";
     }
 
-    GarnaTheBloodflameEffect(final GarnaTheBloodflameEffect effect) {
+    private GarnaTheBloodflameEffect(final GarnaTheBloodflameEffect effect) {
         super(effect);
     }
 

@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,10 +44,10 @@ public final class SerraBestiary extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, sacrifice Serra Bestiary unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}"))));
 
         // Enchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA));
+        Ability ability2 = new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA));
         ability2.addEffect(new SerraBestiaryRuleModifyingEffect());
         this.addAbility(ability2);
 
@@ -66,12 +65,12 @@ public final class SerraBestiary extends CardImpl {
 
 class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SerraBestiaryRuleModifyingEffect() {
+    SerraBestiaryRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = ", and its activated abilities with {T} in their costs can't be activated";
     }
 
-    public SerraBestiaryRuleModifyingEffect(final SerraBestiaryRuleModifyingEffect effect) {
+    private SerraBestiaryRuleModifyingEffect(final SerraBestiaryRuleModifyingEffect effect) {
         super(effect);
     }
 
@@ -81,23 +80,13 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        }
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
             return false;
         }

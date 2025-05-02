@@ -16,6 +16,9 @@ public class BlockingOrBlockedWatcher extends Watcher {
 
     private final Map<MageObjectReference, Set<MageObjectReference>> blockerMap = new HashMap<>();
 
+    /**
+     * Game default watcher
+     */
     public BlockingOrBlockedWatcher() {
         super(WatcherScope.GAME);
     }

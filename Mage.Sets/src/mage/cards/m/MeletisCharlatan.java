@@ -35,7 +35,7 @@ public final class MeletisCharlatan extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{U}, {T}: The controller of target instant or sorcery spell copies it. That player may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MeletisCharlatanCopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(new MeletisCharlatanCopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY);
         ability.addTarget(target);
@@ -54,18 +54,18 @@ public final class MeletisCharlatan extends CardImpl {
 
 class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect {
 
-    public MeletisCharlatanCopyTargetSpellEffect() {
+    MeletisCharlatanCopyTargetSpellEffect() {
         super(Outcome.Copy);
         staticText = "The controller of target instant or sorcery spell copies it. That player may choose new targets for the copy";
     }
 
-    public MeletisCharlatanCopyTargetSpellEffect(final MeletisCharlatanCopyTargetSpellEffect effect) {
+    private MeletisCharlatanCopyTargetSpellEffect(final MeletisCharlatanCopyTargetSpellEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             spell.createCopyOnStack(game, source, spell.getControllerId(), true);
             return true;

@@ -2,6 +2,7 @@ package mage.game;
 
 import mage.MageItem;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
@@ -10,7 +11,6 @@ import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.PreventionEffectData;
-import mage.actions.impl.MageAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.MeldCard;
@@ -28,7 +28,6 @@ import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.turn.Phase;
@@ -89,7 +88,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Dungeon getDungeon(UUID objectId);
 
-    Dungeon getPlayerDungeon(UUID objectId);
+    Dungeon getPlayerDungeon(UUID playerId);
 
     UUID getControllerId(UUID objectId);
 
@@ -111,13 +110,38 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      */
     Permanent getPermanent(UUID permanentId);
 
+    /**
+     * Given the UUID of a permanent, this method returns the permanent. If the current game state does not contain
+     * a permanent with the given UUID, this method checks the last known information on the battlefield to look for it.
+     * <br>
+     * Warning: if the permanent has left the battlefield and then returned, this information might be wrong.
+     * Prefer usage of a MageObjectReference instead of only the UUID.
+     *
+     * @param permanentId - The UUID of the permanent
+     * @return permanent or permanent's LKI
+     */
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);
+
+    /**
+     * Given a MageObjectReference to a permanent, this method returns the permanent. If the current game state does not
+     * contain that permanent, this method checks the last known information on the battlefield.
+     *
+     * @param permanentRef - A MOR to the permanent
+     * @return permanent or permanent's LKI
+     */
+    Permanent getPermanentOrLKIBattlefield(MageObjectReference permanentRef);
 
     Permanent getPermanentEntering(UUID permanentId);
 
     Map<UUID, Permanent> getPermanentsEntering();
 
     Map<Zone, Map<UUID, MageObject>> getLKI();
+    Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags();
+
+    /**
+     * Take the source's Costs Tags and store it for later access through the MOR.
+     */
+    void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source);
 
     // Result must be checked for null. Possible errors search pattern: (\S*) = game.getCard.+\n(?!.+\1 != null)
     Card getCard(UUID cardId);
@@ -133,31 +157,45 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Player getPlayerOrPlaneswalkerController(UUID playerId);
 
+    /**
+     * Static players list from start of the game. Use it to find player by ID or in game engine.
+     */
     Players getPlayers();
 
+    /**
+     * Static players list from start of the game. Use it to interate by starting turn order.
+     * WARNING, it's ignore range and leaved players, so use it by game engine only
+     */
+    // TODO: check usage of getPlayerList in cards and replace by game.getState().getPlayersInRange
     PlayerList getPlayerList();
 
+    /**
+     *  Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
+     *
+     *  Warning, it will return leaved players until end of turn. For dialogs and one shot effects use excludeLeavedPlayers
+     */
+    // TODO: check usage of getOpponents in cards and replace with correct call of excludeLeavedPlayers, see #13289
     default Set<UUID> getOpponents(UUID playerId) {
         return getOpponents(playerId, false);
     }
 
     /**
-     * Returns a Set of opponents in range for the given playerId
+     *  Returns opponents list in range for the given playerId. Use it to interate by starting turn order.
+     *  Warning, it will return dead players until end of turn.
      *
-     * @param playerId
-     * @param excludeDeadPlayers Determines if players who have lost are excluded from the list
-     * @return
+     * @param excludeLeavedPlayers exclude dead player immediately without waiting range update on next turn
      */
-    default Set<UUID> getOpponents(UUID playerId, boolean excludeDeadPlayers) {
+    default Set<UUID> getOpponents(UUID playerId, boolean excludeLeavedPlayers) {
         Player player = getPlayer(playerId);
         if (player == null) {
-            return new HashSet<>();
+            return new LinkedHashSet<>();
         }
 
-        return player.getInRange().stream()
+        return this.getPlayerList().stream()
                 .filter(opponentId -> !opponentId.equals(playerId))
-                .filter(opponentId -> !excludeDeadPlayers || !getPlayer(opponentId).hasLost())
-                .collect(Collectors.toSet());
+                .filter(player::hasPlayerInRange)
+                .filter(opponentId -> !excludeLeavedPlayers || getPlayer(opponentId).isInGame())
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     default boolean isActivePlayer(UUID playerId) {
@@ -243,11 +281,17 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     boolean isSimulation();
 
-    void setSimulation(boolean checkPlayableState);
+    /**
+     * Prepare game for any simulations like AI or effects calc
+     */
+    Game createSimulationForAI();
+
+    /**
+     * Prepare game for any playable calc (available mana/abilities)
+     */
+    Game createSimulationForPlayableCalc();
 
     boolean inCheckPlayableState();
-
-    void setCheckPlayableState(boolean checkPlayableState);
 
     MageObject getLastKnownInformation(UUID objectId, Zone zone);
 
@@ -255,9 +299,12 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     MageObject getLastKnownInformation(UUID objectId, Zone zone, int zoneChangeCounter);
 
-    boolean getShortLivingLKI(UUID objectId, Zone zone);
+    /**
+     * For checking if an object was in a zone during the resolution of an effect
+     */
+    boolean checkShortLivingLKI(UUID objectId, Zone zone);
 
-    void rememberLKI(UUID objectId, Zone zone, MageObject object);
+    void rememberLKI(Zone zone, MageObject object);
 
     void resetLKI();
 
@@ -266,6 +313,10 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void setLosingPlayer(Player player);
 
     Player getLosingPlayer();
+
+    int getTotalErrorsCount(); // debug only
+
+    int getTotalEffectsCount(); // debug only
 
     //client event methods
     void addTableEventListener(Listener<TableEvent> listener);
@@ -407,7 +458,12 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Dungeon addDungeon(Dungeon dungeon, UUID playerId);
 
-    void ventureIntoDungeon(UUID playerId, boolean undercity);
+    /**
+     * Enter to dungeon or go to next room
+     *
+     * @param isEnterToUndercity - enter to Undercity instead choose a new dungeon
+     */
+    void ventureIntoDungeon(UUID playerId, boolean isEnterToUndercity);
 
     void temptWithTheRing(UUID playerId);
 
@@ -466,33 +522,73 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source);
 
+    UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source, boolean fireAsSimultaneousEvent);
+
     /**
-     * Inner game engine call to reset game objects to actual versions
-     * (reset all objects and apply all effects due layer system)
-     * <p>
-     * Warning, if you need to process object moves in the middle of the effect/ability
-     * then call game.getState().processAction(game) instead
+     * Inner engine call to reset all game objects and re-apply all layered continuous effects.
+     * Do NOT use indiscriminately. See processAction() instead.
      */
+    @Deprecated
     void applyEffects();
 
+    /**
+     * Handles simultaneous events for triggers and then re-applies all layered continuous effects.
+     * Must be called between sequential steps of a resolving one-shot effect.
+     * <p>
+     * 608.2e. Some spells and abilities have multiple steps or actions, denoted by separate sentences or clauses,
+     * that involve multiple players. In these cases, the choices for the first action are made in APNAP order,
+     * and then the first action is processed simultaneously. Then the choices for the second action are made in
+     * APNAP order, and then that action is processed simultaneously, and so on. See rule 101.4.
+     * <p>
+     * 608.2f. Some spells and abilities include actions taken on multiple players and/or objects. In most cases,
+     * each such action is processed simultaneously. If the action can't be processed simultaneously, it's instead
+     * processed considering each affected player or object individually. APNAP order is used to make the primary
+     * determination of the order of those actions. Secondarily, if the action is to be taken on both a player
+     * and an object they control or on multiple objects controlled by the same player, the player who controls
+     * the resolving spell or ability chooses the relative order of those actions.
+     */
+    void processAction();
+
+    @Deprecated // TODO: must research usage and remove it from all non engine code (example: Bestow ability, ProcessActions must be used instead)
     boolean checkStateAndTriggered();
 
+    /**
+     * Play priority by all players
+     *
+     * @param activePlayerId starting priority player
+     * @param resuming false to reset passed priority and ask it again
+     */
     void playPriority(UUID activePlayerId, boolean resuming);
 
     void resetControlAfterSpellResolve(UUID topId);
 
     boolean endTurn(Ability source);
 
-    int doAction(Ability source, MageAction action);
-
     //game transaction methods
     void saveState(boolean bookmark);
 
+    /**
+     * Save current game state and return bookmark to it
+     *
+     * @return
+     */
     int bookmarkState();
 
     GameState restoreState(int bookmark, String context);
 
+    /**
+     * Remove selected bookmark and all newer bookmarks and game states
+     * Part of restore/rollback lifecycle
+     *
+     * @param bookmark
+     */
     void removeBookmark(int bookmark);
+
+    /**
+     * TODO: remove logic changed, must research each usage of removeBookmark and replace it with new code
+     * @param bookmark
+     */
+    void removeBookmark_v2(int bookmark);
 
     int getSavedStateSize();
 
@@ -510,8 +606,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     // game cheats (for tests only)
     void cheat(UUID ownerId, Map<Zone, String> commands);
-
-    void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard, List<Card> command);
+    void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PutToBattlefieldInfo> battlefield, List<Card> graveyard, List<Card> command, List<Card> exiled);
 
     // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);
@@ -545,6 +640,9 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     boolean executingRollback();
 
+    /**
+     * Add counters to permanent before ETB. Use it before put real permanent to battlefield.
+     */
     void setEnterWithCounters(UUID sourceId, Counters counters);
 
     Counters getEnterWithCounters(UUID sourceId);

@@ -100,7 +100,7 @@ class NazahnTapEffect extends TapTargetEffect {
         super();
     }
 
-    NazahnTapEffect(final NazahnTapEffect effect) {
+    private NazahnTapEffect(final NazahnTapEffect effect) {
         super(effect);
     }
 

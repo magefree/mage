@@ -80,8 +80,7 @@ class TazriStalwartSurvivorManaAbility extends ActivatedManaAbilityImpl {
                     && permanent
                     .getAbilities(game)
                     .stream()
-                    .filter(ability -> ability.getAbilityType() == AbilityType.ACTIVATED
-                            || ability.getAbilityType() == AbilityType.MANA)
+                    .filter(Ability::isActivatedAbility)
                     .map(Ability::getOriginalId)
                     .anyMatch(abilityId -> !source.getOriginalId().equals(abilityId));
         }
@@ -124,15 +123,11 @@ class TazriStalwartSurvivorManaEffect extends ManaEffect {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            switch (source.getAbilityType()) {
-                case ACTIVATED:
-                case MANA:
-                    break;
-                default:
-                    return false;
+            if (!source.isActivatedAbility()) {
+                return false;
             }
             MageObject object = game.getObject(source);
-            return object != null && object.isCreature(game);
+            return object != null && object.isCreature(game) && !source.isActivated();
         }
 
         @Override
@@ -195,7 +190,7 @@ class TazriStalwartSurvivorManaEffect extends ManaEffect {
         if (controller == null || permanent == null) {
             return new Mana();
         }
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceImpl(false).setManaColorChoice(true);
         choice.setMessage("Pick a mana color");
         ObjectColor color = permanent.getColor(game);
         if (color.isWhite()) {
@@ -219,7 +214,7 @@ class TazriStalwartSurvivorManaEffect extends ManaEffect {
         if (choice.getChoices().size() == 1) {
             choice.setChoice(choice.getChoices().iterator().next());
         } else {
-            controller.choose(outcome, choice, game);
+            controller.choose(Outcome.PutManaInPool, choice, game);
         }
         if (choice.getChoice() == null) {
             return new Mana();
@@ -271,8 +266,7 @@ class TazriStalwartSurvivorMillEffect extends OneShotEffect {
                 .getCard(uuid)
                 .getAbilities(game)
                 .stream()
-                .map(Ability::getAbilityType)
-                .noneMatch(AbilityType.ACTIVATED::equals));
+                .noneMatch(Ability::isNonManaActivatedAbility));
         player.moveCards(cards, Zone.HAND, source, game);
         return true;
     }

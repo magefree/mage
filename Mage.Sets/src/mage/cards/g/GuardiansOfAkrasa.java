@@ -28,7 +28,7 @@ public final class GuardiansOfAkrasa extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public GuardiansOfAkrasa (final GuardiansOfAkrasa card) {
+    private GuardiansOfAkrasa(final GuardiansOfAkrasa card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ParallelThoughts extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ParallelThoughtsSearchEffect()));
 
         // If you would draw a card, you may instead put the top card of the pile you exiled into your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ParallelThoughtsReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ParallelThoughtsReplacementEffect()));
 
     }
 
@@ -58,7 +58,7 @@ class ParallelThoughtsSearchEffect extends OneShotEffect {
         this.staticText = "search your library for seven cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library";
     }
 
-    ParallelThoughtsSearchEffect(final ParallelThoughtsSearchEffect effect) {
+    private ParallelThoughtsSearchEffect(final ParallelThoughtsSearchEffect effect) {
         super(effect);
     }
 
@@ -117,7 +117,7 @@ class ParallelThoughtsReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would draw a card, you may instead put the top card of the pile you exiled with {this} into your hand";
     }
 
-    ParallelThoughtsReplacementEffect(final ParallelThoughtsReplacementEffect effect) {
+    private ParallelThoughtsReplacementEffect(final ParallelThoughtsReplacementEffect effect) {
         super(effect);
     }
 

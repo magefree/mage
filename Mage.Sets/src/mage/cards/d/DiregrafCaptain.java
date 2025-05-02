@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -40,7 +41,7 @@ public final class DiregrafCaptain extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Other Zombie creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // Whenever another Zombie you control dies, target opponent loses 1 life.
         this.addAbility(new DiregrafCaptainTriggeredAbility());
@@ -67,9 +68,10 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl {
     public DiregrafCaptainTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
         this.addTarget(new TargetOpponent());
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
-    public DiregrafCaptainTriggeredAbility(final DiregrafCaptainTriggeredAbility ability) {
+    private DiregrafCaptainTriggeredAbility(final DiregrafCaptainTriggeredAbility ability) {
         super(ability);
     }
 
@@ -98,5 +100,10 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever another Zombie you control dies, target opponent loses 1 life.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

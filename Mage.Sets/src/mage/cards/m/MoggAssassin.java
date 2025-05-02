@@ -37,7 +37,6 @@ public final class MoggAssassin extends CardImpl {
 
         // {T}: You choose target creature an opponent controls, and that opponent chooses target creature. Flip a coin. If you win the flip, destroy the creature you chose. If you lose the flip, destroy the creature your opponent chose.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new MoggAssassinEffect(),
                 new TapSourceCost()
         );
@@ -88,12 +87,12 @@ enum MoggAssassinAdjuster implements TargetAdjuster {
 
 class MoggAssassinEffect extends OneShotEffect {
 
-    public MoggAssassinEffect() {
+    MoggAssassinEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "You choose target creature an opponent controls, and that opponent chooses target creature. Flip a coin. If you win the flip, destroy the creature you chose. If you lose the flip, destroy the creature your opponent chose";
     }
 
-    public MoggAssassinEffect(final MoggAssassinEffect effect) {
+    private MoggAssassinEffect(final MoggAssassinEffect effect) {
         super(effect);
     }
 

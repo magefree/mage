@@ -28,7 +28,7 @@ public final class JungleWeaver extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
-    public JungleWeaver (final JungleWeaver card) {
+    private JungleWeaver(final JungleWeaver card) {
         super(card);
     }
 

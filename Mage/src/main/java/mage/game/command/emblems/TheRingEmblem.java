@@ -12,6 +12,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -24,7 +26,6 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.TemptedByTheRingWatcher;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -42,6 +43,19 @@ public final class TheRingEmblem extends Emblem {
     public TheRingEmblem(UUID controllerId) {
         super("The Ring");
         this.setControllerId(controllerId);
+
+        // ring don't have source, so image can be initialized immediately
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_THE_RING, null);
+        if (foundInfo != null) {
+            this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
+            this.setCardNumber("");
+            this.setImageFileName(""); // use default
+            this.setImageNumber(foundInfo.getImageNumber());
+        } else {
+            // how-to fix: add image to the tokens-database TokenRepository->loadXmageTokens
+            throw new IllegalArgumentException("Wrong code usage: can't find xmage token info for: " + TokenRepository.XMAGE_IMAGE_NAME_THE_RING);
+        }
     }
 
     private TheRingEmblem(final TheRingEmblem card) {
@@ -71,7 +85,7 @@ public final class TheRingEmblem extends Emblem {
                 ).setTriggerPhrase("Whenever your Ring-bearer attacks, ");
                 break;
             case 2:
-                logText ="Whenever your Ring-bearer becomes blocked by a creature, that creature's controller sacrifices it at end of combat.";
+                logText = "Whenever your Ring-bearer becomes blocked by a creature, that creature's controller sacrifices it at end of combat.";
                 ability = new TheRingEmblemTriggeredAbility();
                 break;
             case 3:
@@ -91,9 +105,9 @@ public final class TheRingEmblem extends Emblem {
         game.getState().addAbility(ability, this);
 
         String name = "";
-        if(controllerId  != null){
+        if (controllerId != null) {
             Player player = game.getPlayer(controllerId);
-            if(player != null){
+            if (player != null) {
                 name = player.getLogName();
             }
         }
@@ -130,7 +144,6 @@ class TheRingEmblemLegendaryEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = Optional
                 .ofNullable(game.getPlayer(source.getControllerId()))
-                .filter(Objects::nonNull)
                 .map(player -> player.getRingBearer(game))
                 .orElse(null);
         if (permanent == null) {
@@ -186,7 +199,7 @@ class TheRingEmblemTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
     }
 
     @Override
@@ -195,7 +208,7 @@ class TheRingEmblemTriggeredAbility extends TriggeredAbilityImpl {
         Permanent blocker = game.getPermanent(event.getSourceId());
         if (attacker == null
                 || blocker == null
-                || attacker.isControlledBy(getControllerId())
+                || !attacker.isControlledBy(getControllerId())
                 || !attacker.isRingBearer()) {
             return false;
         }

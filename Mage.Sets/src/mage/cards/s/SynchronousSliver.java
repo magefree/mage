@@ -29,7 +29,7 @@ public final class SynchronousSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // All Sliver creatures have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter, "All Sliver creatures have vigilance.")));
     }
 

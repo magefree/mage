@@ -44,12 +44,12 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        if (targets.choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
+        if (this.getTargets().choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
             manaValues = 0;
             numberCardsRevealed = 0;
             Player player = game.getPlayer(controllerId);
             Cards cards = new CardsImpl();
-            for (UUID targetId : targets.get(0).getTargets()) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card != null) {
                     manaValues += card.getManaValue();
@@ -62,7 +62,7 @@ public class RevealTargetFromHandCost extends CostImpl {
                 MageObject baseObject = game.getBaseObject(source.getSourceId());
                 player.revealCards(baseObject == null ? "card cost" : baseObject.getIdName(), cards, game);
             }
-            if (targets.get(0).getNumberOfTargets() <= numberCardsRevealed) {
+            if (this.getTargets().get(0).getNumberOfTargets() <= numberCardsRevealed) {
                 paid = true; // e.g. for optional additional costs.  example: Dragonlord's Prerogative also true if 0 cards shown
                 return paid;
             }
@@ -89,7 +89,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return allowNoReveal || targets.canChoose(controllerId, source, game);
+        return allowNoReveal || this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

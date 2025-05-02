@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.*;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -23,9 +24,12 @@ public class MusicPlayer {
 
     //open file and add list
     private boolean open() {
+        if (!isMusicEnabled()) {
+            return false;
+        }
         String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_MATCH_MUSIC_PATH, "true");
         filepath = path + File.separator;
-        if (path == null) {
+        if (path == null || path.equals("")) {
             filepath = Constants.BASE_MUSICS_PATH;
         }
         filelist.removeAll();
@@ -50,6 +54,11 @@ public class MusicPlayer {
         return true;
     }
 
+    private static boolean isMusicEnabled() {
+        String enabled = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_MATCH_MUSIC_ON, PreferencesDialog.SOUNDS_MATCH_MUSIC_ENABLE_BY_DEFAULT);
+        return "true".equals(enabled);
+    }
+
     public static void playBGM() {
         stopBGM();
         if (player == null) {
@@ -61,8 +70,7 @@ public class MusicPlayer {
     }
 
     public void play() {
-        String soundsOn = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_MATCH_MUSIC_ON, "true");
-        if (soundsOn.equals("true")) {
+        if (isMusicEnabled()) {
             player.breaked = false;
             player.breaked_out = false;
             player.stopped = false;
@@ -127,7 +135,7 @@ public class MusicPlayer {
             } catch (Exception e) {
             }
             while (!stopped) {
-                int it = (int) Math.abs(Math.random() * (filelist.getItemCount()));
+                int it = (int) Math.abs(RandomUtil.nextDouble() * (filelist.getItemCount()));
                 File file = new File(filepath + filelist.getItem(it));
                 load(file);
                 Thread PlayThread = new Thread(new PlayThread());

@@ -43,7 +43,7 @@ public final class SoldeviAdnate extends CardImpl {
         Ability ability = new DynamicManaAbility(Mana.BlackMana(1), SacrificeCostManaValue.CREATURE, new TapSourceCost(),
                 "add an amount of {B} equal to the sacrificed creature's mana value", false,
                 new HighestCMCOfPermanentValue(filter, true));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

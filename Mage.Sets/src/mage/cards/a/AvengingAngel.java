@@ -48,12 +48,12 @@ public final class AvengingAngel extends CardImpl {
 
 class AvengingAngelEffect extends OneShotEffect {
     
-    public AvengingAngelEffect() {
+    AvengingAngelEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may put it on the top of its owner's library";
+        this.staticText = "you may put it on top of its owner's library";
     }
     
-    public AvengingAngelEffect(final AvengingAngelEffect effect) {
+    private AvengingAngelEffect(final AvengingAngelEffect effect) {
         super(effect);
     }
     

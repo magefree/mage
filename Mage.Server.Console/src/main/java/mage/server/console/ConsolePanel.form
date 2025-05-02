@@ -88,6 +88,9 @@
                           <Connection code="tableUserModel" type="code"/>
                         </Property>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new MageTable()"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -262,6 +265,9 @@
                           <Connection code="tableTableModel" type="code"/>
                         </Property>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new MageTable()"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>

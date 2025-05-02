@@ -1,13 +1,11 @@
-
-
 package mage.game.turn;
-
-import java.util.UUID;
 
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -30,19 +28,31 @@ public class CleanupStep extends Step {
         super.beginStep(game, activePlayerId);
         Player activePlayer = game.getPlayer(activePlayerId);
         game.getState().setPriorityPlayerId(activePlayer.getId());
-        //20091005 - 514.1
+
+        // 514.1
+        // First, if the active player’s hand contains more cards than his or her maximum hand size
+        // (normally seven), he or she discards enough cards to reduce his or her hand size to that number.
+        // This turn-based action doesn’t use the stack.
         if (activePlayer.isInGame()) {
             activePlayer.discardToMax(game);
         }
-        //20100423 - 514.2
-        game.getBattlefield().endOfTurn(activePlayerId, game);
+
+        // 514.2
+        // Second, the following actions happen simultaneously: all damage marked on permanents
+        // (including phased-out permanents) is removed and all "until end of turn" and "this turn"
+        // effects end. This turn-based action doesn’t use the stack.
+        game.getBattlefield().endOfTurn(game);
         game.getState().removeEotEffects(game);
+
+        // 514.3
+        // Normally, no player receives priority during the cleanup step, so no spells can be cast
+        // and no abilities can be activated. However, this rule is subject to the following exception: 514.3a
+        //
+        // Look at EndPhase code to process 514.3
     }
 
     @Override
     public void endStep(Game game, UUID activePlayerId) {
-        Player activePlayer = game.getPlayer(activePlayerId);
-        activePlayer.setGameUnderYourControl(true);
         super.endStep(game, activePlayerId);
     }
 

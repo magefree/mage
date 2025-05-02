@@ -37,7 +37,7 @@ public final class ArchfiendOfIfnir extends CardImpl {
                         CounterType.M1M1.createInstance(1),
                         new FilterOpponentsCreaturePermanent("creature your opponents control")
                 )
-        ));
+        ).setTriggerPhrase("Whenever you cycle or discard another card, "));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));

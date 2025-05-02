@@ -2,11 +2,12 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,11 +40,11 @@ public final class WhitePlumeAdventurer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When White Plume Adventurer enters battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // At the beginning of each opponent's upkeep, untap a creature you control. If you've completed a dungeon, untap all creatures you control instead.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new WhitePlumeAdventurerEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new WhitePlumeAdventurerEffect(), false
         ).addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 
@@ -100,7 +101,7 @@ class WhitePlumeAdventurerEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.untap(game);

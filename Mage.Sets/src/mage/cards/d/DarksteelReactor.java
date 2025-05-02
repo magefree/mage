@@ -3,14 +3,13 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -29,7 +28,7 @@ public final class DarksteelReactor extends CardImpl {
         // Darksteel Reactor is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());
         // At the beginning of your upkeep, you may put a charge counter on Darksteel Reactor.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), true));
         // When Darksteel Reactor has twenty or more charge counters on it, you win the game.
         this.addAbility(new DarksteelReactorStateTriggeredAbility());
 
@@ -51,7 +50,7 @@ class DarksteelReactorStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new WinGameSourceControllerEffect());
     }
 
-    public DarksteelReactorStateTriggeredAbility(final DarksteelReactorStateTriggeredAbility ability) {
+    private DarksteelReactorStateTriggeredAbility(final DarksteelReactorStateTriggeredAbility ability) {
         super(ability);
     }
 

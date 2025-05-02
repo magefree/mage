@@ -49,7 +49,7 @@ public class FlankingAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "flanking";
+        return "flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>";
     }
 
     @Override

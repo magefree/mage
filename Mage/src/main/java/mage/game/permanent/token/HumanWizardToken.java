@@ -16,7 +16,7 @@ public final class HumanWizardToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected HumanWizardToken(final HumanWizardToken token) {
+    private HumanWizardToken(final HumanWizardToken token) {
         super(token);
     }
 

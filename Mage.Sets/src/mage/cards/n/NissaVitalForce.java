@@ -53,7 +53,7 @@ public final class NissaVitalForce extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
 
-        // -6: You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."
+        // -6: You get an emblem with "Whenever a land you control enters, you may draw a card."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new NissaVitalForceEmblem()), -6));
     }
 
@@ -79,7 +79,7 @@ class NissaVitalForceToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public NissaVitalForceToken(final NissaVitalForceToken token) {
+    private NissaVitalForceToken(final NissaVitalForceToken token) {
         super(token);
     }
 

@@ -33,11 +33,6 @@ public class AssignNoCombatDamageTargetEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
@@ -55,6 +50,6 @@ public class AssignNoCombatDamageTargetEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return ((DamageEvent) event).isCombatDamage() && event.getSourceId().equals(targetPointer.getFirst(game, source));
+        return ((DamageEvent) event).isCombatDamage() && event.getSourceId().equals(getTargetPointer().getFirst(game, source));
     }
 }

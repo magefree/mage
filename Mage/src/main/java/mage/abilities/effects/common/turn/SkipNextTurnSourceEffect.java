@@ -41,7 +41,7 @@ public class SkipNextTurnSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID playerId = null;
         if (source instanceof ActivatedAbilityImpl) {
-            playerId = ((ActivatedAbilityImpl) source).getActivatorId();
+            playerId = ((ActivatedAbilityImpl) source).getActivatorId(); // for Lethal Vapors
         }
         if (playerId == null) {
             playerId = source.getControllerId();

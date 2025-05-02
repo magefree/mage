@@ -47,10 +47,10 @@ public final class GoblinRockSled extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Goblin Rock Sled doesn't untap during your untap step if it attacked during your last turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapIfAttackedLastTurnSourceEffect()), new AttackedLastTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new DontUntapIfAttackedLastTurnSourceEffect()), new AttackedLastTurnWatcher());
 
         // Goblin Rock Sled can't attack unless defending player controls a Mountain.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(filter)));
     }
 
     private GoblinRockSled(final GoblinRockSled card) {
@@ -65,23 +65,18 @@ public final class GoblinRockSled extends CardImpl {
 
 class DontUntapIfAttackedLastTurnSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DontUntapIfAttackedLastTurnSourceEffect() {
+    DontUntapIfAttackedLastTurnSourceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, true);
         staticText = "{this} doesn't untap during your untap step if it attacked during your last turn";
     }
 
-    public DontUntapIfAttackedLastTurnSourceEffect(final DontUntapIfAttackedLastTurnSourceEffect effect) {
+    private DontUntapIfAttackedLastTurnSourceEffect(final DontUntapIfAttackedLastTurnSourceEffect effect) {
         super(effect);
     }
 
     @Override
     public DontUntapIfAttackedLastTurnSourceEffect copy() {
         return new DontUntapIfAttackedLastTurnSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

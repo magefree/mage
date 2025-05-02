@@ -53,7 +53,7 @@ class CeaseFireEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Target player can't cast creature spells this turn";
     }
 
-    public CeaseFireEffect(final CeaseFireEffect effect) {
+    private CeaseFireEffect(final CeaseFireEffect effect) {
         super(effect);
     }
 

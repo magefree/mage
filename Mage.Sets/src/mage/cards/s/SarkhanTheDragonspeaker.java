@@ -65,9 +65,10 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
     SarkhanTheDragonspeakerEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Until end of turn, {this} becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste.";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
-    SarkhanTheDragonspeakerEffect(final SarkhanTheDragonspeakerEffect effect) {
+    private SarkhanTheDragonspeakerEffect(final SarkhanTheDragonspeakerEffect effect) {
         super(effect);
     }
 

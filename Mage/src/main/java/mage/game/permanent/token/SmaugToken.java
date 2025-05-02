@@ -30,7 +30,7 @@ public final class SmaugToken extends TokenImpl {
         ).setTriggerPhrase("When this creature dies, "));
     }
 
-    protected SmaugToken(final SmaugToken token) {
+    private SmaugToken(final SmaugToken token) {
         super(token);
     }
 

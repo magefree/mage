@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -54,7 +54,7 @@ public final class GadrakTheCrownScourge extends CardImpl {
         // At the beginning of your end step, create a Treasure token for each nontoken creature that died this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(
                 new TreasureToken(), GadrakTheCrownScourgeValue.instance
-        ), TargetController.YOU, false), new GadrakTheCrownScourgeWatcher());
+        )), new GadrakTheCrownScourgeWatcher());
     }
 
     private GadrakTheCrownScourge(final GadrakTheCrownScourge card) {

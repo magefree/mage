@@ -21,7 +21,7 @@ public final class GravebornToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected GravebornToken(final GravebornToken token) {
+    private GravebornToken(final GravebornToken token) {
         super(token);
     }
 

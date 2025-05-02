@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableSortedSet;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.PlayerList;
 import mage.watchers.Watcher;
 import org.junit.Test;
 
@@ -187,6 +188,8 @@ public class WatcherTest {
 
         private Map<String, SortedSet<String>> sortedSetInMapField = new HashMap<>();
 
+        private Map<String, PlayerList> playerListInMapField = new HashMap<>();
+
         public TestWatcher(WatcherScope scope) {
             super(scope);
         }
@@ -248,8 +251,41 @@ public class WatcherTest {
             return sortedSetInMapField;
         }
 
+        public Map<String, PlayerList> getPlayerListInMapField() {
+            return playerListInMapField;
+        }
+
         public void setSortedSetInMapField(Map<String, SortedSet<String>> sortedSetInMapField) {
             this.sortedSetInMapField = sortedSetInMapField;
         }
+
+        public void setPlayerListInMapField(Map<String, PlayerList> playerListInMapField) {
+            this.playerListInMapField = playerListInMapField;
+        }
+    }
+
+    @Test
+    public void testDeepCopyMapOfPlayerList() {
+        // Given
+        Map<String, PlayerList> playerListInMapField = new HashMap<>();
+        playerListInMapField.put("pl1", new PlayerList());
+        playerListInMapField.put("pl2", new PlayerList());
+
+        TestWatcher testWatcher = new TestWatcher(GAME);
+        testWatcher.setPlayerListInMapField(playerListInMapField);
+
+        // When
+        TestWatcher copy = testWatcher.copy();
+
+        // And
+        testWatcher.getPlayerListInMapField().put("pl3", new PlayerList());
+
+        // Then
+        Map<String, PlayerList> copyPlayerListInMapField = copy.getPlayerListInMapField();
+        assertEquals(2, copyPlayerListInMapField.size());
+        assertTrue(copyPlayerListInMapField.containsKey("pl1"));
+        assertTrue(copyPlayerListInMapField.containsKey("pl2"));
+        assertFalse(copyPlayerListInMapField.containsKey("pl3"));
+        assertEquals(copyPlayerListInMapField.get("pl1").getClass(), playerListInMapField.get("pl1").getClass());
     }
 }

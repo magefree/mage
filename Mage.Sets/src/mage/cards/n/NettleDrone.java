@@ -41,7 +41,7 @@ public final class NettleDrone extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {T}: Nettle Drone deals 1 damage to each opponent.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost()));
 
         // Whenever you cast a colorless spell, untap Nettle Drone.
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filterSpell, false));

@@ -4,20 +4,16 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.replacement.LeaveBattlefieldExileSourceReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -45,7 +41,7 @@ public class GethThaneOfContracts extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(
-                new SimpleStaticAbility(new GethThaneOfContractsReplacementEffect()),
+                new SimpleStaticAbility(new LeaveBattlefieldExileSourceReplacementEffect("this creature")),
                 Duration.Custom
         ).setText("It gains \"If this creature would leave the battlefield, exile it instead of putting it anywhere else.\""));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
@@ -59,41 +55,5 @@ public class GethThaneOfContracts extends CardImpl {
     @Override
     public GethThaneOfContracts copy() {
         return new GethThaneOfContracts(this);
-    }
-}
-
-class GethThaneOfContractsReplacementEffect extends ReplacementEffectImpl {
-
-    public GethThaneOfContractsReplacementEffect() {
-        super(Duration.Custom, Outcome.Exile);
-        this.staticText = "If {this} would leave the battlefield, exile it instead of putting it anywhere else.";
-    }
-
-    private GethThaneOfContractsReplacementEffect(final GethThaneOfContractsReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GethThaneOfContractsReplacementEffect copy() {
-        return new GethThaneOfContractsReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        UUID targetId = zEvent.getTargetId();
-        return targetId != null && targetId.equals(source.getSourceId())
-                && zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED;
     }
 }

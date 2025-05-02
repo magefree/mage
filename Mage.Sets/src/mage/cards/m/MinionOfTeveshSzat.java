@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -38,8 +37,7 @@ public final class MinionOfTeveshSzat extends CardImpl {
                 new DoUnlessControllerPaysEffect(
                         new DamageControllerEffect(2),
                         new ManaCostsImpl<>("{B}{B}")
-                ),
-                TargetController.YOU, false
+                )
         ));
 
         // {tap}: Target creature gets +3/-2 until end of turn.

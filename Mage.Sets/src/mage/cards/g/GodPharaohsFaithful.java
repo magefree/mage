@@ -20,7 +20,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class GodPharaohsFaithful extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a blue, black or red spell");
+    private static final FilterSpell filter = new FilterSpell("a blue, black, or red spell");
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.BLACK), new ColorPredicate(ObjectColor.RED)));
     }

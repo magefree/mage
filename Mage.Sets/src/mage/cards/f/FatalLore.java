@@ -30,10 +30,10 @@ public final class FatalLore extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // An opponent chooses one —
-        this.getSpellAbility().getModes().setModeChooser(TargetController.OPPONENT);
+        this.getSpellAbility().getModes().setChooseController(TargetController.OPPONENT);
 
         // • You draw three cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("you draw three cards"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3, true));
 
         // • You destroy up to two target creatures that player controls. They can't be regenerated. That player draws up to three cards.
         this.getSpellAbility().addMode(new Mode(new DestroyTargetEffect(

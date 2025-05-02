@@ -40,7 +40,7 @@ public final class KavuMonarch extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Kavu creatures have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(TrampleAbility.getInstance(),
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(TrampleAbility.getInstance(),
             Duration.WhileOnBattlefield, filter1)));
 
         // Whenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.

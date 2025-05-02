@@ -34,7 +34,7 @@ public final class LushGrowth extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
         
         // Enchanted land is a Mountain, Forest, and Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.MOUNTAIN, SubType.FOREST, SubType.PLAINS)));
+        this.addAbility(new SimpleStaticAbility(new BecomesBasicLandEnchantedEffect(SubType.MOUNTAIN, SubType.FOREST, SubType.PLAINS)));
     }
 
     private LushGrowth(final LushGrowth card) {

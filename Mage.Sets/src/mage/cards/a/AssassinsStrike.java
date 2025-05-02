@@ -43,12 +43,12 @@ public final class AssassinsStrike extends CardImpl {
 
 class AssassinsStrikeEffect extends OneShotEffect {
 
-    public AssassinsStrikeEffect() {
+    AssassinsStrikeEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Its controller discards a card";
     }
 
-    public AssassinsStrikeEffect(final AssassinsStrikeEffect effect) {
+    private AssassinsStrikeEffect(final AssassinsStrikeEffect effect) {
         super(effect);
     }
 

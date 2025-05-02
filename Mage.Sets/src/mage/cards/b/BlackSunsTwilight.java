@@ -1,10 +1,8 @@
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -20,13 +18,16 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class BlackSunsTwilight extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
 
     public BlackSunsTwilight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{B}");
@@ -69,7 +70,7 @@ class BlackSunsTwilightEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (player == null || xValue < 5) {
             return false;
         }
@@ -81,7 +82,7 @@ class BlackSunsTwilightEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         return card != null && player.moveCards(

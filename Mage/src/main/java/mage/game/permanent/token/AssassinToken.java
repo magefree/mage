@@ -21,7 +21,7 @@ public final class AssassinToken extends TokenImpl {
         addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));
     }
 
-    protected AssassinToken(final AssassinToken token) {
+    private AssassinToken(final AssassinToken token) {
         super(token);
     }
 
@@ -29,4 +29,3 @@ public final class AssassinToken extends TokenImpl {
         return new AssassinToken(this);
     }
 }
-

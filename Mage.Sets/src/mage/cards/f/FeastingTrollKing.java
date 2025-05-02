@@ -48,7 +48,7 @@ public final class FeastingTrollKing extends CardImpl {
         // When Feasting Troll King enters the battlefield, if you cast it from your hand, create three Food tokens.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FoodToken(), 3)),
-                CastFromHandSourcePermanentCondition.instance, "When {this} enters the battlefield, " +
+                CastFromHandSourcePermanentCondition.instance, "When {this} enters, " +
                 "if you cast it from your hand, create three Food tokens."
         ), new CastFromHandWatcher());
 
@@ -56,7 +56,7 @@ public final class FeastingTrollKing extends CardImpl {
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
-                new SacrificeTargetCost(new TargetControlledPermanent(3, filter)),
+                new SacrificeTargetCost(3, filter),
                 MyTurnCondition.instance
         ).addHint(MyTurnHint.instance));
     }

@@ -20,6 +20,7 @@ public class AvacynRestoredPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Angel of Glory's Rise", "A9", Rarity.RARE, mage.cards.a.AngelOfGlorysRise.class));
         cards.add(new SetCardInfo("Killing Wave", 111, Rarity.RARE, mage.cards.k.KillingWave.class));
         cards.add(new SetCardInfo("Latch Seeker", 63, Rarity.UNCOMMON, mage.cards.l.LatchSeeker.class));
         cards.add(new SetCardInfo("Moonsilver Spear", "217*", Rarity.RARE, mage.cards.m.MoonsilverSpear.class));

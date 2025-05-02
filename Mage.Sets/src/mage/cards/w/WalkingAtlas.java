@@ -27,7 +27,6 @@ public final class WalkingAtlas extends CardImpl {
 
         // {tap}: You may put a land card from your hand onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A),
                 new TapSourceCost()
         ));

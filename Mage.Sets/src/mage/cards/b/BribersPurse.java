@@ -31,7 +31,7 @@ public final class BribersPurse extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.GEM.createInstance())));
 
         // {1}, {T}, Remove a gem counter from Briber's Purse: Target creature can't attack or block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new CantAttackBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.GEM.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());

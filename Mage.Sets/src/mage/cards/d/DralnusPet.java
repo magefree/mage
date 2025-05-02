@@ -48,9 +48,9 @@ public final class DralnusPet extends CardImpl {
         kickerCosts.add(new ManaCostsImpl<>("{2}{B}"));
         kickerCosts.add(new DiscardCardCost(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(new KickerAbility(kickerCosts));
-        // If Dralnu's Pet was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.
+        // If Dralnu's Pet was kicked, it enters with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.
         Ability ability = new EntersBattlefieldAbility(new DralnusPetEffect(), KickedCondition.ONCE,
-                "If {this} was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's mana value.", "");
+                "If {this} was kicked, it enters with flying and with X +1/+1 counters on it, where X is the discarded card's mana value.", "");
         ability.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
@@ -67,12 +67,12 @@ public final class DralnusPet extends CardImpl {
 
 class DralnusPetEffect extends OneShotEffect {
 
-    public DralnusPetEffect() {
+    DralnusPetEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "and with X +1/+1 counters on it, where X is the discarded card's mana value";
     }
 
-    public DralnusPetEffect(final DralnusPetEffect effect) {
+    private DralnusPetEffect(final DralnusPetEffect effect) {
         super(effect);
     }
 

@@ -38,7 +38,7 @@ public final class Spellskite extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {U/P}: Change a target of target spell or ability to Spellskite.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpellskiteEffect(), new ManaCostsImpl<>("{U/P}"));
+        Ability ability = new SimpleActivatedAbility(new SpellskiteEffect(), new ManaCostsImpl<>("{U/P}"));
         ability.addTarget(new TargetStackObject());
         this.addAbility(ability);
     }
@@ -55,12 +55,12 @@ public final class Spellskite extends CardImpl {
 
 class SpellskiteEffect extends OneShotEffect {
 
-    public SpellskiteEffect() {
+    SpellskiteEffect() {
         super(Outcome.Neutral);
         staticText = "Change a target of target spell or ability to {this}";
     }
 
-    public SpellskiteEffect(final SpellskiteEffect effect) {
+    private SpellskiteEffect(final SpellskiteEffect effect) {
         super(effect);
     }
 

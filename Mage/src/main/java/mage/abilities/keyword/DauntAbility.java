@@ -12,10 +12,11 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  */
 public class DauntAbility extends SimpleEvasionAbility {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
+    private final boolean asKeyword;
 
     static {
-        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.OR_LESS, 2));
     }
 
     public static FilterCreaturePermanent getFilter() {
@@ -23,11 +24,17 @@ public class DauntAbility extends SimpleEvasionAbility {
     }
 
     public DauntAbility() {
+        this(false);
+    }
+
+    public DauntAbility(boolean asKeyword) {
         super(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield));
+        this.asKeyword = asKeyword;
     }
 
     private DauntAbility(final DauntAbility ability) {
         super(ability);
+        this.asKeyword = ability.asKeyword;
     }
 
     @Override
@@ -37,6 +44,7 @@ public class DauntAbility extends SimpleEvasionAbility {
 
     @Override
     public String getRule() {
-        return "{this} can't be blocked by creatures with power 2 or less.";
+        return this.asKeyword ? "Daunt <i>({this} can't be blocked by creatures with power 2 or less.)</i>" :
+        "{this} can't be blocked by creatures with power 2 or less.";
     }
 }

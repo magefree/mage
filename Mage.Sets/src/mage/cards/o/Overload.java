@@ -49,7 +49,7 @@ class OverloadEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact if its mana value is 2 or less. If this spell was kicked, destroy that artifact if its mana value is 5 or less instead.";
     }
 
-    OverloadEffect(final OverloadEffect effect) {
+    private OverloadEffect(final OverloadEffect effect) {
         super(effect);
     }
 

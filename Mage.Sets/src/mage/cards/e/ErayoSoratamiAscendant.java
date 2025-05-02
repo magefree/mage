@@ -68,7 +68,7 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
         return effect;
     }
 
-    public ErayoSoratamiAscendantTriggeredAbility(final ErayoSoratamiAscendantTriggeredAbility ability) {
+    private ErayoSoratamiAscendantTriggeredAbility(final ErayoSoratamiAscendantTriggeredAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class ErayosEssenceToken extends TokenImpl {
         effect.setText("counter that spell");
         this.addAbility(new ErayosEssenceTriggeredAbility(effect));
     }
-    public ErayosEssenceToken(final ErayosEssenceToken token) {
+    private ErayosEssenceToken(final ErayosEssenceToken token) {
         super(token);
     }
 
@@ -119,7 +119,7 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent casts a spell for the first time each turn, ");
     }
 
-    public ErayosEssenceTriggeredAbility(final ErayosEssenceTriggeredAbility ability) {
+    private ErayosEssenceTriggeredAbility(final ErayosEssenceTriggeredAbility ability) {
         super(ability);
     }
 

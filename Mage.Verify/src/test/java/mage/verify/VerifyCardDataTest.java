@@ -2,33 +2,47 @@ package mage.verify;
 
 import com.google.common.base.CharMatcher;
 import mage.MageObject;
+import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.Mode;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.*;
+import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.common.CitysBlessingHint;
+import mage.abilities.hint.common.CurrentDungeonHint;
+import mage.abilities.hint.common.InitiativeHint;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.*;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.SubType;
+import mage.choices.Choice;
+import mage.constants.*;
+import mage.filter.Filter;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
-import mage.game.draft.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.server.util.SystemUtil;
+import mage.game.permanent.token.custom.XmageToken;
 import mage.sets.TherosBeyondDeath;
+import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
+import mage.utils.SystemUtil;
 import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
 import mage.verify.mtgjson.MtgJsonSet;
@@ -41,13 +55,12 @@ import org.mage.plugins.card.dl.sources.ScryfallImageSupportCards;
 import org.reflections.Reflections;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -57,8 +70,9 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "LTR;LTC;CMM"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "DFT"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
+    private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
 
@@ -84,12 +98,14 @@ public class VerifyCardDataTest {
     private static final List<String> evergreenKeywords = Arrays.asList(
             "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof", "fear",
             "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance",
-            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad", "prowess", "convoke"
+            "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad", "prowess", "convoke",
+            "shroud", "banding", "flanking", "horsemanship", "legendary landwalk"
     );
 
-    private static final List<String> doubleWords = new ArrayList<>();
+    private static final List<String> doubleWords = new ArrayList<>(); // for inner calc
+    private static final List<String> etbTriggerPhrases = new ArrayList<>(); // for inner calc
 
-    {
+    static {
         // numbers
         for (int i = 1; i <= 9; i++) {
             String s = CardUtil.numberToText(i).toLowerCase(Locale.ENGLISH);
@@ -106,51 +122,51 @@ public class VerifyCardDataTest {
         // can be full set ignore list or set + cardname
 
         // power-toughness
-        skipListCreate(SKIP_LIST_PT);
+        // skipListAddName(SKIP_LIST_PT, set, cardName);
 
         // loyalty
-        skipListCreate(SKIP_LIST_LOYALTY);
+        // skipListAddName(SKIP_LIST_LOYALTY, set, cardName);
 
         // defense
-        skipListCreate(SKIP_LIST_DEFENSE);
+        // skipListAddName(SKIP_LIST_DEFENSE, set, cardName);
 
         // color
-        skipListCreate(SKIP_LIST_COLOR);
+        // skipListAddName(SKIP_LIST_COLOR, set, cardName);
 
         // cost
-        skipListCreate(SKIP_LIST_COST);
+        // skipListAddName(SKIP_LIST_COST, set, cardName);
 
         // supertype
-        skipListCreate(SKIP_LIST_SUPERTYPE);
+        // skipListAddName(SKIP_LIST_SUPERTYPE, set, cardName);
 
         // type
-        skipListCreate(SKIP_LIST_TYPE);
+        // skipListAddName(SKIP_LIST_TYPE, set, cardName);
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
 
         // subtype
-        skipListCreate(SKIP_LIST_SUBTYPE);
+        // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
 
         // number
-        skipListCreate(SKIP_LIST_NUMBER);
+        // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
 
         // rarity
-        skipListCreate(SKIP_LIST_RARITY);
+        // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
 
         // missing abilities
-        skipListCreate(SKIP_LIST_MISSING_ABILITIES);
+        // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
 
         // double rare cards
-        skipListCreate(SKIP_LIST_DOUBLE_RARE);
+        // skipListAddName(SKIP_LIST_DOUBLE_RARE, set, cardName);
 
         // Un-supported sets (mtgjson/scryfall contains that set but xmage don't implement it)
-        // Example: Non-English or empty sets: Token sets, Archenemy Schemes, Plane-Chase Planes, etc.
-        skipListCreate(SKIP_LIST_UNSUPPORTED_SETS);
+        // Example: Non-English sets, Token sets, Archenemy Schemes, Plane-Chase Planes, etc.
+        // Sets with no cards or with "Oversized" in the name are automatically skipped.
         //
         // Non-English-only sets should not be added. https://github.com/magefree/mage/pull/6190#issuecomment-582354790
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "4BB"); // 4th Edition Foreign black border.
@@ -201,26 +217,13 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "THP2"); // Born of the Gods Hero's Path
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "THP3"); // Journey into Nyx Hero's Path
         //
-        // Commander Oversized cards.
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OCMD"); // Commander 2011 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC13"); // Commander 2013 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC14"); // Commander 2014 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC15"); // Commander 2015 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC16"); // Commander 2016 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC17"); // Commander 2017 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC18"); // Commander 2018 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC19"); // Commander 2019 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OCM1"); // Commander's Arsenal Oversized
-        //
         // Other
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PCEL"); // Celebration Cards
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMOA"); // Magic Online Avatar
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PVAN"); // Vanguard Series
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "AMH1"); // Modern Horizons Art Series
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PTG"); // Ponies: The Galloping
 
-        // wrond card numbers skip list
-        skipListCreate(SKIP_LIST_WRONG_CARD_NUMBERS);
+        // wrong card numbers skip list
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SWS"); // Star Wars
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UND"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UST"); // un-sets don't have full implementation of card variations
@@ -234,15 +237,12 @@ public class VerifyCardDataTest {
 
 
         // scryfall download sets (missing from scryfall website)
-        skipListCreate(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS);
         skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "SWS"); // Star Wars
 
         // sample decks checking - some decks can contains unimplemented cards, so ignore it
         // file name must be related to sample-decks folder
         // for linux/windows build system use paths constructor
-        skipListCreate(SKIP_LIST_SAMPLE_DECKS);
         skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("Jumpstart", "jumpstart_custom.txt").toString()); // it's not a deck file
-        skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("Commander", "Commander 2019", "Merciless Rage.dck").toString()); // TODO: delete after Aeon Engine implemented
     }
 
     private final ArrayList<String> outputMessages = new ArrayList<>();
@@ -251,29 +251,33 @@ public class VerifyCardDataTest {
     private int wrongAbilityStatsGood = 0;
     private int wrongAbilityStatsBad = 0;
 
-    private static void skipListCreate(String listName) {
-        skipCheckLists.put(listName, new LinkedHashSet<>());
+    private static Set<String> skipListGet(String listName) {
+        return skipCheckLists.computeIfAbsent(listName, x -> new LinkedHashSet<>());
     }
 
     private static void skipListAddName(String listName, String set, String cardName) {
-        skipCheckLists.get(listName).add(set + " - " + cardName);
+        skipListGet(listName).add(set + " - " + cardName);
     }
 
     private static void skipListAddName(String listName, String set) {
-        skipCheckLists.get(listName).add(set);
+        skipListGet(listName).add(set);
     }
 
     private static boolean skipListHaveName(String listName, String set, String cardName) {
-        return skipCheckLists.get(listName).contains(set + " - " + cardName)
-                || skipCheckLists.get(listName).contains(set);
+        return skipListGet(listName).contains(set + " - " + cardName)
+                || skipListGet(listName).contains(set);
     }
 
     private static boolean skipListHaveName(String listName, String set) {
-        return skipCheckLists.get(listName).contains(set);
+        return skipListGet(listName).contains(set);
     }
 
+    /**
+     * For splitting printed rules text with multiple keywords on one line
+     */
     private static boolean evergreenCheck(String s) {
-        return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from") || s.startsWith("ward ");
+        return evergreenKeywords.contains(s) || s.startsWith("protection from") || s.startsWith("hexproof from")
+                || s.startsWith("ward ") || s.startsWith("rampage ") || s.startsWith("annihilator");
     }
 
     private static <T> boolean eqSet(Collection<T> a, Collection<T> b) {
@@ -302,9 +306,9 @@ public class VerifyCardDataTest {
             if (card instanceof CardWithHalves) {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
                 check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
-            } else if (card instanceof AdventureCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 check(card, cardIndex);
-                check(((AdventureCard) card).getSpellCard(), cardIndex);
+                check(((CardWithSpellOption) card).getSpellCard(), cardIndex);
             } else {
                 check(card, cardIndex);
             }
@@ -502,10 +506,15 @@ public class VerifyCardDataTest {
 
             ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase(Locale.ENGLISH));
             if (mageSet == null) {
-                missingSets = missingSets + 1;
-                missingCards = missingCards + refSet.cards.size();
-                if (!CHECK_ONLY_ABILITIES_TEXT) {
-                    info.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ", date: " + refSet.releaseDate + ")");
+                if (refSet.cards.isEmpty() || refSet.name.contains("Oversized")) {
+                    unsupportedSets++;
+                    unsupportedCards += refSet.totalSetSize;
+                } else {
+                    missingSets++;
+                    missingCards = missingCards + refSet.cards.size();
+                    if (!CHECK_ONLY_ABILITIES_TEXT) {
+                        info.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ", date: " + refSet.releaseDate + ")");
+                    }
                 }
                 continue;
             }
@@ -613,7 +622,7 @@ public class VerifyCardDataTest {
                 CardInfo cardInfo = CardRepository.instance.findCardsByClass(info.getCardClass().getCanonicalName()).stream().findFirst().orElse(null);
                 Assert.assertNotNull(cardInfo);
 
-                Card card = cardInfo.getCard();
+                Card card = cardInfo.createCard();
                 Card secondCard = card.getSecondCardFace();
                 if (secondCard != null) {
                     if (set.findCardInfoByClass(secondCard.getClass()).isEmpty()) {
@@ -659,26 +668,33 @@ public class VerifyCardDataTest {
                 }
 
                 // index for missing cards
-                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
-                foundedJsonCards.add(code);
+//                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
+//                foundedJsonCards.add(code);
+//
+//                // CHECK: only lands can use full art in current version;
+//                // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
+//                // TODO: add support textless cards like https://scryfall.com/card/sch/12/thalia-and-the-gitrog-monster
+//                boolean isLand = card.getRarity().equals(Rarity.LAND);
+//                if (card.isFullArt() && !isLand) {
+//                    errorsList.add("Error: only lands can use full art setting: "
+//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+//                }
+//
+//                // CHECK: must use full art setting
+//                if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
+//                    errorsList.add("Error: card must use full art setting: "
+//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+//                }
+//
+//                // CHECK: must not use full art setting
+//                if (!jsonCard.isFullArt && card.isFullArt()) {
+//                    errorsList.add("Error: card must NOT use full art setting: "
+//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+//                }
 
-                // CHECK: only lands can use full art in current version;
-                // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
-                boolean isLand = card.getRarity().equals(Rarity.LAND);
-                if (card.isFullArt() && !isLand) {
-                    errorsList.add("Error: only lands can use full art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
-
-                // CHECK: must use full art setting
-                if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
-                    errorsList.add("Error: card must use full art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
-
-                // CHECK: must not use full art setting
-                if (!jsonCard.isFullArt && card.isFullArt()) {
-                    errorsList.add("Error: card must NOT use full art setting: "
+                // CHECK: must use retro frame setting
+                if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
+                    errorsList.add("Error: card must use retro art setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
             }
@@ -891,12 +907,14 @@ public class VerifyCardDataTest {
             String needClassName = Arrays.stream(
                     set.getName()
                             .replaceAll("&", "And")
+                            .replaceAll("^(\\d+)", "The$1") // replace starting "2007 xxx" by "The2007"
                             .replace("-", " ")
                             .replaceAll("[.+-/:\"']", "")
                             .split(" ")
             ).map(CardUtil::getTextWithFirstCharUpperCase).reduce("", String::concat);
 
             if (!className.equals(needClassName)) {
+                // if set name start with a numbers then add "The" at the start
                 errorsList.add("Error: set's class name must be equal to set name: "
                         + className + " from " + set.getClass().getName() + ", caption: " + set.getName() + ", need name: " + needClassName);
             }
@@ -951,27 +969,37 @@ public class VerifyCardDataTest {
             }
         }
 
-        // CHECK: wrong set name
+        // CHECK: unknown set or wrong name
         for (ExpansionSet set : sets) {
-            if (true) continue; // TODO: enable after merge of 40k's cards pull requests (needs before set rename)
-            MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
-            if (jsonSet == null) {
-                // unofficial or inner set
+            if (set.getSetType().equals(SetType.CUSTOM_SET)) {
+                // skip unofficial sets like Star Wars
                 continue;
             }
-            if (!Objects.equals(set.getName(), jsonSet.name)) {
-                // how-to fix: rename xmage set to the json version or fix a set's code
-                // also don't forget to change names in mtg-cards-data.txt
-                errorsList.add(String.format("Error: wrong set name or set code: %s (mtgjson set for same code: %s)",
-                        set.getCode() + " - " + set.getName(),
-                        jsonSet.name
+
+            MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
+            if (jsonSet == null) {
+                errorsList.add(String.format("Error: unknown official set: %s - %s (make sure it use correct set code or mark it as SetType.CUSTOM_SET)",
+                        set.getCode(),
+                        set.getName()
                 ));
+            } else {
+                if (!Objects.equals(set.getName(), jsonSet.name)) {
+                    // how-to fix: rename xmage set to the json version or fix a set's code
+                    // also don't forget to change names in mtg-cards-data.txt
+                    errorsList.add(String.format("Error: wrong set name or set code: %s (mtgjson set for same code: %s)",
+                            set.getCode() + " - " + set.getName(),
+                            jsonSet.name
+                    ));
+                }
             }
         }
 
         // CHECK: parent and block info
+        // TODO: it's UX problem, see https://github.com/magefree/mage/issues/10184
         for (ExpansionSet set : sets) {
-            if (true) continue; // TODO: comments it and run to find a problems
+            if (true) {
+                continue; // TODO: comments it and run to find a problems
+            }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 continue;
@@ -1004,7 +1032,9 @@ public class VerifyCardDataTest {
 
             // block info
             if (!Objects.equals(set.getBlockName(), jsonSet.block)) {
-                if (true) continue; // TODO: comments it and run to find a problems
+                if (true) {
+                    continue; // TODO: comments it and run to find a problems
+                }
                 errorsList.add(String.format("Error: set with wrong blockName settings: %s (blockName = %s, but must be %s)",
                         set.getCode() + " - " + set.getName(),
                         set.getBlockName(),
@@ -1012,6 +1042,57 @@ public class VerifyCardDataTest {
                 ));
             }
         }
+
+        // CHECK: miss booster settings
+        Set<String> ignoreBoosterSets = new HashSet<>();
+        // temporary, TODO: remove after set release and mtgjson get info
+        ignoreBoosterSets.add("Innistrad Remastered");
+        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
+        ignoreBoosterSets.add("Jumpstart");
+        ignoreBoosterSets.add("Jumpstart 2022");
+        ignoreBoosterSets.add("Foundations Jumpstart");
+        ignoreBoosterSets.add("Ravnica: Clue Edition");
+        // joke or un-sets, low implemented cards
+        ignoreBoosterSets.add("Unglued");
+        ignoreBoosterSets.add("Unhinged");
+        ignoreBoosterSets.add("Unstable");
+        ignoreBoosterSets.add("Unfinity");
+        // other
+        ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
+        ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
+        ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
+
+        for (ExpansionSet set : sets) {
+            MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
+            if (jsonSet == null) {
+                continue;
+            }
+            boolean needBooster = jsonSet.booster != null && !jsonSet.booster.isEmpty();
+            if (set.hasBoosters() != needBooster) {
+                if (ignoreBoosterSets.contains(set.getName())) {
+                    continue;
+                }
+                // error example: wrong booster settings (set MUST HAVE booster, but haven't) - 2020 - J22 - Jumpstart 2022 - boosters: [jumpstart]
+                errorsList.add(String.format("Error: wrong booster settings (set %s booster, but %s) - %s%s",
+                        (needBooster ? "MUST HAVE" : "MUST HAVEN'T"),
+                        (set.hasBoosters() ? "have" : "haven't"),
+                        set.getReleaseYear() + " - " + set.getCode() + " - " + set.getName(),
+                        (jsonSet.booster == null ? "" : " - boosters: " + jsonSet.booster.keySet())
+                ));
+            }
+        }
+
+        // CHECK: missing important sets for draft format
+        Set<String> implementedSets = sets.stream().map(ExpansionSet::getCode).collect(Collectors.toSet());
+        MtgJsonService.sets().values().forEach(jsonSet -> {
+            if (jsonSet.booster != null && !jsonSet.booster.isEmpty() && !implementedSets.contains(jsonSet.code)) {
+                errorsList.add(String.format("Error: missing set implementation (important for draft format) - %s - %s - boosters: %s",
+                        jsonSet.code,
+                        jsonSet.name,
+                        jsonSet.booster.keySet()
+                ));
+            }
+        });
 
         // TODO: add test to check num cards for rarity (rarityStats > 0 and numRarity > 0)
         printMessages(warningsList);
@@ -1038,6 +1119,9 @@ public class VerifyCardDataTest {
             }
 
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
+                if (OmenCard.class.isAssignableFrom(card.getCardClass())) { // temporary until mtgjson fixed
+                    continue;
+                }
                 boolean cardHaveDoubleName = (doubleNames.getOrDefault(card.getName(), 0) > 1);
                 boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
 
@@ -1056,9 +1140,12 @@ public class VerifyCardDataTest {
             }
 
             // CHECK: set code must be compatible with tests commands format like "SET-card"
-            // how-to fix: increase lookup lenth
-            if (set.getCode().length() + 1 > CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH) {
-                errorsList.add("Error: set code too big for test commads lookup: " + set.getCode() + ", lookup length: " + CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH);
+            // how-to fix: change min/max lookup length
+            if (set.getCode().length() < CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH
+                    || set.getCode().length() > CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH) {
+                errorsList.add("Error: set code un-supported by test commands lookup: " + set.getCode()
+                        + ", min length: " + CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH
+                        + ", max length: " + CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH);
             }
 
             boolean containsDoubleSideCards = false;
@@ -1314,7 +1401,7 @@ public class VerifyCardDataTest {
                 // - fix error in token's constructor
                 errorsList.add("Error: token must have default constructor with zero params: " + tokenClass.getName());
             } else if (tokDataNamesIndex.getOrDefault(token.getName().replace(" Token", ""), "").isEmpty()) {
-                if (token instanceof CreatureToken) {
+                if (token instanceof CreatureToken || token instanceof XmageToken) {
                     // ignore custom token builders
                     continue;
                 }
@@ -1339,7 +1426,8 @@ public class VerifyCardDataTest {
             // CHECK: tokens must have Token word in the name
             if (token.getDescription().startsWith(token.getName() + ", ")
                     || token.getDescription().contains("named " + token.getName())
-                    || (token instanceof CreatureToken)) {
+                    || (token instanceof CreatureToken)
+                    || (token instanceof XmageToken)) {
                 // ignore some names:
                 // - Boo, a legendary 1/1 red Hamster creature token with trample and haste
                 // - 1/1 green Insect creature token with flying named Butterfly
@@ -1581,6 +1669,12 @@ public class VerifyCardDataTest {
     private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
+            if (card instanceof SpellOptionCard && ref.layout.equals("reversible_card")) {
+                // TODO: Remove when MtgJson updated
+                // workaround for reversible omen cards e.g. Bloomvine Regent // Claim Territory // Bloomvine Regent
+                // both sides have main card info
+                return;
+            }
             checkAll(card, ref, cardIndex);
         } else if (!CHECK_ONLY_ABILITIES_TEXT) {
             warn(card, "Can't find card in mtgjson to verify");
@@ -1613,9 +1707,11 @@ public class VerifyCardDataTest {
             checkRarityAndBasicLands(card, ref);
             checkMissingAbilities(card, ref);
             checkWrongSymbolsInRules(card);
-            checkCardCanBeCopied(card);
+            if (CHECK_COPYABLE_FIELDS) {
+                checkCardCanBeCopied(card);
+            }
         }
-        checkWrongAbilitiesText(card, ref, cardIndex);
+        checkWrongAbilitiesText(card, ref, cardIndex, false);
     }
 
     private void checkColors(Card card, MtgJsonCard ref) {
@@ -1643,6 +1739,9 @@ public class VerifyCardDataTest {
         }
     }
 
+    // "copy" fails means that the copy constructor are not correct inside a card.
+    // To fix those, try to find the class that did trigger the copy failure, and check
+    // that copy() exists, a copy constructor exists, and the copy constructor is right. 
     private void checkCardCanBeCopied(Card card1) {
         Card card2;
         try {
@@ -1652,18 +1751,180 @@ public class VerifyCardDataTest {
             return;
         }
 
-        // Checks that ability and effect are of the same class when copied.
-        for (int i = 0; i < card1.getAbilities().size(); i++) {
-            Ability ability1 = card1.getAbilities().get(i);
-            Ability ability2 = card2.getAbilities().get(i);
-            if (!ability1.getClass().equals(ability2.getClass())) {
-                fail(card1, "copy", " miss copy in ability " + ability1.getClass().getName());
+        compareClassRecursive(card1, card2, card1, "[Card", 10, new HashSet<>(), true);
+    }
+
+    /**
+     * @param obj1           first object to compare. Initially the original card.
+     * @param obj2           second object to compare. Initially the copy of the original card.
+     * @param originalCard   the original card, used to print a nice message on fail.
+     * @param msg            the recursively built message to explain what is different.
+     * @param maxDepth       the maximum allowed recursion. A safety mesure for the test to end.
+     * @param alreadyChecked Map of all Cards obj1 already compared.
+     * @param useRecursive   When false, do not recursively compare Cards.
+     */
+    private void compareClassRecursive(Object obj1, Object obj2, Card originalCard, String msg, int maxDepth,
+                                       Set<Card> alreadyChecked, boolean useRecursive) {
+        if (obj1 == null && obj2 == null) {
+            return;
+        } else if (obj1 == null || obj2 == null) {
+            fail(originalCard, "copy", "not same class for " + msg + "]");
+        } else if (obj1.getClass() != obj2.getClass()) {
+            fail(originalCard, "copy", "not same class for " + msg + "<" + obj1.getClass() + ">" + "]");
+        } else if (obj1 == obj2) { // for instances mostly
+            return;
+        } else {
+            // Only recurse so much.
+            if (maxDepth == 0) {
+                return;
             }
-            for (int j = 0; j < ability1.getEffects().size(); j++) {
-                Effect effect1 = ability1.getEffects().get(j);
-                Effect effect2 = ability2.getEffects().get(j);
-                if (!effect1.getClass().equals(effect2.getClass())) {
-                    fail(card1, "copy", "miss copy in effect " + effect1.getClass().getName());
+            // Only recurse on those objects
+            if (obj1 instanceof MageObject || obj1 instanceof Filter || obj1 instanceof Condition || obj1 instanceof Effect
+                    || obj1 instanceof Ability || obj1 instanceof Mana || obj1 instanceof Cost || obj1 instanceof DynamicValue
+                    || obj1 instanceof Choice || obj1 instanceof TargetPointer) {
+
+                boolean doRecurse = useRecursive;
+                if (obj1 instanceof Card) {
+                    if (alreadyChecked.contains(obj1)) {
+                        if (!doRecurse) {
+                            return; // we already checked that obj1 and do not want to recurse. stop there.
+                        } else {
+                            doRecurse = false;
+                        }
+                    } else {
+                        alreadyChecked.add((Card) obj1);
+                    }
+                }
+
+                //System.out.println(msg);
+                Class class1 = obj1.getClass();
+                Class class2 = obj2.getClass();
+                do {
+                    if (class1 == null && class2 == null) {
+                        return;
+                    }
+                    if (class1 == null || class2 == null) {
+                        fail(originalCard, "copy", "not same class for " + msg + "<" + obj1.getClass() + ">" + "]");
+                        return;
+                    }
+                    if (class1.equals(ArrayList.class)) {
+                        List list1 = (ArrayList) obj1;
+                        List list2 = (ArrayList) obj2;
+                        Iterator it1 = list1.iterator();
+                        Iterator it2 = list2.iterator();
+                        int i = 0;
+                        while (it1.hasNext() && it2.hasNext()) {
+                            compareClassRecursive(it1.next(), it2.next(), originalCard, msg + "<" + obj1.getClass() + ">" + "[" + i++ + "]", maxDepth - 1, alreadyChecked, useRecursive);
+                        }
+                        if (it1.hasNext() || it2.hasNext()) {
+                            fail(originalCard, "copy", "not same size for (ArrayList) " + msg + "]");
+                        }
+                        return;
+                    }
+
+
+                    List<Field> ability2Fields = Arrays.stream(class2.getDeclaredFields()).collect(Collectors.toList());
+
+                    // Special fields for CardImpl.class
+                    boolean hasSpellAbilityField = false;
+                    boolean hasMeldField = false;
+                    boolean hasSecondSideCardField = false;
+                    // Special fields for AbilityImpl.class
+                    boolean hasWatchersField = false;
+                    boolean hasModesField = false;
+
+                    int fieldIndex = 0;
+                    for (Field field1 : class1.getDeclaredFields()) {
+                        Field field2 = ability2Fields.get(fieldIndex);
+
+                        field1.setAccessible(true);
+                        field2.setAccessible(true);
+                        try {
+                            Object value1 = field1.get(obj1);
+                            Object value2 = field2.get(obj2);
+
+                            boolean doFieldRecurse = true;
+                            if (class1 == CardImpl.class) {
+                                if (field1.getName().equals("spellAbility")) {
+                                    compareClassRecursive(((CardImpl) obj1).getSpellAbility(), ((CardImpl) obj2).getSpellAbility(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
+                                    doFieldRecurse = false;
+                                    hasSpellAbilityField = true;
+                                } else if (field1.getName().equals("meldsToCard")) {
+                                    compareClassRecursive(((CardImpl) obj1).getMeldsToCard(), ((CardImpl) obj2).getMeldsToCard(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
+                                    doFieldRecurse = false;
+                                    hasMeldField = true;
+                                } else if (field1.getName().equals("secondSideCard")) {
+                                    compareClassRecursive(((CardImpl) obj1).getSecondCardFace(), ((CardImpl) obj2).getSecondCardFace(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
+                                    doFieldRecurse = false;
+                                    hasSecondSideCardField = true;
+                                }
+                            }
+                            if (class1 == AbilityImpl.class) {
+                                if (field1.getName().equals("watchers")) {
+                                    // Watchers are only used on initialization, they are not copied.
+                                    doFieldRecurse = false;
+                                    hasWatchersField = true;
+                                }
+                                if (field1.getName().equals("modes")) {
+                                    //compareClassRecursive(((AbilityImpl) obj1).getModes(), ((AbilityImpl) obj2).getModes(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
+                                    compareClassRecursive(((AbilityImpl) obj1).getEffects(), ((AbilityImpl) obj2).getEffects(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
+                                    doFieldRecurse = false;
+                                    hasModesField = true;
+                                }
+                            }
+                            if (doFieldRecurse) {
+                                compareClassRecursive(value1, value2, originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
+                            }
+                        } catch (IllegalArgumentException | IllegalAccessException e) {
+                        }
+                        fieldIndex++;
+                    }
+
+                    // Do check that the expected special fields were encountered.
+                    // If those field are no relevant anymore, or were renamed, please modify the matching code
+                    // block above on how to loop into those fields.
+                    if (class1 == CardImpl.class) {
+                        if (!hasSpellAbilityField) {
+                            fail(originalCard, "copy", "was expecting a spellAbility field, but found none " + msg + "]");
+                        }
+                        if (!hasMeldField) {
+                            fail(originalCard, "copy", "was expecting a meldsToCard field, but found none " + msg + "]");
+                        }
+                        if (!hasSecondSideCardField) {
+                            fail(originalCard, "copy", "was expecting a secondSideCard field, but found none " + msg + "]");
+                        }
+                    } else if (class1 == AbilityImpl.class) {
+                        if (!hasWatchersField) {
+                            fail(originalCard, "copy", "was expecting a watchers field, but found none " + msg + "]");
+                        }
+                        if (!hasModesField) {
+                            fail(originalCard, "copy", "was expecting a modes field, but found none " + msg + "]");
+                        }
+                    }
+
+                    class1 = class1.getSuperclass();
+                    class2 = class2.getSuperclass();
+                } while (class1 != Object.class && class1 != null);
+            } else if (obj1 instanceof Collection) {
+                Collection col1 = (Collection) obj1;
+                Collection col2 = (Collection) obj2;
+                Iterator it1 = col1.iterator();
+                Iterator it2 = col2.iterator();
+                int i = 0;
+                while (it1.hasNext() && it2.hasNext()) {
+                    compareClassRecursive(it1.next(), it2.next(), originalCard, msg + "<" + obj1.getClass() + ">" + "[" + i++ + "]", maxDepth - 1, alreadyChecked, useRecursive);
+                }
+                if (it1.hasNext() || it2.hasNext()) {
+                    fail(originalCard, "copy", "not same size for (Collection) " + msg + "]");
+                }
+            } else if (obj1 instanceof Map) {
+                Map map1 = (Map) obj1;
+                Map map2 = (Map) obj2;
+                map1.forEach((i, el1) -> {
+                    compareClassRecursive(el1, ((Map<?, ?>) obj2).get(i), originalCard, msg + "<" + obj1.getClass() + ">" + ".(" + i + ")", maxDepth - 1, alreadyChecked, useRecursive);
+                });
+                if (map1.size() != map2.size()) {
+                    fail(originalCard, "copy", "not same size for (Map) " + msg + "]");
                 }
             }
         }
@@ -1743,6 +2004,9 @@ public class VerifyCardDataTest {
             return;
         }
 
+        String refLowerText = ref.text.toLowerCase(Locale.ENGLISH);
+        String cardLowerText = String.join("\n", card.getRules()).toLowerCase(Locale.ENGLISH);
+
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
@@ -1794,8 +2058,90 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "legendary nonpermanent cards need to have LegendarySpellAbility");
         }
 
+        // special check: mutate is not supported yet, so must be removed from sets
         if (card.getAbilities().containsClass(MutateAbility.class)) {
+            // how-to fix: add that code at the end of the set
+            // cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
             fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
+        }
+
+        // special check: some new creature's ETB must use When this creature enters instead When {this} enters
+        if (EntersBattlefieldTriggeredAbility.ENABLE_TRIGGER_PHRASE_AUTO_FIX) {
+            if (etbTriggerPhrases.isEmpty()) {
+                etbTriggerPhrases.addAll(EntersBattlefieldTriggeredAbility.getPossibleTriggerPhrases());
+                Assert.assertTrue(etbTriggerPhrases.get(0).startsWith("when"));
+            }
+            if (refLowerText.contains("when")) {
+                for (String needTriggerPhrase : etbTriggerPhrases) {
+                    if (refLowerText.contains(needTriggerPhrase) && !cardLowerText.contains(needTriggerPhrase)) {
+                        fail(card, "abilities", "wrong creature's ETB trigger phrase, must use: " + needTriggerPhrase);
+                    }
+                }
+            }
+        }
+
+        // special check: wrong dies triggers (there are also a runtime check on wrong usage, see isInUseableZoneDiesTrigger)
+        Set<String> ignoredCards = new HashSet<>();
+        ignoredCards.add("Caller of the Claw");
+        ignoredCards.add("Boneyard Scourge");
+        ignoredCards.add("Fell Shepherd");
+        ignoredCards.add("Massacre Girl");
+        ignoredCards.add("Infested Thrinax");
+        ignoredCards.add("Xira, the Golden Sting");
+        ignoredCards.add("Mawloc");
+        ignoredCards.add("Crack in Time");
+        ignoredCards.add("Mysterious Limousine");
+        ignoredCards.add("Graceful Antelope");
+        ignoredCards.add("Portcullis");
+        List<String> ignoredAbilities = new ArrayList<>();
+        ignoredAbilities.add("roll"); // roll die effects
+        ignoredAbilities.add("with \"When"); // token creating effects
+        ignoredAbilities.add("gains \"When"); // token creating effects
+        ignoredAbilities.add("and \"When"); // token creating effects
+        ignoredAbilities.add("it has \"When"); // token creating effects
+        ignoredAbilities.add("beginning of your end step"); // step triggers
+        ignoredAbilities.add("beginning of each end step"); // step triggers
+        ignoredAbilities.add("beginning of combat"); // step triggers
+        if (!ignoredCards.contains(card.getName())) {
+            for (Ability ability : card.getAbilities()) {
+                TriggeredAbility triggeredAbility = ability instanceof TriggeredAbility ? (TriggeredAbility) ability : null;
+                if (triggeredAbility == null) {
+                    continue;
+                }
+
+                // ignore exile effects
+                // example 1: exile up to one other target nonland permanent until Constable of the Realm leaves the battlefield.
+                if (ability.getAllEffects().stream().anyMatch(e -> e instanceof ExileUntilSourceLeavesEffect)) {
+                    continue;
+                }
+                // example 2: When Hostage Taker enters the battlefield, exile another target artifact or creature until Hostage Taker leaves the battlefield
+                if (ability instanceof EntersBattlefieldTriggeredAbility) {
+                    continue;
+                }
+
+
+                // search and check dies related abilities
+                String rules = triggeredAbility.getRule();
+                if (ignoredAbilities.stream().anyMatch(rules::contains)) {
+                    continue;
+                }
+                boolean isDiesAbility = rules.contains("die ")
+                        || (rules.contains("dies ") && !rules.contains("dies this turn"))
+                        || rules.contains("die,")
+                        || rules.contains("dies,");
+                boolean isPutToGraveAbility = rules.contains("put into")
+                        && rules.contains("graveyard")
+                        && rules.contains("from the battlefield");
+                boolean isLeavesBattlefield = rules.contains("leaves the battlefield");
+                if (triggeredAbility.isLeavesTheBattlefieldTrigger()) {
+                    // TODO: add check for wrongly enabled settings too?
+                } else {
+                    if (isDiesAbility || isPutToGraveAbility || isLeavesBattlefield) {
+                        fail(card, "abilities", "dies related trigger must use setLeavesTheBattlefieldTrigger(true) and possibly override isInUseableZone - "
+                                + triggeredAbility.getClass().getSimpleName());
+                    }
+                }
+            }
         }
 
         // special check: duplicated words in ability text (wrong target/filter usage)
@@ -1811,24 +2157,113 @@ public class VerifyCardDataTest {
             }
         }
 
-        // special check: missing or wrong ability/effect hints
-        Map<Class, String> hints = new HashMap<>();
-        hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
-        hints.put(MenaceAbility.class, "can't be blocked except by two or more");
-        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
-        hints.put(EquipAbility.class, "Equip only as a sorcery.");
-        hints.put(WardAbility.class, "becomes the target of a spell or ability an opponent controls");
-        hints.put(ProliferateEffect.class, "Choose any number of permanents and/or players, then give each another counter of each kind already there.");
-
-        for (Class objectClass : hints.keySet()) {
-            String objectHint = hints.get(objectClass);
-            // ability/effect must have description or not
-            boolean needHint = ref.text.contains(objectHint);
-            boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
-            if (needHint != haveHint) {
-                fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
+        // special check: wrong targeted ability
+        // possible fixes:
+        //  * on "must set withNotTarget(true)":
+        //    - check card's ability constructors and fix missing withNotTarget(true) param/field
+        //    - it's can be a keyword action (only mtg rules contains a target word), so add it to the targetedKeywords
+        // * on "must be targeted":
+        //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
+        boolean checkMissNonTargeted = !(card instanceof OmenCard); // must set withNotTarget(true) temporarily set to ignore omen cards
+        boolean checkMissTargeted = false; // must be targeted
+        List<String> targetedKeywords = Arrays.asList(
+                "target",
+                "enchant",
+                "equip",
+                "backup",
+                "modular",
+                "partner"
+        );
+        // card can contain rules text from both sides, so must search ref card for all sides too
+        String additionalName;
+        if (card instanceof AdventureCard) { // temporary to prevent failure due to upstream error
+            additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
+        } else if (card.isTransformable() && !card.isNightCard()) {
+            additionalName = card.getSecondCardFace().getName();
+        } else {
+            additionalName = null;
+        }
+        if (additionalName != null) {
+            MtgJsonCard additionalRef = MtgJsonService.cardFromSet(card.getExpansionSetCode(), additionalName, card.getCardNumber());
+            if (additionalRef == null) {
+                // how-to fix: add new card type processing for an additionalName searching above
+                fail(card, "abilities", "can't find second side info for target check");
+            } else {
+                if (additionalRef.text != null && !additionalRef.text.isEmpty()) {
+                    refLowerText += "\r\n" + additionalRef.text.toLowerCase(Locale.ENGLISH);
+                }
             }
         }
+        boolean needTargetedAbility = targetedKeywords.stream().anyMatch(refLowerText::contains);
+        boolean foundTargetedAbility = card.getAbilities()
+                .stream()
+                .map(Ability::getTargets)
+                .flatMap(Collection::stream)
+                .anyMatch(target -> !target.isNotTarget());
+        boolean foundProblem = needTargetedAbility != foundTargetedAbility;
+        if (checkMissTargeted && needTargetedAbility && foundProblem) {
+            fail(card, "abilities", "wrong target settings (must be targeted, but it not)");
+        }
+        if (checkMissNonTargeted && !needTargetedAbility && foundProblem) {
+            fail(card, "abilities", "wrong target settings (must set withNotTarget(true), but it not)");
+        }
+
+        // special check: missing or wrong ability/effect rules hint
+        Map<Class, String> ruleHints = new HashMap<>();
+        ruleHints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
+        ruleHints.put(MenaceAbility.class, "can't be blocked except by two or more");
+        ruleHints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom");
+        ruleHints.put(EquipAbility.class, "Equip only as a sorcery.");
+        ruleHints.put(WardAbility.class, "becomes the target of a spell or ability an opponent controls");
+        ruleHints.put(ProliferateEffect.class, "Choose any number of permanents and/or players, then give each another counter of each kind already there.");
+        for (Class objectClass : ruleHints.keySet()) {
+            String needText = ruleHints.get(objectClass);
+            // ability/effect must have description or not
+            boolean needHint = ref.text.contains(needText);
+            boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(needText));
+            if (needHint != haveHint) {
+                warn(card, "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
+            }
+        }
+
+        // special check: missing card hints like designation
+        Map<Class, String> cardHints = new HashMap<>();
+        cardHints.put(CitysBlessingHint.class, "city's blessing");
+        cardHints.put(MonarchHint.class, "the monarch");
+        cardHints.put(InitiativeHint.class, "the initiative");
+        cardHints.put(CurrentDungeonHint.class, "venture into");
+        for (Class hintClass : cardHints.keySet()) {
+            String lookupText = cardHints.get(hintClass);
+            boolean needHint = ref.text.contains(lookupText);
+            if (needHint) {
+                boolean haveHint = card.getAbilities()
+                        .stream()
+                        .flatMap(ability -> ability.getHints().stream())
+                        .anyMatch(h -> h.getClass().equals(hintClass));
+                if (!haveHint) {
+                    fail(card, "abilities", "miss card hint: " + hintClass.getSimpleName());
+                }
+            }
+        }
+
+        // special check: equip abilities must have controlled predicate due rules
+        List<EquipAbility> equipAbilities = card.getAbilities()
+                .stream()
+                .filter(a -> a instanceof EquipAbility)
+                .map(a -> (EquipAbility) a)
+                .collect(Collectors.toList());
+        equipAbilities.forEach(a -> {
+            List<Predicate> allPredicates = new ArrayList<>();
+            a.getTargets().forEach(t -> Predicates.collectAllComponents(t.getFilter().getPredicates(), t.getFilter().getExtraPredicates(), allPredicates));
+            boolean hasControlledFilter = allPredicates
+                    .stream()
+                    .filter(p -> p instanceof TargetController.ControllerPredicate)
+                    .map(p -> ((TargetController.ControllerPredicate) p).getController())
+                    .anyMatch(tc -> tc.equals(TargetController.YOU));
+            if (!hasControlledFilter) {
+                fail(card, "abilities", "card has equip ability, but it doesn't use controllered filter - " + a.getRule());
+            }
+        });
 
         // spells have only 1 ability
         if (card.isInstantOrSorcery()) {
@@ -1836,12 +2271,12 @@ public class VerifyCardDataTest {
         }
 
         // additional cost go to 1 ability
-        if (ref.text.startsWith("As an additional cost to cast")) {
+        if (refLowerText.startsWith("as an additional cost to cast")) {
             return;
         }
 
-        // always 1 ability (to cast)
-        if (card.getAbilities().toArray().length == 1) { // all cards have 1 inner ability to cast
+        // must have 1+ abilities all the time (to cast)
+        if (card.getAbilities().toArray().length <= 1) { // all cards have 1 inner ability to cast
             fail(card, "abilities", "card's abilities is empty, but ref have text");
         }
     }
@@ -1902,40 +2337,123 @@ public class VerifyCardDataTest {
                 .replace("<i>", "")
                 .replace("</i>", "");
 
+        newRule = CardNameUtil.normalizeCardName(newRule);
+
         return newRule.trim();
     }
 
     @Test
     public void test_showCardInfo() {
-        // debug only: show direct card info from class file without db-recreate
+        // debug only: show direct card rules from a class file without db-recreate
         //  - search by card name: Spark Double
-        //  - search by class name: SparkDouble
+        //  - search by class name from set: SparkDouble
+        //  - search by class name from non-set: SparkDoubleFixedV1;SparkDoubleFixedV2
         //  - multiple searches: name1;class2;name3
-        String cardSearches = "Spark Double";
+        String cardSearches = "Spark Double;AbandonedSarcophagus";
+
+        // command line support, e.g. check currently opened file
+        // compatible IDEs: IntelliJ IDEA, Visual Studio Code - see instructions in https://github.com/magefree/mage/wiki/Setting-up-your-Development-Environment
+        // example cmd: mvn install test "-Dxmage.showCardInfo=${fileBasenameNoExtension}" "-Dsurefire.failIfNoSpecifiedTests=false" "-Dxmage.build.tests.treeViewRunnerShowAllLogs=true" -Dtest=VerifyCardDataTest#test_showCardInfo
+        if (System.getProperty("xmage.showCardInfo") != null) {
+            cardSearches = System.getProperty("xmage.showCardInfo");
+        }
+
+        // prepare DBs
         CardScanner.scan();
+        MtgJsonService.cards();
+
         Arrays.stream(cardSearches.split(";")).forEach(searchName -> {
+            // original card
             searchName = searchName.trim();
+            String searchClass = String.format("mage.cards.%s.%s",
+                    searchName.substring(0, 1).toLowerCase(Locale.ENGLISH),
+                    searchName);
+
+            String foundCardName = "";
+            String foundClassName = "";
+
+            // search by name
             CardInfo cardInfo = CardRepository.instance.findCard(searchName);
-            if (cardInfo == null) {
-                String searchClass = String.format("mage.cards.%s.%s",
-                        searchName.substring(0, 1).toLowerCase(Locale.ENGLISH),
-                        searchName);
+            if (cardInfo != null) {
+                foundCardName = cardInfo.getName();
+                foundClassName = cardInfo.getClassName();
+            }
+
+            // search by class from set
+            if (foundClassName.isEmpty()) {
                 cardInfo = CardRepository.instance.findCardsByClass(searchClass)
                         .stream()
                         .findFirst()
                         .orElse(null);
+                if (cardInfo != null) {
+                    foundCardName = cardInfo.getName();
+                    foundClassName = cardInfo.getClassName();
+                }
             }
-            if (cardInfo == null) {
+
+            // search by class from non-set (must store in mage.cards.* package)
+            if (foundClassName.isEmpty()) {
+                Reflections reflections = new Reflections(searchClass);
+                try {
+                    Set<Class<? extends CardImpl>> founded = reflections.getSubTypesOf(CardImpl.class);
+                    if (!founded.isEmpty()) {
+                        foundClassName = founded.stream().findFirst().get().getName();
+                        foundCardName = searchClass;
+                    }
+                } catch (Exception e) {
+                    if (!e.getMessage().contains("SubTypesScanner was not configured")) {
+                        // unknown error
+                        throw e;
+                    }
+                }
+            }
+
+            if (foundClassName.isEmpty()) {
                 Assert.fail("Can't find card by name or class: " + searchName);
             }
-            CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), "test", "123", Rarity.COMMON);
-            Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+
+            CardSetInfo testSet = new CardSetInfo(foundCardName, "test", "123", Rarity.COMMON);
+            Card card = CardImpl.createCard(foundClassName, testSet);
+            Assert.assertNotNull("Card can't be loaded: " + foundClassName, card);
+
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
-            if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
-                card.getAbilities().getRules(card.getName()).forEach(this::printAbilityText);
+            if (card instanceof CardWithSpellOption) {
+                // format to print main card then spell card
+                card.getInitAbilities().getRules().forEach(this::printAbilityText);
+                ((CardWithSpellOption) card).getSpellCard().getAbilities().getRules().forEach(r -> printAbilityText(r.replace("&mdash; ", "\n")));
+            } else if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
+                card.getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
+            }
+
+            // ref card
+            System.out.println();
+            MtgJsonCard refMain = MtgJsonService.card(card.getName());
+            MtgJsonCard refSpell = null;
+            if (card instanceof CardWithSpellOption) {
+                refSpell = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
+            }
+            if (refMain == null) {
+                refMain = MtgJsonService.cardByClassName(foundClassName);
+            }
+            if (refMain != null) {
+                System.out.println("ref: " + refMain.getNameAsFace() + " " + refMain.manaCost);
+                System.out.println(refMain.text);
+                if (refSpell != null) {
+                    System.out.println(refSpell.getNameAsFace() + " " + refSpell.manaCost);
+                    System.out.println(refSpell.text);
+                }
+            } else {
+                System.out.println("WARNING, can't find mtgjson ref for " + card.getName());
+            }
+
+            // additional check to simulate diff in rules
+            if (refMain != null) {
+                checkWrongAbilitiesText(card, refMain, 0, true);
+            } else if (refSpell != null) {
+                checkWrongAbilitiesText(((CardWithSpellOption) card).getSpellCard(), refSpell, 0, true);
             }
         });
     }
@@ -1945,65 +2463,12 @@ public class VerifyCardDataTest {
         System.out.println(text);
     }
 
-
-    /*
-        for(String rule : card.getRules()) {
-            rule = rule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
-            // TODO: add Equip {3} checks
-            // TODO: add Raid and other words checks
-            String[] sl = rule.split(":");
-            if (sl.length == 2 && !sl[0].isEmpty()) {
-                String cardCost = sl[0]
-                        .replace("{this}", card.getName())
-                        //.replace("<i>", "")
-                        //.replace("</i>", "")
-                        .replace("&mdash;", "—");
-                String cardAbility = sl[1]
-                        .trim()
-                        .replace("{this}", card.getName())
-                        //.replace("<i>", "")
-                        //.replace("</i>", "")
-                        .replace("&mdash;", "—");
-
-                boolean found = false;
-                for (String refRule : refRules) {
-                    refRule = refRule.replaceAll("(?i)<i>.+</i>", ""); // Ignoring reminder text in italic
-
-                    // fix for ref mana: ref card have xxx instead {T}: Add {xxx}, example: W
-                    if (refRule.length() == 1) {
-                        refRule = "{T}: Add {" + refRule + "}";
-                    }
-                    refRule = refRule
-                            .trim()
-                            //.replace("<i>", "")
-                            //.replace("</i>", "")
-                            .replace("&mdash;", "—");
-
-                    // normal
-                    if (refRule.startsWith(cardCost)) {
-                        found = true;
-                        break;
-                    }
-
-                    // ref card have (xxx) instead xxx, example: ({T}: Add {G}.)
-                    // ref card have <i>(xxx) instead xxx, example: <i>({T}: Add {G}.)</i>
-                    // TODO: delete?
-                    if (refRule.startsWith("(" + cardCost)) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    fail(card, "abilities", "card ability have cost, but can't find in ref [" + cardCost + ": " + cardAbility + "]");
-                }
-            }
-
-        }
-    }*/
     private static boolean compareText(String cardText, String refText, String name) {
         return cardText.equals(refText)
-                || cardText.replace(name, name.split(", ")[0]).equals(refText)
-                || cardText.replace(name, name.split(" ")[0]).equals(refText);
+                || cardText.replace(name, name.split(", ")[0])
+                .equals(refText.replace(name, name.split(", ")[0]))
+                || cardText.replace(name, name.split(" ")[0])
+                .equals(refText.replace(name, name.split(" ")[0]));
     }
 
     private static boolean checkForEffect(Card card, Class<? extends Effect> effectClazz) {
@@ -2018,6 +2483,9 @@ public class VerifyCardDataTest {
     }
 
     private void checkWrongAbilitiesTextStart() {
+        if (FULL_ABILITIES_CHECK_SET_CODES.isEmpty()) {
+            return;
+        }
         System.out.println("Ability text checks started for " + FULL_ABILITIES_CHECK_SET_CODES);
         wrongAbilityStatsTotal = 0;
         wrongAbilityStatsGood = 0;
@@ -2025,17 +2493,21 @@ public class VerifyCardDataTest {
     }
 
     private void checkWrongAbilitiesTextEnd() {
+        if (FULL_ABILITIES_CHECK_SET_CODES.isEmpty()) {
+            return;
+        }
+
         // TODO: implement tests result/stats by github actions to show in check message compared to prev version
-        System.out.println(String.format(""));
-        System.out.println(String.format("Stats for %d cards checked for abilities text:", wrongAbilityStatsTotal));
-        System.out.println(String.format(" - Cards with correct text:  %5d (%.2f)", wrongAbilityStatsGood, wrongAbilityStatsGood * 100.0 / wrongAbilityStatsTotal));
-        System.out.println(String.format(" - Cards with text errors:   %5d (%.2f)", wrongAbilityStatsBad, wrongAbilityStatsBad * 100.0 / wrongAbilityStatsTotal));
-        System.out.println(String.format(""));
+        System.out.println();
+        System.out.printf("Stats for %d cards checked for abilities text:%n", wrongAbilityStatsTotal);
+        System.out.printf(" - Cards with correct text:  %5d (%.2f)%n", wrongAbilityStatsGood, wrongAbilityStatsGood * 100.0 / wrongAbilityStatsTotal);
+        System.out.printf(" - Cards with text errors:   %5d (%.2f)%n", wrongAbilityStatsBad, wrongAbilityStatsBad * 100.0 / wrongAbilityStatsTotal);
+        System.out.println();
     }
 
-    private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
+    private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex, boolean forceToCheck) {
         // checks missing or wrong text
-        if (!FULL_ABILITIES_CHECK_SET_CODES.equals("*") && !FULL_ABILITIES_CHECK_SET_CODES.contains(card.getExpansionSetCode())) {
+        if (!forceToCheck && !FULL_ABILITIES_CHECK_SET_CODES.equals("*") && !FULL_ABILITIES_CHECK_SET_CODES.contains(card.getExpansionSetCode())) {
             return;
         }
         if (wasCheckedByAbilityText(ref)) {
@@ -2074,24 +2546,29 @@ public class VerifyCardDataTest {
             refText += "<br>";
             refText = refText.replace("<br>", "\n");
         }
-        // mana ability fix
-        for (String s : refText.split("[\\$\\\n]")) {
-            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {"))
-                    || !(s.contains("} or {") || s.contains("}, or {"))) {
-                continue;
-            }
-            String newStr = "";
-            for (String c : s.split("[\\{\\}]")) {
-                if ("WUBRG".contains(c) && c.length() > 0) {
-                    newStr += "{T}: Add {" + c + "}.\n";
-                }
-            }
-            if (!newStr.isEmpty()) {
-                newStr = newStr.substring(0, newStr.length() - 1);
-            }
-            refText = refText.replace(s, newStr);
-        }
 
+        // remove unnecessary reminder text
+        refText = refText.replaceAll("^\\(.+(can be paid with|ransforms from|represents).+\\)\n", "");
+
+        // mana ability fix
+        // Current implementation makes one Activated Ability per kind of color.
+        // We split such abilities in the reference text.
+        // For instance "{T}: Add {G} or {W}."
+        //      becomes "{T}: Add {G}.\n{T}: Add {W}."
+        //
+        // The regex down handle more complex situations.
+        refText = splitManaAbilities(refText);
+
+        // cycling fix
+        // Current implementation makes one CyclingAbility per quality,
+        // We split such abilities in the reference text.
+        //
+        // For instance "Swampcycling {2}, mountaincycling {2}"
+        //      becomes "Swampcycling {2}\nMountaincycling {2}"
+        refText = splitCyclingAbilities(refText);
+
+        // ref text can contain dirty spaces after some text remove/fix, example: anchor words in Struggle for Project Purity
+        refText = refText.replaceAll(" +", " ");
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
@@ -2100,23 +2577,27 @@ public class VerifyCardDataTest {
 
         if (ref.subtypes.contains("Adventure")) {
             for (int i = 0; i < refRules.length; i++) {
-                refRules[i] = new StringBuilder("Adventure ")
-                        .append(ref.types.get(0))
-                        .append(" - ")
-                        .append(ref.faceName)
-                        .append(' ')
-                        .append(ref.manaCost)
-                        .append(" - ")
-                        .append(refRules[i])
-                        .toString();
+                refRules[i] = "Adventure " +
+                        ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
             }
         }
-
+        if (ref.subtypes.contains("Omen")) {
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = "Omen " +
+                        ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
+            }
+        }
 
         String[] cardRules = card
                 .getRules()
                 .stream()
-                .filter(s -> !(card instanceof AdventureCard) || !s.startsWith("Adventure "))
+                .filter(s -> !(card instanceof CardWithSpellOption) || !(s.startsWith("Adventure ") || s.startsWith("Omen ")))
                 .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
@@ -2129,6 +2610,12 @@ public class VerifyCardDataTest {
 
         boolean isFine = true;
         for (int i = 0; i < cardRules.length; i++) {
+            if (cardRules[i].startsWith("Use the Special button")) {
+                // This is a rules text for GUI implication like Quenchable Fire
+                cardRules[i] = "+ " + cardRules[i];
+                continue;
+            }
+
             boolean isAbilityFounded = false;
             for (int j = 0; j < refRules.length; j++) {
                 String refRule = refRules[j];
@@ -2165,10 +2652,10 @@ public class VerifyCardDataTest {
         }
 
         // extra message for easy checks
-        if (!isFine) {
+        if (forceToCheck || !isFine) {
             System.out.println();
 
-            System.out.println("Wrong card " + cardIndex + ": " + card.getName());
+            System.out.println((isFine ? "Good" : "Wrong") + " card " + cardIndex + ": " + card.getName());
             Arrays.sort(cardRules);
             for (String s : cardRules) {
                 System.out.println(s);
@@ -2182,6 +2669,132 @@ public class VerifyCardDataTest {
 
             System.out.println();
         }
+    }
+
+    private String splitCyclingAbilities(String refText) {
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (!Pattern.matches("^[a-zA-Z]*cycling .*, [a-zA-Z]*cycling.*", s)) {
+                continue;
+            }
+            String newStr = "";
+            Pattern p = Pattern.compile(", [a-zA-Z]*cycling");
+            Matcher m = p.matcher(s);
+            int start = 0;
+            while (m.find()) {
+                String group = m.group();
+                int newStart = m.start();
+                newStr += s.substring(start, newStart) + "\n" + group.substring(2, 3).toUpperCase() + group.substring(3);
+                start = newStart + group.length();
+            }
+            newStr += s.substring(start);
+            refText = refText.replace(s, newStr);
+        }
+        return refText;
+    }
+
+    @Test
+    public void checkSplitCyclingAbilities() {
+        // Test the function splitting cycling abilities is correct.
+
+        Assert.assertEquals(
+                "Swampcycling {2}\nMountaincycling {2}",
+                splitCyclingAbilities("Swampcycling {2}, mountaincycling {2}")
+        );
+    }
+
+    private String splitManaAbilities(String refText) {
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (!Pattern.matches("[^\"']*: Add [^\\.]* or.*\\..*", s)) {
+                continue;
+            }
+            // Loyalty Abilities
+            if (s.startsWith("0") || s.startsWith("+") || s.startsWith("-")) {
+                continue;
+            }
+            // Leafkin Avenger
+            if (s.contains("} for")) {
+                continue;
+            }
+
+            // Splitting the ability into three segments:
+            //
+            // {G/W}, {T}: Add {G}{G}, {G}{W}, or {W}{W}. This mana can only be used to cast multicolor spells.
+            // ^^^^^^^^^^^^^^^^                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            //     before      ^^^^^^^^^^^^^^^^^^^^^^^^^                    after
+            //                       middle
+            int beforeLength = s.indexOf(": Add ");
+            String before = s.substring(0, beforeLength + 6);
+            int middleIndex = s.indexOf('.', beforeLength);
+            String middle = s.substring(beforeLength + 6, middleIndex);
+            String after = s.substring(middleIndex);
+
+            //making life easier on the split
+            middle = middle
+                    .replace(", or ", "|")
+                    .replace(" or ", "|")
+                    .replace(", ", "|");
+
+            // This now looks like "{G}{G}|{G}{W}|{W}{W}".
+            // for each part, make a new line with 'before + part + end'
+            String newStr = "";
+            for (String part : middle.split("[|]")) {
+                newStr += before + part + after + "\n";
+            }
+            if (!newStr.isEmpty()) {
+                newStr = newStr.substring(0, newStr.length() - 1);
+            }
+            refText = refText.replace(s, newStr);
+        }
+        return refText;
+    }
+
+    @Test
+    public void checkSplitManaAbilities() {
+        // Test the function splitting mana abilities is correct.
+
+        Assert.assertEquals(
+                "{T}: Add {G}.\n{T}: Add {W}.",
+                splitManaAbilities("{T}: Add {G} or {W}.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {G}.\n{T}: Add {W}.\n{T}: Add {R}.",
+                splitManaAbilities("{T}: Add {G}, {W}, or {R}.")
+        );
+        Assert.assertEquals(
+                "{G/W}, {T}: Add {G}{G}.\n{G/W}, {T}: Add {G}{W}.\n{G/W}, {T}: Add {W}{W}.",
+                splitManaAbilities("{G/W}, {T}: Add {G}{G}, {G}{W}, or {W}{W}.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {R}.\n{T}: Add one mana of the chosen color.",
+                splitManaAbilities("{T}: Add {R} or one mana of the chosen color.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {B}. Activate only if you control a swamp.\n{T}: Add {U}. Activate only if you control a swamp.",
+                splitManaAbilities("{T}: Add {B} or {U}. Activate only if you control a swamp.")
+        );
+
+
+        // Not splitting those:
+        Assert.assertEquals(
+                "{T}: Each player creates a colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"",
+                splitManaAbilities("{T}: Each player creates a colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"")
+        );
+        Assert.assertEquals(
+                "+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
+        );
+        Assert.assertEquals(
+                "0: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("0: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
+        );
+        Assert.assertEquals(
+                "-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {G} for each creature with power 4 or greater you control.",
+                splitManaAbilities("{T}: Add {G} for each creature with power 4 or greater you control.")
+        );
     }
 
     private void checkTypes(Card card, MtgJsonCard ref) {
@@ -2313,7 +2926,7 @@ public class VerifyCardDataTest {
             if (!card.isBasic()) {
                 fail(card, "supertype", "basic land must be SuperType.BASIC");
             }
-        } else if (name.equals("Wastes")) {
+        } else if (name.equals("Wastes") || name.equals("Snow-Covered Wastes")) {
             // Wastes are SuperType.BASIC but not necessarily Rarity.LAND
             if (!card.isBasic()) {
                 fail(card, "supertype", "Wastes must be SuperType.BASIC");
@@ -2339,7 +2952,7 @@ public class VerifyCardDataTest {
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
         Map<String, Integer> cardRates = new HashMap<>();
         for (Card card : cardsList) {
-            int curRate = RateCard.rateCard(card, null, false);
+            int curRate = RateCard.rateCard(card, Collections.emptyList(), false);
             int prevRate = cardRates.getOrDefault(card.getName(), 0);
             if (prevRate == 0) {
                 cardRates.putIfAbsent(card.getName(), curRate);
@@ -2355,6 +2968,9 @@ public class VerifyCardDataTest {
     public void test_checkCardConstructors() {
         // create all cards, can catch additional verify and runtime checks from abilities and effects
         // example: wrong code usage errors
+        //
+        // warning, look at stack trace logs, not card names -- some error code can be hidden in static methods and can be called from un-related cards
+        // use test_showCardInfo for detailed errors
         Collection<String> errorsList = new ArrayList<>();
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
@@ -2363,14 +2979,15 @@ public class VerifyCardDataTest {
                     Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                             setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card == null) {
-                        errorsList.add("Error: broken constructor " + setInfo.getCardClass());
+                        errorsList.add("Error: can't create card - " + setInfo.getCardClass() + " - see logs for errors");
+                        continue;
                     }
                     if (!card.getExpansionSetCode().equals(set.getCode())) {
                         errorsList.add("Error: card constructor have custom expansionSetCode, must be removed " + setInfo.getCardClass());
                     }
                 } catch (Throwable e) {
                     // CardImpl.createCard don't throw exceptions (only error logs), so that logs are useless here
-                    logger.error("Error: can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
+                    errorsList.add("Error: can't create card - " + setInfo.getCardClass() + " - see logs for errors");
                 }
             }
         }
@@ -2455,5 +3072,62 @@ public class VerifyCardDataTest {
         if (errorsList.size() > 0) {
             Assert.fail(String.format("Card name converters contains unsupported unicode symbols in %d cards, see logs above", errorsList.size()));
         }
+    }
+
+    /**
+     * Not really a test. Used to make the changelog diff list
+     * for sets that are heavily worked on.
+     */
+    @Ignore
+    @Test
+    public void list_ChangelogHelper() {
+
+        String setCode = "LCC";
+        int maxCards = 100; // don't want to look above that card number, as those are alternate prints.
+        boolean doExclude = false; // use the excluded array or not.
+
+        // Excluded in that list, either already listed in a previous changelog, or exceptions.
+        Set<Integer> excluded = new HashSet<>(Arrays.asList(
+                8, 9, 49, 71, 76, 79, 80, 89, 90, 92, 96, 97
+        ));
+
+        for (int i = 17; i <= 68; ++i) {
+            excluded.add(i); // alternates version of the new cards.
+        }
+
+        /*
+        String setCode = "LCI";
+        int maxCards = 285; // don't want to look above that card number, as those are alternate prints.
+        boolean doExclude = false; // use the excluded array or not.
+
+        // Excluded in that list, either already listed in a previous changelog, or exceptions.
+        Set<Integer> excluded = new HashSet<>(Arrays.asList(
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 127, 128, 129, 130, 131, 132, 133, 134, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284
+        ));
+        */
+
+        Set<Integer> listChangelog = new HashSet<>();
+        List<ExpansionSet.SetCardInfo> setInfo = Sets.getInstance().get(setCode).getSetCardInfo();
+        for (ExpansionSet.SetCardInfo sci : setInfo) {
+            int cn = sci.getCardNumberAsInt();
+            if (cn > maxCards) {
+                continue;
+            }
+            if (doExclude && excluded.contains(cn)) {
+                continue;
+            }
+            listChangelog.add(cn);
+        }
+
+        List<Integer> sorted = listChangelog.stream().sorted().collect(Collectors.toList());
+
+        // to manual update the excluded array
+        System.out.println(sorted.stream().map(cn -> cn + "").collect(Collectors.joining(", ")));
+        // Scryfall list of all the new cards for that set
+        System.out.println(
+                "https://scryfall.com/search?q=s%3A" + setCode + "+-is%3Areprint+%28"
+                        + sorted.stream().map(cn -> "cn%3A" + cn).collect(Collectors.joining("+or+"))
+                        + "%29&order=set&as=grid&unique=cards"
+        );
     }
 }

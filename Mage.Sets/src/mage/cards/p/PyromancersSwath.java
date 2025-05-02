@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
@@ -25,10 +25,10 @@ public final class PyromancersSwath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // If an instant or sorcery source you control would deal damage to a creature or player, it deals that much damage plus 2 to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PyromancersSwathReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new PyromancersSwathReplacementEffect()));
 
         // At the beginning of each end step, discard your hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DiscardHandControllerEffect(), TargetController.ANY, null, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new DiscardHandControllerEffect(), false, null));
 
     }
 
@@ -49,7 +49,7 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
         staticText = "If an instant or sorcery source you control would deal damage to a permanent or player, it deals that much damage plus 2 to that permanent or player instead";
     }
 
-    PyromancersSwathReplacementEffect(final PyromancersSwathReplacementEffect effect) {
+    private PyromancersSwathReplacementEffect(final PyromancersSwathReplacementEffect effect) {
         super(effect);
     }
 
@@ -71,11 +71,6 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
             return object != null && object.isInstantOrSorcery(game);
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -29,7 +29,12 @@ public class CommanderDuelMatch extends MatchImpl {
             startLife = 25;
         }
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        CommanderDuel game = new CommanderDuel(options.getAttackOption(), options.getRange(), mulligan, startLife);
+        startLife = options.isCustomStartLifeEnabled() ? options.getCustomStartLife() : startLife;
+        int startHandSize = options.isCustomStartHandSizeEnabled() ? options.getCustomStartHandSize() : 7;
+        CommanderDuel game = new CommanderDuel(
+                options.getAttackOption(), options.getRange(),
+                mulligan, startLife, startHandSize
+        );
         game.setCheckCommanderDamage(checkCommanderDamage);
         game.setStartMessage(this.createGameStartMessage());
         initGame(game);

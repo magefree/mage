@@ -191,7 +191,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/buttons/card_panel.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Random"/>
+                    <Property name="text" type="java.lang.String" value="Generate"/>
                     <Property name="iconTextGap" type="int" value="1"/>
                     <Property name="name" type="java.lang.String" value="btnGenDeck" noResource="true"/>
                   </Properties>

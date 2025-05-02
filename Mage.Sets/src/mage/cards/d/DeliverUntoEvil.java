@@ -84,7 +84,7 @@ class DeliverUntoEvilEffect extends OneShotEffect {
             return player.moveCards(cards, Zone.HAND, source, game);
         }
         TargetOpponent targetOpponent = new TargetOpponent();
-        targetOpponent.setNotTarget(true);
+        targetOpponent.withNotTarget(true);
         if (!player.choose(outcome, targetOpponent, source, game)) {
             return false;
         }

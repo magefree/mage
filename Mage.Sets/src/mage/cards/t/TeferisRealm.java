@@ -4,7 +4,7 @@ package mage.cards.t;
 import java.util.*;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class TeferisRealm extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TeferisRealmEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new TeferisRealmEffect(), false));
     }
 
     private TeferisRealm(final TeferisRealm card) {
@@ -63,7 +63,7 @@ class TeferisRealmEffect extends OneShotEffect {
         this.staticText = "that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out";
     }
 
-    public TeferisRealmEffect(final TeferisRealmEffect effect) {
+    private TeferisRealmEffect(final TeferisRealmEffect effect) {
         super(effect);
     }
 

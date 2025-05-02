@@ -28,7 +28,7 @@ public final class CauldronOfSouls extends CardImpl {
         // {tap}: Choose any number of target creatures. Each of those creatures gains persist until end of turn.
         Effect effect = new GainAbilityTargetEffect(new PersistAbility(), Duration.EndOfTurn);
         effect.setText("choose any number of target creatures. Each of those creatures gains persist until end of turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURE, false));
         this.addAbility(ability);
 

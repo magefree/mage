@@ -2,8 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.CardImpl;
@@ -18,8 +17,6 @@ import java.util.UUID;
  */
 public final class BoulderbranchGolem extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public BoulderbranchGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
 
@@ -32,7 +29,7 @@ public final class BoulderbranchGolem extends CardImpl {
 
         // When Boulderbranch Golem enters the battlefield, you gain life equal to its power.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GainLifeEffect(xValue).setText("you gain life equal to its power")
+                new GainLifeEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("you gain life equal to its power")
         ));
     }
 

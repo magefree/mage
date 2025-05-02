@@ -4,6 +4,8 @@ package mage.cards.m;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,8 +42,8 @@ public final class MimicVat extends CardImpl {
         // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
         this.addAbility(new MimicVatTriggeredAbility());
 
-        // {3}, {tap}: Create a token that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MimicVatCreateTokenEffect(), new GenericManaCost(3));
+        // {3}, {T}: Create a token that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+        Ability ability = new SimpleActivatedAbility(new MimicVatCreateTokenEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -60,9 +62,10 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
 
     MimicVatTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MimicVatEffect(), true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    MimicVatTriggeredAbility(MimicVatTriggeredAbility ability) {
+    private MimicVatTriggeredAbility(final MimicVatTriggeredAbility ability) {
         super(ability);
     }
 
@@ -105,16 +108,21 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return AbilityWord.IMPRINT.formatWord() + "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with {this} to its owner's graveyard.";
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class MimicVatEffect extends OneShotEffect {
 
-    public MimicVatEffect() {
+    MimicVatEffect() {
         super(Outcome.Benefit);
         staticText = "exile that card";
     }
 
-    public MimicVatEffect(MimicVatEffect effect) {
+    private MimicVatEffect(final MimicVatEffect effect) {
         super(effect);
     }
 
@@ -155,12 +163,12 @@ class MimicVatEffect extends OneShotEffect {
 
 class MimicVatCreateTokenEffect extends OneShotEffect {
 
-    public MimicVatCreateTokenEffect() {
+    MimicVatCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a token that's a copy of a card exiled with {this}. It gains haste. Exile it at the beginning of the next end step";
     }
 
-    public MimicVatCreateTokenEffect(final MimicVatCreateTokenEffect effect) {
+    private MimicVatCreateTokenEffect(final MimicVatCreateTokenEffect effect) {
         super(effect);
     }
 

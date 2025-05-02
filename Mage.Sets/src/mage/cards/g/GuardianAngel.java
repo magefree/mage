@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
@@ -19,10 +18,12 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -50,12 +51,12 @@ public final class GuardianAngel extends CardImpl {
 
 class GuardianAngelEffect extends OneShotEffect {
 
-    public GuardianAngelEffect() {
+    GuardianAngelEffect() {
         super(Outcome.Benefit);
         this.staticText = "Prevent the next X damage that would be dealt to any target this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that permanent or player this turn";
     }
 
-    public GuardianAngelEffect(final GuardianAngelEffect effect) {
+    private GuardianAngelEffect(final GuardianAngelEffect effect) {
         super(effect);
     }
 
@@ -79,11 +80,11 @@ class GuardianAngelEffect extends OneShotEffect {
             } else {
                 targetName = "player " + targetPlayer.getName();
             }
-            ContinuousEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, source.getManaCostsToPay().getX(), false);
-            effect.setTargetPointer(getTargetPointer());
+            ContinuousEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, CardUtil.getSourceCostsTag(game, source, "X", 0), false);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             game.addEffect(effect, source);
             SpecialAction specialAction = new GuardianAngelAction();
-            specialAction.getEffects().get(0).setTargetPointer(getTargetPointer());
+            specialAction.getEffects().get(0).setTargetPointer(this.getTargetPointer().copy());
             specialAction.getEffects().get(0).setText("Prevent the next 1 damage that would be dealt to any target this turn (" + targetName + ").");
             new CreateSpecialActionEffect(specialAction).apply(game, source);
             // Create a hidden delayed triggered ability to remove the special action at end of turn.
@@ -103,7 +104,7 @@ class GuardianAngelAction extends SpecialAction {
         this.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1));
     }
 
-    GuardianAngelAction(final GuardianAngelAction ability) {
+    private GuardianAngelAction(final GuardianAngelAction ability) {
         super(ability);
     }
 
@@ -121,7 +122,7 @@ class GuardianAngelDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.setRuleVisible(false);
     }
 
-    GuardianAngelDelayedTriggeredAbility(GuardianAngelDelayedTriggeredAbility ability) {
+    private GuardianAngelDelayedTriggeredAbility(final GuardianAngelDelayedTriggeredAbility ability) {
         super(ability);
     }
 

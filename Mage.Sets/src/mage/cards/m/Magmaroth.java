@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 
@@ -23,7 +22,7 @@ public final class Magmaroth extends CardImpl{
         toughness = new MageInt(5);
 
         // At the beginning of your upkeep, put a -1/-1 counter on Magmaroth
-        addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance()), TargetController.YOU, false));
+        addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance())));
 
         // Whenever you cast a noncreature spell, remove a -1/-1 counter from Magmaroth
         addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()),
@@ -31,7 +30,7 @@ public final class Magmaroth extends CardImpl{
 
     }
 
-    public Magmaroth(final Magmaroth magmaroth){
+    private Magmaroth(final Magmaroth magmaroth){
         super(magmaroth);
     }
 

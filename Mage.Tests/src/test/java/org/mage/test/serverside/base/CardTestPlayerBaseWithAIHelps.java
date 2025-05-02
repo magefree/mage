@@ -15,7 +15,7 @@ public abstract class CardTestPlayerBaseWithAIHelps extends CardTestPlayerBase {
 
     @Override
     protected TestPlayer createPlayer(String name, RangeOfInfluence rangeOfInfluence) {
-        TestPlayer testPlayer = new TestPlayer(new TestComputerPlayer7(name, RangeOfInfluence.ONE, 6));
+        TestPlayer testPlayer = new TestPlayer(new TestComputerPlayer7(name, rangeOfInfluence, 6));
         testPlayer.setAIPlayer(false); // AI can't play it by itself, use AI commands
         return testPlayer;
     }

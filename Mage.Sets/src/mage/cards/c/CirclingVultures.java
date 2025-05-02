@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.ExileTopCreatureCardOfGraveyardCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
@@ -36,7 +36,7 @@ public final class CirclingVultures extends CardImpl {
         this.addAbility(new CirclingVulturesSpecialAction());
 
         // At the beginning of your upkeep, sacrifice Circling Vultures unless you exile the top creature card of your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTopCreatureCardOfGraveyardCost(1)), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTopCreatureCardOfGraveyardCost(1))));
     }
 
     private CirclingVultures(final CirclingVultures card) {
@@ -57,7 +57,7 @@ class CirclingVulturesSpecialAction extends SpecialAction {
         this.addEffect(new CirclingVulturesDiscardEffect());
     }
 
-    public CirclingVulturesSpecialAction(final CirclingVulturesSpecialAction ability) {
+    private CirclingVulturesSpecialAction(final CirclingVulturesSpecialAction ability) {
         super(ability);
     }
 
@@ -78,7 +78,7 @@ class CirclingVulturesDiscardEffect extends OneShotEffect {
         this.staticText = "discard {this}";
     }
 
-    public CirclingVulturesDiscardEffect(final CirclingVulturesDiscardEffect effect) {
+    private CirclingVulturesDiscardEffect(final CirclingVulturesDiscardEffect effect) {
         super(effect);
     }
 

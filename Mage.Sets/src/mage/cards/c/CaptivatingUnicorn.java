@@ -24,7 +24,7 @@ public final class CaptivatingUnicorn extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Constellation — Whenever an enchantment enters the battlefield under your control, tap target creature an opponent controls.
+        // Constellation — Whenever an enchantment you control enters, tap target creature an opponent controls.
         Ability ability = new ConstellationAbility(new TapTargetEffect(), false, false);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);

@@ -30,8 +30,8 @@ public final class YixlidJailer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Cards in graveyards lose all abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new YixlidJailerEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new YixlidJailerRulesEffect()));
+        this.addAbility(new SimpleStaticAbility(new YixlidJailerEffect()));
+        this.addAbility(new SimpleStaticAbility(new YixlidJailerRulesEffect()));
     }
 
     private YixlidJailer(final YixlidJailer card) {
@@ -46,7 +46,7 @@ public final class YixlidJailer extends CardImpl {
 
 class YixlidJailerEffect extends ContinuousEffectImpl {
 
-    public YixlidJailerEffect() {
+    YixlidJailerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
         staticText = "Cards in graveyards lose all abilities.";
 
@@ -96,7 +96,7 @@ class YixlidJailerEffect extends ContinuousEffectImpl {
 
 class YixlidJailerRulesEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public YixlidJailerRulesEffect() {
+    YixlidJailerRulesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, false, false);
     }
 

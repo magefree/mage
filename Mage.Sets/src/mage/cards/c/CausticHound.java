@@ -27,7 +27,7 @@ public final class CausticHound extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new LoseLifeAllPlayersEffect(4)));
     }
 
-    public CausticHound (final CausticHound card) {
+    private CausticHound(final CausticHound card) {
         super(card);
     }
 

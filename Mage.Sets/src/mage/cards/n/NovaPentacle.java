@@ -31,7 +31,7 @@ public final class NovaPentacle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NovaPentacleEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new NovaPentacleEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterCreaturePermanent(), false));
         this.addAbility(ability);
@@ -57,7 +57,7 @@ class NovaPentacleEffect extends RedirectionEffect {
         this.damageSource = new TargetSource();
     }
 
-    public NovaPentacleEffect(final NovaPentacleEffect effect) {
+    private NovaPentacleEffect(final NovaPentacleEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }
@@ -69,8 +69,8 @@ class NovaPentacleEffect extends RedirectionEffect {
 
     @Override
     public void init(Ability source, Game game) {
-        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
+        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

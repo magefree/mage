@@ -31,7 +31,7 @@ public final class MesaPegasus extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public MesaPegasus (final MesaPegasus card) {
+    private MesaPegasus(final MesaPegasus card) {
         super(card);
     }
 

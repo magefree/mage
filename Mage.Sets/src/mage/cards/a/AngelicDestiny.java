@@ -38,14 +38,14 @@ public final class AngelicDestiny extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +4/+4, has flying and first strike, and is an Angel in addition to its other types.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has flying");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and first strike");
         ability.addEffect(effect);
-        effect = new AddCardSubtypeAttachedEffect(SubType.ANGEL, Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect = new AddCardSubtypeAttachedEffect(SubType.ANGEL, AttachmentType.AURA);
         effect.setText(", and is an Angel in addition to its other types");
         ability.addEffect(effect);
         this.addAbility(ability);

@@ -13,9 +13,8 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -32,7 +31,7 @@ public final class VolosJournalToken extends TokenImpl {
         ).addHint(VolosJournalTokenHint.instance));
     }
 
-    protected VolosJournalToken(final VolosJournalToken token) {
+    private VolosJournalToken(final VolosJournalToken token) {
         super(token);
     }
 
@@ -42,13 +41,13 @@ public final class VolosJournalToken extends TokenImpl {
 
     public static Set<String> getNotedTypes(Game game, Permanent permanent) {
         if (permanent == null) {
-            return new HashSet<>();
+            return new LinkedHashSet<>();
         }
 
         String key = "notedTypes_" + permanent.getId() + '_' + permanent.getZoneChangeCounter(game);
         Object value = game.getState().getValue(key);
         if (value == null) {
-            Set<String> types = new HashSet<>();
+            Set<String> types = new LinkedHashSet<>();
             game.getState().setValue(key, types);
             return types;
         }
@@ -101,39 +100,45 @@ class VolosJournalTokenEffect extends OneShotEffect {
 
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
-            return true;
+            return false;
         }
 
         Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
 
-        Set<String> types = VolosJournalToken.getNotedTypes(game, permanent);
+        Set<String> notedTypes = VolosJournalToken.getNotedTypes(game, permanent);
 
-        ChoiceCreatureType choice = new ChoiceCreatureType();
+        ChoiceCreatureType choice = new ChoiceCreatureType(game, source);
 
         // By default ChoiceCreatureType pre-populates all creatures into choices
         // Limit the available choices to those on the creature being cast
         if (!spell.isAllCreatureTypes(game)) {
-            choice.setChoices(
-                    spell.getSubtype(game)
-                            .stream()
-                            .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
-                            .map(SubType::getDescription)
-                            .collect(Collectors.toSet())
-            );
+            choice.getKeyChoices().clear();
+            spell.getSubtype(game)
+                    .stream()
+                    .filter(subType -> subType.getSubTypeSet() == SubTypeSet.CreatureType)
+                    .map(SubType::getDescription)
+                    .forEach(subType -> {
+                        choice.withItem(subType, subType, null, null, null);
+                    });
         }
         // Remove from the possible choices the subtypes which have already been chosen.
-        choice.getChoices().removeIf(types::contains);
+        choice.getKeyChoices().keySet().removeIf(notedTypes::contains);
 
-        switch (choice.getChoices().size()) {
+        switch (choice.getKeyChoices().size()) {
             case 0:
                 return false;
             case 1:
-                types.add(choice.getChoices().stream().findFirst().get());
+                notedTypes.add(choice.getKeyChoices().keySet().stream().findFirst().get());
                 return true;
         }
 
-        player.choose(outcome, choice, game);
-        types.add(choice.getChoice());
+        if (!player.choose(outcome, choice, game)) {
+            return false;
+        }
+        notedTypes.add(choice.getChoiceKey());
         return true;
     }
 }

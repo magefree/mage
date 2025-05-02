@@ -56,12 +56,12 @@ public final class WordOfCommand extends CardImpl {
 
 class WordOfCommandEffect extends OneShotEffect {
 
-    public WordOfCommandEffect() {
+    WordOfCommandEffect() {
         super(Outcome.GainControl);
         this.staticText = "Look at target opponent's hand and choose a card from it. You control that player until {this} finishes resolving. The player plays that card if able. While doing so, the player can activate mana abilities only if they're from lands that player controls and only if mana they produce is spent to activate other mana abilities of lands the player controls and/or to play that card. If the chosen card is cast as a spell, you control the player while that spell is resolving";
     }
 
-    public WordOfCommandEffect(final WordOfCommandEffect effect) {
+    private WordOfCommandEffect(final WordOfCommandEffect effect) {
         super(effect);
     }
 
@@ -118,8 +118,8 @@ class WordOfCommandEffect extends OneShotEffect {
                         && !targetPlayer.playCard(card, game, false, new ApprovingObject(source, game))) {
                     SpellAbility spellAbility = card.getSpellAbility();
                     if (spellAbility != null) {
-                        spellAbility.getManaCostsToPay().clear();
-                        spellAbility.getManaCostsToPay().addAll(spellAbility.getManaCosts());
+                        spellAbility.clearManaCostsToPay();
+                        spellAbility.addManaCostsToPay(spellAbility.getManaCosts());
                         ((ManaCostsImpl) spellAbility.getManaCostsToPay()).forceManaRollback(game, manaPool); // force rollback if card was deemed playable
                         canPlay = checkPlayability(card, targetPlayer, game, source);
                     } else {
@@ -192,11 +192,11 @@ class WordOfCommandEffect extends OneShotEffect {
 
 class WordOfCommandCantActivateEffect extends RestrictionEffect {
 
-    public WordOfCommandCantActivateEffect() {
+    WordOfCommandCantActivateEffect() {
         super(Duration.EndOfTurn);
     }
 
-    public WordOfCommandCantActivateEffect(final WordOfCommandCantActivateEffect effect) {
+    private WordOfCommandCantActivateEffect(final WordOfCommandCantActivateEffect effect) {
         super(effect);
     }
 
@@ -207,7 +207,7 @@ class WordOfCommandCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return !permanent.isLand(game) && permanent.getControllerId().equals(this.targetPointer.getFirst(game, source));
+        return !permanent.isLand(game) && permanent.getControllerId().equals(this.getTargetPointer().getFirst(game, source));
     }
 
     @Override
@@ -218,11 +218,11 @@ class WordOfCommandCantActivateEffect extends RestrictionEffect {
 
 class WordOfCommandTestFlashEffect extends AsThoughEffectImpl {
 
-    public WordOfCommandTestFlashEffect() {
+    WordOfCommandTestFlashEffect() {
         super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
     }
 
-    public WordOfCommandTestFlashEffect(final WordOfCommandTestFlashEffect effect) {
+    private WordOfCommandTestFlashEffect(final WordOfCommandTestFlashEffect effect) {
         super(effect);
     }
 

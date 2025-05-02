@@ -3,6 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -65,9 +66,10 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
     public EnigmaSphinxTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, optional);
         setTriggerPhrase("When {this} is put into your graveyard from the battlefield, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    EnigmaSphinxTriggeredAbility(EnigmaSphinxTriggeredAbility ability) {
+    private EnigmaSphinxTriggeredAbility(final EnigmaSphinxTriggeredAbility ability) {
         super(ability);
     }
 
@@ -94,16 +96,21 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class EnigmaSphinxEffect extends OneShotEffect {
 
-    public EnigmaSphinxEffect() {
+    EnigmaSphinxEffect() {
         super(Outcome.ReturnToHand);
         staticText = "put it into your library third from the top";
     }
 
-    public EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
+    private EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
         super(effect);
     }
 
@@ -118,7 +125,7 @@ class EnigmaSphinxEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card card = (Card) source.getSourceObjectIfItStillExists(game);
+        Card card = source.getSourceCardIfItStillExists(game);
         if (card != null) {
             controller.putCardOnTopXOfLibrary(card, game, source, 3, true);
         }

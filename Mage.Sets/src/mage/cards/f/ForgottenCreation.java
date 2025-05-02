@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SkulkAbility;
 import mage.cards.CardImpl;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -32,7 +31,7 @@ public final class ForgottenCreation extends CardImpl {
         // Skulk
         this.addAbility(new SkulkAbility());
         // At the beginning of your upkeep, you may discard all the cards in your hand. If you do, draw that many cards.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForgottenCreationEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForgottenCreationEffect(), true));
     }
 
     private ForgottenCreation(final ForgottenCreation card) {
@@ -47,12 +46,12 @@ public final class ForgottenCreation extends CardImpl {
 
 class ForgottenCreationEffect extends OneShotEffect {
 
-    public ForgottenCreationEffect() {
+    ForgottenCreationEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you may discard all the cards in your hand. If you do, draw that many cards";
     }
 
-    public ForgottenCreationEffect(final ForgottenCreationEffect effect) {
+    private ForgottenCreationEffect(final ForgottenCreationEffect effect) {
         super(effect);
     }
 

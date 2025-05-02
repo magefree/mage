@@ -37,7 +37,7 @@ public final class Vigor extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // If damage would be dealt to a creature you control other than Vigor, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VigorReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new VigorReplacementEffect()));
 
         // When Vigor is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
@@ -60,7 +60,7 @@ class VigorReplacementEffect extends ReplacementEffectImpl {
         staticText = "if damage would be dealt to another creature you control, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way";
     }
 
-    VigorReplacementEffect(final VigorReplacementEffect effect) {
+    private VigorReplacementEffect(final VigorReplacementEffect effect) {
         super(effect);
     }
 

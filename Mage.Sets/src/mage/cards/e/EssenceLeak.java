@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.OrCondition;
 import mage.abilities.condition.common.EnchantedCreatureColorCondition;
@@ -43,9 +43,9 @@ public final class EssenceLeak extends CardImpl {
         this.addAbility(ability);
 
         // As long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."
-        Ability sacAbility =new BeginningOfUpkeepTriggeredAbility(new EssenceLeakEffect(), TargetController.YOU, false);
+        Ability sacAbility =new BeginningOfUpkeepTriggeredAbility(new EssenceLeakEffect());
         ContinuousEffect isRedOrGreenAbility = new GainAbilityAttachedEffect(sacAbility, AttachmentType.AURA);
-        SimpleStaticAbility ifRedOrGreenAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(isRedOrGreenAbility,
+        SimpleStaticAbility ifRedOrGreenAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(isRedOrGreenAbility,
                 new OrCondition(new EnchantedCreatureColorCondition(ObjectColor.RED), new EnchantedCreatureColorCondition(ObjectColor.GREEN)),
                 "As long as enchanted permanent is red or green, it has \"At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost.\""));
         this.addAbility(ifRedOrGreenAbility);
@@ -63,12 +63,12 @@ public final class EssenceLeak extends CardImpl {
 
 class EssenceLeakEffect extends OneShotEffect {
 
-    public EssenceLeakEffect() {
+    EssenceLeakEffect() {
         super(Outcome.Sacrifice);
         staticText =  "sacrifice this permanent unless you pay its mana cost";
     }
 
-    public EssenceLeakEffect(final EssenceLeakEffect effect) {
+    private EssenceLeakEffect(final EssenceLeakEffect effect) {
         super(effect);
     }
 

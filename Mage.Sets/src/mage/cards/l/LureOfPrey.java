@@ -52,12 +52,12 @@ public final class LureOfPrey extends CardImpl {
 
 class LureOfPreyRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public LureOfPreyRestrictionEffect() {
+    LureOfPreyRestrictionEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "Cast this spell only if an opponent cast a creature spell this turn";
     }
 
-    public LureOfPreyRestrictionEffect(final LureOfPreyRestrictionEffect effect) {
+    private LureOfPreyRestrictionEffect(final LureOfPreyRestrictionEffect effect) {
         super(effect);
     }
 
@@ -80,11 +80,6 @@ class LureOfPreyRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
             return true; // restrict
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -25,7 +25,7 @@ public final class CursedRack extends CardImpl {
         // As Cursed Rack enters the battlefield, choose an opponent.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
         // The chosen player's maximum hand size is four.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CursedRackHandSizeEffect()));
+        this.addAbility(new SimpleStaticAbility(new CursedRackHandSizeEffect()));
 
     }
 
@@ -41,12 +41,12 @@ public final class CursedRack extends CardImpl {
 
 class CursedRackHandSizeEffect extends ContinuousEffectImpl {
 
-    public CursedRackHandSizeEffect() {
+    CursedRackHandSizeEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "The chosen player's maximum hand size is four";
     }
 
-    public CursedRackHandSizeEffect(final CursedRackHandSizeEffect effect) {
+    private CursedRackHandSizeEffect(final CursedRackHandSizeEffect effect) {
         super(effect);
     }
 

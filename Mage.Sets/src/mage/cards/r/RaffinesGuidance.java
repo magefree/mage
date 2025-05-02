@@ -1,5 +1,6 @@
 package mage.cards.r;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
@@ -26,7 +27,7 @@ import java.util.UUID;
 public final class RaffinesGuidance extends CardImpl {
 
     public RaffinesGuidance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -37,10 +38,11 @@ public final class RaffinesGuidance extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
 
-        // You may cast Raffine’s Guidance from your graveyard by paying {2}{W} instead of its mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RafinnesGuidancePlayEffect()));
+        // You may cast Raffine's Guidance from your graveyard by paying {2}{W} instead of its mana cost.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new RafinnesGuidancePlayEffect())
+                .setIdentifier(MageIdentifier.RafinnesGuidanceAlternateCast));
     }
 
     private RaffinesGuidance(final RaffinesGuidance card) {
@@ -55,12 +57,12 @@ public final class RaffinesGuidance extends CardImpl {
 
 class RafinnesGuidancePlayEffect extends AsThoughEffectImpl {
 
-    public RafinnesGuidancePlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+    RafinnesGuidancePlayEffect() {
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard by paying {2}{W} rather than paying its mana cost.";
     }
 
-    public RafinnesGuidancePlayEffect(final RafinnesGuidancePlayEffect effect) {
+    private RafinnesGuidancePlayEffect(final RafinnesGuidancePlayEffect effect) {
         super(effect);
     }
 
@@ -71,7 +73,10 @@ class RafinnesGuidancePlayEffect extends AsThoughEffectImpl {
                 Player player = game.getPlayer(affectedControllerId);
                 if (player != null) {
                     Costs<Cost> costs = new CostsImpl<>();
-                    player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{2}{W}"), costs);
+                    player.setCastSourceIdWithAlternateMana(
+                            sourceId, new ManaCostsImpl<>("{2}{W}"), costs,
+                            MageIdentifier.RafinnesGuidanceAlternateCast
+                    );
                     return true;
                 }
             }

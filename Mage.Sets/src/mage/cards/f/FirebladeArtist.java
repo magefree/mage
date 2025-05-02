@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -11,9 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
 import java.util.UUID;
@@ -41,9 +39,8 @@ public final class FirebladeArtist extends CardImpl {
         );
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoWhenCostPaid(ability, new SacrificeTargetCost(
-                        new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-                ), "Sacrifice a creature?"), TargetController.YOU, false
+                new DoWhenCostPaid(ability, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE
+                ), "Sacrifice a creature?")
         ));
     }
 

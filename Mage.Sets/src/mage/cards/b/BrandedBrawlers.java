@@ -39,10 +39,10 @@ public final class BrandedBrawlers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Branded Brawlers can't attack if defending player controls an untapped land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfDefenderControlsPermanent(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackIfDefenderControlsPermanent(filter)));
 
         // Branded Brawlers can't block if you control an untapped land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BrandedBrawlersCantBlockEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new BrandedBrawlersCantBlockEffect(filter)));
     }
 
     private BrandedBrawlers(final BrandedBrawlers card) {
@@ -65,7 +65,7 @@ class BrandedBrawlersCantBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block if you control " + filter.getMessage();
     }
 
-    public BrandedBrawlersCantBlockEffect(final BrandedBrawlersCantBlockEffect effect) {
+    private BrandedBrawlersCantBlockEffect(final BrandedBrawlersCantBlockEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

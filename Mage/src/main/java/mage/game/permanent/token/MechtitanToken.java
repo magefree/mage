@@ -31,7 +31,7 @@ public final class MechtitanToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    protected MechtitanToken(final MechtitanToken token) {
+    private MechtitanToken(final MechtitanToken token) {
         super(token);
     }
 

@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -47,12 +48,12 @@ public final class PiasRevolution extends CardImpl {
 
 class PiasRevolutionReturnEffect extends OneShotEffect {
 
-    public PiasRevolutionReturnEffect() {
+    PiasRevolutionReturnEffect() {
         super(Outcome.Benefit);
         this.staticText = "return that card to your hand unless target opponent has {this} deal 3 damage to them";
     }
 
-    public PiasRevolutionReturnEffect(final PiasRevolutionReturnEffect effect) {
+    private PiasRevolutionReturnEffect(final PiasRevolutionReturnEffect effect) {
         super(effect);
     }
 
@@ -97,9 +98,10 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
     public PiasRevolutionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiasRevolutionReturnEffect(), false);
         setTriggerPhrase("Whenever a nontoken artifact is put into your graveyard from the battlefield, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public PiasRevolutionTriggeredAbility(PiasRevolutionTriggeredAbility ability) {
+    private PiasRevolutionTriggeredAbility(final PiasRevolutionTriggeredAbility ability) {
         super(ability);
     }
 
@@ -126,5 +128,10 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

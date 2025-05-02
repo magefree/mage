@@ -38,7 +38,7 @@ public final class Shapesharer extends CardImpl {
         this.addAbility(new ChangelingAbility());
 
         // {2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn.
-        Ability copyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability copyAbility = new SimpleActivatedAbility(
                 new ShapesharerEffect(),
                 new ManaCostsImpl<>("{2}{U}"));
         copyAbility.addTarget(new TargetPermanent(filterShapeshifter));
@@ -58,12 +58,12 @@ public final class Shapesharer extends CardImpl {
 
 class ShapesharerEffect extends OneShotEffect {
 
-    public ShapesharerEffect() {
+    ShapesharerEffect() {
         super(Outcome.Copy);
         this.staticText = "Target Shapeshifter becomes a copy of target creature until your next turn.";
     }
 
-    public ShapesharerEffect(final ShapesharerEffect effect) {
+    private ShapesharerEffect(final ShapesharerEffect effect) {
         super(effect);
     }
 

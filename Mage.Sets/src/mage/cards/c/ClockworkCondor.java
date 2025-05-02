@@ -53,7 +53,7 @@ class ClockworkCondorEffect extends OneShotEffect {
         staticText = "remove a +1/+1 counter from {this} at end of combat";
     }
 
-    ClockworkCondorEffect(final ClockworkCondorEffect effect) {
+    private ClockworkCondorEffect(final ClockworkCondorEffect effect) {
         super(effect);
     }
 

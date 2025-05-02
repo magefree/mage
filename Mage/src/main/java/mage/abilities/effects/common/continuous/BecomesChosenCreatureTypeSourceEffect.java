@@ -18,10 +18,6 @@ public class BecomesChosenCreatureTypeSourceEffect extends OneShotEffect {
         this(false, Duration.EndOfTurn);
     }
 
-    public BecomesChosenCreatureTypeSourceEffect(boolean nonWall) {
-        this(nonWall, Duration.EndOfTurn);
-    }
-
     public BecomesChosenCreatureTypeSourceEffect(boolean nonWall, Duration duration) {
         super(Outcome.BoostCreature);
         this.nonWall = nonWall;
@@ -47,7 +43,7 @@ public class BecomesChosenCreatureTypeSourceEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public BecomesChosenCreatureTypeSourceEffect copy() {
         return new BecomesChosenCreatureTypeSourceEffect(this);
     }
 

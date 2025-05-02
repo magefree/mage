@@ -21,7 +21,7 @@ public final class DarettiConstructToken extends TokenImpl {
         addAbility(DefenderAbility.getInstance());
     }
 
-    protected DarettiConstructToken(final DarettiConstructToken token) {
+    private DarettiConstructToken(final DarettiConstructToken token) {
         super(token);
     }
 

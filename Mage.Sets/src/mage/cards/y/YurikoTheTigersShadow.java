@@ -67,14 +67,14 @@ public final class YurikoTheTigersShadow extends CardImpl {
 
 class YurikoTheTigersShadowEffect extends OneShotEffect {
 
-    public YurikoTheTigersShadowEffect() {
+    YurikoTheTigersShadowEffect() {
         super(Outcome.Benefit);
         this.staticText = "reveal the top card of your library "
                 + "and put that card into your hand. Each opponent loses life "
                 + "equal to that card's mana value";
     }
 
-    public YurikoTheTigersShadowEffect(final YurikoTheTigersShadowEffect effect) {
+    private YurikoTheTigersShadowEffect(final YurikoTheTigersShadowEffect effect) {
         super(effect);
     }
 

@@ -40,12 +40,12 @@ public final class SearchWarrant extends CardImpl {
 
 class SearchWarrantEffect extends OneShotEffect {
 
-    public SearchWarrantEffect() {
+    SearchWarrantEffect() {
         super(Outcome.Exile);
         this.staticText = "Target player reveals their hand. You gain life equal to the number of cards in that player's hand";
     }
 
-    public SearchWarrantEffect(final SearchWarrantEffect effect) {
+    private SearchWarrantEffect(final SearchWarrantEffect effect) {
         super(effect);
     }
 

@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -39,7 +39,7 @@ public final class ChandraFlamecaller extends CardImpl {
 
         // -X: Chandra, Flamecaller deals X damage to each creature.
         this.addAbility(new LoyaltyAbility(new DamageAllEffect(
-                GetXLoyaltyValue.instance, StaticFilters.FILTER_PERMANENT_CREATURE
+                GetXValue.instance, StaticFilters.FILTER_PERMANENT_CREATURE
         )));
     }
 
@@ -55,12 +55,12 @@ public final class ChandraFlamecaller extends CardImpl {
 
 class ChandraElementalEffect extends OneShotEffect {
 
-    public ChandraElementalEffect() {
+    ChandraElementalEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step";
     }
 
-    public ChandraElementalEffect(final ChandraElementalEffect effect) {
+    private ChandraElementalEffect(final ChandraElementalEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class ChandraDrawEffect extends OneShotEffect {
         this.staticText = "Discard all the cards in your hand, then draw that many cards plus one";
     }
 
-    ChandraDrawEffect(final ChandraDrawEffect effect) {
+    private ChandraDrawEffect(final ChandraDrawEffect effect) {
         super(effect);
     }
 

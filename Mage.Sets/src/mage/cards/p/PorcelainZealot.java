@@ -7,13 +7,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.ToxicAbility;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -35,8 +34,8 @@ public final class PorcelainZealot extends CardImpl {
 
         // At the beginning of combat on your turn, target creature you control gets +1/+1 until end of turn. If that creature has toxic, instead it gets +2/+2 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-            new PorcelainZealotEffect(),
-            TargetController.YOU, false);
+                new PorcelainZealotEffect()
+        );
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1));
         this.addAbility(ability);
     }
@@ -53,12 +52,12 @@ public final class PorcelainZealot extends CardImpl {
 
 class PorcelainZealotEffect extends OneShotEffect {
 
-    public PorcelainZealotEffect() {
+    PorcelainZealotEffect() {
         super(Outcome.Benefit);
         this.staticText = "target creature you control gets +1/+1 until end of turn. If that creature has toxic, instead it gets +2/+2 until end of turn.";
     }
 
-    public PorcelainZealotEffect(final PorcelainZealotEffect effect) {
+    private PorcelainZealotEffect(final PorcelainZealotEffect effect) {
         super(effect);
     }
 

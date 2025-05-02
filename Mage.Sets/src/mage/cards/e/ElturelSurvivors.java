@@ -44,7 +44,7 @@ public final class ElturelSurvivors extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Myriad
-        this.addAbility(new MyriadAbility());
+        this.addAbility(new MyriadAbility(false));
 
         // As long as Elturel Survivors is attacking, it gets +X/+0, where X is the number of lands defending player controls.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(

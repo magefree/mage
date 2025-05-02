@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -9,8 +8,6 @@ import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
@@ -22,8 +19,9 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class SpyNetwork extends CardImpl {
@@ -52,12 +50,12 @@ public final class SpyNetwork extends CardImpl {
 
 class SpyNetworkLookAtTargetPlayerHandEffect extends OneShotEffect {
 
-    public SpyNetworkLookAtTargetPlayerHandEffect() {
+    SpyNetworkLookAtTargetPlayerHandEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at target player's hand,";
     }
 
-    public SpyNetworkLookAtTargetPlayerHandEffect(final SpyNetworkLookAtTargetPlayerHandEffect effect) {
+    private SpyNetworkLookAtTargetPlayerHandEffect(final SpyNetworkLookAtTargetPlayerHandEffect effect) {
         super(effect);
     }
 
@@ -82,12 +80,12 @@ class SpyNetworkLookAtTargetPlayerHandEffect extends OneShotEffect {
 
 class SpyNetworkFaceDownEffect extends OneShotEffect {
 
-    public SpyNetworkFaceDownEffect() {
+    SpyNetworkFaceDownEffect() {
         super(Outcome.Benefit);
         this.staticText = "and any face-down creatures they control";
     }
 
-    public SpyNetworkFaceDownEffect(final SpyNetworkFaceDownEffect effect) {
+    private SpyNetworkFaceDownEffect(final SpyNetworkFaceDownEffect effect) {
         super(effect);
     }
 
@@ -109,15 +107,12 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
             if (target.canChoose(controller.getId(), source, game)) {
                 while (controller.chooseUse(outcome, "Look at a face down creature controlled by " + player.getLogName() + "?", source, game)) {
                     target.clearChosen();
-                    while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+                    while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                         controller.chooseTarget(outcome, target, source, game);
                     }
                     Permanent faceDownCreature = game.getPermanent(target.getFirstTarget());
                     if (faceDownCreature != null) {
-                        Permanent copyFaceDown = faceDownCreature.copy();
-                        copyFaceDown.setFaceDown(false, game);
-                        Cards cards = new CardsImpl(copyFaceDown);
-                        controller.lookAtCards("face down card - " + mageObject.getName(), cards, game);
+                        controller.lookAtCards("face down card - " + mageObject.getName(), faceDownCreature, game);
                         game.informPlayers(controller.getLogName() + " looks at a face down creature controlled by " + player.getLogName());
                     }
                 }

@@ -20,7 +20,8 @@ public final class Redeem extends CardImpl {
 
 
         // Prevent all damage that would be dealt this turn to up to two target creatures.
-        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn)
+                .setText("prevent all damage that would be dealt this turn to up to two target creatures"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 

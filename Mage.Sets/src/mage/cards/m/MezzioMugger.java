@@ -26,7 +26,7 @@ public final class MezzioMugger extends CardImpl {
     public MezzioMugger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -72,7 +72,7 @@ class MezzioMuggerEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = game
-                .getOpponents(source.getControllerId())
+                .getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
@@ -85,7 +85,7 @@ class MezzioMuggerEffect extends OneShotEffect {
         }
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, true);
         }
         return true;
     }

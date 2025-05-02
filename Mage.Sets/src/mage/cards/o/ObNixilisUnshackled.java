@@ -68,7 +68,7 @@ class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ObNixilisUnshackledEffect(), false);
     }
 
-    public ObNixilisUnshackledTriggeredAbility(final ObNixilisUnshackledTriggeredAbility ability) {
+    private ObNixilisUnshackledTriggeredAbility(final ObNixilisUnshackledTriggeredAbility ability) {
         super(ability);
     }
 
@@ -108,7 +108,7 @@ class ObNixilisUnshackledEffect extends SacrificeEffect {
         this.staticText = "that player sacrifices a creature and loses 10 life";
     }
 
-    public ObNixilisUnshackledEffect(final ObNixilisUnshackledEffect effect) {
+    private ObNixilisUnshackledEffect(final ObNixilisUnshackledEffect effect) {
         super(effect);
     }
 

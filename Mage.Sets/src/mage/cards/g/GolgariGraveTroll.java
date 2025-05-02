@@ -39,7 +39,7 @@ public final class GolgariGraveTroll extends CardImpl {
         // Golgari Grave-Troll enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.
         this.addAbility(new EntersBattlefieldAbility(new GolgariGraveTrollEffect(), "with a +1/+1 counter on it for each creature card in your graveyard"));
         // {1}, Remove a +1/+1 counter from Golgari Grave-Troll: Regenerate Golgari Grave-Troll.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
         // Dredge 6
@@ -58,11 +58,11 @@ public final class GolgariGraveTroll extends CardImpl {
 
 class GolgariGraveTrollEffect extends OneShotEffect {
 
-    public GolgariGraveTrollEffect() {
+    GolgariGraveTrollEffect() {
         super(Outcome.BoostCreature);
     }
 
-    public GolgariGraveTrollEffect(final GolgariGraveTrollEffect effect) {
+    private GolgariGraveTrollEffect(final GolgariGraveTrollEffect effect) {
         super(effect);
     }
 

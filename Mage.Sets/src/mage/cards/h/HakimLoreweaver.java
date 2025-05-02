@@ -80,12 +80,12 @@ public final class HakimLoreweaver extends CardImpl {
 
 class HakimLoreweaverEffect extends OneShotEffect {
 
-    public HakimLoreweaverEffect() {
+    HakimLoreweaverEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return target Aura card from your graveyard to the battlefield attached to {this}.";
     }
 
-    public HakimLoreweaverEffect(final HakimLoreweaverEffect effect) {
+    private HakimLoreweaverEffect(final HakimLoreweaverEffect effect) {
         super(effect);
     }
 
@@ -136,7 +136,7 @@ enum HakimLoreweaverCondition implements Condition {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(permanent -> permanent.hasSubtype(SubType.AURA, game));
+                .noneMatch(permanent -> permanent.hasSubtype(SubType.AURA, game));
     }
 
     @Override

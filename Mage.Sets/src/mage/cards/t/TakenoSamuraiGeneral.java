@@ -1,9 +1,5 @@
-
-
 package mage.cards.t;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -17,13 +13,16 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Iterator;
+import java.util.UUID;
+
 /**
  * @author Loki
  */
 public final class TakenoSamuraiGeneral extends CardImpl {
 
     public TakenoSamuraiGeneral(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SAMURAI);
@@ -32,7 +31,7 @@ public final class TakenoSamuraiGeneral extends CardImpl {
         this.toughness = new MageInt(3);
         this.addAbility(new BushidoAbility(2));
         // Each other Samurai creature you control gets +1/+1 for each point of bushido it has.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TakenoSamuraiGeneralEffect()));
+        this.addAbility(new SimpleStaticAbility(new TakenoSamuraiGeneralEffect()));
     }
 
     private TakenoSamuraiGeneral(final TakenoSamuraiGeneral card) {
@@ -47,18 +46,19 @@ public final class TakenoSamuraiGeneral extends CardImpl {
 }
 
 class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(SubType.SAMURAI.getPredicate());
     }
 
-    public TakenoSamuraiGeneralEffect() {
+    TakenoSamuraiGeneralEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Each other Samurai creature you control gets +1/+1 for each point of bushido it has";
     }
 
-    public TakenoSamuraiGeneralEffect(final TakenoSamuraiGeneralEffect effect) {
+    private TakenoSamuraiGeneralEffect(final TakenoSamuraiGeneralEffect effect) {
         super(effect);
     }
 
@@ -70,8 +70,8 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+        if (getAffectedObjectsSet()) {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {
                         if (ability instanceof BushidoAbility) {
@@ -85,8 +85,8 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (this.affectedObjectsSet) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+        if (getAffectedObjectsSet()) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent permanent = it.next().getPermanent(game);
                 if (permanent != null) {
                     for (Ability ability : permanent.getAbilities()) {
@@ -101,7 +101,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {
                         if (ability instanceof BushidoAbility) {

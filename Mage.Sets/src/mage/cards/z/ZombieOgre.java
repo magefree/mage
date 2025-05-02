@@ -1,16 +1,16 @@
 package mage.cards.z;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -29,9 +29,9 @@ public final class ZombieOgre extends CardImpl {
 
         // At the beginning of your end step, if a creature died this turn, venture into the dungeon.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new VentureIntoTheDungeonEffect(),
-                TargetController.YOU, MorbidCondition.instance, false
-        ).addHint(MorbidHint.instance));
+                TargetController.YOU, new VentureIntoTheDungeonEffect(),
+                false, MorbidCondition.instance
+        ).addHint(MorbidHint.instance).addHint(CurrentDungeonHint.instance));
     }
 
     private ZombieOgre(final ZombieOgre card) {

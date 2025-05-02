@@ -104,7 +104,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
                     manaStrings.add("B");
                     manaStrings.add("R");
                     manaStrings.add("G");
-                    List<Integer> choices = controller.getMultiAmount(this.outcome, manaStrings, 0, value, MultiAmountType.MANA, game);
+                    List<Integer> choices = controller.getMultiAmount(this.outcome, manaStrings, 0, value, value, MultiAmountType.MANA, game);
                     Mana mana = new Mana(choices.get(0), choices.get(1), choices.get(2), choices.get(3), choices.get(4), 0, 0, 0);
                     return manaBuilder.setMana(mana, source, game).build();
                 }

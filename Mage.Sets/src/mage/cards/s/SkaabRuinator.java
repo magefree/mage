@@ -28,7 +28,7 @@ public final class SkaabRuinator extends CardImpl {
 
         // As an additional cost to cast Skaab Ruinator, exile three creature cards from your graveyard.
         this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                3, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
+                3, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD
         )));
 
         // Flying

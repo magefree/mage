@@ -34,7 +34,7 @@ public final class GoblinTinkerer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, {T}: Destroy target artifact. That artifact deals damage equal to its converted mana cost to Goblin Tinkerer.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
         ability.addEffect(new GoblinTinkererDamageEffect());
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
@@ -59,7 +59,7 @@ class GoblinTinkererDamageEffect extends OneShotEffect {
         this.staticText = "That artifact deals damage equal to its mana value to {this}";
     }
     
-    public GoblinTinkererDamageEffect(final GoblinTinkererDamageEffect effect) {
+    private GoblinTinkererDamageEffect(final GoblinTinkererDamageEffect effect) {
         super(effect);
     }
     

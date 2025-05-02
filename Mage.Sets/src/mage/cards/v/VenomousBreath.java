@@ -33,7 +33,6 @@ public final class VenomousBreath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new InfoEffect("Choose target creature"));
         this.getSpellAbility().addEffect(new VenomousBreathCreateDelayedTriggeredAbilityEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private VenomousBreath(final VenomousBreath card) {
@@ -48,12 +47,12 @@ public final class VenomousBreath extends CardImpl {
 
 class VenomousBreathCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
-    public VenomousBreathCreateDelayedTriggeredAbilityEffect() {
+    VenomousBreathCreateDelayedTriggeredAbilityEffect() {
         super(Outcome.Benefit);
         this.staticText = "At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn";
     }
 
-    public VenomousBreathCreateDelayedTriggeredAbilityEffect(final VenomousBreathCreateDelayedTriggeredAbilityEffect effect) {
+    private VenomousBreathCreateDelayedTriggeredAbilityEffect(final VenomousBreathCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -83,7 +82,7 @@ class VenomousBreathEffect extends OneShotEffect {
         this.targetCreature = targetCreature;
     }
 
-    public VenomousBreathEffect(final VenomousBreathEffect effect) {
+    private VenomousBreathEffect(final VenomousBreathEffect effect) {
         super(effect);
         targetCreature = effect.targetCreature;
     }

@@ -50,7 +50,7 @@ public class DrawDiscardOneOfThemEffect extends OneShotEffect {
             drawnCards.removeAll(initialHand);
             if (!drawnCards.isEmpty()) {
                 TargetCard cardToDiscard = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
-                cardToDiscard.setNotTarget(true);
+                cardToDiscard.withNotTarget(true);
                 if (controller.choose(Outcome.Discard, drawnCards, cardToDiscard, source, game)) {
                     Card card = controller.getHand().get(cardToDiscard.getFirstTarget(), game);
                     if (card != null) {

@@ -52,12 +52,12 @@ public final class CharmedGriffin extends CardImpl {
 
 class CharmedGriffinEffect extends OneShotEffect {
 
-    public CharmedGriffinEffect() {
+    CharmedGriffinEffect() {
         super(Outcome.Detriment);
         this.staticText = "each other player may put an artifact or enchantment card onto the battlefield from their hand";
     }
 
-    public CharmedGriffinEffect(final CharmedGriffinEffect effect) {
+    private CharmedGriffinEffect(final CharmedGriffinEffect effect) {
         super(effect);
     }
 

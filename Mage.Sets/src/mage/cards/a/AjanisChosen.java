@@ -31,10 +31,10 @@ public final class AjanisChosen extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever an enchantment enters the battlefield under your control, create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token.
+        // Whenever an enchantment you control enters, create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AjanisChosenEffect(), filter,
-                false, SetTargetPointer.PERMANENT, null));
+                false, SetTargetPointer.PERMANENT));
     }
 
     private AjanisChosen(final AjanisChosen card) {
@@ -49,12 +49,12 @@ public final class AjanisChosen extends CardImpl {
 
 class AjanisChosenEffect extends OneShotEffect {
 
-    public AjanisChosenEffect() {
+    AjanisChosenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token";
     }
 
-    public AjanisChosenEffect(final AjanisChosenEffect effect) {
+    private AjanisChosenEffect(final AjanisChosenEffect effect) {
         super(effect);
     }
 

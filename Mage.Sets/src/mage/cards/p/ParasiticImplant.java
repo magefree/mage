@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PhyrexianMyrToken;
@@ -34,7 +33,7 @@ public final class ParasiticImplant extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Sacrifice));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
-        ability = new BeginningOfUpkeepTriggeredAbility(new ParasiticImplantEffect(), TargetController.YOU, false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new ParasiticImplantEffect());
         ability.addEffect(new CreateTokenEffect(new PhyrexianMyrToken()).concatBy("and you"));
         this.addAbility(ability);
     }
@@ -55,7 +54,7 @@ class ParasiticImplantEffect extends OneShotEffect {
         staticText = "enchanted creature's controller sacrifices it";
     }
 
-    ParasiticImplantEffect(final ParasiticImplantEffect effect) {
+    private ParasiticImplantEffect(final ParasiticImplantEffect effect) {
         super(effect);
     }
 

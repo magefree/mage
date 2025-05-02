@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -12,8 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -39,7 +37,7 @@ public final class ScroungingBandar extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
 
         // At the beginning of you upkeep, you may move any number of +1/+1 counters from Scrounging Bandar onto another target creature.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ScroungingBandarEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ScroungingBandarEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
@@ -56,12 +54,12 @@ public final class ScroungingBandar extends CardImpl {
 
 class ScroungingBandarEffect extends OneShotEffect {
 
-    public ScroungingBandarEffect() {
+    ScroungingBandarEffect() {
         super(Outcome.Benefit);
-        this.staticText = "you may move any number of +1/+1 counters from Scrounging Bandar onto another target creature";
+        this.staticText = "you may move any number of +1/+1 counters from {this} onto another target creature";
     }
 
-    public ScroungingBandarEffect(final ScroungingBandarEffect effect) {
+    private ScroungingBandarEffect(final ScroungingBandarEffect effect) {
         super(effect);
     }
 

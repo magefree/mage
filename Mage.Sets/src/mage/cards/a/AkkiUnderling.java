@@ -31,7 +31,7 @@ public final class AkkiUnderling extends CardImpl {
 
         // As long as you have seven or more cards in hand, Akki Underling gets +2/+1 and has first strike.
         Condition condition = new CardsInHandCondition(ComparisonType.MORE_THAN,6);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2,1, Duration.WhileOnBattlefield), condition, "As long as you have seven or more cards in hand, {this} gets +2/+1"));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield), condition, "and has first strike"));

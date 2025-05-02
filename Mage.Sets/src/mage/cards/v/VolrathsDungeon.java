@@ -56,12 +56,12 @@ public final class VolrathsDungeon extends CardImpl {
 
 class VolrathsDungeonEffect extends OneShotEffect {
 
-    public VolrathsDungeonEffect() {
+    VolrathsDungeonEffect() {
         super(Outcome.Detriment);
         this.staticText = "Target player puts a card from their hand on top of their library";
     }
 
-    public VolrathsDungeonEffect(final VolrathsDungeonEffect effect) {
+    private VolrathsDungeonEffect(final VolrathsDungeonEffect effect) {
         super(effect);
     }
 

@@ -58,7 +58,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
             case AbilityAddingRemovingEffects_6:
                 if (sublayer == SubLayer.NA) {
                     for (Permanent permanent : game.getBattlefield().getActivePermanents(mountains, source.getControllerId(), source, game)) {
-                        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+                        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
                         ability.addTarget(new TargetAnyTarget());
                         permanent.addAbility(ability, source.getSourceId(), game);
                     }

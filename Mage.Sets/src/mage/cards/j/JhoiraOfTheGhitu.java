@@ -38,7 +38,7 @@ public final class JhoiraOfTheGhitu extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}, Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JhoiraOfTheGhituSuspendEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new JhoiraOfTheGhituSuspendEffect(), new GenericManaCost(2));
         ability.addCost(new ExileFromHandCost(new TargetCardInHand(new FilterNonlandCard("a nonland card from your hand"))));
         this.addAbility(ability);
 
@@ -56,12 +56,12 @@ public final class JhoiraOfTheGhitu extends CardImpl {
 
 class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
 
-    public JhoiraOfTheGhituSuspendEffect() {
+    JhoiraOfTheGhituSuspendEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend. <i>(At the beginning of your upkeep, remove a time counter from that card. When the last is removed, cast it without paying its mana cost. If it's a creature, it has haste.)</i>";
     }
 
-    public JhoiraOfTheGhituSuspendEffect(final JhoiraOfTheGhituSuspendEffect effect) {
+    private JhoiraOfTheGhituSuspendEffect(final JhoiraOfTheGhituSuspendEffect effect) {
         super(effect);
     }
 

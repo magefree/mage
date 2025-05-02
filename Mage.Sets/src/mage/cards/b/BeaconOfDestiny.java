@@ -36,7 +36,7 @@ public final class BeaconOfDestiny extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to Beacon of Destiny instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BeaconOfDestinyEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new BeaconOfDestinyEffect(), new TapSourceCost()));
     }
 
     private BeaconOfDestiny(final BeaconOfDestiny card) {
@@ -59,7 +59,7 @@ class BeaconOfDestinyEffect extends RedirectionEffect {
         this.damageSource = new TargetSource();
     }
 
-    public BeaconOfDestinyEffect(final BeaconOfDestinyEffect effect) {
+    private BeaconOfDestinyEffect(final BeaconOfDestinyEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }
@@ -71,8 +71,8 @@ class BeaconOfDestinyEffect extends RedirectionEffect {
 
     @Override
     public void init(Ability source, Game game) {
-        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
+        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

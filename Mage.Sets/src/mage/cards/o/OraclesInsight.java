@@ -40,11 +40,10 @@ public final class OraclesInsight extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has "{T}: Scry 1, then draw a card."
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new TapSourceCost());
-        Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("then draw a card");
+        ability = new SimpleActivatedAbility(new ScryEffect(1, false), new TapSourceCost());
+        Effect effect = new DrawCardSourceControllerEffect(1).concatBy(", then");
         ability.addEffect(effect);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
     private OraclesInsight(final OraclesInsight card) {

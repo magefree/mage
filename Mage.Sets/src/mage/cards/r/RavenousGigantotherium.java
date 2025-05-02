@@ -73,19 +73,19 @@ class RavenousGigantotheriumAbility extends EntersBattlefieldTriggeredAbility {
         }
         int power = Math.max(permanent.getPower().getValue(), 0);
         this.getEffects().clear();
-        this.addEffect(new DamageMultiEffect(power));
+        this.addEffect(new DamageMultiEffect());
         this.addEffect(new RavenousGigantotheriumEffect());
         this.getTargets().clear();
         if (power < 1) {
             return true;
         }
-        this.addTarget(new TargetCreaturePermanentAmount(power));
+        this.addTarget(new TargetCreaturePermanentAmount(power, 0, power));
         return true;
     }
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield, it deals X damage " +
+        return "When {this} enters, it deals X damage " +
                 "divided as you choose among up to X target creatures, where X is its power. " +
                 "Each of those creatures deals damage equal to its power to {this}.";
     }

@@ -37,8 +37,8 @@ public final class GoblinLookout extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Sacrifice a Goblin: Goblin creatures get +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
+        Ability ability = new SimpleActivatedAbility(new BoostAllEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(filterPermanent));
         this.addAbility(ability);
     }
 

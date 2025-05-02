@@ -1,11 +1,9 @@
-
 package mage.abilities.common;
 
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.AbilityType;
@@ -15,6 +13,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -28,18 +27,11 @@ public class TurnFaceUpAbility extends SpecialAction {
     public TurnFaceUpAbility(Costs<Cost> costs, boolean megamorph) {
         super(Zone.BATTLEFIELD);
         this.addEffect(new TurnFaceUpEffect(megamorph));
-        for (Cost cost : costs) {
-            if (cost instanceof ManaCost) {
-                this.addManaCost((ManaCost) cost);
-            } else {
-                this.addCost(cost);
-            }
-        }
-
+        this.addCost(costs);
         this.usesStack = false;
         this.abilityType = AbilityType.SPECIAL_ACTION;
-        this.setRuleVisible(false); // will be made visible only to controller in CardView
         this.setWorksFaceDown(true);
+        this.setRuleVisible(false); // hide in face up, but show in face down view (it will be enabled as default ability)
     }
 
     protected TurnFaceUpAbility(final TurnFaceUpAbility ability) {
@@ -83,7 +75,7 @@ class TurnFaceUpEffect extends OneShotEffect {
                     if (megamorph) {
                         sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                     }
-                    game.getState().setValue(source.getSourceId().toString() + "TurnFaceUpX", source.getManaCostsToPay().getX());
+                    game.getState().setValue(source.getSourceId().toString() + "TurnFaceUpX", CardUtil.getSourceCostsTag(game, source, "X", 0));
                     return true;
                 }
             }

@@ -1,22 +1,17 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.LifeCompareCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -41,7 +36,8 @@ public final class TwinbladePaladin extends CardImpl {
         // As long as you have 25 or more life, Twinblade Paladin has double strike.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                TwinbladePaladinCondition.instance, "As long as you have 25 or more life, {this} has double strike."
+                new LifeCompareCondition(TargetController.YOU, ComparisonType.OR_GREATER, 25),
+                "As long as you have 25 or more life, {this} has double strike."
         )));
     }
 
@@ -52,15 +48,5 @@ public final class TwinbladePaladin extends CardImpl {
     @Override
     public TwinbladePaladin copy() {
         return new TwinbladePaladin(this);
-    }
-}
-
-enum TwinbladePaladinCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getLife() > 24;
     }
 }

@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ import mage.constants.*;
  */
 public final class TrueFaithCenser extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature is a Human, it gets an addtional +1/+0";
+    private static final String staticText = "As long as equipped creature is a Human, it gets an additional +1/+0";
 
     public TrueFaithCenser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
@@ -31,14 +30,14 @@ public final class TrueFaithCenser extends CardImpl {
         // Equipped creature gets +1/+1 and has vigilance.
         Effect effect = new BoostEquippedEffect(1, 1);
         effect.setText("Equipped creature gets +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has vigilance");
         ability.addEffect(effect);
         this.addAbility(ability);
 
         // As long as equipped creature is a Human, it gets an additional +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostEquippedEffect(1, 0),
                 new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
 

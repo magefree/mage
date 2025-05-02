@@ -22,7 +22,7 @@ public final class UnwindingClock extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Untap all artifacts you control during each other player's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnwindingClockEffect()));
+        this.addAbility(new SimpleStaticAbility(new UnwindingClockEffect()));
     }
 
     private UnwindingClock(final UnwindingClock card) {
@@ -44,7 +44,7 @@ class UnwindingClockEffect extends ContinuousEffectImpl {
         staticText = "Untap all artifacts you control during each other player's untap step";
     }
 
-    public UnwindingClockEffect(final UnwindingClockEffect effect) {
+    private UnwindingClockEffect(final UnwindingClockEffect effect) {
         super(effect);
     }
 

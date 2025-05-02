@@ -107,7 +107,7 @@ class VoldarenEstateManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source instanceof SpellAbility) {
+        if (source instanceof SpellAbility && !source.isActivated()) {
             MageObject object = game.getObject(source);
             return object != null && object.hasSubtype(SubType.VAMPIRE, game);
         }
@@ -132,7 +132,7 @@ enum VoldarenEstateCostAdjuster implements CostAdjuster {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         CardUtil.reduceCost(ability, vampireCount.calculate(game, ability, null));
     }
 }

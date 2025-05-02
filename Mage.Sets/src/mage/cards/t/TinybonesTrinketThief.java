@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,8 +39,8 @@ public final class TinybonesTrinketThief extends CardImpl {
         // At the beginning of each end step, if an opponent discarded a card this turn, you draw a card and you lose 1 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1),
-                        TargetController.EACH_PLAYER, false
+                        TargetController.EACH_PLAYER, new DrawCardSourceControllerEffect(1),
+                        false
                 ), TinybonesTrinketThiefCondition.instance, "At the beginning of each end step, " +
                 "if an opponent discarded a card this turn, you draw a card and you lose 1 life."
         );

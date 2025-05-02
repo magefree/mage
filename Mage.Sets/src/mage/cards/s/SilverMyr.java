@@ -24,7 +24,7 @@ public final class SilverMyr extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SilverMyr (final SilverMyr card) {
+    private SilverMyr(final SilverMyr card) {
         super(card);
     }
 

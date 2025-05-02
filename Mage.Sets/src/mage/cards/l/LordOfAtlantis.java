@@ -35,7 +35,7 @@ public final class LordOfAtlantis extends CardImpl {
         // Other Merfolk creatures get +1/+1 and have islandwalk.
         Effect effect = new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true);
         effect.setText("Other Merfolk get +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAllEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, filter, true);
         effect.setText("and have islandwalk");
         ability.addEffect(effect);

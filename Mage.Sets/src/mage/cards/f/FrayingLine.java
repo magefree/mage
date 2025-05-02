@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -45,7 +45,7 @@ public final class FrayingLine extends CardImpl {
 
         // At the beginning of each player's upkeep, that player may pay {2}. If they do, they put a rope counter on a creature they control. Otherwise, exile Fraying Line and each creature without a rope counter on it, then remove all rope counters from all creatures.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new FrayingLineEffect(), TargetController.ACTIVE, false
+                TargetController.EACH_PLAYER, new FrayingLineEffect(), false
         ));
     }
 
@@ -97,7 +97,7 @@ class FrayingLineEffect extends OneShotEffect {
                 return true;
             }
             TargetPermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
@@ -112,10 +112,7 @@ class FrayingLineEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURE,
                 source.getControllerId(), source, game
         )) {
-            int counters = permanent.getCounters(game).getCount(CounterType.ROPE);
-            if (counters > 0) {
-                permanent.removeCounters(CounterType.ROPE.createInstance(counters), source, game);
-            }
+            permanent.removeAllCounters(CounterType.ROPE.getName(), source, game);
         }
         return true;
     }

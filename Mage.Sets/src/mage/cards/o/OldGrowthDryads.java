@@ -55,7 +55,7 @@ class OldGrowthDryadsEffect extends OneShotEffect {
         this.staticText = "each opponent may search their library for a basic land card, put it onto the battlefield tapped, then shuffle";
     }
 
-    OldGrowthDryadsEffect(final OldGrowthDryadsEffect effect) {
+    private OldGrowthDryadsEffect(final OldGrowthDryadsEffect effect) {
         super(effect);
     }
 

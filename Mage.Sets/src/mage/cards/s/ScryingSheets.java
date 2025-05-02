@@ -34,7 +34,7 @@ public final class ScryingSheets extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{S}, {T}: Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryingSheetsEffect(), new ManaCostsImpl<>("{1}{S}"));
+        Ability ability = new SimpleActivatedAbility(new ScryingSheetsEffect(), new ManaCostsImpl<>("{1}{S}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -56,7 +56,7 @@ class ScryingSheetsEffect extends OneShotEffect {
         this.staticText = "Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand";
     }
 
-    ScryingSheetsEffect(final ScryingSheetsEffect effect) {
+    private ScryingSheetsEffect(final ScryingSheetsEffect effect) {
         super(effect);
     }
 

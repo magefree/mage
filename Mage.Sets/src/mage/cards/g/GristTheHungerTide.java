@@ -13,6 +13,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -24,7 +25,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.IzoniInsectToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.Arrays;
@@ -35,9 +35,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GristTheHungerTide extends CardImpl {
-
-    private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES);
-
     public GristTheHungerTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{G}");
 
@@ -58,13 +55,14 @@ public final class GristTheHungerTide extends CardImpl {
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         this.addAbility(new LoyaltyAbility(new DoWhenCostPaid(
                 ability,
-                new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                )), "Sacrifice a creature?"
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE), "Sacrifice a creature?"
         ), -2));
 
         // −5: Each opponent loses life equal to the number of creature cards in your graveyard.
-        this.addAbility(new LoyaltyAbility(new LoseLifeOpponentsEffect(xValue).setText("each opponent loses life equal to the number of creature cards in your graveyard"), -5));
+        DynamicValue creatureCardsInGraveyard = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES);
+        this.addAbility(new LoyaltyAbility(new LoseLifeOpponentsEffect(creatureCardsInGraveyard)
+                .setText("each opponent loses life equal to the number of creature cards in your graveyard"), -5)
+                .addHint(new ValueHint("Creature cards in your graveyard", creatureCardsInGraveyard)));
     }
 
     private GristTheHungerTide(final GristTheHungerTide card) {
@@ -93,6 +91,7 @@ class GristTheHungerTideTypeEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Outcome.Benefit);
         staticText = "as long as {this} isn't on the battlefield, " +
                 "it's a 1/1 Insect creature in addition to its other types";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private GristTheHungerTideTypeEffect(final GristTheHungerTideTypeEffect effect) {

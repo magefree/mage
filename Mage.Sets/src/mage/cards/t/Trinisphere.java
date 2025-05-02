@@ -27,7 +27,7 @@ public final class Trinisphere extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // As long as Trinisphere is untapped, each spell that would cost less than three mana to cast costs three mana to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrinisphereEffect()));
+        this.addAbility(new SimpleStaticAbility(new TrinisphereEffect()));
     }
 
     private Trinisphere(final Trinisphere card) {
@@ -42,7 +42,7 @@ public final class Trinisphere extends CardImpl {
 
 class TrinisphereEffect extends CostModificationEffectImpl {
 
-    public TrinisphereEffect() {
+    TrinisphereEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, CostModificationType.SET_COST);
         this.staticText = "As long as {this} is untapped, each spell that would cost less than three mana to cast costs three mana to cast";
     }

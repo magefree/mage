@@ -20,7 +20,7 @@ public final class Telepathy extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
 
         // Your opponents play with their hands revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.OPPONENT)));
+        this.addAbility(new SimpleStaticAbility(new PlayWithHandRevealedEffect(TargetController.OPPONENT)));
     }
 
     private Telepathy(final Telepathy card) {

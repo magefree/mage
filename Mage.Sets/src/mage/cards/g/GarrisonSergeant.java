@@ -31,14 +31,13 @@ public final class GarrisonSergeant extends CardImpl {
     public GarrisonSergeant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Garrison Sergeant has double strike as long as you control a Gate.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 DoubleStrikeAbility.getInstance(),

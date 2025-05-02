@@ -8,6 +8,7 @@ import mage.abilities.effects.mana.ManaEffect;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.constants.ManaType;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -88,7 +89,7 @@ class AnyColorCardInYourGraveyardManaEffect extends ManaEffect {
             choice.setChoice(choice.getChoices().iterator().next());
         } else {
             Player player = game.getPlayer(source.getControllerId());
-            if (player == null || !player.choose(outcome, choice, game)) {
+            if (player == null || !player.choose(Outcome.PutManaInPool, choice, game)) {
                 return null;
             }
         }

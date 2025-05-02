@@ -47,7 +47,7 @@ public final class Jihad extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
         
         // White creatures get +2/+1 as long as the chosen player controls a nontoken permanent of the chosen color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(2, 1, Duration.WhileOnBattlefield, filter, false), new JihadOpponentCondition(), "White creatures get +2/+1 as long as the chosen player controls a nontoken permanent of the chosen color.")));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostAllEffect(2, 1, Duration.WhileOnBattlefield, filter, false), new JihadOpponentCondition(), "White creatures get +2/+1 as long as the chosen player controls a nontoken permanent of the chosen color.")));
         
         // When the chosen player controls no nontoken permanents of the chosen color, sacrifice Jihad.
         this.addAbility(new JihadTriggeredAbility(new SacrificeSourceEffect()));
@@ -70,7 +70,7 @@ class JihadTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When the chosen player controls no nontoken permanents of the chosen color, ");
     }
 
-    public JihadTriggeredAbility(final JihadTriggeredAbility ability) {
+    private JihadTriggeredAbility(final JihadTriggeredAbility ability) {
         super(ability);
     }
 

@@ -38,7 +38,7 @@ public final class Malignus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new HighestLifeTotalAmongOpponentsCount())));
 
         // Damage that would be dealt by Malignus can't be prevented.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MalignusEffect()));
+        this.addAbility(new SimpleStaticAbility(new MalignusEffect()));
     }
 
     private Malignus(final Malignus card) {
@@ -74,7 +74,7 @@ class HighestLifeTotalAmongOpponentsCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return CardsInControllerHandCount.instance;
+        return CardsInControllerHandCount.ANY;
     }
 
     @Override
@@ -90,12 +90,12 @@ class HighestLifeTotalAmongOpponentsCount implements DynamicValue {
 
 class MalignusEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MalignusEffect() {
+    MalignusEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Damage that would be dealt by {this} can't be prevented";
     }
 
-    public MalignusEffect(final MalignusEffect effect) {
+    private MalignusEffect(final MalignusEffect effect) {
         super(effect);
     }
 

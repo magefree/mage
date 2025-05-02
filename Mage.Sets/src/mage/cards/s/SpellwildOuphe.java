@@ -25,7 +25,7 @@ public final class SpellwildOuphe extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Spells that target Spellwild Ouphe cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(-2, new FilterCard("Spells"), TargetController.ANY))
         );
     }

@@ -66,7 +66,7 @@ class MirkwoodElkEffect extends OneShotEffect {
         this.staticText = "return target Elf card from your graveyard to your hand. You gain life equal to that card's power.";
     }
 
-    public MirkwoodElkEffect(final MirkwoodElkEffect effect) { super(effect); }
+    private MirkwoodElkEffect(final MirkwoodElkEffect effect) { super(effect); }
 
     @Override
     public MirkwoodElkEffect copy() { return new MirkwoodElkEffect(this); }
@@ -75,7 +75,7 @@ class MirkwoodElkEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card targetElf = game.getCard(targetPointer.getFirst(game, source));
+            Card targetElf = game.getCard(getTargetPointer().getFirst(game, source));
             if (targetElf != null) {
                 controller.moveCards(targetElf, Zone.HAND, source, game);
                 controller.gainLife(targetElf.getPower().getValue(), game, source);

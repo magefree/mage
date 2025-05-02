@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -34,7 +33,7 @@ public final class WardscaleDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as Wardscale Dragon is attacking, defending player can't cast spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardscaleDragonRuleEffect()));
+        this.addAbility(new SimpleStaticAbility(new WardscaleDragonRuleEffect()));
 
     }
 
@@ -50,23 +49,18 @@ public final class WardscaleDragon extends CardImpl {
 
 class WardscaleDragonRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public WardscaleDragonRuleEffect() {
+    WardscaleDragonRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, true, false);
         staticText = "As long as {this} is attacking, defending player can't cast spells";
     }
 
-    public WardscaleDragonRuleEffect(final WardscaleDragonRuleEffect effect) {
+    private WardscaleDragonRuleEffect(final WardscaleDragonRuleEffect effect) {
         super(effect);
     }
 
     @Override
     public WardscaleDragonRuleEffect copy() {
         return new WardscaleDragonRuleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -78,7 +72,7 @@ class WardscaleDragonRuleEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && sourcePermanent.isAttacking()) {
-            return event.getPlayerId().equals(game.getCombat().getDefendingPlayerId(sourcePermanent.getId(), game));
+            return event.getPlayerId().equals(game.getCombat().getDefendingPlayerId(sourcePermanent.getId(), game, false));
         }
         return false;
     }

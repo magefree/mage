@@ -35,7 +35,7 @@ public final class AethertideWhale extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(6)));
 
         // Pay {E}{E}{E}{E}: Return Aethertide Whale to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayEnergyCost(4)));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new PayEnergyCost(4)));
     }
 
     private AethertideWhale(final AethertideWhale card) {

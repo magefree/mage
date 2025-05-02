@@ -2,9 +2,8 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -24,8 +23,6 @@ import java.util.UUID;
  */
 public final class HalanaAndAlenaPartners extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public HalanaAndAlenaPartners(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
@@ -43,9 +40,8 @@ public final class HalanaAndAlenaPartners extends CardImpl {
 
         // At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is Halana and Alena's power. That creature gains haste until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), xValue)
-                        .setText("put X +1/+1 counters on another target creature you control, where X is {this}'s power"),
-                TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), SourcePermanentPowerValue.NOT_NEGATIVE)
+                        .setText("put X +1/+1 counters on another target creature you control, where X is {this}'s power")
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn

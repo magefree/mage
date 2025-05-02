@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageAttachedControllerEffect;
@@ -47,7 +47,7 @@ public final class OrcishMine extends CardImpl {
 
         // At the beginning of your upkeep or whenever enchanted land becomes tapped, remove an ore counter from Orcish Mine.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ORE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(null),
                 new BecomesTappedAttachedTriggeredAbility(null, "enchanted land")));
 
         // When the last ore counter is removed from Orcish Mine, destroy enchanted land and Orcish Mine deals 2 damage to that land's controller.
@@ -71,7 +71,7 @@ class OrcishMineAbility extends TriggeredAbilityImpl {
         this.addEffect(new DamageAttachedControllerEffect(2));
     }
 
-    public OrcishMineAbility(final OrcishMineAbility ability) {
+    private OrcishMineAbility(final OrcishMineAbility ability) {
         super(ability);
     }
 

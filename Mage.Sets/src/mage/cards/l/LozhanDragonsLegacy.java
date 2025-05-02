@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class LozhanDragonsLegacy extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an Adventure spell or Dragon spell");
+    private static final FilterSpell filter = new FilterSpell("an Adventure or Dragon spell");
     private static final FilterPermanentOrPlayer filter2
             = new FilterAnyTarget("any target that isn't a commander");
 

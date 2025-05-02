@@ -31,7 +31,7 @@ public final class DoorToNothingness extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         
         // {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}, {tap}, Sacrifice Door to Nothingness: Target player loses the game.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DoorToNothingnessEffect(), new ManaCostsImpl<>("{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(new DoorToNothingnessEffect(), new ManaCostsImpl<>("{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -50,12 +50,12 @@ public final class DoorToNothingness extends CardImpl {
 
 class DoorToNothingnessEffect extends OneShotEffect {
 
-    public DoorToNothingnessEffect() {
+    DoorToNothingnessEffect() {
         super(Outcome.Damage);
         this.staticText = "Target player loses the game";
     }
 
-    public DoorToNothingnessEffect(final DoorToNothingnessEffect effect) {
+    private DoorToNothingnessEffect(final DoorToNothingnessEffect effect) {
         super(effect);
     }
 

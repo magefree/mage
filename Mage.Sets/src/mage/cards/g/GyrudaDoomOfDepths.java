@@ -116,7 +116,7 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
         }
         // the creature card chosen can be in any zone, not just the graveyard
         TargetCard targetCard = new TargetCard(0, 1, Zone.ALL, filter);
-        targetCard.setNotTarget(true);
+        targetCard.withNotTarget(true);
         controller.choose(outcome, cards, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
         return card != null

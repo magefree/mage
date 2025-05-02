@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardControllerEffect;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -35,7 +36,7 @@ public final class AncientGreenwarden extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // You may play lands from your graveyard.
-        this.addAbility(new SimpleStaticAbility(new PlayLandsFromGraveyardControllerEffect()));
+        this.addAbility(new SimpleStaticAbility(PlayFromGraveyardControllerEffect.playLands()));
 
         // If a land entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
         this.addAbility(new SimpleStaticAbility(new AncientGreenwardenEffect()));
@@ -55,7 +56,7 @@ class AncientGreenwardenEffect extends ReplacementEffectImpl {
 
     AncientGreenwardenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a land entering the battlefield causes a triggered ability " +
+        staticText = "If a land entering causes a triggered ability " +
                 "of a permanent you control to trigger, that ability triggers an additional time";
     }
 
@@ -75,26 +76,25 @@ class AncientGreenwardenEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(event instanceof NumberOfTriggersEvent)) {
-            return false;
-        }
-        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
+        // Only triggers for the source controller
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
+        // Only EtB triggers of lands
         if (sourceEvent == null
                 || sourceEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                 || !(sourceEvent instanceof EntersTheBattlefieldEvent)
                 || !((EntersTheBattlefieldEvent) sourceEvent).getTarget().isLand(game)) {
             return false;
         }
-        return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
+        // Only for triggers of permanents
+        return game.getPermanent(event.getSourceId()) != null;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
         return false;
     }
 }

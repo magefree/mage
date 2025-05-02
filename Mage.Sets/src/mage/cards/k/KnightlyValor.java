@@ -49,7 +49,7 @@ public final class KnightlyValor extends CardImpl {
         // Enchanted creature gets +2/+2 and has vigilance.
         Effect effect = new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2");
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has vigilance");
         ability2.addEffect(effect);
@@ -57,7 +57,7 @@ public final class KnightlyValor extends CardImpl {
 
     }
 
-    public KnightlyValor (final KnightlyValor card) {
+    private KnightlyValor(final KnightlyValor card) {
         super(card);
     }
 

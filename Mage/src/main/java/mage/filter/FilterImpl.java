@@ -26,7 +26,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
         this.lockedFilter = false;
     }
 
-    public FilterImpl(final FilterImpl<E> filter) {
+    protected FilterImpl(final FilterImpl<E> filter) {
         this.message = filter.message;
         this.predicates = new ArrayList<>(filter.predicates);
         this.lockedFilter = false;// After copying a filter it's allowed to modify

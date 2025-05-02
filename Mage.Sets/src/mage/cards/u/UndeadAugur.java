@@ -2,7 +2,7 @@ package mage.cards.u;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class UndeadAugur extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Undead Augur or another Zombie you control dies, you draw a card and you lose 1 life.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(
                 new DrawCardSourceControllerEffect(1).setText("you draw a card"), false, filter
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));

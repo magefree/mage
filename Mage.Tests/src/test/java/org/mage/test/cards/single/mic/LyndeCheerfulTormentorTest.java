@@ -83,4 +83,78 @@ public class LyndeCheerfulTormentorTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, curse, 0);
         assertExileCount(playerA, curse, 1);
     }
+
+    /**
+     * When Lynde brings back a card which is a copy of a curse and enters again as a copy of a curse, the game mistakenly asks who to attach the curse to,
+     * when it should automatically be attached to the controller of Lynde.
+     */
+    @Test
+    public void copyCardTarget() {
+        // {1}{R} - Curse. On upkeep, deal 1 damage to enchanted player
+        String curse = "Curse of the Pierced Heart";
+        // {2}{U}{U} - Enters as a copy of a curse
+        String copy = "Clever Impersonator";
+        // {1} - Sacrifice a permanent
+        String sac = "Claws of Gix";
+        String island = "Island";
+        String mountain = "Mountain";
+
+        // The necessary cards for the test
+        addCard(Zone.HAND, playerA, curse);
+        addCard(Zone.HAND, playerB, copy);
+        addCard(Zone.BATTLEFIELD, playerB, lynde);
+        addCard(Zone.BATTLEFIELD, playerB, sac);
+
+        // Mana needed for player A to cast curse and player B to cast copy and sac
+        addCard(Zone.BATTLEFIELD, playerA, mountain, 2);
+        addCard(Zone.BATTLEFIELD, playerB, island, 5);
+
+        // Player A plays the curse
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, curse, playerB);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+
+        // Do not use Lynde's ability on upkeep
+        setChoice(playerB, false);
+
+        // Player B took one damage from Player A's curse
+        checkLife("Turn 2 Upkeep", 2, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 1);
+
+        // Player B casts the copy spell, choosing to copy the curse and enchant player A
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, copy);
+        setChoice(playerB, true);
+        setChoice(playerB, curse);
+        setChoice(playerB, playerA.getName());
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, 1);
+
+        // Now there should be two curses
+        checkPermanentCount("After copy", 2, PhaseStep.PRECOMBAT_MAIN, playerA, curse, 1);
+        checkPermanentCount("After copy", 2, PhaseStep.PRECOMBAT_MAIN, playerB, curse, 1);
+
+        // Player B sacrifices their copy of the curse
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}, Sacrifice a permanent");
+        setChoice(playerB, curse);
+
+        // Make sure Lynde triggers
+        checkStackObject("After sac", 2, PhaseStep.PRECOMBAT_MAIN, playerB,
+                "Whenever a Curse is put into your graveyard from the battlefield", 1);
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, 2);
+
+        // Have copy come back as copy of curse. It should be attached to playerB automatically, and no choice should be offered on who to attach it to.
+        setChoice(playerB, true);
+        setChoice(playerB, curse);
+
+        // At the beginning of turn 4, player B should have two triggers
+        setChoice(playerB, "At the beginning of enchanted");
+        setChoice(playerB, false);
+
+        setStopAt(4, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, curse, 1);
+        assertPermanentCount(playerB, curse, 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 2);
+    }
 }

@@ -14,7 +14,6 @@ import mage.filter.StaticFilters;
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class FeastingHobbit extends CardImpl {
@@ -31,7 +30,7 @@ public final class FeastingHobbit extends CardImpl {
         this.addAbility(new DevourAbility(3, StaticFilters.FILTER_CONTROLLED_FOOD));
 
         // Creatures with power less than Feasting Hobbit's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
     }
 
     private FeastingHobbit(final FeastingHobbit card) {

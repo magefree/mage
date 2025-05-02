@@ -27,7 +27,7 @@ public final class Xenograft extends CardImpl {
         // As Xenograft enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Detriment)));
         // Each creature you control is the chosen type in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new XenograftAddSubtypeEffect()));
+        this.addAbility(new SimpleStaticAbility(new XenograftAddSubtypeEffect()));
     }
 
     private Xenograft(final Xenograft card) {
@@ -42,12 +42,13 @@ public final class Xenograft extends CardImpl {
 
 class XenograftAddSubtypeEffect extends ContinuousEffectImpl {
 
-    public XenograftAddSubtypeEffect() {
+    XenograftAddSubtypeEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "Each creature you control is the chosen type in addition to its other types";
+        this.dependendToTypes.add(DependencyType.BecomeCreature);
     }
 
-    public XenograftAddSubtypeEffect(final XenograftAddSubtypeEffect effect) {
+    private XenograftAddSubtypeEffect(final XenograftAddSubtypeEffect effect) {
         super(effect);
     }
 

@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.permanent.token.KnightToken;
@@ -35,7 +34,6 @@ public final class SigiledSwordOfValeron extends CardImpl {
 
         // Equipped creature gets +2/+0, has vigilance, and is a Knight in addition to its other types.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostEquippedEffect(2, 0)
         );
         ability.addEffect(new GainAbilityAttachedEffect(
@@ -44,7 +42,6 @@ public final class SigiledSwordOfValeron extends CardImpl {
         ).setText(", has vigilance"));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.KNIGHT,
-                Duration.WhileOnBattlefield,
                 AttachmentType.EQUIPMENT
         ).setText(", and is a Knight in addition to its other types"));
         this.addAbility(ability);

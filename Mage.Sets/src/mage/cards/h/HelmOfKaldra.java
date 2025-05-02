@@ -47,7 +47,7 @@ public final class HelmOfKaldra extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has first strike, trample, and haste.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText(", trample");
         ability.addEffect(effect);
@@ -93,12 +93,12 @@ class HelmOfKaldraCondition implements Condition {
 
 class HelmOfKaldraEffect extends OneShotEffect {
 
-    public HelmOfKaldraEffect() {
+    HelmOfKaldraEffect() {
         super(Outcome.Benefit);
         this.staticText = "if you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create Kaldra, a legendary 4/4 colorless Avatar creature token. Attach those Equipment to it";
     }
 
-    public HelmOfKaldraEffect(final HelmOfKaldraEffect effect) {
+    private HelmOfKaldraEffect(final HelmOfKaldraEffect effect) {
         super(effect);
     }
 

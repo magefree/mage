@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class HungryHungryHeifer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, you may remove a counter from a permanent you control. If you don't, sacrifice Hungry Hungry Heifer.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HungryHungryHeiferEffect(), TargetController.YOU, false, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HungryHungryHeiferEffect()));
     }
 
     private HungryHungryHeifer(final HungryHungryHeifer card) {
@@ -56,7 +56,7 @@ class HungryHungryHeiferEffect extends OneShotEffect {
         this.staticText = "you may remove a counter from a permanent you control. If you don't, sacrifice {this}";
     }
 
-    public HungryHungryHeiferEffect(final HungryHungryHeiferEffect effect) {
+    private HungryHungryHeiferEffect(final HungryHungryHeiferEffect effect) {
         super(effect);
     }
 

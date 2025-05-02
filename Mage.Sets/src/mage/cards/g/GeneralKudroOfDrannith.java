@@ -58,14 +58,14 @@ public final class GeneralKudroOfDrannith extends CardImpl {
                 1, 1, Duration.WhileOnBattlefield, filter, true
         )));
 
-        // Whenever General Kudro of Drannith or another Human enters the battlefield under your control, exile target card from an opponent's graveyard.
+        // Whenever General Kudro of Drannith or another Human you control enters, exile target card from an opponent's graveyard.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(new ExileTargetEffect(), filter2, false, true);
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter3));
         this.addAbility(ability);
 
         // {2}, Sacrifice two Humans: Destroy target creature with power 4 or greater.
         ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter4)));
+        ability.addCost(new SacrificeTargetCost(2, filter4));
         ability.addTarget(new TargetPermanent(filter5));
         this.addAbility(ability);
     }

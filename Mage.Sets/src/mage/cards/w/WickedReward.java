@@ -17,14 +17,14 @@ public final class WickedReward extends CardImpl {
         super(cardId, cardSetInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         //As an additional cost to cast Wicked Reward, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         //Target creature gets +4/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WickedReward(WickedReward other) {
+    private WickedReward(final WickedReward other) {
         super(other);
     }
 

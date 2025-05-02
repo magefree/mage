@@ -18,7 +18,7 @@ public class AngelOfSerenityTest extends CardTestMultiPlayerBase {
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         // Start Life = 2
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 2);
+        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 2, 7);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, "PlayerA");
         playerB = createPlayer(game, "PlayerB");

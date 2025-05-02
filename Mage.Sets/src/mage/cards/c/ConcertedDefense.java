@@ -1,9 +1,8 @@
 package mage.cards.c;
 
-import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.PartyCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.hint.common.PartyCountHint;
 import mage.cards.CardImpl;
@@ -19,7 +18,7 @@ import java.util.UUID;
  */
 public final class ConcertedDefense extends CardImpl {
 
-    private static final DynamicValue xValue = new AdditiveDynamicValue(PartyCount.instance, StaticValue.get(1));
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, PartyCount.instance);
 
     public ConcertedDefense(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

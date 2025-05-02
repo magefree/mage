@@ -45,7 +45,7 @@ public final class Melee extends CardImpl {
         // Cast Melee only during your turn and only during combat before blockers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(
                 null, null, condition,
-                "Cast this spell only during your turn and only during combat before blockers are declared"
+                "Cast this spell only during combat on your turn before blockers are declared"
         ).addHint(hint));
 
         // You choose which creatures block this combat and how those creatures block.
@@ -54,7 +54,7 @@ public final class Melee extends CardImpl {
         this.getSpellAbility().addWatcher(new ControlCombatRedundancyWatcher());
 
         // Whenever a creature attacks and isn't blocked this combat, untap it and remove it from combat.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new MeleeTriggeredAbility()));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new MeleeTriggeredAbility()).concatBy("<br>"));
     }
 
     private Melee(final Melee card) {
@@ -74,7 +74,7 @@ class MeleeTriggeredAbility extends DelayedTriggeredAbility {
         this.addEffect(new RemoveFromCombatTargetEffect());
     }
 
-    public MeleeTriggeredAbility(MeleeTriggeredAbility ability) {
+    private MeleeTriggeredAbility(final MeleeTriggeredAbility ability) {
         super(ability);
     }
 

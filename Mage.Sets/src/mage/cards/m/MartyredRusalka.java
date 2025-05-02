@@ -31,8 +31,8 @@ public final class MartyredRusalka extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}, Sacrifice a creature: Target creature can't attack this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

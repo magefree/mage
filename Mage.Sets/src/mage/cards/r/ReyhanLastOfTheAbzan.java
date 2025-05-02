@@ -63,9 +63,10 @@ class ReyhanLastOfTheAbzanTriggeredAbility extends TriggeredAbilityImpl {
 
     public ReyhanLastOfTheAbzanTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public ReyhanLastOfTheAbzanTriggeredAbility(final ReyhanLastOfTheAbzanTriggeredAbility ability) {
+    private ReyhanLastOfTheAbzanTriggeredAbility(final ReyhanLastOfTheAbzanTriggeredAbility ability) {
         super(ability);
     }
 

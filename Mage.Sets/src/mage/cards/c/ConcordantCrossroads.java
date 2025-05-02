@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -24,8 +23,8 @@ public final class ConcordantCrossroads extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // All creatures have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
+        this.addAbility(new SimpleStaticAbility(
+                new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
     }
 
     private ConcordantCrossroads(final ConcordantCrossroads card) {

@@ -44,7 +44,7 @@ public final class TreasureMage extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 
-    public TreasureMage (final TreasureMage card) {
+    private TreasureMage(final TreasureMage card) {
         super(card);
     }
 

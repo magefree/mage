@@ -35,6 +35,10 @@ public class AddCountersSourceEffect extends OneShotEffect {
         this(counter, StaticValue.get(0), informPlayers);
     }
 
+    public AddCountersSourceEffect(Counter counter, DynamicValue amount) {
+        this(counter, amount, true);
+    }
+
     public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers) {
         this(counter, amount, informPlayers, false);
     }

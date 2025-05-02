@@ -43,14 +43,14 @@ public final class PiaNalaar extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken())));
 
         // {1}{R}: Target artifact creature gets +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE));
         this.addAbility(ability);
 
         // {1}, Sacrifice an artifact: Target creature can't block this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1));
+        ability = new SimpleActivatedAbility(new CantBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1));
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.addAbility(ability);
     }
 

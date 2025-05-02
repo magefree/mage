@@ -26,13 +26,13 @@ public class HiddenRetreat extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         //Put a card from your hand on top of your library: Prevent all damage that would be dealt by target instant or sorcery spell this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HiddenRetreatEffect(), new PutCardFromHandOnTopOfLibraryCost());
+        Ability ability = new SimpleActivatedAbility(new HiddenRetreatEffect(), new PutCardFromHandOnTopOfLibraryCost());
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.addAbility(ability);
 
     }
 
-    public HiddenRetreat(final HiddenRetreat hiddenRetreat) {
+    private HiddenRetreat(final HiddenRetreat hiddenRetreat) {
         super(hiddenRetreat);
     }
 
@@ -44,12 +44,12 @@ public class HiddenRetreat extends CardImpl {
 
 class HiddenRetreatEffect extends PreventionEffectImpl {
 
-    public HiddenRetreatEffect() {
+    HiddenRetreatEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         this.staticText = "Prevent all damage that would be dealt by target instant or sorcery spell this turn.";
     }
 
-    public HiddenRetreatEffect(final HiddenRetreatEffect effect) {
+    private HiddenRetreatEffect(final HiddenRetreatEffect effect) {
         super(effect);
     }
 

@@ -14,7 +14,7 @@ import mage.target.common.TargetAnyTarget;
 public final class RockToken extends TokenImpl {
 
     public RockToken() {
-        super("Rock", "artifact equipment token named Rock with \"Equipped creature has '{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target'\" and equip {1}");
+        super("Rock", "colorless Equipment artifact token named Rock with \"Equipped creature has '{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target'\" and equip {1}");
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.EQUIPMENT);
 
@@ -25,7 +25,7 @@ public final class RockToken extends TokenImpl {
         this.addAbility(new EquipAbility(1));
     }
 
-    protected RockToken(final RockToken token) {
+    private RockToken(final RockToken token) {
         super(token);
     }
 

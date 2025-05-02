@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -33,7 +32,7 @@ public final class ForceOfNature extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay {G}{G}{G}{G}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForceOfNatureEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForceOfNatureEffect()));
 
     }
 
@@ -49,12 +48,12 @@ public final class ForceOfNature extends CardImpl {
 
 class ForceOfNatureEffect extends OneShotEffect {
 
-    public ForceOfNatureEffect() {
+    ForceOfNatureEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 8 damage to you unless you pay {G}{G}{G}{G}";
     }
 
-    public ForceOfNatureEffect(final ForceOfNatureEffect effect) {
+    private ForceOfNatureEffect(final ForceOfNatureEffect effect) {
         super(effect);
     }
 

@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -26,7 +26,7 @@ public final class IronFistOfTheEmpire extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
         // <i>Hate</i> &mdash; At the beggining of each end step, if opponent lost life from a source other than combat damage this turn, you gain 2 life and create a 2/2 red Soldier creature token with first strike name Royal Guard.
-        TriggeredAbility triggeredAbility = new BeginningOfEndStepTriggeredAbility(new GainLifeEffect(2), TargetController.ANY, false);
+        TriggeredAbility triggeredAbility = new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new GainLifeEffect(2), false);
         triggeredAbility.addEffect(new CreateTokenEffect(new RoyalGuardToken()));
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,

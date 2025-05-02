@@ -8,6 +8,7 @@ import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MoreThanMeetsTheEyeAbility;
 import mage.cards.CardImpl;
@@ -46,6 +47,7 @@ public final class StarscreamPowerHungry extends CardImpl {
             "Whenever you draw a card, if you're the monarch, target opponent loses 2 life."
         );
         trigger.addTarget(new TargetOpponent());
+        trigger.addHint(MonarchHint.instance);
         this.addAbility(trigger);
 
         // Whenever one or more creatures deal combat damage to you, convert Starscream.

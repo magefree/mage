@@ -32,9 +32,10 @@ public final class LastMarchOfTheEnts extends CardImpl {
 
         // Draw cards equal to the greatest toughness among creatures you control, then put any number of creature cards from your hand onto the battlefield.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
-                GreatestToughnessAmongControlledCreaturesValue.instance
+                GreatestToughnessAmongControlledCreaturesValue.ALL
         ).setText("draw cards equal to the greatest toughness among creatures you control"));
         this.getSpellAbility().addEffect(new LastMarchOfTheEntsEffect());
+        this.getSpellAbility().addHint(GreatestToughnessAmongControlledCreaturesValue.ALL.getHint());
     }
 
     private LastMarchOfTheEnts(final LastMarchOfTheEnts card) {
@@ -50,7 +51,7 @@ public final class LastMarchOfTheEnts extends CardImpl {
 class LastMarchOfTheEntsEffect extends OneShotEffect {
 
     LastMarchOfTheEntsEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.PutCreatureInPlay);
         staticText = ", then put any number of creature cards from your hand onto the battlefield";
     }
 
@@ -70,7 +71,7 @@ class LastMarchOfTheEntsEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES);
-        player.choose(outcome, player.getHand(), target, source, game);
+        player.choose(outcome, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;
     }

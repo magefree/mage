@@ -41,7 +41,7 @@ public final class HeroicDefiance extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield),
                         new HeroicDefianceCondition(),
                         "Enchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common")));

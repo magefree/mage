@@ -29,14 +29,14 @@ public final class CastIntoDarkness extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets -2/-0 and can't block.
         Effect effect = new BoostEnchantedEffect(-2,0, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets -2/-0");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new CantBlockAttachedEffect(AttachmentType.AURA);
         effect.setText("and can't block");
         ability.addEffect(effect);

@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
@@ -13,18 +12,20 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public final class ArchonOfRedemption extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
@@ -39,9 +40,9 @@ public final class ArchonOfRedemption extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Archon of Redemption or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.
+        // Whenever Archon of Redemption or another creature with flying you control enters, you may gain life equal to that creature's power.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new ArchonOfRedemptionEffect(), filter, true, SetTargetPointer.PERMANENT, true
+                new ArchonOfRedemptionEffect(), filter, true, SetTargetPointer.PERMANENT, false
         ));
     }
 

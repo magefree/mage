@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class JovensTools extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by walls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
     static {
         filter.add(Predicates.not(SubType.WALL.getPredicate()));
     }
@@ -32,7 +31,7 @@ public final class JovensTools extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {4}, {T}: Target creature can't be blocked this turn except by Walls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

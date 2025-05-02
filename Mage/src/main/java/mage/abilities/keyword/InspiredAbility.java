@@ -28,6 +28,7 @@ public class InspiredAbility extends TriggeredAbilityImpl {
             setAbilityWord(AbilityWord.INSPIRED);
         }
         setTriggerPhrase("Whenever {this} becomes untapped, ");
+        this.withRuleTextReplacement(true);
     }
 
     protected InspiredAbility(final InspiredAbility ability) {

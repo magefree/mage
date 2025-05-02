@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
@@ -17,8 +16,9 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.RiftmarkedKnightToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +63,7 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When the last time counter is removed from {this} while it's exiled, ");
     }
 
-    public RiftmarkedKnightTriggeredAbility(final RiftmarkedKnightTriggeredAbility ability) {
+    private RiftmarkedKnightTriggeredAbility(final RiftmarkedKnightTriggeredAbility ability) {
         super(ability);
     }
 
@@ -74,7 +74,9 @@ class RiftmarkedKnightTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return (event.getTargetId().equals(this.getSourceId()) && game.getCard(event.getTargetId()).getCounters(game).getCount(CounterType.TIME) == 0);
+        return (event.getTargetId().equals(this.getSourceId())
+                && event.getData().equals(CounterType.TIME.getName())
+                && game.getCard(event.getTargetId()).getCounters(game).getCount(CounterType.TIME) == 0);
     }
 
     @Override

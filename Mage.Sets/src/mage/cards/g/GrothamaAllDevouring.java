@@ -43,7 +43,7 @@ public final class GrothamaAllDevouring extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Other creatures have "Whenever this creature attacks, you may have it fight Grothama, All-Devouring."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrothamaAllDevouringGainAbilityEffect()));
+        this.addAbility(new SimpleStaticAbility(new GrothamaAllDevouringGainAbilityEffect()));
 
         // When Grothama leaves the battlefield, each player draws cards equal to the amount of damage dealt to Grothama this turn by sources they controlled.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new GrothamaAllDevouringDrawCardsEffect(), false), new GrothamaAllDevouringWatcher());
@@ -74,7 +74,7 @@ class GrothamaAllDevouringGainAbilityEffect extends GainAbilityAllEffect {
         this.staticText = "Other creatures have \"Whenever this creature attacks, you may have it fight {this}.\"";
     }
 
-    GrothamaAllDevouringGainAbilityEffect(final GrothamaAllDevouringGainAbilityEffect effect) {
+    private GrothamaAllDevouringGainAbilityEffect(final GrothamaAllDevouringGainAbilityEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class GrothamaAllDevouringFightEffect extends OneShotEffect {
         this.staticText = "you may have it fight " + fightName;
     }
 
-    GrothamaAllDevouringFightEffect(final GrothamaAllDevouringFightEffect effect) {
+    private GrothamaAllDevouringFightEffect(final GrothamaAllDevouringFightEffect effect) {
         super(effect);
         this.fightId = effect.fightId;
     }
@@ -133,7 +133,7 @@ class GrothamaAllDevouringDrawCardsEffect extends OneShotEffect {
                 + "damage dealt to {this} this turn by sources they controlled.";
     }
 
-    GrothamaAllDevouringDrawCardsEffect(final GrothamaAllDevouringDrawCardsEffect effect) {
+    private GrothamaAllDevouringDrawCardsEffect(final GrothamaAllDevouringDrawCardsEffect effect) {
         super(effect);
     }
 

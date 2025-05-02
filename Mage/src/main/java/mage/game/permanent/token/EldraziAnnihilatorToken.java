@@ -19,7 +19,7 @@ public final class EldraziAnnihilatorToken extends TokenImpl {
         addAbility(new AnnihilatorAbility(1));
     }
 
-    protected EldraziAnnihilatorToken(final EldraziAnnihilatorToken token) {
+    private EldraziAnnihilatorToken(final EldraziAnnihilatorToken token) {
         super(token);
     }
 

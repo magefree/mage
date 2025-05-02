@@ -5,8 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,9 +38,9 @@ public final class Mournwillow extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new MournwillowEffect(), false),
                 DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; When {this} enters the battlefield, if there are four or more card types among cards in your graveyard, "
+                "<i>Delirium</i> &mdash; When {this} enters, if there are four or more card types among cards in your graveyard, "
                         + "creatures with power 2 or less can't block this turn.");
-        ability.addHint(CardTypesInGraveyardHint.YOU);
+        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
         this.addAbility(ability);
     }
 
@@ -56,12 +56,12 @@ public final class Mournwillow extends CardImpl {
 
 class MournwillowEffect extends RestrictionEffect {
 
-    public MournwillowEffect() {
+    MournwillowEffect() {
         super(Duration.EndOfTurn);
         staticText = "creatures with power 2 or less can't block this turn";
     }
 
-    public MournwillowEffect(final MournwillowEffect effect) {
+    private MournwillowEffect(final MournwillowEffect effect) {
         super(effect);
     }
 

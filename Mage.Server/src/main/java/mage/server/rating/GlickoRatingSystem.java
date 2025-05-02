@@ -12,14 +12,14 @@ public class GlickoRatingSystem {
     // rating deviation will grow back from 50 to max 350 in 2 years
     public static final double C = 0.00137934314767061324980397708525;
 
-    public static final double BaseRating = 1500;
-    public static final double BaseRD = 350;
-    public static final double MinRD = 30;
+    public static final double BASE_RATING = 1500;
+    public static final double BASE_RD = 350;
+    public static final double MIN_RD = 30;
 
     private static final double Q = Math.log(10) / 400;
 
     public static GlickoRating getInitialRating() {
-        return new GlickoRating(GlickoRatingSystem.BaseRating, GlickoRatingSystem.BaseRD, 0);
+        return new GlickoRating(GlickoRatingSystem.BASE_RATING, GlickoRatingSystem.BASE_RD, 0);
     }
 
     public static int getDisplayedRating(GlickoRating rating) {
@@ -55,17 +55,17 @@ public class GlickoRatingSystem {
             double newRD = Math.sqrt(
                     rating.getRatingDeviation() * rating.getRatingDeviation()
                             + C * C * Math.max(gameTimeMs - rating.getLastGameTimeMs(), 0));
-            newRatingDeviation = Math.max(Math.min(BaseRD, newRD), MinRD);
+            newRatingDeviation = Math.max(Math.min(BASE_RD, newRD), MIN_RD);
         }
         else
         {
-            newRatingDeviation = BaseRD;
+            newRatingDeviation = BASE_RD;
         }
         return newRatingDeviation;
     }
 
     private GlickoRating getNewRating(GlickoRating playerRating, GlickoRating opponentRating, double outcome) {
-        double RD = playerRating.getRatingDeviation();
+        double playerRatingDeviation = playerRating.getRatingDeviation();
 
         double g = gFunc(opponentRating.getRatingDeviation());
         double p = -g * (playerRating.getRating() - opponentRating.getRating()) / 400;
@@ -73,8 +73,8 @@ public class GlickoRatingSystem {
         double d2 = 1 / (Q * Q * g * g * e * (1 - e));
 
         // todo: set minimum K?
-        double newRating = playerRating.getRating() + Q / (1 / RD / RD + 1 / d2) * g * (outcome - e);
-        double newRD = Math.sqrt(1 / (1 / RD / RD + 1 / d2));
+        double newRating = playerRating.getRating() + Q / (1 / playerRatingDeviation / playerRatingDeviation + 1 / d2) * g * (outcome - e);
+        double newRD = Math.sqrt(1 / (1 / playerRatingDeviation / playerRatingDeviation + 1 / d2));
 
         return new GlickoRating(newRating, newRD);
     }

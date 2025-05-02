@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -22,7 +22,6 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -43,8 +42,8 @@ public final class UnnaturalHunger extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted creature's controller, Unnatural Hunger deals damage to that player equal to that creature's power unless they sacrifice another creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UnnaturalHungerEffect(),
-                TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new UnnaturalHungerEffect(),
+                false));
     }
 
     private UnnaturalHunger(final UnnaturalHunger card) {
@@ -59,7 +58,7 @@ public final class UnnaturalHunger extends CardImpl {
 
 class UnnaturalHungerEffect extends OneShotEffect {
 
-    public UnnaturalHungerEffect() {
+    UnnaturalHungerEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals damage to that player equal to that creature's power unless they sacrifice another creature";
     }
@@ -76,7 +75,7 @@ class UnnaturalHungerEffect extends OneShotEffect {
             if (attachedTo != null) {
                 FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                 filter.add(Predicates.not(new PermanentIdPredicate(aura.getAttachedTo())));  // not attached permanent
-                Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter));
+                Cost cost = new SacrificeTargetCost(filter);
                 Player enchantedCreatureController = game.getPlayer(attachedTo.getControllerId());
                 if (enchantedCreatureController != null
                         && cost.canPay(source, source, enchantedCreatureController.getId(), game)

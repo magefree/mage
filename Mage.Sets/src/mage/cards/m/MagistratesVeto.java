@@ -32,7 +32,7 @@ public final class MagistratesVeto extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // White creatures and blue creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private MagistratesVeto(final MagistratesVeto card) {

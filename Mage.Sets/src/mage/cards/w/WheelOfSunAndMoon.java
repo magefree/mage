@@ -43,7 +43,7 @@ public final class WheelOfSunAndMoon extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WheelOfSunAndMoonEffect()));
+        this.addAbility(new SimpleStaticAbility(new WheelOfSunAndMoonEffect()));
     }
 
     private WheelOfSunAndMoon(final WheelOfSunAndMoon card) {
@@ -58,12 +58,12 @@ public final class WheelOfSunAndMoon extends CardImpl {
 
 class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
 
-    public WheelOfSunAndMoonEffect() {
+    WheelOfSunAndMoonEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library";
     }
 
-    public WheelOfSunAndMoonEffect(final WheelOfSunAndMoonEffect effect) {
+    private WheelOfSunAndMoonEffect(final WheelOfSunAndMoonEffect effect) {
         super(effect);
     }
 

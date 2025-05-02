@@ -31,7 +31,7 @@ public final class MephiticOoze extends CardImpl {
 
         // Mephitic Ooze gets +1/+0 for each artifact you control.
         Effect effect = new BoostSourceEffect(ArtifactYouControlCount.instance, StaticValue.get(0), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(ArtifactYouControlHint.instance));
+        this.addAbility(new SimpleStaticAbility(effect).addHint(ArtifactYouControlHint.instance));
 
         // Whenever Mephitic Ooze deals combat damage to a creature, destroy that creature. The creature can't be regenerated.
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), false, true));

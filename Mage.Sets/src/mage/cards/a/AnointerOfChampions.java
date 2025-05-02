@@ -29,7 +29,7 @@ public final class AnointerOfChampions extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target attacking creature gets +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }

@@ -44,9 +44,10 @@ class KarmicJusticeTriggeredAbility extends TriggeredAbilityImpl {
     
     KarmicJusticeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
+        this.setLeavesTheBattlefieldTrigger(true);
     }
     
-    KarmicJusticeTriggeredAbility(final KarmicJusticeTriggeredAbility ability) {
+    private KarmicJusticeTriggeredAbility(final KarmicJusticeTriggeredAbility ability) {
         super(ability);
     }
     
@@ -79,6 +80,6 @@ class KarmicJusticeTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public String getRule() {
-        return "Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, you may destroy target permanent that opponent controls";
+        return "Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, you may destroy target permanent that opponent controls.";
     }
 }

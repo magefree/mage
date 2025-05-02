@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,13 +38,13 @@ public final class ShaukuEndbringer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Shauku, Endbringer can't attack if there's another creature on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShaukuEndbringerEffect()));
+        this.addAbility(new SimpleStaticAbility(new ShaukuEndbringerEffect()));
 
         // At the beginning of your upkeep, you lose 3 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(3), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(3)));
 
         // {T}: Exile target creature and put a +1/+1 counter on Shauku.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new TapSourceCost());
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy("and"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -73,7 +73,7 @@ class ShaukuEndbringerEffect extends RestrictionEffect {
         staticText = "{this} can't attack if there's another creature on the battlefield.";
     }
 
-    public ShaukuEndbringerEffect(final ShaukuEndbringerEffect effect) {
+    private ShaukuEndbringerEffect(final ShaukuEndbringerEffect effect) {
         super(effect);
     }
 

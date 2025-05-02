@@ -40,7 +40,7 @@ public final class BudokaGardener extends CardImpl {
         this.flipCardName = "Dokai, Weaver of Life";
 
         // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), new TapSourceCost());
         ability.addEffect(new BudokaGardenerEffect());
         this.addAbility(ability.addHint(new ValueHint("Lands you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND))));
     }
@@ -65,14 +65,16 @@ class BudokaGardenerEffect extends OneShotEffect {
         staticText = "If you control ten or more lands, flip {this}";
     }
 
-    BudokaGardenerEffect(final BudokaGardenerEffect effect) {
+    private BudokaGardenerEffect(final BudokaGardenerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
         if (game.getBattlefield().count(filterLands, source.getControllerId(), source, game) < 10) {
             return false;
         }
@@ -99,12 +101,12 @@ class DokaiWeaverofLife extends TokenImpl {
         toughness = new MageInt(3);
 
         // {4}{G}{G}, {T}: Create an X/X green Elemental creature token, where X is the number of lands you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl<>("{4}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl<>("{4}{G}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public DokaiWeaverofLife(final DokaiWeaverofLife token) {
+    private DokaiWeaverofLife(final DokaiWeaverofLife token) {
         super(token);
     }
 

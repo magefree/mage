@@ -64,7 +64,7 @@ class NissasDefeatEffect extends OneShotEffect {
         this.staticText = "Destroy target Forest, green enchantment, or green planeswalker. If that permanent was a Nissa planeswalker, draw a card.";
     }
 
-    public NissasDefeatEffect(final NissasDefeatEffect effect) {
+    private NissasDefeatEffect(final NissasDefeatEffect effect) {
         super(effect);
     }
 

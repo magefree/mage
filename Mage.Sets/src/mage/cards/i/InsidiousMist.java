@@ -44,7 +44,7 @@ public final class InsidiousMist extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // Insideous Mist can't block and can't be blocked.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockSourceEffect(Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new CantBlockSourceEffect(Duration.WhileOnBattlefield));
         Effect effect = new CantBeBlockedSourceEffect();
         effect.setText("and can't be blocked");
         ability.addEffect(effect);
@@ -52,7 +52,8 @@ public final class InsidiousMist extends CardImpl {
 
         // Whenever Insideous Mist attacks and isn't blocked, you may pay {2}{B}. If you do, transform it.
         this.addAbility(new TransformAbility());
-        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(new TransformSourceEffect(), new ManaCostsImpl<>("{2}{B}"), "Pay {2}{B} to transform?")));
+        this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(new TransformSourceEffect()
+                .setText("transform it"), new ManaCostsImpl<>("{2}{B}"), "Pay {2}{B} to transform?")));
     }
 
     private InsidiousMist(final InsidiousMist card) {

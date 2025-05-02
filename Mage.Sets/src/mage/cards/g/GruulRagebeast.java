@@ -32,7 +32,7 @@ public final class GruulRagebeast extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Whenever Gruul Ragebeast or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
+        // Whenever Gruul Ragebeast or another creature you control enters, that creature fights target creature an opponent controls.
         this.addAbility(new GruulRagebeastTriggeredAbility());
     }
 
@@ -93,10 +93,11 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         // that triggers depends on stack order, so make each trigger unique with extra info
         String triggeredInfo = "";
-        if (this.getEffects().get(0).getTargetPointer() != null) {
-            triggeredInfo = " Your fighting creature: " + this.getEffects().get(0).getTargetPointer().getData("triggeredName") + ".";
+        String triggeredMana = this.getEffects().get(0).getTargetPointer().getData("triggeredName");
+        if (!triggeredMana.isEmpty()) {
+            triggeredInfo = " Your fighting creature: " + triggeredMana + ".";
         }
-        return "Whenever {this} or another creature enters the battlefield under your control, "
+        return "Whenever {this} or another creature you control enters, "
                 + "that creature fights target creature an opponent controls." + triggeredInfo;
     }
 }
@@ -113,7 +114,7 @@ class GruulRagebeastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent triggeredCreature = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent triggeredCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (triggeredCreature != null
                 && target != null

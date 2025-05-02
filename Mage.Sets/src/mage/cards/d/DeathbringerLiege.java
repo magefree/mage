@@ -49,8 +49,8 @@ public final class DeathbringerLiege extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlack, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlack, true)));
         Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filterWhiteSpellCard, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -59,7 +59,7 @@ public final class DeathbringerLiege extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathbringerLiege (final DeathbringerLiege card) {
+    private DeathbringerLiege(final DeathbringerLiege card) {
         super(card);
     }
 
@@ -76,13 +76,13 @@ class DeathbringerLiegeEffect extends OneShotEffect {
         staticText = "destroy target creature if it's tapped";
     }
 
-    DeathbringerLiegeEffect(final DeathbringerLiegeEffect effect) {
+    private DeathbringerLiegeEffect(final DeathbringerLiegeEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent p = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (p != null && p.isTapped()) {
             p.destroy(source, game, false);
         }

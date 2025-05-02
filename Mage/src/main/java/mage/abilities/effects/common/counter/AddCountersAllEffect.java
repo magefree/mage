@@ -2,6 +2,8 @@ package mage.abilities.effects.common.counter;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.Counter;
@@ -16,11 +18,17 @@ import mage.players.Player;
 public class AddCountersAllEffect extends OneShotEffect {
 
     private final Counter counter;
+    private final DynamicValue amount;
     private final FilterPermanent filter;
 
     public AddCountersAllEffect(Counter counter, FilterPermanent filter) {
+        this(counter, StaticValue.get(0), filter);
+    }
+
+    public AddCountersAllEffect(Counter counter, DynamicValue amount, FilterPermanent filter) {
         super(Outcome.Benefit);
         this.counter = counter;
+        this.amount = amount;
         this.filter = filter;
         staticText = "put " + counter.getDescription() + " on each " + filter.getMessage();
     }
@@ -29,23 +37,40 @@ public class AddCountersAllEffect extends OneShotEffect {
         super(effect);
         this.counter = effect.counter.copy();
         this.filter = effect.filter.copy();
+        this.amount = effect.amount;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
-        if (controller != null && sourceObject != null) {
-            if (counter != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    permanent.addCounters(counter.copy(), source.getControllerId(), source, game);
-                    if (!game.isSimulation()) {
-                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts " + counter.getCount() + ' ' + counter.getName()
-                                + " counter on " + permanent.getLogName());
-                    }
-                }
+        if (controller != null && sourceObject != null && counter != null) {
+            Counter newCounter = counter.copy();
+            int calculated = amount.calculate(game, source, this);
+            if (!(amount instanceof StaticValue) || calculated > 0) {
+                // If dynamic, or static and set to a > 0 value, we use that instead of the counter's internal amount.
+                newCounter.remove(newCounter.getCount());
+                newCounter.add(calculated);
+            } else {
+                // StaticValue 0 -- the default counter has the amount, so no adjustment.
             }
-            return true;
+
+            if (newCounter.getCount() <= 0) {
+                return false; // no need to iterate on the permanents, no counters will be put on them
+            }
+
+            boolean result = false;
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                Counter newCounterForPermanent = newCounter.copy();
+
+                permanent.addCounters(newCounterForPermanent, source.getControllerId(), source, game);
+                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
+                        + newCounterForPermanent.getCount() + ' ' + newCounterForPermanent.getName()
+                        + (newCounterForPermanent.getCount() == 1 ? " counter" : " counters") + " on " + permanent.getLogName());
+
+                result |= true;
+            }
+            return result;
         }
         return false;
     }

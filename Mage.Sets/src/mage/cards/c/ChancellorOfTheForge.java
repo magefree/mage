@@ -56,7 +56,7 @@ class ChancellorOfTheForgeDelayedTriggeredAbility extends DelayedTriggeredAbilit
         super(new CreateTokenEffect(new PhyrexianGoblinHasteToken()));
     }
 
-    ChancellorOfTheForgeDelayedTriggeredAbility(ChancellorOfTheForgeDelayedTriggeredAbility ability) {
+    private ChancellorOfTheForgeDelayedTriggeredAbility(final ChancellorOfTheForgeDelayedTriggeredAbility ability) {
         super(ability);
     }
 

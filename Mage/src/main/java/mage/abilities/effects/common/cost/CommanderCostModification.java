@@ -1,12 +1,13 @@
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
-import mage.abilities.common.CastCommanderAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.cards.Card;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -47,7 +48,7 @@ public class CommanderCostModification extends CostModificationEffectImpl {
         }
 
         return commander.getId().equals(cardToCheck.getMainCard().getId())
-                && (abilityToModify instanceof CastCommanderAbility
+                && ((abilityToModify instanceof SpellAbility && abilityToModify.getZone() == Zone.COMMAND)
                 || abilityToModify instanceof PlayLandAsCommanderAbility);
     }
 

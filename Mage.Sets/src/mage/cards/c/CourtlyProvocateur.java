@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -8,9 +7,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
-import mage.abilities.keyword.BlocksThisTurnMarkerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,14 +29,12 @@ public final class CourtlyProvocateur extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target creature attacks this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(AttacksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, null));
+        Ability ability = new SimpleActivatedAbility(new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {tap}: Target creature blocks this turn if able.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        ability2.addEffect(new GainAbilityTargetEffect(BlocksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, null));
+        Ability ability2 = new SimpleActivatedAbility(new BlocksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }

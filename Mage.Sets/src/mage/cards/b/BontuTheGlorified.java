@@ -58,7 +58,7 @@ public final class BontuTheGlorified extends CardImpl {
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");
         ability.addEffect(effect);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
 
     }
@@ -75,12 +75,12 @@ public final class BontuTheGlorified extends CardImpl {
 
 class BontuTheGlorifiedRestrictionEffect extends RestrictionEffect {
 
-    public BontuTheGlorifiedRestrictionEffect() {
+    BontuTheGlorifiedRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless a creature died under your control this turn";
     }
 
-    public BontuTheGlorifiedRestrictionEffect(final BontuTheGlorifiedRestrictionEffect effect) {
+    private BontuTheGlorifiedRestrictionEffect(final BontuTheGlorifiedRestrictionEffect effect) {
         super(effect);
     }
 

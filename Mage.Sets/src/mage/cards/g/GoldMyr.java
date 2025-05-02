@@ -24,7 +24,7 @@ public final class GoldMyr extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public GoldMyr (final GoldMyr card) {
+    private GoldMyr(final GoldMyr card) {
         super(card);
     }
 

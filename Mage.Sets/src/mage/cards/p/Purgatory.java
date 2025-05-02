@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
@@ -43,11 +42,10 @@ public final class Purgatory extends CardImpl {
         this.addAbility(new PurgatoryTriggeredAbility());
 
         // At the beginning of your upkeep, you may pay {4} and 2 life. If you do, return a card exiled with Purgatory to the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
-            new DoIfCostPaid(new PurgatoryReturnEffect(), 
-            new CompositeCost(new GenericManaCost(4), new PayLifeCost(2), "{4} and 2 life")),
-            TargetController.YOU, 
-            false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new DoIfCostPaid(new PurgatoryReturnEffect(),
+            new CompositeCost(new GenericManaCost(4), new PayLifeCost(2), "{4} and 2 life"))
+        ));
     }
 
     private Purgatory(final Purgatory card) {
@@ -64,9 +62,10 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
 
     PurgatoryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PurgatoryExileEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    PurgatoryTriggeredAbility(PurgatoryTriggeredAbility ability) {
+    private PurgatoryTriggeredAbility(final PurgatoryTriggeredAbility ability) {
         super(ability);
     }
 
@@ -105,16 +104,21 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever a nontoken creature is put into your graveyard from the battlefield, exile that card.";
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class PurgatoryExileEffect extends OneShotEffect {
 
-    public PurgatoryExileEffect() {
+    PurgatoryExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile that card";
     }
 
-    public PurgatoryExileEffect(PurgatoryExileEffect effect) {
+    private PurgatoryExileEffect(final PurgatoryExileEffect effect) {
         super(effect);
     }
     
@@ -143,12 +147,12 @@ class PurgatoryExileEffect extends OneShotEffect {
 
 class PurgatoryReturnEffect extends OneShotEffect {
 
-    public PurgatoryReturnEffect() {
+    PurgatoryReturnEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return a card exiled with {this} to the battlefield";
     }
 
-    public PurgatoryReturnEffect(final PurgatoryReturnEffect effect) {
+    private PurgatoryReturnEffect(final PurgatoryReturnEffect effect) {
         super(effect);
     }
 

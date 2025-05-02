@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SacrificeSourceTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -31,12 +31,12 @@ public final class DaemogothWoeEater extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice a creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, ""
-        ), TargetController.YOU, false));
+                StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""
+        )));
 
         // When you sacrifice Daemogoth Woe-Eater, each opponent discards a card, you draw a card, and you gain 2 life.
         Ability ability = new SacrificeSourceTriggeredAbility(
-                new DiscardEachPlayerEffect(TargetController.OPPONENT), false
+                new DiscardEachPlayerEffect(TargetController.OPPONENT)
         );
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", you"));
         ability.addEffect(new GainLifeEffect(2).concatBy(", and"));

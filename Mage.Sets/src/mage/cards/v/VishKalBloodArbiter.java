@@ -51,7 +51,7 @@ public final class VishKalBloodArbiter extends CardImpl {
                 new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(), SacrificeCostCreaturesPower.instance, true
                 ).setText("put X +1/+1 counters on {this}, where X is the sacrificed creature's power"),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)
         ));
 
         // Remove all +1/+1 counters from Vish Kal: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.

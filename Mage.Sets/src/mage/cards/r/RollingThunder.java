@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,8 +19,8 @@ public final class RollingThunder extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
         // Rolling Thunder deals X damage divided as you choose among any number of targets.
-        DynamicValue xValue = ManacostVariableValue.REGULAR;
-        this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
+        DynamicValue xValue = GetXValue.instance;
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));  
     }
 

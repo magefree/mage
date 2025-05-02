@@ -58,7 +58,7 @@ class GoblinTutorEffect extends OneShotEffect {
                 "<br>6 - An instant or sorcery";
     }
 
-    public GoblinTutorEffect(final GoblinTutorEffect effect) {
+    private GoblinTutorEffect(final GoblinTutorEffect effect) {
         super(effect);
     }
 

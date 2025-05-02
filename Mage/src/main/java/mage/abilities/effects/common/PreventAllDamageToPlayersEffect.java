@@ -28,11 +28,6 @@ public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
             Player controller = game.getPlayer(source.getControllerId());

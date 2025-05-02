@@ -30,9 +30,9 @@ public final class LeylineOfPunishment extends CardImpl {
         // If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
         // Players can't gain life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantGainLifeAllEffect()));
         // Damage can't be prevented.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfPunishmentEffect2()));
+        this.addAbility(new SimpleStaticAbility(new LeylineOfPunishmentEffect2()));
     }
 
     private LeylineOfPunishment(final LeylineOfPunishment card) {
@@ -53,7 +53,7 @@ class LeylineOfPunishmentEffect2 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Damage can't be prevented";
     }
 
-    public LeylineOfPunishmentEffect2(final LeylineOfPunishmentEffect2 effect) {
+    private LeylineOfPunishmentEffect2(final LeylineOfPunishmentEffect2 effect) {
         super(effect);
     }
 

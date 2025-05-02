@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.TwoChoiceVote;
@@ -78,7 +78,7 @@ class SplitDecisionEffect extends OneShotEffect {
         if (denialCount > duplicationCount) {
             return game.getStack().counter(spell.getId(), source, game);
         } else {
-            return new CopyTargetSpellEffect().apply(game, source);
+            return new CopyTargetStackObjectEffect().apply(game, source);
         }
     }
 }

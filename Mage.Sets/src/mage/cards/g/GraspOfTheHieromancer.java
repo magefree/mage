@@ -44,7 +44,7 @@ public final class GraspOfTheHieromancer extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +1/+1 and has "Whenever this creature attacks, tap target creature defending player controls."
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
         Ability gainedAbility = new GraspOfTheHieromancerTriggeredAbility(new TapTargetEffect(), false);        
         gainedAbility.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
@@ -72,7 +72,7 @@ class GraspOfTheHieromancerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public GraspOfTheHieromancerTriggeredAbility(final GraspOfTheHieromancerTriggeredAbility ability) {
+    private GraspOfTheHieromancerTriggeredAbility(final GraspOfTheHieromancerTriggeredAbility ability) {
         super(ability);
     }
 

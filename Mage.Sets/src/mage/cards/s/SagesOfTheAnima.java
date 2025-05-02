@@ -34,7 +34,7 @@ public final class SagesOfTheAnima extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If you would draw a card, instead reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SagesOfTheAnimaReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new SagesOfTheAnimaReplacementEffect()));
 
     }
 
@@ -50,7 +50,7 @@ public final class SagesOfTheAnima extends CardImpl {
 
 class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
 
-    public SagesOfTheAnimaReplacementEffect() {
+    SagesOfTheAnimaReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card, instead "
                 + "reveal the top three cards of your library. "
@@ -58,18 +58,13 @@ class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
                 + "and the rest on the bottom of your library in any order";
     }
 
-    public SagesOfTheAnimaReplacementEffect(final SagesOfTheAnimaReplacementEffect effect) {
+    private SagesOfTheAnimaReplacementEffect(final SagesOfTheAnimaReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public SagesOfTheAnimaReplacementEffect copy() {
         return new SagesOfTheAnimaReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

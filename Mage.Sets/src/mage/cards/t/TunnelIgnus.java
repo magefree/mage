@@ -78,7 +78,7 @@ class TunnelIgnusTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3));
     }
 
-    TunnelIgnusTriggeredAbility(final TunnelIgnusTriggeredAbility ability) {
+    private TunnelIgnusTriggeredAbility(final TunnelIgnusTriggeredAbility ability) {
         super(ability);
     }
 

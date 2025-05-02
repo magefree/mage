@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -44,9 +44,9 @@ public final class CrestedSunmare extends CardImpl {
         // At the beginning of each end step, if you gained life this turn, create a 5/5 white Horse creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new CrestedSunmareToken()),
-                        TargetController.ANY, false
-                ), new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0),
+                        TargetController.ANY, new CreateTokenEffect(new CrestedSunmareToken()),
+                        false
+                ), new YouGainedLifeCondition(),
                 "At the beginning of each end step, if you gained life this turn, " +
                         "create a 5/5 white Horse creature token."
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());

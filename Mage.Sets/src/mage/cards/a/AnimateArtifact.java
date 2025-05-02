@@ -42,7 +42,7 @@ public final class AnimateArtifact extends CardImpl {
         this.addAbility(ability);
 
         // As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnimateArtifactContinuousEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new AnimateArtifactContinuousEffect(Duration.WhileOnBattlefield)));
     }
 
     private AnimateArtifact(final AnimateArtifact card) {
@@ -57,12 +57,12 @@ public final class AnimateArtifact extends CardImpl {
 
 class AnimateArtifactContinuousEffect extends ContinuousEffectImpl {
 
-    public AnimateArtifactContinuousEffect(Duration duration) {
+    AnimateArtifactContinuousEffect(Duration duration) {
         super(duration, Outcome.Benefit);
         staticText = "As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value";
     }
 
-    public AnimateArtifactContinuousEffect(final AnimateArtifactContinuousEffect effect) {
+    private AnimateArtifactContinuousEffect(final AnimateArtifactContinuousEffect effect) {
         super(effect);
     }
 

@@ -40,7 +40,7 @@ public final class HandOfJustice extends CardImpl {
         this.toughness = new MageInt(6);
 
         // {tap}, Tap three untapped white creatures you control: Destroy target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

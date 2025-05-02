@@ -23,7 +23,7 @@ public final class EtheriumCellToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    protected EtheriumCellToken(final EtheriumCellToken token) {
+    private EtheriumCellToken(final EtheriumCellToken token) {
         super(token);
     }
 

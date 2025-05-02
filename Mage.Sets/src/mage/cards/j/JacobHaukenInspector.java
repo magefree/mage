@@ -58,7 +58,7 @@ public final class JacobHaukenInspector extends CardImpl {
 
 class JacobHaukenInspectorExileEffect extends OneShotEffect {
 
-    public JacobHaukenInspectorExileEffect() {
+    JacobHaukenInspectorExileEffect() {
         super(Outcome.Benefit);
         staticText = "Draw a card, then exile a card from your hand face down. You may look at that card for as long as it remains exiled";
     }

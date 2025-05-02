@@ -28,7 +28,7 @@ public final class PatrolHound extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Discard a card: Patrol Hound gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
     }
 
     private PatrolHound(final PatrolHound card) {

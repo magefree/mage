@@ -31,7 +31,7 @@ public final class BartelRuneaxe extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // Bartel Runeaxe can't be the target of Aura spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BartelRuneaxeEffect()));
+        this.addAbility(new SimpleStaticAbility(new BartelRuneaxeEffect()));
     }
 
     private BartelRuneaxe(final BartelRuneaxe card) {
@@ -46,12 +46,12 @@ public final class BartelRuneaxe extends CardImpl {
 
 class BartelRuneaxeEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BartelRuneaxeEffect() {
+    BartelRuneaxeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of Aura spells";
     }
 
-    public BartelRuneaxeEffect(final BartelRuneaxeEffect effect) {
+    private BartelRuneaxeEffect(final BartelRuneaxeEffect effect) {
         super(effect);
     }
 
@@ -63,11 +63,6 @@ class BartelRuneaxeEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TARGET;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

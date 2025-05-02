@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -36,7 +36,7 @@ public final class DuelcraftTrainer extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(
                         DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
-                ), TargetController.YOU, false), CovenCondition.instance, "At the beginning " +
+                )), CovenCondition.instance, "At the beginning " +
                 "of combat on your turn, if you control three or more creatures with different powers, " +
                 "target creature you control gains double strike until end of turn."
         );

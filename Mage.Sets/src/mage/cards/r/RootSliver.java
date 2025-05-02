@@ -35,7 +35,7 @@ public final class RootSliver extends CardImpl {
         // Root Sliver can't be countered.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
         // Sliver spells can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RootSliverEffect()));
+        this.addAbility(new SimpleStaticAbility(new RootSliverEffect()));
 
     }
 
@@ -51,23 +51,18 @@ public final class RootSliver extends CardImpl {
 
 class RootSliverEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RootSliverEffect() {
+    RootSliverEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Sliver spells can't be countered";
     }
 
-    public RootSliverEffect(final RootSliverEffect effect) {
+    private RootSliverEffect(final RootSliverEffect effect) {
         super(effect);
     }
 
     @Override
     public RootSliverEffect copy() {
         return new RootSliverEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

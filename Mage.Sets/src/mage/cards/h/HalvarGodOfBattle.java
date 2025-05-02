@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -28,7 +28,6 @@ import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -69,7 +68,7 @@ public final class HalvarGodOfBattle extends ModalDoubleFacedCard {
         ));
 
         // At the beginning of each combat, you may attach target Aura or Equipment attached to a creature you control to target creature you control.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new HalvarGodOfBattleEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, new HalvarGodOfBattleEffect(), false);
         ability.addTarget(new TargetPermanent(filter2));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.getLeftHalfCard().addAbility(ability);
@@ -104,7 +103,7 @@ public final class HalvarGodOfBattle extends ModalDoubleFacedCard {
 
 class HalvarGodOfBattleEffect extends OneShotEffect {
 
-    public HalvarGodOfBattleEffect() {
+    HalvarGodOfBattleEffect() {
         super(Outcome.BoostCreature);
         staticText = "you may attach target Aura or Equipment attached to a creature you control to target creature you control";
     }
@@ -126,17 +125,12 @@ class HalvarGodOfBattleEffect extends OneShotEffect {
         if (controller != null && attachment != null && creature != null && creature.isControlledBy(controller.getId())) {
             Permanent oldCreature = game.getPermanent(attachment.getAttachedTo());
             if (oldCreature != null && oldCreature.isControlledBy(controller.getId()) && !oldCreature.equals(creature)) {
-                boolean canAttach = true;
-                if (attachment.hasSubtype(SubType.AURA, game)) {
-                    Target auraTarget = attachment.getSpellAbility().getTargets().get(0);
-                    if (!auraTarget.canTarget(creature.getId(), game)) {
-                        canAttach = false;
-                    }
-                }
-                if (!canAttach) {
+                if (creature.cantBeAttachedBy(attachment, source, game, true)) {
                     game.informPlayers(attachment.getLogName() + " was not attached to " + creature.getLogName()
-                            + " because it's not a legal target for the aura");
-                } else if (controller.chooseUse(Outcome.BoostCreature, "Attach " + attachment.getLogName()
+                            + " because it's not a legal target");
+                    return false;
+                }
+                if (controller.chooseUse(Outcome.BoostCreature, "Attach " + attachment.getLogName()
                         + " to " + creature.getLogName() + "?", source, game)) {
                     oldCreature.removeAttachment(attachment.getId(), source, game);
                     creature.addAttachment(attachment.getId(), source, game);
@@ -152,7 +146,7 @@ class HalvarGodOfBattleEffect extends OneShotEffect {
 
 class SwordOfTheRealmsEffect extends OneShotEffect {
 
-    public SwordOfTheRealmsEffect() {
+    SwordOfTheRealmsEffect() {
         super(Outcome.ReturnToHand);
         staticText = "return it to its owner's hand";
     }

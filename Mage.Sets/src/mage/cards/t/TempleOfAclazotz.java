@@ -36,8 +36,8 @@ public final class TempleOfAclazotz extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TempleOfAclazotzEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(new TempleOfAclazotzEffect(), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 
@@ -53,12 +53,12 @@ public final class TempleOfAclazotz extends CardImpl {
 
 class TempleOfAclazotzEffect extends OneShotEffect {
 
-    public TempleOfAclazotzEffect() {
+    TempleOfAclazotzEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }
 
-    public TempleOfAclazotzEffect(final TempleOfAclazotzEffect effect) {
+    private TempleOfAclazotzEffect(final TempleOfAclazotzEffect effect) {
         super(effect);
     }
 

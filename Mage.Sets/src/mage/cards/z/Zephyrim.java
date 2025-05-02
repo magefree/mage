@@ -1,6 +1,7 @@
 package mage.cards.z;
 
 import mage.MageInt;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MiracleAbility;
 import mage.abilities.keyword.SquadAbility;
@@ -26,7 +27,7 @@ public final class Zephyrim extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Squad {2}
-        this.addAbility(new SquadAbility());
+        this.addAbility(new SquadAbility(new GenericManaCost(2)));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -60,7 +60,7 @@ class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(13)), false);
     }
 
-    public WithengarUnboundTriggeredAbility(final WithengarUnboundTriggeredAbility ability) {
+    private WithengarUnboundTriggeredAbility(final WithengarUnboundTriggeredAbility ability) {
         super(ability);
     }
 

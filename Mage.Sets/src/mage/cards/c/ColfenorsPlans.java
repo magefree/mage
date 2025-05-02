@@ -34,14 +34,14 @@ public final class ColfenorsPlans extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ColfenorsPlansExileEffect(), false));
 
         // You may look at and play cards exiled with Colfenor's Plans.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ColfenorsPlansPlayCardEffect()));
+        this.addAbility(new SimpleStaticAbility(new ColfenorsPlansPlayCardEffect()));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ColfenorsPlansLookAtCardEffect()));
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // You can't cast more than one spell each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.YOU)));
+        this.addAbility(new SimpleStaticAbility(new CantCastMoreThanOneSpellEffect(TargetController.YOU)));
 
     }
 
@@ -57,12 +57,12 @@ public final class ColfenorsPlans extends CardImpl {
 
 class ColfenorsPlansExileEffect extends OneShotEffect {
 
-    public ColfenorsPlansExileEffect() {
+    ColfenorsPlansExileEffect() {
         super(Outcome.DrawCard);
         staticText = "exile the top seven cards of your library face down";
     }
 
-    public ColfenorsPlansExileEffect(final ColfenorsPlansExileEffect effect) {
+    private ColfenorsPlansExileEffect(final ColfenorsPlansExileEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class ColfenorsPlansExileEffect extends OneShotEffect {
             Cards toExile = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             controller.moveCardsToExile(toExile.getCards(game), source, game, false,
-                    exileId, CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                    exileId, CardUtil.createObjectRelatedWindowTitle(source, game, null));
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null) {
                 for (Card card : exileZone.getCards(game)) {
@@ -95,12 +95,12 @@ class ColfenorsPlansExileEffect extends OneShotEffect {
 
 class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
 
-    public ColfenorsPlansPlayCardEffect() {
+    ColfenorsPlansPlayCardEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may play cards exiled with {this}";
     }
 
-    public ColfenorsPlansPlayCardEffect(final ColfenorsPlansPlayCardEffect effect) {
+    private ColfenorsPlansPlayCardEffect(final ColfenorsPlansPlayCardEffect effect) {
         super(effect);
     }
 
@@ -126,12 +126,12 @@ class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
 
 class ColfenorsPlansLookAtCardEffect extends AsThoughEffectImpl {
 
-    public ColfenorsPlansLookAtCardEffect() {
+    ColfenorsPlansLookAtCardEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }
 
-    public ColfenorsPlansLookAtCardEffect(final ColfenorsPlansLookAtCardEffect effect) {
+    private ColfenorsPlansLookAtCardEffect(final ColfenorsPlansLookAtCardEffect effect) {
         super(effect);
     }
 

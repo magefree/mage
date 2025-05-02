@@ -47,12 +47,12 @@ public final class CreepingRenaissance extends CardImpl {
 
 class CreepingRenaissanceEffect extends OneShotEffect {
 
-    public CreepingRenaissanceEffect() {
+    CreepingRenaissanceEffect() {
         super(Outcome.Detriment);
         staticText = "Choose a permanent type. Return all cards of the chosen type from your graveyard to your hand";
     }
 
-    public CreepingRenaissanceEffect(final CreepingRenaissanceEffect effect) {
+    private CreepingRenaissanceEffect(final CreepingRenaissanceEffect effect) {
         super(effect);
     }
 

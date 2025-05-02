@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -24,11 +23,7 @@ import mage.game.permanent.token.VampireToken;
  */
 public final class LordOfLineage extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Vampire creatures");
-
-    static {
-        filter.add(SubType.VAMPIRE.getPredicate());
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.VAMPIRE, "Vampire creatures");
 
     public LordOfLineage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
@@ -41,11 +36,14 @@ public final class LordOfLineage extends CardImpl {
         // this card is the second face of double-faced card Bloodline Keeper
         this.nightCard = true;
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Other Vampire creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
-        // {tap}: Create a 2/2 black Vampire creature token with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
+
+        // {T}: Create a 2/2 black Vampire creature token with flying.
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
     }
 
     private LordOfLineage(final LordOfLineage card) {

@@ -48,7 +48,7 @@ public final class ImmersturmPredator extends CardImpl {
         // Sacrifice another creature: Immersturm Predator gains indestructible until end of turn. Tap it.
         ability = new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
-        ), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addEffect(new TapSourceEffect().setText("Tap it"));
         this.addAbility(ability);
     }

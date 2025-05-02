@@ -45,8 +45,8 @@ public final class CateranEnforcer extends CardImpl {
         this.addAbility(FearAbility.getInstance());
         
         // {4}, {T}: Search your library for a Mercenary permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        ability.addCost(new GenericManaCost(4));
         this.addAbility(ability);
     }
 

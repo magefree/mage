@@ -67,7 +67,7 @@ class SummonUndeadEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         player.moveCards(card, Zone.BATTLEFIELD, source, game);

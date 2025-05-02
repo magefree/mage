@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -55,7 +55,7 @@ public final class DanceOfMany extends CardImpl {
         this.addAbility(ability2);
 
         // At the beginning of your upkeep, sacrifice Dance of Many unless you pay {U}{U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}{U}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}{U}"))));
 
     }
 
@@ -71,12 +71,12 @@ public final class DanceOfMany extends CardImpl {
 
 class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
 
-    public DanceOfManyCreateTokenCopyEffect() {
+    DanceOfManyCreateTokenCopyEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create a token that's a copy of target nontoken creature";
     }
 
-    public DanceOfManyCreateTokenCopyEffect(final DanceOfManyCreateTokenCopyEffect effect) {
+    private DanceOfManyCreateTokenCopyEffect(final DanceOfManyCreateTokenCopyEffect effect) {
         super(effect);
     }
 
@@ -115,12 +115,12 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
 
 class DanceOfManyExileTokenEffect extends OneShotEffect {
 
-    public DanceOfManyExileTokenEffect() {
+    DanceOfManyExileTokenEffect() {
         super(Outcome.Removal);
         staticText = "exile the token";
     }
 
-    public DanceOfManyExileTokenEffect(final DanceOfManyExileTokenEffect effect) {
+    private DanceOfManyExileTokenEffect(final DanceOfManyExileTokenEffect effect) {
         super(effect);
     }
 

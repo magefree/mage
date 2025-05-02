@@ -37,7 +37,8 @@ public final class BlazeOfGlory extends CardImpl {
 
         // Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new CanBlockAdditionalCreatureTargetEffect(Duration.EndOfTurn, 0));
+        this.getSpellAbility().addEffect(new CanBlockAdditionalCreatureTargetEffect(Duration.EndOfTurn, 0)
+                .setText("target creature defending player controls can block any number of creatures this turn"));
         this.getSpellAbility().addEffect(new BlazeOfGloryRequirementEffect());
     }
 
@@ -53,18 +54,18 @@ public final class BlazeOfGlory extends CardImpl {
 
 class BlazeOfGloryRequirementEffect extends RequirementEffect {
 
-    public BlazeOfGloryRequirementEffect() {
+    BlazeOfGloryRequirementEffect() {
         super(Duration.EndOfTurn);
         this.staticText = "It blocks each attacking creature this turn if able";
     }
 
-    public BlazeOfGloryRequirementEffect(final BlazeOfGloryRequirementEffect effect) {
+    private BlazeOfGloryRequirementEffect(final BlazeOfGloryRequirementEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(targetPointer.getFirst(game, source));
+        return permanent.getId().equals(getTargetPointer().getFirst(game, source));
     }
 
     @Override

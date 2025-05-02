@@ -134,6 +134,11 @@ public abstract class Designation extends MageObjectImpl {
     }
 
     @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public int getManaValue() {
         return 0;
     }
@@ -174,6 +179,19 @@ public abstract class Designation extends MageObjectImpl {
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
     }
 
     @Override

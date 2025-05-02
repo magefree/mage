@@ -69,7 +69,7 @@ class VraskaSwarmsEminenceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control with deathtouch deals damage to a player or planeswalker, ");
     }
 
-    public VraskaSwarmsEminenceTriggeredAbility(final VraskaSwarmsEminenceTriggeredAbility ability) {
+    private VraskaSwarmsEminenceTriggeredAbility(final VraskaSwarmsEminenceTriggeredAbility ability) {
         super(ability);
     }
 

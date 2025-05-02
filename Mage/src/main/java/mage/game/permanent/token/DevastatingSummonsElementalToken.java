@@ -15,7 +15,7 @@ public final class DevastatingSummonsElementalToken extends TokenImpl {
         subtype.add(SubType.ELEMENTAL);
     }
 
-    protected DevastatingSummonsElementalToken(final DevastatingSummonsElementalToken token) {
+    private DevastatingSummonsElementalToken(final DevastatingSummonsElementalToken token) {
         super(token);
     }
 

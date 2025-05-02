@@ -26,7 +26,7 @@ public final class SokenzanBruiser extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public SokenzanBruiser (final SokenzanBruiser card) {
+    private SokenzanBruiser(final SokenzanBruiser card) {
         super(card);
     }
 

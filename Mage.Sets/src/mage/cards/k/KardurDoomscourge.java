@@ -39,7 +39,6 @@ public final class KardurDoomscourge extends CardImpl {
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, Duration.UntilYourNextTurn
         ).setText("until your next turn, creatures your opponents control attack each combat if able"));
         ability.addEffect(new KardurDoomscourgeEffect());
-        ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
 
         // Whenever an attacking creature dies, each opponent loses 1 life and you gain 1 life.

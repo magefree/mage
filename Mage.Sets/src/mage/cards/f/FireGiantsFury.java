@@ -66,7 +66,7 @@ public final class FireGiantsFury extends CardImpl {
 
 class FireGiantsFuryEffect extends OneShotEffect {
 
-    public FireGiantsFuryEffect() {
+    FireGiantsFuryEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Whenever it deals combat damage to a player this turn, exile that many cards from the top of your library. Until the end of your next turn, you may play those cards";
     }
@@ -135,7 +135,7 @@ class FireGiantsFuryDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class FireGiantsFuryDelayedEffect extends OneShotEffect {
 
-    public FireGiantsFuryDelayedEffect() {
+    FireGiantsFuryDelayedEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "exile that many cards from the top of your library. Until the end of your next turn, you may play those cards";
     }

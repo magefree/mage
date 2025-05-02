@@ -36,7 +36,7 @@ public final class GlazeFiend extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever another artifact enters the battlefield under your control, Glaze Fiend gets +2/+2 until end of turn.
+        // Whenever another artifact you control enters, Glaze Fiend gets +2/+2 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter));
     }
 

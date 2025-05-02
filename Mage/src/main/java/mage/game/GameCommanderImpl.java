@@ -33,8 +33,8 @@ public abstract class GameCommanderImpl extends GameImpl {
     // (see rule 504, "Draw Step") of his or her first turn.
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize) {
-        super(attackOption, range, mulligan, startingLife, minimumDeckSize, 7);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int minimumDeckSize, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, minimumDeckSize, startLife, startHandSize);
     }
 
     protected GameCommanderImpl(final GameCommanderImpl game) {
@@ -80,11 +80,14 @@ public abstract class GameCommanderImpl extends GameImpl {
                         true, "Choose a color for " + commander.getName()
                 );
                 player.choose(Outcome.Neutral, choiceColor, this);
-                color = choiceColor.getColor();
+                color = choiceColor.getColor(); // can be null on disconnect
             } else {
                 color = iterator.next();
             }
-            commander.getColor().addColor(color);
+
+            if (color != null) {
+                commander.getColor().addColor(color);
+            }
         }
     }
 
@@ -171,7 +174,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         // Paris mulligan - no longer used by default for commander
 //        Player player = getPlayer(playerId);
 //        TargetCardInHand target = new TargetCardInHand(1, player.getHand().size(), new FilterCard("card to mulligan"));
-//        target.setNotTarget(true);
+//        target.withNotTarget(true);
 //        target.setRequired(false);
 //        if (player.choose(Outcome.Exile, player.getHand(), target, this)) {
 //            int numCards = target.getTargets().size();
@@ -244,6 +247,10 @@ public abstract class GameCommanderImpl extends GameImpl {
     @Override
     protected boolean checkStateBasedActions() {
         for (Player player : getPlayers().values()) {
+            if (!player.isInGame()) {
+                continue;
+            }
+
             for (UUID commanderId : this.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)) {
                 CommanderInfoWatcher damageWatcher = getState().getWatcher(CommanderInfoWatcher.class, commanderId);
                 if (damageWatcher == null) {
@@ -252,7 +259,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                 for (Map.Entry<UUID, Integer> entrySet : damageWatcher.getDamageToPlayer().entrySet()) {
                     if (entrySet.getValue() > 20) {
                         Player opponent = getPlayer(entrySet.getKey());
-                        if (opponent != null && !opponent.hasLost() && player.isInGame()) {
+                        if (opponent != null && !opponent.hasLost()) {
                             opponent.lost(this);
                         }
                     }

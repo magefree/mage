@@ -57,12 +57,12 @@ public final class PropheticFlamespeaker extends CardImpl {
 
 class PropheticFlamespeakerExileEffect extends OneShotEffect {
 
-    public PropheticFlamespeakerExileEffect() {
+    PropheticFlamespeakerExileEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile the top card of your library. You may play it this turn";
     }
 
-    public PropheticFlamespeakerExileEffect(final PropheticFlamespeakerExileEffect effect) {
+    private PropheticFlamespeakerExileEffect(final PropheticFlamespeakerExileEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 if (controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
-                        CardUtil.createObjectRealtedWindowTitle(source, game, "<this card may be played the turn it was exiled>"))) {
+                        CardUtil.createObjectRelatedWindowTitle(source, game, "<this card may be played the turn it was exiled>"))) {
                     ContinuousEffect effect = new PropheticFlamespeakerCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);
@@ -92,12 +92,12 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect {
 
 class PropheticFlamespeakerCastFromExileEffect extends AsThoughEffectImpl {
 
-    public PropheticFlamespeakerCastFromExileEffect() {
+    PropheticFlamespeakerCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play the card from exile";
     }
 
-    public PropheticFlamespeakerCastFromExileEffect(final PropheticFlamespeakerCastFromExileEffect effect) {
+    private PropheticFlamespeakerCastFromExileEffect(final PropheticFlamespeakerCastFromExileEffect effect) {
         super(effect);
     }
 

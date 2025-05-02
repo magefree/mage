@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -37,7 +36,7 @@ public final class MangarasTome extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MangarasTomeSearchEffect()));
 
         // {2}: The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MangarasTomeReplacementEffect(), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new MangarasTomeReplacementEffect(), new GenericManaCost(2)));
     }
 
     private MangarasTome(final MangarasTome card) {
@@ -57,7 +56,7 @@ class MangarasTomeSearchEffect extends OneShotEffect {
         this.staticText = "search your library for five cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library";
     }
 
-    MangarasTomeSearchEffect(final MangarasTomeSearchEffect effect) {
+    private MangarasTomeSearchEffect(final MangarasTomeSearchEffect effect) {
         super(effect);
     }
 
@@ -94,7 +93,7 @@ class MangarasTomeReplacementEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand";
     }
 
-    MangarasTomeReplacementEffect(final MangarasTomeReplacementEffect effect) {
+    private MangarasTomeReplacementEffect(final MangarasTomeReplacementEffect effect) {
         super(effect);
     }
 
@@ -112,6 +111,7 @@ class MangarasTomeReplacementEffect extends ReplacementEffectImpl {
                 controller.moveCards(card, Zone.HAND, source, game);
             }
         }
+        used = true; // one time use
         return true;
     }
 
@@ -122,6 +122,6 @@ class MangarasTomeReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.isControlledBy(event.getPlayerId());
+        return !used && source.isControlledBy(event.getPlayerId());
     }
 }

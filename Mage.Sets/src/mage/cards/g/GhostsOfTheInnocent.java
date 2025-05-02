@@ -30,7 +30,7 @@ public final class GhostsOfTheInnocent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // If a source would deal damage to a creature or player, it deals half that damage, rounded down, to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostsOfTheInnocentPreventDamageEffect()));
+        this.addAbility(new SimpleStaticAbility(new GhostsOfTheInnocentPreventDamageEffect()));
     }
 
     private GhostsOfTheInnocent(final GhostsOfTheInnocent card) {
@@ -50,7 +50,7 @@ class GhostsOfTheInnocentPreventDamageEffect extends ReplacementEffectImpl imple
         staticText = "If a source would deal damage to a permanent or player, it deals half that damage, rounded down, to that permanent or player instead";
     }
 
-    public GhostsOfTheInnocentPreventDamageEffect(final GhostsOfTheInnocentPreventDamageEffect effect) {
+    private GhostsOfTheInnocentPreventDamageEffect(final GhostsOfTheInnocentPreventDamageEffect effect) {
         super(effect);
     }
 
@@ -67,11 +67,6 @@ class GhostsOfTheInnocentPreventDamageEffect extends ReplacementEffectImpl imple
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return true;
     }
 

@@ -39,7 +39,7 @@ public final class VampireNocturnus extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
         // As long as the top card of your library is black, Vampire Nocturnus and other Vampire creatures you control get +2/+1 and have flying.
         this.addAbility(new VampireNocturnusAbility());
     }
@@ -76,7 +76,7 @@ class VampireNocturnusAbility extends StaticAbility {
                 new VampireNocturnusCondition(), ""));
     }
 
-    public VampireNocturnusAbility(VampireNocturnusAbility ability) {
+    private VampireNocturnusAbility(final VampireNocturnusAbility ability) {
         super(ability);
     }
 

@@ -5,6 +5,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.constants.AbilityType;
+import mage.constants.ManaType;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -12,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import mage.constants.ManaType;
 
 /**
  * see 20110715 - 605.1b
@@ -32,8 +31,7 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
     public TriggeredManaAbility(Zone zone, ManaEffect effect, boolean optional) {
         super(zone, effect, optional);
         this.usesStack = false;
-        this.abilityType = AbilityType.MANA;
-
+        this.abilityType = AbilityType.TRIGGERED_MANA;
     }
 
     protected TriggeredManaAbility(final TriggeredManaAbility ability) {

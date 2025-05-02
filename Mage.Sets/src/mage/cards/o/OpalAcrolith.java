@@ -42,7 +42,7 @@ public final class OpalAcrolith extends CardImpl {
                 "Whenever an opponent casts a creature spell, if Opal Acrolith is an enchantment, Opal Acrolith becomes a 2/4 Soldier creature."));
 
         // {0}: Opal Acrolith becomes an enchantment.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesEnchantmentSourceEffect(), new ManaCostsImpl<>("{0}")));
+        this.addAbility(new SimpleActivatedAbility(new BecomesEnchantmentSourceEffect(), new ManaCostsImpl<>("{0}")));
 
     }
 
@@ -66,7 +66,7 @@ class OpalAcrolithToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public OpalAcrolithToken(final OpalAcrolithToken token) {
+    private OpalAcrolithToken(final OpalAcrolithToken token) {
         super(token);
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -27,8 +27,8 @@ public final class GibberingDescent extends CardImpl {
 
         // At the beginning of each player's upkeep, that player loses 1 life and discards a card.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new LoseLifeTargetEffect(1).setText("that player loses 1 life"),
-                TargetController.ANY, false, true
+                TargetController.EACH_PLAYER, new LoseLifeTargetEffect(1).setText("that player loses 1 life"),
+                false
         );
         ability.addEffect(new DiscardTargetEffect(1).setText("and discards a card"));
         this.addAbility(ability);
@@ -57,7 +57,7 @@ class GibberingDescentSkipUpkeepEffect extends ContinuousRuleModifyingEffectImpl
         this.staticText = "skip your upkeep step if you have no cards in hand";
     }
 
-    GibberingDescentSkipUpkeepEffect(final GibberingDescentSkipUpkeepEffect effect) {
+    private GibberingDescentSkipUpkeepEffect(final GibberingDescentSkipUpkeepEffect effect) {
         super(effect);
     }
 

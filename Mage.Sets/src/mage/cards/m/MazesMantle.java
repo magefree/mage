@@ -43,12 +43,12 @@ public class MazesMantle extends CardImpl {
         filter.add(new AbilityPredicate(ToxicAbility.class));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn)),
-                new AttachedToMatchesFilterCondition(filter), "When {this} enters the battlefield, " +
+                new AttachedToMatchesFilterCondition(filter), "When {this} enters, " +
                 "if enchanted creature has toxic, that creature gains hexproof until end of turn."
         ));
 
         //Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
     }
 
     private MazesMantle(final MazesMantle card) {

@@ -34,7 +34,7 @@ public final class UrzasScienceFairProject extends CardImpl {
         this.toughness = new MageInt(4);
 
         //  {2}: Roll a six-sided die. Urza's Science Fair Project gets the indicated result. 1 - It gets -2/-2 until end of turn. 2 - Prevent all combat damage it would deal this turn. 3 - It gains vigilance until end of turn. 4 - It gains first strike until end of turn. 5 - It gains flying until end of turn. 6 - It gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasScienceFairProjectEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new UrzasScienceFairProjectEffect(), new GenericManaCost(2));
         this.addAbility(ability);
     }
 
@@ -50,7 +50,7 @@ public final class UrzasScienceFairProject extends CardImpl {
 
 class UrzasScienceFairProjectEffect extends OneShotEffect {
 
-    public UrzasScienceFairProjectEffect() {
+    UrzasScienceFairProjectEffect() {
         super(Outcome.Benefit);
         this.staticText = "Roll a six-sided die. {this} gets the indicated result." +
                 "<br>1 - It gets -2/-2 until end of turn." +
@@ -61,7 +61,7 @@ class UrzasScienceFairProjectEffect extends OneShotEffect {
                 "<br>6 - It gets +2/+2 until end of turn";
     }
 
-    public UrzasScienceFairProjectEffect(final UrzasScienceFairProjectEffect effect) {
+    private UrzasScienceFairProjectEffect(final UrzasScienceFairProjectEffect effect) {
         super(effect);
     }
 

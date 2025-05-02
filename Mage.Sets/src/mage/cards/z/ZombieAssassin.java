@@ -32,7 +32,7 @@ public final class ZombieAssassin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}, Exile two cards from your graveyard and Zombie Assassin: Destroy target nonblack creature. It can't be regenerated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new TapSourceCost());
         Target target = new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK);
         ability.addTarget(target);
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2,2,StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));

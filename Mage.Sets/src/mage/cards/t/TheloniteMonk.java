@@ -42,8 +42,8 @@ public final class TheloniteMonk extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}, Sacrifice a green creature: Target land becomes a Forest.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.WhileOnBattlefield, SubType.FOREST), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(new BecomesBasicLandTargetEffect(Duration.WhileOnBattlefield, SubType.FOREST), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

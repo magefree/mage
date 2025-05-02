@@ -24,10 +24,10 @@ public final class DralnusCrusade extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{R}");
 
         // Goblin creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false)));
 
         // All Goblins are black and are Zombies in addition to their other creature types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DralnusCrusadeEffect()));
+        this.addAbility(new SimpleStaticAbility(new DralnusCrusadeEffect()));
     }
 
     private DralnusCrusade(final DralnusCrusade card) {
@@ -42,14 +42,14 @@ public final class DralnusCrusade extends CardImpl {
 
 class DralnusCrusadeEffect extends ContinuousEffectImpl {
 
-    public DralnusCrusadeEffect() {
+    DralnusCrusadeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "All Goblins are black and are Zombies in addition to their other creature types";
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, source.getControllerId(), source, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, source.getControllerId(), source, game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.addSubType(game, SubType.ZOMBIE);
@@ -62,7 +62,7 @@ class DralnusCrusadeEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    public DralnusCrusadeEffect(final DralnusCrusadeEffect effect) {
+    private DralnusCrusadeEffect(final DralnusCrusadeEffect effect) {
         super(effect);
     }
 

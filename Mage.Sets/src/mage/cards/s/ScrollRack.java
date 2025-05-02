@@ -30,7 +30,7 @@ public final class ScrollRack extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {1}, {tap}: Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScrollRackEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new ScrollRackEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -47,12 +47,12 @@ public final class ScrollRack extends CardImpl {
 
 class ScrollRackEffect extends OneShotEffect {
 
-    public ScrollRackEffect() {
+    ScrollRackEffect() {
         super(Outcome.Neutral);
         staticText = "Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order";
     }
 
-    public ScrollRackEffect(final ScrollRackEffect effect) {
+    private ScrollRackEffect(final ScrollRackEffect effect) {
         super(effect);
     }
 
@@ -63,7 +63,6 @@ class ScrollRackEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             FilterCard filter = new FilterCard("card in your hand to exile");
             TargetCardInHand target = new TargetCardInHand(0, controller.getHand().size(), filter);
-            target.setRequired(false);
             int amountExiled = 0;
             if (target.canChoose(source.getControllerId(), source, game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), source, game)) {
                 if (!target.getTargets().isEmpty()) {

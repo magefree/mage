@@ -52,7 +52,7 @@ public final class RaziaBorosArchangel extends CardImpl {
 
         // {T}: The next 3 damage that would be dealt to target creature you control this turn is dealt to another target creature instead.
         Effect effect = new RaziaBorosArchangelEffect(Duration.EndOfTurn, 3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         Target target = new TargetControlledCreaturePermanent();
         target.setTargetTag(1);
         ability.addTarget(target);
@@ -85,18 +85,13 @@ class RaziaBorosArchangelEffect extends RedirectionEffect {
         staticText = "The next " + amount + " damage that would be dealt to target creature you control this turn is dealt to another target creature instead";
     }
 
-    public RaziaBorosArchangelEffect(final RaziaBorosArchangelEffect effect) {
+    private RaziaBorosArchangelEffect(final RaziaBorosArchangelEffect effect) {
         super(effect);
     }
 
     @Override
     public RaziaBorosArchangelEffect copy() {
         return new RaziaBorosArchangelEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

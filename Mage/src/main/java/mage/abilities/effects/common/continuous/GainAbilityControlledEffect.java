@@ -12,6 +12,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.Iterator;
 
@@ -24,12 +25,9 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     protected boolean excludeSource;
     protected FilterPermanent filter;
     protected boolean forceQuotes = false;
+    protected boolean durationRuleAtStart = false; // put duration rule to the start of the rules instead end
 
     public GainAbilityControlledEffect(Ability ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
-    }
-
-    public GainAbilityControlledEffect(CompoundAbility ability, Duration duration) {
         this(ability, duration, StaticFilters.FILTER_PERMANENTS);
     }
 
@@ -61,12 +59,13 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
         this.forceQuotes = effect.forceQuotes;
+        this.durationRuleAtStart = effect.durationRuleAtStart;
     }
 
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (perm.isControlledBy(source.getControllerId())
                         && !(excludeSource && perm.getId().equals(source.getSourceId()))) {
@@ -83,7 +82,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent perm = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (perm != null) {
@@ -120,21 +119,30 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
+        if (durationRuleAtStart && !duration.toString().isEmpty() && duration != Duration.EndOfGame) {
+            sb.append(duration.toString()).append(", ");
+        }
         if (excludeSource) {
             sb.append("other ");
         }
-        String gainedAbility = ability.getRule();
-        sb.append(filter.getMessage()).append(" you control ");
+        String gainedAbility = CardUtil.stripReminderText(ability.getRule());
+        sb.append(filter.getMessage());
+        if (!filter.getMessage().contains("you control")) {
+            sb.append(" you control");
+        }
+        boolean singular = filter.getMessage().toLowerCase().startsWith("each");
         if (duration == Duration.WhileOnBattlefield || duration == Duration.EndOfGame) {
-            sb.append("have ");
-            if (forceQuotes || gainedAbility.startsWith("When") || gainedAbility.startsWith("{T}")) {
-                gainedAbility = '"' + gainedAbility + '"';
-            }
+            sb.append(singular ? " has " : " have ");
         } else {
-            sb.append("gain ");
+            sb.append(singular ? " gains " : " gain ");
+        }
+        if (forceQuotes || gainedAbility.startsWith("When") || gainedAbility.startsWith("{T}")) {
+            gainedAbility = '"' + gainedAbility + '"';
+        } else {
+            gainedAbility = CardUtil.getTextWithFirstCharLowerCase(gainedAbility);
         }
         sb.append(gainedAbility);
-        if (!duration.toString().isEmpty() && duration != Duration.EndOfGame) {
+        if (!durationRuleAtStart && !duration.toString().isEmpty() && duration != Duration.EndOfGame) {
             sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();
@@ -142,11 +150,15 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     /**
      * Add quotes to gains abilities (by default static abilities don't have it)
-     *
-     * @return
      */
     public GainAbilityControlledEffect withForceQuotes() {
         this.forceQuotes = true;
+        setText();
+        return this;
+    }
+
+    public GainAbilityControlledEffect withDurationRuleAtStart(boolean durationRuleAtStart) {
+        this.durationRuleAtStart = durationRuleAtStart;
         setText();
         return this;
     }

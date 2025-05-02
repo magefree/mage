@@ -46,8 +46,8 @@ public final class ShadowbornApostle extends CardImpl {
         this.getSpellAbility().addEffect(new InfoEffect("A deck can have any number of cards named Shadowborn Apostle."));
         // {B}, Sacrifice six creatures named Shadowborn Apostle: Search your library for a Demon creature and put it onto the battlefield. Then shuffle your library.
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(6,6,filterApostle, false)));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{B}"));
+        ability.addCost(new SacrificeTargetCost(6, filterApostle));
         this.addAbility(ability);
     }
 

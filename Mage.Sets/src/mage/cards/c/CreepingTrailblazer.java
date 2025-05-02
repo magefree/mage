@@ -44,7 +44,7 @@ public final class CreepingTrailblazer extends CardImpl {
 
         // {2}{R}{G}: Creeping Trailblazer gets +1/+1 until end of turn for each Elemental you control.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true)
+                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn)
                         .setText("{this} gets +1/+1 until end of turn for each Elemental you control."),
                 new ManaCostsImpl<>("{2}{R}{G}")
         ));

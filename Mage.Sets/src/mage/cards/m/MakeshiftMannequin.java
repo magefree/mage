@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -64,7 +64,7 @@ class MakeshiftMannequinEffect extends OneShotEffect {
                 + "or ability, sacrifice it.\"";
     }
 
-    MakeshiftMannequinEffect(final MakeshiftMannequinEffect effect) {
+    private MakeshiftMannequinEffect(final MakeshiftMannequinEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class MakeshiftMannequinEffect extends OneShotEffect {
                     if (permanent != null) {
                         ContinuousEffect gainedEffect = new MakeshiftMannequinGainAbilityEffect();
                         // Bug #6885 Fixed when owner/controller leaves the game the effect still applies
-                        SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, gainedEffect);
+                        SimpleStaticAbility gainAbility = new SimpleStaticAbility(gainedEffect);
                         gainAbility.setSourceId(cardId);
                         gainAbility.getTargets().add(source.getTargets().get(0));
                         game.addEffect(gainedEffect, gainAbility);
@@ -107,7 +107,7 @@ class MakeshiftMannequinGainAbilityEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    MakeshiftMannequinGainAbilityEffect(final MakeshiftMannequinGainAbilityEffect effect) {
+    private MakeshiftMannequinGainAbilityEffect(final MakeshiftMannequinGainAbilityEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class MakeshiftMannequinGainAbilityEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.addAbility(
-                    new SourceBecomesTargetTriggeredAbility(
+                    new BecomesTargetSourceTriggeredAbility(
                             new SacrificeSourceEffect()),
                     source.getSourceId(), game);
             return true;

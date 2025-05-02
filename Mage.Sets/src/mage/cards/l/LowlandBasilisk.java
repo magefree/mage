@@ -27,7 +27,8 @@ public final class LowlandBasilisk extends CardImpl {
         // Whenever Lowland Basilisk deals damage to a creature, destroy that creature at end of combat.
         this.addAbility(new DealsDamageToACreatureTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat")), true),
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat"))
+                                .setTriggerPhrase(""), true),
                 false, 
                 false,
                 true));

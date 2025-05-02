@@ -21,7 +21,7 @@ public final class WhiteAstartesWarriorToken extends TokenImpl {
         addAbility(VigilanceAbility.getInstance());
     }
 
-    protected WhiteAstartesWarriorToken(final WhiteAstartesWarriorToken token) {
+    private WhiteAstartesWarriorToken(final WhiteAstartesWarriorToken token) {
         super(token);
     }
 

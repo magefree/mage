@@ -49,12 +49,12 @@ public final class DinrovaHorror extends CardImpl {
 
 class DinrovaHorrorEffect extends OneShotEffect {
 
-    public DinrovaHorrorEffect() {
+    DinrovaHorrorEffect() {
         super(Outcome.Detriment);
         this.staticText = "return target permanent to its owner's hand, then that player discards a card";
     }
 
-    public DinrovaHorrorEffect(final DinrovaHorrorEffect effect) {
+    private DinrovaHorrorEffect(final DinrovaHorrorEffect effect) {
         super(effect);
     }
 

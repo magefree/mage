@@ -36,7 +36,6 @@ public final class LimitedResources extends CardImpl {
 
         // Players can't play lands as long as ten or more lands are on the battlefield.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousRuleModifyingEffect(
                         new CantPlayLandEffect(),
                         new PermanentsOnTheBattlefieldCondition(
@@ -57,12 +56,12 @@ public final class LimitedResources extends CardImpl {
 
 class LimitedResourcesEffect extends OneShotEffect {
 
-    public LimitedResourcesEffect() {
+    LimitedResourcesEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player chooses five lands they control and sacrifices the rest";
     }
 
-    public LimitedResourcesEffect(final LimitedResourcesEffect effect) {
+    private LimitedResourcesEffect(final LimitedResourcesEffect effect) {
         super(effect);
     }
 
@@ -78,7 +77,7 @@ class LimitedResourcesEffect extends OneShotEffect {
             if (player != null) {
                 int lands = game.getBattlefield().countAll(new FilterControlledLandPermanent(), playerId, game);
                 TargetLandPermanent target = new TargetLandPermanent(Integer.min(5, lands));
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.setRequired(true);
                 player.chooseTarget(outcome.Benefit, target, source, game);
                 game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), playerId, game).stream().filter((land) -> (!target.getTargets().contains(land.getId()))).forEachOrdered((land) -> {
@@ -92,23 +91,18 @@ class LimitedResourcesEffect extends OneShotEffect {
 
 class CantPlayLandEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantPlayLandEffect() {
+    CantPlayLandEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Players can't play lands as long as ten or more lands are on the battlefield";
     }
 
-    public CantPlayLandEffect(final CantPlayLandEffect effect) {
+    private CantPlayLandEffect(final CantPlayLandEffect effect) {
         super(effect);
     }
 
     @Override
     public CantPlayLandEffect copy() {
         return new CantPlayLandEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

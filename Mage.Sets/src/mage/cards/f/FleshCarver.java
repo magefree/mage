@@ -24,7 +24,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.FleshCarverHorrorToken;
+import mage.game.permanent.token.HorrorXXBlackToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
@@ -45,8 +45,8 @@ public final class FleshCarver extends CardImpl {
         // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
         // {1}{B}, Sacrifice another creature: Put two +1/+1 counters on Flesh Carver.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{1}{B}"));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
 
         // When Flesh Carver dies, create an X/X black Horror creature token, where X is Flesh Carver's power.
@@ -70,7 +70,7 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
         setTriggerPhrase("When Flesh Carver dies, ");
     }
 
-    public FleshCarverAbility(final FleshCarverAbility ability) {
+    private FleshCarverAbility(final FleshCarverAbility ability) {
         super(ability);
     }
 
@@ -96,12 +96,12 @@ class FleshCarverAbility extends DiesSourceTriggeredAbility {
 
 class FleshCarverEffect extends OneShotEffect {
 
-    public FleshCarverEffect() {
+    FleshCarverEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "create an X/X black Horror creature token, where X is {this}'s power";
     }
 
-    public FleshCarverEffect(FleshCarverEffect ability) {
+    private FleshCarverEffect(final FleshCarverEffect ability) {
         super(ability);
     }
 
@@ -110,7 +110,7 @@ class FleshCarverEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int xValue = (Integer) getValue("power");
-            return new CreateTokenEffect(new FleshCarverHorrorToken(xValue)).apply(game, source);
+            return new CreateTokenEffect(new HorrorXXBlackToken(xValue)).apply(game, source);
         }
         return false;
     }

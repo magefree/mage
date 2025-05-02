@@ -1,6 +1,7 @@
 
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -16,8 +17,8 @@ import mage.target.targetpointer.FixedTarget;
 public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterPermanent filter;
-    private boolean setTargetPointer;
-    private boolean onlyToControllerGraveyard;
+    private final boolean setTargetPointer;
+    private final boolean onlyToControllerGraveyard;
 
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
         this(effect, optional, filter, setTargetPointer, false);
@@ -25,7 +26,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
 
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer, boolean onlyToControllerGraveyard) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.setLeavesTheBattlefieldTrigger(true);
+        setLeavesTheBattlefieldTrigger(true);
         this.filter = filter;
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
         this.setTargetPointer = setTargetPointer;
@@ -62,5 +63,10 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
     @Override
     public PutIntoGraveFromBattlefieldAllTriggeredAbility copy() {
         return new PutIntoGraveFromBattlefieldAllTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

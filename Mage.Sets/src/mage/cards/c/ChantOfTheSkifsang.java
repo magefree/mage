@@ -34,7 +34,7 @@ public final class ChantOfTheSkifsang extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets -13/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-13, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-13, 0, Duration.WhileOnBattlefield)));
     }
 
     private ChantOfTheSkifsang(final ChantOfTheSkifsang card) {

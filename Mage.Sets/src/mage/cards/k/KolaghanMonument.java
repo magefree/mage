@@ -31,7 +31,7 @@ public final class KolaghanMonument extends CardImpl {
         this.addAbility(new RedManaAbility());
         
         // {4}{B}{R}: Kolaghan Monument becomes a 4/4 black and red Dragon artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect
             (new KolaghanMonumentToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{B}{R}")));
     }
 
@@ -56,7 +56,7 @@ public final class KolaghanMonument extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
-        public KolaghanMonumentToken(final KolaghanMonumentToken token) {
+        private KolaghanMonumentToken(final KolaghanMonumentToken token) {
             super(token);
         }
 

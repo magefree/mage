@@ -75,13 +75,12 @@ class IchigaWhoTopplesOaks extends TokenImpl {
 
         // Remove a ki counter from Ichiga, Who Topples Oaks: Target creature gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public IchigaWhoTopplesOaks(final IchigaWhoTopplesOaks token) {
+    private IchigaWhoTopplesOaks(final IchigaWhoTopplesOaks token) {
         super(token);
     }
 

@@ -1,9 +1,8 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MonstrousCondition;
@@ -15,13 +14,15 @@ import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,6 @@ public final class SwarmbornGiant extends CardImpl {
 
         // As long as Swarmborn Giant is monstrous, it has reach.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield),
                         MonstrousCondition.instance,
                         "As long as {this} is monstrous, it has reach"));
@@ -61,14 +61,14 @@ public final class SwarmbornGiant extends CardImpl {
     }
 }
 
-class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
+class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
-    public SwarmbornGiantTriggeredAbility() {
+    SwarmbornGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
         setTriggerPhrase("When you're dealt combat damage, ");
     }
 
-    public SwarmbornGiantTriggeredAbility(final SwarmbornGiantTriggeredAbility ability) {
+    private SwarmbornGiantTriggeredAbility(final SwarmbornGiantTriggeredAbility ability) {
         super(ability);
     }
 
@@ -79,14 +79,15 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getControllerId())) {
-            DamagedEvent damagedEvent = (DamagedEvent) event;
-            return damagedEvent.isCombatDamage();
+        // all events in the batch are always relevant
+        if (isControlledBy(event.getTargetId()) && ((DamagedBatchForOnePlayerEvent) event).isCombatDamage()) {
+            this.getAllEffects().setValue("damage", event.getAmount());
+            return true;
         }
         return false;
     }

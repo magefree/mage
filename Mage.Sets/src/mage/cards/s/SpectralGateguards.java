@@ -32,7 +32,7 @@ public final class SpectralGateguards extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Spectral Gateguards is paired with another creature, both creatures have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(VigilanceAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(VigilanceAbility.getInstance(), ruleText)));
     }
 
     private SpectralGateguards(final SpectralGateguards card) {

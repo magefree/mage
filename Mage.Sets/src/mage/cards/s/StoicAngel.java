@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -14,8 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -37,7 +35,7 @@ public final class StoicAngel extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // Players can't untap more than one creature during their untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StoicAngelEffect()));
+        this.addAbility(new SimpleStaticAbility(new StoicAngelEffect()));
     }
 
     private StoicAngel(final StoicAngel card) {
@@ -52,14 +50,12 @@ public final class StoicAngel extends CardImpl {
 
 class StoicAngelEffect extends RestrictionUntapNotMoreThanEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent();
-
-    public StoicAngelEffect() {
-        super(Duration.WhileOnBattlefield, 1, filter);
+    StoicAngelEffect() {
+        super(Duration.WhileOnBattlefield, 1, StaticFilters.FILTER_CONTROLLED_CREATURE);
         staticText = "Players can't untap more than one creature during their untap steps";
     }
 
-    public StoicAngelEffect(final StoicAngelEffect effect) {
+    private StoicAngelEffect(final StoicAngelEffect effect) {
         super(effect);
     }
 

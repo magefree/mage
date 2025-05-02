@@ -41,7 +41,7 @@ public final class TerraRavager extends CardImpl {
 
         // Whenever Terra Ravager attacks, it gets +X/+0 until end of turn, where X is the number of lands defending player controls.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"
+                xValue, StaticValue.get(0), Duration.EndOfTurn, "it"
         ), false));
     }
 

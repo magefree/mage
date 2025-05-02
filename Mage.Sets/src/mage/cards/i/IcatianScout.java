@@ -32,7 +32,7 @@ public final class IcatianScout extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, {tap}: Target creature gains first strike until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
             FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -37,7 +37,7 @@ public final class SoulTithe extends CardImpl {
         // At the beginning of the upkeep of enchanted permanent's controller,
         // that player sacrifices it unless they pay {X},
         // where X is its converted mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SoulTitheEffect(), TargetController.CONTROLLER_ATTACHED_TO, false)
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new SoulTitheEffect(), false)
                 .setTriggerPhrase("At the beginning of the upkeep of enchanted permanent's controller, "));
     }
 
@@ -53,12 +53,12 @@ public final class SoulTithe extends CardImpl {
 
 class SoulTitheEffect extends OneShotEffect {
 
-    public SoulTitheEffect() {
+    SoulTitheEffect() {
         super(Outcome.Sacrifice);
         staticText = "that player sacrifices it unless they pay {X}, where X is its mana value";
     }
 
-    public SoulTitheEffect(final SoulTitheEffect effect) {
+    private SoulTitheEffect(final SoulTitheEffect effect) {
         super(effect);
     }
 

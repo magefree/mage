@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -35,7 +35,7 @@ public final class FarTraveler extends CardImpl {
 
         // Commander creatures you own have "At the beginning of your end step, exile up to one target tapped creature you control, then return it to the battlefield under its owner's control."
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ExileThenReturnTargetEffect(false, false), TargetController.YOU, false
+                new ExileThenReturnTargetEffect(false, false)
         );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(

@@ -37,7 +37,7 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
         this.id = UUID.randomUUID();
         this.costType = costType;
         this.paid = false;
-        this.targets = new Targets();
+        this.targets = null; // rare usage, must be null by default for performance optimization
         this.amountPaid = 0;
         this.xText = xText;
         this.actionText = actionText;
@@ -48,7 +48,7 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
         this.costType = cost.costType;
         this.text = cost.text;
         this.paid = cost.paid;
-        this.targets = cost.targets.copy();
+        this.targets = cost.targets == null ? null : cost.targets.copy();
         this.xText = cost.xText;
         this.actionText = cost.actionText;
         this.amountPaid = cost.amountPaid;
@@ -70,14 +70,23 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
         return actionText;
     }
 
-    public void addTarget(Target target) {
-        if (target != null) {
-            this.targets.add(target);
+    private void prepareTargets() {
+        if (this.targets == null) {
+            this.targets = new Targets();
         }
+    }
+
+    public void addTarget(Target target) {
+        if (target == null) {
+            throw new IllegalArgumentException("Wrong code usage: can't add nullable target to the cost");
+        }
+        prepareTargets();
+        this.targets.add(target);
     }
 
     @Override
     public Targets getTargets() {
+        prepareTargets();
         return this.targets;
     }
 
@@ -89,6 +98,7 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     @Override
     public void clearPaid() {
         paid = false;
+        prepareTargets();
         targets.clearChosen();
         amountPaid = 0;
     }

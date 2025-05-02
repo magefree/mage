@@ -39,7 +39,7 @@ public final class FrogtosserBanneret extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Goblin spells and Rogue spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private FrogtosserBanneret(final FrogtosserBanneret card) {

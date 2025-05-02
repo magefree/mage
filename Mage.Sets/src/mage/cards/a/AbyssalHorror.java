@@ -33,7 +33,7 @@ public final class AbyssalHorror extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AbyssalHorror (final AbyssalHorror card) {
+    private AbyssalHorror(final AbyssalHorror card) {
         super(card);
     }
 

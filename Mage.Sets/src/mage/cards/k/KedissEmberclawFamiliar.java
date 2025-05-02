@@ -39,7 +39,7 @@ public final class KedissEmberclawFamiliar extends CardImpl {
         // Whenever a commander you control deals combat damage to an opponent, it deals that much damage to each other opponent.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new KedissEmberclawFamiliarEffect(), filter, false,
-                SetTargetPointer.PLAYER, true, true
+                SetTargetPointer.PLAYER, true, true, TargetController.OPPONENT
         ));
 
         // Partner

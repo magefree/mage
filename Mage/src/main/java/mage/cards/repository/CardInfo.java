@@ -100,13 +100,15 @@ public class CardInfo {
     @DatabaseField(indexName = "nightCard_index")
     protected boolean nightCard;
     @DatabaseField
+    protected boolean meldCard;
+    @DatabaseField
     protected String flipCardName;
     @DatabaseField
     protected String secondSideName;
     @DatabaseField
-    protected boolean adventureCard;
+    protected boolean cardWithSpellOption;
     @DatabaseField
-    protected String adventureSpellName;
+    protected String spellOptionCardName;
     @DatabaseField
     protected boolean modalDoubleFacedCard;
     @DatabaseField
@@ -149,14 +151,15 @@ public class CardInfo {
 
         this.doubleFaced = card.isTransformable() && card.getSecondCardFace() != null;
         this.nightCard = card.isNightCard();
+        this.meldCard = card instanceof MeldCard;
         Card secondSide = card.getSecondCardFace();
         if (secondSide != null) {
             this.secondSideName = secondSide.getName();
         }
 
-        if (card instanceof AdventureCard) {
-            this.adventureCard = true;
-            this.adventureSpellName = ((AdventureCard) card).getSpellCard().getName();
+        if (card instanceof CardWithSpellOption) {
+            this.cardWithSpellOption = true;
+            this.spellOptionCardName = ((CardWithSpellOption) card).getSpellCard().getName();
         }
 
         if (card instanceof ModalDoubleFacedCard) {
@@ -186,8 +189,8 @@ public class CardInfo {
             List<String> manaCostLeft = ((ModalDoubleFacedCard) card).getLeftHalfCard().getManaCostSymbols();
             List<String> manaCostRight = ((ModalDoubleFacedCard) card).getRightHalfCard().getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
-        } else if (card instanceof AdventureCard) {
-            List<String> manaCostLeft = ((AdventureCard) card).getSpellCard().getManaCostSymbols();
+        } else if (card instanceof CardWithSpellOption) {
+            List<String> manaCostLeft = ((CardWithSpellOption) card).getSpellCard().getManaCostSymbols();
             List<String> manaCostRight = card.getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else {
@@ -238,11 +241,17 @@ public class CardInfo {
         this.isExtraDeckCard = card.isExtraDeckCard();
     }
 
-    public Card getCard() {
+    /**
+     * Create normal card (with full abilities)
+     */
+    public Card createCard() {
         return CardImpl.createCard(className, new CardSetInfo(name, setCode, cardNumber, rarity, new CardGraphicInfo(FrameStyle.valueOf(frameStyle), variousArt)));
     }
 
-    public Card getMockCard() {
+    /**
+     * Create deck editor's mock card (with text only instead real abilities)
+     */
+    public Card createMockCard() {
         if (this.splitCard) {
             return new MockSplitCard(this);
         } else {
@@ -452,16 +461,24 @@ public class CardInfo {
         return nightCard;
     }
 
+    public boolean isMeldCard() {
+        return meldCard;
+    }
+
     public String getSecondSideName() {
         return secondSideName;
     }
 
-    public boolean isAdventureCard() {
-        return adventureCard;
+    public boolean isCardWithSpellOption() {
+        return cardWithSpellOption;
     }
 
-    public String getAdventureSpellName() {
-        return adventureSpellName;
+    /**
+     * used for spell card portion of adventure/omen cards
+     * @return name of the spell
+     */
+    public String getSpellOptionCardName() {
+        return spellOptionCardName;
     }
 
     public boolean isModalDoubleFacedCard() {

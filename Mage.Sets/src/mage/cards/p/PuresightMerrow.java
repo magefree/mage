@@ -36,7 +36,7 @@ public final class PuresightMerrow extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {WU}, {untap}: Look at the top card of your library. You may exile that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PuresightMerrowEffect(), new ManaCostsImpl<>("{W/U}"));
+        Ability ability = new SimpleActivatedAbility(new PuresightMerrowEffect(), new ManaCostsImpl<>("{W/U}"));
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);
 
@@ -54,12 +54,12 @@ public final class PuresightMerrow extends CardImpl {
 
 class PuresightMerrowEffect extends OneShotEffect {
 
-    public PuresightMerrowEffect() {
+    PuresightMerrowEffect() {
         super(Outcome.Detriment);
         staticText = "Look at the top card of your library. You may exile that card";
     }
 
-    public PuresightMerrowEffect(final PuresightMerrowEffect effect) {
+    private PuresightMerrowEffect(final PuresightMerrowEffect effect) {
         super(effect);
     }
 

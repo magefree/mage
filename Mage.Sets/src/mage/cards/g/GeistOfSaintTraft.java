@@ -55,7 +55,7 @@ class GeistOfSaintTraftEffect extends OneShotEffect {
         staticText = "create a 4/4 white Angel creature token with flying that's tapped and attacking. Exile that token at end of combat";
     }
 
-    GeistOfSaintTraftEffect(final GeistOfSaintTraftEffect effect) {
+    private GeistOfSaintTraftEffect(final GeistOfSaintTraftEffect effect) {
         super(effect);
     }
 

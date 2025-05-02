@@ -54,7 +54,7 @@ public final class SpectraWard extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and has protection from all colors. This effect doesn't remove auras.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2,2, Duration.WhileOnBattlefield));
         ProtectionAbility protectionAbility = new ProtectionAbility(filter);
         protectionAbility.setRemovesAuras(false);
         ability.addEffect(new GainAbilityAttachedEffect(protectionAbility, AttachmentType.AURA, Duration.WhileOnBattlefield)

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -46,7 +46,7 @@ public final class NeyithOfTheDireHunt extends CardImpl {
         // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature's power until end of turn. That creature must be blocked this combat if able.
         Ability ability = new BeginningOfCombatTriggeredAbility(new DoIfCostPaid(
                 new NeyithOfTheDireHuntEffect(), new ManaCostsImpl<>("{2}{R/G}")
-        ), TargetController.YOU, false);
+        ));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -44,7 +44,7 @@ public final class MournersShield extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {tap}: Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.
-        Ability preventAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MournersShieldEffect(), new GenericManaCost(2));
+        Ability preventAbility = new SimpleActivatedAbility(new MournersShieldEffect(), new GenericManaCost(2));
         preventAbility.addCost(new TapSourceCost());
         this.addAbility(preventAbility);
     }
@@ -66,7 +66,7 @@ class MournersShieldImprintEffect extends OneShotEffect {
         this.staticText = "you may exile target card from a graveyard";
     }
 
-    MournersShieldImprintEffect(final MournersShieldImprintEffect effect) {
+    private MournersShieldImprintEffect(final MournersShieldImprintEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class MournersShieldEffect extends PreventionEffectImpl {
         this.staticText = "Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.";
     }
 
-    public MournersShieldEffect(final MournersShieldEffect effect) {
+    private MournersShieldEffect(final MournersShieldEffect effect) {
         super(effect);
         if (effect.target != null) {
             this.target = effect.target.copy();
@@ -123,6 +123,7 @@ class MournersShieldEffect extends PreventionEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         ObjectColor colorsAmongImprinted = new ObjectColor();
         Permanent sourceObject = game.getPermanent(source.getSourceId());
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId()));

@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -18,7 +18,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.InsectToken;
 
@@ -46,7 +45,7 @@ public final class VilespawnSpider extends CardImpl {
 
         // At the beginning of your upkeep, mill a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MillCardsControllerEffect(1), TargetController.YOU, false
+                new MillCardsControllerEffect(1)
         ));
 
         // {2}{G}{U}, {T}, Sacrifice Vilespawn Spider: Create a 1/1 green Insect creature token for each creature card in your graveyard. Activate only as a sorcery.

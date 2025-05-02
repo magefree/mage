@@ -1,11 +1,7 @@
-
 package mage.cards.d;
 
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
@@ -32,18 +28,12 @@ public final class DeathOfAThousandStings extends CardImpl {
         // Target player loses 1 life and you gain 1 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        Effect effect = new GainLifeEffect(1);
-        effect.setText("and you gain 1 life");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new GainLifeEffect(1).concatBy("and"));
 
         // At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Death of a Thousand Stings from your graveyard to your hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                        new ReturnSourceFromGraveyardToHandEffect(),
-                        TargetController.YOU, true),
-                MoreCardsInHandThanOpponentsCondition.instance,
-                "At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return {this} from your graveyard to your hand.");
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
+                TargetController.YOU, new ReturnSourceFromGraveyardToHandEffect(),
+                true).withInterveningIf(MoreCardsInHandThanOpponentsCondition.instance));
     }
 
     private DeathOfAThousandStings(final DeathOfAThousandStings card) {

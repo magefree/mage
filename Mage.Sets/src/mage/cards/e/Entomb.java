@@ -16,7 +16,7 @@ public final class Entomb extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Search your library for a card and put that card into your graveyard. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInGraveyardEffect());
+        this.getSpellAbility().addEffect(new SearchLibraryPutInGraveyardEffect(true));
     }
 
     private Entomb(final Entomb card) {

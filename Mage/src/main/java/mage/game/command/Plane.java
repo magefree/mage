@@ -65,14 +65,16 @@ public abstract class Plane extends CommandObjectImpl {
         return frameStyle;
     }
 
-    public void setSourceObject() {
+    public void setSourceObjectAndInitImage() {
         this.sourceObject = null;
 
         // choose set code due source
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
             this.setCardNumber("");
+            this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());
         } else {
             // how-to fix: add plane to the tokens-database
@@ -101,6 +103,11 @@ public abstract class Plane extends CommandObjectImpl {
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
         this.abilites.setControllerId(controllerId);
+    }
+
+    @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
     }
 
     @Override
@@ -196,6 +203,11 @@ public abstract class Plane extends CommandObjectImpl {
     }
 
     @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public int getManaValue() {
         return 0;
     }
@@ -254,6 +266,19 @@ public abstract class Plane extends CommandObjectImpl {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
     }
 
     public void discardEffects() {

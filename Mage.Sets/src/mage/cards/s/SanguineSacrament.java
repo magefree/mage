@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ enum SanguineSacramentValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return sourceAbility.getManaCostsToPay().getX() * 2;
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0) * 2;
     }
 
     @Override

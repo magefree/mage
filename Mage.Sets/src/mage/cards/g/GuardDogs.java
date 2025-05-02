@@ -35,7 +35,7 @@ public final class GuardDogs extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{W}, {T}: Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GuardDogsEffect(), new ManaCostsImpl<>("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(new GuardDogsEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -60,17 +60,18 @@ class GuardDogsEffect extends PreventionEffectImpl {
         this.staticText = "Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent";
     }
 
-    public GuardDogsEffect(final GuardDogsEffect effect) {
+    private GuardDogsEffect(final GuardDogsEffect effect) {
         super(effect);
     }
     
 
     @Override
     public void init(Ability source, Game game) {
-        this.controlledTarget = new TargetControlledPermanent();
-        this.controlledTarget.setNotTarget(true);
-        this.controlledTarget.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
+
+        this.controlledTarget = new TargetControlledPermanent();
+        this.controlledTarget.withNotTarget(true);
+        this.controlledTarget.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
     
 

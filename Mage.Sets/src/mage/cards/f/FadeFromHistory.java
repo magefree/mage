@@ -42,7 +42,7 @@ public final class FadeFromHistory extends CardImpl {
 
 class FadeFromHistoryTokenEffect extends OneShotEffect {
 
-    public FadeFromHistoryTokenEffect() {
+    FadeFromHistoryTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Each player who controls an artifact or enchantment creates a 2/2 green Bear creature token.";
     }

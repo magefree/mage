@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class OrcGeneral extends CardImpl {
     
     private static final FilterControlledPermanent filterOrcOrGoblin = new FilterControlledPermanent("another Orc or Goblin");
-    private static final FilterCreaturePermanent filterOrc = new FilterCreaturePermanent("Other Orc creatures");
+    private static final FilterCreaturePermanent filterOrc = new FilterCreaturePermanent("Orc creatures");
     
     static {
         filterOrcOrGoblin.add(Predicates.or(SubType.ORC.getPredicate(),
@@ -44,8 +43,8 @@ public final class OrcGeneral extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}, Sacrifice another Orc or Goblin: Other Orc creatures get +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filterOrc, true), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterOrcOrGoblin)));
+        Ability ability = new SimpleActivatedAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, filterOrc, true), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(filterOrcOrGoblin));
         this.addAbility(ability);
     }
 

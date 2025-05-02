@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesColorOrColorsTargetEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
 
@@ -32,7 +31,7 @@ public final class Shyft extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, you may have Shyft become the color or colors of your choice.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShyftEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShyftEffect(), true));
     }
 
     private Shyft(final Shyft card) {
@@ -52,7 +51,7 @@ class ShyftEffect extends OneShotEffect {
         this.staticText = "have {this} become the color or colors of your choice.";
     }
 
-    ShyftEffect(final ShyftEffect effect) {
+    private ShyftEffect(final ShyftEffect effect) {
         super(effect);
     }
 

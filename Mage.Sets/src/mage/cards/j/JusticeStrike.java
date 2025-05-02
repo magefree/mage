@@ -37,12 +37,12 @@ public final class JusticeStrike extends CardImpl {
 
 class JusticeStrikeEffect extends OneShotEffect {
 
-    public JusticeStrikeEffect() {
+    JusticeStrikeEffect() {
         super(Outcome.Damage);
         this.staticText = "Target creature deals damage to itself equal to its power.";
     }
 
-    public JusticeStrikeEffect(final JusticeStrikeEffect effect) {
+    private JusticeStrikeEffect(final JusticeStrikeEffect effect) {
         super(effect);
     }
 

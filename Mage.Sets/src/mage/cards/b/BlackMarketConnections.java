@@ -2,14 +2,13 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.Shapeshifter32Token;
 import mage.game.permanent.token.TreasureToken;
 
@@ -25,8 +24,8 @@ public final class BlackMarketConnections extends CardImpl {
 
         // At the beginning of your precombat main phase, choose one or more —
         // • Sell Contraband — Create a Treasure token. You lose 1 life.
-        Ability ability = new BeginningOfPreCombatMainTriggeredAbility(
-                new CreateTokenEffect(new TreasureToken()), TargetController.YOU, false
+        Ability ability = new BeginningOfFirstMainTriggeredAbility(
+                new CreateTokenEffect(new TreasureToken())
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1));
         ability.withFirstModeFlavorWord("Sell Contraband");

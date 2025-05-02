@@ -27,7 +27,7 @@ public final class LeylineOfSingularity extends CardImpl {
         this.addAbility(LeylineAbility.getInstance());
 
         // All nonland permanents are legendary.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new SetSupertypeAllEffect()));
     }
 
     private LeylineOfSingularity(final LeylineOfSingularity card) {
@@ -49,7 +49,7 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
         this.staticText = "All nonland permanents are legendary";
     }
 
-    public SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
+    private SetSupertypeAllEffect(final SetSupertypeAllEffect effect) {
         super(effect);
     }
 

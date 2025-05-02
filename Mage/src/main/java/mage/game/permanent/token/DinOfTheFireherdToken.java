@@ -19,7 +19,7 @@ public final class DinOfTheFireherdToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    protected DinOfTheFireherdToken(final DinOfTheFireherdToken token) {
+    private DinOfTheFireherdToken(final DinOfTheFireherdToken token) {
         super(token);
     }
 

@@ -90,7 +90,6 @@ class ElspethsTalentTriggeredAbility extends TriggeredAbilityImpl {
                 && event.getSourceId().equals(permanent.getAttachedTo())
                 && isControlledBy(event.getPlayerId())
                 && Optional.ofNullable(game.getStack().getStackObject(event.getSourceId()))
-                .filter(Objects::nonNull)
                 .map(StackObject::getStackAbility)
                 .map(LoyaltyAbility.class::isInstance)
                 .orElse(false);

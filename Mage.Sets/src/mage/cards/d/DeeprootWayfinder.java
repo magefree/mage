@@ -70,7 +70,7 @@ class DeeprootWayfinderEffect extends OneShotEffect {
         }
         player.surveil(1, source, game);
         TargetCard target = new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_LAND_A);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         return player.moveCards(

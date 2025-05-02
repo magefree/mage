@@ -42,7 +42,7 @@ public final class FiendslayerPaladin extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Fiendslayer Paladin can't be the target of black or red spells your opponents control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FiendslayerPaladinEffect()));
+        this.addAbility(new SimpleStaticAbility(new FiendslayerPaladinEffect()));
         
     }
 
@@ -58,23 +58,18 @@ public final class FiendslayerPaladin extends CardImpl {
 
 class FiendslayerPaladinEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public FiendslayerPaladinEffect() {
+    FiendslayerPaladinEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of black or red spells your opponents control";
     }
 
-    public FiendslayerPaladinEffect(final FiendslayerPaladinEffect effect) {
+    private FiendslayerPaladinEffect(final FiendslayerPaladinEffect effect) {
         super(effect);
     }
 
     @Override
     public FiendslayerPaladinEffect copy() {
         return new FiendslayerPaladinEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

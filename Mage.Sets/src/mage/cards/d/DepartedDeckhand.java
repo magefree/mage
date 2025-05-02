@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,14 +43,13 @@ public final class DepartedDeckhand extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Departed Deckhand becomes the target of a spell, sacrifice it.
-        this.addAbility(new SourceBecomesTargetTriggeredAbility(
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(
                 new SacrificeSourceEffect(),
                 StaticFilters.FILTER_SPELL_A
         ));
 
         // Departed Deckhand can only be blocked by Spirits.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedByCreaturesSourceEffect(
                         filter, Duration.WhileOnBattlefield
                 ).setText("{this} can't be blocked except by Spirits")

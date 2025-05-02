@@ -1,7 +1,6 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -10,6 +9,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.ClueArtifactToken;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -27,8 +28,21 @@ public class InvestigateEffect extends OneShotEffect {
     }
 
     public InvestigateEffect(DynamicValue amount) {
+        this(amount, true);
+    }
+
+    public InvestigateEffect(boolean showAbilityHint) {
+        this(1, showAbilityHint);
+    }
+
+    public InvestigateEffect(int amount, boolean showAbilityHint) {
+        this(StaticValue.get(amount), showAbilityHint);
+    }
+
+    public InvestigateEffect(DynamicValue amount, boolean showAbilityHint) {
         super(Outcome.Benefit);
         this.amount = amount;
+        this.staticText = makeText(showAbilityHint);
     }
 
     protected InvestigateEffect(final InvestigateEffect effect) {
@@ -39,14 +53,21 @@ public class InvestigateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = this.amount.calculate(game, source, this);
-        if (value < 1) {
-            return false;
+        if (value > 0) {
+            doInvestigate(source.getControllerId(), value, game, source);
+            return true;
         }
-        new ClueArtifactToken().putOntoBattlefield(value, game, source, source.getControllerId());
+        return false;
+    }
+
+    public static void doInvestigate(UUID playerId, int value, Game game, Ability source) {
+        new ClueArtifactToken().putOntoBattlefield(value, game, source, playerId);
         for (int i = 0; i < value; i++) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.INVESTIGATED, source.getSourceId(), source, source.getControllerId()));
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.INVESTIGATED,
+                    source.getSourceId(), source, playerId
+            ));
         }
-        return true;
     }
 
     @Override
@@ -54,11 +75,7 @@ public class InvestigateEffect extends OneShotEffect {
         return new InvestigateEffect(this);
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
+    private String makeText(boolean showAbilityHint) {
         String message;
         if (amount instanceof StaticValue) {
             int value = ((StaticValue) amount).getValue();
@@ -75,7 +92,8 @@ public class InvestigateEffect extends OneShotEffect {
         } else {
             message = " X times, where X is the " + amount.getMessage() + ". <i>(To investigate, c";
         }
-        return "investigate" + message + "reate a colorless Clue artifact token " +
-                "with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
+        String finalMessage = "investigate" + message + "reate a Clue token. " +
+                "It's an artifact with \"{2}, Sacrifice this artifact: Draw a card.\")</i>";
+        return showAbilityHint ? finalMessage : CardUtil.stripReminderText(finalMessage);
     }
 }

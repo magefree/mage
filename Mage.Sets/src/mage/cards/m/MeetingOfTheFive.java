@@ -85,7 +85,7 @@ class MeetingOfTheFiveExileEffect extends OneShotEffect {
 class MeetingOfTheFiveCastEffect extends CanPlayCardControllerEffect {
 
     MeetingOfTheFiveCastEffect(Game game, Card card) {
-        super(game, card.getId(), card.getZoneChangeCounter(game), Duration.EndOfTurn);
+        super(game, card.getId(), card.getZoneChangeCounter(game), true, Duration.EndOfTurn);
     }
 
     private MeetingOfTheFiveCastEffect(final MeetingOfTheFiveCastEffect effect) {
@@ -130,7 +130,7 @@ class MeetingOfTheFiveManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!(source instanceof SpellAbility)) {
+        if (!(source instanceof SpellAbility) || source.isActivated()) {
             return false;
         }
         MageObject object = game.getObject(source);

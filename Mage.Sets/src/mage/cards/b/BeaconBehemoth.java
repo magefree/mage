@@ -35,12 +35,12 @@ public final class BeaconBehemoth extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
 
-    public BeaconBehemoth (final BeaconBehemoth card) {
+    private BeaconBehemoth(final BeaconBehemoth card) {
         super(card);
     }
 

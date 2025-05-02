@@ -54,12 +54,12 @@ public final class GraveSifter extends CardImpl {
 
 class GraveSifterEffect extends OneShotEffect {
 
-    public GraveSifterEffect() {
+    GraveSifterEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "each player chooses a creature type and returns any number of cards of that type from their graveyard to their hand";
     }
 
-    public GraveSifterEffect(final GraveSifterEffect effect) {
+    private GraveSifterEffect(final GraveSifterEffect effect) {
         super(effect);
     }
 
@@ -70,7 +70,7 @@ class GraveSifterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
+        Choice typeChoice = new ChoiceCreatureType(game, source);
         typeChoice.setMessage("Choose creature type to return cards from your graveyard");
         Player controller = game.getPlayer(source.getControllerId());
         Set<Card> toHand = new HashSet<>();
@@ -80,9 +80,9 @@ class GraveSifterEffect extends OneShotEffect {
                 if (player != null) {
                     typeChoice.clearChoice();
                     if (player.choose(outcome, typeChoice, game)) {
-                        game.informPlayers(player.getLogName() + " has chosen: " + typeChoice.getChoice());
-                        FilterCard filter = new FilterCreatureCard("creature cards with creature type " + typeChoice.getChoice() + " from your graveyard");
-                        filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+                        game.informPlayers(player.getLogName() + " has chosen: " + typeChoice.getChoiceKey());
+                        FilterCard filter = new FilterCreatureCard("creature cards with creature type " + typeChoice.getChoiceKey() + " from your graveyard");
+                        filter.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
                         Target target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter);
                         player.chooseTarget(outcome, target, source, game);
                         toHand.addAll(new CardsImpl(target.getTargets()).getCards(game));

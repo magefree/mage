@@ -2,9 +2,8 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
@@ -44,8 +43,8 @@ public class MiragePhalanx extends CardImpl {
         // “At the beginning of combat on your turn, create a token that's a copy of this creature,
         // except it has haste and loses soulbond.
         // Exile it at end of combat.”
-        Ability ability = new BeginningOfCombatTriggeredAbility(new MiragePhalanxEffect(), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
+        Ability ability = new BeginningOfCombatTriggeredAbility(new MiragePhalanxEffect());
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(ability, ruleText)));
     }
 
     private MiragePhalanx(final MiragePhalanx card) {
@@ -71,7 +70,9 @@ class MiragePhalanxEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         // It has haste
         CreateTokenCopyTargetEffect tokenCopyEffect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
@@ -87,5 +88,5 @@ class MiragePhalanxEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() { return new MiragePhalanxEffect(this); }
+    public MiragePhalanxEffect copy() { return new MiragePhalanxEffect(this); }
 }

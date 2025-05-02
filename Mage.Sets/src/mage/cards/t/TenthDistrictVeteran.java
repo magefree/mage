@@ -9,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -19,12 +18,6 @@ import java.util.UUID;
  * @author JayDi85
  */
 public final class TenthDistrictVeteran extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public TenthDistrictVeteran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -39,7 +32,7 @@ public final class TenthDistrictVeteran extends CardImpl {
 
         // Whenever Tenth District Veteran attacks, untap another target creature you control.
         Ability ability = new AttacksTriggeredAbility(new UntapTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 

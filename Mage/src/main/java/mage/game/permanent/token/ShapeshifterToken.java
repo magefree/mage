@@ -20,7 +20,7 @@ public final class ShapeshifterToken extends TokenImpl {
         addAbility(new ChangelingAbility());
     }
 
-    protected ShapeshifterToken(final ShapeshifterToken token) {
+    private ShapeshifterToken(final ShapeshifterToken token) {
         super(token);
     }
 

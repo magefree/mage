@@ -1,8 +1,7 @@
-
 package mage.cards.o;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
@@ -38,13 +37,15 @@ public final class OniPossession extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice a creature.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, ""), TargetController.YOU, false);
+                new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""));
         this.addAbility(ability2);
         // Enchanted creature gets +3/+3 and has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
+        Ability staticAbility = new SimpleStaticAbility(new BoostEnchantedEffect(3, 3));
+        staticAbility.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)
+                .setText("and has trample"));
+        this.addAbility(staticAbility);
         // Enchanted creature is a Demon Spirit.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetCardSubtypeAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA, SubType.DEMON, SubType.SPIRIT)));
+        this.addAbility(new SimpleStaticAbility(new SetCardSubtypeAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA, SubType.DEMON, SubType.SPIRIT)));
     }
 
     private OniPossession(final OniPossession card) {

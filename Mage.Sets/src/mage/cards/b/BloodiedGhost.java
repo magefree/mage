@@ -33,7 +33,7 @@ public final class BloodiedGhost extends CardImpl {
             "with a -1/-1 counter on it."));
     }
 
-    public BloodiedGhost (final BloodiedGhost card) {
+    private BloodiedGhost(final BloodiedGhost card) {
         super(card);
     }
 

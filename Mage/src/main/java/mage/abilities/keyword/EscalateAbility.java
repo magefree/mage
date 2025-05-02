@@ -42,7 +42,7 @@ class EscalateEffect extends CostModificationEffectImpl {
         this.staticText = "Escalate " + cost.getText() + " <i>(Pay this cost for each mode chosen beyond the first.)</i>";
     }
 
-    EscalateEffect(final EscalateEffect effect) {
+    private EscalateEffect(final EscalateEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

@@ -19,7 +19,7 @@ public final class TheEleventhHourToken extends TokenImpl {
     }
 
     public TheEleventhHourToken() {
-        super("Human Token", "1/1 white Human creature token with \"Doctor spells you cast cost 1 less to cast.\"");
+        super("Human Token", "1/1 white Human creature token with \"Doctor spells you cast cost {1} less to cast.\"");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.HUMAN);
@@ -29,7 +29,7 @@ public final class TheEleventhHourToken extends TokenImpl {
         addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    protected TheEleventhHourToken(final TheEleventhHourToken token) {
+    private TheEleventhHourToken(final TheEleventhHourToken token) {
         super(token);
     }
 

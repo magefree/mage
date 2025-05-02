@@ -47,12 +47,12 @@ public final class WarpWorld extends CardImpl {
 
 class WarpWorldEffect extends OneShotEffect {
 
-    public WarpWorldEffect() {
+    WarpWorldEffect() {
         super(Outcome.Neutral);
         this.staticText = "Each player shuffles all permanents they own into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library";
     }
 
-    public WarpWorldEffect(final WarpWorldEffect effect) {
+    private WarpWorldEffect(final WarpWorldEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class WarpWorldEffect extends OneShotEffect {
             }
         }
 
-        game.getState().processAction(game); // so effects from creatures that were on the battlefield won't trigger from draw or later put into play
+        game.processAction(); // so effects from creatures that were on the battlefield won't trigger from draw or later put into play
 
         Map<UUID, CardsImpl> cardsRevealed = new HashMap<>();
 
@@ -111,7 +111,7 @@ class WarpWorldEffect extends OneShotEffect {
                 cardsRevealed.put(player.getId(), cards);
             }
         }
-        game.getState().processAction(game);
+        game.processAction();
         // put artifacts, creaturs and lands onto the battlefield
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
@@ -129,7 +129,7 @@ class WarpWorldEffect extends OneShotEffect {
                 player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
             }
         }
-        game.getState().processAction(game);
+        game.processAction();
         // put enchantments onto the battlefield
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);

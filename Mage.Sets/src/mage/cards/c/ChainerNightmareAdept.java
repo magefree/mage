@@ -3,7 +3,8 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.SpellAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -14,8 +15,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
@@ -46,7 +46,7 @@ public final class ChainerNightmareAdept extends CardImpl {
                 Zone.BATTLEFIELD, new ChainerNightmareAdeptContinuousEffect(), new DiscardCardCost()
         ), new ChainerNightmareAdeptWatcher());
 
-        // Whenever a nontoken creature enters the battlefield under your control, 
+        // Whenever a nontoken creature you control enters,
         // if you didn't cast it from your hand, it gains haste until your next turn.
         this.addAbility(new ChainerNightmareAdeptTriggeredAbility());
     }
@@ -64,7 +64,7 @@ public final class ChainerNightmareAdept extends CardImpl {
 class ChainerNightmareAdeptContinuousEffect extends AsThoughEffectImpl {
 
     ChainerNightmareAdeptContinuousEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "you may cast a creature spell from your graveyard this turn";
     }
 
@@ -92,18 +92,22 @@ class ChainerNightmareAdeptContinuousEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         ChainerNightmareAdeptWatcher watcher = game.getState().getWatcher(ChainerNightmareAdeptWatcher.class);
         if (watcher == null || !watcher.checkPermission(
-                affectedControllerId, source, game
-        ) || game.getState().getZone(sourceId) != Zone.GRAVEYARD) {
+                playerId, source, game
+        ) || game.getState().getZone(objectId) != Zone.GRAVEYARD) {
             return false;
         }
-        Card card = game.getCard(sourceId);
-        return card != null
-                && card.getOwnerId().equals(affectedControllerId)
-                && card.isCreature(game)
-                && !card.isLand(game);
+        Card card = game.getCard(objectId);
+        return card != null && affectedAbility instanceof SpellAbility
+                && card.getOwnerId().equals(playerId)
+                && ((SpellAbility) affectedAbility).getCharacteristics(game).isCreature();
     }
 }
 
@@ -118,12 +122,11 @@ class ChainerNightmareAdeptWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            if (event.getAdditionalReference() == null) {
+            if (event.getApprovingObject() == null) {
                 return;
             }
-            morMap.computeIfAbsent(event.getAdditionalReference().getApprovingMageObjectReference(), m -> new HashMap<>())
+            morMap.computeIfAbsent(event.getApprovingObject().getApprovingMageObjectReference(), m -> new HashMap<>())
                     .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
-            return;
         }
     }
 
@@ -152,25 +155,17 @@ class ChainerNightmareAdeptWatcher extends Watcher {
     }
 }
 
-class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
+class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldControlledTriggeredAbility {
 
-    private static final String abilityText = "Whenever a nontoken creature "
-            + "enters the battlefield under your control, "
-            + "if you didn't cast it from your hand, it gains haste until your next turn.";
     private static final ContinuousEffect gainHasteUntilNextTurnEffect
             = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.UntilYourNextTurn);
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("nontoken creature");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     ChainerNightmareAdeptTriggeredAbility() {
-        super(Zone.BATTLEFIELD, gainHasteUntilNextTurnEffect, filter, false,
-                SetTargetPointer.PERMANENT, abilityText);
+        super(Zone.BATTLEFIELD, gainHasteUntilNextTurnEffect, StaticFilters.FILTER_CREATURE_NON_TOKEN, false,
+                SetTargetPointer.PERMANENT);
         this.addWatcher(new CastFromHandWatcher());
+        setTriggerPhrase("Whenever a nontoken creature you control enters, "
+                + "if you didn't cast it from your hand, ");
     }
 
     private ChainerNightmareAdeptTriggeredAbility(final ChainerNightmareAdeptTriggeredAbility effect) {
@@ -184,11 +179,9 @@ class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggere
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
-
         CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
-        return watcher != null && !watcher.spellWasCastFromHand(event.getTargetId());
+        return watcher != null && !watcher.spellWasCastFromHand(event.getTargetId())
+                && super.checkTrigger(event, game);
     }
+
 }

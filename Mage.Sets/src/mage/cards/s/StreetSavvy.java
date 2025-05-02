@@ -35,7 +35,7 @@ public final class StreetSavvy extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities.
-        SimpleStaticAbility staticAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0 ,2)
+        SimpleStaticAbility staticAbility = new SimpleStaticAbility(new BoostEnchantedEffect(0 ,2)
             .setText("Enchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities."));
         staticAbility.addEffect(new StreetSavvyEffect());
         this.addAbility(staticAbility);
@@ -53,12 +53,12 @@ public final class StreetSavvy extends CardImpl {
 
 class StreetSavvyEffect extends AsThoughEffectImpl {
 
-    public StreetSavvyEffect() {
+    StreetSavvyEffect() {
         super(AsThoughEffectType.BLOCK_LANDWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "";
     }
 
-    public StreetSavvyEffect(final StreetSavvyEffect effect) {
+    private StreetSavvyEffect(final StreetSavvyEffect effect) {
         super(effect);
     }
 

@@ -30,7 +30,7 @@ public final class JhoirasFamiliar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Historic spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostReductionControllerEffect(new FilterHistoricCard(), 1)
                         .setText("Historic spells you cast cost {1} less to cast. <i>(Artifacts, legendaries, and Sagas are historic.)</i>")));
     }

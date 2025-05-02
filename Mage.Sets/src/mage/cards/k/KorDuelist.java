@@ -35,7 +35,7 @@ public final class KorDuelist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         GainAbilitySourceEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new SourceIsEquiped(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(effect, new SourceIsEquiped(), ruleText)));
     }
 
     private KorDuelist(final KorDuelist card) {

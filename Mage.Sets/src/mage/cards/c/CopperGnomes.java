@@ -29,7 +29,6 @@ public final class CopperGnomes extends CardImpl {
 
         // {4}, Sacrifice Copper Gnomes: You may put an artifact card from your hand onto the battlefield.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_ARTIFACT_AN),
                 new ManaCostsImpl<>("{4}")
         );

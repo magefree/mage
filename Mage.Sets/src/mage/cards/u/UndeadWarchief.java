@@ -36,10 +36,10 @@ public final class UndeadWarchief extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Zombie spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Zombie creatures you control get +2/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filterCreatures, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filterCreatures, false)));
     }
 
     private UndeadWarchief(final UndeadWarchief card) {

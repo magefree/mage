@@ -39,7 +39,7 @@ public final class Sunweb extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Sunweb can't block creatures with power 2 or less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockCreaturesSourceEffect(filter)));
     }
 
     private Sunweb(final Sunweb card) {

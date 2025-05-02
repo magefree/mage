@@ -29,7 +29,7 @@ public final class RumorGatherer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, scry 1. If this is the second time this ability has resolved this turn, draw a card instead.
+        // Alliance — Whenever another creature you control enters, scry 1. If this is the second time this ability has resolved this turn, draw a card instead.
         this.addAbility(new AllianceAbility(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), new ScryEffect(1),
                 RumorGathererCondition.instance, "scry 1. If this is the second time " +

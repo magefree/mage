@@ -1,13 +1,13 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.ExileCardsFromTopOfLibraryControllerEffect;
 import mage.abilities.hint.common.OpponentsLostLifeHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 import mage.util.CardUtil;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -32,8 +31,7 @@ public final class TheaterOfHorrors extends CardImpl {
 
         // At the beginning of your upkeep, exile the top card of your library.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TheaterOfHorrorsExileEffect(),
-                TargetController.YOU, false
+                new ExileCardsFromTopOfLibraryControllerEffect(1, true)
         ));
 
         // During your turn, if an opponent lost life this turn, you may play cards exiled with Theater of Horrors.
@@ -55,39 +53,6 @@ public final class TheaterOfHorrors extends CardImpl {
     @Override
     public TheaterOfHorrors copy() {
         return new TheaterOfHorrors(this);
-    }
-}
-
-class TheaterOfHorrorsExileEffect extends OneShotEffect {
-
-    TheaterOfHorrorsExileEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile the top card of your library.";
-    }
-
-    private TheaterOfHorrorsExileEffect(final TheaterOfHorrorsExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TheaterOfHorrorsExileEffect copy() {
-        return new TheaterOfHorrorsExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Card card = player.getLibrary().getFromTop(game);
-        if (card == null) {
-            return false;
-        }
-        return player.moveCardsToExile(
-                card, source, game, true, CardUtil.getCardExileZoneId(game, source),
-                CardUtil.createObjectRealtedWindowTitle(source, game, null)
-        );
     }
 }
 

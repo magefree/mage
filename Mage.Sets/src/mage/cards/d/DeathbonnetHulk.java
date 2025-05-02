@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class DeathbonnetHulk extends CardImpl {
 
         // At the beginning of your upkeep, you may exile a card from a graveyard. If a creature card was exiled this way, put a +1/+1 counter on Deathbonnet Hulk.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DeathbonnetHulkEffect(), TargetController.YOU, false
+                new DeathbonnetHulkEffect()
         ));
     }
 
@@ -72,7 +72,7 @@ class DeathbonnetHulkEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInGraveyard(0, 1);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {

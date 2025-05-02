@@ -28,7 +28,7 @@ import java.util.UUID;
 public final class HeronBlessedGeist extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            new FilterEnchantmentPermanent("you control an enchantment and only as a sorcery")
+            new FilterEnchantmentPermanent("you control an enchantment")
     );
     private static final Hint hint = new ConditionHint(condition, "You control an enchantment");
 

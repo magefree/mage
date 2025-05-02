@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -46,10 +46,10 @@ public final class AdmiralBeckettBrass extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Pirates you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom, true), TargetController.YOU, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom, true));
         ability.addTarget(new TargetNonlandPermanent(filter2));
         this.addAbility(ability, new DamagedByPiratesWatcher());
     }

@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -35,7 +34,7 @@ public final class Woeleecher extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {W}, {tap}: Remove a -1/-1 counter from target creature. If you do, you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WoeleecherEffect(), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new WoeleecherEffect(), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -54,15 +53,12 @@ public final class Woeleecher extends CardImpl {
 
 class WoeleecherEffect extends OneShotEffect {
 
-    private int numberCountersOriginal = 0;
-    private int numberCountersAfter = 0;
-
-    public WoeleecherEffect() {
+    WoeleecherEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Remove a -1/-1 counter from target creature. If you do, you gain 2 life";
     }
 
-    public WoeleecherEffect(final WoeleecherEffect effect) {
+    private WoeleecherEffect(final WoeleecherEffect effect) {
         super(effect);
     }
 
@@ -76,10 +72,9 @@ class WoeleecherEffect extends OneShotEffect {
         Permanent target = game.getPermanent(source.getFirstTarget());
         Player you = game.getPlayer(source.getControllerId());
         if (target != null && you != null) {
-            numberCountersOriginal = target.getCounters(game).getCount(CounterType.M1M1);
+            int numberCountersOriginal = target.getCounters(game).getCount(CounterType.M1M1);
             target.removeCounters(CounterType.M1M1.createInstance(), source, game);
-            numberCountersAfter = target.getCounters(game).getCount(CounterType.M1M1);
-            if (numberCountersAfter < numberCountersOriginal && you != null) {
+            if (target.getCounters(game).getCount(CounterType.M1M1) < numberCountersOriginal) {
                 you.gainLife(2, game, source);
                 return true;
             }

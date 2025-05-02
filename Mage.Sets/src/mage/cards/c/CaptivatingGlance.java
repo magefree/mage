@@ -2,7 +2,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -42,7 +42,7 @@ public final class CaptivatingGlance extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your end step, clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new CaptivatingGlanceEffect(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CaptivatingGlanceEffect()));
 
     }
 
@@ -58,12 +58,12 @@ public final class CaptivatingGlance extends CardImpl {
 
 class CaptivatingGlanceEffect extends OneShotEffect {
 
-    public CaptivatingGlanceEffect() {
+    CaptivatingGlanceEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature";
     }
 
-    public CaptivatingGlanceEffect(final CaptivatingGlanceEffect effect) {
+    private CaptivatingGlanceEffect(final CaptivatingGlanceEffect effect) {
         super(effect);
     }
 

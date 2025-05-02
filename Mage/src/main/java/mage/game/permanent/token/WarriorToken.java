@@ -18,7 +18,7 @@ public final class WarriorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected WarriorToken(final WarriorToken token) {
+    private WarriorToken(final WarriorToken token) {
         super(token);
     }
 

@@ -29,7 +29,7 @@ public final class ArcboundReclaimer extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Remove a +1/+1 counter from Arcbound Reclaimer: Put target artifact card from your graveyard on top of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
+        Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(true), new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
 

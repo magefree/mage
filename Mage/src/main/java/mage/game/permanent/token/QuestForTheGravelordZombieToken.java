@@ -20,7 +20,7 @@ public final class QuestForTheGravelordZombieToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    protected QuestForTheGravelordZombieToken(final QuestForTheGravelordZombieToken token) {
+    private QuestForTheGravelordZombieToken(final QuestForTheGravelordZombieToken token) {
         super(token);
     }
 

@@ -41,7 +41,6 @@ public final class KelsinkoRanger extends CardImpl {
 
         // {1}{W}: Target green creature gains first strike until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{W}")
         );

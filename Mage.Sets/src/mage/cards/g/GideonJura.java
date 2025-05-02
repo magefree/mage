@@ -80,7 +80,7 @@ class GideonJuraToken extends TokenImpl {
         toughness = new MageInt(6);
     }
 
-    public GideonJuraToken(final GideonJuraToken token) {
+    private GideonJuraToken(final GideonJuraToken token) {
         super(token);
     }
 
@@ -99,7 +99,7 @@ class GideonJuraEffect extends RequirementEffect {
         staticText = "During target opponent's next turn, creatures that player controls attack {this} if able";
     }
 
-    public GideonJuraEffect(final GideonJuraEffect effect) {
+    private GideonJuraEffect(final GideonJuraEffect effect) {
         super(effect);
         this.creatingPermanent = effect.creatingPermanent;
     }

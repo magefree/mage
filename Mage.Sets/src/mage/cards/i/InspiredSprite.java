@@ -39,7 +39,7 @@ public final class InspiredSprite extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
     private InspiredSprite(final InspiredSprite card) {

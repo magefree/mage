@@ -28,7 +28,7 @@ public final class IcatianPhalanx extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public IcatianPhalanx (final IcatianPhalanx card) {
+    private IcatianPhalanx(final IcatianPhalanx card) {
         super(card);
     }
 

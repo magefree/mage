@@ -3,7 +3,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Pronoun;
+import mage.constants.Pronoun;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -43,12 +43,12 @@ public final class NissaVastwoodSeer extends CardImpl {
         // When Nissa, Vastwood Seer enters the battlefield, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true));
 
-        // Whenever a land enters the battlefield under your control, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.
+        // Whenever a land you control enters, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.SHE), new FilterLandPermanent()),
                 new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), ComparisonType.MORE_THAN, 6, true),
-                "Whenever a land enters the battlefield under your control, if you control seven or more lands, exile {this}, then return her to the battlefield transformed under her owner's control."));
+                "Whenever a land you control enters, if you control seven or more lands, exile {this}, then return her to the battlefield transformed under her owner's control."));
     }
 
     private NissaVastwoodSeer(final NissaVastwoodSeer card) {

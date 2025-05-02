@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -40,7 +40,7 @@ public final class KaronaFalseGod extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of each player's upkeep, that player untaps Karona, False God and gains control of it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new KaronaFalseGodUntapGetControlEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new KaronaFalseGodUntapGetControlEffect(), false));
 
         // Whenever Karona attacks, creatures of the creature type of your choice get +3/+3 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new KaronaFalseGodEffect(), false));
@@ -58,12 +58,12 @@ public final class KaronaFalseGod extends CardImpl {
 
 class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
 
-    public KaronaFalseGodUntapGetControlEffect() {
+    KaronaFalseGodUntapGetControlEffect() {
         super(Outcome.GainControl);
         this.staticText = "that player untaps {this} and gains control of it";
     }
 
-    public KaronaFalseGodUntapGetControlEffect(final KaronaFalseGodUntapGetControlEffect effect) {
+    private KaronaFalseGodUntapGetControlEffect(final KaronaFalseGodUntapGetControlEffect effect) {
         super(effect);
     }
 
@@ -105,12 +105,12 @@ class KaronaFalseGodUntapGetControlEffect extends OneShotEffect {
 
 class KaronaFalseGodEffect extends OneShotEffect {
 
-    public KaronaFalseGodEffect() {
+    KaronaFalseGodEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "creatures of the creature type of your choice get +3/+3 until end of turn";
     }
 
-    public KaronaFalseGodEffect(final KaronaFalseGodEffect effect) {
+    private KaronaFalseGodEffect(final KaronaFalseGodEffect effect) {
         super(effect);
     }
 
@@ -124,17 +124,14 @@ class KaronaFalseGodEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && controller != null) {
-            Choice typeChoice = new ChoiceCreatureType(sourceObject);
+            Choice typeChoice = new ChoiceCreatureType(game, source);
             if (!controller.choose(Outcome.BoostCreature, typeChoice, game)) {
                 return false;
             }
-            String typeChosen = typeChoice.getChoice();
-            if (!typeChosen.isEmpty()) {
-                game.informPlayers(controller.getLogName() + " has chosen " + typeChosen);
-                FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                filter.add(SubType.byDescription(typeChosen).getPredicate());
-                game.addEffect(new BoostAllEffect(3, 3, Duration.EndOfTurn, filter, false), source);
-            }
+            game.informPlayers(controller.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+            FilterCreaturePermanent filter = new FilterCreaturePermanent();
+            filter.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
+            game.addEffect(new BoostAllEffect(3, 3, Duration.EndOfTurn, filter, false), source);
             return true;
         }
         return false;

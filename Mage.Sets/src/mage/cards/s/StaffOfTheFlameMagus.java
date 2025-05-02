@@ -33,9 +33,9 @@ public final class StaffOfTheFlameMagus extends CardImpl {
     public StaffOfTheFlameMagus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // Whenever you cast a red spell or a Mountain enters the battlefield under your control, you gain 1 life.
+        // Whenever you cast a red spell or a Mountain you control enters, you gain 1 life.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), false,
-                "Whenever you cast a red spell or a Mountain enters the battlefield under your control, ",
+                "Whenever you cast a red spell or a Mountain you control enters, ",
                 new SpellCastControllerTriggeredAbility(null, filterSpell,false),
                 new EntersBattlefieldControlledTriggeredAbility(null, filterLand)));
     }

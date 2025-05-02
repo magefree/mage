@@ -40,8 +40,8 @@ public final class ThallidOmnivore extends CardImpl {
 
         // {1}, Sacrifice another creature: Thallid Omnivore gets +2/+2 until end of turn. If a saproling was sacrificed in this way you gain 2 life.
         Effect effect = new BoostSourceEffect(2, 2, Duration.EndOfTurn);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(1));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addEffect(new ThallidOmnivoreEffect());
         this.addAbility(ability);
 
@@ -59,12 +59,12 @@ public final class ThallidOmnivore extends CardImpl {
 
 class ThallidOmnivoreEffect extends OneShotEffect {
 
-    public ThallidOmnivoreEffect() {
+    ThallidOmnivoreEffect() {
         super(Outcome.GainLife);
         this.staticText = "If a Saproling was sacrificed this way, you gain 2 life";
     }
 
-    public ThallidOmnivoreEffect(final ThallidOmnivoreEffect effect) {
+    private ThallidOmnivoreEffect(final ThallidOmnivoreEffect effect) {
         super(effect);
     }
 

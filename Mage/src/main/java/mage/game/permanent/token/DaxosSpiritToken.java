@@ -25,10 +25,10 @@ public final class DaxosSpiritToken extends TokenImpl {
         subtype.add(SubType.SPIRIT);
         power = new MageInt(0);
         toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DaxosSpiritSetPTEffect()));
+        this.addAbility(new SimpleStaticAbility(new DaxosSpiritSetPTEffect()));
     }
 
-    protected DaxosSpiritToken(final DaxosSpiritToken token) {
+    private DaxosSpiritToken(final DaxosSpiritToken token) {
         super(token);
     }
 
@@ -65,7 +65,7 @@ class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
+        int amount = controller.getCountersCount(CounterType.EXPERIENCE);
         permanent.getPower().setModifiedBaseValue(amount);
         permanent.getToughness().setModifiedBaseValue(amount);
         return true;

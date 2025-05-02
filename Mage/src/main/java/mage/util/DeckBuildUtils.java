@@ -6,12 +6,12 @@ import java.util.Set;
 
 public final class DeckBuildUtils {
 
+    /**
+     * Returns the number of basic lands suggested to complete a deck
+     * as an array of five ints: plains, islands, swamps, mountains, forests
+     * Total number of lands always sufficient to reach deckSize
+     */
     public static int[] landCountSuggestion(int deckSize, Set<Card> deckList) {
-        /*
-        Returns the number of basic lands suggested to complete a deck
-        as an array of five ints: plains, islands, swamps, mountains, forests
-        Total number of lands always sufficient to reach deckSize
-         */
         int plains = 0, islands = 0, swamps = 0, mountains = 0, forests = 0;
         int landsNeeded = deckSize - deckList.size();
         if (landsNeeded > 0) {
@@ -51,9 +51,4 @@ public final class DeckBuildUtils {
         }
         return new int[] {plains, islands, swamps, mountains, forests};
     }
-
-    // Hide constructor - not to be instantiated
-    private DeckBuildUtils() {
-    }
-
 }

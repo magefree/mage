@@ -34,7 +34,7 @@ public final class WitchbaneOrb extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new WitchbaneOrbEffect()));
 
         // You have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(HexproofAbility.getInstance())));
 
     }
 
@@ -50,12 +50,12 @@ public final class WitchbaneOrb extends CardImpl {
 
 class WitchbaneOrbEffect extends OneShotEffect {
 
-    public WitchbaneOrbEffect() {
+    WitchbaneOrbEffect() {
         super(Outcome.Protect);
         staticText = "destroy all Curses attached to you";
     }
 
-    public WitchbaneOrbEffect(final WitchbaneOrbEffect effect) {
+    private WitchbaneOrbEffect(final WitchbaneOrbEffect effect) {
         super(effect);
     }
 

@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
@@ -34,9 +33,9 @@ public final class AetherVial extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // At the beginning of your upkeep, you may put a charge counter on Aether Vial.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), true));
         // {tap}: You may put a creature card with converted mana cost equal to the number of charge counters on Aether Vial from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AetherVialEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AetherVialEffect(), new TapSourceCost()));
     }
 
     private AetherVial(final AetherVial card) {
@@ -51,12 +50,12 @@ public final class AetherVial extends CardImpl {
 
 class AetherVialEffect extends OneShotEffect {
 
-    public AetherVialEffect() {
+    AetherVialEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "You may put a creature card with mana value equal to the number of charge counters on {this} from your hand onto the battlefield";
     }
 
-    public AetherVialEffect(final AetherVialEffect effect) {
+    private AetherVialEffect(final AetherVialEffect effect) {
         super(effect);
     }
 
@@ -67,7 +66,7 @@ class AetherVialEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (permanent == null) {

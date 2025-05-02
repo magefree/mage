@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common;
 
 import mage.constants.Duration;
@@ -15,7 +13,8 @@ public class PreventCombatDamageToSourceEffect extends PreventionEffectImpl {
 
     public PreventCombatDamageToSourceEffect(Duration duration) {
         super(duration, Integer.MAX_VALUE, true);
-        staticText = "Prevent all combat damage that would be dealt to {this}" + duration.toString();
+        staticText = "prevent all combat damage that would be dealt to {this}"
+                + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 
     protected PreventCombatDamageToSourceEffect(final PreventCombatDamageToSourceEffect effect) {
@@ -38,4 +37,3 @@ public class PreventCombatDamageToSourceEffect extends PreventionEffectImpl {
     }
 
 }
-

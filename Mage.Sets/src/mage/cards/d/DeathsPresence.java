@@ -1,8 +1,8 @@
-
-
 package mage.cards.d;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -25,7 +25,6 @@ public final class DeathsPresence extends CardImpl {
     public DeathsPresence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}");
 
-        
         // Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.
         this.addAbility(new DeathsPresenceTriggeredAbility());
     }
@@ -44,9 +43,10 @@ class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl {
 
     public DeathsPresenceTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    public DeathsPresenceTriggeredAbility(final DeathsPresenceTriggeredAbility ability) {
+    private DeathsPresenceTriggeredAbility(final DeathsPresenceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -79,5 +79,10 @@ class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

@@ -35,7 +35,7 @@ public final class BurdenOfGuilt extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // {1}: Tap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapEnchantedEffect(), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new TapEnchantedEffect(), new GenericManaCost(1)));
     }
 
     private BurdenOfGuilt(final BurdenOfGuilt card) {

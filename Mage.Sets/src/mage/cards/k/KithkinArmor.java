@@ -44,11 +44,10 @@ public final class KithkinArmor extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't be blocked by creatures with power 3 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KithkinArmorRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new KithkinArmorRestrictionEffect()));
 
         // Sacrifice Kithkin Armor: The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage.
         Ability protectionAbility = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new KithkinArmorPreventionEffect(),
                 new KithkinArmorCost());
         protectionAbility.addTarget(new TargetSource());
@@ -72,7 +71,7 @@ class KithkinArmorCost extends CostImpl {
         this.text = "sacrifice {this}";
     }
 
-    public KithkinArmorCost(KithkinArmorCost cost) {
+    private KithkinArmorCost(final KithkinArmorCost cost) {
         super(cost);
     }
 
@@ -104,12 +103,12 @@ class KithkinArmorCost extends CostImpl {
 
 class KithkinArmorRestrictionEffect extends RestrictionEffect {
 
-    public KithkinArmorRestrictionEffect() {
+    KithkinArmorRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't be blocked by creatures with power 3 or greater";
     }
 
-    public KithkinArmorRestrictionEffect(final KithkinArmorRestrictionEffect effect) {
+    private KithkinArmorRestrictionEffect(final KithkinArmorRestrictionEffect effect) {
         super(effect);
     }
 
@@ -143,7 +142,7 @@ class KithkinArmorPreventionEffect extends PreventionEffectImpl {
         staticText = "The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage";
     }
 
-    KithkinArmorPreventionEffect(final KithkinArmorPreventionEffect effect) {
+    private KithkinArmorPreventionEffect(final KithkinArmorPreventionEffect effect) {
         super(effect);
     }
 

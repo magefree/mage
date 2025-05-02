@@ -77,7 +77,7 @@ class VoidEffect extends OneShotEffect {
         filterCard.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, number));
         filterCard.add(Predicates.not(CardType.LAND.getPredicate()));
 
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer == null) {
             return true;
         }

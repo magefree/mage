@@ -26,7 +26,7 @@ public final class SerpentGeneratorSnakeToken extends TokenImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
     }
 
-    protected SerpentGeneratorSnakeToken(final SerpentGeneratorSnakeToken token) {
+    private SerpentGeneratorSnakeToken(final SerpentGeneratorSnakeToken token) {
         super(token);
     }
 

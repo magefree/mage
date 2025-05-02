@@ -30,7 +30,7 @@ public class TapAllTargetPlayerControlsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, player.getId(), game);
             for (Permanent p : permanents) {
@@ -51,9 +51,8 @@ public class TapAllTargetPlayerControlsEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        return "tap all " + filter.toString() + " target " +
-                (mode.getTargets().isEmpty() ? "player" : mode.getTargets().get(0).getTargetName()) +
-                " controls";
+        return "tap all " + filter.getMessage() + ' '
+                + getTargetPointer().describeTargets(mode.getTargets(), "that player")
+                + " controls";
     }
 }

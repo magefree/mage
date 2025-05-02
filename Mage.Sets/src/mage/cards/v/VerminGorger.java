@@ -31,7 +31,7 @@ public final class VerminGorger extends CardImpl {
         // {T}, Sacrifice another creature: Each opponent loses 2 life and you gain 2 life.
         Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(2), new TapSourceCost());
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

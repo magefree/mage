@@ -40,7 +40,7 @@ public final class MerrowReejerey extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other Merfolk creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
         // Whenever you cast a Merfolk spell, you may tap or untap target permanent.
         Ability ability = new SpellCastControllerTriggeredAbility(new MayTapOrUntapTargetEffect(), filter2, true);
         Target target = new TargetPermanent();

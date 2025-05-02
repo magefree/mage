@@ -7,6 +7,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
@@ -22,7 +23,7 @@ public final class BoneShards extends CardImpl {
 
         // As an additional cost to cast this spell, sacrifice a creature or discard a card.
         this.getSpellAbility().addCost(new OrCost(
-                "sacrifice a creature or discard a card", new SacrificeTargetCost(new TargetControlledCreaturePermanent()),
+                "sacrifice a creature or discard a card", new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 new DiscardCardCost()
         ));
 

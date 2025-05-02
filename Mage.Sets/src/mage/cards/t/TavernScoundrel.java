@@ -49,7 +49,7 @@ public final class TavernScoundrel extends CardImpl {
         // {1}, {T}, Sacrifice another permanent: Flip a coin.
         Ability ability = new SimpleActivatedAbility(new FlipCoinEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

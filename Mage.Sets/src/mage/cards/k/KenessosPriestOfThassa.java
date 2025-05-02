@@ -108,7 +108,7 @@ class KenessosPriestOfThassaActivatedEffect extends OneShotEffect {
                 "you may put it on the bottom of your library.";
     }
 
-    public KenessosPriestOfThassaActivatedEffect(final KenessosPriestOfThassaActivatedEffect effect) {
+    private KenessosPriestOfThassaActivatedEffect(final KenessosPriestOfThassaActivatedEffect effect) {
         super(effect);
     }
 

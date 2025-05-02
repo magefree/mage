@@ -28,7 +28,7 @@ public final class OutlandColossus extends CardImpl {
         this.addAbility(new RenownAbility(6));
         
         // Outland Colossus can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
     private OutlandColossus(final OutlandColossus card) {

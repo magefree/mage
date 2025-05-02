@@ -31,7 +31,7 @@ public final class GiantTurtle extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Giant Turtle can't attack if it attacked during your last turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfAttackedLastTurnEffect()), new AttackedLastTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new CantAttackIfAttackedLastTurnEffect()), new AttackedLastTurnWatcher());
     }
 
     private GiantTurtle(final GiantTurtle card) {
@@ -46,12 +46,12 @@ public final class GiantTurtle extends CardImpl {
 
 class CantAttackIfAttackedLastTurnEffect extends RestrictionEffect {
 
-    public CantAttackIfAttackedLastTurnEffect() {
+    CantAttackIfAttackedLastTurnEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack if it attacked during your last turn";
     }
 
-    public CantAttackIfAttackedLastTurnEffect(final CantAttackIfAttackedLastTurnEffect effect) {
+    private CantAttackIfAttackedLastTurnEffect(final CantAttackIfAttackedLastTurnEffect effect) {
         super(effect);
     }
 

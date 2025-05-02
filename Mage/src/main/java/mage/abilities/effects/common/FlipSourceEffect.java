@@ -21,7 +21,7 @@ public class FlipSourceEffect extends OneShotEffect {
     public FlipSourceEffect(Token flipToken) {
         super(Outcome.BecomeCreature);
         this.flipToken = flipToken;
-        staticText = "flip it";
+        staticText = "flip {this}";
     }
 
     protected FlipSourceEffect(final FlipSourceEffect effect) {

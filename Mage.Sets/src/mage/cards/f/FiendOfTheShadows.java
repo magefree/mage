@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 
@@ -43,7 +42,7 @@ public final class FiendOfTheShadows extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new FiendOfTheShadowsEffect(), false, true));
 
         // Sacrifice a Human: Regenerate Fiend of the Shadows.
-        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new SacrificeTargetCost(filter)));
     }
 
     private FiendOfTheShadows(final FiendOfTheShadows card) {
@@ -75,7 +74,7 @@ class FiendOfTheShadowsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player == null || player.getHand().isEmpty()) {
             return false;
         }
@@ -89,7 +88,7 @@ class FiendOfTheShadowsEffect extends OneShotEffect {
                 card, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source),
                 source, game, Zone.HAND, true
         );
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, false);
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.Custom, false);
         return true;
     }
 }

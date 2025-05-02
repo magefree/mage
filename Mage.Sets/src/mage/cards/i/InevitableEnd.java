@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
@@ -38,9 +38,9 @@ public final class InevitableEnd extends CardImpl {
         // creature."
         BeginningOfUpkeepTriggeredAbility triggeredAbility
                 = new BeginningOfUpkeepTriggeredAbility(
-                        new SacrificeControllerEffect(
-                                StaticFilters.FILTER_PERMANENT_CREATURE, 1, null),
-                        TargetController.YOU, false);
+                new SacrificeControllerEffect(
+                                StaticFilters.FILTER_PERMANENT_CREATURE, 1, null)
+        );
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 triggeredAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted creature has \"" + triggeredAbility.getRule() + "\"")));

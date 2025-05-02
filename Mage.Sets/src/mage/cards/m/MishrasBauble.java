@@ -27,7 +27,7 @@ public final class MishrasBauble extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
         // {T}, Sacrifice Mishra's Bauble: Look at the top card of target player's library. Draw a card at the beginning of the next turn's upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LookLibraryTopCardTargetPlayerEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));

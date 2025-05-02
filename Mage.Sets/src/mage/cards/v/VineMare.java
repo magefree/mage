@@ -40,7 +40,6 @@ public final class VineMare extends CardImpl {
 
         // Vine Mare can't be blocked by black creatures.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedByCreaturesSourceEffect(
                         filter, Duration.WhileOnBattlefield
                 )

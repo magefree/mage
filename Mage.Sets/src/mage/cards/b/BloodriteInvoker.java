@@ -28,13 +28,13 @@ public final class BloodriteInvoker extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(3), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(3), new GenericManaCost(8));
         ability.addEffect(new GainLifeEffect(3).concatBy("and"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public BloodriteInvoker (final BloodriteInvoker card) {
+    private BloodriteInvoker(final BloodriteInvoker card) {
         super(card);
     }
 

@@ -3,8 +3,7 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -13,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.players.Player;
 
 import java.util.Objects;
@@ -51,16 +51,14 @@ public final class IronMastiff extends CardImpl {
 
 class IronMastiffEffect extends RollDieWithResultTableEffect {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     IronMastiffEffect() {
         super(20, "roll a d20 for each player being attacked and ignore all but the highest roll");
-        this.addTableEntry(1, 9, new DamageControllerEffect(xValue)
+        this.addTableEntry(1, 9, new DamageControllerEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("{this} deals damage equal to its power to you"));
-        this.addTableEntry(10, 19, new DamageTargetEffect(xValue)
+        this.addTableEntry(10, 19, new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("{this} deals damage equal to its power to defending player"));
         this.addTableEntry(20, 20, new DamagePlayersEffect(
-                Outcome.Damage, xValue, TargetController.OPPONENT
+                Outcome.Damage, SourcePermanentPowerValue.NOT_NEGATIVE, TargetController.OPPONENT
         ).setText("{this} deals damage equal to its power to each opponent"));
     }
 
@@ -81,8 +79,11 @@ class IronMastiffEffect extends RollDieWithResultTableEffect {
         }
         int toRoll = game
                 .getCombat()
-                .getDefenders()
+                .getGroups()
                 .stream()
+                .map(CombatGroup::getDefenderId)
+                .filter(Objects::nonNull)
+                .distinct()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
                 .mapToInt(x -> 1)

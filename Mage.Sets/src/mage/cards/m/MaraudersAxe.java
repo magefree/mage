@@ -22,7 +22,7 @@ public final class MaraudersAxe extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(2));

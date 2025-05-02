@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,10 +19,10 @@ public final class FutureSight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}{U}");
 
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
         // You may play lands and cast spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect()));
     }
 
     private FutureSight(final FutureSight card) {

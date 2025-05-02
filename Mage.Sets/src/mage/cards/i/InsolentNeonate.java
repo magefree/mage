@@ -30,7 +30,7 @@ public final class InsolentNeonate extends CardImpl {
         // Menace
         this.addAbility(new MenaceAbility());
         // Discard a card, Sacrifice Insolent Neonate: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new DiscardCardCost());
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new DiscardCardCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

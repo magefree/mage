@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
@@ -15,7 +15,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 /**
@@ -35,7 +34,7 @@ public final class GoblinSecretAgent extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of your upkeep, reveal a card from your hand at random.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoblinSecretAgentEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoblinSecretAgentEffect()));
     }
 
     private GoblinSecretAgent(final GoblinSecretAgent card) {
@@ -50,12 +49,12 @@ public final class GoblinSecretAgent extends CardImpl {
 
 class GoblinSecretAgentEffect extends OneShotEffect {
 
-    public GoblinSecretAgentEffect() {
+    GoblinSecretAgentEffect() {
         super(Outcome.Detriment);
         this.staticText = "reveal a card from your hand at random";
     }
     
-    public GoblinSecretAgentEffect(final GoblinSecretAgentEffect effect) {
+    private GoblinSecretAgentEffect(final GoblinSecretAgentEffect effect) {
         super(effect);
     }
 

@@ -22,7 +22,7 @@ public final class MerfolkHexproofToken extends TokenImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    protected MerfolkHexproofToken(final MerfolkHexproofToken token) {
+    private MerfolkHexproofToken(final MerfolkHexproofToken token) {
         super(token);
     }
 

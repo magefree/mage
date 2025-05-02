@@ -20,7 +20,7 @@ public final class AltarOfBone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{W}");
 
         // As an additional cost to cast Altar of Bone, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         // Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true));
     }

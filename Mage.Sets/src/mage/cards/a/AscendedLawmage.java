@@ -36,7 +36,7 @@ public final class AscendedLawmage extends CardImpl {
 
     }
 
-    public AscendedLawmage (final AscendedLawmage card) {
+    private AscendedLawmage(final AscendedLawmage card) {
         super(card);
     }
 

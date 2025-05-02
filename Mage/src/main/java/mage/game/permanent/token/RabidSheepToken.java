@@ -19,7 +19,7 @@ public final class RabidSheepToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected RabidSheepToken(final RabidSheepToken token) {
+    private RabidSheepToken(final RabidSheepToken token) {
         super(token);
     }
 

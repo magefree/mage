@@ -30,7 +30,7 @@ public final class Riddlesmith extends CardImpl {
         ));
     }
 
-    public Riddlesmith(final Riddlesmith card) {
+    private Riddlesmith(final Riddlesmith card) {
         super(card);
     }
 

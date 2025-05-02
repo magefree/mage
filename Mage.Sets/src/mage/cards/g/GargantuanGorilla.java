@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -20,7 +20,6 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -37,10 +36,10 @@ public final class GargantuanGorilla extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of your upkeep, you may sacrifice a Forest. If you sacrifice a snow Forest this way, Gargantuan Gorilla gains trample until end of turn. If you don’t sacrifice a Forest, sacrifice Gargantuan Gorilla and it deals 7 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GargantuanGorillaSacrificeEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GargantuanGorillaSacrificeEffect()));
 
         // {T}: Gargantuan Gorilla deals damage equal to its power to another target creature. That creature deals damage equal to its power to Gargantuan Gorilla.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargantuanGorillaFightEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GargantuanGorillaFightEffect(), new TapSourceCost());
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(AnotherPredicate.instance);
         ability.addTarget(new TargetCreaturePermanent(filter));
@@ -72,7 +71,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
         staticText = "you may sacrifice a Forest. If you sacrifice a snow Forest this way, {this} gains trample until end of turn. If you don't sacrifice a Forest, sacrifice {this} and it deals 7 damage to you.";
     }
 
-    public GargantuanGorillaSacrificeEffect(final GargantuanGorillaSacrificeEffect effect) {
+    private GargantuanGorillaSacrificeEffect(final GargantuanGorillaSacrificeEffect effect) {
         super(effect);
     }
 
@@ -86,8 +85,7 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-            SacrificeTargetCost cost = new SacrificeTargetCost(target);
+            SacrificeTargetCost cost = new SacrificeTargetCost(1, filter);
             if (!controller.chooseUse(Outcome.Benefit, "Sacrifice a Forest?", source, game)
                     || !cost.canPay(source, source, source.getControllerId(), game)
                     || !cost.pay(source, game, source, source.getControllerId(), true)) {
@@ -109,12 +107,12 @@ class GargantuanGorillaSacrificeEffect extends OneShotEffect {
 
 class GargantuanGorillaFightEffect extends OneShotEffect {
 
-    public GargantuanGorillaFightEffect() {
+    GargantuanGorillaFightEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals damage equal to its power to another target creature. That creature deals damage equal to its power to {this}";
     }
 
-    public GargantuanGorillaFightEffect(final GargantuanGorillaFightEffect effect) {
+    private GargantuanGorillaFightEffect(final GargantuanGorillaFightEffect effect) {
         super(effect);
     }
 

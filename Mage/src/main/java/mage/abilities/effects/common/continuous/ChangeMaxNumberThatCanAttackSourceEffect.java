@@ -8,6 +8,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -17,9 +18,10 @@ public class ChangeMaxNumberThatCanAttackSourceEffect extends ContinuousEffectIm
     private final int maxAttackedBy;
 
     public ChangeMaxNumberThatCanAttackSourceEffect(int maxAttackedBy) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.maxAttackedBy = maxAttackedBy;
-        staticText = "No more than " + (maxAttackedBy == 1 ? "one" : "two") + " creatures can attack you each combat";
+        staticText = "no more than " + CardUtil.numberToText(maxAttackedBy) +
+                " creature" + (maxAttackedBy > 1 ? "s" : "") + " can attack you each combat";
     }
 
     protected ChangeMaxNumberThatCanAttackSourceEffect(final ChangeMaxNumberThatCanAttackSourceEffect effect) {
@@ -33,11 +35,7 @@ public class ChangeMaxNumberThatCanAttackSourceEffect extends ContinuousEffectIm
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (layer != Layer.RulesEffects) {
-            return false;
-        }
-
+    public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
@@ -47,15 +45,5 @@ public class ChangeMaxNumberThatCanAttackSourceEffect extends ContinuousEffectIm
             controller.setMaxAttackedBy(maxAttackedBy);
         }
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

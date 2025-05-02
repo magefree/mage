@@ -36,7 +36,7 @@ public final class UndeadAlchemist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // If a Zombie you control would deal combat damage to a player, instead that player puts that many cards from the top of their library into their graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UndeadAlchemistEffect()));
+        this.addAbility(new SimpleStaticAbility(new UndeadAlchemistEffect()));
 
         // Whenever a creature card is put into an opponent's graveyard from their library, exile that card and create a 2/2 black Zombie creature token.
         this.addAbility(new UndeadAlchemistTriggeredAbility());
@@ -59,7 +59,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 
-    public UndeadAlchemistTriggeredAbility(final UndeadAlchemistTriggeredAbility ability) {
+    private UndeadAlchemistTriggeredAbility(final UndeadAlchemistTriggeredAbility ability) {
         super(ability);
     }
 
@@ -131,11 +131,6 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

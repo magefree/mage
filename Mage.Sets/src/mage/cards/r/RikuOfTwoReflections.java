@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
@@ -46,17 +46,17 @@ public final class RikuOfTwoReflections extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an instant or sorcery spell, you may pay {U}{R}. If you do, copy that spell. You may choose new targets for the copy.
-        Effect effect = new CopyTargetSpellEffect(true);
+        Effect effect = new CopyTargetStackObjectEffect(true);
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DoIfCostPaid(effect, new ManaCostsImpl<>("{U}{R}")),
                 filter, false, SetTargetPointer.SPELL
         ));
 
-        // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, create a token that's a copy of that creature.
+        // Whenever another nontoken creature you control enters, you may pay {G}{U}. If you do, create a token that's a copy of that creature.
         effect = new DoIfCostPaid(new CreateTokenCopyTargetEffect(true),
                 new ManaCostsImpl<>("{G}{U}"), "Create a token that's a copy of that creature?");
         effect.setText("you may pay {G}{U}. If you do, create a token that's a copy of that creature");
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterPermanent, false, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterPermanent, false, SetTargetPointer.PERMANENT));
     }
 
     private RikuOfTwoReflections(final RikuOfTwoReflections card) {

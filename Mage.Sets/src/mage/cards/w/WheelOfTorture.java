@@ -1,8 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +22,7 @@ public final class WheelOfTorture extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of each opponent's upkeep, Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in their hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new WheelOfTortureEffect(), TargetController.OPPONENT, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new WheelOfTortureEffect(), false);
         this.addAbility(ability);
     }
 
@@ -39,18 +38,18 @@ public final class WheelOfTorture extends CardImpl {
 
 class WheelOfTortureEffect extends OneShotEffect {
 
-    private WheelOfTortureEffect(final WheelOfTortureEffect effect) {
-        super(effect);
-        this.staticText = "Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in their hand";
+    WheelOfTortureEffect() {
+        super(Outcome.Damage);
+        this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
-    public WheelOfTortureEffect() {
-        super(Outcome.Damage);
+    private WheelOfTortureEffect(final WheelOfTortureEffect effect) {
+        super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int amount = 3 - player.getHand().size();
             if (amount > 0) {

@@ -2,6 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -59,6 +60,7 @@ class MagusOfTheBridgeTriggeredAbility extends TriggeredAbilityImpl {
     public MagusOfTheBridgeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileSourceEffect());
         setTriggerPhrase("When a creature is put into an opponent's graveyard from the battlefield, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MagusOfTheBridgeTriggeredAbility(final MagusOfTheBridgeTriggeredAbility ability) {
@@ -85,5 +87,10 @@ class MagusOfTheBridgeTriggeredAbility extends TriggeredAbilityImpl {
                     && permanent.isCreature(game) && controller.hasOpponent(permanent.getOwnerId(), game);
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

@@ -11,7 +11,6 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +33,7 @@ public final class ImmolationShaman extends CardImpl {
     public ImmolationShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -44,7 +43,6 @@ public final class ImmolationShaman extends CardImpl {
 
         // {3}{R}{R}: Immolation Shaman gets +3/+3 and gains menace until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(
                         3, 3, Duration.EndOfTurn
                 ).setText("{this} gets +3/+3"),
@@ -70,6 +68,7 @@ class ImmolationShamanTriggeredAbility extends TriggeredAbilityImpl {
 
     ImmolationShamanTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(1), true, "that player", true));
+        setTriggerPhrase("Whenever an opponent activates an ability of an artifact, creature, or land that isn't a mana ability, ");
     }
 
     private ImmolationShamanTriggeredAbility(final ImmolationShamanTriggeredAbility ability) {
@@ -92,7 +91,7 @@ class ImmolationShamanTriggeredAbility extends TriggeredAbilityImpl {
             Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (source != null && (source.isArtifact(game) || source.isCreature(game) || source.isLand(game))) {
                 StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+                if (!stackAbility.getStackAbility().isManaActivatedAbility()) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
@@ -103,9 +102,4 @@ class ImmolationShamanTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever an opponent activates an ability of an artifact, creature, or land on the battlefield, " +
-                "if it isn't a mana ability, {this} deals 1 damage to that player.";
-    }
 }

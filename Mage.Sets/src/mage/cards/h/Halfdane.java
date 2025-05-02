@@ -3,7 +3,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
@@ -39,7 +39,7 @@ public final class Halfdane extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, change Halfdane's base power and toughness to the power and toughness of target creature other than Halfdane until the end of your next upkeep.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new HalfdaneUpkeepEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new HalfdaneUpkeepEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -56,12 +56,12 @@ public final class Halfdane extends CardImpl {
 
 class HalfdaneUpkeepEffect extends OneShotEffect {
 
-    public HalfdaneUpkeepEffect() {
+    HalfdaneUpkeepEffect() {
         super(Outcome.Detriment);
         this.staticText = "change {this}'s base power and toughness to the power and toughness of target creature other than Halfdane until the end of your next upkeep";
     }
 
-    public HalfdaneUpkeepEffect(final HalfdaneUpkeepEffect effect) {
+    private HalfdaneUpkeepEffect(final HalfdaneUpkeepEffect effect) {
         super(effect);
     }
 
@@ -81,8 +81,8 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
         ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(
             permanent.getPower().getValue(),
             permanent.getToughness().getValue(),
-            Duration.UntilYourNextUpkeepStep,
-            SubLayer.SetPT_7b);
+            Duration.UntilYourNextUpkeepStep
+        );
         game.addEffect(effect, source);
         return true;
     }

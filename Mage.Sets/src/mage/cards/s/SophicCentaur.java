@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  *
@@ -33,10 +32,10 @@ public final class SophicCentaur extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}{G}, {tap}, Discard a card: You gain 2 life for each card in your hand.
-        DynamicValue lifeToGainAmount = new MultipliedValue(CardsInControllerHandCount.instance, 2);
+        DynamicValue lifeToGainAmount = new MultipliedValue(CardsInControllerHandCount.ANY, 2);
         Effect effect = new GainLifeEffect(lifeToGainAmount);
         effect.setText("You gain 2 life for each card in your hand");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{2}{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);

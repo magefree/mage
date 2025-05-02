@@ -4,7 +4,7 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class WildDogs extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Wild Dogs.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildDogsEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildDogsEffect()));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
@@ -53,12 +52,12 @@ public final class WildDogs extends CardImpl {
 
 class WildDogsEffect extends OneShotEffect {
 
-    public WildDogsEffect() {
+    WildDogsEffect() {
         super(Outcome.GainControl);
         this.staticText = "the player with the most life gains control of {this}";
     }
 
-    public WildDogsEffect(final WildDogsEffect effect) {
+    private WildDogsEffect(final WildDogsEffect effect) {
         super(effect);
     }
 

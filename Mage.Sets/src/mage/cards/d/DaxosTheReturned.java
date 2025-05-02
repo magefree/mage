@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.DaxosSpiritToken;
 
 import java.util.UUID;
@@ -19,12 +19,6 @@ import java.util.UUID;
  * @author fireshoes
  */
 public final class DaxosTheReturned extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public DaxosTheReturned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
@@ -37,11 +31,11 @@ public final class DaxosTheReturned extends CardImpl {
         // Whenever you cast an enchantment spell, you get an experience counter.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersPlayersEffect(
                 CounterType.EXPERIENCE.createInstance(), TargetController.YOU
-        ), filter, false));
+        ), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
 
         // {1}{W}{B}: Create a white and black Spirit enchantment creature token. It has
         // "This creature's power and toughness are each equal to the number of experience counters you have."
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DaxosSpiritToken(), 1), new ManaCostsImpl<>("{1}{W}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new DaxosSpiritToken(), 1), new ManaCostsImpl<>("{1}{W}{B}")));
     }
 
     private DaxosTheReturned(final DaxosTheReturned card) {

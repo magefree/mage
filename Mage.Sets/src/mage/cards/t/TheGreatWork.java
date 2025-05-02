@@ -103,7 +103,7 @@ class TheGreatWorkEffect extends OneShotEffect {
 class TheGreatWorkCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     TheGreatWorkCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, you may cast instant and sorcery spells from any graveyard";
     }
 
@@ -137,7 +137,7 @@ class TheGreatWorkCastFromGraveyardEffect extends AsThoughEffectImpl {
 
 class TheGreatWorkReplacementEffect extends ReplacementEffectImpl {
 
-    public TheGreatWorkReplacementEffect() {
+    TheGreatWorkReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Exile);
         staticText = "if a spell cast this way would be put into a graveyard, exile it instead";
     }
@@ -149,11 +149,6 @@ class TheGreatWorkReplacementEffect extends ReplacementEffectImpl {
     @Override
     public TheGreatWorkReplacementEffect copy() {
         return new TheGreatWorkReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -18,7 +18,6 @@ import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -57,7 +56,7 @@ class SkymarkRocAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);
     }
 
-    public SkymarkRocAbility(final SkymarkRocAbility ability) {
+    private SkymarkRocAbility(final SkymarkRocAbility ability) {
         super(ability);
     }
 

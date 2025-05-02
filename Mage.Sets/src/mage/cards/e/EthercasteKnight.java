@@ -27,7 +27,7 @@ public final class EthercasteKnight extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public EthercasteKnight (final EthercasteKnight card) {
+    private EthercasteKnight(final EthercasteKnight card) {
         super(card);
     }
 

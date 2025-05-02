@@ -50,8 +50,8 @@ public final class VisceridDrone extends CardImpl {
         // {tap}, Sacrifice a creature and a Swamp: Destroy target nonartifact creature. It can't be regenerated.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new TapSourceCost());
         ability.addCost(new CompositeCost(
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter2)),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
+                new SacrificeTargetCost(filter2),
                 "Sacrifice a creature and a Swamp"
         ));
         ability.addTarget(new TargetCreaturePermanent(filter1));
@@ -60,8 +60,8 @@ public final class VisceridDrone extends CardImpl {
         // {tap}, Sacrifice a creature and a snow Swamp: Destroy target creature. It can't be regenerated.
         ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new TapSourceCost());
         ability.addCost(new CompositeCost(
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter3)),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
+                new SacrificeTargetCost(filter3),
                 "Sacrifice a creature and a snow Swamp"
         ));
         ability.addTarget(new TargetCreaturePermanent());

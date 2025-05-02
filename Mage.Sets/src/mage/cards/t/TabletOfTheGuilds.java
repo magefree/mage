@@ -53,12 +53,12 @@ public final class TabletOfTheGuilds extends CardImpl {
 
 class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
 
-    public TabletOfTheGuildsEntersBattlefieldEffect() {
+    TabletOfTheGuildsEntersBattlefieldEffect() {
         super(Outcome.BoostCreature);
         staticText = "choose two colors";
     }
 
-    public TabletOfTheGuildsEntersBattlefieldEffect(final TabletOfTheGuildsEntersBattlefieldEffect effect) {
+    private TabletOfTheGuildsEntersBattlefieldEffect(final TabletOfTheGuildsEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -97,12 +97,12 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
 
 class TabletOfTheGuildsGainLifeEffect extends OneShotEffect {
 
-    public TabletOfTheGuildsGainLifeEffect() {
+    TabletOfTheGuildsGainLifeEffect() {
         super(Outcome.Neutral);
         staticText = "if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is";
     }
 
-    public TabletOfTheGuildsGainLifeEffect(final TabletOfTheGuildsGainLifeEffect effect) {
+    private TabletOfTheGuildsGainLifeEffect(final TabletOfTheGuildsGainLifeEffect effect) {
         super(effect);
     }
 

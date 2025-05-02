@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class LeyLine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // At the beginning of each player's upkeep, that player may put a +1/+1 counter on target creature of their choice.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LeyLineEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new LeyLineEffect(), false);
         ability.setTargetAdjuster(LeyLineAdjuster.instance);
         this.addAbility(ability);
     }
@@ -56,12 +56,12 @@ enum LeyLineAdjuster implements TargetAdjuster {
 
 class LeyLineEffect extends OneShotEffect {
 
-    public LeyLineEffect() {
+    LeyLineEffect() {
         super(Outcome.BoostCreature);
         staticText = "that player may put a +1/+1 counter on target creature of their choice";
     }
 
-    public LeyLineEffect(LeyLineEffect effect) {
+    private LeyLineEffect(final LeyLineEffect effect) {
         super(effect);
     }
 

@@ -57,10 +57,10 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
     public GuardianOfTazeemTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TapTargetEffect(), false);
         addEffect(new GuardianOfTazeemEffect());
-        setTriggerPhrase("<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " );
+        setTriggerPhrase("<i>Landfall</i> &mdash; Whenever a land you control enters, " );
     }
 
-    public GuardianOfTazeemTriggeredAbility(final GuardianOfTazeemTriggeredAbility ability) {
+    private GuardianOfTazeemTriggeredAbility(final GuardianOfTazeemTriggeredAbility ability) {
         super(ability);
     }
 
@@ -93,12 +93,12 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
 
 class GuardianOfTazeemEffect extends OneShotEffect {
 
-    public GuardianOfTazeemEffect() {
+    GuardianOfTazeemEffect() {
         super(Outcome.Benefit);
         this.staticText = "If that land is an Island, that creature doesn't untap during its controller's next untap step";
     }
 
-    public GuardianOfTazeemEffect(final GuardianOfTazeemEffect effect) {
+    private GuardianOfTazeemEffect(final GuardianOfTazeemEffect effect) {
         super(effect);
     }
 

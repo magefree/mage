@@ -11,7 +11,7 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -25,6 +25,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public final class ChamberSentry extends CardImpl {
                 "with a +1/+1 counter on it for each color of mana spent to cast it"));
 
         // {X}, {T}, Remove X +1/+1 counters from Chamber Sentry: It deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR)
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(GetXValue.instance)
                 .setText("It deals X damage to any target"),
                 new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
@@ -95,7 +96,7 @@ class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
         }
     }
 
-    public ChamberSentryRemoveVariableCountersSourceCost(final ChamberSentryRemoveVariableCountersSourceCost cost) {
+    private ChamberSentryRemoveVariableCountersSourceCost(final ChamberSentryRemoveVariableCountersSourceCost cost) {
         super(cost);
         this.minimalCountersToPay = cost.minimalCountersToPay;
         this.counterName = cost.counterName;
@@ -128,6 +129,6 @@ class ChamberSentryRemoveVariableCountersSourceCost extends VariableCostImpl {
 
     @Override
     public int announceXValue(Ability source, Game game) {
-        return source.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, source, "X", 0);
     }
 }

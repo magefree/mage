@@ -74,7 +74,7 @@ class BasriKetTriggeredAbility extends DelayedTriggeredAbility {
         super(null, Duration.EndOfTurn, false);
     }
 
-    public BasriKetTriggeredAbility(BasriKetTriggeredAbility ability) {
+    private BasriKetTriggeredAbility(final BasriKetTriggeredAbility ability) {
         super(ability);
     }
 

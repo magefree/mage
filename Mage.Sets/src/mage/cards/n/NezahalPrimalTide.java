@@ -43,14 +43,14 @@ public final class NezahalPrimalTide extends CardImpl {
 
         // You have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Whenever an opponent casts a noncreature spell, draw a card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, SetTargetPointer.NONE));
 
         // Discard three cards: Exile Nezahal. Return it to the battlefield tapped under its owner's control at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true),
+        this.addAbility(new SimpleActivatedAbility(new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true),
                 new DiscardTargetCost(new TargetCardInHand(3, StaticFilters.FILTER_CARD_CARDS))));
 
     }

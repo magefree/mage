@@ -48,7 +48,7 @@ class RepopulateEffect extends OneShotEffect {
         staticText = "Shuffle all creature cards from target player's graveyard into that player's library";
     }
 
-    RepopulateEffect(final RepopulateEffect effect) {
+    private RepopulateEffect(final RepopulateEffect effect) {
         super(effect);
     }
 

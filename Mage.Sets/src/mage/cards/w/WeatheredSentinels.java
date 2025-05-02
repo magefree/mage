@@ -6,7 +6,6 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -48,7 +47,7 @@ public class WeatheredSentinels extends CardImpl {
                 new ConditionalAsThoughEffect(
                         new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                         WeatheredSentinelsCanAttackSomeoneCondition.instance)
-                        .setText("Weathered Sentinels can attack players who attacked you during their last turn as though it didn't have defender.")),
+                        .setText("{this} can attack players who attacked you during their last turn as though it didn't have defender.")),
                 new WeatheredSentinelsLastTurnAttackersWatcher()
         );
 
@@ -85,7 +84,7 @@ class WeatheredSentinelsAttackerReplacementEffect extends ReplacementEffectImpl 
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
     }
 
-    WeatheredSentinelsAttackerReplacementEffect(final WeatheredSentinelsAttackerReplacementEffect effect) {
+    private WeatheredSentinelsAttackerReplacementEffect(final WeatheredSentinelsAttackerReplacementEffect effect) {
         super(effect);
     }
 
@@ -132,7 +131,7 @@ class WeatheredSentinelsAttackerReplacementEffect extends ReplacementEffectImpl 
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public WeatheredSentinelsAttackerReplacementEffect copy() {
         return new WeatheredSentinelsAttackerReplacementEffect(this);
     }
 }

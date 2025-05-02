@@ -42,12 +42,12 @@ public final class DubiousChallenge extends CardImpl {
 
 class DubiousChallengeEffect extends OneShotEffect {
 
-    public DubiousChallengeEffect() {
+    DubiousChallengeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control.";
     }
 
-    public DubiousChallengeEffect(final DubiousChallengeEffect effect) {
+    private DubiousChallengeEffect(final DubiousChallengeEffect effect) {
         super(effect);
     }
 
@@ -97,11 +97,11 @@ class DubiousChallengeEffect extends OneShotEffect {
 
 class DubiousChallengeMoveToBattlefieldEffect extends OneShotEffect {
 
-    public DubiousChallengeMoveToBattlefieldEffect() {
+    DubiousChallengeMoveToBattlefieldEffect() {
         super(Outcome.Benefit);
     }
 
-    public DubiousChallengeMoveToBattlefieldEffect(final DubiousChallengeMoveToBattlefieldEffect effect) {
+    private DubiousChallengeMoveToBattlefieldEffect(final DubiousChallengeMoveToBattlefieldEffect effect) {
         super(effect);
     }
 

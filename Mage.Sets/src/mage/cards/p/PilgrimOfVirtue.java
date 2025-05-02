@@ -38,7 +38,7 @@ public final class PilgrimOfVirtue extends CardImpl {
         // Protection from black
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
         // {W}, Sacrifice Pilgrim of Virtue: The next time a black source of your choice would deal damage this turn, prevent that damage.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PilgrimOfVirtueEffect(), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new PilgrimOfVirtueEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -70,7 +70,7 @@ class PilgrimOfVirtueEffect extends PreventionEffectImpl {
         staticText = "The next time a black source of your choice would deal damage to you this turn, prevent that damage";
     }
 
-    public PilgrimOfVirtueEffect(final PilgrimOfVirtueEffect effect) {
+    private PilgrimOfVirtueEffect(final PilgrimOfVirtueEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
@@ -81,12 +81,8 @@ class PilgrimOfVirtueEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 

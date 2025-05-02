@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -35,9 +35,9 @@ public final class FesteringWound extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may put an infection counter on Festering Wound.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.INFECTION.createInstance(), true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.INFECTION.createInstance(), true), true));
         // At the beginning of the upkeep of enchanted creature's controller, Festering Wound deals X damage to that player, where X is the number of infection counters on Festering Wound.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new FesteringWoundEffect(), TargetController.CONTROLLER_ATTACHED_TO, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new FesteringWoundEffect(), false));
     }
 
     private FesteringWound(final FesteringWound card) {
@@ -52,12 +52,12 @@ public final class FesteringWound extends CardImpl {
 
 class FesteringWoundEffect extends OneShotEffect {
 
-    public FesteringWoundEffect() {
+    FesteringWoundEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals X damage to that player, where X is the number of infection counters on {this}";
     }
 
-    public FesteringWoundEffect(final FesteringWoundEffect effect) {
+    private FesteringWoundEffect(final FesteringWoundEffect effect) {
         super(effect);
     }
 

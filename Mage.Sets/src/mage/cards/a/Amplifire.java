@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.*;
@@ -28,7 +28,7 @@ public final class Amplifire extends CardImpl {
         // Until your next turn, Amplifire's base power becomes twice that card's power and its base toughness becomes twice that card's toughness.
         // Put the revealed cards on the bottom of your library in a random order.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AmplifireEffect(), TargetController.YOU, false
+                new AmplifireEffect()
         ));
     }
 
@@ -83,8 +83,7 @@ class AmplifireEffect extends OneShotEffect {
             SetBasePowerToughnessSourceEffect setBasePowerToughnessSourceEffect = new SetBasePowerToughnessSourceEffect(
                     2*lastCard.getPower().getValue(),
                     2*lastCard.getToughness().getValue(),
-                    Duration.UntilYourNextTurn,
-                    SubLayer.SetPT_7b
+                    Duration.UntilYourNextTurn
             );
             game.addEffect(setBasePowerToughnessSourceEffect, source);
         }

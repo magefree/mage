@@ -46,7 +46,7 @@ public final class ChaoticTransformation extends CardImpl {
 
 class ChaoticTransformationEffect extends OneShotEffect {
 
-    public ChaoticTransformationEffect() {
+    ChaoticTransformationEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land. "
                 + "For each permanent exiled this way, its controller reveals cards from the top of their library until they reveal a card that shares a card type with it, puts that card onto the battlefield, then shuffles.";

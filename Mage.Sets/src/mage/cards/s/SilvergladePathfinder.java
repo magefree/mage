@@ -32,7 +32,7 @@ public final class SilvergladePathfinder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{G}, {tap}, Discard a card: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
             new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true),
             new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());

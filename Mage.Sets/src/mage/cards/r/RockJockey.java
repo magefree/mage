@@ -53,12 +53,12 @@ public final class RockJockey extends CardImpl {
 
 class RockJockeyEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public RockJockeyEffect() {
+    RockJockeyEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "You can't play lands if you've cast {this} this turn";
     }
 
-    public RockJockeyEffect(final RockJockeyEffect effect) {
+    private RockJockeyEffect(final RockJockeyEffect effect) {
         super(effect);
     }
 

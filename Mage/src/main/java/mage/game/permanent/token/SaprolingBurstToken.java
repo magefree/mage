@@ -31,10 +31,10 @@ public final class SaprolingBurstToken extends TokenImpl {
         this.color.setGreen(true);
         this.subtype.add(SubType.SAPROLING);
         this.cardType.add(CardType.CREATURE);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(new SaprolingBurstTokenDynamicValue(saprolingBurstMOR))));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(new SaprolingBurstTokenDynamicValue(saprolingBurstMOR))));
     }
 
-    protected SaprolingBurstToken(final SaprolingBurstToken token) {
+    private SaprolingBurstToken(final SaprolingBurstToken token) {
         super(token);
     }
 

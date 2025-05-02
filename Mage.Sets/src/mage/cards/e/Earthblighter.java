@@ -37,9 +37,9 @@ public final class Earthblighter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{B}, {tap}, Sacrifice a Goblin: Destroy target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

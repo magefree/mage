@@ -75,13 +75,12 @@ class AzamukiTreacheryIncarnate extends TokenImpl {
 
         // Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainControlTargetEffect(Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
+    private AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
         super(token);
     }
 

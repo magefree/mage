@@ -47,10 +47,10 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Endless One", 1); // {X}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
-        // cast with X=3, but double it
+        // cast with X=3, but double it twice
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Endless One");
-        setChoice(playerA, "Unbound Flourishing"); // choose replacement effects
         setChoice(playerA, "X=3");
+        setChoice(playerA, "Whenever you cast a permanent spell"); // x2 triggers from Unbound Flourishing
         checkPermanentCounters("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Endless One", CounterType.P1P1, 3 * 2 * 2);
 
         setStrictChooseMode(true);
@@ -59,7 +59,7 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_OnCastInstantOrSourcery_MustCopy() {
+    public void test_OnCastInstantOrSorcery_MustCopy() {
         addCard(Zone.BATTLEFIELD, playerA, "Unbound Flourishing", 1);
         //
         // Banefire deals X damage to any target.
@@ -156,6 +156,36 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         setChoice(playerA, true); // change target
         addTarget(playerA, playerB); // change to B
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20 - 3); // original damage
+        checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerB, 20 - 3); // copy damage
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_OnActivatedAbility_MustCopy2Counter() {
+        addCard(Zone.BATTLEFIELD, playerA, "Unbound Flourishing", 1);
+        //
+        // {X}{R}, {T}, Sacrifice Cinder Elemental: It deals X damage to any target.
+        addCard(Zone.BATTLEFIELD, playerA, "Cinder Elemental", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        //
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        addCard(Zone.HAND, playerB, "Stifle", 1);
+
+        // activate with X=3 and make copy with another target, not double X
+        checkLife("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{R}", playerA);
+        setChoice(playerA, "X=3");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Stifle"); //Counter the original ability, copy must still work
+        addTarget(playerB, "stack ability ({X}{R}, {T}, Sacrifice");
+
+        setChoice(playerA, true); // change target
+        addTarget(playerA, playerB); // change to B
+        checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerA, 20); // original damage is countered
         checkLife("after", 1, PhaseStep.BEGIN_COMBAT, playerB, 20 - 3); // copy damage
 
         setStrictChooseMode(true);

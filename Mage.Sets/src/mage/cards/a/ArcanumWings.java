@@ -34,7 +34,7 @@ public final class ArcanumWings extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
 
         // Aura swap {2}{U}
         this.addAbility(new AuraSwapAbility(new ManaCostsImpl<>("{2}{U}")));

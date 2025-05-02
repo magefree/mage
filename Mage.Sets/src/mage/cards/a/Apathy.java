@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -43,7 +43,7 @@ public final class Apathy extends CardImpl {
 
         // At the beginning of the upkeep of enchanted creature’s controller, that player may discard a card at random. If the player does, untap that creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ApathyEffect(), TargetController.CONTROLLER_ATTACHED_TO, false
+                TargetController.CONTROLLER_ATTACHED_TO, new ApathyEffect(), false
         ));
     }
 

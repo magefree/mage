@@ -21,7 +21,7 @@ public final class MastersCall extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MyrToken(), 2));
     }
 
-    public MastersCall (final MastersCall card) {
+    private MastersCall(final MastersCall card) {
         super(card);
     }
 

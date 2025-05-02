@@ -4,7 +4,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
@@ -38,10 +38,10 @@ public final class BlessingOfLeeches extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you lose 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
 
         // {0}: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),new GenericManaCost(0)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateAttachedEffect(AttachmentType.AURA),new GenericManaCost(0)));
     }
 
     private BlessingOfLeeches(final BlessingOfLeeches card) {
@@ -53,4 +53,3 @@ public final class BlessingOfLeeches extends CardImpl {
         return new BlessingOfLeeches(this);
     }
 }
-

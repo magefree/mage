@@ -11,6 +11,7 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -19,6 +20,9 @@ import java.util.stream.Collectors;
  * @author Styxo
  */
 public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
+
+    // retrieve the number of attackers in triggered effects with getValue
+    public static final String VALUEKEY_NUMBER_ATTACKERS = "number_attackers";
 
     private final FilterPermanent filter;
     private final int minAttackers;
@@ -44,12 +48,8 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         if (minAttackers == 1 && StaticFilters.FILTER_PERMANENT_CREATURES.equals(filter)) {
             setTriggerPhrase("Whenever you attack, ");
         } else {
-            StringBuilder sb = new StringBuilder("Whenever you attack with ");
-            sb.append(CardUtil.numberToText(minAttackers));
-            sb.append(" or more ");
-            sb.append(filter.getMessage());
-            sb.append(", ");
-            setTriggerPhrase(sb.toString());
+            setTriggerPhrase("Whenever you attack with " + CardUtil.numberToText(minAttackers)
+                    + " or more " + filter.getMessage() + ", ");
         }
     }
 
@@ -86,9 +86,9 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         if (attackers.size() < minAttackers) {
             return false;
         }
-        getEffects().setValue("attackers", attackers.size());
+        getEffects().setValue(VALUEKEY_NUMBER_ATTACKERS, attackers.size());
         if (setTargetPointer) {
-            getEffects().setTargetPointer(new FixedTargets(attackers, game));
+            getEffects().setTargetPointer(new FixedTargets(new ArrayList<>(attackers), game));
         }
         return true;
     }

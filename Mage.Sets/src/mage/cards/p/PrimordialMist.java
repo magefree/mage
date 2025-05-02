@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -11,12 +11,7 @@ import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
@@ -41,12 +36,12 @@ public final class PrimordialMist extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
         // At the beginning of your end step, you may manifest the top card of your library.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ManifestEffect(1), TargetController.YOU, true));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new ManifestEffect(1), true));
 
         // Exile a face-down permanent you control face-up: You may play that card this turn
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        target.withNotTarget(true);
+        Ability ability = new SimpleActivatedAbility(
                 new PrimordialMistCastFromExileEffect(),
                 new PrimordialMistCost(target));
         this.addAbility(ability);
@@ -68,10 +63,10 @@ class PrimordialMistCost extends CostImpl {
 
     public PrimordialMistCost(TargetPermanent target) {
         this.target = target;
-        this.text = "Exile a face-down permanent you control face-up";
+        this.text = "Exile a face-down permanent you control face up";
     }
 
-    public PrimordialMistCost(final PrimordialMistCost cost) {
+    private PrimordialMistCost(final PrimordialMistCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }
@@ -119,12 +114,12 @@ class PrimordialMistCost extends CostImpl {
 
 class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
 
-    public PrimordialMistCastFromExileEffect() {
+    PrimordialMistCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Exile a face-down permanent you control face up: You may play that card this turn.";
+        staticText = "You may play that card this turn.";
     }
 
-    public PrimordialMistCastFromExileEffect(final PrimordialMistCastFromExileEffect effect) {
+    private PrimordialMistCastFromExileEffect(final PrimordialMistCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -141,7 +136,7 @@ class PrimordialMistCastFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         return source.isControlledBy(affectedControllerId)
-                && (game.getCard(targetPointer.getFirst(game, source)) != null)
-                && objectId == targetPointer.getFirst(game, source);
+                && (game.getCard(getTargetPointer().getFirst(game, source)) != null)
+                && objectId == getTargetPointer().getFirst(game, source);
     }
 }

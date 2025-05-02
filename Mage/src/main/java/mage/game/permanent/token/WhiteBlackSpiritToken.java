@@ -21,7 +21,7 @@ public final class WhiteBlackSpiritToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    protected WhiteBlackSpiritToken(final WhiteBlackSpiritToken token) {
+    private WhiteBlackSpiritToken(final WhiteBlackSpiritToken token) {
         super(token);
     }
 

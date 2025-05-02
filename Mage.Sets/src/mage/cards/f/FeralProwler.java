@@ -21,7 +21,7 @@ public final class FeralProwler extends CardImpl {
         addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public FeralProwler(final FeralProwler feralProwler) {
+    private FeralProwler(final FeralProwler feralProwler) {
         super(feralProwler);
     }
 

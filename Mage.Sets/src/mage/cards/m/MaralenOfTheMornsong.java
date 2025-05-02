@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -32,10 +32,10 @@ public final class MaralenOfTheMornsong extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Players can't draw cards.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaralenOfTheMornsongEffect()));
+        this.addAbility(new SimpleStaticAbility(new MaralenOfTheMornsongEffect()));
 
         // At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles their library.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new MaralenOfTheMornsongEffect2(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.EACH_PLAYER, new MaralenOfTheMornsongEffect2(), false));
 
     }
 
@@ -51,18 +51,13 @@ public final class MaralenOfTheMornsong extends CardImpl {
 
 class MaralenOfTheMornsongEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public MaralenOfTheMornsongEffect() {
+    MaralenOfTheMornsongEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral, false, false);
         staticText = "Players can't draw cards";
     }
 
-    public MaralenOfTheMornsongEffect(final MaralenOfTheMornsongEffect effect) {
+    private MaralenOfTheMornsongEffect(final MaralenOfTheMornsongEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -89,7 +84,7 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
         staticText = "that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles";
     }
 
-    public MaralenOfTheMornsongEffect2(final MaralenOfTheMornsongEffect2 effect) {
+    private MaralenOfTheMornsongEffect2(final MaralenOfTheMornsongEffect2 effect) {
         super(effect);
     }
 

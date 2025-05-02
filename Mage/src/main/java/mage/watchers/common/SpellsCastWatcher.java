@@ -24,6 +24,9 @@ public class SpellsCastWatcher extends Watcher {
     private final Map<UUID, List<Spell>> spellsCastFromGraveyard = new HashMap<>();
     private int nonCreatureSpells;
 
+    /**
+     * Game default watcher
+     */
     public SpellsCastWatcher() {
         super(WatcherScope.GAME);
     }
@@ -91,7 +94,7 @@ public class SpellsCastWatcher extends Watcher {
     }
 
     public int getCount(UUID playerId) {
-        return spellsCast.getOrDefault(playerId, new ArrayList<>()).size();
+        return spellsCast.getOrDefault(playerId, Collections.emptyList()).size();
     }
 
 }

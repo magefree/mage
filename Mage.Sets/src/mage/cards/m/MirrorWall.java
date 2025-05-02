@@ -30,7 +30,7 @@ public final class MirrorWall extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {W}: Mirror Wall can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{W}")));
     }

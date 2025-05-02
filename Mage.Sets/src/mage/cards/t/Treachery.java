@@ -38,7 +38,7 @@ public final class Treachery extends CardImpl {
         // When Treachery enters the battlefield, untap up to five lands.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapLandsEffect(5)));
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
     }
 

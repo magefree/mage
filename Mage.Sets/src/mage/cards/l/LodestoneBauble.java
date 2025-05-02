@@ -39,7 +39,7 @@ public final class LodestoneBauble extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // {1}, {T}, Sacrifice Lodestone Bauble: Put up to four target basic land cards from a player's graveyard on top of their library in any order. That player draws a card at the beginning of the next turn's upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LodestoneBaubleEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new LodestoneBaubleEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new LodestoneBaubleDrawEffect());
@@ -64,7 +64,7 @@ class LodestoneBaubleTarget extends TargetCardInGraveyard {
         super(0, 4, new FilterBasicLandCard("basic land cards from a player's graveyard"));
     }
 
-    public LodestoneBaubleTarget(final LodestoneBaubleTarget target) {
+    private LodestoneBaubleTarget(final LodestoneBaubleTarget target) {
         super(target);
     }
 
@@ -93,7 +93,7 @@ class LodestoneBaubleEffect extends OneShotEffect {
         this.staticText = "Put up to four target basic land cards from a player's graveyard on top of their library in any order";
     }
 
-    LodestoneBaubleEffect(final LodestoneBaubleEffect effect) {
+    private LodestoneBaubleEffect(final LodestoneBaubleEffect effect) {
         super(effect);
     }
 
@@ -119,12 +119,12 @@ class LodestoneBaubleEffect extends OneShotEffect {
 
 class LodestoneBaubleDrawEffect extends OneShotEffect {
 
-    public LodestoneBaubleDrawEffect() {
+    LodestoneBaubleDrawEffect() {
         super(Outcome.DrawCard);
         staticText = "That player draws a card at the beginning of the next turn's upkeep";
     }
 
-    public LodestoneBaubleDrawEffect(final LodestoneBaubleDrawEffect effect) {
+    private LodestoneBaubleDrawEffect(final LodestoneBaubleDrawEffect effect) {
         super(effect);
     }
 

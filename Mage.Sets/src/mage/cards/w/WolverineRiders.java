@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class WolverineRiders extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.ELF, "another Elf");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -42,13 +42,12 @@ public final class WolverineRiders extends CardImpl {
 
         // At the beginning of each upkeep, create a 1/1 green Elf Warrior creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new ElfWarriorToken()), TargetController.EACH_PLAYER, false
+                TargetController.ANY, new CreateTokenEffect(new ElfWarriorToken()), false
         ));
 
-        // Whenever another Elf enters the battlefield under your control, you gain life equal to its toughness.
+        // Whenever another Elf you control enters, you gain life equal to its toughness.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new GainLifeEffect(WolverineRidersValue.instance), filter, "Whenever another Elf " +
-                "enters the battlefield under your control, you gain life equal to its toughness."
+                new GainLifeEffect(WolverineRidersValue.instance, "you gain life equal to its toughness"), filter
         ));
     }
 

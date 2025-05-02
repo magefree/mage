@@ -30,7 +30,7 @@ public final class SeasonedTactician extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {3}, Exile the top four cards of your library: The next time a source of your choice would deal damage to you this turn, prevent that damage.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn),
+        Ability ability = new SimpleActivatedAbility(new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn),
             new ManaCostsImpl<>("{3}"));
         ability.addCost(new ExileFromTopOfLibraryCost(4));
         this.addAbility(ability);

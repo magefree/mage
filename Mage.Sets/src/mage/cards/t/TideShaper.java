@@ -52,7 +52,7 @@ public final class TideShaper extends CardImpl {
         // When Tide Shaper enters the battlefield, if it was kicked, target land becomes an Island for as long as Tide Shaper remains on the battlefield.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TideShaperEffect()),
-                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
                 "target land becomes an Island for as long as {this} remains on the battlefield."
         );
         ability.addTarget(new TargetLandPermanent());
@@ -92,11 +92,10 @@ class TideShaperEffect extends BecomesBasicLandTargetEffect {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         if (source.getSourcePermanentIfItStillExists(game) == null) {
             discard();
-            return;
         }
-        super.init(source, game);
     }
 
     @Override

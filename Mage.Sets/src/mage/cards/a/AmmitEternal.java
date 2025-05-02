@@ -33,7 +33,7 @@ public final class AmmitEternal extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.M1M1), false));
     }
 
-    public AmmitEternal(final AmmitEternal ammitEternal) {
+    private AmmitEternal(final AmmitEternal ammitEternal) {
         super(ammitEternal);
     }
 

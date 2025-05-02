@@ -41,9 +41,8 @@ public final class RazakethTheFoulblooded extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Pay 2 life, Sacrifice another creature: Search your library for a card and put that card into your hand. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true), new PayLifeCost(2));
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false)));
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true), new PayLifeCost(2));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

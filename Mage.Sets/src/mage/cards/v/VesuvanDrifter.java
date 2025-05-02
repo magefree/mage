@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
@@ -40,7 +40,7 @@ public final class VesuvanDrifter extends CardImpl {
 
         // At the beginning of each combat, you may reveal the top card of your library. If you reveal a creature card this way, Vesuvan Drifter becomes a copy of that card until end of turn, except it has flying.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new VesuvanDrifterEffect(), TargetController.ANY, true
+                TargetController.ANY, new VesuvanDrifterEffect(), true
         ));
     }
 

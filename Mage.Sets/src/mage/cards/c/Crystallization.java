@@ -30,11 +30,11 @@ public final class Crystallization extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 
         // When enchanted creature becomes the target of a spell or ability, exile that creature.
         this.addAbility(new BecomesTargetAttachedTriggeredAbility(new ExileAttachedEffect().setText("exile that creature")));

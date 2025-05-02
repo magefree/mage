@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -13,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -23,11 +21,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class TarPitcher extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
-
-    static {
-        filter.add(SubType.GOBLIN.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.GOBLIN, "Goblin");
 
     public TarPitcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
@@ -37,8 +31,8 @@ public final class TarPitcher extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // {tap}, Sacrifice a Goblin: Tar Pitcher deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

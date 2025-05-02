@@ -28,13 +28,13 @@ public final class CephalidSnitch extends CardImpl {
 
     public CephalidSnitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Sacrifice Cephalid Snitch: Target creature loses protection from black until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CephalidSnitchEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CephalidSnitchEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -55,7 +55,7 @@ class CephalidSnitchEffect extends LoseAbilityTargetEffect{
         staticText = "Target creature loses protection from black until end of turn.";
     }
 
-    public CephalidSnitchEffect(final CephalidSnitchEffect effect) {
+    private CephalidSnitchEffect(final CephalidSnitchEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class CephalidSnitchEffect extends LoseAbilityTargetEffect{
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             List<Ability> toRemove = new ArrayList<>();
             //Go through protection abilities and sort out any containing black

@@ -28,7 +28,7 @@ public class GlowText extends JLabel {
     private Color glowColor;
     private boolean wrap;
     private int lineCount = 0;
-    private static final SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE;
+    private static final SoftValuesLoadingCache<Key, BufferedImage> GLOW_TEXT_IMAGES_CACHE;
 
     private static final class Key {
 
@@ -122,7 +122,7 @@ public class GlowText extends JLabel {
     }
 
     static {
-        IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(GlowText::createGlowImage));
+        GLOW_TEXT_IMAGES_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(GlowText::createGlowImage));
     }
 
     public void setGlow(Color glowColor, int size, float intensity) {
@@ -153,59 +153,64 @@ public class GlowText extends JLabel {
     }
 
     public BufferedImage getGlowImage() {
-        return IMAGE_CACHE.getOrThrow(new Key(getWidth(), getHeight(), getText(), getFont(), getForeground(), glowSize, glowIntensity, glowColor, wrap));
+        return GLOW_TEXT_IMAGES_CACHE.getOrThrow(new Key(getWidth(), getHeight(), getText(), getFont(), getForeground(), glowSize, glowIntensity, glowColor, wrap));
     }
 
     private static BufferedImage createGlowImage(Key key) {
         Dimension size = new Dimension(key.width, key.height);
         BufferedImage image = GraphicsUtilities.createCompatibleTranslucentImage(size.width, size.height);
-        Graphics2D g2d = image.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        Graphics2D g2 = image.createGraphics();
+        try {
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        int textX = 0, textY = 0;
-        int wrapWidth = Math.max(0, key.wrap ? size.width - key.glowSize : Integer.MAX_VALUE);
+            int textX = 0, textY = 0;
+            int wrapWidth = Math.max(0, key.wrap ? size.width - key.glowSize : Integer.MAX_VALUE);
 
-        AttributedString attributedString = new AttributedString(key.text);
-        attributedString.addAttribute(TextAttribute.FONT, key.getFont());
-        AttributedCharacterIterator charIterator = attributedString.getIterator();
-        FontRenderContext fontContext = g2d.getFontRenderContext();
+            AttributedString attributedString = new AttributedString(key.text);
+            attributedString.addAttribute(TextAttribute.FONT, key.getFont());
+            AttributedCharacterIterator charIterator = attributedString.getIterator();
+            FontRenderContext fontContext = g2.getFontRenderContext();
 
-        LineBreakMeasurer measurer = new LineBreakMeasurer(charIterator, BreakIterator.getWordInstance(Locale.ENGLISH), fontContext);
-        int lineCount = 0;
-        while (measurer.getPosition() < charIterator.getEndIndex()) {
-            //TextLayout textLayout = measurer.nextLayout(wrapWidth);
-            lineCount++;
-            if (lineCount > 2) {
-                break;
+            LineBreakMeasurer measurer = new LineBreakMeasurer(charIterator, BreakIterator.getWordInstance(Locale.ENGLISH), fontContext);
+            int lineCount = 0;
+            while (measurer.getPosition() < charIterator.getEndIndex()) {
+                //TextLayout textLayout = measurer.nextLayout(wrapWidth);
+                lineCount++;
+                if (lineCount > 2) {
+                    break;
+                }
             }
-        }
-        charIterator.first();
-        // Use char wrap if word wrap would cause more than two lines of text.
-        if (lineCount > 2) {
-            measurer = new LineBreakMeasurer(charIterator, BreakIterator.getCharacterInstance(Locale.ENGLISH), fontContext);
-        } else {
-            measurer.setPosition(0);
-        }
-        while (measurer.getPosition() < charIterator.getEndIndex()) {
-            TextLayout textLayout = measurer.nextLayout(wrapWidth);
-            float ascent = textLayout.getAscent();
-            textY += ascent; // Move down to baseline.
+            charIterator.first();
+            // Use char wrap if word wrap would cause more than two lines of text.
+            if (lineCount > 2) {
+                measurer = new LineBreakMeasurer(charIterator, BreakIterator.getCharacterInstance(Locale.ENGLISH), fontContext);
+            } else {
+                measurer.setPosition(0);
+            }
+            while (measurer.getPosition() < charIterator.getEndIndex()) {
+                TextLayout textLayout = measurer.nextLayout(wrapWidth);
+                float ascent = textLayout.getAscent();
+                textY += ascent; // Move down to baseline.
 
-            g2d.setColor(key.glowColor);
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
-            int glowSize = key.glowSize;
-            textLayout.draw(g2d, textX + glowSize / 2 + 1, textY + glowSize / 2 - 1);
-            textLayout.draw(g2d, textX + glowSize / 2 + 1, textY + glowSize / 2 + 1);
-            textLayout.draw(g2d, textX + glowSize / 2 - 1, textY + glowSize / 2 - 1);
-            textLayout.draw(g2d, textX + glowSize / 2 - 1, textY + glowSize / 2 + 1);
+                g2.setColor(key.glowColor);
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+                int glowSize = key.glowSize;
+                textLayout.draw(g2, textX + glowSize / 2 + 1, textY + glowSize / 2 - 1);
+                textLayout.draw(g2, textX + glowSize / 2 + 1, textY + glowSize / 2 + 1);
+                textLayout.draw(g2, textX + glowSize / 2 - 1, textY + glowSize / 2 - 1);
+                textLayout.draw(g2, textX + glowSize / 2 - 1, textY + glowSize / 2 + 1);
 
-            g2d.setColor(key.color);
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-            textLayout.draw(g2d, textX + glowSize / 2, textY + glowSize / 2);
+                g2.setColor(key.color);
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+                textLayout.draw(g2, textX + glowSize / 2, textY + glowSize / 2);
 
-            textY += textLayout.getDescent() + textLayout.getLeading(); // Move down to top of next line.
+                textY += textLayout.getDescent() + textLayout.getLeading(); // Move down to top of next line.
+            }
+        } finally {
+            g2.dispose();
         }
+
         return image;
     }
 

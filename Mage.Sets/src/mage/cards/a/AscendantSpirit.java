@@ -39,8 +39,7 @@ public final class AscendantSpirit extends CardImpl {
         ability.addEffect(new SetBasePowerToughnessSourceEffect(
                 2,
                 3,
-                Duration.WhileOnBattlefield,
-                SubLayer.SetPT_7b
+                Duration.Custom
         ).setText("with base power and toughness 2/3"));
         this.addAbility(ability);
 
@@ -93,7 +92,7 @@ class AscendantSpiritWarriorEffect extends OneShotEffect {
                 Duration.Custom, SubType.SPIRIT, SubType.WARRIOR, SubType.ANGEL
         ), source);
         game.addEffect(new SetBasePowerToughnessSourceEffect(
-                4, 4, Duration.Custom, SubLayer.SetPT_7b
+                4, 4, Duration.Custom
         ), source);
         return true;
     }

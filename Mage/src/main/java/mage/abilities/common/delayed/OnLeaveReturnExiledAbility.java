@@ -40,6 +40,7 @@ public class OnLeaveReturnExiledAbility extends DelayedTriggeredAbility {
         super(new ReturnExiledPermanentsEffect(zone), Duration.OneUse);
         this.usesStack = false;
         this.setRuleVisible(false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     protected OnLeaveReturnExiledAbility(final OnLeaveReturnExiledAbility ability) {

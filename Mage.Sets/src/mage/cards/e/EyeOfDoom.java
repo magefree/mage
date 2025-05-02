@@ -42,7 +42,7 @@ public final class EyeOfDoom extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EyeOfDoomEffect(), false));
 
         // {2}, {tap}, Sacrifice Eye of Doom: Destroy each permanent with a doom counter on it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DestroyAllEffect(filter), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -60,12 +60,12 @@ public final class EyeOfDoom extends CardImpl {
 
 class EyeOfDoomEffect extends OneShotEffect {
 
-    public EyeOfDoomEffect() {
+    EyeOfDoomEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player chooses a nonland permanent and puts a doom counter on it";
     }
 
-    public EyeOfDoomEffect(final EyeOfDoomEffect effect) {
+    private EyeOfDoomEffect(final EyeOfDoomEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class EyeOfDoomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Map<UUID,Permanent>permanents=new HashMap<>();
         Target target = new TargetNonlandPermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         PlayerList playerList = game.getPlayerList().copy();
         playerList.setCurrent(game.getActivePlayerId());
         Player player = game.getPlayer(game.getActivePlayerId());

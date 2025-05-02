@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.TokensCreatedThisTurnCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -30,9 +30,9 @@ public final class ThalisseReverentMedium extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of each end step, create X 1/1 white Spirit creature tokens with flying, where X is the number of tokens you created this turn.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new CreateTokenEffect(
                 new SpiritWhiteToken(), TokensCreatedThisTurnCount.instance
-        ), TargetController.ANY, false).addHint(TokensCreatedThisTurnCount.getHint()), new CreatedTokenWatcher());
+        ), false).addHint(TokensCreatedThisTurnCount.getHint()), new CreatedTokenWatcher());
     }
 
     private ThalisseReverentMedium(final ThalisseReverentMedium card) {

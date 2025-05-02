@@ -51,7 +51,7 @@ public final class HopeOfGhirapur extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice Hope of Ghirapur: Until your next turn, target player who was dealt combat damage by Hope of Ghirapur this turn can't cast noncreature spells.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HopeOfGhirapurCantCastEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new HopeOfGhirapurCantCastEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability, new HopeOfGhirapurCombatDamageWatcher());
     }
@@ -68,23 +68,18 @@ public final class HopeOfGhirapur extends CardImpl {
 
 class HopeOfGhirapurCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public HopeOfGhirapurCantCastEffect() {
+    HopeOfGhirapurCantCastEffect() {
         super(Duration.UntilYourNextTurn, Outcome.Benefit);
         staticText = "Until your next turn, target player who was dealt combat damage by {this} this turn can't cast noncreature spells";
     }
 
-    public HopeOfGhirapurCantCastEffect(final HopeOfGhirapurCantCastEffect effect) {
+    private HopeOfGhirapurCantCastEffect(final HopeOfGhirapurCantCastEffect effect) {
         super(effect);
     }
 
     @Override
     public HopeOfGhirapurCantCastEffect copy() {
         return new HopeOfGhirapurCantCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

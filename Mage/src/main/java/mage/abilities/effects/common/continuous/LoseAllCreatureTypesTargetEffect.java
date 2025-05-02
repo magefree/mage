@@ -43,6 +43,7 @@ public class LoseAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target " + mode.getTargets().get(0).getTargetName() + " loses all creature types " + duration.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") + " loses all creature types"
+                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 }

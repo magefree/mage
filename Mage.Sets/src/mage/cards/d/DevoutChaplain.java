@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
@@ -25,7 +24,7 @@ import java.util.UUID;
  * @author noxx
  */
 public final class DevoutChaplain extends CardImpl {
-    private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
+    private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Humans you control");
 
     static {
         humanFilter.add(TappedPredicate.UNTAPPED);
@@ -42,7 +41,7 @@ public final class DevoutChaplain extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Tap two untapped Humans you control: Exile target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(2, 2, humanFilter, false)));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);

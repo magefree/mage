@@ -62,7 +62,7 @@ class TeachingsOfTheArchaicsEffect extends OneShotEffect {
             return false;
         }
         int diff = game
-                .getOpponents(source.getControllerId())
+                .getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

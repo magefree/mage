@@ -42,7 +42,7 @@ public final class FlowstoneSculpture extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}, Discard a card: Put a +1/+1 counter on Flowstone Sculpture or Flowstone Sculpture gains flying, first strike, or trample.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlowstoneSculptureEffect(), new ManaCostsImpl<>("{2}"));
+        Ability ability = new SimpleActivatedAbility(new FlowstoneSculptureEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }
@@ -73,7 +73,7 @@ class FlowstoneSculptureEffect extends OneShotEffect {
         staticText = "Put a +1/+1 counter on {this} or {this} gains flying, first strike, or trample.";
     }
 
-    public FlowstoneSculptureEffect(final FlowstoneSculptureEffect effect) {
+    private FlowstoneSculptureEffect(final FlowstoneSculptureEffect effect) {
         super(effect);
     }
 

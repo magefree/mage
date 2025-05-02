@@ -26,10 +26,10 @@ public final class CavernThoctar extends CardImpl {
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")));
     }
 
-    public CavernThoctar (final CavernThoctar card) {
+    private CavernThoctar(final CavernThoctar card) {
         super(card);
     }
 

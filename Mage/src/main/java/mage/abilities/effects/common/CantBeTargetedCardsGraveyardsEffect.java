@@ -31,11 +31,6 @@ public class CantBeTargetedCardsGraveyardsEffect extends ContinuousRuleModifying
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TARGET;
     }
@@ -46,7 +41,7 @@ public class CantBeTargetedCardsGraveyardsEffect extends ContinuousRuleModifying
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (targetCard != null && stackObject != null) {
             Zone zone = game.getState().getZone(targetCard.getId());
-            if (zone != null && zone == Zone.GRAVEYARD) {
+            if (zone == Zone.GRAVEYARD) {
                 return true;
             }
         }

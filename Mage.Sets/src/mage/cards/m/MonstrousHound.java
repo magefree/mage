@@ -33,13 +33,11 @@ public final class MonstrousHound extends CardImpl {
         // Monstrous Hound can't attack unless you control more lands than defending player.
         Effect effect = new CantAttackUnlessControllerControlsMoreLandsEffect();
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 effect.setText("{this} can't attack unless you control more lands than defending player")));
 
         // Monstrous Hound can't block unless you control more lands than attacking player.
         Effect effect2 = new CantBlockUnlessControllerControlsMoreLandsEffect();
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 effect2.setText("{this} can't block unless you control more lands than attacking player")));
 
     }
@@ -60,7 +58,7 @@ class CantAttackUnlessControllerControlsMoreLandsEffect extends RestrictionEffec
         super(Duration.WhileOnBattlefield);
     }
 
-    CantAttackUnlessControllerControlsMoreLandsEffect(final CantAttackUnlessControllerControlsMoreLandsEffect effect) {
+    private CantAttackUnlessControllerControlsMoreLandsEffect(final CantAttackUnlessControllerControlsMoreLandsEffect effect) {
         super(effect);
     }
 
@@ -108,7 +106,7 @@ class CantBlockUnlessControllerControlsMoreLandsEffect extends RestrictionEffect
         super(Duration.WhileOnBattlefield);
     }
 
-    CantBlockUnlessControllerControlsMoreLandsEffect(final CantBlockUnlessControllerControlsMoreLandsEffect effect) {
+    private CantBlockUnlessControllerControlsMoreLandsEffect(final CantBlockUnlessControllerControlsMoreLandsEffect effect) {
         super(effect);
     }
 

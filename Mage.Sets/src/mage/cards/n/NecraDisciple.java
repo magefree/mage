@@ -30,7 +30,7 @@ public final class NecraDisciple extends CardImpl {
         Ability firstAbility = new AnyColorManaAbility(new ColoredManaCost(ColoredManaSymbol.G));
         firstAbility.addCost(new TapSourceCost());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability secondAbility = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
         secondAbility.addCost(new TapSourceCost());
         secondAbility.addTarget(new TargetAnyTarget());
         this.addAbility(secondAbility);

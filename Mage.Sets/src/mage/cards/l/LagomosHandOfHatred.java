@@ -3,7 +3,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,7 +38,7 @@ public final class LagomosHandOfHatred extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of combat on your turn, create a 2/1 red Elemental creature token with trample and haste. Sacrifice it at the beginning of the next end step.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new LagomosHandOfHatredEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new LagomosHandOfHatredEffect()));
 
         // {T}: Search your library for a card, put it into your hand, then shuffle. Activate only if five or more creatures died this turn.
         this.addAbility(new ConditionalActivatedAbility(
@@ -61,7 +61,7 @@ public final class LagomosHandOfHatred extends CardImpl {
 
 class LagomosHandOfHatredEffect extends OneShotEffect {
 
-    public LagomosHandOfHatredEffect() {
+    LagomosHandOfHatredEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a 2/1 red Elemental creature token with trample and haste. Sacrifice it at the beginning of the next end step.";
     }

@@ -37,7 +37,7 @@ public final class EnsoulArtifact extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
             new BecomesCreatureAttachedEffect(new CreatureToken(5, 5), "Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types", Duration.WhileOnBattlefield)
         ));
 

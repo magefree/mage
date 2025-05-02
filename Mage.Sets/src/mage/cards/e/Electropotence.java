@@ -27,7 +27,7 @@ public final class Electropotence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
 
-        // Whenever a creature enters the battlefield under your control, you may pay {2}{R}. If you do, that creature deals damage equal to its power to any target.
+        // Whenever a creature you control enters, you may pay {2}{R}. If you do, that creature deals damage equal to its power to any target.
         Ability ability = new ElectropotenceTriggeredAbility();
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -49,7 +49,7 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ElectropotenceEffect());
     }
 
-    public ElectropotenceTriggeredAbility(ElectropotenceTriggeredAbility ability) {
+    private ElectropotenceTriggeredAbility(final ElectropotenceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -71,7 +71,7 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under your control, you may pay {2}{R}. If you do, that creature deals damage equal to its power to any target.";
+        return "Whenever a creature you control enters, you may pay {2}{R}. If you do, that creature deals damage equal to its power to any target.";
     }
 
     @Override
@@ -82,11 +82,11 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class ElectropotenceEffect extends OneShotEffect {
 
-    public ElectropotenceEffect() {
+    ElectropotenceEffect() {
         super(Outcome.Damage);
     }
 
-    public ElectropotenceEffect(final ElectropotenceEffect effect) {
+    private ElectropotenceEffect(final ElectropotenceEffect effect) {
         super(effect);
     }
 

@@ -30,7 +30,7 @@ public final class SteelcladSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Steelclad Serpent can't attack unless you control another artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelcladSerpentEffect()));
+        this.addAbility(new SimpleStaticAbility(new SteelcladSerpentEffect()));
     }
 
     private SteelcladSerpent(final SteelcladSerpent card) {
@@ -57,7 +57,7 @@ class SteelcladSerpentEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you control another artifact";
     }
 
-    public SteelcladSerpentEffect(final SteelcladSerpentEffect effect) {
+    private SteelcladSerpentEffect(final SteelcladSerpentEffect effect) {
         super(effect);
     }
 

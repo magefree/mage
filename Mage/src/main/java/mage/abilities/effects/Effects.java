@@ -105,6 +105,7 @@ public class Effects extends ArrayList<Effect> {
         // add punctuation to very last rule.
         if (lastRule != null && lastRule.length() > 3
                 && !lastRule.endsWith(".")
+                && !lastRule.endsWith("!")
                 && !lastRule.endsWith("\"")
                 && !lastRule.endsWith(".]")
                 && !lastRule.startsWith("<b>LEVEL ")

@@ -7,7 +7,7 @@ import mage.deck.Modern;
 import mage.deck.Standard;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.serverside.base.MageTestBase;
+import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ import static org.mage.test.serverside.deck.DeckValidationUtil.testDeckValid;
 /**
  * @author LevelX2
  */
-public class DeckValidatorTest extends MageTestBase {
+public class DeckValidatorTest extends MageTestPlayerBase {
 
     @Test
     public void testStandardDeckCardsAmountValid() {
@@ -305,7 +305,7 @@ public class DeckValidatorTest extends MageTestBase {
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new DeckValidationUtil.CardNameAmount("Green Sun's Zenith", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Grief", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);

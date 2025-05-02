@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPlayer;
 
@@ -40,7 +39,7 @@ public final class JushiApprentice extends CardImpl {
         this.flipCardName = "Tomoya the Revealer";
 
         // {2}{U}, {tap}: Draw a card. If you have nine or more cards in hand, flip Jushi Apprentice.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new TomoyaTheRevealer()), new CardsInHandCondition(ComparisonType.MORE_THAN, 8),
                     "If you have nine or more cards in hand, flip {this}"));
@@ -70,12 +69,12 @@ class TomoyaTheRevealer extends TokenImpl {
         toughness = new MageInt(3);
 
         // {3}{U}{U},{T} : Target player draws X cards, where X is the number of cards in your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(CardsInControllerHandCount.instance), new ManaCostsImpl<>("{3}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(CardsInControllerHandCount.ANY), new ManaCostsImpl<>("{3}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
-    public TomoyaTheRevealer(final TomoyaTheRevealer token) {
+    private TomoyaTheRevealer(final TomoyaTheRevealer token) {
         super(token);
     }
 

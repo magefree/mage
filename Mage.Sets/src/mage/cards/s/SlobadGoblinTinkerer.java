@@ -44,7 +44,7 @@ public final class SlobadGoblinTinkerer extends CardImpl {
         // Sacrifice an artifact: Target artifact is indestructible this turn.
         Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(filterControlled))
+                new SacrificeTargetCost(filterControlled)
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

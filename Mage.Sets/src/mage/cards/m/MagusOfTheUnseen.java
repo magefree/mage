@@ -48,7 +48,7 @@ public final class MagusOfTheUnseen extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{U}, {tap}: Untap target artifact an opponent controls and gain control of it until end of turn. It gains haste until end of turn. When you lose control of the artifact, tap it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent(filter));
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
@@ -77,7 +77,7 @@ class MagusOfTheUnseenDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new TapTargetEffect(), Duration.EndOfGame, true); // effect can last over turns end, if you still control the target but only one time
     }
 
-    MagusOfTheUnseenDelayedTriggeredAbility(MagusOfTheUnseenDelayedTriggeredAbility ability) {
+    private MagusOfTheUnseenDelayedTriggeredAbility(final MagusOfTheUnseenDelayedTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,12 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PutCards;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -47,11 +45,9 @@ public final class DreamshaperShaman extends CardImpl {
                 ),
                 new CompositeCost(
                         new ManaCostsImpl<>("{2}{R}"),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
-                        )), "pay {2}{R} and sacrifice a nonland permanent"
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND), "pay {2}{R} and sacrifice a nonland permanent"
                 )
-        ), TargetController.YOU, false));
+        )));
     }
 
     private DreamshaperShaman(final DreamshaperShaman card) {

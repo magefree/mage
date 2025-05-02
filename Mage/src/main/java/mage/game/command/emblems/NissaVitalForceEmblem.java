@@ -1,22 +1,22 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 
 /**
  * @author spjspj
  */
 public final class NissaVitalForceEmblem extends Emblem {
-    // You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."
+    // You get an emblem with "Whenever a land you control enters, you may draw a card."
 
     public NissaVitalForceEmblem() {
         super("Emblem Nissa");
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(1), new FilterControlledLandPermanent("a land"),
-                true, null, true);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.COMMAND,
+                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_LAND_A, true);
         getAbilities().add(ability);
     }
 

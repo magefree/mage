@@ -48,7 +48,7 @@ public final class MuldrothaTheGravetide extends CardImpl {
         this.toughness = new MageInt(6);
 
         // During each of your turns, you may play up to one permanent card of each permanent type from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MuldrothaTheGravetideCastFromGraveyardEffect())
+        this.addAbility(new SimpleStaticAbility(new MuldrothaTheGravetideCastFromGraveyardEffect())
                 .setIdentifier(MageIdentifier.MuldrothaTheGravetideWatcher), 
                 new MuldrothaTheGravetideWatcher());
     }
@@ -65,13 +65,13 @@ public final class MuldrothaTheGravetide extends CardImpl {
 
 class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
 
-    public MuldrothaTheGravetideCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit, true);
+    MuldrothaTheGravetideCastFromGraveyardEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "During each of your turns, you may play a land and cast a permanent spell of each permanent type from your graveyard. "
                 + "<i>(If a card has multiple permanent types, choose one as you play it.)</i>";
     }
 
-    public MuldrothaTheGravetideCastFromGraveyardEffect(final MuldrothaTheGravetideCastFromGraveyardEffect effect) {
+    private MuldrothaTheGravetideCastFromGraveyardEffect(final MuldrothaTheGravetideCastFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -146,8 +146,8 @@ class MuldrothaTheGravetideWatcher extends Watcher {
 
     private void addPermanentTypes(GameEvent event, Card mageObject, Game game) {
         if (mageObject != null 
-                && event.getAdditionalReference() != null 
-                && MageIdentifier.MuldrothaTheGravetideWatcher.equals(event.getAdditionalReference().getApprovingAbility().getIdentifier())) {
+                && event.getApprovingObject() != null
+                && MageIdentifier.MuldrothaTheGravetideWatcher.equals(event.getApprovingObject().getApprovingAbility().getIdentifier())) {
             UUID playerId = null;
             if (mageObject instanceof Spell) {
                 playerId = ((Spell) mageObject).getControllerId();
@@ -155,10 +155,10 @@ class MuldrothaTheGravetideWatcher extends Watcher {
                 playerId = ((Permanent) mageObject).getControllerId();
             }
             if (playerId != null) {
-                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getAdditionalReference().getApprovingMageObjectReference());
+                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getApprovingObject().getApprovingMageObjectReference());
                 if (permanentTypes == null) {
                     permanentTypes = EnumSet.noneOf(CardType.class);
-                    sourcePlayedPermanentTypes.put(event.getAdditionalReference().getApprovingMageObjectReference(), permanentTypes);
+                    sourcePlayedPermanentTypes.put(event.getApprovingObject().getApprovingMageObjectReference(), permanentTypes);
                 }
                 Set<CardType> typesNotCast = EnumSet.noneOf(CardType.class);
                 for (CardType cardType : mageObject.getCardType(game)) {

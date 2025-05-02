@@ -26,6 +26,7 @@ public final class PestilentSouleater extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+        // {B/P}: Pestilent Souleater gains infect until end of turn. ({B/P} can be paid with either {B} or 2 life. A creature with infect deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 InfectAbility.getInstance(), Duration.EndOfTurn
         ), new ManaCostsImpl<>("{B/P}")));

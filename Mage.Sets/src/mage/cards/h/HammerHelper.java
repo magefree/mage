@@ -49,7 +49,7 @@ class HammerHelperEffect extends OneShotEffect {
         staticText = "Gain control of target creature until end of turn. Untap that creature and roll a six-sided die. Until end of turn, it gains haste and gets +X/+0, where X is the result";
     }
 
-    HammerHelperEffect(HammerHelperEffect effect) {
+    private HammerHelperEffect(final HammerHelperEffect effect) {
         super(effect);
     }
 
@@ -65,6 +65,7 @@ class HammerHelperEffect extends OneShotEffect {
         if (controller != null && targetCreature != null) {
             source.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId(), game));
             game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn), source);
+            game.processAction();
             targetCreature.untap(game);
             int amount = controller.rollDice(outcome, source, game, 6);
             game.addEffect(new BoostTargetEffect(amount, 0, Duration.EndOfTurn), source);

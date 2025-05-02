@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -19,9 +18,11 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class Anthroplasm extends CardImpl {
@@ -36,7 +37,7 @@ public final class Anthroplasm extends CardImpl {
         // Anthroplasm enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
         // {X}, {tap}: Remove all +1/+1 counters from Anthroplasm and put X +1/+1 counters on it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AnthroplasmEffect(), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(new AnthroplasmEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -59,7 +60,7 @@ class AnthroplasmEffect extends OneShotEffect {
         staticText = "Remove all +1/+1 counters from {this} and put X +1/+1 counters on it";
     }
 
-    AnthroplasmEffect(AnthroplasmEffect effect) {
+    private AnthroplasmEffect(final AnthroplasmEffect effect) {
         super(effect);
     }
 
@@ -73,9 +74,9 @@ class AnthroplasmEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             //Remove all +1/+1 counters
-            permanent.removeCounters(permanent.getCounters(game).get(CounterType.P1P1.getName()), source, game);
+            permanent.removeAllCounters(CounterType.P1P1.getName(), source, game);
             //put X +1/+1 counters
-            permanent.addCounters(CounterType.P1P1.createInstance(source.getManaCostsToPay().getX()), source.getControllerId(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(CardUtil.getSourceCostsTag(game, source, "X", 0)), source.getControllerId(), source, game);
             return true;
         }
         return false;

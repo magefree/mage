@@ -19,7 +19,7 @@ public final class Manalith extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public Manalith (final Manalith card) {
+    private Manalith(final Manalith card) {
         super(card);
     }
 

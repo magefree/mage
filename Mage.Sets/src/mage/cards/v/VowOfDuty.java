@@ -40,7 +40,7 @@ public final class VowOfDuty extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +2/+2, has vigilance, and can't attack you or a planeswalker you control.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2,Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2,2,Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText(", has vigilance");
         ability.addEffect(effect);

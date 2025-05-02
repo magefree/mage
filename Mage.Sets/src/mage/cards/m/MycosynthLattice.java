@@ -29,13 +29,13 @@ public final class MycosynthLattice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // All permanents are artifacts in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PermanentsAreArtifactsEffect()));
+        this.addAbility(new SimpleStaticAbility(new PermanentsAreArtifactsEffect()));
 
         // All cards that aren't on the battlefield, spells, and permanents are colorless.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EverythingIsColorlessEffect()));
+        this.addAbility(new SimpleStaticAbility(new EverythingIsColorlessEffect()));
 
         // Players may spend mana as though it were mana of any color.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaCanBeSpentAsAnyColorEffect());
+        Ability ability = new SimpleStaticAbility(new ManaCanBeSpentAsAnyColorEffect());
         ability.addHint(new StaticHint("(XMage hint: You can use floating mana by clicking on the related symbol of the needed mana type in your mana pool player area.)"));
         this.addAbility(ability);
     }
@@ -52,7 +52,7 @@ public final class MycosynthLattice extends CardImpl {
 
 class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
 
-    public PermanentsAreArtifactsEffect() {
+    PermanentsAreArtifactsEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "All permanents are artifacts in addition to their other types";
         this.dependencyTypes.add(DependencyType.ArtifactAddingRemoving); // March of the Machines
@@ -78,7 +78,7 @@ class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
 
 class EverythingIsColorlessEffect extends ContinuousEffectImpl {
 
-    public EverythingIsColorlessEffect() {
+    EverythingIsColorlessEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Neutral);
         staticText = "All cards that aren't on the battlefield, spells, and permanents are colorless";
     }

@@ -51,7 +51,7 @@ class ShriekgeistTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MillCardsTargetEffect(2));
     }
 
-    public ShriekgeistTriggeredAbility(final ShriekgeistTriggeredAbility ability) {
+    private ShriekgeistTriggeredAbility(final ShriekgeistTriggeredAbility ability) {
         super(ability);
     }
 

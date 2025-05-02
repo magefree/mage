@@ -30,7 +30,7 @@ public final class BloodToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    protected BloodToken(final BloodToken token) {
+    private BloodToken(final BloodToken token) {
         super(token);
     }
 

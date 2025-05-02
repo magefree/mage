@@ -9,15 +9,12 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,7 +33,8 @@ public final class DecoyGambit extends CardImpl {
         // For each opponent, choose up to one target creature that player controls, 
         // then return that creature to its owner's hand unless its controller has you draw a card.
         this.getSpellAbility().addEffect(new DecoyGambitEffect());
-        this.getSpellAbility().setTargetAdjuster(DecoyGambitAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,1));
+        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
     }
 
     private DecoyGambit(final DecoyGambit card) {
@@ -46,26 +44,6 @@ public final class DecoyGambit extends CardImpl {
     @Override
     public DecoyGambit copy() {
         return new DecoyGambit(this);
-    }
-}
-
-enum DecoyGambitAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        game.getOpponents(ability.getControllerId())
-                .stream()
-                .map(game::getPlayer)
-                .filter(Objects::nonNull)
-                .forEachOrdered(player -> {
-                    FilterPermanent filter = new FilterCreaturePermanent(
-                            "creature controlled by " + player.getName()
-                    );
-                    filter.add(new ControllerIdPredicate(player.getId()));
-                    ability.addTarget(new TargetPermanent(0, 1, filter, false));
-                });
     }
 }
 
@@ -108,11 +86,12 @@ class DecoyGambitEffect extends OneShotEffect {
                 continue;
             }
             if (player.chooseUse(outcome, "Have " + controller.getName() + " draw a card? If you don't, "
-                    + permanent.getName() + " will be returned to its owner's hand.", source, game)) {
+                    + permanent.getLogName() + " will be returned to its owner's hand.", source, game)) {
                 game.informPlayers(player.getLogName() + " chose to have " + controller.getName() + " draw a card.");
                 numberOfCardsToDraw += 1;
             } else {
-                game.informPlayers(player.getLogName() + " chose to have their creature returned to their hand.");
+                game.informPlayers(player.getLogName() + " chose to have their creature " + permanent.getLogName()
+                        + " returned to their hand.");
                 permanentToHand.add(permanent);
             }
         }

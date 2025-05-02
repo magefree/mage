@@ -38,7 +38,7 @@ public final class MinnWilyIllusionistToken extends TokenImpl {
         ).setText("this creature gets +1/+0 for each other Illusion you control")));
     }
 
-    protected MinnWilyIllusionistToken(final MinnWilyIllusionistToken token) {
+    private MinnWilyIllusionistToken(final MinnWilyIllusionistToken token) {
         super(token);
     }
 

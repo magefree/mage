@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
@@ -44,7 +43,7 @@ public class RemoveFromCombatTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "Remove target " + mode.getTargets().get(0).getTargetName() + " from combat";
+        return "remove " + getTargetPointer().describeTargets(mode.getTargets(), "that creature") + " from combat";
     }
 
 }

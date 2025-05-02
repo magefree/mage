@@ -22,7 +22,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -37,13 +36,13 @@ public final class Necropotence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
         // Whenever you discard a card, exile that card from your graveyard.
         Effect effect = new ExileTargetEffect(null, "", Zone.GRAVEYARD);
         effect.setText("exile that card from your graveyard");
         this.addAbility(new NecropotenceTriggeredAbility(effect));
         // Pay 1 life: Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new NecropotenceEffect(), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new NecropotenceEffect(), new PayLifeCost(1)));
 
     }
 
@@ -64,7 +63,7 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you discard a card, ");
     }
 
-    NecropotenceTriggeredAbility(final NecropotenceTriggeredAbility ability) {
+    private NecropotenceTriggeredAbility(final NecropotenceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,12 +89,12 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class NecropotenceEffect extends OneShotEffect {
 
-    public NecropotenceEffect() {
+    NecropotenceEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step";
     }
 
-    public NecropotenceEffect(final NecropotenceEffect effect) {
+    private NecropotenceEffect(final NecropotenceEffect effect) {
         super(effect);
     }
 
@@ -111,7 +110,7 @@ class NecropotenceEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null && controller.moveCardsToExile(card, source, game, false,
                     CardUtil.getCardExileZoneId(game, source),
-                    CardUtil.createObjectRealtedWindowTitle(source, game, null))) {
+                    CardUtil.createObjectRelatedWindowTitle(source, game, null))) {
                 card.setFaceDown(true, game);
                 Effect returnToHandEffect = new ReturnToHandTargetEffect();
                 returnToHandEffect.setText("put that face down card into your hand");

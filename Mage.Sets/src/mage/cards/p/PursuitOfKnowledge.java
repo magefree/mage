@@ -31,10 +31,10 @@ public final class PursuitOfKnowledge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // If you would draw a card, you may put a study counter on Pursuit of Knowledge instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PursuitOfKnowledgeEffect()));
+        this.addAbility(new SimpleStaticAbility(new PursuitOfKnowledgeEffect()));
 
         // Remove three study counters from Pursuit of Knowledge, Sacrifice Pursuit of Knowledge: Draw seven cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(7),
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7),
             new RemoveCountersSourceCost(CounterType.STUDY.createInstance(3)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -52,12 +52,12 @@ public final class PursuitOfKnowledge extends CardImpl {
 
 class PursuitOfKnowledgeEffect extends ReplacementEffectImpl {
 
-    public PursuitOfKnowledgeEffect() {
+    PursuitOfKnowledgeEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card, you may put a study counter on {this} instead";
     }
 
-    public PursuitOfKnowledgeEffect(final PursuitOfKnowledgeEffect effect) {
+    private PursuitOfKnowledgeEffect(final PursuitOfKnowledgeEffect effect) {
         super(effect);
     }
 
@@ -77,11 +77,6 @@ class PursuitOfKnowledgeEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(event.getPlayerId());
         if(controller != null) {
@@ -93,4 +88,3 @@ class PursuitOfKnowledgeEffect extends ReplacementEffectImpl {
         return false;
     }
 }
-

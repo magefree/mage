@@ -16,7 +16,7 @@ public final class GiantWizardToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    protected GiantWizardToken(final GiantWizardToken token) {
+    private GiantWizardToken(final GiantWizardToken token) {
         super(token);
     }
 

@@ -9,6 +9,7 @@
  import mage.client.util.SettingsManager;
  import mage.client.util.gui.GuiDisplayUtil;
  import mage.game.events.PlayerQueryEvent.QueryType;
+ import mage.util.RandomUtil;
  import mage.view.CardsView;
  import org.mage.card.arcane.CardPanel;
 
@@ -19,18 +20,18 @@
  import java.util.UUID;
 
  /**
-  * Game GUI: choose target card from the cards list (example: exile and choose card to cast)
+  * Game GUI: choose target card from the cards list (example: exile and choose card to cast, choose triggers order, etc)
+  * <p>
+  * Used by feedback's connected dialog, send command on card clicks, so no need callback on close
   *
-  * @author BetaSteward_at_googlemail.com
+  * @author BetaSteward_at_googlemail.com, JayDi85
   */
  public class ShowCardsDialog extends MageDialog {
 
      // remember if this dialog was already auto positioned, so don't do it after the first time
+     // TODO: buggy, must remember by window title? Don't work with multiple triggers https://github.com/magefree/mage/issues/12281
      private boolean positioned;
 
-     /**
-      * Creates new form ShowCardsDialog
-      */
      public ShowCardsDialog() {
          this.positioned = false;
 
@@ -38,7 +39,6 @@
          initComponents();
 
          this.setModal(false);
-
      }
 
      public void cleanUp() {
@@ -58,7 +58,37 @@
      }
 
      private void setGUISize() {
+         // nothing to change (all components in cardArea)
+     }
 
+     @Override
+     public void show() {
+         super.show();
+
+         // auto-position on first usage
+         if (positioned) {
+             showAndPositionWindow();
+         }
+     }
+
+     private void showAndPositionWindow() {
+         SwingUtilities.invokeLater(() -> {
+             int width = ShowCardsDialog.this.getWidth();
+             int height = ShowCardsDialog.this.getHeight();
+             if (width > 0 && height > 0) {
+                 Point centered = SettingsManager.instance.getComponentPosition(width, height);
+                 if (!positioned) {
+                     // starting position
+                     // little randomize to see multiple opened windows
+                     int xPos = centered.x / 2 + RandomUtil.nextInt(50);
+                     int yPos = centered.y / 2 + RandomUtil.nextInt(50);
+                     ShowCardsDialog.this.setLocation(xPos, yPos);
+                     show();
+                     positioned = true;
+                 }
+                 GuiDisplayUtil.keepComponentInsideFrame(centered.x, centered.y, ShowCardsDialog.this);
+             }
+         });
      }
 
      public void loadCards(String name, CardsView showCards, BigCard bigCard,
@@ -96,25 +126,7 @@
 
          // window settings
          MageFrame.getDesktop().remove(this);
-         if (this.isModal()) {
-             MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-         } else {
-             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-         }
-
-         SwingUtilities.invokeLater(() -> {
-             if (!positioned) {
-                 int width = ShowCardsDialog.this.getWidth();
-                 int height = ShowCardsDialog.this.getHeight();
-                 if (width > 0 && height > 0) {
-                     Point centered = SettingsManager.instance.getComponentPosition(width, height);
-                     ShowCardsDialog.this.setLocation(centered.x, centered.y);
-                     positioned = true;
-                     GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, ShowCardsDialog.this);
-                 }
-             }
-             ShowCardsDialog.this.setVisible(true);
-         });
+         MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
      }
 
      private void initComponents() {

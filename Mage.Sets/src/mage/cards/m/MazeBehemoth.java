@@ -40,11 +40,11 @@ public final class MazeBehemoth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Multicolored creatures you control have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
     }
 
-    public MazeBehemoth (final MazeBehemoth card) {
+    private MazeBehemoth(final MazeBehemoth card) {
         super(card);
     }
 

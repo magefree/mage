@@ -55,7 +55,7 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player casts a spell from their hand, ");
     }
 
-    public PossibilityStormTriggeredAbility(final PossibilityStormTriggeredAbility ability) {
+    private PossibilityStormTriggeredAbility(final PossibilityStormTriggeredAbility ability) {
         super(ability);
     }
 
@@ -71,10 +71,14 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getZone() != Zone.HAND) { return false; }
+        if (event.getZone() != Zone.HAND) {
+            return false;
+        }
 
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null) { return false; }
+        if (spell == null) {
+            return false;
+        }
 
         for (Effect effect : this.getEffects()) {
             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -85,30 +89,36 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
 class PossibilityStormEffect extends OneShotEffect {
 
-    public PossibilityStormEffect() {
+    PossibilityStormEffect() {
         super(Outcome.Neutral);
         staticText = "that player exiles it, then exiles cards from the top of their library until they exile a card that shares a card type with it. That player may cast that card without paying its mana cost. Then they put all cards exiled with {this} on the bottom of their library in a random order";
     }
 
-    public PossibilityStormEffect(final PossibilityStormEffect effect) {
+    private PossibilityStormEffect(final PossibilityStormEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         boolean noLongerOnStack = false; // spell was exiled already by another effect, for example NivMagus Elemental
         if (spell == null) {
-            spell = ((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK));
+            spell = ((Spell) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK));
             noLongerOnStack = true;
         }
-        if (spell == null) { return false; }
+        if (spell == null) {
+            return false;
+        }
 
         Player spellController = game.getPlayer(spell.getControllerId());
-        if (spellController == null) { return false; }
+        if (spellController == null) {
+            return false;
+        }
 
         MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject == null) { return false; }
+        if (sourceObject == null) {
+            return false;
+        }
 
         if (!noLongerOnStack) {
             spellController.moveCardsToExile(spell, source, game, true, source.getSourceId(), sourceObject.getIdName());
@@ -119,10 +129,14 @@ class PossibilityStormEffect extends OneShotEffect {
         Card card;
         do {
             card = library.getFromTop(game);
-            if (card != null) {
-                spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
+            if (card == null) {
+                break;
             }
-        } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType(game), game));
+
+            if (!spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
+                break;
+            };
+        } while (library.hasCards() && !sharesType(card, spell.getCardType(game), game));
 
         if (card != null && sharesType(card, spell.getCardType(game), game)
                 && !card.isLand(game)

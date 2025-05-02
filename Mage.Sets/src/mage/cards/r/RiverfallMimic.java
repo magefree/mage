@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.MageInt;
@@ -12,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -31,8 +29,6 @@ public final class RiverfallMimic extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    private static final String rule = "Whenever you cast a spell that's both blue and red, {this} has base power and toughness 3/3 until end of turn and can't be blocked this turn.";
-
     public RiverfallMimic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U/R}");
         this.subtype.add(SubType.SHAPESHIFTER);
@@ -43,11 +39,12 @@ public final class RiverfallMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both blue and red, Riverfall Mimic has base power and toughness 3/3 until end of turn and can't be blocked this turn.
-        Ability ability = SpellCastControllerTriggeredAbility.createWithRule(
-                new SetBasePowerToughnessSourceEffect(3, 3, Duration.EndOfTurn, SubLayer.SetPT_7b),
-                filter, false, rule
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new SetBasePowerToughnessSourceEffect(3, 3, Duration.EndOfTurn),
+                filter, false
         );
-        ability.addEffect(new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.EndOfTurn, false, true));
+        ability.addEffect(new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.EndOfTurn)
+                .setText("and can't be blocked this turn"));
         this.addAbility(ability);
     }
 

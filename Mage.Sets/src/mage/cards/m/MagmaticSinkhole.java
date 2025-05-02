@@ -18,7 +18,7 @@ public final class MagmaticSinkhole extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{R}");
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
 
         // Magmatic Sinkhole deals 5 damage to target creature or planeswalker.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

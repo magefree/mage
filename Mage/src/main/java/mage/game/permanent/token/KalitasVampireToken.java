@@ -23,7 +23,7 @@ public final class KalitasVampireToken extends TokenImpl {
         toughness = new MageInt(tokenToughness);
     }
 
-    protected KalitasVampireToken(final KalitasVampireToken token) {
+    private KalitasVampireToken(final KalitasVampireToken token) {
         super(token);
     }
 

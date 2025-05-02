@@ -29,7 +29,7 @@ import mage.util.GameLog;
  * both this creature and another creature and both are unpaired, you may pair
  * this creature with another unpaired creature you control for as long as both
  * remain creatures on the battlefield under your control” and “Whenever another
- * creature enters the battlefield under your control, if you control both that
+ * creature you control enters, if you control both that
  * creature and this one and both are unpaired, you may pair that creature with
  * this creature for as long as both remain creatures on the battlefield under
  * your control.”
@@ -135,7 +135,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
                 TargetControlledPermanent target = new TargetControlledPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.canChoose(controller.getId(), source, game)) {
                     if (controller.choose(Outcome.Benefit, target, source, game)) {
                         Permanent chosen = game.getPermanent(target.getFirstTarget());
@@ -159,7 +159,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
 }
 
 /**
- * “Whenever another creature enters the battlefield under your control, if you
+ * “Whenever another creature you control enters, if you
  * control both that creature and this one and both are unpaired, you may pair
  * that creature with this creature for as long as both remain creatures on the
  * battlefield under your control.”
@@ -175,7 +175,7 @@ class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
     }
 
     public SoulbondEntersOtherAbility() {
-        super(Zone.BATTLEFIELD, new SoulboundEntersOtherEffect(), soulbondFilter, true, SetTargetPointer.PERMANENT, "");
+        super(Zone.BATTLEFIELD, new SoulboundEntersOtherEffect(), soulbondFilter, true, SetTargetPointer.PERMANENT);
         setRuleVisible(false);
     }
 

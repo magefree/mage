@@ -51,7 +51,7 @@ class HoodedHorrorCantBeBlockedEffect extends RestrictionEffect {
         staticText = "{this} can't be blocked as long as defending player controls the most creatures or is tied for the most";
     }
 
-    public HoodedHorrorCantBeBlockedEffect(final HoodedHorrorCantBeBlockedEffect effect) {
+    private HoodedHorrorCantBeBlockedEffect(final HoodedHorrorCantBeBlockedEffect effect) {
         super(effect);
     }
 

@@ -35,7 +35,7 @@ public final class HeroOfIroas extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Aura spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Hero of Iroas, put a +1/+1 counter on Hero of Iroas.
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));

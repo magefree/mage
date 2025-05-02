@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerCard;
 
 /**
@@ -26,10 +26,10 @@ public final class OathOfAjani extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Ajani enters the battlefield, put a +1/+1 counter on each creature you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE)));
 
         // Planeswalker spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterPlaneswalkerCard("Planeswalker spells"), 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(new FilterPlaneswalkerCard("Planeswalker spells"), 1)));
     }
 
     private OathOfAjani(final OathOfAjani card) {

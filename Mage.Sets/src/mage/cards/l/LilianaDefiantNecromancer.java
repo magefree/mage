@@ -2,25 +2,19 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
 import mage.game.command.emblems.LilianaDefiantNecromancerEmblem;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -51,7 +45,7 @@ public final class LilianaDefiantNecromancer extends CardImpl {
         // -X: Return target nonlegendary creature with converted mana cost X from your graveyard to the battlefield.
         Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
-        ability.setTargetAdjuster(LilianaDefiantNecromancerAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
 
         //-8: You get an emblem with "Whenever a creature dies, return it to the battlefield under your control at the beginning of the next end step.";
@@ -65,23 +59,5 @@ public final class LilianaDefiantNecromancer extends CardImpl {
     @Override
     public LilianaDefiantNecromancer copy() {
         return new LilianaDefiantNecromancer(this);
-    }
-}
-
-enum LilianaDefiantNecromancerAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int cmc = 0;
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                cmc = ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
-        FilterCard newFilter = LilianaDefiantNecromancer.filter.copy();
-        newFilter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCardInYourGraveyard(newFilter));
     }
 }

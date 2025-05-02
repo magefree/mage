@@ -1,13 +1,11 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.BloodthirstAbility;
@@ -19,13 +17,12 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author BursegSardaukar
  */
 public final class RabbleRouser extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
 
     public RabbleRouser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -35,13 +32,12 @@ public final class RabbleRouser extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        //Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)
+        // Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)
         this.addAbility(new BloodthirstAbility(1));
 
-        //{R}, {T}: Attacking creatures get +X/+0 until end of turn, where X is Rabble-Rouser's power.
-
+        // {R}, {T}: Attacking creatures get +X/+0 until end of turn, where X is Rabble-Rouser's power.
         Ability ability = new SimpleActivatedAbility(
-                new BoostAllEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false, null),
+                new BoostAllEffect(SourcePermanentPowerValue.NOT_NEGATIVE, StaticValue.get(0), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false, null),
                 new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

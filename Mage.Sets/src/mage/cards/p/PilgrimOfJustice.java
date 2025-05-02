@@ -38,7 +38,7 @@ public final class PilgrimOfJustice extends CardImpl {
         // Protection from red
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         // {W}, Sacrifice Pilgrim of Justice: The next time a red source of your choice would deal damage this turn, prevent that damage.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PilgrimOfJusticeEffect(), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new PilgrimOfJusticeEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -70,7 +70,7 @@ class PilgrimOfJusticeEffect extends PreventionEffectImpl {
         staticText = "The next time a red source of your choice would deal damage to you this turn, prevent that damage";
     }
 
-    public PilgrimOfJusticeEffect(final PilgrimOfJusticeEffect effect) {
+    private PilgrimOfJusticeEffect(final PilgrimOfJusticeEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
@@ -81,12 +81,8 @@ class PilgrimOfJusticeEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 

@@ -36,11 +36,11 @@ public final class Thermopod extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {S}: Thermopod gains haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
         // Sacrifice a creature: Add {R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(1), CreaturesYouControlCount.instance),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private Thermopod(final Thermopod card) {

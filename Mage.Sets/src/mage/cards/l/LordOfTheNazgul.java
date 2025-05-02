@@ -20,7 +20,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.RingBearerPredicate;
 import mage.game.permanent.token.WraithToken;
 
@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class LordOfTheNazgul extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterWraith = new FilterControlledCreaturePermanent("Wraiths you control");
+    private static final FilterPermanent filterWraith = new FilterControlledPermanent("Wraiths you control");
     private static final FilterPermanent filterRingBearer = new FilterPermanent("Ring-bearers");
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filterWraith, ComparisonType.MORE_THAN, 8);
     private static final Hint hint = new ValueHint(
@@ -54,7 +54,7 @@ public final class LordOfTheNazgul extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Wraiths you control have protection from Ring-bearers.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new ProtectionAbility(filterRingBearer), Duration.WhileOnBattlefield, filterWraith
         )));
 
@@ -64,7 +64,7 @@ public final class LordOfTheNazgul extends CardImpl {
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         );
         ability.addEffect(new ConditionalContinuousEffect(
-                new SetBasePowerToughnessAllEffect(9, 9, Duration.EndOfTurn, filterWraith, true),
+                new SetBasePowerToughnessAllEffect(9, 9, Duration.EndOfTurn, filterWraith),
                 condition, "Then if you control nine or more Wraiths, Wraiths you control have base power and toughness 9/9 until end of turn"
         ));
         this.addAbility(ability.addHint(hint));

@@ -1,33 +1,24 @@
 package mage.cards.p;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Paroxysm extends CardImpl {
@@ -46,11 +37,8 @@ public final class Paroxysm extends CardImpl {
 
         // At the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of their library.
         // If that card is a land card, destroy that creature. Otherwise, it gets +3/+3 until end of turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new ParoxysmEffect(),
-                TargetController.CONTROLLER_ATTACHED_TO,
-                false, false, "At the beginning of the upkeep of enchanted creature's controller, "));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new ParoxysmEffect(),
+                false));
     }
 
     private Paroxysm(final Paroxysm card) {
@@ -72,7 +60,7 @@ class ParoxysmEffect extends OneShotEffect {
                 + "Otherwise, it gets +3/+3 until end of turn.";
     }
 
-    ParoxysmEffect(final ParoxysmEffect effect) {
+    private ParoxysmEffect(final ParoxysmEffect effect) {
         super(effect);
     }
 

@@ -21,18 +21,13 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     protected Token token;
     protected String theyAreStillType;
     private final FilterPermanent filter;
-    private boolean loseColor = true;
-    private boolean loseTypes = false;
-    protected boolean loseName = false;
+    private final boolean loseColor;
+    private final boolean loseTypes;
+    private final boolean loseName;
 
     public BecomesCreatureAllEffect(Token token, String theyAreStillType,
                                     FilterPermanent filter, Duration duration, boolean loseColor) {
         this(token, theyAreStillType, filter, duration, loseColor, false, false);
-    }
-
-    public BecomesCreatureAllEffect(Token token, String theyAreStillType,
-                                    FilterPermanent filter, Duration duration, boolean loseColor, boolean loseName) {
-        this(token, theyAreStillType, filter, duration, loseColor, loseName, false);
     }
 
     public BecomesCreatureAllEffect(Token token, String theyAreStillType,
@@ -61,7 +56,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(
                     filter, source.getControllerId(), source, game)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
@@ -77,7 +72,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Set<Permanent> affectedPermanents = new HashSet<>();
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (MageObjectReference ref : affectedObjectList) {
                 affectedPermanents.add(ref.getPermanent(game));
             }
@@ -128,7 +123,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                 case AbilityAddingRemovingEffects_6:
                     if (!token.getAbilities().isEmpty()) {
                         for (Ability ability : token.getAbilities()) {
-                            permanent.addAbility(ability, source.getSourceId(), game);
+                            permanent.addAbility(ability, source.getSourceId(), game, true);
                         }
                     }
                     break;
@@ -164,6 +159,9 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (duration.toString() != null && !duration.toString().isEmpty()) {
             sb.append(duration.toString()).append(", ");
@@ -176,7 +174,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         }
         sb.append(token.getDescription());
         if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
-            sb.append(". They're still ").append(theyAreStillType);
+            sb.append(" that are still ").append(theyAreStillType);
         }
         return sb.toString();
     }

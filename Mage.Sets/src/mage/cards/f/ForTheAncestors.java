@@ -4,20 +4,18 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.choices.ChoiceCreatureType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
 
@@ -70,13 +68,21 @@ class ForTheAncestorsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        ChoiceCreatureType choice = new ChoiceCreatureType();
-        player.choose(outcome, choice, game);
-        SubType subType = SubType.fromString(choice.getChoice());
-        FilterCard filter = new FilterCard(subType + " cards");
-        filter.add(subType.getPredicate());
+        ChoiceCreatureType choice = new ChoiceCreatureType(game, source);
+        if (!player.choose(outcome, choice, game)) {
+            return false;
+        }
+        SubType subType = SubType.byDescription(choice.getChoiceKey());
+        FilterCard filter;
+        if (subType != null) {
+            filter = new FilterCard(choice.getChoiceKey() + " cards");
+            filter.add(subType.getPredicate());
+        } else {
+            filter = new FilterCard();
+            filter.add((Predicate<Card>) (input, game1) -> false);
+        }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
-        TargetCard target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
+        TargetCard target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);
         player.choose(outcome, cards, target, source, game);
         Cards toHand = new CardsImpl(target.getTargets());
         player.revealCards(source, toHand, game);

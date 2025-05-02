@@ -6,10 +6,11 @@ import mage.abilities.common.EntersBattlefieldOrLeavesSourceTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.game.permanent.token.SamuraiToken;
 
 import java.util.UUID;
@@ -24,7 +25,7 @@ public final class ExperimentalSynthesizer extends CardImpl {
 
         // When Experimental Synthesizer enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.
         this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1), false
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn).withTextOptions("that card", false), false
         ));
 
         // {2}{R}, Sacrifice Experimental Synthesizer: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.

@@ -74,7 +74,7 @@ class UglukOfTheWhiteHandEffect extends OneShotEffect {
             "If that creature was a Goblin or Orc, put two +1/+1 counters on Ugluk instead.";
     }
 
-    public UglukOfTheWhiteHandEffect(final UglukOfTheWhiteHandEffect effect) {
+    private UglukOfTheWhiteHandEffect(final UglukOfTheWhiteHandEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class UglukOfTheWhiteHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent deadCreature = game.getPermanentOrLKIBattlefield(targetPointer.getFirst(game, source));
+        Permanent deadCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
 
         boolean wasOrcOrGoblin = false;
         if (deadCreature != null) {

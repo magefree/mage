@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.*;
@@ -27,7 +27,7 @@ public final class ConcertedEffort extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // At the beginning of each upkeep, creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConcertedEffortEffect(), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new ConcertedEffortEffect(), false));
     }
 
     private ConcertedEffort(final ConcertedEffort card) {
@@ -68,7 +68,7 @@ class ConcertedEffortEffect extends OneShotEffect {
         this.staticText = "creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance";
     }
 
-    ConcertedEffortEffect(final ConcertedEffortEffect effect) {
+    private ConcertedEffortEffect(final ConcertedEffortEffect effect) {
         super(effect);
     }
 

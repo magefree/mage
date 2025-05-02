@@ -59,11 +59,11 @@ public final class WoodvineElemental extends CardImpl {
 
 class WoodvineElementalEffect extends OneShotEffect {
 
-    public WoodvineElementalEffect() {
+    WoodvineElementalEffect() {
         super(Outcome.Benefit);
     }
 
-    public WoodvineElementalEffect(final WoodvineElementalEffect effect) {
+    private WoodvineElementalEffect(final WoodvineElementalEffect effect) {
         super(effect);
     }
 

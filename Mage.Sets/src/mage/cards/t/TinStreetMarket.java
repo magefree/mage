@@ -38,9 +38,10 @@ public final class TinStreetMarket extends CardImpl {
 
 
         // Enchanted land has "{T}, Discard a card: Draw a card."
-        Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        Ability gainAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
         gainAbility.addCost(new DiscardCardCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
+                Duration.WhileOnBattlefield, null, "land")));
         
     }
 
@@ -53,4 +54,3 @@ public final class TinStreetMarket extends CardImpl {
         return new TinStreetMarket(this);
     }
 }
-

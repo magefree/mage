@@ -56,7 +56,7 @@ class AbilityActivatedTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageAttachedControllerEffect(2));
     }
 
-    AbilityActivatedTriggeredAbility(final AbilityActivatedTriggeredAbility ability) {
+    private AbilityActivatedTriggeredAbility(final AbilityActivatedTriggeredAbility ability) {
         super(ability);
     }
 

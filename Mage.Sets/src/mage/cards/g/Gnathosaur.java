@@ -36,9 +36,8 @@ public final class Gnathosaur extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+                new SacrificeTargetCost(filter)));
     }
 
     private Gnathosaur(final Gnathosaur card) {

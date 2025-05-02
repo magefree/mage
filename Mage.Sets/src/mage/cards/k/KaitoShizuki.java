@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.RaidCondition;
@@ -44,8 +44,8 @@ public final class KaitoShizuki extends CardImpl {
 
         // At the beginning of your end step, if Kaito Shizuki entered the battlefield this turn, he phases out.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new PhaseOutSourceEffect().setText("he phases out"),
-                TargetController.YOU, SourceEnteredThisTurnCondition.instance, false
+                TargetController.YOU, new PhaseOutSourceEffect().setText("he phases out"),
+                false, SourceEnteredThisTurnCondition.instance
         ).addHint(hint));
 
         // +1: Draw a card. Then discard a card unless you attacked this turn.

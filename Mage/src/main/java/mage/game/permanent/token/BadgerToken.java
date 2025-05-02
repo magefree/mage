@@ -16,7 +16,7 @@ public final class BadgerToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    protected BadgerToken(final BadgerToken token) {
+    private BadgerToken(final BadgerToken token) {
         super(token);
     }
 

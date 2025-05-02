@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
@@ -29,11 +29,11 @@ public final class PhyrexianVatmother extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersPlayersEffect(
                         CounterType.POISON.createInstance(), TargetController.YOU
-                ), TargetController.YOU, false
+                )
         ));
     }
 
-    public PhyrexianVatmother(final PhyrexianVatmother card) {
+    private PhyrexianVatmother(final PhyrexianVatmother card) {
         super(card);
     }
 

@@ -25,10 +25,10 @@ public final class GolemFoundry extends CardImpl {
         // Whenever you cast an artifact spell, you may put a charge counter on Golem Foundry.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), StaticFilters.FILTER_SPELL_AN_ARTIFACT, true));
         // Remove three charge counters from Golem Foundry: Create a 3/3 colorless Golem artifact creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new GolemToken()), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))));
     }
 
-    public GolemFoundry (final GolemFoundry card) {
+    private GolemFoundry(final GolemFoundry card) {
         super(card);
     }
 

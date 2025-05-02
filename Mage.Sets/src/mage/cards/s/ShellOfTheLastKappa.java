@@ -77,12 +77,12 @@ public final class ShellOfTheLastKappa extends CardImpl {
 
 class ShellOfTheLastKappaEffect extends OneShotEffect {
 
-    public ShellOfTheLastKappaEffect() {
+    ShellOfTheLastKappaEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target instant or sorcery spell that targets you";
     }
 
-    public ShellOfTheLastKappaEffect(final ShellOfTheLastKappaEffect effect) {
+    private ShellOfTheLastKappaEffect(final ShellOfTheLastKappaEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class ShellOfTheLastKappaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent == null) {
@@ -115,12 +115,12 @@ class ShellOfTheLastKappaEffect extends OneShotEffect {
 
 class ShellOfTheLastKappaCastEffect extends OneShotEffect {
 
-    public ShellOfTheLastKappaCastEffect() {
+    ShellOfTheLastKappaCastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "You may cast a spell from among cards exiled with {this} without paying its mana cost";
     }
 
-    public ShellOfTheLastKappaCastEffect(final ShellOfTheLastKappaCastEffect effect) {
+    private ShellOfTheLastKappaCastEffect(final ShellOfTheLastKappaCastEffect effect) {
         super(effect);
     }
 

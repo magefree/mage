@@ -6,6 +6,8 @@ import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 public class RiteOfPassageTest extends CardTestPlayerBase {
 
 
@@ -22,6 +24,28 @@ public class RiteOfPassageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,"Shock","Watchwolf");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
+        assertCounterCount("Watchwolf", CounterType.P1P1, 1);
+    }
+
+    @Test
+    public void addCounterMultiDamage(){
+        // Watchwolf 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Watchwolf", 1);
+        // Whenever a creature you control is dealt damage, put a +1/+1 counter on it.
+        addCard(Zone.BATTLEFIELD, playerA, "Rite of Passage");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Agent of Stromgald", 1);
+
+        attack(1, playerA, "Watchwolf", playerB);
+        block(1, playerB, "Memnite", "Watchwolf");
+        block(1, playerB, "Agent of Stromgald", "Watchwolf");
+        setChoice(playerA, CHOICE_SKIP);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
         assertCounterCount("Watchwolf", CounterType.P1P1, 1);
     }
 

@@ -47,7 +47,7 @@ public final class SearchForSurvivors extends CardImpl {
 
 class SearchForSurvivorsEffect extends OneShotEffect {
 
-    public SearchForSurvivorsEffect() {
+    SearchForSurvivorsEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Reorder your graveyard at random. "
                 + "An opponent chooses a card at random in your graveyard. "
@@ -55,7 +55,7 @@ class SearchForSurvivorsEffect extends OneShotEffect {
                 + "Otherwise, exile it";
     }
 
-    public SearchForSurvivorsEffect(final SearchForSurvivorsEffect effect) {
+    private SearchForSurvivorsEffect(final SearchForSurvivorsEffect effect) {
         super(effect);
     }
 

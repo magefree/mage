@@ -27,7 +27,7 @@ public final class MazeOfIth extends CardImpl {
 
         // {T}: Untap target attacking creature. Prevent all combat damage that 
         // would be dealt to and dealt by that creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt to");
         effect.setOutcome(Outcome.Detriment);

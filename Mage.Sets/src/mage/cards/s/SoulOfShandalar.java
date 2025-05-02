@@ -42,7 +42,7 @@ public final class SoulOfShandalar extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {3}{R}{R}: Soul of Shandalar deals 3 damage to target player and 3 damage to up to one target creature that player controls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulOfShandalarEffect(), new ManaCostsImpl<>("{3}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(new SoulOfShandalarEffect(), new ManaCostsImpl<>("{3}{R}{R}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addTarget(new SoulOfShandalarTarget());
         this.addAbility(ability);
@@ -67,13 +67,13 @@ public final class SoulOfShandalar extends CardImpl {
 
 class SoulOfShandalarEffect extends OneShotEffect {
 
-    public SoulOfShandalarEffect() {
+    SoulOfShandalarEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 3 damage to target player or planeswalker "
                 + "and 3 damage to up to one target creature that player or that planeswalker's controller controls";
     }
 
-    public SoulOfShandalarEffect(final SoulOfShandalarEffect effect) {
+    private SoulOfShandalarEffect(final SoulOfShandalarEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class SoulOfShandalarTarget extends TargetPermanent {
         super(0, 1, new FilterCreaturePermanent("creature that the targeted player or planeswalker's controller controls"), false);
     }
 
-    public SoulOfShandalarTarget(final SoulOfShandalarTarget target) {
+    private SoulOfShandalarTarget(final SoulOfShandalarTarget target) {
         super(target);
     }
 

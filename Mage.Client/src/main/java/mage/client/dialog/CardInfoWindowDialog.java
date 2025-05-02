@@ -1,22 +1,21 @@
 package mage.client.dialog;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 import mage.cards.MageCard;
 import mage.client.cards.BigCard;
+import mage.client.components.MageDesktopIconifySupport;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.CardType;
+import mage.util.RandomUtil;
 import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.ExileView;
@@ -29,7 +28,7 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
  *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
-public class CardInfoWindowDialog extends MageDialog {
+public class CardInfoWindowDialog extends MageDialog implements MageDesktopIconifySupport {
 
     private static final Logger LOGGER = Logger.getLogger(CardInfoWindowDialog.class);
 
@@ -47,22 +46,6 @@ public class CardInfoWindowDialog extends MageDialog {
         this.showType = showType;
         this.positioned = false;
         initComponents();
-
-        // ENABLE a minimizing window on double clicks
-        BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
-        ui.getNorthPane().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) { // double clicks and repeated double clicks
-                    e.consume();
-                    try {
-                        CardInfoWindowDialog.this.setIcon(!CardInfoWindowDialog.this.isIcon());
-                    } catch (PropertyVetoException exp) {
-                        // ignore read only
-                    }
-                }
-            }
-        });
 
         this.setModal(false);
         switch (this.showType) {
@@ -131,7 +114,7 @@ public class CardInfoWindowDialog extends MageDialog {
         cards.changeGUISize();
     }
 
-    public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
+    public void loadCardsAndShow(ExileView exile, BigCard bigCard, UUID gameId) {
         boolean changed = cards.loadCards(exile, bigCard, gameId, true);
         String titel = name + " (" + exile.size() + ')';
         setTitle(titel);
@@ -150,16 +133,8 @@ public class CardInfoWindowDialog extends MageDialog {
         }
     }
 
-    public void loadCards(SimpleCardsView showCards, BigCard bigCard, UUID gameId) {
-        cards.loadCards(showCards, bigCard, gameId);
-        showAndPositionWindow();
-    }
-
-    public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
-        loadCards(showCards, bigCard, gameId, true);
-    }
-
-    public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
+    // TODO: remove oudated code with revertOrder (wait new release and delete if no bug reports for diff windows with cards, 2023-12-14)
+    public void loadCardsAndShow(CardsView showCards, BigCard bigCard, UUID gameId, boolean revertOrder) {
         cards.loadCards(showCards, bigCard, gameId, revertOrder);
 
         // additional info for grave windows
@@ -192,6 +167,7 @@ public class CardInfoWindowDialog extends MageDialog {
 
     @Override
     public void show() {
+        // hide empty exile windows
         if (showType == ShowType.EXILE) {
             if (cards == null || cards.getNumberOfCards() == 0) {
                 return;
@@ -199,7 +175,9 @@ public class CardInfoWindowDialog extends MageDialog {
         }
 
         super.show();
-        if (positioned) { // check if in frame rectangle
+
+        // auto-position on first usage
+        if (!positioned) {
             showAndPositionWindow();
         }
     }
@@ -211,8 +189,24 @@ public class CardInfoWindowDialog extends MageDialog {
             if (width > 0 && height > 0) {
                 Point centered = SettingsManager.instance.getComponentPosition(width, height);
                 if (!positioned) {
-                    int xPos = centered.x / 2;
-                    int yPos = centered.y / 2;
+                    // starting position
+
+                    // auto-resize window, but keep it GUI friendly on too many cards (do not overlap a full screen)
+                    int minWidth = CardInfoWindowDialog.this.getWidth();
+                    int maxWidth = SettingsManager.instance.getScreenWidth() / 2;
+                    int needWidth = CardInfoWindowDialog.this.cards.getPreferredSize().width;
+                    needWidth = Math.max(needWidth, minWidth);
+                    needWidth = Math.min(needWidth, maxWidth);
+                    needWidth += GUISizeHelper.scrollBarSize; // more space, so no horizontal scrolls
+                    int needHeight = CardInfoWindowDialog.this.getHeight(); // keep default height
+                    CardInfoWindowDialog.this.setPreferredSize(new Dimension(needWidth, needHeight));
+                    CardInfoWindowDialog.this.pack();
+                    centered = SettingsManager.instance.getComponentPosition(needWidth, needHeight);
+
+                    // little randomize to see multiple opened windows
+                    int xPos = centered.x / 2 + RandomUtil.nextInt(50);
+                    int yPos = centered.y / 2 + RandomUtil.nextInt(50);
+
                     CardInfoWindowDialog.this.setLocation(xPos, yPos);
                     show();
                     positioned = true;

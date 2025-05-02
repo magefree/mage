@@ -75,7 +75,7 @@ class GreatHallOfTheCitadelManaCondition extends ManaCondition implements Condit
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source instanceof SpellAbility) {
+        if (source instanceof SpellAbility && !source.isActivated()) {
             MageObject object = game.getObject(source);
             return object != null && object.isLegendary(game);
         }

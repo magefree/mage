@@ -44,7 +44,7 @@ public final class MossbridgeTroll extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new MossbridgeTrollReplacementEffect()));
 
         // Tap any number of untapped creatures you control other than Mossbridge Troll with total power 10 or greater: Mossbridge Troll gets +20/+20 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(20, 20, Duration.EndOfTurn), new MossbridgeTrollCost());
+        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(20, 20, Duration.EndOfTurn), new MossbridgeTrollCost());
         ability.setAdditionalCostsRuleVisible(false);
         this.addAbility(ability);
 
@@ -67,7 +67,7 @@ class MossbridgeTrollReplacementEffect extends ReplacementEffectImpl {
         staticText = "If {this} would be destroyed, regenerate it";
     }
 
-    MossbridgeTrollReplacementEffect(MossbridgeTrollReplacementEffect effect) {
+    private MossbridgeTrollReplacementEffect(final MossbridgeTrollReplacementEffect effect) {
         super(effect);
     }
 
@@ -112,15 +112,15 @@ class MossbridgeTrollCost extends CostImpl {
         this.text = "tap any number of untapped creatures you control other than {this} with total power 10 or greater";
     }
 
-    public MossbridgeTrollCost(final MossbridgeTrollCost cost) {
+    private MossbridgeTrollCost(final MossbridgeTrollCost cost) {
         super(cost);
     }
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         int sumPower = 0;
-        if (targets.choose(Outcome.Tap, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : targets.get(0).getTargets()) {
+        if (this.getTargets().choose(Outcome.Tap, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null && permanent.tap(source, game)) {
                     sumPower += permanent.getPower().getValue();

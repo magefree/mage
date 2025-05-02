@@ -55,12 +55,12 @@ public final class CemeteryPuca extends CardImpl {
 
 class CemeteryPucaEffect extends OneShotEffect {
 
-    public CemeteryPucaEffect() {
+    CemeteryPucaEffect() {
         super(Outcome.Copy);
         staticText = "{this} becomes a copy of that creature, except it has this ability";
     }
 
-    public CemeteryPucaEffect(final CemeteryPucaEffect effect) {
+    private CemeteryPucaEffect(final CemeteryPucaEffect effect) {
         super(effect);
     }
 

@@ -74,7 +74,7 @@ public class CountryComboBox extends JComboBox {
         {"Croatia", "hr"},
         {"Cuba", "cu"},
         {"Cyprus", "cy"},
-        {"Czech Republic", "cz"},
+        {"Czechia", "cz"},
         {"Denmark", "dk"},
         {"Djibouti", "dj"},
         {"Dominica", "dm"},
@@ -304,7 +304,7 @@ public class CountryComboBox extends JComboBox {
 
     @Override
     public Object getSelectedItem() {
-        return super.getSelectedItem(); //To change body of generated methods, choose Tools | Templates.
+        return super.getSelectedItem();
     }
 
 }

@@ -37,7 +37,7 @@ public final class JacesSentinel extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as you control a Jace planeswalker, Jace's Sentinel gets +1/+0 and can't be blocked.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control a Jace planeswalker, {this} gets +1/+0"));

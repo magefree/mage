@@ -42,9 +42,9 @@ public final class GoblinSoothsayer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, {T}, Sacrifice a Goblin: Red creatures get +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1,Duration.EndOfTurn, filter, false), new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(new BoostAllEffect(1,1,Duration.EndOfTurn, filter, false), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter2)));
+        ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);
         
     }

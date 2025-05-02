@@ -24,7 +24,7 @@ public final class ElementalAugury extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
         // {3}: Look at the top three cards of target player's library, then put them back in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElementalAuguryEffect(), new ManaCostsImpl<>("{3}"));
+        Ability ability = new SimpleActivatedAbility(new ElementalAuguryEffect(), new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -41,12 +41,12 @@ public final class ElementalAugury extends CardImpl {
 
 class ElementalAuguryEffect extends OneShotEffect {
 
-    public ElementalAuguryEffect() {
+    ElementalAuguryEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top three cards of target player's library, then put them back in any order";
     }
 
-    public ElementalAuguryEffect(final ElementalAuguryEffect effect) {
+    private ElementalAuguryEffect(final ElementalAuguryEffect effect) {
         super(effect);
     }
 

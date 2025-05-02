@@ -31,7 +31,7 @@ public class LightspeedSkipping extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public LightspeedSkipping(final LightspeedSkipping card) {
+    private LightspeedSkipping(final LightspeedSkipping card) {
         super(card);
     }
 

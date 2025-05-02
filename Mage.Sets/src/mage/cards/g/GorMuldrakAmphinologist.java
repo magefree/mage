@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -15,7 +15,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.permanent.token.SalamnderWarriorToken;
+import mage.game.permanent.token.SalamanderWarriorToken;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
 
@@ -51,7 +51,7 @@ public final class GorMuldrakAmphinologist extends CardImpl {
 
         // At the beginning of your end step, each player who controls the fewest creatures creates a 4/3 blue Salamander Warrior creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GorMuldrakAmphinologistEffect(), TargetController.YOU, false
+                new GorMuldrakAmphinologistEffect()
         ));
     }
 
@@ -99,7 +99,7 @@ class GorMuldrakAmphinologistEffect extends OneShotEffect {
                 .forEach(uuid -> creatureMap.compute(uuid, CardUtil::setOrIncrementValue));
         int minValue = creatureMap.values().stream().mapToInt(x -> x).min().orElse(0);
         minValue = Math.max(minValue, 0);
-        Token token = new SalamnderWarriorToken();
+        Token token = new SalamanderWarriorToken();
         for (Map.Entry<UUID, Integer> entry : creatureMap.entrySet()) {
             if (entry.getValue() > minValue) {
                 continue;

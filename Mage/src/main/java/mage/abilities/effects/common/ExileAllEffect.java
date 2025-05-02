@@ -27,7 +27,7 @@ public class ExileAllEffect extends OneShotEffect {
         super(Outcome.Exile);
         this.filter = filter;
         this.forSource = forSource;
-        setText();
+        this.staticText = "exile all " + filter.getMessage();
     }
 
     protected ExileAllEffect(final ExileAllEffect effect) {
@@ -58,9 +58,4 @@ public class ExileAllEffect extends OneShotEffect {
 
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("exile all ").append(filter.getMessage());
-        staticText = sb.toString();
-    }
 }

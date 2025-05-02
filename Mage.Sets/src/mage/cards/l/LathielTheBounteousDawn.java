@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -15,10 +15,8 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.target.TargetAmount;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -29,7 +27,7 @@ import java.util.UUID;
  */
 public final class LathielTheBounteousDawn extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
+    private static final Condition condition = new YouGainedLifeCondition();
 
     public LathielTheBounteousDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
@@ -44,18 +42,13 @@ public final class LathielTheBounteousDawn extends CardImpl {
 
         // At the beginning of each end step, if you gained life this turn, distribute up to that many +1/+1 counters among any number of other target creatures.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DistributeCountersEffect(
-                        CounterType.P1P1, 1, false, ""
-                ), TargetController.ANY, false),
+                new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new DistributeCountersEffect(), false),
                 condition, "At the beginning of each end step, if you gained life this turn, " +
                 "distribute up to that many +1/+1 counters among any number of other target creatures."
         );
-        TargetAmount target = new TargetCreaturePermanentAmount(
+        ability.addTarget(new TargetCreaturePermanentAmount(
                 LathielTheBounteousDawnValue.instance,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        );
-        target.setMinNumberOfTargets(0);
-        ability.addTarget(target);
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability.addHint(LathielTheBounteousDawnValue.getHint()), new PlayerGainedLifeWatcher());
     }
 

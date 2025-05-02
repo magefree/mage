@@ -20,8 +20,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class RighteousWar extends CardImpl {
 
-    private static final FilterCreaturePermanent whiteFilter = new FilterCreaturePermanent("white creatures you control");
-    private static final FilterCreaturePermanent blackFilter = new FilterCreaturePermanent("black creatures you control");
+    private static final FilterCreaturePermanent whiteFilter = new FilterCreaturePermanent("white creatures");
+    private static final FilterCreaturePermanent blackFilter = new FilterCreaturePermanent("black creatures");
 
     static {
         whiteFilter.add(new ColorPredicate(ObjectColor.WHITE));
@@ -33,7 +33,6 @@ public final class RighteousWar extends CardImpl {
 
         // White creatures you control have protection from black.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
                         ProtectionAbility.from(ObjectColor.BLACK),
                         Duration.WhileOnBattlefield,
@@ -43,7 +42,6 @@ public final class RighteousWar extends CardImpl {
 
         // Black creatures you control have protection from white.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
                         ProtectionAbility.from(ObjectColor.WHITE),
                         Duration.WhileOnBattlefield,

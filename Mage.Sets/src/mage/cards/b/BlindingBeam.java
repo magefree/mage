@@ -61,12 +61,12 @@ public final class BlindingBeam extends CardImpl {
 
 class BlindingBeamEffect extends OneShotEffect {
 
-    public BlindingBeamEffect() {
+    BlindingBeamEffect() {
         super(Outcome.Tap);
         staticText = "creatures don't untap during target player's next untap step";
     }
 
-    public BlindingBeamEffect(final BlindingBeamEffect effect) {
+    private BlindingBeamEffect(final BlindingBeamEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
         this.targetPlayerId = targetPlayerId;
     }
 
-    public BlindingBeamEffect2(final BlindingBeamEffect2 effect) {
+    private BlindingBeamEffect2(final BlindingBeamEffect2 effect) {
         super(effect);
         this.targetPlayerId = effect.targetPlayerId;
     }
@@ -106,11 +106,6 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
     @Override
     public BlindingBeamEffect2 copy() {
         return new BlindingBeamEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

@@ -61,7 +61,7 @@ class KariZevSkyshipRaiderEffect extends OneShotEffect {
         staticText = "create Ragavan, a legendary 2/1 red Monkey creature token. Ragavan enters the battlefield tapped and attacking. Exile that token at end of combat";
     }
 
-    KariZevSkyshipRaiderEffect(final KariZevSkyshipRaiderEffect effect) {
+    private KariZevSkyshipRaiderEffect(final KariZevSkyshipRaiderEffect effect) {
         super(effect);
     }
 

@@ -35,12 +35,12 @@ public final class ContagionClasp extends CardImpl {
 
         /* {4}, {T}: Proliferate. (You choose any number of permanents and/or players
          * with counters on them, then give each another counter of a kind already there.) */
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new GenericManaCost(4));
+        ability = new SimpleActivatedAbility(new ProliferateEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public ContagionClasp (final ContagionClasp card) {
+    private ContagionClasp(final ContagionClasp card) {
         super(card);
     }
 

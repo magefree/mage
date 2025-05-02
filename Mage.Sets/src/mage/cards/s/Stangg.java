@@ -50,14 +50,14 @@ public final class Stangg extends CardImpl {
 
 class StanggCreateTokenEffect extends OneShotEffect {
 
-    public StanggCreateTokenEffect() {
+    StanggCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create Stangg Twin, a legendary 3/4 red and green Human Warrior creature token. "
                 + "Exile that token when {this} leaves the battlefield. "
                 + "Sacrifice {this} when that token leaves the battlefield";
     }
 
-    public StanggCreateTokenEffect(final StanggCreateTokenEffect effect) {
+    private StanggCreateTokenEffect(final StanggCreateTokenEffect effect) {
         super(effect);
     }
 

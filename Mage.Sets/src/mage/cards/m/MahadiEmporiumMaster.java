@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.CreaturesDiedThisTurnHint;
@@ -10,9 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.TreasureToken;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
 
@@ -25,7 +23,6 @@ public final class MahadiEmporiumMaster extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -34,7 +31,7 @@ public final class MahadiEmporiumMaster extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(
                         new TreasureToken(), CreaturesDiedThisTurnCount.instance
-                ).setText("create a Treasure token for each creature that died this turn"), TargetController.YOU, false
+                ).setText("create a Treasure token for each creature that died this turn")
         ).addHint(CreaturesDiedThisTurnHint.instance));
     }
 

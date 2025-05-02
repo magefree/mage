@@ -3,7 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -58,7 +58,7 @@ public final class EsikaGodOfTheTree extends ModalDoubleFacedCard {
         // Legendary Enchantment
         // At the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
         this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new PrismaticBridgeEffect(), TargetController.YOU, false, false
+                new PrismaticBridgeEffect()
         ));
     }
 
@@ -74,7 +74,7 @@ public final class EsikaGodOfTheTree extends ModalDoubleFacedCard {
 
 class PrismaticBridgeEffect extends OneShotEffect {
 
-    public PrismaticBridgeEffect() {
+    PrismaticBridgeEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "reveal cards from the top of your library until you reveal "
                 + "a creature or planeswalker card. Put that card onto the battlefield and the rest "

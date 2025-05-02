@@ -7,12 +7,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * 3BG Legendary Creature - Frog Horror Deathtouch
- *
+ * <p>
  * At the beginning of your upkeep, sacrifice The Gitrog Monster unless you
  * sacrifice a land.
- *
+ * <p>
  * You may play an additional land on each of your turns.
- *
+ * <p>
  * Whenever one or more land cards are put into your graveyard from anywhere,
  * draw a card.
  *
@@ -35,6 +35,7 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Gitrog Monster");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Armageddon");
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.DRAW);
         execute();
 
@@ -58,10 +59,10 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Gitrog Monster");
         // on 3rd turn during upkeep opt to sacrifice a land
-        // TODO: I don't know how to get these choices to work, let the choices go automatically
-//        addTarget(playerA, "Swamp");
-//        setChoice(playerA, true);
+        setChoice(playerA, true); // sac land
+        setChoice(playerA, "Swamp"); // sac land
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.DRAW);
         execute();
 
@@ -88,6 +89,7 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Gitrog Monster");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Planar Outburst");
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.DRAW);
         execute();
 
@@ -98,7 +100,7 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
     /**
      * NOTE: As of 05/05/2017 this test is failing due to a bug in code. See
      * issue #3251
-     *
+     * <p>
      * I took control of a Gitrog Monster, while the Gitrog Monster's owner
      * controlled a Dryad Arbor and cast Toxic Deluge for 6.
      */
@@ -125,10 +127,13 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Rags // Riches", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 7);
 
+        // first land
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp");
+        // cast gitrog and second land
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Gitrog Monster");
         playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Dryad Arbor");
 
+        // change control to B, so no additional land for A
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Riches");
         setChoice(playerA, "The Gitrog Monster");
 
@@ -137,6 +142,7 @@ public class TheGitrogMonsterTest extends CardTestPlayerBase {
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Toxic Deluge");
         setChoice(playerA, "X=6");
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 

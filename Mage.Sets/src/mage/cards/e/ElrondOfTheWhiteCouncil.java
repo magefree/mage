@@ -1,6 +1,7 @@
 package mage.cards.e;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -23,6 +24,7 @@ import mage.target.targetpointer.FixedTargets;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -111,7 +113,7 @@ class ElrondOfWhiteCouncilEffect extends OneShotEffect {
             // (2023-06-16): If you have multiple votes, you can vote for fellowship multiple times. If you do, you can choose the same creature each time.
             for (int i = 0; i < countFellowship; ++i) {
                 TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
 
                 if (player.chooseTarget(Outcome.Detriment, target, source, game)) {
                     Permanent chosen = game.getPermanent(target.getFirstTarget());
@@ -127,19 +129,19 @@ class ElrondOfWhiteCouncilEffect extends OneShotEffect {
         }
 
         // You gain control of each creature chosen this way, and they gain "This creature can't attack its owner."
-        TargetPointer pointer = new FixedTargets(chosenCreatures.stream().collect(Collectors.toList()), game);
+        TargetPointer blueprintTarget = new FixedTargets(new ArrayList<>(chosenCreatures), game);
 
         game.addEffect(new GainControlTargetEffect(
                 Duration.WhileOnBattlefield
-        ).setTargetPointer(pointer), source);
+        ).setTargetPointer(blueprintTarget.copy()), source);
 
         game.addEffect(new GainAbilityTargetEffect(
                 new SimpleStaticAbility(new CantAttackItsOwnerEffect()),
                 Duration.WhileOnBattlefield
-        ).setTargetPointer(pointer), source);
+        ).setTargetPointer(blueprintTarget.copy()), source);
 
         // Need to process the control change.
-        game.getState().processAction(game);
+        game.processAction();
 
         // Then for each aid vote, put a +1/+1 counter on each creature you control.
         int countAid = vote.getVoteCount(false);

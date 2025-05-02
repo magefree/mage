@@ -27,12 +27,12 @@ public final class KamiOfAncientLaw extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }
 
-    public KamiOfAncientLaw (final KamiOfAncientLaw card) {
+    private KamiOfAncientLaw(final KamiOfAncientLaw card) {
         super(card);
     }
 

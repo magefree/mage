@@ -73,4 +73,28 @@ public class DauthiVoidwalkerTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20 - 3);
     }
+
+    @Test
+    public void test_MakeSureNoTriggerInWrongZones() {
+        // bug report: it triggered in library
+        // https://github.com/magefree/mage/issues/13089
+
+        // If a card would be put into an opponent's graveyard from anywhere, instead exile it with a void counter on it.
+        // {T}, Sacrifice Dauthi Voidwalker: Choose an exiled card an opponent owns with a void counter on it. You may play it this turn without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Dauthi Voidwalker", 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        // kill B's creature without triggers
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Balduvian Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("after kill", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Balduvian Bears", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
 }

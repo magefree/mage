@@ -1,15 +1,16 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.TreasureToken;
@@ -36,11 +37,11 @@ public final class ProfessionalFaceBreaker extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Whenever one or more creatures you control deal combat damage to a player, create a Treasure token.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
         // Sacrifice a Treasure: Exile the top card of your library. You may play that card this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1, false), new SacrificeTargetCost(filter)
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), new SacrificeTargetCost(filter)
         ));
     }
 

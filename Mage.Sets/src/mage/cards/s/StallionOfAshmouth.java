@@ -4,8 +4,8 @@ import mage.MageInt;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -30,7 +30,7 @@ public final class StallionOfAshmouth extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{B}"), DeliriumCondition.instance
-        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardHint.YOU));
+        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private StallionOfAshmouth(final StallionOfAshmouth card) {

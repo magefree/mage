@@ -52,12 +52,12 @@ public final class MistmoonGriffin extends CardImpl {
 
 class MistmoonGriffinEffect extends OneShotEffect {
 
-    public MistmoonGriffinEffect() {
+    MistmoonGriffinEffect() {
         super(Outcome.Benefit);
         this.staticText = ", then return the top creature card of your graveyard to the battlefield";
     }
 
-    public MistmoonGriffinEffect(final MistmoonGriffinEffect effect) {
+    private MistmoonGriffinEffect(final MistmoonGriffinEffect effect) {
         super(effect);
     }
 

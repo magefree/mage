@@ -23,15 +23,15 @@ import java.util.TreeSet;
 /**
  * App GUI: adding new lands to the deck, uses in deck editor and drafting
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class AddLandDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(MageDialog.class);
 
     private Deck deck;
-    
     private DeckEditorMode mode;
+    private AddLandCallback callback = null;
 
     private static final int DEFAULT_SEALED_DECK_CARD_NUMBER = 40;
 
@@ -40,9 +40,14 @@ public class AddLandDialog extends MageDialog {
         this.setModal(true);
     }
 
-    public void showDialog(Deck deck, DeckEditorMode mode) {
+    public interface AddLandCallback {
+        void onLandsAdded();
+    }
+
+    public void showDialog(Deck deck, DeckEditorMode mode, AddLandCallback callback) {
         this.deck = deck;
         this.mode = mode;
+        this.callback = callback;
         SortedSet<String> landSetNames = new TreeSet<>();
         String defaultSetName = null;
         if (mode != DeckEditorMode.FREE_BUILDING) {
@@ -82,7 +87,7 @@ public class AddLandDialog extends MageDialog {
             landSetNames.add(expansionInfo.getName());
         }
         if (landSetNames.isEmpty()) {
-            throw new IllegalArgumentException("No set with basic land was found");
+            throw new IllegalArgumentException("No set with basic land was found (possible memory problems, need client restart)");
         }
         if (landSetNames.size() > 1) {
             landSetNames.add("<Random lands>");
@@ -126,11 +131,7 @@ public class AddLandDialog extends MageDialog {
 
         // windows settings
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         this.makeWindowCentered();
 
         // Close on "ESC"
@@ -173,7 +174,7 @@ public class AddLandDialog extends MageDialog {
         int foundLands = 0;
         int foundNoneAfter = 0;
         for (int i = 0; foundLands != number && foundNoneAfter < 1000; i++) {
-            Card land = cards.get(RandomUtil.nextInt(cards.size())).getMockCard();
+            Card land = cards.get(RandomUtil.nextInt(cards.size())).createMockCard();
             boolean useLand = !useFullArt;
             if (useFullArt && (land.getFrameStyle() == FrameStyle.BFZ_FULL_ART_BASIC
                     || land.getFrameStyle() == FrameStyle.UGL_FULL_ART_BASIC
@@ -214,7 +215,11 @@ public class AddLandDialog extends MageDialog {
         addLands("Plains", nPlains, useFullArt);
         addLands("Swamp", nSwamp, useFullArt);
 
-        this.removeDialog();
+        if (this.callback != null) {
+            callback.onLandsAdded();
+        }
+
+        onCancel();
     }
 
     /**
@@ -266,7 +271,6 @@ public class AddLandDialog extends MageDialog {
 
         spnForest.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        lblForestIcon.setToolTipText("");
         lblForestIcon.setMaximumSize(new java.awt.Dimension(22, 20));
         lblForestIcon.setMinimumSize(new java.awt.Dimension(22, 20));
         lblForestIcon.setPreferredSize(new java.awt.Dimension(22, 20));
@@ -472,6 +476,7 @@ public class AddLandDialog extends MageDialog {
     }//GEN-LAST:event_btnSetFastSearchActionPerformed
 
     private void autoAddLands() {
+        // suggest lands amount for deck without lands
         int deckSize = ((Number) spnDeckSize.getValue()).intValue();
         int[] lands = DeckBuildUtils.landCountSuggestion(deckSize, deck.getMaindeckCards());
         spnPlains.setValue(lands[0]);

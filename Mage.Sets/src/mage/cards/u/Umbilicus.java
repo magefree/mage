@@ -2,7 +2,7 @@ package mage.cards.u;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class Umbilicus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of each player's upkeep, that player returns a permanent they control to its owner's hand unless they pay 2 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new BloodClockEffect(), TargetController.ANY, false, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new BloodClockEffect(), false);
         this.addAbility(ability);
     }
 
@@ -42,12 +42,12 @@ public final class Umbilicus extends CardImpl {
 
 class BloodClockEffect extends OneShotEffect {
 
-    public BloodClockEffect() {
+    BloodClockEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "that player returns a permanent they control to its owner's hand unless they pay 2 life";
     }
 
-    public BloodClockEffect(final BloodClockEffect effect) {
+    private BloodClockEffect(final BloodClockEffect effect) {
         super(effect);
     }
 
@@ -58,7 +58,7 @@ class BloodClockEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player == null) {
             return false;
         }

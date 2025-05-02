@@ -1,15 +1,18 @@
 package mage.designations;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerBatchEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.Objects;
@@ -40,7 +43,7 @@ public class Initiative extends Designation {
     }
 }
 
-class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl {
+class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     InitiativeDamageTriggeredAbility() {
         super(Zone.ALL, new InitiativeTakeEffect());
@@ -57,17 +60,22 @@ class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
+    }
+
+    @Override
+    public boolean checkEvent(DamagedPlayerEvent event, Game game) {
+        if (!event.isCombatDamage() || !event.getTargetId().equals(game.getInitiativeId())) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return permanent != null && permanent.isCreature(game);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerBatchEvent dEvent = (DamagedPlayerBatchEvent) event;
-        UUID playerId = dEvent
-                .getEvents()
+        UUID playerId = getFilteredEvents((DamagedBatchForOnePlayerEvent) event, game)
                 .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> e.getTargetId().equals(game.getInitiativeId()))
                 .map(GameEvent::getSourceId)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
@@ -83,7 +91,7 @@ class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more creatures a player controls deals combat damage to you, that player takes the initiative.";
+        return "Whenever one or more creatures a player controls deal combat damage to the player who has the initiative, the controller of those creatures takes the initiative.";
     }
 }
 
@@ -113,6 +121,7 @@ class InitiativeVentureTriggeredAbility extends TriggeredAbilityImpl {
 
     InitiativeVentureTriggeredAbility() {
         super(Zone.ALL, new InitiativeUndercityEffect());
+        addHint(CurrentDungeonHint.instance);
     }
 
     private InitiativeVentureTriggeredAbility(final InitiativeVentureTriggeredAbility ability) {

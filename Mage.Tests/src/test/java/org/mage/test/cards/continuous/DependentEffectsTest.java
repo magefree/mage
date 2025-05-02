@@ -2,7 +2,6 @@
 package org.mage.test.cards.continuous;
 
 import mage.abilities.Ability;
-import mage.constants.AbilityType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
@@ -11,7 +10,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class DependentEffectsTest extends CardTestPlayerBase {
@@ -33,9 +31,9 @@ public class DependentEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Opalescence",true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Opalescence", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enchanted Evening");
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -49,12 +47,12 @@ public class DependentEffectsTest extends CardTestPlayerBase {
     /**
      * Opalescence is dependent on Enchanted Evening, so it will be applied
      * after it regardless of timestamp.
-     *
+     * <p>
      * Tokens can also have mana costs, and as a consequence of that, converted
      * mana costs. A token created with Rite of Replication would have the mana
      * cost of the creature it targeted. Most tokens do not have mana costs
      * though.
-     *
+     * <p>
      * Tokens with no mana costs would be 0/0, as you said, and would indeed be
      * put into owner's graveyard next time State Based Actionas are performed.
      * Tokens with mana costs would naturally have whatever power and toughness
@@ -112,7 +110,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         Permanent necroticOoze = getPermanent("Necrotic Ooze", playerA);
         int numberOfActivatedAbilities = 0;
         for (Ability ability : necroticOoze.getAbilities(currentGame)) {
-            if (ability.getAbilityType() == AbilityType.ACTIVATED) {
+            if (ability.isActivatedAbility()){
                 numberOfActivatedAbilities++;
             }
         }
@@ -133,7 +131,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Yixlid Jailer", 1); // Creature - {1}{B}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yixlid Jailer");
-        
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -143,7 +141,7 @@ public class DependentEffectsTest extends CardTestPlayerBase {
         Permanent necroticOoze = getPermanent("Necrotic Ooze", playerA);
         int numberOfActivatedAbilities = 0;
         for (Ability ability : necroticOoze.getAbilities(currentGame)) {
-            if (ability.getAbilityType() == AbilityType.ACTIVATED) {
+            if (ability.isActivatedAbility()){
                 numberOfActivatedAbilities++;
             }
         }

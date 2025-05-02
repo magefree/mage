@@ -16,6 +16,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public final class MondrakGloryDominus extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreateTwiceThatManyTokensEffect()));
+        this.addAbility(new SimpleStaticAbility(new CreateTwiceThatManyTokensEffect()));
 
         // {1}{W/P}{W/P}, Sacrifice two other artifacts and/or creatures: Put an indestructible counter on Mondrak, Glory Dominus.
         Ability ability = new SimpleActivatedAbility(
@@ -53,7 +54,7 @@ public final class MondrakGloryDominus extends CardImpl {
                         CounterType.INDESTRUCTIBLE.createInstance()
                 ),
                 new ManaCostsImpl<>("{1}{W/P}{W/P}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 

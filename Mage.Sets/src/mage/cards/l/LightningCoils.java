@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -34,10 +33,8 @@ public final class LightningCoils extends CardImpl {
                         new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true),
                         false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
 
-        // At the beginning of your upkeep, if Lightning Coils has five or more charge counters on it, remove all of them from it 
-        // and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. 
-        // Exile them at the beginning of the next end step.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LightningCoilsEffect(), TargetController.YOU, false));
+        // At the beginning of your upkeep, if Lightning Coils has five or more charge counters on it, remove all of them from it  and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LightningCoilsEffect()));
     }
 
     private LightningCoils(final LightningCoils card) {
@@ -57,19 +54,19 @@ class LightningCoilsEffect extends OneShotEffect {
         staticText = "if {this} has five or more charge counters on it, remove all of them from it and create that many 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.";
     }
 
-    LightningCoilsEffect(final LightningCoilsEffect effect) {
+    private LightningCoilsEffect(final LightningCoilsEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent p = game.getPermanent(source.getSourceId());
-        if (p != null && controller != null) {
-            int counters = p.getCounters(game).getCount(CounterType.CHARGE);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && controller != null) {
+            int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (counters >= 5) {
                 // remove all the counters and create that many tokens
-                p.removeCounters(CounterType.CHARGE.getName(), p.getCounters(game).getCount(CounterType.CHARGE), source, game);
+                permanent.removeAllCounters(CounterType.CHARGE.getName(), source, game);
                 CreateTokenEffect effect = new CreateTokenEffect(new ElementalTokenWithHaste(), counters);
                 effect.apply(game, source);
 

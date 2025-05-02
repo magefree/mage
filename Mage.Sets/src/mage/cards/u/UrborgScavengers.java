@@ -74,12 +74,15 @@ class UrborgScavengersEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent == null){
+            return false;
+        }
         ExileZone exileZone = game
                 .getExile()
                 .getExileZone(CardUtil.getExileZoneId(
-                        game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
+                        game, source.getSourceId(), sourcePermanent.getZoneChangeCounter(game)
                 ));
-        if (sourcePermanent == null || exileZone == null || exileZone.isEmpty()) {
+        if (exileZone == null || exileZone.isEmpty()) {
             return false;
         }
         exileZone

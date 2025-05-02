@@ -13,7 +13,7 @@ public enum DomainAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         CardUtil.reduceCost(ability, DomainValue.REGULAR.calculate(game, ability, null));
     }
 }

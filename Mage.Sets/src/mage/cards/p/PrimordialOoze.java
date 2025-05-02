@@ -3,7 +3,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -32,7 +32,7 @@ public final class PrimordialOoze extends CardImpl {
         // Primordial Ooze attacks each combat if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
         // At the beginning of your upkeep, put a +1/+1 counter on Primordial Ooze. Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap Primordial Ooze and it deals X damage to you.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new PrimordialOozeEffect());
         this.addAbility(ability);
     }
@@ -49,12 +49,12 @@ public final class PrimordialOoze extends CardImpl {
 
 class PrimordialOozeEffect extends OneShotEffect {
 
-    public PrimordialOozeEffect() {
+    PrimordialOozeEffect() {
         super(Outcome.Detriment);
         this.staticText = "Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap {this} and it deals X damage to you";
     }
 
-    public PrimordialOozeEffect(final PrimordialOozeEffect effect) {
+    private PrimordialOozeEffect(final PrimordialOozeEffect effect) {
         super(effect);
     }
 

@@ -42,7 +42,7 @@ public final class AuriokWindwalker extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {T}: Attach target Equipment you control to target creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachTargetEquipmentEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AttachTargetEquipmentEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(filter));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
@@ -60,12 +60,12 @@ public final class AuriokWindwalker extends CardImpl {
 
 class AttachTargetEquipmentEffect extends OneShotEffect {
 
-    public AttachTargetEquipmentEffect() {
+    AttachTargetEquipmentEffect() {
         super(Outcome.BoostCreature);
         staticText = "Attach target Equipment you control to target creature you control";
     }
 
-    public AttachTargetEquipmentEffect(final AttachTargetEquipmentEffect effect) {
+    private AttachTargetEquipmentEffect(final AttachTargetEquipmentEffect effect) {
         super(effect);
     }
 

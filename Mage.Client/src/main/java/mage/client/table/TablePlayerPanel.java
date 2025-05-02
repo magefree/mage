@@ -18,16 +18,12 @@ public class TablePlayerPanel extends javax.swing.JPanel {
 
     protected final PlayerTypeEventSource playerTypeEventSource = new PlayerTypeEventSource();
 
-
-    /**
-     * Creates new form TablePlayerPanel
-     */
     public TablePlayerPanel() {
         initComponents();
         this.newPlayerPanel.setVisible(false);
     }
 
-    public void init(int playerNum, PlayerType playerType) {
+    public void init(int playerNum, PlayerType playerType, int playerSkill, String playerDeck) {
         cbPlayerType.setModel(new DefaultComboBoxModel(SessionHandler.getPlayerTypes()));
         this.lblPlayerNum.setText("Player " + playerNum);
         if (ClientDefaultSettings.otherPlayerIndex != null) {
@@ -41,17 +37,27 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         if (playerType != null) {
             this.cbPlayerType.setSelectedItem(playerType);
         }
+        this.newPlayerPanel.setDeckFile(playerDeck);
+        this.newPlayerPanel.setSkillLevel(playerSkill);
     }
 
     public boolean joinTable(UUID roomId, UUID tableId) throws IOException, ClassNotFoundException {
         if (this.cbPlayerType.getSelectedItem() != PlayerType.HUMAN) {
-            return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (PlayerType) this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getLevel(), DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), "");
+            return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (PlayerType) this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getSkillLevel(), DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), "");
         }
         return true;
     }
 
     public PlayerType getPlayerType() {
         return PlayerType.getByDescription(this.cbPlayerType.getSelectedItem().toString());
+    }
+
+    public int getPlayerSkill() {
+        return newPlayerPanel.getSkillLevel();
+    }
+
+    public String getPlayerDeck() {
+        return newPlayerPanel.getDeckFile();
     }
 
     public void addPlayerTypeEventListener(Listener<Event> listener) {

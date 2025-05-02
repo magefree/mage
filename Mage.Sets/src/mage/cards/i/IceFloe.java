@@ -38,7 +38,7 @@ public final class IceFloe extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {T}: Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as Ice Floe remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
         this.addAbility(ability);

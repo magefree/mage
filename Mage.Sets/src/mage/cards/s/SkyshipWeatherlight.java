@@ -38,7 +38,7 @@ public final class SkyshipWeatherlight extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SkyshipWeatherlightEffect(), false));
 
         // {4}, {tap}, Choose a card at random that was removed from the game with Skyship Weatherlight. Put that card into your hand.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SkyshipWeatherlightEffect2(), new GenericManaCost(4));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new SkyshipWeatherlightEffect2(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -71,7 +71,7 @@ class SkyshipWeatherlightEffect extends SearchEffect {
 
     }
 
-    public SkyshipWeatherlightEffect(final SkyshipWeatherlightEffect effect) {
+    private SkyshipWeatherlightEffect(final SkyshipWeatherlightEffect effect) {
         super(effect);
     }
 
@@ -111,7 +111,7 @@ class SkyshipWeatherlightEffect2 extends OneShotEffect {
         this.staticText = "Choose a card at random that was exiled with {this}. Put that card into its owner's hand";
     }
 
-    public SkyshipWeatherlightEffect2(final SkyshipWeatherlightEffect2 effect) {
+    private SkyshipWeatherlightEffect2(final SkyshipWeatherlightEffect2 effect) {
         super(effect);
     }
 

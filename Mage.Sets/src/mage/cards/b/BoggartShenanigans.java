@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,20 +19,20 @@ import java.util.UUID;
  */
 public final class BoggartShenanigans extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.GOBLIN);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.GOBLIN, "another Goblin you control");
 
     static {
         filter.add(AnotherPredicate.instance);
     }
 
     public BoggartShenanigans(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
 
         // Whenever another Goblin you control dies, you may have Boggart Shenanigans deal 1 damage to target player.
-        Ability ability = new DiesCreatureTriggeredAbility(
+        Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new DamageTargetEffect(1), true, filter, false
-        ).setTriggerPhrase("Whenever another Goblin you control is put into a graveyard from the battlefield, ");
+        );
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

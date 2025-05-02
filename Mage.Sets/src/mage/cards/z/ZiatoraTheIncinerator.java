@@ -2,7 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -16,9 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -41,7 +40,7 @@ public final class ZiatoraTheIncinerator extends CardImpl {
 
         // At the beginning of your end step, you may sacrifice another creature. When you do, Ziatora, the Incinerator deals damage equal to that creature's power to any target and you create three Treasure tokens.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ZiatoraTheIncineratorEffect(), TargetController.YOU, false
+                new ZiatoraTheIncineratorEffect()
         ));
     }
 
@@ -78,8 +77,8 @@ class ZiatoraTheIncineratorEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetPermanent target = new TargetControlledPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
+        TargetSacrifice target = new TargetSacrifice(
+                0, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         );
         player.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());

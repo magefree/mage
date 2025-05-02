@@ -73,12 +73,12 @@ public final class SkitteringCicada extends CardImpl {
 
 class SkitteringCicadaBoostEffect extends OneShotEffect {
 
-    public SkitteringCicadaBoostEffect() {
+    SkitteringCicadaBoostEffect() {
         super(Outcome.BoostCreature);
         this.staticText = " and gets +X/+X, where X is that spell's mana value";
     }
 
-    public SkitteringCicadaBoostEffect(final SkitteringCicadaBoostEffect effect) {
+    private SkitteringCicadaBoostEffect(final SkitteringCicadaBoostEffect effect) {
         super(effect);
     }
 

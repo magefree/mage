@@ -48,7 +48,7 @@ class HavengulSkaabAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
     }
 
-    public HavengulSkaabAbility(final HavengulSkaabAbility ability) {
+    private HavengulSkaabAbility(final HavengulSkaabAbility ability) {
         super(ability);
     }
 

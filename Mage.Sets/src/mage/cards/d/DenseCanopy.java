@@ -26,7 +26,7 @@ public final class DenseCanopy extends CardImpl {
 
 
         // Creatures with flying can block only creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DenseCanopyCantBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new DenseCanopyCantBlockEffect()));
     }
 
     private DenseCanopy(final DenseCanopy card) {
@@ -52,7 +52,7 @@ class DenseCanopyCantBlockEffect extends RestrictionEffect {
         staticText = "creatures with flying can block only creatures with flying";
     }
 
-    public DenseCanopyCantBlockEffect(final DenseCanopyCantBlockEffect effect) {
+    private DenseCanopyCantBlockEffect(final DenseCanopyCantBlockEffect effect) {
         super(effect);
     }
 

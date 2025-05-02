@@ -38,10 +38,10 @@ public final class ChokingRestraints extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature can't attack or block
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 
         // {3}{W}{W}, Sacrifice Choking Restraints: Exile enchanted creature.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileAttachedEffect(), new ManaCostsImpl<>("{3}{W}{W}"));
+        ability = new SimpleActivatedAbility(new ExileAttachedEffect(), new ManaCostsImpl<>("{3}{W}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 

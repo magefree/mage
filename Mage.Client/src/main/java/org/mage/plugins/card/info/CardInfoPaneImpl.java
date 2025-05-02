@@ -11,7 +11,7 @@ import mage.view.CardView;
 import org.mage.card.arcane.UI;
 
 /**
- * Card info pane for displaying card rules. Supports drawing mana symbols.
+ * GUI: card info pane for displaying card rules (example: text mode for popup card). Supports drawing mana symbols.
  *
  * @author nantuko
  */
@@ -24,7 +24,6 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
     public static final int TOOLTIP_BORDER_WIDTH = 80;
 
-    private CardView currentCard;
     private int type;
 
     private int addWidth;
@@ -44,15 +43,13 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
     }
 
     private void setGUISize() {
-        addWidth = GUISizeHelper.getTooltipCardWidth();
-        addHeight = GUISizeHelper.getTooltipCardHeight();
+        addWidth = GUISizeHelper.cardTooltipLargeTextWidth;
+        addHeight = GUISizeHelper.cardTooltipLargeTextHeight;
         setSize = true;
     }
 
     @Override
     public void setCard(final CardView card, final Component container) {
-        currentCard = card;
-
         try {
             SwingUtilities.invokeLater(() -> {
                 TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
@@ -68,6 +65,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
     }
 
     private void resizeTooltipIfNeeded(Component container, int ruleLength, int rules) {
+        // TODO: fix bug with long image path here?
         if (container == null) {
             return;
         }
@@ -96,10 +94,5 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
             this.setSize(addWidth + TOOLTIP_WIDTH_MIN,
                     addHeight + TOOLTIP_HEIGHT_MIN);
         }
-    }
-
-    @Override
-    public boolean isCurrentCard(CardView card) {
-        return currentCard != null && currentCard.equals(card);
     }
 }

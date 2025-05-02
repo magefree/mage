@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class Rackling extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each opponent's upkeep, Rackling deals X damage to that player, where X is 3 minus the number of cards in their hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RacklingEffect(), TargetController.OPPONENT, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new RacklingEffect(), false));
     }
 
     private Rackling(final Rackling card) {
@@ -41,12 +41,12 @@ public final class Rackling extends CardImpl {
 
 class RacklingEffect extends OneShotEffect {
 
-    public RacklingEffect() {
+    RacklingEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
-    public RacklingEffect(final RacklingEffect effect) {
+    private RacklingEffect(final RacklingEffect effect) {
         super(effect);
     }
 
@@ -57,7 +57,7 @@ class RacklingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             int damage = 3 - player.getHand().size();
             if (damage > 0) {

@@ -3,6 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -65,9 +66,10 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
     TianaShipsCaretakerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TianaShipsCaretakerEffect(), true);
         setTriggerPhrase("Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
-    TianaShipsCaretakerTriggeredAbility(final TianaShipsCaretakerTriggeredAbility ability) {
+    private TianaShipsCaretakerTriggeredAbility(final TianaShipsCaretakerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -98,6 +100,11 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class TianaShipsCaretakerEffect extends OneShotEffect {
@@ -107,7 +114,7 @@ class TianaShipsCaretakerEffect extends OneShotEffect {
         this.staticText = "you may return that card to its owner's hand at the beginning of the next end step";
     }
 
-    TianaShipsCaretakerEffect(final TianaShipsCaretakerEffect effect) {
+    private TianaShipsCaretakerEffect(final TianaShipsCaretakerEffect effect) {
         super(effect);
     }
 

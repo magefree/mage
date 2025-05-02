@@ -40,7 +40,7 @@ public final class WhirlpoolWarrior extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect()));
 
         // {R}, Sacrifice Whirlpool Warrior: Each player shuffles the cards from their hand into their library, then draws that many cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WhirlpoolWarriorActivatedEffect(), new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(new WhirlpoolWarriorActivatedEffect(), new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -57,12 +57,12 @@ public final class WhirlpoolWarrior extends CardImpl {
 
 class WhirlpoolWarriorActivatedEffect extends OneShotEffect {
 
-    public WhirlpoolWarriorActivatedEffect() {
+    WhirlpoolWarriorActivatedEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each player shuffles the cards from their hand into their library, then draws that many cards";
     }
 
-    public WhirlpoolWarriorActivatedEffect(final WhirlpoolWarriorActivatedEffect effect) {
+    private WhirlpoolWarriorActivatedEffect(final WhirlpoolWarriorActivatedEffect effect) {
         super(effect);
     }
 

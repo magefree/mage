@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -29,7 +29,6 @@ import mage.game.permanent.token.BloodToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
@@ -66,9 +65,8 @@ public class StrefanMaurerProgenitor extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new CreateTokenEffect(
                                 new BloodToken(),
-                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance),
-                        TargetController.YOU,
-                        false)
+                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance)
+                )
                         .addHint(hint)
         );
 
@@ -78,21 +76,15 @@ public class StrefanMaurerProgenitor extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(
                 new DoIfCostPaid(
                         new StrefanMaurerProgenitorPlayVampireEffect(),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                2,
-                                2,
-                                bloodTokenFilter,
-                                true)
-                        )),
-                false
-                )
+                        new SacrificeTargetCost(2, bloodTokenFilter)
+                ), false)
         );
     }
 
     private StrefanMaurerProgenitor(final StrefanMaurerProgenitor card) { super(card);}
 
     @Override
-    public Card copy() {
+    public StrefanMaurerProgenitor copy() {
         return new StrefanMaurerProgenitor(this);
     }
 }
@@ -113,18 +105,26 @@ class StrefanMaurerProgenitorPlayVampireEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) { return false; }
+        if (player == null) {
+            return false;
+        }
 
         TargetCard target = new TargetCardInHand(0, 1, vampireCardFilter);
-        if (!player.choose(outcome, player.getHand(), target, source, game)) { return false; }
+        if (!player.choose(outcome, player.getHand(), target, source, game)) {
+            return false;
+        }
 
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
 
         Permanent permanent = game.getPermanent(card.getId());
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
         game.getCombat().addAttackingCreature(permanent.getId(), game);
 

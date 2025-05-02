@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.constants.CardType;
 import mage.constants.ManaType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -53,7 +54,7 @@ class MeteorCraterEffect extends ManaEffect {
         staticText = "Choose a color of a permanent you control. Add one mana of that color";
     }
 
-    public MeteorCraterEffect(final MeteorCraterEffect effect) {
+    private MeteorCraterEffect(final MeteorCraterEffect effect) {
         super(effect);
     }
 
@@ -72,12 +73,17 @@ class MeteorCraterEffect extends ManaEffect {
         if (types.isEmpty()) {
             return null;
         }
+
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return null;
+        }
+
         Choice choice = ManaType.getChoiceOfManaTypes(types, true);
         if (choice.getChoices().size() == 1) {
             choice.setChoice(choice.getChoices().iterator().next());
         } else {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player == null || !player.choose(outcome, choice, game)) {
+            if (!player.choose(Outcome.PutManaInPool, choice, game)) {
                 return null;
             }
         }

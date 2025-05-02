@@ -32,7 +32,7 @@ public final class CastleRaptors extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // As long as Castle Raptors is untapped, it gets +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(0, 2, Duration.WhileOnBattlefield), SourceTappedCondition.UNTAPPED,
             "As long as {this} is untapped, it gets +0/+2.")));
     }

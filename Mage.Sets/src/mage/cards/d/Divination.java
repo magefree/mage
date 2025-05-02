@@ -20,7 +20,7 @@ public final class Divination extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public Divination (final Divination card) {
+    private Divination(final Divination card) {
         super(card);
     }
 

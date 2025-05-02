@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -20,9 +20,7 @@ import mage.cards.MeldCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -60,7 +58,8 @@ public final class TitaniaGaeaIncarnate extends MeldCard {
         ));
 
         // When Titania, Gaea Incarnate enters the battlefield, return all land cards from your graveyard to the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TitaniaGaeaIncarnateEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnFromYourGraveyardToBattlefieldAllEffect(
+                StaticFilters.FILTER_CARD_LANDS, true)));
 
         // {3}{G}: Put four +1/+1 counters on target land you control. It becomes a 0/0 Elemental creature with haste. It's still a land.
         Ability ability = new SimpleActivatedAbility(
@@ -82,31 +81,5 @@ public final class TitaniaGaeaIncarnate extends MeldCard {
     @Override
     public TitaniaGaeaIncarnate copy() {
         return new TitaniaGaeaIncarnate(this);
-    }
-}
-
-class TitaniaGaeaIncarnateEffect extends OneShotEffect {
-
-    TitaniaGaeaIncarnateEffect() {
-        super(Outcome.Benefit);
-        staticText = "return all land cards from your graveyard to the battlefield tapped";
-    }
-
-    private TitaniaGaeaIncarnateEffect(final TitaniaGaeaIncarnateEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TitaniaGaeaIncarnateEffect copy() {
-        return new TitaniaGaeaIncarnateEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.moveCards(
-                player.getGraveyard().getCards(StaticFilters.FILTER_CARD_LAND, game),
-                Zone.BATTLEFIELD, source, game, true, false, false, null
-        );
     }
 }

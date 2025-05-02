@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -35,7 +35,7 @@ public final class ChaosMoon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // At the beginning of each upkeep, count the number of permanents. If the number is odd, until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, that player adds {R} (in addition to the mana the land produces). If the number is even, until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ChaosMoonEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new ChaosMoonEffect(), false));
     }
 
     private ChaosMoon(final ChaosMoon card) {
@@ -60,7 +60,7 @@ class ChaosMoonEffect extends OneShotEffect {
         super(Outcome.Neutral);
         this.staticText = "count the number of permanents. If the number is odd, " +
                 "until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, " +
-                "that player adds {R} (in addition to the mana the land produces). If the number is even, " +
+                "that player adds an additional {R}. If the number is even, " +
                 "until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, " +
                 "that Mountain produces colorless mana instead of any other type";
     }
@@ -147,11 +147,6 @@ class ChaosMoonEvenReplacementEffect extends ReplacementEffectImpl {
     @Override
     public ChaosMoonEvenReplacementEffect copy() {
         return new ChaosMoonEvenReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

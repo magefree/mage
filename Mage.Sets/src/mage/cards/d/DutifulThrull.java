@@ -27,7 +27,7 @@ public final class DutifulThrull extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Regenerate Dutiful Thrull.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
     private DutifulThrull(final DutifulThrull card) {

@@ -36,7 +36,7 @@ public final class HarshJudgment extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // If an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HarshJudgmentEffect()));
+        this.addAbility(new SimpleStaticAbility(new HarshJudgmentEffect()));
     }
 
     private HarshJudgment(final HarshJudgment card) {
@@ -58,7 +58,7 @@ class HarshJudgmentEffect extends RedirectionEffect {
         staticText = "If an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead";
     }
 
-    public HarshJudgmentEffect(final HarshJudgmentEffect effect) {
+    private HarshJudgmentEffect(final HarshJudgmentEffect effect) {
         super(effect);
     }
 
@@ -94,10 +94,5 @@ class HarshJudgmentEffect extends RedirectionEffect {
     @Override
     public HarshJudgmentEffect copy() {
         return new HarshJudgmentEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 }

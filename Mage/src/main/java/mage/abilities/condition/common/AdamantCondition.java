@@ -6,6 +6,7 @@ import mage.abilities.condition.Condition;
 import mage.constants.AbilityType;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
+import mage.util.CardUtil;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 import java.util.Arrays;
@@ -53,7 +54,7 @@ public enum AdamantCondition implements Condition {
         if (watcher == null) {
             return false;
         }
-        Mana payment = watcher.getLastManaPayment(source.getSourceId());
+        Mana payment = watcher.getManaPayment(CardUtil.getSourceStackMomentReference(game, source));
         if (payment == null) {
             return false;
         }

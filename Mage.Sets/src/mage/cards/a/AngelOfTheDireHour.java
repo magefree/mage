@@ -1,11 +1,8 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -15,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.watchers.common.CastFromHandWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,10 +33,9 @@ public final class AngelOfTheDireHour extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Angel of the Dire Hour enters the battlefield, if you cast it from your hand, exile all attacking creatures.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ExileAllEffect(StaticFilters.FILTER_ATTACKING_CREATURES), false),
-                CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, exile all attacking creatures."),
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new ExileAllEffect(StaticFilters.FILTER_ATTACKING_CREATURES), false)
+                        .withInterveningIf(CastFromHandSourcePermanentCondition.instance),
                 new CastFromHandWatcher());
     }
 

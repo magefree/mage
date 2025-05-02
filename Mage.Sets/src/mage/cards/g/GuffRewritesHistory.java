@@ -84,7 +84,7 @@ enum GuffRewritesHistoryAdjuster implements TargetAdjuster {
 
 class GuffRewritesHistoryEffect extends OneShotEffect {
 
-    public GuffRewritesHistoryEffect() {
+    GuffRewritesHistoryEffect() {
         super(Outcome.Neutral);
     }
 
@@ -161,7 +161,7 @@ class GuffRewritesHistoryEffect extends OneShotEffect {
             cards.retainZone(Zone.EXILED, game);
             // reveal all the exiled cards, as they are reshuffled instantly and do not stay in exile.
             controller.revealCards(source, " — " + controller.getName(), cards, game);
-            if (nonland != null && cards.contains(nonland)) {
+            if (nonland != null && cards.contains(nonland.getId())) {
                 nonlands.put(playerId, nonland);
                 cards.remove(nonland);
             }

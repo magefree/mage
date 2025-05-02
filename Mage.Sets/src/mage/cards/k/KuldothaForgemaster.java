@@ -34,10 +34,10 @@ public final class KuldothaForgemaster extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {T}, Sacrifice three artifacts: Search your library for an artifact card and put it onto the battlefield. Then shuffle your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterArtifactCard())),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
+        ability.addCost(new SacrificeTargetCost(3, filter));
         this.addAbility(ability);
     }
 

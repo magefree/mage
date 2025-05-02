@@ -34,7 +34,7 @@ public final class HarborSerpent extends CardImpl {
         this.addAbility(new IslandwalkAbility());
 
         // Harbor Serpent can't attack unless there are five or more Islands on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HarborSerpentEffect()));
+        this.addAbility(new SimpleStaticAbility(new HarborSerpentEffect()));
     }
 
     private HarborSerpent(final HarborSerpent card) {
@@ -56,7 +56,7 @@ class HarborSerpentEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless there are five or more Islands on the battlefield";
     }
 
-    public HarborSerpentEffect(final HarborSerpentEffect effect) {
+    private HarborSerpentEffect(final HarborSerpentEffect effect) {
         super(effect);
     }
 

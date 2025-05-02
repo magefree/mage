@@ -24,10 +24,10 @@ public final class AzusaLostButSeeking extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new PlayAdditionalLandsControllerEffect(2, Duration.WhileOnBattlefield)));
     }
 
-    public AzusaLostButSeeking (final AzusaLostButSeeking card) {
+    private AzusaLostButSeeking(final AzusaLostButSeeking card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
     public boolean match(MageItem o, Game game) {
         if (super.match(o, game)) {
             if (o instanceof Player) {
-                return !((Player) o).getCounters().isEmpty();
+                return ((Player) o).getCountersTotalCount() > 0;
             } else if (o instanceof Permanent) {
                 return !((Permanent) o).getCounters(game).isEmpty();
             }
@@ -41,7 +41,7 @@ public class FilterPermanentOrPlayerWithCounter extends FilterPermanentOrPlayer 
     public boolean match(MageItem o, UUID playerId, Ability source, Game game) {
         if (super.match(o, playerId, source, game)) { // same as parent class, so can call with full params
             if (o instanceof Player) {
-                return !((Player) o).getCounters().isEmpty();
+                return ((Player) o).getCountersTotalCount() > 0;
             } else if (o instanceof Permanent) {
                 return !((Permanent) o).getCounters(game).isEmpty();
             }

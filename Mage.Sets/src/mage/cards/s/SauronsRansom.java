@@ -48,14 +48,14 @@ public final class SauronsRansom extends CardImpl {
 
 class SauronsRansomEffect extends OneShotEffect {
 
-    public SauronsRansomEffect() {
+    SauronsRansomEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose an opponent. They look at the top four cards of your library and separate " +
             "them into a face-down pile and a face-up pile. Put one pile into your hand and " +
             "the other into your graveyard";
     }
 
-    public SauronsRansomEffect(final SauronsRansomEffect effect) {
+    private SauronsRansomEffect(final SauronsRansomEffect effect) {
         super(effect);
     }
 

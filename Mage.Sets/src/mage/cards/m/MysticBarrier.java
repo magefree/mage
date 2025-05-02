@@ -1,6 +1,6 @@
 package mage.cards.m;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionRestrictionEffect;
@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public final class MysticBarrier extends CardImpl {
         // When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, PlayerCanOnlyAttackInDirectionRestrictionEffect.choiceEffect(),
                 new EntersBattlefieldTriggeredAbility(null, false),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false)));
+                new BeginningOfUpkeepTriggeredAbility(null)));
 
         // Each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that player.
         this.addAbility(new SimpleStaticAbility(

@@ -57,13 +57,13 @@ public final class MirrorBox extends CardImpl {
 
 class MirrorBoxBoostEffect extends ContinuousEffectImpl {
 
-    public MirrorBoxBoostEffect() {
+    MirrorBoxBoostEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.staticText = "each nontoken creature you control gets +1/+1 for " +
                 "each other creature you control with the same name as that creature";
     }
 
-    public MirrorBoxBoostEffect(final MirrorBoxBoostEffect effect) {
+    private MirrorBoxBoostEffect(final MirrorBoxBoostEffect effect) {
         super(effect);
     }
 

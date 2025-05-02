@@ -2,12 +2,14 @@ package mage.cards.g;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.ChooseACardNameEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,10 +41,10 @@ public final class GideonsIntervention extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(effect));
 
         // Your opponents can't cast spells with the chosen name.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GideonsInterventionCantCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new GideonsInterventionCantCastEffect()));
 
         // Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GideonsInterventionPreventAllDamageEffect()));
+        this.addAbility(new SimpleStaticAbility(new GideonsInterventionPreventAllDamageEffect()));
     }
 
     private GideonsIntervention(final GideonsIntervention card) {
@@ -57,12 +59,12 @@ public final class GideonsIntervention extends CardImpl {
 
 class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public GideonsInterventionCantCastEffect() {
+    GideonsInterventionCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Your opponents can't cast spells with the chosen name";
     }
 
-    public GideonsInterventionCantCastEffect(final GideonsInterventionCantCastEffect effect) {
+    private GideonsInterventionCantCastEffect(final GideonsInterventionCantCastEffect effect) {
         super(effect);
     }
 
@@ -90,8 +92,12 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
     public boolean applies(GameEvent event, Ability source, Game game) {
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            return object != null && object.getName().equals(cardName);
+            SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+            if (spellAbility == null) {
+                return false;
+            }
+            Card card = spellAbility.getCharacteristics(game);
+            return card != null && CardUtil.haveSameNames(card, cardName, game);
         }
         return false;
     }
@@ -99,23 +105,18 @@ class GideonsInterventionCantCastEffect extends ContinuousRuleModifyingEffectImp
 
 class GideonsInterventionPreventAllDamageEffect extends PreventionEffectImpl {
 
-    public GideonsInterventionPreventAllDamageEffect() {
+    GideonsInterventionPreventAllDamageEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.";
     }
 
-    public GideonsInterventionPreventAllDamageEffect(final GideonsInterventionPreventAllDamageEffect effect) {
+    private GideonsInterventionPreventAllDamageEffect(final GideonsInterventionPreventAllDamageEffect effect) {
         super(effect);
     }
 
     @Override
     public GideonsInterventionPreventAllDamageEffect copy() {
         return new GideonsInterventionPreventAllDamageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

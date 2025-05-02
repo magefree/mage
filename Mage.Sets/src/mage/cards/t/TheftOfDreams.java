@@ -42,12 +42,12 @@ public final class TheftOfDreams extends CardImpl {
 
 class TheftOfDreamsEffect extends OneShotEffect {
 
-    public TheftOfDreamsEffect() {
+    TheftOfDreamsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw a card for each tapped creature target opponent controls";
     }
 
-    public TheftOfDreamsEffect(final TheftOfDreamsEffect effect) {
+    private TheftOfDreamsEffect(final TheftOfDreamsEffect effect) {
         super(effect);
     }
 

@@ -71,12 +71,12 @@ public final class MarduCharm extends CardImpl {
 
 class MarduCharmCreateTokenEffect extends OneShotEffect {
 
-    public MarduCharmCreateTokenEffect() {
+    MarduCharmCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create two 1/1 white Warrior creature tokens. They gain first strike until end of turn";
     }
 
-    public MarduCharmCreateTokenEffect(final MarduCharmCreateTokenEffect effect) {
+    private MarduCharmCreateTokenEffect(final MarduCharmCreateTokenEffect effect) {
         super(effect);
     }
 

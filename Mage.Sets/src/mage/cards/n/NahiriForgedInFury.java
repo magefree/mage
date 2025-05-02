@@ -72,7 +72,7 @@ class NahiriForgedInFuryEffect extends OneShotEffect {
                 + "You may cast Equipment spells this way without paying their mana costs.";
     }
 
-    NahiriForgedInFuryEffect(final NahiriForgedInFuryEffect effect) {
+    private NahiriForgedInFuryEffect(final NahiriForgedInFuryEffect effect) {
         super(effect);
     }
 

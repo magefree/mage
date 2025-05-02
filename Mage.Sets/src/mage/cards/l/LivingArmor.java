@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -12,22 +11,23 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Derpthemeus
  */
 public final class LivingArmor extends CardImpl {
 
     public LivingArmor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {tap}, Sacrifice Living Armor: Put X +0/+1 counters on target creature, where X is that creature's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LivingArmorEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LivingArmorEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -49,7 +49,7 @@ public final class LivingArmor extends CardImpl {
             this.staticText = "Put X +0/+1 counters on target creature, where X is that creature's mana value";
         }
 
-        public LivingArmorEffect(final LivingArmorEffect effect) {
+        private LivingArmorEffect(final LivingArmorEffect effect) {
             super(effect);
         }
 
@@ -63,7 +63,7 @@ public final class LivingArmor extends CardImpl {
             Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
             if (creature != null) {
                 int amount = creature.getManaValue();
-                creature.addCounters(new BoostCounter(0, 1, amount), source.getControllerId(), source, game);
+                creature.addCounters(CounterType.P0P1.createInstance(amount), source.getControllerId(), source, game);
                 return true;
             }
             return false;

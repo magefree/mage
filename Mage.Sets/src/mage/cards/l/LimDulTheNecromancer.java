@@ -48,7 +48,7 @@ public final class LimDulTheNecromancer extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl<>("{1}{B}")), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, true));
 
         // {1}{B}: Regenerate target Zombie.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability2 = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability2.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability2);
 
@@ -66,12 +66,12 @@ public final class LimDulTheNecromancer extends CardImpl {
 
 class LimDulTheNecromancerEffect extends OneShotEffect {
 
-    public LimDulTheNecromancerEffect() {
+    LimDulTheNecromancerEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types";
     }
 
-    public LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
+    private LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)
                         && card.isCreature(game)) {

@@ -4,7 +4,7 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +31,7 @@ public final class WildRicochet extends CardImpl {
 
         // You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect());
-        Effect effect = new CopyTargetSpellEffect();
+        Effect effect = new CopyTargetStackObjectEffect();
         effect.setText("Then copy that spell. You may choose new targets for the copy");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetStackObject(filter));

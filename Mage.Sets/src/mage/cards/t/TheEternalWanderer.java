@@ -57,7 +57,7 @@ public final class TheEternalWanderer extends CardImpl {
         this.setStartingLoyalty(5);
 
         // No more than one creature can attack The Eternal Wanderer each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheEternalWandererAttackRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new TheEternalWandererAttackRestrictionEffect()));
 
         // +1: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step.
         Ability ability = new LoyaltyAbility(new TheEternalWandererExileEffect(), 1);
@@ -83,13 +83,13 @@ public final class TheEternalWanderer extends CardImpl {
 
 class TheEternalWandererExileEffect extends OneShotEffect {
 
-    public TheEternalWandererExileEffect() {
+    TheEternalWandererExileEffect() {
         super(Outcome.Detriment);
         staticText = "Exile up to one target artifact or creature. Return that card to the battlefield " +
                 "under its owner's control at the beginning of that player's next end step.";
     }
 
-    public TheEternalWandererExileEffect(final TheEternalWandererExileEffect effect) {
+    private TheEternalWandererExileEffect(final TheEternalWandererExileEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,6 @@ class TheEternalWandererExileEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            System.out.println(permanent);
             if (permanent != null) {
                 UUID exileId = UUID.randomUUID();
                 if (controller.moveCardsToExile(permanent, source, game, true, exileId, sourceObject.getIdName())) {
@@ -122,12 +121,12 @@ class TheEternalWandererExileEffect extends OneShotEffect {
 
 class TheEternalWandererSacrificeEffect extends OneShotEffect {
 
-    public TheEternalWandererSacrificeEffect() {
+    TheEternalWandererSacrificeEffect() {
         super(Outcome.Detriment);
         staticText = "For each player, choose a creature that player controls. Each player sacrifices all creatures they control not chosen this way";
     }
 
-    public TheEternalWandererSacrificeEffect(final TheEternalWandererSacrificeEffect effect) {
+    private TheEternalWandererSacrificeEffect(final TheEternalWandererSacrificeEffect effect) {
         super(effect);
     }
 
@@ -186,7 +185,7 @@ class TheEternalWandererAttackRestrictionEffect extends RestrictionEffect {
                      " The Eternal Wanderer each combat";
     }
 
-    TheEternalWandererAttackRestrictionEffect(final TheEternalWandererAttackRestrictionEffect effect) {
+    private TheEternalWandererAttackRestrictionEffect(final TheEternalWandererAttackRestrictionEffect effect) {
         super(effect);
     }
 

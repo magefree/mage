@@ -105,11 +105,6 @@ class TeferiTimeRavelerReplacementEffect extends ContinuousRuleModifyingEffectIm
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public TeferiTimeRavelerReplacementEffect copy() {
         return new TeferiTimeRavelerReplacementEffect(this);
     }

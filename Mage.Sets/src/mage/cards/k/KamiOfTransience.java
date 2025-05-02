@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
@@ -14,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -29,12 +29,6 @@ import java.util.UUID;
  */
 public final class KamiOfTransience extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
-
     public KamiOfTransience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
 
@@ -47,13 +41,13 @@ public final class KamiOfTransience extends CardImpl {
 
         // Whenever you cast an enchantment spell, put a +1/+1 counter on Kami of Transience.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false
         ));
 
         // At the beginning of each end step, if an enchantment was put into your graveyard from the battlefield this turn, you may return Kami of Transience from your graveyard to your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                TargetController.ANY, KamiOfTransienceCondition.instance, true
+                Zone.GRAVEYARD, TargetController.ANY, new ReturnSourceFromGraveyardToHandEffect(),
+                true, KamiOfTransienceCondition.instance
         ).addHint(KamiOfTransienceCondition.getHint()), new KamiOfTransienceWatcher());
     }
 

@@ -43,12 +43,12 @@ public final class ManifoldInsights extends CardImpl {
 
 class ManifoldInsightsEffect extends OneShotEffect {
 
-    public ManifoldInsightsEffect() {
+    ManifoldInsightsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top ten cards of your library. Starting with the next opponent in turn order, each opponent chooses a different nonland card from among them. Put the chosen cards into your hand and the rest on the bottom of your library in a random order";
     }
 
-    public ManifoldInsightsEffect(final ManifoldInsightsEffect effect) {
+    private ManifoldInsightsEffect(final ManifoldInsightsEffect effect) {
         super(effect);
     }
 

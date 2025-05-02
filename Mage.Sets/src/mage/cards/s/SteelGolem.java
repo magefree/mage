@@ -27,7 +27,7 @@ public final class SteelGolem extends CardImpl {
         this.toughness = new MageInt(4);
 
         // You can't cast creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelGolemEffect()));
+        this.addAbility(new SimpleStaticAbility(new SteelGolemEffect()));
     }
 
     private SteelGolem(final SteelGolem card) {
@@ -42,12 +42,12 @@ public final class SteelGolem extends CardImpl {
 
 class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SteelGolemEffect() {
+    SteelGolemEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You can't cast creature spells";
     }
 
-    public SteelGolemEffect(final SteelGolemEffect effect) {
+    private SteelGolemEffect(final SteelGolemEffect effect) {
         super(effect);
     }
 

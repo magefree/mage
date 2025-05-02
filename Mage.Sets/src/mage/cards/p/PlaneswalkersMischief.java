@@ -50,12 +50,12 @@ public final class PlaneswalkersMischief extends CardImpl {
 
 class PlaneswalkersMischiefEffect extends OneShotEffect {
 
-    public PlaneswalkersMischiefEffect() {
+    PlaneswalkersMischiefEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent reveals a card at random from their hand. If it's an instant or sorcery card, exile it. You may cast it without paying its mana cost for as long as it remains exiled. At the beginning of the next end step, if you haven't cast it, return it to its owner's hand.";
     }
 
-    public PlaneswalkersMischiefEffect(final PlaneswalkersMischiefEffect effect) {
+    private PlaneswalkersMischiefEffect(final PlaneswalkersMischiefEffect effect) {
         super(effect);
     }
 
@@ -95,11 +95,11 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
 class PlaneswalkersMischiefCastFromExileEffect extends AsThoughEffectImpl {
 
     PlaneswalkersMischiefCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card without paying its mana cost as long as it remains exiled";
     }
 
-    PlaneswalkersMischiefCastFromExileEffect(final PlaneswalkersMischiefCastFromExileEffect effect) {
+    private PlaneswalkersMischiefCastFromExileEffect(final PlaneswalkersMischiefCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -115,7 +115,7 @@ class PlaneswalkersMischiefCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(objectId)
+        if (getTargetPointer().getTargets(game, source).contains(objectId)
                 && game.getState().getZone(objectId) == Zone.EXILED) {
             Player player = game.getPlayer(source.getControllerId());
             Card card = game.getCard(objectId);

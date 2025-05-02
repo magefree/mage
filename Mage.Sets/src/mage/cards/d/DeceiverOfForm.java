@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.*;
@@ -30,7 +30,7 @@ public final class DeceiverOfForm extends CardImpl {
         // At the beginning of combat on your turn, reveal the top card of your library.
         // If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form becomes copies of that card until end of turn.
         // You may put that card on the bottom of your library.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new DeceiverOfFormEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new DeceiverOfFormEffect()));
     }
 
     private DeceiverOfForm(final DeceiverOfForm card) {
@@ -45,12 +45,12 @@ public final class DeceiverOfForm extends CardImpl {
 
 class DeceiverOfFormEffect extends OneShotEffect {
 
-    public DeceiverOfFormEffect() {
+    DeceiverOfFormEffect() {
         super(Outcome.Copy);
         this.staticText = "reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form becomes copies of that card until end of turn. You may put that card on the bottom of your library";
     }
 
-    public DeceiverOfFormEffect(final DeceiverOfFormEffect effect) {
+    private DeceiverOfFormEffect(final DeceiverOfFormEffect effect) {
         super(effect);
     }
 
@@ -81,11 +81,8 @@ class DeceiverOfFormEffect extends OneShotEffect {
                                         && ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
                                     copyFromCard = ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard();
                                 }
-                                Permanent newBluePrint = null;
-                                newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
-                                newBluePrint.assignNewId();
+                                Permanent newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
                                 CopyEffect copyEffect = new CopyEffect(Duration.EndOfTurn, newBluePrint, permanent.getId());
-                                copyEffect.newId();
                                 Ability newAbility = source.copy();
                                 copyEffect.init(newAbility, game);
                                 game.addEffect(copyEffect, newAbility);

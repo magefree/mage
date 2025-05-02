@@ -56,7 +56,7 @@ class YidrisMaelstromWielderGainCascadeEffect extends ContinuousEffectImpl {
         staticText = "as you cast spells from your hand this turn, they gain cascade";
     }
 
-    public YidrisMaelstromWielderGainCascadeEffect(final YidrisMaelstromWielderGainCascadeEffect effect) {
+    private YidrisMaelstromWielderGainCascadeEffect(final YidrisMaelstromWielderGainCascadeEffect effect) {
         super(effect);
     }
 

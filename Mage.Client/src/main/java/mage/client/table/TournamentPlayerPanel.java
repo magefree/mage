@@ -22,13 +22,29 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
         this.pnlPlayerName.setVisible(false);
     }
 
-    public void init(int playerNum) {
+    public void init(int playerNum, PlayerType playerType, int playerSkill) {
         cbPlayerType.setModel(new DefaultComboBoxModel(SessionHandler.getPlayerTypes()));
         this.lblPlayerNum.setText("Player " + playerNum);
+        if (ClientDefaultSettings.otherPlayerIndex != null) {
+            Integer index = Integer.parseInt(ClientDefaultSettings.otherPlayerIndex);
+            if (index >= cbPlayerType.getItemCount()) {
+                cbPlayerType.setSelectedIndex(cbPlayerType.getItemCount() - 1);
+            } else {
+                cbPlayerType.setSelectedIndex(index);
+            }
+        }
+        if (playerType != null) {
+            this.cbPlayerType.setSelectedItem(playerType);
+        }
+        this.spnLevel.setValue(playerSkill);
     }
 
     public JComboBox getPlayerType() {
         return this.cbPlayerType;
+    }
+
+    public int getPlayerSkill() {
+        return (Integer) this.spnLevel.getValue();
     }
 
     public boolean joinTournamentTable(UUID roomId, UUID tableId, DeckCardLists deckCardLists) {
@@ -78,7 +94,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Skill:");
 
-        spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
+        spnLevel.setModel(new javax.swing.SpinnerNumberModel(2, 1, 10, 1));
         spnLevel.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout pnlPlayerNameLayout = new javax.swing.GroupLayout(pnlPlayerName);

@@ -31,7 +31,7 @@ public final class DictateOfTheTwinGods extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DictateOfTheTwinGodsEffect()));
+        this.addAbility(new SimpleStaticAbility(new DictateOfTheTwinGodsEffect()));
 
     }
 
@@ -47,12 +47,12 @@ public final class DictateOfTheTwinGods extends CardImpl {
 
 class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
 
-    public DictateOfTheTwinGodsEffect() {
+    DictateOfTheTwinGodsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
-        staticText = "If a source would deal damage to a permanent or player, that source deals double that damage to that permanent or player instead";
+        staticText = "If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead";
     }
 
-    public DictateOfTheTwinGodsEffect(final DictateOfTheTwinGodsEffect effect) {
+    private DictateOfTheTwinGodsEffect(final DictateOfTheTwinGodsEffect effect) {
         super(effect);
     }
 
@@ -74,11 +74,6 @@ class DictateOfTheTwinGodsEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return true;
     }
 

@@ -28,7 +28,7 @@ public final class WandOfDenial extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {tap}: Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WandOfDenialEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new WandOfDenialEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -45,12 +45,12 @@ public final class WandOfDenial extends CardImpl {
 
 class WandOfDenialEffect extends OneShotEffect {
 
-    public WandOfDenialEffect() {
+    WandOfDenialEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.";
     }
     
-    public WandOfDenialEffect(final WandOfDenialEffect effect) {
+    private WandOfDenialEffect(final WandOfDenialEffect effect) {
         super(effect);
     }
 

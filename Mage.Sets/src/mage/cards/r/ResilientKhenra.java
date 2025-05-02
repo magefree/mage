@@ -1,20 +1,20 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.EternalizeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,8 +30,8 @@ public final class ResilientKhenra extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Resilient Khenra enters the battlefield, you may have target creature get +X/+X until end of turn, where X is Resilient Khenra's power.
-        DynamicValue xValue = new SourcePermanentPowerCount(false);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(
+                SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

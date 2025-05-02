@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.BloodToken;
-import mage.target.common.TargetControlledPermanent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import java.util.UUID;
  */
 public final class RestlessBloodseeker extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
+    private static final Condition condition = new YouGainedLifeCondition();
     private static final Hint hint = new ConditionHint(condition, "You gained life this turn");
     private static final FilterControlledPermanent filter
             = new FilterControlledPermanent(SubType.BLOOD, "Blood tokens");
@@ -46,15 +45,15 @@ public final class RestlessBloodseeker extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, create a Blood token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new BloodToken()),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new CreateTokenEffect(new BloodToken()),
+                false, condition
         ).addHint(hint), new PlayerGainedLifeWatcher());
 
         // Sacrifice two Blood tokens: Transform Restless Bloodseeker. Activate only as a sorcery.
         this.addAbility(new TransformAbility());
         this.addAbility(new ActivateAsSorceryActivatedAbility(
                 new TransformSourceEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(2, filter))
+                new SacrificeTargetCost(2, filter)
         ));
     }
 

@@ -9,7 +9,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class BlackManaBattery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {2}, {T}: Put a charge counter on Black Mana Battery.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)),
                 new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
@@ -38,7 +38,7 @@ public final class BlackManaBattery extends CardImpl {
         // Add {B}, then add an additional {B} for each charge counter removed this way.
         ability = new DynamicManaAbility(
                 Mana.BlackMana(1),
-                new IntPlusDynamicValue(1, RemovedCountersForCostValue.instance),
+                new IntPlusDynamicValue(1, GetXValue.instance),
                 new TapSourceCost(),
                 "Add {B}, then add {B} for each charge counter removed this way",
                 true, new IntPlusDynamicValue(1, new CountersSourceCount(CounterType.CHARGE)));

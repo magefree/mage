@@ -39,7 +39,7 @@ public final class Purity extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // If noncombat damage would be dealt to you, prevent that damage. You gain life equal to the damage prevented this way.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PurityEffect()));
+        this.addAbility(new SimpleStaticAbility(new PurityEffect()));
 
         // When Purity is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
@@ -62,7 +62,7 @@ class PurityEffect extends PreventionEffectImpl {
         staticText = "If noncombat damage would be dealt to you, prevent that damage. You gain life equal to the damage prevented this way";
     }
 
-    PurityEffect(final PurityEffect effect) {
+    private PurityEffect(final PurityEffect effect) {
         super(effect);
     }
 

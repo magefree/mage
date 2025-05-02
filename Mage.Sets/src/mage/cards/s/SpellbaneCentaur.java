@@ -36,7 +36,7 @@ public final class SpellbaneCentaur extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Creatures you control can't be the targets of blue spells or abilities from blue sources.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CantBeTargetedAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES,
                         filter, Duration.WhileOnBattlefield)));
     }

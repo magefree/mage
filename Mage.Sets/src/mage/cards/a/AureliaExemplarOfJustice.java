@@ -3,7 +3,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -45,8 +44,7 @@ public final class AureliaExemplarOfJustice extends CardImpl {
 
         // At the beginning of combat on your turn, choose up to one target creature you control. Until end of turn, that creature gets +2/+0, gains trample if it's red, and gains vigilance if it's white.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AureliaExemplarOfJusticeEffect(),
-                TargetController.YOU, false
+                new AureliaExemplarOfJusticeEffect()
         );
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);
@@ -64,7 +62,7 @@ public final class AureliaExemplarOfJustice extends CardImpl {
 
 class AureliaExemplarOfJusticeEffect extends OneShotEffect {
 
-    public AureliaExemplarOfJusticeEffect() {
+    AureliaExemplarOfJusticeEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose up to one target creature you control. "
                 + "Until end of turn, that creature gets +2/+0, "
@@ -72,7 +70,7 @@ class AureliaExemplarOfJusticeEffect extends OneShotEffect {
                 + "and gains vigilance if it's white.";
     }
 
-    public AureliaExemplarOfJusticeEffect(final AureliaExemplarOfJusticeEffect effect) {
+    private AureliaExemplarOfJusticeEffect(final AureliaExemplarOfJusticeEffect effect) {
         super(effect);
     }
 

@@ -15,7 +15,7 @@ public final class PlantToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected PlantToken(final PlantToken token) {
+    private PlantToken(final PlantToken token) {
         super(token);
     }
 

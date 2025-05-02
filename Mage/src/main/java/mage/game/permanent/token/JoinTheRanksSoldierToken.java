@@ -19,7 +19,7 @@ public final class JoinTheRanksSoldierToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected JoinTheRanksSoldierToken(final JoinTheRanksSoldierToken token) {
+    private JoinTheRanksSoldierToken(final JoinTheRanksSoldierToken token) {
         super(token);
     }
 

@@ -20,7 +20,7 @@ public final class SorinLordOfInnistradVampireToken extends TokenImpl {
         addAbility(LifelinkAbility.getInstance());
     }
 
-    protected SorinLordOfInnistradVampireToken(final SorinLordOfInnistradVampireToken token) {
+    private SorinLordOfInnistradVampireToken(final SorinLordOfInnistradVampireToken token) {
         super(token);
     }
 

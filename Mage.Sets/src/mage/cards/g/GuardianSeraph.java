@@ -32,7 +32,7 @@ public final class GuardianSeraph extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // If a source an opponent controls would deal damage to you, prevent 1 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GuardianSeraphEffect()));
+        this.addAbility(new SimpleStaticAbility(new GuardianSeraphEffect()));
     }
 
     private GuardianSeraph(final GuardianSeraph card) {
@@ -47,12 +47,12 @@ public final class GuardianSeraph extends CardImpl {
 
 class GuardianSeraphEffect extends PreventionEffectImpl {
 
-    public GuardianSeraphEffect() {
+    GuardianSeraphEffect() {
         super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If a source an opponent controls would deal damage to you, prevent 1 of that damage";
     }
 
-    public GuardianSeraphEffect(final GuardianSeraphEffect effect) {
+    private GuardianSeraphEffect(final GuardianSeraphEffect effect) {
         super(effect);
     }
 

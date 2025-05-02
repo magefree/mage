@@ -28,7 +28,7 @@ public final class AkromasDevoted extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Cleric creatures have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(VigilanceAbility.getInstance(),
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(VigilanceAbility.getInstance(),
             Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.CLERIC, "Cleric creatures"))));
     }
 

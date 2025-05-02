@@ -34,7 +34,6 @@ public final class SkatewingSpy extends CardImpl {
 
         // Each creature you control with a +1/+1 counter on it has flying.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(
                         FlyingAbility.getInstance(),
                         Duration.WhileOnBattlefield,

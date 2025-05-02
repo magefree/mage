@@ -27,7 +27,7 @@ public final class ThopterArchitect extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever an artifact enters the battlefield under your control, target creature gains flying until end of turn.
+        // Whenever an artifact you control enters, target creature gains flying until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new GainAbilityTargetEffect(FlyingAbility.getInstance()),
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN

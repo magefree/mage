@@ -75,10 +75,10 @@ class UnblinkingObserverManaCondition extends ManaCondition implements Condition
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source instanceof DisturbAbility) {
+        if (source instanceof DisturbAbility && !source.isActivated()) {
             return true;
         }
-        if (source instanceof SpellAbility) {
+        if (source instanceof SpellAbility && !source.isActivated()) {
             MageObject object = game.getObject(source);
             return object != null && object.isInstantOrSorcery(game);
         }

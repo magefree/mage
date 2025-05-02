@@ -21,7 +21,9 @@ public class PermanentReferenceInCollectionPredicate implements Predicate<Perman
         this.references = references;
     }
     public PermanentReferenceInCollectionPredicate(Collection<Permanent> permanents, Game game) {
-        this.references = permanents.stream().map((p) -> new MageObjectReference(p, game))
+        this.references = permanents
+                .stream()
+                .map(p -> new MageObjectReference(p, game))
                 .collect(Collectors.toSet());
     }
 

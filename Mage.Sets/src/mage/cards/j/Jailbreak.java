@@ -49,7 +49,7 @@ public final class Jailbreak extends CardImpl {
 
 class JailbreakEffect extends OneShotEffect {
 
-    public JailbreakEffect() {
+    JailbreakEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Return target permanent card in an opponent's graveyard to the battlefield under their control. " +
                 "When that permanent enters the battlefield, return up to one target permanent card with equal or lesser mana value from your graveyard to the battlefield.";

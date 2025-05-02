@@ -38,12 +38,12 @@ public final class PrimalSurge extends CardImpl {
 
 class PrimalSurgeEffect extends OneShotEffect {
 
-    public PrimalSurgeEffect() {
+    PrimalSurgeEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Exile the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you do, repeat this process";
     }
 
-    public PrimalSurgeEffect(final PrimalSurgeEffect effect) {
+    private PrimalSurgeEffect(final PrimalSurgeEffect effect) {
         super(effect);
     }
 
@@ -59,19 +59,21 @@ class PrimalSurgeEffect extends OneShotEffect {
             return false;
         }
 
-        boolean repeat;
         do {
-            repeat = false;
             Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                controller.moveCards(card, Zone.EXILED, source, game);
-                if (card.isPermanent(game)
-                        && controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    repeat = true;
-                }
+            if (card == null) {
+                break;
             }
-        } while (controller.canRespond() && repeat);
+            if (!controller.moveCards(card, Zone.EXILED, source, game)) {
+                break;
+            }
+            if (card.isPermanent(game)
+                    && controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                continue;
+            }
+            break;
+        } while (controller.canRespond());
 
         return true;
     }

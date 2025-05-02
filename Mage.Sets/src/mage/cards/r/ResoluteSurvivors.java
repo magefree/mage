@@ -1,18 +1,18 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ExertCreatureControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.keyword.ExertAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,12 +32,8 @@ public final class ResoluteSurvivors extends CardImpl {
         this.addAbility(new ExertAbility(null, false));
 
         // Whenever you exert a creature, Resolute Survivors deals 1 damage to each opponent and you gain 1 life.
-        Effect effect = new LoseLifeOpponentsEffect(1);
-        effect.setText("Whenever you exert a creature, {this} deals 1 damage to each opponent");
-        Ability ability = new ExertCreatureControllerTriggeredAbility(effect);
-        effect = new GainLifeEffect(1);
-        effect.setText("and you gain 1 life");
-        ability.addEffect(effect);
+        Ability ability = new ExertCreatureControllerTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT));
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 

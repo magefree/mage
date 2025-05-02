@@ -1,6 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,6 +13,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -31,7 +34,7 @@ public final class FallOfCairAndros extends CardImpl {
         this.addAbility(new FallOfCairAndrosTriggeredAbility());
 
         // {7}{R}: Fall of Cair Andros deals 7 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(7), new ManaCostsImpl("{7}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(7), new ManaCostsImpl<>("{7}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -46,7 +49,7 @@ public final class FallOfCairAndros extends CardImpl {
     }
 }
 
-class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl {
+class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     FallOfCairAndrosTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -63,22 +66,28 @@ class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // all events in the batch are always relevant if triggers at all
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null || !permanent.isCreature(game)
                 || !game.getOpponents(getControllerId()).contains(permanent.getControllerId())) {
             return false;
         }
-        DamagedPermanentEvent dEvent = (DamagedPermanentEvent) event;
-        if (dEvent.isCombatDamage() || dEvent.getExcess() < 1) {
+        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
+        int excessDamage = dEvent.getEvents()
+                .stream()
+                .mapToInt(DamagedEvent::getExcess)
+                .sum();
+
+        if (dEvent.isCombatDamage() || excessDamage < 1) {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new AmassEffect(dEvent.getExcess(), SubType.ORC));
+        this.addEffect(new AmassEffect(excessDamage, SubType.ORC));
         return true;
     }
 

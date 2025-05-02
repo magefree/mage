@@ -22,13 +22,13 @@ public final class TowerOfMurmurs extends CardImpl {
 
     public TowerOfMurmurs (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(8), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(8), new GenericManaCost(8));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public TowerOfMurmurs (final TowerOfMurmurs card) {
+    private TowerOfMurmurs(final TowerOfMurmurs card) {
         super(card);
     }
 

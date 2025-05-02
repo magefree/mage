@@ -35,7 +35,6 @@ public final class GraveyardMarshal extends CardImpl {
 
         // {2}{B}, Exile a creature card from your graveyard: Create a tapped 2/2 black Zombie creature token.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(
                         new ZombieToken(),
                         1, true, false

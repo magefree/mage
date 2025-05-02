@@ -47,6 +47,7 @@ import java.util.UUID;
 public class ChampionAbility extends StaticAbility {
 
     protected final String objectDescription;
+    protected final String etbObjectDescription;
 
     /**
      * Champion one or more creature types or if the subtype array is empty
@@ -58,6 +59,8 @@ public class ChampionAbility extends StaticAbility {
      */
     public ChampionAbility(Card card, SubType... subtypes) {
         super(Zone.BATTLEFIELD, null);
+
+        this.etbObjectDescription = EntersBattlefieldTriggeredAbility.getThisObjectDescription(card);
 
         List<SubType> subTypes = Arrays.asList(subtypes);
         FilterControlledPermanent filter;
@@ -105,6 +108,7 @@ public class ChampionAbility extends StaticAbility {
     protected ChampionAbility(final ChampionAbility ability) {
         super(ability);
         this.objectDescription = ability.objectDescription;
+        this.etbObjectDescription = ability.etbObjectDescription;
     }
 
     @Override
@@ -115,7 +119,7 @@ public class ChampionAbility extends StaticAbility {
     @Override
     public String getRule() {
         return "Champion " + CardUtil.addArticle(objectDescription)
-                + " <i>(When this enters the battlefield, sacrifice it unless you exile another " + objectDescription
+                + " <i>(When " + etbObjectDescription + " enters, sacrifice it unless you exile another " + objectDescription
                 + " you control. When this leaves the battlefield, that card returns to the battlefield.)</i>";
     }
 }
@@ -134,10 +138,10 @@ class ChampionExileCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player controller = game.getPlayer(controllerId);
-        if (controller == null || !targets.choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
+        if (controller == null || !this.getTargets().choose(Outcome.Exile, controllerId, source.getSourceId(), source, game)) {
             return paid;
         }
-        for (UUID targetId : targets.get(0).getTargets()) {
+        for (UUID targetId : this.getTargets().get(0).getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent == null) {
                 return false;
@@ -156,7 +160,7 @@ class ChampionExileCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

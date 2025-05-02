@@ -30,10 +30,10 @@ public final class GlorifierOfDusk extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Pay 2 life: Glorifier of Dusk gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new PayLifeCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new PayLifeCost(2)));
 
         // Pay 2 life: Glorifier of Dusk gains vigilance until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new PayLifeCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new PayLifeCost(2)));
     }
 
     private GlorifierOfDusk(final GlorifierOfDusk card) {

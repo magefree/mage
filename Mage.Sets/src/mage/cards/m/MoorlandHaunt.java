@@ -30,7 +30,7 @@ public final class MoorlandHaunt extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {W}{U}, {tap}, Exile a creature card from your graveyard: Create a 1/1 white Spirit creature token with flying.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new SpiritWhiteToken()),
                 new ManaCostsImpl<>("{W}{U}"));
         ability.addCost(new TapSourceCost());

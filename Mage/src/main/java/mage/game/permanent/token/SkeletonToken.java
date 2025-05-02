@@ -18,7 +18,7 @@ public final class SkeletonToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected SkeletonToken(final SkeletonToken token) {
+    private SkeletonToken(final SkeletonToken token) {
         super(token);
     }
 

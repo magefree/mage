@@ -28,11 +28,11 @@ public final class SharedFate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
         // If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new SharedFateReplacementEffect()));
 
         // Each player may look at and play cards they exiled with Shared Fate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFatePlayEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateLookEffect()));
+        this.addAbility(new SimpleStaticAbility(new SharedFatePlayEffect()));
+        this.addAbility(new SimpleStaticAbility(new SharedFateLookEffect()));
     }
 
     private SharedFate(final SharedFate card) {
@@ -60,7 +60,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead";
     }
 
-    SharedFateReplacementEffect(final SharedFateReplacementEffect effect) {
+    private SharedFateReplacementEffect(final SharedFateReplacementEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
         staticText = "Each player may look at and play cards they exiled with {this}";
     }
 
-    SharedFatePlayEffect(final SharedFatePlayEffect effect) {
+    private SharedFatePlayEffect(final SharedFatePlayEffect effect) {
         super(effect);
     }
 
@@ -159,12 +159,12 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
 
 class SharedFateLookEffect extends AsThoughEffectImpl {
 
-    public SharedFateLookEffect() {
+    SharedFateLookEffect() {
         super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each player may look at the cards exiled with {this}";
     }
 
-    public SharedFateLookEffect(final SharedFateLookEffect effect) {
+    private SharedFateLookEffect(final SharedFateLookEffect effect) {
         super(effect);
     }
 

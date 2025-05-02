@@ -27,7 +27,7 @@ public final class CatharticAdept extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new MillCardsTargetEffect(1),
                 new TapSourceCost());
         ability.addTarget(new TargetPlayer());

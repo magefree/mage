@@ -47,6 +47,7 @@ public class ChoiceColor extends ChoiceImpl {
 
         this.setMessage(chooseMessage);
         this.setSubMessage(chooseSubMessage);
+        this.manaColorChoice = true;
     }
 
     protected ChoiceColor(final ChoiceColor choice) {

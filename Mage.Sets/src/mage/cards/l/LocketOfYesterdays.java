@@ -24,7 +24,7 @@ public final class LocketOfYesterdays extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LocketOfYesterdaysCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new LocketOfYesterdaysCostReductionEffect()));
     }
 
     private LocketOfYesterdays(final LocketOfYesterdays card) {
@@ -44,7 +44,7 @@ class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard";
     }
 
-    LocketOfYesterdaysCostReductionEffect(LocketOfYesterdaysCostReductionEffect effect) {
+    private LocketOfYesterdaysCostReductionEffect(final LocketOfYesterdaysCostReductionEffect effect) {
         super(effect);
     }
 

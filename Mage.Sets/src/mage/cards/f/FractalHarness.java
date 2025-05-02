@@ -3,8 +3,9 @@ package mage.cards.f;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoubleCountersTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +35,7 @@ public final class FractalHarness extends CardImpl {
 
         // Whenever equipped creature attacks, double the number of +1/+1 counters on it.
         this.addAbility(new AttacksAttachedTriggeredAbility(
-                new FractalHarnessDoubleEffect(), AttachmentType.EQUIPMENT, false, SetTargetPointer.PERMANENT
+                new DoubleCountersTargetEffect(CounterType.P1P1), AttachmentType.EQUIPMENT, false, SetTargetPointer.PERMANENT
         ));
 
         // Equip {2}
@@ -72,7 +73,7 @@ class FractalHarnessTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new FractalToken();
         token.putOntoBattlefield(1, game, source, source.getControllerId());
-        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
+        int xValue = GetXValue.instance.calculate(game, source, this);
         boolean flag = true;
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent permanent = game.getPermanent(tokenId);
@@ -86,32 +87,5 @@ class FractalHarnessTokenEffect extends OneShotEffect {
             permanent.addCounters(CounterType.P1P1.createInstance(xValue), source.getControllerId(), source, game);
         }
         return true;
-    }
-}
-
-class FractalHarnessDoubleEffect extends OneShotEffect {
-
-    FractalHarnessDoubleEffect() {
-        super(Outcome.Benefit);
-        staticText = "double the number of +1/+1 counters on it";
-    }
-
-    private FractalHarnessDoubleEffect(final FractalHarnessDoubleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FractalHarnessDoubleEffect copy() {
-        return new FractalHarnessDoubleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent == null) {
-            return false;
-        }
-        return permanent.addCounters(CounterType.P1P1.createInstance(permanent.getCounters(game).getCount(CounterType.P1P1)),
-                 source.getControllerId(), source, game);
     }
 }

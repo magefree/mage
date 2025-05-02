@@ -1,26 +1,13 @@
 package mage.cards.a;
 
-import java.util.EnumSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.ModalDoubleFacedCardHalf;
+import mage.cards.*;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -29,8 +16,11 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.EnumSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author credman0
  */
 public class AminatousAugury extends CardImpl {
@@ -58,7 +48,7 @@ public class AminatousAugury extends CardImpl {
 
 class AminatousAuguryEffect extends OneShotEffect {
 
-    public AminatousAuguryEffect() {
+    AminatousAuguryEffect() {
         super(Outcome.PlayForFree);
         staticText = "Exile the top eight cards of your library. "
                 + "You may put a land card from among them onto the battlefield. "
@@ -66,7 +56,7 @@ class AminatousAuguryEffect extends OneShotEffect {
                 + "you may cast a spell of that type from among the exiled cards without paying its mana cost.";
     }
 
-    public AminatousAuguryEffect(final AminatousAuguryEffect effect) {
+    private AminatousAuguryEffect(final AminatousAuguryEffect effect) {
         super(effect);
     }
 
@@ -88,7 +78,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         }
 
         // move cards from library to exile
-        controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 8), source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
+        controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 8), source, game, true, source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, null));
         ExileZone auguryExileZone = game.getExile().getExileZone(source.getSourceId());
         if (auguryExileZone == null) {
             return true;
@@ -137,12 +127,12 @@ class AminatousAuguryEffect extends OneShotEffect {
 
 class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
 
-    public AminatousAuguryCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.PlayForFree);
+    AminatousAuguryCastFromExileEffect() {
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.PlayForFree);
         staticText = "Cast this card without paying its mana cost";
     }
 
-    public AminatousAuguryCastFromExileEffect(final AminatousAuguryCastFromExileEffect effect) {
+    private AminatousAuguryCastFromExileEffect(final AminatousAuguryCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -218,7 +208,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
             usedCardTypes.addAll(unusedCardTypes);
             game.getState().setValue(source.getSourceId().toString() + "cardTypes", usedCardTypes);
         }
-        player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
+        allowCardToPlayWithoutMana(objectId, source, player.getId(), game);
         return true;
     }
 }

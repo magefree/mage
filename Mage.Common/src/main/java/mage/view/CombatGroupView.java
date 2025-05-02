@@ -19,6 +19,7 @@ public class CombatGroupView implements Serializable {
 
     private final CardsView attackers = new CardsView();
     private final CardsView blockers = new CardsView();
+    private final boolean isBlocked;
     private String defenderName = "";
     private final UUID defenderId;
 
@@ -40,12 +41,13 @@ public class CombatGroupView implements Serializable {
                 attackers.put(id, new PermanentView(attacker, game.getCard(attacker.getId()),null, game));
             }
         }
-        for (UUID id: combatGroup.getBlockerOrder()) {
+        for (UUID id: combatGroup.getBlockers()) {
             Permanent blocker = game.getPermanent(id);
             if (blocker != null) {
                 blockers.put(id, new PermanentView(blocker, game.getCard(blocker.getId()), null, game));
             }
         }
+        isBlocked = combatGroup.getBlocked();
     }
 
     public String getDefenderName() {
@@ -62,5 +64,9 @@ public class CombatGroupView implements Serializable {
 
     public UUID getDefenderId() {
         return defenderId;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
     }
 }

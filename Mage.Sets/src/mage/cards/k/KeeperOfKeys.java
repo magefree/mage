@@ -3,19 +3,18 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 /**
@@ -34,12 +33,12 @@ public final class KeeperOfKeys extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Keeper of Keys enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new CantBeBlockedAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, Duration.EndOfTurn),
-                TargetController.YOU, false), MonarchIsSourceControllerCondition.instance,
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
+                new CantBeBlockedAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, Duration.EndOfTurn)
+        ), MonarchIsSourceControllerCondition.instance,
                 "At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn."));
     }
 

@@ -42,7 +42,7 @@ public class StennParanoidPartisan extends CardImpl {
         ));
 
         // Spells you cast of the chosen type cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostReductionAllOfChosenCardTypeEffect(new FilterCard("Spells you cast of the chosen type"), 1, true)
         ));
 

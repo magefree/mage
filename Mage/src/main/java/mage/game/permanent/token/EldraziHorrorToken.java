@@ -18,7 +18,7 @@ public final class EldraziHorrorToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    protected EldraziHorrorToken(final EldraziHorrorToken token) {
+    private EldraziHorrorToken(final EldraziHorrorToken token) {
         super(token);
     }
 

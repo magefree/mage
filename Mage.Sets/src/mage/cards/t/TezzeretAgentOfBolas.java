@@ -72,7 +72,7 @@ class TezzeretAgentOfBolasEffect2 extends OneShotEffect {
         staticText = "Target player loses X life and you gain X life, where X is twice the number of artifacts you control";
     }
 
-    public TezzeretAgentOfBolasEffect2(final TezzeretAgentOfBolasEffect2 effect) {
+    private TezzeretAgentOfBolasEffect2(final TezzeretAgentOfBolasEffect2 effect) {
         super(effect);
     }
 

@@ -42,13 +42,13 @@ public final class Flamewright extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, {tap}: Create a 1/1 colorless Construct artifact creature token with defender.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DarettiConstructToken()), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new DarettiConstructToken()), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {tap}, Sacrifice a creature with defender: Flamewright deals 1 damage to any target.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

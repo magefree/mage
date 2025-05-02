@@ -54,7 +54,7 @@ class IchneumonDruidAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(StaticValue.get(4), false, "that player", true));
     }
 
-    public IchneumonDruidAbility(final IchneumonDruidAbility ability) {
+    private IchneumonDruidAbility(final IchneumonDruidAbility ability) {
         super(ability);
     }
 

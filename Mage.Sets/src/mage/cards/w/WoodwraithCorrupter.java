@@ -41,7 +41,7 @@ public final class WoodwraithCorrupter extends CardImpl {
 
         // {1}{B}{G}, {T}: Target Forest becomes a 4/4 black and green Elemental Horror creature. It's still a land.
         Effect effect = new BecomesCreatureTargetEffect(new WoodwraithCorrupterToken(), false, true, Duration.Custom);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{B}{G}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -71,7 +71,7 @@ class WoodwraithCorrupterToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
-    public WoodwraithCorrupterToken(final WoodwraithCorrupterToken token) {
+    private WoodwraithCorrupterToken(final WoodwraithCorrupterToken token) {
         super(token);
     }
 

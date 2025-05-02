@@ -32,12 +32,12 @@ public final class DeadeyePlunderers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Deadeye Plunderers gets +1/+1 for each artifact you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(ArtifactYouControlCount.instance, ArtifactYouControlCount.instance, Duration.WhileOnBattlefield)
         ).addHint(ArtifactYouControlHint.instance));
 
         // {2}{U}{B}: Create a colorless artifact token named Treasure with "{T}, Sacrifice this artifact: Add one mana of any color."
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl<>("{2}{U}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl<>("{2}{U}{B}")));
     }
 
     private DeadeyePlunderers(final DeadeyePlunderers card) {

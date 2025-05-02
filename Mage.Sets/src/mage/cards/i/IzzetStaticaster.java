@@ -43,7 +43,7 @@ public final class IzzetStaticaster extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {T}: Izzet Staticaster deals 1 damage to target creature and each other creature with the same name as that creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IzzetStaticasterDamageEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new IzzetStaticasterDamageEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -60,12 +60,12 @@ public final class IzzetStaticaster extends CardImpl {
 
 class IzzetStaticasterDamageEffect extends OneShotEffect {
 
-    public IzzetStaticasterDamageEffect() {
+    IzzetStaticasterDamageEffect() {
         super(Outcome.Exile);
         this.staticText = "{this} deals 1 damage to target creature and each other creature with the same name as that creature";
     }
 
-    public IzzetStaticasterDamageEffect(final IzzetStaticasterDamageEffect effect) {
+    private IzzetStaticasterDamageEffect(final IzzetStaticasterDamageEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class IzzetStaticasterDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             if (CardUtil.haveEmptyName(targetPermanent)) {

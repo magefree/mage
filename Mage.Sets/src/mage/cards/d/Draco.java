@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.common.DomainValue;
@@ -39,7 +39,8 @@ public final class Draco extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new DracoCostReductionEffect()).addHint(DomainHint.instance));
 
         // Domain - At the beginning of your upkeep, sacrifice Draco unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DracoSacrificeUnlessPaysEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DracoSacrificeUnlessPaysEffect())
+                .setAbilityWord(AbilityWord.DOMAIN));
     }
 
     private Draco(final Draco card) {
@@ -54,7 +55,7 @@ public final class Draco extends CardImpl {
 
 class DracoCostReductionEffect extends CostModificationEffectImpl {
 
-    public DracoCostReductionEffect() {
+    DracoCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "<i>Domain</i> &mdash; This spell costs {2} less to cast for each basic land type among lands you control.";
     }
@@ -88,7 +89,7 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
         staticText = "sacrifice {this} unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.";
     }
 
-    public DracoSacrificeUnlessPaysEffect(final DracoSacrificeUnlessPaysEffect effect) {
+    private DracoSacrificeUnlessPaysEffect(final DracoSacrificeUnlessPaysEffect effect) {
         super(effect);
     }
 
@@ -118,5 +119,3 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
     }
 
 }
-
-

@@ -86,12 +86,12 @@ class NicolBolasDragonGodGainAbilitiesEffect extends ContinuousEffectImpl {
         if (perm == null) {
             return true;
         }
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 filter, source.getControllerId(), source, game
         )) {
             for (Ability ability : permanent.getAbilities()) {
                 if (ability instanceof LoyaltyAbility) {
-                    perm.addAbility(ability, source.getSourceId(), game);
+                    perm.addAbility(ability, source.getSourceId(), game, true);
                 }
             }
         }
@@ -148,7 +148,7 @@ class NicolBolasDragonGodPlusOneEffect extends OneShotEffect {
             }
             // permanent
             TargetPermanent targetPermanent = new TargetControlledPermanent();
-            targetPermanent.setNotTarget(true);
+            targetPermanent.withNotTarget(true);
             targetPermanent.setTargetController(opponentId);
             if (!targetPermanent.possibleTargets(opponentId, game).isEmpty()) {
                 possibleTargetTypes.add(targetPermanent);

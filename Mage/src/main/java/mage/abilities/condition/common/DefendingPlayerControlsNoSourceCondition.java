@@ -10,6 +10,10 @@ import mage.game.Game;
 /**
  * This condition always returns false outside of the combat phase.
  *
+ * The name is bad, but "No Source" is refering to the fact this is to be used outside
+ * a "Whenever ~ attacks," or similar, where the "defending player" takes another
+ * meaning. {@link DefendingPlayerControlsNoSourcePredicate} for more info.
+ *
  * @author Susucr
  */
 public class DefendingPlayerControlsNoSourceCondition implements Condition {

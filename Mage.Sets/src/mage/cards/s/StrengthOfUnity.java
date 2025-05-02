@@ -37,7 +37,7 @@ public final class StrengthOfUnity extends CardImpl {
         // Domain - Enchanted creature gets +1/+1 for each basic land type among lands you control.
         Effect effect = new BoostEnchantedEffect(DomainValue.REGULAR, DomainValue.REGULAR);
         effect.setText("<i>Domain</i> &mdash; Enchanted creature gets +1/+1 for each basic land type among lands you control.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(DomainHint.instance));
+        this.addAbility(new SimpleStaticAbility(effect).addHint(DomainHint.instance));
     }
 
     private StrengthOfUnity(final StrengthOfUnity card) {

@@ -12,9 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -23,13 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class Oliphaunt extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
     
     public Oliphaunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
@@ -46,7 +37,7 @@ public final class Oliphaunt extends CardImpl {
                 .setText("another target creature you control gets +2/+0"));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())
                 .setText("and gains trample until end of turn"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 
         // Mountaincycling {1}

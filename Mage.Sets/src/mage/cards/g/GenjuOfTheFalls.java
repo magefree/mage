@@ -41,7 +41,7 @@ public final class GenjuOfTheFalls extends CardImpl {
         this.addAbility(ability);
 
         // {2}: Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
         this.addAbility(ability2);
 
         // When enchanted Island is put into a graveyard, you may return Genju of the Falls from your graveyard to your hand.        TargetPermanent auraTarget = new TargetLandPermanent(filter);
@@ -72,7 +72,7 @@ public final class GenjuOfTheFalls extends CardImpl {
             addAbility(FlyingAbility.getInstance());
         }
 
-        public SpiritToken(final SpiritToken token) {
+        private SpiritToken(final SpiritToken token) {
             super(token);
         }
 

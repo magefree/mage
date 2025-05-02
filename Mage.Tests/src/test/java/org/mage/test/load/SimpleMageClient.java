@@ -23,9 +23,13 @@ public class SimpleMageClient implements MageClient {
 
     private final LoadCallbackClient callbackClient;
 
-    public SimpleMageClient(boolean joinGameChat, String logsPrefix) {
+    public SimpleMageClient(boolean joinGameChat, String logsPrefix, Boolean showLogsAsHtml) {
         clientId = UUID.randomUUID();
-        callbackClient = new LoadCallbackClient(joinGameChat, logsPrefix);
+        callbackClient = new LoadCallbackClient(joinGameChat, logsPrefix, showLogsAsHtml);
+    }
+
+    protected void updateGlobalProgress(String globalProgress) {
+        callbackClient.updateGlobalProgress(globalProgress);
     }
 
     @Override
@@ -39,7 +43,7 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public void disconnected(boolean askToReconnect) {
+    public void disconnected(boolean askToReconnect, boolean keepMySessionActive) {
         // do nothing
     }
 
@@ -54,9 +58,14 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public void processCallback(ClientCallback callback) {
+    public void onNewConnection() {
+        callbackClient.onNewConnection();
+    }
+
+    @Override
+    public void onCallback(ClientCallback callback) {
         try {
-            callbackClient.processCallback(callback);
+            callbackClient.onCallback(callback);
         } catch (Throwable e) {
             log.error(e.getMessage(), e);
         }

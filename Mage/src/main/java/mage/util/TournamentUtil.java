@@ -13,16 +13,14 @@ import java.util.stream.Collectors;
 public final class TournamentUtil {
 
     /**
-     * Tries to calculate the most appropiate sets to add basic lands for cards of a deck
+     * Tries to calculate the most appropriate sets to add basic lands for cards of a deck
      *
-     * @param setCodesDeck
-     * @return setCode for lands
+     * @param setCodesDeck all sets in current deck
      */
-
     public static Set<String> getLandSetCodeForDeckSets(Collection<String> setCodesDeck) {
-
         Set<String> landSetCodes = new HashSet<>();
-        // decide from which sets basic lands are taken from
+
+        // from deck's sets
         for (String setCode : setCodesDeck) {
             ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
             if (expansionInfo.hasBasicLands() && !CardRepository.haveSnowLands(setCode)) {
@@ -30,7 +28,7 @@ public final class TournamentUtil {
             }
         }
 
-        // if sets have no basic land, take land from block
+        // from deck's blocks
         if (landSetCodes.isEmpty()) {
             for (String setCode : setCodesDeck) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
@@ -42,10 +40,9 @@ public final class TournamentUtil {
                 }
             }
         }
-        // if still no set with lands found, take one by random
+
+        // from random
         if (landSetCodes.isEmpty()) {
-            // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
-            // select a set with basic lands by random
             List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate()
                     .stream()
                     .filter(exp -> !CardRepository.haveSnowLands(exp.getCode()))
@@ -56,7 +53,7 @@ public final class TournamentUtil {
         }
 
         if (landSetCodes.isEmpty()) {
-            throw new IllegalArgumentException("No set with basic land was found");
+            throw new IllegalArgumentException("No set with basic land was found (possible memory problems, need server restart)");
         }
         return landSetCodes;
     }
@@ -73,7 +70,7 @@ public final class TournamentUtil {
         List<Card> cards = new ArrayList<>();
         if (!lands.isEmpty()) {
             for (int i = 0; i < number; i++) {
-                Card land = lands.get(RandomUtil.nextInt(lands.size())).getCard();
+                Card land = lands.get(RandomUtil.nextInt(lands.size())).createCard();
                 cards.add(land);
             }
         }

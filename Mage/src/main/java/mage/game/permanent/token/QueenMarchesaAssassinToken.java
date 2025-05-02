@@ -22,7 +22,7 @@ public final class QueenMarchesaAssassinToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    protected QueenMarchesaAssassinToken(final QueenMarchesaAssassinToken token) {
+    private QueenMarchesaAssassinToken(final QueenMarchesaAssassinToken token) {
         super(token);
     }
 

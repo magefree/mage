@@ -33,7 +33,7 @@ public final class IxallisKeeper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {7}{G}, {T}, Sacrifice Ixalli's Keeper: Target creature gets +5/+5 and gains trample until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(5, 5, Duration.EndOfTurn)
                         .setText("Target creature gets +5/+5"), new ManaCostsImpl<>("{7}{G}"));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)

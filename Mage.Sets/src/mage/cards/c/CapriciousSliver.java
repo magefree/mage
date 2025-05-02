@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class CapriciousSliver extends CardImpl {
         // Sliver creatures you control have "Whenever this creature deals combat damage to a player, exile the top card of your library. You may play that card this turn."
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new DealsCombatDamageToAPlayerTriggeredAbility(
-                        new ExileTopXMayPlayUntilEndOfTurnEffect(1), false
+                        new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn).withTextOptions("that card", true), false
                 ).setTriggerPhrase("Whenever this creature deals combat damage to a player, "),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_SLIVERS
         )));

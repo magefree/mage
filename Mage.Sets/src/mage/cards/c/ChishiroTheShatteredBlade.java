@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -45,7 +44,7 @@ public final class ChishiroTheShatteredBlade extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever an Aura or Equipment enters the battlefield under your control, create a 2/2 red Spirit creature token.
+        // Whenever an Aura or Equipment you control enters, create a 2/2 red Spirit creature token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CreateTokenEffect(new SpiritRedToken()), filter
         ));
@@ -53,7 +52,7 @@ public final class ChishiroTheShatteredBlade extends CardImpl {
         // At the beginning of your end step, put a +1/+1 counter on each modified creature you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(), filter2
-        ), TargetController.YOU, false));
+        )));
     }
 
     private ChishiroTheShatteredBlade(final ChishiroTheShatteredBlade card) {

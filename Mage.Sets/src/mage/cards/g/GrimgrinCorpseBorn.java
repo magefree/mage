@@ -47,13 +47,13 @@ public final class GrimgrinCorpseBorn extends CardImpl {
 
         // Grimgrin, Corpse-Born enters the battlefield tapped and doesn't untap during your untap step.
         Ability ability = new EntersBattlefieldTappedAbility(
-                "{this} enters the battlefield tapped and doesn't untap during your untap step.");
+                "{this} enters tapped and doesn't untap during your untap step.");
         ability.addEffect(new DontUntapInControllersUntapStepSourceEffect());
         this.addAbility(ability);
 
         // Sacrifice another creature: Untap Grimgrin and put a +1/+1 counter on it.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability = new SimpleActivatedAbility(new UntapSourceEffect(),
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("and put a +1/+1 counter on it"));
         this.addAbility(ability);
 

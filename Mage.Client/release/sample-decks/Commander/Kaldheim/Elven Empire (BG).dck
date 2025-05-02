@@ -1,0 +1,75 @@
+1 [HA4:20] Abomination of Llanowar
+1 [8ED:118] Ambition's Cost
+1 [ELD:331] Arcane Signet
+1 [CLU:158] Beast Whisperer
+1 [KHM:206] Binding the Old Gods
+1 [KHC:12] Bounty of Skemfar
+1 [KHM:378] Canopy Tactician
+1 [WAR:187] Casualties of War
+1 [ELD:333] Command Tower
+1 [KHC:13] Crown of Skemfar
+1 [KLD:151] Cultivator of Blades
+1 [ORI:172] Dwynen, Gilt-Leaf Daen
+1 [KHM:385] Elderfang Ritualist
+1 [KHC:15] Elderfang Venom
+1 [KHM:391] Elven Ambush
+1 [M13:168] Elvish Archdruid
+1 [M15:173] Elvish Mystic
+1 [LRW:208] Elvish Promenade
+1 [M19:180] Elvish Rejuvenator
+1 [RNA:124] End-Raze Forerunners
+1 [KHC:48] Eyeblight Cullers
+1 [ORI:96] Eyeblight Massacre
+1 [SHM:113] Farhaven Elf
+16 [OTJ:276] Forest
+1 [M19:251] Foul Orchard
+1 [GRN:175] Golgari Findbroker
+1 [CLU:235] Golgari Guildgate
+1 [CLU:236] Golgari Rot Farm
+1 [KHM:212] Harald, King of Skemfar
+1 [AKH:170] Harvest Season
+1 [LRW:220] Imperious Perfect
+1 [LRW:222] Jagged-Scar Archers
+1 [KHM:178] Jaspera Sentinel
+1 [MOM:270] Jungle Hollow
+1 [GN3:102] Llanowar Tribe
+1 [LRW:229] Lys Alana Huntmaster
+1 [LRW:122] Lys Alana Scarblade
+1 [DOM:172] Marwyn, the Nurturer
+1 [LRW:230] Masked Admirers
+1 [KHC:51] Miara, Thorn of the Glade
+1 [M20:214] Moldervine Reclamation
+1 [M3C:358] Myriad Landscape
+1 [RAV:174] Nullmage Shepherd
+1 [KHC:71] Numa, Joraga Chieftain
+1 [LCC:206] Pact of the Serpent
+1 [M3C:363] Path of Ancestry
+1 [KHM:103] Poison the Cup
+1 [M19:220] Poison-Tip Archer
+1 [KHC:52] Pride of the Perfect
+1 [LRW:136] Prowess of the Fair
+1 [DGM:93] Putrefy
+1 [M19:196] Reclamation Sage
+1 [KHM:106] Return Upon the Tide
+1 [MOR:135] Rhys the Exiled
+1 [KHM:190] Roots of Wisdom
+1 [KHC:10] Ruthless Winnower
+1 [KHC:11] Serpent's Soul-Jar
+1 [ORI:217] Shaman of the Pack
+1 [KHM:268] Skemfar Elderhall
+1 [KHM:110] Skemfar Shadowsage
+1 [SUM:274] Sol Ring
+1 [OTC:208] Springbloom Druid
+13 [OTJ:274] Swamp
+1 [ORI:199] Sylvan Messenger
+1 [KHM:113] Tergrid's Shadow
+1 [LGN:140] Timberwatch Elf
+1 [M21:226] Twinblade Assassins
+1 [SCD:215] Voice of Many
+1 [ONS:297] Voice of the Woods
+1 [LGN:144] Wirewood Channeler
+1 [KHC:14] Wolverine Riders
+1 [9ED:283] Wood Elves
+SB: 1 [KHC:1] Lathril, Blade of the Elves
+LAYOUT MAIN:(1,8)(CARD_TYPE,false,55)|([ELD:331],[KHC:11],[SUM:274])([HA4:20],[CLU:158],[KHM:378],[KLD:151],[ORI:172],[KHM:385],[M13:168],[M15:173],[M19:180],[RNA:124],[KHC:48],[SHM:113],[GRN:175],[KHM:212],[LRW:220],[LRW:222],[KHM:178],[GN3:102],[LRW:229],[LRW:122],[DOM:172],[LRW:230],[KHC:51],[RAV:174],[KHC:71],[M19:220],[M19:196],[MOR:135],[KHC:10],[ORI:217],[KHM:110],[OTC:208],[ORI:199],[LGN:140],[M21:226],[SCD:215],[ONS:297],[LGN:144],[KHC:14],[9ED:283])([KHM:206],[KHC:13],[KHC:15],[M20:214],[KHC:52])([KHM:391],[KHM:103],[DGM:93],[KHM:113])([ELD:333],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[M19:251],[CLU:235],[CLU:236],[MOM:270],[M3C:358],[M3C:363],[KHM:268],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274])([8ED:118],[KHC:12],[WAR:187],[ORI:96],[AKH:170],[LCC:206],[KHM:106],[KHM:190])([LRW:136])([LRW:208])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([KHC:1])

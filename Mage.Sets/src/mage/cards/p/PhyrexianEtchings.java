@@ -2,7 +2,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -28,7 +28,7 @@ public final class PhyrexianEtchings extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{B}")));
 
         // At the beginning of your end step, draw a card for each age counter on Phyrexian Etchings.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.AGE)), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.AGE))));
 
         // When Phyrexian Etchings is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new LoseLifeSourceControllerEffect(new MultipliedValue(new CountersSourceCount(CounterType.AGE), 2))

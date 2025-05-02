@@ -4,7 +4,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
@@ -31,7 +31,7 @@ public final class PhantasmalImage extends CardImpl {
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
             blueprint.addSubType(SubType.ILLUSION);
-            blueprint.getAbilities().add(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+            blueprint.getAbilities().add(new BecomesTargetSourceTriggeredAbility(new SacrificeSourceEffect()));
             return true;
         }
     };
@@ -44,9 +44,7 @@ public final class PhantasmalImage extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // You may have Phantasmal Image enter the battlefield as a copy of any creature
-        // on the battlefield, except it's an Illusion in addition to its other types and
-        // it has "When this creature becomes the target of a spell or ability, sacrifice it."
+        // You may have Phantasmal Image enter the battlefield as a copy of any creature on the battlefield, except it's an Illusion in addition to its other types and it has "When this creature becomes the target of a spell or ability, sacrifice it."
         Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, phantasmalImageApplier);
         effect.setText(effectText);
         this.addAbility(new EntersBattlefieldAbility(effect, true));

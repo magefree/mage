@@ -20,7 +20,7 @@ public final class HumanClericToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    protected HumanClericToken(final HumanClericToken token) {
+    private HumanClericToken(final HumanClericToken token) {
         super(token);
     }
 

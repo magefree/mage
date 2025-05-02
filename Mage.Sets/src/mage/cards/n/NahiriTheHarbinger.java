@@ -95,7 +95,7 @@ class NahiriTheHarbingerEffect extends SearchEffect {
         this.staticText = "Search your library for an artifact or creature card, put it onto the battlefield, then shuffle. It gains haste. Return it to your hand at the beginning of the next end step";
     }
 
-    NahiriTheHarbingerEffect(final NahiriTheHarbingerEffect effect) {
+    private NahiriTheHarbingerEffect(final NahiriTheHarbingerEffect effect) {
         super(effect);
     }
 

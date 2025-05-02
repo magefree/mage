@@ -3,7 +3,6 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlankingAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -43,7 +42,7 @@ public final class SidarKondoOfJamuraa extends CardImpl {
         this.addAbility(new FlankingAbility());
 
         // Creatures your opponents control without flying or reach can't block creatures with power 2 or less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(filter)));
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
@@ -63,17 +62,13 @@ class SidarKondoOfJamuraaCantBlockCreaturesSourceEffect extends RestrictionEffec
 
     private final FilterCreaturePermanent filter;
 
-    public SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(FilterCreaturePermanent filter) {
-        this(filter, Duration.WhileOnBattlefield);
-    }
-
-    public SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(FilterCreaturePermanent filter, Duration duration) {
-        super(duration);
+    SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(FilterCreaturePermanent filter) {
+        super(Duration.WhileOnBattlefield);
         this.filter = filter;
         staticText = "Creatures your opponents control without flying or reach can't block " + filter.getMessage();
     }
 
-    public SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(SidarKondoOfJamuraaCantBlockCreaturesSourceEffect effect) {
+    private SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(final SidarKondoOfJamuraaCantBlockCreaturesSourceEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -96,7 +91,7 @@ class SidarKondoOfJamuraaCantBlockCreaturesSourceEffect extends RestrictionEffec
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public SidarKondoOfJamuraaCantBlockCreaturesSourceEffect copy() {
         return new SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(this);
     }
 }

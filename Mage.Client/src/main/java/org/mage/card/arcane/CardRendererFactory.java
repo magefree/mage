@@ -1,6 +1,7 @@
 package org.mage.card.arcane;
 
-import mage.cards.ArtRect;
+import mage.cards.FrameStyle;
+import mage.client.dialog.PreferencesDialog;
 import mage.view.CardView;
 
 /**
@@ -12,10 +13,10 @@ public class CardRendererFactory {
     }
 
     public CardRenderer create(CardView card) {
-        if (card.isSplitCard() && card.getArtRect() != ArtRect.SPLIT_FUSED) {
-            // Split fused cards still render with the normal frame, showing all abilities
-            // from both halves in one frame.
+        if (card.isSplitCard()) {
             return new ModernSplitCardRenderer(card);
+        } else if (card.getFrameStyle().equals(FrameStyle.RETRO)  || card.getFrameStyle().equals(FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC) || PreferencesDialog.getRenderRetroFrames()) {
+            return new RetroCardRenderer(card);
         } else {
             return new ModernCardRenderer(card);
         }

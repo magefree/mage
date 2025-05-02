@@ -35,13 +35,13 @@ public final class MinamoSchoolAtWatersEdge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.supertype.add(SuperType.LEGENDARY);
         this.addAbility(new BlueManaAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(),  new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(),  new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
-    public MinamoSchoolAtWatersEdge (final MinamoSchoolAtWatersEdge card) {
+    private MinamoSchoolAtWatersEdge(final MinamoSchoolAtWatersEdge card) {
         super(card);
     }
 

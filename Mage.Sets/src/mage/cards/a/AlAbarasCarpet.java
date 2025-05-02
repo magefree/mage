@@ -31,7 +31,7 @@ public final class AlAbarasCarpet extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {5}, {T}: Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AlAbarasCarpetEffect(), new GenericManaCost(5));
+        Ability ability = new SimpleActivatedAbility(new AlAbarasCarpetEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
@@ -59,7 +59,7 @@ class AlAbarasCarpetEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you this turn by attacking creatures without flying";
     }
 
-    AlAbarasCarpetEffect(final AlAbarasCarpetEffect effect) {
+    private AlAbarasCarpetEffect(final AlAbarasCarpetEffect effect) {
         super(effect);
     }
 

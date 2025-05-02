@@ -38,13 +38,13 @@ public final class ShorecrasherElemental extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}: Exile Shorecrasher Elemental, then return it to the battlefield face down under its owner's control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShorecrasherElementalEffect(), new ManaCostsImpl<>("{U}")));
+        this.addAbility(new SimpleActivatedAbility(new ShorecrasherElementalEffect(), new ManaCostsImpl<>("{U}")));
 
         // {1}: Shorecrasher Elemental gets +1/-1 or -1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShorecrasherElementalBoostEffect(), new ManaCostsImpl<>("{1}")));
+        this.addAbility(new SimpleActivatedAbility(new ShorecrasherElementalBoostEffect(), new ManaCostsImpl<>("{1}")));
 
         // Megamorph {4}{U}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{4}{U}"), true));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{U}"), true));
 
     }
 
@@ -60,12 +60,12 @@ public final class ShorecrasherElemental extends CardImpl {
 
 class ShorecrasherElementalEffect extends OneShotEffect {
 
-    public ShorecrasherElementalEffect() {
+    ShorecrasherElementalEffect() {
         super(Outcome.Neutral);
         this.staticText = "Exile {this}, then return it to the battlefield face down under its owner's control";
     }
 
-    public ShorecrasherElementalEffect(final ShorecrasherElementalEffect effect) {
+    private ShorecrasherElementalEffect(final ShorecrasherElementalEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class ShorecrasherElementalBoostEffect extends OneShotEffect {
         this.staticText = "{this} gets +1/-1 or -1/+1 until end of turn";
     }
 
-    public ShorecrasherElementalBoostEffect(final ShorecrasherElementalBoostEffect effect) {
+    private ShorecrasherElementalBoostEffect(final ShorecrasherElementalBoostEffect effect) {
         super(effect);
     }
 

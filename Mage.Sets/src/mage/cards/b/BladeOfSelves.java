@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -17,12 +16,18 @@ import mage.constants.*;
  */
 public final class BladeOfSelves extends CardImpl {
 
+    private static final String rule = "Equipped creature has myriad. " +
+            "<i>(Whenever it attacks, for each opponent other than defending player, " +
+            "you may create a token that's a copy of that creature that's tapped and " +
+            "attacking that player or a planeswalker they control. Exile the tokens at end of combat.)</i>";
+
     public BladeOfSelves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has myriad.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new MyriadAbility(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(new MyriadAbility(), AttachmentType.EQUIPMENT)
+                .setText(rule)));
         
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), false));

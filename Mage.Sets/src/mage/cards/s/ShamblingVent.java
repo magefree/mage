@@ -35,7 +35,7 @@ public final class ShamblingVent extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {1}{W}{B}: Shambling Vent becomes a 2/3 white and black Elemental creature with lifelink until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new ShamblingVentToken(), CardType.LAND, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}{B}")));
     }
 
@@ -61,7 +61,7 @@ class ShamblingVentToken extends TokenImpl {
         toughness = new MageInt(3);
         addAbility(LifelinkAbility.getInstance());
     }
-    public ShamblingVentToken(final ShamblingVentToken token) {
+    private ShamblingVentToken(final ShamblingVentToken token) {
         super(token);
     }
 

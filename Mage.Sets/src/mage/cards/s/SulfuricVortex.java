@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -28,10 +28,10 @@ public final class SulfuricVortex extends CardImpl {
 
 
         // At the beginning of each player's upkeep, Sulfuric Vortex deals 2 damage to that player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"), TargetController.ANY, false, true));        
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new DamageTargetEffect(2, true, "that player"), false));
         
         // If a player would gain life, that player gains no life instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SulfuricVortexReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new SulfuricVortexReplacementEffect()));
         
     }
 
@@ -47,12 +47,12 @@ public final class SulfuricVortex extends CardImpl {
 
 class SulfuricVortexReplacementEffect extends ReplacementEffectImpl {
 
-    public SulfuricVortexReplacementEffect() {
+    SulfuricVortexReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a player would gain life, that player gains no life instead";
     }
 
-    public SulfuricVortexReplacementEffect(final SulfuricVortexReplacementEffect effect) {
+    private SulfuricVortexReplacementEffect(final SulfuricVortexReplacementEffect effect) {
         super(effect);
     }
 
@@ -69,11 +69,6 @@ class SulfuricVortexReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

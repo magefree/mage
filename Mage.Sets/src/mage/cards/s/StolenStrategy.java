@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ public final class StolenStrategy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
 
         // At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast nonland cards from among those exiled cards, and you may spend mana as though it were mana of any color to cast those spells.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new StolenStrategyEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new StolenStrategyEffect()));
     }
 
     private StolenStrategy(final StolenStrategy card) {
@@ -38,14 +38,14 @@ public final class StolenStrategy extends CardImpl {
 
 class StolenStrategyEffect extends OneShotEffect {
 
-    public StolenStrategyEffect() {
+    StolenStrategyEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "exile the top card of each opponent's library. "
                 + "Until end of turn, you may cast nonland cards from among those exiled cards, "
                 + "and you may spend mana as though it were mana of any color to cast those spells";
     }
 
-    public StolenStrategyEffect(final StolenStrategyEffect effect) {
+    private StolenStrategyEffect(final StolenStrategyEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class StolenStrategyEffect extends OneShotEffect {
                 if (!card.isLand(game) && card.getSpellAbility() != null) {
                     // allow to cast the card
                     // and you may spend mana as though it were mana of any color to cast it
-                    CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+                    CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
                 }
             }
         }

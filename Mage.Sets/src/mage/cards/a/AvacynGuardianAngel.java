@@ -41,14 +41,14 @@ public final class AvacynGuardianAngel extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {1}{W}: Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new AvacynGuardianAngelPreventToCreatureEffect(),
                 new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
 
         // {5}{W}{W}: Prevent all damage that would be dealt to target player this turn by sources of the color of your choice.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        ability = new SimpleActivatedAbility(
                 new AvacynGuardianAngelPreventToPlayerEffect(),
                 new ManaCostsImpl<>("{5}{W}{W}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
@@ -110,11 +110,6 @@ class AvacynGuardianAngelPreventToCreaturePreventionEffect extends PreventionEff
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!super.applies(event, source, game)
                 || event.getType() != GameEvent.EventType.DAMAGE_PERMANENT
@@ -173,11 +168,6 @@ class AvacynGuardianAngelPreventToPlayerPreventionEffect extends PreventionEffec
     private AvacynGuardianAngelPreventToPlayerPreventionEffect(AvacynGuardianAngelPreventToPlayerPreventionEffect effect) {
         super(effect);
         this.color = effect.color;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

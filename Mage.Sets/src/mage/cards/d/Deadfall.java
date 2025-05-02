@@ -24,7 +24,7 @@ public final class Deadfall extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Creatures with forestwalk can be blocked as though they didn't have forestwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DeadfallEffect()));
+        this.addAbility(new SimpleStaticAbility(new DeadfallEffect()));
     }
 
     private Deadfall(final Deadfall card) {
@@ -39,12 +39,12 @@ public final class Deadfall extends CardImpl {
 
 class DeadfallEffect extends AsThoughEffectImpl {
 
-    public DeadfallEffect() {
+    DeadfallEffect() {
         super(AsThoughEffectType.BLOCK_FORESTWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with forestwalk can be blocked as though they didn't have forestwalk";
     }
 
-    public DeadfallEffect(final DeadfallEffect effect) {
+    private DeadfallEffect(final DeadfallEffect effect) {
         super(effect);
     }
 

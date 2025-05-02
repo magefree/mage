@@ -27,7 +27,7 @@ public final class BorosSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BorosSignet (final BorosSignet card) {
+    private BorosSignet(final BorosSignet card) {
         super(card);
     }
 

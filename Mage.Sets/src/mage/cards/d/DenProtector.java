@@ -31,10 +31,10 @@ public final class DenProtector extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Creatures with power less than Den Protector's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
 
         // Megamorph {1}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{G}"), true));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{G}"), true));
 
         // When Den Protector is turned face up, return target card from your graveyard to your hand.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());

@@ -39,7 +39,7 @@ public final class HostileHostel extends CardImpl {
         this.addAbility(new TransformAbility());
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new HostileHostelEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

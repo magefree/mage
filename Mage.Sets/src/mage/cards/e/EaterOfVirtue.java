@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.cards.e;
 
 import java.util.Set;
@@ -40,6 +35,7 @@ import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,10 +56,10 @@ public final class EaterOfVirtue extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new EaterOfVirtueExileEffect(), "equipped creature", false, true, SetTargetPointer.CARD));
 
         // Equipped creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0, Duration.WhileOnBattlefield)));
 
         // As long as a card exiled with Eater of Virtue has flying, equipped creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EaterOfVirtueGainAbilityAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new EaterOfVirtueGainAbilityAttachedEffect()));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), false));
@@ -87,7 +83,7 @@ class EaterOfVirtueExileEffect extends OneShotEffect {
         this.staticText = "exile it";
     }
 
-    EaterOfVirtueExileEffect(final EaterOfVirtueExileEffect effect) {
+    private EaterOfVirtueExileEffect(final EaterOfVirtueExileEffect effect) {
         super(effect);
     }
 
@@ -100,7 +96,7 @@ class EaterOfVirtueExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent eaterOfVirtue = game.getPermanent(source.getSourceId());
-        Card exiledCard = game.getCard(targetPointer.getFirst(game, source));
+        Card exiledCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null
                 && eaterOfVirtue != null
                 && exiledCard != null) {
@@ -114,12 +110,12 @@ class EaterOfVirtueExileEffect extends OneShotEffect {
 
 class EaterOfVirtueGainAbilityAttachedEffect extends ContinuousEffectImpl {
 
-    public EaterOfVirtueGainAbilityAttachedEffect() {
+    EaterOfVirtueGainAbilityAttachedEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "As long as a card exiled with Eater of Virtue has flying, equipped creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance";
     }
 
-    public EaterOfVirtueGainAbilityAttachedEffect(final EaterOfVirtueGainAbilityAttachedEffect effect) {
+    private EaterOfVirtueGainAbilityAttachedEffect(final EaterOfVirtueGainAbilityAttachedEffect effect) {
         super(effect);
     }
 
@@ -135,10 +131,9 @@ class EaterOfVirtueGainAbilityAttachedEffect extends ContinuousEffectImpl {
                 && eaterOfVirtue.getAttachedTo() != null) {
             Permanent permanent = game.getPermanent(eaterOfVirtue.getAttachedTo());
             if (permanent != null) {
-                UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + "cards exiled by Eater of Virtue", game);
-                if (game.getState().getExile().getExileZone(exileId) != null
-                        && game.getState().getExile().getExileZone(exileId).size() > 0) {
-                    Set<Card> cardsInExile = game.getState().getExile().getExileZone(exileId).getCards(game);
+                ExileZone exileZone = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(source.getSourceId().toString() + "cards exiled by Eater of Virtue", game));
+                if (exileZone != null && !exileZone.isEmpty()) {
+                    Set<Card> cardsInExile = exileZone.getCards(game);
                     for (Card card : cardsInExile) {
                         for (Ability a : card.getAbilities()) {
                             if (a instanceof FlyingAbility) {

@@ -27,7 +27,7 @@ public final class CryptCreeper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Crypt Creeper: Exile target card from a graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
     }

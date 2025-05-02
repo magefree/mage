@@ -32,7 +32,7 @@ public final class CagedSun extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // Creatures you control of the chosen color get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CagedSunEffect2()));
+        this.addAbility(new SimpleStaticAbility(new CagedSunEffect2()));
 
         // Whenever a land's ability adds one or more mana of the chosen color, add one additional mana of that color.
         this.addAbility(new CagedSunTriggeredAbility());
@@ -57,7 +57,7 @@ class CagedSunEffect2 extends ContinuousEffectImpl {
         staticText = "Creatures you control of the chosen color get +1/+1";
     }
 
-    public CagedSunEffect2(final CagedSunEffect2 effect) {
+    private CagedSunEffect2(final CagedSunEffect2 effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility {
         super(Zone.BATTLEFIELD, new CagedSunEffect());
     }
 
-    public CagedSunTriggeredAbility(CagedSunTriggeredAbility ability) {
+    private CagedSunTriggeredAbility(final CagedSunTriggeredAbility ability) {
         super(ability);
     }
 
@@ -127,11 +127,11 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility {
 
 class CagedSunEffect extends ManaEffect {
 
-    public CagedSunEffect() {
+    CagedSunEffect() {
         super();
     }
 
-    public CagedSunEffect(final CagedSunEffect effect) {
+    private CagedSunEffect(final CagedSunEffect effect) {
         super(effect);
     }
 

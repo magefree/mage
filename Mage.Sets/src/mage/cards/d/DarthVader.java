@@ -1,8 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -19,8 +17,10 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Iterator;
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class DarthVader extends CardImpl {
@@ -58,12 +58,12 @@ public final class DarthVader extends CardImpl {
 
 class UnboostCreaturesDefendingPlayerEffect extends ContinuousEffectImpl {
 
-    public UnboostCreaturesDefendingPlayerEffect() {
+    UnboostCreaturesDefendingPlayerEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.UnboostCreature);
         staticText = "creatures defending player controls get -1/-1 until end of turn for each +1/+1 counter on Darth Vader";
     }
 
-    public UnboostCreaturesDefendingPlayerEffect(final UnboostCreaturesDefendingPlayerEffect effect) {
+    private UnboostCreaturesDefendingPlayerEffect(final UnboostCreaturesDefendingPlayerEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class UnboostCreaturesDefendingPlayerEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getTargetPointer().getFirst(game, source), game)) {
                 affectedObjectList.add(new MageObjectReference(creature, game));
             }
@@ -84,7 +84,7 @@ class UnboostCreaturesDefendingPlayerEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
                 int unboostCount = -1 * new CountersSourceCount(CounterType.P1P1).calculate(game, source, this);

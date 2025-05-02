@@ -42,7 +42,7 @@ public final class RunechantersPike extends CardImpl {
         Effect effect2 = new BoostEquippedEffect(new RunechantersPikeValue(), StaticValue.get(0));
         effect.setText("Equipped creature has first strike");
         effect2.setText(" and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ability.addEffect(effect2);
         this.addAbility(ability);
 

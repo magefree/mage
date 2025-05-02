@@ -30,7 +30,7 @@ public final class Lifeline extends CardImpl {
 
         // Whenever a creature dies, if another creature is on the battlefield, return the first card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new DiesCreatureTriggeredAbility(Zone.BATTLEFIELD, new LifelineEffect(), false, StaticFilters.FILTER_PERMANENT_CREATURE, true),
+                new DiesCreatureTriggeredAbility(new LifelineEffect(), false, StaticFilters.FILTER_PERMANENT_CREATURE, true),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_PERMANENT_CREATURE, false),
                 "Whenever a creature dies, if another creature is on the battlefield, return the first card to the battlefield under its owner's control at the beginning of the next end step.");
         this.addAbility(ability);
@@ -48,12 +48,12 @@ public final class Lifeline extends CardImpl {
 
 class LifelineEffect extends OneShotEffect {
 
-    public LifelineEffect() {
+    LifelineEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "";
     }
 
-    public LifelineEffect(final LifelineEffect effect) {
+    private LifelineEffect(final LifelineEffect effect) {
         super(effect);
     }
 
