@@ -92,7 +92,7 @@
             <!-- TODO: feature must be removed as unused or implemented for all -->
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.12.78</version>
+            <version>1.12.261</version>
         </dependency>
 
         <dependency>
