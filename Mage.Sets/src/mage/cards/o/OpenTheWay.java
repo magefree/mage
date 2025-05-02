@@ -3,7 +3,6 @@ package mage.cards.o;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.*;
@@ -28,7 +27,7 @@ public final class OpenTheWay extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new InfoEffect("X can't be greater than the number of players in the game")
         ).setRuleAtTheTop(true));
-        this.getSpellAbility().setCostAdjuster(OpenTheWayAdjuster.instance);
+        this.getSpellAbility().setCostAdjuster(OpenTheWayCostAdjuster.instance);
 
         // Reveal cards from the top of your library until you reveal X land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order.
         this.getSpellAbility().addEffect(new OpenTheWayEffect());
@@ -44,14 +43,12 @@ public final class OpenTheWay extends CardImpl {
     }
 }
 
-enum OpenTheWayAdjuster implements CostAdjuster {
+enum OpenTheWayCostAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int playerCount = game.getPlayers().size();
-        CardUtil.castStream(ability.getCosts().stream(), VariableManaCost.class)
-                .forEach(cost -> cost.setMaxX(playerCount));
+    public void prepareX(Ability ability, Game game) {
+        ability.setVariableCostsMinMax(0, game.getState().getPlayersInRange(ability.getControllerId(), game, true).size());
     }
 }
 

@@ -21,12 +21,12 @@ public class JudgeGiftCards2011 extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Bitterblossom", 1, Rarity.RARE, mage.cards.b.Bitterblossom.class));
-        cards.add(new SetCardInfo("Dark Confidant", 6, Rarity.RARE, mage.cards.d.DarkConfidant.class));
+        cards.add(new SetCardInfo("Dark Confidant", 6, Rarity.RARE, mage.cards.d.DarkConfidant.class, RETRO_ART));
         cards.add(new SetCardInfo("Doubling Season", 7, Rarity.RARE, mage.cards.d.DoublingSeason.class));
         cards.add(new SetCardInfo("Entomb", 4, Rarity.RARE, mage.cards.e.Entomb.class));
         cards.add(new SetCardInfo("Goblin Welder", 8, Rarity.RARE, mage.cards.g.GoblinWelder.class));
         cards.add(new SetCardInfo("Mana Crypt", 5, Rarity.RARE, mage.cards.m.ManaCrypt.class));
-        cards.add(new SetCardInfo("Sword of Fire and Ice", 2, Rarity.RARE, mage.cards.s.SwordOfFireAndIce.class));
+        cards.add(new SetCardInfo("Sword of Fire and Ice", 2, Rarity.RARE, mage.cards.s.SwordOfFireAndIce.class, RETRO_ART));
         cards.add(new SetCardInfo("Vendilion Clique", 3, Rarity.RARE, mage.cards.v.VendilionClique.class));
      }
 }

@@ -98,4 +98,31 @@ public class DoIfCostPaidTest extends CardTestPlayerBase {
         execute();
     }
 
+    @Test
+    public void testCannotPay() {
+        String thirst = "Thirst for Meaning"; // Draw three cards. Then discard two cards unless you discard an enchantment card.
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Craw Wurm");
+        addCard(Zone.LIBRARY, playerA, "Runeclaw Bear");
+        addCard(Zone.LIBRARY, playerA, "Glory Seeker");
+        addCard(Zone.HAND, playerA, thirst);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, thirst);
+        // can't discard enchantment, so must discard two
+        setChoice(playerA, "Runeclaw Bear");
+        setChoice(playerA, "Glory Seeker");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, 3);
+        assertGraveyardCount(playerA, thirst, 1);
+        assertGraveyardCount(playerA, "Runeclaw Bear", 1);
+        assertGraveyardCount(playerA, "Glory Seeker", 1);
+        assertHandCount(playerA, 1);
+        assertHandCount(playerA, "Craw Wurm", 1);
+    }
+
 }

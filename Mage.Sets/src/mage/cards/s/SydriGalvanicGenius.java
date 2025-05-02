@@ -73,6 +73,7 @@ class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
     SydriGalvanicGeniusEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private SydriGalvanicGeniusEffect(final SydriGalvanicGeniusEffect effect) {

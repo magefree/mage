@@ -1,13 +1,12 @@
 package mage.game.draft;
 
-import java.util.*;
-
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.game.draft.DraftCube.CardIdentity;
 
+import java.util.*;
+
 /**
- *
  * @author spjspj
  */
 public class RichManCubeBoosterDraft extends DraftImpl {
@@ -36,6 +35,7 @@ public class RichManCubeBoosterDraft extends DraftImpl {
             }
             boosterNum++;
         }
+        this.boosterSendingEnd();
         this.fireEndDraftEvent();
     }
 
@@ -65,7 +65,7 @@ public class RichManCubeBoosterDraft extends DraftImpl {
                 }
 
                 List<Card> nextBooster = draftCube.createBooster();
-                next.setBooster(nextBooster);
+                next.setBoosterAndLoad(nextBooster);
                 if (Objects.equals(nextId, startId)) {
                     break;
                 }
@@ -77,22 +77,21 @@ public class RichManCubeBoosterDraft extends DraftImpl {
 
     @Override
     protected boolean pickCards() {
-        for (DraftPlayer player : players.values()) {
-            if (cardNum > 36) {
-                return false;
-            }
-            player.setPicking();
-            player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
-        }
-        cardNum++;
-        synchronized (this) {
-            while (!donePicking()) {
-                try {
-                    this.wait();
-                } catch (InterruptedException ex) {
+        synchronized (players) {
+            for (DraftPlayer player : players.values()) {
+                if (cardNum > 36) {
+                    return false;
                 }
+                player.setPickingAndSending();
             }
         }
+
+        while (!donePicking()) {
+            boosterSendingStart();
+            picksWait();
+        }
+
+        cardNum++;
         return true;
     }
 

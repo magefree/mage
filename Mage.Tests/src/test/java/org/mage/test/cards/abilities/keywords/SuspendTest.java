@@ -43,6 +43,40 @@ public class SuspendTest extends CardTestPlayerBase {
     }
 
     /**
+     * Tests bug that was mentioned in suspend ability, but does not appear to still be an issue.
+     * Epochrasite being unable to be cast after casting from suspend and returning to hand.
+     */
+    @Test
+    public void test_Single_Epochrasite_Recast_After_Suspend() {
+        // Bug was mentioned in suspend ability, but does not appear to still be an issue
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        // Epochrasite enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand.
+        // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
+        addCard(Zone.HAND, playerA, "Epochrasite", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+        addCard(Zone.HAND, playerB, "Boomerang", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Epochrasite");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Epochrasite");
+        castSpell(7, PhaseStep.DRAW, playerB, "Boomerang", "Epochrasite");
+        castSpell(7, PhaseStep.PRECOMBAT_MAIN, playerA, "Epochrasite");
+
+
+        setChoice(playerA, true); // choose yes to cast
+
+        setStrictChooseMode(true);
+        setStopAt(7, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertPermanentCount(playerA, "Epochrasite", 1); // returned on turn 7 and cast again after going to hand
+        assertPowerToughness(playerA, "Epochrasite", 1, 1);
+        assertAbility(playerA, "Epochrasite", HasteAbility.getInstance(), false);
+    }
+
+    /**
      * Tests Jhoira of the Ghitu works (give suspend to a exiled card) {2},
      * Exile a nonland card from your hand: Put four time counters on the exiled
      * card. If it doesn't have suspend, it gains suspend.
@@ -275,6 +309,7 @@ public class SuspendTest extends CardTestPlayerBase {
 
         // 3 time counters removes on upkeep (3, 5, 7) and cast again
         setChoice(playerA, true); // choose yes to cast
+        setChoice(playerA, "Cast Wear");
         addTarget(playerA, "Bident of Thassa");
         checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bident of Thassa", 0);
         checkPermanentCount("after suspend", 7, PhaseStep.PRECOMBAT_MAIN, playerB, "Bow of Nylea", 1);

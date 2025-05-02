@@ -1,10 +1,11 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -15,20 +16,24 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class AxebaneGuardian extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
-    static{
+    static {
         filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final Hint hint = new ValueHint("Creatures you control with defender", xValue);
+
     public AxebaneGuardian(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
 
@@ -39,8 +44,10 @@ public final class AxebaneGuardian extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {tap}: Add X mana in any combination of colors, where X is the number of creatures with defender you control.
-        this.addAbility(new DynamicManaAbility(new Mana(0, 0, 0, 0,0, 0,1, 0), new PermanentsOnBattlefieldCount(filter),
-                "Add X mana in any combination of colors, where X is the number of creatures with defender you control."));
+        this.addAbility(new DynamicManaAbility(
+                Mana.AnyMana(1), xValue, "Add X mana in any combination of colors, " +
+                "where X is the number of creatures you control with defender."
+        ).addHint(hint));
     }
 
     private AxebaneGuardian(final AxebaneGuardian card) {

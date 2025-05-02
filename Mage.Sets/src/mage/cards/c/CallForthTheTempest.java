@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.UUID;
@@ -21,7 +22,7 @@ import java.util.UUID;
  */
 public final class CallForthTheTempest extends CardImpl {
 
-    private static Hint hint = new ValueHint("Total mana value of other spells you've cast this turn", CallForthTheTempestDynamicValue.instance);
+    private static final Hint hint = new ValueHint("Total mana value of other spells you've cast this turn", CallForthTheTempestDynamicValue.instance);
 
     public CallForthTheTempest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");
@@ -36,7 +37,7 @@ public final class CallForthTheTempest extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(
                 CallForthTheTempestDynamicValue.instance,
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
-        ));
+        ).setText("{this} deals damage to each creature your opponents control equal to the total mana value of other spells you've cast this turn"));
         this.getSpellAbility().addHint(hint);
     }
 
@@ -64,7 +65,7 @@ enum CallForthTheTempestDynamicValue implements DynamicValue {
                 .getSpellsCastThisTurn(sourceAbility.getControllerId())
                 .stream()
                 .filter(s -> s != null && !s.getSourceId().equals(sourceAbility.getSourceId()))
-                .mapToInt(s -> s.getManaValue())
+                .mapToInt(Spell::getManaValue)
                 .sum();
     }
 

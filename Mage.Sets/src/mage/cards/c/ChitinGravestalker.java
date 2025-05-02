@@ -34,7 +34,7 @@ public final class ChitinGravestalker extends CardImpl {
     }
 
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(filter);
-    private static final Hint hint = new ValueHint("Instant and sorcery card in your graveyard", xValue);
+    private static final Hint hint = new ValueHint("Artifact and/or creature cards in your graveyard", xValue);
 
     public ChitinGravestalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");

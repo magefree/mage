@@ -1,13 +1,12 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,6 +18,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,20 +76,15 @@ class MirrorMatchEffect extends OneShotEffect {
                     effect.setTargetPointer(new FixedTarget(attacker, game));
                     effect.apply(game, source);
                     CombatGroup group = game.getCombat().findGroup(attacker.getId());
-                    boolean isCreature = false;
                     if (group != null) {
                         for (Permanent addedToken : effect.getAddedPermanents()) {
                             if (addedToken.isCreature(game)) {
                                 group.addBlockerToGroup(addedToken.getId(), attackerId, game);
-                                isCreature = true;
                             }
                         }
                         ExileTargetEffect exileEffect = new ExileTargetEffect("Exile those tokens at end of combat");
                         exileEffect.setTargetPointer(new FixedTargets(effect.getAddedPermanents(), game));
                         game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
-                        if (isCreature) {
-                            group.pickBlockerOrder(attacker.getControllerId(), game);
-                        }
                     }
                 }
             }

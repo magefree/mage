@@ -2,23 +2,22 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.ModeChoiceSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseModeEffect;
+import mage.abilities.effects.common.continuous.GainAnchorWordAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ModeChoice;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -34,29 +33,21 @@ import java.util.stream.Collectors;
  */
 public final class StruggleForProjectPurity extends CardImpl {
 
-    private static final String ruleTrigger1 = "&bull  Brotherhood &mdash; At the beginning of your upkeep, each opponent draws a card. You draw a card for each card drawn this way.";
-    private static final String ruleTrigger2 = "&bull  Enclave &mdash; Whenever a player attacks you with one or more creatures, that player gets twice that many rad counters.";
-
     public StruggleForProjectPurity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // As Struggle for Project Purity enters, choose Brotherhood or Enclave.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Brotherhood or Enclave?", "Brotherhood", "Enclave"), null,
-                "As {this} enters, choose Brotherhood or Enclave.", ""));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(ModeChoice.BROTHERHOOD, ModeChoice.ENCLAVE)));
 
         // * Brotherhood - At the beginning of your upkeep, each opponent draws a card. You draw a card for each card drawn this way.
-        Ability ability = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new StruggleForProjectDrawEffect()),
-                new ModeChoiceSourceCondition("Brotherhood"),
-                ruleTrigger1);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(
+                new BeginningOfUpkeepTriggeredAbility(new StruggleForProjectDrawEffect()), ModeChoice.BROTHERHOOD
+        )));
 
         // * Enclave - Whenever a player attacks you with one or more creatures, that player gets twice that many rad counters.
-        ability = new ConditionalTriggeredAbility(
-                new StruggleForProjectRadCountersTriggeredAbility(),
-                new ModeChoiceSourceCondition("Enclave"),
-                ruleTrigger2);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(
+                new StruggleForProjectRadCountersTriggeredAbility(), ModeChoice.ENCLAVE
+        )));
     }
 
     private StruggleForProjectPurity(final StruggleForProjectPurity card) {
@@ -73,7 +64,7 @@ class StruggleForProjectDrawEffect extends OneShotEffect {
 
     StruggleForProjectDrawEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Each opponent draws a card. You draw a card for each card drawn this way.";
+        this.staticText = "each opponent draws a card. You draw a card for each card drawn this way.";
     }
 
     private StruggleForProjectDrawEffect(final StruggleForProjectDrawEffect effect) {
@@ -110,7 +101,6 @@ class StruggleForProjectRadCountersTriggeredAbility extends TriggeredAbilityImpl
 
     public StruggleForProjectRadCountersTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
-        setTriggerPhrase("Whenever a player attacks you with one or more creatures, ");
     }
 
     private StruggleForProjectRadCountersTriggeredAbility(final StruggleForProjectRadCountersTriggeredAbility ability) {
@@ -143,8 +133,6 @@ class StruggleForProjectRadCountersTriggeredAbility extends TriggeredAbilityImpl
         }
 
         this.getEffects().clear();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new ControllerIdPredicate(event.getPlayerId()));
         Effect effect = new AddCountersTargetEffect(
                 CounterType.RAD.createInstance(),
                 StaticValue.get(attackersOnYou.size() * 2)
@@ -152,5 +140,10 @@ class StruggleForProjectRadCountersTriggeredAbility extends TriggeredAbilityImpl
         effect.setTargetPointer(new FixedTarget(attackingPlayer.getId()));
         this.getEffects().add(effect);
         return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a player attacks you with one or more creatures, that player gets twice that many rad counters.";
     }
 }

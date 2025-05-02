@@ -20,7 +20,7 @@ public class ReshuffledBoosterDraft extends BoosterDraft {
     protected void openBooster() {
         if (boosterNum <= numberBoosters) {
             for (DraftPlayer player: players.values()) {
-                player.setBooster(reshuffledSet.createBooster());
+                player.setBoosterAndLoad(reshuffledSet.createBooster());
             }
         }
     }

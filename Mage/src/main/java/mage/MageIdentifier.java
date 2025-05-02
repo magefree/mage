@@ -35,6 +35,7 @@ public enum MageIdentifier {
     CourtOfLocthwainWatcher("Without paying manacost"),
     LaraCroftTombRaiderWatcher,
     CoramTheUndertakerWatcher,
+    ThundermanDragonWatcher,
 
     // ----------------------------//
     //       alternate casts       //
@@ -59,6 +60,7 @@ public enum MageIdentifier {
     DemonicEmbraceAlternateCast,
     FalcoSparaPactweaverAlternateCast,
     HelbruteAlternateCast,
+    IntoThePitAlternateCast,
     MaestrosAscendencyAlternateCast,
     NashiMoonSagesScionAlternateCast,
     OsteomancerAdeptAlternateCast,
@@ -76,7 +78,8 @@ public enum MageIdentifier {
     TheRuinousPowersAlternateCast,
     FiresOfMountDoomAlternateCast,
     PrimalPrayersAlternateCast,
-    QuilledGreatwurmAlternateCast;
+    QuilledGreatwurmAlternateCast,
+    WickerfolkIndomitableAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects

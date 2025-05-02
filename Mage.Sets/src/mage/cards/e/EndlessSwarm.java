@@ -22,7 +22,7 @@ public final class EndlessSwarm extends CardImpl {
 
 
         // Create a 1/1 green Snake creature token for each card in your hand.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), CardsInControllerHandCount.instance).setText("create a 1/1 green Snake creature token for each card in your hand"));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), CardsInControllerHandCount.ANY).setText("create a 1/1 green Snake creature token for each card in your hand"));
 
         // Epic
         this.getSpellAbility().addEffect(new EpicEffect());

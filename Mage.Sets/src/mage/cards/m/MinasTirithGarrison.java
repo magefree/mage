@@ -39,7 +39,7 @@ public final class MinasTirithGarrison extends CardImpl {
 
         // Minas Tirith Garrison's power is equal to the number of cards in your hand.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.instance)
+                Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.ANY)
         ));
 
         // Whenever Minas Tirith Garrison attacks, you may tap any number of untapped Humans you control. Draw a card for each Human tapped this way.

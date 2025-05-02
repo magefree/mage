@@ -781,15 +781,17 @@ public abstract class PlayerImpl implements Player, Serializable {
             Card card = isDrawsFromBottom() ? getLibrary().drawFromBottom(game) : getLibrary().drawFromTop(game);
             if (card != null) {
                 card.moveToZone(Zone.HAND, source, game, false); // if you want to use event.getSourceId() here then thinks x10 times
-                if (isTopCardRevealed()) {
+                if (isTopCardRevealed() && !isDrawsFromBottom()) {
                     game.fireInformEvent(getLogName() + " draws a revealed card  (" + card.getLogName() + ')');
                 }
                 game.fireEvent(new DrewCardEvent(card.getId(), getId(), source, event));
                 numDrawn++;
             }
         }
-        if (!isTopCardRevealed() && numDrawn > 0) {
-            game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
+        if ((!isTopCardRevealed() || isDrawsFromBottom()) && numDrawn > 0) {
+            game.fireInformEvent(getLogName() + " draws " + CardUtil.numberToText(numDrawn, "a")
+                    + " card" + (numDrawn > 1 ? "s" : "")
+                    + (isDrawsFromBottom() ? " from the bottom of their library" : ""));
         }
         // if this method was called from a replacement event, pass the number of cards back through
         // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
@@ -1346,6 +1348,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 castEvent.setZone(fromZone);
                 game.fireEvent(castEvent);
                 if (spell.activate(game, allowedIdentifiers, noMana)) {
+                    game.processAction();
                     GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
                             ability.getId(), ability, playerId, approvingObject);
                     castedEvent.setZone(fromZone);
@@ -3678,8 +3681,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!copy.canActivate(playerId, game).canActivate()) {
                 return false;
             }
+
+            // apply dynamic costs and cost modification
+            copy.adjustX(game);
             if (availableMana != null) {
-                copy.adjustCosts(game);
+                // TODO: need research, why it look at availableMana here - can delete condition?
                 game.getContinuousEffects().costModification(copy, game);
             }
             boolean canBeCastRegularly = true;
@@ -3890,7 +3896,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 copyAbility = ability.copy();
                 copyAbility.clearManaCostsToPay();
                 copyAbility.addManaCostsToPay(manaCosts.copy());
-                copyAbility.adjustCosts(game);
+                // apply dynamic costs and cost modification
+                copyAbility.adjustX(game);
                 game.getContinuousEffects().costModification(copyAbility, game);
 
                 // reduced all cost
@@ -3962,12 +3969,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // alternative cost reduce
                 copyAbility = ability.copy();
                 copyAbility.clearManaCostsToPay();
-                // TODO: IDE warning:
-                //              Unchecked assignment: 'mage.abilities.costs.mana.ManaCosts' to
-                //              'java.util.Collection<? extends mage.abilities.costs.mana.ManaCost>'.
-                //              Reason: 'manaCosts' has raw type, so result of copy is erased
                 copyAbility.addManaCostsToPay(manaCosts.copy());
-                copyAbility.adjustCosts(game);
+                // apply dynamic costs and cost modification
+                copyAbility.adjustX(game);
                 game.getContinuousEffects().costModification(copyAbility, game);
 
                 // reduced all cost
@@ -4067,11 +4071,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
-        } else if (object instanceof AdventureCard) {
+        } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
-            AdventureCard adventureCard = (AdventureCard) object;
-            getPlayableFromObjectSingle(game, fromZone, adventureCard.getSpellCard(), adventureCard.getSpellCard().getAbilities(game), availableMana, output);
-            getPlayableFromObjectSingle(game, fromZone, adventureCard, adventureCard.getSharedAbilities(game), availableMana, output);
+            CardWithSpellOption cardWithSpellOption = (CardWithSpellOption) object;
+            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
+            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
         } else if (object instanceof Card) {
             getPlayableFromObjectSingle(game, fromZone, object, ((Card) object).getAbilities(game), availableMana, output);
         } else if (object instanceof StackObject) {

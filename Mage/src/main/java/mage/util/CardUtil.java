@@ -58,6 +58,9 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -1079,46 +1082,70 @@ public final class CardUtil {
                 .collect(Collectors.toSet());
     }
 
-    /**
-     * For finding the spell or ability on the stack for "becomes the target" triggers.
-     *
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game  the Game from checkTrigger() or watch()
-     * @return the StackObject which targeted the source, or null if not found
-     */
-    public static StackObject getTargetingStackObject(GameEvent event, Game game) {
-        // In case of multiple simultaneous triggered abilities from the same source,
-        // need to get the actual one that targeted, see #8026, #8378
-        // Also avoids triggering on cancelled selections, see #8802
-        for (StackObject stackObject : game.getStack()) {
-            Ability stackAbility = stackObject.getStackAbility();
-            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
-                continue;
-            }
-            if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {
-                return stackObject;
-            }
-        }
-        return null;
+    public static Set<UUID> getAllPossibleTargets(Cost cost, Game game, Ability source) {
+        return cost.getTargets()
+                .stream()
+                .map(t -> t.possibleTargets(source.getControllerId(), source, game))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
     }
 
     /**
-     * For ensuring that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
+     * Distribute values between min and max and make sure that the values will be evenly distributed
+     * Use it to limit possible values list like mana options
+     */
+    public static List<Integer> distributeValues(int count, int min, int max) {
+        List<Integer> res = new ArrayList<>();
+        if (count <= 0 || min > max) {
+            return res;
+        }
+
+        if (min == max) {
+            res.add(min);
+            return res;
+        }
+
+        int range = max - min + 1;
+
+        // low possible amount
+        if (range <= count) {
+            for (int i = 0; i < range; i++) {
+                res.add(min + i);
+            }
+            return res;
+        }
+
+        // big possible amount, so skip some values
+        double step = (double) (max - min) / (count - 1);
+        for (int i = 0; i < count; i++) {
+            res.add(min + (int) Math.round(i * step));
+        }
+        // make sure first and last elements are good
+        res.set(0, min);
+        if (res.size() > 1) {
+            res.set(res.size() - 1, max);
+        }
+
+        return res;
+    }
+
+    /**
+     * For finding the spell or ability on the stack for "becomes the target" triggers.
+     * Also ensures that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
      * If this is the first attempt at triggering for a given ability targeting a given object,
-     * this method records that in the game state for later checks by this same method.
+     * this method records that in the game state for later checks by this same method, to not return the same object again.
      *
-     * @param checkingReference must be unique for each usage (this.id.toString() of the TriggeredAbility, or this.getKey() of the watcher)
-     * @param targetingObject   from getTargetingStackObject
+     * @param checkingReference must be unique for each usage (this.getId().toString() of the TriggeredAbility, or this.getKey() of the watcher)
      * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
      * @param game              the Game from checkTrigger() or watch()
-     * @return true if already triggered/watched, false if this is the first/only trigger/watch
+     * @return the StackObject which targeted the source, or null if already used or not found
      */
-    public static boolean checkTargetedEventAlreadyUsed(String checkingReference, StackObject targetingObject, GameEvent event, Game game) {
+    public static StackObject findTargetingStackObject(String checkingReference, GameEvent event, Game game) {
+        // In case of multiple simultaneous triggered abilities from the same source,
+        // need to get the actual one that targeted, see #8026, #8378, rulings for Battle Mammoth
+        // In case of copied triggered abilities, need to trigger on each independently, see #13498
+        // Also avoids triggering on cancelled selections, see #8802
         String stateKey = "targetedMap" + checkingReference;
-        // If a spell or ability an opponent controls targets a single permanent you control more than once,
-        // Battle Mammoth's triggered ability will trigger only once.
-        // However, if a spell or ability an opponent controls targets multiple permanents you control,
-        // Battle Mammoth's triggered ability will trigger once for each of those permanents. (2021-02-05)
         Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue(stateKey);
         // targetMap: key - targetId; value - Set of stackObject Ids
         if (targetMap == null) {
@@ -1127,13 +1154,22 @@ public final class CardUtil {
             targetMap = new HashMap<>(targetMap); // must have new object reference if saved back to game state
         }
         Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
-        if (!targetingObjects.add(targetingObject.getId())) {
-            return true; // The trigger/watcher already recorded that target of the stack object
+        for (StackObject stackObject : game.getStack()) {
+            Ability stackAbility = stackObject.getStackAbility();
+            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
+                continue;
+            }
+            if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {
+                if (!targetingObjects.add(stackObject.getId())) {
+                    continue; // The trigger/watcher already recorded that target of the stack object, check for another
+                }
+                // Otherwise, store this combination of trigger/watcher + target + stack object
+                targetMap.put(event.getTargetId(), targetingObjects);
+                game.getState().setValue(stateKey, targetMap);
+                return stackObject;
+            }
         }
-        // Otherwise, store this combination of trigger/watcher + target + stack object
-        targetMap.put(event.getTargetId(), targetingObjects);
-        game.getState().setValue(stateKey, targetMap);
-        return false;
+        return null;
     }
 
     /**
@@ -1263,7 +1299,7 @@ public final class CardUtil {
         Card permCard;
         if (card instanceof SplitCard) {
             permCard = card;
-        } else if (card instanceof AdventureCard) {
+        } else if (card instanceof CardWithSpellOption) {
             permCard = card;
         } else if (card instanceof ModalDoubleFacedCard) {
             permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
@@ -1451,9 +1487,9 @@ public final class CardUtil {
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
             cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
-        } else if (cardToCast instanceof AdventureCard) {
+        } else if (cardToCast instanceof CardWithSpellOption) {
             cards.add(cardToCast);
-            cards.add(((AdventureCard) cardToCast).getSpellCard());
+            cards.add(((CardWithSpellOption) cardToCast).getSpellCard());
         } else {
             cards.add(cardToCast);
         }
@@ -1642,9 +1678,9 @@ public final class CardUtil {
         }
 
         // handle adventure cards
-        if (card instanceof AdventureCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             if (manaCost != null) {
                 // get additional cost if any
                 Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
@@ -1682,9 +1718,9 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
-        if (card instanceof AdventureCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
         }
@@ -1899,6 +1935,10 @@ public final class CardUtil {
         return defaultValue;
     }
 
+    public static int getSourceCostsTagX(Game game, Ability source, int defaultValue) {
+        return getSourceCostsTag(game, source, "X", defaultValue);
+    }
+
     public static String addCostVerb(String text) {
         if (costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith)) {
             return text;
@@ -2069,8 +2109,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
-            AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
+        } else if (object instanceof CardWithSpellOption || object instanceof SpellOptionCard) {
+            CardWithSpellOption mainCard = (CardWithSpellOption) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getSpellCard());
         } else if (object instanceof Spell) {
@@ -2176,12 +2216,86 @@ public final class CardUtil {
         return sb.toString();
     }
 
+    public static <T> Optional<T> getEffectValueFromAbility(Ability ability, String key, Class<T> clazz) {
+        return castStream(
+                ability.getAllEffects()
+                        .stream()
+                        .map(effect -> effect.getValue(key)),
+                clazz
+        ).findFirst();
+    }
+
     public static <T> Stream<T> castStream(Collection<?> collection, Class<T> clazz) {
         return castStream(collection.stream(), clazz);
     }
 
     public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
         return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
+    }
+
+    public static <T> boolean checkAnyPairs(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(collection, (t1, t2) -> predicate.test(t1, t2)).anyMatch(x -> x);
+    }
+
+    public static <T> Stream<T> streamAllPairwiseMatches(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(
+                collection,
+                (t1, t2) -> predicate.test(t1, t2)
+                        ? Stream.of(t1, t2)
+                        : Stream.<T>empty()
+        ).flatMap(Function.identity()).distinct();
+    }
+
+    private static class IntPairIterator implements Iterator<AbstractMap.SimpleImmutableEntry<Integer, Integer>> {
+        private final int amount;
+        private int firstCounter = 0;
+        private int secondCounter = 1;
+
+        IntPairIterator(int amount) {
+            this.amount = amount;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return firstCounter + 1 < amount;
+        }
+
+        @Override
+        public AbstractMap.SimpleImmutableEntry<Integer, Integer> next() {
+            AbstractMap.SimpleImmutableEntry<Integer, Integer> value
+                    = new AbstractMap.SimpleImmutableEntry(firstCounter, secondCounter);
+            secondCounter++;
+            if (secondCounter == amount) {
+                firstCounter++;
+                secondCounter = firstCounter + 1;
+            }
+            return value;
+        }
+
+        public int getMax() {
+            // amount choose 2
+            return (amount * amount - amount) / 2;
+        }
+    }
+
+    public static <T, U> Stream<U> streamPairsWithMap(Collection<T> collection, BiFunction<T, T, U> function) {
+        if (collection.size() < 2) {
+            return Stream.empty();
+        }
+        List<T> list;
+        if (collection instanceof List) {
+            list = (List<T>) collection;
+        } else {
+            list = new ArrayList<>(collection);
+        }
+        IntPairIterator it = new IntPairIterator(list.size());
+        return Stream
+                .generate(it::next)
+                .limit(it.getMax())
+                .map(pair -> function.apply(
+                        list.get(pair.getKey()),
+                        list.get(pair.getValue())
+                ));
     }
 
     public static void AssertNoControllerOwnerPredicates(Target target) {

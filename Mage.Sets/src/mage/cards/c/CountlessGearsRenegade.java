@@ -1,10 +1,8 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,13 +29,10 @@ public final class CountlessGearsRenegade extends CardImpl {
 
         // <i>Revolt</i> &mdash; When Countless Gears Renegade enters the battlefield, if a permanent you controlled
         // left the battlefield this turn, create a 1/1 colorless Servo artifact creature token.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ServoToken()), false),
-                RevoltCondition.instance, "When {this} enters, if a permanent you controlled " +
-                "left the battlefield this turn, create a 1/1 colorless Servo artifact creature token."
-        );
-        ability.setAbilityWord(AbilityWord.REVOLT);
-        this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ServoToken()))
+                .withInterveningIf(RevoltCondition.instance)
+                .setAbilityWord(AbilityWord.REVOLT)
+                .addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private CountlessGearsRenegade(final CountlessGearsRenegade card) {

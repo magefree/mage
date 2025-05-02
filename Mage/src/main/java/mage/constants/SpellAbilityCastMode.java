@@ -15,6 +15,7 @@ public enum SpellAbilityCastMode {
     NORMAL("Normal"),
     MADNESS("Madness"),
     FLASHBACK("Flashback"),
+    HARMONIZE("Harmonize"),
     BESTOW("Bestow"),
     PROTOTYPE("Prototype"),
     MORPH("Morph", false, true), // and megamorph
@@ -91,6 +92,7 @@ public enum SpellAbilityCastMode {
             case NORMAL:
             case MADNESS:
             case FLASHBACK:
+            case HARMONIZE:
             case DISTURB:
             case PLOT:
             case MORE_THAN_MEETS_THE_EYE:

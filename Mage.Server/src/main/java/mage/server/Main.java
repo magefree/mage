@@ -85,7 +85,8 @@ public final class Main {
     // - fast game buttons;
     // - cheat commands;
     // - no deck validation;
-    // - no connection validation by pings (no disconnects on IDE's debugger usage)
+    // - no draft's clicks protection timeout;
+    // - no connection validation by pings (no disconnects on IDE's debugger usage);
     // - load any deck in sideboarding;
     // - simplified registration and login (no password check);
     // - debug main menu for GUI and rendering testing (must use -debug arg for client app);
@@ -370,7 +371,7 @@ public final class Main {
                 // no need to keep session
                 logger.info("CLIENT DISCONNECTED - " + sessionInfo);
                 logger.debug("- cause: client called disconnect command");
-                managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.DisconnectedByUser, true);
+                managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection, true);
             } else if (throwable == null) {
                 // lease timeout (ping), so server lost connection with a client
                 // must keep tables

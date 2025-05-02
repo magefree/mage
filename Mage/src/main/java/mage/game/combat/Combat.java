@@ -33,7 +33,6 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDefender;
 import mage.util.CardUtil;
 import mage.util.Copyable;
-import mage.util.trace.TraceUtil;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -61,7 +60,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     protected List<CombatGroup> groups = new ArrayList<>();
     protected List<CombatGroup> formerGroups = new ArrayList<>();
-    protected Map<UUID, CombatGroup> blockingGroups = new HashMap<>();
+    protected Map<UUID, CombatGroup> blockingGroups = new LinkedHashMap<>();
     // all possible defenders (players, planeswalkers or battle)
     protected Set<UUID> defenders = new HashSet<>();
     // how many creatures attack defending player
@@ -201,7 +200,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         StringBuilder sb = new StringBuilder();
         sb.append(attackingPlayerId).append(defenders);
         for (CombatGroup group : groups) {
-            sb.append(group.defenderId).append(group.attackers).append(group.attackerOrder).append(group.blockers).append(group.blockerOrder);
+            sb.append(group.defenderId).append(group.attackers).append(group.blockers);
         }
         return sb.toString();
     }
@@ -744,8 +743,6 @@ public class Combat implements Serializable, Copyable<Combat> {
                 game.getCombat().logBlockerInfo(defender, game);
             }
         }
-        // tool to catch the bug about flyers blocked by non flyers or intimidate blocked by creatures with other colors
-        TraceUtil.traceCombatIfNeeded(game, game.getCombat());
     }
 
     private void makeSureItsNotComputer(Player controller) {
@@ -761,7 +758,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Add info about attacker blocked by blocker to the game log
      */
     private void logBlockerInfo(Player defender, Game game) {
-        boolean shownDefendingPlayer = game.getPlayers().size() < 3; // only two players no need to saw the attacked player
+        boolean shownDefendingPlayer = game.getPlayers().size() <= 2; // 1 vs 1 game, no need to saw the attacked player
         for (CombatGroup group : game.getCombat().getGroups()) {
             if (group.defendingPlayerId.equals(defender.getId())) {
                 if (!shownDefendingPlayer) {
@@ -788,7 +785,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 if (attackerExists) {
                     if (!group.getBlockers().isEmpty()) {
                         sb.append("blocked by ");
-                        for (UUID blockingCreatureId : group.getBlockerOrder()) {
+                        for (UUID blockingCreatureId : group.getBlockers()) {
                             Permanent blockingCreature = game.getPermanent(blockingCreatureId);
                             if (blockingCreature != null) {
                                 sb.append(blockingCreature.getLogName()).append(" (");
@@ -1802,24 +1799,11 @@ public class Combat implements Serializable, Copyable<Combat> {
         return playerDefenders;
     }
 
-    public void damageAssignmentOrder(Game game) {
-        for (CombatGroup group : groups) {
-            group.pickBlockerOrder(attackingPlayerId, game);
-        }
-        for (Map.Entry<UUID, CombatGroup> blockingGroup : blockingGroups.entrySet()) {
-            Permanent blocker = game.getPermanent(blockingGroup.getKey());
-            if (blocker != null) {
-                blockingGroup.getValue().pickAttackerOrder(blocker.getControllerId(), game);
-            }
-        }
-    }
-
     @SuppressWarnings("deprecation")
     public void removeAttacker(UUID attackerId, Game game) {
         for (CombatGroup group : groups) {
             if (group.attackers.contains(attackerId)) {
                 group.attackers.remove(attackerId);
-                group.attackerOrder.remove(attackerId);
                 for (Set<UUID> attackingCreatures : numberCreaturesDefenderAttackedBy.values()) {
                     attackingCreatures.remove(attackerId);
                 }
@@ -1872,7 +1856,6 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
             for (CombatGroup group : groupsToCheck) {
                 group.blockers.remove(blockerId);
-                group.blockerOrder.remove(blockerId);
                 if (group.blockers.isEmpty()) {
                     group.blocked = false;
                 }
@@ -1888,11 +1871,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                     if (blockGroup.blockers.contains(blockerId)) {
                         for (UUID attackerId : group.getAttackers()) {
                             blockGroup.attackers.remove(attackerId);
-                            blockGroup.attackerOrder.remove(attackerId);
                         }
                         if (creature.getBlocking() == 0) {
                             blockGroup.blockers.remove(blockerId);
-                            blockGroup.attackerOrder.clear();
                         }
                     }
                     if (blockGroup.blockers.isEmpty()) {
@@ -1917,7 +1898,6 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (CombatGroup group : groups) {
             if (group.blockers.contains(blockerId)) {
                 group.blockers.remove(blockerId);
-                group.blockerOrder.remove(blockerId);
                 if (group.blockers.isEmpty()) {
                     group.blocked = false;
                 }
@@ -1927,7 +1907,6 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (CombatGroup group : getBlockingGroups()) {
             if (group.blockers.contains(blockerId)) {
                 group.blockers.remove(blockerId);
-                group.attackerOrder.clear();
             }
             if (group.blockers.isEmpty()) {
                 canRemove = true;

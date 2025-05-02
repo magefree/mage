@@ -79,6 +79,7 @@ public class PermanentView extends CardView {
                 this.alternateName = original.getName();
             }
         }
+
         if (permanent.getOwnerId() != null && !permanent.getOwnerId().equals(permanent.getControllerId())) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {

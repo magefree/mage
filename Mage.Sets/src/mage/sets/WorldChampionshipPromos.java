@@ -20,6 +20,7 @@ public class WorldChampionshipPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Balduvian Horde", 1, Rarity.RARE, mage.cards.b.BalduvianHorde.class));
+        cards.add(new SetCardInfo("Balduvian Horde", 1, Rarity.RARE, mage.cards.b.BalduvianHorde.class, RETRO_ART));
+        cards.add(new SetCardInfo("Crucible of Worlds", 2019, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
      }
 }

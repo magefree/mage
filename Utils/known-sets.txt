@@ -98,6 +98,8 @@ Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
 Fifth Edition|FifthEdition|
+Final Fantasy|FinalFantasy|
+Final Fantasy Commander|FinalFantasyCommander|
 Foundations|Foundations|
 Foundations Jumpstart|FoundationsJumpstart|
 Fourth Edition|FourthEdition|
@@ -171,6 +173,7 @@ Magic Origins|MagicOrigins|
 Magic Player Rewards|MagicPlayerRewards|
 Magic: The Gathering-Commander|Commander|
 Magic: The Gathering-Conspiracy|Conspiracy|
+Marvel's Spider-Man Eternal|MarvelsSpiderManEternal|
 Masterpiece Series|MasterpieceSeries|
 Masterpiece Series Amonkhet|MasterpieceSeriesAmonkhet|
 Masters Edition|MastersEdition|
@@ -248,6 +251,8 @@ New Capenna Commander|NewCapennaCommander|
 Strixhaven: School of Mages|StrixhavenSchoolOfMages|
 Stronghold|Stronghold|
 Super Series|SuperSeries|
+Tarkir: Dragonstorm|TarkirDragonstorm|
+Tarkir: Dragonstorm Commander|TarkirDragonstormCommander|
 Tempest|Tempest|
 Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|

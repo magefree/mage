@@ -32,7 +32,7 @@ public final class MuYanlingWindRider extends CardImpl {
             = new FilterCreaturePermanent("creatures you control with flying");
 
     static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
+        filter2.add(new AbilityPredicate(FlyingAbility.class));
     }
 
     public MuYanlingWindRider(UUID ownerId, CardSetInfo setInfo) {

@@ -18,6 +18,7 @@ public class WhenTargetDiesDelayedTriggeredAbility extends DelayedTriggeredAbili
 
     protected MageObjectReference mor;
     private final SetTargetPointer setTargetPointer;
+    private final boolean onlyControlled;
 
     public WhenTargetDiesDelayedTriggeredAbility(Effect effect) {
         this(effect, SetTargetPointer.NONE);
@@ -28,15 +29,21 @@ public class WhenTargetDiesDelayedTriggeredAbility extends DelayedTriggeredAbili
     }
 
     public WhenTargetDiesDelayedTriggeredAbility(Effect effect, Duration duration, SetTargetPointer setTargetPointer) {
+        this(effect, duration, setTargetPointer, false);
+    }
+
+    public WhenTargetDiesDelayedTriggeredAbility(Effect effect, Duration duration, SetTargetPointer setTargetPointer, boolean onlyControlled) {
         super(effect, duration, true);
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("When that creature dies" + (duration == Duration.EndOfTurn ? " this turn, " : ", "));
+        this.onlyControlled = onlyControlled;
+        setTriggerPhrase("When that creature dies" + (onlyControlled ? " under your control" : "") + (duration == Duration.EndOfTurn ? " this turn, " : ", "));
     }
 
     protected WhenTargetDiesDelayedTriggeredAbility(final WhenTargetDiesDelayedTriggeredAbility ability) {
         super(ability);
         this.mor = ability.mor;
         this.setTargetPointer = ability.setTargetPointer;
+        this.onlyControlled = ability.onlyControlled;
     }
 
     @Override
@@ -62,7 +69,8 @@ public class WhenTargetDiesDelayedTriggeredAbility extends DelayedTriggeredAbili
             return false;
         }
         Permanent permanent = zEvent.getTarget();
-        if (mor == null || !mor.refersTo(permanent, game)) {
+        if (mor == null || !mor.refersTo(permanent, game)
+                || onlyControlled && !permanent.isControlledBy(getControllerId())) {
             return false;
         }
         switch (setTargetPointer) {

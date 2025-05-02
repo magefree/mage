@@ -50,6 +50,8 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
         staticText = "Each noncreature artifact is an artifact creature with power and toughness each equal to its mana value";
         dependendToTypes.add(DependencyType.ArtifactAddingRemoving);
+        
+        dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private MarchOfTheMachinesEffect(final MarchOfTheMachinesEffect effect) {

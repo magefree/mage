@@ -530,8 +530,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         }
                     }
 
-                    if (stackObject == null && (this instanceof AdventureCard)) {
-                        stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId(), false);
+                    if (stackObject == null && (this instanceof CardWithSpellOption)) {
+                        stackObject = game.getStack().getSpell(((CardWithSpellOption) this).getSpellCard().getId(), false);
                     }
 
                     if (stackObject == null) {
@@ -802,7 +802,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     game.fireEvent(addedOneEvent);
                 } else {
                     finalAmount--;
-                    returnCode = false;
+                    returnCode = false; // restricted by ADD_COUNTER
                 }
             }
             if (finalAmount > 0) {
@@ -810,28 +810,33 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
             } else {
+                // TODO: must return true, cause it's not replaced here (rework Fangs of Kalonia and Spectacular Showdown)
+                // example from Devoted Druid
+                // If you can put counters on it, but that is modified by an effect (such as that of Vizier of Remedies),
+                // you can activate the ability even if paying the cost causes no counters to be put on Devoted Druid.
+                // (2018-12-07)
                 returnCode = false;
             }
         } else {
-            returnCode = false;
+            returnCode = false; // restricted by ADD_COUNTERS
         }
         return returnCode;
     }
 
     @Override
-    public void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
+    public int removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
 
         if (amount <= 0) {
-            return;
+            return 0;
         }
 
         if (getCounters(game).getCount(counterName) <= 0) {
-            return;
+            return 0;
         }
 
         GameEvent removeCountersEvent = new RemoveCountersEvent(counterName, this, source, amount, isDamage);
         if (game.replaceEvent(removeCountersEvent)) {
-            return;
+            return 0;
         }
 
         int finalAmount = 0;
@@ -854,13 +859,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, isDamage);
         game.fireEvent(event);
+        return finalAmount;
     }
 
     @Override
-    public void removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
-        if (counter != null) {
-            removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
-        }
+    public int removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
+        return counter != null ? removeCounters(counter.getName(), counter.getCount(), source, game, isDamage) : 0;
     }
 
     @Override

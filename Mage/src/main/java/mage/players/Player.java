@@ -23,7 +23,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.game.*;
-import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
 import mage.game.match.Match;
@@ -744,10 +743,14 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean shuffleCardsToLibrary(Card card, Game game, Ability source);
 
-    // set the value for X mana spells and abilities
+    /**
+     * Set the value for X mana spells and abilities
+     */
     int announceXMana(int min, int max, String message, Game game, Ability ability);
 
-    // set the value for non mana X costs
+    /**
+     * Set the value for non mana X costs
+     */
     int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);
 
     // TODO: rework to use pair's list of effect + ability instead string's map
@@ -760,19 +763,6 @@ public interface Player extends MageItem, Copyable<Player> {
     void selectAttackers(Game game, UUID attackingPlayerId);
 
     void selectBlockers(Ability source, Game game, UUID defendingPlayerId);
-
-    UUID chooseAttackerOrder(List<Permanent> attacker, Game game);
-
-    /**
-     * Choose the order in which blockers get damage assigned to
-     *
-     * @param blockers     list of blockers where to choose the next one from
-     * @param combatGroup  the concerning combat group
-     * @param blockerOrder the already set order of blockers
-     * @param game
-     * @return blocker next to add to the blocker order
-     */
-    UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game);
 
     int getAmount(int min, int max, String message, Game game);
 

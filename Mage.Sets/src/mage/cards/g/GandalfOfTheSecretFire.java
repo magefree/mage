@@ -119,7 +119,7 @@ class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
             game.informPlayers(controller.getLogName() + " exiles " + sourceSpell.getLogName() + " with 3 time counters on it");
         }
         if (!sourceSpell.getAbilities(game).containsClass(SuspendAbility.class)) {
-            game.addEffect(new GainSuspendEffect(new MageObjectReference(sourceSpell.getCard(), game)), source);
+            game.addEffect(new GainSuspendEffect(new MageObjectReference(sourceSpell.getMainCard(), game)), source);
         }
         return true;
     }

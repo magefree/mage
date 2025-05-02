@@ -135,4 +135,46 @@ public class GainProtectionTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Pentarch Ward", 1);
         assertHandCount(playerB, 3);
     }
+
+    // reported issue #13419
+    @Test
+    public void testChoMannosBlessingContagion() {
+        String soltari = "Soltari Visionary";
+        // Shadow (This creature can block or be blocked by only creatures with shadow.)
+        // Whenever this creature deals damage to a player, destroy target enchantment that player controls.
+        String contagion = "Contagion";
+        // You may pay 1 life and exile a black card from your hand rather than pay this spell’s mana cost.
+        // Distribute two -2/-1 counters among one or two target creatures.
+        String cmb = "Cho-Manno's Blessing";
+        // Flash
+        // Enchant creature
+        // As this Aura enters, choose a color.
+        // Enchanted creature has protection from the chosen color. This effect doesn’t remove this Aura.
+
+        addCard(Zone.BATTLEFIELD, playerA, soltari);
+        addCard(Zone.HAND, playerB, contagion);
+        addCard(Zone.HAND, playerB, "Warpath Ghoul"); // black card
+        addCard(Zone.HAND, playerA, cmb);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, contagion, soltari);
+        setChoice(playerB, "Cast with alternative cost");
+        setChoice(playerB, "Warpath Ghoul");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cmb, soltari, contagion); // in response
+        setChoice(playerA, "Black");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 19);
+        assertExileCount(playerB, "Warpath Ghoul", 1);
+        assertGraveyardCount(playerB, contagion, 1);
+        assertPermanentCount(playerA, soltari, 1);
+        assertPermanentCount(playerA, cmb, 1);
+        assertAttachedTo(playerA, cmb, soltari, true);
+
+    }
+
 }

@@ -2,19 +2,21 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.CommanderInPlayCondition;
+import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.GoblinToken;
@@ -40,13 +42,9 @@ public final class SiegeGangLieutenant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Lieutenant -- At the beginning of combat on your turn, if you control your commander, create two 1/1 red Goblin creature tokens. Those tokens gain haste until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new SiegeGangLieutenantEffect()
-                ), CommanderInPlayCondition.instance, "At the beginning of combat on your turn, " +
-                "if you control your commander, create two 1/1 red Goblin creature tokens. " +
-                "Those tokens gain haste until end of turn."
-        ).setAbilityWord(AbilityWord.LIEUTENANT));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new SiegeGangLieutenantEffect())
+                .withInterveningIf(ControlYourCommanderCondition.instance)
+                .setAbilityWord(AbilityWord.LIEUTENANT));
 
         // {2}, Sacrifice a Goblin: Siege-Gang Lieutenant deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(2));

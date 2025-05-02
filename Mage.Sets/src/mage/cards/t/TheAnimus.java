@@ -1,15 +1,15 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
-import mage.cards.*;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -18,11 +18,14 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.Targets;
-import mage.target.common.*;
+import mage.target.common.TargetCardInExile;
+import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
- *
  * @author grimreap124
  */
 public final class TheAnimus extends CardImpl {
@@ -37,7 +40,7 @@ public final class TheAnimus extends CardImpl {
 
     public TheAnimus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, exile up to one target legendary creature card from a graveyard with a memory counter on it.
@@ -47,7 +50,7 @@ public final class TheAnimus extends CardImpl {
 
         // {T}: Until your next turn, target legendary creature you control becomes a copy of target creature card in exile with a memory counter on it. Activate only as a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(new TheAnimusCopyEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanentSameController(1, StaticFilters.FILTER_CREATURE_LEGENDARY));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY));
         ability.addTarget(new TargetCardInExile(1, 1, exileFilter));
         this.addAbility(ability);
     }

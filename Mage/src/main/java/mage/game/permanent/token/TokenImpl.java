@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.repository.TokenInfo;
@@ -438,7 +439,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 // end of messy target-groping code to handle auras
 
                 // this section is for tokens created attached to a specific known object
-                if (permanentAttachedTo != null) {
+                boolean isBestow = permanent.getAbilities().stream()
+                        .anyMatch(ability -> ability instanceof BestowAbility);
+                if (permanentAttachedTo != null && !isBestow) {
                     if (permanent.hasSubtype(SubType.AURA, game)) {
                         permanent.getAbilities().get(0).getTargets().get(0).add(permanentAttachedTo.getId(), game);
                         permanent.getAbilities().get(0).getEffects().get(0).apply(game, permanent.getAbilities().get(0));

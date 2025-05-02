@@ -51,7 +51,7 @@ public final class SunBlessedHealer extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect()
         ).withInterveningIf(KickedCondition.ONCE);
-        ability.addTarget(new TargetCardInYourGraveyard());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 

@@ -4,7 +4,7 @@ package mage.abilities.condition.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.cards.AdventureCardSpell;
+import mage.cards.SpellOptionCard;
 import mage.cards.Card;
 import mage.cards.ModalDoubleFacedCardHalf;
 import mage.cards.SplitCardHalf;
@@ -20,7 +20,7 @@ public enum IsBeingCastFromHandCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        if (object instanceof SplitCardHalf || object instanceof AdventureCardSpell || object instanceof ModalDoubleFacedCardHalf) {
+        if (object instanceof SplitCardHalf || object instanceof SpellOptionCard || object instanceof ModalDoubleFacedCardHalf) {
             UUID mainCardId = ((Card) object).getMainCard().getId();
             object = game.getObject(mainCardId);
         }

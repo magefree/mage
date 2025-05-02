@@ -1,3 +1,4 @@
+Affinity for artifacts|new|
 Afflict|number|
 Afterlife|number|
 Annihilator|number|
@@ -24,6 +25,7 @@ Cycling|cost|
 Dash|manaString|
 Daybound|new|
 Deathtouch|instance|
+Decayed|new|
 Demonstrate|new|
 Delve|new|
 Dethrone|new|
@@ -62,6 +64,7 @@ For Mirrodin!|new|
 Freerunning|manaString|
 Friends forever|instance|
 Gift|card|
+Harmonize|card, manaString|
 Haste|instance|
 Hexproof|instance|
 Hideaway|number|
@@ -84,6 +87,7 @@ Melee|new|
 Menace|new|
 Mentor|new|
 Miracle|manaString|
+Mobilize|number|
 Modular|card, number|
 Mountaincycling|cost|
 Mountainwalk|new|

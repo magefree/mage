@@ -20,10 +20,10 @@ public class HarperPrismBookPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Arena", 1, Rarity.RARE, mage.cards.a.Arena.class));
-        cards.add(new SetCardInfo("Giant Badger", 4, Rarity.RARE, mage.cards.g.GiantBadger.class));
-        cards.add(new SetCardInfo("Mana Crypt", 5, Rarity.RARE, mage.cards.m.ManaCrypt.class));
-        cards.add(new SetCardInfo("Sewers of Estark", 2, Rarity.RARE, mage.cards.s.SewersOfEstark.class));
-        cards.add(new SetCardInfo("Windseeker Centaur", 3, Rarity.RARE, mage.cards.w.WindseekerCentaur.class));
+        cards.add(new SetCardInfo("Arena", 1, Rarity.RARE, mage.cards.a.Arena.class, RETRO_ART));
+        cards.add(new SetCardInfo("Giant Badger", 4, Rarity.RARE, mage.cards.g.GiantBadger.class, RETRO_ART));
+        cards.add(new SetCardInfo("Mana Crypt", 5, Rarity.RARE, mage.cards.m.ManaCrypt.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sewers of Estark", 2, Rarity.RARE, mage.cards.s.SewersOfEstark.class, RETRO_ART));
+        cards.add(new SetCardInfo("Windseeker Centaur", 3, Rarity.RARE, mage.cards.w.WindseekerCentaur.class, RETRO_ART));
     }
 }

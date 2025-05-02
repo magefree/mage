@@ -46,15 +46,15 @@ public final class KianneCorruptedMemory extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 new ConditionalAsThoughEffect(
                         new CastAsThoughItHadFlashAllEffect(Duration.Custom, filter),
-                        KianneCorruptedMemoryOddCondition.instance
-        )));
+                        KianneCorruptedMemoryEvenCondition.instance
+        ).setText("As long as {this}'s power is even, you may cast noncreature spells as though they had flash.")));
 
         // As long as Kianne's power is odd, you may cast creature spells as though they had flash.
         this.addAbility(new SimpleStaticAbility(
                 new ConditionalAsThoughEffect(
                         new CastAsThoughItHadFlashAllEffect(Duration.Custom, filter2),
-                        KianneCorruptedMemoryEvenCondition.instance
-        )));
+                        KianneCorruptedMemoryOddCondition.instance
+        ).setText("As long as {this}'s power is odd, you may cast creature spells as though they had flash.")));
 
         // Whenever you draw a card, put a +1/+1 counter on Kianne.
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));

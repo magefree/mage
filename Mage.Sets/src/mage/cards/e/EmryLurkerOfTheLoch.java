@@ -4,13 +4,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.ArtifactYouControlCount;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.MillCardsControllerEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
-import mage.abilities.hint.common.ArtifactYouControlHint;
+import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -35,14 +32,10 @@ public final class EmryLurkerOfTheLoch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // This spell costs {1} less to cast for each artifact you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL,
-                new SpellCostReductionForEachSourceEffect(1, ArtifactYouControlCount.instance)
-        ).addHint(ArtifactYouControlHint.instance));
+        this.addAbility(new AffinityForArtifactsAbility());
 
         // When Emry, Lurker of the Loch enters the battlefield, put the top four cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new MillCardsControllerEffect(4)
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(4)));
 
         // {T}: Choose target artifact card in your graveyard. You may cast that card this turn.
         Ability ability = new SimpleActivatedAbility(new EmryLurkerOfTheLochPlayEffect(), new TapSourceCost());
@@ -84,15 +77,14 @@ class EmryLurkerOfTheLochPlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         UUID targetId = getTargetPointer().getFirst(game, source);
-        if (targetId != null) {
-            return targetId.equals(objectId)
-                    && source.isControlledBy(affectedControllerId)
-                    && Zone.GRAVEYARD == game.getState().getZone(objectId)
-                    && !game.getCard(targetId).isLand(game);
-        } else {
+        if (targetId == null) {
             // the target card has changed zone meanwhile, so the effect is no longer needed
             discard();
             return false;
         }
+        return targetId.equals(objectId)
+                && source.isControlledBy(affectedControllerId)
+                && Zone.GRAVEYARD == game.getState().getZone(objectId)
+                && !game.getCard(targetId).isLand(game);
     }
 }

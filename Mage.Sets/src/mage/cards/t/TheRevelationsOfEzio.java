@@ -61,7 +61,7 @@ public final class TheRevelationsOfEzio extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 ability -> {
-                    ability.addEffect(new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.P1P1.createInstance(), true));
+                    ability.addEffect(new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(true, CounterType.P1P1.createInstance()));
                     ability.addTarget(new TargetCardInYourGraveyard(assassinFilter));
                 }
         );

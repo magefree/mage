@@ -34,7 +34,8 @@ public class ActionSimulator {
     }
 
     public int evaluateState() {
-        Player opponent = game.getPlayer(game.getOpponents(player.getId()).stream().findFirst().orElse(null));
+        // must find all leaved opponents
+        Player opponent = game.getPlayer(game.getOpponents(player.getId(), false).stream().findFirst().orElse(null));
         if (opponent == null) {
             return Integer.MAX_VALUE;
         }

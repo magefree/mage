@@ -36,7 +36,6 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     /**
-     * 
      * @param zone             What zone the ability can trigger from (see {@link mage.abilities.Ability#getZone})
      * @param effect           What effect will happen when this ability triggers (see {@link mage.abilities.Ability#getEffects})
      * @param targetController Which player(s) to pay attention to
@@ -44,7 +43,7 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
      * @param setTargetPointer Who to set the target pointer of the effects to. Only accepts NONE, PLAYER (the player who cast the spell), and SPELL (the spell which was cast)
      */
     public CastSecondSpellTriggeredAbility(Zone zone, Effect effect, TargetController targetController,
-            boolean optional, SetTargetPointer setTargetPointer) {
+                                           boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         if (targetController == TargetController.YOU) {
             this.addHint(hint);
@@ -54,7 +53,7 @@ public class CastSecondSpellTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    private CastSecondSpellTriggeredAbility(final CastSecondSpellTriggeredAbility ability) {
+    protected CastSecondSpellTriggeredAbility(final CastSecondSpellTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;

@@ -40,6 +40,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
     ChimericStaffEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private ChimericStaffEffect(final ChimericStaffEffect effect) {

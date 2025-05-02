@@ -3,11 +3,8 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.costadjusters.ImprintedManaValueXCostAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
@@ -45,7 +42,7 @@ public final class SoulFoundry extends CardImpl {
         // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
         Ability ability = new SimpleActivatedAbility(new SoulFoundryEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
-        ability.setCostAdjuster(SoulFoundryAdjuster.instance);
+        ability.setCostAdjuster(ImprintedManaValueXCostAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -56,31 +53,6 @@ public final class SoulFoundry extends CardImpl {
     @Override
     public SoulFoundry copy() {
         return new SoulFoundry(this);
-    }
-}
-
-enum SoulFoundryAdjuster implements CostAdjuster {
-    instance;
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
-        if (sourcePermanent != null) {
-            if (!sourcePermanent.getImprinted().isEmpty()) {
-                Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
-                if (imprinted != null) {
-                    ability.clearManaCostsToPay();
-                    ability.addManaCostsToPay(new GenericManaCost(imprinted.getManaValue()));
-                }
-            }
-        }
-
-        // no {X} anymore as we already have imprinted the card with defined manacost
-        for (ManaCost cost : ability.getManaCostsToPay()) {
-            if (cost instanceof VariableCost) {
-                cost.setPaid();
-            }
-        }
     }
 }
 

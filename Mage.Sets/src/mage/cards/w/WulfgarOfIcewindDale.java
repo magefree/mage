@@ -1,19 +1,14 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.AdditionalTriggersAttackingReplacementEffect;
 import mage.abilities.keyword.MeleeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Controllable;
-import mage.game.Game;
-import mage.game.events.DefenderAttackedEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 
 import java.util.UUID;
 
@@ -35,7 +30,7 @@ public final class WulfgarOfIcewindDale extends CardImpl {
         this.addAbility(new MeleeAbility());
 
         // If a creature you control attacking would cause a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(new WulfgarOfIcewindDaleEffect()));
+        this.addAbility(new SimpleStaticAbility(new AdditionalTriggersAttackingReplacementEffect(true)));
     }
 
     private WulfgarOfIcewindDale(final WulfgarOfIcewindDale card) {
@@ -45,66 +40,5 @@ public final class WulfgarOfIcewindDale extends CardImpl {
     @Override
     public WulfgarOfIcewindDale copy() {
         return new WulfgarOfIcewindDale(this);
-    }
-}
-
-class WulfgarOfIcewindDaleEffect extends ReplacementEffectImpl {
-
-    WulfgarOfIcewindDaleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if a creature you control attacking causes a triggered ability " +
-                "of a permanent you control to trigger, that ability triggers an additional time";
-    }
-
-    private WulfgarOfIcewindDaleEffect(final WulfgarOfIcewindDaleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WulfgarOfIcewindDaleEffect copy() {
-        return new WulfgarOfIcewindDaleEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-        Permanent sourcePermanent = game.getPermanent(numberOfTriggersEvent.getSourceId());
-        if (sourcePermanent == null || !sourcePermanent.isControlledBy(source.getControllerId())) {
-            return false;
-        }
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-        if (sourceEvent == null) {
-            return false;
-        }
-
-        switch (sourceEvent.getType()) {
-            case ATTACKER_DECLARED:
-                return source.isControlledBy(sourceEvent.getPlayerId());
-            case DECLARED_ATTACKERS:
-                return game
-                        .getCombat()
-                        .getAttackers()
-                        .stream()
-                        .map(game::getControllerId)
-                        .anyMatch(source::isControlledBy);
-            case DEFENDER_ATTACKED:
-                return ((DefenderAttackedEvent) sourceEvent)
-                        .getAttackers(game)
-                        .stream()
-                        .map(Controllable::getControllerId)
-                        .anyMatch(source::isControlledBy);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
-        return false;
     }
 }

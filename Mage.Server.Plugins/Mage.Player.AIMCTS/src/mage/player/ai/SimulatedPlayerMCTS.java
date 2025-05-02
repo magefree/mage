@@ -141,7 +141,7 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         //useful only for two player games - will only attack first opponent
-        UUID defenderId = game.getOpponents(playerId).iterator().next();
+        UUID defenderId = game.getOpponents(playerId, true).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
@@ -372,22 +372,6 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
             return mode;
         }
         return super.chooseMode(modes, source, game);
-    }
-
-    @Override
-    public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
-        if (this.isHuman()) {
-            return attackers.get(RandomUtil.nextInt(attackers.size())).getId();
-        }
-        return super.chooseAttackerOrder(attackers, game);
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
-        if (this.isHuman()) {
-            return blockers.get(RandomUtil.nextInt(blockers.size())).getId();
-        }
-        return super.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
     }
 
     @Override

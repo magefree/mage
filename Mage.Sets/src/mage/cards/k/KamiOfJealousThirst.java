@@ -60,7 +60,7 @@ enum KamiOfJealousThirstAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void increaseCost(Ability ability, Game game) {
         int amount = CardsDrawnThisTurnDynamicValue.instance.calculate(game, ability, null);
         if (amount >= 3) {
             CardUtil.adjustCost(ability, new ManaCostsImpl<>("{4}{B}"), false);

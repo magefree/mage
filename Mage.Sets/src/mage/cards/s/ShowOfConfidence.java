@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.InstantAndSorceryCastThisTurn;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -17,7 +18,6 @@ import mage.game.stack.Spell;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -29,7 +29,8 @@ public final class ShowOfConfidence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // When you cast this spell, copy it for each other instant or sorcery spell you've cast this turn. You may choose new targets for the copies.
-        this.addAbility(new CastSourceTriggeredAbility(new ShowOfConfidenceEffect()));
+        this.addAbility(new CastSourceTriggeredAbility(new ShowOfConfidenceEffect())
+                            .addHint(InstantAndSorceryCastThisTurn.YOU.getHint()));
 
         // Put a +1/+1 counter on target creature. It gains vigilance until end of turn.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
@@ -73,14 +74,7 @@ class ShowOfConfidenceEffect extends OneShotEffect {
         if (spell == null || watcher == null) {
             return false;
         }
-        int copies = watcher.getSpellsCastThisTurn(source.getControllerId())
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(spell1 -> spell1.isInstantOrSorcery(game))
-                .filter(s -> !s.getSourceId().equals(source.getSourceId())
-                        || s.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter())
-                .mapToInt(x -> 1)
-                .sum();
+        int copies = InstantAndSorceryCastThisTurn.YOU.calculate(game, source, this) - 1;
         if (copies > 0) {
             spell.createCopyOnStack(game, source, source.getControllerId(), true, copies);
         }

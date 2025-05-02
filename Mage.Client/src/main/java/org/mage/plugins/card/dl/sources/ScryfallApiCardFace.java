@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public class ScryfallApiCardFace {
     public String name;
+    public String layout;
     public Map<String, String> image_uris;
 
     // fast access fields, fills on loading

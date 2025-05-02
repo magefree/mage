@@ -24,9 +24,9 @@ public class JudgeGiftCards2012 extends ExpansionSet {
         cards.add(new SetCardInfo("Flusterstorm", 2, Rarity.RARE, mage.cards.f.Flusterstorm.class));
         cards.add(new SetCardInfo("Karakas", 6, Rarity.RARE, mage.cards.k.Karakas.class));
         cards.add(new SetCardInfo("Karmic Guide", 4, Rarity.RARE, mage.cards.k.KarmicGuide.class));
-        cards.add(new SetCardInfo("Noble Hierarch", 3, Rarity.RARE, mage.cards.n.NobleHierarch.class));
+        cards.add(new SetCardInfo("Noble Hierarch", 3, Rarity.RARE, mage.cards.n.NobleHierarch.class, RETRO_ART));
         cards.add(new SetCardInfo("Sneak Attack", 5, Rarity.RARE, mage.cards.s.SneakAttack.class));
-        cards.add(new SetCardInfo("Sword of Light and Shadow", 7, Rarity.RARE, mage.cards.s.SwordOfLightAndShadow.class));
+        cards.add(new SetCardInfo("Sword of Light and Shadow", 7, Rarity.RARE, mage.cards.s.SwordOfLightAndShadow.class, RETRO_ART));
         cards.add(new SetCardInfo("Xiahou Dun, the One-Eyed", 1, Rarity.RARE, mage.cards.x.XiahouDunTheOneEyed.class));
      }
 }

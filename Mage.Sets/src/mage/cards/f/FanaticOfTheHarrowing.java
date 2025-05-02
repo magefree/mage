@@ -61,17 +61,21 @@ class FanaticOfTheHarrowingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean flag = false;
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(source.getControllerId());
+            Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
             if (!player.discard(1, false, false, source, game).isEmpty()
-                    && player.equals(source.getControllerId())) {
+                    && playerId.equals(source.getControllerId())) {
                 flag = true;
             }
         }
+        game.processAction();
         if (flag) {
-            game.getPlayer(source.getControllerId()).drawCards(1, source, game);
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                controller.drawCards(1, source, game);
+            }
         }
         return true;
     }

@@ -74,7 +74,7 @@ enum MobilizedDistrictAdjuster implements CostAdjuster {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
             int count = cardsCount.calculate(game, ability, null);

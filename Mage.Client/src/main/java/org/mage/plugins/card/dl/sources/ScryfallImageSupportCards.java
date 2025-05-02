@@ -439,7 +439,7 @@ public class ScryfallImageSupportCards {
             add("ELD"); // Throne of Eldraine
             //add("PTG"); // Ponies: The Galloping
             add("CMB1"); // Mystery Booster Playtest Cards 2019
-            //add("MB1"); // Mystery Booster
+            add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
             add("HA1"); // Historic Anthology 1
             //add("HHO"); // Happy Holidays
@@ -534,7 +534,7 @@ public class ScryfallImageSupportCards {
             add("ONE"); // Phyrexia: All Will Be One
             add("ONC"); // Phyrexia: All Will Be One Commander
             add("PL23"); // Year of the Rabbit 2023
-            add("DA1"); // Unknown Event
+            add("UNK"); // Unknown Event
             add("SIS"); // Shadows of the Past
             add("SIR"); // Shadows over Innistrad Remastered
             add("SLP"); // Secret Lair Showdown
@@ -543,6 +543,9 @@ public class ScryfallImageSupportCards {
             add("MAT"); // March of the Machine: The Aftermath
             add("MUL"); // Multiverse Legends
             add("30A"); // 30th Anniversary Edition
+            add("P30A"); // 30th Anniversary Play Promos
+            add("P30M"); // 30th Anniversary Misc Promos
+            add("PEWK"); // Eternal Weekend
             add("LTR"); // The Lord of the Rings: Tales of Middle-Earth
             add("LTC"); // Tales of Middle-Earth Commander
             add("CMM"); // Commander Masters
@@ -577,8 +580,14 @@ public class ScryfallImageSupportCards {
             add("PIO"); // Pioneer Masters
             add("PW25"); // Wizards Play Network 2025
             add("INR"); // Innistrad Remastered
+            add("PF25"); // MagicFest 2025
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander
+            add("TDM"); // Tarkir: Dragonstorm
+            add("TDC"); // Tarkir: Dragonstorm Commander
+            add("FIN"); // Final Fantasy
+            add("FIC"); // Final Fantasy Commander
+            add("SPE"); // Marvel's Spider-Man Eternal
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
@@ -625,16 +634,24 @@ public class ScryfallImageSupportCards {
             // SLD
             // fake double faced cards
             put("SLD/Adrix and Nev, Twincasters/1544b", "https://api.scryfall.com/cards/sld/1544/en?format=image&face=back");
+            put("SLD/Aesi, Tyrant of Gyre Strait/1873b", "https://api.scryfall.com/cards/sld/1873/en?format=image&face=back");
             put("SLD/Ajani Goldmane/745b", "https://api.scryfall.com/cards/sld/745/en?format=image&face=back");
             put("SLD/Ajani Goldmane/1453b", "https://api.scryfall.com/cards/sld/1453/en?format=image&face=back");
-            put("SLD/Anointed Procession/1511b", "https://api.scryfall.com/cards/sld/1453/en?format=image&face=back");
+            put("SLD/Anje Falkenrath/1874b", "https://api.scryfall.com/cards/sld/1874/en?format=image&face=back");
+            put("SLD/Anointed Procession/1511b", "https://api.scryfall.com/cards/sld/1511/en?format=image&face=back");
             put("SLD/Birds of Paradise/1675b", "https://api.scryfall.com/cards/sld/1675/en?format=image&face=back");
             put("SLD/Blightsteel Colossus/1079b", "https://api.scryfall.com/cards/sld/1079/en?format=image&face=back");
             put("SLD/Chandra Nalaar/748b", "https://api.scryfall.com/cards/sld/748/en?format=image&face=back");
             put("SLD/Chandra Nalaar/1456b", "https://api.scryfall.com/cards/sld/1456/en?format=image&face=back");
+            put("SLD/Chulane, Teller of Tales/1875b", "https://api.scryfall.com/cards/sld/1875/en?format=image&face=back");
             put("SLD/Darksteel Colossus/1081b", "https://api.scryfall.com/cards/sld/1081/en?format=image&face=back");
             put("SLD/Death Baron/1458b", "https://api.scryfall.com/cards/sld/1458/en?format=image&face=back");
             put("SLD/Doubling Cube/1080b", "https://api.scryfall.com/cards/sld/1080/en?format=image&face=back");
+            put("SLD/Dragonlord Atarka/1970b", "https://api.scryfall.com/cards/sld/1970/en?format=image&face=back");
+            put("SLD/Dragonlord Dromoka/1971b", "https://api.scryfall.com/cards/sld/1971/en?format=image&face=back");
+            put("SLD/Dragonlord Kolaghan/1972b", "https://api.scryfall.com/cards/sld/1972/en?format=image&face=back");
+            put("SLD/Dragonlord Ojutai/1973b", "https://api.scryfall.com/cards/sld/1973/en?format=image&face=back");
+            put("SLD/Dragonlord Silumgar/1974b", "https://api.scryfall.com/cards/sld/1974/en?format=image&face=back");
             put("SLD/Estrid's Invocation/1325b", "https://api.scryfall.com/cards/sld/1325/en?format=image&face=back");
             put("SLD/Estrid, the Masked/1327b", "https://api.scryfall.com/cards/sld/1327/en?format=image&face=back");
             put("SLD/Etali, Primal Storm/1123b", "https://api.scryfall.com/cards/sld/1123/en?format=image&face=back");
@@ -653,14 +670,21 @@ public class ScryfallImageSupportCards {
             put("SLD/Krark, the Thumbless/1543b", "https://api.scryfall.com/cards/sld/1543/en?format=image&face=back");
             put("SLD/Liliana Vess/747b", "https://api.scryfall.com/cards/sld/747/en?format=image&face=back");
             put("SLD/Liliana Vess/1455b", "https://api.scryfall.com/cards/sld/1455/en?format=image&face=back");
+            put("SLD/Mechtitan Core/1969b", "https://api.scryfall.com/cards/sld/1969/en?format=image&face=back");
+            put("SLD/Mechtitan Core/1965b", "https://api.scryfall.com/cards/sld/1965/en?format=image&face=back");
             put("SLD/Norin the Wary/827b", "https://api.scryfall.com/cards/sld/827/en?format=image&face=back");
             put("SLD/Noxious Ghoul/1459b", "https://api.scryfall.com/cards/sld/1459/en?format=image&face=back");
             put("SLD/Okaun, Eye of Chaos/380b", "https://api.scryfall.com/cards/sld/380/en?format=image&face=back");
             put("SLD/Okaun, Eye of Chaos/380*b", "https://api.scryfall.com/cards/sld/380★/en?format=image&face=back");
+            put("SLD/Parhelion II/1964b", "https://api.scryfall.com/cards/sld/1964/en?format=image&face=back");
+            put("SLD/Peacewalker Colossus/1966b", "https://api.scryfall.com/cards/sld/1966/en?format=image&face=back");
             put("SLD/Propaganda/381b", "https://api.scryfall.com/cards/sld/381/en?format=image&face=back");
+            put("SLD/Radha, Heart of Keld/1876b", "https://api.scryfall.com/cards/sld/1876/en?format=image&face=back");
+            put("SLD/Reckoner Bankbuster/1967b", "https://api.scryfall.com/cards/sld/1967/en?format=image&face=back");
             put("SLD/Rin and Seri, Inseparable/1508b", "https://api.scryfall.com/cards/sld/1508/en?format=image&face=back");
             put("SLD/Rin and Seri, Inseparable/1554b", "https://api.scryfall.com/cards/sld/1554/en?format=image&face=back");
             put("SLD/Sakashima of a Thousand Faces/1541b", "https://api.scryfall.com/cards/sld/1541/en?format=image&face=back");
+            put("SLD/Smuggler's Copter/1968b", "https://api.scryfall.com/cards/sld/1968/en?format=image&face=back");
             put("SLD/Sol Ring/1512b", "https://api.scryfall.com/cards/sld/1512/en?format=image&face=back");
             put("SLD/Steely Resolve/1326b", "https://api.scryfall.com/cards/sld/1326/en?format=image&face=back");
             put("SLD/Stitch in Time/382b", "https://api.scryfall.com/cards/sld/382/en?format=image&face=back");
@@ -679,8 +703,16 @@ public class ScryfallImageSupportCards {
             // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
 
+            // MB1
+            put("MB1/Goblin Trenches", "https://api.scryfall.com/cards/plst/EMA-203/");
+            put("MB1/Prophetic Bolt", "https://api.scryfall.com/cards/plst/C15-231/");
+
             // LTR - 0 number for tokens only
-            put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/");
+            // Scryfall has a bug, for some reason this link doesn't work with ?format=image even though it works with ?format=json
+            // and ?format=text. Base url fails because language is qya and not en and alternate url fails because of this bug
+            // TODO: This should be reverted when Scryfall fixes the bug 
+            // put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/");
+            put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/qya?format=image");
 
             // REX - double faced lands (xmage uses two diff lands for it)
             put("REX/Command Tower/26b", "https://api.scryfall.com/cards/rex/26/en?format=image&face=back");
@@ -689,6 +721,15 @@ public class ScryfallImageSupportCards {
             put("REX/Mountain/24b", "https://api.scryfall.com/cards/rex/24/en?format=image&face=back");
             put("REX/Plains/21b", "https://api.scryfall.com/cards/rex/21/en?format=image&face=back");
             put("REX/Swamp/23b", "https://api.scryfall.com/cards/rex/23/en?format=image&face=back");
+
+            // TDM - fake double faced cards
+            put("TDM/Bloomvine Regent/381b", "https://api.scryfall.com/cards/tdm/381/en?format=image&face=back");
+            put("TDM/Clarion Conqueror/377b", "https://api.scryfall.com/cards/tdm/377/en?format=image&face=back");
+            put("TDM/Magmatic Hellkite/380b", "https://api.scryfall.com/cards/tdm/380/en?format=image&face=back");
+            put("TDM/Marang River Regent/378b", "https://api.scryfall.com/cards/tdm/378/en?format=image&face=back");
+            put("TDM/Scavenger Regent/379b", "https://api.scryfall.com/cards/tdm/379/en?format=image&face=back");
+            put("TDM/Ugin, Eye of the Storms/382b", "https://api.scryfall.com/cards/tdm/382/en?format=image&face=back");
+
         }
     };
 

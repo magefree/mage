@@ -54,7 +54,7 @@ public final class DesecrationDemon extends CardImpl {
 class DesecrationDemonEffect extends OneShotEffect {
     DesecrationDemonEffect() {
         super(Outcome.BoostCreature);
-        staticText = "any opponent may sacrifice a creature. If a player does, tap {this} and put a +1/+1 counter on it";
+        staticText = "any opponent may sacrifice a creature of their choice. If a player does, tap {this} and put a +1/+1 counter on it";
     }
 
     private DesecrationDemonEffect(final DesecrationDemonEffect effect) {

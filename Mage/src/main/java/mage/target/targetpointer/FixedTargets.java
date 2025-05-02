@@ -22,14 +22,7 @@ public class FixedTargets extends TargetPointerImpl {
 
     final ArrayList<MageObjectReference> targets = new ArrayList<>();
 
-    public FixedTargets(List<Permanent> objects, Game game) {
-        this(objects
-                .stream()
-                .map(o -> new MageObjectReference(o.getId(), game))
-                .collect(Collectors.toList()));
-    }
-
-    public FixedTargets(Set<Card> objects, Game game) {
+    public FixedTargets(Collection<? extends Card> objects, Game game) {
         this(objects
                 .stream()
                 .map(o -> new MageObjectReference(o.getId(), game))
@@ -50,7 +43,7 @@ public class FixedTargets extends TargetPointerImpl {
                 .collect(Collectors.toList()), game);
     }
 
-    public FixedTargets(List<MageObjectReference> morList) {
+    public FixedTargets(Collection<MageObjectReference> morList) {
         super();
         targets.addAll(morList);
         this.setInitialized(); // no need dynamic init

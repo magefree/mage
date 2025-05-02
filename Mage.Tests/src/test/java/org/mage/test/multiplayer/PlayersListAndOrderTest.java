@@ -116,6 +116,36 @@ public class PlayersListAndOrderTest extends CardTestMultiPlayerBase {
     }
 
     @Test
+    public void test_Game_PlayerListMustHaveAccessByIndex() {
+        // make sure CircularList return same data by index, see #13526
+
+        PlayerList players = new PlayerList();
+        players.add(playerA.getId());
+        players.add(playerB.getId());
+        players.add(playerC.getId());
+        players.add(playerD.getId());
+        List<UUID> staticList = new ArrayList<>(players);
+        Assert.assertEquals("last added player must be current", staticList.get(0), playerD.getId());
+
+        // normal
+        Assert.assertEquals(players.get(0), staticList.get(0));
+        Assert.assertEquals(players.get(1), staticList.get(1));
+        Assert.assertEquals(players.get(2), staticList.get(2));
+        Assert.assertEquals(players.get(3), staticList.get(3));
+        Assert.assertEquals(players.get(2), staticList.get(2)); // make sure no depends on calls order
+
+        // make sure CircularList keeps inner structure
+        players.setCurrent(playerC.getId());
+        Assert.assertEquals(players.get(0), staticList.get(0));
+        Assert.assertEquals(players.get(1), staticList.get(1));
+        Assert.assertEquals(players.get(2), staticList.get(2));
+        Assert.assertEquals(players.get(3), staticList.get(3));
+        Assert.assertEquals(players.get(2), staticList.get(2)); // make sure no depends on calls order
+
+        Assert.assertNull("must return null on non existing item", players.get(999));
+    }
+
+    @Test
     public void test_Game_GetPlayerList() {
         // game.getPlayerList() - APNAP order, for cards usage
 

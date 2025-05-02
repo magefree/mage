@@ -10,6 +10,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
+import mage.abilities.dynamicvalue.common.InstantAndSorceryCastThisTurn;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -24,14 +25,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.util.CardUtil;
-import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -76,7 +72,7 @@ public final class SorcererClass extends CardImpl {
                         StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                         false, SetTargetPointer.SPELL
                 ), 3
-        )), new SorcererClassWatcher());
+        )).addHint(InstantAndSorceryCastThisTurn.YOU.getHint()));
     }
 
     private SorcererClass(final SorcererClass card) {
@@ -151,7 +147,7 @@ class SorcererClassEffect extends OneShotEffect {
         if (spell == null) {
             return false;
         }
-        int count = SorcererClassWatcher.spellCount(source.getControllerId(), game);
+        int count = InstantAndSorceryCastThisTurn.YOU.calculate(game, source, this);
         if (count < 1) {
             return false;
         }
@@ -163,37 +159,5 @@ class SorcererClassEffect extends OneShotEffect {
             player.damage(count, spell.getId(), source, game);
         }
         return true;
-    }
-}
-
-class SorcererClassWatcher extends Watcher {
-
-    private final Map<UUID, Integer> spellMap = new HashMap<>();
-
-    SorcererClassWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
-            return;
-        }
-        Spell spell = game.getSpell(event.getTargetId());
-        if (spell == null || !spell.isInstantOrSorcery(game)) {
-            return;
-        }
-        spellMap.compute(spell.getControllerId(), CardUtil::setOrIncrementValue);
-    }
-
-    @Override
-    public void reset() {
-        spellMap.clear();
-        super.reset();
-    }
-
-    static int spellCount(UUID playerId, Game game) {
-        SorcererClassWatcher watcher = game.getState().getWatcher(SorcererClassWatcher.class);
-        return watcher != null ? watcher.spellMap.getOrDefault(playerId, 0) : 0;
     }
 }

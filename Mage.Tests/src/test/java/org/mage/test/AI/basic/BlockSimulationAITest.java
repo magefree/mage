@@ -309,4 +309,47 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
         assertGraveyardCount(playerA, "Balduvian Bears", 1);
         assertDamageReceived(playerB, "Graveblade Marauder", 2);
     }
+
+    @Test
+    public void test_Block_deathtouch_attacker_vs_menace() {
+        // possible bug: AI freeze, see https://github.com/magefree/mage/issues/13342
+        // it's only HumanPlayer related and can't be tested here
+
+        // First strike, Deathtouch
+        // Whenever Glissa Sunslayer deals combat damage to a player, choose one —
+        // • You draw a card and you lose 1 life.
+        // • Destroy target enchantment.
+        // • Remove up to three counters from target permanent.
+        addCard(Zone.BATTLEFIELD, playerA, "Glissa Sunslayer", 1); // 3/3
+        // Deathtouch
+        // Whenever a creature you control with deathtouch deals combat damage to a player, that player gets two poison counters.
+        addCard(Zone.BATTLEFIELD, playerA, "Fynn, the Fangbearer", 1); // 1/3
+        // Deathtouch
+        // Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)
+        addCard(Zone.BATTLEFIELD, playerA, "Bilious Skulldweller", 1); // 1/1
+        //
+        // Menace
+        // At the beginning of each player’s upkeep, Furnace Punisher deals 2 damage to that player unless they control
+        // two or more basic lands.
+        addCard(Zone.BATTLEFIELD, playerB, "Furnace Punisher", 1); // 3/3
+
+        attack(1, playerA, "Glissa Sunslayer");
+        attack(1, playerA, "Fynn, the Fangbearer");
+        attack(1, playerA, "Bilious Skulldweller");
+        setChoice(playerA, "Whenever a creature you control", 2); // x3 triggers
+        setModeChoice(playerA, "1"); // you draw a card and you lose 1 life
+
+        // ai must not block attacker with Deathtouch
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("no blockers", 1, playerB, "");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20 - 1 - 2); // from draw, from furnace damage
+        assertLife(playerB, 20 - 3 - 1 - 1);
+        assertPermanentCount(playerA, "Glissa Sunslayer", 1);
+        assertGraveyardCount(playerB, 0);
+    }
 }

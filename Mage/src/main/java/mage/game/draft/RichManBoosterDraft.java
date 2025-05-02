@@ -1,15 +1,14 @@
-
 package mage.game.draft;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public class RichManBoosterDraft extends DraftImpl {
@@ -38,6 +37,7 @@ public class RichManBoosterDraft extends DraftImpl {
             }
             boosterNum++;
         }
+        this.boosterSendingEnd();
         this.fireEndDraftEvent();
     }
 
@@ -50,7 +50,7 @@ public class RichManBoosterDraft extends DraftImpl {
             DraftPlayer next = players.get(nextId);
             while (true) {
                 List<Card> nextBooster = sets.get((cardNum - 1) % sets.size()).createBooster();
-                next.setBooster(nextBooster);
+                next.setBoosterAndLoad(nextBooster);
                 if (Objects.equals(nextId, startId)) {
                     break;
                 }
@@ -62,22 +62,21 @@ public class RichManBoosterDraft extends DraftImpl {
 
     @Override
     protected boolean pickCards() {
-        for (DraftPlayer player : players.values()) {
-            if (cardNum > 36) {
-                return false;
-            }
-            player.setPicking();
-            player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
-        }
-        cardNum++;
-        synchronized (this) {
-            while (!donePicking()) {
-                try {
-                    this.wait();
-                } catch (InterruptedException ex) {
+        synchronized (players) {
+            for (DraftPlayer player : players.values()) {
+                if (cardNum > 36) {
+                    return false;
                 }
+                player.setPickingAndSending();
             }
         }
+
+        while (!donePicking()) {
+            boosterSendingStart();
+            picksWait();
+        }
+
+        cardNum++;
         return true;
     }
 
@@ -85,6 +84,7 @@ public class RichManBoosterDraft extends DraftImpl {
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
         int cardNum = Math.min(36, this.cardNum);
+
         // richman uses custom times
         int time = (int) Math.ceil(customProfiTimes[cardNum - 1] * timing.getCustomTimeoutFactor());
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);

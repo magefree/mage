@@ -1,31 +1,24 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PleaForGuidance extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("enchantment cards");
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
-    
     public PleaForGuidance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}");
 
         // Search your library for up to two enchantment cards, reveal them, and put them into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0,2, filter), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_ENCHANTMENTS), true));
     }
 
     private PleaForGuidance(final PleaForGuidance card) {

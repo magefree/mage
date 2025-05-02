@@ -67,4 +67,35 @@ public class AgrusKosEternalSoldierTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
     }
 
+    @Test
+    public void testCopiedTriggerAbility() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerB, agrus);
+        addCard(Zone.BATTLEFIELD, playerB, turtle);
+        addCard(Zone.BATTLEFIELD, playerB, firewalker);
+        addCard(Zone.BATTLEFIELD, playerB, "Plateau", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Panharmonicon");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        addCard(Zone.HAND, playerA, "Smoldering Werewolf");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Smoldering Werewolf");
+        setChoice(playerA, "When {this} enters, it deals");
+        addTarget(playerA, agrus);
+        addTarget(playerA, agrus);
+        setChoice(playerB, true); // gain life
+        setChoice(playerB, "Whenever {this} becomes");
+        setChoice(playerB, true); // pay to copy
+        setChoice(playerB, true); // pay to copy
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertDamageReceived(playerB, agrus, 2);
+        assertDamageReceived(playerB, turtle, 2);
+        assertDamageReceived(playerB, firewalker, 0);
+        assertLife(playerA, 20);
+        assertLife(playerB, 21);
+    }
+
 }

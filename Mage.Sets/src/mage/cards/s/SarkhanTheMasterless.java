@@ -91,6 +91,7 @@ class SarkhanTheMasterlessBecomeDragonEffect extends ContinuousEffectImpl {
     SarkhanTheMasterlessBecomeDragonEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Until end of turn, each planeswalker you control becomes a 4/4 red Dragon creature and gains flying.";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private SarkhanTheMasterlessBecomeDragonEffect(final SarkhanTheMasterlessBecomeDragonEffect effect) {

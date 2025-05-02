@@ -18,7 +18,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public abstract class DraftImpl implements Draft {
 
@@ -36,7 +36,7 @@ public abstract class DraftImpl implements Draft {
     protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
     protected TimingOption timing;
     protected int boosterLoadingCounter; // number of times the boosters have been sent to players until all are confirmed to have received them
-    protected final int BOOSTER_LOADING_INTERVAL = 2; // interval in seconds
+    protected final int BOOSTER_LOADING_INTERVAL_SECS = 2; // interval in seconds
 
     protected boolean abort = false;
     protected boolean started = false;
@@ -44,8 +44,8 @@ public abstract class DraftImpl implements Draft {
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
-    protected ScheduledFuture<?> boosterLoadingHandle;
-    protected ScheduledExecutorService boosterLoadingExecutor = null;
+    protected ScheduledFuture<?> boosterSendingWorker;
+    protected ScheduledExecutorService boosterSendingExecutor = null;
 
     public DraftImpl(DraftOptions options, List<ExpansionSet> sets) {
         this.id = UUID.randomUUID();
@@ -83,7 +83,6 @@ public abstract class DraftImpl implements Draft {
         if (newPlayer != null) {
             DraftPlayer newDraftPlayer = new DraftPlayer(newPlayer);
             DraftPlayer oldDraftPlayer = players.get(oldPlayer.getId());
-            newDraftPlayer.setBooster(oldDraftPlayer.getBooster());
             Map<UUID, DraftPlayer> newPlayers = new LinkedHashMap<>();
             synchronized (players) {
                 for (Map.Entry<UUID, DraftPlayer> entry : players.entrySet()) {
@@ -110,12 +109,14 @@ public abstract class DraftImpl implements Draft {
 
                 table.setCurrent(currentId);
             }
+
+            // boosters send to all players by timeout, so don't need to send it manually here
+            newDraftPlayer.setBoosterAndLoad(oldDraftPlayer.getBooster());
             if (oldDraftPlayer.isPicking()) {
-                newDraftPlayer.setPicking();
-                if (!newDraftPlayer.getBooster().isEmpty()) {
-                    newDraftPlayer.getPlayer().pickCard(newDraftPlayer.getBooster(), newDraftPlayer.getDeck(), this);
-                }
+                newDraftPlayer.setPickingAndSending();
             }
+            boosterSendingStart(); // if it's AI then make pick from it
+
             return true;
         }
         return false;
@@ -124,7 +125,7 @@ public abstract class DraftImpl implements Draft {
     @Override
     public Collection<DraftPlayer> getPlayers() {
         synchronized (players) {
-            return players.values();
+            return new ArrayList<>(players.values());
         }
     }
 
@@ -188,7 +189,7 @@ public abstract class DraftImpl implements Draft {
             List<Card> currentBooster = current.booster;
             while (true) {
                 List<Card> nextBooster = next.booster;
-                next.setBooster(currentBooster);
+                next.setBoosterAndLoad(currentBooster);
                 if (Objects.equals(nextId, startId)) {
                     break;
                 }
@@ -209,7 +210,7 @@ public abstract class DraftImpl implements Draft {
             List<Card> currentBooster = current.booster;
             while (true) {
                 List<Card> prevBooster = prev.booster;
-                prev.setBooster(currentBooster);
+                prev.setBoosterAndLoad(currentBooster);
                 if (Objects.equals(prevId, startId)) {
                     break;
                 }
@@ -221,70 +222,71 @@ public abstract class DraftImpl implements Draft {
     }
 
     protected void openBooster() {
-        if (boosterNum <= numberBoosters) {
-            for (DraftPlayer player : players.values()) {
-                if (draftCube != null) {
-                    player.setBooster(draftCube.createBooster());
-                } else {
-                    player.setBooster(sets.get(boosterNum - 1).createBooster());
+        synchronized (players) {
+            if (boosterNum <= numberBoosters) {
+                for (DraftPlayer player : players.values()) {
+                    if (draftCube != null) {
+                        player.setBoosterAndLoad(draftCube.createBooster());
+                    } else {
+                        player.setBoosterAndLoad(sets.get(boosterNum - 1).createBooster());
+                    }
                 }
             }
         }
     }
 
     protected boolean pickCards() {
-        for (DraftPlayer player : players.values()) {
-            if (player.getBooster().isEmpty()) {
-                return false;
-            }
-            player.setPicking();
-            player.setBoosterNotLoaded();
-        }
-        setupBoosterLoadingHandle();
-        synchronized (this) {
-            while (!donePicking()) {
-                try {
-                    this.wait(10000); // checked every 10s to make sure the draft moves on
-                } catch (InterruptedException ex) {
+        synchronized (players) {
+            for (DraftPlayer player : players.values()) {
+                if (player.getBooster().isEmpty()) {
+                    return false;
                 }
+                player.setPickingAndSending();
             }
         }
+
+        while (!donePicking()) {
+            boosterSendingStart();
+            picksWait();
+        }
+
         cardNum++;
         return true;
     }
 
-    protected void setupBoosterLoadingHandle() {
-        cancelBoosterLoadingHandle();
-        boosterLoadingCounter = 0;
-
-        if (this.boosterLoadingExecutor == null) {
-            this.boosterLoadingExecutor = Executors.newSingleThreadScheduledExecutor(
-                    new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY_BOOSTERS_SEND)
+    public void boosterSendingStart() {
+        if (this.boosterSendingExecutor == null) {
+            this.boosterSendingExecutor = Executors.newSingleThreadScheduledExecutor(
+                    new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TOURNEY_BOOSTERS_SEND + " " + this.getId())
             );
         }
+        boosterLoadingCounter = 0;
 
-        boosterLoadingHandle = boosterLoadingExecutor.scheduleAtFixedRate(() -> {
-            try {
-                if (loadBoosters()) {
-                    cancelBoosterLoadingHandle();
-                } else {
-                    boosterLoadingCounter++;
+        if (boosterSendingWorker == null) {
+            boosterSendingWorker = boosterSendingExecutor.scheduleAtFixedRate(() -> {
+                try {
+                    if (isAbort() || sendBoostersToPlayers()) {
+                        boosterSendingEnd();
+                    } else {
+                        boosterLoadingCounter++;
+                    }
+                } catch (Exception ex) {
+                    logger.fatal("Fatal boosterLoadingHandle error in draft " + id + " pack " + boosterNum + " pick " + cardNum, ex);
                 }
-            } catch (Exception ex) {
-                logger.fatal("Fatal boosterLoadingHandle error in draft " + id + " pack " + boosterNum + " pick " + cardNum, ex);
-            }
-        }, 0, BOOSTER_LOADING_INTERVAL, TimeUnit.SECONDS);
-    }
-
-    protected void cancelBoosterLoadingHandle() {
-        if (boosterLoadingHandle != null) {
-            boosterLoadingHandle.cancel(true);
+            }, 0, BOOSTER_LOADING_INTERVAL_SECS, TimeUnit.SECONDS);
         }
     }
 
-    protected boolean loadBoosters() {
+    protected void boosterSendingEnd() {
+        if (boosterSendingWorker != null) {
+            boosterSendingWorker.cancel(true);
+            boosterSendingWorker = null;
+        }
+    }
+
+    protected boolean sendBoostersToPlayers() {
         boolean allBoostersLoaded = true;
-        for (DraftPlayer player : players.values()) {
+        for (DraftPlayer player : getPlayers()) {
             if (player.isPicking() && !player.isBoosterLoaded()) {
                 allBoostersLoaded = false;
                 player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
@@ -297,16 +299,20 @@ public abstract class DraftImpl implements Draft {
         if (isAbort()) {
             return true;
         }
-        return players.values()
-                .stream()
-                .noneMatch(DraftPlayer::isPicking);
 
+        synchronized (players) {
+            return players.values()
+                    .stream()
+                    .noneMatch(DraftPlayer::isPicking);
+        }
     }
 
     @Override
     public boolean allJoined() {
-        return players.values().stream()
-                .allMatch(DraftPlayer::isJoined);
+        synchronized (players) {
+            return players.values().stream()
+                    .allMatch(DraftPlayer::isJoined);
+        }
     }
 
     @Override
@@ -342,9 +348,30 @@ public abstract class DraftImpl implements Draft {
         // if the pack is re-sent to a player because they haven't been able to successfully load it, the pick time is reduced appropriately because of the elapsed time
         // the time is always at least 1 second unless it's set to 0, i.e. unlimited time
         if (time > 0) {
-            time = Math.max(1, time - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL);
+            time = Math.max(1, time - boosterLoadingCounter * BOOSTER_LOADING_INTERVAL_SECS);
         }
         return time;
+    }
+
+    public void picksCheckDone() {
+        // notify main thread about changes, can be called from user's thread
+        synchronized (this) {
+            this.notifyAll();
+        }
+    }
+
+    protected void picksWait() {
+        // main thread waiting any picks or changes
+        synchronized (this) {
+            try {
+                this.wait(10000); // checked every 10s to make sure the draft moves on
+            } catch (InterruptedException ignore) {
+            }
+        }
+
+        if (donePicking()) {
+            boosterSendingEnd();
+        }
     }
 
     @Override
@@ -354,13 +381,10 @@ public abstract class DraftImpl implements Draft {
             for (Card card : player.booster) {
                 if (card.getId().equals(cardId)) {
                     player.addPick(card, hiddenCards);
-                    player.booster.remove(card);
                     break;
                 }
             }
-            synchronized (this) {
-                this.notifyAll();
-            }
+            picksCheckDone();
         }
         return !player.isPicking();
     }

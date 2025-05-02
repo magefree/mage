@@ -4,72 +4,65 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author TheElk801
  */
 public class MostCommonColorCondition implements Condition {
 
     protected final ObjectColor compareColor;
     protected final boolean isMono;
-    protected final Predicate predicate;
+    protected final FilterPermanent filter;
 
     public MostCommonColorCondition(ObjectColor color) {
         this(color, false, null);
     }
 
-    //Use this one if you don't want a tie for most common and want to restrict to a player (literally only Call to Arms)
+    // Use this one if you don't want a tie for most common and want to restrict to a player (literally only Call to Arms)
     public MostCommonColorCondition(ObjectColor color, boolean isMono, Predicate predicate) {
         this.compareColor = color;
         this.isMono = isMono;
-        this.predicate = predicate;
+        if (predicate == null) {
+            this.filter = StaticFilters.FILTER_PERMANENT;
+        } else {
+            this.filter = new FilterPermanent();
+            this.filter.add(predicate);
+        }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterPermanent[] colorFilters = new FilterPermanent[6];
-        int i = 0;
-        for (ObjectColor color : ObjectColor.getAllColors()) {
-            colorFilters[i] = new FilterPermanent();
-            colorFilters[i].add(new ColorPredicate(color));
-            if (predicate != null) {
-                colorFilters[i].add(predicate);
-            }
-            i++;
-        }
-        int[] colorCounts = new int[6];
-        i = 0;
-        for (ObjectColor color : ObjectColor.getAllColors()) {
-            colorFilters[i].add(new ColorPredicate(color));
-            colorCounts[i] = game.getBattlefield().count(colorFilters[i], source.getControllerId(), source, game);
-            i++;
-        }
-        int max = 0;
-        for (i = 0; i < 5; i++) {
-            if (colorCounts[i] > max) {
-                max = colorCounts[i] * 1;
+        Map<String, Integer> colorMap = new HashMap<>();
+        for (Permanent permanent : game
+                .getBattlefield()
+                .getActivePermanents(filter, source.getControllerId(), source, game)) {
+            for (char c : permanent.getColor(game).toString().toCharArray()) {
+                colorMap.compute("" + c, CardUtil::setOrIncrementValue);
             }
         }
-        i = 0;
-        ObjectColor commonest = new ObjectColor();
-        for (ObjectColor color : ObjectColor.getAllColors()) {
-            if (colorCounts[i] == max) {
-                commonest.addColor(color);
-            }
-            i++;
-        }
-        if (compareColor.shares(commonest)) {
-            if (isMono) {
-                return !commonest.isMulticolored();
-            } else {
-                return true;
-            }
-        }
-        return false;
+        int most = colorMap
+                .values()
+                .stream()
+                .mapToInt(x -> x)
+                .max()
+                .orElse(0);
+        ObjectColor common = new ObjectColor(
+                colorMap.entrySet()
+                        .stream()
+                        .filter(e -> e.getValue() == most)
+                        .map(Map.Entry::getKey)
+                        .collect(Collectors.joining())
+        );
+        return common.shares(compareColor) && (!isMono || common.getColorCount() == 1);
     }
 
     @Override

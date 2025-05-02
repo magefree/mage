@@ -9,6 +9,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
@@ -33,10 +35,19 @@ public class PutIntoLibraryNFromTopTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        return player != null && permanent != null
-                && player.putCardOnTopXOfLibrary(permanent, game, source, position, true);
+        boolean result = false;
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent == null) {
+                continue;
+            }
+            Player player = game.getPlayer(permanent.getOwnerId());
+            if (player == null) {
+                continue;
+            }
+            result |= player.putCardOnTopXOfLibrary(permanent, game, source, position, true);
+        }
+        return result;
     }
 
     @Override

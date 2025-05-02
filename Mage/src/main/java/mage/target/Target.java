@@ -55,6 +55,9 @@ public interface Target extends Serializable {
 
     boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);
 
+    /**
+     * Add target from targeting methods like chooseTarget (will check and generate target events and effects)
+     */
     void addTarget(UUID id, Ability source, Game game);
 
     void addTarget(UUID id, int amount, Ability source, Game game);
@@ -90,6 +93,9 @@ public interface Target extends Serializable {
 
     boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game);
 
+    /**
+     * Add target from non targeting methods like choose
+     */
     void add(UUID id, Game game);
 
     void remove(UUID targetId);

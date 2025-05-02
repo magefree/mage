@@ -43,7 +43,7 @@ public final class BaldinCenturyHerdmaster extends CardImpl {
 
         // Whenever Baldin, Century Herdmaster attacks, up to one hundred target creatures each get +0/+X until end of turn, where X is the number of cards in your hand.
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(
-                StaticValue.get(0), CardsInControllerHandCount.instance, Duration.EndOfTurn
+                StaticValue.get(0), CardsInControllerHandCount.ANY, Duration.EndOfTurn
         ).setText("up to one hundred target creatures each get +0/+X until end of turn, where X is the number of cards in your hand"));
         ability.addTarget(new TargetCreaturePermanent(0, 100));
         this.addAbility(ability);

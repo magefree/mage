@@ -31,6 +31,7 @@ public final class GorehornRaider extends CardImpl {
 
         // Raid -- When this creature enters, if you attacked this turn, this creature deals 2 damage to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2))
+                .withRuleTextReplacement(false)
                 .withInterveningIf(RaidCondition.instance);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());

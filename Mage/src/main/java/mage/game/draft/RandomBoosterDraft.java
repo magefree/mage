@@ -28,7 +28,7 @@ public class RandomBoosterDraft extends BoosterDraft {
     protected void openBooster() {
         if (boosterNum <= numberBoosters) {
             for (DraftPlayer player: players.values()) {
-                player.setBooster(getNextBooster().create15CardBooster());
+                player.setBoosterAndLoad(getNextBooster().create15CardBooster());
             }
         }
     }

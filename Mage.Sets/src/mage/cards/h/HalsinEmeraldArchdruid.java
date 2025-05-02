@@ -63,6 +63,7 @@ class HalsinEmeraldArchdruidEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, target token you control becomes a green Bear creature " +
                 "with base power and toughness 4/4 in addition to its other colors and types";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private HalsinEmeraldArchdruidEffect(final HalsinEmeraldArchdruidEffect effect) {

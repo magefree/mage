@@ -111,6 +111,8 @@ Exodus|EXO|
 Zendikar Expeditions|EXP|
 Fallout|PIP|
 Fallen Empires|FEM|
+Final Fantasy|FIN|
+Final Fantasy Commander|FIC|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
 Foundations|FDN|
@@ -171,6 +173,7 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+Marvel's Spider-Man Eternal|SPE|
 March of the Machine|MOM|
 March of the Machine Commander|MOC|
 March of the Machine: The Aftermath|MAT|
@@ -246,6 +249,8 @@ New Capenna Commander|NCC|
 Stronghold|STH|
 Special Guests|SPG|
 Super Series|SUS|
+Tarkir: Dragonstorm|TDM|
+Tarkir: Dragonstorm Commander|TDC|
 Theros|THS|
 Theros Beyond Death|THB|
 The Brothers' War|BRO|

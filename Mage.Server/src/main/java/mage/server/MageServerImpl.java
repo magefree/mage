@@ -29,7 +29,6 @@ import mage.server.managers.ManagerFactory;
 import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ServerMessagesUtil;
-import mage.utils.SystemUtil;
 import mage.utils.*;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
@@ -1300,29 +1299,30 @@ public class MageServerImpl implements MageServer {
 
         @Override
         public TableView execute() throws MageException {
-            Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
-            if (!session.isPresent()) {
+            Session session = managerFactory.sessionManager().getSession(sessionId).orElse(null);
+            if (session == null) {
                 return null;
             }
-            UUID userId = session.get().getUserId();
-            Optional<User> _user = managerFactory.userManager().getUser(userId);
-            if (!_user.isPresent()) {
-                logger.error("User for session not found. session = " + sessionId);
+            UUID userId = session.getUserId();
+            User user = managerFactory.userManager().getUser(userId).orElse(null);
+            if (user == null) {
                 return null;
             }
-            User user = _user.get();
+
             // check if user can create another table
             int notStartedTables = user.getNumberOfNotStartedTables();
             if (notStartedTables > 1) {
                 user.showUserMessage("Create table", "You have already " + notStartedTables + " not started tables. You can't create another.");
-                throw new MageException("No message");
+                throw new MageException("User " + user.getName() + " can't create table: too much started");
             }
+
             // check if the user itself satisfies the quitRatio requirement.
             int quitRatio = options.getQuitRatio();
             if (quitRatio < user.getMatchQuitRatio()) {
                 user.showUserMessage("Create table", "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + '%');
-                throw new MageException("No message");
+                throw new MageException("User " + user.getName() + " can't create table: incompatible quit ratio");
             }
+
             // check if the user satisfies the minimumRating requirement.
             int minimumRating = options.getMinimumRating();
             int userRating;
@@ -1334,20 +1334,15 @@ public class MageServerImpl implements MageServer {
             if (userRating < minimumRating) {
                 String message = new StringBuilder("Your rating ").append(userRating).append(" is lower than the table requirement ").append(minimumRating).toString();
                 user.showUserMessage("Create table", message);
-                throw new MageException("No message");
+                throw new MageException("User " + user.getName() + " can't create table: incompatible rating");
             }
-            Optional<GamesRoom> room = managerFactory.gamesRoomManager().getRoom(roomId);
-            if (room.isPresent()) {
-                TableView table = room.get().createTable(userId, options);
-                if (logger.isDebugEnabled()) {
-                    logger.debug("TABLE created - tableId: " + table.getTableId() + ' ' + table.getTableName());
-                    logger.debug("- " + user.getName() + " userId: " + user.getId());
-                    logger.debug("- chatId: " + managerFactory.tableManager().getChatId(table.getTableId()));
-                }
-                return table;
-            } else {
+
+            GamesRoom room = managerFactory.gamesRoomManager().getRoom(roomId).orElse(null);
+            if (room == null) {
                 return null;
             }
+
+            return room.createTable(userId, options);
         }
     }
 

@@ -181,19 +181,21 @@ public interface Card extends MageObject, Ownerable {
      * Remove {@param amount} counters of the specified kind.
      *
      * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     * @return amount of counters removed
      */
-    void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage);
+    int removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage);
 
-    default void removeCounters(Counter counter, Ability source, Game game) {
-        removeCounters(counter, source, game, false);
+    default int removeCounters(Counter counter, Ability source, Game game) {
+        return removeCounters(counter, source, game, false);
     }
 
     /**
      * Remove all counters of any kind.
      *
      * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     * @return amount of counters removed
      */
-    void removeCounters(Counter counter, Ability source, Game game, boolean isDamage);
+    int removeCounters(Counter counter, Ability source, Game game, boolean isDamage);
 
     /**
      * Remove all counters of any kind.

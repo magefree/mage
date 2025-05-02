@@ -124,7 +124,7 @@ class GrenzoHavocRaiserEffect extends OneShotEffect {
 
     GrenzoHavocRaiserEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it";
+        this.staticText = "exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell";
     }
 
     private GrenzoHavocRaiserEffect(final GrenzoHavocRaiserEffect effect) {

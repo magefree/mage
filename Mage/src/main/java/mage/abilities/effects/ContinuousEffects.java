@@ -22,7 +22,6 @@ import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.util.trace.TraceInfo;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -550,9 +549,9 @@ public class ContinuousEffects implements Serializable {
                 // rules:
                 // 708.4. In every zone except the stack, the characteristics of a split card are those of its two halves combined.
                 idToCheck = ((SplitCardHalf) objectToCheck).getMainCard().getId();
-            } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
-                // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card
-                idToCheck = ((AdventureCardSpell) objectToCheck).getMainCard().getId();
+            } else if (!type.needPlayCardAbility() && objectToCheck instanceof CardWithSpellOption) {
+                // adventure/omen spell uses alternative characteristics for spell/stack, all other cases must use main card
+                idToCheck = ((CardWithSpellOption) objectToCheck).getMainCard().getId();
             } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacedCardHalf) {
                 // each mdf side uses own characteristics to check for playing, all other cases must use main card
                 // rules:
@@ -689,6 +688,8 @@ public class ContinuousEffects implements Serializable {
      * the battlefield for
      * {@link CostModificationEffect cost modification effects} and applies them
      * if necessary.
+     * <p>
+     * Warning, don't forget to call ability.adjustX before any cost modifications
      *
      * @param abilityToModify
      * @param game
@@ -696,6 +697,10 @@ public class ContinuousEffects implements Serializable {
     public void costModification(Ability abilityToModify, Game game) {
         List<CostModificationEffect> costEffects = getApplicableCostModificationEffects(game);
 
+        // add dynamic costs from X and other places
+        abilityToModify.adjustCostsPrepare(game);
+
+        abilityToModify.adjustCostsModify(game, CostModificationType.INCREASE_COST);
         for (CostModificationEffect effect : costEffects) {
             if (effect.getModificationType() == CostModificationType.INCREASE_COST) {
                 Set<Ability> abilities = costModificationEffects.getAbility(effect.getId());
@@ -707,6 +712,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
+        abilityToModify.adjustCostsModify(game, CostModificationType.REDUCE_COST);
         for (CostModificationEffect effect : costEffects) {
             if (effect.getModificationType() == CostModificationType.REDUCE_COST) {
                 Set<Ability> abilities = costModificationEffects.getAbility(effect.getId());
@@ -718,6 +724,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
+        abilityToModify.adjustCostsModify(game, CostModificationType.SET_COST);
         for (CostModificationEffect effect : costEffects) {
             if (effect.getModificationType() == CostModificationType.SET_COST) {
                 Set<Ability> abilities = costModificationEffects.getAbility(effect.getId());
@@ -1403,88 +1410,6 @@ public class ContinuousEffects implements Serializable {
             }
         }
         return controllerFound;
-    }
-
-    /**
-     * Debug only: prints out a status of the currently existing continuous effects
-     *
-     * @param game
-     */
-    public void traceContinuousEffects(Game game) {
-        game.getContinuousEffects().getLayeredEffects(game);
-        logger.info("-------------------------------------------------------------------------------------------------");
-        int numberEffects = 0;
-        for (ContinuousEffectsList list : allEffectsLists) {
-            numberEffects += list.size();
-        }
-        logger.info("Turn: " + game.getTurnNum() + " - currently existing continuous effects: " + numberEffects);
-        logger.info("layeredEffects ...................: " + layeredEffects.size());
-        logger.info("continuousRuleModifyingEffects ...: " + continuousRuleModifyingEffects.size());
-        logger.info("replacementEffects ...............: " + replacementEffects.size());
-        logger.info("preventionEffects ................: " + preventionEffects.size());
-        logger.info("requirementEffects ...............: " + requirementEffects.size());
-        logger.info("restrictionEffects ...............: " + restrictionEffects.size());
-        logger.info("restrictionUntapNotMoreThanEffects: " + restrictionUntapNotMoreThanEffects.size());
-        logger.info("costModificationEffects ..........: " + costModificationEffects.size());
-        logger.info("spliceCardEffects ................: " + spliceCardEffects.size());
-        logger.info("asThoughEffects:");
-        for (Map.Entry<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> entry : asThoughEffectsMap.entrySet()) {
-            logger.info("... " + entry.getKey().toString() + ": " + entry.getValue().size());
-        }
-        logger.info("applyStatus ....................: " + (applyStatus != null ? "exists" : "null"));
-        logger.info("auraReplacementEffect ............: " + (continuousRuleModifyingEffects != null ? "exists" : "null"));
-        Map<String, TraceInfo> orderedEffects = new TreeMap<>();
-        traceAddContinuousEffects(orderedEffects, layeredEffects, game, "layeredEffects................");
-        traceAddContinuousEffects(orderedEffects, continuousRuleModifyingEffects, game, "continuousRuleModifyingEffects");
-        traceAddContinuousEffects(orderedEffects, replacementEffects, game, "replacementEffects............");
-        traceAddContinuousEffects(orderedEffects, preventionEffects, game, "preventionEffects.............");
-        traceAddContinuousEffects(orderedEffects, requirementEffects, game, "requirementEffects............");
-        traceAddContinuousEffects(orderedEffects, restrictionEffects, game, "restrictionEffects............");
-        traceAddContinuousEffects(orderedEffects, restrictionUntapNotMoreThanEffects, game, "restrictionUntapNotMore...");
-        traceAddContinuousEffects(orderedEffects, costModificationEffects, game, "costModificationEffects.......");
-        traceAddContinuousEffects(orderedEffects, spliceCardEffects, game, "spliceCardEffects.............");
-        for (Map.Entry<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> entry : asThoughEffectsMap.entrySet()) {
-            traceAddContinuousEffects(orderedEffects, entry.getValue(), game, entry.getKey().toString());
-        }
-        String playerName = "";
-        for (Map.Entry<String, TraceInfo> entry : orderedEffects.entrySet()) {
-            if (!entry.getValue().getPlayerName().equals(playerName)) {
-                playerName = entry.getValue().getPlayerName();
-                logger.info("--- Player: " + playerName + "  --------------------------------");
-            }
-            logger.info(entry.getValue().getInfo()
-                    + " " + entry.getValue().getSourceName()
-                    + " " + entry.getValue().getDuration().name()
-                    + " " + entry.getValue().getRule()
-                    + " (Order: " + entry.getValue().getOrder() + ")"
-            );
-        }
-        logger.info("---- End trace Continuous effects --------------------------------------------------------------------------");
-    }
-
-    public static void traceAddContinuousEffects(Map orderedEffects, ContinuousEffectsList<?> cel, Game game, String listName) {
-        for (ContinuousEffect effect : cel) {
-            Set<Ability> abilities = cel.getAbility(effect.getId());
-            for (Ability ability : abilities) {
-                Player controller = game.getPlayer(ability.getControllerId());
-                MageObject source = game.getObject(ability.getSourceId());
-                TraceInfo traceInfo = new TraceInfo();
-                traceInfo.setInfo(listName);
-                traceInfo.setOrder(effect.getOrder());
-                if (ability instanceof MageSingleton) {
-                    traceInfo.setPlayerName("Mage Singleton");
-                    traceInfo.setSourceName("Mage Singleton");
-                } else {
-                    traceInfo.setPlayerName(controller == null ? "no controller" : controller.getName());
-                    traceInfo.setSourceName(source == null ? "no source" : source.getIdName());
-                }
-                traceInfo.setRule(ability.getRule());
-                traceInfo.setAbilityId(ability.getId());
-                traceInfo.setEffectId(effect.getId());
-                traceInfo.setDuration(effect.getDuration());
-                orderedEffects.put(traceInfo.getPlayerName() + traceInfo.getSourceName() + effect.getId() + ability.getId(), traceInfo);
-            }
-        }
     }
 
     public int getTotalEffectsCount() {

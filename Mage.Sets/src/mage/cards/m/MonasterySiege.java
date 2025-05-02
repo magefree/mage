@@ -2,14 +2,13 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ModeChoiceSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.abilities.effects.common.continuous.GainAnchorWordAbilitySourceEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -31,17 +30,19 @@ public final class MonasterySiege extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // As Monastery Siege enters the battlefield, choose Khans or Dragons.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
-                "As {this} enters, choose Khans or Dragons.", ""));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(ModeChoice.KHANS, ModeChoice.DRAGONS)));
 
         // * Khans - At the beginning of your draw step, draw an additional card, then discard a card.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfDrawTriggeredAbility(new DrawDiscardControllerEffect(1, 1), false),
-                new ModeChoiceSourceCondition("Khans"),
-                "&bull; Khans &mdash; At the beginning of your draw step, draw an additional card, then discard a card."));
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(
+                new BeginningOfDrawTriggeredAbility(
+                        new DrawDiscardControllerEffect(1, 1), false
+                ), ModeChoice.KHANS
+        )));
 
         // * Dragons - Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(new MonasterySiegeCostIncreaseEffect()));
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(
+                new MonasterySiegeCostIncreaseEffect(), ModeChoice.DRAGONS
+        )));
     }
 
     private MonasterySiege(final MonasterySiege card) {
@@ -56,11 +57,9 @@ public final class MonasterySiege extends CardImpl {
 
 class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
 
-    private static final ModeChoiceSourceCondition modeDragons = new ModeChoiceSourceCondition("Dragons");
-
     MonasterySiegeCostIncreaseEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "&bull; Dragons &mdash; Spells your opponents cast that target you or a permanent you control cost {2} more to cast";
+        staticText = "spells your opponents cast that target you or a permanent you control cost {2} more to cast";
     }
 
     private MonasterySiegeCostIncreaseEffect(final MonasterySiegeCostIncreaseEffect effect) {
@@ -75,10 +74,6 @@ class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (!modeDragons.apply(game, source)) {
-            return false;
-        }
-
         if (!(abilityToModify instanceof SpellAbility)) {
             return false;
         }

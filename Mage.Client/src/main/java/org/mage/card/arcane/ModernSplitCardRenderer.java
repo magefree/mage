@@ -56,7 +56,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     private boolean isAftermath = false;
 
     private static String trimAdventure(String rule) {
-        if (rule.startsWith("Adventure")) {
+        if (rule.startsWith("Adventure") || rule.startsWith("Omen")) {
             return rule.substring(rule.lastIndexOf("&mdash;") + 8);
         }
         return rule;
@@ -71,7 +71,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.color = new ObjectColor(cardView.getRightSplitCostsStr());
         leftHalf.color = new ObjectColor(cardView.getLeftSplitCostsStr());
 
-        if (isAdventure()) {
+        if (isCardWithSpellOption()) {
             List<String> trimmedRules = new ArrayList<>();
             for (String rule : view.getRightSplitRules()) {
                 trimmedRules.add(trimAdventure(rule));
@@ -95,7 +95,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         // they "rotate" in opposite directions making consquence and normal split cards
         // have the "right" vs "left" as the top half.
         // Adventures are treated differently and not rotated at all.
-        if (isAdventure()) {
+        if (isCardWithSpellOption()) {
             manaCostString = leftHalf.manaCostString;
             textboxKeywords = leftHalf.keywords;
             textboxRules = leftHalf.rules;
@@ -159,7 +159,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     protected void drawBackground(Graphics2D g) {
         if (cardView.isFaceDown()) {
             drawCardBackTexture(g);
-        } if (isAdventure()) {
+        } if (isCardWithSpellOption()) {
             super.drawBackground(g);
         } else {
             { // Left half background (top of the card)
@@ -204,7 +204,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     @Override
     protected void drawArt(Graphics2D g) {
-        if (isAdventure) {
+        if (isCardWithSpellOption) {
             super.drawArt(g);
         } else if (artImage != null) {
             if (isAftermath()) {
@@ -318,7 +318,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     @Override
     protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image, boolean lessOpaqueRulesTextBox) {
-        if (isAdventure()) {
+        if (isCardWithSpellOption()) {
             super.drawFrame(g, attribs, image, lessOpaqueRulesTextBox);
 
             CardPanelAttributes adventureAttribs = new CardPanelAttributes(

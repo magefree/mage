@@ -72,7 +72,7 @@ enum CrownOfGondorAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         if (MonarchIsSourceControllerCondition.instance.apply(game, ability)) {
             CardUtil.reduceCost(ability, 3);
         }

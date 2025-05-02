@@ -2,12 +2,11 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
-import mage.abilities.condition.common.CommanderInPlayCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -16,9 +15,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTargets;
 
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -37,14 +34,9 @@ public final class LoyalApprentice extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Lieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new LoyalApprenticeEffect()
-                ), CommanderInPlayCondition.instance, "<i>Lieutenant</i> &mdash; " +
-                "At the beginning of combat on your turn, if you control your commander, " +
-                "create a 1/1 colorless Thopter artifact creature token with flying. " +
-                "That token gains haste until end of turn."
-        ));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new LoyalApprenticeEffect())
+                .withInterveningIf(ControlYourCommanderCondition.instance)
+                .setAbilityWord(AbilityWord.LIEUTENANT));
     }
 
     private LoyalApprentice(final LoyalApprentice card) {
@@ -61,6 +53,7 @@ class LoyalApprenticeEffect extends OneShotEffect {
 
     LoyalApprenticeEffect() {
         super(Outcome.Benefit);
+        staticText = "create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn";
     }
 
     private LoyalApprenticeEffect(final LoyalApprenticeEffect effect) {
@@ -78,13 +71,7 @@ class LoyalApprenticeEffect extends OneShotEffect {
         token.putOntoBattlefield(1, game, source, source.getControllerId());
         game.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ).setTargetPointer(new FixedTargets(
-                token.getLastAddedTokenIds()
-                        .stream()
-                        .map(game::getPermanent)
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.toList()), game
-        )), source);
+        ).setTargetPointer(new FixedTargets(token, game)), source);
         return true;
     }
 }

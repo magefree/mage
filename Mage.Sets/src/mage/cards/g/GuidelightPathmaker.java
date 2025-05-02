@@ -59,7 +59,7 @@ class GuidelightPathmakerEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "search your library for an artifact card and reveal it. " +
                 "Put it onto the battlefield if its mana value is 2 or less. " +
-                "Otherwise, put it into your hand. Then shuffle";
+                "Otherwise, put it into your hand. If you search your library this way, shuffle";
     }
 
     private GuidelightPathmakerEffect(final GuidelightPathmakerEffect effect) {

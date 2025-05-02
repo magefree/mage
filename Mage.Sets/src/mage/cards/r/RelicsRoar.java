@@ -41,6 +41,7 @@ class RelicsRoarEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, target artifact or creature becomes a Dinosaur artifact creature " +
                 "with base power and toughness 4/3 in addition to its other types";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private RelicsRoarEffect(final RelicsRoarEffect effect) {

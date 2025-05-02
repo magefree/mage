@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.VehiclesBecomeArtifactCreatureEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -25,7 +25,7 @@ public final class ArmedAndArmored extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Vehicles you control become artifact creatures until end of turn.
-        this.getSpellAbility().addEffect(new ArmedAndArmoredEffect());
+        this.getSpellAbility().addEffect(new VehiclesBecomeArtifactCreatureEffect(Duration.EndOfTurn));
 
         // Choose a Dwarf you control. Attach any number of Equipment you control to it.
         this.getSpellAbility().addEffect(new ArmedAndArmoredEquipEffect());
@@ -38,41 +38,6 @@ public final class ArmedAndArmored extends CardImpl {
     @Override
     public ArmedAndArmored copy() {
         return new ArmedAndArmored(this);
-    }
-}
-
-class ArmedAndArmoredEffect extends ContinuousEffectImpl {
-
-    ArmedAndArmoredEffect() {
-        super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
-        staticText = "Vehicles you control become artifact creatures until end of turn";
-    }
-
-    private ArmedAndArmoredEffect(final ArmedAndArmoredEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArmedAndArmoredEffect copy() {
-        return new ArmedAndArmoredEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent != null && permanent.hasSubtype(SubType.VEHICLE, game)) {
-                if (sublayer == SubLayer.NA) {
-                    permanent.addCardType(game, CardType.ARTIFACT);
-                    permanent.addCardType(game, CardType.CREATURE);// TODO: Check if giving CREATURE Type is correct
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 }
 

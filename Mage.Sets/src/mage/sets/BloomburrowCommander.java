@@ -97,6 +97,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("End-Raze Forerunners", 214, Rarity.RARE, mage.cards.e.EndRazeForerunners.class));
         cards.add(new SetCardInfo("Esika's Chariot", 215, Rarity.RARE, mage.cards.e.EsikasChariot.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 196, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
+        cards.add(new SetCardInfo("Evercoat Ursine", 30, Rarity.RARE, mage.cards.e.EvercoatUrsine.class));
         cards.add(new SetCardInfo("Evolving Wilds", 302, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 131, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 216, Rarity.COMMON, mage.cards.e.Explore.class));
@@ -147,6 +148,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Illusory Ambusher", 167, Rarity.UNCOMMON, mage.cards.i.IllusoryAmbusher.class));
         cards.add(new SetCardInfo("Inferno Titan", 198, Rarity.MYTHIC, mage.cards.i.InfernoTitan.class));
         cards.add(new SetCardInfo("Ink-Eyes, Servant of Oni", 77, Rarity.RARE, mage.cards.i.InkEyesServantOfOni.class));
+        cards.add(new SetCardInfo("Insatiable Frugivore", 18, Rarity.RARE, mage.cards.i.InsatiableFrugivore.class));
         cards.add(new SetCardInfo("Inspiring Overseer", 141, Rarity.COMMON, mage.cards.i.InspiringOverseer.class));
         cards.add(new SetCardInfo("Intellectual Offering", 168, Rarity.RARE, mage.cards.i.IntellectualOffering.class));
         cards.add(new SetCardInfo("Ishai, Ojutai Dragonspeaker", 89, Rarity.MYTHIC, mage.cards.i.IshaiOjutaiDragonspeaker.class));
@@ -278,6 +280,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Swarmyard", 133, Rarity.RARE, mage.cards.s.Swarmyard.class));
         cards.add(new SetCardInfo("Swarmyard Massacre", 20, Rarity.RARE, mage.cards.s.SwarmyardMassacre.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 286, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Sword of the Squeak", 40, Rarity.RARE, mage.cards.s.SwordOfTheSqueak.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 109, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Tainted Wood", 337, Rarity.UNCOMMON, mage.cards.t.TaintedWood.class));
         cards.add(new SetCardInfo("Talisman of Impulse", 287, Rarity.UNCOMMON, mage.cards.t.TalismanOfImpulse.class));

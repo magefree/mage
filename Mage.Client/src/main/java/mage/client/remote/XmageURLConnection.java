@@ -129,6 +129,10 @@ public class XmageURLConnection {
         }
 
         this.proxy = Proxy.NO_PROXY;
+        if (!PreferencesDialog.NETWORK_ENABLE_PROXY_SUPPORT) {
+            return;
+        }
+
         if (type != Proxy.Type.DIRECT) {
             try {
                 String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");

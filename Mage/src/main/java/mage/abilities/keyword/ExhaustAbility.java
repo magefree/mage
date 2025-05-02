@@ -3,20 +3,36 @@ package mage.abilities.keyword;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
+import mage.constants.AsThoughEffectType;
 import mage.constants.Zone;
+import mage.game.Game;
 
 /**
  * @author TheElk801
  */
 public class ExhaustAbility extends ActivatedAbilityImpl {
 
+    private boolean withReminderText = true;
+
     public ExhaustAbility(Effect effect, Cost cost) {
         super(Zone.BATTLEFIELD, effect, cost);
+    }
+
+    public ExhaustAbility(Effect effect, Cost cost, boolean withReminderText) {
+        super(Zone.BATTLEFIELD, effect, cost);
+        this.setRuleVisible(false);
+        this.withReminderText = withReminderText;
     }
 
     private ExhaustAbility(final ExhaustAbility ability) {
         super(ability);
         this.maxActivationsPerGame = 1;
+        this.withReminderText = ability.withReminderText;
+    }
+
+    public ExhaustAbility withReminderText(boolean withReminderText) {
+        this.withReminderText = withReminderText;
+        return this;
     }
 
     @Override
@@ -25,7 +41,22 @@ public class ExhaustAbility extends ActivatedAbilityImpl {
     }
 
     @Override
+    public boolean hasMoreActivationsThisTurn(Game game) {
+        ActivationInfo info = getActivationInfo(game);
+        if (info != null && info.totalActivations >= maxActivationsPerGame) {
+            boolean canActivate = !game.getContinuousEffects()
+                .asThough(sourceId, AsThoughEffectType.ALLOW_EXHAUST_PER_TURN, this, controllerId, game)
+                .isEmpty();
+            if (canActivate) {
+                return true;
+            }
+        }
+        return super.hasMoreActivationsThisTurn(game);
+    }
+
+    @Override
     public String getRule() {
-        return "Exhaust &mdash; " + super.getRule() + " <i>(Activate each exhaust ability only once.)</i>";
+        return "Exhaust &mdash; " + super.getRule() +
+                (withReminderText ? " <i>(Activate each exhaust ability only once.)</i>" : "");
     }
 }

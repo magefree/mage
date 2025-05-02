@@ -13,7 +13,7 @@ import mage.constants.SubType;
 public final class RatCantBlockToken extends TokenImpl {
 
     public RatCantBlockToken() {
-        super("Rat Token", "1/1 black Rat creature token with \"This creature can't block.\"");
+        super("Rat Token", "1/1 black Rat creature token with \"This token can't block.\"");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.RAT);
@@ -22,7 +22,7 @@ public final class RatCantBlockToken extends TokenImpl {
 
         this.addAbility(new SimpleStaticAbility(
                 new CantBlockSourceEffect(Duration.WhileOnBattlefield)
-                        .setText("this creature can't block")
+                        .setText("this token can't block")
         ));
     }
 

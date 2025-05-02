@@ -43,7 +43,7 @@ public final class RakdosJoinsUp extends CardImpl {
 
         // When Rakdos Joins Up enters the battlefield, return target creature card from your graveyard to the battlefield with two additional +1/+1 counters on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.P1P1.createInstance(2), true)
+                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(true, CounterType.P1P1.createInstance(2))
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
