@@ -15,9 +15,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -135,7 +133,7 @@ class CourageousResolveProtectionAbility extends ProtectionAbility {
 class CantLoseLifeEffect extends ContinuousEffectImpl {
 
     public CantLoseLifeEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+        super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
     }
 
     protected CantLoseLifeEffect(final CantLoseLifeEffect effect) {
