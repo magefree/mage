@@ -537,8 +537,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Me, the Immortal", 752, Rarity.RARE, mage.cards.m.MeTheImmortal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Memory Worm", 695, Rarity.UNCOMMON, mage.cards.m.MemoryWorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Memory Worm", 90, Rarity.UNCOMMON, mage.cards.m.MemoryWorm.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Midnight Crusader Shuttle", 179, Rarity.UNCOMMON, mage.cards.m.MidnightCrusaderShuttle.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Midnight Crusader Shuttle", 784, Rarity.UNCOMMON, mage.cards.m.MidnightCrusaderShuttle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Midnight Crusader Shuttle", 179, Rarity.UNCOMMON, mage.cards.m.MidnightCrusaderShuttle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Midnight Crusader Shuttle", 784, Rarity.UNCOMMON, mage.cards.m.MidnightCrusaderShuttle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind Stone", 244, Rarity.UNCOMMON, mage.cards.m.MindStone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mind Stone", 835, Rarity.UNCOMMON, mage.cards.m.MindStone.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Missy", 1022, Rarity.RARE, mage.cards.m.Missy.class, NON_FULL_USE_VARIOUS));
