@@ -79,7 +79,8 @@ public enum MageIdentifier {
     FiresOfMountDoomAlternateCast,
     PrimalPrayersAlternateCast,
     QuilledGreatwurmAlternateCast,
-    WickerfolkIndomitableAlternateCast;
+    WickerfolkIndomitableAlternateCast,
+    ValgavothTerrorEaterAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects
