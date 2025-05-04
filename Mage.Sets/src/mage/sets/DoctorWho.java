@@ -1081,10 +1081,10 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("The War Doctor", 772, Rarity.RARE, mage.cards.t.TheWarDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The War Games", 30, Rarity.RARE, mage.cards.t.TheWarGames.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The War Games", 635, Rarity.RARE, mage.cards.t.TheWarGames.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Wedding of River Song", 31, Rarity.RARE, mage.cards.t.TheWeddingOfRiverSong.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Wedding of River Song", 349, Rarity.RARE, mage.cards.t.TheWeddingOfRiverSong.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Wedding of River Song", 636, Rarity.RARE, mage.cards.t.TheWeddingOfRiverSong.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Wedding of River Song", 940, Rarity.RARE, mage.cards.t.TheWeddingOfRiverSong.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Wedding of River Song", 31, Rarity.RARE, mage.cards.t.TheWeddingOfRiverSong.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Wedding of River Song", 349, Rarity.RARE, mage.cards.t.TheWeddingOfRiverSong.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Wedding of River Song", 636, Rarity.RARE, mage.cards.t.TheWeddingOfRiverSong.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Wedding of River Song", 940, Rarity.RARE, mage.cards.t.TheWeddingOfRiverSong.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thespian's Stage", 1122, Rarity.RARE, mage.cards.t.ThespiansStage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thespian's Stage", 323, Rarity.RARE, mage.cards.t.ThespiansStage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thespian's Stage", 531, Rarity.RARE, mage.cards.t.ThespiansStage.class, NON_FULL_USE_VARIOUS));

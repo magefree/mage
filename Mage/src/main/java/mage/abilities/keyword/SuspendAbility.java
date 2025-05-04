@@ -250,7 +250,9 @@ public class SuspendAbility extends SpecialAction {
                         "Suspended cards of " + owner.getName()
                 )
         );
-        card.addCounters(CounterType.TIME.createInstance(amount), owner.getId(), source, game);
+        if (amount > 0) {
+            card.addCounters(CounterType.TIME.createInstance(amount), owner.getId(), source, game);
+        }
         if (!card.getAbilities(game).containsClass(SuspendAbility.class)) {
             game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
         }
