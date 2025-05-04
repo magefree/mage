@@ -151,7 +151,8 @@ class ContractualSafeguardSecondEffect extends OneShotEffect {
                 chosenType = choice.getChoice();
         }
         CounterType counterType = CounterType.findByName(chosenType);
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_CREATURES, source.getControllerId(), source, game)) {
             if (!creature.getId().equals(permanent.getId())) {
                 creature.addCounters(counterType.createInstance(), source, game);
             }
