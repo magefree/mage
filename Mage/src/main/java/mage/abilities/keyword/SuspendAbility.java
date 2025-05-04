@@ -1,10 +1,10 @@
 package mage.abilities.keyword;
 
 import mage.MageIdentifier;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.ManaCost;
@@ -14,7 +14,9 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.cards.ModalDoubleFacedCard;
@@ -228,6 +230,30 @@ public class SuspendAbility extends SpecialAction {
             return ActivationStatus.getFalse();
         }
         return super.canActivate(playerId, game);
+    }
+
+    public static boolean addTimeCountersAndSuspend(Card card, int amount, Ability source, Game game) {
+        if (card == null || card.isCopy()) {
+            return false;
+        }
+        if (!Zone.EXILED.match(game.getState().getZone(card.getId()))) {
+            return false;
+        }
+        Player owner = game.getPlayer(card.getOwnerId());
+        if (owner == null) {
+            return false;
+        }
+        owner.moveCardsToExile(
+                card.getMainCard(), source, game, true,
+                SuspendAbility.getSuspendExileId(owner.getId(), game),
+                "Suspended cards of " + owner.getName()
+        );
+        card.addCounters(CounterType.TIME.createInstance(amount), owner.getId(), source, game);
+        if (!card.getAbilities(game).containsClass(SuspendAbility.class)) {
+            game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
+        }
+        game.informPlayers(owner.getLogName() + " suspends " + amount + " - " + card.getName());
+        return true;
     }
 
     @Override
