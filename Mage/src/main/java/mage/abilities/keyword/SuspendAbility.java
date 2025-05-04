@@ -243,10 +243,12 @@ public class SuspendAbility extends SpecialAction {
         if (owner == null) {
             return false;
         }
-        owner.moveCardsToExile(
-                card.getMainCard(), source, game, true,
-                SuspendAbility.getSuspendExileId(owner.getId(), game),
-                "Suspended cards of " + owner.getName()
+        game.getExile().moveToAnotherZone(
+                card.getMainCard(), game,
+                game.getExile().createZone(
+                        SuspendAbility.getSuspendExileId(owner.getId(), game),
+                        "Suspended cards of " + owner.getName()
+                )
         );
         card.addCounters(CounterType.TIME.createInstance(amount), owner.getId(), source, game);
         if (!card.getAbilities(game).containsClass(SuspendAbility.class)) {
