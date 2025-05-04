@@ -445,10 +445,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Ian Chesterton", 341, Rarity.RARE, mage.cards.i.IanChesterton.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ian Chesterton", 627, Rarity.RARE, mage.cards.i.IanChesterton.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ian Chesterton", 932, Rarity.RARE, mage.cards.i.IanChesterton.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Idris, Soul of the TARDIS", 1010, Rarity.RARE, mage.cards.i.IdrisSoulOfTheTardis.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Idris, Soul of the TARDIS", 135, Rarity.RARE, mage.cards.i.IdrisSoulOfTheTardis.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Idris, Soul of the TARDIS", 419, Rarity.RARE, mage.cards.i.IdrisSoulOfTheTardis.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Idris, Soul of the TARDIS", 740, Rarity.RARE, mage.cards.i.IdrisSoulOfTheTardis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idris, Soul of the TARDIS", 1010, Rarity.RARE, mage.cards.i.IdrisSoulOfTheTARDIS.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idris, Soul of the TARDIS", 135, Rarity.RARE, mage.cards.i.IdrisSoulOfTheTARDIS.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idris, Soul of the TARDIS", 419, Rarity.RARE, mage.cards.i.IdrisSoulOfTheTARDIS.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Idris, Soul of the TARDIS", 740, Rarity.RARE, mage.cards.i.IdrisSoulOfTheTARDIS.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Impending Flux", 386, Rarity.RARE, mage.cards.i.ImpendingFlux.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Impending Flux", 692, Rarity.RARE, mage.cards.i.ImpendingFlux.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Impending Flux", 87, Rarity.RARE, mage.cards.i.ImpendingFlux.class, NON_FULL_USE_VARIOUS));
