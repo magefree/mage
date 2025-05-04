@@ -23,7 +23,6 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aesi, Tyrant of Gyre Strait", 210, Rarity.MYTHIC, mage.cards.a.AesiTyrantOfGyreStrait.class));
         cards.add(new SetCardInfo("Aether Gale", 109, Rarity.RARE, mage.cards.a.AetherGale.class));
         cards.add(new SetCardInfo("Aminatou's Augury", 71, Rarity.RARE, mage.cards.a.AminatousAugury.class));
-        cards.add(new SetCardInfo("Ancient Cellarspawn", 16, Rarity.RARE, mage.cards.a.AncientCellarspawn.class));
         cards.add(new SetCardInfo("Arachnogenesis", 169, Rarity.RARE, mage.cards.a.Arachnogenesis.class));
         cards.add(new SetCardInfo("Arcane Denial", 110, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 259, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
@@ -39,7 +38,6 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Auramancer", 97, Rarity.COMMON, mage.cards.a.Auramancer.class));
         cards.add(new SetCardInfo("Azorius Chancery", 261, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Signet", 240, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
-        cards.add(new SetCardInfo("Barbflare Gremlin", 26, Rarity.RARE, mage.cards.b.BarbflareGremlin.class));
         cards.add(new SetCardInfo("Barren Moor", 262, Rarity.UNCOMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Basilisk Collar", 241, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 131, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
@@ -90,7 +88,6 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Deluge of Doom", 18, Rarity.RARE, mage.cards.d.DelugeOfDoom.class));
         cards.add(new SetCardInfo("Demolisher Spawn", 31, Rarity.RARE, mage.cards.d.DemolisherSpawn.class));
         cards.add(new SetCardInfo("Demon of Fate's Design", 137, Rarity.RARE, mage.cards.d.DemonOfFatesDesign.class));
-        cards.add(new SetCardInfo("Demonic Covenant", 19, Rarity.RARE, mage.cards.d.DemonicCovenant.class));
         cards.add(new SetCardInfo("Diabolic Vision", 87, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Dig Through Time", 115, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Dimir Aqueduct", 270, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
@@ -148,7 +145,6 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Grasp", 143, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Inkshield", 221, Rarity.RARE, mage.cards.i.Inkshield.class));
         cards.add(new SetCardInfo("Inscription of Abundance", 186, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
-        cards.add(new SetCardInfo("Into the Pit", 20, Rarity.RARE, mage.cards.i.IntoThePit.class));
         cards.add(new SetCardInfo("Ishkanah, Grafwidow", 187, Rarity.MYTHIC, mage.cards.i.IshkanahGrafwidow.class));
         cards.add(new SetCardInfo("Jungle Hollow", 285, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kaervek the Merciless", 222, Rarity.RARE, mage.cards.k.KaervekTheMerciless.class));
@@ -222,7 +218,6 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rendmaw, Creaking Nest", 5, Rarity.MYTHIC, mage.cards.r.RendmawCreakingNest.class));
         cards.add(new SetCardInfo("Retreat to Coralhelm", 126, Rarity.UNCOMMON, mage.cards.r.RetreatToCoralhelm.class));
         cards.add(new SetCardInfo("Return to Dust", 102, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
-        cards.add(new SetCardInfo("Sadistic Shell Game", 24, Rarity.RARE, mage.cards.s.SadisticShellGame.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 194, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Sandwurm Convergence", 195, Rarity.RARE, mage.cards.s.SandwurmConvergence.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 196, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
@@ -241,7 +236,6 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skaab Ruinator", 128, Rarity.MYTHIC, mage.cards.s.SkaabRuinator.class));
         cards.add(new SetCardInfo("Skola Grovedancer", 199, Rarity.COMMON, mage.cards.s.SkolaGrovedancer.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 299, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
-        cards.add(new SetCardInfo("Soaring Lightbringer", 11, Rarity.RARE, mage.cards.s.SoaringLightbringer.class));
         cards.add(new SetCardInfo("Sol Ring", 94, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 253, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Sphere of Safety", 104, Rarity.UNCOMMON, mage.cards.s.SphereOfSafety.class));
@@ -310,6 +304,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Whispersilk Cloak", 257, Rarity.UNCOMMON, mage.cards.w.WhispersilkCloak.class));
         cards.add(new SetCardInfo("Whisperwood Elemental", 204, Rarity.MYTHIC, mage.cards.w.WhisperwoodElemental.class));
         cards.add(new SetCardInfo("Wilderness Reclamation", 205, Rarity.UNCOMMON, mage.cards.w.WildernessReclamation.class));
+        cards.add(new SetCardInfo("Winter, Cynical Opportunist", 7, Rarity.MYTHIC, mage.cards.w.WinterCynicalOpportunist.class));
         cards.add(new SetCardInfo("Witch's Clinic", 325, Rarity.RARE, mage.cards.w.WitchsClinic.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 326, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
         cards.add(new SetCardInfo("Worldspine Wurm", 206, Rarity.MYTHIC, mage.cards.w.WorldspineWurm.class));
