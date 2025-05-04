@@ -900,13 +900,13 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("The Eighth Doctor", 410, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Eighth Doctor", 559, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Eighth Doctor", 729, Rarity.RARE, mage.cards.t.TheEighthDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eleventh Doctor", "562z", Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eleventh Doctor", 1002, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eleventh Doctor", 1153, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));//
-        //cards.add(new SetCardInfo("The Eleventh Doctor", 125, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eleventh Doctor", 411, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eleventh Doctor", 562, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Eleventh Doctor", 730, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eleventh Doctor", "562z", Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eleventh Doctor", 1002, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eleventh Doctor", 1153, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));//
+        cards.add(new SetCardInfo("The Eleventh Doctor", 125, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eleventh Doctor", 411, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eleventh Doctor", 562, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Eleventh Doctor", 730, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Eleventh Hour", 41, Rarity.RARE, mage.cards.t.TheEleventhHour.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Eleventh Hour", 646, Rarity.RARE, mage.cards.t.TheEleventhHour.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Face of Boe", 1003, Rarity.RARE, mage.cards.t.TheFaceOfBoe.class, NON_FULL_USE_VARIOUS));
