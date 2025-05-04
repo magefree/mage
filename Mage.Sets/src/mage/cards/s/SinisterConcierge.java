@@ -69,7 +69,7 @@ class SinisterConciergeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (controller == null || card == null
-                || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1
+                || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter()
                 || !Zone.GRAVEYARD.match(game.getState().getZone(card.getId()))) {
             return false;
         }
