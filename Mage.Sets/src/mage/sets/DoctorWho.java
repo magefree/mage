@@ -1001,8 +1001,8 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("The Pandorica", 343, Rarity.RARE, mage.cards.t.ThePandorica.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Pandorica", 630, Rarity.RARE, mage.cards.t.ThePandorica.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Pandorica", 934, Rarity.RARE, mage.cards.t.ThePandorica.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Parting of the Ways", 696, Rarity.RARE, mage.cards.t.ThePartingOfTheWays.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Parting of the Ways", 91, Rarity.RARE, mage.cards.t.ThePartingOfTheWays.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Parting of the Ways", 696, Rarity.RARE, mage.cards.t.ThePartingOfTheWays.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Parting of the Ways", 91, Rarity.RARE, mage.cards.t.ThePartingOfTheWays.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Pyramid of Mars", 597, Rarity.COMMON, mage.cards.t.ThePyramidOfMars.class));
         cards.add(new SetCardInfo("The Rani", 1024, Rarity.RARE, mage.cards.t.TheRani.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Rani", 149, Rarity.RARE, mage.cards.t.TheRani.class, NON_FULL_USE_VARIOUS));
