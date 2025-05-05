@@ -6,6 +6,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.ReadAheadAbility;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.SagaChapter;
@@ -50,6 +51,9 @@ public class SagaAbility extends SimpleStaticAbility {
         Ability ability = new EntersBattlefieldAbility(new SagaLoreCountersEffect(readAhead, maxChapter));
         ability.setRuleVisible(false);
         card.addAbility(ability);
+        if (readAhead) {
+            card.addAbility(ReadAheadAbility.getInstance());
+        }
     }
 
     protected SagaAbility(final SagaAbility ability) {
@@ -115,7 +119,7 @@ public class SagaAbility extends SimpleStaticAbility {
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, boolean optional, Consumer<TriggeredAbility> applier) {
         for (int i = fromChapter.getNumber(); i <= toChapter.getNumber(); i++) {
             ChapterTriggeredAbility ability = new ChapterTriggeredAbility(
-                    SagaChapter.getChapter(i), toChapter, optional, readAhead
+                    SagaChapter.getChapter(i), toChapter, optional
             );
             applier.accept(ability);
             if (i > fromChapter.getNumber()) {
@@ -131,10 +135,7 @@ public class SagaAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return (readAhead
-                ? "Read ahead <i>(Choose a chapter and start with that many lore counters. " +
-                "Add one after your draw step. Skipped chapters don't trigger."
-                : "<i>(As this Saga enters and after your draw step, add a lore counter.")
+        return "<i>(As this Saga enters and after your draw step, add a lore counter."
                 + (showSacText ? " Sacrifice after " + maxChapter.toString() + '.' : "") + ")</i> ";
     }
 
@@ -206,20 +207,17 @@ class SagaLoreCountersEffect extends OneShotEffect {
 class ChapterTriggeredAbility extends TriggeredAbilityImpl {
 
     private final SagaChapter chapterFrom, chapterTo;
-    private final boolean readAhead;
 
-    ChapterTriggeredAbility(SagaChapter chapterFrom, SagaChapter chapterTo, boolean optional, boolean readAhead) {
+    ChapterTriggeredAbility(SagaChapter chapterFrom, SagaChapter chapterTo, boolean optional) {
         super(Zone.ALL, null, optional);
         this.chapterFrom = chapterFrom;
         this.chapterTo = chapterTo;
-        this.readAhead = readAhead;
     }
 
     private ChapterTriggeredAbility(final ChapterTriggeredAbility ability) {
         super(ability);
         this.chapterFrom = ability.chapterFrom;
         this.chapterTo = ability.chapterTo;
-        this.readAhead = ability.readAhead;
     }
 
     @Override
@@ -238,7 +236,7 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         int loreCounters = permanent.getCounters(game).getCount(CounterType.LORE);
-        if (readAhead && permanent.getTurnsOnBattlefield() == 0) {
+        if (permanent.hasAbility(ReadAheadAbility.getInstance(), game) && permanent.getTurnsOnBattlefield() == 0) {
             return chapterFrom.getNumber() == loreCounters;
         }
         return loreCounters - event.getAmount() < chapterFrom.getNumber()
