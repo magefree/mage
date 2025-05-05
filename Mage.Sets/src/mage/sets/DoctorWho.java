@@ -964,12 +964,12 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("The Master, Formed Anew", 426, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Master, Formed Anew", 542, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Master, Formed Anew", 748, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Gallifrey's End", 1018, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Gallifrey's End", 1134, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Gallifrey's End", 144, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Gallifrey's End", 427, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Gallifrey's End", 543, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Gallifrey's End", 749, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Gallifrey's End", 1018, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Gallifrey's End", 1134, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Gallifrey's End", 144, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Gallifrey's End", 427, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Gallifrey's End", 543, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Gallifrey's End", 749, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Mesmerist", 1019, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Mesmerist", 1135, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Mesmerist", 145, Rarity.RARE, mage.cards.t.TheMasterMesmerist.class, NON_FULL_USE_VARIOUS));
