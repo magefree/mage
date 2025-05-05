@@ -2,6 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.keyword.DemonstrateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -29,6 +30,7 @@ public final class IncarnationTechnique extends CardImpl {
         this.addAbility(new DemonstrateAbility());
 
         // Mill five cards, then return a creature card from your graveyard to the battlefield.
+        this.getSpellAbility().addEffect(new MillCardsControllerEffect(5).concatBy(", then"));
         this.getSpellAbility().addEffect(new IncarnationTechniqueEffect());
     }
 
@@ -46,7 +48,7 @@ class IncarnationTechniqueEffect extends OneShotEffect {
 
     IncarnationTechniqueEffect() {
         super(Outcome.Benefit);
-        staticText = "mill five cards, then return a creature card from your graveyard to the battlefield";
+        staticText = "return a creature card from your graveyard to the battlefield";
     }
 
     private IncarnationTechniqueEffect(final IncarnationTechniqueEffect effect) {
@@ -64,7 +66,6 @@ class IncarnationTechniqueEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.millCards(5, source, game);
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
