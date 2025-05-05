@@ -46,7 +46,7 @@ public final class TheMasterGallifreysEnd extends CardImpl {
         this.subtype.add(SubType.TIME_LORD);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(4);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(3);
 
         // Make Them Pay -- Whenever a nontoken artifact creature you control dies, you may exile it. If you do, choose an opponent with the most life among your opponents. That player faces a villainous choice -- They lose 4 life, or you create a token that's a copy of that card.
         this.addAbility(new DiesCreatureTriggeredAbility(
