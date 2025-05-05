@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,8 +8,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,12 +54,9 @@ class RepentanceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (targetCreature != null) {
-                targetCreature.damage(targetCreature.getPower().getValue(), source.getSourceId(), source, game, false, true);
-            }
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            permanent.damage(permanent.getPower().getValue(), permanent.getId(), source, game, false, true);
             return true;
         }
         return false;
