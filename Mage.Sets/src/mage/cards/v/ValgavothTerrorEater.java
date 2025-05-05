@@ -10,7 +10,7 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.GraveyardFromAnywhereExileReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.WardAbility;
@@ -71,10 +71,10 @@ public final class ValgavothTerrorEater extends CardImpl {
     }
 }
 
-class ValgavothTerrorEaterReplacementEffect extends ReplacementEffectImpl {
+class ValgavothTerrorEaterReplacementEffect extends GraveyardFromAnywhereExileReplacementEffect {
 
     ValgavothTerrorEaterReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
+        super(StaticFilters.FILTER_CARD_A, false);
         staticText = "If a card you didn't control would be put into an opponent's graveyard from anywhere, exile it instead";
     }
 
@@ -94,6 +94,7 @@ class ValgavothTerrorEaterReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
 
+        // TODO: part of #13594 refactor to replaceEvent (add exile zone info in ZoneChangeEvent?)
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null) {
             return controller.moveCardsToExile(
@@ -115,18 +116,13 @@ class ValgavothTerrorEaterReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zce = (ZoneChangeEvent) event;
-        // only look at movement to the graveyard
-        if (((ZoneChangeEvent) event).getToZone() != Zone.GRAVEYARD) {
+        // checks that zce movement is to graveyard
+        if (!super.applies(event, source, game)) {
             return false;
         }
 
+        ZoneChangeEvent zce = (ZoneChangeEvent) event;
         UUID controllerId = source.getControllerId();
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
