@@ -237,8 +237,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Day of Destiny", 206, Rarity.RARE, mage.cards.d.DayOfDestiny.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Day of Destiny", 464, Rarity.RARE, mage.cards.d.DayOfDestiny.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Day of Destiny", 797, Rarity.RARE, mage.cards.d.DayOfDestiny.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Day of the Moon", 684, Rarity.RARE, mage.cards.d.DayOfTheMoon.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Day of the Moon", 79, Rarity.RARE, mage.cards.d.DayOfTheMoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Day of the Moon", 684, Rarity.RARE, mage.cards.d.DayOfTheMoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Day of the Moon", 79, Rarity.RARE, mage.cards.d.DayOfTheMoon.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Death in Heaven", 66, Rarity.RARE, mage.cards.d.DeathInHeaven.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Death in Heaven", 671, Rarity.RARE, mage.cards.d.DeathInHeaven.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Decaying Time Loop", 685, Rarity.UNCOMMON, mage.cards.d.DecayingTimeLoop.class, NON_FULL_USE_VARIOUS));
