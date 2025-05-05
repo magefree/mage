@@ -1,24 +1,22 @@
 package mage.cards.y;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BecomePermanentFacedownEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -61,6 +59,14 @@ public final class YedoraGraveGardener extends CardImpl {
 
 class YedoraGraveGardenerEffect extends OneShotEffect {
 
+    private static final BecomePermanentFacedownEffect.PermanentApplier applier
+            = (permanent, game, source) -> {
+        permanent.addCardType(game, CardType.LAND);
+        permanent.addSubType(game, SubType.FOREST);
+        permanent.removeAllAbilities(source.getSourceId(), game);
+        permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+    };
+
     YedoraGraveGardenerEffect() {
         super(Outcome.Benefit);
         staticText = "you may return it to the battlefield face down under its owner's control. " +
@@ -83,46 +89,11 @@ class YedoraGraveGardenerEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        game.addEffect(new YedoraGraveGardenerContinuousEffect().setTargetPointer(
-                new FixedTarget(new MageObjectReference(card, game, 1))
-        ), source);
+        game.addEffect(new BecomePermanentFacedownEffect(applier, new CardsImpl(card), game), source);
         player.moveCards(
                 card, Zone.BATTLEFIELD, source, game,
                 false, true, true, null
         );
-        return true;
-    }
-}
-
-class YedoraGraveGardenerContinuousEffect extends ContinuousEffectImpl {
-
-    YedoraGraveGardenerContinuousEffect() {
-        super(Duration.Custom, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.Neutral);
-    }
-
-    private YedoraGraveGardenerContinuousEffect(final YedoraGraveGardenerContinuousEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public YedoraGraveGardenerContinuousEffect copy() {
-        return new YedoraGraveGardenerContinuousEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (target == null || !target.isFaceDown(game)) {
-            discard();
-            return false;
-        }
-        target.removeAllSuperTypes(game);
-        target.removeAllCardTypes(game);
-        target.removeAllSubTypes(game);
-        target.addCardType(game, CardType.LAND);
-        target.addSubType(game, SubType.FOREST);
-        target.removeAllAbilities(source.getSourceId(), game);
-        target.addAbility(new GreenManaAbility(), source.getSourceId(), game);
         return true;
     }
 }
