@@ -73,11 +73,6 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public int getNumberOfTargets() {
-        return this.minNumberOfTargets;
-    }
-
-    @Override
     public int getMinNumberOfTargets() {
         return this.minNumberOfTargets;
     }
@@ -234,7 +229,7 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean isChosen(Game game) {
-        if (getMaxNumberOfTargets() == 0 && getNumberOfTargets() == 0) {
+        if (getMaxNumberOfTargets() == 0 && getMinNumberOfTargets() == 0) {
             return true;
         }
         return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets() || chosen;
@@ -258,7 +253,7 @@ public abstract class TargetImpl implements Target {
             if (!targets.containsKey(id)) {
                 targets.put(id, 0);
                 rememberZoneChangeCounter(id, game);
-                chosen = targets.size() >= getNumberOfTargets();
+                chosen = targets.size() >= getMinNumberOfTargets();
             }
         }
     }
@@ -285,7 +280,7 @@ public abstract class TargetImpl implements Target {
                     if (!game.replaceEvent(new TargetEvent(id, source))) {
                         targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
-                        chosen = targets.size() >= getNumberOfTargets();
+                        chosen = targets.size() >= getMinNumberOfTargets();
                         if (!skipEvent && shouldReportEvents) {
                             game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, source, source.getControllerId()));
                         }
@@ -323,7 +318,7 @@ public abstract class TargetImpl implements Target {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, id, source, source.getControllerId()))) {
                 targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
-                chosen = targets.size() >= getNumberOfTargets();
+                chosen = targets.size() >= getMinNumberOfTargets();
                 if (!skipEvent && shouldReportEvents) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, source, source.getControllerId()));
                 }
@@ -341,7 +336,7 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
-        chosen = targets.size() >= getNumberOfTargets();
+        chosen = targets.size() >= getMinNumberOfTargets();
         do {
             if (!targetController.canRespond()) {
                 return chosen;
@@ -349,7 +344,7 @@ public abstract class TargetImpl implements Target {
             if (!targetController.choose(outcome, this, source, game)) {
                 return chosen;
             }
-            chosen = targets.size() >= getNumberOfTargets();
+            chosen = targets.size() >= getMinNumberOfTargets();
         } while (!isChosen(game) && !doneChoosing(game));
         return chosen;
     }
@@ -363,7 +358,7 @@ public abstract class TargetImpl implements Target {
 
         List<UUID> possibleTargets = new ArrayList<>(possibleTargets(playerId, source, game));
 
-        chosen = targets.size() >= getNumberOfTargets();
+        chosen = targets.size() >= getMinNumberOfTargets();
         do {
             if (!targetController.canRespond()) {
                 return chosen;
@@ -392,7 +387,7 @@ public abstract class TargetImpl implements Target {
                     return chosen;
                 }
             }
-            chosen = targets.size() >= getNumberOfTargets();
+            chosen = targets.size() >= getMinNumberOfTargets();
         } while (!isChosen(game) && !doneChoosing(game));
 
         return chosen;
@@ -438,7 +433,7 @@ public abstract class TargetImpl implements Target {
                 return false;
             }
             // if no targets have to be set and no targets are set, that's legal
-            if (getNumberOfTargets() == 0) {
+            if (getMinNumberOfTargets() == 0) {
                 return true;
             }
         }
@@ -457,7 +452,7 @@ public abstract class TargetImpl implements Target {
         // e.g. for {'A','B','C','D'} => N = 4
         int N = possibleTargets.size();
         // not enough targets, return no option
-        if (N < getNumberOfTargets()) {
+        if (N < getMinNumberOfTargets()) {
             return options;
         }
         // not target but that's allowed, return one empty option
@@ -479,8 +474,8 @@ public abstract class TargetImpl implements Target {
         if (N < maxK) { // less possible targets than the maximum allowed so reduce the max
             maxK = N;
         }
-        int minK = getNumberOfTargets();
-        if (getNumberOfTargets() == 0) { // add option without targets if possible
+        int minK = getMinNumberOfTargets();
+        if (getMinNumberOfTargets() == 0) { // add option without targets if possible
             TargetImpl target = this.copy();
             options.add(target);
             minK = 1;
@@ -688,7 +683,7 @@ public abstract class TargetImpl implements Target {
         String abilityText = source.getRule(true).toLowerCase();
         boolean strictModeEnabled = player.getStrictChooseMode();
         boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() // Targets must be picked
-                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
+                && possibleTargets.size() == this.getMinNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
                 && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
                 && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
                 && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching

@@ -539,7 +539,7 @@ public class TestPlayer implements Player {
                         }
 
                         // found, can use as target
-                        if (currentTarget.getNumberOfTargets() == 1) {
+                        if (currentTarget.getMinNumberOfTargets() == 1) {
                             currentTarget.clearChosen();
                         }
                         if (currentTarget.getOriginalTarget() instanceof TargetCreaturePermanentAmount) {

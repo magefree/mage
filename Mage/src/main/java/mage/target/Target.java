@@ -129,8 +129,6 @@ public interface Target extends Serializable {
 
     int getTargetAmount(UUID targetId);
 
-    int getNumberOfTargets();
-
     int getMinNumberOfTargets();
 
     int getMaxNumberOfTargets();

@@ -164,7 +164,7 @@ public class ComputerPlayer extends PlayerImpl {
 
         boolean required = target.isRequired(sourceId, game);
         Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
-        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
+        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getMinNumberOfTargets()) {
             required = false;
         }
 
@@ -251,7 +251,7 @@ public class ComputerPlayer extends PlayerImpl {
             for (Permanent permanent : targets) {
                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
                     // stop to add targets if not needed and outcome is no advantage for AI player
-                    if (target.getNumberOfTargets() == target.getTargets().size()) {
+                    if (target.getMinNumberOfTargets() == target.getTargets().size()) {
                         if (outcome.isGood() && hasOpponent(permanent.getControllerId(), game)) {
                             return true;
                         }
@@ -348,7 +348,7 @@ public class ComputerPlayer extends PlayerImpl {
                 target.add(randomOpponentId, game);
                 return true;
             }
-            if (!target.isRequired(sourceId, game) || target.getNumberOfTargets() == 0) {
+            if (!target.isRequired(sourceId, game) || target.getMinNumberOfTargets() == 0) {
                 return false;
             }
             if (target.canTarget(abilityControllerId, randomOpponentId, source, game)) {
@@ -548,7 +548,7 @@ public class ComputerPlayer extends PlayerImpl {
 
         boolean required = target.isRequired(sourceId, game);
         Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
-        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
+        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getMinNumberOfTargets()) {
             required = false;
         }
 
@@ -672,7 +672,7 @@ public class ComputerPlayer extends PlayerImpl {
             for (Permanent permanent : targets) {
                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
-                    if (target.getNumberOfTargets() <= target.getTargets().size() && (!outcome.isGood() || target.getMaxNumberOfTargets() <= target.getTargets().size())) {
+                    if (target.getMinNumberOfTargets() <= target.getTargets().size() && (!outcome.isGood() || target.getMaxNumberOfTargets() <= target.getTargets().size())) {
                         return true;
                     }
                 }
@@ -2051,9 +2051,9 @@ public class ComputerPlayer extends PlayerImpl {
                 cardChoices.remove(card);
             } else {
                 // We don't have any valid target to choose so stop choosing
-                return target.getTargets().size() >= target.getNumberOfTargets();
+                return target.getTargets().size() >= target.getMinNumberOfTargets();
             }
-            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
+            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getMinNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getMinNumberOfTargets()) / 2) {
                 return true;
             }
         }
@@ -2082,9 +2082,9 @@ public class ComputerPlayer extends PlayerImpl {
                 cardChoices.remove(card); // selectCard don't remove cards (only on second+ tries)
             } else {
                 // We don't have any valid target to choose so stop choosing
-                return target.getTargets().size() >= target.getNumberOfTargets();
+                return target.getTargets().size() >= target.getMinNumberOfTargets();
             }
-            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
+            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getMinNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getMinNumberOfTargets()) / 2) {
                 return true;
             }
         }

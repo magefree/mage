@@ -699,11 +699,11 @@ public class HumanPlayer extends PlayerImpl {
         while (canRespond()) {
             Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
             if (possibleTargetIds == null || possibleTargetIds.isEmpty()) {
-                return target.getTargets().size() >= target.getNumberOfTargets();
+                return target.getTargets().size() >= target.getMinNumberOfTargets();
             }
 
             boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
-            if (target.getTargets().size() >= target.getNumberOfTargets()) {
+            if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
                 required = false;
             }
 
@@ -770,7 +770,7 @@ public class HumanPlayer extends PlayerImpl {
                 // send other command like cancel or done (??sends other commands like concede??)
 
                 // auto-complete on all selected
-                if (target.getTargets().size() >= target.getNumberOfTargets()) {
+                if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
                     return true;
                 }
 
@@ -802,7 +802,7 @@ public class HumanPlayer extends PlayerImpl {
             Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
             boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
             if (possibleTargetIds.isEmpty()
-                    || target.getTargets().size() >= target.getNumberOfTargets()) {
+                    || target.getTargets().size() >= target.getMinNumberOfTargets()) {
                 required = false;
             }
 
@@ -840,7 +840,7 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 }
             } else {
-                if (target.getTargets().size() >= target.getNumberOfTargets()) {
+                if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
                     return true;
                 }
                 if (!required) {
@@ -856,7 +856,7 @@ public class HumanPlayer extends PlayerImpl {
         if (options == null) {
             options = new HashMap<>();
         }
-        if (target.getTargets().size() >= target.getNumberOfTargets()
+        if (target.getTargets().size() >= target.getMinNumberOfTargets()
                 && !options.containsKey("UI.right.btn.text")) {
             options.put("UI.right.btn.text", "Done");
         }
@@ -887,7 +887,7 @@ public class HumanPlayer extends PlayerImpl {
             boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
             int count = cards.count(target.getFilter(), abilityControllerId, source, game);
             if (count == 0
-                    || target.getTargets().size() >= target.getNumberOfTargets()) {
+                    || target.getTargets().size() >= target.getMinNumberOfTargets()) {
                 required = false;
             }
 
@@ -933,7 +933,7 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 }
             } else {
-                if (target.getTargets().size() >= target.getNumberOfTargets()) {
+                if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
                     return true;
                 }
                 if (!required) {
@@ -968,7 +968,7 @@ public class HumanPlayer extends PlayerImpl {
             boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source);
             int count = cards.count(target.getFilter(), abilityControllerId, source, game);
             if (count == 0
-                    || target.getTargets().size() >= target.getNumberOfTargets()) {
+                    || target.getTargets().size() >= target.getMinNumberOfTargets()) {
                 required = false;
             }
 
@@ -1013,7 +1013,7 @@ public class HumanPlayer extends PlayerImpl {
                     }
                 }
             } else {
-                if (target.getTargets().size() >= target.getNumberOfTargets()) {
+                if (target.getTargets().size() >= target.getMinNumberOfTargets()) {
                     return true;
                 }
                 if (!required) {
@@ -1061,7 +1061,7 @@ public class HumanPlayer extends PlayerImpl {
             Set<UUID> possibleTargetIds = target.possibleTargets(abilityControllerId, source, game);
             boolean required = target.isRequired(source.getSourceId(), game);
             if (possibleTargetIds.isEmpty()
-                    || target.getSize() >= target.getNumberOfTargets()) {
+                    || target.getSize() >= target.getMinNumberOfTargets()) {
                 required = false;
             }
 
