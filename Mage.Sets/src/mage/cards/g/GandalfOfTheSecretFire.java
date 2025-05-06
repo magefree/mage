@@ -5,12 +5,10 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -113,14 +111,8 @@ class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
         if (controller == null || sourceSpell == null || sourceSpell.isCopy()) {
             return false;
         }
-        UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-        if (controller.moveCardsToExile(sourceSpell, source, game, true, exileId, "Suspended cards of " + controller.getName())) {
-            sourceSpell.addCounters(CounterType.TIME.createInstance(3), controller.getId(), source, game);
-            game.informPlayers(controller.getLogName() + " exiles " + sourceSpell.getLogName() + " with 3 time counters on it");
-        }
-        if (!sourceSpell.getAbilities(game).containsClass(SuspendAbility.class)) {
-            game.addEffect(new GainSuspendEffect(new MageObjectReference(sourceSpell.getMainCard(), game)), source);
-        }
+        controller.moveCards(sourceSpell, Zone.EXILED, source, game);
+        SuspendAbility.addTimeCountersAndSuspend(sourceSpell.getMainCard(), 3, source, game);
         return true;
     }
 
