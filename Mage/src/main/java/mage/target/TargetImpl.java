@@ -31,7 +31,16 @@ public abstract class TargetImpl implements Target {
     protected int minNumberOfTargets;
     protected boolean required = true;
     protected boolean requiredExplicitlySet = false;
+    /**
+     * Simple chosen state due selected and require targets count
+     * Complex targets must override isChosen method or set chosen value manually
+     * For "up to" targets it will be false before first choose dialog:
+     * - chosen = false - player do not make a choice yet
+     * - chosen = true, targets.size = 0 - player choose 0 targets in "up to" and it's valid
+     * - chosen = true, targets.size >= 1 - player choose some targets and it's valid
+     */
     protected boolean chosen = false;
+
     // is the target handled as targeted spell/ability (notTarget = true is used for not targeted effects like e.g. sacrifice)
     protected boolean notTarget = false;
     protected boolean atRandom = false; // for inner choose logic
@@ -229,15 +238,28 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean isChosen(Game game) {
+        // min = max = 0 - for abilities with X=0, e.g. nothing to choose
         if (getMaxNumberOfTargets() == 0 && getMinNumberOfTargets() == 0) {
             return true;
         }
-        return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets() || chosen;
+
+        // limit by max amount
+        if (getMaxNumberOfTargets() > 0 && targets.size() > getMaxNumberOfTargets()) {
+            return chosen;
+        }
+
+        // limit by min amount
+        if (getMinNumberOfTargets() > 0 && targets.size() < getMinNumberOfTargets()) {
+            return chosen;
+        }
+
+        // all fine
+        return chosen || (targets.size() >= getMinNumberOfTargets() && targets.size() <= getMaxNumberOfTargets());
     }
 
     @Override
     public boolean doneChoosing(Game game) {
-        return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets();
+        return isChoiceSelected() && isChosen(game);
     }
 
     @Override
@@ -248,12 +270,18 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
+    public boolean isChoiceSelected() {
+        // min = max = 0 - for abilities with X=0, e.g. nothing to choose
+        return chosen || getMaxNumberOfTargets() == 0 && getMinNumberOfTargets() == 0;
+    }
+
+    @Override
     public void add(UUID id, Game game) {
         if (getMaxNumberOfTargets() == 0 || targets.size() < getMaxNumberOfTargets()) {
             if (!targets.containsKey(id)) {
                 targets.put(id, 0);
                 rememberZoneChangeCounter(id, game);
-                chosen = targets.size() >= getMinNumberOfTargets();
+                chosen = isChosen(game);
             }
         }
     }
@@ -280,7 +308,7 @@ public abstract class TargetImpl implements Target {
                     if (!game.replaceEvent(new TargetEvent(id, source))) {
                         targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
-                        chosen = targets.size() >= getMinNumberOfTargets();
+                        chosen = isChosen(game);
                         if (!skipEvent && shouldReportEvents) {
                             game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, source, source.getControllerId()));
                         }
@@ -318,14 +346,16 @@ public abstract class TargetImpl implements Target {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, id, source, source.getControllerId()))) {
                 targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
-                chosen = targets.size() >= getMinNumberOfTargets();
+                chosen = isChosen(game);
                 if (!skipEvent && shouldReportEvents) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, source, source.getControllerId()));
                 }
             }
         } else {
+            // AI targets simulation
             targets.put(id, amount);
             rememberZoneChangeCounter(id, game);
+            chosen = isChosen(game);
         }
     }
 
@@ -336,17 +366,20 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
-        chosen = targets.size() >= getMinNumberOfTargets();
+        chosen = false;
         do {
             if (!targetController.canRespond()) {
+                chosen = isChosen(game);
                 return chosen;
             }
             if (!targetController.choose(outcome, this, source, game)) {
+                chosen = isChosen(game);
                 return chosen;
             }
-            chosen = targets.size() >= getMinNumberOfTargets();
-        } while (!isChosen(game) && !doneChoosing(game));
-        return chosen;
+            chosen = isChosen(game);
+        } while (!doneChoosing(game));
+
+        return isChosen(game);
     }
 
     @Override
@@ -358,13 +391,15 @@ public abstract class TargetImpl implements Target {
 
         List<UUID> possibleTargets = new ArrayList<>(possibleTargets(playerId, source, game));
 
-        chosen = targets.size() >= getMinNumberOfTargets();
+        chosen = false;
         do {
             if (!targetController.canRespond()) {
+                chosen = isChosen(game);
                 return chosen;
             }
             if (isRandom()) {
                 if (possibleTargets.isEmpty()) {
+                    chosen = isChosen(game);
                     return chosen;
                 }
                 // find valid target
@@ -384,13 +419,14 @@ public abstract class TargetImpl implements Target {
                 if (autoChosenId != null) {
                     addTarget(autoChosenId, source, game);
                 } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player
+                    chosen = isChosen(game);
                     return chosen;
                 }
             }
-            chosen = targets.size() >= getMinNumberOfTargets();
-        } while (!isChosen(game) && !doneChoosing(game));
+            chosen = isChosen(game);
+        } while (!doneChoosing(game));
 
-        return chosen;
+        return isChosen(game);
     }
 
     @Override

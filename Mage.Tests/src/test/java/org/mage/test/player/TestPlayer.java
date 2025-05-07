@@ -2335,12 +2335,17 @@ public class TestPlayer implements Player {
                         }
                     }
 
+                    if (!targetFound) {
+                        //failOnLastBadChoice(game, source, target, choiceRecord, "unknown or can't target");
+                    }
+
                     try {
                         if (target.isChosen(game)) {
                             return true;
                         } else {
+                            // TODO: move check above and fix all fail tests (not after target.isChosen)
                             if (!targetFound) {
-                                failOnLastBadChoice(game, source, target, choiceRecord, "unknown or can't target");
+                                failOnLastBadChoice(game, source, target, choiceRecord, "selected, but not all required targets");
                             }
                         }
                     } finally {

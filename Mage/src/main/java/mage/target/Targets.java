@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.util.Copyable;
 
 import java.util.*;
@@ -38,7 +39,11 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
     }
 
     public List<Target> getUnchosen(Game game) {
-        return stream().filter(target -> !target.isChosen(game)).collect(Collectors.toList());
+        return stream().filter(target -> !target.isChoiceSelected()).collect(Collectors.toList());
+    }
+
+    public boolean doneChoosing(Game game) {
+        return stream().allMatch(t -> t.doneChoosing(game));
     }
 
     public void clearChosen() {
@@ -67,7 +72,7 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
                 if (!target.choose(outcome, playerId, sourceId, source, game)) {
                     return false;
                 }
-            }
+            } while (!doneChoosing(game));
         }
         return true;
     }
@@ -112,7 +117,7 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
                     //game.restoreState(state, "Targets");
                     clearChosen();
                 }
-            }
+            } while (!doneChoosing(game));
         }
         return true;
     }
