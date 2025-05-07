@@ -76,17 +76,20 @@ public class TargetCardInLibrary extends TargetCard {
         Cards cardsId = new CardsImpl();
         cards.forEach(cardsId::add);
 
-        chosen = targets.size() >= getMinNumberOfTargets();
+        chosen = false;
         do {
             if (!player.canRespond()) {
+                chosen = isChosen(game);
                 return chosen;
             }
             if (!player.chooseTarget(outcome, cardsId, this, source, game)) {
+                chosen = isChosen(game);
                 return chosen;
             }
-            chosen = targets.size() >= getMinNumberOfTargets();
-        } while (!isChosen(game) && !doneChoosing(game));
-        return chosen;
+            chosen = isChosen(game);
+        } while (!doneChoosing(game));
+
+        return isChosen(game);
     }
 
     @Override

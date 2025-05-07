@@ -2932,7 +2932,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 count = Math.min(searchingLibrary.count(target.getFilter(), game), librarySearchLimit);
             }
 
-            if (count < target.getNumberOfTargets()) {
+            if (count < target.getMinNumberOfTargets()) {
                 newTarget.setMinNumberOfTargets(count);
             }
 

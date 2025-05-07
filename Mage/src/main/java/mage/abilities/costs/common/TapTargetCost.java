@@ -24,7 +24,7 @@ public class TapTargetCost extends CostImpl {
         this.target = target;
         this.target.withNotTarget(true); // costs are never targeted
         this.target.setRequired(false); // can be cancel by user
-        this.text = "tap " + (target.getNumberOfTargets() > 1
+        this.text = "tap " + (target.getMinNumberOfTargets() > 1
                 ? CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' ' + target.getTargetName()
                 : CardUtil.addArticle(target.getTargetName()));
     }
@@ -47,7 +47,7 @@ public class TapTargetCost extends CostImpl {
                 permanents.add(permanent);
             }
         }
-        if (target.getNumberOfTargets() == 0) {
+        if (target.getMinNumberOfTargets() == 0) {
             paid = true; // e.g. Aryel with X = 0
         }
         source.getEffects().setValue("tappedPermanents", permanents);

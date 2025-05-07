@@ -164,7 +164,7 @@ public class ComputerPlayer extends PlayerImpl {
 
         boolean required = target.isRequired(sourceId, game);
         Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
-        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
+        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getMinNumberOfTargets()) {
             required = false;
         }
 
@@ -251,7 +251,8 @@ public class ComputerPlayer extends PlayerImpl {
             for (Permanent permanent : targets) {
                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
                     // stop to add targets if not needed and outcome is no advantage for AI player
-                    if (target.getNumberOfTargets() == target.getTargets().size()) {
+                    // TODO: need research and improve - is it good to check target.isChosen(game) instead return true?
+                    if (target.getMinNumberOfTargets() == target.getTargets().size()) {
                         if (outcome.isGood() && hasOpponent(permanent.getControllerId(), game)) {
                             return true;
                         }
@@ -348,7 +349,7 @@ public class ComputerPlayer extends PlayerImpl {
                 target.add(randomOpponentId, game);
                 return true;
             }
-            if (!target.isRequired(sourceId, game) || target.getNumberOfTargets() == 0) {
+            if (!target.isRequired(sourceId, game) || target.getMinNumberOfTargets() == 0) {
                 return false;
             }
             if (target.canTarget(abilityControllerId, randomOpponentId, source, game)) {
@@ -548,7 +549,7 @@ public class ComputerPlayer extends PlayerImpl {
 
         boolean required = target.isRequired(sourceId, game);
         Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
-        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
+        if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getMinNumberOfTargets()) {
             required = false;
         }
 
@@ -672,7 +673,7 @@ public class ComputerPlayer extends PlayerImpl {
             for (Permanent permanent : targets) {
                 if (target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
-                    if (target.getNumberOfTargets() <= target.getTargets().size() && (!outcome.isGood() || target.getMaxNumberOfTargets() <= target.getTargets().size())) {
+                    if (target.getMinNumberOfTargets() <= target.getTargets().size() && (!outcome.isGood() || target.getMaxNumberOfTargets() <= target.getTargets().size())) {
                         return true;
                     }
                 }
@@ -2044,19 +2045,20 @@ public class ComputerPlayer extends PlayerImpl {
 
         // we still use playerId when getting cards even if they don't control the search
         List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), playerId, source, game));
-        while (!target.doneChoosing(game)) {
+        do {
             Card card = selectCardTarget(abilityControllerId, cardChoices, outcome, target, source, game);
             if (card != null) {
                 target.addTarget(card.getId(), source, game);
                 cardChoices.remove(card);
             } else {
                 // We don't have any valid target to choose so stop choosing
-                return target.getTargets().size() >= target.getNumberOfTargets();
+                return target.isChosen(game);
             }
-            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
-                return true;
+            // try to fill as much as possible for good effect (see while end) or half for bad (see if)
+            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getMinNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getMinNumberOfTargets()) / 2) {
+                return target.isChosen(game);
             }
-        }
+        } while (target.getTargets().size() < target.getMaxNumberOfTargets());
         return true;
     }
 
@@ -2075,19 +2077,20 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), abilityControllerId, source, game));
-        while (!target.doneChoosing(game)) {
+        do {
             Card card = selectCard(abilityControllerId, cardChoices, outcome, target, game);
             if (card != null) {
                 target.add(card.getId(), game);
                 cardChoices.remove(card); // selectCard don't remove cards (only on second+ tries)
             } else {
                 // We don't have any valid target to choose so stop choosing
-                return target.getTargets().size() >= target.getNumberOfTargets();
+                return target.isChosen(game);
             }
-            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
-                return true;
+            // try to fill as much as possible for good effect (see while end) or half for bad (see if)
+            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getMinNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getMinNumberOfTargets()) / 2) {
+                return target.isChosen(game);
             }
-        }
+        } while (target.getTargets().size() < target.getMaxNumberOfTargets());
         return true;
     }
 

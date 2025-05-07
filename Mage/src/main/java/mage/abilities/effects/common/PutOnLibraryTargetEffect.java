@@ -132,8 +132,8 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
         sb.append("put ");
         if (target.getMaxNumberOfTargets() == 0 || target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
             sb.append("any number of ");
-        } else if (target.getMaxNumberOfTargets() != 1 || target.getNumberOfTargets() != 1) {
-            if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
+        } else if (target.getMaxNumberOfTargets() != 1 || target.getMinNumberOfTargets() != 1) {
+            if (target.getMaxNumberOfTargets() > target.getMinNumberOfTargets()) {
                 sb.append("up to ");
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');

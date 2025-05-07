@@ -4014,7 +4014,6 @@ public abstract class GameImpl implements Game {
                         playerObject.resetStoredBookmark(this);
                         playerObject.resetPlayerPassedActions();
                         playerObject.abort();
-
                     }
                 }
                 fireUpdatePlayersEvent();

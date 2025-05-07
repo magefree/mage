@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -17,13 +18,22 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public interface Target extends Serializable {
+public interface Target extends Copyable<Target>, Serializable {
 
+    /**
+     * All targets selected by a player
+     * <p>
+     * Warning, for "up to" targets it will return true all the time, so make sure your dialog
+     * use do-while logic and call "choose" one time min or use doneChoosing
+     */
     boolean isChosen(Game game);
 
+    // TODO: combine code or research usages (doneChoosing must be in while cycles, isChosen in other places, see #13606)
     boolean doneChoosing(Game game);
 
     void clearChosen();
+
+    boolean isChoiceSelected();
 
     boolean isNotTarget();
 
@@ -129,8 +139,6 @@ public interface Target extends Serializable {
 
     int getTargetAmount(UUID targetId);
 
-    int getNumberOfTargets();
-
     int getMinNumberOfTargets();
 
     int getMaxNumberOfTargets();
@@ -163,6 +171,7 @@ public interface Target extends Serializable {
 
     UUID getFirstTarget();
 
+    @Override
     Target copy();
 
     // some targets are chosen from players that are not the controller of the ability (e.g. Pandemonium)

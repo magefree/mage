@@ -86,7 +86,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         int possibleTargets = 0;
-        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
+        if (getMinNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
             return true;
         }
         Player sourceController = game.getPlayer(sourceControllerId);

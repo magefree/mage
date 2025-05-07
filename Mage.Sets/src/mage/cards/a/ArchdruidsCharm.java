@@ -137,7 +137,7 @@ class ArchdruidsCharmMode1Effect extends SearchEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("Search your library for ");
-        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+        if (target.getMinNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             sb.append(target.getTargetName()).append(revealCards ? " and reveal them." : ".");
         } else {
