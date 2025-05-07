@@ -76,7 +76,36 @@ public class ReadAheadTest extends CardTestPlayerBase {
     private static final String babs = "Barbara Wright";
 
     @Test
-    public void testBarbaraWright() {
+    public void testBarbaraWrightChapter1() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, babs);
+        addCard(Zone.HAND, playerA, rite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rite);
+        setChoice(playerA, "X=1");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+        assertCounterCount(rite, CounterType.LORE, 1);
+        assertPermanentCount(playerA, "Cleric Token", 2);
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertCounterCount(rite, CounterType.LORE, 2);
+        assertPermanentCount(playerA, "Cleric Token", 2 + 2);
+
+        setStopAt(5, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, rite, 1);
+        assertPermanentCount(playerA, rite, 0);
+        assertPermanentCount(playerA, "Cleric Token", 2 + 2);
+        assertPermanentCount(playerA, "Demon Token", 1);
+    }
+
+    @Test
+    public void testBarbaraWrightChapter2() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
         addCard(Zone.BATTLEFIELD, playerA, babs);
         addCard(Zone.HAND, playerA, rite);
@@ -85,8 +114,9 @@ public class ReadAheadTest extends CardTestPlayerBase {
         setChoice(playerA, "X=2");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
-        execute();assertAbility(playerA,rite, ReadAheadAbility.getInstance(),true);
+        execute();
         assertCounterCount(rite, CounterType.LORE, 2);
+        assertAbility(playerA, rite, ReadAheadAbility.getInstance(), true);
         assertPermanentCount(playerA, "Cleric Token", 2);
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -95,6 +125,24 @@ public class ReadAheadTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, rite, 1);
         assertPermanentCount(playerA, rite, 0);
         assertPermanentCount(playerA, "Cleric Token", 2);
+        assertPermanentCount(playerA, "Demon Token", 1);
+    }
+
+    @Test
+    public void testBarbaraWrightChapter3() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, babs);
+        addCard(Zone.HAND, playerA, rite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rite);
+        setChoice(playerA, "X=3");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, rite, 1);
+        assertPermanentCount(playerA, rite, 0);
+        assertPermanentCount(playerA, "Cleric Token", 0);
         assertPermanentCount(playerA, "Demon Token", 1);
     }
 }
