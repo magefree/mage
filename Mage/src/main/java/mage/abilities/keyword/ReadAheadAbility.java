@@ -27,6 +27,7 @@ public class ReadAheadAbility extends StaticAbility implements MageSingleton {
 
     private ReadAheadAbility() {
         super(Zone.BATTLEFIELD, null);
+        this.setRuleAtTheTop(true);
     }
 
     @Override

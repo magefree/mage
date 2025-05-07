@@ -1,7 +1,9 @@
 package org.mage.test.cards.enchantments;
 
+import mage.abilities.keyword.ReadAheadAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -68,5 +70,31 @@ public class ReadAheadTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Dragon Token", 1);
         assertPermanentCount(playerA, war, 0);
         assertGraveyardCount(playerA, war, 1);
+    }
+
+    private static final String rite = "Rite of Belzenlok";
+    private static final String babs = "Barbara Wright";
+
+    @Test
+    public void testBarbaraWright() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, babs);
+        addCard(Zone.HAND, playerA, rite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, rite);
+        setChoice(playerA, "X=2");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();assertAbility(playerA,rite, ReadAheadAbility.getInstance(),true);
+        assertCounterCount(rite, CounterType.LORE, 2);
+        assertPermanentCount(playerA, "Cleric Token", 2);
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, rite, 1);
+        assertPermanentCount(playerA, rite, 0);
+        assertPermanentCount(playerA, "Cleric Token", 2);
+        assertPermanentCount(playerA, "Demon Token", 1);
     }
 }
