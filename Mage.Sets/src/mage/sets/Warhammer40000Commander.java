@@ -161,6 +161,7 @@ public final class Warhammer40000Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Living Death", 202, Rarity.RARE, mage.cards.l.LivingDeath.class));
         cards.add(new SetCardInfo("Lokhust Heavy Destroyer", 38, Rarity.RARE, mage.cards.l.LokhustHeavyDestroyer.class));
         cards.add(new SetCardInfo("Lord of Change", 24, Rarity.RARE, mage.cards.l.LordOfChange.class));
+        cards.add(new SetCardInfo("Lucius the Eternal", 130, Rarity.RARE, mage.cards.l.LuciusTheEternal.class));
         cards.add(new SetCardInfo("Lychguard", 39, Rarity.RARE, mage.cards.l.Lychguard.class));
         cards.add(new SetCardInfo("Magnus the Red", 131, Rarity.RARE, mage.cards.m.MagnusTheRed.class));
         cards.add(new SetCardInfo("Magus Lucea Kane", 7, Rarity.MYTHIC, mage.cards.m.MagusLuceaKane.class));
