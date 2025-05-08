@@ -219,6 +219,7 @@ public enum CounterType {
     STUN("stun"),
     SUPPLY("supply"),
     SUSPECT("suspect"),
+    TAKEOVER("takeover"),
     TASK("task"),
     THEFT("theft"),
     TIDE("tide"),

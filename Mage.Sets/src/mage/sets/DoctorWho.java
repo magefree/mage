@@ -958,12 +958,12 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Girl in the Fireplace", 21, Rarity.RARE, mage.cards.t.TheGirlInTheFireplace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Girl in the Fireplace", 626, Rarity.RARE, mage.cards.t.TheGirlInTheFireplace.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Lux Foundation Library", 588, Rarity.COMMON, mage.cards.t.TheLuxFoundationLibrary.class));
-        //cards.add(new SetCardInfo("The Master, Formed Anew", 1017, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Formed Anew", 1133, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Formed Anew", 143, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Formed Anew", 426, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Formed Anew", 542, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Master, Formed Anew", 748, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Formed Anew", 1017, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Formed Anew", 1133, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Formed Anew", 143, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Formed Anew", 426, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Formed Anew", 542, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Master, Formed Anew", 748, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Gallifrey's End", 1018, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Gallifrey's End", 1134, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Gallifrey's End", 144, Rarity.RARE, mage.cards.t.TheMasterGallifreysEnd.class, NON_FULL_USE_VARIOUS));
