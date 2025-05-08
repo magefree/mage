@@ -32,7 +32,7 @@ public class ReadAheadAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "read ahead <i>(Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger.)</i>";
+        return "read ahead";
     }
 
     @Override

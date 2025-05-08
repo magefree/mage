@@ -283,7 +283,8 @@ class GainReadAheadAbility extends SimpleStaticAbility {
     GainReadAheadAbility() {
         super(new GainAbilityControlledEffect(
                 ReadAheadAbility.getInstance(), Duration.WhileOnBattlefield, filter
-        ).setText("Sagas you control have read ahead"));
+        ).setText("Sagas you control have read ahead. <i>(As a Saga enters, choose a chapter " +
+                "and start with that many lore counters. Skipped chapters don't trigger.)</i>"));
     }
 
     private GainReadAheadAbility(final GainReadAheadAbility ability) {
