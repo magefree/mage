@@ -1058,10 +1058,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Thirteenth Doctor", 448, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Thirteenth Doctor", 564, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Thirteenth Doctor", 609, Rarity.MYTHIC, mage.cards.t.TheThirteenthDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Toymaker's Trap", 375, Rarity.RARE, mage.cards.t.TheToymakersTrap.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Toymaker's Trap", 677, Rarity.RARE, mage.cards.t.TheToymakersTrap.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Toymaker's Trap", 72, Rarity.RARE, mage.cards.t.TheToymakersTrap.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Toymaker's Trap", 966, Rarity.RARE, mage.cards.t.TheToymakersTrap.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Toymaker's Trap", 375, Rarity.RARE, mage.cards.t.TheToymakersTrap.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Toymaker's Trap", 677, Rarity.RARE, mage.cards.t.TheToymakersTrap.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Toymaker's Trap", 72, Rarity.RARE, mage.cards.t.TheToymakersTrap.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Toymaker's Trap", 966, Rarity.RARE, mage.cards.t.TheToymakersTrap.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Twelfth Doctor", "563z", Rarity.RARE, mage.cards.t.TheTwelfthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Twelfth Doctor", 1040, Rarity.RARE, mage.cards.t.TheTwelfthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Twelfth Doctor", 1154, Rarity.RARE, mage.cards.t.TheTwelfthDoctor.class, NON_FULL_USE_VARIOUS));

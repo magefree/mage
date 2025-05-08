@@ -100,11 +100,11 @@ class DayOfTheMoonEffect extends OneShotEffect {
         return true;
     }
 
-    private List<String> getOrSetValue(Game game, Ability source) {
-        String key = source.getControllerId() + "_" + source.getSourceObjectZoneChangeCounter();
-        List<String> set = (List<String>) game.getState().getValue(key);
-        if (set != null) {
-            return set;
+    private static List<String> getOrSetValue(Game game, Ability source) {
+        String key = "DayOfTheMoon_" + source.getControllerId() + '_' + source.getSourceObjectZoneChangeCounter();
+        List<String> list = (List<String>) game.getState().getValue(key);
+        if (list != null) {
+            return list;
         }
         return game.getState().setValue(key, new ArrayList<>());
     }
