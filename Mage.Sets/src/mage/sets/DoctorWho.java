@@ -909,10 +909,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Eleventh Doctor", 730, Rarity.RARE, mage.cards.t.TheEleventhDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Eleventh Hour", 41, Rarity.RARE, mage.cards.t.TheEleventhHour.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Eleventh Hour", 646, Rarity.RARE, mage.cards.t.TheEleventhHour.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Face of Boe", 1003, Rarity.RARE, mage.cards.t.TheFaceOfBoe.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Face of Boe", 126, Rarity.RARE, mage.cards.t.TheFaceOfBoe.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Face of Boe", 412, Rarity.RARE, mage.cards.t.TheFaceOfBoe.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Face of Boe", 731, Rarity.RARE, mage.cards.t.TheFaceOfBoe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Face of Boe", 1003, Rarity.RARE, mage.cards.t.TheFaceOfBoe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Face of Boe", 126, Rarity.RARE, mage.cards.t.TheFaceOfBoe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Face of Boe", 412, Rarity.RARE, mage.cards.t.TheFaceOfBoe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Face of Boe", 731, Rarity.RARE, mage.cards.t.TheFaceOfBoe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fifth Doctor", "556z", Rarity.RARE, mage.cards.t.TheFifthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fifth Doctor", 1004, Rarity.RARE, mage.cards.t.TheFifthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fifth Doctor", 1147, Rarity.RARE, mage.cards.t.TheFifthDoctor.class, NON_FULL_USE_VARIOUS));
