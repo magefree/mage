@@ -32,6 +32,7 @@ public class SagaAbility extends SimpleStaticAbility {
 
     private final SagaChapter maxChapter;
     private final boolean showSacText;
+    private final boolean readAhead;
 
     public SagaAbility(Card card) {
         this(card, SagaChapter.CHAPTER_III, false);
@@ -45,6 +46,7 @@ public class SagaAbility extends SimpleStaticAbility {
         super(Zone.ALL, null);
         this.maxChapter = maxChapter;
         this.showSacText = card.getSecondCardFace() == null && !card.isNightCard();
+        this.readAhead = readAhead;
         this.setRuleVisible(true);
         this.setRuleAtTheTop(true);
         Ability ability = new EntersBattlefieldAbility(new SagaLoreCountersEffect(maxChapter));
@@ -59,6 +61,7 @@ public class SagaAbility extends SimpleStaticAbility {
         super(ability);
         this.maxChapter = ability.maxChapter;
         this.showSacText = ability.showSacText;
+        this.readAhead = ability.readAhead;
     }
 
     public void addChapterEffect(Card card, SagaChapter chapter, Effect... effects) {
@@ -133,7 +136,10 @@ public class SagaAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "<i>(As this Saga enters and after your draw step, add a lore counter."
+        return (readAhead
+                ? "<i>(Choose a chapter and start with that many lore counters. " +
+                "Add one after your draw step. Skipped chapters don't trigger."
+                : "<i>(As this Saga enters and after your draw step, add a lore counter.")
                 + (showSacText ? " Sacrifice after " + maxChapter.toString() + '.' : "") + ")</i> ";
     }
 
