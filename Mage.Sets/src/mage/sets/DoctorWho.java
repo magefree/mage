@@ -78,10 +78,10 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("Bad Wolf Bay", 569, Rarity.COMMON, mage.cards.b.BadWolfBay.class));
         cards.add(new SetCardInfo("Banish to Another Universe", 13, Rarity.UNCOMMON, mage.cards.b.BanishToAnotherUniverse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Banish to Another Universe", 618, Rarity.UNCOMMON, mage.cards.b.BanishToAnotherUniverse.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Barbara Wright", 14, Rarity.RARE, mage.cards.b.BarbaraWright.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Barbara Wright", 335, Rarity.RARE, mage.cards.b.BarbaraWright.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Barbara Wright", 619, Rarity.RARE, mage.cards.b.BarbaraWright.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Barbara Wright", 926, Rarity.RARE, mage.cards.b.BarbaraWright.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Barbara Wright", 14, Rarity.RARE, mage.cards.b.BarbaraWright.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Barbara Wright", 335, Rarity.RARE, mage.cards.b.BarbaraWright.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Barbara Wright", 619, Rarity.RARE, mage.cards.b.BarbaraWright.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Barbara Wright", 926, Rarity.RARE, mage.cards.b.BarbaraWright.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beast Within", 228, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beast Within", 819, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Become the Pilot", 354, Rarity.RARE, mage.cards.b.BecomeThePilot.class, NON_FULL_USE_VARIOUS));
