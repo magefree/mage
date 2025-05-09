@@ -295,10 +295,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Ensnared by the Mara", 689, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ensnared by the Mara", 84, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ensnared by the Mara", 975, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Everybody Lives!", 18, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Everybody Lives!", 338, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Everybody Lives!", 623, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Everybody Lives!", 929, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everybody Lives!", 18, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everybody Lives!", 338, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everybody Lives!", 623, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Everybody Lives!", 929, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everything Comes to Dust", 19, Rarity.RARE, mage.cards.e.EverythingComesToDust.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everything Comes to Dust", 339, Rarity.RARE, mage.cards.e.EverythingComesToDust.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everything Comes to Dust", 624, Rarity.RARE, mage.cards.e.EverythingComesToDust.class, NON_FULL_USE_VARIOUS));
