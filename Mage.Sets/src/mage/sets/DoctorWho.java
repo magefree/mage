@@ -397,8 +397,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Game Trail", 500, Rarity.RARE, mage.cards.g.GameTrail.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Game Trail", 875, Rarity.RARE, mage.cards.g.GameTrail.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Gardens of Tranquil Repose", 583, Rarity.COMMON, mage.cards.g.GardensOfTranquilRepose.class));
-        //cards.add(new SetCardInfo("Genesis of the Daleks", 674, Rarity.RARE, mage.cards.g.GenesisOfTheDaleks.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Genesis of the Daleks", 69, Rarity.RARE, mage.cards.g.GenesisOfTheDaleks.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Genesis of the Daleks", 674, Rarity.RARE, mage.cards.g.GenesisOfTheDaleks.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Genesis of the Daleks", 69, Rarity.RARE, mage.cards.g.GenesisOfTheDaleks.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glacial Fortress", 1092, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glacial Fortress", 285, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glacial Fortress", 501, Rarity.RARE, mage.cards.g.GlacialFortress.class, NON_FULL_USE_VARIOUS));
