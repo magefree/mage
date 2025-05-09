@@ -1,7 +1,6 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,11 +12,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
+
+import java.util.UUID;
+
 
 /**
  *
@@ -25,7 +26,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class Ixidron extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("face-down creatures on the battlefield");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creatures on the battlefield");
     private static final FilterCreaturePermanent filterTurnFaceDown = new FilterCreaturePermanent("other nontoken creatures");
 
     static {
