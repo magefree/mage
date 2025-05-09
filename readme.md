@@ -37,6 +37,9 @@ Servers status:
 Beta server with un-released or under development features:
 * http://xmage.today/ (release version)
 
+Check set implementation status:
+* [Set tracker](https://github.com/magefree/mage/Set-implementation-list.md)
+
 ## Features
 
 * Multiplatform app: Windows, Linux, MacOS;
