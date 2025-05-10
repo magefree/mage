@@ -30,8 +30,8 @@ public final class ShinryuTranscendentRival extends CardImpl {
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(8);
+        this.toughness = new MageInt(8);
         this.color.setBlack(true);
         this.nightCard = true;
 
