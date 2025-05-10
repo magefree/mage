@@ -76,6 +76,7 @@ Intimidate|instance|
 Ingest|new|
 Islandcycling|cost|
 Islandwalk|new|
+Job select|new|
 Jump-start|card|
 Kicker|manaString|
 Level up|cost|
