@@ -23,6 +23,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Adventurer's Inn", 271, Rarity.COMMON, mage.cards.a.AdventurersInn.class));
         cards.add(new SetCardInfo("Black Mage's Rod", 90, Rarity.COMMON, mage.cards.b.BlackMagesRod.class));
         cards.add(new SetCardInfo("Chaos, the Endless", 221, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class));
+        cards.add(new SetCardInfo("Cid, Timeless Artificer", 216, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", 552, Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class));
         cards.add(new SetCardInfo("Commune with Beavers", 102, Rarity.COMMON, mage.cards.c.CommuneWithBeavers.class));
         cards.add(new SetCardInfo("Cooking Campsite", 31, Rarity.UNCOMMON, mage.cards.c.CookingCampsite.class));
