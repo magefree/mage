@@ -2773,6 +2773,7 @@
 
 # FIN
 |Generate|TOK:FIN|Food|||FoodToken|
+|Generate|TOK:FIN|Hero|||HeroToken|
 
 # JVC
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|
