@@ -5,7 +5,6 @@
 use Text::Template;
 use strict;
 
-
 my $authorFile = 'author.txt';
 my $dataFile = 'mtg-cards-data.txt';
 my $setsFile = 'mtg-sets-data.txt';
@@ -32,7 +31,7 @@ sub fixCost {
 
 my $author;
 if (-e $authorFile) {
-    open (DATA, $authorFile) || die "can't open $authorFile : $!";
+    open(DATA, $authorFile) || die "can't open $authorFile : $!";
     $author = <DATA>;
     chomp $author;
     close(DATA);
@@ -40,32 +39,32 @@ if (-e $authorFile) {
     $author = 'anonymous';
 }
 
-open (DATA, $dataFile) || die "can't open $dataFile : $!";
-while(my $line = <DATA>) {
+open(DATA, $dataFile) || die "can't open $dataFile : $!";
+while (my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $cards{$data[0]}{$data[1]} = \@data;
+    $cards{$data[0]}{$data[1]}{$data[2]} = \@data;
 }
 close(DATA);
 
-open (DATA, $setsFile) || die "can't open $setsFile : $!";
-while(my $line = <DATA>) {
+open(DATA, $setsFile) || die "can't open $setsFile : $!";
+while (my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $sets{$data[0]}= $data[1];
+    $sets{$data[0]} = $data[1];
     #print "$data[0]--$data[1]\n"
 }
 close(DATA);
 
-open (DATA, $knownSetsFile) || die "can't open $knownSetsFile : $!";
-while(my $line = <DATA>) {
+open(DATA, $knownSetsFile) || die "can't open $knownSetsFile : $!";
+while (my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $knownSets{$data[0]}= $data[1];
+    $knownSets{$data[0]} = $data[1];
 }
 close(DATA);
 
-open (DATA, $keywordsFile) || die "can't open $keywordsFile : $!";
-while(my $line = <DATA>) {
+open(DATA, $keywordsFile) || die "can't open $keywordsFile : $!";
+while (my $line = <DATA>) {
     my @data = split('\\|', $line);
-    $keywords{toCamelCase($data[0])}= $data[1];
+    $keywords{toCamelCase($data[0])} = $data[1];
 }
 close(DATA);
 
@@ -97,12 +96,11 @@ if (!$cardName) {
     chomp $cardName;
 }
 
-
 if (!exists $cards{$cardName}) {
     my $possible;
-    foreach $possible (sort keys (%cards)) {
+    foreach $possible (sort keys(%cards)) {
         if ($possible =~ m/$cardName/img && $cardName =~ m/..../) {
-            print ("Did you mean $possible?\n");
+            print("Did you mean $possible?\n");
         }
     }
     die "Card name doesn't exist: $cardName\n";
@@ -116,18 +114,18 @@ my $originalName = $cardName;
 
 # Remove the // from name of split cards
 if (index($cardName, $splitDelimiter) != -1) {
-    $cardName  =~ s/$splitDelimiter/$empty/g;
+    $cardName =~ s/$splitDelimiter/$empty/g;
     $cardTemplate = 'cardSplitClass.tmpl';
     $splitSpell = 'true';
 }
 
 
 # Check if card is already implemented
-my $fileName = "../Mage.Sets/src/mage/cards/".lc(substr($cardName, 0, 1))."/".toCamelCase($cardName).".java";
-if(-e $fileName) {
-  die "$cardName is already implemented.\n$fileName\n";
+my $fileName = "../Mage.Sets/src/mage/cards/" . lc(substr($cardName, 0, 1)) . "/" . toCamelCase($cardName) . ".java";
+if (-e $fileName) {
+    die "$cardName is already implemented.\n$fileName\n";
 }
-                                                                          
+
 # Generate lines to corresponding sets
 my %vars;
 $vars{'className'} = toCamelCase($cardName);
@@ -135,45 +133,55 @@ $vars{'cardNameFirstLetter'} = lc substr($cardName, 0, 1);
 my @card;
 
 foreach my $setName (keys %{$cards{$originalName}}) {
-  my $setFileName = "../Mage.Sets/src/mage/sets/".$knownSets{$setName}.".java";
-  @card = @{${cards{$originalName}{$setName}}};
-  my $line = "        cards.add(new SetCardInfo(\"".$card[0]."\", ".$card[2].", Rarity.".$raritiesConversion{$card[3]}.", mage.cards.".$vars{'cardNameFirstLetter'}.".".$vars{'className'}.".class));\n";
-  @ARGV = ($setFileName);
-  $^I = '.bak';
-  my $last;
-  my $lastName;
-  my $currName;
-  while (<>) {
-    if ($_ !~ m/cards.add/) {      
-      if (defined($last)) {
-        print $last; 
-      }
-      # print card line as last
-      if (defined($currName) && ($cardName cmp $currName) > 0) {
+    my $keyCount = keys %{$cards{$originalName}{$setName}};
+    my $printingString;
+    if (($keyCount) > 1) {
+        $printingString = ", NON_FULL_USE_VARIOUS";
+    } else {
+        $printingString = "";
+    }
+    foreach my $cardNumber (sort keys %{$cards{$originalName}{$setName}}) {
+        my $setFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . ".java";
+        @card = @{${cards {$originalName}{ $setName }{$cardNumber}}};
+        my $line = "        cards.add(new SetCardInfo(\"" . $card[0] . "\", " . $card[2] . ", Rarity." . $raritiesConversion{$card[3]} . ", mage.cards." . $vars{'cardNameFirstLetter'} . "." . $vars{'className'} . ".class" . $printingString . "));\n";
         print $line;
-        undef $currName;
-      }
-      $last = $_;
-      print $last if eof;   
-      next;
-    }
-    
-    ($lastName) = $last =~ m/"(.*?)"/;
-    ($currName) = $_ =~ m/"(.*?)"/;
-    print $last;
-    $last = $_;
-    # print card line as first
-    if (!defined($lastName) && defined($currName) && ($currName cmp $cardName) > 0) {
-      print $line;
-    }
-    # print card line in the middle
-    if (defined($lastName) && defined($currName) && ($cardName cmp $lastName) > 0 && ($currName cmp $cardName) > 0) {
-      print $line;
-    }
-  }
+        @ARGV = ($setFileName);
+        $^I = '.bak';
+        my $last;
+        my $lastName;
+        my $currName;
+        while (<>) {
+            if ($_ !~ m/cards.add/) {
+                if (defined($last)) {
+                    print $last;
+                }
+                # print card line as last
+                if (defined($currName) && ($cardName cmp $currName) > 0) {
+                    print $line;
+                    undef $currName;
+                }
+                $last = $_;
+                print $last if eof;
+                next;
+            }
 
-  unlink $setFileName.".bak";
-  print "$setFileName\n";
+            ($lastName) = $last =~ m/"(.*?)"/;
+            ($currName) = $_ =~ m/"(.*?)"/;
+            print $last;
+            $last = $_;
+            # print card line as first
+            if (!defined($lastName) && defined($currName) && ($currName cmp $cardName) > 0) {
+                print $line;
+            }
+            # print card line in the middle
+            if (defined($lastName) && defined($currName) && ($cardName cmp $lastName) > -1 && ($currName cmp $cardName) > 0) {
+                print $line;
+            }
+        }
+
+        unlink $setFileName . ".bak";
+        print "$setFileName\n";
+    }
 }
 
 # Generate the card
@@ -194,7 +202,7 @@ my $cardAbilities = $card[8];
 my $type = $card[5];
 while ($type =~ m/([a-zA-Z]+)( )*/g) {
     if (exists($cardTypes{$1})) {
-        push(@types, $cardTypes{$1}); 
+        push(@types, $cardTypes{$1});
         if ($cardTypes{$1} eq $cardTypes{'Planeswalker'}) {
             $vars{'planeswalker'} = 'true';
             $cardAbilities = $card[7];
@@ -206,11 +214,11 @@ while ($type =~ m/([a-zA-Z]+)( )*/g) {
         if (@types) {
             my $st = uc($1);
             $vars{'subType'} .= "\n        this.subtype.add(SubType.$st);";
-			$vars{'hasSubTypes'} = 'true';
+            $vars{'hasSubTypes'} = 'true';
         } else {
             my $st = uc($1);
             $vars{'subType'} .= "\n        this.supertype.add(SuperType.$st);";
-			$vars{'hasSuperTypes'} = 'true';
+            $vars{'hasSuperTypes'} = 'true';
         }
     }
 }
@@ -220,9 +228,9 @@ $vars{'abilitiesImports'} = '';
 $vars{'abilities'} = '';
 
 my $strong = "<strong>";
-$cardAbilities  =~ s/$strong/$empty/g;
+$cardAbilities =~ s/$strong/$empty/g;
 $strong = "</strong>";
-$cardAbilities  =~ s/$strong/$empty/g;
+$cardAbilities =~ s/$strong/$empty/g;
 $cardAbilities =~ s/\&/\|/g;
 
 my @abilities = split('\$', $cardAbilities);
@@ -282,8 +290,8 @@ foreach my $ability (@abilities) {
                         if ($1 =~ m/(^.*\s.*)/g) {
                             $vars{'abilities'} .= "\n        TargetPermanent auraTarget = new TargetPermanent(filter);";
                         } else {
-                            $vars{'abilities'} .= "\n        TargetPermanent auraTarget = new Target". toCamelCase($1) . "Permanent();";
-                            $vars{'abilitiesImports'} .= "\nimport mage.target.common.Target". toCamelCase($1) . "Permanent;";
+                            $vars{'abilities'} .= "\n        TargetPermanent auraTarget = new Target" . toCamelCase($1) . "Permanent();";
+                            $vars{'abilitiesImports'} .= "\nimport mage.target.common.Target" . toCamelCase($1) . "Permanent;";
                         }
                         $vars{'abilities'} .= "\n        this.getSpellAbility().addTarget(auraTarget);";
                         $vars{'abilities'} .= "\n        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));";
