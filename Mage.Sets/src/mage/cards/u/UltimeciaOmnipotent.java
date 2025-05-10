@@ -12,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
 /**
- *
- * @author anonymous
+ * @author balazskristof
  */
 public final class UltimeciaOmnipotent extends CardImpl {
 

@@ -3,11 +3,9 @@ package mage.cards.b;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -22,8 +20,7 @@ import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 /**
- *
- * @author anonymous
+ * @author balazskristof
  */
 public final class BlackMagesRod extends CardImpl {
 

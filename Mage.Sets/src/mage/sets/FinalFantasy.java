@@ -145,6 +145,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Judgment Bolt", 559, Rarity.RARE, mage.cards.j.JudgmentBolt.class));
         cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 343, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 232, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 399, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 497, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 544, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Laughing Mad", 143, Rarity.COMMON, mage.cards.l.LaughingMad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Laughing Mad", 585, Rarity.COMMON, mage.cards.l.LaughingMad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning, Security Sergeant", 462, Rarity.RARE, mage.cards.l.LightningSecuritySergeant.class, NON_FULL_USE_VARIOUS));
@@ -234,6 +238,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Tifa Lockhart", 536, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tonberry", 122, Rarity.UNCOMMON, mage.cards.t.Tonberry.class));
         cards.add(new SetCardInfo("Town Greeter", 209, Rarity.COMMON, mage.cards.t.TownGreeter.class));
+        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 232, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 399, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 497, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 544, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551a", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551b", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551c", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
