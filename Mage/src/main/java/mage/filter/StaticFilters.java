@@ -341,7 +341,7 @@ public final class StaticFilters {
         FILTER_PERMANENTS_ARTIFACT_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterControlledArtifactPermanent FILTER_ARTIFACT_NON_CREATURE = new FilterControlledArtifactPermanent("noncreature artifact");
+    public static final FilterArtifactPermanent FILTER_ARTIFACT_NON_CREATURE = new FilterArtifactPermanent("noncreature artifact");
 
     static {
         FILTER_ARTIFACT_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
