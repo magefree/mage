@@ -144,7 +144,6 @@ foreach my $setName (keys %{$cards{$originalName}}) {
         my $setFileName = "../Mage.Sets/src/mage/sets/" . $knownSets{$setName} . ".java";
         @card = @{${cards {$originalName}{ $setName }{$cardNumber}}};
         my $line = "        cards.add(new SetCardInfo(\"" . $card[0] . "\", " . $card[2] . ", Rarity." . $raritiesConversion{$card[3]} . ", mage.cards." . $vars{'cardNameFirstLetter'} . "." . $vars{'className'} . ".class" . $printingString . "));\n";
-        print $line;
         @ARGV = ($setFileName);
         $^I = '.bak';
         my $last;
