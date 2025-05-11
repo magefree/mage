@@ -42,6 +42,11 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 419, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 420, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 480, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 133, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 318, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 385, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 458, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 530, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 10, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 375, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 427, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
@@ -75,6 +80,11 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 483, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 539, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ice Magic", 56, Rarity.COMMON, mage.cards.i.IceMagic.class));
+        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 133, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 318, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 385, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 458, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 530, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 297, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 298, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 299, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
