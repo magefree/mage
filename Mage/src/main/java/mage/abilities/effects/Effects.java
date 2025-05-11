@@ -115,10 +115,18 @@ public class Effects extends ArrayList<Effect> {
             sbText.append('.');
         }
 
+
+        if (mode.getCost() != null || mode.getFlavorWord() != null) {
+            sbText.replace(0, 1, sbText.substring(0, 1).toUpperCase());
+        }
+        // cost
+        if (mode.getCost() != null) {
+            sbText.insert(0, " &mdash; ");
+            sbText.insert(0, mode.getCost().getText());
+        }
         // flavor word
         if (mode.getFlavorWord() != null) {
-            return CardUtil.italicizeWithEmDash(mode.getFlavorWord())
-                    + CardUtil.getTextWithFirstCharUpperCase(sbText.toString());
+            sbText.insert(0, CardUtil.italicizeWithEmDash(mode.getFlavorWord()));
         }
 
         return sbText.toString();

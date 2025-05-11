@@ -134,6 +134,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Umbra armor|new|
+Tiered|card|
 Toxic|number|
 Training|new|
 Trample|instance|

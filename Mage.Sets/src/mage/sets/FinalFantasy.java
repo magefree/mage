@@ -61,6 +61,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 446, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 526, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 99, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire Magic", 136, Rarity.UNCOMMON, mage.cards.f.FireMagic.class));
         cards.add(new SetCardInfo("Forest", 306, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 307, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 308, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
