@@ -124,6 +124,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ultimecia, Time Sorceress", 513, Rarity.UNCOMMON, mage.cards.u.UltimeciaTimeSorceress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wastes", 309, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("White Mage's Staff", 42, Rarity.COMMON, mage.cards.w.WhiteMagesStaff.class));
+        cards.add(new SetCardInfo("Zanarkand, Ancient Metropolis", 293, Rarity.RARE, mage.cards.z.ZanarkandAncientMetropolis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zanarkand, Ancient Metropolis", 314, Rarity.RARE, mage.cards.z.ZanarkandAncientMetropolis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zell Dincht", 170, Rarity.RARE, mage.cards.z.ZellDincht.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zell Dincht", 468, Rarity.RARE, mage.cards.z.ZellDincht.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zenos yae Galvus", 127, Rarity.RARE, mage.cards.z.ZenosYaeGalvus.class, NON_FULL_USE_VARIOUS));
