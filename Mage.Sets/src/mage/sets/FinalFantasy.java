@@ -74,6 +74,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 394, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 483, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 539, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ice Magic", 56, Rarity.COMMON, mage.cards.i.IceMagic.class));
         cards.add(new SetCardInfo("Island", 297, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 298, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 299, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
