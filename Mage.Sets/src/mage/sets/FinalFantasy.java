@@ -18,7 +18,7 @@ public final class FinalFantasy extends ExpansionSet {
     private FinalFantasy() {
         super("Final Fantasy", "FIN", ExpansionSet.buildDate(2025, 6, 13), SetType.EXPANSION);
         this.blockName = "Final Fantasy"; // for sorting in GUI
-        this.hasBasicLands = false; // temporary
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("A Realm Reborn", 196, Rarity.RARE, mage.cards.a.ARealmReborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("A Realm Reborn", 344, Rarity.RARE, mage.cards.a.ARealmReborn.class, NON_FULL_USE_VARIOUS));
