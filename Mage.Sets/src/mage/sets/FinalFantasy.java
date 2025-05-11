@@ -71,6 +71,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 526, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 99, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fire Magic", 136, Rarity.UNCOMMON, mage.cards.f.FireMagic.class));
+        cards.add(new SetCardInfo("Firion, Wild Rose Warrior", 137, Rarity.RARE, mage.cards.f.FirionWildRoseWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Firion, Wild Rose Warrior", 386, Rarity.RARE, mage.cards.f.FirionWildRoseWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Firion, Wild Rose Warrior", 459, Rarity.RARE, mage.cards.f.FirionWildRoseWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Firion, Wild Rose Warrior", 531, Rarity.RARE, mage.cards.f.FirionWildRoseWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 306, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 307, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 308, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
