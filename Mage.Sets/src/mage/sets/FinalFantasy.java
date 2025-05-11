@@ -42,6 +42,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 419, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 420, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 480, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 10, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 375, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 427, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 520, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", 482, Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", 552, Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Commune with Beavers", 182, Rarity.COMMON, mage.cards.c.CommuneWithBeavers.class));
