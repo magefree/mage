@@ -57,6 +57,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 394, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 483, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 539, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fang, Fearless l'Cie", 381, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fang, Fearless l'Cie", 446, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fang, Fearless l'Cie", 526, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fang, Fearless l'Cie", 99, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 306, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 307, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 308, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
@@ -86,6 +90,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 295, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 296, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 572, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "381b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "446b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "526b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "99b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sazh's Chocobo", 200, Rarity.UNCOMMON, mage.cards.s.SazhsChocobo.class));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 505, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 553, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
@@ -124,6 +132,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ultimecia, Omnipotent", 513, Rarity.UNCOMMON, mage.cards.u.UltimeciaOmnipotent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Time Sorceress", 247, Rarity.UNCOMMON, mage.cards.u.UltimeciaTimeSorceress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Time Sorceress", 513, Rarity.UNCOMMON, mage.cards.u.UltimeciaTimeSorceress.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 211, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 392, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 475, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 537, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wastes", 309, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("White Mage's Staff", 42, Rarity.COMMON, mage.cards.w.WhiteMagesStaff.class));
         cards.add(new SetCardInfo("Zanarkand, Ancient Metropolis", 293, Rarity.RARE, mage.cards.z.ZanarkandAncientMetropolis.class, NON_FULL_USE_VARIOUS));
