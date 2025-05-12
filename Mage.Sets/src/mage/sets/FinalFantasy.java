@@ -68,6 +68,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 394, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 483, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 539, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Esper Terra", 245, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Esper Terra", 323, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Esper Terra", 511, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 381, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 446, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 526, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
@@ -147,6 +150,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 301, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 302, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 574, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Terra, Magical Adept", 245, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Terra, Magical Adept", 323, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Terra, Magical Adept", 511, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Crystal's Chosen", 14, Rarity.UNCOMMON, mage.cards.t.TheCrystalsChosen.class));
         cards.add(new SetCardInfo("Tifa Lockhart", 206, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 391, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
