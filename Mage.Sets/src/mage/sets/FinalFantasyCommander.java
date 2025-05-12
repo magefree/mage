@@ -19,6 +19,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         super("Final Fantasy Commander", "FIC", ExpansionSet.buildDate(2025, 6, 13), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Alphinaud Leveilleur", 33, Rarity.RARE, mage.cards.a.AlphinaudLeveilleur.class));
         cards.add(new SetCardInfo("Altered Ego", 317, Rarity.RARE, mage.cards.a.AlteredEgo.class));
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 267, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 229, Rarity.UNCOMMON, mage.cards.a.AngelOfTheRuins.class));
