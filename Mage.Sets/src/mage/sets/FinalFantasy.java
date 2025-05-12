@@ -121,6 +121,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 343, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Malboro", 106, Rarity.COMMON, mage.cards.m.Malboro.class));
+        cards.add(new SetCardInfo("Matoya, Archon Elder", 439, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Matoya, Archon Elder", 62, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 303, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 304, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 305, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
