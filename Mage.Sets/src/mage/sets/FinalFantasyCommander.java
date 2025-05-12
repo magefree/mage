@@ -46,6 +46,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Celes, Rune Knight", 220, Rarity.MYTHIC, mage.cards.c.CelesRuneKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos Warp", 291, Rarity.RARE, mage.cards.c.ChaosWarp.class));
         cards.add(new SetCardInfo("Chasm Skulker", 262, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
+        cards.add(new SetCardInfo("Chocobo Knights", 12, Rarity.RARE, mage.cards.c.ChocoboKnights.class));
         cards.add(new SetCardInfo("Cleansing Nova", 235, Rarity.RARE, mage.cards.c.CleansingNova.class));
         cards.add(new SetCardInfo("Clever Concealment", 236, Rarity.RARE, mage.cards.c.CleverConcealment.class));
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 168, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
