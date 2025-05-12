@@ -1675,6 +1675,10 @@ public class VerifyCardDataTest {
                 // both sides have main card info
                 return;
             }
+            if (card instanceof AdventureCard && card.isLand()) {
+                // temporary until scryfall fixes the mana cost issue for adventure lands
+                return;
+            }
             checkAll(card, ref, cardIndex);
         } else if (!CHECK_ONLY_ABILITIES_TEXT) {
             warn(card, "Can't find card in mtgjson to verify");
