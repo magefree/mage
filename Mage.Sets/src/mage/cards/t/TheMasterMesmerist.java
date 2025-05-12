@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class TheMasterMesmerist extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent("power less than or equal to {this}'s power");
+    private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent("creature an opponent controls with power less than or equal to {this}'s power");
     private static final FilterPermanent filter2 = new FilterCreaturePermanent();
 
     static {

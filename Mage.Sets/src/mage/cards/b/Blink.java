@@ -34,13 +34,21 @@ public final class Blink extends CardImpl {
 
         // I, III -- Choose target creature. Its owner shuffles it into their library, then investigates.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
+                this, SagaChapter.CHAPTER_I,
+                new BlinkEffect(), new TargetCreaturePermanent()
+        );
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_III,
                 new BlinkEffect(), new TargetCreaturePermanent()
         );
 
         // II, IV -- Create a 2/2 black Alien Angel artifact creature token with first strike, vigilance, and "Whenever an opponent casts a creature spell, this permanent isn't a creature until end of turn."
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_IV,
+                this, SagaChapter.CHAPTER_II,
+                new CreateTokenEffect(new AlienAngelToken())
+        );
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_IV,
                 new CreateTokenEffect(new AlienAngelToken())
         );
         this.addAbility(sagaAbility);

@@ -91,7 +91,7 @@ class MidnightCrusaderShuttleEffect extends OneShotEffect {
 class MidnightCrusaderShuttleFirstChoice extends VillainousChoice {
 
     MidnightCrusaderShuttleFirstChoice() {
-        super("That player sacrifices a creature", "Sacrifice a creature");
+        super("That player sacrifices a creature of their choice", "Sacrifice a creature");
     }
 
     @Override

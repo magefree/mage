@@ -138,7 +138,7 @@ class MeTheImmortalCastEffect extends AsThoughEffectImpl {
 
     MeTheImmortalCastEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        this.staticText = "you may cast {this} from your graveyard " +
+        this.staticText = "you may cast this card from your graveyard " +
                 "by discarding two cards in addition to paying its other costs";
     }
 

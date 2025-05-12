@@ -45,7 +45,7 @@ public final class TheEleventhDoctor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // I. AM. TALKING! -- Whenever The Eleventh Doctor deals combat damage to a player, you may exile a card from your hand with a number of time counters on it equal to its mana value. If it doesn't have suspend, it gains suspend.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new TheEleventhDoctorEffect()).setTriggerPhrase("I. AM. TALKING!"));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new TheEleventhDoctorEffect()).withFlavorWord("I. AM. TALKING!"));
 
         // {2}: Target creature with power 3 or less can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(Duration.EndOfTurn), new GenericManaCost(2));

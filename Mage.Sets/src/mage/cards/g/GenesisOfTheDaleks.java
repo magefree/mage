@@ -91,7 +91,7 @@ enum GenesisOfTheDaleksValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "for each lore counter on {this}";
+        return "lore counter on {this}";
     }
 
     @Override

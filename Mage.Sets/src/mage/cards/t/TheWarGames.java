@@ -55,7 +55,7 @@ public final class TheWarGames extends CardImpl {
 
         // II, III -- Put a +1/+1 counter on each Warrior creature.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
+                this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_III,
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)
         );
 

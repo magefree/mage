@@ -70,7 +70,7 @@ public final class TheDalekEmperor extends CardImpl {
 class TheDalekEmperorFirstChoice extends VillainousChoice {
 
     TheDalekEmperorFirstChoice() {
-        super("That player sacrifices a creature they control", "You sacrifice a creature");
+        super("That player sacrifices a creature of their choice", "You sacrifice a creature");
     }
 
     @Override
