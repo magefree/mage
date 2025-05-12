@@ -142,6 +142,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 433, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 1, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 356, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Leviathan", 361, Rarity.RARE, mage.cards.s.SummonLeviathan.class));
         cards.add(new SetCardInfo("Summon: Primal Odin", 121, Rarity.RARE, mage.cards.s.SummonPrimalOdin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Primal Odin", 365, Rarity.RARE, mage.cards.s.SummonPrimalOdin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Shiva", 362, Rarity.UNCOMMON, mage.cards.s.SummonShiva.class, NON_FULL_USE_VARIOUS));
