@@ -65,6 +65,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dig Through Time", 263, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Dispatch", 241, Rarity.UNCOMMON, mage.cards.d.Dispatch.class));
         cards.add(new SetCardInfo("Duskshell Crawler", 301, Rarity.COMMON, mage.cards.d.DuskshellCrawler.class));
+        cards.add(new SetCardInfo("Elena, Turk Recruit", 18, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class));
         cards.add(new SetCardInfo("Exsanguinate", 276, Rarity.UNCOMMON, mage.cards.e.Exsanguinate.class));
         cards.add(new SetCardInfo("Farewell", 242, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Farseek", 302, Rarity.COMMON, mage.cards.f.Farseek.class));
