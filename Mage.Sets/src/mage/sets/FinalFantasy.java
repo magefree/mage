@@ -25,8 +25,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Absolute Virtue", 212, Rarity.MYTHIC, mage.cards.a.AbsoluteVirtue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Absolute Virtue", 476, Rarity.MYTHIC, mage.cards.a.AbsoluteVirtue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adventurer's Inn", 271, Rarity.COMMON, mage.cards.a.AdventurersInn.class));
-        cards.add(new SetCardInfo("Aerith Gainsborough", 4, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 374, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aerith Gainsborough", 4, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 423, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 519, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ardyn, the Usurper", 315, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
@@ -180,14 +180,14 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Tifa Lockhart", 536, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tonberry", 122, Rarity.UNCOMMON, mage.cards.t.Tonberry.class));
         cards.add(new SetCardInfo("Town Greeter", 209, Rarity.COMMON, mage.cards.t.TownGreeter.class));
-        cards.add(new SetCardInfo("Traveling Chocobo", 210, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Traveling Chocobo", 406, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Traveling Chocobo", 551, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551a", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551b", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551c", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551d", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551f", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Traveling Chocobo", 210, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Traveling Chocobo", 406, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Traveling Chocobo", 551, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Omnipotent", 247, Rarity.UNCOMMON, mage.cards.u.UltimeciaOmnipotent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Omnipotent", 513, Rarity.UNCOMMON, mage.cards.u.UltimeciaOmnipotent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Time Sorceress", 247, Rarity.UNCOMMON, mage.cards.u.UltimeciaTimeSorceress.class, NON_FULL_USE_VARIOUS));
