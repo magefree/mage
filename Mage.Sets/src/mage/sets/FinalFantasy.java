@@ -109,6 +109,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 573, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jidoor, Aristocratic Capital", 284, Rarity.RARE, mage.cards.j.JidoorAristocraticCapital.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jidoor, Aristocratic Capital", 311, Rarity.RARE, mage.cards.j.JidoorAristocraticCapital.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jill, Shiva's Dominant", 378, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jill, Shiva's Dominant", 438, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jill, Shiva's Dominant", 523, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jill, Shiva's Dominant", 58, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 343, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Malboro", 106, Rarity.COMMON, mage.cards.m.Malboro.class));
@@ -135,6 +139,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 384, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 455, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 529, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shiva, Warden of Ice", 378, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shiva, Warden of Ice", 438, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shiva, Warden of Ice", 523, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shiva, Warden of Ice", 58, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Catch a Fish", 31, Rarity.UNCOMMON, mage.cards.s.SidequestCatchAFish.class));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 242, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 348, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
