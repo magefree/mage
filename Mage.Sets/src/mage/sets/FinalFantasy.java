@@ -68,6 +68,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Cooking Campsite", 31, Rarity.UNCOMMON, mage.cards.c.CookingCampsite.class));
         cards.add(new SetCardInfo("Dark Confidant", 334, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 94, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dragoon's Lance", 17, Rarity.UNCOMMON, mage.cards.d.DragoonsLance.class));
         cards.add(new SetCardInfo("Dragoon's Wyvern", 49, Rarity.COMMON, mage.cards.d.DragoonsWyvern.class));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 218, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 394, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
