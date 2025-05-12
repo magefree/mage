@@ -307,6 +307,9 @@ public class VerifyCardDataTest {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
                 check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
             } else if (card instanceof CardWithSpellOption) {
+                if (card.isLand()) { // temporary until scryfall fixes the mana cost issue for adventure lands
+                    continue;
+                }
                 check(card, cardIndex);
                 check(((CardWithSpellOption) card).getSpellCard(), cardIndex);
             } else {
@@ -1673,10 +1676,6 @@ public class VerifyCardDataTest {
                 // TODO: Remove when MtgJson updated
                 // workaround for reversible omen cards e.g. Bloomvine Regent // Claim Territory // Bloomvine Regent
                 // both sides have main card info
-                return;
-            }
-            if (card instanceof AdventureCard && card.isLand()) {
-                // temporary until scryfall fixes the mana cost issue for adventure lands
                 return;
             }
             checkAll(card, ref, cardIndex);
