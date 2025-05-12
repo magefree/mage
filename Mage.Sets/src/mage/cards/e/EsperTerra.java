@@ -43,6 +43,9 @@ public final class EsperTerra extends CardImpl {
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
+        this.nightCard = true;
+        this.color.setRed(true);
+        this.color.setGreen(true);
 
         // (As this Saga enters and after your draw step, add a lore counter.)
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_IV);
