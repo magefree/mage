@@ -8,6 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -49,6 +50,7 @@ public final class JillShivasDominant extends CardImpl {
         this.addAbility(ability);
 
         // {3}{U}{U}, {T}: Exile Jill, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
+        this.addAbility(new TransformAbility());
         ability = new ActivateAsSorceryActivatedAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED), new ManaCostsImpl<>("{3}{U}{U}")
         );
