@@ -29,6 +29,11 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Aerith Gainsborough", 374, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 423, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 519, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ardyn, the Usurper", 315, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ardyn, the Usurper", 379, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ardyn, the Usurper", 444, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ardyn, the Usurper", 524, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ardyn, the Usurper", 89, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Mage's Rod", 90, Rarity.COMMON, mage.cards.b.BlackMagesRod.class));
         cards.add(new SetCardInfo("Chaos, the Endless", 221, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos, the Endless", 486, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
