@@ -36,6 +36,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Secret Rendezvous", 218, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Rendezvous", 219, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Secret Rendezvous", 253, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sephiroth, Fallen Hero", 182, Rarity.RARE, mage.cards.s.SephirothFallenHero.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sephiroth, Fallen Hero", 92, Rarity.RARE, mage.cards.s.SephirothFallenHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Herald of Hope", 186, Rarity.MYTHIC, mage.cards.t.TerraHeraldOfHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Herald of Hope", 204, Rarity.MYTHIC, mage.cards.t.TerraHeraldOfHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Herald of Hope", 212, Rarity.MYTHIC, mage.cards.t.TerraHeraldOfHope.class, NON_FULL_USE_VARIOUS));

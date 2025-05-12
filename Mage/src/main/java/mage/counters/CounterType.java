@@ -38,6 +38,7 @@ public enum CounterType {
     BURDEN("burden"),
     CAGE("cage"),
     CARRION("carrion"),
+    CELL("cell"),
     CHARGE("charge"),
     CHIP("chip"),
     CHORUS("chorus"),
