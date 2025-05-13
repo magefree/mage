@@ -340,5 +340,6 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Y'shtola, Night's Blessed", 215, Rarity.MYTHIC, mage.cards.y.YshtolaNightsBlessed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola, Night's Blessed", 226, Rarity.MYTHIC, mage.cards.y.YshtolaNightsBlessed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola, Night's Blessed", 7, Rarity.MYTHIC, mage.cards.y.YshtolaNightsBlessed.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna's Decision", 125, Rarity.RARE, mage.cards.y.YunasDecision.class, NON_FULL_USE_VARIOUS));
     }
 }
