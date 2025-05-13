@@ -289,6 +289,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Indulgence", 366, Rarity.UNCOMMON, mage.cards.t.TalismanOfIndulgence.class));
         cards.add(new SetCardInfo("Talisman of Progress", 367, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Tangled Islet", 434, Rarity.COMMON, mage.cards.t.TangledIslet.class));
+        cards.add(new SetCardInfo("Tataru Taru", 138, Rarity.RARE, mage.cards.t.TataruTaru.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tataru Taru", 30, Rarity.RARE, mage.cards.t.TataruTaru.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple of Enlightenment", 435, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
         cards.add(new SetCardInfo("Temple of Mystery", 436, Rarity.RARE, mage.cards.t.TempleOfMystery.class));
         cards.add(new SetCardInfo("Temple of Plenty", 437, Rarity.RARE, mage.cards.t.TempleOfPlenty.class));
