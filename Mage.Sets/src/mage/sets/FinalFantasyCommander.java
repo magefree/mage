@@ -107,6 +107,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Duskshell Crawler", 301, Rarity.COMMON, mage.cards.d.DuskshellCrawler.class));
         cards.add(new SetCardInfo("Elena, Turk Recruit", 18, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class));
         cards.add(new SetCardInfo("Endless Detour", 324, Rarity.RARE, mage.cards.e.EndlessDetour.class));
+        cards.add(new SetCardInfo("Espers to Magicite", 43, Rarity.RARE, mage.cards.e.EspersToMagicite.class));
         cards.add(new SetCardInfo("Everflowing Chalice", 343, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 389, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 390, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
