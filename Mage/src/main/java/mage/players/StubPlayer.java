@@ -42,7 +42,9 @@ public class StubPlayer extends PlayerImpl {
     public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         if (target instanceof TargetPlayer) {
             for (Player player : game.getPlayers().values()) {
-                if (player.getId().equals(getId()) && target.canTarget(getId(), game)) {
+                if (player.getId().equals(getId())
+                        && target.canTarget(getId(), game)
+                        && !target.contains(getId())) {
                     target.add(player.getId(), game);
                     return true;
                 }

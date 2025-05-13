@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class WorldgorgerDragonTest extends CardTestPlayerBase {
@@ -83,62 +82,48 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         // When Staunch Defenders enters the battlefield, you gain 4 life.
         addCard(Zone.BATTLEFIELD, playerA, "Staunch Defenders", 1);
 
+        // 1 cast and resolve
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Worldgorger Dragon");
+        setChoice(playerA, "Worldgorger Dragon"); // attach
+        setChoice(playerA, "When {this} enters, if it's"); // x2 triggers (gain life from Staunch Defenders and etb from Animate Dead)
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3);
+
+        // 2 etb and attach
         setChoice(playerA, "Worldgorger Dragon");
         setChoice(playerA, "When {this} enters, if it's");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3);
 
+        // 3 etb and attach
         setChoice(playerA, "Worldgorger Dragon");
         setChoice(playerA, "When {this} enters, if it's");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3);
 
+        // 4 etb and attach
         setChoice(playerA, "Worldgorger Dragon");
         setChoice(playerA, "When {this} enters, if it's");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3);
 
+        // 5 etb and attach
+        setChoice(playerA, "Worldgorger Dragon");
+        setChoice(playerA, false); // no draws on infinite loop
+        setChoice(playerA, "When {this} enters, if it's");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3);
+
+        // 6 etb and attach
         setChoice(playerA, "Worldgorger Dragon");
         setChoice(playerA, "When {this} enters, if it's");
-        setChoice(playerA, false);
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3);
 
-        setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters, if it's");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3 - 1);
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-
-        setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters, if it's");
-
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-
-        setChoice(playerA, "Worldgorger Dragon");
-        setChoice(playerA, "When {this} enters, if it's");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Geyser", playerB, 22);
+        // cast spell and stop infinite loop after 20+ mana in pool
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Geyser", playerB, 20);
         setChoice(playerA, "X=20");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 44);
+        assertLife(playerA, 20 + 5 * 4);
         assertLife(playerB, 0);
 
         assertGraveyardCount(playerA, "Volcanic Geyser", 1);
@@ -154,12 +139,11 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
      * you choose to skip or pick a different creature, it always returns the
      * first creature you picked. Kind of hard to explain, but here's how to
      * reproduce:
-     *
+     * <p>
      * 1) Cast Animate Dead, targeting Worldgorger Dragon 2) Worldgorger Dragon
      * will exile Animate Dead, killing the dragon and returning the permanents
      * 3) Select Worldgorger again 4) Step 2 repeats 5) Attempt to select a
      * different creature. Worldgorger Dragon is returned instead.
-     *
      */
     @Test
     public void testWithAnimateDeadDifferentTargets() {

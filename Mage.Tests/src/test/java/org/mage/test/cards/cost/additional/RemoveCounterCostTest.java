@@ -3,6 +3,7 @@ package org.mage.test.cards.cost.additional;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -22,6 +23,7 @@ public class RemoveCounterCostTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, Remove two +1/+1 counters");
         setChoice(playerA, "Novijen Sages"); // counters to remove
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
         setChoice(playerA, "X=2"); // counters to remove
 
         setStrictChooseMode(true);

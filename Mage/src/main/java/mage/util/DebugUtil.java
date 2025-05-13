@@ -17,6 +17,11 @@ public class DebugUtil {
     public static boolean AI_ENABLE_DEBUG_MODE = false;
     public static boolean AI_SHOW_TARGET_OPTIMIZATION_LOGS = false; // works with target amount
 
+    // GAME
+    // print detail target info for activate/cast/trigger only, not a single choose dialog
+    // can be useful to debug unit tests, auto-choose or AI
+    public static boolean GAME_SHOW_CHOOSE_TARGET_LOGS = false;
+
     // cards basic (card panels)
     public static boolean GUI_CARD_DRAW_OUTER_BORDER = false;
     public static boolean GUI_CARD_DRAW_INNER_BORDER = false;

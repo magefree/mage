@@ -672,6 +672,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean priority(Game game);
 
+    /**
+     * Warning, any choose and chooseTarget dialogs must return false to stop choosing, e.g. no more possible targets
+     * Same logic as "something changes" in "apply"
+     */
     boolean choose(Outcome outcome, Target target, Ability source, Game game);
 
     boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options);

@@ -160,7 +160,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
                         }
                         newAbility.adjustTargets(game);
                         // add the different possible target option for the specific X value
-                        if (!newAbility.getTargets().getUnchosen(game).isEmpty()) {
+                        if (newAbility.getTargets().getNextUnchosen(game) != null) {
                             addTargetOptions(options, newAbility, targetNum, game);
                         }
                     }

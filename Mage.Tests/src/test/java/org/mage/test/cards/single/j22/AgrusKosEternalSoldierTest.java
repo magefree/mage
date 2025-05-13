@@ -3,6 +3,7 @@ package org.mage.test.cards.single.j22;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -80,13 +81,17 @@ public class AgrusKosEternalSoldierTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Smoldering Werewolf");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Smoldering Werewolf");
-        setChoice(playerA, "When {this} enters, it deals");
-        addTarget(playerA, agrus);
-        addTarget(playerA, agrus);
-        setChoice(playerB, true); // gain life
-        setChoice(playerB, "Whenever {this} becomes");
-        setChoice(playerB, true); // pay to copy
-        setChoice(playerB, true); // pay to copy
+        setChoice(playerB, true); // gain life on cast
+        //
+        setChoice(playerA, "When {this} enters, it deals"); // x2 triggers from Panharmonicon
+        addTarget(playerA, agrus); // x1 trigger
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // x1 trigger
+        addTarget(playerA, agrus); // x2 trigger
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // x2 trigger
+        //
+        setChoice(playerB, "Whenever {this} becomes"); // x2 triggers from Panharmonicon
+        setChoice(playerB, true); // x1 pay to copy
+        setChoice(playerB, true); // x2 pay to copy
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

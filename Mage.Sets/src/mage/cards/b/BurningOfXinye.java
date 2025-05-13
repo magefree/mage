@@ -82,15 +82,12 @@ class BurningOfXinyeEffect extends OneShotEffect {
 
         Target target = new TargetControlledPermanent(amount, amount, filter, true);
         if (amount > 0 && target.canChoose(player.getId(), source, game)) {
-            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
-                player.choose(Outcome.DestroyPermanent, target, source, game);
-            }
-
-            for (UUID targetId : target.getTargets()) {
-                Permanent permanent = game.getPermanent(targetId);
-
-                if (permanent != null) {
-                    abilityApplied |= permanent.destroy(source, game, false);
+            if (player.choose(Outcome.DestroyPermanent, target, source, game)) {
+                for (UUID targetId : target.getTargets()) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null) {
+                        abilityApplied |= permanent.destroy(source, game, false);
+                    }
                 }
             }
         }

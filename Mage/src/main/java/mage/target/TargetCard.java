@@ -50,6 +50,12 @@ public class TargetCard extends TargetObject {
         return this.filter;
     }
 
+    @Override
+    public TargetCard withNotTarget(boolean notTarget) {
+        super.withNotTarget(notTarget);
+        return this;
+    }
+
     /**
      * Checks if there are enough {@link Card cards} in the appropriate zone that the player can choose from among them
      * or if they are autochosen since there are fewer than the minimum number.

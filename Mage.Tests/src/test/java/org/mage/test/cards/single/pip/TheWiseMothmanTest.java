@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -37,6 +38,7 @@ public class TheWiseMothmanTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}");
         addTarget(playerA, mothman + "^Grizzly Bears"); // up to three targets => choosing 2
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
