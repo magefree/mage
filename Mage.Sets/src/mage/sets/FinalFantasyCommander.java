@@ -204,6 +204,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rugged Prairie", 417, Rarity.RARE, mage.cards.r.RuggedPrairie.class));
         cards.add(new SetCardInfo("Ruin Grinder", 297, Rarity.RARE, mage.cards.r.RuinGrinder.class));
         cards.add(new SetCardInfo("Ruinous Ultimatum", 329, Rarity.RARE, mage.cards.r.RuinousUltimatum.class));
+        cards.add(new SetCardInfo("SOLDIER Military Program", 25, Rarity.RARE, mage.cards.s.SOLDIERMilitaryProgram.class));
         cards.add(new SetCardInfo("Sabin, Master Monk", 57, Rarity.RARE, mage.cards.s.SabinMasterMonk.class));
         cards.add(new SetCardInfo("Sacred Peaks", 418, Rarity.COMMON, mage.cards.s.SacredPeaks.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 419, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
