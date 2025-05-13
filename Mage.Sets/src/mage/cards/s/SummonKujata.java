@@ -26,7 +26,7 @@ import java.util.UUID;
 public final class SummonKujata extends CardImpl {
 
     public SummonKujata(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "5R");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{5}{R}");
 
         this.subtype.add(SubType.SAGA);
         this.subtype.add(SubType.OX);
@@ -62,7 +62,6 @@ public final class SummonKujata extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-
     }
 
     private SummonKujata(final SummonKujata card) {
