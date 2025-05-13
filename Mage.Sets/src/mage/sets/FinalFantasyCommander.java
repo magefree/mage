@@ -264,6 +264,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Torrential Gearhulk", 272, Rarity.RARE, mage.cards.t.TorrentialGearhulk.class));
         cards.add(new SetCardInfo("Tragic Arrogance", 258, Rarity.RARE, mage.cards.t.TragicArrogance.class));
         cards.add(new SetCardInfo("Trailblazer's Boots", 370, Rarity.UNCOMMON, mage.cards.t.TrailblazersBoots.class));
+        cards.add(new SetCardInfo("Umaro, Raging Yeti", 63, Rarity.RARE, mage.cards.u.UmaroRagingYeti.class));
         cards.add(new SetCardInfo("Underground River", 439, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
         cards.add(new SetCardInfo("Unfinished Business", 259, Rarity.RARE, mage.cards.u.UnfinishedBusiness.class));
         cards.add(new SetCardInfo("Vandalblast", 298, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
