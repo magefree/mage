@@ -88,6 +88,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Crux of Fate", 275, Rarity.RARE, mage.cards.c.CruxOfFate.class));
         cards.add(new SetCardInfo("Cultivate", 300, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cut a Deal", 238, Rarity.UNCOMMON, mage.cards.c.CutADeal.class));
+        cards.add(new SetCardInfo("Cyan, Vengeful Samurai", 16, Rarity.RARE, mage.cards.c.CyanVengefulSamurai.class));
         cards.add(new SetCardInfo("Damning Verdict", 239, Rarity.RARE, mage.cards.d.DamningVerdict.class));
         cards.add(new SetCardInfo("Darksteel Plate", 342, Rarity.RARE, mage.cards.d.DarksteelPlate.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 384, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
