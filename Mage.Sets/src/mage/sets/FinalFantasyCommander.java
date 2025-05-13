@@ -34,6 +34,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Archaeomancer's Map", 230, Rarity.RARE, mage.cards.a.ArchaeomancersMap.class));
         cards.add(new SetCardInfo("Archfiend of Depravity", 273, Rarity.RARE, mage.cards.a.ArchfiendOfDepravity.class));
         cards.add(new SetCardInfo("Archmage Emeritus", 261, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class));
+        cards.add(new SetCardInfo("Ardbert, Warrior of Darkness", 77, Rarity.RARE, mage.cards.a.ArdbertWarriorOfDarkness.class));
         cards.add(new SetCardInfo("Armory Automaton", 336, Rarity.RARE, mage.cards.a.ArmoryAutomaton.class));
         cards.add(new SetCardInfo("Ash Barrens", 374, Rarity.COMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Auron, Venerated Guardian", 10, Rarity.RARE, mage.cards.a.AuronVeneratedGuardian.class));
