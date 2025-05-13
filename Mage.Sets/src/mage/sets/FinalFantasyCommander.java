@@ -134,6 +134,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Harmonize", 308, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Hellkite Tyrant", 295, Rarity.RARE, mage.cards.h.HellkiteTyrant.class));
         cards.add(new SetCardInfo("Herald's Horn", 228, Rarity.RARE, mage.cards.h.HeraldsHorn.class));
+        cards.add(new SetCardInfo("Hermes, Overseer of Elpis", 36, Rarity.RARE, mage.cards.h.HermesOverseerOfElpis.class));
         cards.add(new SetCardInfo("Hero's Blade", 345, Rarity.UNCOMMON, mage.cards.h.HerosBlade.class));
         cards.add(new SetCardInfo("Hero's Heirloom", 346, Rarity.UNCOMMON, mage.cards.h.HerosHeirloom.class));
         cards.add(new SetCardInfo("High Market", 402, Rarity.RARE, mage.cards.h.HighMarket.class));
