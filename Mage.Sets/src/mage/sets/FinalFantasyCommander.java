@@ -149,6 +149,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furious Rise", 294, Rarity.UNCOMMON, mage.cards.f.FuriousRise.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 397, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Game Trail", 398, Rarity.RARE, mage.cards.g.GameTrail.class));
+        cards.add(new SetCardInfo("General Leo Cristophe", 135, Rarity.RARE, mage.cards.g.GeneralLeoCristophe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("General Leo Cristophe", 20, Rarity.RARE, mage.cards.g.GeneralLeoCristophe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Generous Patron", 305, Rarity.RARE, mage.cards.g.GenerousPatron.class));
         cards.add(new SetCardInfo("Geothermal Bog", 399, Rarity.COMMON, mage.cards.g.GeothermalBog.class));
         cards.add(new SetCardInfo("Glacial Fortress", 400, Rarity.RARE, mage.cards.g.GlacialFortress.class));
