@@ -131,6 +131,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Exotic Orchard", 390, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explorer's Scope", 344, Rarity.COMMON, mage.cards.e.ExplorersScope.class));
         cards.add(new SetCardInfo("Exsanguinate", 276, Rarity.UNCOMMON, mage.cards.e.Exsanguinate.class));
+        cards.add(new SetCardInfo("Eye of Nidhogg", 115, Rarity.RARE, mage.cards.e.EyeOfNidhogg.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Eye of Nidhogg", 44, Rarity.RARE, mage.cards.e.EyeOfNidhogg.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Farewell", 242, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Farseek", 302, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fathom Mage", 325, Rarity.RARE, mage.cards.f.FathomMage.class));
