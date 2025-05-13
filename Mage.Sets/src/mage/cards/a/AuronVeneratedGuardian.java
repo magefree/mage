@@ -58,7 +58,7 @@ public final class AuronVeneratedGuardian extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(
                 ability, new PutCountersSourceCost(CounterType.P1P1.createInstance())
                 .setText("put a +1/+1 counter on it"), "", false
-        )));
+        )).withFlavorWord("Shooting Star"));
     }
 
     private AuronVeneratedGuardian(final AuronVeneratedGuardian card) {

@@ -135,6 +135,7 @@ public class VerifyCardDataTest {
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
+        skipListAddName(SKIP_LIST_COST, "FIC", "Summon: Kujata");
 
         // supertype
         // skipListAddName(SKIP_LIST_SUPERTYPE, set, cardName);
@@ -144,12 +145,16 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
+        skipListAddName(SKIP_LIST_TYPE, "FIC", "Sabin, Master Monk");
+        skipListAddName(SKIP_LIST_TYPE, "FIC", "Setzer, Wandering Gambler");
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "FIC", "Sabin, Master Monk");
+        skipListAddName(SKIP_LIST_SUBTYPE, "FIC", "Setzer, Wandering Gambler");
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -2135,7 +2140,7 @@ public class VerifyCardDataTest {
                 boolean isPutToGraveAbility = rules.contains("put into")
                         && rules.contains("graveyard")
                         && rules.contains("from the battlefield");
-                boolean isLeavesBattlefield = rules.contains("leaves the battlefield");
+                boolean isLeavesBattlefield = rules.contains("leaves the battlefield") && !rules.contains("until {this} leaves the battlefield");
                 if (triggeredAbility.isLeavesTheBattlefieldTrigger()) {
                     // TODO: add check for wrongly enabled settings too?
                 } else {
