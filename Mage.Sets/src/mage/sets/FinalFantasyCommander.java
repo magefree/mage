@@ -63,6 +63,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chasm Skulker", 262, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
         cards.add(new SetCardInfo("Chocobo Knights", 12, Rarity.RARE, mage.cards.c.ChocoboKnights.class));
         cards.add(new SetCardInfo("Choked Estuary", 379, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
+        cards.add(new SetCardInfo("Cid, Freeflier Pilot", 13, Rarity.RARE, mage.cards.c.CidFreeflierPilot.class));
         cards.add(new SetCardInfo("Cinder Glade", 380, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Cleansing Nova", 235, Rarity.RARE, mage.cards.c.CleansingNova.class));
         cards.add(new SetCardInfo("Clever Concealment", 236, Rarity.RARE, mage.cards.c.CleverConcealment.class));
