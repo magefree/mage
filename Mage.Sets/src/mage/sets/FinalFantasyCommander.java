@@ -42,6 +42,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Authority of the Consuls", 232, Rarity.RARE, mage.cards.a.AuthorityOfTheConsuls.class));
         cards.add(new SetCardInfo("Baleful Strix", 318, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Bane of Progress", 299, Rarity.RARE, mage.cards.b.BaneOfProgress.class));
+        cards.add(new SetCardInfo("Barret, Avalanche Leader", 79, Rarity.RARE, mage.cards.b.BarretAvalancheLeader.class));
         cards.add(new SetCardInfo("Bastion Protector", 233, Rarity.RARE, mage.cards.b.BastionProtector.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 274, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
         cards.add(new SetCardInfo("Battlefield Forge", 375, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
