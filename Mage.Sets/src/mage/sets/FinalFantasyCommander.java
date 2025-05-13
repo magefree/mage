@@ -221,6 +221,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stitcher's Supplier", 287, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Sublime Epiphany", 271, Rarity.RARE, mage.cards.s.SublimeEpiphany.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 427, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
+        cards.add(new SetCardInfo("Summon: Good King Mog XII", 26, Rarity.RARE, mage.cards.s.SummonGoodKingMogXII.class));
         cards.add(new SetCardInfo("Sun Titan", 254, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 428, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 429, Rarity.RARE, mage.cards.s.SunkenHollow.class));
