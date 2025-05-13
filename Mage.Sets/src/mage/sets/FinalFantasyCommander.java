@@ -231,6 +231,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sulfurous Springs", 427, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
         cards.add(new SetCardInfo("Summon: Good King Mog XII", 26, Rarity.RARE, mage.cards.s.SummonGoodKingMogXII.class));
         cards.add(new SetCardInfo("Summon: Ixion", 27, Rarity.RARE, mage.cards.s.SummonIxion.class));
+        cards.add(new SetCardInfo("Summon: Kujata", 61, Rarity.RARE, mage.cards.s.SummonKujata.class));
         cards.add(new SetCardInfo("Summoning Materia", 72, Rarity.RARE, mage.cards.s.SummoningMateria.class));
         cards.add(new SetCardInfo("Sun Titan", 254, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 428, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
