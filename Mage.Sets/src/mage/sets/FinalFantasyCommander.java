@@ -71,6 +71,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cleansing Nova", 235, Rarity.RARE, mage.cards.c.CleansingNova.class));
         cards.add(new SetCardInfo("Clever Concealment", 236, Rarity.RARE, mage.cards.c.CleverConcealment.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 381, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
+        cards.add(new SetCardInfo("Cloud's Limit Break", 14, Rarity.RARE, mage.cards.c.CloudsLimitBreak.class));
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 168, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 2, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 202, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
