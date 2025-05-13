@@ -151,6 +151,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Isolated Chapel", 405, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Jungle Shrine", 406, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
         cards.add(new SetCardInfo("Key to the City", 348, Rarity.RARE, mage.cards.k.KeyToTheCity.class));
+        cards.add(new SetCardInfo("Krile Baldesion", 86, Rarity.RARE, mage.cards.k.KrileBaldesion.class));
         cards.add(new SetCardInfo("Legions to Ashes", 326, Rarity.RARE, mage.cards.l.LegionsToAshes.class));
         cards.add(new SetCardInfo("Lethal Scheme", 277, Rarity.RARE, mage.cards.l.LethalScheme.class));
         cards.add(new SetCardInfo("Lightning Greaves", 349, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
