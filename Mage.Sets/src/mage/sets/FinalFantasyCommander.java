@@ -49,6 +49,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bred for the Hunt", 321, Rarity.UNCOMMON, mage.cards.b.BredForTheHunt.class));
         cards.add(new SetCardInfo("Bronze Guardian", 234, Rarity.RARE, mage.cards.b.BronzeGuardian.class));
         cards.add(new SetCardInfo("Brushland", 377, Rarity.RARE, mage.cards.b.Brushland.class));
+        cards.add(new SetCardInfo("Bugenhagen, Wise Elder", 66, Rarity.RARE, mage.cards.b.BugenhagenWiseElder.class));
         cards.add(new SetCardInfo("Canopy Vista", 378, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Celes, Rune Knight", 1, Rarity.MYTHIC, mage.cards.c.CelesRuneKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Celes, Rune Knight", 167, Rarity.MYTHIC, mage.cards.c.CelesRuneKnight.class, NON_FULL_USE_VARIOUS));
