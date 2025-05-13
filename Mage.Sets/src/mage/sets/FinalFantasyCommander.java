@@ -175,6 +175,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Professional Face-Breaker", 296, Rarity.RARE, mage.cards.p.ProfessionalFaceBreaker.class));
         cards.add(new SetCardInfo("Promise of Loyalty", 249, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Propaganda", 268, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
+        cards.add(new SetCardInfo("Protection Magic", 24, Rarity.RARE, mage.cards.p.ProtectionMagic.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 269, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Puresteel Paladin", 250, Rarity.RARE, mage.cards.p.PuresteelPaladin.class));
         cards.add(new SetCardInfo("Radiant Grove", 414, Rarity.COMMON, mage.cards.r.RadiantGrove.class));
