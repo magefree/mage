@@ -304,6 +304,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terra, Herald of Hope", 212, Rarity.MYTHIC, mage.cards.t.TerraHeraldOfHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Herald of Hope", 223, Rarity.MYTHIC, mage.cards.t.TerraHeraldOfHope.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Herald of Hope", 4, Rarity.MYTHIC, mage.cards.t.TerraHeraldOfHope.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thancred Waters", 139, Rarity.RARE, mage.cards.t.ThancredWaters.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thancred Waters", 31, Rarity.RARE, mage.cards.t.ThancredWaters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thought Vessel", 368, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Three Visits", 315, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
         cards.add(new SetCardInfo("Tifa, Martial Artist", 188, Rarity.MYTHIC, mage.cards.t.TifaMartialArtist.class, NON_FULL_USE_VARIOUS));
