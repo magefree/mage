@@ -1,11 +1,12 @@
-package mage.cards.t;
+package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.BlitzAbility;
+import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -16,43 +17,48 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class TenaciousUnderdog extends CardImpl {
+public final class SabinMasterMonk extends CardImpl {
 
-    public TenaciousUnderdog(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
+    public SabinMasterMonk(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
 
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WARRIOR);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        this.subtype.add(SubType.NOBLE);
+        this.subtype.add(SubType.MONK);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Blitz—{2}{B}{B}, Pay 2 life.
-        Ability ability = new BlitzAbility(this, "{2}{B}{B}");
-        ability.addCost(new PayLifeCost(2));
+        // Double strike
+        this.addAbility(DoubleStrikeAbility.getInstance());
+
+        // Blitz--{2}{R}{R}, Discard a card.
+        Ability ability = new BlitzAbility(this, "{2}{R}{R}");
+        ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
 
-        // You may cast Tenacious Underdog from your graveyard using its blitz ability.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TenaciousUnderdogEffect()));
+        // You may cast this card from your graveyard using its blitz ability.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SabinMasterMonkEffect()));
     }
 
-    private TenaciousUnderdog(final TenaciousUnderdog card) {
+    private SabinMasterMonk(final SabinMasterMonk card) {
         super(card);
     }
 
     @Override
-    public TenaciousUnderdog copy() {
-        return new TenaciousUnderdog(this);
+    public SabinMasterMonk copy() {
+        return new SabinMasterMonk(this);
     }
 }
 
-class TenaciousUnderdogEffect extends AsThoughEffectImpl {
+class SabinMasterMonkEffect extends AsThoughEffectImpl {
 
-    TenaciousUnderdogEffect() {
+    SabinMasterMonkEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
         staticText = "you may cast this card from your graveyard using its blitz ability";
     }
 
-    private TenaciousUnderdogEffect(final TenaciousUnderdogEffect effect) {
+    private SabinMasterMonkEffect(final SabinMasterMonkEffect effect) {
         super(effect);
     }
 
@@ -62,8 +68,8 @@ class TenaciousUnderdogEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public TenaciousUnderdogEffect copy() {
-        return new TenaciousUnderdogEffect(this);
+    public SabinMasterMonkEffect copy() {
+        return new SabinMasterMonkEffect(this);
     }
 
     @Override
