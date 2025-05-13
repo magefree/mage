@@ -203,6 +203,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sephiroth, Fallen Hero", 182, Rarity.RARE, mage.cards.s.SephirothFallenHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Fallen Hero", 92, Rarity.RARE, mage.cards.s.SephirothFallenHero.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sepulchral Primordial", 284, Rarity.RARE, mage.cards.s.SepulchralPrimordial.class));
+        cards.add(new SetCardInfo("Setzer, Wandering Gambler", 93, Rarity.RARE, mage.cards.s.SetzerWanderingGambler.class));
         cards.add(new SetCardInfo("Shadowblood Ridge", 421, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shineshadow Snarl", 422, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class));
         cards.add(new SetCardInfo("Skullclamp", 355, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
