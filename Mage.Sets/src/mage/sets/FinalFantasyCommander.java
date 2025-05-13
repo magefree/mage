@@ -308,6 +308,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thancred Waters", 31, Rarity.RARE, mage.cards.t.ThancredWaters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Falcon, Airship Restored", 116, Rarity.RARE, mage.cards.t.TheFalconAirshipRestored.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Falcon, Airship Restored", 45, Rarity.RARE, mage.cards.t.TheFalconAirshipRestored.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Warring Triad", 193, Rarity.RARE, mage.cards.t.TheWarringTriad.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Warring Triad", 99, Rarity.RARE, mage.cards.t.TheWarringTriad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thought Vessel", 368, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Three Visits", 315, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
         cards.add(new SetCardInfo("Tifa, Martial Artist", 188, Rarity.MYTHIC, mage.cards.t.TifaMartialArtist.class, NON_FULL_USE_VARIOUS));
