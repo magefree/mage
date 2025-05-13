@@ -36,6 +36,7 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Archmage Emeritus", 261, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class));
         cards.add(new SetCardInfo("Armory Automaton", 336, Rarity.RARE, mage.cards.a.ArmoryAutomaton.class));
         cards.add(new SetCardInfo("Ash Barrens", 374, Rarity.COMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Auron, Venerated Guardian", 10, Rarity.RARE, mage.cards.a.AuronVeneratedGuardian.class));
         cards.add(new SetCardInfo("Austere Command", 231, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Authority of the Consuls", 232, Rarity.RARE, mage.cards.a.AuthorityOfTheConsuls.class));
         cards.add(new SetCardInfo("Baleful Strix", 318, Rarity.RARE, mage.cards.b.BalefulStrix.class));
