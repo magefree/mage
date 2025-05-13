@@ -45,6 +45,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Auron, Venerated Guardian", 130, Rarity.RARE, mage.cards.a.AuronVeneratedGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Austere Command", 231, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Authority of the Consuls", 232, Rarity.RARE, mage.cards.a.AuthorityOfTheConsuls.class));
+        cards.add(new SetCardInfo("Avalanche of Sector 7", 150, Rarity.RARE, mage.cards.a.AvalancheOfSector7.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Avalanche of Sector 7", 53, Rarity.RARE, mage.cards.a.AvalancheOfSector7.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baleful Strix", 318, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Bane of Progress", 299, Rarity.RARE, mage.cards.b.BaneOfProgress.class));
         cards.add(new SetCardInfo("Barret, Avalanche Leader", 166, Rarity.RARE, mage.cards.b.BarretAvalancheLeader.class, NON_FULL_USE_VARIOUS));
