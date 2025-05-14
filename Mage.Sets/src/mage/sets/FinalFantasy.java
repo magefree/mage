@@ -126,6 +126,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Laughing Mad", 585, Rarity.COMMON, mage.cards.l.LaughingMad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning, Security Sergeant", 462, Rarity.RARE, mage.cards.l.LightningSecuritySergeant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning, Security Sergeant", 560, Rarity.RARE, mage.cards.l.LightningSecuritySergeant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Magitek Scythe", 562, Rarity.RARE, mage.cards.m.MagitekScythe.class));
         cards.add(new SetCardInfo("Malboro", 106, Rarity.COMMON, mage.cards.m.Malboro.class));
         cards.add(new SetCardInfo("Matoya, Archon Elder", 439, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Matoya, Archon Elder", 62, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
