@@ -241,6 +241,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ultimecia, Temporal Threat", 556, Rarity.RARE, mage.cards.u.UltimeciaTemporalThreat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Time Sorceress", 247, Rarity.UNCOMMON, mage.cards.u.UltimeciaTimeSorceress.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Time Sorceress", 513, Rarity.UNCOMMON, mage.cards.u.UltimeciaTimeSorceress.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Undercity Dire Rat", 123, Rarity.COMMON, mage.cards.u.UndercityDireRat.class));
         cards.add(new SetCardInfo("Valkyrie Aerial Unit", 84, Rarity.UNCOMMON, mage.cards.v.ValkyrieAerialUnit.class));
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 211, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 392, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
