@@ -1,13 +1,14 @@
 package mage.cards.t;
 
+import java.util.Optional;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
@@ -19,7 +20,7 @@ public final class TranceKujaFateDefied extends CardImpl {
 
     public TranceKujaFateDefied(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.WIZARD);
@@ -70,7 +71,9 @@ class TranceKujaFateDefiedEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return game.getControllerId(event.getSourceId()).equals(source.getControllerId())
-                && game.getObject(event.getSourceId()).hasSubtype(SubType.WIZARD, game);
+                && Optional.ofNullable(game.getObject(event.getSourceId()))
+                .map(object -> object.hasSubtype(SubType.WIZARD, game))
+                .orElse(false);
     }
 
     @Override
