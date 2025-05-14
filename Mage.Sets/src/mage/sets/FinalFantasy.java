@@ -247,6 +247,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 537, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 125, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 383, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Warrior's Sword", 169, Rarity.COMMON, mage.cards.w.WarriorsSword.class));
         cards.add(new SetCardInfo("Wastes", 309, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("White Auracite", 41, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("White Auracite", 579, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
