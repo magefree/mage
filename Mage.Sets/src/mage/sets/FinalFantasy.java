@@ -29,6 +29,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Aerith Gainsborough", 4, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 423, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 519, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Al Bhed Salvagers", 88, Rarity.UNCOMMON, mage.cards.a.AlBhedSalvagers.class));
         cards.add(new SetCardInfo("Ardyn, the Usurper", 315, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ardyn, the Usurper", 379, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ardyn, the Usurper", 444, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
