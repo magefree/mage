@@ -41,14 +41,14 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Beatrix, Loyal General", 426, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 554, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Mage's Rod", 90, Rarity.COMMON, mage.cards.b.BlackMagesRod.class));
-        cards.add(new SetCardInfo("Cecil, Dark Knight", 91, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 380, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 445, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 525, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 91, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cecil, Dark Knight", 91, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 380, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 445, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 525, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cecil, Redeemed Paladin", 91, Rarity.RARE, mage.cards.c.CecilRedeemedPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos, the Endless", 221, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos, the Endless", 486, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 216, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
@@ -202,7 +202,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 433, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 1, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 356, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Summon: Leviathan", 361, Rarity.RARE, mage.cards.s.SummonLeviathan.class));
+        cards.add(new SetCardInfo("Summon: Leviathan", 361, Rarity.RARE, mage.cards.s.SummonLeviathan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Leviathan", 77, Rarity.RARE, mage.cards.s.SummonLeviathan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Primal Odin", 121, Rarity.RARE, mage.cards.s.SummonPrimalOdin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Primal Odin", 365, Rarity.RARE, mage.cards.s.SummonPrimalOdin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Shiva", 362, Rarity.UNCOMMON, mage.cards.s.SummonShiva.class, NON_FULL_USE_VARIOUS));
