@@ -1,18 +1,10 @@
 package mage.cards.c;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.game.Controllable;
-import mage.game.Game;
-import mage.players.Player;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.LessThanHalfStartingLifeTotalCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -23,7 +15,14 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.game.Controllable;
+import mage.game.Game;
+import mage.players.Player;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author balazskristof
@@ -32,7 +31,7 @@ public final class CecilDarkKnight extends CardImpl {
 
     public CecilDarkKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
@@ -48,10 +47,10 @@ public final class CecilDarkKnight extends CardImpl {
         this.addAbility(new TransformAbility());
         Ability ability = new DealsDamageSourceTriggeredAbility(new LoseLifeSourceControllerEffect(SavedDamageValue.MUCH), false).withFlavorWord("Darkness");
         ability.addEffect(new ConditionalOneShotEffect(
-            new UntapSourceEffect(),
-            CecilDarkKnightCondition.instance
+                new UntapSourceEffect(),
+                CecilDarkKnightCondition.instance
         ).addEffect(
-            (OneShotEffect) new TransformSourceEffect(true).concatBy("and")
+                (OneShotEffect) new TransformSourceEffect(true).concatBy("and")
         ).concatBy("Then"));
         this.addAbility(ability);
     }
@@ -72,12 +71,12 @@ enum CecilDarkKnightCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return Optional
-            .ofNullable(source)
-            .map(Controllable::getControllerId)
-            .map(game::getPlayer)
-            .map(Player::getLife)
-            .map(life -> life <= game.getStartingLife() / 2)
-            .orElse(false);
+                .ofNullable(source)
+                .map(Controllable::getControllerId)
+                .map(game::getPlayer)
+                .map(Player::getLife)
+                .map(life -> life <= game.getStartingLife() / 2)
+                .orElse(false);
     }
 
     @Override
