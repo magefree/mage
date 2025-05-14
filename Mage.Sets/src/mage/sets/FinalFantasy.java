@@ -157,6 +157,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 295, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 296, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 572, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Rabanastre, Royal City", 287, Rarity.COMMON, mage.cards.r.RabanastreRoyalCity.class));
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "381b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "446b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "526b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
