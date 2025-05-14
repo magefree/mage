@@ -146,6 +146,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Sazh's Chocobo", 200, Rarity.UNCOMMON, mage.cards.s.SazhsChocobo.class));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 505, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 553, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Seymour Flux", 452, Rarity.RARE, mage.cards.s.SeymourFlux.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Seymour Flux", 558, Rarity.RARE, mage.cards.s.SeymourFlux.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shantotto, Tactician Magician", 241, Rarity.UNCOMMON, mage.cards.s.ShantottoTacticianMagician.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shantotto, Tactician Magician", 507, Rarity.UNCOMMON, mage.cards.s.ShantottoTacticianMagician.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shinryu, Transcendent Rival", 127, Rarity.RARE, mage.cards.s.ShinryuTranscendentRival.class, NON_FULL_USE_VARIOUS));
