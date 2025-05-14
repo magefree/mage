@@ -134,6 +134,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Jill, Shiva's Dominant", 438, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jill, Shiva's Dominant", 523, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jill, Shiva's Dominant", 58, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Judgment Bolt", 559, Rarity.RARE, mage.cards.j.JudgmentBolt.class));
         cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 343, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Laughing Mad", 143, Rarity.COMMON, mage.cards.l.LaughingMad.class, NON_FULL_USE_VARIOUS));
