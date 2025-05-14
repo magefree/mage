@@ -154,6 +154,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Generous Patron", 305, Rarity.RARE, mage.cards.g.GenerousPatron.class));
         cards.add(new SetCardInfo("Geothermal Bog", 399, Rarity.COMMON, mage.cards.g.GeothermalBog.class));
         cards.add(new SetCardInfo("Glacial Fortress", 400, Rarity.RARE, mage.cards.g.GlacialFortress.class));
+        cards.add(new SetCardInfo("Gogo, Mysterious Mime", 153, Rarity.RARE, mage.cards.g.GogoMysteriousMime.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gogo, Mysterious Mime", 56, Rarity.RARE, mage.cards.g.GogoMysteriousMime.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grateful Apparition", 244, Rarity.UNCOMMON, mage.cards.g.GratefulApparition.class));
         cards.add(new SetCardInfo("Graven Cairns", 401, Rarity.RARE, mage.cards.g.GravenCairns.class));
         cards.add(new SetCardInfo("Gyre Sage", 306, Rarity.RARE, mage.cards.g.GyreSage.class));
