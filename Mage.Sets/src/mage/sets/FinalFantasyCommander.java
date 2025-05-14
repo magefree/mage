@@ -181,6 +181,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Inexorable Tide", 265, Rarity.RARE, mage.cards.i.InexorableTide.class));
         cards.add(new SetCardInfo("Inspiring Call", 310, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Inspiring Statuary", 347, Rarity.RARE, mage.cards.i.InspiringStatuary.class));
+        cards.add(new SetCardInfo("Interceptor, Shadow's Hound", 147, Rarity.RARE, mage.cards.i.InterceptorShadowsHound.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Interceptor, Shadow's Hound", 47, Rarity.RARE, mage.cards.i.InterceptorShadowsHound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Into the Story", 266, Rarity.UNCOMMON, mage.cards.i.IntoTheStory.class));
         cards.add(new SetCardInfo("Isolated Chapel", 405, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Jungle Shrine", 406, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
