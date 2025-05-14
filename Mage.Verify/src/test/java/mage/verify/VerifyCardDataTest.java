@@ -145,6 +145,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
+        skipListAddName(SKIP_LIST_TYPE, "FIN", "Interceptor, Shadow's Hound");
         skipListAddName(SKIP_LIST_TYPE, "FIC", "Sabin, Master Monk");
         skipListAddName(SKIP_LIST_TYPE, "FIC", "Setzer, Wandering Gambler");
 
@@ -153,6 +154,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
+        skipListAddName(SKIP_LIST_SUBTYPE, "FIN", "Interceptor, Shadow's Hound");
         skipListAddName(SKIP_LIST_SUBTYPE, "FIC", "Sabin, Master Monk");
         skipListAddName(SKIP_LIST_SUBTYPE, "FIC", "Setzer, Wandering Gambler");
 
