@@ -159,6 +159,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gyre Sage", 306, Rarity.RARE, mage.cards.g.GyreSage.class));
         cards.add(new SetCardInfo("Hardened Scales", 307, Rarity.RARE, mage.cards.h.HardenedScales.class));
         cards.add(new SetCardInfo("Harmonize", 308, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
+        cards.add(new SetCardInfo("Heidegger, Shinra Executive", 136, Rarity.RARE, mage.cards.h.HeideggerShinraExecutive.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Heidegger, Shinra Executive", 21, Rarity.RARE, mage.cards.h.HeideggerShinraExecutive.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hellkite Tyrant", 295, Rarity.RARE, mage.cards.h.HellkiteTyrant.class));
         cards.add(new SetCardInfo("Herald's Horn", 228, Rarity.RARE, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Hermes, Overseer of Elpis", 141, Rarity.RARE, mage.cards.h.HermesOverseerOfElpis.class, NON_FULL_USE_VARIOUS));
