@@ -1,5 +1,6 @@
 package mage.cards.i;
 
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.AdventureCard;
@@ -20,9 +21,12 @@ public final class IshgardTheHolySee extends AdventureCard {
     private static final FilterCard filter = new FilterArtifactOrEnchantmentCard("artifact and/or enchantment cards from your graveyard");
 
     public IshgardTheHolySee(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, new CardType[]{CardType.SORCERY}, "{3}{W}{W}", "Faith & Grief", "");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, new CardType[]{CardType.SORCERY}, "", "Faith & Grief", "{3}{W}{W}");
 
         this.subtype.add(SubType.TOWN);
+
+        // This land enters tapped.
+        this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
