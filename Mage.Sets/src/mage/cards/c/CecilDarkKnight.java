@@ -6,7 +6,6 @@ import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -50,7 +49,7 @@ public final class CecilDarkKnight extends CardImpl {
                 new UntapSourceEffect(),
                 CecilDarkKnightCondition.instance
         ).addEffect(
-                (OneShotEffect) new TransformSourceEffect(true).concatBy("and")
+                new TransformSourceEffect(true).concatBy("and")
         ).concatBy("Then"));
         this.addAbility(ability);
     }

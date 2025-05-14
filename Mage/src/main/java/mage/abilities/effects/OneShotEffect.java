@@ -31,7 +31,13 @@ public abstract class OneShotEffect extends EffectImpl {
     }
 
     @Override
-    public Effect setTargetPointer(TargetPointer targetPointer) {
+    public OneShotEffect concatBy(String concatPrefix) {
+        super.concatBy(concatPrefix);
+        return this;
+    }
+
+    @Override
+    public OneShotEffect setTargetPointer(TargetPointer targetPointer) {
         super.setTargetPointer(targetPointer);
         return this;
     }
