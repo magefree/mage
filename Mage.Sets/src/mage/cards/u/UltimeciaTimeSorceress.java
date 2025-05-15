@@ -5,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.ExileFromGraveCost;
-import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -20,8 +19,7 @@ import mage.constants.CardType;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
- *
- * @author anonymous
+ * @author balazskristof
  */
 public final class UltimeciaTimeSorceress extends CardImpl {
 
