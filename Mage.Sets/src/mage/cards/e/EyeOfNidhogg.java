@@ -9,7 +9,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.combat.GoadAttachedEffect;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAttachedEffect;
 import mage.abilities.effects.common.continuous.SetCardColorAttachedEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.EnchantAbility;
@@ -46,9 +46,9 @@ public final class EyeOfNidhogg extends CardImpl {
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.DRAGON, AttachmentType.AURA
         ).setText("Dragon with power"));
-        ability.addEffect(new SetBasePowerToughnessEnchantedEffect(
-                4, 2
-        ).setText("and toughness 4/2"));
+        ability.addEffect(new SetBasePowerToughnessAttachedEffect(
+                4, 2,
+                AttachmentType.AURA).setText("and toughness 4/2"));
         ability.addEffect(new GainAbilityAttachedEffect(
                 FlyingAbility.getInstance(), AttachmentType.AURA
         ).setText(", has flying"));

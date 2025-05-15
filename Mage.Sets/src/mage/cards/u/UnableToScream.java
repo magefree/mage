@@ -7,7 +7,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAttachedEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeAttachedEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesAttachedEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +40,7 @@ public final class UnableToScream extends CardImpl {
         Ability ability = new SimpleStaticAbility(new LoseAllAbilitiesAttachedEffect(AttachmentType.AURA));
         ability.addEffect(new AddCardSubtypeAttachedEffect(SubType.TOY, AttachmentType.AURA).setText(" and is a Toy"));
         ability.addEffect(new AddCardTypeAttachedEffect(CardType.ARTIFACT, AttachmentType.AURA).setText(" artifact creature"));
-        ability.addEffect(new SetBasePowerToughnessEnchantedEffect(0, 2).setText(" with base power and toughness 0/2 in addition to its other types."));
+        ability.addEffect(new SetBasePowerToughnessAttachedEffect(0, 2, AttachmentType.AURA).setText(" with base power and toughness 0/2 in addition to its other types."));
         this.addAbility(ability);
 
         // As long as enchanted creature is face down, it can't be turned face up.

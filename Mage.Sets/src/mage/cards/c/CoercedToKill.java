@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAttachedEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAttachedEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.constants.*;
 import mage.target.common.TargetCreaturePermanent;
@@ -37,7 +37,7 @@ public final class CoercedToKill extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
         // Enchanted creature has base power and toughness 1/1, has deathtouch, and is an Assassin in addition to its other types.
-        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessEnchantedEffect(1, 1));
+        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessAttachedEffect(1, 1, AttachmentType.AURA));
         ability.addEffect(new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.AURA)
                 .setText(", has deathtouch"));
         ability.addEffect(new AddCardSubtypeAttachedEffect(SubType.ASSASSIN, AttachmentType.AURA)

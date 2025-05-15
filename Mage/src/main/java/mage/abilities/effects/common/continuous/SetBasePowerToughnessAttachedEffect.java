@@ -2,41 +2,34 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  * @author LevelX2
  */
-public class SetBasePowerToughnessEnchantedEffect extends ContinuousEffectImpl {
+public class SetBasePowerToughnessAttachedEffect extends ContinuousEffectImpl {
 
     private final int power;
     private final int toughness;
 
-    public SetBasePowerToughnessEnchantedEffect() {
-        this(0, 2);
-    }
-
-    public SetBasePowerToughnessEnchantedEffect(int power, int toughness) {
+    public SetBasePowerToughnessAttachedEffect(int power, int toughness, AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
-        staticText = "Enchanted creature has base power and toughness " + power + "/" + toughness;
+        staticText = attachmentType.verb() + " creature has base power and toughness " + power + "/" + toughness;
         this.power = power;
         this.toughness = toughness;
     }
 
-    protected SetBasePowerToughnessEnchantedEffect(final SetBasePowerToughnessEnchantedEffect effect) {
+    protected SetBasePowerToughnessAttachedEffect(final SetBasePowerToughnessAttachedEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
     }
 
     @Override
-    public SetBasePowerToughnessEnchantedEffect copy() {
-        return new SetBasePowerToughnessEnchantedEffect(this);
+    public SetBasePowerToughnessAttachedEffect copy() {
+        return new SetBasePowerToughnessAttachedEffect(this);
     }
 
     @Override

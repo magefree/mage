@@ -365,6 +365,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Walking Ballista", 371, Rarity.RARE, mage.cards.w.WalkingBallista.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 372, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Wooded Ridgeline", 441, Rarity.COMMON, mage.cards.w.WoodedRidgeline.class));
+        cards.add(new SetCardInfo("Wrecking Ball Arm", 100, Rarity.RARE, mage.cards.w.WreckingBallArm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wrecking Ball Arm", 128, Rarity.RARE, mage.cards.w.WreckingBallArm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola, Night's Blessed", 191, Rarity.MYTHIC, mage.cards.y.YshtolaNightsBlessed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola, Night's Blessed", 207, Rarity.MYTHIC, mage.cards.y.YshtolaNightsBlessed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola, Night's Blessed", 215, Rarity.MYTHIC, mage.cards.y.YshtolaNightsBlessed.class, NON_FULL_USE_VARIOUS));
