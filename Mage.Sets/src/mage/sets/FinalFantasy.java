@@ -122,6 +122,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Galian Beast", 383, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 221, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 486, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 139, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 338, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 461, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gladiolus Amicitia", 224, Rarity.UNCOMMON, mage.cards.g.GladiolusAmicitia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gladiolus Amicitia", 489, Rarity.UNCOMMON, mage.cards.g.GladiolusAmicitia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 218, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
