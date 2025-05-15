@@ -21,6 +21,8 @@ public interface Effect extends Serializable, Copyable<Effect> {
 
     void newId();
 
+    void newId(UUID newID);
+
     /**
      * Some general behaviours for rule text handling: Rule text of effects get
      * automatically a full stop "." at the end, if not another effect e.g. with
