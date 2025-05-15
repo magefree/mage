@@ -180,6 +180,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Rosa, Resolute White Mage", 555, Rarity.RARE, mage.cards.r.RosaResoluteWhiteMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sage's Nouliths", 582, Rarity.COMMON, mage.cards.s.SagesNouliths.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sage's Nouliths", 70, Rarity.COMMON, mage.cards.s.SagesNouliths.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sahagin", 71, Rarity.COMMON, mage.cards.s.Sahagin.class));
         cards.add(new SetCardInfo("Samurai's Katana", 154, Rarity.UNCOMMON, mage.cards.s.SamuraisKatana.class));
         cards.add(new SetCardInfo("Sazh's Chocobo", 200, Rarity.UNCOMMON, mage.cards.s.SazhsChocobo.class));
         cards.add(new SetCardInfo("Sephiroth's Intervention", 116, Rarity.COMMON, mage.cards.s.SephirothsIntervention.class));
