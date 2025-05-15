@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
@@ -29,7 +30,7 @@ public final class UltimateMagicHoly extends CardImpl {
 
         // Permanents you control gain indestructible until end of turn. If this spell was cast from exile, prevent all damage that would be dealt to you this turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
-                IndestructibleAbility.getInstance(), Duration.EndOfTurn
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENTS
         ));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new PreventDamageToControllerEffect(Duration.EndOfTurn)),
