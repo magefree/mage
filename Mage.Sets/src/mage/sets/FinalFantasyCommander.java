@@ -175,6 +175,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hildibrand Manderville", 173, Rarity.RARE, mage.cards.h.HildibrandManderville.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hildibrand Manderville", 83, Rarity.RARE, mage.cards.h.HildibrandManderville.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hinterland Harbor", 403, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
+        cards.add(new SetCardInfo("Hraesvelgr of the First Brood", 142, Rarity.RARE, mage.cards.h.HraesvelgrOfTheFirstBrood.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hraesvelgr of the First Brood", 37, Rarity.RARE, mage.cards.h.HraesvelgrOfTheFirstBrood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hypnotic Sprite", 264, Rarity.UNCOMMON, mage.cards.h.HypnoticSprite.class));
         cards.add(new SetCardInfo("Idyllic Beachfront", 404, Rarity.COMMON, mage.cards.i.IdyllicBeachfront.class));
         cards.add(new SetCardInfo("Incubation Druid", 309, Rarity.RARE, mage.cards.i.IncubationDruid.class));
