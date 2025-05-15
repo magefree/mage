@@ -191,6 +191,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Krile Baldesion", 86, Rarity.RARE, mage.cards.k.KrileBaldesion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Legions to Ashes", 326, Rarity.RARE, mage.cards.l.LegionsToAshes.class));
         cards.add(new SetCardInfo("Lethal Scheme", 277, Rarity.RARE, mage.cards.l.LethalScheme.class));
+        cards.add(new SetCardInfo("Lifestream's Blessing", 122, Rarity.RARE, mage.cards.l.LifestreamsBlessing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lifestream's Blessing", 67, Rarity.RARE, mage.cards.l.LifestreamsBlessing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Greaves", 349, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lingering Souls", 245, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
         cards.add(new SetCardInfo("Lord Jyscal Guado", 137, Rarity.RARE, mage.cards.l.LordJyscalGuado.class, NON_FULL_USE_VARIOUS));
