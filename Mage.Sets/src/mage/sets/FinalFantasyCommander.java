@@ -57,6 +57,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bedevil", 319, Rarity.RARE, mage.cards.b.Bedevil.class));
         cards.add(new SetCardInfo("Behemoth Sledge", 320, Rarity.UNCOMMON, mage.cards.b.BehemothSledge.class));
         cards.add(new SetCardInfo("Big Score", 290, Rarity.COMMON, mage.cards.b.BigScore.class));
+        cards.add(new SetCardInfo("Blue Mage's Cane", 112, Rarity.RARE, mage.cards.b.BlueMagesCane.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blue Mage's Cane", 35, Rarity.RARE, mage.cards.b.BlueMagesCane.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bonders' Enclave", 376, Rarity.RARE, mage.cards.b.BondersEnclave.class));
         cards.add(new SetCardInfo("Bred for the Hunt", 321, Rarity.UNCOMMON, mage.cards.b.BredForTheHunt.class));
         cards.add(new SetCardInfo("Bronze Guardian", 234, Rarity.RARE, mage.cards.b.BronzeGuardian.class));
