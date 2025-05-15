@@ -92,6 +92,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 202, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 210, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 221, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coin of Fate", 15, Rarity.RARE, mage.cards.c.CoinOfFate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coin of Fate", 104, Rarity.RARE, mage.cards.c.CoinOfFate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Collective Effort", 237, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
         cards.add(new SetCardInfo("Colossus Hammer", 338, Rarity.UNCOMMON, mage.cards.c.ColossusHammer.class));
         cards.add(new SetCardInfo("Combustible Gearhulk", 292, Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class));
