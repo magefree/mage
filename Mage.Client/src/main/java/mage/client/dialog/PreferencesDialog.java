@@ -3486,7 +3486,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             dialog.txtImageFolderPath.setText(path);
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
-        load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
+        load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "false");
         dialog.cbPreferredImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, CardLanguage.ENGLISH.getCode()));
 
         // rendering settings
