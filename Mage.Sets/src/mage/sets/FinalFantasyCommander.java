@@ -49,6 +49,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Avalanche of Sector 7", 53, Rarity.RARE, mage.cards.a.AvalancheOfSector7.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baleful Strix", 318, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Bane of Progress", 299, Rarity.RARE, mage.cards.b.BaneOfProgress.class));
+        cards.add(new SetCardInfo("Banon, the Returners' Leader", 78, Rarity.RARE, mage.cards.b.BanonTheReturnersLeader.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Banon, the Returners' Leader", 165, Rarity.RARE, mage.cards.b.BanonTheReturnersLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barret, Avalanche Leader", 166, Rarity.RARE, mage.cards.b.BarretAvalancheLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barret, Avalanche Leader", 79, Rarity.RARE, mage.cards.b.BarretAvalancheLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bastion Protector", 233, Rarity.RARE, mage.cards.b.BastionProtector.class));
