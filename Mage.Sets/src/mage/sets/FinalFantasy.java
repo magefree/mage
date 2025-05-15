@@ -239,6 +239,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Terra, Magical Adept", 323, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Magical Adept", 511, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Crystal's Chosen", 14, Rarity.UNCOMMON, mage.cards.t.TheCrystalsChosen.class));
+        cards.add(new SetCardInfo("The Prima Vista", 64, Rarity.UNCOMMON, mage.cards.t.ThePrimaVista.class));
         cards.add(new SetCardInfo("Tifa Lockhart", 206, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 391, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 473, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
