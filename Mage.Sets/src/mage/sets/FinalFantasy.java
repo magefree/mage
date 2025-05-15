@@ -175,6 +175,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "99b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rinoa Heartilly", 237, Rarity.UNCOMMON, mage.cards.r.RinoaHeartilly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rinoa Heartilly", 502, Rarity.UNCOMMON, mage.cards.r.RinoaHeartilly.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rosa, Resolute White Mage", 431, Rarity.RARE, mage.cards.r.RosaResoluteWhiteMage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rosa, Resolute White Mage", 555, Rarity.RARE, mage.cards.r.RosaResoluteWhiteMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sage's Nouliths", 582, Rarity.COMMON, mage.cards.s.SagesNouliths.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sage's Nouliths", 70, Rarity.COMMON, mage.cards.s.SagesNouliths.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Samurai's Katana", 154, Rarity.UNCOMMON, mage.cards.s.SamuraisKatana.class));
