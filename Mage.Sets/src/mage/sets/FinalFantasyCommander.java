@@ -349,6 +349,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Torrential Gearhulk", 272, Rarity.RARE, mage.cards.t.TorrentialGearhulk.class));
         cards.add(new SetCardInfo("Tragic Arrogance", 258, Rarity.RARE, mage.cards.t.TragicArrogance.class));
         cards.add(new SetCardInfo("Trailblazer's Boots", 370, Rarity.UNCOMMON, mage.cards.t.TrailblazersBoots.class));
+        cards.add(new SetCardInfo("Transpose", 119, Rarity.RARE, mage.cards.t.Transpose.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Transpose", 52, Rarity.RARE, mage.cards.t.Transpose.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tromell, Seymour's Butler", 162, Rarity.RARE, mage.cards.t.TromellSeymoursButler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tromell, Seymour's Butler", 73, Rarity.RARE, mage.cards.t.TromellSeymoursButler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimate Magic: Holy", 110, Rarity.RARE, mage.cards.u.UltimateMagicHoly.class, NON_FULL_USE_VARIOUS));
