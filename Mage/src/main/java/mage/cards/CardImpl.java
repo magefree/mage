@@ -45,7 +45,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected Rarity rarity;
     protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
-    protected Class<? extends Card> meldsToClazz;
+    protected Class<? extends MeldCard> meldsToClazz;
     protected Card meldsToCard;
     protected Card secondSideCard;
     protected boolean nightCard;

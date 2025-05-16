@@ -6,8 +6,8 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.*;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.MeldCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -23,7 +23,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class RagnarokDivineDeliverance extends CardImpl {
+public final class RagnarokDivineDeliverance extends MeldCard {
 
     private static final FilterCard filter = new FilterPermanentCard("nonlegendary permanent card from your graveyard");
 
