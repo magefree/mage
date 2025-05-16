@@ -32,7 +32,7 @@ class ChooseTargetTestableDialog extends BaseTestableDialog {
     public ChooseTargetTestableDialog(boolean isPlayerChoice, boolean isTargetChoice, boolean notTarget, boolean isYou, String name, Target target) {
         super(String.format("%s%s(%s, %s)",
                 isPlayerChoice ? "player.choose" : "target.choose",
-                isTargetChoice ? "target" : "", // chooseTarget or choose
+                isTargetChoice ? "Target" : "", // chooseTarget or choose
                 isYou ? "you" : "AI",
                 notTarget ? "not target" : "target"), name, target.toString());
         this.isPlayerChoice = isPlayerChoice;

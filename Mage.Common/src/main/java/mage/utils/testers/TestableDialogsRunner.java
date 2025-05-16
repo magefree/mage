@@ -29,8 +29,7 @@ import java.util.stream.Collectors;
  * [x] chooseTargetAmount
  * [x] chooseUse
  * [x] choosePile
- * [ ] announceXMana // TODO: implement
- * [ ] announceXCost // TODO: implement
+ * [x] announceX
  * [ ] getAmount // TODO: implement
  * [ ] getMultiAmountWithIndividualConstraints // TODO: implement
  * <p>
@@ -74,6 +73,7 @@ public class TestableDialogsRunner {
         ChooseChoiceTestableDialog.register(this);
         ChoosePileTestableDialog.register(this);
         ChooseAmountTestableDialog.register(this);
+        AnnounceXTestableDialog.register(this);
     }
 
     void registerDialog(TestableDialog dialog) {
