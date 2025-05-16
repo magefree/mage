@@ -114,11 +114,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                     filter.add(new PermanentReferenceInCollectionPredicate(list, game));
                     TargetPermanent target = new TargetPermanent(filter);
                     target.withNotTarget(true);
-                    if (target.canChoose(controller.getId(), source, game)) {
-                        while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
-                            controller.chooseTarget(outcome, target, source, game);
-                        }
-                    } else {
+                    if (!controller.chooseTarget(outcome, target, source, game)) {
                         return true;
                     }
                     Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());

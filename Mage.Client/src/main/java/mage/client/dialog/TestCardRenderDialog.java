@@ -326,6 +326,13 @@ public class TestCardRenderDialog extends MageDialog {
             possibleTargets.add(playerYou.getId());
         }
 
+        // chosen target
+        Set<UUID> chosenTargets = null;
+        if (false) { // TODO: add GUI's checkbox for checkPlayerAsChosen
+            chosenTargets = new LinkedHashSet<>();
+            chosenTargets.add(playerYou.getId());
+        }
+
         // player's panel
         if (this.player == null) {
             // create new panel
@@ -345,7 +352,7 @@ public class TestCardRenderDialog extends MageDialog {
                 .findFirst()
                 .orElse(null);
         this.player.init(this.game.getId(), playerYou.getId(), isMe, this.bigCard, 0);
-        this.player.update(gameView, currentPlayerView, possibleTargets);
+        this.player.update(gameView, currentPlayerView, possibleTargets, chosenTargets);
         this.player.sizePlayerPanel(smallMode);
 
         // update CARDS

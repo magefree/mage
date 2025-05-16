@@ -2,8 +2,10 @@ package org.mage.test.cards.single.mkm;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.target.TargetPlayer;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class CovetedFalconTest extends CardTestPlayerBase {
@@ -31,6 +33,7 @@ public class CovetedFalconTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}: Turn this face-down permanent face up.");
         addTarget(playerA, playerB);
         addTarget(playerA, "Grizzly Bears");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -57,6 +60,7 @@ public class CovetedFalconTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}: Turn this face-down permanent face up.");
         addTarget(playerA, playerB);
         addTarget(playerA, "Grizzly Bears");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn Against", "Grizzly Bears");
@@ -82,6 +86,7 @@ public class CovetedFalconTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}: Turn this face-down permanent face up.");
         addTarget(playerA, playerB);
         addTarget(playerA, "Putrid Goblin");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Murder", "Putrid Goblin");
@@ -111,6 +116,7 @@ public class CovetedFalconTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}: Turn this face-down permanent face up.");
         addTarget(playerA, playerB);
         addTarget(playerA, "Treacherous Pit-Dweller");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Murder", "Treacherous Pit-Dweller");
@@ -151,6 +157,7 @@ public class CovetedFalconTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}: Turn this face-down permanent face up.");
         addTarget(playerA, playerB);
         addTarget(playerA, "Darksteel Relic^Grizzly Bears");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
 
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Murder", "Guardian Beast");
 

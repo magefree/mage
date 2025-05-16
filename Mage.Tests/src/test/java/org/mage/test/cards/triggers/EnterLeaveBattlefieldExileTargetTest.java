@@ -3,6 +3,7 @@ package org.mage.test.cards.triggers;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -23,6 +24,7 @@ public class EnterLeaveBattlefieldExileTargetTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel of Serenity");
         addTarget(playerA, "Silvercoat Lion^Pillarfield Ox");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
         setChoice(playerA, true);
 
         setStrictChooseMode(true);

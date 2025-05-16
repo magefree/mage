@@ -3,6 +3,7 @@ package org.mage.test.cards.triggers.dies;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -159,6 +160,7 @@ public class VengefulTownsfolkTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice up to three");
         setChoice(playerA, "Angel of the God-Pharaoh"); // sac cost
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -183,6 +185,7 @@ public class VengefulTownsfolkTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice up to three");
         setChoice(playerA, "Grizzly Bears^Angel of the God-Pharaoh"); // sac cost
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

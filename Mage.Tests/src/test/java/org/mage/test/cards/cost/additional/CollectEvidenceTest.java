@@ -10,6 +10,7 @@ import mage.counters.CounterType;
 import mage.game.stack.StackObject;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -280,6 +281,7 @@ public class CollectEvidenceTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, monitor);
         setChoice(playerA, true);
         setChoice(playerA, giant);
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -24,12 +24,13 @@ public interface Target extends Copyable<Target>, Serializable {
      * All targets selected by a player
      * <p>
      * Warning, for "up to" targets it will return true all the time, so make sure your dialog
-     * use do-while logic and call "choose" one time min or use doneChoosing
+     * use do-while logic and call "choose" one time min or use isChoiceCompleted
      */
     boolean isChosen(Game game);
 
-    // TODO: combine code or research usages (doneChoosing must be in while cycles, isChosen in other places, see #13606)
-    boolean doneChoosing(Game game);
+    boolean isChoiceCompleted(Game game);
+
+    boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game);
 
     void clearChosen();
 
@@ -63,6 +64,9 @@ public interface Target extends Copyable<Target>, Serializable {
      */
     Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game);
 
+    /**
+     * Priority method to make a choice from cards and other places, not a player.chooseXXX
+     */
     boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);
 
     /**
@@ -101,10 +105,19 @@ public interface Target extends Copyable<Target>, Serializable {
 
     Set<UUID> possibleTargets(UUID sourceControllerId, Game game);
 
+    @Deprecated // TODO: need replace to source only version?
     boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game);
 
     /**
+     * Priority method to make a choice from cards and other places, not a player.chooseXXX
+     */
+    default boolean choose(Outcome outcome, UUID playerId, Ability source, Game game) {
+        return choose(outcome, playerId, source == null ? null : source.getSourceId(), source, game);
+    }
+
+    /**
      * Add target from non targeting methods like choose
+     * TODO: need usage research, looks like there are wrong usage of addTarget, e.g. in choose method (must be add)
      */
     void add(UUID id, Game game);
 

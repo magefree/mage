@@ -67,10 +67,7 @@ class DivineReckoningEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
-                    if (target.canChoose(player.getId(), source, game)) {
-                        while (player.canRespond() && !target.isChosen(game) && target.canChoose(player.getId(), source, game)) {
-                            player.chooseTarget(Outcome.Benefit, target, source, game);
-                        }
+                    if (player.chooseTarget(Outcome.Benefit, target, source, game)) {
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {
                             chosen.add(permanent);

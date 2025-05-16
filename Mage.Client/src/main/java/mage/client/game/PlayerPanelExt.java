@@ -247,7 +247,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 .orElse(0);
     }
 
-    public void update(GameView game, PlayerView player, Set<UUID> possibleTargets) {
+    public void update(GameView game, PlayerView player, Set<UUID> possibleTargets, Set<UUID> chosenTargets) {
         this.player = player;
         int pastLife = player.getLife();
         if (playerLives != null) {
@@ -425,6 +425,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (possibleTargets != null && possibleTargets.contains(this.playerId)) {
             this.avatar.setBorder(YELLOW_BORDER);
             this.btnPlayer.setBorder(YELLOW_BORDER);
+        }
+
+        // selected targeting (draw as priority)
+        if (chosenTargets != null && chosenTargets.contains(this.playerId)) {
+            this.avatar.setBorder(GREEN_BORDER); // TODO: use diff green color for chosen targeting and current priority?
+            this.btnPlayer.setBorder(GREEN_BORDER);
         }
 
         update(player.getManaPool());
