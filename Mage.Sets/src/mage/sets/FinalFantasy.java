@@ -122,6 +122,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 576, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Galian Beast", 125, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galian Beast", 383, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Galian Beast", 454, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Galian Beast", 528, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 221, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 486, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 139, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
@@ -293,6 +295,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 537, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 125, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 383, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vincent Valentine", 454, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vincent Valentine", 528, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warrior's Sword", 169, Rarity.COMMON, mage.cards.w.WarriorsSword.class));
         cards.add(new SetCardInfo("Wastes", 309, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("White Auracite", 41, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
