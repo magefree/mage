@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,6 +33,7 @@ public final class JechtReluctantGuardian extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Whenever Jecht deals combat damage to a player, you may exile it, then return it to the battlefield transformed under its owner's control.
+        this.addAbility(new TransformAbility());
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED)
                         .setText("exile it, then return it to the battlefield transformed under its owner's control"), true
