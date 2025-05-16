@@ -1687,64 +1687,39 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     /**
-     * Gets the amount of mana the player want to spent for a x spell
-     *
-     * @param min
-     * @param max
-     * @param message
-     * @param ability
-     * @param game
-     * @return
+     * Gets the amount of mana the player want to spend for an x spell
      */
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+    public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
         if (!canCallFeedback(game)) {
             return min;
         }
 
-        int xValue = 0;
-        while (canRespond()) {
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireGetAmountEvent(playerId, message + CardUtil.getSourceLogName(game, ability), min, max);
-            }
-            waitForResponse(game);
-
-            if (response.getInteger() != null) {
-                break;
-            }
-
-            // TODO: add response verify here
-        }
-
-        if (response.getInteger() != null) {
-            xValue = response.getInteger();
-        }
-        return xValue;
-    }
-
-    @Override
-    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
-        if (!canCallFeedback(game)) {
+        // fast calc on nothing to choose
+        if (min >= max) {
             return min;
         }
 
-        int xValue = 0;
+        int xValue = min;
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireGetAmountEvent(playerId, message, min, max);
+                game.fireGetAmountEvent(playerId, message + CardUtil.getSourceLogName(game, source), min, max);
             }
             waitForResponse(game);
 
-            if (response.getInteger() != null) {
-                break;
+            if (response.getInteger() == null) {
+                continue;
             }
+
+            xValue = response.getInteger();
+            if (xValue < min || xValue > max) {
+                continue;
+            }
+
+            break;
         }
 
-        if (response.getInteger() != null) {
-            xValue = response.getInteger();
-        }
         return xValue;
     }
 

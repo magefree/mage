@@ -65,7 +65,7 @@ public class HELIOSOneTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             Assert.assertTrue(
                     "X=0 is not a valid choice. Error message:\n" + e.getMessage(),
-                    e.getMessage().contains("Message: Announce the number of {E} to pay")
+                    e.getMessage().contains("Message: Announce the value for {X}")
             );
         }
     }

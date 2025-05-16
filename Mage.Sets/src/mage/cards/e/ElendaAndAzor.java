@@ -80,7 +80,7 @@ class ElendaAndAzorEffect extends OneShotEffect {
         if (controller != null) {
             ManaCosts cost = new ManaCostsImpl<>("{X}{W}{U}{B}");
             if (controller.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, draw X cards.", source, game)) {
-                int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+                int costX = controller.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay to draw)", game, source, true);
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     controller.resetStoredBookmark(game); // otherwise you can undo the payment

@@ -5,7 +5,6 @@ import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.mana.ManaOptions;
@@ -748,16 +747,12 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean shuffleCardsToLibrary(Card card, Game game, Ability source);
 
     /**
-     * Set the value for X mana spells and abilities
+     * Set the value for X in spells and abilities
+     * @param isManaPay helper param for better AI logic
      */
-    int announceXMana(int min, int max, String message, Game game, Ability ability);
+    int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay);
 
-    /**
-     * Set the value for non mana X costs
-     */
-    int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);
-
-    // TODO: rework to use pair's list of effect + ability instead string's map
+     // TODO: rework to use pair's list of effect + ability instead string's map
     int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game);
 
     TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);

@@ -5,7 +5,6 @@ import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -2039,42 +2038,40 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        // current logic - use max possible mana
+    public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
+        // fast calc on nothing to choose
+        if (min >= max) {
+            return min;
+        }
 
         // TODO: add good/bad effects support
-        // TODO: add simple game simulations like declare blocker?
+        // TODO: add simple game simulations like declare blocker (need to find only workable payment)?
+        // TODO: remove random logic or make it more stable (e.g. use same value in same game cycle)
 
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
-        if (numAvailable < 0) {
-            numAvailable = 0;
+        // protection from too big values
+        int realMin = min;
+        int realMax = max;
+        if (max == Integer.MAX_VALUE) {
+            realMax = Math.max(realMin, 10); // AI don't need huge values for X, cause can't use infinite combos
+        }
+
+        int xValue;
+        if (isManaPay) {
+            // as X mana payment - due available mana
+            xValue = Math.max(0, getAvailableManaProducers(game).size() - source.getManaCostsToPay().getUnpaid().manaValue());
         } else {
-            if (numAvailable < min) {
-                numAvailable = min;
-            }
-            if (numAvailable > max) {
-                numAvailable = max;
-            }
+            // as X actions
+            xValue = RandomUtil.nextInt(realMax + 1);
         }
-        return numAvailable;
-    }
 
-    @Override
-    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
-        // current logic - use random non-zero value
-
-        // TODO: add good/bad effects support
-        // TODO: remove random logic
-
-        int value = RandomUtil.nextInt(CardUtil.overflowInc(max, 1));
-        if (value < min) {
-            value = min;
+        if (xValue > realMax) {
+            xValue = realMax;
         }
-        if (value < max) {
-            // do not use zero values
-            value++;
+        if (xValue < realMin) {
+            xValue = realMin;
         }
-        return value;
+
+        return xValue;
     }
 
     @Override

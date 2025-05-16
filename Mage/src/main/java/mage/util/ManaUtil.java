@@ -710,7 +710,7 @@ public final class ManaUtil {
             int bookmark = game.bookmarkState();
             player.resetStoredBookmark(game);
 
-            wantToPay = player.announceXMana(0, maxValue, "Choose how much mana to pay", game, source);
+            wantToPay = player.announceX(0, maxValue, "Choose how much mana to pay", game, source, true);
             if (wantToPay > 0) {
                 Cost cost = ManaUtil.createManaCost(wantToPay, payAsX);
                 payed = cost.pay(source, game, source, player.getId(), false, null);

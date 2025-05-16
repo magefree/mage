@@ -156,13 +156,8 @@ public class StubPlayer extends PlayerImpl {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        return 0;
-    }
-
-    @Override
-    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
-        return 0;
+    public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
+        return min;
     }
 
     @Override

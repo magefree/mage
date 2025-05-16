@@ -70,7 +70,7 @@ class HeroOfLeinaTowerEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (you != null && you.chooseUse(Outcome.BoostCreature, "Do you want to to pay {X}?", source, game)) {
-            int costX = you.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+            int costX = you.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay to add +1/+1 counters)", game, source, true);
             cost.add(new GenericManaCost(costX));
             if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());

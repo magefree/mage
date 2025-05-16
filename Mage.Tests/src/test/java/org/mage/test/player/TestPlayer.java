@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.InfoEffect;
@@ -2916,39 +2915,20 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        assertAliasSupportInChoices(false);
-        if (!choices.isEmpty()) {
-            for (String choice : new ArrayList<>(choices)) {
-                if (choice.startsWith("X=")) {
-                    int xValue = Integer.parseInt(choice.substring(2));
-                    assertXMinMaxValue(game, ability, xValue, min, max);
-                    choices.remove(choice);
-                    return xValue;
-                }
-            }
-        }
-
-        this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
-                + "\nMessage: " + message + prepareXMaxInfo(min, max));
-        return computerPlayer.announceXMana(min, max, message, game, ability);
-    }
-
-    @Override
-    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
+    public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
-                assertXMinMaxValue(game, ability, xValue, min, max);
+                assertXMinMaxValue(game, source, xValue, min, max);
                 choices.remove(0);
                 return xValue;
             }
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game)
                 + "\nMessage: " + message + prepareXMaxInfo(min, max));
-        return computerPlayer.announceXCost(min, max, message, game, ability, null);
+        return computerPlayer.announceX(min, max, message, game, source, isManaPay);
     }
 
     private String prepareXMaxInfo(int min, int max) {

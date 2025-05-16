@@ -2,7 +2,6 @@ package mage.player.ai;
 
 import mage.MageObject;
 import mage.abilities.*;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -250,20 +249,11 @@ public class ComputerPlayerControllableProxy extends ComputerPlayer7 {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+    public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
         if (isUnderMe(game)) {
-            return super.announceXMana(min, max, message, game, ability);
+            return super.announceX(min, max, message, game, source, isManaPay);
         } else {
-            return getControllingPlayer(game).announceXMana(min, max, message, game, ability);
-        }
-    }
-
-    @Override
-    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
-        if (isUnderMe(game)) {
-            return super.announceXCost(min, max, message, game, ability, variableCost);
-        } else {
-            return getControllingPlayer(game).announceXCost(min, max, message, game, ability, variableCost);
+            return getControllingPlayer(game).announceX(min, max, message, game, source, isManaPay);
         }
     }
 

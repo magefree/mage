@@ -80,7 +80,7 @@ class PowerLeakEffect extends OneShotEffect {
         String message = "Pay {X} to prevent X damage from " + permanent.getLogName() + "?";
         int xValue = 0;
         if (player.chooseUse(Outcome.Neutral, message, source, game)) {
-            xValue = player.announceXMana(0, Integer.MAX_VALUE, "Choose the amount of mana to pay", game, source);
+            xValue = player.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay to prevent damage)", game, source, true);
             cost.add(new GenericManaCost(xValue));
             if (cost.pay(source, game, source, player.getId(), false, null)) {
                 game.informPlayers(player.getLogName() + " paid {" + xValue + "} for " + permanent.getLogName());
