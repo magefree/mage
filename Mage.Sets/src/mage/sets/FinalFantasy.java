@@ -254,6 +254,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Knights of Round", 36, Rarity.MYTHIC, mage.cards.s.SummonKnightsOfRound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Leviathan", 361, Rarity.RARE, mage.cards.s.SummonLeviathan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Leviathan", 77, Rarity.RARE, mage.cards.s.SummonLeviathan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Primal Garuda", 360, Rarity.UNCOMMON, mage.cards.s.SummonPrimalGaruda.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Primal Garuda", 37, Rarity.UNCOMMON, mage.cards.s.SummonPrimalGaruda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Primal Odin", 121, Rarity.RARE, mage.cards.s.SummonPrimalOdin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Primal Odin", 365, Rarity.RARE, mage.cards.s.SummonPrimalOdin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Shiva", 362, Rarity.UNCOMMON, mage.cards.s.SummonShiva.class, NON_FULL_USE_VARIOUS));
