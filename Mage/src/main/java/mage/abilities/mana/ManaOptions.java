@@ -393,6 +393,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 && onlyManaCosts
                 && manaToAdd.countColored() > 0;
         boolean canHaveBetterValues;
+        int maxRepeat = manaAbility.getMaxMoreActivationsThisTurn(game);
 
         Mana possibleMana = new Mana();
         Mana improvedMana = new Mana();
@@ -401,9 +402,11 @@ public class ManaOptions extends LinkedHashSet<Mana> {
         // example: {G}: Add one mana of any color
         for (Mana possiblePay : ManaOptions.getPossiblePayCombinations(cost, startingMana)) {
             improvedMana.setToMana(startingMana);
+            int currentAttempt = 0;
             do {
                 // loop until all mana replaced by better values
                 canHaveBetterValues = false;
+                currentAttempt++;
 
                 // it's impossible to analyse all payment order (pay {R} for {1}, {Any} for {G}, etc)
                 // so use simple cost simulation by subtract
@@ -441,7 +444,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                     }
                     improvedMana.setToMana(possibleMana);
                 }
-            } while (repeatable && canHaveBetterValues && improvedMana.includesMana(possiblePay));
+            } while (repeatable && (currentAttempt < maxRepeat) && canHaveBetterValues && improvedMana.includesMana(possiblePay));
         }
         return oldManaWasReplaced;
     }
@@ -670,12 +673,14 @@ final class Comparators {
         for (T first : elements) {
             for (T second : elements) {
                 int firstGreaterThanSecond = comparator.compare(first, second);
-                if (firstGreaterThanSecond <= 0)
+                if (firstGreaterThanSecond <= 0) {
                     continue;
+                }
                 for (T third : elements) {
                     int secondGreaterThanThird = comparator.compare(second, third);
-                    if (secondGreaterThanThird <= 0)
+                    if (secondGreaterThanThird <= 0) {
                         continue;
+                    }
                     int firstGreaterThanThird = comparator.compare(first, third);
                     if (firstGreaterThanThird <= 0) {
                         // Uncomment the following line to step through the failed case

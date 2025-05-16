@@ -49,6 +49,8 @@ public class ViviOrnitierTest extends CardTestPlayerBase {
         checkPlayableAbility("1: bolt can be cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + bolt, true);
         checkPlayableAbility("1: incinerate can be cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + incinerate, true);
 
+        setChoice(playerA, "X=0"); // choose {U} color distribution for vivi on 2 power
+        setChoice(playerA, "X=2"); // choose {R} color distribution for vivi on 2 power
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, incinerate, playerB);
 
         checkPlayableAbility("2: bolt can not be cast", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + bolt, false);
