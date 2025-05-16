@@ -82,7 +82,7 @@ public interface Card extends MageObject, Ownerable {
         return null;
     }
 
-    default Card getMeldsToCard() {
+    default MeldCard getMeldsToCard() {
         return null;
     }
 

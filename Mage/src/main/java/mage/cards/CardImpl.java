@@ -46,7 +46,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
     protected Class<? extends MeldCard> meldsToClazz;
-    protected Card meldsToCard;
+    protected MeldCard meldsToCard;
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
@@ -708,14 +708,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public Card getMeldsToCard() {
+    public MeldCard getMeldsToCard() {
         // init card on first call
         if (meldsToClazz == null && meldsToCard == null) {
             return null;
         }
 
         if (meldsToCard == null) {
-            meldsToCard = initSecondSideCard(meldsToClazz);
+            meldsToCard = (MeldCard) initSecondSideCard(meldsToClazz);
         }
 
         return meldsToCard;
