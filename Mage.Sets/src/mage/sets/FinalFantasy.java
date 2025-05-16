@@ -120,6 +120,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 307, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 308, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 576, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Freya Crescent", 138, Rarity.UNCOMMON, mage.cards.f.FreyaCrescent.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Freya Crescent", 460, Rarity.UNCOMMON, mage.cards.f.FreyaCrescent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galian Beast", 125, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galian Beast", 383, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galian Beast", 454, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
