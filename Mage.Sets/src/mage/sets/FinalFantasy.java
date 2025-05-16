@@ -246,6 +246,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 327, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 34, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 433, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Anima", 120, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Anima", 364, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 1, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 356, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Ramuh", 161, Rarity.UNCOMMON, mage.cards.s.SummonEsperRamuh.class, NON_FULL_USE_VARIOUS));
