@@ -31,7 +31,7 @@ public final class KrovodHaunch extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
 
         // {2}, {T}, Sacrifice Krovod Haunch: You gain 3 life.
-        this.addAbility(new FoodAbility(true));
+        this.addAbility(new FoodAbility());
 
         // When Krovod Haunch is put into a graveyard from the battlefield, you may pay {1}{W}. If you do, create two 1/1 white Dog creature tokens.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(

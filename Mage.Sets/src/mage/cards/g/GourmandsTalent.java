@@ -97,7 +97,7 @@ class GourmandsTalentEffect extends ContinuousEffectImpl {
                     permanent.addSubType(game, SubType.FOOD);
                     break;
                 case AbilityAddingRemovingEffects_6:
-                    permanent.addAbility(new FoodAbility(true), source.getSourceId(), game);
+                    permanent.addAbility(new FoodAbility(), source.getSourceId(), game);
                     break;
             }
         }
