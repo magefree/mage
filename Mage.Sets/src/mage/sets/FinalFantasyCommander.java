@@ -112,6 +112,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cyan, Vengeful Samurai", 132, Rarity.RARE, mage.cards.c.CyanVengefulSamurai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cyan, Vengeful Samurai", 16, Rarity.RARE, mage.cards.c.CyanVengefulSamurai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Damning Verdict", 239, Rarity.RARE, mage.cards.d.DamningVerdict.class));
+        cards.add(new SetCardInfo("Dancer's Chakrams", 17, Rarity.RARE, mage.cards.d.DancersChakrams.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dancer's Chakrams", 105, Rarity.RARE, mage.cards.d.DancersChakrams.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Plate", 342, Rarity.RARE, mage.cards.d.DarksteelPlate.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 384, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Decimate", 323, Rarity.RARE, mage.cards.d.Decimate.class));
