@@ -182,6 +182,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 305, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 575, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Namazu Trader", 107, Rarity.COMMON, mage.cards.n.NamazuTrader.class));
+        cards.add(new SetCardInfo("Paladin's Arms", 28, Rarity.COMMON, mage.cards.p.PaladinsArms.class));
         cards.add(new SetCardInfo("Phantom Train", 110, Rarity.UNCOMMON, mage.cards.p.PhantomTrain.class));
         cards.add(new SetCardInfo("Phoenix Down", 29, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phoenix Down", 578, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
