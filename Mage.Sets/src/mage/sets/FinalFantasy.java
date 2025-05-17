@@ -46,6 +46,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Braska's Final Aeon", 104, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Braska's Final Aeon", 363, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Braska's Final Aeon", 448, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Buster Sword", 255, Rarity.MYTHIC, mage.cards.b.BusterSword.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Buster Sword", 351, Rarity.MYTHIC, mage.cards.b.BusterSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Capital City", 274, Rarity.UNCOMMON, mage.cards.c.CapitalCity.class));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 380, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 445, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
