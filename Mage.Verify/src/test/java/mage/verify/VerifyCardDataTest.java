@@ -4,10 +4,7 @@ import com.google.common.base.CharMatcher;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.AbilityImpl;
-import mage.abilities.Mode;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -43,7 +40,6 @@ import mage.sets.TherosBeyondDeath;
 import mage.target.Target;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
-import mage.util.functions.CopyApplier;
 import mage.utils.SystemUtil;
 import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
@@ -2005,8 +2001,50 @@ public class VerifyCardDataTest {
         }
     }
 
-    //soulshift and provoke should be added, but it currently adds target inside of effect
-    Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|each copy|more) )target(s?)|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow)\\b", Pattern.MULTILINE);
+    Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|each copy|with one or more|could|it) )targets?|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow|soulshift|provoke)\\b(?! (cost|abilit))", Pattern.MULTILINE);
+    Pattern recursiveTargetRegexPattern = Pattern.compile("\\b((?!^)when|gain|have|has|\\. At the beginning|with|until)\\b.*targets?\\b", Pattern.MULTILINE);
+
+    boolean recursiveTargetEffectCheck(Effect effect, int depth) {
+        if (depth > 5){
+            return false;
+        }
+        return Arrays.stream(effect.getClass().getDeclaredFields())
+                .anyMatch(f -> {
+                    Class fieldType = f.getType();
+                    f.setAccessible(true);
+                    try {
+                        Object obj = f.get(effect);
+                        if (obj != null) {
+                            if (Effect.class.isAssignableFrom(fieldType)) {
+                                return recursiveTargetEffectCheck((Effect) obj, depth+1);
+                            }
+                            if (Ability.class.isAssignableFrom(fieldType)) {
+                                return recursiveTargetAbilityCheck((Ability) obj, depth+1);
+                            }
+                            if (Token.class.isAssignableFrom(fieldType)) {
+                                return ((Token) obj).getAbilities().stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, depth+1));
+                            }
+                            if (Collection.class.isAssignableFrom(fieldType)) {
+                                return true;
+                            }
+                        }
+                    } catch (IllegalAccessException ex) {
+                        throw new RuntimeException(ex);//Should never happen due to setAccessible
+                    }
+                    return false;
+                });
+    }
+
+    boolean recursiveTargetAbilityCheck(Ability ability, int depth) {
+        if (ability instanceof SoulshiftAbility || ability instanceof ProvokeAbility){
+            return true; //Not really recursive, but currently adds target inside of ability effect
+        }
+        Collection<Mode> modes = ability.getModes().values();
+        return modes.stream().flatMap(mode -> mode.getTargets().stream()).anyMatch(target -> !target.isNotTarget())
+                | ability.getTargetAdjuster() != null
+                | modes.stream().flatMap(mode -> mode.getEffects().stream()).anyMatch(effect -> recursiveTargetEffectCheck(effect, depth+1));
+    }
+
     private void checkMissingAbilities(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_MISSING_ABILITIES, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -2199,7 +2237,9 @@ public class VerifyCardDataTest {
                 }
             }
         }
+
         boolean needTargetedAbility = targetRegexPattern.matcher(refLowerText).find();
+        boolean recursiveAbilityRef = recursiveTargetRegexPattern.matcher(refLowerText).find();
         List<Ability> abilities = card.getAbilities().copy();
         if (card.getSecondCardFace() != null) {
             abilities.addAll(card.getSecondCardFace().getAbilities());
@@ -2212,19 +2252,11 @@ public class VerifyCardDataTest {
         }
         boolean foundTargetedAbility = targets.stream().anyMatch(target -> !target.isNotTarget())
                 | abilities.stream().anyMatch(x -> x.getTargetAdjuster() != null);
+        //Soulshift and Provoke aren't real recursive abilities, but they add the target inside of the ability which can't currently be detected
+        //Possibly should be replaced with TargetAdjuster?
+        boolean recursiveAbilityCard = abilities.stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, 0));
 
-        boolean recursiveAbility = abilities.stream().flatMap(ability -> ability.getModes().values().stream())
-                .flatMap(mode -> mode.getEffects().stream()).anyMatch(
-                        effect -> Arrays.stream(effect.getClass().getDeclaredFields())
-                                .anyMatch(f -> {
-                                    Class fieldType = f.getType();
-                                    return Effect.class.isAssignableFrom(fieldType)
-                                            || CopyApplier.class.isAssignableFrom(fieldType)
-                                            || Token.class.isAssignableFrom(fieldType)
-                                            || Collection.class.isAssignableFrom(fieldType)
-                                            || Ability.class.isAssignableFrom(fieldType);
-                                }));
-        if (checkMissTargeted && needTargetedAbility && !(foundTargetedAbility || recursiveAbility)) {
+        if (checkMissTargeted && needTargetedAbility && !(foundTargetedAbility || recursiveAbilityRef || recursiveAbilityCard)) {
             fail(card, "abilities", "wrong target settings (must be targeted, but is not)");
         }
         if (checkMissNonTargeted && !needTargetedAbility && foundTargetedAbility) {
