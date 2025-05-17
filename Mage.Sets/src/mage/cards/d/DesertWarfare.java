@@ -5,10 +5,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -24,7 +22,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.SacrificedPermanentEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SandWarriorToken;
@@ -91,10 +88,6 @@ class DesertWarfareTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!(event instanceof ZoneChangeEvent) && !(event instanceof SacrificedPermanentEvent)) {
-            return false;
-        }
-        Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
         if (event instanceof ZoneChangeEvent) {
             ZoneChangeEvent zce = (ZoneChangeEvent) event;
             Card card = game.getCard(event.getTargetId());
@@ -106,7 +99,6 @@ class DesertWarfareTriggeredAbility extends TriggeredAbilityImpl {
                     && zce.getFromZone() != Zone.LIBRARY)) {
                 return false;
             }
-            effect.setTargetPointer(new FixedTarget(card, game));
         } else {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (permanent == null
@@ -114,8 +106,9 @@ class DesertWarfareTriggeredAbility extends TriggeredAbilityImpl {
                     || !permanent.hasSubtype(SubType.DESERT, game)) {
                 return false;
             }
-            effect.setTargetPointer(new FixedTarget(permanent, game));
         }
+        Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
+        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.YOU), this);
         return true;
     }
