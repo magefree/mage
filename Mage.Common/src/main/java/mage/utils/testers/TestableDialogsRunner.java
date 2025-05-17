@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  * [x] chooseUse
  * [x] choosePile
  * [x] announceX
- * [ ] getAmount // TODO: implement
+ * [x] getAmount
  * [ ] getMultiAmountWithIndividualConstraints // TODO: implement
  * <p>
  * Support of priority dialogs (can be called by game engine, some can be implemented in theory):
@@ -74,6 +74,7 @@ public class TestableDialogsRunner {
         ChoosePileTestableDialog.register(this);
         ChooseAmountTestableDialog.register(this);
         AnnounceXTestableDialog.register(this);
+        GetAmountTestableDialog.register(this);
     }
 
     void registerDialog(TestableDialog dialog) {
