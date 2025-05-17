@@ -40,8 +40,10 @@ import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.game.permanent.token.custom.XmageToken;
 import mage.sets.TherosBeyondDeath;
+import mage.target.Target;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
+import mage.util.functions.CopyApplier;
 import mage.utils.SystemUtil;
 import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
@@ -70,7 +72,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "WHO"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
@@ -1939,7 +1941,6 @@ public class VerifyCardDataTest {
             }
         }
     }
-
     private void checkSubtypes(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_SUBTYPE, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -2004,6 +2005,8 @@ public class VerifyCardDataTest {
         }
     }
 
+    //soulshift and provoke should be added, but it currently adds target inside of effect
+    Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|each copy|more) )target(s?)|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow)\\b", Pattern.MULTILINE);
     private void checkMissingAbilities(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_MISSING_ABILITIES, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -2175,15 +2178,7 @@ public class VerifyCardDataTest {
         // * on "must be targeted":
         //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
         boolean checkMissNonTargeted = !(card instanceof OmenCard); // must set withNotTarget(true) temporarily set to ignore omen cards
-        boolean checkMissTargeted = false; // must be targeted
-        List<String> targetedKeywords = Arrays.asList(
-                "target",
-                "enchant",
-                "equip",
-                "backup",
-                "modular",
-                "partner"
-        );
+        boolean checkMissTargeted = true; // must be targeted
         // card can contain rules text from both sides, so must search ref card for all sides too
         String additionalName;
         if (card instanceof AdventureCard) { // temporary to prevent failure due to upstream error
@@ -2204,18 +2199,36 @@ public class VerifyCardDataTest {
                 }
             }
         }
-        boolean needTargetedAbility = targetedKeywords.stream().anyMatch(refLowerText::contains);
-        boolean foundTargetedAbility = card.getAbilities()
-                .stream()
-                .map(Ability::getTargets)
-                .flatMap(Collection::stream)
-                .anyMatch(target -> !target.isNotTarget());
-        boolean foundProblem = needTargetedAbility != foundTargetedAbility;
-        if (checkMissTargeted && needTargetedAbility && foundProblem) {
-            fail(card, "abilities", "wrong target settings (must be targeted, but it not)");
+        boolean needTargetedAbility = targetRegexPattern.matcher(refLowerText).find();
+        List<Ability> abilities = card.getAbilities().copy();
+        if (card.getSecondCardFace() != null) {
+            abilities.addAll(card.getSecondCardFace().getAbilities());
         }
-        if (checkMissNonTargeted && !needTargetedAbility && foundProblem) {
-            fail(card, "abilities", "wrong target settings (must set withNotTarget(true), but it not)");
+        List<Target> targets = abilities.stream().flatMap(ability -> ability.getModes().values().stream()
+                .flatMap(mode -> mode.getTargets().stream())).collect(Collectors.toList());
+        boolean foundNotTarget = targets.stream().anyMatch(Target::isNotTarget);
+        if (foundNotTarget) {
+            fail(card, "abilities", "notTarget should not be used as ability target, should be inside ability effect");
+        }
+        boolean foundTargetedAbility = targets.stream().anyMatch(target -> !target.isNotTarget())
+                | abilities.stream().anyMatch(x -> x.getTargetAdjuster() != null);
+
+        boolean recursiveAbility = abilities.stream().flatMap(ability -> ability.getModes().values().stream())
+                .flatMap(mode -> mode.getEffects().stream()).anyMatch(
+                        effect -> Arrays.stream(effect.getClass().getDeclaredFields())
+                                .anyMatch(f -> {
+                                    Class fieldType = f.getType();
+                                    return Effect.class.isAssignableFrom(fieldType)
+                                            || CopyApplier.class.isAssignableFrom(fieldType)
+                                            || Token.class.isAssignableFrom(fieldType)
+                                            || Collection.class.isAssignableFrom(fieldType)
+                                            || Ability.class.isAssignableFrom(fieldType);
+                                }));
+        if (checkMissTargeted && needTargetedAbility && !(foundTargetedAbility || recursiveAbility)) {
+            fail(card, "abilities", "wrong target settings (must be targeted, but is not)");
+        }
+        if (checkMissNonTargeted && !needTargetedAbility && foundTargetedAbility) {
+            fail(card, "abilities", "wrong target settings (targeted ability found but no target in text)");
         }
 
         // special check: missing or wrong ability/effect rules hint
