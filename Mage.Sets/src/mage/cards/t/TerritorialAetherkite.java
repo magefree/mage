@@ -83,7 +83,7 @@ class TerritorialAetherkiteEffect extends OneShotEffect {
         }
         new GetEnergyCountersControllerEffect(2).apply(game, source);
         int energyToPay = controller.getAmount(0, controller.getCountersCount(CounterType.ENERGY),
-                "Pay any amount of {E}", game);
+                "Pay any amount of {E}", source, game);
         if (energyToPay == 0) {
             return true;
         }

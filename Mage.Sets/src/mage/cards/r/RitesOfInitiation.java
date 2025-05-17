@@ -56,7 +56,7 @@ class RitesOfInitiationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {            
-            int numToDiscard = player.getAmount(0, player.getHand().size(), "Discard how many cards at random?", game);
+            int numToDiscard = player.getAmount(0, player.getHand().size(), "Discard how many cards at random?", source, game);
             player.discard(numToDiscard, true, false, source, game);
             game.addEffect(new BoostControlledEffect(numToDiscard, 0, Duration.EndOfTurn), source);
             return true;

@@ -204,7 +204,7 @@ class SagaLoreCountersEffect extends OneShotEffect {
         }
         int counters = player.getAmount(
                 1, maxChapter.getNumber(),
-                "Choose the number of lore counters to enter with", game
+                "Choose the number of lore counters to enter with", source, game
         );
         return permanent.addCounters(CounterType.LORE.createInstance(counters), source, game);
     }

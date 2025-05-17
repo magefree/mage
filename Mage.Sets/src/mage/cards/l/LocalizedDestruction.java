@@ -88,7 +88,7 @@ class LocalizedDestructionEffect extends OneShotEffect {
         }
 
         int numberToPay = controller.getAmount(1, totalEnergy,
-                "Pay one or more {E}", game);
+                "Pay one or more {E}", source, game);
 
         Cost cost = new PayEnergyCost(numberToPay);
 

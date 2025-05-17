@@ -67,7 +67,7 @@ class WheelOfPotentialEffect extends OneShotEffect {
         }
         int numberToPay = controller.getAmount(
                 0, controller.getCountersCount(CounterType.ENERGY),
-                "How many {E} do you want to pay?", game
+                "How many {E} do you want to pay?", source, game
         );
         Cost cost = new PayEnergyCost(numberToPay);
         int numberPaid = 0;

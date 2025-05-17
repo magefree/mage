@@ -114,7 +114,7 @@ class EsperTerraEffect extends OneShotEffect {
             Optional.ofNullable(source.getControllerId())
                     .map(game::getPlayer)
                     .map(player -> player.getAmount(
-                            0, 3, "Choose how many lore counters to put on " + token.getIdName(), game
+                            0, 3, "Choose how many lore counters to put on " + token.getIdName(), source, game
                     ))
                     .filter(amount -> amount > 0)
                     .ifPresent(amount -> token.addCounters(CounterType.LORE.createInstance(amount), source, game));

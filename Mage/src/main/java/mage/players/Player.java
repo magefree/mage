@@ -763,7 +763,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void selectBlockers(Ability source, Game game, UUID defendingPlayerId);
 
-    int getAmount(int min, int max, String message, Game game);
+    /**
+     *
+     * @param source can be null for system actions like define damage
+     */
+    int getAmount(int min, int max, String message, Ability source, Game game);
 
     /**
      * Player distributes amount among multiple options

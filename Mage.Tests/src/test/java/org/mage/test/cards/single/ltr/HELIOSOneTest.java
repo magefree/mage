@@ -29,7 +29,7 @@ public class HELIOSOneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Memnite");
 
-        setChoice(playerA, "X=0");
+        //setChoice(playerA, "X=0"); // auto-choose X=0
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}");
         addTarget(playerA, "Memnite");
 
@@ -52,7 +52,10 @@ public class HELIOSOneTest extends CardTestPlayerBase {
 
         // TODO: So the test suite let's you activate the ability (as it does not go to adjust targets to check them.)
         //       But X=0 is not a valid choice once targets are checked (no nonland card with that MV in play).
-        setChoice(playerA, "X=0");
+        checkPlayableAbility("Pay X {E} ability is playable, but can't be activated",
+                1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}", true);
+        showAvailableAbilities("hmm", 1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        //setChoice(playerA, "X=0"); // auto-choose X=0
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}");
         addTarget(playerA, "Elite Vanguard"); // not a valid target for X=0 energy payment
@@ -65,7 +68,7 @@ public class HELIOSOneTest extends CardTestPlayerBase {
         } catch (AssertionError e) {
             Assert.assertTrue(
                     "X=0 is not a valid choice. Error message:\n" + e.getMessage(),
-                    e.getMessage().contains("Message: Announce the value for {X}")
+                    e.getMessage().contains("Can't find ability to activate command: {3}")
             );
         }
     }

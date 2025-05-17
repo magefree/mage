@@ -69,7 +69,7 @@ class YusriFortunesFlameEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int flips = player.getAmount(1, 5, "Choose a number between 1 and 5", game);
+        int flips = player.getAmount(1, 5, "Choose a number between 1 and 5", source, game);
         int wins = 0;
         int losses = 0;
         for (int i = 0; i < flips; i++) {

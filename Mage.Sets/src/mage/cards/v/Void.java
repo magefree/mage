@@ -64,7 +64,7 @@ class VoidEffect extends OneShotEffect {
             return false;
         }
         
-        int number = controller.getAmount(0, Integer.MAX_VALUE, "Choose a number (mana cost to destroy)", game);
+        int number = controller.getAmount(0, Integer.MAX_VALUE, "Choose a number (mana cost to destroy)", source, game);
         game.informPlayers(controller.getLogName() + " chooses " + number + '.');
      
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {

@@ -2917,6 +2917,12 @@ public class TestPlayer implements Player {
     @Override
     public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
         assertAliasSupportInChoices(false);
+
+        // fast calc on nothing to choose
+        if (min >= max) {
+            return min;
+        }
+
         if (!choices.isEmpty()) {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
@@ -2949,8 +2955,14 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int getAmount(int min, int max, String message, Game game) {
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
         assertAliasSupportInChoices(false);
+
+        // fast calc on nothing to choose
+        if (min >= max) {
+            return min;
+        }
+
         if (!choices.isEmpty()) {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
@@ -2960,7 +2972,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, message);
-        return computerPlayer.getAmount(min, max, message, game);
+        return computerPlayer.getAmount(min, max, message, source, game);
     }
 
     @Override
