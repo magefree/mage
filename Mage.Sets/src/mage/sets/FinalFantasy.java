@@ -216,6 +216,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Sazh Katzroy", 199, Rarity.RARE, mage.cards.s.SazhKatzroy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sazh Katzroy", 472, Rarity.RARE, mage.cards.s.SazhKatzroy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sazh's Chocobo", 200, Rarity.UNCOMMON, mage.cards.s.SazhsChocobo.class));
+        cards.add(new SetCardInfo("Self-Destruct", 157, Rarity.UNCOMMON, mage.cards.s.SelfDestruct.class));
         cards.add(new SetCardInfo("Sephiroth's Intervention", 116, Rarity.COMMON, mage.cards.s.SephirothsIntervention.class));
         cards.add(new SetCardInfo("Sephiroth, Fabled SOLDIER", 115, Rarity.MYTHIC, mage.cards.s.SephirothFabledSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Fabled SOLDIER", 317, Rarity.MYTHIC, mage.cards.s.SephirothFabledSOLDIER.class, NON_FULL_USE_VARIOUS));
