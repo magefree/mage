@@ -2036,9 +2036,6 @@ public class VerifyCardDataTest {
     }
 
     boolean recursiveTargetAbilityCheck(Ability ability, int depth) {
-        if (ability instanceof SoulshiftAbility || ability instanceof ProvokeAbility){
-            return true; //Not really recursive, but currently adds target inside of ability effect
-        }
         Collection<Mode> modes = ability.getModes().values();
         return modes.stream().flatMap(mode -> mode.getTargets().stream()).anyMatch(target -> !target.isNotTarget())
                 | ability.getTargetAdjuster() != null

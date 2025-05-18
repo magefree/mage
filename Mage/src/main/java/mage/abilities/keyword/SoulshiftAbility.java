@@ -2,19 +2,15 @@
 
 package mage.abilities.keyword;
 
-import mage.constants.ComparisonType;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
+import mage.target.targetadjustment.ManaValueTargetAdjuster;
 
 /**
  * 702.45. Soulshift
@@ -38,22 +34,15 @@ public class SoulshiftAbility extends DiesSourceTriggeredAbility {
     public SoulshiftAbility(DynamicValue amount) {
         super(new ReturnToHandTargetEffect());
         this.amount = amount;
+        FilterCard filter = new FilterCard("Spirit card from your graveyard");
+        filter.add(SubType.SPIRIT.getPredicate());
+        this.addTarget(new TargetCardInYourGraveyard(filter));
+        this.setTargetAdjuster(new ManaValueTargetAdjuster(amount, ComparisonType.OR_LESS));
     }
 
     protected SoulshiftAbility(final SoulshiftAbility ability) {
         super(ability);
         this.amount = ability.amount;
-    }
-
-    @Override
-    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
-        this.getTargets().clear();
-        int intValue = amount.calculate(game, this, null);
-        FilterCard filter = new FilterCard("Spirit card with mana value " + intValue + " or less from your graveyard");
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, intValue + 1));
-        filter.add(SubType.SPIRIT.getPredicate());
-        this.addTarget(new TargetCardInYourGraveyard(filter));
-        super.trigger(game, controllerId, triggeringEvent);
     }
 
     @Override
