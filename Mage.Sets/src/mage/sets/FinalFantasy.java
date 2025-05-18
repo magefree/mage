@@ -314,6 +314,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Triple Triad", 166, Rarity.RARE, mage.cards.t.TripleTriad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Triple Triad", 340, Rarity.RARE, mage.cards.t.TripleTriad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultima Weapon", 563, Rarity.RARE, mage.cards.u.UltimaWeapon.class));
+        cards.add(new SetCardInfo("Ultima, Origin of Oblivion", 2, Rarity.RARE, mage.cards.u.UltimaOriginOfOblivion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ultima, Origin of Oblivion", 324, Rarity.RARE, mage.cards.u.UltimaOriginOfOblivion.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ultima, Origin of Oblivion", 421, Rarity.RARE, mage.cards.u.UltimaOriginOfOblivion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Omnipotent", 247, Rarity.UNCOMMON, mage.cards.u.UltimeciaOmnipotent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Omnipotent", 513, Rarity.UNCOMMON, mage.cards.u.UltimeciaOmnipotent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimecia, Temporal Threat", 441, Rarity.RARE, mage.cards.u.UltimeciaTemporalThreat.class, NON_FULL_USE_VARIOUS));
