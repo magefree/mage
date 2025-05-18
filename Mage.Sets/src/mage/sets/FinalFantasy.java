@@ -128,6 +128,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Galian Beast", 383, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galian Beast", 454, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galian Beast", 528, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Galuf's Final Act", 186, Rarity.UNCOMMON, mage.cards.g.GalufsFinalAct.class));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 221, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 486, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 139, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
