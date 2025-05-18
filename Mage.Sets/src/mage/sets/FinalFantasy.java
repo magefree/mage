@@ -333,6 +333,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Y'shtola Rhul", 443, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 577, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 86, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Hope of Spira", 250, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Hope of Spira", 404, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Hope of Spira", 517, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Hope of Spira", 549, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zanarkand, Ancient Metropolis", 293, Rarity.RARE, mage.cards.z.ZanarkandAncientMetropolis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zanarkand, Ancient Metropolis", 314, Rarity.RARE, mage.cards.z.ZanarkandAncientMetropolis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zell Dincht", 170, Rarity.RARE, mage.cards.z.ZellDincht.class, NON_FULL_USE_VARIOUS));
