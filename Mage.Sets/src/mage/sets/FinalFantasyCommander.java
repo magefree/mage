@@ -365,6 +365,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Unfinished Business", 259, Rarity.RARE, mage.cards.u.UnfinishedBusiness.class));
         cards.add(new SetCardInfo("Vandalblast", 298, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vanquish the Horde", 260, Rarity.RARE, mage.cards.v.VanquishTheHorde.class));
+        cards.add(new SetCardInfo("Vincent, Vengeful Atoner", 157, Rarity.RARE, mage.cards.v.VincentVengefulAtoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vincent, Vengeful Atoner", 64, Rarity.RARE, mage.cards.v.VincentVengefulAtoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vindicate", 330, Rarity.RARE, mage.cards.v.Vindicate.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 440, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
         cards.add(new SetCardInfo("Void Rend", 331, Rarity.RARE, mage.cards.v.VoidRend.class));
