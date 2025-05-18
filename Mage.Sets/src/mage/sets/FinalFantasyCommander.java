@@ -305,6 +305,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Magus Sisters", 71, Rarity.RARE, mage.cards.s.SummonMagusSisters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Yojimbo", 196, Rarity.RARE, mage.cards.s.SummonYojimbo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Yojimbo", 28, Rarity.RARE, mage.cards.s.SummonYojimbo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summoner's Sending", 109, Rarity.RARE, mage.cards.s.SummonersSending.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summoner's Sending", 29, Rarity.RARE, mage.cards.s.SummonersSending.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summoning Materia", 124, Rarity.RARE, mage.cards.s.SummoningMateria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summoning Materia", 72, Rarity.RARE, mage.cards.s.SummoningMateria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sun Titan", 254, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
