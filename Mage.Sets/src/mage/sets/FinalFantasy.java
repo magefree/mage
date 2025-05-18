@@ -94,6 +94,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Coeurl", 12, Rarity.COMMON, mage.cards.c.Coeurl.class));
         cards.add(new SetCardInfo("Commune with Beavers", 182, Rarity.COMMON, mage.cards.c.CommuneWithBeavers.class));
         cards.add(new SetCardInfo("Cooking Campsite", 31, Rarity.UNCOMMON, mage.cards.c.CookingCampsite.class));
+        cards.add(new SetCardInfo("Crystallized Serah", 240, Rarity.RARE, mage.cards.c.CrystallizedSerah.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Crystallized Serah", 506, Rarity.RARE, mage.cards.c.CrystallizedSerah.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 334, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 94, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deadly Embrace", 557, Rarity.RARE, mage.cards.d.DeadlyEmbrace.class));
@@ -236,6 +238,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Sephiroth, One-Winged Angel", 527, Rarity.MYTHIC, mage.cards.s.SephirothOneWingedAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 505, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 553, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Serah Farron", 240, Rarity.RARE, mage.cards.s.SerahFarron.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Serah Farron", 506, Rarity.RARE, mage.cards.s.SerahFarron.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seymour Flux", 452, Rarity.RARE, mage.cards.s.SeymourFlux.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Seymour Flux", 558, Rarity.RARE, mage.cards.s.SeymourFlux.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shambling Cie'th", 117, Rarity.UNCOMMON, mage.cards.s.ShamblingCieth.class));
