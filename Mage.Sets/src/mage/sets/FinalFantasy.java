@@ -166,6 +166,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Judgment Bolt", 559, Rarity.RARE, mage.cards.j.JudgmentBolt.class));
         cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 343, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kain, Traitorous Dragoon", 105, Rarity.RARE, mage.cards.k.KainTraitorousDragoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kain, Traitorous Dragoon", 316, Rarity.RARE, mage.cards.k.KainTraitorousDragoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kain, Traitorous Dragoon", 449, Rarity.RARE, mage.cards.k.KainTraitorousDragoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 232, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 399, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 497, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
