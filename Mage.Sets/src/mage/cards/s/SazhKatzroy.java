@@ -37,7 +37,7 @@ public final class SazhKatzroy extends CardImpl {
     }
 
     public SazhKatzroy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
