@@ -10,7 +10,7 @@ import mage.target.targetpointer.TargetPointer;
 public class OneShotNonTargetEffect extends OneShotEffect {
     OneShotEffect effect;
     Target notTarget;
-    TargetAdjuster adjuster;
+    TargetAdjuster adjuster = null;
 
     public OneShotNonTargetEffect(OneShotEffect effect, Target notTarget) {
         super(effect.outcome);
@@ -42,7 +42,9 @@ public class OneShotNonTargetEffect extends OneShotEffect {
         Target target = notTarget.copy();
         Ability modifiedSource = source.copy();
         modifiedSource.addTarget(target);
-        adjuster.adjustTargets(modifiedSource, game);
+        if (adjuster != null) {
+            adjuster.adjustTargets(modifiedSource, game);
+        }
         if (target.canChoose(source.getControllerId(), modifiedSource, game)) {
             target.choose(this.outcome, source.getControllerId(), modifiedSource, game);
             return effect.apply(game, modifiedSource);
