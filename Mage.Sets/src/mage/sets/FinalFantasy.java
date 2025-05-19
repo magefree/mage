@@ -204,6 +204,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 572, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Poison the Waters", 111, Rarity.UNCOMMON, mage.cards.p.PoisonTheWaters.class));
         cards.add(new SetCardInfo("PuPu UFO", 266, Rarity.UNCOMMON, mage.cards.p.PuPuUFO.class));
+        cards.add(new SetCardInfo("Quina, Qu Gourmet", 194, Rarity.UNCOMMON, mage.cards.q.QuinaQuGourmet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Quina, Qu Gourmet", 471, Rarity.UNCOMMON, mage.cards.q.QuinaQuGourmet.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quistis Trepe", 440, Rarity.UNCOMMON, mage.cards.q.QuistisTrepe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Quistis Trepe", 66, Rarity.UNCOMMON, mage.cards.q.QuistisTrepe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rabanastre, Royal City", 287, Rarity.COMMON, mage.cards.r.RabanastreRoyalCity.class));
