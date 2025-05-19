@@ -3,6 +3,7 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.common.ControlACommanderCondition;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
@@ -34,8 +35,9 @@ public final class SOLDIERMilitaryProgram extends CardImpl {
         ability.getModes().setMoreCondition(2, ControlACommanderCondition.instance);
 
         // * Put a +1/+1 counter on each of up to two Soldiers you control.
-        ability.addMode(new Mode(new AddCountersTargetEffect(CounterType.P1P1.createInstance()))
-                .addTarget(new TargetPermanent(0, 2, filter)));
+        ability.addMode(new Mode(new OneShotNonTargetEffect(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new TargetPermanent(0, 2, filter))));
         this.addAbility(ability);
     }
 
