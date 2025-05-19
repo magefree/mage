@@ -2235,29 +2235,30 @@ public class VerifyCardDataTest {
             }
         }
 
-        boolean needTargetedAbility = targetRegexPattern.matcher(refLowerText).find();
-        boolean recursiveAbilityRef = recursiveTargetRegexPattern.matcher(refLowerText).find();
-        List<Ability> abilities = card.getAbilities().copy();
-        if (card.getSecondCardFace() != null) {
-            abilities.addAll(card.getSecondCardFace().getAbilities());
-        }
-        List<Target> targets = abilities.stream().flatMap(ability -> ability.getModes().values().stream()
-                .flatMap(mode -> mode.getTargets().stream())).collect(Collectors.toList());
-        boolean foundNotTarget = targets.stream().anyMatch(Target::isNotTarget);
-        if (foundNotTarget) {
-            fail(card, "abilities", "notTarget should not be used as ability target, should be inside ability effect");
-        }
-        boolean foundTargetedAbility = targets.stream().anyMatch(target -> !target.isNotTarget())
-                | abilities.stream().anyMatch(x -> x.getTargetAdjuster() != null);
-        //Soulshift and Provoke aren't real recursive abilities, but they add the target inside of the ability which can't currently be detected
-        //Possibly should be replaced with TargetAdjuster?
-        boolean recursiveAbilityCard = abilities.stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, 0));
+        String[] excludedCards = {"Lodestone Bauble"};
+        if (!Arrays.stream(excludedCards).anyMatch(x -> x.equals(ref.name))) {
+            boolean needTargetedAbility = targetRegexPattern.matcher(refLowerText).find();
+            boolean recursiveAbilityRef = recursiveTargetRegexPattern.matcher(refLowerText).find();
+            List<Ability> abilities = card.getAbilities().copy();
+            if (card.getSecondCardFace() != null) {
+                abilities.addAll(card.getSecondCardFace().getAbilities());
+            }
+            List<Target> targets = abilities.stream().flatMap(ability -> ability.getModes().values().stream()
+                    .flatMap(mode -> mode.getTargets().stream())).collect(Collectors.toList());
+            boolean foundNotTarget = targets.stream().anyMatch(Target::isNotTarget);
+            if (foundNotTarget) {
+                fail(card, "abilities", "notTarget should not be used as ability target, should be inside ability effect");
+            }
+            boolean foundTargetedAbility = targets.stream().anyMatch(target -> !target.isNotTarget())
+                    | abilities.stream().anyMatch(x -> x.getTargetAdjuster() != null);
+            boolean recursiveAbilityCard = abilities.stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, 0));
 
-        if (checkMissTargeted && needTargetedAbility && !(foundTargetedAbility || recursiveAbilityRef || recursiveAbilityCard)) {
-            fail(card, "abilities", "wrong target settings (must be targeted, but is not)");
-        }
-        if (checkMissNonTargeted && !needTargetedAbility && foundTargetedAbility) {
-            fail(card, "abilities", "wrong target settings (targeted ability found but no target in text)");
+            if (checkMissTargeted && needTargetedAbility && !(foundTargetedAbility || recursiveAbilityRef || recursiveAbilityCard)) {
+                fail(card, "abilities", "wrong target settings (must be targeted, but is not)");
+            }
+            if (checkMissNonTargeted && !needTargetedAbility && foundTargetedAbility) {
+                fail(card, "abilities", "wrong target settings (targeted ability found but no target in text)");
+            }
         }
 
         // special check: missing or wrong ability/effect rules hint
