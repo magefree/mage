@@ -7,15 +7,16 @@ import mage.target.Target;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.TargetPointer;
 
+/**
+ * @author notgreat
+ */
 public class OneShotNonTargetEffect extends OneShotEffect {
     OneShotEffect effect;
     Target notTarget;
-    TargetAdjuster adjuster = null;
+    TargetAdjuster adjuster;
 
     public OneShotNonTargetEffect(OneShotEffect effect, Target notTarget) {
-        super(effect.outcome);
-        this.effect = effect.copy();
-        this.notTarget = notTarget.copy();
+        this(effect, notTarget, null);
     }
 
     public OneShotNonTargetEffect(OneShotEffect effect, Target notTarget, TargetAdjuster adjuster) {

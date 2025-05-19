@@ -14,7 +14,7 @@ import mage.target.common.TargetControlledPermanent;
 import java.util.UUID;
 
 /**
- * @author jeffwadsworth
+ * @author notgreat
  */
 public class PutCountersTargetCost extends CostImpl {
 
