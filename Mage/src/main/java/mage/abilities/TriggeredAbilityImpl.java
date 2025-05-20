@@ -27,6 +27,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     private boolean optional;
     private Condition interveningIfCondition;
+    private Condition triggerCondition;
     private boolean leavesTheBattlefieldTrigger;
     private int triggerLimitEachTurn = Integer.MAX_VALUE; // for "triggers only once|twice each turn"
     private int triggerLimitEachGame = Integer.MAX_VALUE; // for "triggers only once|twice"
@@ -69,7 +70,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         //20091005 - 603.4
-        if (checkInterveningIfClause(game)) {
+        if (checkInterveningIfClause(game) && checkTriggerCondition(game)) {
             updateTurnCount(game);
             updateGameCount(game);
             game.addTriggeredAbility(this, triggeringEvent);
@@ -226,6 +227,25 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean checkInterveningIfClause(Game game) {
         return interveningIfCondition == null || interveningIfCondition.apply(game, this);
+    }
+
+    @Override
+    public TriggeredAbility withTriggerCondition(Condition condition, String phrase) {
+        this.triggerCondition = condition;
+        if (this.triggerPhrase != null && phrase != null && !phrase.isEmpty()) {
+            this.setTriggerPhrase(this.triggerPhrase.substring(0, this.triggerPhrase.length() - 2) + ' ' + phrase + ", ");
+        }
+        return this;
+    }
+
+    @Override
+    public Condition getTriggerCondition() {
+        return triggerCondition;
+    }
+
+    @Override
+    public boolean checkTriggerCondition(Game game) {
+        return triggerCondition == null || triggerCondition.apply(game, this);
     }
 
     @Override

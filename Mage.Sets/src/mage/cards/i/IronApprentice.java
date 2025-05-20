@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.SourceHasCountersCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -38,10 +37,9 @@ public final class IronApprentice extends CardImpl {
         ), "with a +1/+1 counter on it"));
 
         // When Iron Apprentice dies, if it had counters on it, put those counters on target creature you control.
-        Ability ability = new ConditionalTriggeredAbility(
-                new DiesSourceTriggeredAbility(new IronApprenticeEffect()), SourceHasCountersCondition.instance,
-                "When {this} dies, if it had counters on it, put those counters on target creature you control."
-        );
+        Ability ability = new DiesSourceTriggeredAbility(new IronApprenticeEffect())
+                .withTriggerCondition(SourceHasCountersCondition.instance, "")
+                .setTriggerPhrase("When {this} dies, if it had counters on it, ");
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

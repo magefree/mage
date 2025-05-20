@@ -3,7 +3,6 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.common.LoseLifeTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedLifeLossValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -38,10 +37,10 @@ public final class KefkaRulerOfRuin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever an opponent loses life during your turn, you draw that many cards.
-        this.addAbility(new ConditionalTriggeredAbility(new LoseLifeTriggeredAbility(
+        this.addAbility(new LoseLifeTriggeredAbility(
                 new DrawCardSourceControllerEffect(SavedLifeLossValue.MANY),
                 TargetController.OPPONENT, false, false
-        ), MyTurnCondition.instance, "Whenever an opponent loses life during your turn, you draw that many cards."));
+        ).withTriggerCondition(MyTurnCondition.instance, "during your turn"));
     }
 
     private KefkaRulerOfRuin(final KefkaRulerOfRuin card) {

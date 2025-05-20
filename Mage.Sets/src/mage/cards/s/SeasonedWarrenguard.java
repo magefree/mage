@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
@@ -35,10 +34,9 @@ public final class SeasonedWarrenguard extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Seasoned Warrenguard attacks while you control a token, Seasoned Warrenguard gets +2/+0 until end of turn.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)),
-                condition, "Whenever {this} attacks while you control a token, {this} gets +2/+0 until end of turn"
-        ).addHint(hint));
+        this.addAbility(new AttacksTriggeredAbility(
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn)
+        ).withTriggerCondition(condition, "while you control a token").addHint(hint));
     }
 
     private SeasonedWarrenguard(final SeasonedWarrenguard card) {
