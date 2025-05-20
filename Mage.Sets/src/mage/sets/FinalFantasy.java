@@ -331,6 +331,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("The Prima Vista", 64, Rarity.UNCOMMON, mage.cards.t.ThePrimaVista.class));
         cards.add(new SetCardInfo("The Water Crystal", 333, Rarity.RARE, mage.cards.t.TheWaterCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Water Crystal", 85, Rarity.RARE, mage.cards.t.TheWaterCrystal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Wind Crystal", 330, Rarity.RARE, mage.cards.t.TheWindCrystal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Wind Crystal", 43, Rarity.RARE, mage.cards.t.TheWindCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tidus, Blitzball Star", 512, Rarity.UNCOMMON, mage.cards.t.TidusBlitzballStar.class));
         cards.add(new SetCardInfo("Tifa Lockhart", 206, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 391, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));

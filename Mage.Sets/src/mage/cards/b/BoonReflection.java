@@ -1,17 +1,10 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.GainDoubleLifeReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -24,7 +17,7 @@ public final class BoonReflection extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // If you would gain life, you gain twice that much life instead.
-        this.addAbility(new SimpleStaticAbility(new BoonReflectionEffect()));
+        this.addAbility(new SimpleStaticAbility(new GainDoubleLifeReplacementEffect()));
     }
 
     private BoonReflection(final BoonReflection card) {
@@ -34,38 +27,5 @@ public final class BoonReflection extends CardImpl {
     @Override
     public BoonReflection copy() {
         return new BoonReflection(this);
-    }
-}
-
-class BoonReflectionEffect extends ReplacementEffectImpl {
-
-    BoonReflectionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would gain life, you gain twice that much life instead";
-    }
-
-    private BoonReflectionEffect(final BoonReflectionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BoonReflectionEffect copy() {
-        return new BoonReflectionEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.GAIN_LIFE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId()) && (source.getControllerId() != null);
     }
 }
