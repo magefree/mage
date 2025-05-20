@@ -32,7 +32,7 @@ public final class QuilledCharger extends CardImpl {
         Ability ability = new AttacksWhileSaddledTriggeredAbility(
                 new BoostSourceEffect(1, 2, Duration.EndOfTurn).setText("it gets +1/+2")
         );
-        ability.addEffect(new GainAbilitySourceEffect(new MenaceAbility(false))
+        ability.addEffect(new GainAbilitySourceEffect(new MenaceAbility(false), Duration.EndOfTurn)
                 .setText("and gains menace until end of turn"));
         this.addAbility(ability);
 
