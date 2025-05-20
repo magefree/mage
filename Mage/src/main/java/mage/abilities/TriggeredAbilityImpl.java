@@ -58,6 +58,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         super(ability);
         this.optional = ability.optional;
         this.interveningIfCondition = ability.interveningIfCondition;
+        this.triggerCondition = ability.triggerCondition;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggerLimitEachTurn = ability.triggerLimitEachTurn;
         this.triggerLimitEachGame = ability.triggerLimitEachGame;
