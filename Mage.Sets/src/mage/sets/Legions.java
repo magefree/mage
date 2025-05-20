@@ -175,4 +175,52 @@ public final class Legions extends ExpansionSet {
         cards.add(new SetCardInfo("Withered Wretch", 86, Rarity.UNCOMMON, mage.cards.w.WitheredWretch.class, RETRO_ART));
         cards.add(new SetCardInfo("Zombie Brute", 87, Rarity.UNCOMMON, mage.cards.z.ZombieBrute.class, RETRO_ART));
     }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new LegionsCollator();
+    }
+}
+
+// Booster collation info from https://vm1.substation33.com/tiera/t/lethe/lgn.html
+// expected 5/45 rares to also be shortprinted (similar to uncommons), but no data yet on which ones
+class LegionsCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "131", "33", "123", "69", "10", "100", "129", "38", "17", "67", "30", "128", "110", "19", "70", "37", "132", "106", "12", "69", "113", "40", "72", "132", "10", "61", "113", "30", "117", "129", "17", "63", "12", "31", "123", "101", "33", "67", "20", "106", "102", "37", "14", "70", "31", "131", "102", "100", "61", "19", "40", "110", "63", "101", "14", "38", "128", "72", "20", "117");
+    private final CardRun commonB = new CardRun(true, "98", "114", "76", "41", "24", "44", "92", "82", "45", "139", "26", "136", "80", "91", "139", "9", "44", "80", "91", "140", "85", "98", "3", "54", "81", "134", "136", "29", "76", "89", "45", "114", "82", "46", "133", "92", "24", "85", "54", "133", "26", "140", "9", "81", "3", "46", "134", "89", "41", "29");
+    private final CardRun uncommonA = new CardRun(true, "7", "65", "49", "88", "137", "58", "112", "8", "145", "62", "116", "59", "141", "88", "4", "65", "145", "52", "112", "7", "62", "27", "108", "55", "141", "4", "64", "58", "145", "137", "108", "4", "58", "62", "144", "25", "116", "56", "137", "62", "8", "141", "144", "27", "88", "52", "137", "64", "55", "112", "49", "4", "59", "56", "8", "108", "7", "58", "141", "65", "144", "52", "64", "112", "62", "25", "49", "145", "27", "52", "116", "55", "8", "144", "49", "7", "88", "59", "25", "112", "56", "4", "116", "137", "65", "58", "108", "56", "25", "64", "141", "27", "65", "55", "145", "116", "8", "52", "59", "49", "108", "64", "144", "7", "59", "27", "56", "88", "25", "55");
+    private final CardRun uncommonB = new CardRun(true, "86", "93", "21", "83", "119", "94", "34", "68", "118", "93", "23", "77", "94", "122", "39", "86", "127", "21", "95", "87", "39", "97", "16", "77", "127", "83", "95", "34", "122", "16", "68", "48", "93", "39", "118", "21", "96", "97", "48", "86", "94", "39", "23", "125", "77", "95", "2", "16", "83", "48", "122", "21", "68", "119", "97", "43", "118", "87", "94", "127", "96", "86", "34", "21", "94", "83", "23", "48", "77", "34", "118", "23", "95", "127", "68", "125", "93", "119", "2", "96", "16", "43", "83", "122", "87", "119", "23", "96", "43", "86", "118", "2", "93", "34", "87", "125", "48", "96", "119", "16", "95", "43", "122", "2", "77", "97", "87", "127", "43", "125");
+    private final CardRun rare = new CardRun(false, "1", "5", "6", "11", "13", "15", "18", "22", "28", "32", "35", "36", "42", "47", "50", "51", "53", "57", "60", "66", "71", "73", "74", "75", "78", "79", "84", "90", "99", "103", "104", "105", "107", "109", "111", "115", "120", "121", "124", "126", "130", "135", "138", "142", "143");
+
+    private final BoosterStructure AAAAAABBBBB = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB, commonB
+    );
+
+    private final BoosterStructure AAB = new BoosterStructure(
+            uncommonA, uncommonA,
+            uncommonB
+    );
+    private final BoosterStructure BBA = new BoosterStructure(
+            uncommonB, uncommonB,
+            uncommonA
+    );
+
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(AAAAAABBBBB);
+
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
+            AAB, ABB
+    );
+
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        return booster;
+    }
 }
