@@ -178,6 +178,16 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Kain, Traitorous Dragoon", 105, Rarity.RARE, mage.cards.k.KainTraitorousDragoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kain, Traitorous Dragoon", 316, Rarity.RARE, mage.cards.k.KainTraitorousDragoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kain, Traitorous Dragoon", 449, Rarity.RARE, mage.cards.k.KainTraitorousDragoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Court Mage", 231, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Court Mage", 322, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Court Mage", 398, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Court Mage", 496, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Court Mage", 543, Rarity.MYTHIC, mage.cards.k.KefkaCourtMage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 231, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 322, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 398, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 496, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Ruler of Ruin", 543, Rarity.MYTHIC, mage.cards.k.KefkaRulerOfRuin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 232, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 399, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 497, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
