@@ -404,5 +404,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Zenos yae Galvus", 384, Rarity.RARE, mage.cards.z.ZenosYaeGalvus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zenos yae Galvus", 455, Rarity.RARE, mage.cards.z.ZenosYaeGalvus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zenos yae Galvus", 529, Rarity.RARE, mage.cards.z.ZenosYaeGalvus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zidane, Tantalus Thief", 251, Rarity.UNCOMMON, mage.cards.z.ZidaneTantalusThief.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zidane, Tantalus Thief", 405, Rarity.UNCOMMON, mage.cards.z.ZidaneTantalusThief.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zidane, Tantalus Thief", 518, Rarity.UNCOMMON, mage.cards.z.ZidaneTantalusThief.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zidane, Tantalus Thief", 550, Rarity.UNCOMMON, mage.cards.z.ZidaneTantalusThief.class, NON_FULL_USE_VARIOUS));
     }
 }
