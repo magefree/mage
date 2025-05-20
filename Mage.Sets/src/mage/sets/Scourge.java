@@ -211,7 +211,7 @@ class ScourgeCollator implements BoosterCollator {
     private final RarityConfiguration commonRuns = new RarityConfiguration(AAAAAABBBBB);
 
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            AAB, ABB
+            AAB, BBA
     );
 
     private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
