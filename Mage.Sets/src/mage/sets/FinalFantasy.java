@@ -178,6 +178,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Jill, Shiva's Dominant", 438, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jill, Shiva's Dominant", 523, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jill, Shiva's Dominant", 58, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Joshua, Phoenix's Dominant", 229, Rarity.RARE, mage.cards.j.JoshuaPhoenixsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Joshua, Phoenix's Dominant", 494, Rarity.RARE, mage.cards.j.JoshuaPhoenixsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Judgment Bolt", 559, Rarity.RARE, mage.cards.j.JudgmentBolt.class));
         cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 343, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
@@ -227,6 +229,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Phantom Train", 110, Rarity.UNCOMMON, mage.cards.p.PhantomTrain.class));
         cards.add(new SetCardInfo("Phoenix Down", 29, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phoenix Down", 578, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 229, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Phoenix, Warden of Fire", 494, Rarity.RARE, mage.cards.p.PhoenixWardenOfFire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 294, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 295, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 296, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
