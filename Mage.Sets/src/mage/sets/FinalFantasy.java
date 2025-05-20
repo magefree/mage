@@ -43,6 +43,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Beatrix, Loyal General", 426, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 554, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Mage's Rod", 90, Rarity.COMMON, mage.cards.b.BlackMagesRod.class));
+        cards.add(new SetCardInfo("Blitzball Shot", 176, Rarity.COMMON, mage.cards.b.BlitzballShot.class));
         cards.add(new SetCardInfo("Braska's Final Aeon", 104, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Braska's Final Aeon", 363, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Braska's Final Aeon", 448, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
