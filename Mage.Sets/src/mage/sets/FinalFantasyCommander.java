@@ -272,6 +272,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sepulchral Primordial", 284, Rarity.RARE, mage.cards.s.SepulchralPrimordial.class));
         cards.add(new SetCardInfo("Setzer, Wandering Gambler", 183, Rarity.RARE, mage.cards.s.SetzerWanderingGambler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Setzer, Wandering Gambler", 93, Rarity.RARE, mage.cards.s.SetzerWanderingGambler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shadow, Mysterious Assassin", 148, Rarity.RARE, mage.cards.s.ShadowMysteriousAssassin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shadow, Mysterious Assassin", 50, Rarity.RARE, mage.cards.s.ShadowMysteriousAssassin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadowblood Ridge", 421, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shelinda, Yevon Acolyte", 184, Rarity.RARE, mage.cards.s.ShelindaYevonAcolyte.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shelinda, Yevon Acolyte", 94, Rarity.RARE, mage.cards.s.ShelindaYevonAcolyte.class, NON_FULL_USE_VARIOUS));
