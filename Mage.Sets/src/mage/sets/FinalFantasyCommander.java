@@ -196,6 +196,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Story", 266, Rarity.UNCOMMON, mage.cards.i.IntoTheStory.class));
         cards.add(new SetCardInfo("Isolated Chapel", 405, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Jungle Shrine", 406, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
+        cards.add(new SetCardInfo("Kefka, Dancing Mad", 174, Rarity.RARE, mage.cards.k.KefkaDancingMad.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Dancing Mad", 84, Rarity.RARE, mage.cards.k.KefkaDancingMad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Key to the City", 348, Rarity.RARE, mage.cards.k.KeyToTheCity.class));
         cards.add(new SetCardInfo("Kimahri, Valiant Guardian", 175, Rarity.RARE, mage.cards.k.KimahriValiantGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kimahri, Valiant Guardian", 85, Rarity.RARE, mage.cards.k.KimahriValiantGuardian.class, NON_FULL_USE_VARIOUS));
