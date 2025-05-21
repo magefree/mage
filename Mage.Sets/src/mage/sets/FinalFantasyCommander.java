@@ -252,6 +252,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reanimate", 282, Rarity.RARE, mage.cards.r.Reanimate.class));
         cards.add(new SetCardInfo("Red XIII, Proud Warrior", 181, Rarity.RARE, mage.cards.r.RedXIIIProudWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Red XIII, Proud Warrior", 91, Rarity.RARE, mage.cards.r.RedXIIIProudWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rejoin the Fight", 118, Rarity.RARE, mage.cards.r.RejoinTheFight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rejoin the Fight", 49, Rarity.RARE, mage.cards.r.RejoinTheFight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Relic of Legends", 354, Rarity.UNCOMMON, mage.cards.r.RelicOfLegends.class));
         cards.add(new SetCardInfo("Resourceful Defense", 251, Rarity.RARE, mage.cards.r.ResourcefulDefense.class));
         cards.add(new SetCardInfo("Rise of the Dark Realms", 283, Rarity.MYTHIC, mage.cards.r.RiseOfTheDarkRealms.class));
