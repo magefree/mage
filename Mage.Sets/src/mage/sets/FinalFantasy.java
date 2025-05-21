@@ -432,5 +432,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Zidane, Tantalus Thief", 405, Rarity.UNCOMMON, mage.cards.z.ZidaneTantalusThief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zidane, Tantalus Thief", 518, Rarity.UNCOMMON, mage.cards.z.ZidaneTantalusThief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zidane, Tantalus Thief", 550, Rarity.UNCOMMON, mage.cards.z.ZidaneTantalusThief.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zodiark, Umbral God", 128, Rarity.RARE, mage.cards.z.ZodiarkUmbralGod.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zodiark, Umbral God", 336, Rarity.RARE, mage.cards.z.ZodiarkUmbralGod.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zodiark, Umbral God", 456, Rarity.RARE, mage.cards.z.ZodiarkUmbralGod.class, NON_FULL_USE_VARIOUS));
     }
 }
