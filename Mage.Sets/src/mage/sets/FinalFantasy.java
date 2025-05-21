@@ -24,7 +24,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("A Realm Reborn", 344, Rarity.RARE, mage.cards.a.ARealmReborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Absolute Virtue", 212, Rarity.MYTHIC, mage.cards.a.AbsoluteVirtue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Absolute Virtue", 476, Rarity.MYTHIC, mage.cards.a.AbsoluteVirtue.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Adelbert Steiner", 422, Rarity.UNCOMMON, mage.cards.a.AdelbertSteiner.class));
+        cards.add(new SetCardInfo("Adelbert Steiner", 3, Rarity.UNCOMMON, mage.cards.a.AdelbertSteiner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Adelbert Steiner", 422, Rarity.UNCOMMON, mage.cards.a.AdelbertSteiner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adventurer's Inn", 271, Rarity.COMMON, mage.cards.a.AdventurersInn.class));
         cards.add(new SetCardInfo("Aerith Gainsborough", 374, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 4, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
@@ -353,7 +354,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("The Water Crystal", 85, Rarity.RARE, mage.cards.t.TheWaterCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Wind Crystal", 330, Rarity.RARE, mage.cards.t.TheWindCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Wind Crystal", 43, Rarity.RARE, mage.cards.t.TheWindCrystal.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Tidus, Blitzball Star", 512, Rarity.UNCOMMON, mage.cards.t.TidusBlitzballStar.class));
+        cards.add(new SetCardInfo("Tidus, Blitzball Star", 246, Rarity.UNCOMMON, mage.cards.t.TidusBlitzballStar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tidus, Blitzball Star", 512, Rarity.UNCOMMON, mage.cards.t.TidusBlitzballStar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 206, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 391, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 473, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
