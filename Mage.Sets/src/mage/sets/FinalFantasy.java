@@ -215,6 +215,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Lindblum, Industrial Regency", 285, Rarity.RARE, mage.cards.l.LindblumIndustrialRegency.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lindblum, Industrial Regency", 312, Rarity.RARE, mage.cards.l.LindblumIndustrialRegency.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Machinist's Arsenal", 23, Rarity.RARE, mage.cards.m.MachinistsArsenal.class));
+        cards.add(new SetCardInfo("Magitek Armor", 24, Rarity.UNCOMMON, mage.cards.m.MagitekArmor.class));
         cards.add(new SetCardInfo("Magitek Scythe", 562, Rarity.RARE, mage.cards.m.MagitekScythe.class));
         cards.add(new SetCardInfo("Malboro", 106, Rarity.COMMON, mage.cards.m.Malboro.class));
         cards.add(new SetCardInfo("Matoya, Archon Elder", 439, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
