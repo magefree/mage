@@ -294,6 +294,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Shiva, Warden of Ice", 523, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shiva, Warden of Ice", 58, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Catch a Fish", 31, Rarity.UNCOMMON, mage.cards.s.SidequestCatchAFish.class));
+        cards.add(new SetCardInfo("Sidequest: Play Blitzball", 158, Rarity.UNCOMMON, mage.cards.s.SidequestPlayBlitzball.class));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 242, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 348, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 508, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
@@ -395,6 +396,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("White Auracite", 41, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("White Auracite", 579, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("White Mage's Staff", 42, Rarity.COMMON, mage.cards.w.WhiteMagesStaff.class));
+        cards.add(new SetCardInfo("World Champion, Celestial Weapon", 158, Rarity.UNCOMMON, mage.cards.w.WorldChampionCelestialWeapon.class));
         cards.add(new SetCardInfo("Xande, Dark Mage", 516, Rarity.RARE, mage.cards.x.XandeDarkMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Xande, Dark Mage", 561, Rarity.RARE, mage.cards.x.XandeDarkMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 443, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
