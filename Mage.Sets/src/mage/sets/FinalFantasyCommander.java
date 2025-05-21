@@ -309,6 +309,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Kujata", 61, Rarity.RARE, mage.cards.s.SummonKujata.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Magus Sisters", 200, Rarity.RARE, mage.cards.s.SummonMagusSisters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Magus Sisters", 71, Rarity.RARE, mage.cards.s.SummonMagusSisters.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Valefor", 197, Rarity.RARE, mage.cards.s.SummonValefor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Valefor", 42, Rarity.RARE, mage.cards.s.SummonValefor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Yojimbo", 196, Rarity.RARE, mage.cards.s.SummonYojimbo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Yojimbo", 28, Rarity.RARE, mage.cards.s.SummonYojimbo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summoner's Sending", 109, Rarity.RARE, mage.cards.s.SummonersSending.class, NON_FULL_USE_VARIOUS));
