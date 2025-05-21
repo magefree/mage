@@ -4,9 +4,12 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueConditionHint;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
@@ -45,7 +48,8 @@ public final class RiverSongsDiary extends CardImpl {
 		), RiverSongsDiaryCondition.instance, 
 		"At the beginning of your upkeep, if there are four or more cards exiled with " + 
                 " {this}, choose one of them at random. You may cast it without paying its mana cost."
-	));
+	).addHint(RiverSongsDiaryExiledSpellsCount.getHint()));
+
 
     }
 
@@ -64,12 +68,50 @@ enum RiverSongsDiaryCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        return RiverSongsDiaryExiledSpellsCount.instance.calculate(game, source, null) > 3;
+
+    }
+
+    @Override
+    public String toString() {
+        return "there are four or more cards exiled with {this}";
+    }
+
+}
+
+enum RiverSongsDiaryExiledSpellsCount implements DynamicValue {
+    instance;
+
+    private static final Hint hint = new ValueConditionHint(instance, RiverSongsDiaryCondition.instance);
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
-	        game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())
+	        game, sourceAbility.getSourceId(), 
+                game.getState().getZoneChangeCounter(sourceAbility.getSourceId())
         ));
-	return exileZone != null && exileZone.size() > 3;
+        if (exileZone != null) {
+            return exileZone.size();
+        }
+	return 0;
+    }
+
+    @Override
+    public DynamicValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "spells exiled with {this}";
+    }
+
+    public static Hint getHint() {
+        return hint;
     }
 }
+
+
 
 class RiverSongsDiaryImprintAbility extends TriggeredAbilityImpl {
     	
@@ -126,7 +168,7 @@ class RiverSongsDiaryExileEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
         Spell sourceSpell = game.getStack().getSpell(event.getTargetId());
-        if (player == null) {
+        if (player == null || sourceSpell == null || sourceSpell.isCopy()) {
             return false;
         }
         player.moveCardsToExile(
