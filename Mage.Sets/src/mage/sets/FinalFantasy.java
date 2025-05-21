@@ -104,6 +104,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Commune with Beavers", 182, Rarity.COMMON, mage.cards.c.CommuneWithBeavers.class));
         cards.add(new SetCardInfo("Cooking Campsite", 31, Rarity.UNCOMMON, mage.cards.c.CookingCampsite.class));
         cards.add(new SetCardInfo("Coral Sword", 134, Rarity.UNCOMMON, mage.cards.c.CoralSword.class));
+        cards.add(new SetCardInfo("Crystal Fragments", 13, Rarity.UNCOMMON, mage.cards.c.CrystalFragments.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Crystal Fragments", 357, Rarity.UNCOMMON, mage.cards.c.CrystalFragments.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystallized Serah", 240, Rarity.RARE, mage.cards.c.CrystallizedSerah.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystallized Serah", 506, Rarity.RARE, mage.cards.c.CrystallizedSerah.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 334, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
@@ -314,6 +316,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 327, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 34, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stiltzkin, Moogle Merchant", 433, Rarity.RARE, mage.cards.s.StiltzkinMoogleMerchant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Alexander", 13, Rarity.UNCOMMON, mage.cards.s.SummonAlexander.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Alexander", 357, Rarity.UNCOMMON, mage.cards.s.SummonAlexander.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Anima", 120, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Anima", 364, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 1, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
