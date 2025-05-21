@@ -295,6 +295,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stitcher's Supplier", 287, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Sublime Epiphany", 271, Rarity.RARE, mage.cards.s.SublimeEpiphany.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 427, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
+        cards.add(new SetCardInfo("Summon: Esper Valigarmanda", 198, Rarity.RARE, mage.cards.s.SummonEsperValigarmanda.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Esper Valigarmanda", 60, Rarity.RARE, mage.cards.s.SummonEsperValigarmanda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Good King Mog XII", 194, Rarity.RARE, mage.cards.s.SummonGoodKingMogXII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Good King Mog XII", 26, Rarity.RARE, mage.cards.s.SummonGoodKingMogXII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Ixion", 195, Rarity.RARE, mage.cards.s.SummonIxion.class, NON_FULL_USE_VARIOUS));
