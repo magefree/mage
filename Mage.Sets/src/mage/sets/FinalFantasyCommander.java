@@ -284,6 +284,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skycloud Expanse", 423, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Slayers' Stronghold", 424, Rarity.RARE, mage.cards.s.SlayersStronghold.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 425, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
+        cards.add(new SetCardInfo("Snort", 120, Rarity.RARE, mage.cards.s.Snort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snort", 58, Rarity.RARE, mage.cards.s.Snort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snuff Out", 285, Rarity.COMMON, mage.cards.s.SnuffOut.class));
         cards.add(new SetCardInfo("Sol Ring", 356, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 357, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
