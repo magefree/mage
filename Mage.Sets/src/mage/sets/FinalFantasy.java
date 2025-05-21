@@ -227,6 +227,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Namazu Trader", 107, Rarity.COMMON, mage.cards.n.NamazuTrader.class));
         cards.add(new SetCardInfo("Nibelheim Aflame", 146, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nibelheim Aflame", 339, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Noctis, Prince of Lucis", 235, Rarity.RARE, mage.cards.n.NoctisPrinceOfLucis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Noctis, Prince of Lucis", 401, Rarity.RARE, mage.cards.n.NoctisPrinceOfLucis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Noctis, Prince of Lucis", 500, Rarity.RARE, mage.cards.n.NoctisPrinceOfLucis.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Noctis, Prince of Lucis", 546, Rarity.RARE, mage.cards.n.NoctisPrinceOfLucis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Paladin's Arms", 28, Rarity.COMMON, mage.cards.p.PaladinsArms.class));
         cards.add(new SetCardInfo("Phantom Train", 110, Rarity.UNCOMMON, mage.cards.p.PhantomTrain.class));
         cards.add(new SetCardInfo("Phoenix Down", 29, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
