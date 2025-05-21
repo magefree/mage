@@ -212,6 +212,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lulu, Stern Guardian", 143, Rarity.RARE, mage.cards.l.LuluSternGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lulu, Stern Guardian", 38, Rarity.RARE, mage.cards.l.LuluSternGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Luminous Broodmoth", 246, Rarity.MYTHIC, mage.cards.l.LuminousBroodmoth.class));
+        cards.add(new SetCardInfo("Lyse Hext", 178, Rarity.RARE, mage.cards.l.LyseHext.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lyse Hext", 88, Rarity.RARE, mage.cards.l.LyseHext.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mask of Memory", 350, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Meteor Golem", 351, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Millikin", 352, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
