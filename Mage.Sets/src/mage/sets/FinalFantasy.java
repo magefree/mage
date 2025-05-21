@@ -44,6 +44,11 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Astrologian's Planisphere", 581, Rarity.RARE, mage.cards.a.AstrologiansPlanisphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Auron's Inspiration", 8, Rarity.UNCOMMON, mage.cards.a.AuronsInspiration.class));
         cards.add(new SetCardInfo("Balamb T-Rexaur", 173, Rarity.COMMON, mage.cards.b.BalambTRexaur.class));
+        cards.add(new SetCardInfo("Balthier and Fran", 213, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Balthier and Fran", 319, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Balthier and Fran", 393, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Balthier and Fran", 477, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Balthier and Fran", 538, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barret Wallace", 129, Rarity.UNCOMMON, mage.cards.b.BarretWallace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barret Wallace", 584, Rarity.UNCOMMON, mage.cards.b.BarretWallace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bartz and Boko", 175, Rarity.RARE, mage.cards.b.BartzAndBoko.class, NON_FULL_USE_VARIOUS));
