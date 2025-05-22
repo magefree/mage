@@ -95,7 +95,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 480, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Circle of Power", 583, Rarity.UNCOMMON, mage.cards.c.CircleOfPower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Circle of Power", 92, Rarity.UNCOMMON, mage.cards.c.CircleOfPower.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Clash of the Eikons", 180, Rarity.UNCOMMON, mage.cards.c.ClashOfTheEikons.class));
+        cards.add(new SetCardInfo("Clash of the Eikons", 180, Rarity.UNCOMMON, mage.cards.c.ClashOfTheEikons.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clash of the Eikons", 341, Rarity.UNCOMMON, mage.cards.c.ClashOfTheEikons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 133, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 318, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 385, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
@@ -157,7 +158,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Galuf's Final Act", 186, Rarity.UNCOMMON, mage.cards.g.GalufsFinalAct.class));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 221, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 486, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Garnet, Princess of Alexandria", 222, Rarity.UNCOMMON, mage.cards.g.GarnetPrincessOfAlexandria.class));
+        cards.add(new SetCardInfo("Garnet, Princess of Alexandria", 222, Rarity.UNCOMMON, mage.cards.g.GarnetPrincessOfAlexandria.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Garnet, Princess of Alexandria", 487, Rarity.UNCOMMON, mage.cards.g.GarnetPrincessOfAlexandria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 139, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 338, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 461, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
