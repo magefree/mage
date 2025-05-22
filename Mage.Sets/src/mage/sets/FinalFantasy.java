@@ -186,6 +186,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Jecht, Reluctant Guardian", 104, Rarity.RARE, mage.cards.j.JechtReluctantGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jecht, Reluctant Guardian", 363, Rarity.RARE, mage.cards.j.JechtReluctantGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jecht, Reluctant Guardian", 448, Rarity.RARE, mage.cards.j.JechtReluctantGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jenova, Ancient Calamity", 228, Rarity.RARE, mage.cards.j.JenovaAncientCalamity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jenova, Ancient Calamity", 346, Rarity.RARE, mage.cards.j.JenovaAncientCalamity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jenova, Ancient Calamity", 493, Rarity.RARE, mage.cards.j.JenovaAncientCalamity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jidoor, Aristocratic Capital", 284, Rarity.RARE, mage.cards.j.JidoorAristocraticCapital.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jidoor, Aristocratic Capital", 311, Rarity.RARE, mage.cards.j.JidoorAristocraticCapital.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jill, Shiva's Dominant", 378, Rarity.RARE, mage.cards.j.JillShivasDominant.class, NON_FULL_USE_VARIOUS));
