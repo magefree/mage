@@ -153,6 +153,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furious Rise", 294, Rarity.UNCOMMON, mage.cards.f.FuriousRise.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 397, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Game Trail", 398, Rarity.RARE, mage.cards.g.GameTrail.class));
+        cards.add(new SetCardInfo("Gatta and Luzzu", 134, Rarity.RARE, mage.cards.g.GattaAndLuzzu.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gatta and Luzzu", 19, Rarity.RARE, mage.cards.g.GattaAndLuzzu.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gau, Feral Youth", 152, Rarity.RARE, mage.cards.g.GauFeralYouth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gau, Feral Youth", 55, Rarity.RARE, mage.cards.g.GauFeralYouth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("General Leo Cristophe", 135, Rarity.RARE, mage.cards.g.GeneralLeoCristophe.class, NON_FULL_USE_VARIOUS));
@@ -194,6 +196,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Into the Story", 266, Rarity.UNCOMMON, mage.cards.i.IntoTheStory.class));
         cards.add(new SetCardInfo("Isolated Chapel", 405, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Jungle Shrine", 406, Rarity.UNCOMMON, mage.cards.j.JungleShrine.class));
+        cards.add(new SetCardInfo("Kefka, Dancing Mad", 174, Rarity.RARE, mage.cards.k.KefkaDancingMad.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kefka, Dancing Mad", 84, Rarity.RARE, mage.cards.k.KefkaDancingMad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Key to the City", 348, Rarity.RARE, mage.cards.k.KeyToTheCity.class));
         cards.add(new SetCardInfo("Kimahri, Valiant Guardian", 175, Rarity.RARE, mage.cards.k.KimahriValiantGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kimahri, Valiant Guardian", 85, Rarity.RARE, mage.cards.k.KimahriValiantGuardian.class, NON_FULL_USE_VARIOUS));
@@ -208,6 +212,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lulu, Stern Guardian", 143, Rarity.RARE, mage.cards.l.LuluSternGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lulu, Stern Guardian", 38, Rarity.RARE, mage.cards.l.LuluSternGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Luminous Broodmoth", 246, Rarity.MYTHIC, mage.cards.l.LuminousBroodmoth.class));
+        cards.add(new SetCardInfo("Lyse Hext", 178, Rarity.RARE, mage.cards.l.LyseHext.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lyse Hext", 88, Rarity.RARE, mage.cards.l.LyseHext.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mask of Memory", 350, Rarity.UNCOMMON, mage.cards.m.MaskOfMemory.class));
         cards.add(new SetCardInfo("Meteor Golem", 351, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Millikin", 352, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
@@ -246,6 +252,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reanimate", 282, Rarity.RARE, mage.cards.r.Reanimate.class));
         cards.add(new SetCardInfo("Red XIII, Proud Warrior", 181, Rarity.RARE, mage.cards.r.RedXIIIProudWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Red XIII, Proud Warrior", 91, Rarity.RARE, mage.cards.r.RedXIIIProudWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rejoin the Fight", 118, Rarity.RARE, mage.cards.r.RejoinTheFight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rejoin the Fight", 49, Rarity.RARE, mage.cards.r.RejoinTheFight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Relic of Legends", 354, Rarity.UNCOMMON, mage.cards.r.RelicOfLegends.class));
         cards.add(new SetCardInfo("Resourceful Defense", 251, Rarity.RARE, mage.cards.r.ResourcefulDefense.class));
         cards.add(new SetCardInfo("Rise of the Dark Realms", 283, Rarity.MYTHIC, mage.cards.r.RiseOfTheDarkRealms.class));
@@ -272,6 +280,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sepulchral Primordial", 284, Rarity.RARE, mage.cards.s.SepulchralPrimordial.class));
         cards.add(new SetCardInfo("Setzer, Wandering Gambler", 183, Rarity.RARE, mage.cards.s.SetzerWanderingGambler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Setzer, Wandering Gambler", 93, Rarity.RARE, mage.cards.s.SetzerWanderingGambler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shadow, Mysterious Assassin", 148, Rarity.RARE, mage.cards.s.ShadowMysteriousAssassin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shadow, Mysterious Assassin", 50, Rarity.RARE, mage.cards.s.ShadowMysteriousAssassin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shadowblood Ridge", 421, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shelinda, Yevon Acolyte", 184, Rarity.RARE, mage.cards.s.ShelindaYevonAcolyte.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shelinda, Yevon Acolyte", 94, Rarity.RARE, mage.cards.s.ShelindaYevonAcolyte.class, NON_FULL_USE_VARIOUS));
@@ -282,6 +292,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skycloud Expanse", 423, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Slayers' Stronghold", 424, Rarity.RARE, mage.cards.s.SlayersStronghold.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 425, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
+        cards.add(new SetCardInfo("Snort", 120, Rarity.RARE, mage.cards.s.Snort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snort", 58, Rarity.RARE, mage.cards.s.Snort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snuff Out", 285, Rarity.COMMON, mage.cards.s.SnuffOut.class));
         cards.add(new SetCardInfo("Sol Ring", 356, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 357, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
@@ -295,6 +307,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stitcher's Supplier", 287, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Sublime Epiphany", 271, Rarity.RARE, mage.cards.s.SublimeEpiphany.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 427, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
+        cards.add(new SetCardInfo("Summon: Esper Valigarmanda", 198, Rarity.RARE, mage.cards.s.SummonEsperValigarmanda.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Esper Valigarmanda", 60, Rarity.RARE, mage.cards.s.SummonEsperValigarmanda.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Good King Mog XII", 194, Rarity.RARE, mage.cards.s.SummonGoodKingMogXII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Good King Mog XII", 26, Rarity.RARE, mage.cards.s.SummonGoodKingMogXII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Ixion", 195, Rarity.RARE, mage.cards.s.SummonIxion.class, NON_FULL_USE_VARIOUS));
@@ -303,6 +317,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Kujata", 61, Rarity.RARE, mage.cards.s.SummonKujata.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Magus Sisters", 200, Rarity.RARE, mage.cards.s.SummonMagusSisters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Magus Sisters", 71, Rarity.RARE, mage.cards.s.SummonMagusSisters.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Valefor", 197, Rarity.RARE, mage.cards.s.SummonValefor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Valefor", 42, Rarity.RARE, mage.cards.s.SummonValefor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Yojimbo", 196, Rarity.RARE, mage.cards.s.SummonYojimbo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Yojimbo", 28, Rarity.RARE, mage.cards.s.SummonYojimbo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summoner's Sending", 109, Rarity.RARE, mage.cards.s.SummonersSending.class, NON_FULL_USE_VARIOUS));

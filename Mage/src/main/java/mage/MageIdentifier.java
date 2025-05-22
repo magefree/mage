@@ -63,6 +63,7 @@ public enum MageIdentifier {
     IntoThePitAlternateCast,
     MaestrosAscendencyAlternateCast,
     NashiMoonSagesScionAlternateCast,
+    NoctisPrinceOfLucisAlternateCast,
     OsteomancerAdeptAlternateCast,
     RafinnesGuidanceAlternateCast,
     RonaSheoldredsFaithfulAlternateCast,
