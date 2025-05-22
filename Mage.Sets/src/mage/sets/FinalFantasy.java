@@ -403,6 +403,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Traveling Chocobo", 210, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", 406, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", 551, Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Treno, Dark City", 290, Rarity.COMMON, mage.cards.t.TrenoDarkCity.class));
         cards.add(new SetCardInfo("Triple Triad", 166, Rarity.RARE, mage.cards.t.TripleTriad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Triple Triad", 340, Rarity.RARE, mage.cards.t.TripleTriad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultima Weapon", 563, Rarity.RARE, mage.cards.u.UltimaWeapon.class));
