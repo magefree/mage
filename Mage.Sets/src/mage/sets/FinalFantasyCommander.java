@@ -232,6 +232,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Observed Stasis", 40, Rarity.RARE, mage.cards.o.ObservedStasis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overflowing Basin", 410, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Palace Jailer", 247, Rarity.UNCOMMON, mage.cards.p.PalaceJailer.class));
+        cards.add(new SetCardInfo("Papalymo Totolymo", 180, Rarity.RARE, mage.cards.p.PapalymoTotolymo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Papalymo Totolymo", 90, Rarity.RARE, mage.cards.p.PapalymoTotolymo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path of Ancestry", 411, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path of Discovery", 312, Rarity.RARE, mage.cards.p.PathOfDiscovery.class));
         cards.add(new SetCardInfo("Path to Exile", 248, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
