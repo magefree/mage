@@ -438,6 +438,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("White Auracite", 41, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("White Auracite", 579, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("White Mage's Staff", 42, Rarity.COMMON, mage.cards.w.WhiteMagesStaff.class));
+        cards.add(new SetCardInfo("Windurst, Federation Center", 292, Rarity.COMMON, mage.cards.w.WindurstFederationCenter.class));
         cards.add(new SetCardInfo("World Champion, Celestial Weapon", 158, Rarity.UNCOMMON, mage.cards.w.WorldChampionCelestialWeapon.class));
         cards.add(new SetCardInfo("Xande, Dark Mage", 516, Rarity.RARE, mage.cards.x.XandeDarkMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Xande, Dark Mage", 561, Rarity.RARE, mage.cards.x.XandeDarkMage.class, NON_FULL_USE_VARIOUS));
