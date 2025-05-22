@@ -66,10 +66,31 @@ public interface TriggeredAbility extends Ability {
      */
     TriggeredAbility withRuleTextReplacement(boolean replaceRuleText);
 
+    /**
+     * 603.4. A triggered ability may read "When/Whenever/At [trigger event], if [condition], [effect]."
+     * When the trigger event occurs, the ability checks whether the stated condition is true.
+     * The ability triggers only if it is; otherwise it does nothing. If the ability triggers,
+     * it checks the stated condition again as it resolves. If the condition isn't true at that time,
+     * the ability is removed from the stack and does nothing. Note that this mirrors the check for legal targets.
+     * This rule is referred to as the "intervening 'if' clause" rule.
+     * (The word "if" has only its normal English meaning anywhere else in the text of a card;
+     * this rule only applies to an "if" that immediately follows a trigger condition.)
+     *
+     * @param condition the condition to be checked
+     * @return
+     */
     TriggeredAbility withInterveningIf(Condition condition);
 
     boolean checkInterveningIfClause(Game game);
 
+    /**
+     * Unlike an intervening if clause, this is for when a condition doesn't need to be checked on trigger
+     * but not on resolution. Can also be used for intervening if clauses if the condition is guaranteed to be the same
+     * at both points (e.g. "whenever you cast a spell, if it was cast from a graveyard", etc)
+     *
+     * @param condition the condition to be checked
+     * @return
+     */
     TriggeredAbility withTriggerCondition(Condition condition);
 
     Condition getTriggerCondition();
