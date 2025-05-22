@@ -4,10 +4,7 @@ import com.google.common.base.CharMatcher;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.AbilityImpl;
-import mage.abilities.Mode;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -40,6 +37,7 @@ import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.game.permanent.token.custom.XmageToken;
 import mage.sets.TherosBeyondDeath;
+import mage.target.Target;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 import mage.utils.SystemUtil;
@@ -70,7 +68,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "WHO"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = ""; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
@@ -1932,7 +1930,6 @@ public class VerifyCardDataTest {
             }
         }
     }
-
     private void checkSubtypes(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_SUBTYPE, card.getExpansionSetCode(), card.getName())) {
             return;
@@ -1995,6 +1992,47 @@ public class VerifyCardDataTest {
         if (!eqSet(card.getSuperType().stream().map(s -> s.toString()).collect(Collectors.toList()), expected)) {
             fail(card, "supertypes", card.getSuperType() + " != " + expected);
         }
+    }
+
+    Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|each copy|with one or more|could|it) )targets?|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow|soulshift|provoke)\\b(?! (cost|abilit))", Pattern.MULTILINE);
+    Pattern recursiveTargetRegexPattern = Pattern.compile("\\b((?!^)when|gain|have|has|\\. At the beginning|with|until)\\b.*targets?\\b", Pattern.MULTILINE);
+
+    boolean recursiveTargetEffectCheck(Effect effect, int depth) {
+        if (depth > 5){
+            return false;
+        }
+        return Arrays.stream(effect.getClass().getDeclaredFields())
+                .anyMatch(f -> {
+                    Class fieldType = f.getType();
+                    f.setAccessible(true);
+                    try {
+                        Object obj = f.get(effect);
+                        if (obj != null) {
+                            if (Effect.class.isAssignableFrom(fieldType)) {
+                                return recursiveTargetEffectCheck((Effect) obj, depth+1);
+                            }
+                            if (Ability.class.isAssignableFrom(fieldType)) {
+                                return recursiveTargetAbilityCheck((Ability) obj, depth+1);
+                            }
+                            if (Token.class.isAssignableFrom(fieldType)) {
+                                return ((Token) obj).getAbilities().stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, depth+1));
+                            }
+                            if (Collection.class.isAssignableFrom(fieldType)) {
+                                return true;
+                            }
+                        }
+                    } catch (IllegalAccessException ex) {
+                        throw new RuntimeException(ex);//Should never happen due to setAccessible
+                    }
+                    return false;
+                });
+    }
+
+    boolean recursiveTargetAbilityCheck(Ability ability, int depth) {
+        Collection<Mode> modes = ability.getModes().values();
+        return modes.stream().flatMap(mode -> mode.getTargets().stream()).anyMatch(target -> !target.isNotTarget())
+                | ability.getTargetAdjuster() != null
+                | modes.stream().flatMap(mode -> mode.getEffects().stream()).anyMatch(effect -> recursiveTargetEffectCheck(effect, depth+1));
     }
 
     private void checkMissingAbilities(Card card, MtgJsonCard ref) {
@@ -2168,15 +2206,7 @@ public class VerifyCardDataTest {
         // * on "must be targeted":
         //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
         boolean checkMissNonTargeted = !(card instanceof OmenCard); // must set withNotTarget(true) temporarily set to ignore omen cards
-        boolean checkMissTargeted = false; // must be targeted
-        List<String> targetedKeywords = Arrays.asList(
-                "target",
-                "enchant",
-                "equip",
-                "backup",
-                "modular",
-                "partner"
-        );
+        boolean checkMissTargeted = true; // must be targeted
         // card can contain rules text from both sides, so must search ref card for all sides too
         String additionalName;
         if (card instanceof AdventureCard) { // temporary to prevent failure due to upstream error
@@ -2197,18 +2227,30 @@ public class VerifyCardDataTest {
                 }
             }
         }
-        boolean needTargetedAbility = targetedKeywords.stream().anyMatch(refLowerText::contains);
-        boolean foundTargetedAbility = card.getAbilities()
-                .stream()
-                .map(Ability::getTargets)
-                .flatMap(Collection::stream)
-                .anyMatch(target -> !target.isNotTarget());
-        boolean foundProblem = needTargetedAbility != foundTargetedAbility;
-        if (checkMissTargeted && needTargetedAbility && foundProblem) {
-            fail(card, "abilities", "wrong target settings (must be targeted, but it not)");
+
+        boolean needTargetedAbility = targetRegexPattern.matcher(refLowerText).find();
+        boolean recursiveAbilityRef = recursiveTargetRegexPattern.matcher(refLowerText).find();
+        List<Ability> abilities = card.getAbilities().copy();
+        if (card.getSecondCardFace() != null) {
+            abilities.addAll(card.getSecondCardFace().getAbilities());
         }
-        if (checkMissNonTargeted && !needTargetedAbility && foundProblem) {
-            fail(card, "abilities", "wrong target settings (must set withNotTarget(true), but it not)");
+        List<Target> targets = abilities.stream().flatMap(ability -> ability.getModes().values().stream()
+                .flatMap(mode -> mode.getTargets().stream())).collect(Collectors.toList());
+        boolean foundNotTarget = targets.stream().anyMatch(Target::isNotTarget);
+        if (foundNotTarget) {
+            fail(card, "abilities", "notTarget should not be used as ability target, should be inside ability effect");
+        }
+        boolean foundTargetedAbility = targets.stream().anyMatch(target -> !target.isNotTarget())
+                | abilities.stream().anyMatch(x -> x.getTargetAdjuster() != null);
+        //Soulshift and Provoke aren't real recursive abilities, but they add the target inside of the ability which can't currently be detected
+        //Possibly should be replaced with TargetAdjuster?
+        boolean recursiveAbilityCard = abilities.stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, 0));
+
+        if (checkMissTargeted && needTargetedAbility && !(foundTargetedAbility || recursiveAbilityRef || recursiveAbilityCard)) {
+            fail(card, "abilities", "wrong target settings (must be targeted, but is not)");
+        }
+        if (checkMissNonTargeted && !needTargetedAbility && foundTargetedAbility) {
+            fail(card, "abilities", "wrong target settings (targeted ability found but no target in text)");
         }
 
         // special check: missing or wrong ability/effect rules hint
