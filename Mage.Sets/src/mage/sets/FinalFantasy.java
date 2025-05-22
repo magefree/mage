@@ -423,6 +423,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 392, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 475, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 537, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vector, Imperial Capital", 291, Rarity.COMMON, mage.cards.v.VectorImperialCapital.class));
         cards.add(new SetCardInfo("Vincent Valentine", 125, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 383, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 454, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
