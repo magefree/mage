@@ -289,6 +289,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "446b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "526b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "99b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Reach the Horizon", 195, Rarity.UNCOMMON, mage.cards.r.ReachTheHorizon.class));
         cards.add(new SetCardInfo("Relm's Sketching", 67, Rarity.UNCOMMON, mage.cards.r.RelmsSketching.class));
         cards.add(new SetCardInfo("Reno and Rude", 113, Rarity.UNCOMMON, mage.cards.r.RenoAndRude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reno and Rude", 450, Rarity.UNCOMMON, mage.cards.r.RenoAndRude.class, NON_FULL_USE_VARIOUS));
