@@ -48,7 +48,7 @@ public final class CaseOfTheShiftingVisage extends CardImpl {
                 new CopyTargetStackObjectEffect(true)
                         .setText("copy that spell. <i>(The copy becomes a token.)</i>"),
                 filter, false, SetTargetPointer.SPELL
-        ).withTriggerCondition(SolvedSourceCondition.SOLVED, "");
+        ).withTriggerCondition(SolvedSourceCondition.SOLVED);
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
                 .addHint(new CaseOfTheShiftingVisageHint(toSolveCondition)));

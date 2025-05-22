@@ -34,7 +34,7 @@ public final class DreamspoilerWitches extends CardImpl {
         // Whenever you cast a spell during an opponent's turn, you may have target creature get -1/-1 until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new BoostTargetEffect(-1, -1, Duration.EndOfTurn), true
-        ).withTriggerCondition(OpponentsTurnCondition.instance, "on an opponent's turn");
+        ).withTriggerCondition(OpponentsTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

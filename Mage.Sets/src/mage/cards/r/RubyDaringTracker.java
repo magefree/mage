@@ -36,7 +36,7 @@ public final class RubyDaringTracker extends CardImpl {
         // Whenever Ruby, Daring Tracker attacks while you control a creature with power 4 or greater, Ruby gets +2/+2 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn), false
-        ).withTriggerCondition(FerociousCondition.instance, "while you control a creature with power 4 or greater"));
+        ).withTriggerCondition(FerociousCondition.instance));
 
         // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());

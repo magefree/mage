@@ -33,12 +33,12 @@ public final class VampireScrivener extends CardImpl {
         // Whenever you gain life during your turn, put a +1/+1 counter on Vampire Scrivener.
         this.addAbility(new GainLifeControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-        ).withTriggerCondition(MyTurnCondition.instance, "during your turn"));
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // Whenever you lose life during your turn, put a +1/+1 counter on Vampire Scrivener.
         this.addAbility(new LoseLifeTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-        ).withTriggerCondition(MyTurnCondition.instance, "during your turn"));
+        ).withTriggerCondition(MyTurnCondition.instance));
     }
 
     private VampireScrivener(final VampireScrivener card) {

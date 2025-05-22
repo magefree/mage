@@ -41,7 +41,7 @@ public final class CaseOfTheShatteredPact extends CardImpl {
         // Solved -- At the beginning of combat on your turn, target creature you control gains flying, double strike, and vigilance until end of turn.
         Ability solvedAbility = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance())
                 .setText("target creature you control gains flying")
-        ).withTriggerCondition(SolvedSourceCondition.SOLVED, "");
+        ).withTriggerCondition(SolvedSourceCondition.SOLVED);
         solvedAbility.addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())
                 .setText(", double strike,"));
         solvedAbility.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance())

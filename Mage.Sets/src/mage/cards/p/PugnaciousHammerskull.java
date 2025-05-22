@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class PugnaciousHammerskull extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DINOSAUR);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DINOSAUR, "you don't control another Dinosaur");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -41,7 +41,7 @@ public final class PugnaciousHammerskull extends CardImpl {
         // Whenever Pugnacious Hammerskull attacks while you don't control another Dinosaur, put a stun counter on it.
         this.addAbility(new AttacksTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.STUN.createInstance()).setText("put a stun counter on it")
-        ).withTriggerCondition(condition, "while you don't control another Dinosaur"));
+        ).withTriggerCondition(condition));
     }
 
     private PugnaciousHammerskull(final PugnaciousHammerskull card) {

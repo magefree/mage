@@ -52,7 +52,7 @@ public final class CaseOfTheRansackedLab extends CardImpl {
         Ability solvedAbility = new SpellCastControllerTriggeredAbility(
                 new DrawCardSourceControllerEffect(1),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
-        ).withTriggerCondition(SolvedSourceCondition.SOLVED, "");
+        ).withTriggerCondition(SolvedSourceCondition.SOLVED);
 
         this.addAbility(new CaseAbility(initialAbility, CaseOfTheRansackedLabCondition.instance, solvedAbility)
                         .addHint(new CaseOfTheRansackedLabHint(CaseOfTheRansackedLabCondition.instance)),

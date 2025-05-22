@@ -44,7 +44,7 @@ public final class EnergyVortex extends CardImpl {
         // At the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless they pay {1} for each vortex counter on Energy Vortex.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 TargetController.ANY, new EnergyVortexEffect(), false
-        ).withTriggerCondition(EnergyVortexCondition.instance, "")
+        ).withTriggerCondition(EnergyVortexCondition.instance)
                 .setTriggerPhrase("At the beginning of the chosen player's upkeep, "));
 
         // {X}: Put X vortex counters on Energy Vortex. Activate this ability only during your upkeep.
@@ -74,6 +74,11 @@ enum EnergyVortexCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return game.getActivePlayerId().equals(game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY));
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 }
 

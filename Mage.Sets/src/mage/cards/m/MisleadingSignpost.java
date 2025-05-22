@@ -31,7 +31,7 @@ public final class MisleadingSignpost extends CardImpl {
         // When Misleading Signpost enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ReselectDefenderAttackedByTargetEffect(true), true
-        ).withTriggerCondition(condition, "during the declare attackers step");
+        ).withTriggerCondition(condition);
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
 

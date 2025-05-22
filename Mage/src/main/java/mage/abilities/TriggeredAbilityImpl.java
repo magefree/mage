@@ -231,10 +231,13 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
-    public TriggeredAbility withTriggerCondition(Condition condition, String phrase) {
+    public TriggeredAbility withTriggerCondition(Condition condition) {
         this.triggerCondition = condition;
-        if (this.triggerPhrase != null && phrase != null && !phrase.isEmpty()) {
-            this.setTriggerPhrase(this.triggerPhrase.substring(0, this.triggerPhrase.length() - 2) + ' ' + phrase + ", ");
+        if (this.triggerPhrase != null && !condition.toString().isEmpty()) {
+            this.setTriggerPhrase(
+                    this.triggerPhrase.substring(0, this.triggerPhrase.length() - 2) + ' ' +
+                            (condition.toString().startsWith("during") ? "" : "while ") + condition + ", "
+            );
         }
         return this;
     }

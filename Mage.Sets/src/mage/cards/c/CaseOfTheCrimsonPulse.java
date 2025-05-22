@@ -41,7 +41,7 @@ public final class CaseOfTheCrimsonPulse extends CardImpl {
         // To solve -- You have no cards in hand.
         // Solved -- At the beginning of your upkeep, discard your hand, then draw two cards.
         Ability solvedAbility = new BeginningOfUpkeepTriggeredAbility(new DiscardHandControllerEffect())
-                .withTriggerCondition(SolvedSourceCondition.SOLVED, "");
+                .withTriggerCondition(SolvedSourceCondition.SOLVED);
         solvedAbility.addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
 
         this.addAbility(new CaseAbility(initialAbility, HellbentCondition.instance, solvedAbility)

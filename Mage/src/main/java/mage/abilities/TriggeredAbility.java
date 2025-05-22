@@ -70,7 +70,7 @@ public interface TriggeredAbility extends Ability {
 
     boolean checkInterveningIfClause(Game game);
 
-    TriggeredAbility withTriggerCondition(Condition condition, String phrase);
+    TriggeredAbility withTriggerCondition(Condition condition);
 
     Condition getTriggerCondition();
 

@@ -40,7 +40,7 @@ public final class BreathOfTheSleepless extends CardImpl {
         // Whenever you cast a creature spell during an opponent's turn, tap up to one target creature.
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new TapTargetEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false
-        ).withTriggerCondition(OpponentsTurnCondition.instance, "during an opponent's turn");
+        ).withTriggerCondition(OpponentsTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability.addHint(OpponentsTurnHint.instance));
     }

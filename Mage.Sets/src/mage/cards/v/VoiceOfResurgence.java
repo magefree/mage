@@ -34,7 +34,7 @@ public final class VoiceOfResurgence extends CardImpl {
         OrTriggeredAbility ability = new OrTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()),
                 new SpellCastOpponentTriggeredAbility(null, StaticFilters.FILTER_SPELL_A, false)
-                        .withTriggerCondition(MyTurnCondition.instance, "during your turn"),
+                        .withTriggerCondition(MyTurnCondition.instance),
                 new DiesSourceTriggeredAbility(null, false)
         );
         ability.setLeavesTheBattlefieldTrigger(true);

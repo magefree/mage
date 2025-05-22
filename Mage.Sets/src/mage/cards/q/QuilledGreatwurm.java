@@ -46,7 +46,7 @@ public final class QuilledGreatwurm extends CardImpl {
         this.addAbility(new DealsDamageToAnyTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedDamageValue.MANY),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, SetTargetPointer.PERMANENT, true, false
-        ).withTriggerCondition(MyTurnCondition.instance, "during your turn"));
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // You may cast this card from your graveyard by removing six counters from among creatures you control in addition to paying its other costs.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new QuilledGreatwurmEffect()).setIdentifier(MageIdentifier.QuilledGreatwurmAlternateCast));

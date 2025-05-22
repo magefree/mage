@@ -21,8 +21,9 @@ import java.util.UUID;
  */
 public final class BurningSunCavalry extends CardImpl {
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.DINOSAUR));
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledPermanent(SubType.DINOSAUR, "you control a Dinosaur")
+    );
     private static final Hint hint = new ConditionHint(condition, "You control a Dinosaur");
 
     public BurningSunCavalry(UUID ownerId, CardSetInfo setInfo) {
@@ -36,7 +37,7 @@ public final class BurningSunCavalry extends CardImpl {
         // Whenever Burning Sun Cavalry attacks or blocks while you control a Dinosaur, Burning Sun Cavalry gets +1/+1 until end of turn.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn), false
-        ).withTriggerCondition(condition, "while you control a Dinosaur").addHint(hint));
+        ).withTriggerCondition(condition).addHint(hint));
     }
 
     private BurningSunCavalry(final BurningSunCavalry card) {

@@ -35,8 +35,7 @@ public final class TheNinthDoctor extends CardImpl {
 
         // Into the TARDIS — Whenever The Ninth Doctor becomes untapped during your untap step, you get an additional upkeep step after this step.
         this.addAbility(new InspiredAbility(new TheNinthDoctorEffect(), false, false)
-                .withTriggerCondition(condition, "during your untap step")
-                .setTriggerPhrase("Whenever {this} becomes untapped during your untap step, ")
+                .withTriggerCondition(condition)
                 .withFlavorWord("Into the TARDIS"));
     }
 

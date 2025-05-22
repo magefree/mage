@@ -36,7 +36,7 @@ public final class DovinsAcuity extends CardImpl {
         // Whenever you cast an instant spell during your main phase, you may return Dovin's Acuity to its owner's hand.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new ReturnToHandSourceEffect(true), filter, true
-        ).withTriggerCondition(IsMainPhaseCondition.YOUR, "during your main phase"));
+        ).withTriggerCondition(IsMainPhaseCondition.YOUR).setTriggerPhrase("Whenever you cast an instant spell during your main phase, "));
     }
 
     private DovinsAcuity(final DovinsAcuity card) {

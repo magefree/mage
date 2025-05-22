@@ -53,7 +53,7 @@ public final class TheWatcherInTheWater extends CardImpl {
         // Whenever you draw a card during an opponent's turn, create a 1/1 blue Tentacle creature token.
         this.addAbility(new DrawCardControllerTriggeredAbility(
                 new CreateTokenEffect(new TentacleToken()), false
-        ).withTriggerCondition(OpponentsTurnCondition.instance, "during an opponent's turn"));
+        ).withTriggerCondition(OpponentsTurnCondition.instance));
 
         // Whenever a Tentacle you control dies, untap up to one target Kraken and put a stun counter on up to one target nonland permanent.
         ability = new DiesCreatureTriggeredAbility(new UntapTargetEffect(), false, filter);

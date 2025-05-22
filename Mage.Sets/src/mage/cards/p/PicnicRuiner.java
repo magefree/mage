@@ -32,7 +32,7 @@ public final class PicnicRuiner extends AdventureCard {
         // Whenever Picnic Ruiner attacks while you control a creature with power 4 or greater, Picnic Ruiner gains double strike until end of turn.
         this.addAbility(new AttacksTriggeredAbility(
                 new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), false
-        ).withTriggerCondition(FerociousCondition.instance, "while you control a creature with power 4 or greater"));
+        ).withTriggerCondition(FerociousCondition.instance));
 
         // Stolen Goodies
         // Distribute three +1/+1 counters among any number of target creatures you control.

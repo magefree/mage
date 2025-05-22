@@ -40,7 +40,7 @@ public final class KefkaRulerOfRuin extends CardImpl {
         this.addAbility(new LoseLifeTriggeredAbility(
                 new DrawCardSourceControllerEffect(SavedLifeLossValue.MANY),
                 TargetController.OPPONENT, false, false
-        ).withTriggerCondition(MyTurnCondition.instance, "during your turn"));
+        ).withTriggerCondition(MyTurnCondition.instance));
     }
 
     private KefkaRulerOfRuin(final KefkaRulerOfRuin card) {

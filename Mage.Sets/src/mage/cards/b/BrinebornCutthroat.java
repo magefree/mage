@@ -33,7 +33,7 @@ public final class BrinebornCutthroat extends CardImpl {
         // Whenever you cast a spell during an opponent's turn, put a +1/+1 counter on Brineborn Cutthroat.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false
-        ).withTriggerCondition(OpponentsTurnCondition.instance, "during an opponent's turn").addHint(OpponentsTurnHint.instance));
+        ).withTriggerCondition(OpponentsTurnCondition.instance).addHint(OpponentsTurnHint.instance));
     }
 
     private BrinebornCutthroat(final BrinebornCutthroat card) {

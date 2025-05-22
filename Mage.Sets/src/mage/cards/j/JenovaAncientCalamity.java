@@ -57,7 +57,7 @@ public final class JenovaAncientCalamity extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new DrawCardSourceControllerEffect(JenovaAncientCalamityValue.instance)
                         .setText("draw cards equal to its power"), false, filter
-        ).withTriggerCondition(MyTurnCondition.instance, "during your turn"));
+        ).withTriggerCondition(MyTurnCondition.instance));
     }
 
     private JenovaAncientCalamity(final JenovaAncientCalamity card) {

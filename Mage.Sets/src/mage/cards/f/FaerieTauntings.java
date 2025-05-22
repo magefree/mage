@@ -22,7 +22,7 @@ public final class FaerieTauntings extends CardImpl {
         // Whenever you cast a spell during an opponent's turn, you may have each opponent lose 1 life
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new LoseLifeOpponentsEffect(1), true
-        ).withTriggerCondition(OpponentsTurnCondition.instance, "during an opponent's turn"));
+        ).withTriggerCondition(OpponentsTurnCondition.instance));
     }
 
     private FaerieTauntings(final FaerieTauntings card) {

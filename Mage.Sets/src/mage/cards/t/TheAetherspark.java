@@ -47,7 +47,7 @@ public final class TheAetherspark extends CardImpl {
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                 new DealsCombatDamageEquippedTriggeredAbility(new AddCountersSourceEffect(
                         CounterType.LOYALTY.createInstance(0), SavedDamageValue.MANY
-                )).withTriggerCondition(MyTurnCondition.instance, "during your turn")
+                )).withTriggerCondition(MyTurnCondition.instance)
         ), condition, "and has \"Whenever equipped creature deals combat damage during your turn, put that many loyalty counters on {this}.\""));
         this.addAbility(ability);
 

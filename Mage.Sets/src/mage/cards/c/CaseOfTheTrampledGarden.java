@@ -44,7 +44,7 @@ public final class CaseOfTheTrampledGarden extends CardImpl {
         // Solved -- Whenever you attack, put a +1/+1 counter on target attacking creature. It gains trample until end of turn.
         Ability solvedAbility = new AttacksWithCreaturesTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1
-        ).withTriggerCondition(SolvedSourceCondition.SOLVED, "");
+        ).withTriggerCondition(SolvedSourceCondition.SOLVED);
         solvedAbility.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())
                 .setText("it gains trample until end of turn"));
         solvedAbility.addTarget(new TargetAttackingCreature());

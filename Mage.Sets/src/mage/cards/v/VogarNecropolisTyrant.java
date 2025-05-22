@@ -35,7 +35,7 @@ public final class VogarNecropolisTyrant extends CardImpl {
         // Whenever another creature dies during your turn, put a +1/+1 counter on Vogar, Necropolis Tyrant.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true
-        ).withTriggerCondition(MyTurnCondition.instance, "during your turn"));
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // When Vogar dies, draw a card for each +1/+1 counter on it.
         this.addAbility(new DiesSourceTriggeredAbility(

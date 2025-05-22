@@ -30,7 +30,7 @@ public final class LoneWolfOfTheNatterknolls extends CardImpl {
         // Whenever an opponent cast a spell during your turn, draw two cards.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 new DrawCardSourceControllerEffect(2), StaticFilters.FILTER_SPELL_A, false
-        ).withTriggerCondition(MyTurnCondition.instance, "during your turn"));
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Lone Wolf of the Natterknolls.
         this.addAbility(new WerewolfBackTriggeredAbility());

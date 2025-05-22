@@ -31,7 +31,7 @@ public final class HermitOfTheNatterknolls extends CardImpl {
         // Whenever an opponent casts a spell during your turn, draw a card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A, false
-        ).withTriggerCondition(MyTurnCondition.instance, "during your turn"));
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Hermit of the Natterknolls.
         this.addAbility(new TransformAbility());

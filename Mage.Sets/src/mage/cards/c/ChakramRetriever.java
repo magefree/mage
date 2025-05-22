@@ -32,7 +32,7 @@ public final class ChakramRetriever extends CardImpl {
 
         // Whenever you cast a spell during your turn, untap target creature.
         Ability ability = new SpellCastControllerTriggeredAbility(new UntapTargetEffect(), false)
-                .withTriggerCondition(MyTurnCondition.instance, "during your turn");
+                .withTriggerCondition(MyTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

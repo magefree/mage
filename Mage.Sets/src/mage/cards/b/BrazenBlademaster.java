@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterArtifactPermanent;
 
 import java.util.UUID;
 
@@ -21,7 +21,8 @@ import java.util.UUID;
 public final class BrazenBlademaster extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
-            StaticFilters.FILTER_PERMANENT_ARTIFACT, ComparisonType.MORE_THAN, 1, true
+            new FilterArtifactPermanent("you control two or more artifacts"),
+            ComparisonType.MORE_THAN, 1, true
     );
 
     public BrazenBlademaster(UUID ownerId, CardSetInfo setInfo) {
@@ -35,7 +36,7 @@ public final class BrazenBlademaster extends CardImpl {
         // Whenever Brazen Blademaster attacks while you control two or more artifacts, it gets +2/+1 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(
                 new BoostSourceEffect(2, 1, Duration.EndOfTurn, "it")
-        ).withTriggerCondition(condition, "while you control two or more artifacts"));
+        ).withTriggerCondition(condition));
     }
 
     private BrazenBlademaster(final BrazenBlademaster card) {

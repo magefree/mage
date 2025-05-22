@@ -30,7 +30,7 @@ public final class CourageousGoblin extends CardImpl {
         // Whenever this creature attacks while you control a creature with power 4 or greater, this creature gets +1/+0 and gains menace until end of turn.
         Ability ability = new AttacksTriggeredAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn).setText("{this} gets +1/+0"), false
-        ).withTriggerCondition(FerociousCondition.instance, "while you control a creature with power 4 or greater");
+        ).withTriggerCondition(FerociousCondition.instance);
         ability.addEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(false), Duration.EndOfTurn
         ).setText("and gains menace until end of turn"));

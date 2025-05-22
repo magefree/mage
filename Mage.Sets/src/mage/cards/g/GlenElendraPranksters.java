@@ -32,7 +32,7 @@ public final class GlenElendraPranksters extends CardImpl {
         // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new ReturnToHandTargetEffect(), true
-        ).withTriggerCondition(OpponentsTurnCondition.instance, "during an opponent's turn");
+        ).withTriggerCondition(OpponentsTurnCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ public final class HandThatFeeds extends CardImpl {
         // Delirium -- Whenever Hand That Feeds attacks while there are four or more card types among cards in your graveyard, it gets +2/+0 and gains menace until end of turn.
         Ability ability = new AttacksTriggeredAbility(
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn).setText("it gets +2/+0")
-        ).withTriggerCondition(DeliriumCondition.instance, "while there are four or more card types among cards in your graveyard");
+        ).withTriggerCondition(DeliriumCondition.instance);
         ability.addEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(false), Duration.EndOfTurn
         ).setText("and gains menace until end of turn"));
