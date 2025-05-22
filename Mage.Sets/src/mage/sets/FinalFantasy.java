@@ -168,6 +168,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Gladiolus Amicitia", 489, Rarity.UNCOMMON, mage.cards.g.GladiolusAmicitia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gohn, Town of Ruin", 278, Rarity.COMMON, mage.cards.g.GohnTownOfRuin.class));
         cards.add(new SetCardInfo("Gongaga, Reactor Town", 280, Rarity.COMMON, mage.cards.g.GongagaReactorTown.class));
+        cards.add(new SetCardInfo("Guadosalam, Farplane Gateway", 281, Rarity.COMMON, mage.cards.g.GuadosalamFarplaneGateway.class));
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 218, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 394, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 483, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
