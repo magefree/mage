@@ -448,6 +448,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Vivi Ornitier", 514, Rarity.MYTHIC, mage.cards.v.ViviOrnitier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Warrior's Sword", 169, Rarity.COMMON, mage.cards.w.WarriorsSword.class));
         cards.add(new SetCardInfo("Wastes", 309, Rarity.COMMON, mage.cards.w.Wastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Weapons Vendor", 40, Rarity.COMMON, mage.cards.w.WeaponsVendor.class));
         cards.add(new SetCardInfo("White Auracite", 41, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("White Auracite", 579, Rarity.COMMON, mage.cards.w.WhiteAuracite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("White Mage's Staff", 42, Rarity.COMMON, mage.cards.w.WhiteMagesStaff.class));
