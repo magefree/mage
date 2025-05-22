@@ -392,6 +392,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("The Lord Master of Hell", 484, Rarity.UNCOMMON, mage.cards.t.TheLordMasterOfHell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Lunar Whale", 60, Rarity.RARE, mage.cards.t.TheLunarWhale.class));
         cards.add(new SetCardInfo("The Prima Vista", 64, Rarity.UNCOMMON, mage.cards.t.ThePrimaVista.class));
+        cards.add(new SetCardInfo("The Regalia", 267, Rarity.RARE, mage.cards.t.TheRegalia.class));
         cards.add(new SetCardInfo("The Water Crystal", 333, Rarity.RARE, mage.cards.t.TheWaterCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Water Crystal", 85, Rarity.RARE, mage.cards.t.TheWaterCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Wind Crystal", 330, Rarity.RARE, mage.cards.t.TheWindCrystal.class, NON_FULL_USE_VARIOUS));
