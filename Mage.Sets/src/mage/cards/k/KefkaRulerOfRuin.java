@@ -38,7 +38,7 @@ public final class KefkaRulerOfRuin extends CardImpl {
 
         // Whenever an opponent loses life during your turn, you draw that many cards.
         this.addAbility(new LoseLifeTriggeredAbility(
-                new DrawCardSourceControllerEffect(SavedLifeLossValue.MANY),
+                new DrawCardSourceControllerEffect(SavedLifeLossValue.MANY, true),
                 TargetController.OPPONENT, false, false
         ).withTriggerCondition(MyTurnCondition.instance));
     }

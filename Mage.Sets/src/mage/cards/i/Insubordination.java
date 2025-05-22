@@ -40,7 +40,7 @@ public final class Insubordination extends CardImpl {
                         new DamageAttachedControllerEffect(2), DidNotAttackThisTurnEnchantedCondition.instance,
                         "{this} deals 2 damage to that player unless that creature attacked this turn"
                 ), false
-        ));
+        ).setTriggerPhrase("At the beginning of the end step of enchanted creature's controller, "));
     }
 
     private Insubordination(final Insubordination card) {
