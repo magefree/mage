@@ -340,6 +340,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Shiva, Warden of Ice", 523, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shiva, Warden of Ice", 58, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Catch a Fish", 31, Rarity.UNCOMMON, mage.cards.s.SidequestCatchAFish.class));
+        cards.add(new SetCardInfo("Sidequest: Hunt the Mark", 119, Rarity.UNCOMMON, mage.cards.s.SidequestHuntTheMark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sidequest: Hunt the Mark", 453, Rarity.UNCOMMON, mage.cards.s.SidequestHuntTheMark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Play Blitzball", 158, Rarity.UNCOMMON, mage.cards.s.SidequestPlayBlitzball.class));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 242, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 348, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
@@ -466,6 +468,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Y'shtola Rhul", 443, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 577, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Y'shtola Rhul", 86, Rarity.MYTHIC, mage.cards.y.YshtolaRhul.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yiazmat, Ultimate Mark", 119, Rarity.UNCOMMON, mage.cards.y.YiazmatUltimateMark.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yiazmat, Ultimate Mark", 453, Rarity.UNCOMMON, mage.cards.y.YiazmatUltimateMark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("You're Not Alone", 44, Rarity.COMMON, mage.cards.y.YoureNotAlone.class));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 250, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 404, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
