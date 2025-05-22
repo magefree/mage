@@ -118,7 +118,7 @@ class CodsworthHandyHelperManaCondition implements Condition {
         if (source instanceof SpellAbility) {
             Card card = game.getCard(source.getSourceId());
             return card != null && (
-                    card.getSubtype(game).contains(SubType.AURA) || card.getSubtype(game).contains(SubType.EQUIPMENT)
+                    card.hasSubtype(SubType.AURA, game) || card.hasSubtype(SubType.EQUIPMENT, game)
             );
         }
         return false;

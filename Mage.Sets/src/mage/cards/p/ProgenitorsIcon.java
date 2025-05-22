@@ -91,11 +91,11 @@ class ProgenitorsIconAsThoughEffect extends AsThoughEffectImpl {
             return false;
         }
         Card card = game.getCard(sourceId);
-        if (card == null){
+        if (card == null) {
             return false;
         }
 
-        return card.getSubtype().contains(subType);
+        return card.hasSubtype(subType, game);
     }
 }
 
