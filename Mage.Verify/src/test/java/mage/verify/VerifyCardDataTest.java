@@ -1066,9 +1066,12 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
 
+        // make sure mtgjson has booster data
+        boolean hasBoostersInfo = MtgJsonService.sets().values().stream().anyMatch(s -> s.booster != null && !s.booster.isEmpty());
         for (ExpansionSet set : sets) {
-            if (true) { // temporary workaround for mtgjson
-                continue;
+            if (!hasBoostersInfo) {
+                System.out.println("Warning, mtgjson data lost boosters info");
+                break;
             }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
