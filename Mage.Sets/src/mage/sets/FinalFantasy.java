@@ -181,7 +181,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 385, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 458, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 530, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ignis Scientia", 227, Rarity.UNCOMMON, mage.cards.i.IgnisScientia.class));
+        cards.add(new SetCardInfo("Ignis Scientia", 227, Rarity.UNCOMMON, mage.cards.i.IgnisScientia.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ignis Scientia", 492, Rarity.UNCOMMON, mage.cards.i.IgnisScientia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Insomnia, Crown City", 282, Rarity.COMMON, mage.cards.i.InsomniaCrownCity.class));
         cards.add(new SetCardInfo("Instant Ramen", 259, Rarity.COMMON, mage.cards.i.InstantRamen.class));
         cards.add(new SetCardInfo("Ishgard, the Holy See", 283, Rarity.RARE, mage.cards.i.IshgardTheHolySee.class, NON_FULL_USE_VARIOUS));
