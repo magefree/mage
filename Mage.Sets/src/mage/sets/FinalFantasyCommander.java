@@ -260,6 +260,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rejoin the Fight", 49, Rarity.RARE, mage.cards.r.RejoinTheFight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Relic of Legends", 354, Rarity.UNCOMMON, mage.cards.r.RelicOfLegends.class));
         cards.add(new SetCardInfo("Resourceful Defense", 251, Rarity.RARE, mage.cards.r.ResourcefulDefense.class));
+        cards.add(new SetCardInfo("Rikku, Resourceful Guardian", 145, Rarity.RARE, mage.cards.r.RikkuResourcefulGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rikku, Resourceful Guardian", 41, Rarity.RARE, mage.cards.r.RikkuResourcefulGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rise of the Dark Realms", 283, Rarity.MYTHIC, mage.cards.r.RiseOfTheDarkRealms.class));
         cards.add(new SetCardInfo("Rite of Replication", 270, Rarity.RARE, mage.cards.r.RiteOfReplication.class));
         cards.add(new SetCardInfo("Rogue's Passage", 415, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
