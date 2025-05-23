@@ -265,6 +265,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Namazu Trader", 107, Rarity.COMMON, mage.cards.n.NamazuTrader.class));
         cards.add(new SetCardInfo("Nibelheim Aflame", 146, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nibelheim Aflame", 339, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ninja's Blades", 108, Rarity.RARE, mage.cards.n.NinjasBlades.class));
         cards.add(new SetCardInfo("Noctis, Prince of Lucis", 235, Rarity.RARE, mage.cards.n.NoctisPrinceOfLucis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Noctis, Prince of Lucis", 401, Rarity.RARE, mage.cards.n.NoctisPrinceOfLucis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Noctis, Prince of Lucis", 500, Rarity.RARE, mage.cards.n.NoctisPrinceOfLucis.class, NON_FULL_USE_VARIOUS));
