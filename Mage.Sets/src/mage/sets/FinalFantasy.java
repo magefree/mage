@@ -264,6 +264,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Omega, Heartless Evolution", 236, Rarity.UNCOMMON, mage.cards.o.OmegaHeartlessEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Omega, Heartless Evolution", 347, Rarity.UNCOMMON, mage.cards.o.OmegaHeartlessEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Omega, Heartless Evolution", 501, Rarity.UNCOMMON, mage.cards.o.OmegaHeartlessEvolution.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Overkill", 109, Rarity.UNCOMMON, mage.cards.o.Overkill.class));
         cards.add(new SetCardInfo("Paladin's Arms", 28, Rarity.COMMON, mage.cards.p.PaladinsArms.class));
         cards.add(new SetCardInfo("Phantom Train", 110, Rarity.UNCOMMON, mage.cards.p.PhantomTrain.class));
         cards.add(new SetCardInfo("Phoenix Down", 29, Rarity.UNCOMMON, mage.cards.p.PhoenixDown.class, NON_FULL_USE_VARIOUS));
