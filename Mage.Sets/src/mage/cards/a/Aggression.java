@@ -1,31 +1,26 @@
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.constants.SubType;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.DidNotAttackThisTurnEnchantedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyAttachedToEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.watchers.common.AttackedThisTurnWatcher;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class Aggression extends CardImpl {
@@ -45,27 +40,25 @@ public final class Aggression extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature has first strike and trample.
-        Ability ability2 = new SimpleStaticAbility(
-                new GainAbilityAttachedEffect(
-                        FirstStrikeAbility.getInstance(),
-                        AttachmentType.AURA));
-        ability2.addEffect(new GainAbilityAttachedEffect(
-                TrampleAbility.getInstance(),
-                AttachmentType.AURA).setText("and trample"));
-        this.addAbility(ability2);
+        Ability ability = new SimpleStaticAbility(
+                new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)
+        );
+        ability.addEffect(new GainAbilityAttachedEffect(
+                TrampleAbility.getInstance(), AttachmentType.AURA
+        ).setText("and trample"));
+        this.addAbility(ability);
 
         // At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                        new DestroyAttachedToEffect("enchanted"),
-                        TargetController.CONTROLLER_ATTACHED_TO),
-                DidNotAttackThisTurnEnchantedCondition.instance,
-                "At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn."));
-
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.CONTROLLER_ATTACHED_TO,
+                new ConditionalOneShotEffect(
+                        new DestroyAttachedToEffect(""), DidNotAttackThisTurnEnchantedCondition.instance,
+                        "destroy that creature if it didn't attack this turn"
+                ), false
+        ));
     }
 
     private Aggression(final Aggression card) {

@@ -5,7 +5,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.Effect;
@@ -55,9 +54,10 @@ public final class JenovaAncientCalamity extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a Mutant you control dies during your turn, draw cards equal to its power.
-        this.addAbility(new ConditionalTriggeredAbility(new DiesCreatureTriggeredAbility(
-                new DrawCardSourceControllerEffect(JenovaAncientCalamityValue.instance), false, filter
-        ), MyTurnCondition.instance, "Whenever a Mutant you control dies during your turn, draw cards equal to its power."));
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new DrawCardSourceControllerEffect(JenovaAncientCalamityValue.instance)
+                        .setText("draw cards equal to its power"), false, filter
+        ).withTriggerCondition(MyTurnCondition.instance));
     }
 
     private JenovaAncientCalamity(final JenovaAncientCalamity card) {

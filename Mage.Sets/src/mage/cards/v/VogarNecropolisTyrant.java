@@ -4,11 +4,9 @@ import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,10 +33,9 @@ public final class VogarNecropolisTyrant extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Whenever another creature dies during your turn, put a +1/+1 counter on Vogar, Necropolis Tyrant.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true),
-                MyTurnCondition.instance, "Whenever another creature dies during your turn, put a +1/+1 counter on {this}."
-        ).addHint(MyTurnHint.instance));
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // When Vogar dies, draw a card for each +1/+1 counter on it.
         this.addAbility(new DiesSourceTriggeredAbility(

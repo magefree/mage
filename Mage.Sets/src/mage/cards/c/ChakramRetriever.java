@@ -4,9 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,11 +31,8 @@ public final class ChakramRetriever extends CardImpl {
         this.addAbility(new PartnerWithAbility("Chakram Slinger"));
 
         // Whenever you cast a spell during your turn, untap target creature.
-        Ability ability = new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new UntapTargetEffect(), false),
-                MyTurnCondition.instance,
-                "Whenever you cast a spell during your turn, untap target creature."
-        ).addHint(MyTurnHint.instance);
+        Ability ability = new SpellCastControllerTriggeredAbility(new UntapTargetEffect(), false)
+                .withTriggerCondition(MyTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
