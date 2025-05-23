@@ -1215,6 +1215,12 @@ public final class StaticFilters {
         FILTER_PERMANENT_EQUIPMENT.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_CONTROLLED_PERMANENT_EQUIPMENT = new FilterControlledPermanent(SubType.EQUIPMENT);
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_EQUIPMENT.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT_FORTIFICATION = new FilterPermanent();
 
     static {
