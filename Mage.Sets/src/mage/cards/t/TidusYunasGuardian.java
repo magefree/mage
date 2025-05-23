@@ -16,6 +16,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -28,9 +29,12 @@ public final class TidusYunasGuardian extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("a second target creature you control");
+    private static final FilterPermanent filter2
+            = new FilterControlledCreaturePermanent("creatures you control with counters on them");
 
     static {
         filter.add(new AnotherTargetPredicate(2));
+        filter2.add(CounterAnyPredicate.instance);
     }
 
     public TidusYunasGuardian(UUID ownerId, CardSetInfo setInfo) {
@@ -50,7 +54,7 @@ public final class TidusYunasGuardian extends CardImpl {
 
         // Cheer - Whenever one or more creatures you control with counters on them deal combat damage to a player, you may draw a card and proliferate. Do this only once each turn.
         ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), SetTargetPointer.NONE, true
+                new DrawCardSourceControllerEffect(1), SetTargetPointer.NONE, filter2, true
         ).setDoOnlyOnceEachTurn(true);
         ability.addEffect(new ProliferateEffect(false).concatBy("and"));
         this.addAbility(ability.withFlavorWord("Cheer"));
