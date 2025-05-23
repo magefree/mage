@@ -50,6 +50,6 @@ public class AttachTargetToTargetEffect extends OneShotEffect {
         if (mode.getTargets().size() != 2) {
             throw new IllegalStateException("It must have two targets, but found " + mode.getTargets().size());
         }
-        return "attach " + mode.getTargets().get(0).getDescription() + " to " + mode.getTargets().get(0).getDescription();
+        return "attach " + mode.getTargets().get(0).getDescription() + " to " + mode.getTargets().get(1).getDescription();
     }
 }
