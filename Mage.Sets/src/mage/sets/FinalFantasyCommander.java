@@ -366,6 +366,11 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("The Warring Triad", 99, Rarity.RARE, mage.cards.t.TheWarringTriad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thought Vessel", 368, Rarity.COMMON, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Three Visits", 315, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
+        cards.add(new SetCardInfo("Tidus, Yuna's Guardian", 187, Rarity.MYTHIC, mage.cards.t.TidusYunasGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tidus, Yuna's Guardian", 205, Rarity.MYTHIC, mage.cards.t.TidusYunasGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tidus, Yuna's Guardian", 213, Rarity.MYTHIC, mage.cards.t.TidusYunasGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tidus, Yuna's Guardian", 224, Rarity.MYTHIC, mage.cards.t.TidusYunasGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tidus, Yuna's Guardian", 5, Rarity.MYTHIC, mage.cards.t.TidusYunasGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa, Martial Artist", 188, Rarity.MYTHIC, mage.cards.t.TifaMartialArtist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa, Martial Artist", 206, Rarity.MYTHIC, mage.cards.t.TifaMartialArtist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa, Martial Artist", 214, Rarity.MYTHIC, mage.cards.t.TifaMartialArtist.class, NON_FULL_USE_VARIOUS));
