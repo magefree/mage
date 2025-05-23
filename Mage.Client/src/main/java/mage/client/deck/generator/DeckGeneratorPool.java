@@ -455,7 +455,7 @@ public class DeckGeneratorPool {
 
         // Check we have exactly the right amount of cards for a deck.
         if (deckCards.size() != nonLandSize) {
-            throw new IllegalStateException("Not enough cards found to generate deck.");
+            logger.info("Can't generate full deck for selected settings - try again or choose more sets and less colors");
         }
         // Return the fixed amount
         return deckCards;
