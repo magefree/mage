@@ -10,7 +10,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
@@ -42,7 +41,6 @@ public final class DementiaSliver extends CardImpl {
         Ability gainedAbility = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL), new TapSourceCost(), MyTurnCondition.instance);
         gainedAbility.addEffect(new DementiaSliverEffect());
         gainedAbility.addTarget(new TargetOpponent());
-        gainedAbility.addHint(MyTurnHint.instance);
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter,
                         "All Slivers have \"{T}: Choose a card name. "

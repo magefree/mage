@@ -7,7 +7,6 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.MillThenPutInHandEffect;
 import mage.abilities.effects.common.continuous.GainRetraceYourGraveyardEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -56,7 +55,7 @@ public final class Six extends CardImpl {
                         MyTurnCondition.instance,
                         "During your turn, nonland permanent cards in your graveyard have retrace."
                 )
-        ).addHint(MyTurnHint.instance));
+        ));
     }
 
     private Six(final Six card) {

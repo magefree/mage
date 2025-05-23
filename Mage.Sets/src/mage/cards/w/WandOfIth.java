@@ -7,7 +7,6 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -31,7 +30,6 @@ public final class WandOfIth extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new WandOfIthEffect(), new GenericManaCost(3), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

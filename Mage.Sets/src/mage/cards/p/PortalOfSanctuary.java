@@ -6,7 +6,6 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -37,7 +36,6 @@ public final class PortalOfSanctuary extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

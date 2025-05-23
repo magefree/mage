@@ -5,14 +5,12 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -33,7 +31,6 @@ public final class FatedReturn extends CardImpl {
                 "It gains indestructible"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.instance,
                 "If it's your turn, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>"));
-        this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 
     private FatedReturn(final FatedReturn card) {

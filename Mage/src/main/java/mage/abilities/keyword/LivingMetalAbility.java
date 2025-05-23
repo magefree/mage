@@ -4,7 +4,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.constants.CardType;
 import mage.constants.Duration;
 
@@ -17,7 +16,6 @@ public class LivingMetalAbility extends SimpleStaticAbility {
         super(new ConditionalContinuousEffect(new AddCardTypeSourceEffect(
                 Duration.WhileOnBattlefield, CardType.ARTIFACT, CardType.CREATURE
         ), MyTurnCondition.instance, ""));
-        this.addHint(MyTurnHint.instance);
     }
 
     protected LivingMetalAbility(final LivingMetalAbility ability) {

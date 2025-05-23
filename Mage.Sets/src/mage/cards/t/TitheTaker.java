@@ -6,7 +6,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.AfterlifeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,8 +29,7 @@ public final class TitheTaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // During your turn, spells your opponents cast cost {1} more to cast and abilities your opponents activate cost {1} more to activate unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(new TitheTakerCostReductionEffect())
-                .addHint(MyTurnHint.instance));
+        this.addAbility(new SimpleStaticAbility(new TitheTakerCostReductionEffect()));
 
         // Afterlife 1
         this.addAbility(new AfterlifeAbility(1));

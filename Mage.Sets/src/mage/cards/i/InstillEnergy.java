@@ -8,7 +8,6 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.UntapAttachedEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,8 +41,7 @@ public final class InstillEnergy extends CardImpl {
         // {0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,
                 new UntapAttachedEffect(),
-                new GenericManaCost(0), 1, MyTurnCondition.instance)
-                .addHint(MyTurnHint.instance));
+                new GenericManaCost(0), 1, MyTurnCondition.instance));
     }
 
     private InstillEnergy(final InstillEnergy card) {

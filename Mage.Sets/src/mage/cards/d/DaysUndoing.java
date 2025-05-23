@@ -6,7 +6,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.EndTurnEffect;
 import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +26,6 @@ public final class DaysUndoing extends CardImpl {
         effect.setText(", then draws seven cards");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new EndTurnEffect(), MyTurnCondition.instance, "If it's your turn, end the turn"));
-        this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 
     private DaysUndoing(final DaysUndoing card) {

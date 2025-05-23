@@ -5,7 +5,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ToxicAbility;
 import mage.cards.CardImpl;
@@ -35,7 +34,7 @@ public final class DuelistOfDeepFaith extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()),
                 MyTurnCondition.instance, "during your turn, {this} has first strike"
-        )).addHint(MyTurnHint.instance));
+        )));
     }
 
     private DuelistOfDeepFaith(final DuelistOfDeepFaith card) {

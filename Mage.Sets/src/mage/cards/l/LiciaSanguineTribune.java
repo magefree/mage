@@ -10,7 +10,6 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -54,7 +53,7 @@ public final class LiciaSanguineTribune extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
                 new PayLifeCost(5), 1, MyTurnCondition.instance
-        ).addHint(MyTurnHint.instance));
+        ));
     }
 
     private LiciaSanguineTribune(final LiciaSanguineTribune card) {

@@ -5,7 +5,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +31,7 @@ public final class LeechFanatic extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield),
                 MyTurnCondition.instance, "during your turn, {this} has lifelink"
-        )).addHint(MyTurnHint.instance));
+        )));
     }
 
     private LeechFanatic(final LeechFanatic card) {

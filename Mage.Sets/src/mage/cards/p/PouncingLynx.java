@@ -5,7 +5,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +36,7 @@ public final class PouncingLynx extends CardImpl {
                         "During your turn, "
                                 + "{this} has first strike."
                 )
-        ).addHint(MyTurnHint.instance));
+        ));
     }
 
     private PouncingLynx(final PouncingLynx card) {

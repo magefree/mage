@@ -5,7 +5,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.NotMyTurnCondition;
 import mage.abilities.decorator.ConditionalCostModificationEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +30,7 @@ public final class NaiadOfHiddenCoves extends CardImpl {
                 new SpellsCostReductionControllerEffect(StaticFilters.FILTER_CARD, 1),
                 NotMyTurnCondition.instance, "During turns other than yours, " +
                 "spells you cast cost {1} less to cast."
-        )).addHint(MyTurnHint.instance));
+        )));
     }
 
     private NaiadOfHiddenCoves(final NaiadOfHiddenCoves card) {

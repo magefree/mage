@@ -6,7 +6,6 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -37,7 +36,7 @@ public final class Hookblade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(FlyingAbility.getInstance().getInstance(), AttachmentType.EQUIPMENT),
                 MyTurnCondition.instance, "during your turn, equipped creature has flying"
-        )).addHint(MyTurnHint.instance));
+        )));
 
         // Equip {2}
         this.addAbility(new EquipAbility(2));
