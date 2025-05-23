@@ -397,6 +397,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 302, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 574, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Syncopate", 80, Rarity.COMMON, mage.cards.s.Syncopate.class));
+        cards.add(new SetCardInfo("Tellah, Great Sage", 244, Rarity.RARE, mage.cards.t.TellahGreatSage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tellah, Great Sage", 349, Rarity.RARE, mage.cards.t.TellahGreatSage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tellah, Great Sage", 510, Rarity.RARE, mage.cards.t.TellahGreatSage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Magical Adept", 245, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Magical Adept", 323, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Magical Adept", 511, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
