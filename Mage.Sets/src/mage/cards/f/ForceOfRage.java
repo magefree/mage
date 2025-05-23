@@ -9,7 +9,6 @@ import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.abilities.hint.common.NotMyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,7 +45,7 @@ public final class ForceOfRage extends CardImpl {
                 new ExileFromHandCost(new TargetCardInHand(filter)), NotMyTurnCondition.instance,
                 "If it's not your turn, you may exile a red card from " +
                         "your hand rather than pay this spell's mana cost."
-        ).addHint(NotMyTurnHint.instance));
+        ));
 
         // Create two 3/1 red Elemental creature tokens with trample and haste. Sacrifice those tokens at the beginning of your next upkeep.
         this.getSpellAbility().addEffect(new ForceOfRageEffect());
@@ -93,4 +92,3 @@ class ForceOfRageEffect extends OneShotEffect {
         return true;
     }
 }
-
