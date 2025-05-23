@@ -130,6 +130,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Endless Detour", 324, Rarity.RARE, mage.cards.e.EndlessDetour.class));
         cards.add(new SetCardInfo("Espers to Magicite", 114, Rarity.RARE, mage.cards.e.EspersToMagicite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Espers to Magicite", 43, Rarity.RARE, mage.cards.e.EspersToMagicite.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Estinien Varlineau", 171, Rarity.RARE, mage.cards.e.EstinienVarlineau.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Estinien Varlineau", 82, Rarity.RARE, mage.cards.e.EstinienVarlineau.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Everflowing Chalice", 343, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 389, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 390, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
