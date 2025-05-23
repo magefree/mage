@@ -45,6 +45,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Astrologian's Planisphere", 46, Rarity.RARE, mage.cards.a.AstrologiansPlanisphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrologian's Planisphere", 581, Rarity.RARE, mage.cards.a.AstrologiansPlanisphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Auron's Inspiration", 8, Rarity.UNCOMMON, mage.cards.a.AuronsInspiration.class));
+        cards.add(new SetCardInfo("Balamb Garden, Airborne", 272, Rarity.RARE, mage.cards.b.BalambGardenAirborne.class));
+        cards.add(new SetCardInfo("Balamb Garden, SeeD Academy", 272, Rarity.RARE, mage.cards.b.BalambGardenSeeDAcademy.class));
         cards.add(new SetCardInfo("Balamb T-Rexaur", 173, Rarity.COMMON, mage.cards.b.BalambTRexaur.class));
         cards.add(new SetCardInfo("Balthier and Fran", 213, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balthier and Fran", 319, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
