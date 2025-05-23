@@ -1044,7 +1044,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             selectBySearchPanelC.fill = GridBagConstraints.VERTICAL;
 
             searchByTextField = new JTextField();
-            searchByTextField.setToolTipText("Searches for card names, types, rarity, casting cost and rules text.  NB: Mana symbols are written like {W},{U},{C} etc");
+            searchByTextField.setToolTipText("Search cards by any data like name or mana symbols like {W}, {U}, {C}, etc (use quotes for exact search)");
             searchByTextField.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyReleased(KeyEvent e) {
