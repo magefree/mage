@@ -84,9 +84,7 @@ public interface TriggeredAbility extends Ability {
     boolean checkInterveningIfClause(Game game);
 
     /**
-     * Unlike an intervening if clause, this is for when a condition doesn't need to be checked on trigger
-     * but not on resolution. Can also be used for intervening if clauses if the condition is guaranteed to be the same
-     * at both points (e.g. "whenever you cast a spell, if it was cast from a graveyard", etc)
+     * Unlike intervening if, this is for a condition that's checked only on trigger and not also on resolution.
      *
      * @param condition the condition to be checked
      * @return
