@@ -348,6 +348,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 348, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 508, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Slash of Light", 32, Rarity.COMMON, mage.cards.s.SlashOfLight.class));
+        cards.add(new SetCardInfo("Sleep Magic", 74, Rarity.UNCOMMON, mage.cards.s.SleepMagic.class));
         cards.add(new SetCardInfo("Snow Villiers", 33, Rarity.UNCOMMON, mage.cards.s.SnowVilliers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snow Villiers", 432, Rarity.UNCOMMON, mage.cards.s.SnowVilliers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Squall, SeeD Mercenary", 243, Rarity.RARE, mage.cards.s.SquallSeeDMercenary.class, NON_FULL_USE_VARIOUS));
