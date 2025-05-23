@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.AfterUpkeepStepCondtion;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
+import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class Reset extends CardImpl {
 
         // Cast Reset only during an opponent's turn after their upkeep step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
-                new CompoundCondition(OnOpponentsTurnCondition.instance, AfterUpkeepStepCondtion.instance),
+                new CompoundCondition(OpponentsTurnCondition.instance, AfterUpkeepStepCondtion.instance),
                 "Cast this spell only during an opponent's turn after their upkeep step"));
 
         // Untap all lands you control.

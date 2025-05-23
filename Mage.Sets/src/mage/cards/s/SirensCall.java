@@ -8,7 +8,7 @@ import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.BeforeAttackersAreDeclaredCondition;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
+import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -34,7 +34,7 @@ public final class SirensCall extends CardImpl {
 
         // Cast Siren's Call only during an opponent's turn, before attackers are declared.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
-                new CompoundCondition(OnOpponentsTurnCondition.instance, BeforeAttackersAreDeclaredCondition.instance),
+                new CompoundCondition(OpponentsTurnCondition.instance, BeforeAttackersAreDeclaredCondition.instance),
                 "Cast this spell only during an opponent's turn, before attackers are declared"));
 
         // Creatures the active player controls attack this turn if able.
