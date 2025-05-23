@@ -12,6 +12,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -44,7 +45,7 @@ public final class MiteOverseer extends CardImpl {
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(
                 FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURE_TOKEN
         ), MyTurnCondition.instance, "and have first strike"));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MyTurnHint.instance));
 
         // {3}{W/P}: Create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."
         this.addAbility(new SimpleActivatedAbility(

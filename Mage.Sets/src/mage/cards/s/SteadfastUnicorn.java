@@ -7,6 +7,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +40,7 @@ public final class SteadfastUnicorn extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE
         ).setText("and gain vigilance until end of turn"));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MyTurnHint.instance));
     }
 
     private SteadfastUnicorn(final SteadfastUnicorn card) {

@@ -4,6 +4,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,6 +25,7 @@ public final class FatedConflagration extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2, false), MyTurnCondition.instance, "If it's your turn, scry 2"));
+        this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 
     private FatedConflagration(final FatedConflagration card) {

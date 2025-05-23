@@ -4,6 +4,7 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.NotMyTurnCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.hint.common.NotMyTurnHint;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +26,8 @@ public final class GhostTown extends CardImpl {
 
         // {0}: Return Ghost Town to its owner's hand. Activate this ability only if it's not your turn.
         this.addAbility(new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true),
-                new GenericManaCost(0), NotMyTurnCondition.instance));
+                new GenericManaCost(0), NotMyTurnCondition.instance)
+                .addHint(NotMyTurnHint.instance));
     }
 
     private GhostTown(final GhostTown card) {

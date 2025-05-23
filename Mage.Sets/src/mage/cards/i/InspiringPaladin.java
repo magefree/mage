@@ -6,12 +6,14 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -47,7 +49,7 @@ public final class InspiringPaladin extends CardImpl {
                         ), MyTurnCondition.instance,
                         "During your turn, this creature has first strike."
                 )
-        ));
+        ).addHint(MyTurnHint.instance));
 
         // During your turn, creatures you control with +1/+1 counters on them have first strike.
         this.addAbility(new SimpleStaticAbility(

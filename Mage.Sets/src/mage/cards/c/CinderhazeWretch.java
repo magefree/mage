@@ -9,6 +9,7 @@ import mage.abilities.costs.common.PutCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,6 +35,7 @@ public final class CinderhazeWretch extends CardImpl {
 
         // {T}: Target player discards a card. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new TapSourceCost(), MyTurnCondition.instance);
+        ability.addHint(MyTurnHint.instance);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

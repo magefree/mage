@@ -9,6 +9,7 @@ import mage.abilities.costs.common.RevealSourceFromYourHandCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -47,6 +48,7 @@ public final class TetzimocPrimalDeath extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.HAND, new AddCountersTargetEffect(CounterType.PREY.createInstance()), new ManaCostsImpl<>("{B}"), MyTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new RevealSourceFromYourHandCost());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
 
         // When Tetzimoc, Primal Death enters the battlefield, destroy each creature your opponents control with a prey counter on it.

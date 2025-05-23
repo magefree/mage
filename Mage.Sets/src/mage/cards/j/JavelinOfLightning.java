@@ -7,6 +7,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlashAbility;
@@ -41,7 +42,7 @@ public final class JavelinOfLightning extends CardImpl {
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(
                 FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
         ), MyTurnCondition.instance, "and has first strike"));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MyTurnHint.instance));
 
         // Equip {4}
         this.addAbility(new EquipAbility(4));

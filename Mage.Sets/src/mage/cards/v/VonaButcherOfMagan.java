@@ -7,6 +7,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -43,6 +44,7 @@ public final class VonaButcherOfMagan extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost(), MyTurnCondition.instance);
         ability.addCost(new PayLifeCost(7));
         ability.addTarget(new TargetNonlandPermanent());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

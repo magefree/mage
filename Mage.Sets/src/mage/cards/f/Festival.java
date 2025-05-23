@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
-import mage.abilities.condition.common.OpponentsTurnCondition;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class Festival extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Cast Festival only during an opponent's upkeep.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.UPKEEP, OpponentsTurnCondition.instance,
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, PhaseStep.UPKEEP, OnOpponentsTurnCondition.instance,
                 "Cast this spell only during an opponent's upkeep"));
 
         // Creatures can't attack this turn.

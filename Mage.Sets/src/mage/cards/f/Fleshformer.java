@@ -9,6 +9,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,6 +43,7 @@ public final class Fleshformer extends CardImpl {
         ability.addEffect(effect);
         ability.addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
 
     }

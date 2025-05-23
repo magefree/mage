@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
-import mage.abilities.condition.common.OpponentsTurnCondition;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventDamageByTargetEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
@@ -37,7 +37,7 @@ public final class Delirium extends CardImpl {
 
 
         // Cast this spell only during an opponent’s turn.
-        this.addAbility(new CastOnlyIfConditionIsTrueAbility(OpponentsTurnCondition.instance, "Cast this spell only during an opponent's turn."));
+        this.addAbility(new CastOnlyIfConditionIsTrueAbility(OnOpponentsTurnCondition.instance, "Cast this spell only during an opponent's turn."));
         // Tap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.
         this.getSpellAbility().addEffect(new TapTargetEffect("tap target creature that player controls"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

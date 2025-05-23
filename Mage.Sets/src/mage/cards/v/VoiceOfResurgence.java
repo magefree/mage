@@ -6,6 +6,7 @@ import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +38,7 @@ public final class VoiceOfResurgence extends CardImpl {
                 new DiesSourceTriggeredAbility(null, false)
         );
         ability.setLeavesTheBattlefieldTrigger(true);
-        this.addAbility(ability.addHint(CreaturesYouControlHint.instance));
+        this.addAbility(ability.addHint(MyTurnHint.instance).addHint(CreaturesYouControlHint.instance));
     }
 
     private VoiceOfResurgence(final VoiceOfResurgence card) {

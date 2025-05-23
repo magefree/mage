@@ -14,6 +14,7 @@ import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,6 +43,7 @@ public final class YesManPersonalSecuritron extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
                 new YesManPersonalSecuritronControlEffect(), new TapSourceCost(), MyTurnCondition.instance);
         ability.addTarget(new TargetOpponent());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
 
         // Wild Card -- When Yes Man leaves the battlefield, its owner creates a tapped 1/1 white Soldier creature token for each quest counter on it.

@@ -11,6 +11,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -50,6 +51,7 @@ public final class UrtetRemnantOfMemnarch extends CardImpl {
         // {W}{U}{B}{R}{G}, {T}: Put three +1/+1 counters on each Myr you control. Activate only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(3), filter2), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

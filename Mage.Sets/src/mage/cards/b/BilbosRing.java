@@ -11,6 +11,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -44,7 +45,7 @@ public final class BilbosRing extends CardImpl {
                 new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT),
                 MyTurnCondition.instance, "and can't be blocked"
         ));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(MyTurnHint.instance));
 
         // Whenever equipped creature attacks alone, you draw a card and you lose 1 life.
         ability = new AttacksAloneAttachedTriggeredAbility(

@@ -6,6 +6,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,7 +42,8 @@ public final class AngryMob extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(swamps, swamps, Duration.WhileOnBattlefield),
                 MyTurnCondition.instance,
-                "During your turn, {this}'s power and toughness are each equal to 2 plus the number of Swamps your opponents control. During turns other than yours, {this}'s power and toughness are each 2")));
+                "During your turn, {this}'s power and toughness are each equal to 2 plus the number of Swamps your opponents control. During turns other than yours, {this}'s power and toughness are each 2"))
+                .addHint(MyTurnHint.instance));
 
     }
 

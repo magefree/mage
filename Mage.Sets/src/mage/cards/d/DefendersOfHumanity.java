@@ -12,6 +12,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -49,7 +50,7 @@ public final class DefendersOfHumanity extends CardImpl {
                 new CreateTokenEffect(
                         new WhiteAstartesWarriorToken(), mage.abilities.dynamicvalue.common.GetXValue.instance
                 ), new ManaCostsImpl<>("{X}{2}{W}"), condition
-        ).addHint(CreaturesYouControlHint.instance);
+        ).addHint(CreaturesYouControlHint.instance).addHint(MyTurnHint.instance);
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }

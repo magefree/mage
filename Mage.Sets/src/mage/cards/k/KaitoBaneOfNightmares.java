@@ -14,6 +14,7 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
@@ -55,7 +56,7 @@ public final class KaitoBaneOfNightmares extends CardImpl {
                                 .withAbility(HexproofAbility.getInstance()), null, Duration.WhileOnBattlefield
                 ), KaitoBaneOfNightmaresCondition.instance, "During your turn, as long as {this} has one or more loyalty counters on him, " +
                 "he's a 3/4 Ninja creature and has hexproof."
-        )));
+        )).addHint(MyTurnHint.instance));
 
         // +1: You get an emblem with "Ninjas you control get +1/+1."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KaitoBaneOfNightmaresEmblem()), 1));

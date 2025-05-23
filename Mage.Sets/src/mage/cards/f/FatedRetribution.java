@@ -4,6 +4,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,6 +33,7 @@ public final class FatedRetribution extends CardImpl {
         // Destroy all creatures and planeswalkers. If it's your turn, scry 2.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2, false), MyTurnCondition.instance, "If it's your turn, scry 2"));
+        this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 
     private FatedRetribution(final FatedRetribution card) {

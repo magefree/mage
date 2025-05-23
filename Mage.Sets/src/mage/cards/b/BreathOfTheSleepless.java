@@ -6,6 +6,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
+import mage.abilities.hint.common.OpponentsTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,7 +42,7 @@ public final class BreathOfTheSleepless extends CardImpl {
                 new TapTargetEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false
         ).withTriggerCondition(OpponentsTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(OpponentsTurnHint.instance));
     }
 
     private BreathOfTheSleepless(final BreathOfTheSleepless card) {

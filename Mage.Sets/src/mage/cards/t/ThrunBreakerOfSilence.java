@@ -9,6 +9,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
 import mage.constants.*;
@@ -46,7 +47,8 @@ public final class ThrunBreakerOfSilence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                         MyTurnCondition.instance,
-                        "During your turn, {this} has indestructible")));
+                        "During your turn, {this} has indestructible"))
+                .addHint(MyTurnHint.instance));
     }
 
     private ThrunBreakerOfSilence(final ThrunBreakerOfSilence card) {

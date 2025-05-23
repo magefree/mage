@@ -5,6 +5,7 @@ import mage.abilities.condition.common.NotMyTurnCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.hint.common.NotMyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,7 +40,7 @@ public final class ForceOfVigor extends CardImpl {
                 new ExileFromHandCost(new TargetCardInHand(filter)), NotMyTurnCondition.instance,
                 "If it's not your turn, you may exile a green card from " +
                         "your hand rather than pay this spell's mana cost."
-        ));
+        ).addHint(NotMyTurnHint.instance));
 
         // Destroy up to two target artifacts and/or enchantments.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

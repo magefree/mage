@@ -11,6 +11,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -61,7 +62,8 @@ public final class NaturesChosen extends CardImpl {
         this.addAbility(ability);
 
         // {0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapAttachedEffect(), new GenericManaCost(0), 1, MyTurnCondition.instance));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapAttachedEffect(), new GenericManaCost(0), 1, MyTurnCondition.instance)
+                .addHint(MyTurnHint.instance));
 
         // Tap enchanted creature: Untap target artifact, creature, or land. Activate this ability only if enchanted creature is white and is untapped and only once each turn.
         Effect effect = new UntapTargetEffect();

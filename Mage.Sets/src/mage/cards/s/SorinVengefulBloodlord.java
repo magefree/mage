@@ -9,6 +9,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,7 +42,7 @@ public final class SorinVengefulBloodlord extends CardImpl {
                         StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A
                 ), MyTurnCondition.instance, "During your turn, " +
                 "creatures and planeswalkers you control have lifelink"
-        )));
+        )).addHint(MyTurnHint.instance));
 
         // +2: Sorin, Vengeful Bloodlord deals 1 damage to target player or planeswalker.
         Ability ability = new LoyaltyAbility(new DamageTargetEffect(1), 2);

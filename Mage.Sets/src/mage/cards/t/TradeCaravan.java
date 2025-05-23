@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.IsStepCondition;
-import mage.abilities.condition.common.OpponentsTurnCondition;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -46,7 +46,7 @@ public final class TradeCaravan extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CURRENCY.createInstance())));
         // Remove two currency counters from Trade Caravan: Untap target basic land. Activate this ability only during an opponent's upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new RemoveCountersSourceCost(CounterType.CURRENCY.createInstance(2)), 
-                new CompoundCondition(OpponentsTurnCondition.instance, new IsStepCondition(PhaseStep.UPKEEP, false)), 
+                new CompoundCondition(OnOpponentsTurnCondition.instance, new IsStepCondition(PhaseStep.UPKEEP, false)), 
                 "Remove two currency counters from {this}: Untap target basic land. Activate only during an opponent's upkeep.");
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

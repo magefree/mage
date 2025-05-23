@@ -7,6 +7,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.RiotAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -15,6 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -52,6 +54,7 @@ public final class GruulSpellbreaker extends CardImpl {
                         Duration.WhileOnBattlefield
                 ), MyTurnCondition.instance, "and {this} have hexproof."
         ));
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

@@ -10,6 +10,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -44,7 +45,7 @@ public final class RestlessSpire extends CardImpl {
                         .withAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                                 MyTurnCondition.instance, "During your turn, this creature has first strike."
-                        ))),
+                        )).addHint(MyTurnHint.instance)),
                 CardType.LAND, Duration.EndOfTurn
         ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{U}{R}")));
 

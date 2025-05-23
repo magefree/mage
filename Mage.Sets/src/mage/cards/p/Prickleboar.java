@@ -8,12 +8,14 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -40,6 +42,7 @@ public final class Prickleboar extends CardImpl {
                 "and has first strike");
         Ability ability = new SimpleStaticAbility(boostEffect);
         ability.addEffect(gainAbilityEffect);
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 
