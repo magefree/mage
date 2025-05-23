@@ -154,6 +154,11 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fortified Village", 396, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
         cards.add(new SetCardInfo("Furious Rise", 294, Rarity.UNCOMMON, mage.cards.f.FuriousRise.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 397, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 172, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 203, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 211, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 222, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 3, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Game Trail", 398, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Gatta and Luzzu", 134, Rarity.RARE, mage.cards.g.GattaAndLuzzu.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gatta and Luzzu", 19, Rarity.RARE, mage.cards.g.GattaAndLuzzu.class, NON_FULL_USE_VARIOUS));
