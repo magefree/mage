@@ -209,7 +209,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce) {
         this.doOnlyOnceEachTurn = doOnlyOnce;
-        setOptional();
+        if (CardUtil.castStream(this.getAllEffects(), DoIfCostPaid.class).noneMatch(DoIfCostPaid::isOptional)) {
+            this.optional = true;
+        }
         return this;
     }
 
@@ -268,11 +270,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             )) {
                 return false;
             }
-        }
-        if (doOnlyOnceEachTurn) {
-            game.getState().setValue(CardUtil.getCardZoneString(
-                    "lastTurnUsed" + getOriginalId(), sourceId, game
-            ), game.getTurnNum());
+            if (doOnlyOnceEachTurn) {
+                game.getState().setValue(CardUtil.getCardZoneString(
+                        "lastTurnUsed" + getOriginalId(), sourceId, game
+                ), game.getTurnNum());
+            }
         }
         //20091005 - 603.4
         if (!super.resolve(game)) {
@@ -499,20 +501,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean isOptional() {
         return optional;
-    }
-
-    @Override
-    public TriggeredAbility setOptional() {
-        this.optional = true;
-
-        if (getEffects().stream().anyMatch(
-                effect -> effect instanceof DoIfCostPaid && ((DoIfCostPaid) effect).isOptional())) {
-            throw new IllegalArgumentException(
-                    "DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): "
-                            + this.getClass().getSimpleName());
-        }
-
-        return this;
     }
 
     @Override
