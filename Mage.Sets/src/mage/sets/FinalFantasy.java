@@ -303,6 +303,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Reno and Rude", 113, Rarity.UNCOMMON, mage.cards.r.RenoAndRude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reno and Rude", 450, Rarity.UNCOMMON, mage.cards.r.RenoAndRude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Retrieve the Esper", 68, Rarity.COMMON, mage.cards.r.RetrieveTheEsper.class));
+        cards.add(new SetCardInfo("Ride the Shoopuf", 197, Rarity.UNCOMMON, mage.cards.r.RideTheShoopuf.class));
         cards.add(new SetCardInfo("Rinoa Heartilly", 237, Rarity.UNCOMMON, mage.cards.r.RinoaHeartilly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rinoa Heartilly", 502, Rarity.UNCOMMON, mage.cards.r.RinoaHeartilly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rosa, Resolute White Mage", 431, Rarity.RARE, mage.cards.r.RosaResoluteWhiteMage.class, NON_FULL_USE_VARIOUS));
