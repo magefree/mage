@@ -20,15 +20,16 @@ public class LoveYourLGS2021 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Aven Mindcensor", 1, Rarity.RARE, mage.cards.a.AvenMindcensor.class));
-        cards.add(new SetCardInfo("Bolas's Citadel", 3, Rarity.RARE, mage.cards.b.BolassCitadel.class));
-        cards.add(new SetCardInfo("Dig Through Time", 2, Rarity.RARE, mage.cards.d.DigThroughTime.class));
-        cards.add(new SetCardInfo("Goblin Guide", 4, Rarity.RARE, mage.cards.g.GoblinGuide.class));
-        cards.add(new SetCardInfo("Orb of Dragonkind", "J1", Rarity.RARE, mage.cards.o.OrbOfDragonkind.class,NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Orb of Dragonkind", "J2", Rarity.RARE, mage.cards.o.OrbOfDragonkind.class,NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Orb of Dragonkind", "J3", Rarity.RARE, mage.cards.o.OrbOfDragonkind.class,NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aven Mindcensor", 1, Rarity.RARE, mage.cards.a.AvenMindcensor.class, RETRO_ART));
+        cards.add(new SetCardInfo("Bolas's Citadel", 3, Rarity.RARE, mage.cards.b.BolassCitadel.class, RETRO_ART));
+        cards.add(new SetCardInfo("Dig Through Time", 2, Rarity.RARE, mage.cards.d.DigThroughTime.class, RETRO_ART));
+        cards.add(new SetCardInfo("Goblin Guide", 4, Rarity.RARE, mage.cards.g.GoblinGuide.class, RETRO_ART));
+        cards.add(new SetCardInfo("Orb of Dragonkind", "J1", Rarity.RARE, mage.cards.o.OrbOfDragonkind.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Orb of Dragonkind", "J2", Rarity.RARE, mage.cards.o.OrbOfDragonkind.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Orb of Dragonkind", "J3", Rarity.RARE, mage.cards.o.OrbOfDragonkind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path of Ancestry", "C3", Rarity.RARE, mage.cards.p.PathOfAncestry.class));
-        cards.add(new SetCardInfo("Scavenging Ooze", 5, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
+        cards.add(new SetCardInfo("Scavenging Ooze", 5, Rarity.RARE, mage.cards.s.ScavengingOoze.class, RETRO_ART));
         cards.add(new SetCardInfo("Xantcha, Sleeper Agent", "C1", Rarity.RARE, mage.cards.x.XantchaSleeperAgent.class));
-        cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", "C2", Rarity.RARE, mage.cards.y.YurikoTheTigersShadow.class));     }
+        cards.add(new SetCardInfo("Yuriko, the Tiger's Shadow", "C2", Rarity.RARE, mage.cards.y.YurikoTheTigersShadow.class));
+    }
 }

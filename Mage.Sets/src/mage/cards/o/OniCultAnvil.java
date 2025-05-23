@@ -1,9 +1,7 @@
 package mage.cards.o;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -14,13 +12,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ConstructToken;
+
+import java.util.UUID;
 
 /**
  * @author weirddan455
@@ -50,10 +47,10 @@ public final class OniCultAnvil extends CardImpl {
     }
 }
 
-class OniCultAnvilTriggeredAbility extends TriggeredAbilityImpl {
+class OniCultAnvilTriggeredAbility extends LeavesBattlefieldAllTriggeredAbility {
 
     public OniCultAnvilTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ConstructToken()));
+        super(new CreateTokenEffect(new ConstructToken()), StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS);
         this.setTriggersLimitEachTurn(1);
         setTriggerPhrase("Whenever one or more artifacts you control leave the battlefield during your turn, ");
     }
@@ -68,19 +65,12 @@ class OniCultAnvilTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.isActivePlayer(controllerId)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = zEvent.getTarget();
-                return permanent != null && permanent.isControlledBy(controllerId) && permanent.isArtifact(game);
-            }
+        if (!super.checkTrigger(event, game)) {
+            return false;
         }
-        return false;
+
+        // during your turn
+        return game.isActivePlayer(controllerId);
     }
 }

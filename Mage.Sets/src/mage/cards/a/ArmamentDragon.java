@@ -10,7 +10,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.filter.StaticFilters;
+import mage.target.common.TargetPermanentAmount;
 
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public final class ArmamentDragon extends CardImpl {
 
         // When this creature enters, distribute three +1/+1 counters among one, two, or three target creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1));
-        ability.addTarget(new TargetCreaturePermanentAmount(3));
+        ability.addTarget(new TargetPermanentAmount(3, 1, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
     }
 

@@ -47,7 +47,7 @@ public final class AnafenzaUnyieldingLineage extends CardImpl {
 
         // Whenever another nontoken creature you control dies, Anafenza endures 2.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new EndureSourceEffect(2, "{this}"), true, filter
+                new EndureSourceEffect(2, "{this}"), false, filter
         ));
     }
 

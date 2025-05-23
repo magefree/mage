@@ -1,7 +1,6 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -14,6 +13,7 @@ import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -74,7 +74,7 @@ public final class BlacksmithsTalent extends CardImpl {
                 DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter2
         ), MyTurnCondition.instance, "during your turn, equipped creatures you control have double strike"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.WhileOnBattlefield
+                HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter2
         ), MyTurnCondition.instance, "and haste"));
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 3)));
     }

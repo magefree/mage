@@ -3,6 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,6 +29,7 @@ public final class ReunionOfTheHouse extends CardImpl {
         // Return any number of target creature cards with total power 10 or less from your graveyard to the battlefield. Exile Reunion of the House.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new ReunionOfTheHouseTarget());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private ReunionOfTheHouse(final ReunionOfTheHouse card) {

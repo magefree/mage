@@ -2,16 +2,19 @@ package mage.cards.w;
 
 import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.WardAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -29,13 +32,12 @@ public final class WondrousCrucible extends CardImpl {
 
         // Permanents you control have ward {2}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new WardAbility(new GenericManaCost(2), false), Duration.WhileOnBattlefield
+                new WardAbility(new GenericManaCost(2), false),
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS
         )));
 
         // At the beginning of your end step, mill two cards, then exile a nonland card at random from your graveyard. Copy it. You may cast the copy without paying its mana cost.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new WondrousCrucibleEffect()
-        ));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new WondrousCrucibleEffect()));
     }
 
     private WondrousCrucible(final WondrousCrucible card) {

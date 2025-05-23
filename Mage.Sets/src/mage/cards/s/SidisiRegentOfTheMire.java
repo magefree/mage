@@ -75,7 +75,7 @@ class SidisiRegentOfTheMireCost extends VariableCostImpl {
 
     public SidisiRegentOfTheMireCost() {
         super(VariableCostType.NORMAL, "mana value X");
-        this.text = "Sacrifice a creature with mana value X";
+        this.text = "Sacrifice a creature you control with mana value X other than {this}";
     }
 
     protected SidisiRegentOfTheMireCost(final SidisiRegentOfTheMireCost cost) {

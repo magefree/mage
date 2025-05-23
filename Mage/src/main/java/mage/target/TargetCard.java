@@ -50,6 +50,12 @@ public class TargetCard extends TargetObject {
         return this.filter;
     }
 
+    @Override
+    public TargetCard withNotTarget(boolean notTarget) {
+        super.withNotTarget(notTarget);
+        return this;
+    }
+
     /**
      * Checks if there are enough {@link Card cards} in the appropriate zone that the player can choose from among them
      * or if they are autochosen since there are fewer than the minimum number.
@@ -63,7 +69,7 @@ public class TargetCard extends TargetObject {
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         UUID sourceId = source != null ? source.getSourceId() : null;
         int possibleTargets = 0;
-        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
+        if (getMinNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
             return true;
         }
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {

@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ public final class DesperateMeasures extends CardImpl {
                         SetTargetPointer.NONE, true
                 ), true
         ));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private DesperateMeasures(final DesperateMeasures card) {

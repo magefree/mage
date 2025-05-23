@@ -9,7 +9,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
@@ -37,7 +36,6 @@ public final class Nebuchadnezzar extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addEffect(new NebuchadnezzarEffect());
         ability.addTarget(new TargetOpponent());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

@@ -29,7 +29,7 @@ public enum GreatestToughnessAmongControlledCreaturesValue implements DynamicVal
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         return game
                 .getBattlefield()
-                .getActivePermanents(filter, sourceAbility.getControllerId(), game)
+                .getActivePermanents(filter, sourceAbility.getControllerId(), sourceAbility, game)
                 .stream()
                 .map(MageObject::getToughness)
                 .mapToInt(MageInt::getValue)

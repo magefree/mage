@@ -23,8 +23,8 @@ public final class Unhinged extends ExpansionSet {
 
         cards.add(new SetCardInfo("\"Ach! Hans, Run!\"", 116, Rarity.RARE, mage.cards.a.AchHansRun.class));
         cards.add(new SetCardInfo("B-I-N-G-O", 92, Rarity.RARE, mage.cards.b.BINGO.class));
-        cards.add(new SetCardInfo("Blast from the Past", "72*", Rarity.RARE, mage.cards.b.BlastFromThePast.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Blast from the Past", 72, Rarity.RARE, mage.cards.b.BlastFromThePast.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blast from the Past", "72*", Rarity.RARE, mage.cards.b.BlastFromThePast.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Blast from the Past", 72, Rarity.RARE, mage.cards.b.BlastFromThePast.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodletter", 50, Rarity.COMMON, mage.cards.b.Bloodletter.class));
         cards.add(new SetCardInfo("Booster Tutor", 51, Rarity.UNCOMMON, mage.cards.b.BoosterTutor.class));
         cards.add(new SetCardInfo("Double Header", 31, Rarity.COMMON, mage.cards.d.DoubleHeader.class));
@@ -44,8 +44,8 @@ public final class Unhinged extends ExpansionSet {
         cards.add(new SetCardInfo("Mox Lotus", "124*", Rarity.RARE, mage.cards.m.MoxLotus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Lotus", 124, Rarity.RARE, mage.cards.m.MoxLotus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Now I Know My ABC's", 41, Rarity.RARE, mage.cards.n.NowIKnowMyABCs.class));
-        cards.add(new SetCardInfo("Old Fogey", "106*", Rarity.RARE, mage.cards.o.OldFogey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Old Fogey", 106, Rarity.RARE, mage.cards.o.OldFogey.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Old Fogey", "106*", Rarity.RARE, mage.cards.o.OldFogey.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Old Fogey", 106, Rarity.RARE, mage.cards.o.OldFogey.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 136, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Rare-B-Gone", 119, Rarity.RARE, mage.cards.r.RareBGone.class));
         cards.add(new SetCardInfo("Rod of Spanking", 127, Rarity.UNCOMMON, mage.cards.r.RodOfSpanking.class));

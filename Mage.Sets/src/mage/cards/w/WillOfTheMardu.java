@@ -16,6 +16,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.RedWarriorToken;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.Objects;
@@ -38,7 +39,8 @@ public final class WillOfTheMardu extends CardImpl {
 
         // * Create a number of 1/1 red Warrior creature tokens equal to the number of creatures target player controls.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RedWarriorToken(), WillOfTheMarduValue.instance)
-                .setText("reate a number of 1/1 red Warrior creature tokens equal to the number of creatures target player controls"));
+                .setText("Create a number of 1/1 red Warrior creature tokens equal to the number of creatures target player controls"));
+        this.getSpellAbility().addTarget(new TargetPlayer());
 
         // * Will of the Mardu deals damage to target creature equal to the number of creatures you control.
         this.getSpellAbility().addMode(new Mode(new DamageTargetEffect(CreaturesYouControlCount.instance)

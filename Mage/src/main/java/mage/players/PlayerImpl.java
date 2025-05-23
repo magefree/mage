@@ -886,7 +886,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return toDiscard;
         }
         TargetDiscard target = new TargetDiscard(minAmount, maxAmount, StaticFilters.FILTER_CARD, getId());
-        choose(Outcome.Discard, target, source, game);
+        target.choose(Outcome.Discard, getId(), source, game);
         toDiscard.addAll(target.getTargets());
         return toDiscard;
     }
@@ -2932,7 +2932,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 count = Math.min(searchingLibrary.count(target.getFilter(), game), librarySearchLimit);
             }
 
-            if (count < target.getNumberOfTargets()) {
+            if (count < target.getMinNumberOfTargets()) {
                 newTarget.setMinNumberOfTargets(count);
             }
 
@@ -4472,14 +4472,14 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<Ability> options = new ArrayList<>();
         if (ability.isModal()) {
             addModeOptions(options, ability, game);
-        } else if (!ability.getTargets().getUnchosen(game).isEmpty()) {
+        } else if (ability.getTargets().getNextUnchosen(game) != null) {
             // TODO: Handle other variable costs than mana costs
             if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                 addVariableXOptions(options, ability, 0, game);
             } else {
                 addTargetOptions(options, ability, 0, game);
             }
-        } else if (!ability.getCosts().getTargets().getUnchosen(game).isEmpty()) {
+        } else if (ability.getCosts().getTargets().getNextUnchosen(game) != null) {
             addCostTargetOptions(options, ability, 0, game);
         }
 
@@ -4497,13 +4497,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             newOption.getModes().clearSelectedModes();
             newOption.getModes().addSelectedMode(mode.getId());
             newOption.getModes().setActiveMode(mode);
-            if (!newOption.getTargets().getUnchosen(game).isEmpty()) {
+            if (newOption.getTargets().getNextUnchosen(game) != null) {
                 if (!newOption.getManaCosts().getVariableCosts().isEmpty()) {
                     addVariableXOptions(options, newOption, 0, game);
                 } else {
                     addTargetOptions(options, newOption, 0, game);
                 }
-            } else if (!newOption.getCosts().getTargets().getUnchosen(game).isEmpty()) {
+            } else if (newOption.getCosts().getTargets().getNextUnchosen(game) != null) {
                 addCostTargetOptions(options, newOption, 0, game);
             } else {
                 options.add(newOption);
@@ -4523,7 +4523,9 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     protected void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
         // TODO: target options calculated for triggered ability too, but do not used in real game
-        for (Target target : option.getTargets().getUnchosen(game).get(targetNum).getTargetOptions(option, game)) {
+        // TODO: there are rare errors with wrong targetNum - maybe multiple game sims can change same target object somehow?
+        //  do not hide NullPointError here, research instead
+        for (Target target : option.getTargets().getNextUnchosen(game, targetNum).getTargetOptions(option, game)) {
             Ability newOption = option.copy();
             if (target instanceof TargetAmount) {
                 for (UUID targetId : target.getTargets()) {
@@ -5562,8 +5564,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 TargetPermanent target = new TargetControlledCreaturePermanent();
                 target.withNotTarget(true);
                 target.withChooseHint("to be your Ring-bearer");
-                choose(Outcome.Neutral, target, null, game);
-
+                target.choose(Outcome.Neutral, getId(), null, null, game);
                 newBearerId = target.getFirstTarget();
             } else {
                 newBearerId = currentBearerId;

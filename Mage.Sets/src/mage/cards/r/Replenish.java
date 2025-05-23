@@ -4,7 +4,7 @@ import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffe
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterEnchantmentCard;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -13,13 +13,11 @@ import java.util.UUID;
  */
 public final class Replenish extends CardImpl {
 
-    private static final FilterEnchantmentCard filter = new FilterEnchantmentCard("enchantment cards");
-
     public Replenish(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");
 
         // Return all enchantment cards from your graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(filter));
+        this.getSpellAbility().addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARD_ENCHANTMENTS));
     }
 
     private Replenish(final Replenish card) {

@@ -103,7 +103,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 272, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 273, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Goblin", 135, Rarity.UNCOMMON, mage.cards.f.FrenziedGoblin.class));
-        //cards.add(new SetCardInfo("Frenzied Gorespawn", 32, Rarity.RARE, mage.cards.f.FrenziedGorespawn.class));
+        cards.add(new SetCardInfo("Frenzied Gorespawn", 32, Rarity.RARE, mage.cards.f.FrenziedGorespawn.class));
         cards.add(new SetCardInfo("Fresh-Faced Recruit", 192, Rarity.COMMON, mage.cards.f.FreshFacedRecruit.class));
         cards.add(new SetCardInfo("Frostburn Weird", 193, Rarity.COMMON, mage.cards.f.FrostburnWeird.class));
         cards.add(new SetCardInfo("Fungal Rebirth", 163, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
@@ -129,7 +129,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Havoc Jester", 138, Rarity.UNCOMMON, mage.cards.h.HavocJester.class));
         cards.add(new SetCardInfo("Headliner Scarlett", 4, Rarity.RARE, mage.cards.h.HeadlinerScarlett.class));
         cards.add(new SetCardInfo("Helium Squirter", 87, Rarity.COMMON, mage.cards.h.HeliumSquirter.class));
-        //cards.add(new SetCardInfo("Herald of Ilharg", 34, Rarity.RARE, mage.cards.h.HeraldOfIlharg.class));
+        cards.add(new SetCardInfo("Herald of Ilharg", 34, Rarity.RARE, mage.cards.h.HeraldOfIlharg.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 195, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Hypersonic Dragon", 196, Rarity.RARE, mage.cards.h.HypersonicDragon.class));
         cards.add(new SetCardInfo("Incriminating Impetus", 35, Rarity.UNCOMMON, mage.cards.i.IncriminatingImpetus.class));
@@ -152,7 +152,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Krenko's Command", 139, Rarity.COMMON, mage.cards.k.KrenkosCommand.class));
         cards.add(new SetCardInfo("Kronch Wrangler", 169, Rarity.COMMON, mage.cards.k.KronchWrangler.class));
         cards.add(new SetCardInfo("Lavinia of the Tenth", 199, Rarity.RARE, mage.cards.l.LaviniaOfTheTenth.class));
-        cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 284, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 284, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 36, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Law-Rune Enforcer", 64, Rarity.COMMON, mage.cards.l.LawRuneEnforcer.class));
         cards.add(new SetCardInfo("Lead Pipe", 9, Rarity.UNCOMMON, mage.cards.l.LeadPipe.class));

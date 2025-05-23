@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
+import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RequirementEffect;
@@ -28,7 +28,7 @@ public final class IllusionistsGambit extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
 
         // Cast Illusionist's Gambit only during the declare blockers step on an opponent's turn.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS, OnOpponentsTurnCondition.instance));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(PhaseStep.DECLARE_BLOCKERS, OpponentsTurnCondition.instance));
 
         // Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or a planeswalker you control that combat.
         this.getSpellAbility().addEffect(new IllusionistsGambitRemoveFromCombatEffect());

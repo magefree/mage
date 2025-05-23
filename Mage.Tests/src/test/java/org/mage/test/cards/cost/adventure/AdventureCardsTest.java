@@ -855,4 +855,57 @@ public class AdventureCardsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Servo Token", 3);
         assertExileCount(playerA, "Lonesome Unicorn", 1);
     }
+
+    private static final String zanarkand = "Zanarkand, Ancient Metropolis";
+
+    @Test
+    public void test_ZanarkandRegularPlay() {
+        addCard(Zone.HAND, playerA, zanarkand);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, zanarkand);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTapped(zanarkand, true);
+    }
+
+    private static final String fayth = "Lasting Fayth";
+    private static final String heroToken = "Hero Token";
+
+    @Test
+    public void test_ZanarkandAdventure() {
+        addCard(Zone.HAND, playerA, zanarkand);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fayth);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, heroToken, 1);
+        assertPowerToughness(playerA, heroToken, 1 + 6, 1 + 6);
+        assertExileCount(playerA, zanarkand, 1);
+    }
+
+    @Test
+    public void test_ZanarkandAdventurePlusPlay() {
+        addCard(Zone.HAND, playerA, zanarkand);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, fayth);
+
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, zanarkand);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, heroToken, 1);
+        assertPowerToughness(playerA, heroToken, 1 + 6, 1 + 6);
+        assertTapped(zanarkand, true);
+        assertExileCount(playerA, zanarkand, 0);
+    }
 }

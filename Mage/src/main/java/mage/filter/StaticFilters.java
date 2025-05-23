@@ -1,10 +1,7 @@
 package mage.filter;
 
 import mage.ObjectColor;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
@@ -59,6 +56,12 @@ public final class StaticFilters {
 
     static {
         FILTER_CARD_ENCHANTMENT.setLockedFilter(true);
+    }
+
+    public static final FilterCard FILTER_CARD_ENCHANTMENTS = new FilterEnchantmentCard("enchantment cards");
+
+    static {
+        FILTER_CARD_ENCHANTMENTS.setLockedFilter(true);
     }
 
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
@@ -137,6 +140,12 @@ public final class StaticFilters {
 
     static {
         FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
+    }
+
+    public static final FilterCard FILTER_CARD_LAND_FROM_YOUR_GRAVEYARD = new FilterLandCard("land card from your graveyard");
+
+    static {
+        FILTER_CARD_LAND_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
     public static final FilterCreatureCard FILTER_CARD_CREATURE_A_GRAVEYARD = new FilterCreatureCard("creature card from a graveyard");
@@ -329,7 +338,7 @@ public final class StaticFilters {
         FILTER_PERMANENTS_ARTIFACT_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterControlledArtifactPermanent FILTER_ARTIFACT_NON_CREATURE = new FilterControlledArtifactPermanent("noncreature artifact");
+    public static final FilterArtifactPermanent FILTER_ARTIFACT_NON_CREATURE = new FilterArtifactPermanent("noncreature artifact");
 
     static {
         FILTER_ARTIFACT_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
@@ -1031,6 +1040,21 @@ public final class StaticFilters {
     static {
         FILTER_SPELL_KICKED_A.add(KickedSpellPredicate.instance);
         FILTER_SPELL_KICKED_A.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELL_NO_MANA_SPENT = new FilterSpell("a spell, if no mana was spent to cast it");
+
+    static {
+        FILTER_SPELL_NO_MANA_SPENT.add(new ManaSpentToCastPredicate(ComparisonType.EQUAL_TO, 0));
+        FILTER_SPELL_NO_MANA_SPENT.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_NONCREATURE_SPELL_FOUR_MANA_SPENT = new FilterSpell("a noncreature spell, if at least four mana was spent to cast it");
+
+    static {
+        FILTER_NONCREATURE_SPELL_FOUR_MANA_SPENT.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        FILTER_NONCREATURE_SPELL_FOUR_MANA_SPENT.add(new ManaSpentToCastPredicate(ComparisonType.MORE_THAN, 3));
+        FILTER_NONCREATURE_SPELL_FOUR_MANA_SPENT.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT_TOKEN = new FilterPermanent("token");

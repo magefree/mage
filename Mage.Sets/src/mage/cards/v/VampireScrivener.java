@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.LoseLifeTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -12,8 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 import java.util.UUID;
 
@@ -34,13 +31,14 @@ public final class VampireScrivener extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you gain life during your turn, put a +1/+1 counter on Vampire Scrivener.
-        this.addAbility(new ConditionalTriggeredAbility(new GainLifeControllerTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance())), MyTurnCondition.instance,
-                "Whenever you gain life during your turn, put a +1/+1 counter on {this}."
-        ));
+        this.addAbility(new GainLifeControllerTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // Whenever you lose life during your turn, put a +1/+1 counter on Vampire Scrivener.
-        this.addAbility(new VampireScrivenerTriggeredAbility());
+        this.addAbility(new LoseLifeTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+        ).withTriggerCondition(MyTurnCondition.instance));
     }
 
     private VampireScrivener(final VampireScrivener card) {
@@ -51,27 +49,4 @@ public final class VampireScrivener extends CardImpl {
     public VampireScrivener copy() {
         return new VampireScrivener(this);
     }
-}
-
-class VampireScrivenerTriggeredAbility extends LoseLifeTriggeredAbility {
-
-    VampireScrivenerTriggeredAbility() {
-        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        setTriggerPhrase("Whenever you lose life during your turn, ");
-    }
-
-    private VampireScrivenerTriggeredAbility(final VampireScrivenerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VampireScrivenerTriggeredAbility copy() {
-        return new VampireScrivenerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.isActivePlayer(getControllerId()) && super.checkTrigger(event, game);
-    }
-
 }

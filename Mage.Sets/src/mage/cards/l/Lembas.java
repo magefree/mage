@@ -30,7 +30,7 @@ public final class Lembas extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Lembas: You gain 3 life.
-        this.addAbility(new FoodAbility(true));
+        this.addAbility(new FoodAbility());
 
         // When Lembas is put into a graveyard from the battlefield, its owner shuffles it into their library.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(

@@ -1,30 +1,25 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.cards.OmenCard;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.OmenCard;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Jmlundeen
  */
 public final class WhirlwingStormbrood extends OmenCard {
@@ -40,7 +35,7 @@ public final class WhirlwingStormbrood extends OmenCard {
 
     public WhirlwingStormbrood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{4}{U}", "Dynamic Soar", "{2}{G}");
-        
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -56,7 +51,7 @@ public final class WhirlwingStormbrood extends OmenCard {
 
         // Dynamic Soar
         // Put three +1/+1 counters on target creature you control.
-        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), StaticValue.get(3)));
+        this.getSpellCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3), StaticValue.get(3)));
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.finalizeOmen();
     }

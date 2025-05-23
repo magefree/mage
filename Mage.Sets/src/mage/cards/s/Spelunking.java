@@ -77,7 +77,7 @@ class SpelunkingEffect extends OneShotEffect {
             Card landInHand = game.getCard(target.getFirstTarget());
             if (landInHand != null) {
                 controller.moveCards(landInHand, Zone.BATTLEFIELD, source, game);
-                if (landInHand.getSubtype(game).contains(SubType.CAVE)) {
+                if (landInHand.hasSubtype(SubType.CAVE, game)) {
                     // If you put a Cave onto the battlefield this way, you gain 4 life
                     controller.gainLife(4, game, source);
                 }

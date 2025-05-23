@@ -27,7 +27,7 @@ public class CreateXXTokenExiledEffectManaValueEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.tokenMaker = tokenMaker;
         staticText = "the exiled card's owner creates an X/X " + description +
-                "creature token, where X is the mana value of the exiled card";
+                " creature token, where X is the mana value of the exiled card";
     }
 
     private CreateXXTokenExiledEffectManaValueEffect(final CreateXXTokenExiledEffectManaValueEffect effect) {

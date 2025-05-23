@@ -724,7 +724,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
-     *
+     * <p>
      * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList() {
@@ -734,7 +734,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Returns a list of all active players of the game, setting the playerId to
      * the current player of the list.
-     *
+     * <p>
      * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList(UUID playerId) {
@@ -1369,8 +1369,9 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param valueId
      * @param value
      */
-    public void setValue(String valueId, Object value) {
+    public <T> T setValue(String valueId, T value) {
         values.put(valueId, value);
+        return value;
     }
 
     /**

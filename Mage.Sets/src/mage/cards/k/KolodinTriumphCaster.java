@@ -2,8 +2,10 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SaddleTargetMountEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -15,6 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.targetpointer.TargetPointer;
 
 /**
  *
@@ -48,13 +51,13 @@ public final class KolodinTriumphCaster extends CardImpl {
                 new GainAbilityControlledEffect(HasteAbility.getInstance(),
                         Duration.WhileOnBattlefield, filter)));
         // Whenever a Mount you control enters, it becomes saddled until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new SaddleTargetMountEffect("it becomes saddled until end of turn"),
-                mountFilter));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new SaddleTargetMountEffect("it becomes saddled until end of turn"),
+                mountFilter, false, SetTargetPointer.PERMANENT));
         // Whenever a Vehicle you control enters, it becomes an artifact creature until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCardTypeTargetEffect(
-                Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE)
-                        .setText("it becomes an artifact creature until end of turn"), vehicleFilter)
-                );
+        Effect effect = new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE)
+                .setText("it becomes an artifact creature until end of turn");
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, vehicleFilter,
+                false, SetTargetPointer.PERMANENT));
     }
 
     private KolodinTriumphCaster(final KolodinTriumphCaster card) {

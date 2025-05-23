@@ -132,7 +132,7 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
-        if (getNumberOfTargets() == 0 && targets.isEmpty()) {
+        if (getMinNumberOfTargets() == 0 && targets.isEmpty()) {
             return true; // 0 targets selected is valid
         }
         return targets.keySet().stream().anyMatch(playerId -> canTarget(playerId, source, game));

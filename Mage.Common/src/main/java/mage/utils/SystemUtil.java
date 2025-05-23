@@ -28,6 +28,7 @@ import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
+import mage.utils.testers.TestableDialogsRunner;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -69,6 +70,7 @@ public final class SystemUtil {
     private static final String COMMAND_LANDS_ADD_TO_BATTLEFIELD = "@lands add";
     private static final String COMMAND_UNDER_CONTROL_TAKE = "@under control take";
     private static final String COMMAND_UNDER_CONTROL_GIVE = "@under control give";
+    private static final String COMMAND_SHOW_TEST_DIALOGS = "@show dialog";
     private static final String COMMAND_MANA_ADD = "@mana add"; // TODO: not implemented
     private static final String COMMAND_RUN_CUSTOM_CODE = "@run custom code"; // TODO: not implemented
     private static final String COMMAND_SHOW_OPPONENT_HAND = "@show opponent hand";
@@ -76,6 +78,7 @@ public final class SystemUtil {
     private static final String COMMAND_SHOW_MY_HAND = "@show my hand";
     private static final String COMMAND_SHOW_MY_LIBRARY = "@show my library";
     private static final Map<String, String> supportedCommands = new HashMap<>();
+    private static final TestableDialogsRunner testableDialogsRunner = new TestableDialogsRunner(); // for tests
 
     static {
         // special commands names in choose dialog
@@ -89,6 +92,7 @@ public final class SystemUtil {
         supportedCommands.put(COMMAND_SHOW_OPPONENT_LIBRARY, "SHOW OPPONENT LIBRARY");
         supportedCommands.put(COMMAND_SHOW_MY_HAND, "SHOW MY HAND");
         supportedCommands.put(COMMAND_SHOW_MY_LIBRARY, "SHOW MY LIBRARY");
+        supportedCommands.put(COMMAND_SHOW_TEST_DIALOGS, "SHOW TEST DIALOGS");
     }
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
@@ -263,8 +267,13 @@ public final class SystemUtil {
     public static void executeCheatCommands(Game game, String commandsFilePath, Player feedbackPlayer) {
 
         // fake test ability for triggers and events
-        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("fake ability"));
         fakeSourceAbilityTemplate.setControllerId(feedbackPlayer.getId());
+        Card fakeSourceCard = feedbackPlayer.getLibrary().getFromTop(game);
+        if (fakeSourceCard != null) {
+            // set any existing card as source, so dialogs will show all GUI elements, including source and workable popup info
+            fakeSourceAbilityTemplate.setSourceId(fakeSourceCard.getId());
+        }
 
         List<String> errorsList = new ArrayList<>();
         try {
@@ -304,8 +313,9 @@ public final class SystemUtil {
             // add default commands
             initLines.add(0, String.format("[%s]", COMMAND_LANDS_ADD_TO_BATTLEFIELD));
             initLines.add(1, String.format("[%s]", COMMAND_CARDS_ADD_TO_HAND));
-            initLines.add(2, String.format("[%s]", COMMAND_UNDER_CONTROL_TAKE));
-            initLines.add(3, String.format("[%s]", COMMAND_UNDER_CONTROL_GIVE));
+            initLines.add(2, String.format("[%s]", COMMAND_SHOW_TEST_DIALOGS));
+            initLines.add(3, String.format("[%s]", COMMAND_UNDER_CONTROL_TAKE));
+            initLines.add(4, String.format("[%s]", COMMAND_UNDER_CONTROL_GIVE));
 
             // collect all commands
             CommandGroup currentGroup = null;
@@ -391,7 +401,7 @@ public final class SystemUtil {
             // 3. system commands
             if (runGroup.isSpecialCommand) {
 
-                Player opponent = game.getPlayer(game.getOpponents(feedbackPlayer.getId()).stream().findFirst().orElse(null));
+                Player opponent = game.getPlayer(game.getOpponents(feedbackPlayer.getId(), true).stream().findFirst().orElse(null));
 
                 String info;
                 switch (runGroup.name) {
@@ -438,7 +448,7 @@ public final class SystemUtil {
                         cardName = cardChoice.getChoice();
 
                         // amount
-                        int cardAmount = feedbackPlayer.getAmount(1, 100, "How many [" + cardName + "] to add?", game);
+                        int cardAmount = feedbackPlayer.getAmount(1, 100, "How many [" + cardName + "] to add?", null, game);
                         if (cardAmount == 0) {
                             break;
                         }
@@ -535,6 +545,11 @@ public final class SystemUtil {
                             // workaround for refresh priority dialog like avatar click (cheats called from priority in 99%)
                             game.firePriorityEvent(feedbackPlayer.getId());
                         }
+                        break;
+                    }
+
+                    case COMMAND_SHOW_TEST_DIALOGS: {
+                        testableDialogsRunner.selectAndShowTestableDialog(feedbackPlayer, fakeSourceAbilityTemplate.copy(), game, opponent);
                         break;
                     }
 

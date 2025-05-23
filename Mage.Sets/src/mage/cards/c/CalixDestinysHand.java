@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.filter.predicate.Predicates;
@@ -45,7 +46,6 @@ public final class CalixDestinysHand extends CardImpl {
     }
 
     private static final FilterPermanent filter3 = new FilterControlledEnchantmentPermanent();
-    private static final FilterCard filter4 = new FilterEnchantmentCard("enchantment cards");
 
     public CalixDestinysHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");
@@ -70,7 +70,7 @@ public final class CalixDestinysHand extends CardImpl {
         this.addAbility(ability);
 
         // −7: Return all enchantment cards from your graveyard to the battlefield.
-        this.addAbility(new LoyaltyAbility(new ReturnFromYourGraveyardToBattlefieldAllEffect(filter4), -7));
+        this.addAbility(new LoyaltyAbility(new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARD_ENCHANTMENTS), -7));
     }
 
     private CalixDestinysHand(final CalixDestinysHand card) {
@@ -109,8 +109,8 @@ class CalixDestinysHandExileEffect extends OneShotEffect {
         source.getTargets();
         Permanent theirPerm = game.getPermanent(source.getTargets().get(0).getFirstTarget());
         Permanent myPerm = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (controller == null 
-                || theirPerm == null 
+        if (controller == null
+                || theirPerm == null
                 || myPerm == null) {
             return false;
         }

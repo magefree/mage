@@ -68,7 +68,7 @@ class GoblinGameEffect extends OneShotEffect {
                 .collect(Collectors.toList());
         for (Player player : players) {
             // TODO: consider changing 1000 to another cap, or even Integer.MAX_VALUE if the Volcano Hellion binary wraparound gets addressed (although hiding over two billions of items would be rather difficult IRL)
-            numberChosen.put(player.getId(), player.getAmount(1, 1000, "Choose a number of objects to hide.", game));
+            numberChosen.put(player.getId(), player.getAmount(1, 1000, "Choose a number of objects to hide.", source, game));
         }
 
         // get lowest number

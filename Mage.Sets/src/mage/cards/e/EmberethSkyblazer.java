@@ -11,7 +11,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +38,7 @@ public final class EmberethSkyblazer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
                 MyTurnCondition.instance, "During your turn, {this} has flying."
-        )).addHint(MyTurnHint.instance));
+        )));
 
         // Whenever Embereth Skyblazer attacks, you may pay {2}{R}. If you do, creatures you control get +X/+0 until end of turn, where X is the number of opponents you have.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(

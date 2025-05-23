@@ -2,11 +2,9 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.costs.Cost;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInTargetPlayerHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -14,6 +12,7 @@ import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.combat.TargetPlayerCantAttackYouEffect;
 import mage.abilities.hint.common.MonarchHint;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -40,16 +39,9 @@ public final class ChampionsOfMinasTirith extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // At the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, where X is the number of cards in their hand. If they don't, they can't attack you this combat.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        Zone.BATTLEFIELD,
-                        TargetController.OPPONENT, new ChampionsOfMinasTirithEffect(),
-                        false
-                ),
-                MonarchIsSourceControllerCondition.instance,
-                "At the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, "
-                        + "where X is the number of cards in their hand. If they don't, they can't attack you this combat."
-        ).addHint(MonarchHint.instance));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                TargetController.OPPONENT, new ChampionsOfMinasTirithEffect(), false
+        ).withInterveningIf(MonarchIsSourceControllerCondition.instance).addHint(MonarchHint.instance));
     }
 
     private ChampionsOfMinasTirith(final ChampionsOfMinasTirith card) {
@@ -66,6 +58,7 @@ class ChampionsOfMinasTirithEffect extends OneShotEffect {
 
     ChampionsOfMinasTirithEffect() {
         super(Outcome.Benefit);
+        staticText = "that opponent may pay {X}, where X is the number of cards in their hand. If they don't, they can't attack you this combat";
     }
 
     private ChampionsOfMinasTirithEffect(final ChampionsOfMinasTirithEffect effect) {

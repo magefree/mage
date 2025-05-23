@@ -787,8 +787,8 @@ public abstract class AbilityImpl implements Ability {
                         xValue = variableManaCost.getAmount();
                     } else {
                         // announce by player
-                        xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(),
-                                "Announce the value for " + variableManaCost.getText(), game, this);
+                        xValue = controller.announceX(variableManaCost.getMinX(), variableManaCost.getMaxX(),
+                                "Announce the value for " + variableManaCost.getText(), game, this, true);
                     }
 
                     int amountMana = xValue * variableManaCost.getXInstancesCount();

@@ -67,7 +67,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
                 addSacrificeTarget(game, permanent);
                 paid |= permanent.sacrifice(source, game);
             }
-            if (!paid && this.getTargets().get(0).getNumberOfTargets() == 0) {
+            if (!paid && this.getTargets().get(0).getMinNumberOfTargets() == 0) {
                 paid = true; // e.g. for Devouring Rage
             }
         }
@@ -88,7 +88,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
             return false;
         }
         int validTargets = 0;
-        int neededTargets = this.getTargets().get(0).getNumberOfTargets();
+        int neededTargets = this.getTargets().get(0).getMinNumberOfTargets();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(((TargetPermanent) this.getTargets().get(0)).getFilter(), controllerId, source, game)) {
             if (controller.canPaySacrificeCost(permanent, source, controllerId, game)) {
                 validTargets++;
@@ -114,11 +114,11 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
         if (target.getMinNumberOfTargets() != target.getMaxNumberOfTargets()) {
             return target.getTargetName();
         }
-        if (target.getNumberOfTargets() == 1
+        if (target.getMinNumberOfTargets() == 1
                 || target.getTargetName().startsWith("a ")
                 || target.getTargetName().startsWith("an ")) {
             return CardUtil.addArticle(target.getTargetName());
         }
-        return CardUtil.numberToText(target.getNumberOfTargets()) + ' ' + target.getTargetName();
+        return CardUtil.numberToText(target.getMinNumberOfTargets()) + ' ' + target.getTargetName();
     }
 }

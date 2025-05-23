@@ -3,6 +3,7 @@ package org.mage.test.cards.single.clb;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -29,6 +30,7 @@ public class BabaLysagaNightWitchTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.UPKEEP, playerA, "{1}: {this} becomes a 2/2 Assembly-Worker artifact creature until end of turn. It's still a land.");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice up to three permanents: If there ");
         setChoice(playerA, "Mishra's Factory");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -48,6 +50,7 @@ public class BabaLysagaNightWitchTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice up to three permanents: If there ");
         setChoice(playerA, "Mishra's Factory");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();

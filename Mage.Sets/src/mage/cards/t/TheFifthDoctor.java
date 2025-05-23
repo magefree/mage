@@ -28,7 +28,7 @@ import java.util.UUID;
 public final class TheFifthDoctor extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent(
-            "creature you control that didn't attack or enter the battlefield this turn"
+            "creature you control that didn't attack or enter this turn"
     );
 
     static {

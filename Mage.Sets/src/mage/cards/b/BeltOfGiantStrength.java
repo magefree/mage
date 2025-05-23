@@ -4,10 +4,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -30,8 +31,9 @@ public final class BeltOfGiantStrength extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has base power and toughness 10/10.
-        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessEnchantedEffect(10, 10)
-                .setText("equipped creature has base power and toughness 10/10")));
+        this.addAbility(new SimpleStaticAbility(
+                new SetBasePowerToughnessAttachedEffect(10, 10, AttachmentType.EQUIPMENT)
+        ));
 
         // Equip {10}. This ability costs {X} less to activate where X is the power of the creature it targets.
         EquipAbility ability = new EquipAbility(Outcome.BoostCreature, new GenericManaCost(10), new TargetControlledCreaturePermanent(), false);

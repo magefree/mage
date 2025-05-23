@@ -64,7 +64,7 @@ class ScryingGlassEffect extends OneShotEffect {
         int amount = 0;
         if (controller != null
                 && targetOpponent != null) {
-            amount = controller.getAmount(1, Integer.MAX_VALUE, "Choose a number", game);
+            amount = controller.getAmount(1, Integer.MAX_VALUE, "Choose a number", source, game);
             controller.choose(Outcome.Discard, color, game);
             FilterCard filter = new FilterCard();
             filter.add(new ColorPredicate(color.getColor()));

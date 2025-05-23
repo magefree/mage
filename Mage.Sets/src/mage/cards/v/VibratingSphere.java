@@ -5,12 +5,10 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.condition.common.NotMyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -26,8 +24,7 @@ public final class VibratingSphere extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield),
                 MyTurnCondition.instance,
-                "During your turn, creatures you control get +2/+0"))
-                .addHint(MyTurnHint.instance));
+                "During your turn, creatures you control get +2/+0")));
 
         // As long as it's not your turn, creatures you control get -0/-2.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

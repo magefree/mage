@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
+import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -38,7 +38,7 @@ public final class WakeTheDead extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");
 
         // Cast Wake the Dead only during combat on an opponent's turn.
-        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, OnOpponentsTurnCondition.instance));
+        this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(TurnPhase.COMBAT, OpponentsTurnCondition.instance));
 
         // Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
         this.getSpellAbility().addEffect(new WakeTheDeadReturnFromGraveyardToBattlefieldTargetEffect());

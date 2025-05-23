@@ -133,7 +133,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
                 }
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getPermanentFilter(), sourceControllerId, game)) { // TODO: miss source?
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game) && filter.match(permanent, sourceControllerId, source, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {

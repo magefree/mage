@@ -1,7 +1,5 @@
-
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.abilities.MageSingleton;
 import mage.abilities.OpeningHandAction;
 import mage.abilities.StaticAbility;
@@ -11,8 +9,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.io.ObjectStreamException;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LeylineAbility extends StaticAbility implements MageSingleton, OpeningHandAction {
@@ -33,7 +32,7 @@ public class LeylineAbility extends StaticAbility implements MageSingleton, Open
 
     @Override
     public String getRule() {
-        return "If {this} is in your opening hand, you may begin the game with it on the battlefield.";
+        return "If this card is in your opening hand, you may begin the game with it on the battlefield.";
     }
 
     @Override

@@ -70,4 +70,9 @@ enum ReverberatingSummonsCondition implements Condition {
                 .getWatcher(SpellsCastWatcher.class)
                 .getCount(source.getControllerId()) >= 2;
     }
+
+    @Override
+    public String toString() {
+        return "you've cast two or more spells this turn";
+    }
 }

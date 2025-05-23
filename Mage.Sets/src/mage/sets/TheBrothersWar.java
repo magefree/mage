@@ -236,7 +236,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Domination", 142, Rarity.COMMON, mage.cards.m.MishrasDomination.class));
         cards.add(new SetCardInfo("Mishra's Foundry", 265, Rarity.RARE, mage.cards.m.MishrasFoundry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mishra's Foundry", 372, Rarity.RARE, mage.cards.m.MishrasFoundry.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mishra's Foundry", 378, Rarity.RARE, mage.cards.m.MishrasFoundry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mishra's Foundry", 378, Rarity.RARE, mage.cards.m.MishrasFoundry.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Mishra's Juggernaut", 161, Rarity.COMMON, mage.cards.m.MishrasJuggernaut.class));
         cards.add(new SetCardInfo("Mishra's Onslaught", 143, Rarity.COMMON, mage.cards.m.MishrasOnslaught.class));
         cards.add(new SetCardInfo("Mishra's Research Desk", 162, Rarity.UNCOMMON, mage.cards.m.MishrasResearchDesk.class));
@@ -286,7 +286,7 @@ public final class TheBrothersWar extends ExpansionSet {
         cards.add(new SetCardInfo("Pyrrhic Blast", 148, Rarity.UNCOMMON, mage.cards.p.PyrrhicBlast.class));
         cards.add(new SetCardInfo("Queen Kayla bin-Kroog", 218, Rarity.RARE, mage.cards.q.QueenKaylaBinKroog.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Queen Kayla bin-Kroog", 357, Rarity.RARE, mage.cards.q.QueenKaylaBinKroog.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Queen Kayla bin-Kroog", 379, Rarity.RARE, mage.cards.q.QueenKaylaBinKroog.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Queen Kayla bin-Kroog", 379, Rarity.RARE, mage.cards.q.QueenKaylaBinKroog.class, RETRO_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Ravenous Gigamole", 113, Rarity.COMMON, mage.cards.r.RavenousGigamole.class));
         cards.add(new SetCardInfo("Raze to the Ground", 149, Rarity.COMMON, mage.cards.r.RazeToTheGround.class));
         cards.add(new SetCardInfo("Razorlash Transmogrant", 122, Rarity.RARE, mage.cards.r.RazorlashTransmogrant.class, NON_FULL_USE_VARIOUS));

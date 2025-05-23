@@ -25,7 +25,7 @@ public final class TraverseEternity extends CardImpl {
 
         // Draw cards equal to the highest mana value among historic permanents you control.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(TraverseEternityValue.instance)
-                .setText("draw cards equal to the highest mana value among historic permanents you control"));
+                .setText("draw cards equal to the greatest mana value among historic permanents you control"));
         this.getSpellAbility().addHint(TraverseEternityValue.getHint());
     }
 
@@ -41,7 +41,7 @@ public final class TraverseEternity extends CardImpl {
 
 enum TraverseEternityValue implements DynamicValue {
     instance;
-    private static final Hint hint = new ValueHint("Highest mana value among your historic permanents", instance);
+    private static final Hint hint = new ValueHint("Greatest mana value among your historic permanents", instance);
 
     public static Hint getHint() {
         return hint;

@@ -141,7 +141,7 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         //useful only for two player games - will only attack first opponent
-        UUID defenderId = game.getOpponents(playerId).iterator().next();
+        UUID defenderId = game.getOpponents(playerId, true).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
@@ -375,11 +375,11 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public int getAmount(int min, int max, String message, Game game) {
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
         if (this.isHuman()) {
-            return RandomUtil.nextInt(max - min) + min;
+            return RandomUtil.nextInt(max - min + 1) + min;
         }
-        return super.getAmount(min, max, message, game);
+        return super.getAmount(min, max, message, source, game);
     }
 
 }

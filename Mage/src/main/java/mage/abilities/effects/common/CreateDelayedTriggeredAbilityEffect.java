@@ -81,8 +81,9 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect setTargetPointer(TargetPointer targetPointer) {
+    public CreateDelayedTriggeredAbilityEffect setTargetPointer(TargetPointer targetPointer) {
         ability.getEffects().setTargetPointer(targetPointer);
-        return super.setTargetPointer(targetPointer);
+        super.setTargetPointer(targetPointer);
+        return this;
     }
 }

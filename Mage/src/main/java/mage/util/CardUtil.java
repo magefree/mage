@@ -58,6 +58,9 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -1131,10 +1134,10 @@ public final class CardUtil {
      * Also ensures that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
      * If this is the first attempt at triggering for a given ability targeting a given object,
      * this method records that in the game state for later checks by this same method, to not return the same object again.
-     * 
+     *
      * @param checkingReference must be unique for each usage (this.getId().toString() of the TriggeredAbility, or this.getKey() of the watcher)
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game  the Game from checkTrigger() or watch()
+     * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @param game              the Game from checkTrigger() or watch()
      * @return the StackObject which targeted the source, or null if already used or not found
      */
     public static StackObject findTargetingStackObject(String checkingReference, GameEvent event, Game game) {
@@ -2213,17 +2216,13 @@ public final class CardUtil {
         return sb.toString();
     }
 
-    public static <T> T getEffectValueFromAbility(Ability ability, String key, Class<T> clazz) {
-        return getEffectValueFromAbility(ability, key, clazz, null);
-    }
-
-    public static <T> T getEffectValueFromAbility(Ability ability, String key, Class<T> clazz, T defaultValue) {
+    public static <T> Optional<T> getEffectValueFromAbility(Ability ability, String key, Class<T> clazz) {
         return castStream(
                 ability.getAllEffects()
                         .stream()
                         .map(effect -> effect.getValue(key)),
                 clazz
-        ).findFirst().orElse(defaultValue);
+        ).findFirst();
     }
 
     public static <T> Stream<T> castStream(Collection<?> collection, Class<T> clazz) {
@@ -2232,6 +2231,71 @@ public final class CardUtil {
 
     public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
         return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
+    }
+
+    public static <T> boolean checkAnyPairs(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(collection, (t1, t2) -> predicate.test(t1, t2)).anyMatch(x -> x);
+    }
+
+    public static <T> Stream<T> streamAllPairwiseMatches(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(
+                collection,
+                (t1, t2) -> predicate.test(t1, t2)
+                        ? Stream.of(t1, t2)
+                        : Stream.<T>empty()
+        ).flatMap(Function.identity()).distinct();
+    }
+
+    private static class IntPairIterator implements Iterator<AbstractMap.SimpleImmutableEntry<Integer, Integer>> {
+        private final int amount;
+        private int firstCounter = 0;
+        private int secondCounter = 1;
+
+        IntPairIterator(int amount) {
+            this.amount = amount;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return firstCounter + 1 < amount;
+        }
+
+        @Override
+        public AbstractMap.SimpleImmutableEntry<Integer, Integer> next() {
+            AbstractMap.SimpleImmutableEntry<Integer, Integer> value
+                    = new AbstractMap.SimpleImmutableEntry(firstCounter, secondCounter);
+            secondCounter++;
+            if (secondCounter == amount) {
+                firstCounter++;
+                secondCounter = firstCounter + 1;
+            }
+            return value;
+        }
+
+        public int getMax() {
+            // amount choose 2
+            return (amount * amount - amount) / 2;
+        }
+    }
+
+    public static <T, U> Stream<U> streamPairsWithMap(Collection<T> collection, BiFunction<T, T, U> function) {
+        if (collection.size() < 2) {
+            return Stream.empty();
+        }
+        List<T> list;
+        if (collection instanceof List) {
+            list = (List<T>) collection;
+        } else {
+            list = new ArrayList<>(collection);
+        }
+        IntPairIterator it = new IntPairIterator(list.size());
+        return Stream
+                .generate(it::next)
+                .limit(it.getMax())
+                .map(pair -> function.apply(
+                        list.get(pair.getKey()),
+                        list.get(pair.getValue())
+                ));
     }
 
     public static void AssertNoControllerOwnerPredicates(Target target) {

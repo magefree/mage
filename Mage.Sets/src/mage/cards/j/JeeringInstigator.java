@@ -10,7 +10,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
@@ -59,7 +58,6 @@ public final class JeeringInstigator extends CardImpl {
         effect.setText("It gains haste until end of turn");
         ability.addEffect(effect);
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

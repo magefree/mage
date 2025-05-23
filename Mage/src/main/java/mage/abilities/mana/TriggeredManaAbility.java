@@ -105,6 +105,11 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
     }
 
     @Override
+    public int getMaxMoreActivationsThisTurn(Game game) {
+        return getRemainingTriggersLimitEachTurn(game);
+    }
+
+    @Override
     public TriggeredManaAbility setPoolDependant(boolean poolDependant) {
         this.poolDependant = poolDependant;
         return this;

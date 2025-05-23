@@ -33,7 +33,7 @@ public final class ArashinSunshield extends CardImpl {
 
         // When this creature enters, exile up to two target cards from a single graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect());
-        ability.addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARDS_NON_LAND));
+        ability.addTarget(new TargetCardInASingleGraveyard(0, 2, StaticFilters.FILTER_CARD_CARDS));
         this.addAbility(ability);
 
         // {W}, {T}: Tap target creature.

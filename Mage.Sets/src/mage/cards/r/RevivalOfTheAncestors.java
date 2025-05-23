@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.NoFlyingSpiritWhiteToken;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.common.TargetPermanentAmount;
 
 import java.util.UUID;
 
@@ -42,7 +42,7 @@ public final class RevivalOfTheAncestors extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II,
                 new DistributeCountersEffect(CounterType.P1P1),
-                new TargetCreaturePermanentAmount(3)
+                new TargetPermanentAmount(3, 1, StaticFilters.FILTER_CONTROLLED_CREATURES)
         );
 
         // III -- Creatures you control gain trample and lifelink until end of turn.

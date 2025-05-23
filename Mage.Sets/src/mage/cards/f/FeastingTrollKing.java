@@ -9,7 +9,6 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -19,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.FoodToken;
-import mage.target.common.TargetControlledPermanent;
 import mage.watchers.common.CastFromHandWatcher;
 
 import java.util.UUID;
@@ -58,7 +56,7 @@ public final class FeastingTrollKing extends CardImpl {
                 new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new SacrificeTargetCost(3, filter),
                 MyTurnCondition.instance
-        ).addHint(MyTurnHint.instance));
+        ));
     }
 
     private FeastingTrollKing(final FeastingTrollKing card) {

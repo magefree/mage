@@ -24,7 +24,7 @@ import mage.target.TargetSpell;
 public final class RunescaleStormbrood extends OmenCard {
 
     private static final FilterSpell filter = new FilterSpell("spell with mana value 2 or less");
-    private static final FilterSpell castFilter = new FilterSpell("noncreature spell or Dragon spell");
+    private static final FilterSpell castFilter = new FilterSpell("a noncreature spell or a Dragon spell");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 2));

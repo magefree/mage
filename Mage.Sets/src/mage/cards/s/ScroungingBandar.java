@@ -78,7 +78,7 @@ class ScroungingBandarEffect extends OneShotEffect {
             if (fromPermanent != null && toPermanent != null) {
                 int amountCounters = fromPermanent.getCounters(game).getCount(CounterType.P1P1);
                 if (amountCounters > 0) {
-                    int amountToMove = controller.getAmount(0, amountCounters, "How many counters do you want to move?", game);
+                    int amountToMove = controller.getAmount(0, amountCounters, "How many counters do you want to move?", source, game);
                     if (amountToMove > 0) {
                         fromPermanent.removeCounters(CounterType.P1P1.createInstance(amountToMove), source, game);
                         toPermanent.addCounters(CounterType.P1P1.createInstance(amountToMove), source.getControllerId(), source, game);

@@ -17,9 +17,9 @@ public final class NestingDragonToken extends TokenImpl {
                 "Dragon Egg Token",
                 "0/2 red Dragon Egg creature token with defender and "
                         + "\""
-                        + "When this creature dies, "
+                        + "When this token dies, "
                         + "create a 2/2 red Dragon creature token with flying and "
-                        + "'{R}: This creature gets +1/+0 until end of turn.'"
+                        + "'{R}: This token gets +1/+0 until end of turn.'"
                         + "\""
         );
         cardType.add(CardType.CREATURE);

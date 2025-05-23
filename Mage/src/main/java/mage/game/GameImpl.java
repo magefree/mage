@@ -1522,7 +1522,7 @@ public abstract class GameImpl implements Game {
         UUID[] players = getPlayers().keySet().toArray(new UUID[0]);
         UUID playerId;
         while (!hasEnded()) {
-            playerId = players[RandomUtil.nextInt(players.length)];
+            playerId = players[RandomUtil.nextInt(players.length)]; // test game
             Player player = getPlayer(playerId);
             if (player != null && player.canRespond()) {
                 fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");
@@ -1810,14 +1810,21 @@ public abstract class GameImpl implements Game {
 
     protected void resolve() {
         StackObject top = null;
+        boolean wasError = false;
         try {
             top = state.getStack().peek();
             top.resolve(this);
             resetControlAfterSpellResolve(top.getId());
+        } catch (Throwable e) {
+            // workaround to show real error in tests instead checkInfiniteLoop
+            wasError = true;
+            throw e;
         } finally {
             if (top != null) {
                 state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
-                checkInfiniteLoop(top.getSourceId());
+                if (!wasError) {
+                    checkInfiniteLoop(top.getSourceId());
+                }
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
                         state.handleSimultaneousEvent(this);
@@ -3746,7 +3753,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PutToBattlefieldInfo> battlefield, List<Card> graveyard, List<Card> command, List<Card> exiled) {
         // fake test ability for triggers and events
-        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("fake ability"));
         fakeSourceAbilityTemplate.setControllerId(ownerId);
 
         Player player = getPlayer(ownerId);
@@ -4014,7 +4021,6 @@ public abstract class GameImpl implements Game {
                         playerObject.resetStoredBookmark(this);
                         playerObject.resetPlayerPassedActions();
                         playerObject.abort();
-
                     }
                 }
                 fireUpdatePlayersEvent();

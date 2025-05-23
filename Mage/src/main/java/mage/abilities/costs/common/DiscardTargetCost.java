@@ -47,7 +47,7 @@ public class DiscardTargetCost extends CostImpl {
         if (player == null) {
             return false;
         }
-        int amount = this.getTargets().get(0).getNumberOfTargets();
+        int amount = this.getTargets().get(0).getMinNumberOfTargets();
         if (randomDiscard) {
             this.cards.addAll(player.discard(amount, true, true, source, game).getCards(game));
         } else if (this.getTargets().choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {

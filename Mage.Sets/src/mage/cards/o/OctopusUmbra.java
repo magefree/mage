@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAttachedEffect;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
@@ -51,7 +50,7 @@ public final class OctopusUmbra extends CardImpl {
         Ability abilityToAdd = new AttacksTriggeredAbility(new TapTargetEffect(), true);
         abilityToAdd.addTarget(new TargetCreaturePermanent(filter));
         ability = new SimpleStaticAbility(
-                new SetBasePowerToughnessEnchantedEffect(8, 8)
+                new SetBasePowerToughnessAttachedEffect(8, 8, AttachmentType.AURA)
         );
         ability.addEffect(new GainAbilityAttachedEffect(
                 abilityToAdd, AttachmentType.AURA

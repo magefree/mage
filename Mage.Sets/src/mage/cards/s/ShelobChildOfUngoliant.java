@@ -228,7 +228,7 @@ class ShelobChildOfUngoliantEffect extends OneShotEffect {
                 token.addSubType(SubType.FOOD);
 
                 // {2}, {T}, Sacrifice this artifact: You gain 3 life.
-                token.addAbility(new FoodAbility(false));
+                token.addAbility(new FoodAbility());
             }).apply(game, source);
     }
 }

@@ -23,7 +23,7 @@ public class WizardsPlayNetwork2021 extends ExpansionSet {
         cards.add(new SetCardInfo("Arbor Elf", 1, Rarity.RARE, mage.cards.a.ArborElf.class));
         cards.add(new SetCardInfo("Collected Company", 2, Rarity.RARE, mage.cards.c.CollectedCompany.class));
         cards.add(new SetCardInfo("Conjurer's Closet", 6, Rarity.RARE, mage.cards.c.ConjurersCloset.class));
-        cards.add(new SetCardInfo("Fabled Passage", 4, Rarity.RARE, mage.cards.f.FabledPassage.class));
+        cards.add(new SetCardInfo("Fabled Passage", 4, Rarity.RARE, mage.cards.f.FabledPassage.class, RETRO_ART));
         cards.add(new SetCardInfo("Mind Stone", 5, Rarity.RARE, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Wurmcoil Engine", 3, Rarity.MYTHIC, mage.cards.w.WurmcoilEngine.class));
     }

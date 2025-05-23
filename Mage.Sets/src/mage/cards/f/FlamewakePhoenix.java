@@ -2,21 +2,17 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.hint.common.FerociousHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -33,20 +29,19 @@ public final class FlamewakePhoenix extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // Flamewake Phoenix attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
 
         // <i>Ferocious</i> &mdash; At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return Flamewake Phoenix from your graveyard to the battlefield.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        Zone.GRAVEYARD,
-                        TargetController.YOU, new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), new ManaCostsImpl<>("{R}")),
-                        false),
-                FerociousCondition.instance,
-                "<i>Ferocious</i> &mdash; At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return {this} from your graveyard to the battlefield."
-        ).addHint(FerociousHint.instance));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                Zone.GRAVEYARD, TargetController.YOU,
+                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{R}")),
+                false
+        ).withInterveningIf(FerociousCondition.instance).setAbilityWord(AbilityWord.FEROCIOUS).addHint(FerociousHint.instance));
     }
 
     private FlamewakePhoenix(final FlamewakePhoenix card) {

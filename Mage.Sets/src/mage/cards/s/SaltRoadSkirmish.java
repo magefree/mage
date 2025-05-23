@@ -47,7 +47,8 @@ class SaltRoadSkirmishEffect extends OneShotEffect {
 
     SaltRoadSkirmishEffect() {
         super(Outcome.Benefit);
-        staticText = "";
+        staticText = "create two 1/1 red Warrior creature tokens. " +
+                "They gain haste until end of turn. Sacrifice them at the beginning of the next end step";
     }
 
     private SaltRoadSkirmishEffect(final SaltRoadSkirmishEffect effect) {

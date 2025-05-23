@@ -29,7 +29,7 @@ public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
         if (filterMessage.startsWith("a ")) {
             filterMessage = filterMessage.substring(2);
         }
-        setTriggerPhrase("Whenever {this} or another " + filterMessage + " dies, ");
+        setTriggerPhrase("Whenever {this} or " + (filterMessage.startsWith("another") ? "" : "another ") + filterMessage + " dies, ");
         setLeavesTheBattlefieldTrigger(true);
     }
 
@@ -61,8 +61,12 @@ public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         // TODO: remove applyFilterOnSource workaround for Basri's Lieutenant
-        return ((!applyFilterOnSource && zEvent.getTarget().getId().equals(this.getSourceId()))
-                || filter.match(zEvent.getTarget(), getControllerId(), this, game));
+        if ((applyFilterOnSource || !zEvent.getTarget().getId().equals(this.getSourceId()))
+                && !filter.match(zEvent.getTarget(), getControllerId(), this, game)) {
+            return false;
+        }
+        this.getEffects().setValue("creatureDied", zEvent.getTarget());
+        return true;
     }
 
     @Override

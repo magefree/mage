@@ -5,7 +5,6 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.EndTurnEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,8 +24,7 @@ public final class Discontinuity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(
                 new ManaCostsImpl<>("{2}{U}{U}"), MyTurnCondition.instance
         ).setText("during your turn, this spell costs {2}{U}{U} less to cast"))
-                .setRuleAtTheTop(true)
-                .addHint(MyTurnHint.instance));
+                .setRuleAtTheTop(true));
 
         // End the turn.
         this.getSpellAbility().addEffect(new EndTurnEffect());

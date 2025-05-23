@@ -1,10 +1,5 @@
 package mage.cards.p;
 
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -29,7 +24,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
+
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -108,18 +108,13 @@ class PullEffect extends OneShotEffect {
             return false;
         }
 
-        permanents.forEach(permanent -> {
-            FixedTarget blueprintTarget = new FixedTarget(permanent, game);
+        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance());
+        effect.setTargetPointer(new FixedTargets(permanents, game));
+        game.addEffect(effect, source);
 
-            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance());
-            effect.setTargetPointer(blueprintTarget.copy());
-            game.addEffect(effect, source);
-
-            Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + permanent.getLogName(), controller.getId());
-            sacrificeEffect.setTargetPointer(blueprintTarget.copy());
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
-        });
-
+        Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice them", controller.getId());
+        sacrificeEffect.setTargetPointer(new FixedTargets(permanents, game));
+        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
         return true;
     }
 }

@@ -57,7 +57,7 @@ class TemporaryTruceEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    int cardsToDraw = player.getAmount(0, 2, "Draw how many cards?", game);
+                    int cardsToDraw = player.getAmount(0, 2, "Draw how many cards?", source, game);
                     player.drawCards(cardsToDraw, source, game);
                     player.gainLife((2 - cardsToDraw) * 2, game, source);
                 }

@@ -2,8 +2,8 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.WonCoinFlipControllerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,14 +13,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
-import mage.game.events.CoinFlippedEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -44,7 +39,7 @@ public final class TavernScoundrel extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you win a coin flip, create two Treasure tokens.
-        this.addAbility(new TavernScoundrelTriggeredAbility());
+        this.addAbility(new WonCoinFlipControllerTriggeredAbility(new CreateTokenEffect(new TreasureToken(), 2)));
 
         // {1}, {T}, Sacrifice another permanent: Flip a coin.
         Ability ability = new SimpleActivatedAbility(new FlipCoinEffect(), new GenericManaCost(1));
@@ -60,39 +55,5 @@ public final class TavernScoundrel extends CardImpl {
     @Override
     public TavernScoundrel copy() {
         return new TavernScoundrel(this);
-    }
-}
-
-class TavernScoundrelTriggeredAbility extends TriggeredAbilityImpl {
-
-    TavernScoundrelTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken(), 2), false);
-    }
-
-    private TavernScoundrelTriggeredAbility(final TavernScoundrelTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TavernScoundrelTriggeredAbility copy() {
-        return new TavernScoundrelTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COIN_FLIPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        CoinFlippedEvent flipEvent = (CoinFlippedEvent) event;
-        return isControlledBy(event.getPlayerId())
-                && flipEvent.isWinnable()
-                && flipEvent.wasWon();
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you win a coin flip, create two Treasure tokens.";
     }
 }

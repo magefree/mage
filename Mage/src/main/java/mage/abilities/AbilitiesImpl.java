@@ -92,7 +92,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 String rule = ability.getRule();
                 if (rule != null) {
                     if (!rule.isEmpty()) {
-                        rules.add(Character.toUpperCase(rule.charAt(0)) + rule.substring(1));
+                        rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+                        if (ability.getRuleAtTheTop()) {
+                            rules.add(0, rule);
+                        } else {
+                            rules.add(rule);
+                        }
                     }
                 } else { // logging so we can still can be made aware of rule problems a card has
                     String cardName = ((SpellAbility) ability).getCardName();

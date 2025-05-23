@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -80,7 +79,7 @@ class SquealingDevilEffect extends OneShotEffect {
         ManaCosts cost = new ManaCostsImpl<>("{X}");
         if (player != null) {
             if (player.chooseUse(Outcome.BoostCreature, "Pay " + cost.getText() + "?", source, game)) {
-                int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+                int costX = player.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay to boost)", game, source, true);
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     Permanent permanent = game.getPermanent(source.getFirstTarget());

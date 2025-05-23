@@ -76,6 +76,7 @@ Intimidate|instance|
 Ingest|new|
 Islandcycling|cost|
 Islandwalk|new|
+Job select|new|
 Jump-start|card|
 Kicker|manaString|
 Level up|cost|
@@ -133,6 +134,7 @@ Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Umbra armor|new|
+Tiered|card|
 Toxic|number|
 Training|new|
 Trample|instance|

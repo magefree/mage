@@ -13,6 +13,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
@@ -38,7 +39,8 @@ public final class UnscytheKillerOfKings extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, create a 2/2 black Zombie creature token.
-        this.addAbility(new DealtDamageAttachedAndDiedTriggeredAbility(new UnscytheEffect(), true));
+        this.addAbility(new DealtDamageAttachedAndDiedTriggeredAbility(new UnscytheEffect(), true,
+                StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.CARD, AttachmentType.EQUIPMENT));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));

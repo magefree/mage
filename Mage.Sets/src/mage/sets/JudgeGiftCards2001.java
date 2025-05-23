@@ -20,7 +20,7 @@ public class JudgeGiftCards2001 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Ball Lightning", 1, Rarity.RARE, mage.cards.b.BallLightning.class));
-        cards.add(new SetCardInfo("Oath of Druids", 2, Rarity.RARE, mage.cards.o.OathOfDruids.class));
+        cards.add(new SetCardInfo("Ball Lightning", 1, Rarity.RARE, mage.cards.b.BallLightning.class, RETRO_ART));
+        cards.add(new SetCardInfo("Oath of Druids", 2, Rarity.RARE, mage.cards.o.OathOfDruids.class, RETRO_ART));
      }
 }

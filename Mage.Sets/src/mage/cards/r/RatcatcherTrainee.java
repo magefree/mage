@@ -6,7 +6,6 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -34,7 +33,7 @@ public final class RatcatcherTrainee extends AdventureCard {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                 MyTurnCondition.instance, "During your turn, {this} has first strike."
-        )).addHint(MyTurnHint.instance));
+        )));
 
         // Pest Problem
         // Create two 1/1 black Rat creature tokens with "This creature can’t block."

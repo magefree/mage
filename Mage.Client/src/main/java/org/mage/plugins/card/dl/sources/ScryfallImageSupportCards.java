@@ -543,6 +543,9 @@ public class ScryfallImageSupportCards {
             add("MAT"); // March of the Machine: The Aftermath
             add("MUL"); // Multiverse Legends
             add("30A"); // 30th Anniversary Edition
+            add("P30A"); // 30th Anniversary Play Promos
+            add("P30M"); // 30th Anniversary Misc Promos
+            add("PEWK"); // Eternal Weekend
             add("LTR"); // The Lord of the Rings: Tales of Middle-Earth
             add("LTC"); // Tales of Middle-Earth Commander
             add("CMM"); // Commander Masters
@@ -577,6 +580,7 @@ public class ScryfallImageSupportCards {
             add("PIO"); // Pioneer Masters
             add("PW25"); // Wizards Play Network 2025
             add("INR"); // Innistrad Remastered
+            add("PF25"); // MagicFest 2025
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander
             add("TDM"); // Tarkir: Dragonstorm

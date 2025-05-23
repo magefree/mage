@@ -4,10 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.OpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
-import mage.abilities.hint.common.OpponentsTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,12 +37,11 @@ public final class BreathOfTheSleepless extends CardImpl {
         ));
 
         // Whenever you cast a creature spell during an opponent's turn, tap up to one target creature.
-        Ability ability = new ConditionalTriggeredAbility(new SpellCastControllerTriggeredAbility(
+        Ability ability = new SpellCastControllerTriggeredAbility(
                 new TapTargetEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false
-        ), OpponentsTurnCondition.instance, "Whenever you cast a creature spell " +
-                "during an opponent's turn, tap up to one target creature.");
+        ).withTriggerCondition(OpponentsTurnCondition.instance);
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        this.addAbility(ability.addHint(OpponentsTurnHint.instance));
+        this.addAbility(ability);
     }
 
     private BreathOfTheSleepless(final BreathOfTheSleepless card) {

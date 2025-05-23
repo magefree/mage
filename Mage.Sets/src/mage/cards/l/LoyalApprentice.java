@@ -53,6 +53,7 @@ class LoyalApprenticeEffect extends OneShotEffect {
 
     LoyalApprenticeEffect() {
         super(Outcome.Benefit);
+        staticText = "create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn";
     }
 
     private LoyalApprenticeEffect(final LoyalApprenticeEffect effect) {

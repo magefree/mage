@@ -27,10 +27,9 @@ public final class TocasiasWelcome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Whenever one or more creatures with mana value 3 or less enter the battlefield under your control, draw a card. This ability triggers only once each turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), filter
-        ).setTriggersLimitEachTurn(1).setTriggerPhrase("Whenever one or more creatures with mana value 3 " +
-                "or less enter the battlefield under your control, "));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter)
+                .setTriggersLimitEachTurn(1)
+                .setTriggerPhrase("Whenever one or more creatures you control with mana value 3 or less enter, "));
     }
 
     private TocasiasWelcome(final TocasiasWelcome card) {

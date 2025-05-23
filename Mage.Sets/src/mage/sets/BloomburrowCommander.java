@@ -280,6 +280,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Swarmyard", 133, Rarity.RARE, mage.cards.s.Swarmyard.class));
         cards.add(new SetCardInfo("Swarmyard Massacre", 20, Rarity.RARE, mage.cards.s.SwarmyardMassacre.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 286, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Sword of the Squeak", 40, Rarity.RARE, mage.cards.s.SwordOfTheSqueak.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 109, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Tainted Wood", 337, Rarity.UNCOMMON, mage.cards.t.TaintedWood.class));
         cards.add(new SetCardInfo("Talisman of Impulse", 287, Rarity.UNCOMMON, mage.cards.t.TalismanOfImpulse.class));

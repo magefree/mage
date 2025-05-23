@@ -7,7 +7,6 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TargetPlayerGainControlSourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,7 +33,6 @@ public final class HumbleDefector extends CardImpl {
                 new DrawCardSourceControllerEffect(2), new TapSourceCost(), MyTurnCondition.instance);
         ability.addEffect(new TargetPlayerGainControlSourceEffect());
         ability.addTarget(new TargetOpponent());
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
 
     }

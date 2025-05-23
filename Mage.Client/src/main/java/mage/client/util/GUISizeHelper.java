@@ -6,6 +6,7 @@ import mage.client.util.gui.GuiDisplayUtil;
 import org.mage.card.arcane.CardRenderer;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.Locale;
@@ -108,7 +109,7 @@ public final class GUISizeHelper {
 
         // app - frame/window title
         // nimbus's LaF limited to static title size, so font can't be too big (related code in SynthInternalFrameTitlePane, BasicInternalFrameTitlePane)
-        UIManager.put("InternalFrame.titleFont", dialogFont.deriveFont(Font.BOLD, Math.min(17, 0.8f * dialogFont.getSize())));
+        UIManager.put("InternalFrame.titleFont", new FontUIResource(dialogFont.deriveFont(Font.BOLD, Math.min(17, 0.8f * dialogFont.getSize()))));
 
         // app - tables
         tableFont = new java.awt.Font("Arial", 0, dialogFontSize);
@@ -150,7 +151,11 @@ public final class GUISizeHelper {
         cardTooltipLargeImageHeight = 30 * tooltipFontSize;
         cardTooltipLargeTextWidth = Math.max(150, 20 * tooltipFontSize - 50);
         cardTooltipLargeTextHeight = Math.max(100, 12 * tooltipFontSize - 20);
-        UIManager.put("ToolTip.font", cardTooltipFont);
+        UIManager.put("ToolTip.font", new FontUIResource(cardTooltipFont));
+
+        // app - information boxes (only title, text controls by content)
+        // TODO: doesn't work
+        //UIManager.put("OptionPane.titleFont", new FontUIResource(dialogFont.deriveFont(Font.BOLD, Math.min(17, 1.3f * dialogFont.getSize()))));
 
         // game - player panel
         playerPanelGuiScale = (float) (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_PLAYER_PANEL_SIZE, 14) / 14.0);

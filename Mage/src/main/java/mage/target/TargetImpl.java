@@ -31,7 +31,16 @@ public abstract class TargetImpl implements Target {
     protected int minNumberOfTargets;
     protected boolean required = true;
     protected boolean requiredExplicitlySet = false;
+    /**
+     * Simple chosen state due selected and require targets count
+     * Complex targets must override isChosen method or set chosen value manually
+     * For "up to" targets it will be false before first choose dialog:
+     * - chosen = false - player do not make a choice yet
+     * - chosen = true, targets.size = 0 - player choose 0 targets in "up to" and it's valid
+     * - chosen = true, targets.size >= 1 - player choose some targets and it's valid
+     */
     protected boolean chosen = false;
+
     // is the target handled as targeted spell/ability (notTarget = true is used for not targeted effects like e.g. sacrifice)
     protected boolean notTarget = false;
     protected boolean atRandom = false; // for inner choose logic
@@ -70,11 +79,6 @@ public abstract class TargetImpl implements Target {
         this.targetTag = target.targetTag;
         this.chooseHint = target.chooseHint;
         this.shouldReportEvents = target.shouldReportEvents;
-    }
-
-    @Override
-    public int getNumberOfTargets() {
-        return this.minNumberOfTargets;
     }
 
     @Override
@@ -169,11 +173,14 @@ public abstract class TargetImpl implements Target {
         if (getMaxNumberOfTargets() != 1) {
             StringBuilder sb = new StringBuilder();
             sb.append("Select ").append(targetName);
+            sb.append(" (selected ").append(targets.size());
             if (getMaxNumberOfTargets() > 0 && getMaxNumberOfTargets() != Integer.MAX_VALUE) {
-                sb.append(" (selected ").append(targets.size()).append(" of ").append(getMaxNumberOfTargets()).append(')');
-            } else {
-                sb.append(" (selected ").append(targets.size()).append(')');
+                sb.append(" of ").append(getMaxNumberOfTargets());
             }
+            if (getMinNumberOfTargets() > 0) {
+                sb.append(", min ").append(getMinNumberOfTargets());
+            }
+            sb.append(')');
             sb.append(suffix);
             return sb.toString();
         }
@@ -234,15 +241,64 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean isChosen(Game game) {
-        if (getMaxNumberOfTargets() == 0 && getNumberOfTargets() == 0) {
+        // min = max = 0 - for abilities with X=0, e.g. nothing to choose
+        if (getMaxNumberOfTargets() == 0 && getMinNumberOfTargets() == 0) {
             return true;
         }
-        return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets() || chosen;
+
+        // limit by max amount
+        if (getMaxNumberOfTargets() > 0 && targets.size() > getMaxNumberOfTargets()) {
+            return false;
+        }
+
+        // limit by min amount
+        if (getMinNumberOfTargets() > 0 && targets.size() < getMinNumberOfTargets()) {
+            return false;
+        }
+
+        // all fine
+        return chosen || (targets.size() >= getMinNumberOfTargets() && targets.size() <= getMaxNumberOfTargets());
     }
 
     @Override
-    public boolean doneChoosing(Game game) {
-        return getMaxNumberOfTargets() != 0 && targets.size() == getMaxNumberOfTargets();
+    @Deprecated // TODO: replace usage in cards by full version from choose methods
+    public boolean isChoiceCompleted(Game game) {
+        return isChoiceCompleted(null, null, game);
+    }
+
+    @Override
+    public boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game) {
+        // make sure target request called one time minimum (for "up to" targets)
+        // choice is selected after any addTarget call (by test, AI or human players)
+        if (!isChoiceSelected()) {
+            return false;
+        }
+
+        // make sure selected targets are valid
+        if (!isChosen(game)) {
+            return false;
+        }
+
+        // make sure to auto-finish on all targets selection
+        // - human player can select and deselect targets until fill all targets amount or press done button
+        // - AI player can select all new targets as much as possible
+        if (getMaxNumberOfTargets() > 0) {
+            if (getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+                if (abilityControllerId != null && source != null) {
+                    // any amount - nothing to choose
+                    return this.getSize() >= this.possibleTargets(abilityControllerId, source, game).size();
+                } else {
+                    // any amount - any selected
+                    return this.getSize() > 0;
+                }
+            } else {
+                // check selected limit
+                return this.getSize() >= getMaxNumberOfTargets();
+            }
+        }
+
+        // all other use cases are fine
+        return true;
     }
 
     @Override
@@ -253,12 +309,18 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
+    public boolean isChoiceSelected() {
+        // min = max = 0 - for abilities with X=0, e.g. nothing to choose
+        return chosen || getMaxNumberOfTargets() == 0 && getMinNumberOfTargets() == 0;
+    }
+
+    @Override
     public void add(UUID id, Game game) {
         if (getMaxNumberOfTargets() == 0 || targets.size() < getMaxNumberOfTargets()) {
             if (!targets.containsKey(id)) {
                 targets.put(id, 0);
                 rememberZoneChangeCounter(id, game);
-                chosen = targets.size() >= getNumberOfTargets();
+                chosen = isChosen(game);
             }
         }
     }
@@ -266,7 +328,7 @@ public abstract class TargetImpl implements Target {
     @Override
     public void remove(UUID id) {
         if (targets.containsKey(id)) {
-            targets.remove(id);
+            targets.remove(id); // TODO: miss chosen update here?
             zoneChangeCounters.remove(id);
         }
     }
@@ -285,13 +347,15 @@ public abstract class TargetImpl implements Target {
                     if (!game.replaceEvent(new TargetEvent(id, source))) {
                         targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
-                        chosen = targets.size() >= getNumberOfTargets();
+                        chosen = isChosen(game);
                         if (!skipEvent && shouldReportEvents) {
                             game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, source, source.getControllerId()));
                         }
                     }
                 } else {
                     targets.put(id, 0);
+                    rememberZoneChangeCounter(id, game);
+                    chosen = isChosen(game);
                 }
             }
         }
@@ -323,14 +387,16 @@ public abstract class TargetImpl implements Target {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, id, source, source.getControllerId()))) {
                 targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
-                chosen = targets.size() >= getNumberOfTargets();
+                chosen = isChosen(game);
                 if (!skipEvent && shouldReportEvents) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, source, source.getControllerId()));
                 }
             }
         } else {
+            // AI targets simulation
             targets.put(id, amount);
             rememberZoneChangeCounter(id, game);
+            chosen = isChosen(game);
         }
     }
 
@@ -341,17 +407,45 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
-        chosen = targets.size() >= getNumberOfTargets();
+        UUID abilityControllerId = playerId;
+        if (this.getTargetController() != null && this.getAbilityController() != null) {
+            abilityControllerId = this.getAbilityController();
+        }
+
+        chosen = false;
         do {
+            int prevTargetsCount = this.getTargets().size();
+
+            // stop by disconnect
             if (!targetController.canRespond()) {
-                return chosen;
+                break;
             }
+
+            // stop by cancel/done
             if (!targetController.choose(outcome, this, source, game)) {
-                return chosen;
+                break;
             }
-            chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen(game) && !doneChoosing(game));
-        return chosen;
+
+            // TODO: miss auto-choose code? see chooseTarget below
+            // TODO: miss random code? see chooseTarget below
+
+            chosen = isChosen(game);
+
+            // stop by full complete
+            if (isChoiceCompleted(abilityControllerId, source, game)) {
+                break;
+            }
+
+            // stop by nothing to use (actual for human and done button)
+            if (prevTargetsCount == this.getTargets().size()) {
+                break;
+            }
+
+            // can select next target
+        } while (true);
+
+        chosen = isChosen(game);
+        return this.getTargets().size() > 0;
     }
 
     @Override
@@ -361,41 +455,80 @@ public abstract class TargetImpl implements Target {
             return false;
         }
 
-        List<UUID> possibleTargets = new ArrayList<>(possibleTargets(playerId, source, game));
+        UUID abilityControllerId = playerId;
+        if (this.getTargetController() != null && this.getAbilityController() != null) {
+            abilityControllerId = this.getAbilityController();
+        }
 
-        chosen = targets.size() >= getNumberOfTargets();
+        List<UUID> randomPossibleTargets = new ArrayList<>(possibleTargets(playerId, source, game));
+
+        chosen = false;
         do {
+            int prevTargetsCount = this.getTargets().size();
+
+            // stop by disconnect
             if (!targetController.canRespond()) {
-                return chosen;
+                break;
             }
+
+            // MAKE A CHOICE
             if (isRandom()) {
-                if (possibleTargets.isEmpty()) {
-                    return chosen;
+                // random choice
+
+                // stop on nothing to choose
+                if (randomPossibleTargets.isEmpty()) {
+                    break;
                 }
-                // find valid target
-                while (!possibleTargets.isEmpty()) {
-                    int index = RandomUtil.nextInt(possibleTargets.size());
-                    if (this.canTarget(playerId, possibleTargets.get(index), source, game)) {
-                        this.addTarget(possibleTargets.get(index), source, game);
-                        possibleTargets.remove(index);
+
+                // add valid random target one by one
+                while (!randomPossibleTargets.isEmpty()) {
+                    UUID possibleTarget = RandomUtil.randomFromCollection(randomPossibleTargets);
+                    if (this.canTarget(playerId, possibleTarget, source, game) && !this.contains(possibleTarget)) {
+                        this.addTarget(possibleTarget, source, game);
+                        randomPossibleTargets.remove(possibleTarget);
                         break;
                     } else {
-                        possibleTargets.remove(index);
+                        randomPossibleTargets.remove(possibleTarget);
                     }
                 }
+                // continue to next target
             } else {
-                // Try to autochoosen
+                // player's choice
+
                 UUID autoChosenId = tryToAutoChoose(playerId, source, game);
-                if (autoChosenId != null) {
+                if (autoChosenId != null && !this.contains(autoChosenId)) {
+                    // auto-choose
                     addTarget(autoChosenId, source, game);
-                } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player
-                    return chosen;
+                    // continue to next target (example: auto-choose must fill min/max = 2 from 2 possible cards)
+                } else {
+                    // manual
+
+                    // stop by cancel/done
+                    if (!targetController.chooseTarget(outcome, this, source, game)) {
+                        break;
+                    }
+
+                    // continue to next target
                 }
             }
-            chosen = targets.size() >= getNumberOfTargets();
-        } while (!isChosen(game) && !doneChoosing(game));
 
-        return chosen;
+            chosen = isChosen(game);
+
+            // stop by full complete
+            if (isChoiceCompleted(abilityControllerId, source, game)) {
+                break;
+            }
+
+            // stop by nothing to choose (actual for human and done button?)
+            if (prevTargetsCount == this.getTargets().size()) {
+                break;
+            }
+
+            // can select next target
+        } while (true);
+
+        chosen = isChosen(game);
+        return this.getTargets().size() > 0;
     }
 
     @Override
@@ -438,7 +571,7 @@ public abstract class TargetImpl implements Target {
                 return false;
             }
             // if no targets have to be set and no targets are set, that's legal
-            if (getNumberOfTargets() == 0) {
+            if (getMinNumberOfTargets() == 0) {
                 return true;
             }
         }
@@ -457,7 +590,7 @@ public abstract class TargetImpl implements Target {
         // e.g. for {'A','B','C','D'} => N = 4
         int N = possibleTargets.size();
         // not enough targets, return no option
-        if (N < getNumberOfTargets()) {
+        if (N < getMinNumberOfTargets()) {
             return options;
         }
         // not target but that's allowed, return one empty option
@@ -479,8 +612,8 @@ public abstract class TargetImpl implements Target {
         if (N < maxK) { // less possible targets than the maximum allowed so reduce the max
             maxK = N;
         }
-        int minK = getNumberOfTargets();
-        if (getNumberOfTargets() == 0) { // add option without targets if possible
+        int minK = getMinNumberOfTargets();
+        if (getMinNumberOfTargets() == 0) { // add option without targets if possible
             TargetImpl target = this.copy();
             options.add(target);
             minK = 1;
@@ -634,6 +767,7 @@ public abstract class TargetImpl implements Target {
     public void setTargetAmount(UUID targetId, int amount, Game game) {
         targets.put(targetId, amount);
         rememberZoneChangeCounter(targetId, game);
+        chosen = isChosen(game);
     }
 
     @Override
@@ -685,10 +819,21 @@ public abstract class TargetImpl implements Target {
         } else {
             playerAutoTargetLevel = 2;
         }
+
+        // freeze protection on disconnect - auto-choice works for online players only
+        boolean isOnline = player.canRespond();
+        if (!player.isGameUnderControl()) {
+            Player controllingPlayer = game.getPlayer(player.getTurnControlledBy());
+            if (player.isHuman()) {
+                isOnline = controllingPlayer.canRespond();
+            }
+        }
+
         String abilityText = source.getRule(true).toLowerCase();
         boolean strictModeEnabled = player.getStrictChooseMode();
         boolean canAutoChoose = this.getMinNumberOfTargets() == this.getMaxNumberOfTargets() // Targets must be picked
-                && possibleTargets.size() == this.getNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
+                && isOnline
+                && possibleTargets.size() == this.getMinNumberOfTargets() - this.getSize() // Available targets are equal to the number that must be picked
                 && !strictModeEnabled  // Test AI is not set to strictChooseMode(true)
                 && playerAutoTargetLevel > 0 // Human player has enabled auto-choose in settings
                 && !abilityText.contains("search"); // Do not autochoose for any effects which involve searching
@@ -743,5 +888,14 @@ public abstract class TargetImpl implements Target {
         }
 
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName()
+                + ", from " + this.getMinNumberOfTargets()
+                + " to " + this.getMaxNumberOfTargets()
+                + ", " + this.getDescription()
+                + ", selected " + this.getTargets().size();
     }
 }

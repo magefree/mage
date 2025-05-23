@@ -48,7 +48,7 @@ public final class BoneDevourer extends CardImpl {
 
         // When this creature dies, you draw X cards and you lose X life, where X is the number of +1/+1 counters on it.
         Ability ability = new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(xValue).setText("you draw X cards"));
-        ability.addEffect(new LoseLifeSourceControllerEffect(xValue));
+        ability.addEffect(new LoseLifeSourceControllerEffect(xValue).setText("and you lose X life, where X is the number of +1/+1 counters on it"));
         this.addAbility(ability);
     }
 

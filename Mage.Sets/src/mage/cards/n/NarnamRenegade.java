@@ -7,6 +7,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -33,9 +34,9 @@ public final class NarnamRenegade extends CardImpl {
         // <i>Revolt</i> &mdash; Narnam Renegade enters the battlefield with a +1/+1 counter on it if a permanent you controlled left this battlefield this turn.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false,
-                RevoltCondition.instance, "<i>Revolt</i> &mdash; {this} enters with " +
-                "a +1/+1 counter on it if a permanent you controlled left the battlefield this turn.", null
-        ).addHint(RevoltCondition.getHint()), new RevoltWatcher());
+                RevoltCondition.instance, "{this} enters with a +1/+1 counter on it " +
+                "if a permanent you controlled left the battlefield this turn.", null
+        ).setAbilityWord(AbilityWord.REVOLT).addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 
     private NarnamRenegade(final NarnamRenegade card) {

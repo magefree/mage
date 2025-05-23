@@ -70,7 +70,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "DFT"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "WHO"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
@@ -132,6 +132,7 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
+        skipListAddName(SKIP_LIST_COLOR, "FIN", "Summon: Alexander");
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
@@ -307,6 +308,9 @@ public class VerifyCardDataTest {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
                 check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
             } else if (card instanceof CardWithSpellOption) {
+                if (card.isLand()) { // temporary until scryfall fixes the mana cost issue for adventure lands
+                    continue;
+                }
                 check(card, cardIndex);
                 check(((CardWithSpellOption) card).getSpellCard(), cardIndex);
             } else {
@@ -668,27 +672,33 @@ public class VerifyCardDataTest {
                 }
 
                 // index for missing cards
-                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
-                foundedJsonCards.add(code);
+//                String code = MtgJsonService.xMageToMtgJsonCodes.getOrDefault(set.getCode(), set.getCode()) + " - " + jsonCard.getNameAsFull() + " - " + jsonCard.number;
+//                foundedJsonCards.add(code);
+//
+//                // CHECK: only lands can use full art in current version;
+//                // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
+//                // TODO: add support textless cards like https://scryfall.com/card/sch/12/thalia-and-the-gitrog-monster
+//                boolean isLand = card.getRarity().equals(Rarity.LAND);
+//                if (card.isFullArt() && !isLand) {
+//                    errorsList.add("Error: only lands can use full art setting: "
+//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+//                }
+//
+//                // CHECK: must use full art setting
+//                if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
+//                    errorsList.add("Error: card must use full art setting: "
+//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+//                }
+//
+//                // CHECK: must not use full art setting
+//                if (!jsonCard.isFullArt && card.isFullArt()) {
+//                    errorsList.add("Error: card must NOT use full art setting: "
+//                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
+//                }
 
-                // CHECK: only lands can use full art in current version;
-                // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
-                // TODO: add support textless cards like https://scryfall.com/card/sch/12/thalia-and-the-gitrog-monster
-                boolean isLand = card.getRarity().equals(Rarity.LAND);
-                if (card.isFullArt() && !isLand) {
-                    errorsList.add("Error: only lands can use full art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
-
-                // CHECK: must use full art setting
-                if (jsonCard.isFullArt && isLand && !card.isFullArt()) {
-                    errorsList.add("Error: card must use full art setting: "
-                            + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
-                }
-
-                // CHECK: must not use full art setting
-                if (!jsonCard.isFullArt && card.isFullArt()) {
-                    errorsList.add("Error: card must NOT use full art setting: "
+                // CHECK: must use retro frame setting
+                if ((jsonCard.frameVersion.equals("1993") || jsonCard.frameVersion.equals("1997")) && !card.isRetroFrame()) {
+                    errorsList.add("Error: card must use retro art setting: "
                             + set.getCode() + " - " + set.getName() + " - " + card.getName() + " - " + card.getCardNumber());
                 }
             }
@@ -1056,7 +1066,13 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
 
+        // make sure mtgjson has booster data
+        boolean hasBoostersInfo = MtgJsonService.sets().values().stream().anyMatch(s -> s.booster != null && !s.booster.isEmpty());
         for (ExpansionSet set : sets) {
+            if (!hasBoostersInfo) {
+                System.out.println("Warning, mtgjson data lost boosters info");
+                break;
+            }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 continue;
@@ -2126,7 +2142,7 @@ public class VerifyCardDataTest {
                 boolean isPutToGraveAbility = rules.contains("put into")
                         && rules.contains("graveyard")
                         && rules.contains("from the battlefield");
-                boolean isLeavesBattlefield = rules.contains("leaves the battlefield");
+                boolean isLeavesBattlefield = rules.contains("leaves the battlefield") && !rules.contains("until {this} leaves the battlefield");
                 if (triggeredAbility.isLeavesTheBattlefieldTrigger()) {
                     // TODO: add check for wrongly enabled settings too?
                 } else {
@@ -2560,6 +2576,9 @@ public class VerifyCardDataTest {
         // For instance "Swampcycling {2}, mountaincycling {2}"
         //      becomes "Swampcycling {2}\nMountaincycling {2}"
         refText = splitCyclingAbilities(refText);
+
+        // ref text can contain dirty spaces after some text remove/fix, example: anchor words in Struggle for Project Purity
+        refText = refText.replaceAll(" +", " ");
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {

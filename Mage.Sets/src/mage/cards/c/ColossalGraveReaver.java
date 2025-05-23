@@ -1,11 +1,5 @@
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.BatchTriggeredAbility;
@@ -13,11 +7,11 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.abilities.keyword.FlyingAbility;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -28,15 +22,20 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTargets;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author Grath
  */
 public final class ColossalGraveReaver extends CardImpl {
 
     public ColossalGraveReaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{B}{G}");
-        
+
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
@@ -159,6 +158,6 @@ class ColossalGraveReaverTriggeredAbility extends TriggeredAbilityImpl implement
     @Override
     public String getRule() {
         return "Whenever one or more creature cards are put into your graveyard " +
-                "from your library, put one of them onto the battlefield tapped.";
+                "from your library, put one of them onto the battlefield.";
     }
 }

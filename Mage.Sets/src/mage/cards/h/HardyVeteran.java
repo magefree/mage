@@ -7,13 +7,11 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -36,7 +34,6 @@ public final class HardyVeteran extends CardImpl {
                 MyTurnCondition.instance,
                 "During your turn, {this} gets +0/+2");
         Ability ability = new SimpleStaticAbility(boostEffect);
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

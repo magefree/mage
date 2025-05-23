@@ -36,7 +36,7 @@ public class SinisterConciergeTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lightningBolt, sinisterConcierge);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, true);
         addTarget(playerA, bondedConstruct);
 
         setStopAt(1, PhaseStep.END_COMBAT);

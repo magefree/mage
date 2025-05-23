@@ -36,7 +36,7 @@ public final class WillOfTheSultai extends CardImpl {
         // * Target player mills three cards. Return all land cards from your graveyard to the battlefield tapped.
         this.getSpellAbility().addEffect(new MillCardsTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARD_LANDS));
+        this.getSpellAbility().addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARD_LANDS, true));
 
         // * Put X +1/+1 counters on target creature, where X is the number of lands you control. It gains trample until end of turn.
         this.getSpellAbility().addMode(new Mode(new AddCountersTargetEffect(

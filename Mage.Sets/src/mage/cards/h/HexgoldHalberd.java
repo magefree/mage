@@ -8,7 +8,6 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -42,7 +41,7 @@ public final class HexgoldHalberd extends CardImpl {
                 new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT),
                 MyTurnCondition.instance, "and trample"
         ));
-        this.addAbility(ability.addHint(MyTurnHint.instance));
+        this.addAbility(ability);
 
         // Equip {2}{R}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}{R}"), false));

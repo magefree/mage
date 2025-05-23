@@ -53,7 +53,7 @@ class SongcrafterMageEffect extends ContinuousEffectImpl {
     SongcrafterMageEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "target instant or sorcery card in your graveyard gains harmonize until end of turn. " +
-                "The harmonize cost is equal to its mana cost";
+                "Its harmonize cost is equal to its mana cost";
     }
 
     private SongcrafterMageEffect(final SongcrafterMageEffect effect) {

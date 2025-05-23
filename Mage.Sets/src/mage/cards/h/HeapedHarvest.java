@@ -33,7 +33,7 @@ public final class HeapedHarvest extends CardImpl {
         ));
 
         // {2}, {T}, Sacrifice Heaped Harvest: You gain 3 life.
-        this.addAbility(new FoodAbility(true));
+        this.addAbility(new FoodAbility());
     }
 
     private HeapedHarvest(final HeapedHarvest card) {

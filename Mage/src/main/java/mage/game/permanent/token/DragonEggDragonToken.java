@@ -8,7 +8,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  * @author spjspj
@@ -16,7 +15,7 @@ import mage.constants.Zone;
 public final class DragonEggDragonToken extends TokenImpl {
 
     public DragonEggDragonToken() {
-        super("Dragon Token", "2/2 red Dragon creature token with flying and \"{R}: This creature gets +1/+0 until end of turn.\"");
+        super("Dragon Token", "2/2 red Dragon creature token with flying and \"{R}: This token gets +1/+0 until end of turn.\"");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DRAGON);
@@ -24,8 +23,7 @@ public final class DragonEggDragonToken extends TokenImpl {
         toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn)
-                .setText("This creature gets +1/+0 until end of turn"), new ManaCostsImpl<>("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private DragonEggDragonToken(final DragonEggDragonToken token) {

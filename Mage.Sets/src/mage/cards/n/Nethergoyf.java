@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileFromGraveCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessPlusOneSourceEffect;
 import mage.abilities.hint.HintUtils;
@@ -100,7 +99,11 @@ class NethergoyfTarget extends TargetCardInYourGraveyard {
                 types.size() + " of 4",
                 types.size() >= 4 ? Color.GREEN : Color.RED
         );
-        text += " [" + types.stream().map(CardType::toString).collect(Collectors.joining(", ")) + "])";
+        String info = types.stream().map(CardType::toString).collect(Collectors.joining(", "));
+        if (!info.isEmpty()) {
+            text += " [" + info + "]";
+        }
+        text += ")";
         return text;
     }
 

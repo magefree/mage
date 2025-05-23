@@ -2,15 +2,15 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AffinityEffect;
+import mage.abilities.effects.common.FaceVillainousChoiceOpponentsEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.FaceVillainousChoice;
@@ -33,6 +33,9 @@ public final class TheDalekEmperor extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.DALEK, "Daleks");
     private static final Hint hint = new ValueHint("Daleks you control", new PermanentsOnBattlefieldCount(filter));
+    private static final FaceVillainousChoice choice = new FaceVillainousChoice(
+            Outcome.Sacrifice, new TheDalekEmperorFirstChoice(), new TheDalekEmperorSecondChoice()
+    );
 
     public TheDalekEmperor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}{B}{R}");
@@ -51,9 +54,7 @@ public final class TheDalekEmperor extends CardImpl {
         )));
 
         // At the beginning of combat on your turn, each opponent faces a villainous choice -- That player sacrifices a creature they control, or you create a 3/3 black Dalek artifact creature token with menace.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new TheDalekEmperorEffect()
-        ));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new FaceVillainousChoiceOpponentsEffect(choice)));
     }
 
     private TheDalekEmperor(final TheDalekEmperor card) {
@@ -66,40 +67,10 @@ public final class TheDalekEmperor extends CardImpl {
     }
 }
 
-class TheDalekEmperorEffect extends OneShotEffect {
-
-    private static final FaceVillainousChoice choice = new FaceVillainousChoice(
-            Outcome.Sacrifice, new TheDalekEmperorFirstChoice(), new TheDalekEmperorSecondChoice()
-    );
-
-    TheDalekEmperorEffect() {
-        super(Outcome.Benefit);
-        staticText = "each opponent " + choice.generateRule();
-    }
-
-    private TheDalekEmperorEffect(final TheDalekEmperorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TheDalekEmperorEffect copy() {
-        return new TheDalekEmperorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            choice.faceChoice(player, game, source);
-        }
-        return true;
-    }
-}
-
 class TheDalekEmperorFirstChoice extends VillainousChoice {
 
     TheDalekEmperorFirstChoice() {
-        super("That player sacrifices a creature they control", "You sacrifice a creature");
+        super("That player sacrifices a creature of their choice", "You sacrifice a creature");
     }
 
     @Override

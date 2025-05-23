@@ -11,7 +11,6 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -44,11 +43,10 @@ public final class QuilledGreatwurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a creature you control deals combat damage during your turn, put that many +1/+1 counters on it.
-        this.addAbility(new ConditionalTriggeredAbility(new DealsDamageToAnyTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersTargetEffect(
-                        CounterType.P1P1.createInstance(), SavedDamageValue.MANY
-                ), StaticFilters.FILTER_CONTROLLED_A_CREATURE, SetTargetPointer.PERMANENT, true, false
-        ), MyTurnCondition.instance, "Whenever a creature you control deals combat damage during your turn, put that many +1/+1 counters on it"));
+        this.addAbility(new DealsDamageToAnyTriggeredAbility(
+                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(), SavedDamageValue.MANY),
+                StaticFilters.FILTER_CONTROLLED_A_CREATURE, SetTargetPointer.PERMANENT, true, false
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // You may cast this card from your graveyard by removing six counters from among creatures you control in addition to paying its other costs.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new QuilledGreatwurmEffect()).setIdentifier(MageIdentifier.QuilledGreatwurmAlternateCast));
@@ -74,7 +72,7 @@ class QuilledGreatwurmEffect extends AsThoughEffectImpl {
 
     QuilledGreatwurmEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        this.staticText = "you may cast {this} from your graveyard by removing six counters " +
+        this.staticText = "you may cast this card from your graveyard by removing six counters " +
                 "from among creatures you control in addition to paying its other costs";
     }
 

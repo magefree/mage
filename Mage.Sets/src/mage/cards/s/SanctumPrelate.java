@@ -62,7 +62,7 @@ class ChooseNumberEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int numberChoice = controller.announceXMana(0, Integer.MAX_VALUE, "Choose a number.", game, source);
+            int numberChoice = controller.getAmount(0, Integer.MAX_VALUE, "Choose a number (mana cost to restrict)", source, game);
             game.getState().setValue(source.getSourceId().toString(), numberChoice);
 
             Permanent permanent = game.getPermanentEntering(source.getSourceId());

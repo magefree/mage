@@ -18,8 +18,6 @@ import mage.constants.ModeChoice;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -66,7 +64,7 @@ class StruggleForProjectDrawEffect extends OneShotEffect {
 
     StruggleForProjectDrawEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Each opponent draws a card. You draw a card for each card drawn this way.";
+        this.staticText = "each opponent draws a card. You draw a card for each card drawn this way.";
     }
 
     private StruggleForProjectDrawEffect(final StruggleForProjectDrawEffect effect) {
@@ -103,7 +101,6 @@ class StruggleForProjectRadCountersTriggeredAbility extends TriggeredAbilityImpl
 
     public StruggleForProjectRadCountersTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
-        setTriggerPhrase("Whenever a player attacks you with one or more creatures, ");
     }
 
     private StruggleForProjectRadCountersTriggeredAbility(final StruggleForProjectRadCountersTriggeredAbility ability) {
@@ -136,8 +133,6 @@ class StruggleForProjectRadCountersTriggeredAbility extends TriggeredAbilityImpl
         }
 
         this.getEffects().clear();
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new ControllerIdPredicate(event.getPlayerId()));
         Effect effect = new AddCountersTargetEffect(
                 CounterType.RAD.createInstance(),
                 StaticValue.get(attackersOnYou.size() * 2)
@@ -145,5 +140,10 @@ class StruggleForProjectRadCountersTriggeredAbility extends TriggeredAbilityImpl
         effect.setTargetPointer(new FixedTarget(attackingPlayer.getId()));
         this.getEffects().add(effect);
         return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a player attacks you with one or more creatures, that player gets twice that many rad counters.";
     }
 }

@@ -7,7 +7,6 @@ import mage.abilities.effects.Effect;
 import mage.constants.AttachmentType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -20,10 +19,6 @@ public class DealtDamageAttachedAndDiedTriggeredAbility extends TriggeredAbility
 
     private final FilterCreaturePermanent filter;
     private final SetTargetPointer setTargetPointer;
-
-    public DealtDamageAttachedAndDiedTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT, AttachmentType.EQUIPMENT);
-    }
 
     public DealtDamageAttachedAndDiedTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter,
                                                       SetTargetPointer setTargetPointer, AttachmentType attachmentType) {
@@ -72,8 +67,17 @@ public class DealtDamageAttachedAndDiedTriggeredAbility extends TriggeredAbility
                 })) {
             return false;
         }
-        if (this.setTargetPointer == SetTargetPointer.PERMANENT) {
-            getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        switch (setTargetPointer) {
+            case PERMANENT:
+                getEffects().setTargetPointer(new FixedTarget(creatureMOR));
+                break;
+            case CARD:
+                getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                break;
+            case NONE:
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported setTargetPointer value in DealtDamageAttachedAndDiedTriggeredAbility");
         }
         return true;
     }

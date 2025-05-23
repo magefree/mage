@@ -60,8 +60,10 @@ public enum MageIdentifier {
     DemonicEmbraceAlternateCast,
     FalcoSparaPactweaverAlternateCast,
     HelbruteAlternateCast,
+    IntoThePitAlternateCast,
     MaestrosAscendencyAlternateCast,
     NashiMoonSagesScionAlternateCast,
+    NoctisPrinceOfLucisAlternateCast,
     OsteomancerAdeptAlternateCast,
     RafinnesGuidanceAlternateCast,
     RonaSheoldredsFaithfulAlternateCast,
@@ -78,7 +80,8 @@ public enum MageIdentifier {
     FiresOfMountDoomAlternateCast,
     PrimalPrayersAlternateCast,
     QuilledGreatwurmAlternateCast,
-    WickerfolkIndomitableAlternateCast;
+    WickerfolkIndomitableAlternateCast,
+    ValgavothTerrorEaterAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects

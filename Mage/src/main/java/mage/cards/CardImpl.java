@@ -45,8 +45,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected Rarity rarity;
     protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
-    protected Class<? extends Card> meldsToClazz;
-    protected Card meldsToCard;
+    protected Class<? extends MeldCard> meldsToClazz;
+    protected MeldCard meldsToCard;
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
@@ -708,14 +708,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public Card getMeldsToCard() {
+    public MeldCard getMeldsToCard() {
         // init card on first call
         if (meldsToClazz == null && meldsToCard == null) {
             return null;
         }
 
         if (meldsToCard == null) {
-            meldsToCard = initSecondSideCard(meldsToClazz);
+            meldsToCard = (MeldCard) initSecondSideCard(meldsToClazz);
         }
 
         return meldsToCard;
@@ -802,7 +802,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     game.fireEvent(addedOneEvent);
                 } else {
                     finalAmount--;
-                    returnCode = false;
+                    returnCode = false; // restricted by ADD_COUNTER
                 }
             }
             if (finalAmount > 0) {
@@ -810,10 +810,15 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
             } else {
+                // TODO: must return true, cause it's not replaced here (rework Fangs of Kalonia and Spectacular Showdown)
+                // example from Devoted Druid
+                // If you can put counters on it, but that is modified by an effect (such as that of Vizier of Remedies),
+                // you can activate the ability even if paying the cost causes no counters to be put on Devoted Druid.
+                // (2018-12-07)
                 returnCode = false;
             }
         } else {
-            returnCode = false;
+            returnCode = false; // restricted by ADD_COUNTERS
         }
         return returnCode;
     }

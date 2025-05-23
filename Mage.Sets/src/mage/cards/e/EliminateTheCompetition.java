@@ -22,7 +22,7 @@ public final class EliminateTheCompetition extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // As an additional cost to cast Eliminate the Competition, sacrifice X creatures.
-        this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledCreaturePermanent("creatures"), true));
+        this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledCreaturePermanent("creatures"), false));
 
         // Destroy X target creatures.
         Effect effect = new DestroyTargetEffect();

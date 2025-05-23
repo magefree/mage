@@ -8,7 +8,6 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,7 +33,6 @@ public final class HoofprintsOfTheStag extends CardImpl {
         // {2}{w}, Remove four hoofprint counters from Hoofprints of the Stag: Create a 4/4 white Elemental creature token with flying. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WhiteElementalToken(), 1), new ManaCostsImpl<>("{2}{W}"), MyTurnCondition.instance);
         ability.addCost(new RemoveCountersSourceCost(CounterType.HOOFPRINT.createInstance(4)));
-        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

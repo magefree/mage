@@ -16,7 +16,6 @@ import mage.abilities.effects.common.ReturnFromGraveyardAtRandomEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -67,7 +66,7 @@ public final class TombTyrant extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
-        this.addAbility(ability.addHint(MyTurnHint.instance).addHint(hint));
+        this.addAbility(ability.addHint(hint));
     }
 
     private TombTyrant(final TombTyrant card) {
