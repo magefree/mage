@@ -383,6 +383,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tromell, Seymour's Butler", 73, Rarity.RARE, mage.cards.t.TromellSeymoursButler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimate Magic: Holy", 110, Rarity.RARE, mage.cards.u.UltimateMagicHoly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultimate Magic: Holy", 32, Rarity.RARE, mage.cards.u.UltimateMagicHoly.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ultimate Magic: Meteor", 121, Rarity.RARE, mage.cards.u.UltimateMagicMeteor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ultimate Magic: Meteor", 62, Rarity.RARE, mage.cards.u.UltimateMagicMeteor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umaro, Raging Yeti", 156, Rarity.RARE, mage.cards.u.UmaroRagingYeti.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Umaro, Raging Yeti", 63, Rarity.RARE, mage.cards.u.UmaroRagingYeti.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Underground River", 439, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
