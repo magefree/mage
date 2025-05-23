@@ -98,6 +98,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Circle of Power", 92, Rarity.UNCOMMON, mage.cards.c.CircleOfPower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clash of the Eikons", 180, Rarity.UNCOMMON, mage.cards.c.ClashOfTheEikons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clash of the Eikons", 341, Rarity.UNCOMMON, mage.cards.c.ClashOfTheEikons.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clive's Hideaway", 275, Rarity.RARE, mage.cards.c.ClivesHideaway.class));
         cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 133, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 318, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 385, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
