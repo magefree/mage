@@ -394,6 +394,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Vindicate", 330, Rarity.RARE, mage.cards.v.Vindicate.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 440, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
         cards.add(new SetCardInfo("Void Rend", 331, Rarity.RARE, mage.cards.v.VoidRend.class));
+        cards.add(new SetCardInfo("Wakka, Devoted Guardian", 190, Rarity.RARE, mage.cards.w.WakkaDevotedGuardian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wakka, Devoted Guardian", 97, Rarity.RARE, mage.cards.w.WakkaDevotedGuardian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Walking Ballista", 371, Rarity.RARE, mage.cards.w.WalkingBallista.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 372, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Wooded Ridgeline", 441, Rarity.COMMON, mage.cards.w.WoodedRidgeline.class));
