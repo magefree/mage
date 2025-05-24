@@ -412,6 +412,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Terra, Magical Adept", 323, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terra, Magical Adept", 511, Rarity.MYTHIC, mage.cards.t.TerraMagicalAdept.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Crystal's Chosen", 14, Rarity.UNCOMMON, mage.cards.t.TheCrystalsChosen.class));
+        cards.add(new SetCardInfo("The Darkness Crystal", 335, Rarity.RARE, mage.cards.t.TheDarknessCrystal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Darkness Crystal", 96, Rarity.RARE, mage.cards.t.TheDarknessCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Earth Crystal", 184, Rarity.RARE, mage.cards.t.TheEarthCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Earth Crystal", 342, Rarity.RARE, mage.cards.t.TheEarthCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Emperor of Palamecia", 219, Rarity.UNCOMMON, mage.cards.t.TheEmperorOfPalamecia.class, NON_FULL_USE_VARIOUS));

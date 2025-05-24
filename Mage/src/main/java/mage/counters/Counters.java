@@ -14,7 +14,10 @@ import java.util.stream.Collectors;
  */
 public class Counters extends HashMap<String, Counter> implements Serializable, Copyable<Counters> {
 
-    public Counters() {
+    public Counters(Counter... counters) {
+        for (Counter counter : counters) {
+            this.addCounter(counter);
+        }
     }
 
     protected Counters(final Counters counters) {
