@@ -97,8 +97,6 @@ public interface TriggeredAbility extends Ability {
 
     boolean isOptional();
 
-    TriggeredAbility setOptional();
-
     /**
      * Allow trigger to fire after source leave the battlefield (example: will use LKI on itself sacrifice)
      */

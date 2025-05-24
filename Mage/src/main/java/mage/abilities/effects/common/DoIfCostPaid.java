@@ -110,6 +110,9 @@ public class DoIfCostPaid extends OneShotEffect {
                 didPay = true;
                 game.informPlayers(player.getLogName() + " paid for " + mageObject.getLogName() + " - " + message);
                 applyEffects(game, source, executingEffects);
+                game.getState().setValue(CardUtil.getCardZoneString(
+                        "lastTurnUsed" + source.getOriginalId(), source.getSourceId(), game
+                ), game.getTurnNum());
                 player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
             } else {
                 // Paying cost was cancels so try to undo payment so far
