@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  * Support:
  * - [x] game changers
  * - [ ] infinite combos
- * - [ ] mass land destruction
+ * - [x] mass land destruction
  * - [x] extra turns
  * - [x] tutors
  *
@@ -27,7 +27,7 @@ public class BracketLegalityLabel extends LegalityLabel {
 
     private static final String GROUP_GAME_CHANGES = "Game Changers";
     private static final String GROUP_INFINITE_COMBOS = "Infinite Combos (unsupported)";
-    private static final String GROUP_MASS_LAND_DESTRUCTION = "Mass Land Destruction (unsupported)";
+    private static final String GROUP_MASS_LAND_DESTRUCTION = "Mass Land Destruction";
     private static final String GROUP_EXTRA_TURN = "Extra Turns";
     private static final String GROUP_TUTORS = "Tutors";
 
@@ -248,8 +248,20 @@ public class BracketLegalityLabel extends LegalityLabel {
     }
 
     private void collectMassLandDestruction(Deck deck) {
-        // TODO: implement
+        // https://mtg.wiki/page/Land_destruction
+        // https://draftsim.com/mtg-mass-land-destruction/
         this.foundMassLandDestruction.clear();
+        Stream.concat(deck.getCards().stream(), deck.getSideboard().stream())
+                .filter(card -> card.getRules().stream()
+                        .map(s -> s.toLowerCase(Locale.ENGLISH))
+                        .anyMatch(s -> (s.contains("destroy") || s.contains("sacrifice"))
+                                && (s.contains("all") || s.contains("x target") || s.contains("{x} target"))
+                                && isTextContainsLandName(s)
+                        )
+                )
+                .map(Card::getName)
+                .sorted()
+                .forEach(this.foundMassLandDestruction::add);
     }
 
     private void collectExtraTurn(Deck deck) {
@@ -286,5 +298,46 @@ public class BracketLegalityLabel extends LegalityLabel {
                 || lowerText.contains("swamp card")
                 || lowerText.contains("mountain card")
                 || lowerText.contains("forest card");
+    }
+
+    private boolean isTextContainsLandName(String lowerText) {
+        // TODO: add tests to find all cards from https://mtg.wiki/page/Land_destruction
+        // TODO: add tests
+        /*
+// mass land destruction
+Ajani Vengeant
+Armageddon
+Avalanche
+Bend or Break
+Boil
+Boiling Seas
+Boom // Bust
+Burning of Xinye
+Catastrophe
+Decree of Annihilation
+Desolation Angel
+Devastation
+Fall of the Thran
+From the Ashes
+Impending Disaster
+Jokulhaups
+Myojin of Infinite Rage
+Numot, the Devastator
+Obliterate
+Orcish Settlers
+Ravages of War
+Ruination
+Rumbling Crescendo
+Scorched Earth
+Tsunami
+Wake of Destruction
+Wildfire
+         */
+        return lowerText.contains("lands")
+                || lowerText.contains("plains")
+                || lowerText.contains("island")
+                || lowerText.contains("swamp")
+                || lowerText.contains("mountain")
+                || lowerText.contains("forest");
     }
 }
