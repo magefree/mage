@@ -222,6 +222,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Meteor Golem", 351, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Millikin", 352, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
         cards.add(new SetCardInfo("Mind Stone", 353, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Mog, Moogle Warrior", 179, Rarity.RARE, mage.cards.m.MogMoogleWarrior.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mog, Moogle Warrior", 89, Rarity.RARE, mage.cards.m.MogMoogleWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Morbid Opportunist", 278, Rarity.UNCOMMON, mage.cards.m.MorbidOpportunist.class));
         cards.add(new SetCardInfo("Mortify", 327, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mossfire Valley", 407, Rarity.RARE, mage.cards.m.MossfireValley.class));
