@@ -61,10 +61,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("As Foretold", 805, Rarity.RARE, mage.cards.a.AsForetold.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ash Barrens", 257, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ash Barrens", 848, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ashad, the Lone Cyberman", 113, Rarity.RARE, mage.cards.a.AshadTheLoneCyberman.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ashad, the Lone Cyberman", 402, Rarity.RARE, mage.cards.a.AshadTheLoneCyberman.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ashad, the Lone Cyberman", 718, Rarity.RARE, mage.cards.a.AshadTheLoneCyberman.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ashad, the Lone Cyberman", 993, Rarity.RARE, mage.cards.a.AshadTheLoneCyberman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashad, the Lone Cyberman", 113, Rarity.RARE, mage.cards.a.AshadTheLoneCyberman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashad, the Lone Cyberman", 402, Rarity.RARE, mage.cards.a.AshadTheLoneCyberman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashad, the Lone Cyberman", 718, Rarity.RARE, mage.cards.a.AshadTheLoneCyberman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashad, the Lone Cyberman", 993, Rarity.RARE, mage.cards.a.AshadTheLoneCyberman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrid Peth", 11, Rarity.RARE, mage.cards.a.AstridPeth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrid Peth", 334, Rarity.RARE, mage.cards.a.AstridPeth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrid Peth", 616, Rarity.RARE, mage.cards.a.AstridPeth.class, NON_FULL_USE_VARIOUS));
@@ -931,6 +931,7 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("The Five Doctors", 394, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Five Doctors", 706, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Five Doctors", 985, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
+        //cards.add(new SetCardInfo("The Five Doctors", 101, Rarity.RARE, mage.cards.t.TheFiveDoctors.class));
         cards.add(new SetCardInfo("The Flood of Mars", 360, Rarity.RARE, mage.cards.t.TheFloodOfMars.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Flood of Mars", 45, Rarity.RARE, mage.cards.t.TheFloodOfMars.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Flood of Mars", 650, Rarity.RARE, mage.cards.t.TheFloodOfMars.class, NON_FULL_USE_VARIOUS));
