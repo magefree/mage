@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CostAdjuster;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -44,9 +45,10 @@ public final class BalambGardenSeeDAcademy extends CardImpl {
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
 
-        // {5}{G}{U}: Transform this land. This ability costs {1} less to activate for each other Town you control.
+        // {5}{G}{U}, {T}: Transform this land. This ability costs {1} less to activate for each other Town you control.
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{5}{G}{U}"));
+        ability.addCost(new TapSourceCost());
         ability.addEffect(new InfoEffect("This ability costs {1} less to activate for each other Town you control"));
         this.addAbility(ability
                 .setCostAdjuster(BalambGardenSeeDAcademyAdjuster.instance)
