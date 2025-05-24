@@ -135,10 +135,10 @@ public class BracketLegalityLabel extends LegalityLabel {
         groups.put(GROUP_TUTORS, this.foundTutors);
         groups.forEach((group, cards) -> {
             showInfo.add("<br>");
-            showInfo.add("<u><span style='font-weight:bold;'>" + group + ": " + this.foundGameChangers.size() + "</span></u>");
+            showInfo.add("<u><span style='font-weight:bold;'>" + group + ": " + cards.size() + "</span></u>");
             if (!cards.isEmpty()) {
                 showInfo.add("<ul style=\"font-size: " + infoFontSize + "px; width: " + TOOLTIP_TABLE_WIDTH + "px; padding-left: 10px; margin: 0;\">");
-                this.foundGameChangers.forEach(s -> showInfo.add(String.format("<li style=\"margin-bottom: 2px;\">%s</li>", s)));
+                cards.forEach(s -> showInfo.add(String.format("<li style=\"margin-bottom: 2px;\">%s</li>", s)));
                 showInfo.add("</ul>");
             }
         });
