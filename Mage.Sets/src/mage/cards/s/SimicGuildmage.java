@@ -13,24 +13,25 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.AnotherTargetPredicate;
+import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.Target;
+import mage.target.TargetImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -39,12 +40,12 @@ import java.util.UUID;
 public final class SimicGuildmage extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("another target creature with the same controller");
-    private static final FilterEnchantmentPermanent auraFilter = new FilterEnchantmentPermanent("Aura");
+    private static final FilterPermanent auraFilter = new FilterPermanent(SubType.AURA, "Aura enchanting a permanent");
 
     static {
         filter.add(new AnotherTargetPredicate(2));
         filter.add(SameControllerPredicate.instance);
-        auraFilter.add(SubType.AURA.getPredicate());
+        auraFilter.add(new AttachedToPredicate(StaticFilters.FILTER_PERMANENT));
     }
 
     public SimicGuildmage(UUID ownerId, CardSetInfo setInfo) {
@@ -129,40 +130,33 @@ class MoveAuraEffect extends OneShotEffect {
          */
 
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent aura = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (aura == null) {
-                return true;
-            }
-            Permanent fromPermanent = game.getPermanent(aura.getAttachedTo());
-            if (fromPermanent == null) {
-                return false;
-            }
-            boolean passed = true;
-            Target chosenPermanentToAttachAuras = aura.getSpellAbility().getTargets().get(0).copy();
-            chosenPermanentToAttachAuras.withNotTarget(true);
-            Filter filterChoice = chosenPermanentToAttachAuras.getFilter();
-            filterChoice.add(new ControllerIdPredicate(fromPermanent.getControllerId()));
-            filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
-            chosenPermanentToAttachAuras.withTargetName("a different " + filterChoice.getMessage() + " with the same controller as the " + filterChoice.getMessage() + " the target aura is attached to");
-            if (chosenPermanentToAttachAuras.canChoose(source.getControllerId(), source, game)
-                    && controller.choose(Outcome.Neutral, chosenPermanentToAttachAuras, source, game)) {
-                Permanent permanentToAttachAura = game.getPermanent(chosenPermanentToAttachAuras.getFirstTarget());
-                if (permanentToAttachAura != null) {
-                    // Check for protection
-                    if (permanentToAttachAura.cantBeAttachedBy(aura, source, game, true)) {
-                        passed = false;
-                    }
-                    if (passed) {
-                        fromPermanent.removeAttachment(aura.getId(), source, game);
-                        permanentToAttachAura.addAttachment(aura.getId(), source, game);
-                        return true;
-                    }
-                }
-            }
-            return true;
+        Permanent aura = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || aura == null) {
+            return false;
         }
-
-        return false;
+        FilterPermanent filter = new FilterPermanent(
+                "permanent" + Optional
+                        .ofNullable(aura)
+                        .map(Permanent::getAttachedTo)
+                        .map(game::getControllerId)
+                        .map(game::getPlayer)
+                        .map(Player::getName)
+                        .map(s -> " controlled by" + s)
+                        .orElse("")
+        );
+        filter.add(new ControllerIdPredicate(game.getControllerId(aura.getAttachedTo())));
+        filter.add(Predicates.not(new PermanentIdPredicate(aura.getAttachedTo())));
+        if (!game.getBattlefield().contains(filter, source.getControllerId(), source, game, 1)) {
+            return false;
+        }
+        TargetPermanent target = new TargetPermanent(filter);
+        target.withNotTarget(true);
+        controller.choose(outcome, target, source, game);
+        return Optional
+                .ofNullable(target)
+                .map(TargetImpl::getFirstTarget)
+                .map(game::getPermanent)
+                .map(permanent -> permanent.addAttachment(aura.getId(), source, game))
+                .orElse(false);
     }
 }

@@ -5,6 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,7 +30,8 @@ public final class WildwoodGeist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                 MyTurnCondition.instance,
-                "during your turn, {this} gets +2/+2")));
+                "during your turn, {this} gets +2/+2"))
+                .addHint(MyTurnHint.instance));
     }
 
     private WildwoodGeist(final WildwoodGeist card) {

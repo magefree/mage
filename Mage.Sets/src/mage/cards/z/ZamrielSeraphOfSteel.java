@@ -5,6 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -48,7 +49,7 @@ public final class ZamrielSeraphOfSteel extends CardImpl {
                         Duration.WhileOnBattlefield, filter
                 ), MyTurnCondition.instance, "during your turn, " +
                 "equipped creatures you control have indestructible"
-        )));
+        )).addHint(MyTurnHint.instance));
     }
 
     private ZamrielSeraphOfSteel(final ZamrielSeraphOfSteel card) {

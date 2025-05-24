@@ -10,6 +10,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -57,6 +58,7 @@ public final class CrownOfDoom extends CardImpl {
                 new ManaCostsImpl<>("{2}"),
                 MyTurnCondition.instance);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

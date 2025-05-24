@@ -9,6 +9,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
 import mage.abilities.hint.common.CurrentDungeonHint;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -39,7 +40,7 @@ public final class TriumphantAdventurer extends CardImpl {
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                         FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield
                 ), MyTurnCondition.instance, "During your turn, {this} has first strike.")
-        ));
+        ).addHint(MyTurnHint.instance));
 
         // Whenever Triumphant Adventurer attacks, venture into the dungeon.
         this.addAbility(new AttacksTriggeredAbility(new VentureIntoTheDungeonEffect(), false)

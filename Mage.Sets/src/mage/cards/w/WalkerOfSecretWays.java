@@ -8,6 +8,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,6 +47,7 @@ public final class WalkerOfSecretWays extends CardImpl {
         // {1}{U}: Return target Ninja you control to its owner's hand. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl<>("{1}{U}"), MyTurnCondition.instance);
         ability.addTarget(new TargetControlledPermanent(filterCreature));
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
 
 

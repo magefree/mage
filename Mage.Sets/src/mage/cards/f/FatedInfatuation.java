@@ -4,6 +4,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,6 +25,7 @@ public final class FatedInfatuation extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenCopyTargetEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ScryEffect(2), MyTurnCondition.instance, "If it's your turn, scry 2"));
+        this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 
     private FatedInfatuation(final FatedInfatuation card) {

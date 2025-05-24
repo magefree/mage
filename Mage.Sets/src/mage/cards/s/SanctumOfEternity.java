@@ -6,6 +6,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,6 +45,7 @@ public final class SanctumOfEternity extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

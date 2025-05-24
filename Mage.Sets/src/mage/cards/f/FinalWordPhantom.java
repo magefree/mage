@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
-import mage.abilities.condition.common.OpponentsTurnCondition;
+import mage.abilities.condition.common.OnOpponentsTurnCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.constants.Duration;
@@ -42,7 +42,7 @@ public final class FinalWordPhantom extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // During each opponent's end step, you may cast spells as though they had flash.
-        Condition condition = new CompoundCondition(OpponentsTurnCondition.instance, new IsStepCondition(PhaseStep.END_TURN, false));
+        Condition condition = new CompoundCondition(OnOpponentsTurnCondition.instance, new IsStepCondition(PhaseStep.END_TURN, false));
         this.addAbility(new SimpleStaticAbility(
                 new ConditionalAsThoughEffect(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter), condition)
                         .setText("during each opponent's end step, you may cast spells as though they had flash")));

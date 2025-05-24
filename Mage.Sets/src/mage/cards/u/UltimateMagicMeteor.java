@@ -8,12 +8,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -76,6 +78,15 @@ class UltimateMagicMeteorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (!Optional
+                .ofNullable(source)
+                .map(Ability::getSourceId)
+                .map(game::getSpell)
+                .map(Spell::getFromZone)
+                .map(Zone.EXILED::match)
+                .orElse(false)) {
+            return false;
+        }
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;

@@ -6,6 +6,7 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.EndTurnEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,6 +25,7 @@ public final class SundialOfTheInfinite extends CardImpl {
         // {1}, {T}: End the turn. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new EndTurnEffect(), new GenericManaCost(1), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
+        ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
 

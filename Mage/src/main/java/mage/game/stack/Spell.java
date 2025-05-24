@@ -1205,6 +1205,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public boolean addAttachment(UUID permanentId, Ability source, Game game) {
         throw new UnsupportedOperationException("Not supported.");
     }

@@ -3,6 +3,7 @@ package mage.cards.r;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -25,7 +26,7 @@ public final class ReturnThePast extends CardImpl {
 
 
         // As long as it's your turn, each instant and sorcery card in your graveyard has flashback. Its flashback cost is equal to its mana cost.
-        this.addAbility(new SimpleStaticAbility(new ReturnThePastEffect()));
+        this.addAbility(new SimpleStaticAbility(new ReturnThePastEffect()).addHint(MyTurnHint.instance));
     }
 
     private ReturnThePast(final ReturnThePast card) {

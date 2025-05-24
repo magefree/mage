@@ -11,6 +11,7 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainsChoiceOfAbilitiesEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -53,7 +54,7 @@ public final class GideonBlackblade extends CardImpl {
                         new GideonBlackbladeToken(), CardType.PLANESWALKER, Duration.WhileOnBattlefield
                 ), MyTurnCondition.instance, "During your turn, " +
                 "{this} is a 4/4 Human Soldier creature with indestructible that's still a planeswalker."
-        )));
+        )).addHint(MyTurnHint.instance));
 
         // Prevent all damage that would be dealt to Gideon Blackblade during your turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalPreventionEffect(

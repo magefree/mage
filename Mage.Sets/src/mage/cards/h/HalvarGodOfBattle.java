@@ -2,23 +2,23 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachTargetToTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -32,6 +32,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -40,12 +41,12 @@ import java.util.UUID;
 public final class HalvarGodOfBattle extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    private static final FilterPermanent filter2 = new FilterPermanent("aura or equipment attached to a creature you control");
+    private static final FilterPermanent filter2 = new FilterPermanent("Aura or Equipment attached to a creature you control");
 
     static {
         filter.add(Predicates.or(EnchantedPredicate.instance, EquippedPredicate.instance));
         filter2.add(Predicates.or(SubType.AURA.getPredicate(), SubType.EQUIPMENT.getPredicate()));
-        filter2.add(new HalvarGodOfBattlePredicate(StaticFilters.FILTER_CONTROLLED_CREATURE));
+        filter2.add(HalvarGodOfBattlePredicate.instance);
     }
 
     public HalvarGodOfBattle(UUID ownerId, CardSetInfo setInfo) {
@@ -63,12 +64,13 @@ public final class HalvarGodOfBattle extends ModalDoubleFacedCard {
 
         // Creatures you control that are enchanted or equipped have double strike.
         this.getLeftHalfCard().addAbility(new SimpleStaticAbility(
-                new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter
+                new GainAbilityControlledEffect(
+                        DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter
                 ).setText("Creatures you control that are enchanted or equipped have double strike")
         ));
 
         // At the beginning of each combat, you may attach target Aura or Equipment attached to a creature you control to target creature you control.
-        Ability ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, new HalvarGodOfBattleEffect(), false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, new AttachTargetToTargetEffect(), true);
         ability.addTarget(new TargetPermanent(filter2));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.getLeftHalfCard().addAbility(ability);
@@ -98,49 +100,6 @@ public final class HalvarGodOfBattle extends ModalDoubleFacedCard {
     @Override
     public HalvarGodOfBattle copy() {
         return new HalvarGodOfBattle(this);
-    }
-}
-
-class HalvarGodOfBattleEffect extends OneShotEffect {
-
-    HalvarGodOfBattleEffect() {
-        super(Outcome.BoostCreature);
-        staticText = "you may attach target Aura or Equipment attached to a creature you control to target creature you control";
-    }
-
-    private HalvarGodOfBattleEffect(final HalvarGodOfBattleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HalvarGodOfBattleEffect copy() {
-        return new HalvarGodOfBattleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent attachment = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (controller != null && attachment != null && creature != null && creature.isControlledBy(controller.getId())) {
-            Permanent oldCreature = game.getPermanent(attachment.getAttachedTo());
-            if (oldCreature != null && oldCreature.isControlledBy(controller.getId()) && !oldCreature.equals(creature)) {
-                if (creature.cantBeAttachedBy(attachment, source, game, true)) {
-                    game.informPlayers(attachment.getLogName() + " was not attached to " + creature.getLogName()
-                            + " because it's not a legal target");
-                    return false;
-                }
-                if (controller.chooseUse(Outcome.BoostCreature, "Attach " + attachment.getLogName()
-                        + " to " + creature.getLogName() + "?", source, game)) {
-                    oldCreature.removeAttachment(attachment.getId(), source, game);
-                    creature.addAttachment(attachment.getId(), source, game);
-                    game.informPlayers(attachment.getLogName() + " was unattached from " + oldCreature.getLogName()
-                            + " and attached to " + creature.getLogName());
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
 
@@ -174,23 +133,17 @@ class SwordOfTheRealmsEffect extends OneShotEffect {
     }
 }
 
-class HalvarGodOfBattlePredicate implements ObjectSourcePlayerPredicate<Permanent> {
-
-    private final FilterPermanent filter;
-
-    public HalvarGodOfBattlePredicate(FilterPermanent filter) {
-        this.filter = filter;
-    }
+enum HalvarGodOfBattlePredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        UUID attachedTo = input.getObject().getAttachedTo();
-        Permanent permanent = game.getPermanent(attachedTo);
-        return permanent != null && filter.match(permanent, input.getPlayerId(), input.getSource(), game);
-    }
-
-    @Override
-    public String toString() {
-        return "attached to " + filter.getMessage();
+        return Optional
+                .ofNullable(input)
+                .map(ObjectSourcePlayer::getObject)
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanent)
+                .map(permanent -> permanent.isControlledBy(input.getPlayerId()))
+                .orElse(false);
     }
 }

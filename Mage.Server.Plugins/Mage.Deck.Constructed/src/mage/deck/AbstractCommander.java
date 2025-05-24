@@ -88,13 +88,13 @@ public abstract class AbstractCommander extends Constructed {
             boolean valid = true;
             for (Card card : deck.getCards()) {
                 if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
                     valid = false;
                 }
             }
             for (Card card : deck.getSideboard()) {
                 if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
                     valid = false;
                 }
             }

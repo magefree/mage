@@ -84,7 +84,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             sb.append((char) (this.view.isCanAttack() ? 1 : 0));
             sb.append((char) (this.view.isCanBlock() ? 1 : 0));
             sb.append((char) (this.view.isFaceDown() ? 1 : 0));
-            sb.append((char) this.view.getFrameStyle().ordinal());
+            sb.append((char) (this.view.getFrameStyle() != null ? this.view.getFrameStyle().ordinal() : -1));
             if (this.view instanceof PermanentView) {
                 sb.append((char) (((PermanentView) this.view).hasSummoningSickness() ? 1 : 0));
                 sb.append((char) (((PermanentView) this.view).getDamage()));
