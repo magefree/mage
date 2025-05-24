@@ -1,6 +1,7 @@
 package mage.client.components;
 
 import mage.MageObject;
+import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.util.GUISizeHelper;
 
@@ -17,7 +18,7 @@ import java.util.stream.Stream;
  * - [x] game changers
  * - [ ] infinite combos
  * - [ ] mass land destruction
- * - [ ] extra turns
+ * - [x] extra turns
  * - [ ] tutors
  *
  * @author JayDi85
@@ -27,7 +28,7 @@ public class BracketLegalityLabel extends LegalityLabel {
     private static final String GROUP_GAME_CHANGES = "Game Changers";
     private static final String GROUP_INFINITE_COMBOS = "Infinite Combos (unsupported)";
     private static final String GROUP_MASS_LAND_DESTRUCTION = "Mass Land Destruction (unsupported)";
-    private static final String GROUP_EXTRA_TURN = "Extra Turns (unsupported)";
+    private static final String GROUP_EXTRA_TURN = "Extra Turns";
     private static final String GROUP_TUTORS = "Tutors (unsupported)";
 
     private final BracketLevel level;
@@ -125,7 +126,14 @@ public class BracketLegalityLabel extends LegalityLabel {
 
         // show all found cards in any use cases
         Color showColor = this.badCards.isEmpty() ? COLOR_LEGAL : COLOR_NOT_LEGAL;
+
         List<String> showInfo = new ArrayList<>();
+        if (this.badCards.isEmpty()) {
+            showInfo.add("<p>Deck is <span style='color:green;font-weight:bold;'>GOOD</span> for " + this.level + "</p>");
+        } else {
+            showInfo.add("<p>Deck is <span style='color:#BF544A;font-weight:bold;'>BAD</span> for " + this.level + "</p>");
+            showInfo.add("<p>(click here to select all bad cards)</p>");
+        }
 
         Map<String, List<String>> groups = new LinkedHashMap<>();
         groups.put(GROUP_GAME_CHANGES, this.foundGameChangers);
@@ -134,6 +142,7 @@ public class BracketLegalityLabel extends LegalityLabel {
         groups.put(GROUP_EXTRA_TURN, this.foundExtraTurn);
         groups.put(GROUP_TUTORS, this.foundTutors);
         groups.forEach((group, cards) -> {
+            showInfo.add("<br>");
             showInfo.add("<br>");
             showInfo.add("<u><span style='font-weight:bold;'>" + group + ": " + cards.size() + "</span></u>");
             if (!cards.isEmpty()) {
@@ -245,8 +254,16 @@ public class BracketLegalityLabel extends LegalityLabel {
     }
 
     private void collectExtraTurn(Deck deck) {
-        // TODO: implement
         this.foundExtraTurn.clear();
+        Stream.concat(deck.getCards().stream(), deck.getSideboard().stream())
+                .filter(card -> card.getRules().stream()
+                        .map(s -> s.toLowerCase(Locale.ENGLISH))
+                        .anyMatch(s -> s.contains("extra turn"))
+                )
+                .map(Card::getName)
+                .distinct()
+                .sorted()
+                .forEach(this.foundExtraTurn::add);
     }
 
     private void collectTutors(Deck deck) {
