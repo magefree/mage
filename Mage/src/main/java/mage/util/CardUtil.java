@@ -1701,6 +1701,8 @@ public final class CardUtil {
             player.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), manaCost, additionalCostsNormalCard, MageIdentifier.Default);
         }
 
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getMainCard().getId(), Boolean.TRUE);
+
         // cast it
         boolean result = player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
                 game, noMana, new ApprovingObject(source, game));
