@@ -325,7 +325,7 @@ public class TableController {
         // user - restrict by deck power level and cards colors (see edh power level for details)
         int edhPowerLevel = table.getMatch().getOptions().getEdhPowerLevel();
         if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase(Locale.ENGLISH).equals("commander")) {
-            int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
+            int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck, new ArrayList<>(), new ArrayList<>());
             if (deckEdhPowerLevel % 100 > edhPowerLevel) {
                 String message = new StringBuilder("Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. ")
                         .append("\nThe table requirement has a maximum power level of ").append(edhPowerLevel).append(" whilst your deck has a calculated power level of ")

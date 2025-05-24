@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- * @author TheElk801
+ * @author TheElk801, JayDi85
  */
 public abstract class AbstractCommander extends Constructed {
 
@@ -258,14 +258,17 @@ public abstract class AbstractCommander extends Constructed {
     }
 
     @Override
-    public int getEdhPowerLevel(Deck deck) {
-        if (deck == null) {
-            return 0;
-        }
-
+    public int getEdhPowerLevel(Deck deck, List<String> foundPowerCards, List<String> foundInfo) {
+        // calculate power level and find all related cards with it to show in hints (see deck validation in deck editor)
         int edhPowerLevel = 0;
         int commanderColors = 0;
         int numberInfinitePieces = 0;
+        foundPowerCards.clear();
+        foundInfo.clear();
+
+        if (deck == null) {
+            return 0;
+        }
 
         for (Card card : deck.getCards()) {
 
@@ -330,6 +333,7 @@ public abstract class AbstractCommander extends Constructed {
             boolean yourOpponentsControl = false;
             boolean whenYouCast = false;
 
+            List<String> cardStates = new ArrayList<>();
             for (String str : card.getRules()) {
                 String s = str.toLowerCase(Locale.ENGLISH);
                 annihilator |= s.contains("annihilator");
@@ -406,178 +410,236 @@ public abstract class AbstractCommander extends Constructed {
 
             if (extraTurns) {
                 thisMaxPower = Math.max(thisMaxPower, 7);
+                cardStates.add(String.format("extraTurns %d", 7));
             }
             if (buyback) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
+                cardStates.add(String.format("buyback %d", 6));
             }
             if (tutor) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
+                cardStates.add(String.format("tutor %d", 6));
             }
             if (annihilator) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("annihilator %d", 5));
             }
             if (cantUntap) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("cantUntap %d", 5));
             }
             if (costLessEach) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("costLessEach %d", 5));
             }
             if (infect) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("infect %d", 5));
             }
             if (overload) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("overload %d", 5));
             }
             if (twiceAs) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("twiceAs %d", 5));
             }
             if (cascade) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("cascade %d", 4));
             }
             if (doesntUntap) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("doesntUntap %d", 4));
             }
             if (each) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("each %d", 4));
             }
             if (exileAll) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("exileAll %d", 4));
             }
             if (flash) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("flash %d", 4));
             }
             if (flashback) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("flashback %d", 4));
             }
             if (flicker) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("flicker %d", 4));
             }
             if (gainControl) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("gainControl %d", 4));
             }
             if (lifeTotalBecomes) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("lifeTotalBecomes %d", 4));
             }
             if (mayCastForFree) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("mayCastForFree %d", 4));
             }
             if (preventDamage) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("preventDamage %d", 4));
             }
             if (proliferate) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("proliferate %d", 4));
             }
             if (protection) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("protection %d", 4));
             }
             if (putUnderYourControl) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("putUnderYourControl %d", 4));
             }
             if (returnFromYourGY) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("returnFromYourGY %d", 4));
             }
             if (sacrifice) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("sacrifice %d", 2));
             }
             if (skip) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("skip %d", 4));
             }
             if (storm) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("storm %d", 4));
             }
             if (unblockable) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("unblockable %d", 4));
             }
             if (whenCounterThatSpell) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("whenCounterThatSpell %d", 4));
             }
             if (wheneverEnters) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("wheneverEnters %d", 4));
             }
             if (xCost) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("xCost %d", 4));
             }
             if (youControlTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("youControlTarget %d", 4));
             }
             if (yourOpponentsControl) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("yourOpponentsControl %d", 4));
             }
             if (whenYouCast) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("whenYouCast %d", 4));
             }
             if (anyNumberOfTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("anyNumberOfTarget %d", 4));
             }
             if (createToken) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("createToken %d", 3));
             }
             if (destroyAll) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("destroyAll %d", 3));
             }
             if (dredge) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("dredge %d", 3));
             }
             if (hexproof) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("hexproof %d", 3));
             }
             if (shroud) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("shroud %d", 3));
             }
             if (undying) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("undying %d", 3));
             }
             if (persist) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("persist %d", 3));
             }
             if (cantBe) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("cantBe %d", 2));
             }
             if (evoke) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("evoke %d", 2));
             }
             if (exile) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("exile %d", 2));
             }
             if (menace) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("menace %d", 2));
             }
             if (miracle) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("miracle %d", 2));
             }
             if (sliver) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("sliver %d", 2));
             }
             if (untapTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("untapTarget %d", 2));
             }
             if (copy) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("copy %d", 1));
             }
             if (counter) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("counter %d", 1));
             }
             if (destroy) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("destroy %d", 1));
             }
             if (drawCards) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("drawCards %d", 1));
             }
             if (exalted) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("exalted %d", 1));
             }
             if (retrace) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("retrace %d", 1));
             }
             if (trample) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("trample %d", 1));
             }
             if (tutorBasic) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("tutorBasic %d", 1));
             }
 
             if (card.isPlaneswalker()) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
+                cardStates.add(String.format("isPlaneswalker %d", 6));
             }
 
             String cn = card.getName().toLowerCase(Locale.ENGLISH);
@@ -845,6 +907,7 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("zealous conscripts")
                     || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 12);
+                cardStates.add(String.format("saltiest card %d", 12));
             }
 
             // Parts of infinite combos
@@ -906,6 +969,7 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("worthy cause") || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")) {
                 thisMaxPower = Math.max(thisMaxPower, 15);
+                cardStates.add(String.format("infinite combo %d", 15));
                 numberInfinitePieces++;
             }
 
@@ -951,11 +1015,26 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("winota, joiner of forces")
                     || cn.equals("yuriko, the tiger's shadow")) {
                 thisMaxPower = Math.max(thisMaxPower, 20);
+                cardStates.add(String.format("game changer %d", 20));
             }
-        }
+
+            // keep card's level
+            if (!cardStates.isEmpty()) {
+                foundInfo.add(String.format("+%d from <b>%s</b> (%s)",
+                        thisMaxPower,
+                        card.getName(),
+                        String.join(", ", cardStates)
+                ));
+                foundPowerCards.add(card.getName());
+            }
+
+            edhPowerLevel += thisMaxPower;
+
+        } // cards list
 
         ObjectColor color = null;
         for (Card commander : deck.getSideboard()) {
+            List<String> commanderStates = new ArrayList<>();
             int thisMaxPower = 0;
             String cn = commander.getName().toLowerCase(Locale.ENGLISH);
             if (color == null) {
@@ -1024,6 +1103,7 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("vorinclex, voice of hunger")
                     || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 25);
+                commanderStates.add(String.format("not fun commander (+%d)", 25));
             }
 
             // Saltiest commanders
@@ -1060,21 +1140,40 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("xanathar, guild kingpin")
                     || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 20);
+                commanderStates.add(String.format("saltiest commander (+%d)", 20));
             }
+
+            // keep commander's level
+            if (!commanderStates.isEmpty()) {
+                foundInfo.add(String.format("+%d from <b>%s</b> (%s)",
+                        thisMaxPower,
+                        commander.getName(),
+                        String.join(", ", commanderStates)
+                ));
+                foundPowerCards.add(commander.getName());
+            }
+
             edhPowerLevel += thisMaxPower;
         }
 
-        edhPowerLevel += numberInfinitePieces * 18;
-        edhPowerLevel = Math.round(edhPowerLevel / 10);
-        if (edhPowerLevel >= 100) {
-            edhPowerLevel = 99;
+        if (numberInfinitePieces > 0) {
+            edhPowerLevel += numberInfinitePieces * 18;
+            foundInfo.add(String.format("+%d from <b>%d infinite pieces</b>", numberInfinitePieces * 18, numberInfinitePieces));
         }
-        if (color != null) {
-            edhPowerLevel += (color.isWhite() ? 10000000 : 0);
-            edhPowerLevel += (color.isBlue() ? 1000000 : 0);
-            edhPowerLevel += (color.isBlack() ? 100000 : 0);
-            edhPowerLevel += (color.isRed() ? 10000 : 0);
-            edhPowerLevel += (color.isGreen() ? 1000 : 0);
+
+        // block colored decks by table's edh power level were disabled
+        // it's better to show real edh power level and allow for direct values control
+        if (false) {
+            if (edhPowerLevel >= 100) {
+                edhPowerLevel = 99;
+            }
+            if (color != null) {
+                edhPowerLevel += (color.isWhite() ? 10000000 : 0);
+                edhPowerLevel += (color.isBlue() ? 1000000 : 0);
+                edhPowerLevel += (color.isBlack() ? 100000 : 0);
+                edhPowerLevel += (color.isRed() ? 10000 : 0);
+                edhPowerLevel += (color.isGreen() ? 1000 : 0);
+            }
         }
         return edhPowerLevel;
     }
