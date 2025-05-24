@@ -389,6 +389,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     private static boolean startsWithVerb(String ruleLow) {
         return ruleLow.startsWith("attach")
+                || ruleLow.startsWith("cast")
                 || ruleLow.startsWith("change")
                 || ruleLow.startsWith("counter")
                 || ruleLow.startsWith("create")

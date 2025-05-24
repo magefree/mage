@@ -1,17 +1,17 @@
 package mage.cards.e;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.MayCastTargetCardEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.card.CastFromZonePredicate;
@@ -19,7 +19,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.LifeLostBatchEvent;
 import mage.game.events.LifeLostEvent;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.List;
@@ -65,7 +67,7 @@ public final class EmetSelchOfTheThirdSeat extends CardImpl {
 class EmetSelchOfTheThirdSeatAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<LifeLostEvent> {
 
     EmetSelchOfTheThirdSeatAbility() {
-        super(Zone.BATTLEFIELD, new MayCastTargetCardEffect(true));
+        super(Zone.BATTLEFIELD, new EmetSelchOfTheThirdSeatEffect());
         this.setTriggerPhrase("Whenever one or more opponents lose life, ");
         this.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.setDoOnlyOnceEachTurn(true);
@@ -98,5 +100,39 @@ class EmetSelchOfTheThirdSeatAbility extends TriggeredAbilityImpl implements Bat
     @Override
     public EmetSelchOfTheThirdSeatAbility copy() {
         return new EmetSelchOfTheThirdSeatAbility(this);
+    }
+}
+
+class EmetSelchOfTheThirdSeatEffect extends OneShotEffect {
+
+    EmetSelchOfTheThirdSeatEffect() {
+        super(Outcome.Benefit);
+        staticText = "cast target instant or sorcery card from your graveyard. " +
+                "If that spell would be put into your graveyard, exile it instead";
+    }
+
+    private EmetSelchOfTheThirdSeatEffect(final EmetSelchOfTheThirdSeatEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EmetSelchOfTheThirdSeatEffect copy() {
+        return new EmetSelchOfTheThirdSeatEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (player == null || card == null || !CardUtil.castSingle(player, source, game, card)) {
+            // if the spell isn't cast then the ability can be used again in the same turn
+            game.getState().removeValue(CardUtil.getCardZoneString(
+                    "lastTurnUsed" + source.getOriginalId(), source.getSourceId(), game
+            ));
+            return false;
+        }
+        game.addEffect(new ThatSpellGraveyardExileReplacementEffect(true)
+                .setTargetPointer(new FixedTarget(card, game)), source);
+        return true;
     }
 }
