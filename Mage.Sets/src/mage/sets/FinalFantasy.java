@@ -501,6 +501,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 404, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 517, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 549, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zack Fair", 45, Rarity.UNCOMMON, mage.cards.z.ZackFair.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zack Fair", 580, Rarity.UNCOMMON, mage.cards.z.ZackFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zanarkand, Ancient Metropolis", 293, Rarity.RARE, mage.cards.z.ZanarkandAncientMetropolis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zanarkand, Ancient Metropolis", 314, Rarity.RARE, mage.cards.z.ZanarkandAncientMetropolis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zell Dincht", 170, Rarity.RARE, mage.cards.z.ZellDincht.class, NON_FULL_USE_VARIOUS));
