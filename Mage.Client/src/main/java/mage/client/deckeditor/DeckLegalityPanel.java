@@ -5,6 +5,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
+import mage.client.components.BracketLegalityLabel;
 import mage.client.components.EdhPowerLevelLegalityLabel;
 import mage.client.components.LegalityLabel;
 import mage.deck.*;
@@ -105,6 +106,10 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
 
         // extra buttons like score
         this.add(new EdhPowerLevelLegalityLabel());
+        // only 3 buttons allowed for one line
+        this.add(new BracketLegalityLabel(BracketLegalityLabel.BracketLevel.BRACKET_1));
+        this.add(new BracketLegalityLabel(BracketLegalityLabel.BracketLevel.BRACKET_2_3));
+        this.add(new BracketLegalityLabel(BracketLegalityLabel.BracketLevel.BRACKET_4_5));
 
         addHidePanelButton();
 
