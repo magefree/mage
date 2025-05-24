@@ -54,7 +54,7 @@ public class ContinuousEffects implements Serializable {
     private final ApplyStatusEffect applyStatus;
     private final AuraReplacementEffect auraReplacementEffect;
 
-    private final Map<String, ContinuousEffectsList<ContinuousEffect>> lastEffectsListOnLayer = new HashMap<>(); // helps to find out new effect timestamps on layers
+    private final List<ContinuousEffect> lastEffectList = new ArrayList<>();
 
     public ContinuousEffects() {
         applyStatus = new ApplyStatusEffect();
@@ -78,9 +78,7 @@ public class ContinuousEffects implements Serializable {
 
         costModificationEffects = effect.costModificationEffects.copy();
         spliceCardEffects = effect.spliceCardEffects.copy();
-        for (Map.Entry<String, ContinuousEffectsList<ContinuousEffect>> entry : effect.lastEffectsListOnLayer.entrySet()) {
-            lastEffectsListOnLayer.put(entry.getKey(), entry.getValue().copy());
-        }
+        lastEffectList.addAll(effect.lastEffectList);
         collectAllEffects();
         order = effect.order;
     }
@@ -170,7 +168,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     public synchronized List<ContinuousEffect> getLayeredEffects(Game game) {
-        return getLayeredEffects(game, "main");
+        return getLayeredEffects(game, false);
     }
 
     /**
@@ -178,11 +176,11 @@ public class ContinuousEffects implements Serializable {
      * generates from new/old lists on same layer)
      *
      * @param game
-     * @param timestampGroupName workaround to fix broken timestamps on effect's
-     *                           add/remove between different layers
+     * @param clearPrevious clears the {@link #lastEffectList} before adding effects. This is used at the start
+     *                      of applying to determine actually active effects.
      * @return effects list ordered by timestamp
      */
-    public synchronized List<ContinuousEffect> getLayeredEffects(Game game, String timestampGroupName) {
+    public synchronized List<ContinuousEffect> getLayeredEffects(Game game, boolean clearPrevious) {
         List<ContinuousEffect> layerEffects = new ArrayList<>();
         for (ContinuousEffect effect : layeredEffects) {
             switch (effect.getDuration()) {
@@ -208,7 +206,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
-        updateTimestamps(timestampGroupName, layerEffects);
+        updateTimestamps(clearPrevious, layerEffects);
         layerEffects.sort(Comparator.comparingLong(ContinuousEffect::getOrder));
         /* debug effects apply order:
         if (game.getStep() != null) System.out.println("layr - " + game.getTurnNum() + "." + game.getTurnStepType() + ": layers " + layerEffects.size()
@@ -232,19 +230,18 @@ public class ContinuousEffects implements Serializable {
      *
      * @param layerEffects
      */
-    private synchronized void updateTimestamps(String timestampGroupName, List<ContinuousEffect> layerEffects) {
-        if (!lastEffectsListOnLayer.containsKey(timestampGroupName)) {
-            lastEffectsListOnLayer.put(timestampGroupName, new ContinuousEffectsList<>());
-        }
-        ContinuousEffectsList<ContinuousEffect> prevs = lastEffectsListOnLayer.get(timestampGroupName);
+    private synchronized void updateTimestamps(boolean clearEffects, List<ContinuousEffect> layerEffects) {
         for (ContinuousEffect continuousEffect : layerEffects) {
             // check if it's new, then set order
-            if (!prevs.contains(continuousEffect)) {
+            if (!lastEffectList.contains(continuousEffect)) {
                 setOrder(continuousEffect);
+                lastEffectList.add(continuousEffect);
             }
         }
-        prevs.clear();
-        prevs.addAll(layerEffects);
+        if (clearEffects) {
+            lastEffectList.clear();
+            lastEffectList.addAll(layerEffects);
+        }
     }
 
     public void setOrder(ContinuousEffect effect) {
@@ -966,7 +963,7 @@ public class ContinuousEffects implements Serializable {
     //20091005 - 613
     public synchronized void apply(Game game) {
         removeInactiveEffects(game);
-        List<ContinuousEffect> activeLayerEffects = getLayeredEffects(game); // main call
+        List<ContinuousEffect> activeLayerEffects = getLayeredEffects(game, true); // main call
 
         List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
         for (ContinuousEffect effect : layer) {
@@ -983,7 +980,7 @@ public class ContinuousEffects implements Serializable {
         }
         //Reload layerEffect if copy effects were applied
         if (!layer.isEmpty()) {
-            activeLayerEffects = getLayeredEffects(game, "layer_1");
+            activeLayerEffects = getLayeredEffects(game);
         }
 
         layer = filterLayeredEffects(activeLayerEffects, Layer.ControlChangingEffects_2);
@@ -1005,19 +1002,19 @@ public class ContinuousEffects implements Serializable {
             game.getBattlefield().resetPermanentsControl();
         }
 
-        applyLayer(activeLayerEffects, Layer.TextChangingEffects_3, game, "layer_3");
-        activeLayerEffects = getLayeredEffects(game, "layer_3");
-        applyLayer(activeLayerEffects, Layer.TypeChangingEffects_4, game, "layer_4");
-        activeLayerEffects = getLayeredEffects(game, "layer_4");
-        applyLayer(activeLayerEffects, Layer.ColorChangingEffects_5, game, "layer_5");
-        activeLayerEffects = getLayeredEffects(game, "layer_5");
+        applyLayer(activeLayerEffects, Layer.TextChangingEffects_3, game);
+        activeLayerEffects = getLayeredEffects(game);
+        applyLayer(activeLayerEffects, Layer.TypeChangingEffects_4, game);
+        activeLayerEffects = getLayeredEffects(game);
+        applyLayer(activeLayerEffects, Layer.ColorChangingEffects_5, game);
+        activeLayerEffects = getLayeredEffects(game);
 
         Map<ContinuousEffect, List<Ability>> appliedEffectAbilities = new HashMap<>();
         boolean done = false;
         Map<ContinuousEffect, Set<UUID>> waitingEffects = new LinkedHashMap<>();
         Set<UUID> appliedEffects = new HashSet<>();
         applyStatus.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, null, game);
-        activeLayerEffects = getLayeredEffects(game, "layer_6");
+        activeLayerEffects = getLayeredEffects(game);
 
         while (!done) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
             done = true;
@@ -1072,7 +1069,7 @@ public class ContinuousEffects implements Serializable {
                     effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability, game);
                     done = false;
                     // list must be updated after each applied effect (eg. if "Turn to Frog" removes abilities)
-                    activeLayerEffects = getLayeredEffects(game, "apply");
+                    activeLayerEffects = getLayeredEffects(game);
                 }
                 appliedEffects.add(effect.getId());
 
@@ -1099,7 +1096,7 @@ public class ContinuousEffects implements Serializable {
                         entry.getKey().apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability, game);
                         done = false;
                         // list must be updated after each applied effect (eg. if "Turn to Frog" removes abilities)
-                        activeLayerEffects = getLayeredEffects(game, "apply");
+                        activeLayerEffects = getLayeredEffects(game);
                     }
                     appliedEffects.add(entry.getKey().getId());
                     iterator.remove();
@@ -1158,7 +1155,7 @@ public class ContinuousEffects implements Serializable {
         return object != null && object.hasAbility(ability, game);
     }
 
-    private void applyLayer(List<ContinuousEffect> activeLayerEffects, Layer currentLayer, Game game, String timestampGroupName) {
+    private void applyLayer(List<ContinuousEffect> activeLayerEffects, Layer currentLayer, Game game) {
         List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, currentLayer);
         // layer is a list of all effects at the current layer
         if (!layer.isEmpty()) {
@@ -1181,7 +1178,7 @@ public class ContinuousEffects implements Serializable {
                 applyContinuousEffect(effect, currentLayer, game);
                 // add it to the applied effects list
                 appliedEffects.add(effect.getId());
-                layer = getLayeredEffects(game, timestampGroupName);
+                layer = getLayeredEffects(game);
 
                 // check waiting effects to see if it has anything to check
                 if (!waitingEffects.isEmpty()) {
@@ -1192,7 +1189,7 @@ public class ContinuousEffects implements Serializable {
                             applyContinuousEffect(entry.getKey(), currentLayer, game);
                             // add it to the applied effects list
                             appliedEffects.add(entry.getKey().getId());
-                            layer = getLayeredEffects(game, timestampGroupName);
+                            layer = getLayeredEffects(game);
                         }
                     }
                 }
@@ -1203,7 +1200,7 @@ public class ContinuousEffects implements Serializable {
                             applyContinuousEffect(entry.getKey(), currentLayer, game);
                             // add it to the applied effects list
                             appliedEffects.add(entry.getKey().getId());
-                            layer = getLayeredEffects(game, timestampGroupName);
+                            layer = getLayeredEffects(game);
                         }
                     }
                 }
