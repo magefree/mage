@@ -59,7 +59,7 @@ public class EdhPowerLevelLegalityLabel extends LegalityLabel {
         // use 60% font for better and compatible list
         int infoFontSize = Math.round(GUISizeHelper.cardTooltipFont.getSize() * 0.6f);
         int maxLimit = 25;
-        String extraInfo = this.foundPowerCards.size() <= maxLimit ? "" : String.format("<li style=\"margin-bottom: 2px;\">and %d more cards</li>", maxLimit - this.foundPowerCards.size());
+        String extraInfo = this.foundPowerCards.size() <= maxLimit ? "" : String.format("<li style=\"margin-bottom: 2px;\">and %d more cards</li>", this.foundPowerCards.size() - maxLimit);
         return foundInfo.stream()
                 .limit(maxLimit)
                 .reduce("<html><body>"

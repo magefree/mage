@@ -260,6 +260,7 @@ public abstract class AbstractCommander extends Constructed {
     @Override
     public int getEdhPowerLevel(Deck deck, List<String> foundPowerCards, List<String> foundInfo) {
         // calculate power level and find all related cards with it to show in hints (see deck validation in deck editor)
+        // example: https://edhpowerlevel.com
         int edhPowerLevel = 0;
         int commanderColors = 0;
         int numberInfinitePieces = 0;
