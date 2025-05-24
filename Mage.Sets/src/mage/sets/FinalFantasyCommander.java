@@ -127,6 +127,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Duskshell Crawler", 301, Rarity.COMMON, mage.cards.d.DuskshellCrawler.class));
         cards.add(new SetCardInfo("Elena, Turk Recruit", 133, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elena, Turk Recruit", 18, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emet-Selch of the Third Seat", 170, Rarity.RARE, mage.cards.e.EmetSelchOfTheThirdSeat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emet-Selch of the Third Seat", 81, Rarity.RARE, mage.cards.e.EmetSelchOfTheThirdSeat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Endless Detour", 324, Rarity.RARE, mage.cards.e.EndlessDetour.class));
         cards.add(new SetCardInfo("Espers to Magicite", 114, Rarity.RARE, mage.cards.e.EspersToMagicite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Espers to Magicite", 43, Rarity.RARE, mage.cards.e.EspersToMagicite.class, NON_FULL_USE_VARIOUS));
