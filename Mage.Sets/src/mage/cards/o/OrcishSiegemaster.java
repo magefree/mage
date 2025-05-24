@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 
@@ -60,10 +59,10 @@ public final class OrcishSiegemaster extends CardImpl {
         // Whenever Orcish Siegemaster attacks, it gets +X/+0 until end of turn, where X is the greatest power among creatures you control.
         this.addAbility(new AttacksTriggeredAbility(
                 new BoostSourceEffect(
-                        GreatestPowerAmongControlledCreaturesValue.instance,
+                        GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures,
                         StaticValue.get(0), Duration.EndOfTurn, "it"
                 )
-        ).addHint(GreatestPowerAmongControlledCreaturesValue.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
     }
 
     private OrcishSiegemaster(final OrcishSiegemaster card) {

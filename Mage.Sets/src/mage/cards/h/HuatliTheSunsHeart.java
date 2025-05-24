@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.GreatestToughnessAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessControlledEffect;
 import mage.cards.CardImpl;
@@ -30,9 +30,9 @@ public final class HuatliTheSunsHeart extends CardImpl {
 
         // -3: You gain life equal to the greatest toughness among creatures you control.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(
-                GreatestToughnessAmongControlledCreaturesValue.ALL,
+                GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures,
                 "You gain life equal to the greatest toughness among creatures you control"
-        ), -3).addHint(GreatestToughnessAmongControlledCreaturesValue.ALL.getHint()));
+        ), -3).addHint(GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures.getHint()));
     }
 
     private HuatliTheSunsHeart(final HuatliTheSunsHeart card) {

@@ -1,26 +1,25 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayEnergyCost;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.BlocksIfAbleTargetEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class PeemaAetherSeer extends CardImpl {
@@ -34,9 +33,9 @@ public final class PeemaAetherSeer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Peema Aether-Seer enters the battlefield, you get an amount of {E} equal to the greatest power among creatures you control.
-        Effect effect = new GetEnergyCountersControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance);
+        Effect effect = new GetEnergyCountersControllerEffect(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures);
         effect.setText("you get an amount of {E} equal to the greatest power among creatures you control");
-        this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(GreatestPowerAmongControlledCreaturesValue.getHint()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
 
         // Pay {E}{E}{E}: Target creature blocks this turn if able.
         Ability ability = new SimpleActivatedAbility(new BlocksIfAbleTargetEffect(Duration.EndOfTurn), new PayEnergyCost(3));

@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.GreatestToughnessAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,9 +26,9 @@ public final class FlourishingHunter extends CardImpl {
 
         // When Flourishing Hunter enters the battlefield, you gain life equal to the greatest toughness among other creatures you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GainLifeEffect(GreatestToughnessAmongControlledCreaturesValue.OTHER)
+                new GainLifeEffect(GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures)
                         .setText("you gain life equal to the greatest toughness among other creatures you control")
-        ).addHint(GreatestToughnessAmongControlledCreaturesValue.OTHER.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures.getHint()));
     }
 
     private FlourishingHunter(final FlourishingHunter card) {

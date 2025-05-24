@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.PlotAbility;
@@ -24,7 +24,7 @@ public final class TumbleweedRising extends CardImpl {
 
         // Create an X/X green Elemental creature token, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new TumbleweedRisingEffect());
-        this.getSpellAbility().addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
 
         // Plot {2}{G}
         this.addAbility(new PlotAbility("{2}{G}"));
@@ -60,7 +60,7 @@ class TumbleweedRisingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xvalue = GreatestPowerAmongControlledCreaturesValue.instance.calculate(game, source, this);
+        int xvalue = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, source, this);
         return new CreateTokenEffect(new ElementalXXGreenToken(xvalue)).apply(game, source);
     }
 }

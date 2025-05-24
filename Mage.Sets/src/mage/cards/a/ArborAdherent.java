@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.GreatestToughnessAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -31,10 +31,10 @@ public final class ArborAdherent extends CardImpl {
 
         // {T}: Add X mana of any one color, where X is the greatest toughness among other creatures you control.
         this.addAbility(new DynamicManaAbility(
-                Mana.AnyMana(1), GreatestToughnessAmongControlledCreaturesValue.OTHER,
+                Mana.AnyMana(1), GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures,
                 new TapSourceCost(), "add X mana of any one color, where X is the " +
                 "greatest toughness among other creatures you control", true
-        ).addHint(GreatestToughnessAmongControlledCreaturesValue.OTHER.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures.getHint()));
     }
 
     private ArborAdherent(final ArborAdherent card) {

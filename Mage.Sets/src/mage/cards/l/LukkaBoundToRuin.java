@@ -6,7 +6,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
@@ -56,7 +56,7 @@ public class LukkaBoundToRuin extends CardImpl {
                 "where X is the greatest power among creatures you control as you activate this ability.");
         ability = new LoyaltyAbility(damageMultiEffect, -4);
         ability.setTargetAdjuster(LukkaBoundToRuinAdjuster.instance);
-        ability.addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
+        ability.addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
         this.addAbility(ability);
     }
 
@@ -133,7 +133,7 @@ enum LukkaBoundToRuinAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         // Maximum targets is equal to the damage - as each target need to be assigned at least 1 damage
         ability.getTargets().clear();
-        int xValue = GreatestPowerAmongControlledCreaturesValue.instance.calculate(game, ability, null);
+        int xValue = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, ability, null);
         ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(xValue, 0, xValue));
     }
 }

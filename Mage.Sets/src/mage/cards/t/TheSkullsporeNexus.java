@@ -10,6 +10,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -45,7 +46,8 @@ public final class TheSkullsporeNexus extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheSkullsporeNexusReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheSkullsporeNexusReductionEffect())
+                .addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
 
         // Whenever one or more nontoken creatures you control die, create a green Fungus Dinosaur creature token with base power and toughness each equal to the total power of those creatures.
         this.addAbility(new TheSkullsporeNexusTrigger());
@@ -94,6 +96,9 @@ class TheSkullsporeNexusReductionEffect extends CostModificationEffectImpl {
         CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;
     }
+
+
+    // int reductionAmount = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, abilityToModify, this);
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
