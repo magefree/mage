@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  * - [ ] infinite combos
  * - [ ] mass land destruction
  * - [x] extra turns
- * - [ ] tutors
+ * - [x] tutors
  *
  * @author JayDi85
  */
@@ -29,7 +29,7 @@ public class BracketLegalityLabel extends LegalityLabel {
     private static final String GROUP_INFINITE_COMBOS = "Infinite Combos (unsupported)";
     private static final String GROUP_MASS_LAND_DESTRUCTION = "Mass Land Destruction (unsupported)";
     private static final String GROUP_EXTRA_TURN = "Extra Turns";
-    private static final String GROUP_TUTORS = "Tutors (unsupported)";
+    private static final String GROUP_TUTORS = "Tutors";
 
     private final BracketLevel level;
 
@@ -110,7 +110,7 @@ public class BracketLegalityLabel extends LegalityLabel {
                 // this.badCards.addAll(this.foundTutors); // allow any amount
                 break;
             case BRACKET_4_5:
-                // any allow
+                // allow any cards
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported level: " + this.level);
@@ -144,7 +144,7 @@ public class BracketLegalityLabel extends LegalityLabel {
         groups.forEach((group, cards) -> {
             showInfo.add("<br>");
             showInfo.add("<br>");
-            showInfo.add("<u><span style='font-weight:bold;'>" + group + ": " + cards.size() + "</span></u>");
+            showInfo.add("<span style='font-weight:bold;'>" + group + ": " + cards.size() + "</span>");
             if (!cards.isEmpty()) {
                 showInfo.add("<ul style=\"font-size: " + infoFontSize + "px; width: " + TOOLTIP_TABLE_WIDTH + "px; padding-left: 10px; margin: 0;\">");
                 cards.forEach(s -> showInfo.add(String.format("<li style=\"margin-bottom: 2px;\">%s</li>", s)));
@@ -238,7 +238,6 @@ public class BracketLegalityLabel extends LegalityLabel {
         Stream.concat(deck.getCards().stream(), deck.getSideboard().stream())
                 .map(MageObject::getName)
                 .filter(fullGameChanges::contains)
-                .distinct()
                 .sorted()
                 .forEach(this.foundGameChangers::add);
     }
@@ -261,13 +260,31 @@ public class BracketLegalityLabel extends LegalityLabel {
                         .anyMatch(s -> s.contains("extra turn"))
                 )
                 .map(Card::getName)
-                .distinct()
                 .sorted()
                 .forEach(this.foundExtraTurn::add);
     }
 
     private void collectTutors(Deck deck) {
-        // TODO: implement
+        // edh power level uses search for land and non-land card, but bracket need only non-land cards searching
         this.foundTutors.clear();
+        Stream.concat(deck.getCards().stream(), deck.getSideboard().stream())
+                .filter(card -> card.getRules().stream()
+                        .map(s -> s.toLowerCase(Locale.ENGLISH))
+                        .anyMatch(s -> s.contains("search your library") && !isTextContainsLandCard(s))
+                )
+                .map(Card::getName)
+                .sorted()
+                .forEach(this.foundTutors::add);
+    }
+
+    private boolean isTextContainsLandCard(String lowerText) {
+        // TODO: share code with AbstractCommander and edh power level
+        // TODO: add tests
+        return lowerText.contains("basic ")
+                || lowerText.contains("plains card")
+                || lowerText.contains("island card")
+                || lowerText.contains("swamp card")
+                || lowerText.contains("mountain card")
+                || lowerText.contains("forest card");
     }
 }
