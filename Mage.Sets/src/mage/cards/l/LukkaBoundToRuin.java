@@ -56,7 +56,7 @@ public class LukkaBoundToRuin extends CardImpl {
                 "where X is the greatest power among creatures you control as you activate this ability.");
         ability = new LoyaltyAbility(damageMultiEffect, -4);
         ability.setTargetAdjuster(LukkaBoundToRuinAdjuster.instance);
-        ability.addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        ability.addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.addAbility(ability);
     }
 
@@ -133,7 +133,7 @@ enum LukkaBoundToRuinAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         // Maximum targets is equal to the damage - as each target need to be assigned at least 1 damage
         ability.getTargets().clear();
-        int xValue = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, ability, null);
+        int xValue = GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.calculate(game, ability, null);
         ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(xValue, 0, xValue));
     }
 }

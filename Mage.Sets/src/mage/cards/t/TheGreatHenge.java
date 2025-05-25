@@ -34,7 +34,7 @@ public final class TheGreatHenge extends CardImpl {
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheGreatHengeCostReductionEffect())
-                .addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
+                .addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // {T}: Add {G}{G}. You gain 2 life.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost());
@@ -74,7 +74,7 @@ class TheGreatHengeCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         // TODO: that abilityToModify should be source, but there is currently a bug with that #11166
-        int reductionAmount = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, abilityToModify, this);
+        int reductionAmount = GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.calculate(game, abilityToModify, this);
         CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;
     }

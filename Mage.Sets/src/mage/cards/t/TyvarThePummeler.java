@@ -56,10 +56,10 @@ public final class TyvarThePummeler extends CardImpl {
 
         // {3}{G}{G}: Creatures you control get +X/+X until end of turn, where X is the greatest power among creatures you control.
         this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(
-                GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures,
-                GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures,
+                GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
+                GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
                 Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{3}{G}{G}")).addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
+        ), new ManaCostsImpl<>("{3}{G}{G}")).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
     }
 
     private TyvarThePummeler(final TyvarThePummeler card) {

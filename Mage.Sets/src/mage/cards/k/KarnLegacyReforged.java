@@ -34,7 +34,7 @@ public final class KarnLegacyReforged extends CardImpl {
 
         // Karn, Legacy Reforged's power and toughness are each equal to the greatest mana value among artifacts you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(GreatestAmongPermanentsValue.Instanced.ManaValueControlledArtifacts)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS)
                 .setText("{this}'s power and toughness are each equal to the greatest mana value among artifacts you control")
         ));
 

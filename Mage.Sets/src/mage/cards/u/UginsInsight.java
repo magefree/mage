@@ -20,9 +20,9 @@ public final class UginsInsight extends CardImpl {
 
         // Scry X, where X is the greatest mana value among permanents you control, then draw three cards.
         this.getSpellAbility().addEffect(
-                new ScryEffect(GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents)
+                new ScryEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS)
         );
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.getHint());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3).concatBy(", then"));
     }
 

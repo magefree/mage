@@ -41,9 +41,9 @@ public final class BouncersBeatdown extends CardImpl {
         ).setRuleAtTheTop(true));
 
         // Bouncer's Beatdown deals X damage to target creature or planeswalker, where X is the greatest power among creatures you control. If that creature or planeswalker would die this turn, exile it instead.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures)
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
                 .setText("{this} deals X damage to target creature or planeswalker, where X is the greatest power among creatures you control"));
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
         this.getSpellAbility().addEffect(new ExileTargetIfDiesEffect("creature or planeswalker"));
     }

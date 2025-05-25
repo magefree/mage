@@ -32,9 +32,9 @@ public final class RubblebeltRioters extends CardImpl {
 
         // Whenever Rubblebelt Rioters attacks, it gets +X/+0 until end of turn, where X is the greatest power among creatures you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures, StaticValue.get(0),
+                GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES, StaticValue.get(0),
                 Duration.EndOfTurn
-        ), false).addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
+        ), false).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
     }
 
     private RubblebeltRioters(final RubblebeltRioters card) {

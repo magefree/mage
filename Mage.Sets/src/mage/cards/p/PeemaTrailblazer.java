@@ -42,9 +42,9 @@ public final class PeemaTrailblazer extends CardImpl {
         final Ability ability = new ExhaustAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new PayEnergyCost(6)
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures)
+        ability.addEffect(new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
                 .setText("Then draw cards equal to the greatest power among creatures you control"));
-        ability.addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        ability.addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.addAbility(ability);
     }
 

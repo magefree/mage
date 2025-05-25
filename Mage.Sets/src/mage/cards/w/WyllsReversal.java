@@ -38,7 +38,7 @@ public final class WyllsReversal extends CardImpl {
         // 15+ | You may choose new targets for that spell or ability. Then copy it. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new WyllsReversalEffect());
         this.getSpellAbility().addTarget(new TargetStackObject());
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private WyllsReversal(final WyllsReversal card) {
@@ -94,7 +94,7 @@ class WyllsReversalEffect extends RollDieWithResultTableEffect {
             return false;
         }
         int result = player.rollDice(outcome, source, game, 20)
-                + GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, source, this);
+                + GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.calculate(game, source, this);
         if (result >= 1) {
             stackObject.chooseNewTargets(
                     game, source.getControllerId(), false,

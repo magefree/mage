@@ -19,57 +19,34 @@ import java.util.stream.Stream;
 
 /**
  * Dynamic value for "greatest [quality] among [permanent filter]"
- * For the most common ones, add an entry in the Instanced enum instead of using new GreatestAmongPermanentsValue(...).
+ * For the most common ones, add a static entry instead of using new GreatestAmongPermanentsValue(...).
  *
  * @author Susucr
  */
 public class GreatestAmongPermanentsValue implements DynamicValue {
 
-    public enum Instanced implements DynamicValue {
-        PowerControlledCreatures(Quality.Power, StaticFilters.FILTER_CONTROLLED_CREATURES),
-        PowerOtherControlledCreatures(Quality.Power, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES),
-        ToughnessControlledCreatures(Quality.Toughness, StaticFilters.FILTER_CONTROLLED_CREATURES),
-        ToughnessOtherControlledCreatures(Quality.Toughness, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES),
-        PowerOrToughnessOtherControlledCreatures(Quality.PowerOrToughness, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES),
-        ManaValueControlledPermanents(Quality.ManaValue, StaticFilters.FILTER_CONTROLLED_PERMANENTS),
-        ManaValueControlledCreatures(Quality.ManaValue, StaticFilters.FILTER_CONTROLLED_CREATURES),
-        ManaValueControlledArtifacts(Quality.ManaValue, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS),
-        ManaValueOtherControlledPermanents(Quality.ManaValue, StaticFilters.FILTER_OTHER_CONTROLLED_PERMANENTS),
-        ManaValueOtherControlledCreatures(Quality.ManaValue, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES),
-        ManaValueOtherControlledArtifacts(Quality.ManaValue, StaticFilters.FILTER_OTHER_CONTROLLED_ARTIFACTS);
-
-        private final GreatestAmongPermanentsValue inner;
-        private final Hint hint;
-
-        Instanced(Quality quality, FilterPermanent filter) {
-            this.inner = new GreatestAmongPermanentsValue(quality, filter);
-            this.hint = this.inner.getHint();
-        }
-
-        @Override
-        public int calculate(Game game, Ability sourceAbility, Effect effect) {
-            return this.inner.calculate(game, sourceAbility, effect);
-        }
-
-        @Override
-        public Instanced copy() {
-            return this;
-        }
-
-        @Override
-        public String getMessage() {
-            return this.inner.getMessage();
-        }
-
-        @Override
-        public String toString() {
-            return this.inner.toString();
-        }
-
-        public Hint getHint() {
-            return this.hint;
-        }
-    }
+    public static final GreatestAmongPermanentsValue POWER_CONTROLLED_CREATURES
+            = new GreatestAmongPermanentsValue(Quality.Power, StaticFilters.FILTER_CONTROLLED_CREATURES);
+    public static final GreatestAmongPermanentsValue POWER_OTHER_CONTROLLED_CREATURES
+            = new GreatestAmongPermanentsValue(Quality.Power, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES);
+    public static final GreatestAmongPermanentsValue TOUGHNESS_CONTROLLED_CREATURES
+            = new GreatestAmongPermanentsValue(Quality.Toughness, StaticFilters.FILTER_CONTROLLED_CREATURES);
+    public static final GreatestAmongPermanentsValue TOUGHNESS_OTHER_CONTROLLED_CREATURES
+            = new GreatestAmongPermanentsValue(Quality.Toughness, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES);
+    public static final GreatestAmongPermanentsValue POWER_OR_TOUGHNESS_OTHER_CONTROLLED_CREATURES
+            = new GreatestAmongPermanentsValue(Quality.PowerOrToughness, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES);
+    public static final GreatestAmongPermanentsValue MANAVALUE_CONTROLLED_CREATURES
+            = new GreatestAmongPermanentsValue(Quality.ManaValue, StaticFilters.FILTER_CONTROLLED_CREATURES);
+    public static final GreatestAmongPermanentsValue MANAVALUE_OTHER_CONTROLLED_CREATURES
+            = new GreatestAmongPermanentsValue(Quality.ManaValue, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES);
+    public static final GreatestAmongPermanentsValue MANAVALUE_CONTROLLED_ARTIFACTS
+            = new GreatestAmongPermanentsValue(Quality.ManaValue, StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS);
+    public static final GreatestAmongPermanentsValue MANAVALUE_OTHER_CONTROLLED_ARTIFACTS
+            = new GreatestAmongPermanentsValue(Quality.ManaValue, StaticFilters.FILTER_OTHER_CONTROLLED_ARTIFACTS);
+    public static final GreatestAmongPermanentsValue MANAVALUE_CONTROLLED_PERMANENTS
+            = new GreatestAmongPermanentsValue(Quality.ManaValue, StaticFilters.FILTER_CONTROLLED_PERMANENTS);
+    public static final GreatestAmongPermanentsValue MANAVALUE_OTHER_CONTROLLED_PERMANENTS
+            = new GreatestAmongPermanentsValue(Quality.ManaValue, StaticFilters.FILTER_OTHER_CONTROLLED_PERMANENTS);
 
     public enum Quality {
         Power("power", Permanent::getPower),
@@ -107,7 +84,7 @@ public class GreatestAmongPermanentsValue implements DynamicValue {
 
     private GreatestAmongPermanentsValue(final GreatestAmongPermanentsValue value) {
         super();
-        this.filter = value.filter.copy();
+        this.filter = value.filter;
         this.quality = value.quality;
     }
 
@@ -140,5 +117,6 @@ public class GreatestAmongPermanentsValue implements DynamicValue {
 
     public Hint getHint() {
         return new ValueHint("Greatest " + quality.text + " among " + filter.getMessage(), this);
+        ;
     }
 }

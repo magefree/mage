@@ -36,7 +36,7 @@ public final class ArniBrokenbrow extends CardImpl {
 
         // Boast — {1}: You may change Arni Brokenbrow's base power to 1 plus the greatest power among other creatures you control until end of turn.
         this.addAbility(new BoastAbility(new ArniBrokenbrowEffect(), new GenericManaCost(1))
-                .addHint(GreatestAmongPermanentsValue.Instanced.PowerOtherControlledCreatures.getHint()));
+                .addHint(GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES.getHint()));
     }
 
     private ArniBrokenbrow(final ArniBrokenbrow card) {
@@ -72,7 +72,7 @@ class ArniBrokenbrowEffect extends OneShotEffect {
         if (controller == null || mageObject == null) {
             return false;
         }
-        int power = GreatestAmongPermanentsValue.Instanced.PowerOtherControlledCreatures.calculate(game, source, this);
+        int power = GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES.calculate(game, source, this);
         power += 1;
         if (controller.chooseUse(outcome, "Change base power of " + mageObject.getLogName() + " to "
                 + power + " until end of turn?", source, game

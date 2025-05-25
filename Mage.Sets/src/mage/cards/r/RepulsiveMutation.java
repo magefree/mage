@@ -29,11 +29,11 @@ public final class RepulsiveMutation extends CardImpl {
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Then counter up to one target spell unless its controller pays mana equal to the greatest power among creatures you control.
-        getSpellAbility().addEffect(new CounterUnlessPaysEffect(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures)
+        getSpellAbility().addEffect(new CounterUnlessPaysEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
                 .setTargetPointer(new SecondTargetPointer())
                 .setText("Then counter up to one target spell unless its controller pays mana equal to the greatest power among creatures you control."));
         getSpellAbility().addTarget(new TargetSpell(0, 1, StaticFilters.FILTER_SPELL));
-        getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private RepulsiveMutation(final RepulsiveMutation card) {

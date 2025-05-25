@@ -24,7 +24,7 @@ public final class MimingSlime extends CardImpl {
 
         // Create an X/X green Ooze creature token, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new MimingSlimeCreateTokenEffect());
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private MimingSlime(final MimingSlime card) {
@@ -55,7 +55,7 @@ class MimingSlimeCreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int value = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, source, this);
+        int value = GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.calculate(game, source, this);
         return (new CreateTokenEffect(new OozeToken(value, value))).apply(game, source);
     }
 }

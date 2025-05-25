@@ -30,9 +30,9 @@ public final class HuatliTheSunsHeart extends CardImpl {
 
         // -3: You gain life equal to the greatest toughness among creatures you control.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(
-                GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures,
+                GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES,
                 "You gain life equal to the greatest toughness among creatures you control"
-        ), -3).addHint(GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures.getHint()));
+        ), -3).addHint(GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES.getHint()));
     }
 
     private HuatliTheSunsHeart(final HuatliTheSunsHeart card) {

@@ -26,9 +26,9 @@ public final class FlourishingHunter extends CardImpl {
 
         // When Flourishing Hunter enters the battlefield, you gain life equal to the greatest toughness among other creatures you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new GainLifeEffect(GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures)
+                new GainLifeEffect(GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES)
                         .setText("you gain life equal to the greatest toughness among other creatures you control")
-        ).addHint(GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES.getHint()));
     }
 
     private FlourishingHunter(final FlourishingHunter card) {

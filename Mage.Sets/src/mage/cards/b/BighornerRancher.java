@@ -34,16 +34,16 @@ public final class BighornerRancher extends CardImpl {
 
         // {T}: Add an amount of {G} equal to the greatest power among creatures you control.
         this.addAbility(new DynamicManaAbility(
-                Mana.GreenMana(1), GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures, new TapSourceCost(),
+                Mana.GreenMana(1), GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES, new TapSourceCost(),
                 "Add an amount of {G} equal to the greatest power among creatures you control."
-        ).addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // Sacrifice Bighorner Rancher: You gain life equal to the greatest toughness among other creatures you control.
         this.addAbility(new SimpleActivatedAbility(
-                new GainLifeEffect(GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures)
+                new GainLifeEffect(GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES)
                         .setText("You gain life equal to the greatest toughness among other creatures you control."),
                 new SacrificeSourceCost()
-        ).addHint(GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES.getHint()));
     }
 
     private BighornerRancher(final BighornerRancher card) {

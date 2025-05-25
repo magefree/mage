@@ -21,11 +21,11 @@ public final class BoonOfBoseiju extends CardImpl {
 
         // Target creature gets +X/+X until end of turn, where X is the greatest mana value among permanents you control. Untap that creature.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents,
-                GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents,
+                GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS,
+                GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS,
                 Duration.EndOfTurn
         ));
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.getHint());
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap it"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

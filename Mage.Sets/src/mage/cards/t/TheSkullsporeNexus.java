@@ -45,7 +45,7 @@ public final class TheSkullsporeNexus extends CardImpl {
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheSkullsporeNexusReductionEffect())
-                .addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
+                .addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // Whenever one or more nontoken creatures you control die, create a green Fungus Dinosaur creature token with base power and toughness each equal to the total power of those creatures.
         this.addAbility(new TheSkullsporeNexusTrigger());
@@ -84,7 +84,7 @@ class TheSkullsporeNexusReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         // TODO: that abilityToModify should be source, but there is currently a bug with that #11166
-        int reductionAmount = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, abilityToModify, this);
+        int reductionAmount = GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.calculate(game, abilityToModify, this);
         CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;
     }

@@ -31,10 +31,10 @@ public final class ArborAdherent extends CardImpl {
 
         // {T}: Add X mana of any one color, where X is the greatest toughness among other creatures you control.
         this.addAbility(new DynamicManaAbility(
-                Mana.AnyMana(1), GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures,
+                Mana.AnyMana(1), GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES,
                 new TapSourceCost(), "add X mana of any one color, where X is the " +
                 "greatest toughness among other creatures you control", true
-        ).addHint(GreatestAmongPermanentsValue.Instanced.ToughnessOtherControlledCreatures.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES.getHint()));
     }
 
     private ArborAdherent(final ArborAdherent card) {

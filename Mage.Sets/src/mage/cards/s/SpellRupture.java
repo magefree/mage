@@ -28,7 +28,7 @@ public final class SpellRupture extends CardImpl {
         // Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new SpellRuptureCounterUnlessPaysEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private SpellRupture(final SpellRupture card) {
@@ -69,7 +69,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
         if (player == null || controller == null || sourceObject == null) {
             return false;
         }
-        int maxPower = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, source, this);
+        int maxPower = GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.calculate(game, source, this);
         Cost cost = ManaUtil.createManaCost(maxPower, true);
         if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + ", where X is " + maxPower + "? (otherwise " + spell.getName() + " will be countered)", source, game)
                 && cost.pay(source, game, source, player.getId(), false)) {

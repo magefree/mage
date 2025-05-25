@@ -19,9 +19,9 @@ public final class RewardTheFaithful extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Any number of target players each gain life equal to the greatest converted mana cost among permanents you control.
-        this.getSpellAbility().addEffect(new GainLifeTargetEffect(GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents)
+        this.getSpellAbility().addEffect(new GainLifeTargetEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS)
                 .setText("Any number of target players each gain life equal to the greatest mana value among permanents you control."));
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.getHint());
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
     }
 

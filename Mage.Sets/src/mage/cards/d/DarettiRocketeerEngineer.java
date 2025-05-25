@@ -37,7 +37,7 @@ public final class DarettiRocketeerEngineer extends CardImpl {
         // Daretti's power is equal to the greatest mana value among artifacts you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerSourceEffect(GreatestAmongPermanentsValue.Instanced.ManaValueControlledArtifacts)
+                new SetBasePowerSourceEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS)
                         .setText("{this}'s power is equal to the greatest mana value among artifacts you control")
         ));
 

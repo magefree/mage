@@ -29,10 +29,10 @@ public final class TuyaBearclaw extends CardImpl {
 
         // Whenever Tuya Bearclaw attacks, it gets +X/+X until end of turn, where X is the greatest power among other creatures you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                GreatestAmongPermanentsValue.Instanced.PowerOtherControlledCreatures,
-                GreatestAmongPermanentsValue.Instanced.PowerOtherControlledCreatures,
+                GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES,
+                GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES,
                 Duration.EndOfTurn
-        ), false).addHint(GreatestAmongPermanentsValue.Instanced.PowerOtherControlledCreatures.getHint()));
+        ), false).addHint(GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES.getHint()));
     }
 
     private TuyaBearclaw(final TuyaBearclaw card) {

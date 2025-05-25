@@ -58,11 +58,11 @@ public final class ArniSlaysTheTroll extends CardImpl {
 
         // III — You gain life equal to the greatest power among creatures you control.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
-                new GainLifeEffect(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures,
+                new GainLifeEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
                         "You gain life equal to the greatest power among creatures you control"
                 )
         );
-        sagaAbility.addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        sagaAbility.addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.addAbility(sagaAbility);
     }
 

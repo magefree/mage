@@ -40,7 +40,7 @@ public final class PyreswipeHawk extends CardImpl {
 
         // Whenever Pyreswipe Hawk attacks, it gets +X/+0 until end of turn, where X is the greatest mana value among artifacts you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                GreatestAmongPermanentsValue.Instanced.ManaValueControlledArtifacts,
+                GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS,
                 StaticValue.get(0), Duration.EndOfTurn, "it"
         )));
 

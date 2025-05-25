@@ -54,7 +54,7 @@ public final class AbzanMonument extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability.addHint(GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures.getHint()));
+        this.addAbility(ability.addHint(GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES.getHint()));
     }
 
     private AbzanMonument(final AbzanMonument card) {
@@ -86,7 +86,7 @@ class AbzanMonumentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int value = GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures.calculate(game, source, this);
+        int value = GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES.calculate(game, source, this);
         return new CreateTokenEffect(new SpiritXXToken(value)).apply(game, source);
     }
 }

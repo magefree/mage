@@ -34,9 +34,9 @@ public final class DodgyJalopy extends CardImpl {
         // Dodgy Jalopy's power is equal to the greatest mana value among creatures you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerSourceEffect(GreatestAmongPermanentsValue.Instanced.ManaValueControlledCreatures)
+                new SetBasePowerSourceEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_CREATURES)
                         .setText("{this}'s power is equal to the greatest mana value among creatures you control.")
-        ).addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledCreatures.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_CREATURES.getHint()));
 
         // Crew 3
         this.addAbility(new CrewAbility(3));

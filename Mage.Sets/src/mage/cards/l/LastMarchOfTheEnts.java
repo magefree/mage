@@ -32,10 +32,10 @@ public final class LastMarchOfTheEnts extends CardImpl {
 
         // Draw cards equal to the greatest toughness among creatures you control, then put any number of creature cards from your hand onto the battlefield.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
-                GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures
+                GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES
         ).setText("draw cards equal to the greatest toughness among creatures you control"));
         this.getSpellAbility().addEffect(new LastMarchOfTheEntsEffect());
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES.getHint());
     }
 
     private LastMarchOfTheEnts(final LastMarchOfTheEnts card) {

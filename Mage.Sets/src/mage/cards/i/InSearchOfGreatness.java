@@ -31,7 +31,7 @@ public final class InSearchOfGreatness extends CardImpl {
         // At the beginning of your upkeep, you may cast a permanent spell from your hand with converted mana cost equal to 1 plus the greatest mana value among other permanents you control without paying its mana cost. If you don't, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new InSearchOfGreatnessEffect()
-        ).addHint(GreatestAmongPermanentsValue.Instanced.ManaValueOtherControlledPermanents.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.MANAVALUE_OTHER_CONTROLLED_PERMANENTS.getHint()));
     }
 
     private InSearchOfGreatness(final InSearchOfGreatness card) {
@@ -68,7 +68,7 @@ class InSearchOfGreatnessEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int manaValue = GreatestAmongPermanentsValue.Instanced.ManaValueOtherControlledPermanents.calculate(game, source, this);
+        int manaValue = GreatestAmongPermanentsValue.MANAVALUE_OTHER_CONTROLLED_PERMANENTS.calculate(game, source, this);
         FilterCard filter = new FilterPermanentCard();
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, manaValue + 1));
         filter.add(PermanentPredicate.instance);

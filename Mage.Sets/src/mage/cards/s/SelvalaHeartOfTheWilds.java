@@ -41,11 +41,11 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
 
         // {G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.
         ManaEffect manaEffect = new AddManaInAnyCombinationEffect(
-                GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures, GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures,
+                GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES, GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
                 ColoredManaSymbol.W, ColoredManaSymbol.U, ColoredManaSymbol.B, ColoredManaSymbol.R, ColoredManaSymbol.G);
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, manaEffect, new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        ability.addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.addAbility(ability);
 
     }

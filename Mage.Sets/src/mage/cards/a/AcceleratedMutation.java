@@ -20,11 +20,11 @@ public final class AcceleratedMutation extends CardImpl {
 
         // Target creature gets +X/+X until end of turn, where X is the greatest converted mana cost among permanents you control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents,
-                GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents,
+                GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS,
+                GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS,
                 Duration.EndOfTurn
         ));
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.getHint());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

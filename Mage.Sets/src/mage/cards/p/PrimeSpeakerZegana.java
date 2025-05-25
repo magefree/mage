@@ -34,11 +34,11 @@ public final class PrimeSpeakerZegana extends CardImpl {
         //Prime Speaker Zegana enters the battlefield with X +1/+1 counters on it, where X is the greatest power among other creatures you control.
         Effect effect = new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(0),
-                GreatestAmongPermanentsValue.Instanced.PowerOtherControlledCreatures,
+                GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES,
                 true
         );
         effect.setText("with X +1/+1 counters on it, where X is the greatest power among other creatures you control.");
-        this.addAbility(new EntersBattlefieldAbility(effect).addHint(GreatestAmongPermanentsValue.Instanced.PowerOtherControlledCreatures.getHint()));
+        this.addAbility(new EntersBattlefieldAbility(effect).addHint(GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES.getHint()));
         //When Prime Speaker Zegana enters the battlefield, draw cards equal to its power.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("draw cards equal to its power")));

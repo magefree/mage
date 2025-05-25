@@ -18,10 +18,10 @@ public final class RushOfKnowledge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");
 
         // Draw cards equal to the greatest mana value among permanents you control.
-        DrawCardSourceControllerEffect effect = new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents);
+        DrawCardSourceControllerEffect effect = new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS);
         effect.setText("Draw cards equal to the greatest mana value among permanents you control");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.getHint());
     }
 
     private RushOfKnowledge(final RushOfKnowledge card) {

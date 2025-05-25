@@ -26,10 +26,10 @@ public final class OverwhelmingStampede extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES
         ).setText("Until end of turn, creatures you control gain trample"));
         this.getSpellAbility().addEffect(new BoostControlledEffect(
-                GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures, GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures,
+                GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES, GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
                 Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, false
         ).setText("and get +X/+X, where X is the greatest power among creatures you control"));
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private OverwhelmingStampede(final OverwhelmingStampede card) {

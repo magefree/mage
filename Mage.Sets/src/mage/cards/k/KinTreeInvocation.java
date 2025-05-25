@@ -24,7 +24,7 @@ public final class KinTreeInvocation extends CardImpl {
 
         // Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control.
         this.getSpellAbility().addEffect(new KinTreeInvocationCreateTokenEffect());
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES.getHint());
     }
 
     private KinTreeInvocation(final KinTreeInvocation card) {
@@ -55,7 +55,7 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int value = GreatestAmongPermanentsValue.Instanced.ToughnessControlledCreatures.calculate(game, source, this);
+        int value = GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES.calculate(game, source, this);
         return (new CreateTokenEffect(new SpiritWarriorToken(value))).apply(game, source);
     }
 

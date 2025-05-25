@@ -20,14 +20,14 @@ public final class EssenceHarvest extends CardImpl {
 
         // Target player loses X life and you gain X life, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(
-                new LoseLifeTargetEffect(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures)
+                new LoseLifeTargetEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
                         .setText("target player loses X life")
         );
         this.getSpellAbility().addEffect(
-                new GainLifeEffect(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures)
+                new GainLifeEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
                         .setText("and you gain X life, where X is the greatest power among creatures you control")
         );
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

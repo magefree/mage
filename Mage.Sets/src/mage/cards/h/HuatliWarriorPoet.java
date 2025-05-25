@@ -37,10 +37,10 @@ public final class HuatliWarriorPoet extends CardImpl {
         // +2: You gain life equal to the greatest power among creatures you control.
         this.addAbility(new LoyaltyAbility(
                 new GainLifeEffect(
-                        GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures,
+                        GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
                         "You gain life equal to the greatest power among creatures you control"
                 ), 2
-        ).addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // 0: Create a 3/3 green Dinosaur creature token with trample.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DinosaurToken()), 0));

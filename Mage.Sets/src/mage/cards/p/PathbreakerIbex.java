@@ -33,10 +33,10 @@ public final class PathbreakerIbex extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES
         ).setText("creatures you control gain trample"), false);
         ability.addEffect(new BoostControlledEffect(
-                GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures, GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures,
+                GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES, GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
                 Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, false
         ).setText("and get +X/+X until end of turn, where X is the greatest power among creatures you control"));
-        ability.addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        ability.addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.addAbility(ability);
     }
 

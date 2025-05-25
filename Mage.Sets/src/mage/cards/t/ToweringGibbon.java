@@ -31,7 +31,7 @@ public final class ToweringGibbon extends CardImpl {
         // Towering Gibbon's power is equal to the greatest mana value among creatures you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerSourceEffect(GreatestAmongPermanentsValue.Instanced.ManaValueControlledCreatures)
+                new SetBasePowerSourceEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_CREATURES)
                         .setText("{this}'s power is equal to the greatest mana value among creatures you control")
         ));
     }

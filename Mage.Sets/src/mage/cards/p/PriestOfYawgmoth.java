@@ -35,7 +35,7 @@ public final class PriestOfYawgmoth extends CardImpl {
                 new TapSourceCost(),
                 "add an amount of {B} equal to the sacrificed artifact's mana value",
                 false,
-                GreatestAmongPermanentsValue.Instanced.ManaValueOtherControlledArtifacts
+                GreatestAmongPermanentsValue.MANAVALUE_OTHER_CONTROLLED_ARTIFACTS
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.addAbility(ability);

@@ -36,9 +36,9 @@ public final class GarrukPrimalHunter extends CardImpl {
 
         // -3: Draw cards equal to the greatest power among creatures you control.
         this.addAbility(new LoyaltyAbility(
-                new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures)
+                new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
                         .setText("Draw cards equal to the greatest power among creatures you control"),
-                -3).addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
+                -3).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // -6: Create a 6/6 green Wurm creature token for each land you control.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WurmToken(), new PermanentsOnBattlefieldCount(filter)), -6));

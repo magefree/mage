@@ -23,8 +23,8 @@ public final class MonstrousOnslaught extends CardImpl {
         Effect effect = new DamageMultiEffect();
         effect.setText("{this} deals X damage divided as you choose among any number of target creatures, where X is the greatest power among creatures you control as you cast this spell");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures));
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES));
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private MonstrousOnslaught(final MonstrousOnslaught card) {

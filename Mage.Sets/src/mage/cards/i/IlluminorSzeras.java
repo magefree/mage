@@ -37,7 +37,7 @@ public final class IlluminorSzeras extends CardImpl {
         Ability ability = new DynamicManaAbility(
                 Mana.BlackMana(1), xValue, new TapSourceCost(), "add an amount of {B} " +
                 "equal to the sacrificed creature's mana value", false,
-                GreatestAmongPermanentsValue.Instanced.ManaValueOtherControlledCreatures
+                GreatestAmongPermanentsValue.MANAVALUE_OTHER_CONTROLLED_CREATURES
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability.withFlavorWord("Secrets of the Soul"));

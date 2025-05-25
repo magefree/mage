@@ -59,10 +59,10 @@ public final class OrcishSiegemaster extends CardImpl {
         // Whenever Orcish Siegemaster attacks, it gets +X/+0 until end of turn, where X is the greatest power among creatures you control.
         this.addAbility(new AttacksTriggeredAbility(
                 new BoostSourceEffect(
-                        GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures,
+                        GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
                         StaticValue.get(0), Duration.EndOfTurn, "it"
                 )
-        ).addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
     }
 
     private OrcishSiegemaster(final OrcishSiegemaster card) {

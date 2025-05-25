@@ -23,7 +23,7 @@ public final class DispersalShield extends CardImpl {
 
         // Counter target spell if its converted mana cost is less than or equal to the highest converted mana cost among permanents you control.
         this.getSpellAbility().addEffect(new DispersalShieldEffect());
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.getHint());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
@@ -55,7 +55,7 @@ class DispersalShieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = GreatestAmongPermanentsValue.Instanced.ManaValueControlledPermanents.calculate(game, source, this);
+        int amount = GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.calculate(game, source, this);
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null && spell.getManaValue() <= amount) {
             return game.getStack().counter(source.getFirstTarget(), source, game);

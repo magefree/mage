@@ -18,10 +18,10 @@ public final class OneWithTheMachine extends CardImpl {
 
         // Draw cards equal to the greatest mana value among artifacts you control.
         this.getSpellAbility().addEffect(
-                new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.Instanced.ManaValueControlledArtifacts)
+                new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS)
                         .setText("Draw cards equal to the greatest mana value among artifacts you control")
         );
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledArtifacts.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS.getHint());
     }
 
     private OneWithTheMachine(final OneWithTheMachine card) {

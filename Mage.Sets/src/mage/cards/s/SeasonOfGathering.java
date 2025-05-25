@@ -52,11 +52,11 @@ public final class SeasonOfGathering extends CardImpl {
 
         // {P}{P}{P} -- Draw cards equal to the greatest power among creatures you control.
         Mode mode3 = new Mode(
-                new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures)
+                new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
                         .setText("Draw cards equal to the greatest power among creatures you control.")
         );
         this.getSpellAbility().addMode(mode3.withPawPrintValue(3));
-        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.getHint());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private SeasonOfGathering(final SeasonOfGathering card) {

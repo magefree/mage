@@ -33,7 +33,7 @@ public final class MuzzioVisionaryArchitect extends CardImpl {
         // {3}{U}, {tap}: Look at the top X cards of your library, where X is the greatest mana value among artifacts you control. You may reveal an artifact card from among them and put it onto the battlefield. Put the rest on the bottom of your library in any order.
         Ability ability = new SimpleActivatedAbility(new MuzzioVisionaryArchitectEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledArtifacts.getHint());
+        ability.addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS.getHint());
         this.addAbility(ability);
     }
 
@@ -69,7 +69,7 @@ class MuzzioVisionaryArchitectEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int amount = GreatestAmongPermanentsValue.Instanced.ManaValueControlledArtifacts.calculate(game, source, this);
+        int amount = GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS.calculate(game, source, this);
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, amount));
         controller.lookAtCards(source, null, cards, game);
         if (!cards.isEmpty()) {

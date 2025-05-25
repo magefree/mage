@@ -36,9 +36,9 @@ public final class GlintRaker extends CardImpl {
 
         // Glint Raker gets +X/+0, where X is the highest mana value among artifacts you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                GreatestAmongPermanentsValue.Instanced.ManaValueControlledArtifacts,
+                GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS,
                 StaticValue.get(0), Duration.WhileOnBattlefield
-        )).addHint(GreatestAmongPermanentsValue.Instanced.ManaValueControlledArtifacts.getHint()));
+        )).addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_ARTIFACTS.getHint()));
 
         // Whenever Glint Raker deals combat damage to a player, you may reveal that many cards from the top of your library. Put an artifact card revealed this way into your hand and the rest into your graveyard.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
