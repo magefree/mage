@@ -73,6 +73,7 @@ class TheGreatHengeCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        // TODO: that abilityToModify should be source, but there is currently a bug with that #11166
         int reductionAmount = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, abilityToModify, this);
         CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;

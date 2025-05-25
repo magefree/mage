@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -20,7 +19,6 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
@@ -85,20 +83,11 @@ class TheSkullsporeNexusReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = game.getBattlefield()
-                .getAllActivePermanents(
-                        StaticFilters.FILTER_PERMANENT_CREATURE, abilityToModify.getControllerId(), game
-                ).stream()
-                .map(Permanent::getPower)
-                .mapToInt(MageInt::getValue)
-                .max()
-                .orElse(0);
+        // TODO: that abilityToModify should be source, but there is currently a bug with that #11166
+        int reductionAmount = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, abilityToModify, this);
         CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;
     }
-
-
-    // int reductionAmount = GreatestAmongPermanentsValue.Instanced.PowerControlledCreatures.calculate(game, abilityToModify, this);
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
