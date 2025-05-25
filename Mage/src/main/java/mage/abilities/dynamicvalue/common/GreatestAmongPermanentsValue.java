@@ -1,6 +1,5 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -11,10 +10,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.function.Function;
 import java.util.function.ToIntFunction;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 
 /**
@@ -49,8 +45,12 @@ public class GreatestAmongPermanentsValue implements DynamicValue {
             = new GreatestAmongPermanentsValue(Quality.ManaValue, StaticFilters.FILTER_OTHER_CONTROLLED_PERMANENTS);
 
     public enum Quality {
-        Power("power", Permanent::getPower),
-        Toughness("toughness", Permanent::getToughness),
+        Power("power", (Permanent permanent) -> {
+            return permanent.getPower().getValue();
+        }),
+        Toughness("toughness", (Permanent permanent) -> {
+            return permanent.getToughness().getValue();
+        }),
         ManaValue("mana value", Permanent::getManaValue),
         PowerOrToughness("power and/or toughness",
                 (Permanent permanent) -> {
@@ -61,16 +61,11 @@ public class GreatestAmongPermanentsValue implements DynamicValue {
         );
 
         final String text;
-        final Function<Stream<Permanent>, IntStream> mapToQuality;
+        final ToIntFunction<Permanent> mapToQuality;
 
-        Quality(String text, Function<Permanent, MageInt> permanentToMageInt) {
+        Quality(String text, ToIntFunction<Permanent> mapToQuality) {
             this.text = text;
-            this.mapToQuality = (Stream<Permanent> stream) -> stream.map(permanentToMageInt).mapToInt(MageInt::getValue);
-        }
-
-        Quality(String text, ToIntFunction<Permanent> permanentToInt) {
-            this.text = text;
-            this.mapToQuality = (Stream<Permanent> stream) -> stream.mapToInt(permanentToInt);
+            this.mapToQuality = mapToQuality;
         }
     }
 
@@ -95,12 +90,13 @@ public class GreatestAmongPermanentsValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Stream<Permanent> permanents = game
+        return game
                 .getBattlefield()
                 .getActivePermanents(
                         this.filter, sourceAbility.getControllerId(), sourceAbility, game
-                ).stream();
-        return this.quality.mapToQuality.apply(permanents)
+                )
+                .stream()
+                .mapToInt(this.quality.mapToQuality)
                 .max()
                 .orElse(0);
     }
@@ -117,6 +113,5 @@ public class GreatestAmongPermanentsValue implements DynamicValue {
 
     public Hint getHint() {
         return new ValueHint("Greatest " + quality.text + " among " + filter.getMessage(), this);
-        ;
     }
 }
