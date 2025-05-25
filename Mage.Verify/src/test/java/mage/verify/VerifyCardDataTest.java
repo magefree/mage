@@ -1047,7 +1047,7 @@ public class VerifyCardDataTest {
         // CHECK: miss booster settings
         Set<String> ignoreBoosterSets = new HashSet<>();
         // temporary, TODO: remove after set release and mtgjson get info
-        ignoreBoosterSets.add("Innistrad Remastered");
+        ignoreBoosterSets.add("Final Fantasy");
         // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
         ignoreBoosterSets.add("Jumpstart");
         ignoreBoosterSets.add("Jumpstart 2022");
