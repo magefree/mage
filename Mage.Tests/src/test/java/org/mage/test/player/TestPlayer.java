@@ -3795,6 +3795,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public List<Boolean> flipCoins(Ability source, Game game, int amount, boolean winnable) {
+        return computerPlayer.flipCoins(source, game, amount, winnable);
+    }
+
+    @Override
     public boolean flipCoinResult(Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {

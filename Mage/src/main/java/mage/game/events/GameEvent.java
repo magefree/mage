@@ -173,7 +173,7 @@ public class GameEvent implements Serializable {
          amount      amount of life loss
          flag        true = from combat damage - other from non combat damage
          */
-        
+
         LOSE_LIFE, LOST_LIFE,
         /* LOST_LIFE_BATCH_FOR_ONE_PLAYER
          combines all life lost events for a player to a single batch (event)
@@ -401,7 +401,7 @@ public class GameEvent implements Serializable {
         SURVEIL, SURVEILED,
         PROLIFERATE, PROLIFERATED,
         FATESEALED,
-        FLIP_COIN, COIN_FLIPPED,
+        FLIP_COIN, FLIP_COINS, COIN_FLIPPED,
         REPLACE_ROLLED_DIE, // for Clam-I-Am workaround only
         ROLL_DIE, DIE_ROLLED,
         ROLL_DICE, DICE_ROLLED,
