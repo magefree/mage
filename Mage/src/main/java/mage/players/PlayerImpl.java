@@ -3061,7 +3061,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<Boolean> flipCoins(Ability source, Game game, int amount, boolean winnable) {
         List<Boolean> results = new ArrayList<>();
         if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.FLIP_COINS, this.getId(), source, this.getId(), amount))) {
-            // TODO: handle this properly
+            // TODO: handle this properly, need to inform players and trigger coin flip events
             for (int i = 0; i < amount; i++) {
                 results.add(true);
             }
