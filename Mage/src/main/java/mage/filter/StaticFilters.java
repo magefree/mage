@@ -643,6 +643,20 @@ public final class StaticFilters {
         FILTER_OTHER_CONTROLLED_CREATURES.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_OTHER_CONTROLLED_PERMANENTS = new FilterControlledPermanent("other permanents you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_PERMANENTS.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_PERMANENTS.setLockedFilter(true);
+    }
+
+    public static final FilterControlledArtifactPermanent FILTER_OTHER_CONTROLLED_ARTIFACTS = new FilterControlledArtifactPermanent("other artifacts you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_ARTIFACTS.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_ARTIFACTS.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
 
     static {

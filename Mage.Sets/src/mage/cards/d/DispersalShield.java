@@ -1,9 +1,7 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.HighestManaValueCount;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,17 +11,19 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author nigelzor
  */
 public final class DispersalShield extends CardImpl {
 
     public DispersalShield(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Counter target spell if its converted mana cost is less than or equal to the highest converted mana cost among permanents you control.
         this.getSpellAbility().addEffect(new DispersalShieldEffect());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.getHint());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
@@ -41,7 +41,7 @@ class DispersalShieldEffect extends OneShotEffect {
 
     DispersalShieldEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell if its mana value is less than or equal to the highest mana value among permanents you control";
+        staticText = "Counter target spell if its mana value is less than or equal to the greatest mana value among permanents you control";
     }
 
     private DispersalShieldEffect(final DispersalShieldEffect effect) {
@@ -55,9 +55,9 @@ class DispersalShieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DynamicValue amount = new HighestManaValueCount();
+        int amount = GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.calculate(game, source, this);
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-        if (spell != null && spell.getManaValue() <= amount.calculate(game, source, this)) {
+        if (spell != null && spell.getManaValue() <= amount) {
             return game.getStack().counter(source.getFirstTarget(), source, game);
         }
         return false;

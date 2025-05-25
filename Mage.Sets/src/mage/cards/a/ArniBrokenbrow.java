@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.BoastAbility;
@@ -11,11 +12,9 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -36,7 +35,8 @@ public final class ArniBrokenbrow extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Boast — {1}: You may change Arni Brokenbrow's base power to 1 plus the greatest power among other creatures you control until end of turn.
-        this.addAbility(new BoastAbility(new ArniBrokenbrowEffect(), new GenericManaCost(1)));
+        this.addAbility(new BoastAbility(new ArniBrokenbrowEffect(), new GenericManaCost(1))
+                .addHint(GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES.getHint()));
     }
 
     private ArniBrokenbrow(final ArniBrokenbrow card) {
@@ -72,17 +72,7 @@ class ArniBrokenbrowEffect extends OneShotEffect {
         if (controller == null || mageObject == null) {
             return false;
         }
-        int power = game
-                .getBattlefield()
-                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game)
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(permanent -> !permanent.getId().equals(source.getSourceId())
-                        || permanent.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter())
-                .map(MageObject::getPower)
-                .mapToInt(MageInt::getValue)
-                .max()
-                .orElse(0);
+        int power = GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES.calculate(game, source, this);
         power += 1;
         if (controller.chooseUse(outcome, "Change base power of " + mageObject.getLogName() + " to "
                 + power + " until end of turn?", source, game
