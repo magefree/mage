@@ -20,6 +20,9 @@ public final class FinalFantasy extends ExpansionSet {
         this.blockName = "Final Fantasy"; // for sorting in GUI
         this.hasBasicLands = true;
 
+        this.enablePlayBooster(Integer.MAX_VALUE);
+        this.numBoosterDoubleFaced = -1;
+
         cards.add(new SetCardInfo("A Realm Reborn", 196, Rarity.RARE, mage.cards.a.ARealmReborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("A Realm Reborn", 344, Rarity.RARE, mage.cards.a.ARealmReborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Absolute Virtue", 212, Rarity.MYTHIC, mage.cards.a.AbsoluteVirtue.class, NON_FULL_USE_VARIOUS));
