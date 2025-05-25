@@ -111,7 +111,7 @@ class RodOfAbsorptionExileEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Spell sourceSpell = game.getStack().getSpell(event.getTargetId());
+        Spell sourceSpell = morSpell.getSpell(game);
         if (sourceSpell == null || sourceSpell.isCopy()) {
             return false;
         }
