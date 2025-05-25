@@ -138,6 +138,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 394, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 483, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 539, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Esper Origins", 185, Rarity.RARE, mage.cards.e.EsperOrigins.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Esper Origins", 370, Rarity.RARE, mage.cards.e.EsperOrigins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esper Terra", 245, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esper Terra", 323, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esper Terra", 511, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
@@ -387,6 +389,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Anima", 364, Rarity.UNCOMMON, mage.cards.s.SummonAnima.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 1, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Bahamut", 356, Rarity.MYTHIC, mage.cards.s.SummonBahamut.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Esper Maduin", 185, Rarity.RARE, mage.cards.s.SummonEsperMaduin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Esper Maduin", 370, Rarity.RARE, mage.cards.s.SummonEsperMaduin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Ramuh", 161, Rarity.UNCOMMON, mage.cards.s.SummonEsperRamuh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Ramuh", 367, Rarity.UNCOMMON, mage.cards.s.SummonEsperRamuh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Knights of Round", 359, Rarity.MYTHIC, mage.cards.s.SummonKnightsOfRound.class, NON_FULL_USE_VARIOUS));
