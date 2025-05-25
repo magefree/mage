@@ -129,6 +129,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonskull Summit", 387, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 388, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Duskshell Crawler", 301, Rarity.COMMON, mage.cards.d.DuskshellCrawler.class));
+        cards.add(new SetCardInfo("Edgar, Master Machinist", 169, Rarity.RARE, mage.cards.e.EdgarMasterMachinist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Edgar, Master Machinist", 80, Rarity.RARE, mage.cards.e.EdgarMasterMachinist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elena, Turk Recruit", 133, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elena, Turk Recruit", 18, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Endless Detour", 324, Rarity.RARE, mage.cards.e.EndlessDetour.class));
