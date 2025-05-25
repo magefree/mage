@@ -248,6 +248,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 413, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Priest of Fell Rites", 328, Rarity.RARE, mage.cards.p.PriestOfFellRites.class));
         cards.add(new SetCardInfo("Professional Face-Breaker", 296, Rarity.RARE, mage.cards.p.ProfessionalFaceBreaker.class));
+        cards.add(new SetCardInfo("Professor Hojo", 161, Rarity.RARE, mage.cards.p.ProfessorHojo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Professor Hojo", 69, Rarity.RARE, mage.cards.p.ProfessorHojo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Promise of Loyalty", 249, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Propaganda", 268, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Protection Magic", 107, Rarity.RARE, mage.cards.p.ProtectionMagic.class, NON_FULL_USE_VARIOUS));
