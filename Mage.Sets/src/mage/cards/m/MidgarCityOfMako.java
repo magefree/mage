@@ -31,10 +31,11 @@ public final class MidgarCityOfMako extends AdventureCard {
 
         // Reactor Raid
         // You may sacrifice an artifact or creature. If you do, draw two cards.
-        this.getSpellAbility().addEffect(new DoIfCostPaid(
+        this.getSpellCard().getSpellAbility().addEffect(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(2),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE)
         ));
+        this.finalizeAdventure();
     }
 
     private MidgarCityOfMako(final MidgarCityOfMako card) {
