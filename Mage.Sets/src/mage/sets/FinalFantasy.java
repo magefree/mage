@@ -64,6 +64,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Barret Wallace", 584, Rarity.UNCOMMON, mage.cards.b.BarretWallace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bartz and Boko", 175, Rarity.RARE, mage.cards.b.BartzAndBoko.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bartz and Boko", 469, Rarity.RARE, mage.cards.b.BartzAndBoko.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Battle Menu", 9, Rarity.UNCOMMON, mage.cards.b.BattleMenu.class));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 426, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 554, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Mage's Rod", 90, Rarity.COMMON, mage.cards.b.BlackMagesRod.class));
