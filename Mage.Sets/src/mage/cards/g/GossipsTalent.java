@@ -1,10 +1,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
-import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.*;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
@@ -59,11 +56,10 @@ public final class GossipsTalent extends CardImpl {
 
         // Whenever a creature you control deals combat damage to a player, you may exile it, then return it to the battlefield under its owner's control.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
-                new OneOrMoreCombatDamagePlayerTriggeredAbility(
-                        Zone.BATTLEFIELD,
+                new DealsDamageToAPlayerAllTriggeredAbility(
                         new ExileThenReturnTargetEffect(false, false)
                                 .setText("exile it, then return it to the battlefield under its owner's control"),
-                        StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT, true
+                        StaticFilters.FILTER_PERMANENT_CREATURE, true, SetTargetPointer.PERMANENT, true
                 ), 3
         )));
     }
