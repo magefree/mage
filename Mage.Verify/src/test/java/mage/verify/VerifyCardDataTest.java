@@ -2002,7 +2002,7 @@ public class VerifyCardDataTest {
     }
 
     Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|the copy|each copy|with one or more|could|it) )targets?|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow|soulshift|provoke)\\b(?! (cost|abilit))", Pattern.MULTILINE);
-    Pattern recursiveTargetRegexPattern = Pattern.compile("\\b((?!^)when|gain|have|has|\\. At the beginning|with|until)\\b(.|—\\n)*targets?\\b", Pattern.MULTILINE);
+    Pattern recursiveTargetRegexPattern = Pattern.compile("\\b((?<!^|— )when(ever)?|gain|have|has|\\. At the beginning|with|until)\\b(.|—\\n)*targets?\\b", Pattern.MULTILINE);
 
     boolean recursiveTargetEffectCheck(Effect effect, int depth) {
         if (depth > 5){
