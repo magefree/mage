@@ -48,6 +48,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Astrologian's Planisphere", 46, Rarity.RARE, mage.cards.a.AstrologiansPlanisphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrologian's Planisphere", 581, Rarity.RARE, mage.cards.a.AstrologiansPlanisphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Auron's Inspiration", 8, Rarity.UNCOMMON, mage.cards.a.AuronsInspiration.class));
+        cards.add(new SetCardInfo("Bahamut, Warden of Light", 16, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bahamut, Warden of Light", 376, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bahamut, Warden of Light", 428, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balamb Garden, Airborne", 272, Rarity.RARE, mage.cards.b.BalambGardenAirborne.class));
         cards.add(new SetCardInfo("Balamb Garden, SeeD Academy", 272, Rarity.RARE, mage.cards.b.BalambGardenSeeDAcademy.class));
         cards.add(new SetCardInfo("Balamb T-Rexaur", 173, Rarity.COMMON, mage.cards.b.BalambTRexaur.class));
@@ -130,6 +133,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Confidant", 334, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 94, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deadly Embrace", 557, Rarity.RARE, mage.cards.d.DeadlyEmbrace.class));
+        cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 16, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 376, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 428, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragoon's Lance", 17, Rarity.UNCOMMON, mage.cards.d.DragoonsLance.class));
         cards.add(new SetCardInfo("Dragoon's Wyvern", 49, Rarity.COMMON, mage.cards.d.DragoonsWyvern.class));
         cards.add(new SetCardInfo("Dreams of Laguna", 50, Rarity.COMMON, mage.cards.d.DreamsOfLaguna.class));
