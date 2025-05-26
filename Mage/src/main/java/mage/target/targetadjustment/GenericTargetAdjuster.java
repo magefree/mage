@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.target.Target;
 
 public abstract class GenericTargetAdjuster implements TargetAdjuster {
-    protected Target blueprintTarget = null;
+    public Target blueprintTarget = null;
 
     @Override
     public void addDefaultTargets(Ability ability) {

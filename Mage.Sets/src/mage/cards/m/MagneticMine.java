@@ -26,7 +26,7 @@ public final class MagneticMine extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         // Whenever another artifact is put into a graveyard from the battlefield, Magnetic Mine deals 2 damage to that artifact’s controller.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
-                new DamageTargetControllerEffect(2), false, filter, true));
+                new DamageTargetControllerEffect(2, "artifact"), false, filter, true));
     }
 
     private MagneticMine(final MagneticMine card) {

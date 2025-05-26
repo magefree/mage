@@ -4,7 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.game.Game;
 import mage.target.Target;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.Targets;
+import mage.target.targetadjustment.GenericTargetAdjuster;
 import mage.target.targetpointer.TargetPointer;
 
 /**
@@ -13,13 +14,13 @@ import mage.target.targetpointer.TargetPointer;
 public class OneShotNonTargetEffect extends OneShotEffect {
     OneShotEffect effect;
     Target notTarget;
-    TargetAdjuster adjuster;
+    GenericTargetAdjuster adjuster;
 
     public OneShotNonTargetEffect(OneShotEffect effect, Target notTarget) {
         this(effect, notTarget, null);
     }
 
-    public OneShotNonTargetEffect(OneShotEffect effect, Target notTarget, TargetAdjuster adjuster) {
+    public OneShotNonTargetEffect(OneShotEffect effect, Target notTarget, GenericTargetAdjuster adjuster) {
         super(effect.outcome);
         this.effect = effect;
         this.notTarget = notTarget;
@@ -44,8 +45,17 @@ public class OneShotNonTargetEffect extends OneShotEffect {
         Ability modifiedSource = source.copy();
         modifiedSource.addTarget(target);
         if (adjuster != null) {
+            if (adjuster.blueprintTarget == null) {
+                adjuster.addDefaultTargets(modifiedSource);
+            }
             adjuster.adjustTargets(modifiedSource, game);
+            Targets adjustedTargets = modifiedSource.getTargets();
+            if (adjustedTargets.isEmpty()) { //if adjusted to have no targets, apply anyway
+                return effect.apply(game, modifiedSource);
+            }
+            target = modifiedSource.getTargets().get(0);
         }
+
         if (target.canChoose(source.getControllerId(), modifiedSource, game)) {
             target.choose(this.outcome, source.getControllerId(), modifiedSource, game);
             return effect.apply(game, modifiedSource);

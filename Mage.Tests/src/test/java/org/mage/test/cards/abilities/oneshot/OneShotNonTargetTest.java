@@ -29,4 +29,26 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Resolute Reinforcements", 1);
         assertTappedCount("Plains", true, 7);
     }
+    @Test
+    public void TemporalFirestormTest() {
+        addCard(Zone.HAND, playerA, "Temporal Firestorm");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Squire");
+        addCard(Zone.BATTLEFIELD, playerA, "Python");
+        addCard(Zone.BATTLEFIELD, playerA, "Watchwolf");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Temporal Firestorm");
+        setChoice(playerA, true);
+        setChoice(playerA, true);
+        setChoice(playerA, "Squire^Python");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertGraveyardCount(playerA, "Squire", 0);
+        assertGraveyardCount(playerA, "Python", 0);
+        assertGraveyardCount(playerA, "Watchwolf", 1);
+    }
 }
