@@ -2,13 +2,17 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.MageObjectReference;
+import mage.abilities.Ability;
 import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
@@ -16,10 +20,10 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetadjustment.GenericTargetAdjuster;
 
 import java.util.UUID;
 
@@ -44,7 +48,10 @@ public final class ColfenorTheLastYew extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Whenever Colfenor, the Last Yew or another creature you control dies, return up to one other target creature card with lesser toughness from your graveyard to your hand.
-        this.addAbility(new ColfenorTheLastYewTriggeredAbility());
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false, StaticFilters.FILTER_CONTROLLED_CREATURE);
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, new FilterCreatureCard("other target creature card with lesser toughness")));
+        ability.setTargetAdjuster(new ColfenorTheLastYewTargetAdjuster());
+        this.addAbility(ability);
     }
 
     private ColfenorTheLastYew(final ColfenorTheLastYew card) {
@@ -56,43 +63,15 @@ public final class ColfenorTheLastYew extends CardImpl {
         return new ColfenorTheLastYew(this);
     }
 }
-
-class ColfenorTheLastYewTriggeredAbility extends DiesThisOrAnotherTriggeredAbility {
-
-    ColfenorTheLastYewTriggeredAbility() {
-        super(new ReturnFromGraveyardToHandTargetEffect(), false, StaticFilters.FILTER_CONTROLLED_CREATURE);
-    }
-
-    private ColfenorTheLastYewTriggeredAbility(final ColfenorTheLastYewTriggeredAbility ability) {
-        super(ability);
-    }
-
+class ColfenorTheLastYewTargetAdjuster extends GenericTargetAdjuster {
     @Override
-    public DiesThisOrAnotherTriggeredAbility copy() {
-        return new ColfenorTheLastYewTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        Permanent permanent = zEvent.getTarget();
-        if (permanent == null) {
-            return false;
-        }
+    public void adjustTargets(Ability ability, Game game) {
+        Permanent permanent = (Permanent)ability.getEffects().get(0).getValue("creatureDied");
+        ability.getTargets().clear();
+        Target newTarget = blueprintTarget.copy();
         FilterCard filterCard = new FilterCreatureCard("creature card with toughness less than " + permanent.getToughness().getValue());
         filterCard.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, permanent.getToughness().getValue()));
         filterCard.add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(permanent, game))));
-        this.getTargets().clear();
-        this.addTarget(new TargetCardInYourGraveyard(0, 1, filterCard));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} or another creature you control dies, return up to one other target creature card " +
-                "with lesser toughness from your graveyard to your hand.";
+        ability.addTarget(newTarget);
     }
 }
