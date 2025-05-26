@@ -81,7 +81,7 @@ public class OneShotNonTargetEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         Mode modeCopy = mode.copy();
-        mode.addTarget(notTarget);
+        modeCopy.addTarget(notTarget);
         return effect.getText(modeCopy);
     }
 }
