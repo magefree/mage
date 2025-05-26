@@ -50,7 +50,7 @@ public final class FelineSovereign extends CardImpl {
         this.addAbility(ability);
 
         // Whenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls.
-        Ability ability2 = new OneOrMoreCombatDamagePlayerTriggeredAbility(new DestroyTargetEffect(), filterCat, SetTargetPointer.PLAYER);
+        Ability ability2 = new OneOrMoreCombatDamagePlayerTriggeredAbility(new DestroyTargetEffect(), SetTargetPointer.PLAYER, filterCat, false);
         ability2.addTarget(new TargetPermanent(0, 1, new FilterArtifactOrEnchantmentPermanent("artifact or enchantment that player controls")));
         ability2.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
         this.addAbility(ability2);
