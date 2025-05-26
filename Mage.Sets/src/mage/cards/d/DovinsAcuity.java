@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.IsMainPhaseCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -20,7 +19,7 @@ import java.util.UUID;
  */
 public final class DovinsAcuity extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell();
+    private static final FilterSpell filter = new FilterSpell("an instant spell");
 
     static {
         filter.add(CardType.INSTANT.getPredicate());
@@ -35,13 +34,9 @@ public final class DovinsAcuity extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you cast an instant spell during your main phase, you may return Dovin's Acuity to its owner's hand.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(
-                        new ReturnToHandSourceEffect(true), filter, true
-                ), IsMainPhaseCondition.YOUR,
-                "Whenever you cast an instant spell during your main phase, " +
-                        "you may return {this} to its owner's hand."
-        ));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new ReturnToHandSourceEffect(true), filter, true
+        ).withTriggerCondition(IsMainPhaseCondition.YOUR).setTriggerPhrase("Whenever you cast an instant spell during your main phase, "));
     }
 
     private DovinsAcuity(final DovinsAcuity card) {

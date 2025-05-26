@@ -1,10 +1,9 @@
 package mage.cards.i;
 
-import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -12,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.mageobject.PermanentPredicate;
@@ -20,7 +18,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -31,12 +28,10 @@ public final class InSearchOfGreatness extends CardImpl {
     public InSearchOfGreatness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
 
-        // At the beginning of your upkeep, you may cast a permanent spell from your hand with converted mana cost
-        // equal to 1 plus the highest converted mana cost among other permanents you control
-        // without paying its mana cost. If you don't, scry 1.
+        // At the beginning of your upkeep, you may cast a permanent spell from your hand with converted mana cost equal to 1 plus the greatest mana value among other permanents you control without paying its mana cost. If you don't, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new InSearchOfGreatnessEffect()
-        ));
+        ).addHint(GreatestAmongPermanentsValue.MANAVALUE_OTHER_CONTROLLED_PERMANENTS.getHint()));
     }
 
     private InSearchOfGreatness(final InSearchOfGreatness card) {
@@ -73,16 +68,7 @@ class InSearchOfGreatnessEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        MageObjectReference sourceRef = new MageObjectReference(source);
-        int manaValue = game
-                .getBattlefield()
-                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT, controller.getId(), game)
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(permanent -> !sourceRef.refersTo(permanent, game))
-                .mapToInt(MageObject::getManaValue)
-                .max()
-                .orElse(0);
+        int manaValue = GreatestAmongPermanentsValue.MANAVALUE_OTHER_CONTROLLED_PERMANENTS.calculate(game, source, this);
         FilterCard filter = new FilterPermanentCard();
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, manaValue + 1));
         filter.add(PermanentPredicate.instance);

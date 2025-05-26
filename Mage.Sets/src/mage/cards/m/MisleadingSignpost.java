@@ -1,11 +1,9 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.combat.ReselectDefenderAttackedByTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.mana.BlueManaAbility;
@@ -15,26 +13,25 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.target.common.TargetAttackingCreature;
 
+import java.util.UUID;
 
 /**
- *
  * @author Xanderhall
  */
 public final class MisleadingSignpost extends CardImpl {
 
+    private static final Condition condition = new IsStepCondition(PhaseStep.DECLARE_ATTACKERS, false);
+
     public MisleadingSignpost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}");
-        
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
         // When Misleading Signpost enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking.
-        Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReselectDefenderAttackedByTargetEffect(true), true),
-                new IsStepCondition(PhaseStep.DECLARE_ATTACKERS, false),
-                "When {this} enters during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. "
-                + "<i>(It can't attack its controller or their permanents)</i>");
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new ReselectDefenderAttackedByTargetEffect(true), true
+        ).withTriggerCondition(condition);
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
 

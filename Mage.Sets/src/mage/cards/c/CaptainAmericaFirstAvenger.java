@@ -1,23 +1,26 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.EarlyTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
-import mage.constants.*;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterEquipmentPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -30,21 +33,16 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTargetAmount;
 
+import java.util.UUID;
+
 /**
- *
  * @author Grath
  */
 public final class CaptainAmericaFirstAvenger extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterEquipmentPermanent("Equipment you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public CaptainAmericaFirstAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{U}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
@@ -65,7 +63,7 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
         ability = new BeginningOfCombatTriggeredAbility(
                 new CaptainAmericaFirstAvengerCatchEffect()
         );
-        ability.addTarget(new TargetPermanent(0, 1, filter));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT));
         this.addAbility(ability.withFlavorWord("... Catch"));
     }
 

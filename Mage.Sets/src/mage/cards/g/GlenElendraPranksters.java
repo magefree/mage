@@ -1,11 +1,9 @@
-
 package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.common.OnOpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.condition.common.OpponentsTurnCondition;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -17,7 +15,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author Markedagain
  */
 public final class GlenElendraPranksters extends CardImpl {
@@ -31,11 +28,11 @@ public final class GlenElendraPranksters extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand.
-        Ability ability = new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new ReturnToHandTargetEffect(), true), OnOpponentsTurnCondition.instance,
-                "Whenever you cast a spell during an opponent's turn, you may return target creature you control to its owner's hand."
-        );
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new ReturnToHandTargetEffect(), true
+        ).withTriggerCondition(OpponentsTurnCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

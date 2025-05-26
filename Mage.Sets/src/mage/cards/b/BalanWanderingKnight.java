@@ -4,7 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.EquippedMultipleSourceCondition;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -15,6 +16,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterEquipmentPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -25,7 +30,14 @@ import java.util.UUID;
  */
 public final class BalanWanderingKnight extends CardImpl {
 
-    private static final String rule = "{this} has double strike as long as two or more Equipment are attached to it.";
+    private static final FilterPermanent filter = new FilterEquipmentPermanent();
+
+    static {
+        filter.add(BalanWanderingKnightPredicate.instance);
+    }
+
+    private static final Condition condition
+            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 1, false);
 
     public BalanWanderingKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
@@ -38,8 +50,10 @@ public final class BalanWanderingKnight extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Balan, Wandering Knight has double strike as long as two or more Equipment are attached to it.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()), EquippedMultipleSourceCondition.instance, rule);
-        this.addAbility(new SimpleStaticAbility(effect));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()), condition,
+                "{this} has double strike as long as two or more Equipment are attached to it."
+        )));
 
         // {1}{W}: Attach all Equipment you control to Balan.
         this.addAbility(new SimpleActivatedAbility(new BalanWanderingKnightEffect(), new ManaCostsImpl<>("{1}{W}")));
@@ -54,39 +68,44 @@ public final class BalanWanderingKnight extends CardImpl {
         return new BalanWanderingKnight(this);
     }
 
-    static class BalanWanderingKnightEffect extends OneShotEffect {
+}
 
-        public BalanWanderingKnightEffect() {
-            super(Outcome.Benefit);
-            this.staticText = "Attach all Equipment you control to {this}.";
-        }
+enum BalanWanderingKnightPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
-        private BalanWanderingKnightEffect(final BalanWanderingKnightEffect effect) {
-            super(effect);
-        }
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return input.getObject().isAttachedTo(input.getSourceId());
+    }
+}
 
-        @Override
-        public BalanWanderingKnightEffect copy() {
-            return new BalanWanderingKnightEffect(this);
-        }
+class BalanWanderingKnightEffect extends OneShotEffect {
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent balan = game.getPermanent(source.getSourceId());
-            if (balan != null) {
-                FilterPermanent filter = new FilterPermanent();
-                filter.add(SubType.EQUIPMENT.getPredicate());
-                for (Permanent equipment : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                    if (equipment != null) {
-                        //If an Equipment can't equip, it isn't attached, and it doesn't become unattached (if it's attached to a creature).
-                        if (!balan.cantBeAttachedBy(equipment, source, game, false)) {
-                            balan.addAttachment(equipment.getId(), source, game);
-                        }
-                    }
-                }
-                return true;
-            }
+    BalanWanderingKnightEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "attach all Equipment you control to {this}.";
+    }
+
+    private BalanWanderingKnightEffect(final BalanWanderingKnightEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public BalanWanderingKnightEffect copy() {
+        return new BalanWanderingKnightEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
             return false;
         }
+        for (Permanent equipment : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT, source.getControllerId(), source, game
+        )) {
+            permanent.addAttachment(equipment.getId(), source, game);
+        }
+        return true;
     }
 }

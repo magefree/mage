@@ -19,6 +19,7 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
         return "EDH: " + getPowerLevel(sample);
     }
 
+    // TODO: it's outdated code, must migrate to shared code from AbstractCommander
     private int getPowerLevel(CardView card) {
 
         int thisMaxPower = 0;

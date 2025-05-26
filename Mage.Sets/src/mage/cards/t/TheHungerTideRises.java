@@ -9,11 +9,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,12 +53,6 @@ public final class TheHungerTideRises extends CardImpl {
 
 //Based on Scapeshift
 class HungerTideSacrificeSearchEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterControlledPermanent("other permanents you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     HungerTideSacrificeSearchEffect() {
         super(Outcome.Benefit);

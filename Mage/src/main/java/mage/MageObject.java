@@ -77,16 +77,12 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     /**
      * Return original object's subtypes
-     *
-     * @return
      */
     SubTypes getSubtype();
 
     /**
-     * Return full subtypes list (from object, from effects)
-     *
-     * @param game
-     * @return
+     * Return full subtypes list (from object, from effects).
+     * Don't use this to check if an object has a subtype, use hasSubtype for that which accounts for changelings
      */
     SubTypes getSubtype(Game game);
 

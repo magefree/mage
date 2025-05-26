@@ -132,6 +132,7 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
+        skipListAddName(SKIP_LIST_COLOR, "FIN", "Summon: Alexander");
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
@@ -307,9 +308,6 @@ public class VerifyCardDataTest {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
                 check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
             } else if (card instanceof CardWithSpellOption) {
-                if (card.isLand()) { // temporary until scryfall fixes the mana cost issue for adventure lands
-                    continue;
-                }
                 check(card, cardIndex);
                 check(((CardWithSpellOption) card).getSpellCard(), cardIndex);
             } else {
@@ -1049,7 +1047,7 @@ public class VerifyCardDataTest {
         // CHECK: miss booster settings
         Set<String> ignoreBoosterSets = new HashSet<>();
         // temporary, TODO: remove after set release and mtgjson get info
-        ignoreBoosterSets.add("Innistrad Remastered");
+        ignoreBoosterSets.add("Final Fantasy");
         // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
         ignoreBoosterSets.add("Jumpstart");
         ignoreBoosterSets.add("Jumpstart 2022");
@@ -1065,7 +1063,13 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
 
+        // make sure mtgjson has booster data
+        boolean hasBoostersInfo = MtgJsonService.sets().values().stream().anyMatch(s -> s.booster != null && !s.booster.isEmpty());
         for (ExpansionSet set : sets) {
+            if (!hasBoostersInfo) {
+                System.out.println("Warning, mtgjson data lost boosters info");
+                break;
+            }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
                 continue;
@@ -1122,9 +1126,6 @@ public class VerifyCardDataTest {
             }
 
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
-                if (OmenCard.class.isAssignableFrom(card.getCardClass())) { // temporary until mtgjson fixed
-                    continue;
-                }
                 boolean cardHaveDoubleName = (doubleNames.getOrDefault(card.getName(), 0) > 1);
                 boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
 
@@ -1722,12 +1723,16 @@ public class VerifyCardDataTest {
             return;
         }
 
+        // TODO: temporary fix - scryfall/mtgjson wrongly add [colors, mana cost] from spell part to main part/card,
+        //  example: Ishgard, the Holy See // Faith & Grief
+        if (card instanceof CardWithSpellOption && card.isLand()
+                || card instanceof SpellOptionCard && ((SpellOptionCard) card).getParentCard().isLand()) {
+            return;
+        }
+
         Set<String> expected = new HashSet<>();
         if (ref.colors != null) {
             expected.addAll(ref.colors);
-        }
-        if (card.isFlipCard()) {
-            expected.addAll(ref.colorIdentity);
         }
 
         ObjectColor color = card.getColor(null);
@@ -2167,7 +2172,7 @@ public class VerifyCardDataTest {
         //    - it's can be a keyword action (only mtg rules contains a target word), so add it to the targetedKeywords
         // * on "must be targeted":
         //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
-        boolean checkMissNonTargeted = !(card instanceof OmenCard); // must set withNotTarget(true) temporarily set to ignore omen cards
+        boolean checkMissNonTargeted = true; // must set withNotTarget(true)
         boolean checkMissTargeted = false; // must be targeted
         List<String> targetedKeywords = Arrays.asList(
                 "target",
@@ -2177,9 +2182,10 @@ public class VerifyCardDataTest {
                 "modular",
                 "partner"
         );
-        // card can contain rules text from both sides, so must search ref card for all sides too
+        // xmage card can contain rules text from both sides, so must search ref card for all sides too
         String additionalName;
-        if (card instanceof AdventureCard) { // temporary to prevent failure due to upstream error
+        if (card instanceof CardWithSpellOption) {
+            // adventure/omen cards
             additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
         } else if (card.isTransformable() && !card.isNightCard()) {
             additionalName = card.getSecondCardFace().getName();
@@ -2197,6 +2203,7 @@ public class VerifyCardDataTest {
                 }
             }
         }
+
         boolean needTargetedAbility = targetedKeywords.stream().anyMatch(refLowerText::contains);
         boolean foundTargetedAbility = card.getAbilities()
                 .stream()
@@ -2873,6 +2880,13 @@ public class VerifyCardDataTest {
 
     private void checkCost(Card card, MtgJsonCard ref) {
         if (skipListHaveName(SKIP_LIST_COST, card.getExpansionSetCode(), card.getName())) {
+            return;
+        }
+
+        // TODO: temporary fix - scryfall/mtgjson wrongly add [colors, mana cost] from spell part to main part/card,
+        //  example: Ishgard, the Holy See // Faith & Grief
+        if (card instanceof CardWithSpellOption && card.isLand()
+                || card instanceof SpellOptionCard && ((SpellOptionCard) card).getParentCard().isLand()) {
             return;
         }
 

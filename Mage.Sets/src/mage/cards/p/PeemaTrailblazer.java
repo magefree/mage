@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -42,11 +42,10 @@ public final class PeemaTrailblazer extends CardImpl {
         final Ability ability = new ExhaustAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new PayEnergyCost(6)
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance));
-        ability.addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
+        ability.addEffect(new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
+                .setText("Then draw cards equal to the greatest power among creatures you control"));
+        ability.addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.addAbility(ability);
-
-
     }
 
     private PeemaTrailblazer(final PeemaTrailblazer card) {

@@ -268,12 +268,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_AUTO_TARGET_LEVEL = "autoTargetLevel";
 
     // pref setting for deck generator
+    public static final String KEY_NEW_DECK_GENERATOR_COLORS = "newDeckGeneratorDeckColors";
     public static final String KEY_NEW_DECK_GENERATOR_DECK_SIZE = "newDeckGeneratorDeckSize";
     public static final String KEY_NEW_DECK_GENERATOR_SET = "newDeckGeneratorSet";
     public static final String KEY_NEW_DECK_GENERATOR_SINGLETON = "newDeckGeneratorSingleton";
     public static final String KEY_NEW_DECK_GENERATOR_ARTIFACTS = "newDeckGeneratorArtifacts";
     public static final String KEY_NEW_DECK_GENERATOR_NON_BASIC_LANDS = "newDeckGeneratorNonBasicLands";
     public static final String KEY_NEW_DECK_GENERATOR_COLORLESS = "newDeckGeneratorColorless";
+    public static final String KEY_NEW_DECK_GENERATOR_COMMANDER = "newDeckGeneratorCommander";
     public static final String KEY_NEW_DECK_GENERATOR_ADVANCED = "newDeckGeneratorAdvanced";
     public static final String KEY_NEW_DECK_GENERATOR_CREATURE_PERCENTAGE = "newDeckGeneratorCreaturePercentage";
     public static final String KEY_NEW_DECK_GENERATOR_NON_CREATURE_PERCENTAGE = "newDeckGeneratorNonCreaturePercentage";

@@ -3,7 +3,6 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.GreenManaAbility;
@@ -35,11 +34,9 @@ public final class RubyDaringTracker extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Ruby, Daring Tracker attacks while you control a creature with power 4 or greater, Ruby gets +2/+2 until end of turn.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new AttacksTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false),
-                FerociousCondition.instance,
-                "Whenever {this} attacks while you control a creature with power 4 or greater, {this} gets +2/+2 until end of turn."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn), false
+        ).withTriggerCondition(FerociousCondition.instance));
 
         // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
