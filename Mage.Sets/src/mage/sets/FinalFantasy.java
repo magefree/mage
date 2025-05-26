@@ -45,6 +45,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ardyn, the Usurper", 444, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ardyn, the Usurper", 524, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ardyn, the Usurper", 89, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashe, Princess of Dalmasca", 425, Rarity.UNCOMMON, mage.cards.a.AshePrincessOfDalmasca.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ashe, Princess of Dalmasca", 7, Rarity.UNCOMMON, mage.cards.a.AshePrincessOfDalmasca.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrologian's Planisphere", 46, Rarity.RARE, mage.cards.a.AstrologiansPlanisphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Astrologian's Planisphere", 581, Rarity.RARE, mage.cards.a.AstrologiansPlanisphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Auron's Inspiration", 8, Rarity.UNCOMMON, mage.cards.a.AuronsInspiration.class));
