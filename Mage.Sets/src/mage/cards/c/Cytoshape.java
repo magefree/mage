@@ -73,7 +73,7 @@ class CytoshapeEffect extends OneShotEffect {
         target.choose(Outcome.Copy, ability.getControllerId(), ability, game);
         Permanent copyFrom = game.getPermanent(target.getFirstTarget());
         if (copyFrom != null) {
-            Permanent copyTo = game.getPermanentOrLKIBattlefield(ability.getTargets().get(1).getFirstTarget());
+            Permanent copyTo = game.getPermanentOrLKIBattlefield(ability.getTargets().get(0).getFirstTarget());
             if (copyTo != null) {
                 game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), ability, new EmptyCopyApplier());
             }
