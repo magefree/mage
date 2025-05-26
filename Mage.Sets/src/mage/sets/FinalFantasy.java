@@ -265,6 +265,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Malboro", 106, Rarity.COMMON, mage.cards.m.Malboro.class));
         cards.add(new SetCardInfo("Matoya, Archon Elder", 439, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Matoya, Archon Elder", 62, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Midgar, City of Mako", 286, Rarity.RARE, mage.cards.m.MidgarCityOfMako.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Midgar, City of Mako", 313, Rarity.RARE, mage.cards.m.MidgarCityOfMako.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moogles' Valor", 27, Rarity.RARE, mage.cards.m.MooglesValor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moogles' Valor", 326, Rarity.RARE, mage.cards.m.MooglesValor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 303, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
