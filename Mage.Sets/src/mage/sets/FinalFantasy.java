@@ -237,6 +237,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Joshua, Phoenix's Dominant", 397, Rarity.RARE, mage.cards.j.JoshuaPhoenixsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Joshua, Phoenix's Dominant", 494, Rarity.RARE, mage.cards.j.JoshuaPhoenixsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Joshua, Phoenix's Dominant", 542, Rarity.RARE, mage.cards.j.JoshuaPhoenixsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Judge Magister Gabranth", 230, Rarity.UNCOMMON, mage.cards.j.JudgeMagisterGabranth.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Judge Magister Gabranth", 495, Rarity.UNCOMMON, mage.cards.j.JudgeMagisterGabranth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Judgment Bolt", 559, Rarity.RARE, mage.cards.j.JudgmentBolt.class));
         cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 343, Rarity.RARE, mage.cards.j.JumboCactuar.class, NON_FULL_USE_VARIOUS));
