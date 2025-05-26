@@ -33,6 +33,9 @@ public final class SOLDIERMilitaryProgram extends CardImpl {
         // * Create a 1/1 white Soldier creature token.
         Ability ability = new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new SoldierToken()));
         ability.getModes().setMoreCondition(2, ControlACommanderCondition.instance);
+        ability.getModes().setChooseText(
+                "choose one. If you control a commander, you may choose both instead."
+        );
 
         // * Put a +1/+1 counter on each of up to two Soldiers you control.
         ability.addMode(new Mode(new OneShotNonTargetEffect(

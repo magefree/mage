@@ -93,7 +93,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
             case NONE:
                 break;
             default:
-                throw new IllegalArgumentException("Unsupported SetTargetPointer in BecomesTargetSourceTriggeredAbility");
+                throw new IllegalArgumentException("Unsupported SetTargetPointer in DiesCreatureTriggeredAbility");
         }
         return true;
     }

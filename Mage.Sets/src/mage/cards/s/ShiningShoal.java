@@ -102,15 +102,13 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectionEffect {
 
             // get source of the damage event
             MageObject sourceObject = game.getObject(event.getSourceId());
-            // get the chosen damage source
-            MageObject chosenSourceObject = game.getObject(mageObjectReference.getSourceId());
             // does the source of the damage exist?
             if (sourceObject == null) {
                 game.informPlayers("Couldn't find source of damage");
                 return false;
             }
             // do the 2 objects match?
-            if (chosenSourceObject == null || !mageObjectReference.refersTo(sourceObject, game)) {
+            if (!mageObjectReference.refersTo(sourceObject, game)) {
                 return false;
             }
 

@@ -54,7 +54,7 @@ public final class Valleymaker extends CardImpl {
         
         // {tap}, Sacrifice a Forest: Choose a player. That player adds {G}{G}{G}.
         Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new ValleymakerManaEffect()
-                .setText("choose a player. That player adds {G}{G}{G}"), new TapSourceCost());
+                .setText("That player adds {G}{G}{G}"), new TapSourceCost());
         ability2.addCost(new SacrificeTargetCost(filter2));
         ability2.getEffects().add(0, new ChoosePlayerEffect(Outcome.PutManaInPool));
         this.addAbility(ability2);

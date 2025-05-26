@@ -32,9 +32,8 @@ public final class Cytoshape extends CardImpl {
         // Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.
         this.getSpellAbility().addEffect(new CytoshapeEffect());
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature that will become a copy of the chosen creature");
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature that will become a copy");
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-
     }
 
     private Cytoshape(final Cytoshape card) {
