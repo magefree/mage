@@ -146,6 +146,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Dreams of Laguna", 50, Rarity.COMMON, mage.cards.d.DreamsOfLaguna.class));
         cards.add(new SetCardInfo("Dwarven Castle Guard", 18, Rarity.COMMON, mage.cards.d.DwarvenCastleGuard.class));
         cards.add(new SetCardInfo("Eject", 52, Rarity.UNCOMMON, mage.cards.e.Eject.class));
+        cards.add(new SetCardInfo("Elixir", 256, Rarity.UNCOMMON, mage.cards.e.Elixir.class));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 218, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 394, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch, Unsundered", 483, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
