@@ -302,6 +302,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shineshadow Snarl", 422, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class));
         cards.add(new SetCardInfo("Siegfried, Famed Swordsman", 149, Rarity.RARE, mage.cards.s.SiegfriedFamedSwordsman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Siegfried, Famed Swordsman", 51, Rarity.RARE, mage.cards.s.SiegfriedFamedSwordsman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sin, Unending Cataclysm", 185, Rarity.RARE, mage.cards.s.SinUnendingCataclysm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sin, Unending Cataclysm", 95, Rarity.RARE, mage.cards.s.SinUnendingCataclysm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullclamp", 355, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 423, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Slayers' Stronghold", 424, Rarity.RARE, mage.cards.s.SlayersStronghold.class));
