@@ -443,6 +443,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("The Earth Crystal", 342, Rarity.RARE, mage.cards.t.TheEarthCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Emperor of Palamecia", 219, Rarity.UNCOMMON, mage.cards.t.TheEmperorOfPalamecia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Emperor of Palamecia", 484, Rarity.UNCOMMON, mage.cards.t.TheEmperorOfPalamecia.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Final Days", 101, Rarity.UNCOMMON, mage.cards.t.TheFinalDays.class));
         cards.add(new SetCardInfo("The Fire Crystal", 135, Rarity.RARE, mage.cards.t.TheFireCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fire Crystal", 337, Rarity.RARE, mage.cards.t.TheFireCrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Gold Saucer", 279, Rarity.UNCOMMON, mage.cards.t.TheGoldSaucer.class));
