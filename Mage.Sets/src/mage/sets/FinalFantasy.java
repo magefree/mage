@@ -101,6 +101,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 215, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco, Seeker of Paradise", 479, Rarity.RARE, mage.cards.c.ChocoSeekerOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Choco-Comet", 132, Rarity.UNCOMMON, mage.cards.c.ChocoComet.class));
+        cards.add(new SetCardInfo("Chocobo Racetrack", 179, Rarity.UNCOMMON, mage.cards.c.ChocoboRacetrack.class));
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 216, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 407, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cid, Timeless Artificer", 408, Rarity.UNCOMMON, mage.cards.c.CidTimelessArtificer.class, NON_FULL_USE_VARIOUS));
