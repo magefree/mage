@@ -85,6 +85,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Buster Sword", 255, Rarity.MYTHIC, mage.cards.b.BusterSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Buster Sword", 351, Rarity.MYTHIC, mage.cards.b.BusterSword.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cactuar", 177, Rarity.UNCOMMON, mage.cards.c.Cactuar.class));
+        cards.add(new SetCardInfo("Call the Mountain Chocobo", 131, Rarity.COMMON, mage.cards.c.CallTheMountainChocobo.class));
         cards.add(new SetCardInfo("Capital City", 274, Rarity.UNCOMMON, mage.cards.c.CapitalCity.class));
         cards.add(new SetCardInfo("Cargo Ship", 47, Rarity.UNCOMMON, mage.cards.c.CargoShip.class));
         cards.add(new SetCardInfo("Cecil, Dark Knight", 380, Rarity.RARE, mage.cards.c.CecilDarkKnight.class, NON_FULL_USE_VARIOUS));
