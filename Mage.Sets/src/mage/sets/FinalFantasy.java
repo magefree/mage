@@ -306,6 +306,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Midgar, City of Mako", 313, Rarity.RARE, mage.cards.m.MidgarCityOfMako.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minwu, White Mage", 26, Rarity.RARE, mage.cards.m.MinwuWhiteMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minwu, White Mage", 430, Rarity.RARE, mage.cards.m.MinwuWhiteMage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Monk's Fist", 265, Rarity.COMMON, mage.cards.m.MonksFist.class));
         cards.add(new SetCardInfo("Moogles' Valor", 27, Rarity.RARE, mage.cards.m.MooglesValor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moogles' Valor", 326, Rarity.RARE, mage.cards.m.MooglesValor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 303, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
