@@ -35,6 +35,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Aerith Gainsborough", 4, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 423, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 519, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Aerith Rescue Mission", 5, Rarity.COMMON, mage.cards.a.AerithRescueMission.class));
         cards.add(new SetCardInfo("Aettir and Priwen", 253, Rarity.MYTHIC, mage.cards.a.AettirAndPriwen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aettir and Priwen", 350, Rarity.MYTHIC, mage.cards.a.AettirAndPriwen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ahriman", 87, Rarity.COMMON, mage.cards.a.Ahriman.class));
