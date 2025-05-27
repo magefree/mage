@@ -17,8 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.permanent.AttachedToSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -32,7 +31,7 @@ public final class BalanWanderingKnight extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent(SubType.EQUIPMENT, "");
 
     static {
-        filter.add(BalanWanderingKnightPredicate.instance);
+        filter.add(AttachedToSourcePredicate.instance);
     }
 
     private static final Condition condition
@@ -67,15 +66,6 @@ public final class BalanWanderingKnight extends CardImpl {
         return new BalanWanderingKnight(this);
     }
 
-}
-
-enum BalanWanderingKnightPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject().isAttachedTo(input.getSourceId());
-    }
 }
 
 class BalanWanderingKnightEffect extends OneShotEffect {

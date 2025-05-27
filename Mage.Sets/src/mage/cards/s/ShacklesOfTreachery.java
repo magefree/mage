@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -14,10 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.AttachedToSourcePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -32,7 +28,7 @@ public final class ShacklesOfTreachery extends CardImpl {
             = new FilterPermanent(SubType.EQUIPMENT, "Equipment attached to it");
 
     static {
-        filter.add(ShacklesOfTreacheryPredicate.instance);
+        filter.add(AttachedToSourcePredicate.instance);
     }
 
     public ShacklesOfTreachery(UUID ownerId, CardSetInfo setInfo) {
@@ -62,15 +58,5 @@ public final class ShacklesOfTreachery extends CardImpl {
     @Override
     public ShacklesOfTreachery copy() {
         return new ShacklesOfTreachery(this);
-    }
-}
-
-enum ShacklesOfTreacheryPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
-        return permanent != null && permanent.getAttachments().contains(input.getObject().getId());
     }
 }
