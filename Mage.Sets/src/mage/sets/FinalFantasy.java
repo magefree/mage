@@ -53,8 +53,11 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Bahamut, Warden of Light", 16, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bahamut, Warden of Light", 376, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bahamut, Warden of Light", 428, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Balamb Garden, Airborne", 272, Rarity.RARE, mage.cards.b.BalambGardenAirborne.class));
-        cards.add(new SetCardInfo("Balamb Garden, SeeD Academy", 272, Rarity.RARE, mage.cards.b.BalambGardenSeeDAcademy.class));
+        cards.add(new SetCardInfo("Bahamut, Warden of Light", 521, Rarity.RARE, mage.cards.b.BahamutWardenOfLight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Balamb Garden, Airborne", 272, Rarity.RARE, mage.cards.b.BalambGardenAirborne.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Balamb Garden, Airborne", 354, Rarity.RARE, mage.cards.b.BalambGardenAirborne.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Balamb Garden, SeeD Academy", 272, Rarity.RARE, mage.cards.b.BalambGardenSeeDAcademy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Balamb Garden, SeeD Academy", 354, Rarity.RARE, mage.cards.b.BalambGardenSeeDAcademy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balamb T-Rexaur", 173, Rarity.COMMON, mage.cards.b.BalambTRexaur.class));
         cards.add(new SetCardInfo("Balthier and Fran", 213, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balthier and Fran", 319, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
@@ -142,6 +145,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 16, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 376, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 428, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 521, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragoon's Lance", 17, Rarity.UNCOMMON, mage.cards.d.DragoonsLance.class));
         cards.add(new SetCardInfo("Dragoon's Wyvern", 49, Rarity.COMMON, mage.cards.d.DragoonsWyvern.class));
         cards.add(new SetCardInfo("Dreams of Laguna", 50, Rarity.COMMON, mage.cards.d.DreamsOfLaguna.class));
@@ -289,7 +293,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Matoya, Archon Elder", 62, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Midgar, City of Mako", 286, Rarity.RARE, mage.cards.m.MidgarCityOfMako.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Midgar, City of Mako", 313, Rarity.RARE, mage.cards.m.MidgarCityOfMako.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Minwu, White Mage", 26, Rarity.RARE, mage.cards.m.MinwuWhiteMage.class));
+        cards.add(new SetCardInfo("Minwu, White Mage", 26, Rarity.RARE, mage.cards.m.MinwuWhiteMage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Minwu, White Mage", 430, Rarity.RARE, mage.cards.m.MinwuWhiteMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moogles' Valor", 27, Rarity.RARE, mage.cards.m.MooglesValor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Moogles' Valor", 326, Rarity.RARE, mage.cards.m.MooglesValor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 303, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
@@ -341,6 +346,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Raubahn, Bull of Ala Mhigo", 151, Rarity.RARE, mage.cards.r.RaubahnBullOfAlaMhigo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raubahn, Bull of Ala Mhigo", 388, Rarity.RARE, mage.cards.r.RaubahnBullOfAlaMhigo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raubahn, Bull of Ala Mhigo", 465, Rarity.RARE, mage.cards.r.RaubahnBullOfAlaMhigo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Raubahn, Bull of Ala Mhigo", 533, Rarity.RARE, mage.cards.r.RaubahnBullOfAlaMhigo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reach the Horizon", 195, Rarity.UNCOMMON, mage.cards.r.ReachTheHorizon.class));
         cards.add(new SetCardInfo("Relm's Sketching", 67, Rarity.UNCOMMON, mage.cards.r.RelmsSketching.class));
         cards.add(new SetCardInfo("Reno and Rude", 113, Rarity.UNCOMMON, mage.cards.r.RenoAndRude.class, NON_FULL_USE_VARIOUS));
