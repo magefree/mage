@@ -185,6 +185,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Freya Crescent", 460, Rarity.UNCOMMON, mage.cards.f.FreyaCrescent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("From Father to Son", 20, Rarity.RARE, mage.cards.f.FromFatherToSon.class));
         cards.add(new SetCardInfo("G'raha Tia", 21, Rarity.UNCOMMON, mage.cards.g.GrahaTia.class));
+        cards.add(new SetCardInfo("Gaelicat", 22, Rarity.COMMON, mage.cards.g.Gaelicat.class));
         cards.add(new SetCardInfo("Gaius van Baelsar", 102, Rarity.UNCOMMON, mage.cards.g.GaiusVanBaelsar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gaius van Baelsar", 447, Rarity.UNCOMMON, mage.cards.g.GaiusVanBaelsar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Galian Beast", 125, Rarity.RARE, mage.cards.g.GalianBeast.class, NON_FULL_USE_VARIOUS));
