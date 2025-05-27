@@ -366,6 +366,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Restoration Magic", 30, Rarity.UNCOMMON, mage.cards.r.RestorationMagic.class));
         cards.add(new SetCardInfo("Retrieve the Esper", 68, Rarity.COMMON, mage.cards.r.RetrieveTheEsper.class));
         cards.add(new SetCardInfo("Ride the Shoopuf", 197, Rarity.UNCOMMON, mage.cards.r.RideTheShoopuf.class));
+        cards.add(new SetCardInfo("Ring of the Lucii", 269, Rarity.UNCOMMON, mage.cards.r.RingOfTheLucii.class));
         cards.add(new SetCardInfo("Rinoa Heartilly", 237, Rarity.UNCOMMON, mage.cards.r.RinoaHeartilly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rinoa Heartilly", 502, Rarity.UNCOMMON, mage.cards.r.RinoaHeartilly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rook Turret", 69, Rarity.COMMON, mage.cards.r.RookTurret.class));
