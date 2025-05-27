@@ -68,6 +68,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Balthier and Fran", 393, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balthier and Fran", 477, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balthier and Fran", 538, Rarity.RARE, mage.cards.b.BalthierAndFran.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bard's Bow", 174, Rarity.COMMON, mage.cards.b.BardsBow.class));
         cards.add(new SetCardInfo("Baron, Airship Kingdom", 273, Rarity.COMMON, mage.cards.b.BaronAirshipKingdom.class));
         cards.add(new SetCardInfo("Barret Wallace", 129, Rarity.UNCOMMON, mage.cards.b.BarretWallace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barret Wallace", 584, Rarity.UNCOMMON, mage.cards.b.BarretWallace.class, NON_FULL_USE_VARIOUS));
