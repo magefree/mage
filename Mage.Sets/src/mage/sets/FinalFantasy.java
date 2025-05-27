@@ -262,6 +262,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Kuja, Genome Sorcerer", 544, Rarity.RARE, mage.cards.k.KujaGenomeSorcerer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Laughing Mad", 143, Rarity.COMMON, mage.cards.l.LaughingMad.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Laughing Mad", 585, Rarity.COMMON, mage.cards.l.LaughingMad.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Light of Judgment", 144, Rarity.COMMON, mage.cards.l.LightOfJudgment.class));
         cards.add(new SetCardInfo("Lightning, Army of One", 233, Rarity.MYTHIC, mage.cards.l.LightningArmyOfOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning, Army of One", 320, Rarity.MYTHIC, mage.cards.l.LightningArmyOfOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning, Army of One", 400, Rarity.MYTHIC, mage.cards.l.LightningArmyOfOne.class, NON_FULL_USE_VARIOUS));
