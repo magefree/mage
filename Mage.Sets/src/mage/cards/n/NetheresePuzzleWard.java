@@ -2,6 +2,7 @@ package mage.cards.n;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -67,7 +68,9 @@ class NetheresePuzzleWardEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        return player.scry(player.rollDice(outcome, source, game, 4), source, game);
+        int roll = player.rollDice(outcome, source, game, 4);
+        new ScryEffect(roll).apply(game, source);
+        return true;
     }
 }
 

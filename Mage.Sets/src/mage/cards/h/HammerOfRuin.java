@@ -14,8 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterEquipmentPermanent;
+import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
@@ -26,8 +25,8 @@ import java.util.UUID;
  */
 public final class HammerOfRuin extends CardImpl {
 
-    private static final FilterEquipmentPermanent filter
-            = new FilterEquipmentPermanent("Equipment that player controls");
+    private static final FilterPermanent filter
+            = new FilterPermanent(SubType.EQUIPMENT, "Equipment that player controls");
 
     public HammerOfRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

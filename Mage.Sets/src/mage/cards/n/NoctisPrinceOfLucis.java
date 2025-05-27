@@ -43,7 +43,7 @@ public final class NoctisPrinceOfLucis extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // You may cast artifact spells from your graveyard by paying 3 life in addition to paying their other costs. If you cast a spell this way, that artifact enters with a finality counter on it.
-        this.addAbility(new SimpleStaticAbility(new NoctisPrinceOfLucisEffect()));
+        this.addAbility(new SimpleStaticAbility(new NoctisPrinceOfLucisEffect()), new NoctisPrinceOfLucisWatcher());
     }
 
     private NoctisPrinceOfLucis(final NoctisPrinceOfLucis card) {

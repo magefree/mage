@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
-import mage.abilities.effects.common.ExileAndReturnSourceEffect;
+import mage.abilities.effects.common.ExileSourceAndReturnFaceUpEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -62,7 +62,7 @@ public final class EsperTerra extends CardImpl {
                 new BasicManaEffect(new Mana(
                         2, 2, 2, 2, 2, 0, 0, 0
                 )).setText("add {W}{W}, {U}{U}, {B}{B}, {R}{R}, and {G}{G}"),
-                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD));
+                new ExileSourceAndReturnFaceUpEffect());
         this.addAbility(sagaAbility);
 
         // Flying

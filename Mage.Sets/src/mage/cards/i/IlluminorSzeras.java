@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.HighestCMCOfPermanentValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.SacrificeCostManaValue;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -24,9 +24,6 @@ import java.util.UUID;
 public final class IlluminorSzeras extends CardImpl {
 
     private static final DynamicValue xValue = SacrificeCostManaValue.CREATURE;
-    private static final DynamicValue netValue = new HighestCMCOfPermanentValue(
-            StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
-    );
 
     public IlluminorSzeras(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
@@ -39,7 +36,8 @@ public final class IlluminorSzeras extends CardImpl {
         // Secrets of the Soul -- {T}, Sacrifice another creature: Add an amount of {B} equal to the sacrificed creature's mana value.
         Ability ability = new DynamicManaAbility(
                 Mana.BlackMana(1), xValue, new TapSourceCost(), "add an amount of {B} " +
-                "equal to the sacrificed creature's mana value", false, netValue
+                "equal to the sacrificed creature's mana value", false,
+                GreatestAmongPermanentsValue.MANAVALUE_OTHER_CONTROLLED_CREATURES
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability.withFlavorWord("Secrets of the Soul"));
