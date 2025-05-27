@@ -294,6 +294,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Lion Heart", 261, Rarity.UNCOMMON, mage.cards.l.LionHeart.class));
         cards.add(new SetCardInfo("Locke Cole", 234, Rarity.UNCOMMON, mage.cards.l.LockeCole.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Locke Cole", 499, Rarity.UNCOMMON, mage.cards.l.LockeCole.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loporrit Scout", 192, Rarity.COMMON, mage.cards.l.LoporritScout.class));
         cards.add(new SetCardInfo("Louisoix's Sacrifice", 59, Rarity.RARE, mage.cards.l.LouisoixsSacrifice.class));
         cards.add(new SetCardInfo("Lunatic Pandora", 262, Rarity.COMMON, mage.cards.l.LunaticPandora.class));
         cards.add(new SetCardInfo("Machinist's Arsenal", 23, Rarity.RARE, mage.cards.m.MachinistsArsenal.class));
