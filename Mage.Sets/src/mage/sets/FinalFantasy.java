@@ -295,6 +295,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Malboro", 106, Rarity.COMMON, mage.cards.m.Malboro.class));
         cards.add(new SetCardInfo("Matoya, Archon Elder", 439, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Matoya, Archon Elder", 62, Rarity.RARE, mage.cards.m.MatoyaArchonElder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Memories Returning", 63, Rarity.RARE, mage.cards.m.MemoriesReturning.class));
         cards.add(new SetCardInfo("Midgar, City of Mako", 286, Rarity.RARE, mage.cards.m.MidgarCityOfMako.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Midgar, City of Mako", 313, Rarity.RARE, mage.cards.m.MidgarCityOfMako.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minwu, White Mage", 26, Rarity.RARE, mage.cards.m.MinwuWhiteMage.class, NON_FULL_USE_VARIOUS));

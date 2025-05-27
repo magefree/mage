@@ -1034,8 +1034,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
-        return putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, anyOrder);
+    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source) {
+        return putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, false);
     }
 
     @Override

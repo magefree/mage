@@ -3240,8 +3240,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
-        return computerPlayer.putCardsOnBottomOfLibrary(card, game, source, anyOrder);
+    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source) {
+        return computerPlayer.putCardsOnBottomOfLibrary(card, game, source);
     }
 
     @Override
