@@ -232,6 +232,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ignis Scientia", 492, Rarity.UNCOMMON, mage.cards.i.IgnisScientia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Insomnia, Crown City", 282, Rarity.COMMON, mage.cards.i.InsomniaCrownCity.class));
         cards.add(new SetCardInfo("Instant Ramen", 259, Rarity.COMMON, mage.cards.i.InstantRamen.class));
+        cards.add(new SetCardInfo("Iron Giant", 260, Rarity.COMMON, mage.cards.i.IronGiant.class));
         cards.add(new SetCardInfo("Ishgard, the Holy See", 283, Rarity.RARE, mage.cards.i.IshgardTheHolySee.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ishgard, the Holy See", 310, Rarity.RARE, mage.cards.i.IshgardTheHolySee.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 297, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
