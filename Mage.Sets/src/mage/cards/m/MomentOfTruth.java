@@ -93,7 +93,7 @@ class MomentOfTruthEffect extends OneShotEffect {
         if (card == null) {
             return true;
         }
-        player.putCardsOnBottomOfLibrary(card, game, source, false);
+        player.putCardsOnBottomOfLibrary(card, game, source);
         return true;
     }
 }

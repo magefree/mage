@@ -715,7 +715,7 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
 
-    boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source, boolean anyOrder);
+    boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source);
 
     /**
      * Moves the card to the top x position of the library

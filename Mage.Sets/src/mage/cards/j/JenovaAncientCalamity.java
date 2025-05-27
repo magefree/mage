@@ -47,7 +47,7 @@ public final class JenovaAncientCalamity extends CardImpl {
         // At the beginning of combat on your turn, put a number of +1/+1 counters equal to Jenova's power onto up to one other target creature. That creature becomes a Mutant in addition to its other types.
         Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(
                 CounterType.P1P1.createInstance(), SourcePermanentPowerValue.NOT_NEGATIVE
-        ).setText("put a number of +1/+1 counters equal to {this}'s power onto up to one other target creature"));
+        ).setText("put a number of +1/+1 counters equal to {this}'s power on up to one other target creature"));
         ability.addEffect(new AddCardSubTypeTargetEffect(SubType.MUTANT, Duration.Custom)
                 .setText("That creature becomes a Mutant in addition to its other types"));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
@@ -56,7 +56,7 @@ public final class JenovaAncientCalamity extends CardImpl {
         // Whenever a Mutant you control dies during your turn, draw cards equal to its power.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new DrawCardSourceControllerEffect(JenovaAncientCalamityValue.instance)
-                        .setText("draw cards equal to its power"), false, filter
+                        .setText("you draw cards equal to its power"), false, filter
         ).withTriggerCondition(MyTurnCondition.instance));
     }
 
