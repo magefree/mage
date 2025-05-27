@@ -115,4 +115,47 @@ public class FeatherTheRedeemedTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
     }
+
+    @Test
+    public void test_SplitCard() {
+        // cast fire, put to exile, return to hand
+        addCard(Zone.BATTLEFIELD, playerA, "Feather, the Redeemed");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Fire // Ice", 1);
+
+        // cast and put to exile
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire");
+        addTargetAmount(playerA, "Feather, the Redeemed", 2);
+        checkExileCount("turn 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fire // Ice", 1);
+        checkHandCardCount("turn 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Fire // Ice", 0);
+
+        // return to hand at the next end step
+        checkExileCount("turn 1 after", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire // Ice", 0);
+        checkHandCardCount("turn 1 after", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire // Ice", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+    }
+
+    @Test
+    public void test_Adventure() {
+        // cast stomp, put to exile, no return to hand
+        addCard(Zone.BATTLEFIELD, playerA, "Feather, the Redeemed");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Bonecrusher Giant", 1);
+
+        // cast and put to exile
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Stomp", "Feather, the Redeemed");
+        checkExileCount("turn 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bonecrusher Giant", 1);
+        checkHandCardCount("turn 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bonecrusher Giant", 0);
+
+        // no return to hand, as it does not go to graveyard on resolve
+        checkExileCount("turn 1 after", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Bonecrusher Giant", 1);
+        checkHandCardCount("turn 1 after", 2, PhaseStep.PRECOMBAT_MAIN, playerA, "Bonecrusher Giant", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+    }
 }

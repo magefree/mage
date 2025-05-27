@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -21,11 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterEquipmentPermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.permanent.AttachedToPredicate;
+import mage.filter.predicate.permanent.AttachedToSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -77,25 +72,6 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
     }
 }
 
-enum CaptainAmericaPredicate implements ObjectSourcePlayerPredicate<MageObject> {
-    instance;
-
-    // Functional negation of AnotherPredicate.
-    @Override
-    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
-        if (!input.getObject().getId().equals(input.getSourceId())) {
-            return false;
-        }
-        int zcc = input.getSource().getSourceObjectZoneChangeCounter();
-        return zcc == input.getObject().getZoneChangeCounter(game);
-    }
-
-    @Override
-    public String toString() {
-        return "{this}";
-    }
-}
-
 enum CaptainAmericaFirstAvengerValue implements DynamicValue {
     instance;
 
@@ -131,12 +107,10 @@ enum CaptainAmericaFirstAvengerValue implements DynamicValue {
 
 class CaptainAmericaFirstAvengerUnattachCost extends CostImpl implements EarlyTargetCost {
 
-    private static final FilterPermanent filter = new FilterEquipmentPermanent("equipment attached to this creature");
-    private static final FilterPermanent subfilter = new FilterControlledPermanent("{this}");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.EQUIPMENT, "equipment attached to this creature");
 
     static {
-        subfilter.add(CaptainAmericaPredicate.instance);
-        filter.add(new AttachedToPredicate(subfilter));
+        filter.add(AttachedToSourcePredicate.instance);
     }
 
     CaptainAmericaFirstAvengerUnattachCost() {

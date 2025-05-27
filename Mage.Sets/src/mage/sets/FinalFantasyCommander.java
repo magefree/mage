@@ -248,6 +248,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 413, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Priest of Fell Rites", 328, Rarity.RARE, mage.cards.p.PriestOfFellRites.class));
         cards.add(new SetCardInfo("Professional Face-Breaker", 296, Rarity.RARE, mage.cards.p.ProfessionalFaceBreaker.class));
+        cards.add(new SetCardInfo("Professor Hojo", 161, Rarity.RARE, mage.cards.p.ProfessorHojo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Professor Hojo", 69, Rarity.RARE, mage.cards.p.ProfessorHojo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Promise of Loyalty", 249, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Propaganda", 268, Rarity.UNCOMMON, mage.cards.p.Propaganda.class));
         cards.add(new SetCardInfo("Protection Magic", 107, Rarity.RARE, mage.cards.p.ProtectionMagic.class, NON_FULL_USE_VARIOUS));
@@ -258,6 +260,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rampant Growth", 313, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rampant Rejuvenator", 314, Rarity.RARE, mage.cards.r.RampantRejuvenator.class));
         cards.add(new SetCardInfo("Reanimate", 282, Rarity.RARE, mage.cards.r.Reanimate.class));
+        cards.add(new SetCardInfo("Reaper's Scythe", 117, Rarity.RARE, mage.cards.r.ReapersScythe.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Reaper's Scythe", 48, Rarity.RARE, mage.cards.r.ReapersScythe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Red XIII, Proud Warrior", 181, Rarity.RARE, mage.cards.r.RedXIIIProudWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Red XIII, Proud Warrior", 91, Rarity.RARE, mage.cards.r.RedXIIIProudWarrior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rejoin the Fight", 118, Rarity.RARE, mage.cards.r.RejoinTheFight.class, NON_FULL_USE_VARIOUS));
@@ -298,6 +302,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shineshadow Snarl", 422, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class));
         cards.add(new SetCardInfo("Siegfried, Famed Swordsman", 149, Rarity.RARE, mage.cards.s.SiegfriedFamedSwordsman.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Siegfried, Famed Swordsman", 51, Rarity.RARE, mage.cards.s.SiegfriedFamedSwordsman.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sin, Unending Cataclysm", 185, Rarity.RARE, mage.cards.s.SinUnendingCataclysm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sin, Unending Cataclysm", 95, Rarity.RARE, mage.cards.s.SinUnendingCataclysm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullclamp", 355, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 423, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Slayers' Stronghold", 424, Rarity.RARE, mage.cards.s.SlayersStronghold.class));

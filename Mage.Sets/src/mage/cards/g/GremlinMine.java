@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -15,17 +14,17 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class GremlinMine extends CardImpl {
@@ -45,13 +44,13 @@ public final class GremlinMine extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(4, "it"), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetArtifactPermanent(filterCreature));
+        ability.addTarget(new TargetPermanent(filterCreature));
         this.addAbility(ability);
         // {1}, {tap}, Sacrifice Gremlin Mine: Remove up to four charge counters from target noncreature artifact.
         ability = new SimpleActivatedAbility(new GremlinMineEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetArtifactPermanent(filterNonCreature));
+        ability.addTarget(new TargetPermanent(filterNonCreature));
         this.addAbility(ability);
     }
 

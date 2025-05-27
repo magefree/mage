@@ -31,7 +31,7 @@ import java.util.UUID;
 public final class KaitoShizuki extends CardImpl {
 
     private static final Hint hint = new ConditionHint(
-            SourceEnteredThisTurnCondition.instance, "This permanent entered the battlefield this turn"
+            SourceEnteredThisTurnCondition.DID, "This permanent entered the battlefield this turn"
     );
     private static final Condition condition = new InvertCondition(RaidCondition.instance);
 
@@ -45,7 +45,7 @@ public final class KaitoShizuki extends CardImpl {
         // At the beginning of your end step, if Kaito Shizuki entered the battlefield this turn, he phases out.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.YOU, new PhaseOutSourceEffect().setText("he phases out"),
-                false, SourceEnteredThisTurnCondition.instance
+                false, SourceEnteredThisTurnCondition.DID
         ).addHint(hint));
 
         // +1: Draw a card. Then discard a card unless you attacked this turn.

@@ -7,7 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.HighestCMCOfPermanentValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.SacrificeCostManaValue;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -32,6 +31,8 @@ public final class SoldeviAdnate extends CardImpl {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK), CardType.ARTIFACT.getPredicate()));
     }
 
+    private static final GreatestAmongPermanentsValue netValue = new GreatestAmongPermanentsValue(GreatestAmongPermanentsValue.Quality.ManaValue, filter);
+
     public SoldeviAdnate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.HUMAN);
@@ -41,8 +42,7 @@ public final class SoldeviAdnate extends CardImpl {
 
         // {T}, Sacrifice a black or artifact creature: Add an amount of {B} equal to the sacrificed creature's converted mana cost.
         Ability ability = new DynamicManaAbility(Mana.BlackMana(1), SacrificeCostManaValue.CREATURE, new TapSourceCost(),
-                "add an amount of {B} equal to the sacrificed creature's mana value", false,
-                new HighestCMCOfPermanentValue(filter, true));
+                "add an amount of {B} equal to the sacrificed creature's mana value", false, netValue);
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }

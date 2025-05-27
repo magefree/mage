@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -10,6 +9,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -19,7 +19,6 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
@@ -45,7 +44,8 @@ public final class TheSkullsporeNexus extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheSkullsporeNexusReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheSkullsporeNexusReductionEffect())
+                .addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // Whenever one or more nontoken creatures you control die, create a green Fungus Dinosaur creature token with base power and toughness each equal to the total power of those creatures.
         this.addAbility(new TheSkullsporeNexusTrigger());
@@ -83,14 +83,8 @@ class TheSkullsporeNexusReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = game.getBattlefield()
-                .getAllActivePermanents(
-                        StaticFilters.FILTER_PERMANENT_CREATURE, abilityToModify.getControllerId(), game
-                ).stream()
-                .map(Permanent::getPower)
-                .mapToInt(MageInt::getValue)
-                .max()
-                .orElse(0);
+        // TODO: that abilityToModify should be source, but there is currently a bug with that #11166
+        int reductionAmount = GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.calculate(game, abilityToModify, this);
         CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;
     }

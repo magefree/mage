@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.effects.common.ExileAndReturnSourceEffect;
+import mage.abilities.effects.common.ExileSourceAndReturnFaceUpEffect;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
@@ -49,7 +49,7 @@ public final class ShivaWardenOfIce extends CardImpl {
         // III -- Cold Snap -- Tap all lands your opponents control. Exile Shiva, then return it to the battlefield.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, ability -> {
             ability.addEffect(new TapAllEffect(filter));
-            ability.addEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD));
+            ability.addEffect(new ExileSourceAndReturnFaceUpEffect());
             ability.withFlavorWord("Cold Snap");
         });
         this.addAbility(sagaAbility);

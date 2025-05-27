@@ -5,7 +5,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.abilities.effects.common.ExileAndReturnSourceEffect;
+import mage.abilities.effects.common.ExileSourceAndReturnFaceUpEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -51,7 +51,7 @@ public final class PhoenixWardenOfFire extends CardImpl {
         // III -- Flames of Rebirth -- Return any number of target creature cards with total mana value 6 or less from your graveyard to the battlefield. Exile Phoenix, then return it to the battlefield.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, ability -> {
             ability.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-            ability.addEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD));
+            ability.addEffect(new ExileSourceAndReturnFaceUpEffect());
             ability.addTarget(new PhoenixWardenOfFireTarget());
             ability.withFlavorWord("Flames of Rebirth");
         });
