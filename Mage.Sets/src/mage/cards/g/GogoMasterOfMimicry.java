@@ -63,7 +63,7 @@ class GogoMasterOfMimicryCopyEffect extends OneShotEffect {
     GogoMasterOfMimicryCopyEffect() {
         super(Outcome.Benefit);
         staticText = "copy target activated or triggered ability you control X times. " +
-                "You may choose new targets for the copy. This ability can't be copied, and X can't be 0";
+                "You may choose new targets for the copies. This ability can't be copied and X can't be 0";
     }
 
     private GogoMasterOfMimicryCopyEffect(final GogoMasterOfMimicryCopyEffect effect) {
