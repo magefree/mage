@@ -135,6 +135,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud, Planet's Champion", 552, Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloudbound Moogle", 11, Rarity.COMMON, mage.cards.c.CloudboundMoogle.class));
         cards.add(new SetCardInfo("Coeurl", 12, Rarity.COMMON, mage.cards.c.Coeurl.class));
+        cards.add(new SetCardInfo("Coliseum Behemoth", 181, Rarity.UNCOMMON, mage.cards.c.ColiseumBehemoth.class));
         cards.add(new SetCardInfo("Combat Tutorial", 48, Rarity.COMMON, mage.cards.c.CombatTutorial.class));
         cards.add(new SetCardInfo("Commune with Beavers", 182, Rarity.COMMON, mage.cards.c.CommuneWithBeavers.class));
         cards.add(new SetCardInfo("Cooking Campsite", 31, Rarity.UNCOMMON, mage.cards.c.CookingCampsite.class));
