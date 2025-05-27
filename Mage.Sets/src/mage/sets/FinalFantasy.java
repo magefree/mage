@@ -321,6 +321,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Prompto Argentum", 148, Rarity.UNCOMMON, mage.cards.p.PromptoArgentum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prompto Argentum", 387, Rarity.UNCOMMON, mage.cards.p.PromptoArgentum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prompto Argentum", 463, Rarity.UNCOMMON, mage.cards.p.PromptoArgentum.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Prompto Argentum", 532, Rarity.UNCOMMON, mage.cards.p.PromptoArgentum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("PuPu UFO", 266, Rarity.UNCOMMON, mage.cards.p.PuPuUFO.class));
         cards.add(new SetCardInfo("Qiqirn Merchant", 65, Rarity.COMMON, mage.cards.q.QiqirnMerchant.class));
         cards.add(new SetCardInfo("Queen Brahne", 149, Rarity.UNCOMMON, mage.cards.q.QueenBrahne.class, NON_FULL_USE_VARIOUS));
