@@ -341,6 +341,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 296, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 572, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Poison the Waters", 111, Rarity.UNCOMMON, mage.cards.p.PoisonTheWaters.class));
+        cards.add(new SetCardInfo("Prishe's Wanderings", 193, Rarity.COMMON, mage.cards.p.PrishesWanderings.class));
         cards.add(new SetCardInfo("Prompto Argentum", 148, Rarity.UNCOMMON, mage.cards.p.PromptoArgentum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prompto Argentum", 387, Rarity.UNCOMMON, mage.cards.p.PromptoArgentum.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prompto Argentum", 463, Rarity.UNCOMMON, mage.cards.p.PromptoArgentum.class, NON_FULL_USE_VARIOUS));
