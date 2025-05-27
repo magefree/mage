@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterEquipmentPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
@@ -30,7 +29,7 @@ import java.util.UUID;
  */
 public final class BalanWanderingKnight extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterEquipmentPermanent();
+    private static final FilterPermanent filter = new FilterPermanent(SubType.EQUIPMENT, "");
 
     static {
         filter.add(BalanWanderingKnightPredicate.instance);

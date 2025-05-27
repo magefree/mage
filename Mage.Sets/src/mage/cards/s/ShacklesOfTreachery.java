@@ -12,8 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterEquipmentPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
@@ -29,7 +29,7 @@ import java.util.UUID;
 public final class ShacklesOfTreachery extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterEquipmentPermanent("Equipment attached to it");
+            = new FilterPermanent(SubType.EQUIPMENT, "Equipment attached to it");
 
     static {
         filter.add(ShacklesOfTreacheryPredicate.instance);

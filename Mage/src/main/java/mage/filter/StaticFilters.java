@@ -1223,7 +1223,7 @@ public final class StaticFilters {
         FILTER_PERMANENT_AURAS.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterEquipmentPermanent();
+    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterPermanent(SubType.EQUIPMENT, "Equipment");
 
     static {
         FILTER_PERMANENT_EQUIPMENT.setLockedFilter(true);

@@ -17,7 +17,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterEquipmentPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -31,7 +30,7 @@ import java.util.UUID;
  */
 public final class GroomsFinery extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterEquipmentPermanent();
+    private static final FilterPermanent filter = new FilterPermanent(SubType.EQUIPMENT, "");
 
     static {
         filter.add(new NamePredicate("Bride's Gown"));

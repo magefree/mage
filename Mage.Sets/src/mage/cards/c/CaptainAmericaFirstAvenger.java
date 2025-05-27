@@ -22,7 +22,6 @@ import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterEquipmentPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.permanent.AttachedToPredicate;
@@ -131,7 +130,7 @@ enum CaptainAmericaFirstAvengerValue implements DynamicValue {
 
 class CaptainAmericaFirstAvengerUnattachCost extends CostImpl implements EarlyTargetCost {
 
-    private static final FilterPermanent filter = new FilterEquipmentPermanent("equipment attached to this creature");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.EQUIPMENT, "equipment attached to this creature");
     private static final FilterPermanent subfilter = new FilterControlledPermanent("{this}");
 
     static {

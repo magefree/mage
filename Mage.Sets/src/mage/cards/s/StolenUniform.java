@@ -10,11 +10,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetEquipmentPermanent;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -41,7 +42,7 @@ public final class StolenUniform extends CardImpl {
         this.getSpellAbility().addEffect(new StolenUniformAttachEffect());
         this.getSpellAbility().addEffect(new StolenUniformTriggerEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetEquipmentPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_EQUIPMENT));
     }
 
     private StolenUniform(final StolenUniform card) {

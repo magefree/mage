@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterEquipmentPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
@@ -114,7 +113,7 @@ class AkiriFearlessVoyagerEffect extends OneShotEffect {
     }
 
     private static final FilterPermanent filter
-            = new FilterEquipmentPermanent("equipment attached to a creature you control");
+            = new FilterPermanent(SubType.EQUIPMENT, "equipment attached to a creature you control");
 
     static {
         filter.add(AkiriFearlessVoyagerPredicate.instance);
