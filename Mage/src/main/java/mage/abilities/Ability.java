@@ -534,6 +534,10 @@ public interface Ability extends Controllable, Serializable {
 
     boolean canFizzle();
 
+    void setCanBeCopied(boolean canBeCopied);
+
+    boolean canBeCopied();
+
     /**
      * Adds a target adjuster to this ability.
      * If using a generic adjuster, only use after adding the blueprint target!

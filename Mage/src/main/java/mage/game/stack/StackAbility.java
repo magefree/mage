@@ -719,6 +719,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public boolean canBeCopied() {
+        return ability.canBeCopied();
+    }
+
+    @Override
+    public void setCanBeCopied(boolean canBeCopied) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets) {
         Ability newAbility = this.ability.copy();
         newAbility.newId();
