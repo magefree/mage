@@ -443,6 +443,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Titan", 373, Rarity.RARE, mage.cards.s.SummonTitan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summoner's Grimoire", 205, Rarity.RARE, mage.cards.s.SummonersGrimoire.class));
         cards.add(new SetCardInfo("Suplex", 164, Rarity.COMMON, mage.cards.s.Suplex.class));
+        cards.add(new SetCardInfo("Swallowed by Leviathan", 79, Rarity.UNCOMMON, mage.cards.s.SwallowedByLeviathan.class));
         cards.add(new SetCardInfo("Swamp", 300, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 301, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 302, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
