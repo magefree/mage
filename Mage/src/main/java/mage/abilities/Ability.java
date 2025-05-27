@@ -534,7 +534,7 @@ public interface Ability extends Controllable, Serializable {
 
     boolean canFizzle();
 
-    void setCanBeCopied(boolean canBeCopied);
+    Ability withCanBeCopied(boolean canBeCopied);
 
     boolean canBeCopied();
 

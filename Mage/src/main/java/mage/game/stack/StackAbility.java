@@ -724,7 +724,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void setCanBeCopied(boolean canBeCopied) {
+    public Ability withCanBeCopied(boolean canBeCopied) {
         throw new UnsupportedOperationException("Not supported.");
     }
 

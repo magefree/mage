@@ -1741,8 +1741,9 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public void setCanBeCopied(boolean canBeCopied) {
+    public Ability withCanBeCopied(boolean canBeCopied) {
         this.canBeCopied = canBeCopied;
+        return this;
     }
 
     @Override

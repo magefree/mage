@@ -45,8 +45,7 @@ public final class GogoMasterOfMimicry extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
         CardUtil.castStream(ability.getCosts(), VariableManaCost.class).forEach(cost -> cost.setMinX(1));
-        ability.setCanBeCopied(false);
-        this.addAbility(ability);
+        this.addAbility(ability.withCanBeCopied(false));
     }
 
     private GogoMasterOfMimicry(final GogoMasterOfMimicry card) {
