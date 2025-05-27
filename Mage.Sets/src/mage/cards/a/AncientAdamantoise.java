@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -64,7 +65,7 @@ public final class AncientAdamantoise extends CardImpl {
     }
 }
 
-class AncientAdamantoiseDamageEffect extends ReplacementEffectImpl {
+class AncientAdamantoiseDamageEffect extends ContinuousRuleModifyingEffectImpl {
 
     AncientAdamantoiseDamageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -73,11 +74,6 @@ class AncientAdamantoiseDamageEffect extends ReplacementEffectImpl {
 
     private AncientAdamantoiseDamageEffect(final AncientAdamantoiseDamageEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
     }
 
     @Override
