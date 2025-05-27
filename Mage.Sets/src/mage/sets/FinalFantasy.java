@@ -37,6 +37,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Aerith Gainsborough", 519, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aettir and Priwen", 253, Rarity.MYTHIC, mage.cards.a.AettirAndPriwen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aettir and Priwen", 350, Rarity.MYTHIC, mage.cards.a.AettirAndPriwen.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ahriman", 87, Rarity.COMMON, mage.cards.a.Ahriman.class));
         cards.add(new SetCardInfo("Al Bhed Salvagers", 88, Rarity.UNCOMMON, mage.cards.a.AlBhedSalvagers.class));
         cards.add(new SetCardInfo("Ambrosia Whiteheart", 325, Rarity.UNCOMMON, mage.cards.a.AmbrosiaWhiteheart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ambrosia Whiteheart", 424, Rarity.UNCOMMON, mage.cards.a.AmbrosiaWhiteheart.class, NON_FULL_USE_VARIOUS));
