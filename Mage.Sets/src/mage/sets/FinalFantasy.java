@@ -137,6 +137,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Commune with Beavers", 182, Rarity.COMMON, mage.cards.c.CommuneWithBeavers.class));
         cards.add(new SetCardInfo("Cooking Campsite", 31, Rarity.UNCOMMON, mage.cards.c.CookingCampsite.class));
         cards.add(new SetCardInfo("Coral Sword", 134, Rarity.UNCOMMON, mage.cards.c.CoralSword.class));
+        cards.add(new SetCardInfo("Cornered by Black Mages", 93, Rarity.COMMON, mage.cards.c.CorneredByBlackMages.class));
         cards.add(new SetCardInfo("Crystal Fragments", 13, Rarity.UNCOMMON, mage.cards.c.CrystalFragments.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystal Fragments", 357, Rarity.UNCOMMON, mage.cards.c.CrystalFragments.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crystallized Serah", 240, Rarity.RARE, mage.cards.c.CrystallizedSerah.class, NON_FULL_USE_VARIOUS));
