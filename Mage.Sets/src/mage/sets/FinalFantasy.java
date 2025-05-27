@@ -29,6 +29,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Absolute Virtue", 476, Rarity.MYTHIC, mage.cards.a.AbsoluteVirtue.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adelbert Steiner", 3, Rarity.UNCOMMON, mage.cards.a.AdelbertSteiner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adelbert Steiner", 422, Rarity.UNCOMMON, mage.cards.a.AdelbertSteiner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Adventurer's Airship", 252, Rarity.COMMON, mage.cards.a.AdventurersAirship.class));
         cards.add(new SetCardInfo("Adventurer's Inn", 271, Rarity.COMMON, mage.cards.a.AdventurersInn.class));
         cards.add(new SetCardInfo("Aerith Gainsborough", 374, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aerith Gainsborough", 4, Rarity.RARE, mage.cards.a.AerithGainsborough.class, NON_FULL_USE_VARIOUS));
