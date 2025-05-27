@@ -72,11 +72,9 @@ class TwoHeadedGiantEffect extends OneShotEffect {
         }
         List<Boolean> flips = player.flipCoins(source, game, 2, false);
         if (flips.get(0) == flips.get(1)) {
-            if (flips.get(0)) {
-                game.addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), source);
-            } else {
-                game.addEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn), source);
-            }
+            game.addEffect(new GainAbilitySourceEffect(
+                    flips.get(0) ? DoubleStrikeAbility.getInstance() : new MenaceAbility(), Duration.EndOfTurn
+            ), source);
         }
         return true;
     }
