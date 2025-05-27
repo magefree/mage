@@ -138,6 +138,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Confidant", 334, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Confidant", 94, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deadly Embrace", 557, Rarity.RARE, mage.cards.d.DeadlyEmbrace.class));
+        cards.add(new SetCardInfo("Diamond Weapon", 183, Rarity.UNCOMMON, mage.cards.d.DiamondWeapon.class));
         cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 16, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 376, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dion, Bahamut's Dominant", 428, Rarity.RARE, mage.cards.d.DionBahamutsDominant.class, NON_FULL_USE_VARIOUS));
