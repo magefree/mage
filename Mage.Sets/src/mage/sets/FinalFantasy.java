@@ -211,6 +211,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 483, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 539, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haste Magic", 140, Rarity.COMMON, mage.cards.h.HasteMagic.class));
+        cards.add(new SetCardInfo("Hecteyes", 103, Rarity.COMMON, mage.cards.h.Hecteyes.class));
         cards.add(new SetCardInfo("Hope Estheim", 226, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hope Estheim", 396, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hope Estheim", 491, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
