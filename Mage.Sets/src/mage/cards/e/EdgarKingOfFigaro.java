@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.FlipCoinsEvent;
 import mage.game.events.GameEvent;
 import mage.watchers.Watcher;
 
@@ -68,7 +69,8 @@ class EdgarKingOfFigaroEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+        ((FlipCoinsEvent) event).setHeadsAndWon(true);
+        return false;
     }
 
     @Override

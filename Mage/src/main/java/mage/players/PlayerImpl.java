@@ -3060,18 +3060,27 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public List<Boolean> flipCoins(Ability source, Game game, int amount, boolean winnable) {
         List<Boolean> results = new ArrayList<>();
-        if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.FLIP_COINS, this.getId(), source, this.getId(), amount))) {
-            // TODO: handle this properly, need to inform players and trigger coin flip events
-            for (int i = 0; i < amount; i++) {
+        FlipCoinsEvent flipsEvent = new FlipCoinsEvent(this.getId(), amount, source);
+        game.replaceEvent(flipsEvent);
+        for (int i = 0; i < flipsEvent.getAmount(); i++) {
+            if (flipsEvent.isHeadsAndWon()) {
+                if (winnable) {
+                    game.informPlayers(getLogName() + " chose " + CardUtil.booleanToFlipName(true));
+                }
+                game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(true) + CardUtil.getSourceLogName(game, source));
+                if (winnable) {
+                    game.informPlayers(getLogName() + " won the flip" + CardUtil.getSourceLogName(game, source));
+                }
+                game.fireEvent(new FlipCoinEvent(playerId, source, true, true, winnable).createFlippedEvent());
                 results.add(true);
+                continue;
             }
-            return results;
-        }
-        for (int i = 0; i < amount; i++) {
-            boolean chosen = false;
+            boolean chosen;
             if (winnable) {
                 chosen = this.chooseUse(Outcome.Benefit, "Heads or tails?", "", "Heads", "Tails", source, game);
                 game.informPlayers(getLogName() + " chose " + CardUtil.booleanToFlipName(chosen));
+            } else {
+                chosen = false;
             }
             boolean result = this.flipCoinResult(game);
             FlipCoinEvent event = new FlipCoinEvent(playerId, source, result, chosen, winnable);
@@ -3102,10 +3111,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         + CardUtil.getSourceLogName(game, source));
             }
             game.fireEvent(event.createFlippedEvent());
-            if (event.isWinnable()) {
-                results.add(event.getResult() == event.getChosen());
-            }
-            results.add(event.getResult());
+            results.add(event.isWinnable() ? event.getResult() == event.getChosen() : event.getResult());
         }
         return results;
     }
