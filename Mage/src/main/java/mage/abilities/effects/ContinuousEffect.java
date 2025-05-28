@@ -1,11 +1,12 @@
 package mage.abilities.effects;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.constants.DependencyType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.SubLayer;
+import mage.constants.*;
+import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
 
@@ -37,7 +38,11 @@ public interface ContinuousEffect extends Effect {
 
     boolean hasLayer(Layer layer);
 
+    boolean hasSubLayer(SubLayer subLayer);
+
     boolean isInactive(Ability source, Game game);
+
+    boolean isCharacterDefining();
 
     /**
      * Init ability data like ZCC or targets on first check in game cycle (ApplyEffects)
@@ -53,6 +58,20 @@ public interface ContinuousEffect extends Effect {
     SubLayer getSublayer();
 
     List<MageObjectReference> getAffectedObjects();
+
+    List<MageObject> queryAffectedObjects(Game game, Ability source);
+
+    void clearDynamicAffectedObjects();
+
+    EnumSet<Zone> getEffectCardZones();
+
+    FilterStackObject getAffectedStackObjectFilter();
+
+    FilterCard getAffectedCardFilter();
+
+    FilterPermanent getAffectedPermanentFilter();
+
+    int calculateResult(Game game, Ability source, List<MageObject> affectedObjects);
 
     Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer);
 
