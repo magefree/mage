@@ -524,7 +524,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void endOfTurn(Game game) {
-        this.damage = 0;
+        if (!game.replaceEvent(GameEvent.getEvent(
+                EventType.REMOVE_DAMAGE_EOT, this.getId(), null, this.getControllerId()
+        ))) {
+            this.damage = 0;
+        }
         this.timesLoyaltyUsed = 0;
         this.turnsOnBattlefield++;
         this.deathtouched = false;

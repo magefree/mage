@@ -44,6 +44,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ambrosia Whiteheart", 325, Rarity.UNCOMMON, mage.cards.a.AmbrosiaWhiteheart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ambrosia Whiteheart", 424, Rarity.UNCOMMON, mage.cards.a.AmbrosiaWhiteheart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ambrosia Whiteheart", 6, Rarity.UNCOMMON, mage.cards.a.AmbrosiaWhiteheart.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ancient Adamantoise", 172, Rarity.MYTHIC, mage.cards.a.AncientAdamantoise.class));
         cards.add(new SetCardInfo("Ardyn, the Usurper", 315, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ardyn, the Usurper", 379, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ardyn, the Usurper", 444, Rarity.RARE, mage.cards.a.ArdynTheUsurper.class, NON_FULL_USE_VARIOUS));

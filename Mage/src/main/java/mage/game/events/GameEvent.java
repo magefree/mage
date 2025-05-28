@@ -173,7 +173,7 @@ public class GameEvent implements Serializable {
          amount      amount of life loss
          flag        true = from combat damage - other from non combat damage
          */
-        
+
         LOSE_LIFE, LOST_LIFE,
         /* LOST_LIFE_BATCH_FOR_ONE_PLAYER
          combines all life lost events for a player to a single batch (event)
@@ -509,6 +509,7 @@ public class GameEvent implements Serializable {
          combines all permanent damage events to a single batch (event) and split it per damaged permanent
          */
         DAMAGED_BATCH_FOR_ONE_PERMANENT(true),
+        REMOVE_DAMAGE_EOT,
 
         DESTROY_PERMANENT,
         /* DESTROYED_PERMANENT
