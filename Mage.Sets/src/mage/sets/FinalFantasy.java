@@ -223,6 +223,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Gladiolus Amicitia", 224, Rarity.UNCOMMON, mage.cards.g.GladiolusAmicitia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gladiolus Amicitia", 489, Rarity.UNCOMMON, mage.cards.g.GladiolusAmicitia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gogo, Master of Mimicry", 377, Rarity.MYTHIC, mage.cards.g.GogoMasterOfMimicry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gogo, Master of Mimicry", 437, Rarity.MYTHIC, mage.cards.g.GogoMasterOfMimicry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gogo, Master of Mimicry", 522, Rarity.MYTHIC, mage.cards.g.GogoMasterOfMimicry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gogo, Master of Mimicry", 54, Rarity.MYTHIC, mage.cards.g.GogoMasterOfMimicry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gohn, Town of Ruin", 278, Rarity.COMMON, mage.cards.g.GohnTownOfRuin.class));
         cards.add(new SetCardInfo("Gongaga, Reactor Town", 280, Rarity.COMMON, mage.cards.g.GongagaReactorTown.class));
