@@ -40,6 +40,8 @@ public interface StackObject extends MageObject, Controllable {
 
     void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets);
 
+    boolean canBeCopied();
+
     boolean isTargetChanged();
 
     void setTargetChanged(boolean targetChanged);

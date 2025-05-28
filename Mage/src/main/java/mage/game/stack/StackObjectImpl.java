@@ -175,8 +175,6 @@ public abstract class StackObjectImpl implements StackObject {
         );
     }
 
-    abstract boolean canBeCopied();
-
     /**
      * Choose new targets for a stack Object
      *
