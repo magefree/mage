@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedAttackingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -38,7 +39,7 @@ public final class TheMasamune extends CardImpl {
                 new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT),
                 AttachedAttackingCondition.instance, "as long as equipped creature is attacking, it has first strike"
         ));
-        ability.addEffect(new ConditionalContinuousEffect(
+        ability.addEffect(new ConditionalRequirementEffect(
                 new MustBeBlockedByAtLeastOneAttachedEffect(),
                 AttachedAttackingCondition.instance, "and must be blocked if able"
         ));

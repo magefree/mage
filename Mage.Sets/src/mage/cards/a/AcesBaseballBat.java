@@ -5,6 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedAttackingCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -50,7 +51,7 @@ public final class AcesBaseballBat extends CardImpl {
                 new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT),
                 AttachedAttackingCondition.instance, "as long as equipped creature is attacking, it has first strike"
         ));
-        ability.addEffect(new ConditionalContinuousEffect(
+        ability.addEffect(new ConditionalRequirementEffect(
                 new MustBeBlockedByAtLeastOneAttachedEffect(filterDalek),
                 AttachedAttackingCondition.instance, "and must be blocked by a Dalek if able"
         ));
