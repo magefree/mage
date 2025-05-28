@@ -573,6 +573,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return this.affectedPermanentFilter;
     }
 
+    // TODO: review result calculation as cards are updated, possibly need to change method
     @Override
     public int calculateResult(Game game, Ability source, List<MageObject> affectedObjects) {
         return 0;

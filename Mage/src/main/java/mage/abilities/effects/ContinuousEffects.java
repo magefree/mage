@@ -1102,7 +1102,6 @@ public class ContinuousEffects implements Serializable {
                                 .collect(Collectors.toList())
                 );
             }
-            // TODO: review result calculation as cards are updated
             for (Ability ability : getLayeredEffectAbilities(effect)) {
                 resultBefore += effect.calculateResult(gameSim, ability, affectedBefore);
             }
@@ -1139,7 +1138,6 @@ public class ContinuousEffects implements Serializable {
                     }
                 }
                 // or what it does to any of the things it applies to;
-                // TODO: review result calculation as cards are updated
                 if (!dependency) {
                     int resultAfter = 0;
                     for (Ability ability : getLayeredEffectAbilities(otherEffect)) {
