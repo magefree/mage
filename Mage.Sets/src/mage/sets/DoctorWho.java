@@ -877,8 +877,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Caves of Androzani", 15, Rarity.RARE, mage.cards.t.TheCavesOfAndrozani.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Caves of Androzani", 620, Rarity.RARE, mage.cards.t.TheCavesOfAndrozani.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cheetah Planet", 574, Rarity.COMMON, mage.cards.t.TheCheetahPlanet.class));
-        //cards.add(new SetCardInfo("The Curse of Fenric", 118, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Curse of Fenric", 723, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Curse of Fenric", 118, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Curse of Fenric", 723, Rarity.RARE, mage.cards.t.TheCurseOfFenric.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cyber-Controller", 119, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cyber-Controller", 405, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Cyber-Controller", 724, Rarity.RARE, mage.cards.t.TheCyberController.class, NON_FULL_USE_VARIOUS));
@@ -927,10 +927,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The First Doctor", 414, Rarity.RARE, mage.cards.t.TheFirstDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The First Doctor", 552, Rarity.RARE, mage.cards.t.TheFirstDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The First Doctor", 733, Rarity.RARE, mage.cards.t.TheFirstDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Five Doctors", 101, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Five Doctors", 394, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Five Doctors", 706, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Five Doctors", 985, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Five Doctors", 101, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Five Doctors", 394, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Five Doctors", 706, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Five Doctors", 985, Rarity.RARE, mage.cards.t.TheFiveDoctors.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Flood of Mars", 360, Rarity.RARE, mage.cards.t.TheFloodOfMars.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Flood of Mars", 45, Rarity.RARE, mage.cards.t.TheFloodOfMars.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Flood of Mars", 650, Rarity.RARE, mage.cards.t.TheFloodOfMars.class, NON_FULL_USE_VARIOUS));
