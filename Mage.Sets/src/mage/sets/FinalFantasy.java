@@ -483,6 +483,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Esper Maduin", 370, Rarity.RARE, mage.cards.s.SummonEsperMaduin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Ramuh", 161, Rarity.UNCOMMON, mage.cards.s.SummonEsperRamuh.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Esper Ramuh", 367, Rarity.UNCOMMON, mage.cards.s.SummonEsperRamuh.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Fat Chocobo", 202, Rarity.COMMON, mage.cards.s.SummonFatChocobo.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: Fat Chocobo", 371, Rarity.COMMON, mage.cards.s.SummonFatChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: G.F. Cerberus", 162, Rarity.RARE, mage.cards.s.SummonGFCerberus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: G.F. Cerberus", 368, Rarity.RARE, mage.cards.s.SummonGFCerberus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Knights of Round", 359, Rarity.MYTHIC, mage.cards.s.SummonKnightsOfRound.class, NON_FULL_USE_VARIOUS));
