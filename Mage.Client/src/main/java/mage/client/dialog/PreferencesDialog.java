@@ -3838,7 +3838,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static int getRenderMode() {
-        return CardRenderMode.fromString(getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_IMAGE_MODE, CardRenderMode.MTGO.toString())).ordinal();
+        return CardRenderMode.fromString(getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_IMAGE_MODE, CardRenderMode.MTGO.toString())).getId();
     }
 
     public static boolean getRenderIconsForAbilities() {
