@@ -39,7 +39,8 @@ public final class SOLDIERMilitaryProgram extends CardImpl {
 
         // * Put a +1/+1 counter on each of up to two Soldiers you control.
         ability.addMode(new Mode(new OneShotNonTargetEffect(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+                        .setText("Put a +1/+1 counter on each of up to two Soldiers you control"),
                 new TargetPermanent(0, 2, filter))));
         this.addAbility(ability);
     }

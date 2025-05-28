@@ -27,7 +27,7 @@ public final class YaroksWavecrasher extends CardImpl {
 
         // When Yarok’s Wavecrasher enters the battlefield, return another creature you control to its owner’s hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OneShotNonTargetEffect(
-                new ReturnToHandTargetEffect(),
+                new ReturnToHandTargetEffect().setText("return another creature you control to its owner's hand"),
                 new TargetControlledPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL))));
     }
 

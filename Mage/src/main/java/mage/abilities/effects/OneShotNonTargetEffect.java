@@ -1,7 +1,6 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.Targets;
@@ -26,6 +25,10 @@ public class OneShotNonTargetEffect extends OneShotEffect {
         this.notTarget = notTarget;
         this.notTarget.withNotTarget(true);
         this.adjuster = adjuster;
+        if (effect.staticText == null || effect.staticText.equals("")){
+            throw new IllegalArgumentException("Effect must use static text");
+        }
+        this.setText(effect.staticText);
     }
 
     private OneShotNonTargetEffect(OneShotNonTargetEffect eff) {
@@ -76,12 +79,5 @@ public class OneShotNonTargetEffect extends OneShotEffect {
     public void setValue(String key, Object value) {
         effect.setValue(key, value);
         super.setValue(key, value);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        Mode modeCopy = mode.copy();
-        modeCopy.addTarget(notTarget);
-        return effect.getText(modeCopy);
     }
 }

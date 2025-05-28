@@ -34,7 +34,7 @@ public final class WormfangNewt extends CardImpl {
 
         // When Wormfang Turtle enters the battlefield, exile a land you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OneShotNonTargetEffect(
-                new ExileTargetForSourceEffect(),
+                new ExileTargetForSourceEffect().setText("exile a land you control"),
                 new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_A_LAND))));
 
         // When Wormfang Turtle leaves the battlefield, return the exiled card to the battlefield under its owner's control.

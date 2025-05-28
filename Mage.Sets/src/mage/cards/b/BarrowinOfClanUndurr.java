@@ -51,11 +51,11 @@ public final class BarrowinOfClanUndurr extends CardImpl {
 
         // Whenever Barrowin of Clan Undurr attacks, return up to one creature card with mana value 3 or less from your graveyard to the battlefield if you've completed a dungeon.
         Ability ability = new AttacksTriggeredAbility(new ConditionalOneShotEffect(
-                new OneShotNonTargetEffect(new ReturnFromGraveyardToBattlefieldTargetEffect(),
-                        new TargetCardInYourGraveyard(0, 1, filter, true)),
-                CompletedDungeonCondition.instance, "return up to one creature card " +
-                "with mana value 3 or less from your graveyard to the battlefield if you've completed a dungeon"
-        ));
+                new OneShotNonTargetEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
+                        .setText("return up to one creature card with mana value 3 or less from your graveyard to the battlefield"),
+                    new TargetCardInYourGraveyard(0, 1, filter, true)),
+                CompletedDungeonCondition.instance
+        ).withConditionTextAtEnd(true));
         this.addAbility(ability.addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 
