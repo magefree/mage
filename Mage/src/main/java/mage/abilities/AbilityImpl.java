@@ -83,6 +83,7 @@ public abstract class AbilityImpl implements Ability {
     private List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
     private List<Ability> subAbilities = null;
     private boolean canFizzle = true; // for Gilded Drake
+    private boolean canBeCopied = true;
     private TargetAdjuster targetAdjuster = null;
     private CostAdjuster costAdjuster = null;
     private List<Hint> hints = new ArrayList<>();
@@ -129,6 +130,7 @@ public abstract class AbilityImpl implements Ability {
         this.flavorWord = ability.flavorWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
+        this.canBeCopied = ability.canBeCopied;
         this.targetAdjuster = ability.targetAdjuster;
         this.costAdjuster = ability.costAdjuster;
         this.hints = CardUtil.deepCopyObject(ability.hints);
@@ -1731,6 +1733,17 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setCanFizzle(boolean canFizzle) {
         this.canFizzle = canFizzle;
+    }
+
+    @Override
+    public boolean canBeCopied() {
+        return canBeCopied;
+    }
+
+    @Override
+    public Ability withCanBeCopied(boolean canBeCopied) {
+        this.canBeCopied = canBeCopied;
+        return this;
     }
 
     @Override
