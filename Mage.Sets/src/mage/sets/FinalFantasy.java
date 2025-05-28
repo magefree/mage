@@ -77,6 +77,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Battle Menu", 9, Rarity.UNCOMMON, mage.cards.b.BattleMenu.class));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 426, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beatrix, Loyal General", 554, Rarity.RARE, mage.cards.b.BeatrixLoyalGeneral.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Chocobo", 201, Rarity.UNCOMMON, mage.cards.b.BlackChocobo.class));
         cards.add(new SetCardInfo("Black Mage's Rod", 90, Rarity.COMMON, mage.cards.b.BlackMagesRod.class));
         cards.add(new SetCardInfo("Black Waltz No. 3", 214, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Waltz No. 3", 478, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
@@ -438,6 +439,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Sidequest: Hunt the Mark", 119, Rarity.UNCOMMON, mage.cards.s.SidequestHuntTheMark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Hunt the Mark", 453, Rarity.UNCOMMON, mage.cards.s.SidequestHuntTheMark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Play Blitzball", 158, Rarity.UNCOMMON, mage.cards.s.SidequestPlayBlitzball.class));
+        cards.add(new SetCardInfo("Sidequest: Raise a Chocobo", 201, Rarity.UNCOMMON, mage.cards.s.SidequestRaiseAChocobo.class));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 242, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 348, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sin, Spira's Punishment", 508, Rarity.RARE, mage.cards.s.SinSpirasPunishment.class, NON_FULL_USE_VARIOUS));
