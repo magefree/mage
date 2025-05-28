@@ -168,6 +168,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Dragoon's Wyvern", 49, Rarity.COMMON, mage.cards.d.DragoonsWyvern.class));
         cards.add(new SetCardInfo("Dreams of Laguna", 50, Rarity.COMMON, mage.cards.d.DreamsOfLaguna.class));
         cards.add(new SetCardInfo("Dwarven Castle Guard", 18, Rarity.COMMON, mage.cards.d.DwarvenCastleGuard.class));
+        cards.add(new SetCardInfo("Eden, Seat of the Sanctum", 277, Rarity.UNCOMMON, mage.cards.e.EdenSeatOfTheSanctum.class));
         cards.add(new SetCardInfo("Edgar, King of Figaro", 436, Rarity.RARE, mage.cards.e.EdgarKingOfFigaro.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Edgar, King of Figaro", 51, Rarity.RARE, mage.cards.e.EdgarKingOfFigaro.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eject", 52, Rarity.UNCOMMON, mage.cards.e.Eject.class));
