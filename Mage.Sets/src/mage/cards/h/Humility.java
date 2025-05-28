@@ -1,6 +1,8 @@
 package mage.cards.h;
 
 import java.util.UUID;
+
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -47,6 +49,8 @@ public final class Humility extends CardImpl {
         public HumilityEffect(Duration duration) {
             super(duration, Outcome.LoseAbility);
             staticText = "All creatures lose all abilities and have base power and toughness 1/1";
+            this.effectCardZones.add(Zone.BATTLEFIELD);
+            this.affectedPermanentFilter = StaticFilters.FILTER_PERMANENT_CREATURE;
         }
 
         private HumilityEffect(final HumilityEffect effect) {
@@ -60,12 +64,11 @@ public final class Humility extends CardImpl {
 
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player == null) {
-                return false;
-            }
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                    StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
+            for (MageObjectReference mageObjectReference : affectedObjectList) {
+                Permanent permanent = mageObjectReference.getPermanent(game);
+                if (permanent == null) {
+                    continue;
+                }
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
                         permanent.removeAllAbilities(source.getSourceId(), game);
@@ -89,6 +92,12 @@ public final class Humility extends CardImpl {
         public boolean hasLayer(Layer layer) {
             return layer == Layer.AbilityAddingRemovingEffects_6
                     || layer == Layer.PTChangingEffects_7;
+        }
+
+        @Override
+        public boolean hasSubLayer(SubLayer sublayer) {
+            return sublayer == SubLayer.NA
+                    || sublayer == SubLayer.SetPT_7b;
         }
     }
 }

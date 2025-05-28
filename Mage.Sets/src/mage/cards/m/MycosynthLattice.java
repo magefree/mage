@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -55,6 +56,7 @@ class PermanentsAreArtifactsEffect extends ContinuousEffectImpl {
     PermanentsAreArtifactsEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "All permanents are artifacts in addition to their other types";
+        this.effectCardZones.add(Zone.BATTLEFIELD);
         this.dependencyTypes.add(DependencyType.ArtifactAddingRemoving); // March of the Machines
     }
 
@@ -81,83 +83,34 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
     EverythingIsColorlessEffect() {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Neutral);
         staticText = "All cards that aren't on the battlefield, spells, and permanents are colorless";
+        this.effectCardZones.add(Zone.ALL);
+        this.playersToCheck = TargetController.EACH_PLAYER;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ObjectColor colorless = new ObjectColor();
+        if (affectedObjectList.isEmpty()) {
+            return false;
+        }
+        ObjectColor colorless = new ObjectColor();
 
-            // permaments
-            for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                perm.getColor(game).setColor(colorless);
-            }
-
-            List<Card> affectedCards = new ArrayList<>();
-
-            // spells
-            for (MageObject object : game.getStack()) {
-                if (object instanceof Spell) {
-                    game.getState().getCreateMageObjectAttribute(object, game).getColor().setColor(colorless);
-
-                    Card card = ((Spell) object).getCard();
-                    affectedCards.add(card);
+        for (MageObjectReference mor : affectedObjectList) {
+            if (mor.getPermanent(game) != null) {
+                mor.getPermanent(game).getColor(game).setColor(colorless);
+            } else {
+                MageObject affectedObject = mor.getSpell(game);
+                if (affectedObject == null) {
+                    affectedObject = mor.getCard(game);
                 }
-            }
-
-            // exile
-            affectedCards.addAll(game.getExile().getAllCardsByRange(game, controller.getId()));
-
-
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player == null) {
+                if (affectedObject == null) {
                     continue;
                 }
-
-                // command
-                affectedCards.addAll(game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY));
-
-                // hand
-                affectedCards.addAll(player.getHand().getCards(game));
-
-                // library
-                affectedCards.addAll(player.getLibrary().getCards(game));
-
-                // graveyard
-                affectedCards.addAll(player.getGraveyard().getCards(game));
+                game.getState().getCreateMageObjectAttribute(affectedObject, game)
+                        .getColor()
+                        .setColor(ObjectColor.COLORLESS);
             }
-
-
-            // apply colors to all cards
-            affectedCards.forEach(card -> {
-                game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
-
-                // mdf cards
-                if (card instanceof ModalDoubleFacedCard) {
-                    ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
-                    ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
-                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(colorless);
-                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(colorless);
-                }
-
-                // split cards
-                if (card instanceof SplitCard) {
-                    SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
-                    SplitCardHalf rightHalfCard = ((SplitCard) card).getRightHalfCard();
-                    game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(colorless);
-                    game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(colorless);
-                }
-
-                // double faces cards
-                if (card.getSecondCardFace() != null) {
-                    game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
-                }
-            });
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override

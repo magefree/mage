@@ -58,7 +58,7 @@ public class LayerTests extends CardTestPlayerBase {
      *      This came up in a recent EDH game and we had no idea how to progress.
      *      Player A cast a Humility, then a March of the Machines, and finally a Mycosynth Lattice.
      *      Does the game get stuck in an endless loop of each card gaining and losing its respective creature-ness and abilities?
-     *      Answer: No, they all die
+     *      Answer: All lands die and remaining permanents have P/T equal to their mana value
      */
     @Test
     public void testMycosynthLatticeAndMarchOfTheMachinesAndHumility() {
@@ -78,10 +78,15 @@ public class LayerTests extends CardTestPlayerBase {
         execute();
 
         // everything dies
-        assertPermanentCount(playerA, "Humility", 0);
-        assertPermanentCount(playerA, "March of the Machines", 0);
-        assertPermanentCount(playerA, "Mycosynth Lattice", 0);
+        assertPermanentCount(playerA, "Humility", 1);
+        assertPermanentCount(playerA, "March of the Machines", 1);
+        assertPermanentCount(playerA, "Mycosynth Lattice", 1);
         assertPermanentCount(playerA, "Island", 0);
+        assertPermanentCount(playerA, "Plains", 0);
+        assertPermanentCount(playerA, "Swamp", 0);
+        assertBasePowerToughness(playerA, "Humility", 4, 4);
+        assertBasePowerToughness(playerA, "March of the Machines", 4, 4);
+        assertBasePowerToughness(playerA, "Mycosynth Lattice", 6, 6);
     }
 
     @Test
