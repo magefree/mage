@@ -33,7 +33,7 @@ public class PutCountersTargetCost extends CostImpl {
 
     public PutCountersTargetCost(PutCountersTargetCost cost) {
         super(cost);
-        this.counter = cost.counter;
+        this.counter = cost.counter.copy();
     }
 
     public PutCountersTargetCost copy() {
