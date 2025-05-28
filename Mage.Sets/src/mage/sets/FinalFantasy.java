@@ -569,6 +569,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ultros, Obnoxious Octopus", 442, Rarity.UNCOMMON, mage.cards.u.UltrosObnoxiousOctopus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ultros, Obnoxious Octopus", 83, Rarity.UNCOMMON, mage.cards.u.UltrosObnoxiousOctopus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Undercity Dire Rat", 123, Rarity.COMMON, mage.cards.u.UndercityDireRat.class));
+        cards.add(new SetCardInfo("Unexpected Request", 167, Rarity.UNCOMMON, mage.cards.u.UnexpectedRequest.class));
         cards.add(new SetCardInfo("Valkyrie Aerial Unit", 84, Rarity.UNCOMMON, mage.cards.v.ValkyrieAerialUnit.class));
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 211, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 392, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
