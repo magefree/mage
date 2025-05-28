@@ -1,6 +1,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -12,10 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -51,7 +49,7 @@ class NecroticOozeEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "As long as {this} is on the battlefield, "
                 + "it has all activated abilities of all creature cards in all graveyards";
-        this.dependendToTypes.add(DependencyType.AddingAbility); // Yixlid Jailer
+        this.affectsSourceOnly = true;
     }
 
     private NecroticOozeEffect(final NecroticOozeEffect effect) {
@@ -64,7 +62,20 @@ class NecroticOozeEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        Set<Ability> abilities = game
+        Set<Ability> abilities = getAbilities(game, source);
+        for (Ability ability : abilities) {
+            permanent.addAbility(ability, source.getSourceId(), game, true);
+        }
+        return true;
+    }
+
+    @Override
+    public int calculateResult(Game game, Ability source, List<MageObject> affectedObjects) {
+        return getAbilities(game, source).size();
+    }
+
+    private static Set<Ability> getAbilities(Game game, Ability source) {
+        return game
                 .getState()
                 .getPlayersInRange(source.getControllerId(), game)
                 .stream()
@@ -77,10 +88,6 @@ class NecroticOozeEffect extends ContinuousEffectImpl {
                 .flatMap(Collection::stream)
                 .filter(Ability::isActivatedAbility)
                 .collect(Collectors.toSet());
-        for (Ability ability : abilities) {
-            permanent.addAbility(ability, source.getSourceId(), game, true);
-        }
-        return true;
     }
 
     @Override
