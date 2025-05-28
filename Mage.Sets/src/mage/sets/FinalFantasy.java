@@ -560,6 +560,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 399, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 497, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Trance Kuja, Fate Defied", 544, Rarity.RARE, mage.cards.t.TranceKujaFateDefied.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Travel the Overworld", 82, Rarity.UNCOMMON, mage.cards.t.TravelTheOverworld.class));
         cards.add(new SetCardInfo("Traveling Chocobo", "551a", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551b", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Traveling Chocobo", "551c", Rarity.MYTHIC, mage.cards.t.TravelingChocobo.class, NON_FULL_USE_VARIOUS));
