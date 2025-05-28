@@ -1,21 +1,20 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.common.delayed.AddCounterNextSpellDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceCreatureType;
-import mage.constants.*;
-import mage.counters.CounterType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SagaChapter;
+import mage.constants.SubType;
+import mage.filter.FilterSpell;
+import mage.filter.common.FilterCreatureSpell;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -134,91 +133,9 @@ class LongListOfTheEntsEffect extends OneShotEffect {
         game.informPlayers(player.getLogName() + " notes the creature type " + subType);
         newEntList.add(subType);
         game.getState().setValue(LongListOfTheEnts.getKey(game, source, offset), newEntList);
-        game.addDelayedTriggeredAbility(new LongListOfTheEntsTriggeredAbility(subType), source);
+        FilterSpell filter = new FilterCreatureSpell("a creature spell of that type");
+        filter.add(subType.getPredicate());
+        game.addDelayedTriggeredAbility(new AddCounterNextSpellDelayedTriggeredAbility(filter), source);
         return true;
-    }
-
-}
-
-class LongListOfTheEntsTriggeredAbility extends DelayedTriggeredAbility {
-
-    private final SubType subType;
-
-    LongListOfTheEntsTriggeredAbility(SubType subType) {
-        super(new LongListOfTheEntsCounterEffect(), Duration.EndOfTurn, true, false);
-        this.subType = subType;
-    }
-
-    private LongListOfTheEntsTriggeredAbility(final LongListOfTheEntsTriggeredAbility ability) {
-        super(ability);
-        this.subType = ability.subType;
-    }
-
-    @Override
-    public LongListOfTheEntsTriggeredAbility copy() {
-        return new LongListOfTheEntsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId())) {
-            return false;
-        }
-        Spell spell = game.getSpell(event.getTargetId());
-        if (spell == null || !spell.isCreature(game) || !spell.hasSubtype(subType, game)) {
-            return false;
-        }
-        this.getEffects().setValue("spellCast", spell);
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "When you cast your next creature spell of that type this turn, that creature enters the battlefield with an additional +1/+1 counter on it.";
-    }
-}
-
-class LongListOfTheEntsCounterEffect extends ReplacementEffectImpl {
-
-    LongListOfTheEntsCounterEffect() {
-        super(Duration.EndOfStep, Outcome.BoostCreature);
-    }
-
-    private LongListOfTheEntsCounterEffect(LongListOfTheEntsCounterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Spell spell = (Spell) getValue("spellCast");
-        return spell != null && event.getTargetId().equals(spell.getCard().getId());
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (creature != null) {
-            creature.addCounters(
-                    CounterType.P1P1.createInstance(), source.getControllerId(),
-                    source, game, event.getAppliedEffects()
-            );
-            discard();
-        }
-        return false;
-    }
-
-    @Override
-    public LongListOfTheEntsCounterEffect copy() {
-        return new LongListOfTheEntsCounterEffect(this);
     }
 }
