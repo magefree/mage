@@ -132,6 +132,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 385, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 458, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clive, Ifrit's Dominant", 530, Rarity.MYTHIC, mage.cards.c.CliveIfritsDominant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cloud of Darkness", 217, Rarity.UNCOMMON, mage.cards.c.CloudOfDarkness.class));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 10, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 375, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Midgar Mercenary", 427, Rarity.MYTHIC, mage.cards.c.CloudMidgarMercenary.class, NON_FULL_USE_VARIOUS));

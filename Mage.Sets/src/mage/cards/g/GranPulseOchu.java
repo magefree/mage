@@ -2,12 +2,11 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.common.DescendCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +23,6 @@ import java.util.UUID;
 public final class GranPulseOchu extends CardImpl {
 
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_PERMANENT);
-    private static final Hint hint = new ValueHint("Permanent cards in your graveyard", xValue);
 
     public GranPulseOchu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
@@ -42,7 +40,7 @@ public final class GranPulseOchu extends CardImpl {
                 new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn)
                         .setText("until end of turn, this creature gets +1/+1 for each permanent card in your graveyard"),
                 new GenericManaCost(8)
-        ).addHint(hint));
+        ).addHint(DescendCondition.getHint()));
     }
 
     private GranPulseOchu(final GranPulseOchu card) {

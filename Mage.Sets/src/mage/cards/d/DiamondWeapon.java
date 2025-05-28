@@ -2,12 +2,11 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.DescendCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.PreventCombatDamageToSourceEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +21,6 @@ import java.util.UUID;
 public final class DiamondWeapon extends CardImpl {
 
     private static final DynamicValue xValue = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_PERMANENT);
-    private static final Hint hint = new ValueHint("Permanent cards in your graveyard", xValue);
 
     public DiamondWeapon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}{G}{G}");
@@ -33,7 +31,7 @@ public final class DiamondWeapon extends CardImpl {
         this.toughness = new MageInt(8);
 
         // This spell costs {1} less to cast for each permanent card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue)).addHint(hint));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue)).addHint(DescendCondition.getHint()));
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
