@@ -27,6 +27,10 @@
             <artifactId>protobuf-java</artifactId>
             <version>3.19.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.jgrapht</groupId>
+            <artifactId>jgrapht-core</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
