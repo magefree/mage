@@ -1,12 +1,19 @@
 package mage.abilities.effects.common;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetSpell;
 
@@ -67,8 +74,12 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
+
+        return generateText(getTargetPointer().describeTargets(mode.getTargets(), "it"));
+    }
+
+    private String generateText(String targetText) {
         String durationText = duration == Duration.EndOfTurn ? " this turn" : ' ' + duration.toString();
-        String targetText = getTargetPointer().describeTargets(mode.getTargets(), "it");
         String preventText = (amountToPrevent == Integer.MAX_VALUE ? "Prevent all" : "Prevent the next" + amountToPrevent)
                 + (onlyCombat ? " combat damage " : " damage ");
         if (passiveVoice) {
@@ -79,5 +90,19 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
             preventText += targetText + " would deal" + durationText;
         }
         return preventText;
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
+        if (!this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.asList(new StaticHint(generateText("{this}")));
     }
 }

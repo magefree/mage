@@ -2,11 +2,13 @@ package mage.abilities.effects;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.hint.Hint;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.TargetPointer;
 
 import java.util.EnumSet;
@@ -85,4 +87,9 @@ public interface ContinuousEffect extends Effect {
 
     @Override
     ContinuousEffect setTargetPointer(TargetPointer targetPointer);
+
+    // Hint info
+    boolean hasHint();
+
+    List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game);
 }

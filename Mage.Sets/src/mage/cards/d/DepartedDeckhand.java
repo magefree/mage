@@ -27,7 +27,7 @@ import mage.MageInt;
  */
 public final class DepartedDeckhand extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Spirits");
 
     static {
         filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));

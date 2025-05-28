@@ -13,6 +13,7 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
@@ -323,7 +324,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                             restrictHints.add(HintUtils.prepareText("Can't block" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
                         if (!entry.getKey().canBeUntapped(this, ability, game, false)) {
-                            restrictHints.add(HintUtils.prepareText("Can't untapped" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
+                            restrictHints.add(HintUtils.prepareText("Can't be untapped" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
                         }
                         if (!entry.getKey().canUseActivatedAbilities(this, ability, game, false)) {
                             restrictHints.add(HintUtils.prepareText("Can't use activated abilities" + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_RESTRICT));
@@ -379,6 +380,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
 
+                // General continuous effect hints
+                for (Map.Entry<ContinuousEffect, Set<Ability>> entry : game.getContinuousEffects().getHintEffects()
+                        .entrySet()) {
+                    for (Ability ability : entry.getValue()) {
+                        for (Hint hint : entry.getKey().getAffectedHints(this, ability, game)) {
+                            // TODO: Look into making Hints have the ability to provide an icon/color here
+                            restrictHints.add(HintUtils.prepareText(hint.getText(game, ability), null));
+                        }
+                    }
+
+                }
                 restrictHints.sort(String::compareTo);
             }
 

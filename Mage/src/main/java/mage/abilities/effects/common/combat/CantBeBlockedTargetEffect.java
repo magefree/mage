@@ -1,8 +1,14 @@
 package mage.abilities.effects.common.combat;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
@@ -58,5 +64,24 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
         return getTargetPointer().describeTargets(mode.getTargets(), "that creature")
                 + " can't be blocked"
                 + (duration == Duration.EndOfTurn ? " this turn" : "");
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
+        if (!applies(permanent, source, game)) {
+            return Collections.emptyList();
+        }
+
+        return Arrays
+                .asList(new StaticHint("{this} can't be blocked" + (duration == Duration.EndOfTurn ? " this turn" : "")
+                + (this.filter != StaticFilters.FILTER_PERMANENT_CREATURE
+                        ? (this.filter.getMessage().startsWith("except by") ? "" : " by ") + this.filter.getMessage()
+                        : "")
+                + "."));
     }
 }

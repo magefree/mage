@@ -5,9 +5,12 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BecomesExertSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
@@ -20,6 +23,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,6 +57,9 @@ public class ExertAbility extends SimpleStaticAbility {
         ruleText += " <i>(An exerted creature won't untap during your next untap step.)</i>";
         if (exertOnlyOncePerTurn) {
             getWatchers().add(new ExertedThisTurnWatcher());
+
+            addHint(new ConditionHint(NotExertedThisTurnCondition.instance, "{this} hasn't been exerted this turn",
+                    null, "{this} has been exerted this turn", null, true));
         }
     }
 
@@ -71,6 +78,24 @@ public class ExertAbility extends SimpleStaticAbility {
     public String getRule() {
         return ruleText;
     }
+}
+
+enum NotExertedThisTurnCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent creature = game.getPermanent(source.getSourceId());
+        if (creature == null)
+            return true;
+
+        MageObjectReference creatureReference = new MageObjectReference(creature.getId(),
+                creature.getZoneChangeCounter(game), game);
+        ExertedThisTurnWatcher watcher = game.getState().getWatcher(ExertedThisTurnWatcher.class);
+
+        return watcher == null || !watcher.getExertedThisTurnCreatures().contains(creatureReference);
+    }
+
 }
 
 class ExertReplacementEffect extends ReplacementEffectImpl {
