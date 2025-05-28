@@ -94,8 +94,8 @@ public class LayerTests extends CardTestPlayerBase {
         // Blood Moon : Nonbasic lands are Mountains.
         // Urborg, Tomb of Yawgmoth : Each land is a Swamp in addition to its other types.
         // Expected behavior:  Urborg loses all abilities and becomes a Mountain.  The Plains does not have subtype Swamp due to this effect.
+        addCard(Zone.BATTLEFIELD, playerA, "Urborg, Tomb of Yawgmoth", 1);  // non-basic land, put Urborg first to test dependency > timestamp
         addCard(Zone.BATTLEFIELD, playerA, "Blood Moon");
-        addCard(Zone.BATTLEFIELD, playerA, "Urborg, Tomb of Yawgmoth", 1);  // non-basic land
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
