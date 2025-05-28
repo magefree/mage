@@ -30,12 +30,12 @@ public final class GrahaTia extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // The Eye of Allag - Whenever one or more other creatures and/or artifacts you control die, draw a card. This ability triggers only once each turn.
+        // The Allagan Eye - Whenever one or more other creatures and/or artifacts you control die, draw a card. This ability triggers only once each turn.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false,
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT
         ).setTriggerPhrase("Whenever one or more other creatures and/or artifacts you control die, ")
-                .setTriggersLimitEachTurn(1).withFlavorWord("The Eye of Allag"));
+                .setTriggersLimitEachTurn(1).withFlavorWord("The Allagan Eye"));
     }
 
     private GrahaTia(final GrahaTia card) {

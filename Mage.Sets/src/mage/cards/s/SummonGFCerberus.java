@@ -32,7 +32,7 @@ public final class SummonGFCerberus extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
+        // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)
         SagaAbility sagaAbility = new SagaAbility(this);
 
         // I -- Surveil 1.
