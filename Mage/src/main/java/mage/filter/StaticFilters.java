@@ -7,10 +7,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
-import mage.filter.predicate.permanent.AttachedOrShareCreatureTypePredicate;
-import mage.filter.predicate.permanent.RingBearerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.predicate.permanent.*;
 
 /**
  * A class that holds Filter objects that may not be modified without copying
@@ -1214,6 +1211,22 @@ public final class StaticFilters {
 
     static {
         FILTER_BLOCKING_CREATURES.setLockedFilter(true);
+    }
+
+    public static final FilterPermanent FILTER_CREATURE_DAMAGED_THIS_TURN = new FilterCreaturePermanent("creature that was dealt damage this turn");
+
+    static {
+        FILTER_CREATURE_DAMAGED_THIS_TURN.add(WasDealtDamageThisTurnPredicate.instance);
+        FILTER_CREATURE_DAMAGED_THIS_TURN.setLockedFilter(true);
+    }
+
+
+    public static final FilterPermanent FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN = new FilterCreaturePermanent("creature an opponent controls that was dealt damage this turn");
+
+    static {
+        FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN.add(TargetController.OPPONENT.getControllerPredicate());
+        FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN.add(WasDealtDamageThisTurnPredicate.instance);
+        FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT_AURAS = new FilterEnchantmentPermanent("Auras");
