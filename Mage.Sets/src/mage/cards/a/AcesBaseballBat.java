@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.AttachedAttackingCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneAttachedEffect;
@@ -14,8 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -27,12 +25,14 @@ public final class AcesBaseballBat extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterLegendary
             = new FilterControlledCreaturePermanent("legendary creature");
+
     static {
         filterLegendary.add(SuperType.LEGENDARY.getPredicate());
     }
 
     private static final FilterControlledCreaturePermanent filterDalek
             = new FilterControlledCreaturePermanent("a Dalek");
+
     static {
         filterDalek.add(SubType.DALEK.getPredicate());
     }
@@ -48,12 +48,19 @@ public final class AcesBaseballBat extends CardImpl {
         // As long as equipped creature is attacking, it has first strike and must be blocked by a Dalek if able.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT),
-                AttachedToAttackingCondition.instance, "As long as equipped creature is attacking, it has first strike"));
-        ability.addEffect(new MustBeBlockedByAtLeastOneAttachedEffect(filterDalek).concatBy("and"));
+                AttachedAttackingCondition.instance, "as long as equipped creature is attacking, it has first strike"
+        ));
+        ability.addEffect(new ConditionalContinuousEffect(
+                new MustBeBlockedByAtLeastOneAttachedEffect(filterDalek),
+                AttachedAttackingCondition.instance, "and must be blocked by a Dalek if able"
+        ));
         this.addAbility(ability);
 
         // Equip legendary creature (1)
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), new TargetControlledCreaturePermanent(filterLegendary), false));
+        this.addAbility(new EquipAbility(
+                Outcome.AddAbility, new GenericManaCost(1),
+                new TargetControlledCreaturePermanent(filterLegendary), false
+        ));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));
@@ -66,21 +73,5 @@ public final class AcesBaseballBat extends CardImpl {
     @Override
     public AcesBaseballBat copy() {
         return new AcesBaseballBat(this);
-    }
-}
-enum AttachedToAttackingCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment == null || attachment.getAttachedTo() == null) {
-            return false;
-        }
-        Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
-        if (attachedTo == null) {
-            return false;
-        }
-        return attachedTo.isAttacking();
     }
 }
