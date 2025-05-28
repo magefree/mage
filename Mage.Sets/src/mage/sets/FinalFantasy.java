@@ -209,6 +209,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 486, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garnet, Princess of Alexandria", 222, Rarity.UNCOMMON, mage.cards.g.GarnetPrincessOfAlexandria.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garnet, Princess of Alexandria", 487, Rarity.UNCOMMON, mage.cards.g.GarnetPrincessOfAlexandria.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gigantoad", 187, Rarity.COMMON, mage.cards.g.Gigantoad.class));
         cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 139, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 338, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gilgamesh, Master-at-Arms", 461, Rarity.RARE, mage.cards.g.GilgameshMasterAtArms.class, NON_FULL_USE_VARIOUS));
