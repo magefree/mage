@@ -401,7 +401,7 @@ public class GameEvent implements Serializable {
         SURVEIL, SURVEILED,
         PROLIFERATE, PROLIFERATED,
         FATESEALED,
-        FLIP_COIN, COIN_FLIPPED,
+        FLIP_COIN, FLIP_COINS, COIN_FLIPPED,
         REPLACE_ROLLED_DIE, // for Clam-I-Am workaround only
         ROLL_DIE, DIE_ROLLED,
         ROLL_DICE, DICE_ROLLED,
