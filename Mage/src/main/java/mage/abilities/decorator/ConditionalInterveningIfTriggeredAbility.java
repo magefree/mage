@@ -9,7 +9,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
 import mage.constants.EffectType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
@@ -33,6 +32,8 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     /**
      * Triggered ability with a condition. Set the optionality for the trigger
      * ability itself.
+     *
+     * @deprecated use {@link mage.abilities.TriggeredAbility}.withInterveningIf() instead
      *
      * @param ability
      * @param condition

@@ -1,31 +1,32 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.Target;
+import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetadjustment.GenericTargetAdjuster;
+import mage.target.targetpointer.FirstTargetPointer;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
  */
 public final class BladegriffPrototype extends CardImpl {
+    static FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent of that player's choice that one of your opponents controls");
+    static{
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+    }
 
     public BladegriffPrototype(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
@@ -38,7 +39,10 @@ public final class BladegriffPrototype extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Bladegriff Prototype deals combat damage to a player, destroy target nonland permanent of that player's choice that one of your opponents controls.
-        this.addAbility(new BladegriffPrototypeAbility());
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetNonlandPermanent(filter));
+        ability.setTargetAdjuster(new ThatPlayersChoiceTargetAdjuster());
+        this.addAbility(ability);
     }
 
     private BladegriffPrototype(final BladegriffPrototype card) {
@@ -51,54 +55,14 @@ public final class BladegriffPrototype extends CardImpl {
     }
 }
 
-class BladegriffPrototypeAbility extends TriggeredAbilityImpl {
-
-    BladegriffPrototypeAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
-    }
-
-    private BladegriffPrototypeAbility(final BladegriffPrototypeAbility ability) {
-        super(ability);
-    }
-
+class ThatPlayersChoiceTargetAdjuster extends GenericTargetAdjuster {
     @Override
-    public BladegriffPrototypeAbility copy() {
-        return new BladegriffPrototypeAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Player player = game.getPlayer(getControllerId());
-        if (player == null
-                || !event.getSourceId().equals(this.sourceId)
-                || !((DamagedEvent) event).isCombatDamage()) {
-            return false;
-        }
-        FilterPermanent filter = new FilterNonlandPermanent(
-                "nonland permanent controlled by an opponent of " + player.getName()
-        );
-        filter.add(Predicates.or(
-                game.getOpponents(getControllerId())
-                        .stream()
-                        .map(ControllerIdPredicate::new)
-                        .collect(Collectors.toSet())
-        ));
-        TargetPermanent target = new TargetPermanent(filter);
-        target.setTargetController(event.getPlayerId());
-        this.getTargets().clear();
-        this.addTarget(target);
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, " +
-                "destroy target nonland permanent of that player's choice " +
-                "that one of your opponents controls.";
+    public void adjustTargets(Ability ability, Game game) {
+        UUID opponentId = ability.getEffects().get(0).getTargetPointer().getFirst(game, ability);
+        ability.getTargets().clear();
+        ability.getAllEffects().setTargetPointer(new FirstTargetPointer());
+        Target newTarget = blueprintTarget.copy();
+        newTarget.setTargetController(opponentId);
+        ability.addTarget(newTarget);
     }
 }
