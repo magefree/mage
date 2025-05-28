@@ -3,8 +3,7 @@ package mage.abilities.effects;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.target.Target;
-import mage.target.Targets;
-import mage.target.targetadjustment.GenericTargetAdjuster;
+import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.TargetPointer;
 
 /**
@@ -13,13 +12,13 @@ import mage.target.targetpointer.TargetPointer;
 public class OneShotNonTargetEffect extends OneShotEffect {
     OneShotEffect effect;
     Target notTarget;
-    GenericTargetAdjuster adjuster;
+    TargetAdjuster adjuster;
 
     public OneShotNonTargetEffect(OneShotEffect effect, Target notTarget) {
         this(effect, notTarget, null);
     }
 
-    public OneShotNonTargetEffect(OneShotEffect effect, Target notTarget, GenericTargetAdjuster adjuster) {
+    public OneShotNonTargetEffect(OneShotEffect effect, Target notTarget, TargetAdjuster adjuster) {
         super(effect.outcome);
         this.effect = effect;
         this.notTarget = notTarget;
@@ -44,26 +43,25 @@ public class OneShotNonTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        boolean result = false;
         Target target = notTarget.copy();
-        Ability modifiedSource = source.copy();
-        modifiedSource.addTarget(target);
+        if (source.getTargetAdjuster() != null || !source.getTargets().isEmpty()){
+            throw new IllegalStateException("source ability already has target but is using OneShotNonTargetEffect");
+        }
+        source.addTarget(target);
         if (adjuster != null) {
-            if (adjuster.blueprintTarget == null) {
-                adjuster.addDefaultTargets(modifiedSource);
-            }
-            adjuster.adjustTargets(modifiedSource, game);
-            Targets adjustedTargets = modifiedSource.getTargets();
-            if (adjustedTargets.isEmpty()) { //if adjusted to have no targets, apply anyway
-                return effect.apply(game, modifiedSource);
-            }
-            target = modifiedSource.getTargets().get(0);
+            adjuster.clearDefaultTargets();
+            source.setTargetAdjuster(adjuster);
+            source.adjustTargets(game);
+            source.setTargetAdjuster(null);
         }
 
-        if (target.canChoose(source.getControllerId(), modifiedSource, game)) {
-            target.choose(this.outcome, source.getControllerId(), modifiedSource, game);
-            return effect.apply(game, modifiedSource);
+        if (source.canChooseTarget(game, source.getControllerId())){
+            source.getTargets().choose(outcome, source.getControllerId(), source.getId(), source, game);
+            result = effect.apply(game, source);
         }
-        return false;
+        source.getTargets().clear();
+        return result;
     }
 
     @Override

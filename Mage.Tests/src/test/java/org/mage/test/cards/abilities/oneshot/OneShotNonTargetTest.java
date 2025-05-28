@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.oneshot;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 /**
  *
@@ -30,7 +31,7 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         assertTappedCount("Plains", true, 7);
     }
     @Test
-    public void TemporalFirestormTest() {
+    public void NonTargetAdjusterTest() {
         addCard(Zone.HAND, playerA, "Temporal Firestorm");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
@@ -50,5 +51,27 @@ public class OneShotNonTargetTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Squire", 0);
         assertGraveyardCount(playerA, "Python", 0);
         assertGraveyardCount(playerA, "Watchwolf", 1);
+    }
+    @Test
+    public void ModeSelectionTest() {
+        addCard(Zone.HAND, playerA, "SOLDIER Military Program");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Squire", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "SOLDIER Military Program");
+        setModeChoice(playerA, "2");
+        setChoice(playerA, "Squire");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
+
+        setModeChoice(playerA, "1");
+
+        setModeChoice(playerA, "2");
+        setChoice(playerA, "Squire^Soldier Token");
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+        assertPowerToughness(playerA, "Squire", 3, 4);
+        assertPowerToughness(playerA, "Soldier Token", 2, 2);
     }
 }

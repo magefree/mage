@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.target.Target;
 
 public abstract class GenericTargetAdjuster implements TargetAdjuster {
-    public Target blueprintTarget = null;
+    protected Target blueprintTarget = null;
 
     @Override
     public void addDefaultTargets(Ability ability) {
@@ -13,5 +13,9 @@ public abstract class GenericTargetAdjuster implements TargetAdjuster {
         } else {
             throw new IllegalStateException("Wrong code usage: target adjuster already has blueprint target - " + blueprintTarget);
         }
+    }
+    @Override
+    public void clearDefaultTargets() {
+        blueprintTarget = null;
     }
 }
