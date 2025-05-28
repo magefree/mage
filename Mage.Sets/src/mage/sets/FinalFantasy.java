@@ -379,6 +379,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Raubahn, Bull of Ala Mhigo", 465, Rarity.RARE, mage.cards.r.RaubahnBullOfAlaMhigo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raubahn, Bull of Ala Mhigo", 533, Rarity.RARE, mage.cards.r.RaubahnBullOfAlaMhigo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reach the Horizon", 195, Rarity.UNCOMMON, mage.cards.r.ReachTheHorizon.class));
+        cards.add(new SetCardInfo("Red Mage's Rapier", 152, Rarity.COMMON, mage.cards.r.RedMagesRapier.class));
         cards.add(new SetCardInfo("Relm's Sketching", 67, Rarity.UNCOMMON, mage.cards.r.RelmsSketching.class));
         cards.add(new SetCardInfo("Reno and Rude", 113, Rarity.UNCOMMON, mage.cards.r.RenoAndRude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reno and Rude", 450, Rarity.UNCOMMON, mage.cards.r.RenoAndRude.class, NON_FULL_USE_VARIOUS));
