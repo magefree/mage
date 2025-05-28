@@ -2402,7 +2402,7 @@
                         <StringItem index="3" value="Item 4"/>
                       </StringArray>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Image - Renders card image with text overlay&lt;br&gt; MTGO - Renders card frame around card art&lt;br&gt; Forced M15 - Renders all cards in the modern frame&lt;br&gt; Forced Retro - Renders all cards in the retro frame"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Image - Renders card image with text overlay&lt;br&gt; MTGO - Renders card frame around card art&lt;br&gt; Forced M15 - Renders all cards in the MTGO style with the modern frame&lt;br&gt; Forced Retro - Renders all cards in the MTGO style with the retro frame"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

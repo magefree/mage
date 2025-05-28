@@ -82,6 +82,7 @@ public class TestCardRenderDialog extends MageDialog {
         getRootPane().setDefaultButton(buttonCancel);
 
         // init render mode
+        this.comboRenderMode.setModel(new DefaultComboBoxModel<>(CardRenderMode.toList()));
         this.comboRenderMode.setSelectedIndex(PreferencesDialog.getRenderMode());
 
         // init themes list
@@ -629,7 +630,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         labelRenderMode.setText("Render mode:");
 
-        comboRenderMode.setModel(new javax.swing.DefaultComboBoxModel<>(CardRenderMode.toList()));
+        comboRenderMode.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the MTGO style with the modern frame<br> Forced Retro - Renders all cards in the MTGO style with the retro frame");
         comboRenderMode.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboRenderModeItemStateChanged(evt);

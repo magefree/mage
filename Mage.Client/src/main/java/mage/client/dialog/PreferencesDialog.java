@@ -2335,7 +2335,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         labelRenderMode.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the modern frame<br> Forced Retro - Renders all cards in the retro frame");
 
         cbCardRenderImageFallback.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbCardRenderImageFallback.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the modern frame<br> Forced Retro - Renders all cards in the retro frame");
+        cbCardRenderImageFallback.setToolTipText("<HTML>Image - Renders card image with text overlay<br> MTGO - Renders card frame around card art<br> Forced M15 - Renders all cards in the MTGO style with the modern frame<br> Forced Retro - Renders all cards in the MTGO style with the retro frame");
 
         org.jdesktop.layout.GroupLayout panelCardStylesLayout = new org.jdesktop.layout.GroupLayout(panelCardStyles);
         panelCardStyles.setLayout(panelCardStylesLayout);
