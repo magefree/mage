@@ -320,6 +320,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Lunatic Pandora", 262, Rarity.COMMON, mage.cards.l.LunaticPandora.class));
         cards.add(new SetCardInfo("Machinist's Arsenal", 23, Rarity.RARE, mage.cards.m.MachinistsArsenal.class));
         cards.add(new SetCardInfo("Magic Damper", 61, Rarity.COMMON, mage.cards.m.MagicDamper.class));
+        cards.add(new SetCardInfo("Magic Pot", 263, Rarity.COMMON, mage.cards.m.MagicPot.class));
         cards.add(new SetCardInfo("Magitek Armor", 24, Rarity.UNCOMMON, mage.cards.m.MagitekArmor.class));
         cards.add(new SetCardInfo("Magitek Infantry", 25, Rarity.COMMON, mage.cards.m.MagitekInfantry.class));
         cards.add(new SetCardInfo("Magitek Scythe", 562, Rarity.RARE, mage.cards.m.MagitekScythe.class));
