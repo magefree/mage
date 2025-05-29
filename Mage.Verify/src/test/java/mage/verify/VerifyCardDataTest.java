@@ -2336,17 +2336,11 @@ public class VerifyCardDataTest {
         }
 
         // replace special text and symbols
-        newRule = newRule
-                .replace("{this}", CardUtil.getCardSelfReference(card, null))
+        newRule = CardUtil
+                .applySelfReference(newRule, card, null)
                 .replace("−", "-")
                 .replace("—", "-")
-                .replace("&mdash;", "-")
-                .replace(". this", ". This")
-                .replace("\nthis", "\nThis")
-                .replace("-this", "-This")
-                .replace(": this", ": This")
-                .replace("&bull this", "&bull This")
-                .replace("- this", "- This");
+                .replace("&mdash;", "-");
 
         // remove html marks
         newRule = newRule

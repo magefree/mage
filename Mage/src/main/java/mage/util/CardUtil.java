@@ -2531,6 +2531,17 @@ public final class CardUtil {
             SubType.SIEGE
     );
 
+    public static String applySelfReference(String rule, MageObject mageObject, Game game) {
+        return rule
+                .replace("{this}", getCardSelfReference(mageObject, game))
+                .replace(". this", ". This")
+                .replace("\nthis", "\nThis")
+                .replace("-this", "-This")
+                .replace(": this", ": This")
+                .replace("&bull this", "&bull This")
+                .replace("- this", "- This");
+    }
+
     /**
      * Returns the description of the card for rules text that references itself.
      * Applies to abilities that function only on the battlefield.
