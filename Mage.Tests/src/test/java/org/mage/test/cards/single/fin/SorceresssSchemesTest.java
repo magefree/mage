@@ -51,6 +51,34 @@ public class SorceresssSchemesTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_auto_target_in_graveyard() {
+        addCard(Zone.HAND, playerA, schemes, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, schemes);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerA, "Lightning Bolt", 1);
+    }
+
+    @Test
+    public void test_auto_target_in_exile() {
+        addCard(Zone.HAND, playerA, schemes, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.EXILED, playerA, "Deep Analysis", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, schemes);
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerA, "Deep Analysis", 1);
+    }
+
+    @Test
     public void test_various_nontarget() {
         addCard(Zone.HAND, playerA, schemes, 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
