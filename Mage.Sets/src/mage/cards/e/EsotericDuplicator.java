@@ -42,7 +42,7 @@ public final class EsotericDuplicator extends CardImpl {
         ));
 
         // {2}, Sacrifice Esoteric Duplicator: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
     }
 
     private EsotericDuplicator(final EsotericDuplicator card) {

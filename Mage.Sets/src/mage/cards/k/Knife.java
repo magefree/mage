@@ -39,7 +39,7 @@ public final class Knife extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Sacrifice Knife: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
 
         // Equip {2}
         this.addAbility(new EquipAbility(2, false));

@@ -3,7 +3,6 @@ package mage.player.human;
 import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.*;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -2188,7 +2187,7 @@ public class HumanPlayer extends PlayerImpl {
             break;
         }
 
-        return  xValue;
+        return xValue;
     }
 
     @Override
@@ -2517,7 +2516,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (mode.getTargets().canChoose(source.getControllerId(), source, game)) { // and needed targets have to be available
                     String modeText = mode.getEffects().getText(mode);
                     if (obj != null) {
-                        modeText = modeText.replace("{this}", obj.getName());
+                        modeText = CardUtil.applySelfReference(modeText, obj, game);
                     }
                     if (modes.isMayChooseSameModeMoreThanOnce()) {
                         if (timesSelected > 0) {

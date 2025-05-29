@@ -47,7 +47,7 @@ public final class Wrench extends CardImpl {
         this.addAbility(boostAbility);
 
         // {2}, Sacrifice Wrench: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));

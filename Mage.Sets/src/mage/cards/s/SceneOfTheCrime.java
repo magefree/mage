@@ -37,7 +37,7 @@ public final class SceneOfTheCrime extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Sacrifice Scene of the Crime: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
     }
 
     private SceneOfTheCrime(final SceneOfTheCrime card) {

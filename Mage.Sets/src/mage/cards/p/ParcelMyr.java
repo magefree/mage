@@ -23,7 +23,7 @@ public final class ParcelMyr extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}, Sacrifice Parcel Myr: Draw a card
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
     }
 
     private ParcelMyr(final ParcelMyr card) {

@@ -35,7 +35,7 @@ public final class TangletroveKelp extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new TangletroveKelpEffect(), false));
 
         // {2}, Sacrifice Tangletrove Kelp: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
     }
 
     private TangletroveKelp(final TangletroveKelp card) {

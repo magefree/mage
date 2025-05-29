@@ -15,7 +15,7 @@ public final class ClueArtifactToken extends TokenImpl {
         subtype.add(SubType.CLUE);
 
         // {2}, Sacrifice this artifact: Draw a card.
-        this.addAbility(new ClueAbility(false));
+        this.addAbility(new ClueAbility());
     }
 
     private ClueArtifactToken(final ClueArtifactToken token) {

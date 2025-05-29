@@ -8,9 +8,9 @@ import mage.constants.Zone;
 
 public class TreasureAbility extends ActivatedManaAbilityImpl {
 
-    public TreasureAbility(boolean named) {
+    public TreasureAbility() {
         super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-        this.addCost(new SacrificeSourceCost().setText("sacrifice " + (named ? "{this}" : "this artifact")));
+        this.addCost(new SacrificeSourceCost());
     }
 
     private TreasureAbility(final TreasureAbility ability) {
@@ -21,5 +21,5 @@ public class TreasureAbility extends ActivatedManaAbilityImpl {
     public TreasureAbility copy() {
         return new TreasureAbility(this);
     }
-    
+
 }

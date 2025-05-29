@@ -35,7 +35,7 @@ public final class Rope extends CardImpl {
         this.addAbility(boostAbility);
 
         // {2}, Sacrifice Rope: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));

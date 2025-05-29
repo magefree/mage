@@ -47,7 +47,7 @@ public class AgentsToolkit extends CardImpl {
         ));
 
         // {2}, Sacrifice Agent’s Toolkit: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
     }
 
     private AgentsToolkit(final AgentsToolkit card) {

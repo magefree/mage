@@ -46,7 +46,7 @@ public final class InvestigatorsJournal extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Sacrifice Investigator's Journal: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
     }
 
     private InvestigatorsJournal(final InvestigatorsJournal card) {

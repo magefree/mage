@@ -31,7 +31,7 @@ public final class RedHerring extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
 
         // {2}, Sacrifice Red Herring: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
     }
 
     private RedHerring(final RedHerring card) {

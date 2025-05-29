@@ -49,7 +49,7 @@ public final class MinimusContainment extends CardImpl {
 
 class MinimusContainmentEffect extends ContinuousEffectImpl {
 
-    private static final Ability ability = new TreasureAbility(false);
+    private static final Ability ability = new TreasureAbility();
 
     MinimusContainmentEffect() {
         super(Duration.WhileOnBattlefield, Outcome.LoseAbility);

@@ -7,11 +7,11 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.constants.Zone;
 
 public class ClueAbility extends ActivatedAbilityImpl {
-    
-    public ClueAbility(boolean named) {
+
+    public ClueAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         // {2}, Sacrifice this artifact: You draw a card.”
-        this.addCost(new SacrificeSourceCost().setText("sacrifice " + (named ? "{this}" : "this artifact")));
+        this.addCost(new SacrificeSourceCost());
     }
 
     private ClueAbility(final ClueAbility ability) {

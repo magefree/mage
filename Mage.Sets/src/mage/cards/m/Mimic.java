@@ -24,7 +24,7 @@ public final class Mimic extends CardImpl {
         this.subtype.add(SubType.TREASURE);
 
         // {T}, Sacrifice Mimic: Add one mana of any color.
-        this.addAbility(new TreasureAbility(true));
+        this.addAbility(new TreasureAbility());
 
         // {2}: Mimic becomes a Shapeshifter artifact creature with base power and toughness 3/3 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(

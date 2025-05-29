@@ -40,7 +40,7 @@ public final class Candlestick extends CardImpl {
         this.addAbility(boostAbility);
 
         // {2}, Sacrifice Candlestick: Draw a card.
-        this.addAbility(new ClueAbility(true));
+        this.addAbility(new ClueAbility());
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));

@@ -28,7 +28,7 @@ public final class DireMimic extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // {T}, Sacrifice Dire Mimic: Add one mana of any color.
-        this.addAbility(new TreasureAbility(true));
+        this.addAbility(new TreasureAbility());
 
         // {3}: Dire Mimic becomes a Shapeshifter artifact creature with base power and toughness 5/5 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(

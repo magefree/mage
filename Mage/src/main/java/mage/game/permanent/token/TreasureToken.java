@@ -14,7 +14,7 @@ public final class TreasureToken extends TokenImpl {
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.TREASURE);
 
-        this.addAbility(new TreasureAbility(false));
+        this.addAbility(new TreasureAbility());
     }
 
     private TreasureToken(final TreasureToken token) {

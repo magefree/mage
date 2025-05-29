@@ -103,7 +103,7 @@ class VraskaTheSilencerEffect extends OneShotEffect {
 class VraskaTheSilencerContinuousEffect extends ContinuousEffectImpl {
 
     private final MageObjectReference mor;
-    private static final Ability ability = new TreasureAbility(false);
+    private static final Ability ability = new TreasureAbility();
 
     VraskaTheSilencerContinuousEffect(MageObjectReference mor) {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);

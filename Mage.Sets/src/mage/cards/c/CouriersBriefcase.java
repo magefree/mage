@@ -31,7 +31,7 @@ public final class CouriersBriefcase extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new CitizenGreenWhiteToken())));
 
         // {T}, Sacrifice Courier's Briefcase: Add one mana of any color.
-        this.addAbility(new TreasureAbility(true));
+        this.addAbility(new TreasureAbility());
 
         // {W}{U}{B}{R}{G}, {T}, Sacrifice Courier's Briefcase: Draw three cards.
         Ability ability = new SimpleActivatedAbility(

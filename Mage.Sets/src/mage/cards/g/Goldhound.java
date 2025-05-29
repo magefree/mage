@@ -33,7 +33,7 @@ public final class Goldhound extends CardImpl {
         this.addAbility(new MenaceAbility(true));
 
         // {T}, Sacrifice Goldhound: Add one mana of any color.
-        this.addAbility(new TreasureAbility(true));
+        this.addAbility(new TreasureAbility());
     }
 
     private Goldhound(final Goldhound card) {
