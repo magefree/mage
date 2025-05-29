@@ -477,6 +477,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Sleep Magic", 74, Rarity.UNCOMMON, mage.cards.s.SleepMagic.class));
         cards.add(new SetCardInfo("Snow Villiers", 33, Rarity.UNCOMMON, mage.cards.s.SnowVilliers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snow Villiers", 432, Rarity.UNCOMMON, mage.cards.s.SnowVilliers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sorceress's Schemes", 159, Rarity.UNCOMMON, mage.cards.s.SorceresssSchemes.class));
         cards.add(new SetCardInfo("Squall, SeeD Mercenary", 243, Rarity.RARE, mage.cards.s.SquallSeeDMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Squall, SeeD Mercenary", 402, Rarity.RARE, mage.cards.s.SquallSeeDMercenary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Squall, SeeD Mercenary", 509, Rarity.RARE, mage.cards.s.SquallSeeDMercenary.class, NON_FULL_USE_VARIOUS));
