@@ -562,6 +562,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Tifa Lockhart", 391, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 473, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tifa Lockhart", 536, Rarity.RARE, mage.cards.t.TifaLockhart.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tifa's Limit Break", 207, Rarity.UNCOMMON, mage.cards.t.TifasLimitBreak.class));
         cards.add(new SetCardInfo("Tonberry", 122, Rarity.UNCOMMON, mage.cards.t.Tonberry.class));
         cards.add(new SetCardInfo("Torgal, A Fine Hound", 208, Rarity.UNCOMMON, mage.cards.t.TorgalAFineHound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Torgal, A Fine Hound", 345, Rarity.UNCOMMON, mage.cards.t.TorgalAFineHound.class, NON_FULL_USE_VARIOUS));
