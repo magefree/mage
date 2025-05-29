@@ -28,7 +28,7 @@ public class AddCounterNextSpellDelayedTriggeredAbility extends DelayedTriggered
     public AddCounterNextSpellDelayedTriggeredAbility(FilterSpell filter) {
         super(new AddCounterNextSpellEffect(), Duration.EndOfTurn, true, false);
         this.filter = filter;
-        this.setTriggerPhrase("When you next cast " + " this turn, ");
+        this.setTriggerPhrase("When you next cast " + filter.getMessage() + " this turn, ");
     }
 
     private AddCounterNextSpellDelayedTriggeredAbility(final AddCounterNextSpellDelayedTriggeredAbility ability) {
