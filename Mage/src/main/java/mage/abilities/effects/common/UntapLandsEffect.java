@@ -1,7 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -11,8 +9,10 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * "Untap (up to) X lands" effect
@@ -65,7 +65,7 @@ public class UntapLandsEffect extends OneShotEffect {
             } else {
                 tappedLands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).size();
             }
-            TargetLandPermanent target = new TargetLandPermanent(upTo ? 0 : Math.min(tappedLands, amount), amount, filter, true);
+            TargetPermanent target = new TargetPermanent(upTo ? 0 : Math.min(tappedLands, amount), amount, filter, true);
             if (target.canChoose(source.getControllerId(), source, game)) {
 
                 // UI Shortcut: Check if any lands are already tapped.  If there are equal/fewer than amount, give the option to add those in to be untapped now.

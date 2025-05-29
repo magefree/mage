@@ -192,7 +192,7 @@ class AnimateDeadPutOntoBattlefieldEffect extends OneShotEffect {
         player.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null);
         game.processAction();
 
-        Permanent creature = game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
+        Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (creature == null) {
             return true;
         }

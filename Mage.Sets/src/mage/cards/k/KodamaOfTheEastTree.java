@@ -25,6 +25,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -134,7 +135,7 @@ class KodamaOfTheEastTreeEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent otherPermanent = game.getPermanent(card.getId());
+        Permanent otherPermanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (otherPermanent == null) {
             return false;
         }

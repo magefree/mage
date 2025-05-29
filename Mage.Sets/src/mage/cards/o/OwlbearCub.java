@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -116,7 +117,7 @@ class OwlbearCubEffect extends OneShotEffect {
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
-            Permanent permanent = game.getPermanent(card.getId());
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (permanent != null) {
                 game.getCombat().addAttackerToCombat(permanent.getId(), getTargetPointer().getFirst(game, source), game);
             }

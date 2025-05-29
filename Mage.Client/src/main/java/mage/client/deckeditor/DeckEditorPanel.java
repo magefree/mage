@@ -121,12 +121,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             if (!SwingUtilities.isLeftMouseButton(e)) {
                                 return;
                             }
-                            List<String> cardNames = new ArrayList<>();
                             LegalityLabel label = (LegalityLabel) e.getComponent();
-                            label.getValidator().getErrorsList().stream()
-                                    .map(DeckValidatorError::getCardName)
-                                    .filter(Objects::nonNull)
-                                    .forEach(cardNames::add);
+                            List<String> cardNames = new ArrayList<>(label.selectCards());
                             deckArea.getDeckList().deselectAll();
                             deckArea.getDeckList().selectByName(cardNames);
                             deckArea.getSideboardList().deselectAll();
@@ -1290,8 +1286,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
         panelInfo.setOpaque(false);
 
-        deckLegalityDisplay.setMaximumSize(new java.awt.Dimension(245, 155));
-        deckLegalityDisplay.setMinimumSize(new java.awt.Dimension(85, 155));
+        deckLegalityDisplay.setMaximumSize(new java.awt.Dimension(245, 255));
+        deckLegalityDisplay.setMinimumSize(new java.awt.Dimension(85, 255));
         deckLegalityDisplay.setOpaque(false);
         deckLegalityDisplay.setVisible(false);
 
@@ -1313,7 +1309,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelInfoLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(deckLegalityDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(deckLegalityDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())

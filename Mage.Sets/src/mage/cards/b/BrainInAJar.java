@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,7 +45,7 @@ public final class BrainInAJar extends CardImpl {
         this.addAbility(ability);
 
         // {3}, {T}, Remove X charge counters from Brain in a Jar: Scry X.
-        ability = new SimpleActivatedAbility(new BrainInAJarScryEffect(), new GenericManaCost(3));
+        ability = new SimpleActivatedAbility(new ScryEffect(GetXValue.instance), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE));
         this.addAbility(ability);
@@ -89,35 +90,5 @@ class BrainInAJarCastEffect extends OneShotEffect {
         FilterCard filter = new FilterInstantOrSorceryCard();
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, counters));
         return CardUtil.castSpellWithAttributesForFree(controller, source, game, controller.getHand(), filter);
-    }
-}
-
-class BrainInAJarScryEffect extends OneShotEffect {
-
-    BrainInAJarScryEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Scry X";
-    }
-
-    private BrainInAJarScryEffect(final BrainInAJarScryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BrainInAJarScryEffect copy() {
-        return new BrainInAJarScryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int x = GetXValue.instance.calculate(game, source, this);
-            if (x > 0) {
-                return controller.scry(x, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

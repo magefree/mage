@@ -25,6 +25,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -80,7 +81,7 @@ class ApprenticeNecromancerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                Permanent creature = game.getPermanent(card.getId());
+                Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (creature != null) {
                     // Gains haste
                     ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);

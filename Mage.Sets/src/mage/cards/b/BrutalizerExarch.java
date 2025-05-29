@@ -84,7 +84,7 @@ class BrutalizerExarchEffect2 extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (permanent != null && controller != null) {
-            return controller.putCardsOnBottomOfLibrary(permanent, game, source, true);
+            return controller.putCardsOnBottomOfLibrary(permanent, game, source);
         }
         return false;
     }

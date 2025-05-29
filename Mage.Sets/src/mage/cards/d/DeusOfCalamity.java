@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -11,22 +10,23 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class DeusOfCalamity extends CardImpl {
 
     public DeusOfCalamity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}{R/G}{R/G}{R/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}{R/G}{R/G}{R/G}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.AVATAR);
 
@@ -74,9 +74,9 @@ class DeusOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getSourceId().equals(this.getSourceId())
                 && event.getAmount() > 5
                 && game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
-            FilterLandPermanent filter = new FilterLandPermanent("land of the damaged player");
+            FilterPermanent filter = new FilterLandPermanent("land of the damaged player");
             filter.add(new ControllerIdPredicate(event.getTargetId()));
-            Target target = new TargetLandPermanent(filter);
+            Target target = new TargetPermanent(filter);
             this.getTargets().clear();
             this.addTarget(target);
             return true;

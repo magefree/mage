@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MaximumDynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.ValueHint;
@@ -23,7 +23,7 @@ public final class TriumphantChomp extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DINOSAUR);
     private static final DynamicValue xValue = new MaximumDynamicValue(
             StaticValue.get(2),
-            new PermanentsOnBattlefieldCount(filter)
+            new GreatestAmongPermanentsValue(GreatestAmongPermanentsValue.Quality.Power, filter)
     );
 
     public TriumphantChomp(UUID ownerId, CardSetInfo setInfo) {

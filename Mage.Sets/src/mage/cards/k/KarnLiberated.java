@@ -70,6 +70,7 @@ class KarnLiberatedEffect extends OneShotEffect {
 
     private KarnLiberatedEffect(final KarnLiberatedEffect effect) {
         super(effect);
+        this.exileId = effect.exileId;
     }
 
     @Override
@@ -201,7 +202,7 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
         controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
         for (Card card : cards.getCards(game)) {
             if (card != null) {
-                Permanent permanent = game.getPermanent(card.getId());
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (permanent != null) {
                     ((PermanentImpl) permanent).removeSummoningSickness();
                 }

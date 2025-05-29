@@ -1316,6 +1316,15 @@ public final class CardUtil {
     }
 
     /**
+     * If a card object is moved to the battlefield, object id can be different (e.g. MDFC).
+     * Use this method to get the permanent object from the card object after move to battlefield.
+     * Can return null if not found on the battlefield.
+     */
+    public static Permanent getPermanentFromCardPutToBattlefield(Card card, Game game) {
+        return game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
+    }
+
+    /**
      * Return card name for same name searching
      *
      * @param card
