@@ -1,6 +1,6 @@
 package mage.abilities.common;
 
-import mage.MageObjectReference;
+import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.ExileSourceFromHandCost;
@@ -96,21 +96,32 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public GainManaAbilitiesWhileExiledEffect copy() {
-        return new GainManaAbilitiesWhileExiledEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
         if (WasCastFromExileWatcher.check((MageObjectReference) getValue("exiledHandCardRef"), game)) {
             discard();
             return false;
         }
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
-            discard();
-            return false;
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            giveManaAbilities(game, source, (Permanent) object);
         }
+        return true;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
+    }
+
+    @Override
+    public GainManaAbilitiesWhileExiledEffect copy() {
+        return new GainManaAbilitiesWhileExiledEffect(this);
+    }
+
+    private void giveManaAbilities(Game game, Ability source, Permanent permanent) {
         for (char c : colors.toCharArray()) {
             Ability ability;
             switch (c) {
@@ -134,7 +145,6 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
             }
             permanent.addAbility(ability, source.getSourceId(), game);
         }
-        return true;
     }
 }
 

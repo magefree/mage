@@ -1,6 +1,6 @@
 package mage.abilities.common;
 
-import mage.MageObjectReference;
+import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -10,6 +10,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author TheElk801, PurpleCrowbar
@@ -76,20 +80,30 @@ class EnduringGlimmerTypeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public EnduringGlimmerTypeEffect copy() {
-        return new EnduringGlimmerTypeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        if (objects.isEmpty()) {
             discard();
             return false;
         }
-        permanent.retainAllEnchantmentSubTypes(game);
-        permanent.removeAllCardTypes(game);
-        permanent.addCardType(game, CardType.ENCHANTMENT);
+        for (MageObject object : objects) {
+            if (object instanceof Permanent) {
+                Permanent permanent = (Permanent) object;
+                permanent.retainAllEnchantmentSubTypes(game);
+                permanent.removeAllCardTypes(game);
+                permanent.addCardType(game, CardType.ENCHANTMENT);
+            }
+        }
         return true;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
+    }
+
+    @Override
+    public EnduringGlimmerTypeEffect copy() {
+        return new EnduringGlimmerTypeEffect(this);
     }
 }
