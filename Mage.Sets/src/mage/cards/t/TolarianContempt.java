@@ -93,7 +93,7 @@ class TolarianContemptEffect extends OneShotEffect {
             )) {
                 owner.putCardsOnTopOfLibrary(permanent, game, source, false);
             } else {
-                owner.putCardsOnBottomOfLibrary(permanent, game, source, false);
+                owner.putCardsOnBottomOfLibrary(permanent, game, source);
             }
         }
         return true;

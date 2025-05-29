@@ -28,6 +28,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -90,7 +91,7 @@ class ImpromptuRaidEffect extends OneShotEffect {
                     return true;
                 }
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    Permanent permanent = game.getPermanent(card.getId());
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(permanent, game));

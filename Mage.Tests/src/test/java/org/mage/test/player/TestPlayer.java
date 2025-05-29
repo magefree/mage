@@ -3240,8 +3240,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
-        return computerPlayer.putCardsOnBottomOfLibrary(card, game, source, anyOrder);
+    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source) {
+        return computerPlayer.putCardsOnBottomOfLibrary(card, game, source);
     }
 
     @Override
@@ -3792,6 +3792,11 @@ public class TestPlayer implements Player {
     @Override
     public boolean flipCoin(Ability source, Game game, boolean winnable) {
         return computerPlayer.flipCoin(source, game, true);
+    }
+
+    @Override
+    public List<Boolean> flipCoins(Ability source, Game game, int amount, boolean winnable) {
+        return computerPlayer.flipCoins(source, game, amount, winnable);
     }
 
     @Override

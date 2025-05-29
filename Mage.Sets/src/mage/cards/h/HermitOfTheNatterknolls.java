@@ -4,9 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.hint.common.MyTurnHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,11 +29,9 @@ public final class HermitOfTheNatterknolls extends CardImpl {
         this.secondSideCardClazz = mage.cards.l.LoneWolfOfTheNatterknolls.class;
 
         // Whenever an opponent casts a spell during your turn, draw a card.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A, false),
-                MyTurnCondition.instance,
-                "Whenever an opponent casts a spell during your turn, draw a card."
-        ).addHint(MyTurnHint.instance));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A, false
+        ).withTriggerCondition(MyTurnCondition.instance));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Hermit of the Natterknolls.
         this.addAbility(new TransformAbility());

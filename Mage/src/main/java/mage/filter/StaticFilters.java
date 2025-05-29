@@ -7,10 +7,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
-import mage.filter.predicate.permanent.AttachedOrShareCreatureTypePredicate;
-import mage.filter.predicate.permanent.RingBearerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.predicate.permanent.*;
 
 /**
  * A class that holds Filter objects that may not be modified without copying
@@ -643,6 +640,20 @@ public final class StaticFilters {
         FILTER_OTHER_CONTROLLED_CREATURES.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_OTHER_CONTROLLED_PERMANENTS = new FilterControlledPermanent("other permanents you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_PERMANENTS.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_PERMANENTS.setLockedFilter(true);
+    }
+
+    public static final FilterControlledArtifactPermanent FILTER_OTHER_CONTROLLED_ARTIFACTS = new FilterControlledArtifactPermanent("other artifacts you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_ARTIFACTS.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_ARTIFACTS.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
 
     static {
@@ -1202,6 +1213,22 @@ public final class StaticFilters {
         FILTER_BLOCKING_CREATURES.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_CREATURE_DAMAGED_THIS_TURN = new FilterCreaturePermanent("creature that was dealt damage this turn");
+
+    static {
+        FILTER_CREATURE_DAMAGED_THIS_TURN.add(WasDealtDamageThisTurnPredicate.instance);
+        FILTER_CREATURE_DAMAGED_THIS_TURN.setLockedFilter(true);
+    }
+
+
+    public static final FilterPermanent FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN = new FilterCreaturePermanent("creature an opponent controls that was dealt damage this turn");
+
+    static {
+        FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN.add(TargetController.OPPONENT.getControllerPredicate());
+        FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN.add(WasDealtDamageThisTurnPredicate.instance);
+        FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT_AURAS = new FilterEnchantmentPermanent("Auras");
 
     static {
@@ -1209,10 +1236,16 @@ public final class StaticFilters {
         FILTER_PERMANENT_AURAS.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterEquipmentPermanent();
+    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterPermanent(SubType.EQUIPMENT, "Equipment");
 
     static {
         FILTER_PERMANENT_EQUIPMENT.setLockedFilter(true);
+    }
+
+    public static final FilterPermanent FILTER_CONTROLLED_PERMANENT_EQUIPMENT = new FilterControlledPermanent(SubType.EQUIPMENT);
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_EQUIPMENT.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT_FORTIFICATION = new FilterPermanent();

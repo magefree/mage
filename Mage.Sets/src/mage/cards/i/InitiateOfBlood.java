@@ -1,10 +1,9 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.WhenTargetDiesDelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.delayed.WhenTargetDiesDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -14,24 +13,19 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author awjackson
  */
 public final class InitiateOfBlood extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
-
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
-
     public InitiateOfBlood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.OGRE, SubType.SHAMAN);
 
         this.power = new MageInt(2);
@@ -45,7 +39,7 @@ public final class InitiateOfBlood extends CardImpl {
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new WhenTargetDiesDelayedTriggeredAbility(
                 new FlipSourceEffect(new GokaTheUnjust()).setText("flip {this}")
         )));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
         this.addAbility(ability);
     }
 
@@ -61,12 +55,6 @@ public final class InitiateOfBlood extends CardImpl {
 
 class GokaTheUnjust extends TokenImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
-
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
-
     GokaTheUnjust() {
         super("Goka the Unjust", "");
         this.supertype.add(SuperType.LEGENDARY);
@@ -78,9 +66,10 @@ class GokaTheUnjust extends TokenImpl {
 
         // {T}: Goka the Unjust deals 4 damage to target creature that was dealt damage this turn.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(4), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
         this.addAbility(ability);
     }
+
     private GokaTheUnjust(final GokaTheUnjust token) {
         super(token);
     }

@@ -4,7 +4,7 @@ import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTargetsPermanentCondition;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
@@ -41,10 +41,11 @@ public final class BouncersBeatdown extends CardImpl {
         ).setRuleAtTheTop(true));
 
         // Bouncer's Beatdown deals X damage to target creature or planeswalker, where X is the greatest power among creatures you control. If that creature or planeswalker would die this turn, exile it instead.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(GreatestPowerAmongControlledCreaturesValue.instance));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
+                .setText("{this} deals X damage to target creature or planeswalker, where X is the greatest power among creatures you control"));
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
         this.getSpellAbility().addEffect(new ExileTargetIfDiesEffect("creature or planeswalker"));
-        this.getSpellAbility().addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
     }
 
     private BouncersBeatdown(final BouncersBeatdown card) {

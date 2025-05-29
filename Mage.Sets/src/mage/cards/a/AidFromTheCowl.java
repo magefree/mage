@@ -76,7 +76,7 @@ class AidFromTheCowlEffect extends OneShotEffect {
         if (card.isPermanent(game) && controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " onto the battlefield?", source, game)) {
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getIdName() + " on the bottom of your library?", source, game)) {
-            controller.putCardsOnBottomOfLibrary(card, game, source, false);
+            controller.putCardsOnBottomOfLibrary(card, game, source);
         } else {
             game.informPlayers(controller.getLogName() + " puts the revealed card back to the top of the library.");
         }

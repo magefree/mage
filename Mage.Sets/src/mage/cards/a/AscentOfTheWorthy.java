@@ -22,6 +22,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -172,7 +173,7 @@ class AscentOfTheWorthyReturnEffect extends OneShotEffect {
         countersToAdd.addCounter(CounterType.FLYING.createInstance());
         game.setEnterWithCounters(card.getId(), countersToAdd);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

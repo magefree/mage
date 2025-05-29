@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,15 +11,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class GalecasterColossus extends CardImpl {
@@ -44,7 +43,7 @@ public final class GalecasterColossus extends CardImpl {
 
         // Tap an untapped Wizard you control: Return target nonland permanent you don't control to its owner's hand.
         Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new TapTargetCost(new TargetControlledPermanent(1, 1, filter2, true)));
-        ability.addTarget(new TargetNonlandPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

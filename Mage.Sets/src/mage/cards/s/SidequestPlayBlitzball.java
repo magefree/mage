@@ -14,14 +14,19 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.WatcherScope;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -90,7 +95,21 @@ class SidequestPlayBlitzballEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (player == null || permanent == null || !game.getBattlefield().contains(
+                StaticFilters.FILTER_CONTROLLED_CREATURE, source, game, 1
+        )) {
+            return false;
+        }
+        TargetPermanent target = new TargetControlledCreaturePermanent();
+        target.withNotTarget(true);
+        player.choose(outcome, target, source, game);
+        return Optional
+                .ofNullable(target.getFirstTarget())
+                .map(game::getPermanent)
+                .map(p -> p.addAttachment(p.getId(), source, game))
+                .orElse(false);
     }
 }
 
