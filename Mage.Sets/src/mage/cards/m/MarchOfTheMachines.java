@@ -49,8 +49,9 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
     public MarchOfTheMachinesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
         staticText = "Each noncreature artifact is an artifact creature with power and toughness each equal to its mana value";
-        this.effectCardZones.add(Zone.BATTLEFIELD);
-        this.affectedPermanentFilter = filter;
+        dependendToTypes.add(DependencyType.ArtifactAddingRemoving);
+        
+        dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private MarchOfTheMachinesEffect(final MarchOfTheMachinesEffect effect) {
@@ -67,9 +68,10 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
-                    for (MageObjectReference mageObjectReference : affectedObjectList) {
-                        Permanent permanent = mageObjectReference.getPermanent(game);
+                    affectedObjectList.clear();
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                         if (permanent != null) {
+                            affectedObjectList.add(new MageObjectReference(permanent, game));
                             permanent.addCardType(game, CardType.CREATURE);
                         }
                     }
@@ -78,8 +80,8 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
 
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    for (MageObjectReference mageObjectReference : affectedObjectList) {
-                        Permanent permanent = mageObjectReference.getPermanent(game);
+                    for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+                        Permanent permanent = it.next().getPermanent(game);
                         if (permanent != null) {
                             int manaCost = permanent.getManaValue();
                             permanent.getPower().setModifiedBaseValue(manaCost);
@@ -99,12 +101,6 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
     @Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
-    }
-
-    @Override
-    public boolean hasSubLayer(SubLayer subLayer) {
-        return subLayer == SubLayer.NA
-                || subLayer == SubLayer.SetPT_7b;
     }
 
 }

@@ -194,14 +194,6 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
         return null;
     }
 
-    public MageObject getMageObject(Game game) {
-        MageObject obj = game.getObject(sourceId);
-        if (obj != null && obj.getZoneChangeCounter(game) == zoneChangeCounter) {
-            return obj;
-        }
-        return null;
-    }
-
     public boolean zoneCounterIsCurrent(Game game) {
         return game.getState().getZoneChangeCounter(sourceId) == zoneChangeCounter;
     }

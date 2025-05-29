@@ -375,12 +375,6 @@
                 <artifactId>jsoup</artifactId>
                 <version>1.14.3</version>
             </dependency>
-            <dependency>
-                <!-- used for making dependency graph for continuous effects -->
-                <groupId>org.jgrapht</groupId>
-                <artifactId>jgrapht-core</artifactId>
-                <version>1.4.0</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

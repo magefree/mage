@@ -58,7 +58,7 @@ public class LayerTests extends CardTestPlayerBase {
      *      This came up in a recent EDH game and we had no idea how to progress.
      *      Player A cast a Humility, then a March of the Machines, and finally a Mycosynth Lattice.
      *      Does the game get stuck in an endless loop of each card gaining and losing its respective creature-ness and abilities?
-     *      Answer: All lands die and remaining permanents have P/T equal to their mana value
+     *      Answer: No, they all die
      */
     @Test
     public void testMycosynthLatticeAndMarchOfTheMachinesAndHumility() {
@@ -78,15 +78,10 @@ public class LayerTests extends CardTestPlayerBase {
         execute();
 
         // everything dies
-        assertPermanentCount(playerA, "Humility", 1);
-        assertPermanentCount(playerA, "March of the Machines", 1);
-        assertPermanentCount(playerA, "Mycosynth Lattice", 1);
+        assertPermanentCount(playerA, "Humility", 0);
+        assertPermanentCount(playerA, "March of the Machines", 0);
+        assertPermanentCount(playerA, "Mycosynth Lattice", 0);
         assertPermanentCount(playerA, "Island", 0);
-        assertPermanentCount(playerA, "Plains", 0);
-        assertPermanentCount(playerA, "Swamp", 0);
-        assertBasePowerToughness(playerA, "Humility", 4, 4);
-        assertBasePowerToughness(playerA, "March of the Machines", 4, 4);
-        assertBasePowerToughness(playerA, "Mycosynth Lattice", 6, 6);
     }
 
     @Test
@@ -94,8 +89,8 @@ public class LayerTests extends CardTestPlayerBase {
         // Blood Moon : Nonbasic lands are Mountains.
         // Urborg, Tomb of Yawgmoth : Each land is a Swamp in addition to its other types.
         // Expected behavior:  Urborg loses all abilities and becomes a Mountain.  The Plains does not have subtype Swamp due to this effect.
-        addCard(Zone.BATTLEFIELD, playerA, "Urborg, Tomb of Yawgmoth", 1);  // non-basic land, put Urborg first to test dependency > timestamp
         addCard(Zone.BATTLEFIELD, playerA, "Blood Moon");
+        addCard(Zone.BATTLEFIELD, playerA, "Urborg, Tomb of Yawgmoth", 1);  // non-basic land
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

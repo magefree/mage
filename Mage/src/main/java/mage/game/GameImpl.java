@@ -971,9 +971,7 @@ public abstract class GameImpl implements Game {
                     GameState restore = gameStates.rollback(stateNum);
                     if (restore != null) {
                         state.restore(restore);
-                        if (playerList != null) {
-                            playerList.setCurrent(state.getPlayerByOrderId());
-                        }
+                        playerList.setCurrent(state.getPlayerByOrderId());
                         return state;
                     }
                 }

@@ -1,21 +1,14 @@
 package mage.abilities.effects;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
 import mage.abilities.keyword.ChangelingAbility;
-import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterStackObject;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.command.Commander;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -23,7 +16,6 @@ import mage.target.targetpointer.TargetPointer;
 import mage.watchers.common.EndStepCountWatcher;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85
@@ -51,13 +43,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected List<MageObjectReference> affectedObjectList = new ArrayList<>();
 
     protected boolean temporary = false;
-    protected TargetController playersToCheck = TargetController.YOU; // determines which players to check for affected objects
-    protected boolean affectsSourceOnly = false;
-    protected boolean affectsAttachedToOnly = false;
-    protected FilterCard affectedCardFilter;
-    protected FilterPermanent affectedPermanentFilter;
-    protected FilterStackObject affectedStackObjectFilter;
-    protected EnumSet<Zone> effectCardZones = EnumSet.noneOf(Zone.class); // zones to check for affected objects
     protected EnumSet<DependencyType> dependencyTypes; // this effect has the dependencyTypes defined here
     protected EnumSet<DependencyType> dependendToTypes; // this effect is dependent to this types
     /*
@@ -114,13 +99,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.characterDefining = effect.characterDefining;
         this.nextTurnNumber = effect.nextTurnNumber;
         this.effectStartingStepNum = effect.effectStartingStepNum;
-        this.playersToCheck = effect.playersToCheck;
-        this.affectsSourceOnly = effect.affectsSourceOnly;
-        this.affectsAttachedToOnly = effect.affectsAttachedToOnly;
-        this.affectedCardFilter = effect.affectedCardFilter;
-        this.affectedPermanentFilter = effect.affectedPermanentFilter;
-        this.affectedStackObjectFilter = effect.affectedStackObjectFilter;
-        this.effectCardZones = effect.effectCardZones;
     }
 
     @Override
@@ -155,11 +133,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public boolean hasLayer(Layer layer) {
         return this.layer == layer;
-    }
-
-    @Override
-    public boolean hasSubLayer(SubLayer sublayer) {
-        return this.sublayer == sublayer;
     }
 
     @Override
@@ -397,186 +370,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public List<MageObjectReference> getAffectedObjects() {
         return affectedObjectList;
-    }
-
-    /**
-     * Returns the affected mage objects of the effect filtering based on affectedZones, affectedPermanentFilter,
-     * affectedStackObjectFilter, and affectedCardFilter
-     * @return List of affected objects
-     */
-    @Override
-    public List<MageObject> queryAffectedObjects(Game game, Ability source) {
-        if (this.isCharacterDefining()) {
-            return new ArrayList<>(Collections.singleton(source.getSourceObject(game)));
-        }
-
-        if (!this.getTargetPointer().getTargets(game, source).isEmpty()) {
-            return this.getTargetPointer().getTargets(game, source)
-                    .stream()
-                    .map(game::getObject)
-                    .collect(Collectors.toList());
-        }
-        if (this.affectsSourceOnly) {
-            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-            if (permanent != null) {
-                return Collections.singletonList(permanent);
-            }
-        }
-        if (this.affectsAttachedToOnly) {
-            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
-            if (sourceObject != null) {
-                return Collections.singletonList(game.getObject(sourceObject.getAttachedTo()));
-            }
-        }
-        List<MageObject> affectedObjects = new ArrayList<>();
-        if (!this.effectCardZones.isEmpty()) {
-            List<MageObject> affectedCards = new ArrayList<>();
-            Player controller = game.getPlayer(source.getControllerId());
-            for (Zone zone: this.effectCardZones) {
-                switch (zone) {
-                    case ALL:
-                    case HAND:
-                        affectedCards.addAll(getObjectsFromZone(game, Zone.HAND, controller, source));
-                        if (!zone.equals(Zone.ALL)) {
-                            break;
-                        }
-                    case GRAVEYARD:
-                        affectedCards.addAll(getObjectsFromZone(game, Zone.GRAVEYARD, controller, source));
-                        if (!zone.equals(Zone.ALL)) {
-                            break;
-                        }
-                    case LIBRARY:
-                        affectedCards.addAll(getObjectsFromZone(game, Zone.LIBRARY, controller, source));
-                        if (!zone.equals(Zone.ALL)) {
-                            break;
-                        }
-                    case EXILED:
-                        affectedCards.addAll(getObjectsFromZone(game, Zone.EXILED, controller, source));
-                        if (!zone.equals(Zone.ALL)) {
-                            break;
-                        }
-                    case COMMAND:
-                        affectedCards.addAll(getObjectsFromZone(game, Zone.COMMAND, controller, source));
-                        if (!zone.equals(Zone.ALL)) {
-                            break;
-                        }
-                    case STACK:
-                        affectedCards.addAll(getObjectsFromZone(game, Zone.STACK, controller, source));
-                        if (!zone.equals(Zone.ALL)) {
-                            break;
-                        }
-                    case BATTLEFIELD:
-                        affectedCards.addAll(getObjectsFromZone(game, Zone.BATTLEFIELD, controller, source));
-                }
-            }
-            affectedObjects.addAll(affectedCards);
-        }
-        return affectedObjects;
-    }
-
-    private List<MageObject> getObjectsFromZone(Game game, Zone zone, Player controller, Ability source) {
-        List<MageObject> cards = new ArrayList<>();
-        if (this.playersToCheck.equals(TargetController.YOU)) {
-            return getPlayersObjectsFromZone(game, zone, controller, source);
-        }
-
-        for (UUID playerId : game.getOpponents(controller.getId(), true)) {
-            Player opponent = game.getPlayer(playerId);
-            if (opponent == null) {
-                continue;
-            }
-            cards.addAll(getPlayersObjectsFromZone(game, zone, opponent, source));
-        }
-        if (this.playersToCheck.equals(TargetController.EACH_PLAYER)) {
-            cards.addAll(getPlayersObjectsFromZone(game, zone, controller, source));
-        }
-        return cards;
-    }
-
-    private List<MageObject> getPlayersObjectsFromZone(Game game, Zone zone, Player player, Ability source) {
-        List<MageObject> mageObjects = new ArrayList<>();
-
-        switch (zone) {
-            case GRAVEYARD:
-                mageObjects.addAll(player.getGraveyard().getCards(game));
-                break;
-            case HAND:
-                mageObjects.addAll(player.getHand().getCards(game));
-                break;
-            case LIBRARY:
-                mageObjects.addAll(player.getLibrary().getCards(game));
-                break;
-            case EXILED:
-                mageObjects.addAll(game.getExile().getAllCards(game, player.getId()));
-                break;
-            case COMMAND:
-                for (Object commObj : game.getState().getCommand()) {
-                    if (commObj instanceof Commander) {
-                        Card card = game.getCard(((Commander) commObj).getId());
-                        if (card != null) {
-                            mageObjects.add(card);
-                        }
-                    }
-                }
-                break;
-            case STACK:
-                mageObjects.addAll(game.getStack());
-                break;
-            case BATTLEFIELD:
-                mageObjects.addAll(game.getBattlefield().getActivePermanents(player.getId(), game));
-                break;
-            default:
-                return Collections.emptyList();
-        }
-
-        return mageObjects.stream()
-                .filter(Objects::nonNull)
-                .filter(mageObject -> {
-                    if (affectedPermanentFilter != null && mageObject instanceof Permanent) {
-                        return affectedPermanentFilter.match((Permanent) mageObject, player.getId(), source, game);
-                    }
-                    if (affectedStackObjectFilter != null && mageObject instanceof StackObject) {
-                        return affectedStackObjectFilter.match((StackObject) mageObject, player.getId(), source, game);
-                    }
-                    if (affectedCardFilter != null && mageObject instanceof Card) {
-                        return affectedCardFilter.match(((Card) mageObject), player.getId(), source, game);
-                    }
-                    return true;
-                })
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public void clearDynamicAffectedObjects() {
-        if (!this.affectedObjectsSet) {
-            this.affectedObjectList.clear();
-        }
-    }
-
-    @Override
-    public EnumSet<Zone> getEffectCardZones() {
-        return this.effectCardZones;
-    }
-
-    @Override
-    public FilterStackObject getAffectedStackObjectFilter() {
-        return this.affectedStackObjectFilter;
-    }
-
-    @Override
-    public FilterCard getAffectedCardFilter() {
-        return this.affectedCardFilter;
-    }
-
-    @Override
-    public FilterPermanent getAffectedPermanentFilter() {
-        return this.affectedPermanentFilter;
-    }
-
-    // TODO: review result calculation as cards are updated, possibly need to change method
-    @Override
-    public int calculateResult(Game game, Ability source, List<MageObject> affectedObjects) {
-        return 0;
     }
 
     /**

@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
@@ -21,8 +20,6 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
         this.subType = subType;
         this.staticText = "Each land is " + subType.getIndefiniteArticle() + " "
                 + subType.getDescription() + " in addition to its other land types";
-        this.affectedPermanentFilter = StaticFilters.FILTER_LAND;
-        this.effectCardZones.add(Zone.BATTLEFIELD);
         switch (subType) {
             case PLAINS:
                 this.dependencyTypes.add(DependencyType.BecomePlains);
@@ -76,14 +73,12 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
             default:
                 ability = null;
         }
-        for (MageObjectReference mor : affectedObjectList) {
+        for (Permanent land : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_LAND, source.getControllerId(), game
+        )) {
             // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
             // So the ability removing has to be done before Layer 6
             // Lands have their mana ability intrinsically, so that is added in layer 4
-            Permanent land = mor.getPermanent(game);
-            if (land == null) {
-                continue;
-            }
             land.addSubType(game, subType);
             if (ability != null && !land.getAbilities().containsRule(ability)) {
                 land.addAbility(ability, source.getSourceId(), game);
