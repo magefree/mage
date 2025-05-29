@@ -52,7 +52,7 @@ public final class TheWanderingMinstrel extends CardImpl {
         // The Minstrel's Ballad -- At the beginning of combat on your turn, if you control five or more Towns, create a 2/2 Elemental creature token that's all colors.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new CreateTokenEffect(new ElementalAllColorsToken())
-        ).withInterveningIf(condition));
+        ).withInterveningIf(condition).withFlavorWord("The Minstrel's Ballad"));
 
         // {3}{W}{U}{B}{R}{G}: Other creatures you control get +X/+X until end of turn, where X is the number of Towns you control.
         this.addAbility(new SimpleActivatedAbility(
