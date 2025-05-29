@@ -153,11 +153,11 @@ public class Session {
         if (userName.length() > config.getMaxUserNameLength()) {
             return "User name may not be longer than " + config.getMaxUserNameLength() + " characters";
         }
-        if (userName.length() <= 3) {
-            return "User name is too short (3 characters or fewer)";
+        if (userName.length() <= 2) {
+            return "User name is too short (2 characters or fewer)";
         }
-        if (userName.length() >= 500) {
-            return "User name is too long (500 characters or more)";
+        if (userName.length() >= 250) {
+            return "User name is too long (250 characters or more)";
         }
         return null;
     }

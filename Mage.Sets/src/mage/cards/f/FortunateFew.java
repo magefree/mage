@@ -1,9 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -18,10 +15,13 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
- *
  * @author spjspj
  */
 public final class FortunateFew extends CardImpl {
@@ -73,7 +73,7 @@ class FortunateFewEffect extends OneShotEffect {
                         filter.add(Predicates.not(new PermanentIdPredicate(chosenPerm.getId())));
                     }
 
-                    Target target = new TargetNonlandPermanent(filter);
+                    Target target = new TargetPermanent(filter);
                     target.withNotTarget(true);
                     if (player.choose(Outcome.Exile, target, source, game)) {
                         Permanent permanent = game.getPermanent(target.getFirstTarget());

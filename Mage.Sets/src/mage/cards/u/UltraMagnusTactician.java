@@ -20,6 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -97,7 +98,7 @@ class UltraMagnusTacticianEffect extends OneShotEffect {
                 card, Zone.BATTLEFIELD, source, game, true,
                 false, false, null
         );
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return true;
         }

@@ -221,7 +221,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
                 continue;
             }
             controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game, false, false, true, null);
-            Permanent newPermanent = game.getPermanent(creatureCard.getId());
+            Permanent newPermanent = CardUtil.getPermanentFromCardPutToBattlefield(creatureCard, game);
             if (newPermanent == null) {
                 continue;
             }

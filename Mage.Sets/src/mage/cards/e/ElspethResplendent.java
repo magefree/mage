@@ -19,6 +19,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.*;
 
@@ -136,7 +137,7 @@ class ElspethResplendentLookEffect extends OneShotEffect {
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
-            Permanent permanent = game.getPermanent(card.getId());
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (permanent != null) {
                 permanent.addCounters(CounterType.SHIELD.createInstance(), source, game);
             }

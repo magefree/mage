@@ -16,6 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -135,7 +136,7 @@ class ShiftingShadowEffect extends OneShotEffect {
         Permanent creature;
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
-            creature = game.getPermanent(card.getId());
+            creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         } else {
             creature = null;
         }

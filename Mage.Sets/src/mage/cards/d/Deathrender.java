@@ -1,6 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,17 +11,19 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Blinke
  */
 public final class Deathrender extends CardImpl {
@@ -33,8 +34,10 @@ public final class Deathrender extends CardImpl {
 
         // Equipped creature gets +2/+2.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
+
         // Whenever equipped creature dies, you may put a creature card from your hand onto the battlefield and attach Deathrender to it.
         this.addAbility(new DiesAttachedTriggeredAbility(new DeathrenderEffect(), "equipped creature"));
+
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
@@ -68,19 +71,20 @@ class DeathrenderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            TargetCardInHand target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_CREATURE);
-            if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
-                Card creatureInHand = game.getCard(target.getFirstTarget());
-                if (creatureInHand != null) {
-                    if (controller.moveCards(creatureInHand, Zone.BATTLEFIELD, source, game)) {
-                        game.getPermanent(creatureInHand.getId()).addAttachment(sourcePermanent.getId(), source, game);
-                    }
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        if (controller == null || sourcePermanent == null) {
+            return false;
+        }
+        TargetCardInHand target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_CREATURE);
+        if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
+            Card creatureInHand = game.getCard(target.getFirstTarget());
+            if (creatureInHand != null && controller.moveCards(creatureInHand, Zone.BATTLEFIELD, source, game)) {
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(creatureInHand, game);
+                if (permanent != null) {
+                    permanent.addAttachment(sourcePermanent.getId(), source, game);
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

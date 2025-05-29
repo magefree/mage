@@ -78,26 +78,23 @@ class EmergentSequenceEffect extends OneShotEffect {
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A);
         player.searchLibrary(target, source, game);
         Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-        Permanent permanent = null;
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
-            permanent = game.getPermanent(target.getFirstTarget());
         }
         player.shuffleLibrary(source, game);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return true;
         }
-
-        // boost land
         game.addEffect(new BecomesCreatureTargetEffect(
                 new FractalToken(), false, true, Duration.Custom
         ).setTargetPointer(new FixedTarget(permanent, game)), source);
 
-        // rules
         // The last sentence of Emergent Sequence’s ability counts the land it put onto the battlefield.
         // (2021-04-16)
-        // no ETB yet, so add +1 manually
-        int amount = 1 + EmergentSequenceWatcher.getAmount(source.getControllerId(), game);
+        game.processAction();
+
+        int amount = EmergentSequenceWatcher.getAmount(source.getControllerId(), game);
         permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
         return true;
     }

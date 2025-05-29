@@ -1316,6 +1316,15 @@ public final class CardUtil {
     }
 
     /**
+     * If a card object is moved to the battlefield, object id can be different (e.g. MDFC).
+     * Use this method to get the permanent object from the card object after move to battlefield.
+     * Can return null if not found on the battlefield.
+     */
+    public static Permanent getPermanentFromCardPutToBattlefield(Card card, Game game) {
+        return game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
+    }
+
+    /**
      * Return card name for same name searching
      *
      * @param card
@@ -1627,15 +1636,15 @@ public final class CardUtil {
         }
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card) {
-        castSingle(player, source, game, card, null);
+    public static boolean castSingle(Player player, Ability source, Game game, Card card) {
+        return castSingle(player, source, game, card, null);
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
-        castSingle(player, source, game, card, false, manaCost);
+    public static boolean castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
+        return castSingle(player, source, game, card, false, manaCost);
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
+    public static boolean castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
         // handle split-cards
         if (card instanceof SplitCard) {
             SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
@@ -1702,7 +1711,7 @@ public final class CardUtil {
         }
 
         // cast it
-        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
+        boolean result = player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
                 game, noMana, new ApprovingObject(source, game));
 
         // turn off effect after cast on every possible card-face
@@ -1726,6 +1735,7 @@ public final class CardUtil {
         }
         // turn off effect on a normal card
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+        return result;
     }
 
     /**
