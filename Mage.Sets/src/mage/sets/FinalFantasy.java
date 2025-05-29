@@ -508,6 +508,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Summon: Fenrir", 372, Rarity.UNCOMMON, mage.cards.s.SummonFenrir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: G.F. Cerberus", 162, Rarity.RARE, mage.cards.s.SummonGFCerberus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: G.F. Cerberus", 368, Rarity.RARE, mage.cards.s.SummonGFCerberus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: G.F. Ifrit", 163, Rarity.COMMON, mage.cards.s.SummonGFIfrit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Summon: G.F. Ifrit", 369, Rarity.COMMON, mage.cards.s.SummonGFIfrit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Knights of Round", 359, Rarity.MYTHIC, mage.cards.s.SummonKnightsOfRound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Knights of Round", 36, Rarity.MYTHIC, mage.cards.s.SummonKnightsOfRound.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Summon: Leviathan", 361, Rarity.RARE, mage.cards.s.SummonLeviathan.class, NON_FULL_USE_VARIOUS));
