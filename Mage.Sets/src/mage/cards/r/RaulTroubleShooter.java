@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
+import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.MillCardsEachPlayerEffect;
@@ -39,7 +39,7 @@ public final class RaulTroubleShooter extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Once during each of your turns, you may cast a spell from among cards in your graveyard that were milled this turn.
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter), new CardsMilledWatcher());
+        this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(filter), new CardsMilledWatcher());
 
         // {T}: Each player mills a card.
         this.addAbility(new SimpleActivatedAbility(

@@ -19,7 +19,8 @@ public enum MageIdentifier {
     // e.g. [[Johann, Apprentice Sorcerer]]
     // "Once each turn, you may cast an instant or sorcery spell from the top of your library."
     //
-    CastFromGraveyardOnceWatcher,
+    OnceOnYourTurnCastFromGraveyard,
+    OnceOnYourTurnCastFromGraveyardEntersTapped,
     OnceEachTurnCastWatcher,
     HaukensInsightWatcher,
     IntrepidPaleontologistWatcher,
@@ -36,7 +37,6 @@ public enum MageIdentifier {
     LaraCroftTombRaiderWatcher,
     CoramTheUndertakerWatcher,
     ThundermanDragonWatcher,
-    EdgarMasterMachinistWatcher,
 
     // ----------------------------//
     //       alternate casts       //

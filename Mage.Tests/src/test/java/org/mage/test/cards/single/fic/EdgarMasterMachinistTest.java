@@ -41,6 +41,26 @@ public class EdgarMasterMachinistTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_tapped_effect_wait_for_cleanup() {
+        // test to make sure the discarding of the "enters tapped effect" only happens when the spell leave the stack
+        addCard(Zone.BATTLEFIELD, playerA, edgar);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.GRAVEYARD, playerA, "Golgari Signet");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Golgari Signet");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Golgari Signet", 1);
+        assertTappedCount("Mountain", true, 3);
+        assertTappedCount("Golgari Signet", true, 1);
+    }
+
+    @Test
     public void test_cast_limits() {
         addCard(Zone.BATTLEFIELD, playerA, edgar);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
