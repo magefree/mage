@@ -2320,7 +2320,7 @@ public class VerifyCardDataTest {
         // TODO: add legality checks (by sets and cards, by banned)
     }
 
-    private String prepareRule(String cardName, String rule) {
+    private String prepareRule(Card card, String rule) {
         // remove and optimize rule text for analyze
         String newRule = rule;
 
@@ -2337,10 +2337,16 @@ public class VerifyCardDataTest {
 
         // replace special text and symbols
         newRule = newRule
-                .replace("{this}", cardName)
+                .replace("{this}", CardUtil.getCardSelfReference(card, null))
                 .replace("−", "-")
                 .replace("—", "-")
-                .replace("&mdash;", "-");
+                .replace("&mdash;", "-")
+                .replace(". this", ". This")
+                .replace("\nthis", "\nThis")
+                .replace("-this", "-This")
+                .replace(": this", ": This")
+                .replace("&bull this", "&bull This")
+                .replace("- this", "- This");
 
         // remove html marks
         newRule = newRule
@@ -2349,7 +2355,7 @@ public class VerifyCardDataTest {
 
         newRule = CardNameUtil.normalizeCardName(newRule);
 
-        return newRule.trim();
+        return CardUtil.getTextWithFirstCharUpperCase(newRule.trim());
     }
 
     @Test
@@ -2582,7 +2588,7 @@ public class VerifyCardDataTest {
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
-            refRules[i] = prepareRule(card.getName(), refRules[i]);
+            refRules[i] = prepareRule(card, refRules[i]);
         }
 
         if (ref.subtypes.contains("Adventure")) {
@@ -2615,7 +2621,7 @@ public class VerifyCardDataTest {
                 .replace("</b>", "")
                 .split("[\\$\\\n]");
         for (int i = 0; i < cardRules.length; i++) {
-            cardRules[i] = prepareRule(card.getName(), cardRules[i]);
+            cardRules[i] = prepareRule(card, cardRules[i]);
         }
 
         boolean isFine = true;

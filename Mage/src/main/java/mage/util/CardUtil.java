@@ -2521,4 +2521,65 @@ public final class CardUtil {
         return !ability.getEffects().isEmpty()
                 && ability.getEffects().stream().allMatch(InfoEffect.class::isInstance);
     }
+
+    private static final List<SubType> selfRefNamedSubtypes = Arrays.asList(
+            SubType.EQUIPMENT,
+            SubType.VEHICLE,
+            SubType.AURA,
+            SubType.CLASS,
+            SubType.SAGA,
+            SubType.SIEGE
+    );
+
+    /**
+     * Returns the description of the card for rules text that references itself.
+     * Applies to abilities that function only on the battlefield.
+     * Does not account for every exception.
+     * <a href="https://scryfall.com/blog/errata-notice-aetherdrift-231">Details here</a>
+     */
+    public static String getCardSelfReference(MageObject mageObject, Game game) {
+        if (!mageObject.isPermanent(game)) {
+            return mageObject.getName();
+        }
+        if (mageObject.isPlaneswalker(game)) {
+            // try to ref by planeswalker name which is subtype
+            return mageObject
+                    .getSubtype(game)
+                    .stream()
+                    .filter(SubType.getPlaneswalkerTypes()::contains)
+                    .findFirst()
+                    .map(SubType::getDescription)
+                    .orElse(mageObject.getName());
+        }
+        if (mageObject.isLegendary(game)) {
+            // Generate shortname for legendary permanent (other than planeswalker)
+            List<String> parts = Arrays.asList(mageObject.getName().split("(, | of | the | of the )"));
+            if (parts.size() > 1) {
+                return parts.get(0);
+            } else {
+                return mageObject.getName();
+            }
+        }
+        if (mageObject.isCreature(game)) {
+            return "this creature";
+        }
+        if (mageObject.isLand(game)) {
+            return "this land";
+        }
+        for (SubType subType : selfRefNamedSubtypes) {
+            if (mageObject.hasSubtype(subType, game)) {
+                return "this " + subType.getDescription();
+            }
+        }
+        if (mageObject.isBattle(game)) {
+            return "this battle";
+        }
+        if (mageObject.isEnchantment(game)) {
+            return "this enchantment";
+        }
+        if (mageObject.isArtifact(game)) {
+            return "this artifact";
+        }
+        return "this permanent";
+    }
 }
