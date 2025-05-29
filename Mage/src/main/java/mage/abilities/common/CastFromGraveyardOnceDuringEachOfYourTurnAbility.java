@@ -45,7 +45,7 @@ public class CastFromGraveyardOnceDuringEachOfYourTurnAbility extends SimpleStat
     }
 
     public CastFromGraveyardOnceDuringEachOfYourTurnAbility(FilterCard filter, Cost additionalCost, MageIdentifier mageIdentifier) {
-        super(new CastFromGraveyardOnceEffect(filter, additionalCost));
+        super(new CastFromGraveyardOnceEffect(filter, additionalCost, mageIdentifier));
         this.addWatcher(new CastFromGraveyardOnceWatcher());
         switch (mageIdentifier) {
             case OnceOnYourTurnCastFromGraveyard:
@@ -71,20 +71,23 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
 
     private final FilterCard filter;
     private final Cost additionalCost;
+    private final MageIdentifier mageIdentifier;
 
-    CastFromGraveyardOnceEffect(FilterCard filter, Cost additionalCost) {
+    CastFromGraveyardOnceEffect(FilterCard filter, Cost additionalCost, MageIdentifier mageIdentifier) {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
         this.staticText = "Once during each of your turns, you may cast " + filter.getMessage()
                 + (filter.getMessage().contains("your graveyard") ? "" : " from your graveyard")
                 + (additionalCost == null ? "" : " by " + additionalCost.getText() + " in addition to paying its other costs.");
         this.additionalCost = additionalCost;
+        this.mageIdentifier = mageIdentifier;
     }
 
     private CastFromGraveyardOnceEffect(final CastFromGraveyardOnceEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.additionalCost = effect.additionalCost;
+        this.mageIdentifier = effect.mageIdentifier;
     }
 
     @Override
@@ -131,8 +134,9 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
         if (additionalCost != null) {
             Costs<Cost> costs = new CostsImpl<>();
             costs.add(additionalCost);
-            controller.setCastSourceIdWithAlternateMana(objectId, spellAbility.getManaCosts(),
-                    costs, MageIdentifier.OnceOnYourTurnCastFromGraveyard);
+            controller.setCastSourceIdWithAlternateMana(
+                    objectId, spellAbility.getManaCosts(),
+                    costs, mageIdentifier);
         }
         return true;
     }
