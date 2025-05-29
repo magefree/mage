@@ -615,6 +615,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Vincent Valentine", 383, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 454, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 528, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vincent's Limit Break", 126, Rarity.COMMON, mage.cards.v.VincentsLimitBreak.class));
         cards.add(new SetCardInfo("Vivi Ornitier", 248, Rarity.MYTHIC, mage.cards.v.ViviOrnitier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vivi Ornitier", 321, Rarity.MYTHIC, mage.cards.v.ViviOrnitier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vivi Ornitier", 514, Rarity.MYTHIC, mage.cards.v.ViviOrnitier.class, NON_FULL_USE_VARIOUS));
