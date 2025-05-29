@@ -397,6 +397,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "446b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "526b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ragnarok, Divine Deliverance", "99b", Rarity.UNCOMMON, mage.cards.r.RagnarokDivineDeliverance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Random Encounter", 150, Rarity.UNCOMMON, mage.cards.r.RandomEncounter.class));
         cards.add(new SetCardInfo("Raubahn, Bull of Ala Mhigo", 151, Rarity.RARE, mage.cards.r.RaubahnBullOfAlaMhigo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raubahn, Bull of Ala Mhigo", 388, Rarity.RARE, mage.cards.r.RaubahnBullOfAlaMhigo.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Raubahn, Bull of Ala Mhigo", 465, Rarity.RARE, mage.cards.r.RaubahnBullOfAlaMhigo.class, NON_FULL_USE_VARIOUS));
