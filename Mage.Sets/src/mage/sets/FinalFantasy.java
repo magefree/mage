@@ -332,6 +332,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Machinist's Arsenal", 23, Rarity.RARE, mage.cards.m.MachinistsArsenal.class));
         cards.add(new SetCardInfo("Magic Damper", 61, Rarity.COMMON, mage.cards.m.MagicDamper.class));
         cards.add(new SetCardInfo("Magic Pot", 263, Rarity.COMMON, mage.cards.m.MagicPot.class));
+        cards.add(new SetCardInfo("Magicked Card", 73, Rarity.UNCOMMON, mage.cards.m.MagickedCard.class));
         cards.add(new SetCardInfo("Magitek Armor", 24, Rarity.UNCOMMON, mage.cards.m.MagitekArmor.class));
         cards.add(new SetCardInfo("Magitek Infantry", 25, Rarity.COMMON, mage.cards.m.MagitekInfantry.class));
         cards.add(new SetCardInfo("Magitek Scythe", 562, Rarity.RARE, mage.cards.m.MagitekScythe.class));
@@ -465,6 +466,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Shiva, Warden of Ice", 438, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shiva, Warden of Ice", 523, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shiva, Warden of Ice", 58, Rarity.RARE, mage.cards.s.ShivaWardenOfIce.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sidequest: Card Collection", 73, Rarity.UNCOMMON, mage.cards.s.SidequestCardCollection.class));
         cards.add(new SetCardInfo("Sidequest: Catch a Fish", 31, Rarity.UNCOMMON, mage.cards.s.SidequestCatchAFish.class));
         cards.add(new SetCardInfo("Sidequest: Hunt the Mark", 119, Rarity.UNCOMMON, mage.cards.s.SidequestHuntTheMark.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sidequest: Hunt the Mark", 453, Rarity.UNCOMMON, mage.cards.s.SidequestHuntTheMark.class, NON_FULL_USE_VARIOUS));
