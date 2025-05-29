@@ -190,6 +190,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Evil Reawakened", 98, Rarity.UNCOMMON, mage.cards.e.EvilReawakened.class));
         cards.add(new SetCardInfo("Excalibur II", 257, Rarity.RARE, mage.cards.e.ExcaliburII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Excalibur II", 352, Rarity.RARE, mage.cards.e.ExcaliburII.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Exdeath, Void Warlock", 220, Rarity.UNCOMMON, mage.cards.e.ExdeathVoidWarlock.class));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 381, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 446, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 526, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
@@ -354,6 +355,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 575, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mysidian Elder", 145, Rarity.COMMON, mage.cards.m.MysidianElder.class));
         cards.add(new SetCardInfo("Namazu Trader", 107, Rarity.COMMON, mage.cards.n.NamazuTrader.class));
+        cards.add(new SetCardInfo("Neo Exdeath, Dimension's End", 220, Rarity.UNCOMMON, mage.cards.n.NeoExdeathDimensionsEnd.class));
         cards.add(new SetCardInfo("Nibelheim Aflame", 146, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nibelheim Aflame", 339, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ninja's Blades", 108, Rarity.RARE, mage.cards.n.NinjasBlades.class));
