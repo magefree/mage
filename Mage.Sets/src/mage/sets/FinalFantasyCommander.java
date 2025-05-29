@@ -435,5 +435,10 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Yuna's Decision", 74, Rarity.RARE, mage.cards.y.YunasDecision.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna's Whistle", 126, Rarity.RARE, mage.cards.y.YunasWhistle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna's Whistle", 75, Rarity.RARE, mage.cards.y.YunasWhistle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 192, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 208, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 216, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 227, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 8, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
     }
 }

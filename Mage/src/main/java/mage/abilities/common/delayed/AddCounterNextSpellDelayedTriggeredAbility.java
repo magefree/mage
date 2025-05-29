@@ -13,6 +13,7 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -26,7 +27,11 @@ public class AddCounterNextSpellDelayedTriggeredAbility extends DelayedTriggered
     }
 
     public AddCounterNextSpellDelayedTriggeredAbility(FilterSpell filter) {
-        super(new AddCounterNextSpellEffect(), Duration.EndOfTurn, true, false);
+        this(1, filter);
+    }
+
+    public AddCounterNextSpellDelayedTriggeredAbility(int amount, FilterSpell filter) {
+        super(new AddCounterNextSpellEffect(amount), Duration.EndOfTurn, true, false);
         this.filter = filter;
         this.setTriggerPhrase("When you next cast " + filter.getMessage() + " this turn, ");
     }
@@ -62,13 +67,17 @@ public class AddCounterNextSpellDelayedTriggeredAbility extends DelayedTriggered
 
 class AddCounterNextSpellEffect extends ReplacementEffectImpl {
 
-    AddCounterNextSpellEffect() {
+    private final int amount;
+
+    AddCounterNextSpellEffect(int amount) {
         super(Duration.EndOfStep, Outcome.BoostCreature);
-        staticText = "that creature enters the battlefield with an additional +1/+1 counter on it";
+        this.amount = amount;
+        staticText = "that creature enters the battlefield with " + CardUtil.numberToText(amount, "an") + " additional +1/+1 counter" + (amount > 1 ? "s" : "") + " on it";
     }
 
     private AddCounterNextSpellEffect(AddCounterNextSpellEffect effect) {
         super(effect);
+        this.amount = effect.amount;
     }
 
     @Override
@@ -89,7 +98,7 @@ class AddCounterNextSpellEffect extends ReplacementEffectImpl {
             return false;
         }
         creature.addCounters(
-                CounterType.P1P1.createInstance(), source.getControllerId(),
+                CounterType.P1P1.createInstance(amount), source.getControllerId(),
                 source, game, event.getAppliedEffects()
         );
         discard();
