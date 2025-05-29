@@ -188,6 +188,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Esper Terra", 511, Rarity.MYTHIC, mage.cards.e.EsperTerra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ether", 53, Rarity.UNCOMMON, mage.cards.e.Ether.class));
         cards.add(new SetCardInfo("Evil Reawakened", 98, Rarity.UNCOMMON, mage.cards.e.EvilReawakened.class));
+        cards.add(new SetCardInfo("Excalibur II", 257, Rarity.RARE, mage.cards.e.ExcaliburII.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Excalibur II", 352, Rarity.RARE, mage.cards.e.ExcaliburII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 381, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 446, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 526, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
