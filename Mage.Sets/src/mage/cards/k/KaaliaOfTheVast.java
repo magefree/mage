@@ -16,6 +16,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -127,7 +128,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
                     UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
                     if (defenderId != null) {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
-                        Permanent creature = game.getPermanent(cardId);
+                        Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                         if (creature != null) {
                             game.getCombat().addAttackerToCombat(card.getId(), defenderId, game);
                             return true;

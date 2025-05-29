@@ -23,6 +23,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -93,7 +94,7 @@ class BreakOutEffect extends OneShotEffect {
             if (pickedCard.getManaValue() <= 2 &&
                     controller.chooseUse(Outcome.PutCardInPlay, "Put it onto the battlefield?", source, game) &&
                     controller.moveCards(pickedCard, Zone.BATTLEFIELD, source, game)) {
-                Permanent permanent = game.getPermanent(pickedCard.getId());
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(pickedCard, game);
                 if (permanent != null) {
                     ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                     effect.setTargetPointer(new FixedTarget(permanent, game));
