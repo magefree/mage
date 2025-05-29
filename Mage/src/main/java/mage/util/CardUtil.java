@@ -1636,15 +1636,15 @@ public final class CardUtil {
         }
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card) {
-        castSingle(player, source, game, card, null);
+    public static boolean castSingle(Player player, Ability source, Game game, Card card) {
+        return castSingle(player, source, game, card, null);
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
-        castSingle(player, source, game, card, false, manaCost);
+    public static boolean castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
+        return castSingle(player, source, game, card, false, manaCost);
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
+    public static boolean castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
         // handle split-cards
         if (card instanceof SplitCard) {
             SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
@@ -1711,7 +1711,7 @@ public final class CardUtil {
         }
 
         // cast it
-        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
+        boolean result = player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
                 game, noMana, new ApprovingObject(source, game));
 
         // turn off effect after cast on every possible card-face
@@ -1735,6 +1735,7 @@ public final class CardUtil {
         }
         // turn off effect on a normal card
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+        return result;
     }
 
     /**
