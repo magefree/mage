@@ -23,6 +23,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -86,7 +87,7 @@ class GiftOfImmortalityEffect extends OneShotEffect {
         }
 
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

@@ -23,6 +23,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -81,7 +82,7 @@ class CantStayAwayEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(targetCard.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(targetCard, game);
         if (permanent != null) {
             ContinuousEffect effect = new GainAbilityTargetEffect(new SimpleStaticAbility(new CantStayAwayReplacementEffect()), Duration.Custom);
             effect.setTargetPointer(new FixedTarget(permanent, game));

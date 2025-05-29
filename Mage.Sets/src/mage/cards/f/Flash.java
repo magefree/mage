@@ -80,7 +80,7 @@ class FlashEffect extends OneShotEffect {
                 }
 
                 game.processAction();
-                Permanent permanent = game.getPermanent(card.getId());
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (permanent != null) {
                     permanent.sacrifice(source, game);
                 }

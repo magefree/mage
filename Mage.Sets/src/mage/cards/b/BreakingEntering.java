@@ -17,11 +17,13 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 public final class BreakingEntering extends SplitCard {
 
@@ -68,22 +70,22 @@ class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Target target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-            target.withNotTarget(true);
-            if (target.canChoose(source.getControllerId(), source, game)
-                    && controller.chooseTarget(outcome, target, source, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                        effect.setTargetPointer(new FixedTarget(card.getId(), game));
-                        game.addEffect(effect, source);
-                    }
+        if (controller == null) {
+            return false;
+        }
+        Target target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE).withNotTarget(true);
+        if (target.canChoose(source.getControllerId(), source, game)
+                && controller.chooseTarget(outcome, target, source, game)) {
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                if (permanent != null) {
+                    ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
+                    effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
+                    game.addEffect(effect, source);
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

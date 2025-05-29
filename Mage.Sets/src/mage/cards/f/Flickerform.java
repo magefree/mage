@@ -29,6 +29,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -154,45 +155,44 @@ class FlickerformReturnEffect extends OneShotEffect {
         }
         ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
         Card enchantedCard = exileZone.get(enchantedCardId, game);
-        //skip if exiled card is missing
-        if (enchantedCard != null) {
-            Player owner = game.getPlayer(enchantedCard.getOwnerId());
-            //skip if card's owner is missing
-            if (owner != null) {
-                owner.moveCards(enchantedCard, Zone.BATTLEFIELD, source, game);
-                Permanent newPermanent = game.getPermanent(enchantedCardId);
-                if (newPermanent != null) {
-                    Set<Card> toBattlefieldAttached = new HashSet<Card>();
-                    for (Card enchantment : exileZone.getCards(game)) {
-                        if (filterAura.match(enchantment, game)) {
-                            boolean canTarget = false;
-                            for (Target target : enchantment.getSpellAbility().getTargets()) {
-                                Filter filter = target.getFilter();
-                                if (filter.match(newPermanent, game)) {
-                                    canTarget = true;
-                                    break;
-                                }
-                            }
-                            if (!canTarget) {
-                                // Aura stays exiled
-                                continue;
-                            }
-                            game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
+        if (enchantedCard == null) {
+            return false;
+        }
+        Player owner = game.getPlayer(enchantedCard.getOwnerId());
+        if (owner == null) {
+            return false;
+        }
+        owner.moveCards(enchantedCard, Zone.BATTLEFIELD, source, game);
+        Permanent newPermanent = CardUtil.getPermanentFromCardPutToBattlefield(enchantedCard, game);
+        if (newPermanent != null) {
+            Set<Card> toBattlefieldAttached = new HashSet<>();
+            for (Card enchantment : exileZone.getCards(game)) {
+                if (filterAura.match(enchantment, game)) {
+                    boolean canTarget = false;
+                    for (Target target : enchantment.getSpellAbility().getTargets()) {
+                        Filter filter = target.getFilter();
+                        if (filter.match(newPermanent, game)) {
+                            canTarget = true;
+                            break;
                         }
-                        toBattlefieldAttached.add(enchantment);
                     }
-                    if (!toBattlefieldAttached.isEmpty()) {
-                        controller.moveCards(toBattlefieldAttached, Zone.BATTLEFIELD, source, game);
-                        for (Card card : toBattlefieldAttached) {
-                            if (game.getState().getZone(card.getId()) == Zone.BATTLEFIELD) {
-                                newPermanent.addAttachment(card.getId(), source, game);
-                            }
-                        }
+                    if (!canTarget) {
+                        // Aura stays exiled
+                        continue;
+                    }
+                    game.getState().setValue("attachTo:" + enchantment.getId(), newPermanent);
+                }
+                toBattlefieldAttached.add(enchantment);
+            }
+            if (!toBattlefieldAttached.isEmpty()) {
+                controller.moveCards(toBattlefieldAttached, Zone.BATTLEFIELD, source, game);
+                for (Card card : toBattlefieldAttached) {
+                    if (game.getState().getZone(card.getId()) == Zone.BATTLEFIELD) {
+                        newPermanent.addAttachment(card.getId(), source, game);
                     }
                 }
-                return true;
             }
         }
-        return false;
+        return true;
     }
 }

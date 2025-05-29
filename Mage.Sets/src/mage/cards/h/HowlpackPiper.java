@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -92,7 +93,7 @@ class HowlpackPiperEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null || sourcePermanent == null) {
             return true;

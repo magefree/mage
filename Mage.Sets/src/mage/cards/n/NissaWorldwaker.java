@@ -22,6 +22,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -93,7 +94,7 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
                     Card card = controller.getLibrary().getCard(cardId, game);
                     if (card != null) {
                         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            Permanent land = game.getPermanent(card.getId());
+                            Permanent land = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                             if (land != null) {
                                 ContinuousEffect effect = new BecomesCreatureTargetEffect(new NissaWorldwakerToken(), false, true, Duration.Custom);
                                 effect.setTargetPointer(new FixedTarget(land, game));

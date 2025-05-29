@@ -24,6 +24,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -89,7 +90,7 @@ class PuppeteerCliqueEffect extends OneShotEffect {
         if (controller == null || !controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

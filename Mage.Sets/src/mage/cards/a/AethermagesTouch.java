@@ -17,6 +17,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -73,7 +74,7 @@ class AethermagesTouchEffect extends OneShotEffect {
                         cards.remove(card);
                         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                             // It gains \"At the beginning of your end step, return this creature to its owner's hand.\"
-                            Permanent permanent = game.getPermanent(card.getId());
+                            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                             if (permanent != null) {
                                 Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new ReturnToHandSourceEffect(true), false, null);
                                 ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
