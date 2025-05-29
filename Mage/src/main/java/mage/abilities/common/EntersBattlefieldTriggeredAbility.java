@@ -2,8 +2,6 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
-import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -59,43 +57,6 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
     public EntersBattlefieldTriggeredAbility setTriggerPhrase(String triggerPhrase) {
         super.setTriggerPhrase(triggerPhrase);
         return this;
-    }
-
-    /**
-     * Find description of "{this}" like "this creature"
-     */
-    static public String getThisObjectDescription(Card card) {
-        // prepare {this} description
-
-        // short names like Aatchik for Aatchik, Emerald Radian
-        // except: Mu Yanling, Wind Rider (maybe related to spaces in name)
-        List<String> parts = Arrays.asList(card.getName().split(","));
-        if (parts.size() > 1 && !parts.get(0).contains(" ")) {
-            return parts.get(0);
-        }
-
-        // some types have priority, e.g. Vehicle instead artifact, example: Boommobile
-        if (card.getSubtype().contains(SubType.VEHICLE)) {
-            return "this Vehicle";
-        }
-        if (card.getSubtype().contains(SubType.AURA)) {
-            return "this Aura";
-        }
-
-        // by priority
-        if (card.isCreature()) {
-            return "this creature";
-        } else if (card.isPlaneswalker()) {
-            return "this planeswalker";
-        } else if (card.isLand()) {
-            return "this land";
-        } else if (card.isEnchantment()) {
-            return "this enchantment";
-        } else if (card.isArtifact()) {
-            return "this artifact";
-        } else {
-            return "this permanent";
-        }
     }
 
     public static List<String> getPossibleTriggerPhrases() {

@@ -47,7 +47,6 @@ import java.util.UUID;
 public class ChampionAbility extends StaticAbility {
 
     protected final String objectDescription;
-    protected final String etbObjectDescription;
 
     /**
      * Champion one or more creature types or if the subtype array is empty
@@ -59,8 +58,6 @@ public class ChampionAbility extends StaticAbility {
      */
     public ChampionAbility(Card card, SubType... subtypes) {
         super(Zone.BATTLEFIELD, null);
-
-        this.etbObjectDescription = EntersBattlefieldTriggeredAbility.getThisObjectDescription(card);
 
         List<SubType> subTypes = Arrays.asList(subtypes);
         FilterControlledPermanent filter;
@@ -108,7 +105,6 @@ public class ChampionAbility extends StaticAbility {
     protected ChampionAbility(final ChampionAbility ability) {
         super(ability);
         this.objectDescription = ability.objectDescription;
-        this.etbObjectDescription = ability.etbObjectDescription;
     }
 
     @Override
@@ -119,7 +115,7 @@ public class ChampionAbility extends StaticAbility {
     @Override
     public String getRule() {
         return "Champion " + CardUtil.addArticle(objectDescription)
-                + " <i>(When " + etbObjectDescription + " enters, sacrifice it unless you exile another " + objectDescription
+                + " <i>(When {this} enters, sacrifice it unless you exile another " + objectDescription
                 + " you control. When this leaves the battlefield, that card returns to the battlefield.)</i>";
     }
 }

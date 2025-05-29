@@ -36,25 +36,21 @@ import java.util.*;
 public class HideawayAbility extends EntersBattlefieldTriggeredAbility {
 
     private final int amount;
-    private final String etbObjectDescription;
 
     public HideawayAbility(Card card, int amount) {
         super(new HideawayExileEffect(amount));
         this.amount = amount;
         this.addWatcher(new HideawayWatcher());
-
-        this.etbObjectDescription = EntersBattlefieldTriggeredAbility.getThisObjectDescription(card);
     }
 
     private HideawayAbility(final HideawayAbility ability) {
         super(ability);
         this.amount = ability.amount;
-        this.etbObjectDescription = ability.etbObjectDescription;
     }
 
     @Override
     public String getRule() {
-        return "Hideaway " + this.amount + " <i>(When " + this.etbObjectDescription + " enters, look at the top "
+        return "Hideaway " + this.amount + " <i>(When {this} enters, look at the top "
                 + CardUtil.numberToText(this.amount) + " cards of your library, exile one face down, " +
                 "then put the rest on the bottom of your library in a random order.)</i>";
     }
