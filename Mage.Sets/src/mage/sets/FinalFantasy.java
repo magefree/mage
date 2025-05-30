@@ -83,6 +83,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Black Waltz No. 3", 214, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Waltz No. 3", 478, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blazing Bomb", 130, Rarity.COMMON, mage.cards.b.BlazingBomb.class));
+        cards.add(new SetCardInfo("Blitzball", 254, Rarity.COMMON, mage.cards.b.Blitzball.class));
         cards.add(new SetCardInfo("Blitzball Shot", 176, Rarity.COMMON, mage.cards.b.BlitzballShot.class));
         cards.add(new SetCardInfo("Braska's Final Aeon", 104, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Braska's Final Aeon", 363, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
