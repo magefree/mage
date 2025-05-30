@@ -1,25 +1,26 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
-import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
+import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
+
+import java.util.UUID;
 
 /**
  * @author balazskristof
@@ -36,7 +37,7 @@ public final class BanonTheReturnersLeader extends CardImpl {
 
     public BanonTheReturnersLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
@@ -45,7 +46,7 @@ public final class BanonTheReturnersLeader extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Pray -- Once during each of your turns, you may cast a creature spell from among cards in your graveyard that were put there from anywhere other than the battlefield this turn.
-        Ability ability = new CastFromGraveyardOnceEachTurnAbility(filter).withFlavorWord("Pray");
+        Ability ability = new CastFromGraveyardOnceDuringEachOfYourTurnAbility(filter).withFlavorWord("Pray");
         ability.addWatcher(new CardsPutIntoGraveyardWatcher());
         this.addAbility(ability);
         // Whenever you attack, you may pay {1} and discard a card. If you do, draw a card.
