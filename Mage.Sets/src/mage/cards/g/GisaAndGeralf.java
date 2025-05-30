@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
+import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
@@ -9,17 +9,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class GisaAndGeralf extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a Zombie creature spell");
+    private static final FilterCard filter = new FilterCreatureCard("a Zombie creature spell");
+
     static {
         filter.add(SubType.ZOMBIE.getPredicate());
     }
@@ -36,7 +37,7 @@ public final class GisaAndGeralf extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(4)));
 
         // Once during each of your turns, you may cast a Zombie creature spell from your graveyard
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter));
+        this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(filter));
     }
 
     private GisaAndGeralf(final GisaAndGeralf card) {
