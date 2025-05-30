@@ -51,14 +51,13 @@ import mage.util.RandomUtil;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
  * Basic implementation of testable player
@@ -1512,7 +1511,7 @@ public class TestPlayer implements Player {
 
     private void assertPermanentCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
         int foundCount = 0;
-        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
             if (hasObjectTargetNameOrAlias(perm, permanentName) && perm.getControllerId().equals(player.getId())) {
                 foundCount++;
             }
@@ -1528,7 +1527,7 @@ public class TestPlayer implements Player {
 
     private void assertPermanentTapped(PlayerAction action, Game game, Player player, String permanentName, boolean tapped, int count) {
         int foundCount = 0;
-        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
             if (hasObjectTargetNameOrAlias(perm, permanentName)
                     && perm.getControllerId().equals(player.getId())
                     && perm.isTapped() == tapped) {
@@ -1547,7 +1546,7 @@ public class TestPlayer implements Player {
 
     private void assertPermanentCounters(PlayerAction action, Game game, Player player, String permanentName, CounterType counterType, int count) {
         int foundCount = 0;
-        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
             if (hasObjectTargetNameOrAlias(perm, permanentName) && perm.getControllerId().equals(player.getId())) {
                 foundCount = perm.getCounters(game).getCount(counterType);
             }
