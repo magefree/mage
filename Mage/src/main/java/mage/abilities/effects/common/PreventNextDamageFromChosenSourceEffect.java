@@ -29,7 +29,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
         String getText();
     }
 
-    public static ApplierOnPrevention ON_PREVENT_YOU_GAIN_THAT_MUCH_LIFE = new ApplierOnPrevention() {
+    public static final ApplierOnPrevention ON_PREVENT_YOU_GAIN_THAT_MUCH_LIFE = new ApplierOnPrevention() {
         public String getText() {
             return "You gain life equal to the damage prevented this way";
         }
