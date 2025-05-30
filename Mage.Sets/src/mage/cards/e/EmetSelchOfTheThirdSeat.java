@@ -3,6 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.BatchTriggeredAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -126,9 +127,7 @@ class EmetSelchOfTheThirdSeatEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (player == null || card == null || !CardUtil.castSingle(player, source, game, card)) {
             // if the spell isn't cast then the ability can be used again in the same turn
-            game.getState().removeValue(CardUtil.getCardZoneString(
-                    "lastTurnUsed" + source.getOriginalId(), source.getSourceId(), game
-            ));
+            TriggeredAbility.clearDidThisTurn(source, game);
             return false;
         }
         game.addEffect(new ThatSpellGraveyardExileReplacementEffect(true)

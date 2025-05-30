@@ -156,13 +156,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public boolean checkUsedAlready(Game game) {
-        if (!doOnlyOnceEachTurn) {
-            return false;
-        }
-        Integer lastTurnUsed = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnUsed" + getOriginalId(), sourceId, game)
-        );
-        return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
+        return doOnlyOnceEachTurn && TriggeredAbility.checkDidThisTurn(this, game);
     }
 
     @Override
@@ -271,9 +265,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 return false;
             }
             if (doOnlyOnceEachTurn) {
-                game.getState().setValue(CardUtil.getCardZoneString(
-                        "lastTurnUsed" + getOriginalId(), sourceId, game
-                ), game.getTurnNum());
+                TriggeredAbility.setDidThisTurn(this, game);
             }
         }
         //20091005 - 603.4
