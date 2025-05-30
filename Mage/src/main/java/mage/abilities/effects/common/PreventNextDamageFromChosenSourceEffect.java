@@ -96,7 +96,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData data = preventDamageAction(event, source, game);
-        this.used = true;
+        discard();
         if (onPrevention != null) {
             onPrevention.apply(data, targetSource, event, source, game);
         }
@@ -105,8 +105,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return !this.used
-                && super.applies(event, source, game)
+        return super.applies(event, source, game)
                 && (!toYou || event.getTargetId().equals(source.getControllerId()))
                 && event.getSourceId().equals(targetSource.getFirstTarget());
     }
