@@ -255,6 +255,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Hope Estheim", 396, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hope Estheim", 491, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hope Estheim", 541, Rarity.RARE, mage.cards.h.HopeEstheim.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 329, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 39, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hydaelyn, the Mothercrystal", 434, Rarity.RARE, mage.cards.h.HydaelynTheMothercrystal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ice Flan", 55, Rarity.COMMON, mage.cards.i.IceFlan.class));
         cards.add(new SetCardInfo("Ice Magic", 56, Rarity.COMMON, mage.cards.i.IceMagic.class));
         cards.add(new SetCardInfo("Ifrit, Warden of Inferno", 133, Rarity.MYTHIC, mage.cards.i.IfritWardenOfInferno.class, NON_FULL_USE_VARIOUS));
@@ -624,6 +627,9 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Vanille, Cheerful l'Cie", 537, Rarity.UNCOMMON, mage.cards.v.VanilleCheerfulLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vayne's Treachery", 124, Rarity.COMMON, mage.cards.v.VaynesTreachery.class));
         cards.add(new SetCardInfo("Vector, Imperial Capital", 291, Rarity.COMMON, mage.cards.v.VectorImperialCapital.class));
+        cards.add(new SetCardInfo("Venat, Heart of Hydaelyn", 329, Rarity.RARE, mage.cards.v.VenatHeartOfHydaelyn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Venat, Heart of Hydaelyn", 39, Rarity.RARE, mage.cards.v.VenatHeartOfHydaelyn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Venat, Heart of Hydaelyn", 434, Rarity.RARE, mage.cards.v.VenatHeartOfHydaelyn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 125, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 383, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vincent Valentine", 454, Rarity.RARE, mage.cards.v.VincentValentine.class, NON_FULL_USE_VARIOUS));
