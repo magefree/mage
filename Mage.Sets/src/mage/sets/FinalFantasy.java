@@ -424,6 +424,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Rosa, Resolute White Mage", 555, Rarity.RARE, mage.cards.r.RosaResoluteWhiteMage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rufus Shinra", 238, Rarity.UNCOMMON, mage.cards.r.RufusShinra.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rufus Shinra", 503, Rarity.UNCOMMON, mage.cards.r.RufusShinra.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rydia's Return", 198, Rarity.UNCOMMON, mage.cards.r.RydiasReturn.class));
         cards.add(new SetCardInfo("Sabotender", 153, Rarity.COMMON, mage.cards.s.Sabotender.class));
         cards.add(new SetCardInfo("Sage's Nouliths", 582, Rarity.COMMON, mage.cards.s.SagesNouliths.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sage's Nouliths", 70, Rarity.COMMON, mage.cards.s.SagesNouliths.class, NON_FULL_USE_VARIOUS));
