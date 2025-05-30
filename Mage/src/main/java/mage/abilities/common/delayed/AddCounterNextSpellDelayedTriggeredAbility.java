@@ -1,7 +1,6 @@
 package mage.abilities.common.delayed;
 
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -18,9 +17,7 @@ import mage.util.CardUtil;
 /**
  * @author TheElk801
  */
-public class AddCounterNextSpellDelayedTriggeredAbility extends DelayedTriggeredAbility {
-
-    private final FilterSpell filter;
+public class AddCounterNextSpellDelayedTriggeredAbility extends CastNextSpellDelayedTriggeredAbility {
 
     public AddCounterNextSpellDelayedTriggeredAbility() {
         this(StaticFilters.FILTER_SPELL_A_CREATURE);
@@ -31,37 +28,16 @@ public class AddCounterNextSpellDelayedTriggeredAbility extends DelayedTriggered
     }
 
     public AddCounterNextSpellDelayedTriggeredAbility(int amount, FilterSpell filter) {
-        super(new AddCounterNextSpellEffect(amount), Duration.EndOfTurn, true, false);
-        this.filter = filter;
-        this.setTriggerPhrase("When you next cast " + filter.getMessage() + " this turn, ");
+        super(new AddCounterNextSpellEffect(amount), filter, null, false);
     }
 
     private AddCounterNextSpellDelayedTriggeredAbility(final AddCounterNextSpellDelayedTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
     }
 
     @Override
     public AddCounterNextSpellDelayedTriggeredAbility copy() {
         return new AddCounterNextSpellDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId())) {
-            return false;
-        }
-        Spell spell = game.getSpell(event.getTargetId());
-        if (spell == null || !filter.match(spell, getControllerId(), this, game)) {
-            return false;
-        }
-        this.getEffects().setValue("spellCast", spell);
-        return true;
     }
 }
 
@@ -72,7 +48,8 @@ class AddCounterNextSpellEffect extends ReplacementEffectImpl {
     AddCounterNextSpellEffect(int amount) {
         super(Duration.EndOfStep, Outcome.BoostCreature);
         this.amount = amount;
-        staticText = "that creature enters the battlefield with " + CardUtil.numberToText(amount, "an") + " additional +1/+1 counter" + (amount > 1 ? "s" : "") + " on it";
+        staticText = "that creature enters the battlefield with " + CardUtil.numberToText(amount, "an") +
+                " additional +1/+1 counter" + (amount > 1 ? "s" : "") + " on it";
     }
 
     private AddCounterNextSpellEffect(AddCounterNextSpellEffect effect) {
