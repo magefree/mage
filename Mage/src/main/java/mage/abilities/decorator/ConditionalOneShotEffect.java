@@ -5,7 +5,9 @@ import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
 /**
@@ -18,6 +20,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
     private final Effects effects = new Effects();
     private final Effects otherwiseEffects = new Effects();
     private final Condition condition;
+    private boolean withConditionTextAtEnd = false;
 
     public ConditionalOneShotEffect(OneShotEffect effect, Condition condition) {
         this(effect, null, condition, null);
@@ -27,8 +30,18 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         this(effect, null, condition, text);
     }
 
+    private static Outcome generateOutcome(OneShotEffect effect, OneShotEffect otherwiseEffect) {
+        if (effect != null) {
+            return effect.getOutcome();
+        }
+        if (otherwiseEffect != null) {
+            return Outcome.inverse(otherwiseEffect.getOutcome());
+        }
+        throw new IllegalArgumentException("Wrong code usage: ConditionalOneShot should start with an effect to generate Outcome.");
+    }
+
     public ConditionalOneShotEffect(OneShotEffect effect, OneShotEffect otherwiseEffect, Condition condition, String text) {
-        super(effect.getOutcome());
+        super(generateOutcome(effect, otherwiseEffect));
         if (effect != null) {
             this.effects.add(effect);
         }
@@ -44,6 +57,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         this.effects.addAll(effect.effects.copy());
         this.otherwiseEffects.addAll(effect.otherwiseEffects.copy());
         this.condition = effect.condition;
+        this.withConditionTextAtEnd = effect.withConditionTextAtEnd;
     }
 
     @Override
@@ -65,6 +79,11 @@ public class ConditionalOneShotEffect extends OneShotEffect {
 
     public ConditionalOneShotEffect addOtherwiseEffect(OneShotEffect effect) {
         this.otherwiseEffects.add(effect);
+        return this;
+    }
+
+    public ConditionalOneShotEffect withConditionTextAtEnd(boolean withConditionTextAtEnd) {
+        this.withConditionTextAtEnd = withConditionTextAtEnd;
         return this;
     }
 
@@ -92,11 +111,25 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         }
 
         if (otherwiseEffects.isEmpty()) {
-            return "if " + conditionText + ", "
-                    + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+            if (withConditionTextAtEnd) {
+                String effectText = effects.getText(mode);
+                return CardUtil.getTextWithFirstCharLowerCase(effectText.substring(0, effectText.length() - 1))
+                        + " if " + conditionText;
+            } else {
+                return "if " + conditionText + ", "
+                        + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+            }
         }
         return effects.getText(mode) + ". If " + conditionText + ", "
                 + CardUtil.getTextWithFirstCharLowerCase(otherwiseEffects.getText(mode));
+    }
+
+    @Override
+    public ConditionalOneShotEffect setTargetPointer(TargetPointer targetPointer) {
+        effects.setTargetPointer(targetPointer);
+        otherwiseEffects.setTargetPointer(targetPointer);
+        super.setTargetPointer(targetPointer);
+        return this;
     }
 
     @Override

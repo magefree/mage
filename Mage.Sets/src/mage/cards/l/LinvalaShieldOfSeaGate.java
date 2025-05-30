@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.FullPartyCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -54,8 +54,7 @@ public final class LinvalaShieldOfSeaGate extends CardImpl {
         // At the beginning of combat on your turn, if you have a full party, choose target nonland permanent an opponent controls. Until your next turn, it can't attack or block, and its activated abilities can't be activated.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new LinvalaShieldOfSeaGateRestrictionEffect(),
-                        TargetController.YOU, false
+                        new LinvalaShieldOfSeaGateRestrictionEffect()
                 ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, choose target nonland permanent an opponent controls. " +
                 "Until your next turn, it can't attack or block, and its activated abilities can't be activated."

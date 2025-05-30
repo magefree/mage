@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.TapTargetCost;
@@ -54,9 +54,9 @@ public final class TheLadyOfOtaria extends CardImpl {
 
         // At the beginning of each end step, if a land you controlled was put into your graveyard from the battlefield this turn, reveal the top four cards of your library. Put any number of Dwarf cards from among them into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new RevealLibraryPickControllerEffect(
+                TargetController.ANY, new RevealLibraryPickControllerEffect(
                         4, Integer.MAX_VALUE, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM, false
-                ), TargetController.ANY, TheLadyOfOtariaCondition.instance, false
+                ), false, TheLadyOfOtariaCondition.instance
         ).addHint(TheLadyOfOtariaCondition.getHint()), new TheLadyOfOtariaWatcher());
     }
 

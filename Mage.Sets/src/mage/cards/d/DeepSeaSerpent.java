@@ -25,7 +25,7 @@ public final class DeepSeaSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Deep-Sea Serpent can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
     private DeepSeaSerpent(final DeepSeaSerpent card) {

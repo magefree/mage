@@ -37,14 +37,14 @@ public final class CaveOfTheFrostDragon extends CardImpl {
 
         // If you control two or more other lands, Cave of the Frost Dragon enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldAbility(
-                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters the battlefield tapped.", null
+                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters tapped.", null
         ));
 
         // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
 
         // {4}{W}: Cave of the Frost Dragon becomes a 3/4 white Dragon creature with flying until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(3, 4, "3/4 white Dragon creature with flying")
                         .withColor("W")
                         .withSubType(SubType.DRAGON)

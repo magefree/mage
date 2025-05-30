@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,7 +33,7 @@ public final class SimicAscendancy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}");
 
         // {1}{G}{U}: Put a +1/+1 counter on target creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{G}{U}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
@@ -43,8 +43,8 @@ public final class SimicAscendancy extends CardImpl {
         // At the beginning of your upkeep, if Simic Ascendancy has twenty or more growth counters on it, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        Zone.BATTLEFIELD, new WinGameSourceControllerEffect(),
-                        TargetController.YOU, false
+                        Zone.BATTLEFIELD, TargetController.YOU, new WinGameSourceControllerEffect(),
+                        false
                 ), new SourceHasCounterCondition(CounterType.GROWTH, 20, Integer.MAX_VALUE),
                 "At the beginning of your upkeep, if {this} has twenty " +
                         "or more growth counters on it, you win the game"

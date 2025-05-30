@@ -36,13 +36,13 @@ public final class SpikeRogue extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
 
         // {2}, Remove a +1/+1 counter from Spike Rogue: Put a +1/+1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(2));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {2}, Remove a +1/+1 counter from a creature you control: Put a +1/+1 counter on Spike Rogue.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(2));
         ability2.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE, true), CounterType.P1P1));
         this.addAbility(ability2);
     }

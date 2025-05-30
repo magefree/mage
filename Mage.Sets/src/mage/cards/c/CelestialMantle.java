@@ -43,7 +43,7 @@ public final class CelestialMantle extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
 
         // Whenever enchanted creature deals combat damage to a player, double its controller's life total.
         this.addAbility(new CelestialMantleAbility());

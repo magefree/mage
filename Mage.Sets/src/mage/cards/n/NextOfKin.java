@@ -19,6 +19,7 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -67,7 +68,7 @@ class NextOfKinDiesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card nextOfKinCard = (Card) source.getSourceObjectIfItStillExists(game);
+        Card nextOfKinCard = source.getSourceCardIfItStillExists(game);
         Object object = getValue("attachedTo");
         if (controller == null || nextOfKinCard == null || !(object instanceof Permanent)) {
             return false;
@@ -92,9 +93,12 @@ class NextOfKinDiesEffect extends OneShotEffect {
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            Effect returnToBattlefieldAttachedEffect = new ReturnToBattlefieldAttachedEffect();
-            returnToBattlefieldAttachedEffect.setTargetPointer(new FixedTarget(card, game));
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToBattlefieldAttachedEffect), source);
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+            if (permanent != null) {
+                Effect returnToBattlefieldAttachedEffect = new ReturnToBattlefieldAttachedEffect();
+                returnToBattlefieldAttachedEffect.setTargetPointer(new FixedTarget(permanent, game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToBattlefieldAttachedEffect), source);
+            }
         }
         return true;
     }

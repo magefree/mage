@@ -36,7 +36,7 @@ public final class ShiftingSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Slivers can't be blocked except by Slivers.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesAllEffect(filterCreatures, filterBlockedBy, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesAllEffect(filterCreatures, filterBlockedBy, Duration.WhileOnBattlefield)));
     }
 
     private ShiftingSliver(final ShiftingSliver card) {

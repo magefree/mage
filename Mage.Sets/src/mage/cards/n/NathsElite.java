@@ -31,7 +31,7 @@ public final class NathsElite extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All creatures able to block Nath's Elite do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield)));
 
         // When Nath's Elite enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Nath's Elite.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfClashWonEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))));

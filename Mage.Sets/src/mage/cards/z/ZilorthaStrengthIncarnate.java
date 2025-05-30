@@ -30,7 +30,7 @@ public final class ZilorthaStrengthIncarnate extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ZilorthaStrengthIncarnateEffect()));
+        this.addAbility(new SimpleStaticAbility(new ZilorthaStrengthIncarnateEffect()));
     }
 
     private ZilorthaStrengthIncarnate(ZilorthaStrengthIncarnate card) {

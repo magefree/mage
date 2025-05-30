@@ -9,7 +9,7 @@ import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,7 +45,7 @@ public final class ArchmageOfEchoes extends CardImpl {
 
         // Whenever you cast a Faerie or Wizard permanent spell, copy it.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(false, false, false).setText("copy it"),
+                new CopyTargetStackObjectEffect(false, false, false).setText("copy it"),
                 filter, false, SetTargetPointer.SPELL));
     }
 

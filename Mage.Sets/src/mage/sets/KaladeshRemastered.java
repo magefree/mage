@@ -19,14 +19,7 @@ public class KaladeshRemastered extends ExpansionSet {
 
     private KaladeshRemastered() {
         super("Kaladesh Remastered", "KLR", ExpansionSet.buildDate(2020, 11, 12), SetType.MAGIC_ARENA);
-        this.hasBoosters = true;
-        this.hasBasicLands = true;
-        this.maxCardNumberInBooster = 301;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
-        this.numBoosterUncommon = 3;
-        this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
+        this.enableArenaBooster(301); // #302 Sculpting Steel is top-boxer, not in booster
 
         cards.add(new SetCardInfo("Aerial Responder", 1, Rarity.UNCOMMON, mage.cards.a.AerialResponder.class));
         cards.add(new SetCardInfo("Aeronaut Admiral", 2, Rarity.UNCOMMON, mage.cards.a.AeronautAdmiral.class));

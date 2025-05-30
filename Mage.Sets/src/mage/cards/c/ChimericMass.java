@@ -30,11 +30,11 @@ public final class ChimericMass extends CardImpl {
 
         // {1}: Until end of turn, Chimeric Mass becomes a Construct artifact creature with "This creature's power and toughness are each equal to the number of charge counters on it."
         CountersSourceCount count = new CountersSourceCount(CounterType.CHARGE);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(0, 0, "Construct artifact creature with \"This creature's power and toughness are each equal to the number of charge counters on it.\"")
                         .withType(CardType.ARTIFACT)
                         .withSubType(SubType.CONSTRUCT)
-                        .withAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(count, Duration.WhileOnBattlefield))),
+                        .withAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(count, Duration.WhileOnBattlefield))),
                 CardType.ARTIFACT, Duration.EndOfTurn).withDurationRuleAtStart(true), new GenericManaCost(1)));
     }
 

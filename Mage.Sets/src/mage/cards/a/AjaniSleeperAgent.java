@@ -15,11 +15,9 @@ import mage.constants.*;
 import mage.abilities.keyword.CompleatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.emblems.AjaniSleeperAgentEmblem;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -42,12 +40,10 @@ public final class AjaniSleeperAgent extends CardImpl {
         this.addAbility(new LoyaltyAbility(new AjaniSleeperAgentEffect(), 1));
 
         // −3: Distribute three +1/+1 counters among up to three target creatures. They gain vigilance until end of turn.
-        Ability ability = new LoyaltyAbility(new DistributeCountersEffect(CounterType.P1P1, 3, false, "up to three target creatures"), -3);
+        Ability ability = new LoyaltyAbility(new DistributeCountersEffect()
+                .setText("distribute three +1/+1 counters among up to three target creatures"), -3);
         ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance()).setText("They gain vigilance until end of turn"));
-        Target target = new TargetCreaturePermanentAmount(3);
-        target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(3);
-        ability.addTarget(target);
+        ability.addTarget(new TargetCreaturePermanentAmount(3, 0, 3));
         this.addAbility(ability);
 
         // −6: You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."
@@ -94,7 +90,7 @@ class AjaniSleeperAgentEffect extends OneShotEffect {
         if (card.isCreature(game) || card.isPlaneswalker(game)) {
             controller.moveCards(card, Zone.HAND, source, game);
         } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getName() + " on the bottom of your library?", source, game)) {
-            controller.putCardsOnBottomOfLibrary(card, game, source, true);
+            controller.putCardsOnBottomOfLibrary(card, game, source);
         }
         return true;
     }

@@ -1,9 +1,11 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.MageObjectReference;
 import mage.abilities.keyword.MenaceAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.SaddledMountWatcher;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -13,6 +15,11 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class SaddleTest extends CardTestPlayerBase {
 
+    /**
+     * Whenever Quilled Charger attacks while saddled, it gets +1/+2 and gains menace until end of turn.
+     * <p>
+     * Saddle 2
+     */
     private static final String charger = "Quilled Charger";
     private static final String bear = "Grizzly Bears";
 
@@ -20,7 +27,7 @@ public class SaddleTest extends CardTestPlayerBase {
         Permanent permanent = getPermanent(name);
         Assert.assertEquals(
                 name + " should " + (saddled ? "" : "not ") + "be saddled",
-                saddled, permanent.isSaddled()
+                saddled, SaddledMountWatcher.hasBeenSaddledThisTurn(new MageObjectReference(permanent.getId(), currentGame), currentGame)
         );
     }
 
@@ -45,29 +52,35 @@ public class SaddleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, charger);
         addCard(Zone.BATTLEFIELD, playerA, bear);
 
-        setChoice(playerA, bear);
+        // turn 1 - saddle and trigger on attack
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
-
+        setChoice(playerA, bear);
         attack(1, playerA, charger, playerB);
+        runCode("on saddle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
+            assertTapped(bear, true);
+            assertTapped(charger, true);
+            assertSaddled(charger, true);
+            assertAbility(playerA, charger, new MenaceAbility(false), true);
+            assertLife(playerB, 20 - 4 - 1);
+        });
 
         setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.END_TURN);
-        execute();
-
-        assertTapped(bear, true);
-        assertTapped(charger, true);
-        assertSaddled(charger, true);
-        assertAbility(playerA, charger, new MenaceAbility(false), true);
-        assertLife(playerB, 20 - 4 - 1);
-
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
+        // turn 2 - saddle ends
         assertSaddled(charger, false);
     }
 
+    /**
+     * Whenever Rambling Possum attacks while saddled, it gains +1/+2 until end of turn. Then you may return any number
+     * of creatures that saddled it this turn to their owner's hand.
+     * <p>
+     * Saddle 1
+     */
     private static final String possum = "Rambling Possum";
     private static final String lion = "Silvercoat Lion";
+    private static final String elf = "Arbor Elf";
 
     @Test
     public void testSaddledThisTurn() {
@@ -75,16 +88,13 @@ public class SaddleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, bear);
         addCard(Zone.BATTLEFIELD, playerA, lion);
 
-        setChoice(playerA, bear);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
-        execute();
+        setChoice(playerA, bear); // to saddle cost
 
         attack(1, playerA, possum, playerB);
-        setChoice(playerA, bear);
+        setChoice(playerA, bear); // to return
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -101,32 +111,29 @@ public class SaddleTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, possum);
         addCard(Zone.BATTLEFIELD, playerA, bear);
         addCard(Zone.BATTLEFIELD, playerA, lion);
+        addCard(Zone.BATTLEFIELD, playerA, elf);
 
-        setChoice(playerA, bear);
+        // turn 1 - saddle x2 and trigger on attack
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Saddle");
-
-        setStrictChooseMode(true);
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
-        execute();
+        setChoice(playerA, bear + "^" + lion);
 
         attack(1, playerA, possum, playerB);
-        setChoice(playerA, lion);
+        setChoice(playerA, elf); // to return (try to choose a wrong creature, so game must not allow to choose it)
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
+        // TODO: test framework must have tools to check targeting (as workaround try to check it by look at test command error)
         try {
             execute();
         } catch (AssertionError e) {
-            Assert.assertEquals(
-                    "Lion can't be targeted",
-                    "Missing CHOICE def for turn 1, step DECLARE_ATTACKERS, PlayerA\n" +
-                            "Object: PermanentCard: Rambling Possum;\n" +
-                            "Target: TargetPermanent: Select creatures that saddled it this turn (selected 0)",
-                    e.getMessage()
-            );
+            if (!e.getMessage().contains("Select creatures that saddled it this turn (selected 0)")) {
+                Assert.fail("Lion can't be targeted, but catch another error:\n" + e.getMessage());
+            }
         }
 
         assertTapped(bear, true);
-        assertTapped(lion, false);
+        assertTapped(lion, true);
+        assertTapped(elf, false);
         assertTapped(possum, true);
         assertSaddled(possum, true);
     }

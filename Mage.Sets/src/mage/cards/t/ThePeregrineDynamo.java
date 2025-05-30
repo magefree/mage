@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyTargetStackAbilityEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +48,7 @@ public final class ThePeregrineDynamo extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {1}, {T}: Copy target activated or triggered ability you control from another legendary source that's not a commander. You may choose new targets for the copy.
-        Ability ability = new SimpleActivatedAbility(new CopyTargetStackAbilityEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
         this.addAbility(ability);

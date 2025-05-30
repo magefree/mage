@@ -18,6 +18,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -35,8 +36,7 @@ public final class Vault101BirthdayParty extends CardImpl {
 
         // I -- Create a 1/1 white Human Soldier creature token and a Food token.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
-                new CreateTokenEffect(new HumanSoldierToken()),
-                new CreateTokenEffect(new FoodToken()).setText("and a Food token"));
+                new CreateTokenEffect(new HumanSoldierToken()).withAdditionalTokens(new FoodToken()));
 
         // II, III -- You may put an Aura or Equipment card from your hand or graveyard onto the battlefield.
         // If an Equipment is put onto the battlefield this way, you may attach it to a creature you control.
@@ -104,7 +104,7 @@ class Vault101BirthdayPartyEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent equipment = game.getPermanent(card.getId());
+        Permanent equipment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (equipment == null || !equipment.hasSubtype(SubType.EQUIPMENT, game)) {
             return true;
         }

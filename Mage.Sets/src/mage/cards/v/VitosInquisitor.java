@@ -36,7 +36,7 @@ public final class VitosInquisitor extends CardImpl {
                 new ManaCostsImpl<>("{B}"));
         ability.addEffect(new GainAbilitySourceEffect(new MenaceAbility(false), Duration.EndOfTurn)
                 .setText("It gains menace until end of turn"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT));
         this.addAbility(ability);
 
     }

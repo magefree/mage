@@ -26,7 +26,7 @@ public final class NemesisMask extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // All creatures able to block equipped creature do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MustBeBlockedByAllAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)));
 
         // Equip {3}

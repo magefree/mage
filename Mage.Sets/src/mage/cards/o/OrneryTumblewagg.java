@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWhileSaddledTriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.DoubleCountersTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.SaddleAbility;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -32,8 +31,7 @@ public final class OrneryTumblewagg extends CardImpl {
 
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

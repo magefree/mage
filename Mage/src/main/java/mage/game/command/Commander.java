@@ -317,6 +317,21 @@ public class Commander extends CommandObjectImpl {
     }
 
     @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return sourceObject.isAllNonbasicLandTypes(game);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        sourceObject.setIsAllNonbasicLandTypes(value);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        sourceObject.setIsAllNonbasicLandTypes(game, value);
+    }
+
+    @Override
     public void removePTCDA() {
     }
 }

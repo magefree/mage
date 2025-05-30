@@ -3,8 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.RiotAbility;
@@ -23,8 +22,6 @@ import java.util.UUID;
  */
 public final class GruulBeastmaster extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public GruulBeastmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.HUMAN, SubType.SHAMAN);
@@ -36,7 +33,7 @@ public final class GruulBeastmaster extends CardImpl {
 
         // Whenever Gruul Beastmaster attacks, another target creature you control gets +X/+0 until end of turn, where X is Gruul Beastmaster's power.
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(
-                xValue, StaticValue.get(0), Duration.EndOfTurn), false);
+                SourcePermanentPowerValue.NOT_NEGATIVE, StaticValue.get(0), Duration.EndOfTurn), false);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }

@@ -3,7 +3,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.abilities.effects.common.UntapAllEffect;
@@ -25,7 +25,7 @@ public final class NaturesWill extends CardImpl {
         // Whenever one or more creatures you control deal combat damage to a player, tap all lands that player controls and untap all lands you control.
         Effect tapAllEffect = new TapAllTargetPlayerControlsEffect(StaticFilters.FILTER_LANDS);
         tapAllEffect.setText("tap all lands that player controls");
-        Ability ability = new DealCombatDamageControlledTriggeredAbility(tapAllEffect, SetTargetPointer.PLAYER);
+        Ability ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(tapAllEffect, SetTargetPointer.PLAYER);
         ability.addEffect(new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS).concatBy("and"));
         addAbility(ability);
     }

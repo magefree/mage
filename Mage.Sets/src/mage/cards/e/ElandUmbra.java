@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,10 +36,10 @@ public final class ElandUmbra extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +0/+4.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 4, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, 4, Duration.WhileOnBattlefield)));
 
-        // Totem armor
-        this.addAbility(new TotemArmorAbility());
+        // Umbra armor
+        this.addAbility(new UmbraArmorAbility());
     }
 
     private ElandUmbra(final ElandUmbra card) {

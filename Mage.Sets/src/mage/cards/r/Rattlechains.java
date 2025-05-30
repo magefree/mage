@@ -53,7 +53,7 @@ public final class Rattlechains extends CardImpl {
         this.addAbility(ability);
 
         // You may cast Spirit spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filterCard, false)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filterCard, false)));
     }
 
     private Rattlechains(final Rattlechains card) {

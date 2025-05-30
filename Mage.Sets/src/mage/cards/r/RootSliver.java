@@ -35,7 +35,7 @@ public final class RootSliver extends CardImpl {
         // Root Sliver can't be countered.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
         // Sliver spells can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RootSliverEffect()));
+        this.addAbility(new SimpleStaticAbility(new RootSliverEffect()));
 
     }
 

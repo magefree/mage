@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,7 +51,7 @@ public final class RiseOfTheHobgoblins extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RiseOfTheHobgoblinsEffect()));
 
         // {RW}: Red creatures and white creatures you control gain first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter), new ManaCostsImpl<>("{R/W}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter), new ManaCostsImpl<>("{R/W}")));
 
     }
 
@@ -87,7 +86,7 @@ class RiseOfTheHobgoblinsEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         ManaCosts<ManaCost> cost = new ManaCostsImpl<>("{X}");
         if (you != null && you.chooseUse(Outcome.Neutral, "Do you want to to pay {X}?", source, game)) {
-            int costX = you.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+            int costX = you.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay to add counters)", game, source, true);
             cost.add(new GenericManaCost(costX));
             if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                 Token token = new GoblinSoldierToken();

@@ -28,7 +28,7 @@ public final class GruulLocket extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {R/G}{R/G}{R/G}{R/G}, {T}, Sacrifice Gruul Locket: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{R/G}{R/G}{R/G}{R/G}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{R/G}{R/G}{R/G}{R/G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -1,18 +1,13 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,7 +22,7 @@ public final class BlinkmothInfusion extends CardImpl {
         this.addAbility(new AffinityForArtifactsAbility());
 
         // Untap all artifacts.
-        this.getSpellAbility().addEffect(new UntapAllArtifactsEffect());
+        this.getSpellAbility().addEffect(new UntapAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACTS));
     }
 
     private BlinkmothInfusion(final BlinkmothInfusion card) {
@@ -38,35 +33,4 @@ public final class BlinkmothInfusion extends CardImpl {
     public BlinkmothInfusion copy() {
         return new BlinkmothInfusion(this);
     }
-}
-
-class UntapAllArtifactsEffect extends OneShotEffect {
-    
-    public UntapAllArtifactsEffect() {
-        super(Outcome.Untap);
-        staticText = "Untap all artifacts";
-    }
-
-    private UntapAllArtifactsEffect(final UntapAllArtifactsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        for (Permanent artifact: game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), game)) {
-            artifact.untap(game);
-        }
-        return true;
-    }
-
-    @Override
-    public UntapAllArtifactsEffect copy() {
-        return new UntapAllArtifactsEffect(this);
-    }
-
 }

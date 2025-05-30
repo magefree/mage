@@ -39,7 +39,7 @@ public final class GollumPatientPlotter extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{B}")
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

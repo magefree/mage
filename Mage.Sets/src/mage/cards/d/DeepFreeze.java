@@ -40,7 +40,7 @@ public final class DeepFreeze extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has base power and toughness 0/4, has defender, loses all other abilities, and is a blue Wall in addition to its other colors and types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BecomesCreatureAttachedEffect(new DeepFreezeToken(),
                         "Enchanted creature has base power and toughness 0/4, has defender, loses all other abilities, and is a blue Wall in addition to its other colors and types",
                         Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES)

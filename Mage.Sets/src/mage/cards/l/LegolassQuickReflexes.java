@@ -2,8 +2,7 @@ package mage.cards.l;
 
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -24,8 +23,6 @@ import java.util.UUID;
  */
 public final class LegolassQuickReflexes extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public LegolassQuickReflexes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
@@ -43,7 +40,7 @@ public final class LegolassQuickReflexes extends CardImpl {
         ).setText(", reach"));
 
         TriggeredAbility trigger = new BecomesTappedSourceTriggeredAbility(
-                new DamageTargetEffect(xValue)
+                new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                         .setText("it deals damage equal to its power to up to one target creature"),
                 false
         );

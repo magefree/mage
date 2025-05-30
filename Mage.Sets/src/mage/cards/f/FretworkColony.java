@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class FretworkColony extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // At the beginning of your upkeep, put a +1/+1 counter on Fretwork Colony and you lose 1 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         Effect effect = new LoseLifeSourceControllerEffect(1);
         ability.addEffect(effect.concatBy("and"));
         this.addAbility(ability);

@@ -33,7 +33,7 @@ public final class BouncingBeebles extends CardImpl {
                 new CantBeBlockedSourceEffect(),
                 new DefendingPlayerControlsSourceAttackingCondition(new FilterArtifactPermanent()));
         effect.setText("{this} can't be blocked as long as defending player controls an artifact");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private BouncingBeebles(final BouncingBeebles card) {

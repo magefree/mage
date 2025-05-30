@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -28,7 +28,7 @@ public final class MinionReflector extends CardImpl {
     public MinionReflector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
-        // Whenever a nontoken creature enters the battlefield under your control, you may pay {2}. If you do, create a token that's a copy of that creature. That token has haste and "At the beginning of the end step, sacrifice this permanent."
+        // Whenever a nontoken creature you control enters, you may pay {2}. If you do, create a token that's a copy of that creature. That token has haste and "At the beginning of the end step, sacrifice this permanent."
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(
@@ -74,7 +74,7 @@ class MinionReflectorEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
             for (Permanent addedToken : effect.getAddedPermanents()) {
-                ContinuousEffect continuousEffect = new GainAbilityTargetEffect(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false), Duration.Custom);
+                ContinuousEffect continuousEffect = new GainAbilityTargetEffect(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SacrificeSourceEffect(), false), Duration.Custom);
                 continuousEffect.setTargetPointer(new FixedTarget(addedToken.getId()));
                 game.addEffect(continuousEffect, source);
             }

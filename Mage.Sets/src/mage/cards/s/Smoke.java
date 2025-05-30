@@ -24,7 +24,7 @@ public final class Smoke extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{R}");
 
         // Players can't untap more than one creature during their untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SmokeEffect()));
+        this.addAbility(new SimpleStaticAbility(new SmokeEffect()));
     }
 
     private Smoke(final Smoke card) {

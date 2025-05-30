@@ -25,7 +25,7 @@ public final class MarchOfTheMachines extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MarchOfTheMachinesEffect()));
+        this.addAbility(new SimpleStaticAbility(new MarchOfTheMachinesEffect()));
     }
 
     private MarchOfTheMachines(final MarchOfTheMachines card) {
@@ -50,6 +50,8 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
         staticText = "Each noncreature artifact is an artifact creature with power and toughness each equal to its mana value";
         dependendToTypes.add(DependencyType.ArtifactAddingRemoving);
+        
+        dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private MarchOfTheMachinesEffect(final MarchOfTheMachinesEffect effect) {
@@ -67,7 +69,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
                     affectedObjectList.clear();
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                         if (permanent != null) {
                             affectedObjectList.add(new MageObjectReference(permanent, game));
                             permanent.addCardType(game, CardType.CREATURE);

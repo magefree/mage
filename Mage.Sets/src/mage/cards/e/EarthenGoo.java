@@ -44,7 +44,6 @@ public final class EarthenGoo extends CardImpl {
         // Earthen Goo gets +1/+1 for each age counter on it.
         DynamicValue value = new CountersSourceCount(CounterType.AGE);
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)
                         .setText("{this} gets +1/+1 for each age counter on it")
         ));

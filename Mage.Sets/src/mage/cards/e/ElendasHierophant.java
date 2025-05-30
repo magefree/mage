@@ -3,8 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -22,8 +21,6 @@ import java.util.UUID;
  */
 public final class ElendasHierophant extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public ElendasHierophant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
@@ -39,7 +36,7 @@ public final class ElendasHierophant extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // When Elenda's Hierophant dies, create X 1/1 white Vampire creature tokens with lifelink, where X is its power.
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken(), xValue)
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken(), SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("create X 1/1 white Vampire creature tokens with lifelink, where X is its power")));
     }
 

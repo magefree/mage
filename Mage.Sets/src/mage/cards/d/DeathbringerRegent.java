@@ -45,7 +45,7 @@ public final class DeathbringerRegent extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter), false),
                 new DeathbringerRegentCondition(),
-                "When {this} enters the battlefield, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures."),
+                "When {this} enters, if you cast it from your hand and there are five or more other creatures on the battlefield, destroy all other creatures."),
                 new CastFromHandWatcher());
     }
 
@@ -64,6 +64,6 @@ class DeathbringerRegentCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return CastFromHandSourcePermanentCondition.instance.apply(game, source)
-                && game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game).size() >= 6;
+                && game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game).size() >= 6;
     }
 }

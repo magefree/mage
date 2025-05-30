@@ -41,7 +41,7 @@ public final class ShimianNightStalker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {B}, {T}: All damage that would be dealt to you this turn by target attacking creature is dealt to Shimian Night Stalker instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShimianNightStalkerRedirectDamageEffect(), new ManaCostsImpl<>("{B}"));
+        Ability ability = new SimpleActivatedAbility(new ShimianNightStalkerRedirectDamageEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
@@ -77,7 +77,7 @@ class ShimianNightStalkerRedirectDamageEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (event.getSourceId() != null && event.getTargetId() != null) {

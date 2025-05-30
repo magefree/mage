@@ -47,8 +47,8 @@ public final class AlandraSkyDreamer extends CardImpl {
         // Whenever you draw your fifth card each turn, Alandra, Sky Dreamer and Drakes you control each get +X/+X until end of turn, where X is the number of cards in your hand.
         DrawNthCardTriggeredAbility drawNthCardTriggeredAbility = new DrawNthCardTriggeredAbility(
                 new BoostSourceEffect(
-                        CardsInControllerHandCount.instance,
-                        CardsInControllerHandCount.instance,
+                        CardsInControllerHandCount.ANY,
+                        CardsInControllerHandCount.ANY,
                         Duration.EndOfTurn
                 ).setText("{this}"),
                 false,
@@ -56,8 +56,8 @@ public final class AlandraSkyDreamer extends CardImpl {
         );
         drawNthCardTriggeredAbility.addEffect(
                 new BoostControlledEffect(
-                        CardsInControllerHandCount.instance,
-                        CardsInControllerHandCount.instance,
+                        CardsInControllerHandCount.ANY,
+                        CardsInControllerHandCount.ANY,
                         Duration.EndOfTurn,
                         filter,
                         false

@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -17,12 +17,10 @@ import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -50,9 +48,9 @@ public final class CabalTherapist extends CardImpl {
         );
         ability.addEffect(new CabalTherapistDiscardEffect());
         ability.addTarget(new TargetPlayer());
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
-                new DoWhenCostPaid(ability, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-                ), "Sacrifice a creature?"), TargetController.YOU, false
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
+                new DoWhenCostPaid(ability, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE
+                ), "Sacrifice a creature?")
         ));
     }
 

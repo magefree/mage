@@ -23,7 +23,7 @@ public final class CanyonJerboa extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Landfall — Whenever a land enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
+        // Landfall — Whenever a land you control enters, creatures you control get +1/+1 until end of turn.
         this.addAbility(new LandfallAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn)));
     }
 

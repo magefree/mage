@@ -1,24 +1,23 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SurgeOfSalvation extends CardImpl {
@@ -29,7 +28,11 @@ public final class SurgeOfSalvation extends CardImpl {
         // You and permanents you control gain hexproof until end of turn. Prevent all damage that black and/or red sources would deal to creatures you control this turn.
         this.getSpellAbility().addEffect(new GainAbilityControllerEffect(
                 HexproofAbility.getInstance(), Duration.EndOfTurn
-        ).setText("you"));this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HexproofAbility.getInstance(),Duration.EndOfTurn).concatBy("and"));this.getSpellAbility().addEffect(new SurgeOfSalvationEffect());
+        ).setText("you"));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
+                HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENTS
+        ).concatBy("and"));
+        this.getSpellAbility().addEffect(new SurgeOfSalvationEffect());
     }
 
     private SurgeOfSalvation(final SurgeOfSalvation card) {
@@ -45,7 +48,7 @@ public final class SurgeOfSalvation extends CardImpl {
 class SurgeOfSalvationEffect extends PreventionEffectImpl {
 
     SurgeOfSalvationEffect() {
-        super(Duration.EndOfTurn,Integer.MAX_VALUE,false);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage that black and/or red sources would deal to creatures you control this turn";
     }
 
@@ -60,16 +63,16 @@ class SurgeOfSalvationEffect extends PreventionEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType()== GameEvent.EventType.DAMAGE_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if(! super.applies(event, source, game)){
+        if (!super.applies(event, source, game)) {
             return false;
         }
-        Permanent permanent=game.getPermanent(event.getTargetId());
-        MageObject sourceObject=game.getObject(event.getSourceId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        MageObject sourceObject = game.getObject(event.getSourceId());
         return permanent != null
                 && sourceObject != null
                 && permanent.isCreature(game)

@@ -27,7 +27,7 @@ public final class Duskworker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new RegenerateSourceEffect(), false));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
     private Duskworker(final Duskworker card) {

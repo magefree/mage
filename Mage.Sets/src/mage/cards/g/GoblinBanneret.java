@@ -32,7 +32,6 @@ public final class GoblinBanneret extends CardImpl {
 
         // {1}{R}: Goblin Banneret gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{R}")
         ));

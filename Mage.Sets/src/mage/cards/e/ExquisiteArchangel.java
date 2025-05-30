@@ -37,7 +37,7 @@ public final class ExquisiteArchangel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // If you would lose the game, instead exile Exquisite Archangel and your life total becomes equal to your starting life total.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExquisiteArchangelEffect()));
+        this.addAbility(new SimpleStaticAbility(new ExquisiteArchangelEffect()));
 
     }
 

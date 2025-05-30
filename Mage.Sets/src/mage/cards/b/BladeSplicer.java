@@ -38,7 +38,7 @@ public final class BladeSplicer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PhyrexianGolemToken())));
 
         // Golem creatures you control have first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
     private BladeSplicer(final BladeSplicer card) {

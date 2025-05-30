@@ -1,7 +1,5 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -14,13 +12,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,18 +27,12 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class ConfiscationCoup extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
-
-    static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ARTIFACT.getPredicate()));
-    }
-
     public ConfiscationCoup(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Choose target creature or artifact. You get {E}{E}{E}{E}, then you may pay an amount of {E} equal to that permanent's converted mana cost. If you do, gain control of it.
         this.getSpellAbility().addEffect(new ConfiscationCoupEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
     }
 
     private ConfiscationCoup(final ConfiscationCoup card) {

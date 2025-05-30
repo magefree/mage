@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredSourceAbility;
-import mage.abilities.dynamicvalue.common.GreatestToughnessAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -32,9 +32,10 @@ public final class LastMarchOfTheEnts extends CardImpl {
 
         // Draw cards equal to the greatest toughness among creatures you control, then put any number of creature cards from your hand onto the battlefield.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
-                GreatestToughnessAmongControlledCreaturesValue.instance
+                GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES
         ).setText("draw cards equal to the greatest toughness among creatures you control"));
         this.getSpellAbility().addEffect(new LastMarchOfTheEntsEffect());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES.getHint());
     }
 
     private LastMarchOfTheEnts(final LastMarchOfTheEnts card) {

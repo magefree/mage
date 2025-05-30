@@ -39,7 +39,7 @@ public final class SkeletalGrimace extends CardImpl {
 
         // Enchanted creature gets +1/+1 and has "{B}: Regenerate this creature."
         Ability staticAbility = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
+        Ability gainedAbility = new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
         staticAbility.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)
                 .setText("and has \"{B}: Regenerate this creature.\""));
         this.addAbility(staticAbility);

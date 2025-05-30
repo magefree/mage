@@ -56,8 +56,8 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 4, 4);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 4, 4);
     }
 
     @Test
@@ -77,9 +77,9 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        //assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2); // no boost (permanent have haste)
-        assertAbility(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), HasteAbility.getInstance(), true);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        //assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestName(), 2, 2); // no boost (permanent have haste)
+        assertAbility(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), HasteAbility.getInstance(), true);
     }
 
     @Test

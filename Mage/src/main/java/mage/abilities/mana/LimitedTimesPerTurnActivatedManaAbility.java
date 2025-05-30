@@ -1,8 +1,10 @@
 
 package mage.abilities.mana;
 
+import mage.MageIdentifier;
 import mage.Mana;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.mana.AddManaFromColorChoicesEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.mana.ManaEffect;
@@ -12,6 +14,7 @@ import mage.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author LevelX2, Susucr
@@ -35,6 +38,14 @@ public class LimitedTimesPerTurnActivatedManaAbility extends ActivatedManaAbilit
                 new Mana(0, 0, 0, 0, 0, 0, effect.getAmount(), 0));
     }
 
+    public LimitedTimesPerTurnActivatedManaAbility(AddManaFromColorChoicesEffect effect, Cost cost) {
+        this(effect, cost, 1);
+    }
+
+    public LimitedTimesPerTurnActivatedManaAbility(AddManaFromColorChoicesEffect effect, Cost cost, int maxActivationPerTurn) {
+        this(Zone.BATTLEFIELD, effect, cost, maxActivationPerTurn, effect.getNetMana());
+    }
+
     public LimitedTimesPerTurnActivatedManaAbility(Zone zone, ManaEffect effect, Cost cost, int maxActivationPerTurn, Mana mana) {
         this(zone, effect, cost, maxActivationPerTurn, Arrays.asList(mana));
     }
@@ -50,9 +61,9 @@ public class LimitedTimesPerTurnActivatedManaAbility extends ActivatedManaAbilit
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         if (canActivate(this.controllerId, game).canActivate()) {
-            return super.activate(game, noMana);
+            return super.activate(game, allowedIdentifiers, noMana);
         }
         return false;
     }

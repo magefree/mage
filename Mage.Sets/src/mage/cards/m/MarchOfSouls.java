@@ -66,7 +66,7 @@ class MarchOfSoulsEffect extends OneShotEffect {
                 playersWithCreatures.put(controllerId, playersWithCreatures.getOrDefault(controllerId, 0) + 1);
             }
         }
-        game.getState().processAction(game);
+        game.processAction();
         SpiritWhiteToken token = new SpiritWhiteToken();
         for (Map.Entry<UUID, Integer> destroyedCreaturePerPlayer : playersWithCreatures.entrySet()) {
             token.putOntoBattlefield(destroyedCreaturePerPlayer.getValue(), game, source, destroyedCreaturePerPlayer.getKey());

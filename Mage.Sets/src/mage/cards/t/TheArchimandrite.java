@@ -3,15 +3,15 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -26,7 +26,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -37,7 +36,7 @@ import java.util.UUID;
 public final class TheArchimandrite extends CardImpl {
 
     private static final DynamicValue xValue = new AdditiveDynamicValue(
-            CardsInControllerHandCount.instance, StaticValue.get(-4)
+            CardsInControllerHandCount.ANY, StaticValue.get(-4)
     );
     private static final FilterPermanent filter = new FilterControlledPermanent();
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
@@ -68,8 +67,7 @@ public final class TheArchimandrite extends CardImpl {
         // At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus 4.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new GainLifeEffect(xValue)
-                        .setText("you gain X life, where X is the number of cards in your hand minus 4"),
-                TargetController.YOU, false
+                        .setText("you gain X life, where X is the number of cards in your hand minus 4")
         ));
 
         // Whenever you gain life, each Advisor, Artificer, and Monk you control gains vigilance and gets +X/+0 until end of turn, where X is the amount of life you gained.
@@ -77,7 +75,7 @@ public final class TheArchimandrite extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.EndOfTurn, filter
         ).setText("each Advisor, Artificer, and Monk you control gains vigilance"));
         ability.addEffect(new BoostControlledEffect(
-                TheArchimandriteValue.instance, StaticValue.get(0), Duration.EndOfTurn,
+                SavedGainedLifeValue.MANY, StaticValue.get(0), Duration.EndOfTurn,
                 filter2, false
         ).setText("and gets +X/+0 until end of turn, where X is the amount of life you gained"));
         this.addAbility(ability);
@@ -96,29 +94,5 @@ public final class TheArchimandrite extends CardImpl {
     @Override
     public TheArchimandrite copy() {
         return new TheArchimandrite(this);
-    }
-}
-
-enum TheArchimandriteValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return (Integer) effect.getValue("gainedLife");
-    }
-
-    @Override
-    public TheArchimandriteValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return "X";
     }
 }

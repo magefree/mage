@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.constants.AbilityType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.game.Game;
 import mage.util.CardUtil;
 import mage.watchers.common.ManaSpentToCastWatcher;
@@ -19,12 +20,23 @@ public enum ManaWasSpentCondition implements Condition {
     BLUE(ColoredManaSymbol.U),
     BLACK(ColoredManaSymbol.B),
     RED(ColoredManaSymbol.R),
-    GREEN(ColoredManaSymbol.G);
+    GREEN(ColoredManaSymbol.G),
+    COLORLESS(ManaType.COLORLESS);
 
-    protected ColoredManaSymbol coloredManaSymbol;
+    protected final ColoredManaSymbol coloredManaSymbol;
+    protected final ManaType manaType;
 
     ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol) {
+        this(coloredManaSymbol, null);
+    }
+
+    ManaWasSpentCondition(ManaType manaType) {
+        this(null, manaType);
+    }
+
+    ManaWasSpentCondition(ColoredManaSymbol coloredManaSymbol, ManaType manaType) {
         this.coloredManaSymbol = coloredManaSymbol;
+        this.manaType = manaType;
     }
 
     @Override
@@ -36,7 +48,11 @@ public enum ManaWasSpentCondition implements Condition {
         if (watcher != null) {
             Mana payment = watcher.getManaPayment(CardUtil.getSourceStackMomentReference(game, source));
             if (payment != null) {
-                return payment.getColor(coloredManaSymbol) > 0;
+                if (coloredManaSymbol != null) {
+                    return payment.getColor(coloredManaSymbol) > 0;
+                } else if (manaType != null) {
+                    return payment.get(manaType) > 0;
+                }
             }
         }
         return false;
@@ -44,7 +60,12 @@ public enum ManaWasSpentCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{" + coloredManaSymbol.toString() + "} was spent to cast it";
+        if (coloredManaSymbol != null) {
+            return "{" + coloredManaSymbol + "} was spent to cast it";
+        } else if (manaType != null) {
+            return "{" + manaType + "} was spent to cast it";
+        }
+        return "";
     }
 
     @Override

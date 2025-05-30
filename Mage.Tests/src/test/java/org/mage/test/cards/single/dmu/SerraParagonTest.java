@@ -2,12 +2,14 @@ package org.mage.test.cards.single.dmu;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author TheElk801
+ * @author TheElk801, Susucr
  */
 public class SerraParagonTest extends CardTestPlayerBase {
 
@@ -92,5 +94,63 @@ public class SerraParagonTest extends CardTestPlayerBase {
                 Assert.fail("Should have had error about not being able to cast spell, but got:\n" + e.getMessage());
             }
         }
+    }
+
+    /**
+     * bug: Chromatic Star was not triggering the gained trigger.
+     */
+    @Test
+    public void testChromaticStar() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, paragon);
+        addCard(Zone.GRAVEYARD, playerA, "Chromatic Star");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chromatic Star", true);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}, Sacrifice");
+        setChoice(playerA, "Red"); // mana added with Star
+        setChoice(playerA, "When this permanent is put into a graveyard from the battlefield, exile it and you gain 2 life."); // stack triggers
+        // Last trigger is: "When {this} is put into a graveyard from the battlefield, draw a card." from Chromatic Star
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertLife(playerA, 20 + 2);
+        assertExileCount(playerA, "Chromatic Star", 1);
+    }
+
+    private static void checkEnergyCount(String message, Player player, int expected) {
+        Assert.assertEquals(message, expected, player.getCountersCount(CounterType.ENERGY));
+    }
+
+    @Test
+    public void testAetherworksMarvel() {
+        setStrictChooseMode(true);
+
+        // Whenever a permanent you control is put into a graveyard from the battlefield, you get {E}
+        addCard(Zone.BATTLEFIELD, playerA, "Aetherworks Marvel");
+        addCard(Zone.BATTLEFIELD, playerA, paragon);
+        addCard(Zone.GRAVEYARD, playerA, "Chromatic Star");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerA, "Creeping Corrosion"); // Destroy all artifacts
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chromatic Star", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Creeping Corrosion", true);
+        setChoice(playerA, "When this permanent is put into a graveyard from the battlefield, exile it and you gain 2 life."); // stack triggers
+        setChoice(playerA, "Whenever a permanent you control is put into a graveyard from the battlefield, you get {E}", 2); // stack triggers
+        // Last trigger is: "When {this} is put into a graveyard from the battlefield, draw a card." from Chromatic Star
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        runCode("energy counter is 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 2));
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, 1);
+        assertExileCount(playerA, "Chromatic Star", 1);
+        assertGraveyardCount(playerA, 2);
+        assertLife(playerA, 20 + 2);
     }
 }

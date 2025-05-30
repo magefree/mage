@@ -13,11 +13,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -37,14 +35,15 @@ public final class MarshalsAnthem extends CardImpl {
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)
+                new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)
         ));
 
         // When Marshal's Anthem enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times Marshal's Anthem was kicked.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect().setText(rule), false
         );
-        ability.setTargetAdjuster(MarshalsAnthemAdjuster.instance);
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(MultikickerCount.instance));
         this.addAbility(ability);
     }
 
@@ -55,19 +54,5 @@ public final class MarshalsAnthem extends CardImpl {
     @Override
     public MarshalsAnthem copy() {
         return new MarshalsAnthem(this);
-    }
-}
-
-enum MarshalsAnthemAdjuster implements TargetAdjuster {
-    instance;
-    private static final FilterCard filter = new FilterCreatureCard("creature card in your graveyard");
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int numbTargets = MultikickerCount.instance.calculate(game, ability, null);
-        if (numbTargets > 0) {
-            ability.addTarget(new TargetCardInYourGraveyard(0, numbTargets, filter));
-        }
     }
 }

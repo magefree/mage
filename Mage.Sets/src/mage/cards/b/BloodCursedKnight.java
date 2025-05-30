@@ -34,7 +34,7 @@ public final class BloodCursedKnight extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you control an enchantment, Blood-Cursed Knight gets +1/+1 and has lifelink.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(new FilterControlledEnchantmentPermanent()), rule1));

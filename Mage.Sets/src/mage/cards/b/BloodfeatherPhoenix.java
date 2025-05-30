@@ -11,6 +11,7 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -112,12 +113,12 @@ class BloodfeatherPhoenixEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (player == null || sourceObject == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (controller == null || card == null) {
             return false;
         }
-        player.moveCards(game.getCard(sourceObject.getId()), Zone.BATTLEFIELD, source, game);
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         if (game.getPermanent(source.getSourceId()) != null) {
             game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
                     .setTargetPointer(new FixedTarget(source.getSourceId(), game)), source);

@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -17,8 +16,9 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GiveTake extends SplitCard {
@@ -65,20 +65,18 @@ class TakeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (creature != null) {
-            int numberCounters = creature.getCounters(game).getCount(CounterType.P1P1);
-            if (numberCounters > 0) {
-                creature.removeCounters(CounterType.P1P1.getName(), numberCounters, source, game);
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    controller.drawCards(numberCounters, source, game);
-                } else {
-                    throw new UnsupportedOperationException("Controller missing");
-                }
-            }
-            return true;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (creature == null) {
+            return false;
+        }
+        int countersRemoved = creature.removeAllCounters(CounterType.P1P1.getName(), source, game);
+        if (countersRemoved > 0) {
+            controller.drawCards(countersRemoved, source, game);
+        }
+        return true;
     }
 }

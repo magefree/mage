@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -34,9 +33,8 @@ public final class VoidAttendant extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {1}{G}, Put a card an opponent owns from exile into that player's graveyard: Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
-        Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{G}"));
+        Effect effect = new CreateTokenEffect(new EldraziScionToken()).withTextOptions(true);
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new ExileOpponentsCardFromExileToGraveyardCost(true));
         this.addAbility(ability);
 

@@ -70,7 +70,7 @@ class BrainGorgersCounterSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null) {
-            SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+            SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 cost.clearPaid();
                 Player player = game.getPlayer(playerId);

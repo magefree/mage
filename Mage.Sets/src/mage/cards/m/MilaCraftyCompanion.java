@@ -26,6 +26,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -69,7 +70,7 @@ public final class MilaCraftyCompanion extends ModalDoubleFacedCard {
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getRightHalfCard().addAbility(ability);
 
-        // −7: You get an emblem with "Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target."
+        // −7: You get an emblem with "Whenever a creature you control enters, it deals damage equal to its power to any target."
         this.getRightHalfCard().addAbility(new LoyaltyAbility(
                 new GetEmblemEffect(new LukkaWaywardBonderEmblem()), -7
         ));
@@ -185,7 +186,7 @@ class LukkaWaywardBonderReturnEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

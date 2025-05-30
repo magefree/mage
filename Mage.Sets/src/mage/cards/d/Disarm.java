@@ -67,7 +67,7 @@ class DisarmEffect extends OneShotEffect {
             equipmentFilter.add(new AttachedToPredicate(creatureFilter));
             equipmentFilter.add(SubType.EQUIPMENT.getPredicate());
 
-            for (Permanent equipment : game.getBattlefield().getAllActivePermanents(equipmentFilter, game)) {
+            for (Permanent equipment : game.getBattlefield().getActivePermanents(equipmentFilter, source.getControllerId(), source, game)) {
                 creature.removeAttachment(equipment.getId(), source, game);
             }
             return true;

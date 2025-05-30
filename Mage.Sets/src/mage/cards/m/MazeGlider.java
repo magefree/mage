@@ -40,7 +40,7 @@ public final class MazeGlider extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Multicolored creatures you control have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
     }
 

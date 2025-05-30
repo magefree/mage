@@ -24,7 +24,7 @@ public final class WeaponizeTheMonsters extends CardImpl {
 
         // {2}, Sacrifice a creature: Weaponize the Monsters deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

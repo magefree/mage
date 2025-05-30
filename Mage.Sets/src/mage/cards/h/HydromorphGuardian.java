@@ -38,7 +38,7 @@ public final class HydromorphGuardian extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, Sacrifice Hydromorph Guardian: Counter target spell that targets one or more creatures you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

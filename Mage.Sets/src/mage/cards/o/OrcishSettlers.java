@@ -1,8 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,13 +11,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
+import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +38,7 @@ public final class OrcishSettlers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{X}{R}, {tap}, Sacrifice Orcish Settlers: Destroy X target lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrcishSettlersEffect(), new ManaCostsImpl<>("{X}{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(new OrcishSettlersEffect(), new ManaCostsImpl<>("{X}{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -70,7 +72,7 @@ class OrcishSettlersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
+        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (amount == 0) {
             return false;
         }

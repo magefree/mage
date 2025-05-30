@@ -48,7 +48,7 @@ public final class WhirlerRogue extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 
         // Tap two untapped artifacts you control: Target creature can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

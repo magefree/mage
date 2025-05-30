@@ -42,12 +42,12 @@ public class AllosaurusShepherd extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility());
 
         //Green spells you control can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CantBeCounteredControlledEffect(greenSpellsFilter, null, Duration.WhileOnBattlefield)));
 
         //4GG: Until end of turn, each Elf creature you control has base power and toughness 5/5 
         // and becomes a Dinosaur in addition to its other creature types.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new SetBasePowerToughnessAllEffect(5, 5, Duration.EndOfTurn, elvesFilter)
                         .setText("Until end of turn, each Elf creature you control has base power and toughness 5/5"),
                 new ManaCostsImpl<>("{4}{G}{G}"));

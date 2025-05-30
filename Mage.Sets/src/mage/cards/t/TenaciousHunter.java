@@ -39,7 +39,7 @@ public final class TenaciousHunter extends CardImpl {
         this.toughness = new MageInt(4);
 
         // As long as a creature has a -1/-1 counter on it, Tenacious Hunter has vigilance and deathtouch.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()),
                         new PermanentsOnTheBattlefieldCondition(filter, false),
                         "As long as a creature has a -1/-1 counter on it, {this} has vigilance"));

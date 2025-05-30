@@ -1,6 +1,6 @@
 package mage.cards.r;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class Resculpt extends CardImpl {
 
         // Exile target artifact or creature. Its controller creates a 4/4 blue and red Elemental creature token.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new Elemental44Token()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new Elemental44Token()));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
     }
 

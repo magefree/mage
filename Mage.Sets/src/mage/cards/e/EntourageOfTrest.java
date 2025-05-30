@@ -34,7 +34,7 @@ public final class EntourageOfTrest extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Entourage of Trest can block an additional creature each combat as long as you're the monarch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new CanBlockAdditionalCreatureEffect(1), MonarchIsSourceControllerCondition.instance,
                 "{this} can block an additional creature each combat as long as you're the monarch")));
     }

@@ -37,7 +37,7 @@ public final class DetainmentSpell extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature's activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantActivateAbilitiesAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantActivateAbilitiesAttachedEffect()));
 
         // {1}{W}: Attach Detainment Spell to target creature.
         ability = new SimpleActivatedAbility(new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature"), new ManaCostsImpl<>("{1}{W}"));

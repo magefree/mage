@@ -1,8 +1,9 @@
 package mage.game.command.emblems;
 
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
@@ -15,7 +16,7 @@ public class GarrukUnleashedEmblem extends Emblem {
         super("Emblem Garruk");
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), false)
                 .setText("search your library for a creature card, put it onto the battlefield, then shuffle");
-        this.getAbilities().add(new BeginningOfYourEndStepTriggeredAbility(Zone.COMMAND, effect, true));
+        this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, TargetController.YOU, effect, true, null));
     }
 
     private GarrukUnleashedEmblem(final GarrukUnleashedEmblem card) {

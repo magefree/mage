@@ -29,7 +29,7 @@ public final class TangleweaveArmor extends CardImpl {
 
         // Equipped creature gets +X/+X, where X is the greatest mana value among your commanders
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new BoostEquippedEffect(CommanderGreatestManaValue.instance, CommanderGreatestManaValue.instance)
+                new BoostEquippedEffect(CommanderGreatestManaValue.instance, CommanderGreatestManaValue.instance)
         ));
 
         // Equip {4}

@@ -40,7 +40,7 @@ public final class TownGossipmonger extends CardImpl {
 
         // {T}, Tap an untapped creature you control: Transform Town Gossipmonger.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TransformSourceEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
         this.addAbility(ability);
     }

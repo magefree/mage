@@ -41,13 +41,13 @@ public final class ShivsEmbrace extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +2/+2 and has flying.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);
         this.addAbility(ability);
         // {R}: Enchanted creature gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
 
     }
 

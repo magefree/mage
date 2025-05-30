@@ -1,15 +1,14 @@
 package mage.cards.t;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.SacrificeAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -20,7 +19,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -35,6 +33,9 @@ public final class TheApprenticesFolly extends CardImpl {
         filter.add(TokenPredicate.FALSE);
         filter.add(TheApprenticesFollyPredicate.instance);
     }
+
+    private static final FilterPermanent filterReflection =
+            new FilterPermanent(SubType.REFLECTION, "Reflections");
 
     public TheApprenticesFolly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{R}");
@@ -56,9 +57,7 @@ public final class TheApprenticesFolly extends CardImpl {
         );
 
         // III -- Sacrifice all Reflections you control.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
-                new TheApprenticesFollySacrificeAllEffect()
-        );
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new SacrificeAllControllerEffect(filterReflection));
 
         this.addAbility(sagaAbility);
     }
@@ -89,35 +88,4 @@ enum TheApprenticesFollyPredicate implements ObjectSourcePlayerPredicate<Permane
         // This works due to the non-token clause on the target. There should be no controlled token with that name.
         return game.getBattlefield().count(filter, input.getPlayerId(), input.getSource(), game) == 0;
     }
-}
-
-class TheApprenticesFollySacrificeAllEffect extends OneShotEffect {
-
-    private static final FilterControlledPermanent filterReflection =
-            new FilterControlledPermanent(SubType.REFLECTION, "Reflections you control");
-
-    TheApprenticesFollySacrificeAllEffect() {
-        super(Outcome.Sacrifice);
-        staticText = "sacrifice all Reflections you control";
-    }
-
-    private TheApprenticesFollySacrificeAllEffect(final TheApprenticesFollySacrificeAllEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TheApprenticesFollySacrificeAllEffect copy() {
-        return new TheApprenticesFollySacrificeAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield()
-                .getAllActivePermanents(filterReflection, source.getControllerId(), game);
-        for (Permanent permanent : permanents) {
-            permanent.sacrifice(source, game);
-        }
-        return true;
-    }
-
 }

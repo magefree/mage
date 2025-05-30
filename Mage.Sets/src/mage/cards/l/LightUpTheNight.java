@@ -68,8 +68,7 @@ class LightUpTheNightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // Normal cast + Flashback cast
-        int damage = source.getManaCostsToPay().getX() + GetXValue.instance.calculate(game, source, this);
+        int damage = GetXValue.instance.calculate(game, source, this);
         UUID targetId = getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(targetId);
         if (player != null) {

@@ -40,7 +40,7 @@ public final class EternitySnare extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
         
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
     private EternitySnare(final EternitySnare card) {

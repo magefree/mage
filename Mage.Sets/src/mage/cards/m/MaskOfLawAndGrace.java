@@ -37,7 +37,7 @@ public final class MaskOfLawAndGrace extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has protection from black and from red.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED),
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED),
             AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 

@@ -59,11 +59,11 @@ class TradeSecretsEffect extends OneShotEffect {
         if (controller != null
                 && targetOpponent != null) {
             new DrawCardTargetEffect(2).apply(game, source);//The drawcard method would not work immediately
-            int amountOfCardsToDraw = controller.getAmount(0, 4, message2, game);
+            int amountOfCardsToDraw = controller.getAmount(0, 4, message2, source, game);
             new DrawCardSourceControllerEffect(amountOfCardsToDraw).apply(game, source);
             while (targetOpponent.chooseUse(Outcome.AIDontUseIt, message, source, game)) {
                 new DrawCardTargetEffect(2).apply(game, source);
-                amountOfCardsToDraw = controller.getAmount(0, 4, message2, game);
+                amountOfCardsToDraw = controller.getAmount(0, 4, message2, source, game);
                 new DrawCardSourceControllerEffect(amountOfCardsToDraw).apply(game, source);
             }
             return true;

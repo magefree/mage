@@ -34,11 +34,11 @@ public final class AtKnifepoint extends CardImpl {
         // As long as it's your turn, outlaws you control have first strike.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter),
-                MyTurnCondition.instance, "as long as it's your turn, outlaws you control have first strike"
+                MyTurnCondition.instance, "during your turn, outlaws you control have first strike"
         )));
 
         // Whenever you commit a crime, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery." This ability triggers only once each turn.
-        this.addAbility(new CommittedCrimeTriggeredAbility(new CreateTokenEffect(new MercenaryToken())).setTriggersOnceEachTurn(true));
+        this.addAbility(new CommittedCrimeTriggeredAbility(new CreateTokenEffect(new MercenaryToken())).setTriggersLimitEachTurn(1));
     }
 
     private AtKnifepoint(final AtKnifepoint card) {

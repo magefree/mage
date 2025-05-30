@@ -10,6 +10,8 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.dynamicvalue.common.SavedDiscardValue;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -25,7 +27,11 @@ import mage.counters.Counter;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
@@ -52,6 +58,10 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -78,7 +88,9 @@ public final class CardUtil {
             "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay", "collect"
     );
 
-    public static final int TESTS_SET_CODE_LOOKUP_LENGTH = 6; // search set code in commands like "set_code-card_name"
+    // search set code in commands like "set_code-card_name"
+    public static final int TESTS_SET_CODE_MIN_LOOKUP_LENGTH = 3;
+    public static final int TESTS_SET_CODE_MAX_LOOKUP_LENGTH = 6;
     public static final String TESTS_SET_CODE_DELIMETER = "-"; // delimeter for cheats and tests command "set_code-card_name"
 
     /**
@@ -315,14 +327,14 @@ public final class CardUtil {
     /**
      * Adjusts spell or ability cost to be paid by colored and generic mana.
      *
-     * @param spellAbility
-     * @param manaCostsToReduce costs to reduce
+     * @param ability           spell or ability to reduce the cost of
+     * @param manaCostsToReduce reduces the spell or ability cost by that much
      * @param convertToGeneric  colored mana does reduce generic mana if no
      *                          appropriate colored mana is in the costs
      *                          included
      */
-    public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
-        ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
+    public static void adjustCost(Ability ability, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
+        ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
         // save X value (e.g. convoke ability)
         for (VariableCost vCost : previousCost.getVariableCosts()) {
@@ -472,8 +484,8 @@ public final class CardUtil {
             adjustedCost.add(new GenericManaCost(0)); // neede to check if cost was reduced to 0
         }
         adjustedCost.setSourceFilter(previousCost.getSourceFilter());  // keep mana source restrictions
-        spellAbility.clearManaCostsToPay();
-        spellAbility.addManaCostsToPay(adjustedCost);
+        ability.clearManaCostsToPay();
+        ability.addManaCostsToPay(adjustedCost);
     }
 
     /**
@@ -591,6 +603,14 @@ public final class CardUtil {
         return getExileZoneId(getCardZoneString(SOURCE_EXILE_ZONE_TEXT, sourceId, game, previous), game);
     }
 
+    /**
+     * Find exiled zone due source object's zcc
+     * <p>
+     * Warning, carefully use it from static abilities, cause:
+     * - static abilities init from start of the game, e.g. zcc = 0
+     * - activated abilities init on usage, e.g. zcc = 123
+     * - if you need to share some data between diff type of effects then find actual object's zcc manually
+     */
     public static UUID getExileZoneId(Game game, Ability source) {
         return getExileZoneId(game, source, 0);
     }
@@ -709,7 +729,31 @@ public final class CardUtil {
         }
     }
 
-    public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
+    /**
+     * Checks if a given integer is prime
+     *
+     * @param number
+     * @return
+     */
+    public static boolean isPrime(int number) {
+        // if it's 1 or less it's not prime
+        if (number < 2) {
+            return false;
+        }
+        // easy to check 2 and 3 first
+        if (number == 2 || number == 3) {
+            return true;
+        }
+        // sieve of eratosthenes, only need to check up to sqrt(x) to find a divisor
+        for (int i = 2; i * i <= number; i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static String createObjectRelatedWindowTitle(Ability source, Game game, String textSuffix) {
         String title;
         if (source != null) {
             MageObject sourceObject = game.getObject(source);
@@ -916,16 +960,27 @@ public final class CardUtil {
     }
 
     public static String getAddRemoveCountersText(DynamicValue amount, Counter counter, String description, boolean add) {
-        StringBuilder sb = new StringBuilder(add ? "put " : "remove ");
+        boolean targetPlayerGets = add && (description.endsWith("player") || description.endsWith("opponent"));
+        StringBuilder sb = new StringBuilder();
+        if (targetPlayerGets) {
+            sb.append(description);
+            sb.append(" gets ");
+        } else {
+            sb.append(add ? "put " : "remove ");
+        }
         boolean xValue = amount.toString().equals("X");
         if (xValue) {
             sb.append("X ").append(counter.getName()).append(" counters");
-        } else if (amount == SavedDamageValue.MANY) {
+        } else if (amount == SavedDamageValue.MANY
+                || amount == SavedGainedLifeValue.MANY
+                || amount == SavedDiscardValue.MANY) {
             sb.append("that many ").append(counter.getName()).append(" counters");
         } else {
             sb.append(counter.getDescription());
         }
-        sb.append(add ? " on " : " from ").append(description);
+        if (!targetPlayerGets) {
+            sb.append(add ? " on " : " from ").append(description);
+        }
         if (!amount.getMessage().isEmpty()) {
             sb.append(xValue ? ", where X is " : " for each ").append(amount.getMessage());
         }
@@ -967,7 +1022,7 @@ public final class CardUtil {
     }
 
     public static String getTextWithFirstCharUpperCase(String text) {
-        if (text != null && text.length() >= 1) {
+        if (text != null && !text.isEmpty()) {
             return Character.toUpperCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
@@ -975,7 +1030,7 @@ public final class CardUtil {
     }
 
     public static String getTextWithFirstCharLowerCase(String text) {
-        if (text != null && text.length() >= 1) {
+        if (text != null && !text.isEmpty()) {
             return Character.toLowerCase(text.charAt(0)) + text.substring(1);
         } else {
             return text;
@@ -990,6 +1045,8 @@ public final class CardUtil {
                 || text.startsWith("another ")
                 || text.startsWith("any ")
                 || text.startsWith("{this} ")
+                || text.startsWith("your ")
+                || text.startsWith("their ")
                 || text.startsWith("one ")) {
             return text;
         }
@@ -1025,48 +1082,70 @@ public final class CardUtil {
                 .collect(Collectors.toSet());
     }
 
-    /**
-     * For finding the spell or ability on the stack for "becomes the target" triggers.
-     *
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game  the Game from checkTrigger() or watch()
-     * @return the StackObject which targeted the source, or null if not found
-     */
-    public static StackObject getTargetingStackObject(GameEvent event, Game game) {
-        // In case of multiple simultaneous triggered abilities from the same source,
-        // need to get the actual one that targeted, see #8026, #8378
-        // Also avoids triggering on cancelled selections, see #8802
-        for (StackObject stackObject : game.getStack()) {
-            Ability stackAbility = stackObject.getStackAbility();
-            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
-                continue;
-            }
-            for (Target target : stackAbility.getTargets()) {
-                if (target.getTargets().contains(event.getTargetId())) {
-                    return stackObject;
-                }
-            }
-        }
-        return null;
+    public static Set<UUID> getAllPossibleTargets(Cost cost, Game game, Ability source) {
+        return cost.getTargets()
+                .stream()
+                .map(t -> t.possibleTargets(source.getControllerId(), source, game))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
     }
 
     /**
-     * For ensuring that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
+     * Distribute values between min and max and make sure that the values will be evenly distributed
+     * Use it to limit possible values list like mana options
+     */
+    public static List<Integer> distributeValues(int count, int min, int max) {
+        List<Integer> res = new ArrayList<>();
+        if (count <= 0 || min > max) {
+            return res;
+        }
+
+        if (min == max) {
+            res.add(min);
+            return res;
+        }
+
+        int range = max - min + 1;
+
+        // low possible amount
+        if (range <= count) {
+            for (int i = 0; i < range; i++) {
+                res.add(min + i);
+            }
+            return res;
+        }
+
+        // big possible amount, so skip some values
+        double step = (double) (max - min) / (count - 1);
+        for (int i = 0; i < count; i++) {
+            res.add(min + (int) Math.round(i * step));
+        }
+        // make sure first and last elements are good
+        res.set(0, min);
+        if (res.size() > 1) {
+            res.set(res.size() - 1, max);
+        }
+
+        return res;
+    }
+
+    /**
+     * For finding the spell or ability on the stack for "becomes the target" triggers.
+     * Also ensures that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
      * If this is the first attempt at triggering for a given ability targeting a given object,
-     * this method records that in the game state for later checks by this same method.
+     * this method records that in the game state for later checks by this same method, to not return the same object again.
      *
-     * @param checkingReference must be unique for each usage (this.id.toString() of the TriggeredAbility, or this.getKey() of the watcher)
-     * @param targetingObject   from getTargetingStackObject
+     * @param checkingReference must be unique for each usage (this.getId().toString() of the TriggeredAbility, or this.getKey() of the watcher)
      * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
      * @param game              the Game from checkTrigger() or watch()
-     * @return true if already triggered/watched, false if this is the first/only trigger/watch
+     * @return the StackObject which targeted the source, or null if already used or not found
      */
-    public static boolean checkTargetedEventAlreadyUsed(String checkingReference, StackObject targetingObject, GameEvent event, Game game) {
+    public static StackObject findTargetingStackObject(String checkingReference, GameEvent event, Game game) {
+        // In case of multiple simultaneous triggered abilities from the same source,
+        // need to get the actual one that targeted, see #8026, #8378, rulings for Battle Mammoth
+        // In case of copied triggered abilities, need to trigger on each independently, see #13498
+        // Also avoids triggering on cancelled selections, see #8802
         String stateKey = "targetedMap" + checkingReference;
-        // If a spell or ability an opponent controls targets a single permanent you control more than once,
-        // Battle Mammoth's triggered ability will trigger only once.
-        // However, if a spell or ability an opponent controls targets multiple permanents you control,
-        // Battle Mammoth's triggered ability will trigger once for each of those permanents. (2021-02-05)
         Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue(stateKey);
         // targetMap: key - targetId; value - Set of stackObject Ids
         if (targetMap == null) {
@@ -1075,13 +1154,74 @@ public final class CardUtil {
             targetMap = new HashMap<>(targetMap); // must have new object reference if saved back to game state
         }
         Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
-        if (!targetingObjects.add(targetingObject.getId())) {
-            return true; // The trigger/watcher already recorded that target of the stack object
+        for (StackObject stackObject : game.getStack()) {
+            Ability stackAbility = stackObject.getStackAbility();
+            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
+                continue;
+            }
+            if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {
+                if (!targetingObjects.add(stackObject.getId())) {
+                    continue; // The trigger/watcher already recorded that target of the stack object, check for another
+                }
+                // Otherwise, store this combination of trigger/watcher + target + stack object
+                targetMap.put(event.getTargetId(), targetingObjects);
+                game.getState().setValue(stateKey, targetMap);
+                return stackObject;
+            }
         }
-        // Otherwise, store this combination of trigger/watcher + target + stack object
-        targetMap.put(event.getTargetId(), targetingObjects);
-        game.getState().setValue(stateKey, targetMap);
-        return false;
+        return null;
+    }
+
+    /**
+     * For overriding `canTarget()` with usages such as "any number of target cards with total mana value X or less".
+     * Call this after super.canTarget() returns true.
+     *
+     * @param selectedTargets this.getTargets()
+     * @param checkTargetId   id from canTarget
+     * @param valueMapper     e.g. MageObject::getManaValue or m -> m.getPower().getValue()
+     * @param maxValue        the maximum total value of the parameter
+     * @return true if the total value would not be exceeded by the target being checked.
+     */
+    public static boolean checkCanTargetTotalValueLimit(Collection<UUID> selectedTargets, UUID checkTargetId,
+                                                        ToIntFunction<MageObject> valueMapper, int maxValue,
+                                                        Game game) {
+        MageObject checkTarget = game.getObject(checkTargetId);
+        if (checkTarget == null) {
+            return false;
+        }
+        return maxValue >= selectedTargets.stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(valueMapper)
+                .sum()
+                + (selectedTargets.contains(checkTargetId) ? 0 : valueMapper.applyAsInt(checkTarget));
+    }
+
+    /**
+     * For overriding `possibleTargets()` with usages such as "any number of target cards with total mana value X or less".
+     *
+     * @param selectedTargets this.getTargets()
+     * @param possibleTargets super.possibleTargets()
+     * @param valueMapper     e.g. MageObject::getManaValue or m -> m.getPower().getValue()
+     * @param maxValue        the maximum total value of the parameter
+     * @return the set of possible targets that don't exceed the maximum total value.
+     */
+    public static Set<UUID> checkPossibleTargetsTotalValueLimit(Collection<UUID> selectedTargets, Set<UUID> possibleTargets,
+                                                                ToIntFunction<MageObject> valueMapper, int maxValue, Game game) {
+        int selectedValue = selectedTargets.stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(valueMapper)
+                .sum();
+        int remainingValue = maxValue - selectedValue;
+        Set<UUID> validTargets = new HashSet<>();
+        for (UUID id : possibleTargets) {
+            MageObject mageObject = game.getObject(id);
+            if (mageObject != null && valueMapper.applyAsInt(mageObject) <= remainingValue) {
+                validTargets.add(id);
+            }
+        }
+        return validTargets;
     }
 
     /**
@@ -1159,7 +1299,7 @@ public final class CardUtil {
         Card permCard;
         if (card instanceof SplitCard) {
             permCard = card;
-        } else if (card instanceof AdventureCard) {
+        } else if (card instanceof CardWithSpellOption) {
             permCard = card;
         } else if (card instanceof ModalDoubleFacedCard) {
             permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
@@ -1173,6 +1313,15 @@ public final class CardUtil {
         }
 
         return permCard;
+    }
+
+    /**
+     * If a card object is moved to the battlefield, object id can be different (e.g. MDFC).
+     * Use this method to get the permanent object from the card object after move to battlefield.
+     * Can return null if not found on the battlefield.
+     */
+    public static Permanent getPermanentFromCardPutToBattlefield(Card card, Game game) {
+        return game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
     }
 
     /**
@@ -1192,9 +1341,9 @@ public final class CardUtil {
         }
     }
 
-    public static List<String> getCardRulesWithAdditionalInfo(UUID cardId, String cardName,
+    public static List<String> getCardRulesWithAdditionalInfo(MageObject object,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintAbilities) {
-        return getCardRulesWithAdditionalInfo(null, cardId, cardName, rulesSource, hintAbilities);
+        return getCardRulesWithAdditionalInfo(null, object, rulesSource, hintAbilities);
     }
 
     /**
@@ -1203,10 +1352,10 @@ public final class CardUtil {
      * @param rulesSource abilities list to show as rules
      * @param hintsSource abilities list to show as card hints only (you can add additional hints here; example: from second or transformed side)
      */
-    public static List<String> getCardRulesWithAdditionalInfo(Game game, UUID cardId, String cardName,
+    public static List<String> getCardRulesWithAdditionalInfo(Game game, MageObject object,
                                                               Abilities<Ability> rulesSource, Abilities<Ability> hintsSource) {
         try {
-            List<String> rules = rulesSource.getRules(cardName);
+            List<String> rules = rulesSource.getRules();
 
             if (game == null || game.getPhase() == null) {
                 // dynamic hints for started game only
@@ -1214,7 +1363,10 @@ public final class CardUtil {
             }
 
             // additional effect's info from card.addInfo methods
-            rules.addAll(game.getState().getCardState(cardId).getInfo().values());
+            CardState cardState = game.getState().getCardState(object.getId());
+            if (cardState != null) {
+                rules.addAll(cardState.getInfo().values());
+            }
 
             // ability hints
             List<String> abilityHints = new ArrayList<>();
@@ -1230,6 +1382,7 @@ public final class CardUtil {
             }
 
             // restrict hints only for permanents, not cards
+
             // total hints
             if (!abilityHints.isEmpty()) {
                 rules.add(HintUtils.HINT_START_MARK);
@@ -1238,7 +1391,7 @@ public final class CardUtil {
 
             return rules;
         } catch (Exception e) {
-            logger.error("Exception in rules generation for card: " + cardName, e);
+            logger.error("Exception in rules generation for object: " + object.getName(), e);
         }
         return RULES_ERROR_INFO;
     }
@@ -1253,7 +1406,11 @@ public final class CardUtil {
      */
     public static void takeControlUnderPlayerStart(Game game, Ability source, Player controller, Player playerUnderControl, boolean givePauseForResponse) {
         // game logs added in child's call
-        controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source));
+        if (!controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source))) {
+            return;
+        }
+
+        // give pause, so new controller can look around battlefield and hands before finish controlling choose dialog
         if (givePauseForResponse) {
             while (controller.canRespond()) {
                 if (controller.chooseUse(Outcome.Benefit, "You got control of " + playerUnderControl.getLogName()
@@ -1275,14 +1432,14 @@ public final class CardUtil {
     public static void takeControlUnderPlayerEnd(Game game, Ability source, Player controller, Player playerUnderControl) {
         playerUnderControl.setGameUnderYourControl(true, false);
         if (!playerUnderControl.getTurnControlledBy().equals(controller.getId())) {
-            game.informPlayers(controller + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
+            game.informPlayers(controller.getLogName() + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
             controller.getPlayersUnderYourControl().remove(playerUnderControl.getId());
         }
     }
 
     // TODO: use CastManaAdjustment instead of boolean anyColor
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
-        makeCardPlayable(game, source, card, duration, anyColor, null, null);
+    public static void makeCardPlayable(Game game, Ability source, Card card, boolean useCastSpellOnly, Duration duration, boolean anyColor) {
+        makeCardPlayable(game, source, card, useCastSpellOnly, duration, anyColor, null, null);
     }
 
     /**
@@ -1298,14 +1455,14 @@ public final class CardUtil {
      * @param condition can be null
      */
     // TODO: use CastManaAdjustment instead of boolean anyColor
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
+    public static void makeCardPlayable(Game game, Ability source, Card card, boolean useCastSpellOnly, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
         // Example: Hostage Taker
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
-        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
+        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, useCastSpellOnly, duration, playerId, condition), source);
         if (anyColor) {
             game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
         }
@@ -1339,9 +1496,9 @@ public final class CardUtil {
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
             cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
-        } else if (cardToCast instanceof AdventureCard) {
+        } else if (cardToCast instanceof CardWithSpellOption) {
             cards.add(cardToCast);
-            cards.add(((AdventureCard) cardToCast).getSpellCard());
+            cards.add(((CardWithSpellOption) cardToCast).getSpellCard());
         } else {
             cards.add(cardToCast);
         }
@@ -1479,11 +1636,15 @@ public final class CardUtil {
         }
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card) {
-        castSingle(player, source, game, card, null);
+    public static boolean castSingle(Player player, Ability source, Game game, Card card) {
+        return castSingle(player, source, game, card, null);
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
+    public static boolean castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
+        return castSingle(player, source, game, card, false, manaCost);
+    }
+
+    public static boolean castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
         // handle split-cards
         if (card instanceof SplitCard) {
             SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
@@ -1526,9 +1687,9 @@ public final class CardUtil {
         }
 
         // handle adventure cards
-        if (card instanceof AdventureCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             if (manaCost != null) {
                 // get additional cost if any
                 Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
@@ -1550,8 +1711,8 @@ public final class CardUtil {
         }
 
         // cast it
-        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, false),
-                game, false, new ApprovingObject(source, game));
+        boolean result = player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
+                game, noMana, new ApprovingObject(source, game));
 
         // turn off effect after cast on every possible card-face
         if (card instanceof SplitCard) {
@@ -1566,14 +1727,15 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
-        if (card instanceof AdventureCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
         }
         // turn off effect on a normal card
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+        return result;
     }
 
     /**
@@ -1707,7 +1869,8 @@ public final class CardUtil {
     /**
      * Returns the entire cost tags map of either the source ability, or the permanent source of the ability. May be null.
      * Works in any moment (even before source ability activated)
-     * Usually you should use one of the single tag functions instead: getSourceCostsTag() or checkSourceCostsTagExists()
+     * <p>
+     * Usually you should use one of the single tag functions instead: getSourceCostsTag() or checkSourceCostsTagExists().
      * Use this function with caution, as it directly exposes the backing data structure.
      *
      * @param game
@@ -1716,11 +1879,30 @@ public final class CardUtil {
      */
     public static Map<String, Object> getSourceCostsTagsMap(Game game, Ability source) {
         Map<String, Object> costTags;
-        costTags = source.getCostsTagMap();
-        if (costTags == null && source.getSourcePermanentOrLKI(game) != null) {
-            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
+        if (game == null) {
+            return null;
         }
-        return costTags;
+
+        // from spell ability - direct access
+        costTags = source.getCostsTagMap();
+        if (costTags != null) {
+            return costTags;
+        }
+
+        // from any ability after resolve - access by permanent
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        if (permanent != null) {
+            costTags = game.getPermanentCostsTags().get(CardUtil.getSourceStackMomentReference(game, source));
+            return costTags;
+        }
+
+        // from any ability before resolve (on stack) - access by spell ability
+        Spell sourceObject = game.getSpellOrLKIStack(source.getSourceId());
+        if (sourceObject != null) {
+            return sourceObject.getSpellAbility().getCostsTagMap();
+        }
+
+        return null;
     }
 
     /**
@@ -1755,12 +1937,16 @@ public final class CardUtil {
             if (value == null) {
                 throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type null but is trying to be read. Use checkSourceCostsTagExists");
             }
-            if (value.getClass() != defaultValue.getClass()) {
+            if (defaultValue != null && value.getClass() != defaultValue.getClass()) {
                 throw new IllegalStateException("Wrong code usage: Costs tag " + tag + " has value stored of type " + value.getClass().getName() + " different from default of type " + defaultValue.getClass().getName());
             }
             return (T) value;
         }
         return defaultValue;
+    }
+
+    public static int getSourceCostsTagX(Game game, Ability source, int defaultValue) {
+        return getSourceCostsTag(game, source, "X", defaultValue);
     }
 
     public static String addCostVerb(String text) {
@@ -1933,8 +2119,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
-            AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
+        } else if (object instanceof CardWithSpellOption || object instanceof SpellOptionCard) {
+            CardWithSpellOption mainCard = (CardWithSpellOption) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getSpellCard());
         } else if (object instanceof Spell) {
@@ -1998,9 +2184,10 @@ public final class CardUtil {
             return null;
         }
 
-        // not started game
+        // T0 - for not started game
+        // T2 - for starting of the turn
         if (gameState.getTurn().getStep() == null) {
-            return "T0";
+            return "T" + gameState.getTurnNum();
         }
 
         // normal game
@@ -2039,12 +2226,95 @@ public final class CardUtil {
         return sb.toString();
     }
 
+    public static <T> Optional<T> getEffectValueFromAbility(Ability ability, String key, Class<T> clazz) {
+        return castStream(
+                ability.getAllEffects()
+                        .stream()
+                        .map(effect -> effect.getValue(key)),
+                clazz
+        ).findFirst();
+    }
+
     public static <T> Stream<T> castStream(Collection<?> collection, Class<T> clazz) {
         return castStream(collection.stream(), clazz);
     }
 
     public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
         return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
+    }
+
+    public static <T> boolean checkAnyPairs(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(collection, (t1, t2) -> predicate.test(t1, t2)).anyMatch(x -> x);
+    }
+
+    public static <T> Stream<T> streamAllPairwiseMatches(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(
+                collection,
+                (t1, t2) -> predicate.test(t1, t2)
+                        ? Stream.of(t1, t2)
+                        : Stream.<T>empty()
+        ).flatMap(Function.identity()).distinct();
+    }
+
+    private static class IntPairIterator implements Iterator<AbstractMap.SimpleImmutableEntry<Integer, Integer>> {
+        private final int amount;
+        private int firstCounter = 0;
+        private int secondCounter = 1;
+
+        IntPairIterator(int amount) {
+            this.amount = amount;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return firstCounter + 1 < amount;
+        }
+
+        @Override
+        public AbstractMap.SimpleImmutableEntry<Integer, Integer> next() {
+            AbstractMap.SimpleImmutableEntry<Integer, Integer> value
+                    = new AbstractMap.SimpleImmutableEntry(firstCounter, secondCounter);
+            secondCounter++;
+            if (secondCounter == amount) {
+                firstCounter++;
+                secondCounter = firstCounter + 1;
+            }
+            return value;
+        }
+
+        public int getMax() {
+            // amount choose 2
+            return (amount * amount - amount) / 2;
+        }
+    }
+
+    public static <T, U> Stream<U> streamPairsWithMap(Collection<T> collection, BiFunction<T, T, U> function) {
+        if (collection.size() < 2) {
+            return Stream.empty();
+        }
+        List<T> list;
+        if (collection instanceof List) {
+            list = (List<T>) collection;
+        } else {
+            list = new ArrayList<>(collection);
+        }
+        IntPairIterator it = new IntPairIterator(list.size());
+        return Stream
+                .generate(it::next)
+                .limit(it.getMax())
+                .map(pair -> function.apply(
+                        list.get(pair.getKey()),
+                        list.get(pair.getValue())
+                ));
+    }
+
+    public static void AssertNoControllerOwnerPredicates(Target target) {
+        List<Predicate> list = new ArrayList<>();
+        Predicates.collectAllComponents(target.getFilter().getPredicates(), target.getFilter().getExtraPredicates(), list);
+        if (list.stream().anyMatch(p -> p instanceof TargetController.ControllerPredicate || p instanceof TargetController.OwnerPredicate
+                || p instanceof OwnerIdPredicate || p instanceof ControllerIdPredicate)) {
+            throw new IllegalArgumentException("Wrong code usage: target adjuster will add controller/owner predicate, but target's filter already has one - " + target);
+        }
     }
 
     /**
@@ -2157,19 +2427,17 @@ public final class CardUtil {
         String needImageFileName;
         int needImageNumber;
         boolean needUsesVariousArt = false;
-        if (copyFromObject instanceof Card) {
-            needUsesVariousArt = ((Card) copyFromObject).getUsesVariousArt();
-        }
 
         needSetCode = copyFromObject.getExpansionSetCode();
         needCardNumber = copyFromObject.getCardNumber();
         needImageFileName = copyFromObject.getImageFileName();
         needImageNumber = copyFromObject.getImageNumber();
+        needUsesVariousArt = copyFromObject.getUsesVariousArt();
 
         if (targetObject instanceof Permanent) {
             copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else if (targetObject instanceof Token) {
-            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber);
+            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else if (targetObject instanceof Card) {
             copySetAndCardNumber((Card) targetObject, needSetCode, needCardNumber, needImageFileName, needImageNumber, needUsesVariousArt);
         } else {
@@ -2181,28 +2449,34 @@ public final class CardUtil {
         if (targetPermanent instanceof PermanentCard
                 || targetPermanent instanceof PermanentToken) {
             targetPermanent.setExpansionSetCode(newSetCode);
+            targetPermanent.setUsesVariousArt(usesVariousArt);
             targetPermanent.setCardNumber(newCardNumber);
             targetPermanent.setImageFileName(newImageFileName);
             targetPermanent.setImageNumber(newImageNumber);
-            targetPermanent.setUsesVariousArt(usesVariousArt);
         } else {
             throw new IllegalArgumentException("Wrong code usage: un-supported target permanent type: " + targetPermanent.getClass().getSimpleName());
         }
     }
 
-    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber) {
+    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber, boolean newUsesVariousArt) {
         targetToken.setExpansionSetCode(newSetCode);
         targetToken.setCardNumber(newCardNumber);
         targetToken.setImageFileName(newImageFileName);
         targetToken.setImageNumber(newImageNumber);
+
+        // runtime check
+        if (newUsesVariousArt && newCardNumber.isEmpty()) {
+            throw new IllegalArgumentException("Wrong code usage: usesVariousArt can be used for token from card only");
+        }
+        targetToken.setUsesVariousArt(newUsesVariousArt);
     }
 
     private static void copySetAndCardNumber(Card targetCard, String newSetCode, String newCardNumber, String newImageFileName, Integer newImageNumber, boolean usesVariousArt) {
         targetCard.setExpansionSetCode(newSetCode);
+        targetCard.setUsesVariousArt(usesVariousArt);
         targetCard.setCardNumber(newCardNumber);
         targetCard.setImageFileName(newImageFileName);
         targetCard.setImageNumber(newImageNumber);
-        targetCard.setUsesVariousArt(usesVariousArt);
     }
 
     /**
@@ -2245,6 +2519,6 @@ public final class CardUtil {
      */
     public static boolean isInformationAbility(Ability ability) {
         return !ability.getEffects().isEmpty()
-                && ability.getEffects().stream().allMatch(e -> e instanceof InfoEffect);
+                && ability.getEffects().stream().allMatch(InfoEffect.class::isInstance);
     }
 }

@@ -3,7 +3,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -41,8 +41,8 @@ public final class GloriousEnforcer extends CardImpl {
         // At the beginning of each combat, if you have more life than an opponent, Glorious Enforcer gains double strike until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn),
-                        TargetController.ANY, false
+                        TargetController.ANY, new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn),
+                        false
                 ),
                 GloriousEnforcerCondition.instance,
                 "At the beginning of each combat, if you have more life than an opponent, {this} gains double strike until end of turn."

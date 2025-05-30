@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,7 +31,7 @@ public final class Painiac extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, roll a six-sided die. Painiac gets +X/+0 until end of turn, where X is the result.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PainiacEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PainiacEffect()));
     }
 
     private Painiac(final Painiac card) {

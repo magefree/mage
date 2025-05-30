@@ -11,7 +11,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.BoostCounter;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
@@ -85,7 +85,7 @@ class LesserWerewolfEffect extends OneShotEffect {
         }
         if (sourcePermanent.getPower().getValue() >= 1) {
             game.addEffect(new BoostSourceEffect(-1, 0, Duration.EndOfTurn), source);
-            new AddCountersTargetEffect(new BoostCounter(0, -1), outcome).apply(game, source);
+            new AddCountersTargetEffect(CounterType.M0M1.createInstance(), outcome).apply(game, source);
         }
         return true;
     }

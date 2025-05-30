@@ -48,8 +48,8 @@ public final class TenaciousUnderdog extends CardImpl {
 class TenaciousUnderdogEffect extends AsThoughEffectImpl {
 
     TenaciousUnderdogEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
-        staticText = "You may cast {this} from your graveyard using its blitz ability";
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
+        staticText = "you may cast this card from your graveyard using its blitz ability";
     }
 
     private TenaciousUnderdogEffect(final TenaciousUnderdogEffect effect) {

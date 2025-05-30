@@ -41,7 +41,7 @@ public final class AngelicSellSword extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Whenever Angelic Sell-Sword or another nontoken creature enters the battlefield under your control, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+        // Whenever Angelic Sell-Sword or another nontoken creature you control enters, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new MercenaryToken()),
                 StaticFilters.FILTER_CREATURE_NON_TOKEN, false, true

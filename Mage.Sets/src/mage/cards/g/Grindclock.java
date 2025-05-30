@@ -27,8 +27,8 @@ public final class Grindclock extends CardImpl {
     public Grindclock(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrindclockEffect(), new TapSourceCost());
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
+        Ability ability = new SimpleActivatedAbility(new GrindclockEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

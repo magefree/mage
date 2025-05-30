@@ -32,7 +32,6 @@ public final class CrownedCeratok extends CardImpl {
 
         // Each creature you control with a +1/+1 counter on it has trample.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(
                         TrampleAbility.getInstance(),
                         Duration.WhileOnBattlefield,

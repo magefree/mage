@@ -68,12 +68,14 @@ class ForTheAncestorsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        ChoiceCreatureType choice = new ChoiceCreatureType();
-        player.choose(outcome, choice, game);
-        SubType subType = SubType.byDescription(choice.getChoice());
+        ChoiceCreatureType choice = new ChoiceCreatureType(game, source);
+        if (!player.choose(outcome, choice, game)) {
+            return false;
+        }
+        SubType subType = SubType.byDescription(choice.getChoiceKey());
         FilterCard filter;
         if (subType != null) {
-            filter = new FilterCard(choice.getChoice() + " cards");
+            filter = new FilterCard(choice.getChoiceKey() + " cards");
             filter.add(subType.getPredicate());
         } else {
             filter = new FilterCard();

@@ -33,8 +33,7 @@ public final class Portcullis extends CardImpl {
     public Portcullis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature.
-        // Return that card to the battlefield under its owner's control when Portcullis leaves the battlefield.
+        // Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature. Return that card to the battlefield under its owner's control when Portcullis leaves the battlefield.
         String rule = "Whenever a creature enters the battlefield, if there are two or more other creatures on the battlefield, exile that creature.";
         String rule2 = " Return that card to the battlefield under its owner's control when {this} leaves the battlefield.";
         TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PortcullisExileEffect(),

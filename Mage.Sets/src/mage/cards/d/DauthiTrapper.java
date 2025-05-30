@@ -31,7 +31,7 @@ public final class DauthiTrapper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target creature gains shadow until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

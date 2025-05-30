@@ -3,7 +3,7 @@ package mage.cards.o;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
@@ -71,7 +71,7 @@ class OddsEffect extends OneShotEffect {
 
             } else {
                 game.informPlayers("Odds: Spell will be copied");
-                return new CopyTargetSpellEffect().apply(game, source);
+                return new CopyTargetStackObjectEffect().apply(game, source);
             }
         }
         return false;

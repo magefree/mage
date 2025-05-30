@@ -40,7 +40,7 @@ public final class DenOfTheBugbear extends CardImpl {
 
         // If you control two or more other lands, Den of the Bugbear enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldAbility(
-                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters the battlefield tapped.", null
+                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters tapped.", null
         ));
 
         // {T}: Add {R}.
@@ -52,7 +52,7 @@ public final class DenOfTheBugbear extends CardImpl {
                 new CreateTokenEffect(new GoblinToken(), 1, true, true), false,
                 "Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking."
         );
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(3, 2, "3/2 red Goblin creature with \"Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking.\"")
                         .withColor("R")
                         .withSubType(SubType.GOBLIN)

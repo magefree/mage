@@ -46,7 +46,7 @@ public final class KardursViciousReturn extends CardImpl {
         );
         ability.addTarget(new TargetAnyTarget());
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new DoWhenCostPaid(
-                ability, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                ability, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 "Sacrifice a creature?"
         ));
 

@@ -3,7 +3,7 @@ package mage.cards.u;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class UnholyFiend extends CardImpl {
 
         this.nightCard = true;
 
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new LoseLifeSourceControllerEffect(1), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
     }
 
     private UnholyFiend(final UnholyFiend card) {

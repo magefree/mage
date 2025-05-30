@@ -1,8 +1,6 @@
 package mage.utils;
 
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -24,9 +22,13 @@ import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
+import mage.utils.testers.TestableDialogsRunner;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -66,33 +68,39 @@ public final class SystemUtil {
     // [@mana add] -> MANA ADD
     private static final String COMMAND_CARDS_ADD_TO_HAND = "@card add to hand";
     private static final String COMMAND_LANDS_ADD_TO_BATTLEFIELD = "@lands add";
+    private static final String COMMAND_UNDER_CONTROL_TAKE = "@under control take";
+    private static final String COMMAND_UNDER_CONTROL_GIVE = "@under control give";
+    private static final String COMMAND_SHOW_TEST_DIALOGS = "@show dialog";
     private static final String COMMAND_MANA_ADD = "@mana add"; // TODO: not implemented
     private static final String COMMAND_RUN_CUSTOM_CODE = "@run custom code"; // TODO: not implemented
     private static final String COMMAND_SHOW_OPPONENT_HAND = "@show opponent hand";
     private static final String COMMAND_SHOW_OPPONENT_LIBRARY = "@show opponent library";
     private static final String COMMAND_SHOW_MY_HAND = "@show my hand";
     private static final String COMMAND_SHOW_MY_LIBRARY = "@show my library";
-    private static final String COMMAND_ACTIVATE_OPPONENT_ABILITY = "@activate opponent ability";
     private static final Map<String, String> supportedCommands = new HashMap<>();
+    private static final TestableDialogsRunner testableDialogsRunner = new TestableDialogsRunner(); // for tests
 
     static {
         // special commands names in choose dialog
         supportedCommands.put(COMMAND_CARDS_ADD_TO_HAND, "CARDS: ADD TO HAND");
         supportedCommands.put(COMMAND_MANA_ADD, "MANA ADD");
         supportedCommands.put(COMMAND_LANDS_ADD_TO_BATTLEFIELD, "LANDS: ADD TO BATTLEFIELD");
+        supportedCommands.put(COMMAND_UNDER_CONTROL_TAKE, "UNDER CONTROL: TAKE");
+        supportedCommands.put(COMMAND_UNDER_CONTROL_GIVE, "UNDER CONTROL: GIVE");
         supportedCommands.put(COMMAND_RUN_CUSTOM_CODE, "RUN CUSTOM CODE");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_HAND, "SHOW OPPONENT HAND");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_LIBRARY, "SHOW OPPONENT LIBRARY");
         supportedCommands.put(COMMAND_SHOW_MY_HAND, "SHOW MY HAND");
         supportedCommands.put(COMMAND_SHOW_MY_LIBRARY, "SHOW MY LIBRARY");
-        supportedCommands.put(COMMAND_ACTIVATE_OPPONENT_ABILITY, "ACTIVATE OPPONENT ABILITY");
+        supportedCommands.put(COMMAND_SHOW_TEST_DIALOGS, "SHOW TEST DIALOGS");
     }
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
     private static final Pattern patternCommand = Pattern.compile("([\\w]+):([\\S ]+?):([\\S ]+):([\\d]+)"); // battlefield:Human:Island:10
-    private static final Pattern patternCardInfo = Pattern.compile("(^[\\dA-Z]{2,7})@([\\S ]+)" // XLN-Island
-            .replace("7", String.valueOf(CardUtil.TESTS_SET_CODE_LOOKUP_LENGTH))
-            .replace("@", CardUtil.TESTS_SET_CODE_DELIMETER)
+    private static final Pattern patternCardInfo = Pattern.compile("(^[\\dA-Z]{MIN,MAX})DELIMETER([\\S ]+)" // XLN-Island
+            .replace("MIN", String.valueOf(CardUtil.TESTS_SET_CODE_MIN_LOOKUP_LENGTH))
+            .replace("MAX", String.valueOf(CardUtil.TESTS_SET_CODE_MAX_LOOKUP_LENGTH))
+            .replace("DELIMETER", CardUtil.TESTS_SET_CODE_DELIMETER)
     );
 
     // show ext info for special commands
@@ -254,13 +262,18 @@ public final class SystemUtil {
      *
      * @param game
      * @param commandsFilePath file path with commands in init.txt format
-     * @param feedbackPlayer player to execute that cheats (will see choose dialogs)
+     * @param feedbackPlayer   player to execute that cheats (will see choose dialogs)
      */
     public static void executeCheatCommands(Game game, String commandsFilePath, Player feedbackPlayer) {
 
         // fake test ability for triggers and events
-        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("fake ability"));
         fakeSourceAbilityTemplate.setControllerId(feedbackPlayer.getId());
+        Card fakeSourceCard = feedbackPlayer.getLibrary().getFromTop(game);
+        if (fakeSourceCard != null) {
+            // set any existing card as source, so dialogs will show all GUI elements, including source and workable popup info
+            fakeSourceAbilityTemplate.setSourceId(fakeSourceCard.getId());
+        }
 
         List<String> errorsList = new ArrayList<>();
         try {
@@ -300,6 +313,9 @@ public final class SystemUtil {
             // add default commands
             initLines.add(0, String.format("[%s]", COMMAND_LANDS_ADD_TO_BATTLEFIELD));
             initLines.add(1, String.format("[%s]", COMMAND_CARDS_ADD_TO_HAND));
+            initLines.add(2, String.format("[%s]", COMMAND_SHOW_TEST_DIALOGS));
+            initLines.add(3, String.format("[%s]", COMMAND_UNDER_CONTROL_TAKE));
+            initLines.add(4, String.format("[%s]", COMMAND_UNDER_CONTROL_GIVE));
 
             // collect all commands
             CommandGroup currentGroup = null;
@@ -351,21 +367,21 @@ public final class SystemUtil {
                 logger.info("Found " + groups.size() + " groups. Need to select.");
 
                 // choice dialog
-                Map<String, String> list = new LinkedHashMap<>();
-                Map<String, Integer> sort = new LinkedHashMap<>();
-                for (int i = 0; i < groups.size(); i++) {
-                    list.put(Integer.toString(i + 1), groups.get(i).getPrintNameWithStats());
-                    sort.put(Integer.toString(i + 1), i);
-                }
-
                 Choice groupChoice = new ChoiceImpl(false);
                 groupChoice.setMessage("Choose commands group to run");
-                groupChoice.setKeyChoices(list);
-                groupChoice.setSortData(sort);
+                for (int i = 0; i < groups.size(); i++) {
+                    groupChoice.withItem(
+                            Integer.toString(i + 1),
+                            groups.get(i).getPrintNameWithStats(),
+                            i,
+                            ChoiceHintType.TEXT,
+                            String.join("<br>", groups.get(i).commands)
+                    );
+                }
 
                 if (feedbackPlayer.choose(Outcome.Benefit, groupChoice, game)) {
                     String need = groupChoice.getChoiceKey();
-                    if ((need != null) && list.containsKey(need)) {
+                    if (need != null) {
                         runGroup = groups.get(Integer.parseInt(need) - 1);
                     }
                 }
@@ -385,7 +401,7 @@ public final class SystemUtil {
             // 3. system commands
             if (runGroup.isSpecialCommand) {
 
-                Player opponent = game.getPlayer(game.getOpponents(feedbackPlayer.getId()).stream().findFirst().orElse(null));
+                Player opponent = game.getPlayer(game.getOpponents(feedbackPlayer.getId(), true).stream().findFirst().orElse(null));
 
                 String info;
                 switch (runGroup.name) {
@@ -418,53 +434,6 @@ public final class SystemUtil {
                         break;
                     }
 
-                    case COMMAND_ACTIVATE_OPPONENT_ABILITY: {
-                        // WARNING, maybe very bugged if called in wrong priority
-                        // uses choose triggered ability dialog to select it
-                        UUID savedPriorityPlayer = null;
-                        if (game.getActivePlayerId() != opponent.getId()) {
-                            savedPriorityPlayer = game.getActivePlayerId();
-                        }
-
-                        // change active player to find and play selected abilities (it's danger and buggy code)
-                        if (savedPriorityPlayer != null) {
-                            game.getState().setPriorityPlayerId(opponent.getId());
-                            game.firePriorityEvent(opponent.getId());
-                        }
-
-                        List<ActivatedAbility> abilities = opponent.getPlayable(game, true);
-                        Map<String, String> choices = new HashMap<>();
-                        abilities.forEach(ability -> {
-                            MageObject object = ability.getSourceObject(game);
-                            choices.put(ability.getId().toString(), object.getName() + ": " + ability.toString());
-                        });
-                        // TODO: set priority for us?
-                        Choice choice = new ChoiceImpl();
-                        choice.setMessage("Choose playable ability to activate by opponent " + opponent.getName());
-                        choice.setKeyChoices(choices);
-                        if (feedbackPlayer.choose(Outcome.Detriment, choice, game) && choice.getChoiceKey() != null) {
-                            String needId = choice.getChoiceKey();
-                            Optional<ActivatedAbility> ability = abilities.stream().filter(a -> a.getId().toString().equals(needId)).findFirst();
-                            if (ability.isPresent()) {
-                                // TODO: set priority for player?
-                                ActivatedAbility activatedAbility = ability.get();
-                                game.informPlayers(feedbackPlayer.getLogName() + " as another player " + opponent.getLogName()
-                                        + " trying to force an activate ability: " + activatedAbility.getGameLogMessage(game));
-                                if (opponent.activateAbility(activatedAbility, game)) {
-                                    game.informPlayers("Force to activate ability: DONE");
-                                } else {
-                                    game.informPlayers("Force to activate ability: FAIL");
-                                }
-                            }
-                        }
-                        // restore original priority player
-                        if (savedPriorityPlayer != null) {
-                            game.getState().setPriorityPlayerId(savedPriorityPlayer);
-                            game.firePriorityEvent(savedPriorityPlayer);
-                        }
-                        break;
-                    }
-
                     case COMMAND_CARDS_ADD_TO_HAND: {
 
                         // card
@@ -479,7 +448,7 @@ public final class SystemUtil {
                         cardName = cardChoice.getChoice();
 
                         // amount
-                        int cardAmount = feedbackPlayer.getAmount(1, 100, "How many [" + cardName + "] to add?", game);
+                        int cardAmount = feedbackPlayer.getAmount(1, 100, "How many [" + cardName + "] to add?", null, game);
                         if (cardAmount == 0) {
                             break;
                         }
@@ -543,6 +512,47 @@ public final class SystemUtil {
                         break;
                     }
 
+                    case COMMAND_UNDER_CONTROL_TAKE: {
+                        Target target = new TargetOpponent().withNotTarget(true).withChooseHint("to take under your control");
+                        Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                        if (feedbackPlayer.chooseTarget(Outcome.GainControl, target, fakeSourceAbility, game)) {
+                            Player targetPlayer = game.getPlayer(target.getFirstTarget());
+                            if (!targetPlayer.getId().equals(feedbackPlayer.getId())) {
+                                CardUtil.takeControlUnderPlayerStart(game, fakeSourceAbility, feedbackPlayer, targetPlayer, false);
+                                // allow priority play again in same step (for better cheat UX)
+                                targetPlayer.resetPassed();
+                            }
+                            // workaround for refresh priority dialog like avatar click (cheats called from priority in 99%)
+                            game.firePriorityEvent(feedbackPlayer.getId());
+                        }
+                        break;
+                    }
+
+                    case COMMAND_UNDER_CONTROL_GIVE: {
+                        Target target = new TargetPlayer().withNotTarget(true).withChooseHint("to give control of your player");
+                        Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                        if (feedbackPlayer.chooseTarget(Outcome.GainControl, target, fakeSourceAbility, game)) {
+                            Player targetPlayer = game.getPlayer(target.getFirstTarget());
+                            if (targetPlayer != null) {
+                                if (!targetPlayer.getId().equals(feedbackPlayer.getId())) {
+                                    // give control to another player
+                                    CardUtil.takeControlUnderPlayerStart(game, fakeSourceAbility, targetPlayer, feedbackPlayer, false);
+                                } else {
+                                    // return control to itself
+                                    CardUtil.takeControlUnderPlayerEnd(game, fakeSourceAbility, feedbackPlayer, targetPlayer);
+                                }
+                            }
+                            // workaround for refresh priority dialog like avatar click (cheats called from priority in 99%)
+                            game.firePriorityEvent(feedbackPlayer.getId());
+                        }
+                        break;
+                    }
+
+                    case COMMAND_SHOW_TEST_DIALOGS: {
+                        testableDialogsRunner.selectAndShowTestableDialog(feedbackPlayer, fakeSourceAbilityTemplate.copy(), game, opponent);
+                        break;
+                    }
+
                     default: {
                         String mes = String.format("Unknown system command: %s", runGroup.name);
                         errorsList.add(mes);
@@ -550,7 +560,6 @@ public final class SystemUtil {
                         break;
                     }
                 }
-                sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
                 return;
             }
 

@@ -52,14 +52,14 @@ public final class NemataPrimevalWarden extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new NemataPrimevalWardenEffect()));
 
         // {G}, Sacrifice a Saproling: Nemata, Primeval Warden gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
 
         // {1}{B}, Sacrifice 2 Saprolings: Draw a card.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability2 = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
                 new ManaCostsImpl<>("{1}{B}"));
         ability2.addCost(new SacrificeTargetCost(2, filter2));

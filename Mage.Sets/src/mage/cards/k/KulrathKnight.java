@@ -35,7 +35,7 @@ public final class KulrathKnight extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
 
         // Creatures your opponents control with counters on them can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KulrathKnightRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new KulrathKnightRestrictionEffect()));
 
     }
 

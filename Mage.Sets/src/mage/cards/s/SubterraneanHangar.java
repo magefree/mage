@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -30,11 +30,11 @@ public final class SubterraneanHangar extends CardImpl {
         // Subterranean Hangar enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}: Put a storage counter on Subterranean Hangar.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
         // {tap}, Remove any number of storage counters from Subterranean Hangar: Add {B} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.BlackMana(1),
-                RemovedCountersForCostValue.instance,
+                GetXValue.instance,
                 new TapSourceCost(),
                 "Add {B} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));

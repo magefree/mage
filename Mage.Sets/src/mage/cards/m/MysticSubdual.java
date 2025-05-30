@@ -73,11 +73,11 @@ class MysticSubdualEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
-            return true;
+            return false;
         }
         Permanent creature = game.getPermanent(permanent.getAttachedTo());
         if (creature == null) {
-            return true;
+            return false;
         }
         creature.removeAllAbilities(source.getSourceId(), game);
         return true;

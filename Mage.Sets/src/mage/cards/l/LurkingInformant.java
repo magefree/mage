@@ -30,7 +30,7 @@ public final class LurkingInformant extends CardImpl {
 
         // <i>({UB} can be paid with either {U} or {B}.)</i>
         // {2}, {tap}: Look at the top card of target player's library. You may put that card into that player's graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(1, true), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new LookLibraryTopCardTargetPlayerEffect(1, true), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -39,9 +39,9 @@ public final class BoartuskLiege extends CardImpl {
 
         this.addAbility(TrampleAbility.getInstance());
         // Other red creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRed, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRed, true)));
         // Other green creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
     }
 
     private BoartuskLiege(final BoartuskLiege card) {

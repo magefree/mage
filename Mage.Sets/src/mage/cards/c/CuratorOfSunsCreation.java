@@ -45,7 +45,7 @@ class CuratorOfSunsCreationTriggeredAbility extends TriggeredAbilityImpl {
 
     CuratorOfSunsCreationTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
-        setTriggersOnceEachTurn(true);
+        setTriggersLimitEachTurn(1);
     }
 
     private CuratorOfSunsCreationTriggeredAbility(final CuratorOfSunsCreationTriggeredAbility ability) {

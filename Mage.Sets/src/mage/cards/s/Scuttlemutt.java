@@ -32,7 +32,7 @@ public final class Scuttlemutt extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // {T}: Target creature becomes the color or colors of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorOrColorsTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BecomesColorOrColorsTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

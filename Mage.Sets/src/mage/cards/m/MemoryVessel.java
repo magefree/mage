@@ -74,7 +74,7 @@ class MemoryVesselExileEffect extends OneShotEffect {
             player.moveCards(cards, Zone.EXILED, source, game);
             for (Card card : cards) {
                 CardUtil.makeCardPlayable(
-                        game, source, card, Duration.UntilYourNextTurn,
+                        game, source, card, false, Duration.UntilYourNextTurn,
                         false, playerId, null
                 );
             }

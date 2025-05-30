@@ -2,7 +2,6 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -76,9 +75,7 @@ class ForensicGadgeteerEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || (abilityToModify.getAbilityType() == AbilityType.MANA
-                && (abilityToModify instanceof ActivatedAbility))) {
+        if (abilityToModify.isActivatedAbility()){
             // Activated abilities of artifacts
             Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
             return permanent != null

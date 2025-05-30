@@ -36,10 +36,10 @@ public final class WalkingBallista extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // {4}: Put a +1/+1 counter on Walking Ballista.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(4)));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(4)));
 
         // Remove a +1/+1 counter from Walking Ballista: It deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "It"), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1, "It"), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

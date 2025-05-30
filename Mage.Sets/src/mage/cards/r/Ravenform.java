@@ -1,6 +1,6 @@
 package mage.cards.r;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.ForetellAbility;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ public final class Ravenform extends CardImpl {
 
         // Exile target artifact or creature. Its controller creates a 1/1 blue Bird creature token with flying.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new BlueBirdToken()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new BlueBirdToken()));
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
 
         // Foretell {U}

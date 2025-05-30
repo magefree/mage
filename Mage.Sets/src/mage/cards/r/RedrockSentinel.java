@@ -38,7 +38,7 @@ public final class RedrockSentinel extends CardImpl {
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         ability.addEffect(new CreateTokenEffect(new TreasureToken()).concatBy("and"));
         this.addAbility(ability);
     }

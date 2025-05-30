@@ -2,6 +2,7 @@ package mage.server.game;
 
 import mage.MageException;
 import mage.game.Game;
+import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 
 import java.util.UUID;
@@ -30,7 +31,7 @@ public class GameWorker implements Callable<Boolean> {
     public Boolean call() {
         try {
             // play game
-            Thread.currentThread().setName("GAME " + game.getId());
+            Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_GAME + " " + game.getId());
             game.start(choosingPlayerId);
 
             // save result and start next game or close finished table

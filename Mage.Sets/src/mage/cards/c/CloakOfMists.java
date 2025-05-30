@@ -33,7 +33,7 @@ public final class CloakOfMists extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
         // Enchanted creature can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
     }
 
     private CloakOfMists(final CloakOfMists card) {

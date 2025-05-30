@@ -6,8 +6,8 @@ import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.CascadeAbility;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -45,7 +45,7 @@ public final class BloodbraidMarauder extends CardImpl {
                 new GainAbilitySourceEffect(new CascadeAbility(), Duration.WhileOnStack, true),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; This spell has cascade as long as there are four or more card types among cards in your graveyard." + REMINDER_TEXT
-        )).addHint(CardTypesInGraveyardHint.YOU));
+        )).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private BloodbraidMarauder(final BloodbraidMarauder card) {

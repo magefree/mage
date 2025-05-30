@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
@@ -37,7 +37,7 @@ public final class PrimalCocoon extends CardImpl {
         // At the beginning of your upkeep, put a +1/+1 counter on enchanted creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(
                 CounterType.P1P1.createInstance(), "enchanted creature"
-        ), TargetController.YOU, false));
+        )));
 
         // When enchanted creature attacks or blocks, sacrifice Primal Cocoon.
         this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(

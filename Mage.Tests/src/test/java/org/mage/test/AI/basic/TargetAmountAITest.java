@@ -23,7 +23,7 @@ public class TargetAmountAITest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blessings of Nature");
 
         setStopAt(1, PhaseStep.END_TURN);
-        //setStrictChooseMode(true); // ai must choose
+        setStrictChooseMode(false); // ai must choose
         execute();
 
         assertPowerToughness(playerA, "Balduvian Bears", 2 + 4, 2 + 4); // boost one creature (it's just a choose code, so can be different from simulation results)
@@ -31,6 +31,8 @@ public class TargetAmountAITest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void test_AI_SimulateTargets() {
+        // warning, test depends on targets list optimization by AI
+
         // Distribute four +1/+1 counters among any number of target creatures.
         addCard(Zone.HAND, playerA, "Blessings of Nature", 1); // {4}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);

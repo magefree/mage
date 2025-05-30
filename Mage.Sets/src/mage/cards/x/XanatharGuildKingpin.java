@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -36,9 +36,8 @@ public final class XanatharGuildKingpin extends CardImpl {
 
         // At the beginning of your upkeep, choose target opponent. Until end of turn, that player can’t cast spells, you may look at the top card of their library any time, you may play the top card of their library, and you may spend mana as though it were mana of any color to cast spells this way.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new XanatharGuildKingpinRuleModifyingEffect()
-                .setText("choose target opponent. Until end of turn, that player can't cast spells,"),
-                TargetController.YOU, false
+                new XanatharGuildKingpinRuleModifyingEffect()
+                .setText("choose target opponent. Until end of turn, that player can't cast spells,")
         );
         ability.addEffect(new XanatharLookAtTopCardOfLibraryEffect()
                 .setText(" you may look at the top card of their library any time,"));
@@ -163,12 +162,19 @@ class XanatharPlayFromTopOfTargetLibraryEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        if (!(affectedAbility instanceof SpellAbility) || !playerId.equals(source.getControllerId())) {
+        Card cardToCheck = game.getCard(objectId);
+        if (cardToCheck == null) {
             return false;
         }
-        SpellAbility spell = (SpellAbility) affectedAbility;
-        Card cardToCheck = spell.getCharacteristics(game);
-        if (spell.getManaCosts().isEmpty()) {
+        if (affectedAbility instanceof SpellAbility) {
+            SpellAbility spell = (SpellAbility) affectedAbility;
+            cardToCheck = spell.getCharacteristics(game);
+            if (spell.getManaCosts().isEmpty()) {
+                return false;  // prevent casting cards without mana cost?
+            }
+        }
+        // only permits you to cast
+        if (!playerId.equals(source.getControllerId())) {
             return false;
         }
         Player controller = game.getPlayer(source.getControllerId());
@@ -176,7 +182,7 @@ class XanatharPlayFromTopOfTargetLibraryEffect extends AsThoughEffectImpl {
         if (controller == null || opponent == null) {
             return false;
         }
-        // main card of spell must be on top of the opponent's library
+        // main card of spell/land must be on top of the opponent's library
         Card topCard = opponent.getLibrary().getFromTop(game);
         return topCard != null && topCard.getId().equals(cardToCheck.getMainCard().getId());
     }

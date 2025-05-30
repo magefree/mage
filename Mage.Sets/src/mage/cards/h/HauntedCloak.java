@@ -31,7 +31,7 @@ public final class HauntedCloak extends CardImpl {
         // Equipped creature has vigilance, trample, and haste.
         Effect effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has vigilance");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText(", trample");
         ability.addEffect(effect);

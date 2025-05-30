@@ -31,8 +31,8 @@ public final class DimirHouseGuard extends CardImpl {
 
         this.addAbility(FearAbility.getInstance());
         // Sacrifice a creature: Regenerate Dimir House Guard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
         // Transmute {1}{B}{B}
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }

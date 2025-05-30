@@ -35,7 +35,7 @@ public final class CabalTherapy extends CardImpl {
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
 
         // Flashback-Sacrifice a creature.
-        this.addAbility(new FlashbackAbility(this, new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.addAbility(new FlashbackAbility(this, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private CabalTherapy(final CabalTherapy card) {

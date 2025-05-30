@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
@@ -36,7 +36,7 @@ public final class DreamTides extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // At the beginning of each player's upkeep, that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DreamTidesEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new DreamTidesEffect(), false));
     }
 
     private DreamTides(final DreamTides card) {

@@ -41,7 +41,7 @@ public final class Togglodyte extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new TogglodyteToggleEffect(), false));
 
         // As long as Togglodyte is turned off, it can’t attack or block, and prevent all damage it would deal.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalRestrictionEffect(new TogglodyteRestrictionEffect(), new TogglodyteCondition()));
+        Ability ability = new SimpleStaticAbility(new ConditionalRestrictionEffect(new TogglodyteRestrictionEffect(), new TogglodyteCondition()));
         ability.addEffect(new ConditionalReplacementEffect(new TogglodytePreventionEffect(), new TogglodyteCondition()));
         this.addAbility(ability);
     }

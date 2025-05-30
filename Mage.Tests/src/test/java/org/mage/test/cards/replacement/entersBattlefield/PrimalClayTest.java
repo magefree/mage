@@ -3,6 +3,7 @@ package org.mage.test.cards.replacement.entersBattlefield;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -180,8 +181,8 @@ public class PrimalClayTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, clone);
         setChoice(playerB, true); // whether to copy
-        setFlipCoinResult(playerB, false);
         setChoice(playerB, sentry); // what to copy
+        setFlipCoinResult(playerB, false);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -217,10 +218,10 @@ public class PrimalClayTest extends CardTestPlayerBase {
         // Target creature you control gets +2/+2 until end of turn if its power is 2. Then it fights target creature you don’t control.
         addCard(Zone.BATTLEFIELD, playerB, "Siege Mastodon", 1); // 3/5 creature for fighting
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aquamorph+" using Morph");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aquamorph + " using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Savage Swipe");
-        addTarget(playerA, ""); // morph
+        addTarget(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand()); // morph
         addTarget(playerA, "Siege Mastodon");
         // 2/2 becomes 4/4, fights 3/5, neither dies
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -242,7 +243,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, clay);
         addCard(Zone.HAND, playerA, cloudshift);
         addCard(Zone.BATTLEFIELD, playerA, "Waterkin Shaman");
-        // 2/1; Whenever a creature with flying enters the battlefield under your control, Waterkin Shaman gets +1/+1 until end of turn.
+        // 2/1; Whenever a creature with flying you control enters, Waterkin Shaman gets +1/+1 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);

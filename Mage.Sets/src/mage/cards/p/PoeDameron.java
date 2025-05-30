@@ -35,7 +35,7 @@ public final class PoeDameron extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Poe Dameron or another nontoken creature enters the battlefield under your control, starship creatures you control get +1/+1 until end of turn.
+        // Whenever Poe Dameron or another nontoken creature you control enters, starship creatures you control get +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filterStarship, false), filter, false));
     }
 

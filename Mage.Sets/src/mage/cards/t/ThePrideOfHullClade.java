@@ -61,7 +61,7 @@ public final class ThePrideOfHullClade extends CardImpl {
                 new GainAbilityTargetEffect(
                         new DealsCombatDamageToAPlayerTriggeredAbility(
                                 new DrawCardSourceControllerEffect
-                                        (SourcePermanentToughnessValue.getInstance()).setText("draw cards equal to its toughness"), false))
+                                        (SourcePermanentToughnessValue.instance).setText("draw cards equal to its toughness"), false))
                         .setText(", gains \"Whenever this creature deals combat damage to a player, draw cards equal to its toughness,\""));
         ability.addEffect(
                 new CanAttackAsThoughItDidntHaveDefenderTargetEffect(Duration.EndOfTurn)

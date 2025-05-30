@@ -11,7 +11,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -31,7 +31,6 @@ import mage.server.managers.ConfigSettings;
 import mage.server.util.ConfigFactory;
 import mage.server.util.ConfigWrapper;
 import mage.server.util.PluginClassLoader;
-import mage.utils.SystemUtil;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.target.TargetPermanent;
@@ -40,6 +39,7 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copier;
+import mage.utils.SystemUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -241,10 +241,18 @@ public abstract class MageTestPlayerBase {
      * @param enable
      */
     protected void setStrictChooseMode(boolean enable) {
-        if (playerA != null) playerA.setChooseStrictMode(enable);
-        if (playerB != null) playerB.setChooseStrictMode(enable);
-        if (playerC != null) playerC.setChooseStrictMode(enable);
-        if (playerD != null) playerD.setChooseStrictMode(enable);
+        if (playerA != null) {
+            playerA.setChooseStrictMode(enable);
+        }
+        if (playerB != null) {
+            playerB.setChooseStrictMode(enable);
+        }
+        if (playerC != null) {
+            playerC.setChooseStrictMode(enable);
+        }
+        if (playerD != null) {
+            playerD.setChooseStrictMode(enable);
+        }
     }
 
     protected void addCustomCardWithSpell(TestPlayer controllerPlayer, SpellAbility spellAbility, Ability extraAbility, CardType cardType) {
@@ -256,7 +264,7 @@ public abstract class MageTestPlayerBase {
     }
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability) {
-        addCustomCardWithAbility(customName, controllerPlayer, ability, null, CardType.ENCHANTMENT, "", Zone.BATTLEFIELD);
+        addCustomCardWithAbility(customName, controllerPlayer, ability, null, null, "", Zone.BATTLEFIELD);
     }
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,
@@ -310,16 +318,13 @@ public abstract class MageTestPlayerBase {
 
     /**
      * Add cost modification effect to the game (all cast cost will be increaded or decreased for controller)
-     *
-     * @param controller
-     * @param modificationAmount
      */
     protected void addCustomEffect_SpellCostModification(TestPlayer controller, int modificationAmount) {
         Effect effect;
         if (modificationAmount >= 0) {
             effect = new SpellsCostIncreasingAllEffect(modificationAmount, StaticFilters.FILTER_CARD, TargetController.YOU);
         } else {
-            effect = new SpellsCostReductionAllEffect(StaticFilters.FILTER_CARD, -1 * modificationAmount, false, true);
+            effect = new SpellsCostReductionControllerEffect(StaticFilters.FILTER_CARD, -1 * modificationAmount, false);
         }
 
         addCustomCardWithAbility(
@@ -331,9 +336,6 @@ public abstract class MageTestPlayerBase {
 
     /**
      * Add target damage ability that can be called by text: "target damage xxx"
-     *
-     * @param controller
-     * @param damageAmount
      */
     protected void addCustomEffect_TargetDamage(TestPlayer controller, int damageAmount) {
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(damageAmount).setText("target damage " + damageAmount), new ManaCostsImpl<>(""));
@@ -347,12 +349,17 @@ public abstract class MageTestPlayerBase {
 
     /**
      * Add target destroy ability that can be called by text "target destroy"
-     *
-     * @param controller
      */
-    protected void addCustomEffect_DestroyTarget(TestPlayer controller) {
+    protected void addCustomEffect_TargetDestroy(TestPlayer controller) {
+        addCustomEffect_TargetDestroy(controller, 1);
+    }
+
+    /**
+     * Add target destroy ability that can be called by text "target destroy"
+     */
+    protected void addCustomEffect_TargetDestroy(TestPlayer controller, int numberOfTargets) {
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl<>(""));
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(numberOfTargets, StaticFilters.FILTER_PERMANENT));
         addCustomCardWithAbility(
                 "target destroy for " + controller.getName(),
                 controller,
@@ -361,11 +368,21 @@ public abstract class MageTestPlayerBase {
     }
 
     /**
-     * Add target transform ability that can be called by text "target transform"
-     *
-     * @param controller
+     * Add all destroy ability that can be called by text "all destroy"
      */
-    protected void addCustomEffect_TransformTarget(TestPlayer controller) {
+    protected void addCustomEffect_AllDestroy(TestPlayer controller) {
+        Ability ability = new SimpleActivatedAbility(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT).setText("all destroy"), new ManaCostsImpl<>(""));
+        addCustomCardWithAbility(
+                "all destroy for " + controller.getName(),
+                controller,
+                ability
+        );
+    }
+
+    /**
+     * Add target transform ability that can be called by text "target transform"
+     */
+    protected void addCustomEffect_TargetTransform(TestPlayer controller) {
         Ability ability = new SimpleActivatedAbility(new TransformTargetEffect().setText("target transform"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetPermanent());
         addCustomCardWithAbility(
@@ -376,9 +393,23 @@ public abstract class MageTestPlayerBase {
     }
 
     /**
+     * Add target blink ability that can be called by text "target blink"
+     */
+    protected void addCustomEffect_TargetBlink(TestPlayer controller) {
+        Ability ability = new SimpleActivatedAbility(
+                new ExileThenReturnTargetEffect(true, true).setText("target blink"),
+                new ManaCostsImpl<>("")
+        );
+        ability.addTarget(new TargetPermanent());
+        addCustomCardWithAbility(
+                "target blink for " + controller.getName(),
+                controller,
+                ability
+        );
+    }
+
+    /**
      * Return target card to hand that can be called by text "return from ..."
-     *
-     * @param controller
      */
     protected void addCustomEffect_ReturnFromAnyToHand(TestPlayer controller) {
         // graveyard
@@ -421,7 +452,9 @@ class CustomTestCard extends CardImpl {
             abilitiesList.put(cardName, new AbilitiesImpl<>());
         }
         Abilities<Ability> oldAbilities = abilitiesList.get(cardName);
-        if (ability != null) oldAbilities.add(ability);
+        if (ability != null) {
+            oldAbilities.add(ability);
+        }
 
         spellAbilitiesList.put(cardName, spellAbility);
     }

@@ -29,7 +29,7 @@ public final class SkyclawThrash extends CardImpl {
 
     public SkyclawThrash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARRIOR);
 
         this.power = new MageInt(4);

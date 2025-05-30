@@ -45,10 +45,10 @@ public final class Vampirism extends CardImpl {
                 .setText("draw a card at the beginning of the next turn's upkeep"), false));
 
         // Enchanted creature gets +1/+1 for each other creature you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VampirismBoostEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new VampirismBoostEnchantedEffect()));
 
         // Other creatures you control get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(-1, -1, Duration.WhileOnBattlefield, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(-1, -1, Duration.WhileOnBattlefield, true)));
 
     }
 

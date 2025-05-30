@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.BandingAbility;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,7 +33,7 @@ public final class MishrasWarMachine extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
 
         // At the beginning of your upkeep, Mishra's War Machine deals 3 damage to you unless you discard a card. If Mishra's War Machine deals damage to you this way, tap it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MishrasWarMachineEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MishrasWarMachineEffect()));
 
     }
 

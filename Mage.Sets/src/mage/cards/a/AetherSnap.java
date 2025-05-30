@@ -9,8 +9,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.counters.Counter;
-import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -67,13 +65,7 @@ class AetherSnapEffect extends OneShotEffect {
             if (permanent instanceof PermanentToken) {
                 tokens.add(permanent);
             }
-            if (permanent.getCounters(game).isEmpty()) {
-                continue;
-            }
-            Counters counters = permanent.getCounters(game).copy();
-            for (Counter counter : counters.values()) {
-                permanent.removeCounters(counter, source, game);
-            }
+            permanent.removeAllCounters(source, game);
         }
         controller.moveCards(tokens, Zone.EXILED, source, game);
         return true;

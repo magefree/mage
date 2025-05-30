@@ -15,7 +15,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.XCMCGraveyardAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 
 import java.util.UUID;
 
@@ -46,9 +46,9 @@ public final class GethLordOfTheVault extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
         // Then that player puts the top X cards of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl<>("{X}{B}"));
-        ability.setTargetAdjuster(XCMCGraveyardAdjuster.instance);
+        Ability ability = new SimpleActivatedAbility(new GethLordOfTheVaultEffect(), new ManaCostsImpl<>("{X}{B}"));
         ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 

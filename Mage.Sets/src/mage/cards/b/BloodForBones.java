@@ -28,7 +28,7 @@ public final class BloodForBones extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Return a creature card from your graveyard to the battlefield, then return another creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new BloodForBonesEffect());

@@ -27,7 +27,7 @@ public final class ThalakosDrifters extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Discard a card: Thalakos Drifters gains shadow until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
     }
 
     private ThalakosDrifters(final ThalakosDrifters card) {

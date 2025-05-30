@@ -26,12 +26,12 @@ public final class ObsidianBattleAxe extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "a Warrior creature");
 
     public ObsidianBattleAxe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{3}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ARTIFACT},"{3}");
         this.subtype.add(SubType.WARRIOR);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+1 and has haste.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 1));
         ability.addEffect(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has haste"));
         this.addAbility(ability);
         // Whenever a Warrior creature enters the battlefield, you may attach Obsidian Battle-Axe to it.

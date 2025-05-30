@@ -44,12 +44,12 @@ public final class WayOfTheThief extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // Enchanted creature can't be blocked as long as you control a Gate.
         Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA), new PermanentsOnTheBattlefieldCondition(filter));
         effect.setText(rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private WayOfTheThief(final WayOfTheThief card) {

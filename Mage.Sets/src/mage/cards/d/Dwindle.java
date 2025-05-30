@@ -37,7 +37,7 @@ public final class Dwindle extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets -6/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-6, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-6, 0)));
 
         // When enchanted creature blocks, destroy it.
         this.addAbility(new DwindleTriggeredAbility());

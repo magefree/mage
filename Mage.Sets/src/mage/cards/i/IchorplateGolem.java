@@ -38,12 +38,12 @@ public final class IchorplateGolem extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever a creature enters the battlefield under your control, if
+        // Whenever a creature you control enters, if
         // it has one or more oil counters on it, put an oil counter on it.
         this.addAbility(new IchorplateGolemTriggeredAbility());
 
         // Creatures you control with oil counters on them get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)
                 .setText("Creatures you control with oil counters on them get +1/+1")));
     }
 
@@ -94,6 +94,6 @@ class IchorplateGolemTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under your control, if it has one or more oil counters on it, put an oil counter on it.";
+        return "Whenever a creature you control enters, if it has one or more oil counters on it, put an oil counter on it.";
     }
 }

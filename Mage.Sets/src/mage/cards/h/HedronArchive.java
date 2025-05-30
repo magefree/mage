@@ -28,7 +28,7 @@ public final class HedronArchive extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
         
         // {2}, {T}, Sacrifice Hedron Archive: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

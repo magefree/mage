@@ -28,7 +28,7 @@ public final class ProdigalSorcerer extends CardImpl {
         this.toughness = new MageInt(1);
 
         //{T}: Prodigal Sorcerer deals 1 damage to any target.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -4,7 +4,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -74,7 +74,7 @@ public final class TheMirariConjecture extends CardImpl {
 class TheMirariConjectureDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public TheMirariConjectureDelayedTriggeredAbility() {
-        super(new CopyTargetSpellEffect(true), Duration.EndOfTurn, false);
+        super(new CopyTargetStackObjectEffect(true), Duration.EndOfTurn, false);
     }
 
     private TheMirariConjectureDelayedTriggeredAbility(final TheMirariConjectureDelayedTriggeredAbility ability) {

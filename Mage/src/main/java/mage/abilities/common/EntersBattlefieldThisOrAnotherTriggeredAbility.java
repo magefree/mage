@@ -17,7 +17,7 @@ public class EntersBattlefieldThisOrAnotherTriggeredAbility extends EntersBattle
 
     public EntersBattlefieldThisOrAnotherTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyControlled) {
         super(Zone.BATTLEFIELD, effect, new FilterPermanentThisOrAnother(filter, onlyControlled), optional, setTargetPointer);
-        setTriggerPhrase("Whenever " + this.filter.getMessage() + " enters the battlefield" + (onlyControlled ? " under your control, " : ", "));
+        setTriggerPhrase("Whenever " + this.filter.getMessage() + (onlyControlled ? " you control" : "") + " enters, ");
     }
 
     protected EntersBattlefieldThisOrAnotherTriggeredAbility(final EntersBattlefieldThisOrAnotherTriggeredAbility ability) {

@@ -26,7 +26,7 @@ public final class GoblinLyre extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Sacrifice Goblin Lyre: Flip a coin. If you win the flip, Goblin Lyre deals damage to target opponent equal to the number of creatures you control. If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent controls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinLyreEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GoblinLyreEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }

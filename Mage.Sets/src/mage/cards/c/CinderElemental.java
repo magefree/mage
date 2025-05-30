@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class CinderElemental extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {X}{R}, {tap}, Sacrifice Cinder Elemental: Cinder Elemental deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR, "it"), new ManaCostsImpl<>("{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(GetXValue.instance, "it"), new ManaCostsImpl<>("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

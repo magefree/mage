@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,15 +10,14 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,7 +33,7 @@ public final class HammerMage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{R}, {tap}, Discard a card: Destroy all artifacts with converted mana cost X or less.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HammerMageEffect(), new ManaCostsImpl<>("{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(new HammerMageEffect(), new ManaCostsImpl<>("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
@@ -70,7 +68,7 @@ class HammerMageEffect extends  OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterArtifactPermanent filter = new FilterArtifactPermanent();
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1));
         for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             permanent.destroy(source, game, false);
         }

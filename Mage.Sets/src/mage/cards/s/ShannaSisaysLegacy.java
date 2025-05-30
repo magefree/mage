@@ -40,12 +40,11 @@ public final class ShannaSisaysLegacy extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Shanna, Sisay's Legacy can't be the target of abilities your opponents control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShannaSisaysLegacyEffect()));
+        this.addAbility(new SimpleStaticAbility(new ShannaSisaysLegacyEffect()));
 
         // Shanna gets +1/+1 for each creature you control.
         DynamicValue value = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURES);
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)
                         .setText("{this} gets +1/+1 for each creature you control")
         ));

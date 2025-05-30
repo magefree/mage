@@ -29,7 +29,7 @@ public final class LeapingMaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{W}: Leaping Master gains flying until end of turn
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{2}{W}")));
     }
 

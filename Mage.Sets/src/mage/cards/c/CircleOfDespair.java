@@ -26,7 +26,7 @@ public final class CircleOfDespair extends CardImpl {
         // {1}, Sacrifice a creature: The next time a source of your choice would deal damage to any target this turn, prevent that damage.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToTargetEffect(Duration.EndOfTurn), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

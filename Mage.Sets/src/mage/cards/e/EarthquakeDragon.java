@@ -56,7 +56,7 @@ public final class EarthquakeDragon extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{2}{G}")
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         this.addAbility(ability);
     }
 

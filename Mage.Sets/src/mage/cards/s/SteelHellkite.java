@@ -24,6 +24,7 @@ import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -43,7 +44,6 @@ public final class SteelHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {2}: Steel Hellkite gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new GenericManaCost(2)
         ));
@@ -93,7 +93,7 @@ class SteelHellkiteDestroyEffect extends OneShotEffect {
             predicateSet.add(new ControllerIdPredicate(playerId));
         }
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         filter.add(Predicates.or(predicateSet));
         return new DestroyAllEffect(filter).apply(game, source);
     }

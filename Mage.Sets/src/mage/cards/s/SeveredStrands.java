@@ -22,7 +22,7 @@ public final class SeveredStrands extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // You gain life equal to the sacrificed creature's toughness. Destroy target creature an opponent controls.
         this.getSpellAbility().addEffect(new GainLifeEffect(

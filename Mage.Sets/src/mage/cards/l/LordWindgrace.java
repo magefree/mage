@@ -1,6 +1,5 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -11,21 +10,18 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.token.CatWarriorToken;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class LordWindgrace extends CardImpl {
@@ -60,7 +56,7 @@ public final class LordWindgrace extends CardImpl {
                         .setText(", then create six 2/2 green Cat Warrior "
                                 + "creature tokens with forestwalk")
         );
-        ability.addTarget(new TargetNonlandPermanent(0, 6, StaticFilters.FILTER_PERMANENTS_NON_LAND, false));
+        ability.addTarget(new TargetPermanent(0, 6, StaticFilters.FILTER_PERMANENTS_NON_LAND));
         this.addAbility(ability);
 
         // Lord Windgrace can be your commander.

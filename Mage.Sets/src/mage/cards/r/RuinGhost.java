@@ -29,7 +29,7 @@ public final class RuinGhost extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}, {T}: Exile target land you control, then return it to the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileThenReturnTargetEffect(true, false), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new ExileThenReturnTargetEffect(true, false), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
         this.addAbility(ability);

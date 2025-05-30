@@ -39,7 +39,6 @@ public final class Scuttlegator extends CardImpl {
 
         // As long as Scuttlegator has a +1/+1 counter on it, it can attack as though it didn't have defender.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalAsThoughEffect(
                         new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                         new SourceHasCounterCondition(CounterType.P1P1)

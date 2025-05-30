@@ -16,7 +16,7 @@ public class AttacksAloneSourceTriggeredAbility extends TriggeredAbilityImpl {
     public AttacksAloneSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
         setTriggerPhrase("Whenever {this} attacks alone, ");
-        this.replaceRuleText = true; // default true to replace "{this}" with "it"
+        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
     }
 
     protected AttacksAloneSourceTriggeredAbility(final AttacksAloneSourceTriggeredAbility ability) {

@@ -20,7 +20,7 @@ public final class BazaarOfBaghdad extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Draw two cards, then discard three cards.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(2, 3), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(2, 3), new TapSourceCost()));
     }
 
     private BazaarOfBaghdad(final BazaarOfBaghdad card) {

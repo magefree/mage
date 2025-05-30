@@ -29,7 +29,7 @@ public final class GateHound extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES),
                 new EnchantedSourceCondition(),

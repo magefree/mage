@@ -20,7 +20,7 @@ public final class StoneCalendar extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // Spells you cast cost up to {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterCard("spells"), 1, true)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(new FilterCard("spells"), 1, true)));
         
     }
 

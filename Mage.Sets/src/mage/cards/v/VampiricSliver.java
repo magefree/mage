@@ -36,7 +36,7 @@ public final class VampiricSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // All Sliver creatures have "Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())), Duration.WhileOnBattlefield,
                 filter, "All Sliver creatures have \"Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 counter on this creature.\"")));
 

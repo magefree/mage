@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalCostModificationEffect;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.cost.AbilitiesCostReductionControllerEffect;
@@ -50,7 +50,7 @@ public final class NahiriStormOfStone extends CardImpl {
                 new GainAbilityControlledEffect(
                         FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_CREATURE
-                ), MyTurnCondition.instance, "As long as it's your turn, " +
+                ), MyTurnCondition.instance, "During your turn, " +
                 "creatures you control have first strike"
         ));
         ability.addEffect(new ConditionalCostModificationEffect(
@@ -62,7 +62,7 @@ public final class NahiriStormOfStone extends CardImpl {
         this.addAbility(ability);
 
         // -X: Nahiri, Storm of Stone deals X damage to target tapped creature.
-        ability = new LoyaltyAbility(new DamageTargetEffect(GetXLoyaltyValue.instance));
+        ability = new LoyaltyAbility(new DamageTargetEffect(GetXValue.instance));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -112,7 +112,7 @@ public class Brawl extends Constructed {
         Set<String> basicsInDeck = new HashSet<>();
         if (colorIdentity.isColorless()) {
             for (Card card : deck.getCards()) {
-                if (basicLandNames.contains(card.getName())) {
+                if (ALL_BASIC_LAND_NAMES.contains(card.getName())) {
                     basicsInDeck.add(card.getName());
                 }
             }
@@ -122,7 +122,7 @@ public class Brawl extends Constructed {
                     && !(colorIdentity.isColorless()
                     && basicsInDeck.size() == 1
                     && basicsInDeck.contains(card.getName()))) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
                 valid = false;
             }
         }
@@ -131,7 +131,7 @@ public class Brawl extends Constructed {
                     && !(colorIdentity.isColorless()
                     && basicsInDeck.size() == 1
                     && basicsInDeck.contains(card.getName()))) {
-                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
+                addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
                 valid = false;
             }
         }

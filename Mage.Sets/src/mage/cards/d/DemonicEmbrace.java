@@ -45,7 +45,7 @@ public final class DemonicEmbrace extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+1, has flying, and is a Demon in addition to its other types.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, 1, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has flying");
         ability.addEffect(effect);
@@ -72,7 +72,7 @@ public final class DemonicEmbrace extends CardImpl {
 class DemonicEmbracePlayEffect extends AsThoughEffectImpl {
 
     DemonicEmbracePlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard by paying 3 life and discarding a card in addition to paying its other costs";
     }
 

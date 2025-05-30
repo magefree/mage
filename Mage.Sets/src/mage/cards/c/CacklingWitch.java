@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -33,8 +33,8 @@ public final class CacklingWitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{B}, {tap}, Discard a card: Target creature gets +X/+0 until end of turn.
-        ManacostVariableValue manaX = ManacostVariableValue.REGULAR;
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        GetXValue manaX = GetXValue.instance;
+        Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(manaX, StaticValue.get(0), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{X}{B}"));
         ability.addCost(new TapSourceCost());

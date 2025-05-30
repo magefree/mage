@@ -21,7 +21,9 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
     protected final Zone toZone;
 
     public ZoneChangeTriggeredAbility(Zone fromZone, Zone toZone, Effect effect, String triggerPhrase, boolean optional) {
+        // fix 3
         this(toZone == null ? Zone.ALL : toZone, fromZone, toZone, effect, triggerPhrase, optional);
+        //this(fromZone == null ? Zone.ALL : fromZone, fromZone, toZone, effect, triggerPhrase, optional);
     }
 
     public ZoneChangeTriggeredAbility(Zone worksInZone, Zone fromZone, Zone toZone, Effect effect, String triggerPhrase, boolean optional) {

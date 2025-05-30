@@ -38,7 +38,7 @@ public final class HeartflameDuelist extends AdventureCard {
 
         // Instant and sorcery spells you control have lifelink.
         Effect effect = new GainAbilityControlledSpellsEffect(LifelinkAbility.getInstance(), filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Heartflame Slash
         // Heartflame Slash deals 3 damage to any target.

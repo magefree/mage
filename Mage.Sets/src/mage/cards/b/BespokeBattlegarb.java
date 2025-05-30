@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CelebrationCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.common.CelebrationWatcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -28,7 +28,7 @@ public final class BespokeBattlegarb extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0, Duration.WhileOnBattlefield)));
 
         // Celebration -- At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, attach Bespoke Battlegarb to up to one target creature you control.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
@@ -36,9 +36,7 @@ public final class BespokeBattlegarb extends CardImpl {
                         new AttachEffect(
                                 Outcome.BoostCreature,
                                 "attach {this} to up to one target creature you control"
-                        ),
-                        TargetController.YOU,
-                        false
+                        )
                 ), CelebrationCondition.instance, "At the beginning of combat on your turn, if two "
                 + "or more nonland permanents entered the battlefield under your control this turn, "
                 + "attach {this} to up to one target creature you control"
@@ -46,7 +44,7 @@ public final class BespokeBattlegarb extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         ability.setAbilityWord(AbilityWord.CELEBRATION);
         ability.addHint(CelebrationCondition.getHint());
-        this.addAbility(ability, new CelebrationWatcher());
+        this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));

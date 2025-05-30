@@ -16,7 +16,7 @@ public final class HappyHolidays extends ExpansionSet {
     }
 
     private HappyHolidays() {
-        super("Happy Holidays", "HHO", ExpansionSet.buildDate(2006, 12, 31), SetType.JOKESET);
+        super("Happy Holidays", "HHO", ExpansionSet.buildDate(2006, 12, 31), SetType.JOKE_SET);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Fruitcake Elemental", 6, Rarity.RARE, mage.cards.f.FruitcakeElemental.class));

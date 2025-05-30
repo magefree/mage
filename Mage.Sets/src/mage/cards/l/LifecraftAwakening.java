@@ -3,7 +3,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -16,13 +16,12 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class LifecraftAwakening extends CardImpl {
@@ -38,9 +37,9 @@ public final class LifecraftAwakening extends CardImpl {
 
         // Put X +1/+1 counters on target artifact you control. If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature.
         getSpellAbility().addEffect(new AddCountersTargetEffect(
-                CounterType.P1P1.createInstance(), ManacostVariableValue.REGULAR
+                CounterType.P1P1.createInstance(), GetXValue.instance
         ).setText("put X +1/+1 counters on target artifact you control"));
-        getSpellAbility().addTarget(new TargetArtifactPermanent(filter));
+        getSpellAbility().addTarget(new TargetPermanent(filter));
         getSpellAbility().addEffect(new LifecraftAwakeningEffect());
     }
 
@@ -94,6 +93,7 @@ class LifecraftAwakeningToken extends TokenImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
     }
+
     private LifecraftAwakeningToken(final LifecraftAwakeningToken token) {
         super(token);
     }

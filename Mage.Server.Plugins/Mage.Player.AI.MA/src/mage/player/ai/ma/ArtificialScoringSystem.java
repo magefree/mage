@@ -63,14 +63,11 @@ public final class ArtificialScoringSystem {
         return score;
     }
 
-    public static int getVariablePermanentScore(final Game game, final Permanent permanent) {
+    public static int getDynamicPermanentScore(final Game game, final Permanent permanent) {
 
         int score = permanent.getCounters(game).getCount(CounterType.CHARGE) * 30;
         score += permanent.getCounters(game).getCount(CounterType.LEVEL) * 30;
         score -= permanent.getDamage() * 2;
-        if (!canTap(game, permanent)) {
-            score += getTappedScore(game, permanent);
-        }
         if (permanent.getCardType(game).contains(CardType.CREATURE)) {
             final int power = permanent.getPower().getValue();
             final int toughness = permanent.getToughness().getValue();
@@ -95,11 +92,19 @@ public final class ArtificialScoringSystem {
                 }
             }
             score += equipments + enchantments;
+        }
+        return score;
+    }
 
+    public static int getCombatPermanentScore(final Game game, final Permanent permanent) {
+        int score = 0;
+        if (!canTap(game, permanent)) {
+            score += getTappedScore(game, permanent);
+        }
+        if (permanent.getCardType(game).contains(CardType.CREATURE)) {
             if (!permanent.canAttack(null, game)) {
                 score -= 100;
             }
-
             if (!permanent.canBlockAny(game)) {
                 score -= 30;
             }

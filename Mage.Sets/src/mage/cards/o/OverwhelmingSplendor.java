@@ -8,7 +8,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -23,7 +22,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class OverwhelmingSplendor extends CardImpl {
@@ -41,10 +39,10 @@ public final class OverwhelmingSplendor extends CardImpl {
         this.addAbility(ability);
 
         // Creatures enchanted player controls lose all abilities and have base power and toughness 1/1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OverwhelmingSplendorLoseAbilitiesEffect()));
+        this.addAbility(new SimpleStaticAbility(new OverwhelmingSplendorLoseAbilitiesEffect()));
 
         // Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OverwhelmingSplendorCantActivateEffect()));
+        this.addAbility(new SimpleStaticAbility(new OverwhelmingSplendorCantActivateEffect()));
     }
 
     private OverwhelmingSplendor(final OverwhelmingSplendor card) {
@@ -83,7 +81,7 @@ class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
         if (player == null) {
             return false;
         }
-        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     permanent.removeAllAbilities(source.getSourceId(), game);
@@ -149,7 +147,7 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
 
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
         return ability.isPresent()
-                && !(ability.get() instanceof ActivatedManaAbilityImpl)
+                && !(ability.get().isManaActivatedAbility())
                 && !(ability.get() instanceof LoyaltyAbility);
     }
 }

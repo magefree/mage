@@ -7,16 +7,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  * @author fireshoes
@@ -34,11 +33,11 @@ public final class ParanoidParishBlade extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} gets +1/+0 ");
         effect.setText("<i>Delirium</i> &mdash; {this} gets +1/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                 DeliriumCondition.instance, "and has first strike as long as there are four or more card types among cards in your graveyard.");
         ability.addEffect(effect);
-        ability.addHint(CardTypesInGraveyardHint.YOU);
+        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
         this.addAbility(ability);
     }
 

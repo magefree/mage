@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
@@ -56,7 +56,7 @@ public final class ShadrixSilverquill extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // At the beginning of combat on your turn, you may choose two. Each mode must target a different player.
-        Ability ability = new BeginningOfCombatTriggeredAbility(null, TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(null);
         ability.getModes().setMinModes(2);
         ability.getModes().setMaxModes(2);
         ability.getModes().setMaxModesFilter(filter0);

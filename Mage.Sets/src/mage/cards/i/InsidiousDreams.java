@@ -25,7 +25,7 @@ public final class InsidiousDreams extends CardImpl {
     public InsidiousDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
-        // As an additional cost to cast Insidious Dreams, discard X cards.
+        // As an additional cost to cast this spell, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, true));
 
         // Search your library for X cards. Then shuffle your library and put those cards on top of it in any order.
@@ -46,7 +46,7 @@ class InsidiousDreamsEffect extends OneShotEffect {
 
     InsidiousDreamsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for up to X cards. Then shuffle and put those cards on top of it in any order";
+        this.staticText = "Search your library for X cards, then shuffle and put those cards on top in any order";
     }
 
     private InsidiousDreamsEffect(final InsidiousDreamsEffect effect) {
@@ -64,8 +64,9 @@ class InsidiousDreamsEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
+        int minTargets = Math.min(controller.getLibrary().size(), GetXValue.instance.calculate(game, source, this));
         TargetCardInLibrary target = new TargetCardInLibrary(
-                0, GetXValue.instance.calculate(game, source, this), StaticFilters.FILTER_CARD_CARDS
+                minTargets, GetXValue.instance.calculate(game, source, this), StaticFilters.FILTER_CARD_CARDS
         );
         controller.searchLibrary(target, source, game);
         Cards chosen = new CardsImpl(target.getTargets());

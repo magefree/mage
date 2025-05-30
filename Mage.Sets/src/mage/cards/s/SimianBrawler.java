@@ -28,7 +28,7 @@ public final class SimianBrawler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Discard a land card: Simian Brawler gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn),
             new DiscardCardCost(new FilterLandCard("a land card"))));
     }
 

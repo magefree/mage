@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -34,7 +33,7 @@ public final class DropOfHoney extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // At the beginning of your upkeep, destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DropOfHoneyEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DropOfHoneyEffect()));
         // When there are no creatures on the battlefield, sacrifice Drop of Honey.
         this.addAbility(new DropOfHoneyStateTriggeredAbility());
     }

@@ -39,7 +39,7 @@ public final class OneEyedScarecrow extends CardImpl {
 
         this.addAbility(DefenderAbility.getInstance());
         // Creatures with flying your opponents control get -1/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private OneEyedScarecrow(final OneEyedScarecrow card) {

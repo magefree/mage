@@ -59,10 +59,10 @@ public class PayVariableLoyaltyCost extends VariableCostImpl {
 
         int maxValue = permanent.getCounters(game).getCount(CounterType.LOYALTY);
 
-        // apply cost modification
+        // apply dynamic costs and cost modification
         if (source instanceof LoyaltyAbility) {
             LoyaltyAbility copiedAbility = ((LoyaltyAbility) source).copy();
-            copiedAbility.adjustCosts(game);
+            copiedAbility.adjustX(game);
             game.getContinuousEffects().costModification(copiedAbility, game);
             for (Cost cost : copiedAbility.getCosts()) {
                 if (cost instanceof PayVariableLoyaltyCost) {

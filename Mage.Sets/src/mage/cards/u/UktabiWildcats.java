@@ -44,7 +44,7 @@ public final class UktabiWildcats extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter))));
         
         // {G}, Sacrifice a Forest: Regenerate Uktabi Wildcats.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new  RegenerateSourceEffect(), new ManaCostsImpl<>("{G}"));
+        Ability ability = new SimpleActivatedAbility(new  RegenerateSourceEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeTargetCost(sacrificeFilter));
         this.addAbility(ability);
     }

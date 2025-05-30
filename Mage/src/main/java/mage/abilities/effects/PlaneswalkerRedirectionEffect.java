@@ -80,7 +80,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
         if (source != null) {
             return source.getControllerId();
         }
-        Permanent permanent = game.getBattlefield().getPermanent(sourceId);
+        Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
             return permanent.getControllerId();
         }

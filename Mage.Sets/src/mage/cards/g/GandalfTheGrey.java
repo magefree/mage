@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
@@ -61,7 +61,7 @@ public final class GandalfTheGrey extends CardImpl {
 
         // * Copy target instant or sorcery spell you control. You may choose new targets for the copy.
         ability.addMode(
-                new Mode(new CopyTargetSpellEffect()).addTarget(new TargetSpell(filter))
+                new Mode(new CopyTargetStackObjectEffect()).addTarget(new TargetSpell(filter))
                         .setModeTag("copy spell")
         );
 

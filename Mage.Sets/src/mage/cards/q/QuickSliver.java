@@ -35,7 +35,7 @@ public final class QuickSliver extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Any player may play Sliver cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, true)));
     }
 
     private QuickSliver(final QuickSliver card) {

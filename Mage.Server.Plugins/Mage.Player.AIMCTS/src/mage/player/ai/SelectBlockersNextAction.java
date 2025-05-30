@@ -19,7 +19,7 @@ public class SelectBlockersNextAction implements MCTSNodeNextAction{
         else
             blocks = getBlocks(player, fullStateValue, game);
         for (List<List<UUID>> block : blocks) {
-            Game sim = game.copy();
+            Game sim = game.createSimulationForAI();
             MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
             List<CombatGroup> groups = sim.getCombat().getGroups();
             for (int i = 0; i < groups.size(); i++) {

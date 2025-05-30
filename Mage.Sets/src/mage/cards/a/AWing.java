@@ -39,7 +39,7 @@ public final class AWing extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
 
         // {1}:Remove A-wing from combat. It must attack on your next combat if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveFromCombatSourceEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new RemoveFromCombatSourceEffect(), new GenericManaCost(1));
         ability.addEffect(new AWingAttacksNextCombatIfAbleSourceEffect());
         this.addAbility(ability);
     }

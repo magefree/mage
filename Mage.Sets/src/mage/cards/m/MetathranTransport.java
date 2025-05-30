@@ -44,7 +44,7 @@ public final class MetathranTransport extends CardImpl {
         // Metathran Transport can't be blocked by blue creatures.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
         // {U}: Target creature becomes blue until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(ObjectColor.BLUE,
+        Ability ability = new SimpleActivatedAbility(new BecomesColorTargetEffect(ObjectColor.BLUE,
             Duration.EndOfTurn), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

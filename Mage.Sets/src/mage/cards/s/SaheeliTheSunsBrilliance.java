@@ -37,7 +37,7 @@ public final class SaheeliTheSunsBrilliance extends CardImpl {
         // {U}{R}, {T}: Create a token that's a copy of another target creature or artifact you control, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(new SaheeliTheSunsBrillianceEffect(), new ManaCostsImpl<>("{U}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT));
         this.addAbility(ability);
     }
 

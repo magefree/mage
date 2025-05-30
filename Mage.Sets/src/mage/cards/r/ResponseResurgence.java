@@ -1,6 +1,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
+
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;

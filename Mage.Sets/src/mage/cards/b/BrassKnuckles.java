@@ -67,7 +67,6 @@ enum BrassKnucklesCondition implements Condition {
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
-                .filter(Objects::nonNull)
                 .map(Permanent::getAttachments)
                 .map(Collection::stream)
                 .map(stream -> stream.map(game::getPermanent))

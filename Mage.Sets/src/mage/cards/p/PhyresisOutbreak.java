@@ -64,7 +64,7 @@ class PhyresisOutbreakEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId(), true)) {
-            int totalPoison = game.getPlayer(opponentId).getCounters().getCount(CounterType.POISON);
+            int totalPoison = game.getPlayer(opponentId).getCountersCount(CounterType.POISON);
             BoostTargetEffect effect = new BoostTargetEffect(totalPoison * -1, totalPoison * -1, Duration.EndOfTurn);
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_A_CREATURE, opponentId, game)) {
                 effect.setTargetPointer(new FixedTarget(permanent, game));

@@ -13,6 +13,10 @@ import mage.util.CardUtil;
  */
 public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
 
+    public LimitedTimesPerTurnActivatedAbility(Effect effect, Cost cost) {
+        this(Zone.BATTLEFIELD, effect, cost);
+    }
+
     public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
         this(zone, effect, cost, 1);
     }

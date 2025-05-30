@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.Pronoun;
+import mage.constants.Pronoun;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;

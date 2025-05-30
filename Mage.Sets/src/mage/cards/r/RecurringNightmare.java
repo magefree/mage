@@ -27,7 +27,7 @@ public final class RecurringNightmare extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());

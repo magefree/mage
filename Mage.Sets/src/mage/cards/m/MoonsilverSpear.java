@@ -24,7 +24,7 @@ public final class MoonsilverSpear extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // Whenever equipped creature attacks, create a 4/4 white Angel creature token with flying.
         this.addAbility(new AttacksAttachedTriggeredAbility(new CreateTokenEffect(new AngelToken())));

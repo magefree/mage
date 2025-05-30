@@ -38,11 +38,10 @@ public final class SoulRansom extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
         // Discard two cards: Soul Ransom's controller sacrifices it, then draws two cards. Only any opponent may activate this ability.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new SoulRansomEffect(),
                 new DiscardTargetCost(
                         new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)

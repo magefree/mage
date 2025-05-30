@@ -37,7 +37,7 @@ public final class IsochronScepter extends CardImpl {
         );
 
         // {2}, {T}: You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new IsochronScepterCopyEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

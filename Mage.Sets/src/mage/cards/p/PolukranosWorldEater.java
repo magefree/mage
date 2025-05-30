@@ -79,7 +79,7 @@ enum PolukranosWorldEaterAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ((BecomesMonstrousSourceTriggeredAbility) ability).getMonstrosityValue();
         ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanentAmount(xValue, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.addTarget(new TargetCreaturePermanentAmount(xValue, 0, xValue, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }
 }
 

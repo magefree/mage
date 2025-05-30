@@ -31,7 +31,7 @@ public final class PhyrexianDenouncer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice Phyrexian Denouncer: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

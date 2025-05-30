@@ -36,7 +36,7 @@ public final class FellFlagship extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Pirates you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter)));
 
         // Whenever Fell Flagship deals combat damage to a player, that player discards a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));

@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.game.permanent.token.ZombieToken;
@@ -41,7 +40,7 @@ public final class AphemiaTheCacophony extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenEffect(new ZombieToken()),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(filter))
-        ), TargetController.YOU, false));
+        )));
     }
 
     private AphemiaTheCacophony(final AphemiaTheCacophony card) {

@@ -1,7 +1,7 @@
 package mage.filter.predicate.card;
 
-import mage.cards.AdventureCard;
 import mage.cards.Card;
+import mage.cards.CardWithSpellOption;
 import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.cards.mock.MockCard;
@@ -10,13 +10,18 @@ import mage.constants.SuperType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Special predicate to search cards in deck editor
  *
- * @author North
+ * @author North, JayDi85
  */
 public class CardTextPredicate implements Predicate<Card> {
 
@@ -25,7 +30,10 @@ public class CardTextPredicate implements Predicate<Card> {
     private final boolean inTypes;
     private final boolean inRules;
     private final boolean isUnique;
-    private HashMap<String, Boolean> seenCards = null;
+    private HashMap<String, Boolean> seenCards;
+    private final Pattern pattern;
+    private final Matcher matcher;
+    private final List<String> textTokens;
 
     public CardTextPredicate(String text, boolean inNames, boolean inTypes, boolean inRules, boolean isUnique) {
         this.text = text;
@@ -33,124 +41,110 @@ public class CardTextPredicate implements Predicate<Card> {
         this.inTypes = inTypes;
         this.inRules = inRules;
         this.isUnique = isUnique;
-        seenCards = new HashMap<>();
+        this.seenCards = new HashMap<>();
+
+        // regexp to find texts inside "xxx" like
+        // "123 345" → ["123", "345"]
+        // "123 345 678" → ["123", "345", "678"]
+        // "123 "345 678"" → ["123", "345 678"]
+        this.textTokens = new ArrayList<>();
+        this.pattern = Pattern.compile("\"([^\"]*)\"|(\\S+)");
+        this.matcher = this.pattern.matcher(text.toLowerCase(Locale.ENGLISH));
+        while (matcher.find()) {
+            if (matcher.group(1) != null) {
+                // inside "xxx"
+                this.textTokens.add(matcher.group(1));
+            } else {
+                // normal xxx
+                this.textTokens.add(matcher.group(2));
+            }
+        }
     }
 
     @Override
     public boolean apply(Card input, Game game) {
-        if (text.isEmpty() && !isUnique) {
-            return true;
+        if (this.textTokens.isEmpty()) {
+            return saveAndReturnUniqueFind(input);
         }
 
-        if (text.isEmpty() && isUnique) {
-            boolean found = !seenCards.containsKey(input.getName());
-            seenCards.put(input.getName(), true);
-            return found;
-        }
-
-        // first check in card name
+        // name: need all tokens
         if (inNames) {
             String fullName = input.getName();
             if (input instanceof MockCard) {
                 fullName = ((MockCard) input).getFullName(true);
             } else if (input instanceof ModalDoubleFacedCard) {
                 fullName = input.getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + ((ModalDoubleFacedCard) input).getRightHalfCard().getName();
-            } else if (input instanceof AdventureCard) {
-                fullName = input.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + ((AdventureCard) input).getSpellCard().getName();
+            } else if (input instanceof CardWithSpellOption) {
+                fullName = input.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + ((CardWithSpellOption) input).getSpellCard().getName();
             }
-
-            if (fullName.toLowerCase(Locale.ENGLISH).contains(text.toLowerCase(Locale.ENGLISH))) {
-                if (isUnique && seenCards.containsKey(input.getName())) {
-                    return false;
-                }
-                if (isUnique) {
-                    seenCards.put(input.getName(), true);
-                }
-                return true;
+            if (textHasTokens(fullName, true)) {
+                return saveAndReturnUniqueFind(input);
             }
         }
 
-        // separate by spaces
-        String[] tokens = text.toLowerCase(Locale.ENGLISH).split(" ");
-        for (String token : tokens) {
-            boolean found = false;
-            if (!token.isEmpty()) {
-                // then try to find in rules
-                if (inRules) {
-                    if (input instanceof SplitCard) {
-                        for (String rule : ((SplitCard) input).getLeftHalfCard().getRules(game)) {
-                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
-                                found = true;
-                                break;
-                            }
-                        }
-                        for (String rule : ((SplitCard) input).getRightHalfCard().getRules(game)) {
-                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
-                                found = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (input instanceof ModalDoubleFacedCard) {
-                        for (String rule : ((ModalDoubleFacedCard) input).getLeftHalfCard().getRules(game)) {
-                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
-                                found = true;
-                                break;
-                            }
-                        }
-                        for (String rule : ((ModalDoubleFacedCard) input).getRightHalfCard().getRules(game)) {
-                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
-                                found = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (input instanceof AdventureCard) {
-                        for (String rule : ((AdventureCard) input).getSpellCard().getRules(game)) {
-                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
-                                found = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    for (String rule : input.getRules(game)) {
-                        if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
-                            found = true;
-                            break;
-                        }
-                    }
-                }
-                if (inTypes) {
-                    for (SubType subType : input.getSubtype(game)) {
-                        if (subType.toString().equalsIgnoreCase(token)) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    for (SuperType superType : input.getSuperType(game)) {
-                        if (superType.toString().equalsIgnoreCase(token)) {
-                            found = true;
-                            break;
-                        }
-                    }
-                }
+        // rules: need all tokens
+        if (inRules) {
+            List<String> fullRules = new ArrayList<>(input.getRules(game));
+            if (input instanceof SplitCard) {
+                fullRules.addAll(((SplitCard) input).getLeftHalfCard().getRules(game));
+                fullRules.addAll(((SplitCard) input).getRightHalfCard().getRules(game));
             }
-
-            if (found && isUnique && seenCards.containsKey(input.getName())) {
-                found = false;
+            if (input instanceof ModalDoubleFacedCard) {
+                fullRules.addAll(((ModalDoubleFacedCard) input).getLeftHalfCard().getRules(game));
+                fullRules.addAll(((ModalDoubleFacedCard) input).getRightHalfCard().getRules(game));
             }
-            if (!found) {
-                return false;
+            if (input instanceof CardWithSpellOption) {
+                fullRules.addAll(((CardWithSpellOption) input).getSpellCard().getRules(game));
+            }
+            if (textHasTokens(String.join("@", fullRules), true)) {
+                return saveAndReturnUniqueFind(input);
             }
         }
 
+        // types: need all tokens
+        if (inTypes) {
+            List<String> fullTypes = new ArrayList<>();
+            fullTypes.addAll(input.getSubtype(game).stream().map(SubType::toString).collect(Collectors.toList()));
+            fullTypes.addAll(input.getSuperType(game).stream().map(SuperType::toString).collect(Collectors.toList()));
+            if (textHasTokens(String.join("@", fullTypes), true)) {
+                return saveAndReturnUniqueFind(input);
+            }
+        }
+
+        // not found
+        return false;
+    }
+
+    private boolean saveAndReturnUniqueFind(Card card) {
         if (isUnique) {
-            seenCards.put(input.getName(), true);
+            boolean found = !seenCards.containsKey(card.getName());
+            seenCards.put(card.getName(), true);
+            return found;
+        } else {
+            return true;
         }
-        return true;
+    }
+
+    private boolean textHasTokens(String text, boolean needAllTokens) {
+        String searchingText = text + "@" + text.replace(", ", " ");
+        searchingText += "@" + searchingText.toLowerCase(Locale.ENGLISH);
+
+        boolean found = false;
+        for (String token : this.textTokens) {
+            if (searchingText.contains(token)) {
+                found = true;
+                if (!needAllTokens) {
+                    break;
+                }
+            } else {
+                if (needAllTokens) {
+                    found = false;
+                    break;
+                }
+            }
+        }
+
+        return found;
     }
 
     @Override

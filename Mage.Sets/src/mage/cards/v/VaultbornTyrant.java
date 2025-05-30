@@ -17,7 +17,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class VaultbornTyrant extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature you control with power 4 or greater");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.OR_GREATER, 4));
@@ -47,9 +47,9 @@ public final class VaultbornTyrant extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever Vaultborn Tyrant or another creature with power 4 or greater enters the battlefield under your control, you gain 3 life and draw a card.
+        // Whenever Vaultborn Tyrant or another creature with power 4 or greater you control enters, you gain 3 life and draw a card.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new GainLifeEffect(3), filter, false, true
+                new GainLifeEffect(3), filter, false, false
         );
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

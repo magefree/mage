@@ -29,6 +29,6 @@ public enum KickedCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} was kicked" + (text.isEmpty() ? "" : " " + text);
+        return "it was kicked" + (text.isEmpty() ? "" : " " + text);
     }
 }

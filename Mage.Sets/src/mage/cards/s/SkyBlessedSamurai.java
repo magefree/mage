@@ -2,9 +2,8 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
+import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,7 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledEnchantmentPermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
@@ -22,10 +22,8 @@ import java.util.UUID;
  */
 public final class SkyBlessedSamurai extends CardImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
-            StaticFilters.FILTER_CONTROLLED_PERMANENT_ENCHANTMENT
-    );
-    private static final Hint hint = new ValueHint("Enchantments you control", xValue);
+    static final FilterControlledPermanent filter = new FilterControlledEnchantmentPermanent("enchantments");
+    private static final Hint hint = new ValueHint("Enchantments you control", new PermanentsOnBattlefieldCount(filter));
 
     public SkyBlessedSamurai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{6}{W}");
@@ -36,9 +34,7 @@ public final class SkyBlessedSamurai extends CardImpl {
         this.toughness = new MageInt(4);
 
         // This spell costs {1} less to cast for each enchantment you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL,
-                new SpellCostReductionForEachSourceEffect(1, xValue)
-        ).addHint(hint));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).addHint(hint));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

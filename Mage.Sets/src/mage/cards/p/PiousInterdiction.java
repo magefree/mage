@@ -41,7 +41,7 @@ public final class PiousInterdiction extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
 
         // Enchanted creature can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
     }
 
     private PiousInterdiction(final PiousInterdiction card) {

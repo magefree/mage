@@ -37,7 +37,7 @@ public final class Sandsower extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Tap three untapped creatures you control: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true)));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

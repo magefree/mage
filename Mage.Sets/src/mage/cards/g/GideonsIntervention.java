@@ -41,10 +41,10 @@ public final class GideonsIntervention extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(effect));
 
         // Your opponents can't cast spells with the chosen name.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GideonsInterventionCantCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new GideonsInterventionCantCastEffect()));
 
         // Prevent all damage that would be dealt to you and permanents you control by sources with the chosen name.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GideonsInterventionPreventAllDamageEffect()));
+        this.addAbility(new SimpleStaticAbility(new GideonsInterventionPreventAllDamageEffect()));
     }
 
     private GideonsIntervention(final GideonsIntervention card) {

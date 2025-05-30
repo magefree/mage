@@ -6,13 +6,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -31,6 +29,7 @@ import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -47,13 +46,13 @@ public final class NecropolisFiend extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
-        DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+        DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
         Effect effect = new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-X until end of turn");
         Ability ability = new SimpleActivatedAbility(
@@ -85,16 +84,12 @@ enum NecropolisFiendCostAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void prepareX(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller == null) {
             return;
         }
-        for (VariableCost variableCost : ability.getManaCostsToPay().getVariableCosts()) {
-            if (variableCost instanceof VariableManaCost) {
-                ((VariableManaCost) variableCost).setMaxX(controller.getGraveyard().size());
-            }
-        }
+        ability.setVariableCostsMinMax(0, controller.getGraveyard().size());
     }
 }
 
@@ -103,7 +98,7 @@ enum NecropolisFiendTargetAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         for (Cost cost : ability.getCosts()) {
             if (!(cost instanceof ExileFromGraveCost)) {
                 continue;

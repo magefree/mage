@@ -26,7 +26,7 @@ public final class BlinkingSpirit extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {0}: Return Blinking Spirit to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(0)));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new GenericManaCost(0)));
     }
 
     private BlinkingSpirit(final BlinkingSpirit card) {

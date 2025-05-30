@@ -47,7 +47,7 @@ public final class RatchetRescueRacer extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new TransformSourceEffect().setText("convert {this}"), false, filter
         ).setTriggerPhrase("Whenever one or more nontoken artifacts you control " +
-                "are put into a graveyard from the battlefield, ").setTriggersOnceEachTurn(true));
+                "are put into a graveyard from the battlefield, ").setTriggersLimitEachTurn(1));
     }
 
     private RatchetRescueRacer(final RatchetRescueRacer card) {

@@ -1,9 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -15,6 +12,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -82,10 +83,10 @@ class ReciprocateTarget extends TargetPermanent {
         }
         int count = 0;
         MageObject targetSource = game.getObject(source);
-        if(targetSource != null) {
+        if (targetSource != null) {
             PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, sourceControllerId);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
+                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)
                         && watcher != null && watcher.hasSourceDoneDamage(permanent.getId(), game)) {
                     count++;
                     if (count >= remainingTargets) {

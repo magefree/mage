@@ -30,9 +30,7 @@ public final class WastelandRaider extends CardImpl {
         this.addAbility(new SquadAbility(new ManaCostsImpl<>("{2}")));
 
         // When Wasteland Raider enters the battlefield, each player sacrifices a creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(
-                1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        )));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private WastelandRaider(final WastelandRaider card) {

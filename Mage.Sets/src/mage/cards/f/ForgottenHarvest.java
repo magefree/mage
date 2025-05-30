@@ -3,14 +3,13 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -30,8 +29,7 @@ public final class ForgottenHarvest extends CardImpl {
                 new DoIfCostPaid(
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                         new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterLandCard("land card from your graveyard")))
-                ),
-                TargetController.YOU, false
+                )
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

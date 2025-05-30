@@ -44,7 +44,7 @@ public final class DuelistOfTheMind extends CardImpl {
         // Whenever you commit a crime, you may draw a card. If you do, discard a card. This ability triggers only once each turn.
         this.addAbility(new CommittedCrimeTriggeredAbility(
                 new DrawDiscardControllerEffect(1, 1, true), false
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
     }
 
     private DuelistOfTheMind(final DuelistOfTheMind card) {

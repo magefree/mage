@@ -28,8 +28,8 @@ public final class Necropouncer extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         this.addAbility(new LivingWeaponAbility());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 1)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT)));
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 

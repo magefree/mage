@@ -44,7 +44,7 @@ public final class MournersShield extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {tap}: Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.
-        Ability preventAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MournersShieldEffect(), new GenericManaCost(2));
+        Ability preventAbility = new SimpleActivatedAbility(new MournersShieldEffect(), new GenericManaCost(2));
         preventAbility.addCost(new TapSourceCost());
         this.addAbility(preventAbility);
     }

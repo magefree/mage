@@ -92,7 +92,7 @@ class DireFleetDaredevilEffect extends OneShotEffect {
             Card card = game.getCard(targetCard.getId());
             if (card != null) {
                 // you may play and spend any mana
-                CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+                CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
                 // exile from graveyard
                 ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(false);
                 effect.setTargetPointer(new FixedTarget(card, game));

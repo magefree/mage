@@ -25,7 +25,7 @@ public final class DecoctionModule extends CardImpl {
     public DecoctionModule(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // Whenever a creature enters the battlefield under your control, you get {E}.
+        // Whenever a creature you control enters, you get {E}.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new GetEnergyCountersControllerEffect(1),
@@ -34,7 +34,7 @@ public final class DecoctionModule extends CardImpl {
         );
 
         // {4}, {T}: Return target creature you control to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

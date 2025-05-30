@@ -101,11 +101,11 @@ class ScreamingSwarmEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        Card card = source.getSourceCardIfItStillExists(game);
         return player != null
-                && sourceObject instanceof Card
+                && card != null
                 && player.putCardOnTopXOfLibrary(
-                (Card) sourceObject, game, source, 2, true
+                card, game, source, 2, true
         );
     }
 }

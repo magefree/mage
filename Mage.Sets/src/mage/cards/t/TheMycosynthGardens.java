@@ -19,7 +19,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XCMCPermanentAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
@@ -53,7 +53,7 @@ public final class TheMycosynthGardens extends CardImpl {
         ability = new SimpleActivatedAbility(new TheMycosynthGardensCopyEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 

@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author credman0
  */
 public class AminatousAugury extends CardImpl {
@@ -79,7 +78,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         }
 
         // move cards from library to exile
-        controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 8), source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
+        controller.moveCardsToExile(controller.getLibrary().getTopCards(game, 8), source, game, true, source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, null));
         ExileZone auguryExileZone = game.getExile().getExileZone(source.getSourceId());
         if (auguryExileZone == null) {
             return true;
@@ -129,7 +128,7 @@ class AminatousAuguryEffect extends OneShotEffect {
 class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
 
     AminatousAuguryCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.PlayForFree);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.PlayForFree);
         staticText = "Cast this card without paying its mana cost";
     }
 

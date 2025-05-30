@@ -5,7 +5,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -34,7 +34,7 @@ public final class SeizanPerverterOfTruth extends CardImpl {
         // At the beginning of each player's upkeep, that player loses 2 life and draws two cards.
         Effect effect = new LoseLifeTargetEffect(2);
         effect.setText("that player loses 2 life");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, effect, false);
         effect = new DrawCardTargetEffect(2);
         effect.setText("and draws two cards");
         ability.addEffect(effect);

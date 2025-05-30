@@ -48,8 +48,8 @@ public final class RimeTransfusion extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+1 and has "{S}: This creature can't be blocked this turn except by snow creatures."
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn))),new ManaCostsImpl<>("{S}"));
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
+        Ability gainedAbility = new SimpleActivatedAbility(new GainAbilitySourceEffect(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn))),new ManaCostsImpl<>("{S}"));
         ability2.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule));
         this.addAbility(ability2);
     }

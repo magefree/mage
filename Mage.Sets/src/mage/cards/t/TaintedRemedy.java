@@ -25,7 +25,7 @@ public final class TaintedRemedy extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         // If an opponent would gain life, that player loses that much life instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TaintedRemedyReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new TaintedRemedyReplacementEffect()));
 
     }
 

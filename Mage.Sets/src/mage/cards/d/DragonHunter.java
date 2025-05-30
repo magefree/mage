@@ -30,7 +30,7 @@ public final class DragonHunter extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterPermanent(SubType.DRAGON, "Dragons")));
 
         // Dragon Hunter can block Dragons as though it had reach.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockDragonsAsThoughtIthadReachEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockDragonsAsThoughtIthadReachEffect(Duration.WhileOnBattlefield)));
 
     }
 

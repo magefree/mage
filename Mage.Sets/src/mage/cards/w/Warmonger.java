@@ -37,7 +37,7 @@ public final class Warmonger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}: Warmonger deals 1 damage to each creature without flying and each player. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1, filter) , new GenericManaCost(2));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new DamageEverythingEffect(1, filter) , new GenericManaCost(2));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

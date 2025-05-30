@@ -6,6 +6,7 @@ import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,6 +41,7 @@ public final class KickInTheDoor extends CardImpl {
                 .setText("and can't be blocked by Walls this turn")
         );
         this.getSpellAbility().addEffect(new VentureIntoTheDungeonEffect());
+        this.getSpellAbility().addHint(CurrentDungeonHint.instance);
     }
 
     private KickInTheDoor(final KickInTheDoor card) {

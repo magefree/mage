@@ -20,11 +20,13 @@ import mage.view.TableView;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * App GUI: create new GAME
@@ -35,24 +37,30 @@ public class NewTableDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(NewTableDialog.class);
 
-    private CustomOptionsDialog customOptions;
+    public static final int DEFAULT_COMPUTER_PLAYER_SKILL_LEVEL = 2;
+    public static final String PLAYER_DATA_DELIMETER_OLD = ","; // need for compatibility with old version
+    public static final String PLAYER_DATA_DELIMETER_NEW = "@@@";
+
+    private final CustomOptionsDialog customOptions;
     private TableView table;
     private UUID playerId;
     private UUID roomId;
     private String lastSessionId;
     private final List<TablePlayerPanel> players = new ArrayList<>();
+
+    // temp settings on loading players list
     private final List<PlayerType> prefPlayerTypes = new ArrayList<>();
+    private final List<Integer> prefPlayerSkills = new ArrayList<>();
+    private final List<String> prefPlayerDecks = new ArrayList<>();
+
 
     private static final String LIMITED = "Limited";
 
-    /**
-     * Creates new form NewTableDialog
-     */
     public NewTableDialog() {
         lastSessionId = "";
         initComponents();
         this.customOptions = new CustomOptionsDialog(CustomOptionsDialog.SaveLoadKeys.TABLE, btnCustomOptions);
-        MageFrame.getDesktop().add(customOptions, JLayeredPane.MODAL_LAYER);
+        MageFrame.getDesktop().add(customOptions, customOptions.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         player1Panel.showLevel(false);
         this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
         this.spnQuitRatio.setModel(new SpinnerNumberModel(100, 0, 100, 5));
@@ -142,7 +150,6 @@ public class NewTableDialog extends MageDialog {
         popupSaveSettings.add(menuSaveSettings2);
 
         menuLoadSettingsLast.setText("Load from last time");
-        menuLoadSettingsLast.setToolTipText("");
         menuLoadSettingsLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettingsLastActionPerformed(evt);
@@ -152,7 +159,6 @@ public class NewTableDialog extends MageDialog {
         popupLoadSettings.add(separator1);
 
         menuLoadSettings1.setText("Load from config 1");
-        menuLoadSettings1.setToolTipText("");
         menuLoadSettings1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettings1ActionPerformed(evt);
@@ -170,7 +176,6 @@ public class NewTableDialog extends MageDialog {
         popupLoadSettings.add(separator2);
 
         menuLoadSettingsDefault.setText("Load default settings");
-        menuLoadSettingsDefault.setToolTipText("");
         menuLoadSettingsDefault.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettingsDefaultActionPerformed(evt);
@@ -220,7 +225,6 @@ public class NewTableDialog extends MageDialog {
         });
 
         lblSkillLevel.setText("Skill Level:");
-        lblSkillLevel.setToolTipText("");
 
         cbSkillLevel.setToolTipText("<HTML>This option can be used to make it easier to find matches<br>\nwith opponents of the appropriate skill level.");
 
@@ -480,11 +484,18 @@ public class NewTableDialog extends MageDialog {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.table = null;
         this.playerId = null;
-        this.hideDialog();
+        doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnPreviousConfigurationActionPerformed(java.awt.event.ActionEvent evt, int i) {//GEN-FIRST:event_btnPreviousConfigurationActionPerformed
     }//GEN-LAST:event_btnPreviousConfigurationActionPerformed
+
+    private void doClose() {
+        if (this.customOptions.isVisible()) {
+            this.customOptions.hideDialog();
+        }
+        this.hideDialog();
+    }
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 
@@ -524,7 +535,7 @@ public class NewTableDialog extends MageDialog {
                     DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true),
                     this.txtPassword.getText())) {
                 // all fine, can close create dialog (join dialog will be opened after feedback from server)
-                this.hideDialog();
+                doClose();
                 return;
             }
         } catch (ClassNotFoundException | IOException ex) {
@@ -752,27 +763,56 @@ public class NewTableDialog extends MageDialog {
     }
 
     private void createPlayers(int numPlayers) {
-        // add missing player panels
+        // add miss panels
         if (numPlayers > players.size()) {
             while (players.size() != numPlayers) {
                 TablePlayerPanel playerPanel = new TablePlayerPanel();
-                PlayerType playerType = PlayerType.HUMAN;
-                if (prefPlayerTypes.size() >= players.size() && !players.isEmpty()) {
-                    playerType = prefPlayerTypes.get(players.size() - 1);
-                }
-                playerPanel.init(players.size() + 2, playerType);
                 players.add(playerPanel);
                 playerPanel.addPlayerTypeEventListener(
                         (Listener<Event>) event -> drawPlayers()
                 );
             }
+        }
 
-        } // remove player panels no longer needed
-        else if (numPlayers < players.size()) {
+        // remove un-used panels
+        if (numPlayers < players.size()) {
             while (players.size() != numPlayers) {
                 players.remove(players.size() - 1);
             }
         }
+
+        // load player data
+        String prevGoodPlayerDeck = "";
+        for (int i = 0; i < players.size(); i++) {
+            TablePlayerPanel playerPanel = players.get(i);
+
+            // find player type
+            PlayerType playerType = PlayerType.HUMAN;
+            if (i < prefPlayerTypes.size()) {
+                playerType = prefPlayerTypes.get(i);
+            }
+
+            // find skill level
+            int playerSkill = DEFAULT_COMPUTER_PLAYER_SKILL_LEVEL;
+            if (i < prefPlayerSkills.size()) {
+                playerSkill = prefPlayerSkills.get(i);
+            }
+
+            // find deck file
+            String playerDeck = "";
+            if (i < prefPlayerDecks.size()) {
+                playerDeck = prefPlayerDecks.get(i);
+                // use prev deck if loaded not found
+                if (playerDeck.isEmpty() || !(new File(playerDeck).exists())) {
+                    playerDeck = prevGoodPlayerDeck;
+                } else {
+                    prevGoodPlayerDeck = playerDeck;
+                }
+            }
+
+            playerPanel.init(i + 2, playerType, playerSkill, playerDeck);
+        }
+
         drawPlayers();
     }
 
@@ -786,9 +826,9 @@ public class NewTableDialog extends MageDialog {
         this.repaint();
     }
 
-    private void handleError(Exception ex) {
-        logger.fatal("Error loading deck", ex);
-        MageFrame.getInstance().showErrorDialog("Error loading deck", ex.getMessage());
+    private void handleError(Exception e) {
+        logger.fatal("Can't join table due " + e, e);
+        MageFrame.getInstance().showErrorDialog("CLIENT - error on join table", e);
     }
 
     public void showDialog(UUID roomId) {
@@ -804,11 +844,6 @@ public class NewTableDialog extends MageDialog {
             cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
             cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
             cbSkillLevel.setModel(new DefaultComboBoxModel(SkillLevel.values()));
-            // Update the existing player panels (neccessary if server was changes = new session)
-            int i = 2;
-            for (TablePlayerPanel tablePlayerPanel : players) {
-                tablePlayerPanel.init(i++, tablePlayerPanel.getPlayerType());
-            }
             this.setModal(true);
             setGameOptions();
             this.setLocation(150, 100);
@@ -859,11 +894,24 @@ public class NewTableDialog extends MageDialog {
         txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME + versionStr, "Game"));
         txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD + versionStr, ""));
 
-        String playerTypes = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, "Human");
+        // load player data
+        // player type
+        String playerData = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, "Human");
         prefPlayerTypes.clear();
-        for (String pType : playerTypes.split(",")) {
-            prefPlayerTypes.add(PlayerType.getByDescription(pType));
+        for (String playerTypeStr : playerData.split(PLAYER_DATA_DELIMETER_OLD)) {
+            prefPlayerTypes.add(PlayerType.getByDescription(playerTypeStr));
         }
+        // player skill
+        playerData = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_SKILLS + versionStr, String.valueOf(DEFAULT_COMPUTER_PLAYER_SKILL_LEVEL));
+        prefPlayerSkills.clear();
+        for (String playerSkillStr : playerData.split(PLAYER_DATA_DELIMETER_NEW)) {
+            prefPlayerSkills.add(Integer.parseInt(playerSkillStr));
+        }
+        // player deck
+        playerData = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_DECKS + versionStr, "Human");
+        prefPlayerDecks.clear();
+        prefPlayerDecks.addAll(Arrays.asList(playerData.split(PLAYER_DATA_DELIMETER_NEW)));
+
         this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS + versionStr, "2")));
 
         String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE + versionStr, "Two Player Duel");
@@ -964,15 +1012,22 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_MINIMUM_RATING + versionStr, Integer.toString(options.getMinimumRating()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_EDH_POWER_LEVEL + versionStr, Integer.toString(options.getEdhPowerLevel()));
 
-        StringBuilder playerTypesString = new StringBuilder();
-        for (Object player : players) {
-            if (playerTypesString.length() > 0) {
-                playerTypesString.append(',');
-            }
-            TablePlayerPanel tpp = (TablePlayerPanel) player;
-            playerTypesString.append(tpp.getPlayerType());
-        }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, playerTypesString.toString());
+        // save player data
+        // player type
+        String playerData = players.stream()
+                .map(panel -> panel.getPlayerType().toString())
+                .collect(Collectors.joining(PLAYER_DATA_DELIMETER_OLD));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, playerData);
+        // player skill
+        playerData = players.stream()
+                .map(panel -> String.valueOf(panel.getPlayerSkill()))
+                .collect(Collectors.joining(PLAYER_DATA_DELIMETER_NEW));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_SKILLS + versionStr, playerData);
+        // player deck
+        playerData = players.stream()
+                .map(panel -> String.valueOf(panel.getPlayerDeck()))
+                .collect(Collectors.joining(PLAYER_DATA_DELIMETER_NEW));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_DECKS + versionStr, playerData);
 
         customOptions.onSaveSettings(version, options);
     }

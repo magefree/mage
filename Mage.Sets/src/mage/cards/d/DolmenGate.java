@@ -27,7 +27,7 @@ public final class DolmenGate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Prevent all combat damage that would be dealt to attacking creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filter, true)));
     }
 
     private DolmenGate(final DolmenGate card) {

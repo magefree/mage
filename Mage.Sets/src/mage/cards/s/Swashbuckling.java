@@ -39,7 +39,7 @@ public final class Swashbuckling extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and has haste.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)
                 .setText("and has haste"));
         this.addAbility(ability);

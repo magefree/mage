@@ -35,7 +35,7 @@ public class SmugglersBuggy extends CardImpl {
         // Hideaway 4
         //      (When this artifact enters the battlefield, look at the top four cards of your library,
         //      exile one face down, then put the rest on the bottom in a random order.)
-        this.addAbility(new HideawayAbility(4));
+        this.addAbility(new HideawayAbility(this, 4));
 
         // Whenever Smuggler’s Buggy deals combat damage to a player, you may cast the exiled card without paying its mana cost.
         // If you do, return Smuggler’s Buggy to its owner’s hand.

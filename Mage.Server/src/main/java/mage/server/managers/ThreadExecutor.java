@@ -16,6 +16,11 @@ public interface ThreadExecutor {
     ExecutorService getGameExecutor();
 
     /**
+     * Tourney thread
+     */
+    ExecutorService getTourneyExecutor();
+
+    /**
      * Helper threads to execute async commands for game and server related tasks (example: process income command from a client)
      */
     ExecutorService getCallExecutor();

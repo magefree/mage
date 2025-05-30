@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
@@ -25,8 +25,8 @@ public final class ForsakenWastes extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantGainLifeAllEffect()));
         
         // At the beginning of each player's upkeep, that player loses 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1),
-                TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER,
+                new LoseLifeTargetEffect(1), false));
         
         // Whenever Forsaken Wastes becomes the target of a spell, that spell's controller loses 5 life.
         this.addAbility(new BecomesTargetSourceTriggeredAbility(new LoseLifeTargetEffect(5).setText("that spell's controller loses 5 life"),

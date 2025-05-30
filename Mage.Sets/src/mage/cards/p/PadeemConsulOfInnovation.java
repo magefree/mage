@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentGreatestCMCCondition;
@@ -41,7 +41,7 @@ public final class PadeemConsulOfInnovation extends CardImpl {
         // At the beginning of your upkeep, if you control the artifact with the highest converted mana cost or tied for the highest converted mana cost, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                        new DrawCardSourceControllerEffect(1), false
                 ), condition, "At the beginning of your upkeep, if you control the artifact " +
                 "with the highest mana value or tied for the highest mana value, draw a card."
         ));

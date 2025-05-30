@@ -4,7 +4,7 @@ import mage.MageIdentifier;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -46,8 +46,7 @@ public final class CourtOfLocthwain extends CardImpl {
 
         // At the beginning of your upkeep, exile the top card of target opponent's library. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it. If you're the monarch, until end of turn, you may cast a spell from among cards exiled with Court of Locthwain without paying its mana cost.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CourtOfLocthwainFirstEffect(),
-                TargetController.YOU, false
+                new CourtOfLocthwainFirstEffect()
         );
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(
@@ -107,7 +106,7 @@ class CourtOfLocthwainFirstEffect extends OneShotEffect {
 
         if (game.getState().getZone(card.getId()) == Zone.EXILED) {
             CardUtil.makeCardPlayable(
-                    game, source, card, Duration.EndOfGame,
+                    game, source, card, false, Duration.EndOfGame,
                     true, controller.getId(), null
             );
         }
@@ -160,7 +159,7 @@ class CourtOfLocthwainCastForFreeEffect extends AsThoughEffectImpl {
     private final MageObjectReference mor;
 
     public CourtOfLocthwainCastForFreeEffect(MageObjectReference mor) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.mor = mor;
     }
 
@@ -227,7 +226,7 @@ class CourtOfLocthwainWatcher extends Watcher {
                 && event.getPlayerId() != null) {
             decrementCastAvailable(
                     event.getPlayerId(),
-                    event.getAdditionalReference().getApprovingMageObjectReference()
+                    event.getApprovingObject().getApprovingMageObjectReference()
             );
         }
     }

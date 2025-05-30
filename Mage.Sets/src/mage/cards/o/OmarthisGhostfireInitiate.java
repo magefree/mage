@@ -38,7 +38,7 @@ public final class OmarthisGhostfireInitiate extends CardImpl {
         
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
@@ -58,7 +58,7 @@ public final class OmarthisGhostfireInitiate extends CardImpl {
 
         // When Omarthis dies, manifest a number of cards from the top of your library equal to the number of counters on it.
         this.addAbility(new DiesSourceTriggeredAbility(
-            new ManifestEffect(new CountersSourceCount(null))
+            new ManifestEffect(CountersSourceCount.ANY)
                 .setText("manifest a number of cards from the top of your library equal to the number of counters on it."),
             false
         ));

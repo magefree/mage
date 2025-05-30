@@ -15,7 +15,7 @@ import java.util.*;
  */
 public abstract class NthTargetPointer extends TargetPointerImpl {
 
-    private static final List<UUID> emptyTargets = Collections.unmodifiableList(new ArrayList<>(0));
+    private static final List<UUID> emptyTargets = Collections.unmodifiableList(new ArrayList<>());
 
     // TODO: rework to list of MageObjectReference instead zcc
     private final Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
@@ -150,6 +150,7 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
     public String describeTargets(Targets targets, String defaultDescription) {
         if (targets.size() <= this.targetIndex) {
             // TODO: need research, is it used for non setup targets ?!
+            // Typical usage example: trigger sets fixed target pointer
             return defaultDescription;
         } else {
             return targets.get(this.targetIndex).getDescription();

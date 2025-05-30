@@ -33,7 +33,7 @@ public final class SensoryDeprivation extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));
         // Enchanted creature gets -3/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-3, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-3, 0, Duration.WhileOnBattlefield)));
     }
 
     private SensoryDeprivation(final SensoryDeprivation card) {

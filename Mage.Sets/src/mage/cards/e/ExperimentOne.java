@@ -27,12 +27,12 @@ public final class ExperimentOne extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Evolve (Whenever a creature enters the battlefield under your control, if that creature
+        // Evolve (Whenever a creature you control enters, if that creature
         // has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
         this.addAbility(new EvolveAbility());
 
         //Remove two +1/+1 counters from Experiment One: Regenerate Experiment One.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
     private ExperimentOne(final ExperimentOne card) {

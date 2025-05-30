@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
@@ -44,7 +44,7 @@ public final class ColfenorsUrn extends CardImpl {
                 new ExileTargetForSourceEffect().setText("exile it"), true, filter, true, true));
 
         // At the beginning of the end step, if three or more cards have been exiled with Colfenor's Urn, sacrifice it. If you do, return those cards to the battlefield under their owner's control.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ColfenorsUrnEffect(), TargetController.NEXT, new ColfenorsUrnCondition(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new ColfenorsUrnEffect(), false, new ColfenorsUrnCondition()));
     }
 
     private ColfenorsUrn(final ColfenorsUrn card) {
@@ -61,7 +61,7 @@ class ColfenorsUrnEffect extends OneShotEffect {
 
     ColfenorsUrnEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "If you do, return those cards to the battlefield under their owner's control";
+        this.staticText = "sacrifice it. If you do, return those cards to the battlefield under their owner's control";
     }
 
     private ColfenorsUrnEffect(final ColfenorsUrnEffect effect) {
@@ -108,6 +108,6 @@ class ColfenorsUrnCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if three or more cards have been exiled with Colfenor's Urn, sacrifice it.";
+        return "if three or more cards have been exiled with {this}";
     }
 }

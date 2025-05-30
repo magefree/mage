@@ -49,7 +49,7 @@ public final class CaseFileAuditor extends CardImpl {
         // Put the rest on the bottom of your library in a random order.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD,
                 new LookLibraryAndPickControllerEffect(6, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                false, "When {this} enters the battlefield and whenever you solve a Case, ",
+                false, "When {this} enters and whenever you solve a Case, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new CaseFileAuditorTriggeredAbility()));
 

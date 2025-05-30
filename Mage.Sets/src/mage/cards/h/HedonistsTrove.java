@@ -123,7 +123,7 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
 class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
 
     HedonistsTroveCastNonlandCardsEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast spells from among cards exiled with {this}. "
                 + "You can't cast more than one spell this way each turn.";
     }
@@ -173,12 +173,12 @@ class HedonistsTroveWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.SPELL_CAST
-                || event.getAdditionalReference() == null) {
+                || event.getApprovingObject() == null) {
             return;
         }
         playerMap
                 .computeIfAbsent(event.getPlayerId(), x -> new HashSet<>())
-                .add(event.getAdditionalReference().getApprovingMageObjectReference());
+                .add(event.getApprovingObject().getApprovingMageObjectReference());
         playerMap.get(event.getPlayerId()).removeIf(Objects::isNull);
     }
 

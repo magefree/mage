@@ -14,7 +14,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -68,6 +68,7 @@ class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilit
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getPermanent(event.getTargetId()).isControlledBy(this.controllerId);
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && permanent.isControlledBy(this.getControllerId());
     }
 }

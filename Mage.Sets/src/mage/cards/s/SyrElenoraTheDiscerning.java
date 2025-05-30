@@ -30,14 +30,14 @@ public final class SyrElenoraTheDiscerning extends CardImpl {
 
         // Syr Elenora the Discerning's power is equal to the number of cards in your hand.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.instance)
+                Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.ANY)
         ));
 
         // When Syr Elenora enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Spells your opponents cast that target Syr Elenora cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(2, new FilterCard("Spells"), TargetController.OPPONENT))
         );
     }

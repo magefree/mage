@@ -31,7 +31,7 @@ public final class Whipkeeper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Whipkeeper deals damage to target creature equal to the damage already dealt to it this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WhipkeeperEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new WhipkeeperEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         

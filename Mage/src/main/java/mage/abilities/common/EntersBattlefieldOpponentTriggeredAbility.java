@@ -7,6 +7,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author xenohedron
@@ -19,7 +20,7 @@ public class EntersBattlefieldOpponentTriggeredAbility extends EntersBattlefield
 
     public EntersBattlefieldOpponentTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, filter, optional, setTargetPointer);
-        setTriggerPhrase(getTriggerPhraseFromFilter() + " under an opponent's control, ");
+        setTriggerPhrase(getWhen() + CardUtil.addArticle(filter.getMessage()) + " an opponent controls enters, ");
     }
 
     protected EntersBattlefieldOpponentTriggeredAbility(final EntersBattlefieldOpponentTriggeredAbility ability) {

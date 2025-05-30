@@ -3,7 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -17,7 +17,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class ElderSpawn extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, unless you sacrifice an Island, sacrifice Elder Spawn and it deals 6 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ElderSpawnEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ElderSpawnEffect()));
 
         // Elder Spawn can't be blocked by red creatures.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));

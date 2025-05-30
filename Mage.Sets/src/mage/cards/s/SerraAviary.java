@@ -31,7 +31,7 @@ public final class SerraAviary extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // Creatures with flying get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, false)));
     }
 
     private SerraAviary(final SerraAviary card) {

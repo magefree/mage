@@ -1,6 +1,7 @@
 package mage.abilities;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -10,6 +11,7 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.CommandObject;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -57,7 +59,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-        super(AbilityType.ACTIVATED, zone);
+        super(AbilityType.ACTIVATED_NONMANA, zone);
         this.addEffect(effect);
         this.addCost(cost);
     }
@@ -138,6 +140,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
             return ActivationStatus.getFalse();
         }
 
+        // activate restrictions by replacement effects (example: Sharkey, Tyrant of the Shire)
+        if (this.isActivatedAbility()) {
+            if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, this.getId(), this, playerId))) {
+                return ActivationStatus.getFalse();
+            }
+        }
+
         // all fine, can be activated
         // TODO: WTF, must be rework to remove data change in canActivate call
         //  (it can be called from any place by any player or card).
@@ -147,8 +156,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         if (approvingObjects.isEmpty()) {
             return ActivationStatus.withoutApprovingObject(true);
-        }
-        else {
+        } else {
             return new ActivationStatus(approvingObjects);
         }
     }
@@ -207,9 +215,26 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 || activationInfo.activationCounter < getMaxActivationsPerTurn(game);
     }
 
+    public int getMaxMoreActivationsThisTurn(Game game) {
+        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE && maxActivationsPerGame == Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        ActivationInfo activationInfo = getActivationInfo(game);
+        if (activationInfo == null) {
+            return Math.min(maxActivationsPerGame, getMaxActivationsPerTurn(game));
+        }
+        if (activationInfo.totalActivations >= maxActivationsPerGame) {
+            return 0;
+        }
+        if (activationInfo.turnNum != game.getTurnNum()) {
+            return getMaxActivationsPerTurn(game);
+        }
+        return Math.max(0, getMaxActivationsPerTurn(game) - activationInfo.activationCounter);
+    }
+
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (!hasMoreActivationsThisTurn(game) || !super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (!hasMoreActivationsThisTurn(game) || !super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
         ActivationInfo activationInfo = getActivationInfo(game);

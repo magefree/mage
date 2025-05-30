@@ -35,7 +35,7 @@ public final class Earthcraft extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // Tap an untapped creature you control: Untap target basic land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filterCreature, true)));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filterCreature, true)));
         ability.addTarget(new TargetPermanent(filterLand));
         this.addAbility(ability);
     }

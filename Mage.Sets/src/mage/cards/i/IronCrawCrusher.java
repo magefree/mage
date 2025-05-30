@@ -3,8 +3,7 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.PrototypeAbility;
@@ -22,8 +21,6 @@ import java.util.UUID;
  */
 public final class IronCrawCrusher extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public IronCrawCrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
 
@@ -36,7 +33,7 @@ public final class IronCrawCrusher extends CardImpl {
 
         // Whenever Iron-Craw Crusher attacks, target attacking creature gets +X/+0 until end of turn, where X is Iron-Craw Crusher's power.
         Ability ability = new AttacksTriggeredAbility(
-                new BoostTargetEffect(xValue, StaticValue.get(0), Duration.EndOfTurn)
+                new BoostTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE, StaticValue.get(0), Duration.EndOfTurn)
         );
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);

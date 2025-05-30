@@ -2,6 +2,7 @@
 package mage.cards.u;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -27,13 +28,12 @@ import mage.target.TargetSpell;
 import mage.target.common.TargetCardInExile;
 
 /**
- *
  * @author fireshoes
  */
 public final class UlamogsNullifier extends CardImpl {
 
     public UlamogsNullifier(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.PROCESSOR);
         this.power = new MageInt(2);
@@ -92,7 +92,7 @@ class UlamogsNullifierEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Spell spell = game.getStack().getSpell(source.getFirstTarget());
         if (controller != null && spell != null) {
-            Target target = new TargetCardInExile(2, 2, filter, null);
+            Target target = new TargetCardInExile(2, 2, filter);
             if (target.canChoose(source.getControllerId(), source, game)) {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Cards cardsToGraveyard = new CardsImpl(target.getTargets());

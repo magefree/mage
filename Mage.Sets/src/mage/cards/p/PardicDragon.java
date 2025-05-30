@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,7 +7,6 @@ import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -22,6 +19,8 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,16 +37,17 @@ public final class PardicDragon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // {R}: Pardic Dragon gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+
         // Suspend 2-{R}{R}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{R}{R}"), this, true));
+
         // Whenever an opponent casts a spell, if Pardic Dragon is suspended, that player may put a time counter on Pardic Dragon.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new SpellCastOpponentTriggeredAbility(Zone.EXILED, new PardicDragonEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER),
-                SuspendedCondition.instance,
-                "Whenever an opponent casts a spell, if {this} is suspended, that player may put a time counter on {this}."
-                ));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.EXILED, new PardicDragonEffect(),
+                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER)
+                .withInterveningIf(SuspendedCondition.instance));
 
     }
 
@@ -65,7 +65,7 @@ class PardicDragonEffect extends OneShotEffect {
 
     PardicDragonEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player may put a time counter on Pardic Dragon";
+        this.staticText = "that player may put a time counter on {this}";
     }
 
     private PardicDragonEffect(final PardicDragonEffect effect) {

@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -19,14 +18,15 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class ProteanHydra extends CardImpl {
 
     public ProteanHydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}");
         this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(0);
@@ -36,7 +36,9 @@ public final class ProteanHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageAndRemoveCountersEffect(true, false, true)));
+        this.addAbility(new SimpleStaticAbility(
+                new PreventDamageAndRemoveCountersEffect(true, false, true)
+        ), PreventDamageAndRemoveCountersEffect.createWatcher());
 
         // Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.
         this.addAbility(new ProteanHydraAbility());

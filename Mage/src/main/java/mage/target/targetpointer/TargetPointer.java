@@ -3,6 +3,7 @@ package mage.target.targetpointer;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Targets;
 import mage.util.Copyable;
 
@@ -32,11 +33,6 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
      */
     UUID getFirst(Game game, Ability source);
 
-    /**
-     * Return first actual target data (null on outdated targets)
-     */
-    FixedTarget getFirstAsFixedTarget(Game game, Ability source);
-
     TargetPointer copy();
 
     /**
@@ -48,19 +44,18 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
      * retrieved using LKI (608.2b).<br>
      * This is only used if the the target pointer is used to transfer
      * information about a related permanent (often from triggered abilities).
-     *
-     * @param game
-     * @param source
-     * @return permanent
      */
     Permanent getFirstTargetPermanentOrLKI(Game game, Ability source);
 
     /**
+     * Finds the controller of the first target object or LKI,
+     * whether it is a permanent or spell.
+     * Returns null if not found.
+     */
+    Player getControllerOfFirstTargetOrLKI(Game game, Ability source);
+
+    /**
      * Describes the appropriate subset of targets for ability text.
-     *
-     * @param targets
-     * @param defaultText
-     * @return
      */
     default String describeTargets(Targets targets, String defaultDescription) {
         return defaultDescription;
@@ -71,10 +66,7 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
     }
 
     /**
-     * Store text to target pointer (usefull to keep data for specific trigger, e.g. selected target name for rules)
-     *
-     * @param key
-     * @param value
+     * Store text to target pointer (useful to keep data for specific trigger, e.g. selected target name for rules)
      */
     TargetPointer withData(String key, String value);
 

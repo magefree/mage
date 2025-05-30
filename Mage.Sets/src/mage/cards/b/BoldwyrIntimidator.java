@@ -5,17 +5,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CowardsCantBlockWarriorsEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -32,19 +28,23 @@ public final class BoldwyrIntimidator extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Cowards can't block Warriors.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoldwyrIntimidatorEffect()));
+        this.addAbility(new SimpleStaticAbility(new CowardsCantBlockWarriorsEffect()));
 
         // {R}: Target creature becomes a Coward until end of turn.
-        Effect effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.COWARD);
-        effect.setText("Target creature becomes a Coward until end of turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(
+                new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.COWARD)
+                        .setText("target creature becomes a Coward until end of turn"),
+                new ManaCostsImpl<>("{R}")
+        );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {2}{R}: Target creature becomes a Warrior until end of turn.
-        effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.WARRIOR);
-        effect.setText("Target creature becomes a Warrior until end of turn");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{R}"));
+        ability = new SimpleActivatedAbility(
+                new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.WARRIOR)
+                        .setText("target creature becomes a Warrior until end of turn"),
+                new ManaCostsImpl<>("{2}{R}")
+        );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -56,39 +56,5 @@ public final class BoldwyrIntimidator extends CardImpl {
     @Override
     public BoldwyrIntimidator copy() {
         return new BoldwyrIntimidator(this);
-    }
-}
-
-class BoldwyrIntimidatorEffect extends RestrictionEffect {
-
-    BoldwyrIntimidatorEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Cowards can't block Warriors";
-    }
-
-    private BoldwyrIntimidatorEffect(final BoldwyrIntimidatorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        return sourcePermanent != null;
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (attacker != null && blocker != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null && attacker.hasSubtype(SubType.WARRIOR, game)) {
-                return !blocker.hasSubtype(SubType.COWARD, game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public BoldwyrIntimidatorEffect copy() {
-        return new BoldwyrIntimidatorEffect(this);
     }
 }

@@ -46,7 +46,7 @@ public final class NyxInfusion extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 as long as it's an enchantment. Otherwise, it gets -2/-2.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(2,2,Duration.WhileOnBattlefield),
                 new BoostEnchantedEffect(-2,-2,Duration.WhileOnBattlefield),
                 new AttachedToMatchesFilterCondition(filter),

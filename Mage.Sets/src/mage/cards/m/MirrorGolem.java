@@ -40,7 +40,7 @@ public final class MirrorGolem extends CardImpl {
         this.addAbility(ability);
 
         // Mirror Golem has protection from each of the exiled card's card types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MirrorGolemEffect()));
+        this.addAbility(new SimpleStaticAbility(new MirrorGolemEffect()));
     }
 
     private MirrorGolem(final MirrorGolem card) {
@@ -116,8 +116,8 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
                         FilterCard filterCard;
                         if (cardType.equals(CardType.SORCERY)) {
                             filterCard = new FilterCard("sorceries");
-                        } else if (cardType.equals(CardType.TRIBAL)) {
-                            filterCard = new FilterCard("tribal");
+                        } else if (cardType.equals(CardType.KINDRED)) {
+                            filterCard = new FilterCard("kindred");
                         } else {
                             filterCard = new FilterCard(cardType.toString() + "s");
                         }

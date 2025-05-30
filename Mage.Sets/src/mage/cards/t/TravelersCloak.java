@@ -57,7 +57,7 @@ public final class TravelersCloak extends CardImpl {
         // Enchanted creature has landwalk of the chosen type.
         Effect effect = new TravelersCloakGainAbilityAttachedEffect(filter);
         effect.setText("Enchanted creature has landwalk of the chosen type");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private TravelersCloak(final TravelersCloak card) {
@@ -109,4 +109,3 @@ enum TravelersCloakChosenSubtypePredicate implements ObjectSourcePlayerPredicate
         return "Chosen subtype";
     }
 }
-

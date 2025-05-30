@@ -35,10 +35,10 @@ public final class EleshNornGrandCenobite extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Other creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true)));
 
         // Creatures your opponents control get -2/-2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-2, -2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostOpponentsEffect(-2, -2, Duration.WhileOnBattlefield)));
     }
 
     private EleshNornGrandCenobite(final EleshNornGrandCenobite card) {

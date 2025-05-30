@@ -31,7 +31,7 @@ public final class LifeChisel extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,
                 new LifeChiselEffect(),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 new IsStepCondition(PhaseStep.UPKEEP)
         );
         this.addAbility(ability);

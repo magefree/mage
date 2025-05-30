@@ -20,7 +20,7 @@ public final class SpontaneousCombustion extends CardImpl {
     public SpontaneousCombustion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
 
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
     }
 

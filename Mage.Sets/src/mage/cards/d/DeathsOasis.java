@@ -5,8 +5,7 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
@@ -17,16 +16,12 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -44,12 +39,13 @@ public final class DeathsOasis extends CardImpl {
         // Whenever a nontoken creature you control dies, put the top two cards of your library into your graveyard. Then return a creature card with lesser converted mana cost than the creature that died from the graveyard to your hand.
         this.addAbility(new DeathsOasisTriggeredAbility());
 
-        // {1}, Sacrifice Death's Oasis: You gain life equal to the greatest converted mana cost among creatures you control.
+        // {1}, Sacrifice Death's Oasis: You gain life equal to the greatest mana value among creatures you control.
         Ability ability = new SimpleActivatedAbility(
-                new GainLifeEffect(DeathsOasisValue.instance)
+                new GainLifeEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_CREATURES)
                         .setText("you gain life equal to the highest mana value among creatures you control"),
                 new GenericManaCost(1)
         );
+        ability.addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_CREATURES.getHint());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -67,7 +63,7 @@ public final class DeathsOasis extends CardImpl {
 class DeathsOasisTriggeredAbility extends DiesCreatureTriggeredAbility {
 
     DeathsOasisTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false);
+        super(null, false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, false);
     }
 
     private DeathsOasisTriggeredAbility(final DeathsOasisTriggeredAbility ability) {
@@ -134,31 +130,5 @@ class DeathsOasisEffect extends OneShotEffect {
             return false;
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
-    }
-}
-
-enum DeathsOasisValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game
-                .getBattlefield()
-                .getAllActivePermanents(sourceAbility.getControllerId())
-                .stream()
-                .filter(permanent -> permanent.isCreature(game))
-                .mapToInt(Permanent::getManaValue)
-                .max()
-                .orElse(0);
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "1";
     }
 }

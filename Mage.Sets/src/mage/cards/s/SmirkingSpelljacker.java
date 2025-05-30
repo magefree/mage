@@ -63,7 +63,7 @@ public final class SmirkingSpelljacker extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new SmirkingSpelljackerEffect()),
                 SmirkingSpelljackerCondition.instance,
-                "Whenever Smirking Spelljacker attacks, if a card is exiled with it, "
+                "Whenever {this} attacks, if a card is exiled with it, "
                         + "you may cast the exiled card without paying its mana cost."
         ));
     }
@@ -117,7 +117,7 @@ class SmirkingSpelljackerEffect extends OneShotEffect {
             return false;
         }
         FilterCard filter = new FilterCard("card exiled with " + CardUtil.getSourceLogName(game, source));
-        TargetCard target = new TargetCardInExile(1, 1, filter, CardUtil.getExileZoneId(game, source));
+        TargetCard target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source));
         target.withNotTarget(true);
         controller.choose(Outcome.PlayForFree, target, source, game);
         new MayCastTargetCardEffect(CastManaAdjustment.WITHOUT_PAYING_MANA_COST)

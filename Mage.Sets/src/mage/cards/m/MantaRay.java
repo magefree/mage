@@ -37,7 +37,7 @@ public final class MantaRay extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Manta Ray can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
 
         // Manta Ray can't be blocked except by blue creatures.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));

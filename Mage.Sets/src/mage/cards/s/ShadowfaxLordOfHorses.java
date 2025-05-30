@@ -19,6 +19,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class ShadowfaxLordOfHorses extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Horses you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
         // Whenever Shadowfax, Lord of Horses attacks, you may put a creature card
@@ -99,7 +100,7 @@ class ShadowfaxLordOfHorsesEffect extends OneShotEffect {
         }
 
         player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             game.getCombat().addAttackingCreature(permanent.getId(), game);
         }

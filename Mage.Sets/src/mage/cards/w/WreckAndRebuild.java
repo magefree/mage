@@ -75,7 +75,7 @@ class WreckAndRebuildEffect extends OneShotEffect {
             return false;
         }
         TargetCard targetCard = new TargetCardInYourGraveyard(
-                0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, true
+                0, 1, StaticFilters.FILTER_CARD_LAND, true
         );
         player.choose(outcome, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());

@@ -40,7 +40,6 @@ public final class GoblinTrashmaster extends CardImpl {
 
         // Other Goblins you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         1, 1, Duration.WhileOnBattlefield,
                         filter, true

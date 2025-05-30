@@ -5,7 +5,7 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -49,14 +49,14 @@ public final class GruffTriplets extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenCopySourceEffect(2)),
                 new SourceMatchesFilterCondition(filterNonToken),
-                "When {this} enters the battlefield, if it isn't a token, create two tokens that are copies of it."
+                "When {this} enters, if it isn't a token, create two tokens that are copies of it."
         ));
 
         // When Gruff Triplets dies, put a number of +1/+1 counters equal to its power on each creature you control named Gruff Triplets.
         this.addAbility(new DiesSourceTriggeredAbility(
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(),
-                        new SourcePermanentPowerCount(),
+                        SourcePermanentPowerValue.NOT_NEGATIVE,
                         filterNamedGruffTriplets
                 ).setText("put a number of +1/+1 counters equal to its power on each creature you control named Gruff Triplets.")
         ));

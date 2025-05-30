@@ -31,17 +31,12 @@ public class PlayFromTopOfLibraryEffect extends AsThoughEffectImpl {
     }
 
     /**
-     * You may [play lands and/or cast spells, according to filter] from the top of your library
+     * You may [play lands/cast spells/play cards, according to filter] from the top of your library
      */
     public PlayFromTopOfLibraryEffect(FilterCard filter) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
         this.staticText = "you may " + filter.getMessage() + " from the top of your library";
-
-        // verify check: this ability is to allow playing lands or casting spells, not playing a "card"
-        if (filter.getMessage().toLowerCase(Locale.ENGLISH).contains("card")) {
-            throw new IllegalArgumentException("Wrong code usage or wrong filter text: PlayTheTopCardEffect");
-        }
     }
 
     protected PlayFromTopOfLibraryEffect(final PlayFromTopOfLibraryEffect effect) {
@@ -68,15 +63,15 @@ public class PlayFromTopOfLibraryEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         // can play lands/spells (must check specific part and allows specific part)
 
-        Card cardToCheck = game.getCard(objectId); // maybe this should be removed and only check SpellAbility characteristics
+        Card cardToCheck = game.getCard(objectId); // maybe this should be removed and only check SpellAbility characteristics -- No! don't forget PlayLandAbility
         if (cardToCheck == null) {
             return false;
         }
         if (affectedAbility instanceof SpellAbility) {
             SpellAbility spell = (SpellAbility) affectedAbility;
             cardToCheck = spell.getCharacteristics(game);
-            if (spell.getManaCosts().isEmpty()){
-                return false;
+            if (spell.getManaCosts().isEmpty()) {
+                return false;  // prevent casting cards without mana cost?
             }
         }
         // only permits you to cast

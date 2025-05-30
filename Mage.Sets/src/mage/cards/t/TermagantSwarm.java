@@ -2,8 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RavenousAbility;
 import mage.cards.CardImpl;
@@ -19,8 +18,6 @@ import java.util.UUID;
  */
 public final class TermagantSwarm extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public TermagantSwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}");
 
@@ -33,7 +30,7 @@ public final class TermagantSwarm extends CardImpl {
 
         // Death Frenzy -- When Termagant Swarm dies, create a number of 1/1 green Tyranid creature tokens equal to Termagant Swarm's power.
         this.addAbility(new DiesSourceTriggeredAbility(
-                new CreateTokenEffect(new TyranidToken(), xValue)
+                new CreateTokenEffect(new TyranidToken(), SourcePermanentPowerValue.NOT_NEGATIVE)
                         .setText("create a number of 1/1 green Tyranid creature tokens equal to {this}'s power")
         ).withFlavorWord("Death Frenzy"));
     }

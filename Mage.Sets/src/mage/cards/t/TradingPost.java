@@ -33,26 +33,26 @@ public final class TradingPost extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {1}, {T}, Discard a card: You gain 4 life.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), new GenericManaCost(1));
+        Ability ability1 = new SimpleActivatedAbility(new GainLifeEffect(4), new GenericManaCost(1));
         ability1.addCost(new TapSourceCost());
         ability1.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability1);
 
         // {1}, {T}, Pay 1 life: Create a 0/1 white Goat creature token.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoatToken()), new GenericManaCost(1));
+        Ability ability2 = new SimpleActivatedAbility(new CreateTokenEffect(new GoatToken()), new GenericManaCost(1));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new PayLifeCost(1));
         this.addAbility(ability2);
 
         // {1}, {T}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.
-        Ability ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1));
+        Ability ability3 = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1));
         ability3.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         ability3.addCost(new TapSourceCost());
-        ability3.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability3.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability3);
 
         // {1}, {T}, Sacrifice an artifact: Draw a card.
-        Ability ability4 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        Ability ability4 = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability4.addCost(new TapSourceCost());
         ability4.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         this.addAbility(ability4);

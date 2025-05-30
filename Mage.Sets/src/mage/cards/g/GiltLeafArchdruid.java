@@ -5,26 +5,18 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.effects.common.continuous.GainControlAllControlledTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -57,7 +49,7 @@ public final class GiltLeafArchdruid extends CardImpl {
 
         // Tap seven untapped Druids you control: Gain control of all lands target player controls.
         Ability ability = new SimpleActivatedAbility(
-                new GiltLeafArchdruidEffect(),
+                new GainControlAllControlledTargetEffect(StaticFilters.FILTER_LANDS),
                 new TapTargetCost(new TargetControlledPermanent(7, filter2))
         );
         ability.addTarget(new TargetPlayer());
@@ -71,39 +63,5 @@ public final class GiltLeafArchdruid extends CardImpl {
     @Override
     public GiltLeafArchdruid copy() {
         return new GiltLeafArchdruid(this);
-    }
-}
-
-class GiltLeafArchdruidEffect extends OneShotEffect {
-
-    GiltLeafArchdruidEffect() {
-        super(Outcome.GainControl);
-        this.staticText = "gain control of all lands target player controls";
-    }
-
-    private GiltLeafArchdruidEffect(final GiltLeafArchdruidEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GiltLeafArchdruidEffect copy() {
-        return new GiltLeafArchdruidEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (controller != null && targetPlayer != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_LANDS, targetPlayer.getId(), game)) {
-                if (permanent != null) {
-                    ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true);
-                    effect.setTargetPointer(new FixedTarget(permanent, game));
-                    game.addEffect(effect, source);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

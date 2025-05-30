@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -29,13 +29,13 @@ import java.util.UUID;
  */
 public final class OliviaOpulentOutlaw extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("outlaws");
 
     static {
         filter.add(OutlawPredicate.instance);
     }
 
-    private static final FilterControlledPermanent filterTreasure = new FilterControlledPermanent("a Treasure");
+    private static final FilterControlledPermanent filterTreasure = new FilterControlledPermanent("Treasures");
 
     static {
         filterTreasure.add(SubType.TREASURE.getPredicate());
@@ -57,7 +57,7 @@ public final class OliviaOpulentOutlaw extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever one or more outlaws you control deal combat damage to a player, create a Treasure token.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken()), filter
         ));
 

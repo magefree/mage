@@ -35,10 +35,10 @@ public final class MageRingResponder extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Mage-Ring Responder doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // {7}: Untap Mage-Ring Responder.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{7}")));
+        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl<>("{7}")));
 
         // Whenever Mage-Ring Responder attacks, it deals 7 damage to target creature defending player controls.
         this.addAbility(new MageRingResponderAbility());

@@ -36,7 +36,7 @@ public final class ClatteringAugur extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // When Clattering Augur enters the battlefield, you draw a card and you lose 1 life.
-        Effect drawEffect = new DrawCardSourceControllerEffect(1, "you");
+        Effect drawEffect = new DrawCardSourceControllerEffect(1, true);
         Ability ability = new EntersBattlefieldTriggeredAbility(drawEffect);
         Effect lifeEffect = new LoseLifeSourceControllerEffect(1);
         ability.addEffect(lifeEffect.concatBy("and"));

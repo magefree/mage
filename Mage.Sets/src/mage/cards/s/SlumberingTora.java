@@ -57,6 +57,7 @@ class SlumberingToraEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Cat artifact creature until end of turn, " +
                 "where X is the discarded card's mana value";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private SlumberingToraEffect(final SlumberingToraEffect effect) {

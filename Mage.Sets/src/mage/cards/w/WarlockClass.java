@@ -2,10 +2,8 @@ package mage.cards.w;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesClassLevelTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -13,9 +11,13 @@ import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.ClassLevelAbility;
 import mage.abilities.keyword.ClassReminderAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.PutCards;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -36,12 +38,9 @@ public final class WarlockClass extends CardImpl {
         this.addAbility(new ClassReminderAbility());
 
         // At the beginning of your end step, if a creature died this turn, each opponent loses 1 life.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new LoseLifeOpponentsEffect(1), TargetController.YOU, false
-                ), MorbidCondition.instance, "At the beginning of your end step, " +
-                "if a creature died this turn, each opponent loses 1 life."
-        ).addHint(MorbidHint.instance));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new LoseLifeOpponentsEffect(1)
+        ).withInterveningIf(MorbidCondition.instance).addHint(MorbidHint.instance));
 
         // {1}{B}: Level 2
         this.addAbility(new ClassLevelAbility(2, "{1}{B}"));
@@ -56,7 +55,7 @@ public final class WarlockClass extends CardImpl {
         // At the beginning of your end step, each opponent loses life equal to the life they lost this turn.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
                 new BeginningOfEndStepTriggeredAbility(
-                        new WarlockClassEffect(), TargetController.YOU, false
+                        new WarlockClassEffect()
                 ), 3
         )));
     }

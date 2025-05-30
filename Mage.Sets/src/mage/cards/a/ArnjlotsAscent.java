@@ -27,7 +27,7 @@ public final class ArnjlotsAscent extends CardImpl {
         // Cumulative upkeep {U}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}")));
         // {1}: Target creature gains flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(),
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(),
             Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

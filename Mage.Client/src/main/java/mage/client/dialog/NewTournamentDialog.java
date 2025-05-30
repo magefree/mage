@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.*;
 import mage.cards.decks.Deck;
@@ -39,12 +40,16 @@ public class NewTournamentDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(NewTournamentDialog.class);
 
+    // temp settings on loading players list
+    private final List<PlayerType> prefPlayerTypes = new ArrayList<>();
+    private final List<Integer> prefPlayerSkills = new ArrayList<>();
+
     private TableView table;
     // private UUID playerId;
     private UUID roomId;
     private String lastSessionId;
     private RandomPacksSelectorDialog randomPackSelector;
-    private CustomOptionsDialog customOptions;
+    private final CustomOptionsDialog customOptions;
     private JTextArea txtRandomPacks;
     private final java.util.List<TournamentPlayerPanel> players = new ArrayList<>();
     private final java.util.List<JPanel> packPanels = new ArrayList<>();
@@ -52,7 +57,7 @@ public class NewTournamentDialog extends MageDialog {
     private static final int CONSTRUCTION_TIME_MAX = 30;
     private boolean isRandom = false;
     private boolean isRichMan = false;
-    private boolean isRemixed = false;
+    private boolean isReshuffled = false;
     private String cubeFromDeckFilename = "";
     private String jumpstartPacksFilename = "";
     private boolean automaticChange = false;
@@ -60,7 +65,7 @@ public class NewTournamentDialog extends MageDialog {
     public NewTournamentDialog() {
         initComponents();
         this.customOptions = new CustomOptionsDialog(CustomOptionsDialog.SaveLoadKeys.TOURNEY, btnCustomOptions);
-        MageFrame.getDesktop().add(customOptions, JLayeredPane.MODAL_LAYER);
+        MageFrame.getDesktop().add(customOptions, customOptions.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         lastSessionId = "";
         txtName.setText("Tournament");
         this.spnNumWins.setModel(new SpinnerNumberModel(2, 1, 5, 1));
@@ -68,6 +73,16 @@ public class NewTournamentDialog extends MageDialog {
         this.spnNumRounds.setModel(new SpinnerNumberModel(2, 2, 10, 1));
         this.spnQuitRatio.setModel(new SpinnerNumberModel(100, 0, 100, 5));
         this.spnMinimumRating.setModel(new SpinnerNumberModel(0, 0, 3000, 10));
+    }
+
+    private int getCurrentNumPlayers() {
+        int res = (Integer) spnNumPlayers.getValue();
+        return res > 0 ? res : 2;
+    }
+
+    private int getCurrentNumSeats() {
+        int res = (Integer) spnNumSeats.getValue();
+        return res > 0 ? res : 2;
     }
 
     public void showDialog(UUID roomId) {
@@ -89,11 +104,6 @@ public class NewTournamentDialog extends MageDialog {
                     .filter(o -> !o.equals(TimingOption.NONE))
                     .toArray())
             );
-            // update player types
-            int i = 2;
-            for (TournamentPlayerPanel tournamentPlayerPanel : players) {
-                tournamentPlayerPanel.init(i++);
-            }
             cbAllowSpectators.setSelected(true);
             this.setModal(true);
             this.setLocation(150, 100);
@@ -193,7 +203,6 @@ public class NewTournamentDialog extends MageDialog {
         popupSaveSettings.add(menuSaveSettings2);
 
         menuLoadSettingsLast.setText("Load from last time");
-        menuLoadSettingsLast.setToolTipText("");
         menuLoadSettingsLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettingsLastActionPerformed(evt);
@@ -203,7 +212,6 @@ public class NewTournamentDialog extends MageDialog {
         popupLoadSettings.add(separator1);
 
         menuLoadSettings1.setText("Load from config 1");
-        menuLoadSettings1.setToolTipText("");
         menuLoadSettings1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettings1ActionPerformed(evt);
@@ -221,7 +229,6 @@ public class NewTournamentDialog extends MageDialog {
         popupLoadSettings.add(separator2);
 
         menuLoadSettingsDefault.setText("Load default settings");
-        menuLoadSettingsDefault.setToolTipText("");
         menuLoadSettingsDefault.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettingsDefaultActionPerformed(evt);
@@ -401,12 +408,9 @@ public class NewTournamentDialog extends MageDialog {
         });
 
         pnlRandomPacks.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlRandomPacks.setToolTipText("");
         pnlRandomPacks.setLayout(new javax.swing.BoxLayout(pnlRandomPacks, javax.swing.BoxLayout.Y_AXIS));
 
         lblQuitRatio.setText("Allowed quit %");
-
-        spnQuitRatio.setToolTipText("");
 
         lblMinimumRating.setText("Minimum rating:");
         lblMinimumRating.setToolTipText("Players with rating less than this value can't join this table");
@@ -648,7 +652,7 @@ public class NewTournamentDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbTournamentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTournamentTypeActionPerformed
-        prepareTourneyView((Integer) this.spnNumPlayers.getValue());
+        prepareTourneyView(false, prepareVersionStr(-1, false), getCurrentNumPlayers(), getCurrentNumSeats());
 
         jumpstartPacksFilename = "";
         if (cbTournamentType.getSelectedItem().toString().matches(".*Jumpstart.*Custom.*")) {
@@ -657,6 +661,13 @@ public class NewTournamentDialog extends MageDialog {
 
     }//GEN-LAST:event_cbTournamentTypeActionPerformed
 
+    private void doClose() {
+        if (this.customOptions.isVisible()) {
+            this.customOptions.hideDialog();
+        }
+        this.hideDialog();
+    }
+
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
 
         // get settings
@@ -664,7 +675,7 @@ public class NewTournamentDialog extends MageDialog {
 
         // CHECKS
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-        if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
+        if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isReshuffled()) {
             if (tOptions.getLimitedOptions().getSetCodes().size() < 1) {
                 JOptionPane.showMessageDialog(
                         MageFrame.getDesktop(),
@@ -696,6 +707,7 @@ public class NewTournamentDialog extends MageDialog {
         // join AI
         for (TournamentPlayerPanel player : players) {
             if (player.getPlayerType().getSelectedItem() != PlayerType.HUMAN) {
+                // TODO: add support of multiple deck files per each computer player (can be implemented after combine table/tourney dialog in one)
                 if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true))) {
                     // error message must be send by sever
                     SessionHandler.removeTable(roomId, table.getTableId());
@@ -714,7 +726,7 @@ public class NewTournamentDialog extends MageDialog {
                 DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true),
                 tOptions.getPassword())) {
             // all fine, can close create dialog (join dialog will be opened after feedback from server)
-            this.hideDialog();
+            doClose();
             return;
         }
 
@@ -726,11 +738,10 @@ public class NewTournamentDialog extends MageDialog {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.table = null;
         // this.playerId = null;
-        this.hideDialog();
+        doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void updateNumSeats() {
-        // int numPlayers = (Integer) this.spnNumPlayers.getValue();
         int numSeats = (Integer) this.spnNumSeats.getValue();
 
         if (numSeats > 2) {
@@ -749,7 +760,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void spnNumPlayersStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumPlayersStateChanged
-        int numPlayers = (Integer) this.spnNumPlayers.getValue();
+        int numPlayers = getCurrentNumPlayers();
         createPlayers(numPlayers - 1);
         int numSeats = (Integer) this.spnNumSeats.getValue();
         if (numSeats > 2 && numPlayers != numSeats) {
@@ -764,8 +775,7 @@ public class NewTournamentDialog extends MageDialog {
     }//GEN-LAST:event_spnNumSeatsStateChanged
 
     private void spnNumWinsnumPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumWinsnumPlayersChanged
-        int numSeats = (Integer) this.spnNumSeats.getValue();
-        int numWins = (Integer) this.spnNumSeats.getValue();
+        int numSeats = getCurrentNumSeats();
         if (numSeats > 2) {
             spnNumWins.setValue(1);
         }
@@ -871,31 +881,46 @@ public class NewTournamentDialog extends MageDialog {
     }//GEN-LAST:event_btnCustomOptionsActionPerformed
 
     private void setGameOptions() {
-        GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
-//        int oldValue = (Integer) this.spnNumPlayers.getValue();
-//        this.spnNumPlayers.setModel(new SpinnerNumberModel(gameType.getMinPlayers(), gameType.getMinPlayers(), gameType.getMaxPlayers(), 1));
-//        this.spnNumPlayers.setEnabled(gameType.getMinPlayers() != gameType.getMaxPlayers());
-//        if (oldValue >= gameType.getMinPlayers() && oldValue <= gameType.getMaxPlayers()){
-//            this.spnNumPlayers.setBoostedValue(oldValue);
-//        }
-        // this.cbAttackOption.setEnabled(gameType.isUseAttackOption());
-        // this.cbRange.setEnabled(gameType.isUseRange());
-        createPlayers((Integer) spnNumPlayers.getValue() - 1);
+        createPlayers(getCurrentNumPlayers() - 1);
     }
 
-    private void prepareTourneyView(int numPlayers) {
+    private void prepareTourneyView(boolean loadPlayerSettings, String versionStr, int numPlayers, int numSeats) {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         activatePanelElements(tournamentType);
 
-        // players
         if (numPlayers < tournamentType.getMinPlayers() || numPlayers > tournamentType.getMaxPlayers()) {
             numPlayers = tournamentType.getMinPlayers();
-            createPlayers(numPlayers - 1); // ?
         }
         this.spnNumPlayers.setModel(new SpinnerNumberModel(numPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
-        createPlayers((Integer) spnNumPlayers.getValue() - 1);
         this.spnNumSeats.setModel(new SpinnerNumberModel(2, 2, tournamentType.getMaxPlayers(), 1));
+
+        // manual call change events to apply players/seats restrictions and create miss panels
+        // TODO: refactor to use isLoading and restrictions from a code instead restrictions from a component
+        this.spnNumPlayers.setValue(numPlayers);
+        spnNumPlayersStateChanged(null);
+        this.spnNumSeats.setValue(numSeats);
+        spnNumSeatsStateChanged(null);
+
+        if (loadPlayerSettings) {
+            // load player data
+            // player type
+            String playerData = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYER_TYPES + versionStr, "Human");
+            prefPlayerTypes.clear();
+            for (String playerTypeStr : playerData.split(NewTableDialog.PLAYER_DATA_DELIMETER_NEW)) {
+                prefPlayerTypes.add(PlayerType.getByDescription(playerTypeStr));
+            }
+            // player skill
+            playerData = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYER_SKILLS + versionStr, String.valueOf(NewTableDialog.DEFAULT_COMPUTER_PLAYER_SKILL_LEVEL));
+            prefPlayerSkills.clear();
+            for (String playerSkillStr : playerData.split(NewTableDialog.PLAYER_DATA_DELIMETER_NEW)) {
+                prefPlayerSkills.add(Integer.parseInt(playerSkillStr));
+            }
+            // player deck
+            // no deck files support here yet (single deck for all computers)
+        }
+
+        createPlayers(numPlayers - 1);
 
         // packs
         preparePacksView(tournamentType);
@@ -905,8 +930,8 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isLimited()) {
             this.isRandom = tournamentType.isRandom();
             this.isRichMan = tournamentType.isRichMan();
-            this.isRemixed = tournamentType.isRemixed();
-            if (this.isRandom || this.isRichMan || this.isRemixed) {
+            this.isReshuffled = tournamentType.isReshuffled();
+            if (this.isRandom || this.isRichMan || this.isReshuffled) {
                 createRandomPacks();
             } else {
                 createPacks(tournamentType.getNumBoosters());
@@ -914,10 +939,10 @@ public class NewTournamentDialog extends MageDialog {
         }
     }
 
-    private void setNumberOfSwissRoundsMin(int numPlayers) {
+    private void setNumberOfSwissRoundsMin(int additionalNumPlayers) {
         // set 3 rounds default if more than 4 players
         // don't set 4 rounds by default, as 3 rounds generally preferred
-        int minRounds = (numPlayers + 1 > 4) ? 3 : 2;
+        int minRounds = (additionalNumPlayers + 1 > 4) ? 3 : 2;
         int newValue = Math.max((Integer) spnNumRounds.getValue(), minRounds);
         this.spnNumRounds.setModel(new SpinnerNumberModel(newValue, 2, 10, 1));
         this.pack();
@@ -951,7 +976,7 @@ public class NewTournamentDialog extends MageDialog {
                 this.lblPacks.setVisible(false);
                 this.pnlPacks.setVisible(false);
                 this.pnlRandomPacks.setVisible(false);
-            } else if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
+            } else if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isReshuffled()) {
                 this.lblDraftCube.setVisible(false);
                 this.cbDraftCube.setVisible(false);
                 this.lblPacks.setVisible(true);
@@ -1035,7 +1060,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void showRandomPackSelectorDialog() {
-        randomPackSelector.showDialog(isRandom, isRichMan, isRemixed);
+        randomPackSelector.showDialog(isRandom, isRichMan, isReshuffled);
         this.txtRandomPacks.setText(String.join(";", randomPackSelector.getSelectedPacks()));
         this.pack();
         this.revalidate();
@@ -1129,24 +1154,46 @@ public class NewTournamentDialog extends MageDialog {
         }
     }
 
-    private void createPlayers(int numPlayers) {
-        // add/remove player panels
-        if (numPlayers > players.size()) {
-            while (players.size() != numPlayers) {
+    private void createPlayers(int additionalNumPlayers) {
+        // add miss panels
+        if (additionalNumPlayers > players.size()) {
+            while (players.size() != additionalNumPlayers) {
                 TournamentPlayerPanel playerPanel = new TournamentPlayerPanel();
-                playerPanel.init(players.size() + 2);
-
                 players.add(playerPanel);
             }
-        } else if (numPlayers < players.size()) {
-            while (players.size() != numPlayers) {
+        }
+
+        // remove un-used panels
+        if (additionalNumPlayers < players.size()) {
+            while (players.size() != additionalNumPlayers) {
                 players.remove(players.size() - 1);
             }
         }
+
+        // load player data
+        for (int i = 0; i < players.size(); i++) {
+            TournamentPlayerPanel playerPanel = players.get(i);
+
+            // find player type
+            PlayerType playerType = PlayerType.HUMAN;
+            if (i < prefPlayerTypes.size()) {
+                playerType = prefPlayerTypes.get(i);
+            }
+
+            // find skill level
+            int playerSkill = NewTableDialog.DEFAULT_COMPUTER_PLAYER_SKILL_LEVEL;
+            if (i < prefPlayerSkills.size()) {
+                playerSkill = prefPlayerSkills.get(i);
+            }
+
+            // find deck file
+            // no deck files support here yet (single deck for all computers)
+            playerPanel.init(i + 2, playerType, playerSkill);
+        }
+
         drawPlayers();
 
-        setNumberOfSwissRoundsMin(numPlayers);
-
+        setNumberOfSwissRoundsMin(additionalNumPlayers);
     }
 
     private void drawPlayers() {
@@ -1237,7 +1284,7 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isLimited()) {
             tOptions.getLimitedOptions().setConstructionTime((Integer) this.spnConstructTime.getValue() * 60);
             tOptions.getLimitedOptions().setIsRandom(tournamentType.isRandom());
-            tOptions.getLimitedOptions().setIsRemixed(tournamentType.isRemixed());
+            tOptions.getLimitedOptions().setIsReshuffled(tournamentType.isReshuffled());
             tOptions.getLimitedOptions().setIsRichMan(tournamentType.isRichMan());
             tOptions.getLimitedOptions().setIsJumpstart(tournamentType.isJumpstart());
 
@@ -1273,7 +1320,7 @@ public class NewTournamentDialog extends MageDialog {
             } else if (tournamentType.isRandom() || tournamentType.isRichMan()) {
                 this.isRandom = tournamentType.isRandom();
                 this.isRichMan = tournamentType.isRichMan();
-                this.isRemixed = tournamentType.isRemixed();
+                this.isReshuffled = tournamentType.isReshuffled();
                 tOptions.getLimitedOptions().getSetCodes().clear();
                 java.util.List<String> selected = randomPackSelector.getSelectedPacks();
                 Collections.shuffle(selected);
@@ -1290,10 +1337,10 @@ public class NewTournamentDialog extends MageDialog {
                 } else {
                     tOptions.getLimitedOptions().getSetCodes().addAll(selected);
                 }
-            } else if (tournamentType.isRemixed()) {
+            } else if (tournamentType.isReshuffled()) {
                 this.isRandom = tournamentType.isRandom();
                 this.isRichMan = tournamentType.isRichMan();
-                this.isRemixed = tournamentType.isRemixed();
+                this.isReshuffled = tournamentType.isReshuffled();
                 tOptions.getLimitedOptions().getSetCodes().clear();
                 tOptions.getLimitedOptions().getSetCodes().addAll(randomPackSelector.getSelectedPacks());
             } else {
@@ -1340,7 +1387,6 @@ public class NewTournamentDialog extends MageDialog {
 
     private void onLoadSettings(int version) {
         String versionStr = prepareVersionStr(version, false);
-        int numPlayers;
         txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME + versionStr, "Tournament"));
         txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PASSWORD + versionStr, ""));
         int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT + versionStr, "1500"));
@@ -1358,7 +1404,7 @@ public class NewTournamentDialog extends MageDialog {
                 break;
             }
         }
-        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL + versionStr, "Casual");
+        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_SKILL_LEVEL + versionStr, "Casual");
         for (SkillLevel skillLevel : SkillLevel.values()) {
             if (skillLevel.toString().equals(skillLevelDefault)) {
                 this.cbSkillLevel.setSelectedItem(skillLevel);
@@ -1384,12 +1430,12 @@ public class NewTournamentDialog extends MageDialog {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         activatePanelElements(tournamentType);
 
+        int defaultNumberPlayers = 2;
+        int defaultNumberSeats = 2;
         if (tournamentType.isLimited()) {
             if (tournamentType.isDraft()) {
-                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT + versionStr, "4"));
-                prepareTourneyView(numPlayers);
-
-                if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
+                defaultNumberPlayers = 4;
+                if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isReshuffled()) {
                     loadRandomPacks(version);
                 } else {
                     loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT + versionStr, ""));
@@ -1403,14 +1449,21 @@ public class NewTournamentDialog extends MageDialog {
                     }
                 }
             } else {
-                numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED + versionStr, "2"));
-                prepareTourneyView(numPlayers);
                 loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED + versionStr, ""));
             }
         }
         this.cbAllowSpectators.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, "Yes").equals("Yes"));
         this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS + versionStr, "Yes").equals("Yes"));
         this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED + versionStr, "No").equals("Yes"));
+
+        String deckFile = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DECK_FILE + versionStr, "");
+        if (deckFile != null && !deckFile.isEmpty() && new File(deckFile).exists()) {
+            this.player1Panel.setDeckFile(deckFile);
+        }
+
+        int numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_PLAYERS + versionStr, String.valueOf(defaultNumberPlayers)));
+        int numSeats = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_SEATS + versionStr, String.valueOf(defaultNumberSeats)));
+        prepareTourneyView(true, versionStr, numPlayers, numSeats);
 
         this.customOptions.onLoadSettings(version);
     }
@@ -1436,27 +1489,45 @@ public class NewTournamentDialog extends MageDialog {
 
         if (tOptions.getTournamentType().startsWith("Sealed")) {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED + versionStr, tOptions.getLimitedOptions().getSetCodes().toString());
-            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED + versionStr, Integer.toString(tOptions.getPlayerTypes().size()));
         }
 
         if (tOptions.getTournamentType().startsWith("Booster")) {
             DraftOptions draftOptions = (DraftOptions) tOptions.getLimitedOptions();
             if (draftOptions != null) {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT + versionStr, draftOptions.getSetCodes().toString());
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT + versionStr, Integer.toString(tOptions.getPlayerTypes().size()));
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING + versionStr, draftOptions.getTiming().name());
             }
-            String deckFile = this.player1Panel.getDeckFile();
-            if (deckFile != null && !deckFile.isEmpty()) {
-                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, deckFile);
-            }
-            if (tOptions.getLimitedOptions().getIsRandom() || tOptions.getLimitedOptions().getIsRichMan() || tOptions.getLimitedOptions().getIsRemixed()) {
+            if (tOptions.getLimitedOptions().getIsRandom() || tOptions.getLimitedOptions().getIsRichMan() || tOptions.getLimitedOptions().getIsReshuffled()) {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT + versionStr, String.join(";", this.randomPackSelector.getSelectedPacks()));
             }
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, (tOptions.isWatchingAllowed() ? "Yes" : "No"));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS + versionStr, (tOptions.getMatchOptions().isRollbackTurnsAllowed() ? "Yes" : "No"));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED + versionStr, (tOptions.getMatchOptions().isRated() ? "Yes" : "No"));
+
+        String deckFile = this.player1Panel.getDeckFile();
+        if (deckFile != null && !deckFile.isEmpty()) {
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DECK_FILE + versionStr, deckFile);
+        }
+
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_PLAYERS + versionStr, Integer.toString(tOptions.getPlayerTypes().size()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_SEATS + versionStr, Integer.toString((Integer) this.spnNumSeats.getValue()));
+
+        // save player data
+        // player type
+        String playerData = players.stream()
+                .map(panel -> ((PlayerType) panel.getPlayerType().getSelectedItem()))
+                .map(panel -> panel.toString())
+                .collect(Collectors.joining(NewTableDialog.PLAYER_DATA_DELIMETER_NEW));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYER_TYPES + versionStr, playerData);
+        // player skill
+        playerData = players.stream()
+                .map(panel -> String.valueOf(panel.getPlayerSkill()))
+                .collect(Collectors.joining(NewTableDialog.PLAYER_DATA_DELIMETER_NEW));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYER_SKILLS + versionStr, playerData);
+        // player deck
+        // no deck files support here yet (single deck for all computers)
+
         customOptions.onSaveSettings(version, tOptions.getMatchOptions());
     }
 

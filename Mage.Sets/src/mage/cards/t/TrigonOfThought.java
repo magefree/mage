@@ -28,12 +28,12 @@ public final class TrigonOfThought extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)), "with three charge counters on it"));
 
         // {U}{U}, {T}: Put a charge counter on Trigon of Thought.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
+        Ability ability2 = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability2.addCost(new ManaCostsImpl<>("{U}{U}"));
         this.addAbility(ability2);
 
         // {2}, {T}, Remove a charge counter from Trigon of Thought: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);

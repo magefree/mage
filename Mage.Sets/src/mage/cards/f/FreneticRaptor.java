@@ -30,7 +30,7 @@ public final class FreneticRaptor extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Beasts can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private FreneticRaptor(final FreneticRaptor card) {

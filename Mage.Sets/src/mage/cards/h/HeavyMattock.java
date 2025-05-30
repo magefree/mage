@@ -28,9 +28,9 @@ public final class HeavyMattock extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
         // As long as equipped creature is a Human, it gets an additional +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }

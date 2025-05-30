@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class WarCadence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // {X}{R}: This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarCadenceReplacementEffect(), new ManaCostsImpl<>("{X}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new WarCadenceReplacementEffect(), new ManaCostsImpl<>("{X}{R}")));
 
     }
 
@@ -44,7 +44,7 @@ public final class WarCadence extends CardImpl {
 
 class WarCadenceReplacementEffect extends ReplacementEffectImpl {
 
-    DynamicValue xCosts = ManacostVariableValue.REGULAR;
+    DynamicValue xCosts = GetXValue.instance;
 
     WarCadenceReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);

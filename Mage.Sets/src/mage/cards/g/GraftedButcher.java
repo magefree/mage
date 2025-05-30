@@ -53,7 +53,7 @@ public final class GraftedButcher extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, false), new ManaCostsImpl<>("{3}{B}")
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
     }
 

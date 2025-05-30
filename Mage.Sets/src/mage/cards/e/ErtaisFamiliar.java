@@ -89,7 +89,7 @@ class ErtaisFamiliarReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         super.init(source, game);
         affectedObjectList.clear();
         affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
-        affectedObjectsSet = true;
+        setAffectedObjectsSet(true);
     }
 
     @Override

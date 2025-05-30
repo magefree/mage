@@ -20,7 +20,7 @@ public class JudgeGiftCards2002 extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Hammer of Bogardan", 1, Rarity.RARE, mage.cards.h.HammerOfBogardan.class));
-        cards.add(new SetCardInfo("Tradewind Rider", 2, Rarity.RARE, mage.cards.t.TradewindRider.class));
+        cards.add(new SetCardInfo("Hammer of Bogardan", 1, Rarity.RARE, mage.cards.h.HammerOfBogardan.class, RETRO_ART));
+        cards.add(new SetCardInfo("Tradewind Rider", 2, Rarity.RARE, mage.cards.t.TradewindRider.class, RETRO_ART));
      }
 }

@@ -29,7 +29,7 @@ public final class Fleshgrafter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Discard an artifact card: Fleshgrafter gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new DiscardCardCost(new FilterArtifactCard("an artifact card"))));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), new DiscardCardCost(new FilterArtifactCard("an artifact card"))));
     }
 
     private Fleshgrafter(final Fleshgrafter card) {

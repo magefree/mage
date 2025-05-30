@@ -37,7 +37,7 @@ public final class ElegantEntourage extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, target creature other than Elegant Entourage gets +1/+1 and gains trample until end of turn.
+        // Alliance — Whenever another creature you control enters, target creature other than Elegant Entourage gets +1/+1 and gains trample until end of turn.
         Ability ability = new AllianceAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn)
                 .setText("target creature other than {this} gets +1/+1"));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())

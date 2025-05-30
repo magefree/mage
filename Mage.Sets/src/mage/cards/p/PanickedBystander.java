@@ -1,8 +1,8 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -33,15 +33,15 @@ public final class PanickedBystander extends CardImpl {
         this.secondSideCardClazz = mage.cards.c.CacklingCulprit.class;
 
         // Whenever Panicked Bystander or another creature you control dies, you gain 1 life.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new GainLifeEffect(1), false, StaticFilters.FILTER_CONTROLLED_CREATURE
         ));
 
         // At the beginning of your end step, if you gained 3 or more life this turn, transform Panicked Bystander.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new TransformSourceEffect(),
+                false, condition
         ), new PlayerGainedLifeWatcher());
     }
 

@@ -18,7 +18,6 @@ import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -38,7 +37,6 @@ public final class CollectiveEffort extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent("untapped creature you control");
     private static final FilterCreaturePermanent filterDestroyCreature = new FilterCreaturePermanent("creature with power 4 or greater");
-    private static final FilterEnchantmentPermanent filterDestroyEnchantment = new FilterEnchantmentPermanent("enchantment to destroy");
     private static final FilterPlayer filterPlayer = new FilterPlayer("player whose creatures get +1/+1 counters");
 
     static {
@@ -66,7 +64,7 @@ public final class CollectiveEffort extends CardImpl {
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target enchantment");
         Mode mode = new Mode(effect);
-        mode.addTarget(new TargetEnchantmentPermanent(filterDestroyEnchantment).withChooseHint("destroy"));
+        mode.addTarget(new TargetEnchantmentPermanent().withChooseHint("destroy"));
         this.getSpellAbility().addMode(mode);
 
         // Put a +1/+1 counter on each creature target player controls.

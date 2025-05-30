@@ -18,8 +18,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -44,7 +44,7 @@ public final class RoamingThrone extends CardImpl {
         // Roaming Throne is the chosen type in addition to its other types.
         ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddChosenSubtypeEffect()));
+        this.addAbility(new SimpleStaticAbility(new AddChosenSubtypeEffect()));
 
         // If a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time.
         this.addAbility(new SimpleStaticAbility(new RoamingThroneReplacementEffect()));
@@ -90,14 +90,10 @@ class RoamingThroneReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(event instanceof NumberOfTriggersEvent)) {
-            return false;
-        }
-        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        Permanent permanentSource = game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId());
+        Permanent permanentSource = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return permanentSource != null
                 && filter.match(permanentSource, source.getControllerId(), source, game)
                 && permanentSource.hasSubtype(ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game), game);
@@ -105,7 +101,7 @@ class RoamingThroneReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
         return false;
     }
 }

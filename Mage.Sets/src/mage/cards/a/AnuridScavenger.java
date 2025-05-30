@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -40,7 +39,7 @@ public final class AnuridScavenger extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
 
         // At the beginning of your upkeep, sacrifice Anurid Scavenger unless you put a card from your graveyard on the bottom of your library.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new AnuridScavengerCost()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new AnuridScavengerCost())));
     }
 
     private AnuridScavenger(final AnuridScavenger card) {

@@ -24,7 +24,7 @@ public final class ZombieInfestation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
         // Discard two cards: Create a 2/2 black Zombie creature token.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new ZombieToken()),
                 new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);

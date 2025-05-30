@@ -18,7 +18,7 @@ public final class FistOfSuns extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WUBRGInsteadEffect()));
+        this.addAbility(new SimpleStaticAbility(new WUBRGInsteadEffect()));
     }
 
     private FistOfSuns(final FistOfSuns card) {

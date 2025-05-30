@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -8,22 +7,23 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.BirdToken;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class AetherChanneler extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("another nonland permanent");
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("another target nonland permanent");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -42,9 +42,8 @@ public final class AetherChanneler extends CardImpl {
         // * Return another target nonland permanent to its owner's hand.
         // * Draw a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken()));
-        Mode mode = new Mode(new ReturnToHandTargetEffect()
-                .setText("Return another target nonland permanent to its owner's hand."));
-        mode.addTarget(new TargetNonlandPermanent(filter));
+        Mode mode = new Mode(new ReturnToHandTargetEffect());
+        mode.addTarget(new TargetPermanent(filter));
         ability.addMode(mode);
         ability.addMode(new Mode(new DrawCardSourceControllerEffect(1)));
         this.addAbility(ability);

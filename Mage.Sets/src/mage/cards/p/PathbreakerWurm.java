@@ -31,7 +31,7 @@ public final class PathbreakerWurm extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Pathbreaker Wurm is paired with another creature, both creatures have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(TrampleAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(TrampleAbility.getInstance(), ruleText)));
 
     }
 

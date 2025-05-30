@@ -40,9 +40,9 @@ public final class GlenElendraLiege extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // Other blue creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlue, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlue, true)));
         // Other black creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlack, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlack, true)));
     }
 
     private GlenElendraLiege(final GlenElendraLiege card) {

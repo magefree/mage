@@ -40,7 +40,7 @@ public final class KeldonStrikeTeam extends CardImpl {
         // When Keldon Strike Team enters the battlefield, if it was kicked, create two 1/1 white Soldier creature tokens.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2)),
-                KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
+                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
                 "create two 1/1 white Soldier creature tokens."
         ));
 
@@ -49,7 +49,7 @@ public final class KeldonStrikeTeam extends CardImpl {
                 new GainAbilityControlledEffect(
                         HasteAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), SourceEnteredThisTurnCondition.instance, "as long as {this} " +
+                ), SourceEnteredThisTurnCondition.DID, "as long as {this} " +
                 "entered the battlefield this turn, creatures you control have haste"
         )));
     }

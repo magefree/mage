@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.ConditionHint;
@@ -26,11 +26,9 @@ public final class SyggRiverCutthroat extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of each end step, if an opponent lost 3 or more life this turn, you may draw a card.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
-                new DrawCardSourceControllerEffect(1),
-                TargetController.ANY,
-                new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3),
-                true
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new DrawCardSourceControllerEffect(1),
+                true, new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3)
         ).addHint(new ConditionHint(
                 new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3),
                 "An opponent lost 3 or more life this turn"

@@ -1,10 +1,8 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
@@ -18,8 +16,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class EchoBaseCommando extends CardImpl {
@@ -41,7 +40,7 @@ public final class EchoBaseCommando extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
 
         // Activated abilities of creatures your opponent controls cost {2} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EchoBaseCommandoEffect()));
+        this.addAbility(new SimpleStaticAbility(new EchoBaseCommandoEffect()));
 
     }
 
@@ -84,7 +83,7 @@ class EchoBaseCommandoEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED || (abilityToModify.getAbilityType() == AbilityType.MANA && (abilityToModify instanceof ActivatedAbility))) {
+        if (abilityToModify.isActivatedAbility()){
             Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
             if (filter.match(permanent, source.getControllerId(), source, game)) {
                 return true;

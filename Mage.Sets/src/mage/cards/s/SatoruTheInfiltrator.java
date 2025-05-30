@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -20,7 +21,6 @@ import mage.game.stack.Spell;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Susucr
@@ -38,7 +38,7 @@ public final class SatoruTheInfiltrator extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Satoru, the Infiltrator and/or one or more other nontoken creatures enter the battlefield under your control, if none of them were cast or no mana was spent to cast them, draw a card.
         this.addAbility(new SatoruTheInfiltratorTriggeredAbility());
@@ -54,9 +54,9 @@ public final class SatoruTheInfiltrator extends CardImpl {
     }
 }
 
-class SatoruTheInfiltratorTriggeredAbility extends TriggeredAbilityImpl {
+class SatoruTheInfiltratorTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent>  {
 
-    public SatoruTheInfiltratorTriggeredAbility() {
+    SatoruTheInfiltratorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
         this.setTriggerPhrase("Whenever {this} and/or one or more other nontoken creatures "
                 + "enter the battlefield under your control, if none of them were cast or no mana was spent to cast them, ");
@@ -76,24 +76,21 @@ class SatoruTheInfiltratorTriggeredAbility extends TriggeredAbilityImpl {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
     }
 
-    // event is GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.BATTLEFIELD) {
+            return false;
+        }
+        Permanent permanent = event.getTarget();
+        if (permanent == null || !permanent.isControlledBy(getControllerId())) {
+            return false;
+        }
+        return permanent.getId().equals(getSourceId()) || (permanent.isCreature(game) && !(permanent instanceof PermanentToken));
+    }
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-        List<ZoneChangeEvent> moved = zEvent.getEvents()
-                .stream()
-                .filter(e -> e.getToZone() == Zone.BATTLEFIELD) // Keep only to the battlefield
-                .filter(e -> {
-                    Permanent permanent = e.getTarget();
-                    if (permanent == null) {
-                        return false;
-                    }
-                    return permanent.isControlledBy(getControllerId()) // under your control
-                            && (permanent.getId().equals(getSourceId()) // {this}
-                            || (permanent.isCreature(game) && !(permanent instanceof PermanentToken)) // other nontoken Creature
-                    );
-                })
-                .collect(Collectors.toList());
+        List<ZoneChangeEvent> moved = getFilteredEvents((ZoneChangeBatchEvent) event, game);
         if (moved.isEmpty()) {
             return false;
         }

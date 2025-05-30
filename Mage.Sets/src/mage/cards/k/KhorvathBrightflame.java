@@ -44,7 +44,7 @@ public final class KhorvathBrightflame extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Knights your team controls have flying and haste.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter));
         ability.addEffect(new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter).setText("and haste"));
         this.addAbility(ability);
     }

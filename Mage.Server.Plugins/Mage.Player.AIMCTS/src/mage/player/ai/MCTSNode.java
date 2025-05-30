@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.common.PassAbility;
 import mage.cards.Card;
@@ -245,7 +244,7 @@ public class MCTSNode {
      * @return a new game object with simulated players
      */
     protected Game createSimulation(Game game, UUID playerId) {
-        Game sim = game.copy();
+        Game sim = game.createSimulationForAI();
 
         for (Player oldPlayer: sim.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
@@ -254,7 +253,6 @@ public class MCTSNode {
             sim.getState().getPlayers().put(oldPlayer.getId(), newPlayer);
         }
         randomizePlayers(sim, playerId);
-        sim.setSimulation(true);
         return sim;
     }
 
@@ -271,7 +269,7 @@ public class MCTSNode {
                 player.getHand().clear();
                 player.getLibrary().shuffle();
                 for (int i = 0; i < handSize; i++) {
-                    Card card = player.getLibrary().removeFromTop(game);
+                    Card card = player.getLibrary().drawFromTop(game);
                     card.setZone(Zone.HAND, game);
                     player.getHand().add(card);
                 }

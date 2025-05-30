@@ -21,7 +21,7 @@ import mage.game.Game;
 import mage.game.permanent.token.DinosaurToken;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
@@ -63,7 +63,8 @@ public final class WelcomeTo extends CardImpl {
                     ).setText("For each opponent, up to one target noncreature artifact they control becomes " +
                               "a 0/4 Wall artifact creature with defender for as long as you control this Saga."));
             ability.getEffects().setTargetPointer(new EachTargetPointer());
-            ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(0, 1, filterNoncreatureArtifact)));
+            ability.addTarget(new TargetPermanent(0, 1, filterNoncreatureArtifact));
+            ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         });
 
         // II -- Create a 3/3 green Dinosaur creature token with trample. It gains haste until end of turn.

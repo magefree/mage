@@ -37,7 +37,7 @@ public final class GerrardsHourglassPendant extends CardImpl {
 
         // {4}, {T}, Exile Gerrard's Hourglass Pendant: Return to the battlefield tapped all artifact, creature,
         // enchantment, and land cards in your graveyard that were put there from the battlefield this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GerrardsHourglassPendantReanimateEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new GerrardsHourglassPendantReanimateEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         ability.addWatcher(new CardsPutIntoGraveyardWatcher());

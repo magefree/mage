@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -30,11 +30,11 @@ public final class FountainOfCho extends CardImpl {
         // Fountain of Cho enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}: Put a storage counter on Fountain of Cho.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
         // {T}, Remove any number of storage counters from Fountain of Cho: Add {W} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.WhiteMana(1),
-                RemovedCountersForCostValue.instance,
+                GetXValue.instance,
                 new TapSourceCost(),
                 "Add {W} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));

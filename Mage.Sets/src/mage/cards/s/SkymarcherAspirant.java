@@ -39,7 +39,7 @@ public final class SkymarcherAspirant extends CardImpl {
         ContinuousEffect boostSource = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, CitysBlessingCondition.instance,
                 "{this} has flying as long as you have the city's blessing");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(CitysBlessingHint.instance);
+        Ability ability = new SimpleStaticAbility(effect).addHint(CitysBlessingHint.instance);
         this.addAbility(ability);
     }
 

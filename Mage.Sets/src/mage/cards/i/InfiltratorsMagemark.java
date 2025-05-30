@@ -45,7 +45,7 @@ public final class InfiltratorsMagemark extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Creatures you control that are enchanted get +1/+1 and can't be blocked except by creatures with defender.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
+        ability = new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
         Effect effect = new InfiltratorsMagemarkCantBeBlockedAllEffect(filter, Duration.WhileOnBattlefield);
         ability.addEffect(effect);
         this.addAbility(ability);

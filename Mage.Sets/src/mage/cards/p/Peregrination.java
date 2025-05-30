@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.search.SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutOntoBattlefieldTappedRestInHandEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class Peregrination extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle, then scry 1.
-        this.getSpellAbility().addEffect(new SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect(
+        this.getSpellAbility().addEffect(new SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(
                 new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS))
                 .setText("search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle"));
         Effect effect = new ScryEffect(1);

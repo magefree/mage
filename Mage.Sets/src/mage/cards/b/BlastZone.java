@@ -7,7 +7,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -46,7 +46,7 @@ public final class BlastZone extends CardImpl {
 
         // {X}{X}, {T}: Put X charge counters on Blast Zone.
         Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(
-                CounterType.CHARGE.createInstance(), ManacostVariableValue.REGULAR, true
+                CounterType.CHARGE.createInstance(), GetXValue.instance, true
         ), new ManaCostsImpl<>("{X}{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

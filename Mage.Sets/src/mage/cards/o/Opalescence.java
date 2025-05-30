@@ -24,7 +24,7 @@ public final class Opalescence extends CardImpl {
 
         // Each other non-Aura enchantment is a creature with power and 
         // toughness each equal to its converted mana cost. It's still an enchantment.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpalescenceEffect()));
+        this.addAbility(new SimpleStaticAbility(new OpalescenceEffect()));
 
     }
 

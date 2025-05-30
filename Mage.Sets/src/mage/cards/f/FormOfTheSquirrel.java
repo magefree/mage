@@ -38,13 +38,13 @@ public final class FormOfTheSquirrel extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new FormOfTheSquirrelCreateTokenEffect()));
 
         // Creatures can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackYouAllEffect(Duration.WhileOnBattlefield)));
 
         // You have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(ShroudAbility.getInstance())));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(ShroudAbility.getInstance())));
 
         // You can't cast spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FormOfTheSquirrelCantCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new FormOfTheSquirrelCantCastEffect()));
     }
 
     private FormOfTheSquirrel(final FormOfTheSquirrel card) {

@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -43,7 +43,7 @@ public final class ThievingAmalgam extends CardImpl {
 
         // At the beginning of each opponent's upkeep, you manifest the top card of that player's library.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ThievingAmalgamManifestEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new ThievingAmalgamManifestEffect(), false
         ));
 
         // Whenever a creature you control but don't own dies, its owner loses 2 life and you gain 2 life.
@@ -86,7 +86,7 @@ class ThievingAmalgamManifestEffect extends OneShotEffect {
             return false;
         }
 
-        return ManifestEffect.doManifestCards(game, source, controller, targetPlayer.getLibrary().getTopCards(game, 1));
+        return !ManifestEffect.doManifestCards(game, source, controller, targetPlayer.getLibrary().getTopCards(game, 1)).isEmpty();
     }
 }
 

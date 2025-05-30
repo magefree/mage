@@ -36,11 +36,11 @@ public final class GriftersBlade extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
-        // As Grifter's Blade enters the battlefield, choose a creature you control it could be attached to. If you do, it enters the battlefield attached to that creature.
+        // As Grifter's Blade enters the battlefield, choose a creature you control it could be attached to. If you do, it enters attached to that creature.
         this.addAbility(new AsEntersBattlefieldAbility(new GriftersBladeChooseCreatureEffect(Outcome.BoostCreature)));
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
@@ -61,7 +61,7 @@ class GriftersBladeChooseCreatureEffect extends OneShotEffect {
 
     GriftersBladeChooseCreatureEffect(Outcome outcome) {
         super(outcome);
-        this.staticText = "choose a creature you control it could be attached to. If you do, it enters the battlefield attached to that creature";
+        this.staticText = "choose a creature you control it could be attached to. If you do, it enters attached to that creature";
     }
 
     private GriftersBladeChooseCreatureEffect(final GriftersBladeChooseCreatureEffect effect) {

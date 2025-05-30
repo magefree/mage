@@ -3,19 +3,20 @@ package mage.cards.f;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.condition.common.ModeChoiceSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseModeEffect;
+import mage.abilities.effects.common.continuous.GainAnchorWordAbilitySourceEffect;
 import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -29,37 +30,27 @@ import java.util.UUID;
  */
 public final class FrontierSiege extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with flying");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a creature you control with flying");
 
     static {
-        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
-
-    private static final String ruleTrigger1 = "&bull  Khans &mdash; At the beginning of each of your main phases, add {G}{G}.";
-    private static final String ruleTrigger2 = "&bull  Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";
 
     public FrontierSiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // As Frontier Siege enters the battlefield, choose Khans or Dragons.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
-                "As {this} enters the battlefield, choose Khans or Dragons.", ""));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(ModeChoice.KHANS, ModeChoice.DRAGONS)));
 
         // * Khans - At the beginning of each of your main phases, add {G}{G}.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new FrontierSiegeKhansTriggeredAbility(),
-                new ModeChoiceSourceCondition("Khans"),
-                ruleTrigger1));
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(new FrontierSiegeKhansTriggeredAbility(), ModeChoice.KHANS)));
 
-        // * Dragons - Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.
-        Ability ability2 = new ConditionalTriggeredAbility(
-                new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT),
-                new ModeChoiceSourceCondition("Dragons"),
-                ruleTrigger2);
-        ability2.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
-        this.addAbility(ability2);
-
+        // * Dragons - Whenever a creature with flying you control enters, you may have it fight target creature you don't control.
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new FrontierSiegeFightEffect(), filter, true, SetTargetPointer.PERMANENT
+        );
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(ability, ModeChoice.DRAGONS)));
     }
 
     private FrontierSiege(final FrontierSiege card) {
@@ -104,6 +95,7 @@ class FrontierSiegeFightEffect extends OneShotEffect {
 
     FrontierSiegeFightEffect() {
         super(Outcome.Damage);
+        staticText = "have it fight target creature you don't control";
     }
 
     private FrontierSiegeFightEffect(final FrontierSiegeFightEffect effect) {

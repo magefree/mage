@@ -2,7 +2,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
@@ -21,10 +21,10 @@ public final class EmptyThePits extends CardImpl {
 
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
         
         // create X 2/2 black Zombie creature tokens tapped.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), ManacostVariableValue.REGULAR, true, false));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), GetXValue.instance, true, false));
     }
 
     private EmptyThePits(final EmptyThePits card) {

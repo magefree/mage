@@ -58,10 +58,10 @@ class ByInvitationOnlyEffect extends OneShotEffect {
             return false;
         }
         int number = player.getAmount(
-                0, 13, "Choose a number between 0 and 13", game
+                0, 13, "Choose a number between 0 and 13", source, game
         );
         return new SacrificeAllEffect(
-                number, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
+                number, StaticFilters.FILTER_PERMANENT_CREATURE
         ).apply(game, source);
     }
 }

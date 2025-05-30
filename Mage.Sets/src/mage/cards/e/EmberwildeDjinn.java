@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.PayLifeCost;
@@ -42,7 +42,7 @@ public final class EmberwildeDjinn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each player's upkeep, that player may pay {R}{R} or 2 life. If they do, the player gains control of Emberwilde Djinn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EmberwildeDjinnEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new EmberwildeDjinnEffect(), false));
     }
 
     private EmberwildeDjinn(final EmberwildeDjinn card) {
@@ -59,7 +59,7 @@ class EmberwildeDjinnEffect extends OneShotEffect {
 
     EmberwildeDjinnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player may pay {R}{R} or 2 life. If they do, the player gains control of {this}";
+        this.staticText = "that player may pay {R}{R} or 2 life. If the player does, they gain control of {this}";
     }
 
     private EmberwildeDjinnEffect(final EmberwildeDjinnEffect effect) {

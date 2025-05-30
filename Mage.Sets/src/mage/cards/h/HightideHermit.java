@@ -34,7 +34,7 @@ public final class HightideHermit extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(4)));
 
         // Pay {E}{E}: Hightide Hermit can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new PayEnergyCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new PayEnergyCost(2)));
     }
 
     private HightideHermit(final HightideHermit card) {

@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -65,8 +66,8 @@ class DefossilizeEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        game.getState().processAction(game);
-        Permanent permanent = game.getPermanent(card.getId());
+        game.processAction();
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

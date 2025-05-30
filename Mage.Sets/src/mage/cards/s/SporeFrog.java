@@ -28,7 +28,7 @@ public final class SporeFrog extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Spore Frog: Prevent all combat damage that would be dealt this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new SacrificeSourceCost());
         this.addAbility(ability);
     }
 

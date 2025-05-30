@@ -45,14 +45,14 @@ public final class SigardaHeronsGrace extends CardImpl {
         // You and Humans you control have hexproof.
         Effect effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
         effect.setText("You");
-        Ability ability =new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability =new SimpleStaticAbility(effect);
         effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.concatBy("and");
         ability.addEffect(effect);
         this.addAbility(ability);
 
         // {2}, Exile a card from your graveyard: Create a 1/1 white Human Soldier creature token.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanSoldierToken()), new GenericManaCost(2));
+        ability = new SimpleActivatedAbility(new CreateTokenEffect(new HumanSoldierToken()), new GenericManaCost(2));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard()));
         this.addAbility(ability);
     }

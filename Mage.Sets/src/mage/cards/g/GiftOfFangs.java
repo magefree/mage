@@ -1,23 +1,22 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class GiftOfFangs extends CardImpl {
@@ -66,7 +65,7 @@ class GiftOfFangsEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSetAtInit(source)) {
             // Added boosts of activated or triggered abilities exist independent from the source they are created by
             // so a continuous effect for the permanent itself with the attachment is created
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
@@ -81,7 +80,7 @@ class GiftOfFangsEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = null;
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
                 discard();

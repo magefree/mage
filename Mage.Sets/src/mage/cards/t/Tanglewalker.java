@@ -42,7 +42,7 @@ public final class Tanglewalker extends CardImpl {
                 new CantBeBlockedAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, Duration.WhileOnBattlefield),
                 new DefendingPlayerControlsSourceAttackingCondition(filter));
         effect.setText("Each creature you control can't be blocked as long as defending player controls an artifact land");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private Tanglewalker(final Tanglewalker card) {

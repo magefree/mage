@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -22,6 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -33,11 +34,11 @@ public final class DawnOfTheDead extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}{B}");
 
         // At the beginning of your upkeep, you lose 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
 
         // At the beginning of your upkeep, you may return target creature card from your graveyard to the battlefield.
         // That creature gains haste until end of turn. Exile it at the beginning of the next end step.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DawnOfTheDeadEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DawnOfTheDeadEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
@@ -74,7 +75,7 @@ class DawnOfTheDeadEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                Permanent creature = game.getPermanent(card.getId());
+                Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (creature != null) {
                     // gains haste
                     ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);

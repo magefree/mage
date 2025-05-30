@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -73,7 +72,7 @@ class OgreMarauderEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         Player defender = game.getPlayer(defendingPlayerId);
         if (defender != null && sourceObject != null) {
-            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
             boolean paid = false;
             if (cost.canPay(source, source, defendingPlayerId, game)
                     && defender.chooseUse(Outcome.LoseAbility, "Sacrifice a creature to prevent "

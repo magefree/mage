@@ -49,20 +49,20 @@ public final class WanderingMage extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {W}, Pay 1 life: Prevent the next 2 damage that would be dealt to target creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl<>("{W}"));
         ability.addCost(new PayLifeCost(1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {U}: Prevent the next 1 damage that would be dealt to target Cleric or Wizard creature this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{U}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
         // {B}, Put a -1/-1 counter on a creature you control: Prevent the next 2 damage that would be dealt to target player this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl<>("{B}"));
         ability.addCost(new WanderingMageCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());

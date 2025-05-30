@@ -46,7 +46,7 @@ public final class CallapheBelovedOfTheSea extends CardImpl {
         ).addHint(DevotionCount.U.getHint()));
 
         // Creatures and enchantments you control have "Spells your opponents cast that target this permanent cost {1} more to cast".
-        Ability gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability gainAbility = new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(1, new FilterCard("Spells"), TargetController.OPPONENT)
                         .withTargetName("this permanent")
         );

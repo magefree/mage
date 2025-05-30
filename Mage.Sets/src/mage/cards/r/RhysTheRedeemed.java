@@ -41,12 +41,12 @@ public final class RhysTheRedeemed extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{GW}, {tap}: Create a 1/1 green and white Elf Warrior creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GreenWhiteElfWarriorToken()), new ManaCostsImpl<>("{2}{G/W}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new GreenWhiteElfWarriorToken()), new ManaCostsImpl<>("{2}{G/W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {4}{GW}{GW}, {tap}: For each creature token you control, create a token that's a copy of that creature.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RhysTheRedeemedEffect(), new ManaCostsImpl<>("{4}{G/W}{G/W}"));
+        Ability ability2 = new SimpleActivatedAbility(new RhysTheRedeemedEffect(), new ManaCostsImpl<>("{4}{G/W}{G/W}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
 
@@ -89,7 +89,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (permanent.isControlledBy(source.getControllerId())) {
                     CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(permanent, game));

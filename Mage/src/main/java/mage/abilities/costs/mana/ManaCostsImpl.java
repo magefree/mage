@@ -2,6 +2,7 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.mana.ManaOptions;
@@ -127,17 +128,17 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             return false;
         }
 
-        handleLikePhyrexianManaCosts(player, ability, game); // e.g. K'rrik, Son of Yawgmoth
+        AbilityImpl.handlePhyrexianLikeEffects(game, source, ability, this);
 
         if (!player.getManaPool().isForcedToPay()) {
-            assignPayment(game, ability, player.getManaPool(), this);
+            assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);
         }
         game.getState().getSpecialActions().removeManaActions();
         while (player.canRespond() && !isPaid()) {
             ManaCost unpaid = this.getUnpaid();
             String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);
             if (player.playMana(ability, unpaid, promptText, game)) {
-                assignPayment(game, ability, player.getManaPool(), this);
+                assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);
             } else {
                 return false;
             }
@@ -195,40 +196,6 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         tempCosts.pay(source, game, source, payingPlayer.getId(), false, null);
     }
 
-
-    private void handleLikePhyrexianManaCosts(Player player, Ability source, Game game) {
-        if (this.isEmpty()) {
-            return; // nothing to be done without any mana costs. prevents NRE from occurring here
-        }
-        FilterMana phyrexianColors = player.getPhyrexianColors();
-        if (player.getPhyrexianColors() == null) {
-            return;
-        }
-        Costs<PayLifeCost> tempCosts = new CostsImpl<>();
-
-        Iterator<T> manaCostIterator = this.iterator();
-        while (manaCostIterator.hasNext()) {
-            ManaCost manaCost = manaCostIterator.next();
-            Mana mana = manaCost.getMana();
-
-            /* find which color mana is in the cost and set it in the temp Phyrexian cost */
-            if ((!phyrexianColors.isWhite() || mana.getWhite() <= 0)
-                    && (!phyrexianColors.isBlue() || mana.getBlue() <= 0)
-                    && (!phyrexianColors.isBlack() || mana.getBlack() <= 0)
-                    && (!phyrexianColors.isRed() || mana.getRed() <= 0)
-                    && (!phyrexianColors.isGreen() || mana.getGreen() <= 0)) {
-                continue;
-            }
-            PayLifeCost payLifeCost = new PayLifeCost(2);
-            if (payLifeCost.canPay(source, source, player.getId(), game)
-                    && player.chooseUse(Outcome.LoseLife, "Pay 2 life (using an active ability) instead of " + manaCost.getMana() + '?', source, game)) {
-                manaCostIterator.remove();
-                tempCosts.add(payLifeCost);
-            }
-        }
-        tempCosts.pay(source, game, source, player.getId(), false, null);
-    }
-
     @Override
     public ManaCosts<T> getUnpaid() {
         ManaCosts<T> unpaid = new ManaCostsImpl<>();
@@ -265,16 +232,6 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public boolean containsX() {
         return !getVariableCosts().isEmpty();
-    }
-
-    @Override
-    public int getX() {
-        int amount = 0;
-        List<VariableCost> variableCosts = getVariableCosts();
-        if (!variableCosts.isEmpty()) {
-            amount = variableCosts.get(0).getAmount();
-        }
-        return amount;
     }
 
     @Override
@@ -341,6 +298,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         // hybrid
         for (ManaCost cost : this) {
             if (!cost.isPaid() && cost instanceof HybridManaCost) {
+                cost.assignPayment(game, ability, pool, costToPay);
+                if (pool.isEmpty()) {
+                    return;
+                }
+            }
+        }
+
+        // Colorless hybrid
+        for (ManaCost cost : this) {
+            if (!cost.isPaid() && cost instanceof ColorlessHybridManaCost) {
                 cost.assignPayment(game, ability, pool, costToPay);
                 if (pool.isEmpty()) {
                     return;
@@ -418,10 +385,13 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                     game.undo(playerId);
                     this.clearPaid();
 
-                    // TODO: checks Word of Command with Unbound Flourishing's X multiplier
                     // TODO: checks Word of Command with {X}{X} cards
-                    int xValue = referenceCosts.getX();
-                    this.setX(xValue, xValue);
+                    int amount = 0;
+                    List<VariableCost> variableCosts = getVariableCosts();
+                    if (!variableCosts.isEmpty()) {
+                        amount = variableCosts.get(0).getAmount();
+                    }
+                    this.setX(amount, amount);
 
                     player.getManaPool().restoreMana(pool.getPoolBookmark());
                     game.bookmarkState();
@@ -469,7 +439,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                     this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                 } else // check X wasn't added before
                     if (modifierForX == 0) {
-                        // count X occurence
+                        // count X occurrence
                         for (String s : symbols) {
                             if (s.equals("X")) {
                                 modifierForX++;
@@ -492,6 +462,8 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 ManaCost cost;
                 if (without.length() == 1) {
                     cost = new ColoredManaCost(ColoredManaSymbol.lookup(without.charAt(0)));
+                } else if (without.charAt(0) == 'C') {
+                    cost = new ColorlessHybridManaCost(ColoredManaSymbol.lookup(without.charAt(2)));
                 } else {
                     cost = new HybridManaCost(ColoredManaSymbol.lookup(without.charAt(0)), ColoredManaSymbol.lookup(without.charAt(2)));
                 }

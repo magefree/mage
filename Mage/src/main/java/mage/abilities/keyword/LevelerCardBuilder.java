@@ -50,13 +50,13 @@ public class LevelerCardBuilder {
         for (Ability ability : abilities) {
             ContinuousEffect effect = new GainAbilitySourceEffect(ability);
             ConditionalContinuousEffect abEffect = new ConditionalContinuousEffect(effect, condition, "");
-            Ability staticAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, abEffect);
+            Ability staticAbility = new SimpleStaticAbility(abEffect);
             staticAbility.setRuleVisible(false);
             constructed.add(staticAbility);
         }
         ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield);
         ConditionalContinuousEffect ptEffect = new ConditionalContinuousEffect(effect, condition, rule);
-        constructed.add(new SimpleStaticAbility(Zone.BATTLEFIELD, ptEffect));
+        constructed.add(new SimpleStaticAbility(ptEffect));
 
         return constructed;
     }
@@ -192,7 +192,7 @@ public class LevelerCardBuilder {
             sb.append(power);
             sb.append('/');
             sb.append(toughness);
-            List<String> abilityText = abilities.getRules("{this}");
+            List<String> abilityText = abilities.getRules();
             if (!abilityText.isEmpty()) {
                 sb.append("<br>");
                 sb.append(abilityText.stream().collect(Collectors.joining("<br>")));

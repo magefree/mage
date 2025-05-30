@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.cards.CardImpl;
@@ -38,6 +38,7 @@ public final class WyllsReversal extends CardImpl {
         // 15+ | You may choose new targets for that spell or ability. Then copy it. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new WyllsReversalEffect());
         this.getSpellAbility().addTarget(new TargetStackObject());
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private WyllsReversal(final WyllsReversal card) {
@@ -93,7 +94,7 @@ class WyllsReversalEffect extends RollDieWithResultTableEffect {
             return false;
         }
         int result = player.rollDice(outcome, source, game, 20)
-                + GreatestPowerAmongControlledCreaturesValue.instance.calculate(game, source, this);
+                + GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.calculate(game, source, this);
         if (result >= 1) {
             stackObject.chooseNewTargets(
                     game, source.getControllerId(), false,

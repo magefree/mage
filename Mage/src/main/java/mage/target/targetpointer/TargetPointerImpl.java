@@ -2,10 +2,12 @@ package mage.target.targetpointer;
 
 import mage.abilities.Ability;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.players.Player;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author JayDi85
@@ -17,7 +19,7 @@ public abstract class TargetPointerImpl implements TargetPointer {
 
     private boolean initialized = false;
 
-    public TargetPointerImpl() {
+    protected TargetPointerImpl() {
         super();
     }
 
@@ -41,6 +43,21 @@ public abstract class TargetPointerImpl implements TargetPointer {
     }
 
     @Override
+    public Player getControllerOfFirstTargetOrLKI(Game game, Ability source) {
+        Player targetController = null;
+        Permanent permanent = this.getFirstTargetPermanentOrLKI(game, source);
+        if (permanent != null) {
+            targetController = game.getPlayer(permanent.getControllerId());
+        } else {
+            Spell spell = game.getSpellOrLKIStack(this.getFirst(game, source));
+            if (spell != null) {
+                targetController = game.getPlayer(spell.getControllerId());
+            }
+        }
+        return targetController;
+    }
+
+    @Override
     public String getData(String key) {
         if (data == null) {
             return "";
@@ -57,13 +74,4 @@ public abstract class TargetPointerImpl implements TargetPointer {
         return this;
     }
 
-    @Override
-    public final FixedTarget getFirstAsFixedTarget(Game game, Ability source) {
-        UUID firstId = this.getFirst(game, source);
-        if (firstId != null) {
-            return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
-        }
-
-        return null;
-    }
 }

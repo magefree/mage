@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ public final class DoubleDown extends CardImpl {
 
         // Whenever you cast an outlaw spell, copy that spell.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(false, false, false),
+                new CopyTargetStackObjectEffect(false, false, false),
                 filter, false, SetTargetPointer.SPELL
         ));
     }

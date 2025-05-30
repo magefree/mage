@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -18,6 +19,8 @@ import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.Set;
 
 /**
  * @author TheElk801
@@ -73,8 +76,8 @@ public class BlitzAbility extends SpellAbility {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (!super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (!super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
         this.setCostsTag(BLITZ_ACTIVATION_VALUE_KEY, null);

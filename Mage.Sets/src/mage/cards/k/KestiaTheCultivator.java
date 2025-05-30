@@ -50,7 +50,6 @@ public final class KestiaTheCultivator extends CardImpl {
 
         // Enchanted creature gets +4/+4.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield)
         ));
 

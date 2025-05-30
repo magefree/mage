@@ -42,7 +42,7 @@ public final class FiendslayerPaladin extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Fiendslayer Paladin can't be the target of black or red spells your opponents control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FiendslayerPaladinEffect()));
+        this.addAbility(new SimpleStaticAbility(new FiendslayerPaladinEffect()));
         
     }
 

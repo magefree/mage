@@ -20,7 +20,7 @@ public final class RetreatToCoralhelm extends CardImpl {
     public RetreatToCoralhelm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
-        // <i>Landfall</i>- Whenever a land enters the battlefield under your control, choose one - You may tap or untap target creature; or Scry 1.
+        // <i>Landfall</i>- Whenever a land you control enters, choose one - You may tap or untap target creature; or Scry 1.
         LandfallAbility ability = new LandfallAbility(new MayTapOrUntapTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
         Mode mode = new Mode(new ScryEffect(1));

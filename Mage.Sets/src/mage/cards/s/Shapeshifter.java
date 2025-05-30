@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -37,7 +37,7 @@ public final class Shapeshifter extends CardImpl {
         // As Shapeshifter enters the battlefield, choose a number between 0 and 7.
         this.addAbility(new AsEntersBattlefieldAbility(new ShapeshifterEffect()));
         // At the beginning of your upkeep, you may choose a number between 0 and 7.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShapeshifterEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShapeshifterEffect(), true));
         // Shapeshifter's power is equal to the last chosen number and its toughness is equal to 7 minus that number.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ShapeshifterContinuousEffect()));
     }
@@ -76,7 +76,7 @@ class ShapeshifterEffect extends OneShotEffect {
             mageObject = game.getPermanent(source.getSourceId());
         }
         if (controller != null) {
-            Choice numberChoice = new ChoiceImpl();
+            Choice numberChoice = new ChoiceImpl(false);
             numberChoice.setMessage("Choose a number beween 0 and 7");
             Set<String> numbers = new HashSet<>();
             for (int i = 0; i <= 7; i++) {

@@ -30,7 +30,7 @@ public final class DeadlyDesigns extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // {2}: Put a plot counter on Deadly Designs. Any player may activate this ability.
-        SimpleActivatedAbility activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PLOT.createInstance()), new GenericManaCost(2));
+        SimpleActivatedAbility activatedAbility = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.PLOT.createInstance()), new GenericManaCost(2));
         activatedAbility.setMayActivate(TargetController.ANY);
         activatedAbility.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(activatedAbility);
@@ -74,7 +74,7 @@ class DeadlyDesignsTriggerAbility extends StateTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When there are five or more plot counters on {this}, sacrifice it. If you do, destroy up to two target creatures";
+        return "When there are five or more plot counters on {this}, sacrifice it. If you do, destroy up to two target creatures.";
     }
 }
 

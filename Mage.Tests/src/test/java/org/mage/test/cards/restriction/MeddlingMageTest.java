@@ -89,7 +89,7 @@ public class MeddlingMageTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Meddling Mage", 1);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertHandCount(playerA, "Meddling Mage", 0);
         assertHandCount(playerA, "Ainok Tracker", 0);
     }

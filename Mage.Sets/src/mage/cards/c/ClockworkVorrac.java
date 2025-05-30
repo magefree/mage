@@ -38,7 +38,7 @@ public final class ClockworkVorrac extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), "with four +1/+1 counters on it"));
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkVorracEffect(), false));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new TapSourceCost()));
     }
 
     private ClockworkVorrac(final ClockworkVorrac card) {

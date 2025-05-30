@@ -4,7 +4,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,12 +43,12 @@ public final class PriestOfTheWakeningSun extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, you may reveal a Dinosaur card from your hand. If you do, you gain 2 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new PriestOfTheWakeningSunEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new PriestOfTheWakeningSunEffect(), true);
         this.addAbility(ability);
 
         // {3}{W}{W}, Sacrifice Priest of the Wakening Sun: Search your library for a Dinosaur card, reveal it, put it into your hand, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(target, true), new ManaCostsImpl<>("{3}{W}{W}"));
+        Ability ability2 = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(target, true), new ManaCostsImpl<>("{3}{W}{W}"));
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);
     }

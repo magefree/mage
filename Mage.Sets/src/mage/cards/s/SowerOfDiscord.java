@@ -1,8 +1,8 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
@@ -16,11 +16,14 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -107,9 +110,9 @@ class SowerOfDiscordEntersBattlefieldEffect extends OneShotEffect {
 
 }
 
-class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl {
+class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
-    public SowerOfDiscordTriggeredAbility() {
+    SowerOfDiscordTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
     }
 

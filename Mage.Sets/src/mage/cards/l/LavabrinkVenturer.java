@@ -10,6 +10,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ModeChoice;
 import mage.constants.SubType;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ManaValueParityPredicate;
@@ -31,10 +32,7 @@ public final class LavabrinkVenturer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As Lavabrink Venturer enters the battlefield, choose odd or even.
-        this.addAbility(new AsEntersBattlefieldAbility(
-                new ChooseModeEffect("Odd or even?", "Odd", "Even"),
-                "choose odd or even. <i>(Zero is even.)</i>"
-        ));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(ModeChoice.ODD, ModeChoice.EVEN)));
 
         // Lavabrink Venturer has protection from each converted mana cost of the chosen value.
         this.addAbility(new SimpleStaticAbility(new LavabrinkVenturerEffect()));
@@ -75,19 +73,12 @@ class LavabrinkVenturerEffect extends GainAbilitySourceEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String chosenMode = (String) game.getState().getValue(source.getSourceId() + "_modeChoice");
-        if (chosenMode == null) {
+        if (ModeChoice.ODD.checkMode(game, source)) {
+            this.ability = new ProtectionAbility(oddFilter);
+        } else if (ModeChoice.EVEN.checkMode(game, source)) {
+            this.ability = new ProtectionAbility(evenFilter);
+        } else {
             return false;
-        }
-        switch (chosenMode) {
-            case "Odd":
-                this.ability = new ProtectionAbility(oddFilter);
-                break;
-            case "Even":
-                this.ability = new ProtectionAbility(evenFilter);
-                break;
-            default:
-                return false;
         }
         return super.apply(game, source);
     }

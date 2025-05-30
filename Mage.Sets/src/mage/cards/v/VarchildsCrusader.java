@@ -39,7 +39,7 @@ public final class VarchildsCrusader extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {0}: Varchild's Crusader can't be blocked this turn except by Walls. Sacrifice Varchild's Crusader at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn), new GenericManaCost(0));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect())));
         this.addAbility(ability);
     }

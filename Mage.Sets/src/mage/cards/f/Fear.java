@@ -36,7 +36,7 @@ public final class Fear extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has fear.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private Fear(final Fear card) {

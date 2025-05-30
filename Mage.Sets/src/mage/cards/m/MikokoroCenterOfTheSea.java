@@ -26,7 +26,7 @@ public final class MikokoroCenterOfTheSea extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {tap}: Each player draws a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardAllEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DrawCardAllEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -21,6 +21,7 @@ import mage.choices.ChoiceBasicLandType;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
 
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -42,7 +43,7 @@ public final class IllusionaryTerrain extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseTwoBasicLandTypesEffect(Outcome.Neutral)));
 
         // Basic lands of the first chosen type are the second chosen type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IllusionaryTerrainEffect()));
+        this.addAbility(new SimpleStaticAbility(new IllusionaryTerrainEffect()));
 
     }
 
@@ -77,7 +78,7 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         SubType firstChoice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "firstChoice"));
         SubType secondChoice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "secondChoice"));
-        List<Permanent> lands = game.getBattlefield().getAllActivePermanents(CardType.LAND, game);
+        List<Permanent> lands = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game);
         if (controller != null
                 && firstChoice != null
                 && secondChoice != null) {

@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -10,16 +9,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class MisthollowGriffin extends CardImpl {
@@ -50,7 +45,7 @@ public final class MisthollowGriffin extends CardImpl {
 class MisthollowGriffinPlayEffect extends AsThoughEffectImpl {
 
     MisthollowGriffinPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from exile";
     }
 

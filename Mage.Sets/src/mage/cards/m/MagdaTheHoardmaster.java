@@ -35,7 +35,7 @@ public final class MagdaTheHoardmaster extends CardImpl {
         // Whenever you commit a crime, create a tapped Treasure token. This ability triggers only once each turn.
         this.addAbility(
                 new CommittedCrimeTriggeredAbility(new CreateTokenEffect(new TreasureToken(), 1, true))
-                        .setTriggersOnceEachTurn(true)
+                        .setTriggersLimitEachTurn(1)
         );
 
         // Sacrifice three Treasures: Create a 4/4 red Scorpion Dragon creature token with flying and haste. Activate only as a sorcery.

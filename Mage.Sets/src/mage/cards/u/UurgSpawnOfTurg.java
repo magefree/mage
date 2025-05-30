@@ -2,7 +2,7 @@ package mage.cards.u;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -40,12 +40,12 @@ public final class UurgSpawnOfTurg extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(1), TargetController.YOU, false
+                new SurveilEffect(1)
         ));
 
         // {B}{G}, Sacrifice a land: You gain 2 life.
         Ability ability = new SimpleActivatedAbility(new GainLifeEffect(2), new ManaCostsImpl<>("{B}{G}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         this.addAbility(ability);
     }
 

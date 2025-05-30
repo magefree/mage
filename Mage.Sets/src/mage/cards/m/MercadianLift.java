@@ -1,9 +1,7 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -22,6 +20,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,12 +75,7 @@ class MercadianLiftEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int numberOfCounters = 0;
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof RemoveVariableCountersSourceCost) {
-                    numberOfCounters = ((RemoveVariableCountersSourceCost) cost).getAmount();
-                }
-            }
+            int numberOfCounters = CardUtil.getSourceCostsTag(game, source, "X", 0);
             FilterCreatureCard filter = new FilterCreatureCard();
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, numberOfCounters));
             filter.setMessage("creature card with mana value " + numberOfCounters);
@@ -87,7 +83,6 @@ class MercadianLiftEffect extends OneShotEffect {
             if (target.canChoose(controller.getId(), source, game)
                     && controller.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)
                     && controller.choose(Outcome.PutCardInPlay, target, source, game)) {
-                target.setRequired(false);
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     return controller.moveCards(card, Zone.BATTLEFIELD, source, game);

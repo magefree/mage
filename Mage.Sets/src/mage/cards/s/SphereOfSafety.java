@@ -30,7 +30,7 @@ public final class SphereOfSafety extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
 
         // Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfSafetyPayManaToAttackAllEffect());
+        Ability ability = new SimpleStaticAbility(new SphereOfSafetyPayManaToAttackAllEffect());
         ability.addHint(new ValueHint(
                 NumberOfEnchantmentsYouControl.instance.getMessage(),
                 NumberOfEnchantmentsYouControl.instance)

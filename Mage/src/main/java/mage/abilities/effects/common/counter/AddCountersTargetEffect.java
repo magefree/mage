@@ -23,7 +23,7 @@ import java.util.UUID;
 public class AddCountersTargetEffect extends OneShotEffect {
 
     private Counter counter;
-    private DynamicValue amount;
+    private final DynamicValue amount;
 
     public AddCountersTargetEffect(Counter counter) {
         this(counter, counter.getName().equals(CounterType.M1M1.getName()) ? Outcome.UnboostCreature : Outcome.Benefit);

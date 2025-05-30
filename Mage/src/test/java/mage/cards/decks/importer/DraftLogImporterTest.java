@@ -1,6 +1,7 @@
 package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -26,6 +27,7 @@ public class DraftLogImporterTest {
                 false
         );
 
+        Assert.assertEquals("", errors.toString());
         TestDeckChecker.checker()
                 .addMain("Raging Ravine", 1)
                 .addMain("Fiery Temper", 1)
@@ -73,8 +75,6 @@ public class DraftLogImporterTest {
                 .addMain("Just the Wind", 1)
                 .addMain("Flight of Fancy", 1)
                 .verify(deck, 45, 0);
-
-        assertEquals("", errors.toString());
     }
 
 }

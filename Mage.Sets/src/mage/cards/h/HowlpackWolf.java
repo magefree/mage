@@ -34,7 +34,7 @@ public final class HowlpackWolf extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Howlpack Wolf can't block unless you control another Wolf or Werewolf.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockUnlessYouControlSourceEffect(filter)));
     }
 
     private HowlpackWolf(final HowlpackWolf card) {

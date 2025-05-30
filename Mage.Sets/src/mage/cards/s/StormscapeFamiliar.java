@@ -40,7 +40,7 @@ public final class StormscapeFamiliar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // White spells and black spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private StormscapeFamiliar(final StormscapeFamiliar card) {

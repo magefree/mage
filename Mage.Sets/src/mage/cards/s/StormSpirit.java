@@ -31,7 +31,7 @@ public final class StormSpirit extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {tap}: Storm Spirit deals 2 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -70,7 +70,7 @@ class EruthTormentedProphetEffect extends ReplacementEffectImpl {
         Set<Card> cards = player.getLibrary().getTopCards(game, 2);
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         }
         return true;
     }

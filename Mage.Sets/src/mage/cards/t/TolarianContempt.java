@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -18,7 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ public final class TolarianContempt extends CardImpl {
             = new FilterCreaturePermanent("creature with a rejection counter on it");
 
     static {
-        filter.add(CounterType.REJECTION.getPredicate());
+        filterRejection.add(CounterType.REJECTION.getPredicate());
     }
 
     public TolarianContempt(UUID ownerId, CardSetInfo setInfo) {
@@ -46,9 +45,10 @@ public final class TolarianContempt extends CardImpl {
         ));
 
         // At the beginning of your end step, for each opponent, choose up to one target creature they control with a rejection counter on it. That creature's owner puts it on the top or bottom of their library.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new TolarianContemptEffect(), TargetController.YOU, false
-        ).setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(0,1, filterRejection))));
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new TolarianContemptEffect());
+        ability.addTarget(new TargetPermanent(0,1, filterRejection));
+        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+        this.addAbility(ability);
     }
 
     private TolarianContempt(final TolarianContempt card) {
@@ -93,7 +93,7 @@ class TolarianContemptEffect extends OneShotEffect {
             )) {
                 owner.putCardsOnTopOfLibrary(permanent, game, source, false);
             } else {
-                owner.putCardsOnBottomOfLibrary(permanent, game, source, false);
+                owner.putCardsOnBottomOfLibrary(permanent, game, source);
             }
         }
         return true;

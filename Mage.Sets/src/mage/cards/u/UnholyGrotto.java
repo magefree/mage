@@ -34,7 +34,7 @@ public final class UnholyGrotto extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {B}, {tap}: Put target Zombie card from your graveyard on top of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{B}"));
+        Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -27,8 +27,7 @@ public final class GrimFeast extends CardImpl {
 
         // At the beginning of your upkeep, Grim Feast deals 1 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DamageControllerEffect(1),
-                TargetController.YOU, false
+                new DamageControllerEffect(1)
         ));
 
         // Whenever a creature is put into an opponent's graveyard from the battlefield, you gain life equal to its toughness.

@@ -1,12 +1,12 @@
 package mage.game.turn;
 
-import java.util.UUID;
-
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -65,6 +65,9 @@ public class CombatDamageStep extends Step {
         for (CombatGroup group : game.getCombat().getBlockingGroups()) {
             group.applyDamage(game);
         }
+
+        // Even if no damage was dealt, some watchers need a reset. For instance PhantomPreventionWatcher.
+        game.getState().addBatchDamageCouldHaveBeenFired(true, game);
         // Must fire damage batch events now, before SBA (https://github.com/magefree/mage/issues/9129)
         game.getState().handleSimultaneousEvent(game);
     }

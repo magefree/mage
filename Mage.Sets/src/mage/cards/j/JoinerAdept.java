@@ -27,7 +27,7 @@ public final class JoinerAdept extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_LANDS, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_LANDS, false)));
     }
 
     private JoinerAdept(final JoinerAdept card) {

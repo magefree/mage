@@ -21,7 +21,7 @@ public final class BraidwoodCup extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {T}: You gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new TapSourceCost());
         this.addAbility(ability);
     }
 

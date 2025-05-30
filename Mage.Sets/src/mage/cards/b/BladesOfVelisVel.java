@@ -18,7 +18,7 @@ import java.util.UUID;
 public final class BladesOfVelisVel extends CardImpl {
 
     public BladesOfVelisVel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{1}{R}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling

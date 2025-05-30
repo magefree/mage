@@ -4,7 +4,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -35,10 +35,10 @@ public final class RavosSoultender extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, true)));
 
         // At the beginning of your upkeep, you may return target creature card from your graveyard to your hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
 

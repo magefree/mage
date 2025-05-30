@@ -30,10 +30,10 @@ public final class ConstrictingSliver extends CardImpl {
         // until this creature leaves the battlefield."
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(), true);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(ability,
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS)
-                        .setText("Sliver creatures you control have \"When this creature enters the battlefield, "
+                        .setText("Sliver creatures you control have \"When this creature enters, "
                                 + "you may exile target creature an opponent controls until this creature leaves the battlefield.\"")));
     }
 

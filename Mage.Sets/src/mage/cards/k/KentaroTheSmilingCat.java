@@ -37,7 +37,7 @@ public final class KentaroTheSmilingCat extends CardImpl {
         this.addAbility(new BushidoAbility(1));
         
         // You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's converted mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KentaroTheSmilingCatCastingEffect()));
+        this.addAbility(new SimpleStaticAbility(new KentaroTheSmilingCatCastingEffect()));
         
 
     }

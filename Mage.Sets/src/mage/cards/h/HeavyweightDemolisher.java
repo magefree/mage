@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -32,8 +31,7 @@ public final class HeavyweightDemolisher extends CardImpl {
 
         // At the beginning of your upkeep, tap Heavyweight Demolisher unless you pay {3}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TapSourceUnlessPaysEffect(new GenericManaCost(3)),
-                TargetController.YOU, false
+                new TapSourceUnlessPaysEffect(new GenericManaCost(3))
         ));
 
         // Unearth {6}{R}{R}

@@ -46,7 +46,7 @@ public final class MaintenanceDroid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Choose target card you own with a repair counter on it. You may remove a repair counter from it or put another repair counter on it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MaintenanceDroidEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new MaintenanceDroidEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 

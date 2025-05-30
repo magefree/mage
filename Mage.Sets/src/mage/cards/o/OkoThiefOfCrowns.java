@@ -72,6 +72,7 @@ class OkoThiefOfCrownsEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Outcome.Benefit);
         staticText = "target artifact or creature loses all abilities " +
                 "and becomes a green Elk creature with base power and toughness 3/3";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private OkoThiefOfCrownsEffect(final OkoThiefOfCrownsEffect effect) {

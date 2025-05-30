@@ -39,7 +39,7 @@ public final class ProtectorOfTheCrown extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // All damage would be dealt to you is dealt to Protector of the Crown instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectorOfTheCrownEffect()));
+        this.addAbility(new SimpleStaticAbility(new ProtectorOfTheCrownEffect()));
     }
 
     private ProtectorOfTheCrown(final ProtectorOfTheCrown card) {

@@ -92,19 +92,19 @@ public class TournamentPlayer {
         this.setState(TournamentPlayerState.WAITING);
     }
 
-    public boolean updateDeck(Deck deck) {
-        // Check if the cards included in the deck are the same as in the original deck
-        boolean validDeck = (getDeck().getDeckCompleteHashCode() == deck.getDeckCompleteHashCode());
-        if (!validDeck) {
-            // Clear the deck so the player cheating looses the game
-            // TODO: inform other players about cheating?!
-            logger.error("Found cheating player " + getPlayer().getName()
+    public boolean updateDeck(Deck deck, boolean ignoreMainBasicLands) {
+        // used for auto-save deck
+
+        // make sure it's the same deck (player do not add or remove something)
+        boolean isGood = (this.getDeck().getDeckHash(ignoreMainBasicLands) == deck.getDeckHash(ignoreMainBasicLands));
+        if (!isGood) {
+            logger.error("Found cheating tourney player " + player.getName()
                     + " with changed deck, main " + deck.getCards().size() + ", side " + deck.getSideboard().size());
             deck.getCards().clear();
             deck.getSideboard().clear();
         }
         this.deck = deck;
-        return validDeck;
+        return isGood;
     }
 
     /**

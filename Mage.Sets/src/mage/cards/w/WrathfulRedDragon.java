@@ -2,6 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -15,6 +16,7 @@ import mage.filter.common.FilterAnyTarget;
 import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,7 +53,7 @@ public final class WrathfulRedDragon extends CardImpl {
     }
 }
 
-class WrathfulRedDragonTriggeredAbility extends TriggeredAbilityImpl {
+class WrathfulRedDragonTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     private static final FilterPermanentOrPlayer filter
             = new FilterAnyTarget("any target that isn't a Dragon");

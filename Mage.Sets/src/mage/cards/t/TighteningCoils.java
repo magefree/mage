@@ -39,7 +39,7 @@ public final class TighteningCoils extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets -6/-0 and loses flying.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-6, 0, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(-6, 0, Duration.WhileOnBattlefield));
         Effect effect = new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and loses flying");
         ability.addEffect(effect);

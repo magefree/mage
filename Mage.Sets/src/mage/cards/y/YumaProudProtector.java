@@ -52,7 +52,7 @@ public final class YumaProudProtector extends CardImpl {
 
         // Whenever Yuma, Proud Protector enters the battlefield or attacks, you may sacrifice a land. If you do, draw a card.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(
-                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT))
+                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new SacrificeTargetCost(StaticFilters.FILTER_LAND))
         ));
 
         // Whenever a Desert card is put into your graveyard from anywhere, create a 4/2 green Plant Warrior creature token with reach.

@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepAllEffect;
@@ -32,7 +32,7 @@ public final class MistOfStagnation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_PERMANENTS)));
 
         // At the beginning of each player's upkeep, that player chooses a permanent for each card in their graveyard, then untaps those permanents.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MistOfStagnationEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new MistOfStagnationEffect(), false));
     }
 
     private MistOfStagnation(final MistOfStagnation card) {

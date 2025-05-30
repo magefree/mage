@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -45,9 +45,9 @@ public final class CosimaGodOfTheVoyage extends ModalDoubleFacedCard {
         // Legendary Creature - God
         this.getLeftHalfCard().setPT(new MageInt(2), new MageInt(4));
 
-        // At the beginning of your upkeep, you may exile Cosima. If you do, it gains "Whenever a land enters the battlefield under your control, if Cosima is exiled, you may put a voyage counter on it. If you don't, return Cosima to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.
+        // At the beginning of your upkeep, you may exile Cosima. If you do, it gains "Whenever a land you control enters, if Cosima is exiled, you may put a voyage counter on it. If you don't, return Cosima to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.
         this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CosimaGodOfTheVoyageEffect(), TargetController.YOU, true
+                new CosimaGodOfTheVoyageEffect(), true
         ));
 
         // 2.
@@ -80,7 +80,7 @@ class CosimaGodOfTheVoyageEffect extends OneShotEffect {
     CosimaGodOfTheVoyageEffect() {
         super(Outcome.Benefit);
         staticText = "exile {this}. If you do, it gains " +
-                "\"Whenever a land enters the battlefield under your control, if {this} is exiled, " +
+                "\"Whenever a land you control enters, if {this} is exiled, " +
                 "you may put a voyage counter on it. If you don't, return {this} to the battlefield " +
                 "with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.\"";
     }
@@ -183,7 +183,7 @@ class CosimaGodOfTheVoyageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a land enters the battlefield under your control, if {this} is exiled, " +
+        return "Whenever a land you control enters, if {this} is exiled, " +
                 "you may put a voyage counter on it. If you don't, return {this} to the battlefield " +
                 "with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.";
     }

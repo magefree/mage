@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -51,8 +51,8 @@ public final class EowynShieldmaiden extends CardImpl {
 
         TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(
             Zone.BATTLEFIELD,
-            new CreateTokenEffect(new HumanKnightToken(), 2),
-            TargetController.YOU, false, false
+                TargetController.YOU, new CreateTokenEffect(new HumanKnightToken(), 2),
+                false
         );
         triggeredAbility.addEffect(new ConditionalOneShotEffect(
             new DrawCardSourceControllerEffect(1),

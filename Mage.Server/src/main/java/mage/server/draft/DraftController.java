@@ -9,6 +9,7 @@ import mage.game.events.TableEvent;
 import mage.players.Player;
 import mage.server.game.GameController;
 import mage.server.managers.ManagerFactory;
+import mage.util.ThreadUtils;
 import mage.view.DraftPickView;
 import org.apache.log4j.Logger;
 
@@ -119,11 +120,12 @@ public class DraftController {
     private synchronized void checkStart() {
         if (!draft.isStarted() && allJoined()) {
             draft.setStarted();
-            managerFactory.threadExecutor().getCallExecutor().execute(this::startDraft);
+            managerFactory.threadExecutor().getTourneyExecutor().execute(this::startDraft);
         }
     }
 
     private void startDraft() {
+        Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_TOURNEY_DRAFT + " " + tableId);
         for (final Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
             if (!entry.getValue().init()) {
                 logger.fatal("Unable to initialize client for playerId " + entry.getKey());

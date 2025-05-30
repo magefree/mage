@@ -46,7 +46,7 @@ public final class SphinxOfTheFinalWord extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
         
         // Instant and sorcery spells you control can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
     }
 
     private SphinxOfTheFinalWord(final SphinxOfTheFinalWord card) {

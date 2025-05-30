@@ -1,10 +1,11 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SacrificeAllControllerEffect;
+import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,9 +13,10 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -25,6 +27,12 @@ import java.util.UUID;
  */
 public final class HellcarverDemon extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("other permanents");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
     public HellcarverDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.subtype.add(SubType.DEMON);
@@ -34,10 +42,11 @@ public final class HellcarverDemon extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Hellcarver Demon deals combat damage to a player, sacrifice all other permanents you 
-        // control and discard your hand. Exile the top six cards of your library. You may cast any number 
-        // of nonland cards exiled this way without paying their mana costs.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HellcarverDemonEffect(), false));
+        // Whenever Hellcarver Demon deals combat damage to a player, sacrifice all other permanents you control and discard your hand. Exile the top six cards of your library. You may cast any number of nonland cards exiled this way without paying their mana costs.
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeAllControllerEffect(filter), false);
+        ability.addEffect(new DiscardHandControllerEffect().concatBy("and"));
+        ability.addEffect(new HellcarverDemonEffect());
+        this.addAbility(ability);
     }
 
     private HellcarverDemon(final HellcarverDemon card) {
@@ -54,8 +63,7 @@ class HellcarverDemonEffect extends OneShotEffect {
 
     HellcarverDemonEffect() {
         super(Outcome.PlayForFree);
-        staticText = "sacrifice all other permanents you control and discard your hand. "
-                + "Exile the top six cards of your library. You may cast any number of "
+        staticText = "Exile the top six cards of your library. You may cast any number of "
                 + "spells from among cards exiled this way without paying their mana costs";
     }
 
@@ -69,16 +77,6 @@ class HellcarverDemonEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        MageObjectReference sourceMor = new MageObjectReference(source);
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                source.getControllerId(), source, game
-        )) {
-            if (!sourceMor.refersTo(permanent, game)) {
-                permanent.sacrifice(source, game);
-            }
-        }
-        controller.discard(controller.getHand(), false, source, game);
         CardUtil.castMultipleWithAttributeForFree(
                 controller, source, game, new CardsImpl(
                         controller.getLibrary().getTopCards(game, 6)

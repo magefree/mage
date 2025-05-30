@@ -27,7 +27,7 @@ public final class PathrazerOfUlamog extends CardImpl {
 
         this.addAbility(new AnnihilatorAbility(3));
         // Pathrazer of Ulamog can't be blocked except by three or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByOneEffect(3)));
     }
 
     private PathrazerOfUlamog(final PathrazerOfUlamog card) {

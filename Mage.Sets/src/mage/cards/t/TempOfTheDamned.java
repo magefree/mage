@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,7 +34,7 @@ public final class TempOfTheDamned extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TempOfTheDamnedEffect()));
         
         // At the beginning of your upkeep, remove a funk counter from Temp of the Damned. If you can't, sacrifice it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TempOfTheDamnedUpkeepEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TempOfTheDamnedUpkeepEffect()));
     }
 
     private TempOfTheDamned(final TempOfTheDamned card) {
@@ -52,7 +51,7 @@ class TempOfTheDamnedEffect extends OneShotEffect {
 
     TempOfTheDamnedEffect() {
         super(Outcome.Neutral);
-        staticText = "roll a six-sided die. {this} enters the battlefield with a number of funk counters on it equal to the result";
+        staticText = "roll a six-sided die. {this} enters with a number of funk counters on it equal to the result";
     }
 
     private TempOfTheDamnedEffect(final TempOfTheDamnedEffect effect) {

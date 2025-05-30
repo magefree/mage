@@ -31,7 +31,7 @@ public final class SpinalParasite extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // Remove two +1/+1 counters from Spinal Parasite: Remove a counter from target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterTargetEffect(),
+        Ability ability = new SimpleActivatedAbility(new RemoveCounterTargetEffect(),
             new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2)));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

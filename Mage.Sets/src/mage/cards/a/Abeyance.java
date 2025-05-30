@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -93,8 +92,7 @@ class AbeyanceEffect extends ContinuousRuleModifyingEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            return ability.isPresent()
-                    && !(ability.get() instanceof ActivatedManaAbilityImpl);
+            return ability.isPresent() && !ability.get().isManaActivatedAbility();
         }
         return false;
     }

@@ -12,7 +12,7 @@ import mage.constants.SubType;
 public final class ReefWormFishToken extends TokenImpl {
 
     public ReefWormFishToken() {
-        super("Fish Token", "3/3 blue Fish creature token with \"When this creature dies, create a 6/6 blue Whale creature token with \"When this creature dies, create a 9/9 blue Kraken creature token.\"\"");
+        super("Fish Token", "3/3 blue Fish creature token with \"When this creature dies, create a 6/6 blue Whale creature token with 'When this creature dies, create a 9/9 blue Kraken creature token.'\"");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.FISH);

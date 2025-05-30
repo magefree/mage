@@ -1,12 +1,10 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -17,9 +15,9 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCounterChoiceSourceEffect;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -30,15 +28,16 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author Skiwkr
  */
 public final class MeTheImmortal extends CardImpl {
 
     public MeTheImmortal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
@@ -48,9 +47,8 @@ public final class MeTheImmortal extends CardImpl {
         // At the beginning of combat on your turn, put your choice of a +1/+1, first strike, vigilance, or menace counter on Me, the Immortal.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new AddCounterChoiceSourceEffect(
                 CounterType.P1P1, CounterType.FIRST_STRIKE, CounterType.VIGILANCE, CounterType.MENACE
-        ).setText("put your choice of a +1/+1, first strike, vigilance, or menace counter on {this}"),
-                TargetController.YOU,
-                false));
+        ).setText("put your choice of a +1/+1, first strike, vigilance, or menace counter on {this}")
+        ));
         // Counters remain on Me as it moves to any zone other than a player's hand or library.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new MeTheImmortalEffect()));
         // You may cast Me from your graveyard by discarding two cards in addition to paying its other costs.
@@ -139,8 +137,8 @@ class MeTheImmortalEffect extends ReplacementEffectImpl {
 class MeTheImmortalCastEffect extends AsThoughEffectImpl {
 
     MeTheImmortalCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        this.staticText = "you may cast {this} from your graveyard " +
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        this.staticText = "you may cast this card from your graveyard " +
                 "by discarding two cards in addition to paying its other costs";
     }
 

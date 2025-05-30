@@ -1,13 +1,14 @@
 package mage.abilities;
 
+import mage.MageObject;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaAbility;
-import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.util.CardUtil;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
@@ -45,12 +46,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
 
     @Override
-    public List<String> getRules(String source) {
-        return getRules(source, true);
+    public List<String> getRules() {
+        return getRules(true);
     }
 
     @Override
-    public List<String> getRules(String source, boolean capitalize) {
+    public List<String> getRules(boolean capitalize) {
         List<String> rules = new ArrayList<>();
 
         for (T ability : this) {
@@ -91,7 +92,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 String rule = ability.getRule();
                 if (rule != null) {
                     if (!rule.isEmpty()) {
-                        rules.add(Character.toUpperCase(rule.charAt(0)) + rule.substring(1));
+                        rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+                        if (ability.getRuleAtTheTop()) {
+                            rules.add(0, rule);
+                        } else {
+                            rules.add(rule);
+                        }
                     }
                 } else { // logging so we can still can be made aware of rule problems a card has
                     String cardName = ((SpellAbility) ability).getCardName();
@@ -103,6 +109,17 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         return rules;
     }
 
+    @Override
+    public List<String> getRules(Game game, MageObject object) {
+        Abilities<Ability> sourceAbilities = this.getAllAbilities();
+        return CardUtil.getCardRulesWithAdditionalInfo(game, object, sourceAbilities, sourceAbilities);
+    }
+
+    /**
+     * Activated Ability in the engine are broader than in the rules.
+     * Notably SpellAbility & PlayLandAbility are ActivatedAbility,
+     * as they can be activated by a player (the engine meaning).
+     */
     @Override
     public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone) {
         return stream()
@@ -161,7 +178,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     public Abilities<TriggeredAbility> getTriggeredAbilities(Zone zone) {
         Abilities<TriggeredAbility> zonedAbilities = new AbilitiesImpl<>();
         for (T ability : this) {
-            if (ability instanceof TriggeredAbility && ability.getZone().match(zone)) {
+            if (ability.isTriggeredAbility() && ability.getZone().match(zone)) {
                 zonedAbilities.add((TriggeredAbility) ability);
             } else if (ability instanceof ZoneChangeTriggeredAbility) {
                 ZoneChangeTriggeredAbility zcAbility = (ZoneChangeTriggeredAbility) ability;
@@ -176,7 +193,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     @Override
     public boolean hasPoolDependantAbilities() {
         return stream()
-                .filter(ability -> ability.getAbilityType() == AbilityType.MANA)
+                .filter(Ability::isManaAbility)
                 .map(ManaAbility.class::cast)
                 .anyMatch(ManaAbility::isPoolDependant);
     }
@@ -187,6 +204,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 .filter(ProtectionAbility.class::isInstance)
                 .map(ProtectionAbility.class::cast)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
+    }
+
+    @Override
+    public Abilities<Ability> getAllAbilities() {
+        return stream().collect(Collectors.toCollection(AbilitiesImpl::new));
     }
 
     @Override

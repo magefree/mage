@@ -17,9 +17,7 @@ public final class InnocentBlood extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Each player sacrifices a creature.
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(
-                1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT
-        ));
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE));
     }
 
     private InnocentBlood(final InnocentBlood card) {

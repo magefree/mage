@@ -37,7 +37,7 @@ public final class ProfaneProcession extends CardImpl {
 
         // {3}{W}{B}: Exile target creature. Then if there are three or more cards exiled with Profane Procession, transform it.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProfaneProcessionEffect(), new ManaCostsImpl<>("{3}{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(new ProfaneProcessionEffect(), new ManaCostsImpl<>("{3}{W}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -75,7 +75,7 @@ class ProfaneProcessionEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && exileId != null && sourceObject != null) {
             new ExileTargetEffect(exileId, sourceObject.getIdName()).setTargetPointer(this.getTargetPointer().copy()).apply(game, source);
-            game.getState().processAction(game);
+            game.processAction();
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null && exileZone.size() > 2) {
                 new TransformSourceEffect().apply(game, source);

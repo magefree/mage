@@ -6,8 +6,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.SourceControllerCountersCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
@@ -20,9 +19,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.RebelRedToken;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -56,11 +53,13 @@ public final class OtharriSunsGlory extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Whenever Otharri, Suns' Glory attacks, you get an experience counter.
-        // Then create a 2/2 red Rebel creature token that’s tapped and attacking for each experience counter you have.
+        // Whenever Otharri, Suns' Glory attacks, you get an experience counter. Then create a 2/2 red Rebel creature token that’s tapped and attacking for each experience counter you have.
         Ability ability = new AttacksTriggeredAbility(new AddCountersPlayersEffect(CounterType.EXPERIENCE.createInstance(), TargetController.YOU));
-        DynamicValue value = new OtharriSunsGloryCount();
-        ability.addEffect(new CreateTokenEffect(new RebelRedToken(), value, true, true).concatBy("Then"));
+        ability.addEffect(new CreateTokenEffect(
+                new RebelRedToken(),
+                SourceControllerCountersCount.EXPERIENCE,
+                true, true
+        ).concatBy("Then"));
         this.addAbility(ability);
 
         // {2}{R}{W}, Tap an untapped Rebel you control: Return Otharri from your graveyard to the battlefield tapped.
@@ -80,33 +79,5 @@ public final class OtharriSunsGlory extends CardImpl {
     @Override
     public OtharriSunsGlory copy() {
         return new OtharriSunsGlory(this);
-    }
-}
-
-class OtharriSunsGloryCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player player = game.getPlayer(sourceAbility.getControllerId());
-        if (player != null) {
-            amount = player.getCounters().getCount(CounterType.EXPERIENCE);
-        }
-        return amount;
-    }
-
-    @Override
-    public OtharriSunsGloryCount copy() {
-        return new OtharriSunsGloryCount();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "experience counter you have";
     }
 }

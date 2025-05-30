@@ -35,7 +35,7 @@ public final class RootGreevil extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{G}, {tap}, Sacrifice Root Greevil: Destroy all enchantments of the color of your choice.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RootGreevilEffect(), new ManaCostsImpl<>("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new RootGreevilEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -73,7 +73,7 @@ public final class RootGreevil extends CardImpl {
             if (controller != null && controller.choose(Outcome.DestroyPermanent, choice, game)) {
                 FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent();
                 filter.add(new ColorPredicate(choice.getColor()));
-                for (Permanent enchantment : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                for (Permanent enchantment : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     enchantment.destroy(source, game, false);
                 }
                 return true;

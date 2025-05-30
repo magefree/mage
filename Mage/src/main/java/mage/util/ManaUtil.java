@@ -10,13 +10,10 @@ import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -261,6 +258,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_WB)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_WB);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CB)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CB);
             }
         }
 
@@ -282,6 +282,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_UR)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_UR);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CR)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CR);
             }
         }
         return chosenManaAbilityForHybrid;
@@ -302,6 +305,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_GU)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_GU);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CU)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CU);
             }
         }
         return chosenManaAbilityForHybrid;
@@ -322,6 +328,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_RW)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_RW);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CW)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CW);
             }
         }
         return chosenManaAbilityForHybrid;
@@ -342,6 +351,9 @@ public final class ManaUtil {
             } else if (symbols.contains(ManaSymbol.HYBRID_RG)) {
                 chosenManaAbilityForHybrid = ability;
                 countColored.add(ManaSymbol.HYBRID_RG);
+            } else if (symbols.contains(ManaSymbol.HYBRID_CG)) {
+                chosenManaAbilityForHybrid = ability;
+                countColored.add(ManaSymbol.HYBRID_CG);
             }
         }
         return chosenManaAbilityForHybrid;
@@ -629,8 +641,8 @@ public final class ManaUtil {
         Card secondSide;
         if (card instanceof SplitCard) {
             secondSide = ((SplitCard) card).getRightHalfCard();
-        } else if (card instanceof AdventureCard) {
-            secondSide = ((AdventureCard) card).getSpellCard();
+        } else if (card instanceof CardWithSpellOption) {
+            secondSide = ((CardWithSpellOption) card).getSpellCard();
         } else if (card instanceof ModalDoubleFacedCard) {
             secondSide = ((ModalDoubleFacedCard) card).getRightHalfCard();
         } else {
@@ -643,7 +655,7 @@ public final class ManaUtil {
         return getColorIdentity(
                 token.getColor(),
                 String.join("", token.getManaCostSymbols()),
-                token.getAbilities().getRules(token.getName()),
+                token.getAbilities().getRules(),
                 token.getBackFace() == null ? null : token.getBackFace().getCopySourceCard()
         );
     }
@@ -674,7 +686,7 @@ public final class ManaUtil {
 
     public static ManaCost createManaCost(DynamicValue genericManaCount, Game game, Ability sourceAbility, Effect effect) {
         int costValue = genericManaCount.calculate(game, sourceAbility, effect);
-        if (genericManaCount instanceof ManacostVariableValue) {
+        if (genericManaCount instanceof GetXValue) {
             // variable (X must be final value after all events and effects)
             return createManaCost(costValue, true);
         } else {
@@ -698,7 +710,7 @@ public final class ManaUtil {
             int bookmark = game.bookmarkState();
             player.resetStoredBookmark(game);
 
-            wantToPay = player.announceXMana(0, maxValue, "Choose how much mana to pay", game, source);
+            wantToPay = player.announceX(0, maxValue, "Choose how much mana to pay", game, source, true);
             if (wantToPay > 0) {
                 Cost cost = ManaUtil.createManaCost(wantToPay, payAsX);
                 payed = cost.pay(source, game, source, player.getId(), false, null);

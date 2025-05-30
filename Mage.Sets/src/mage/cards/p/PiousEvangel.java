@@ -42,13 +42,13 @@ public final class PiousEvangel extends CardImpl {
 
         this.secondSideCardClazz = mage.cards.w.WaywardDisciple.class;
 
-        // Whenever Pious Evangel or another creature enters the battlefield under your control, you gain 1 life.
+        // Whenever Pious Evangel or another creature you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new GainLifeEffect(1),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true));
 
         // {2}, {T}, Sacrifice another permanent: Transform Pious Evangel.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new TransformSourceEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter2));
         this.addAbility(ability);

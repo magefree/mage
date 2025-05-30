@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -18,7 +18,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -43,7 +42,7 @@ public final class ElementalResonance extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your precombat main phase, add mana equal to enchanted permanent's mana cost.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new ElementalResonanceEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new ElementalResonanceEffect()));
     }
 
     private ElementalResonance(final ElementalResonance card) {
@@ -97,7 +96,7 @@ class ElementalResonanceEffect extends OneShotEffect {
         String manaToAdd = "";
         if (manaOptions.size() > 1) {
 //          TODO: Make the choices look nicer, right now the brace notation is hard to visually parse, especially with Reaper King
-            Choice choice = new ChoiceImpl();
+            Choice choice = new ChoiceImpl(false);
             choice.setMessage("Choose a mana combination");
             choice.getChoices().addAll(manaOptions);
             if (!controller.choose(Outcome.PutManaInPool, choice, game)) {

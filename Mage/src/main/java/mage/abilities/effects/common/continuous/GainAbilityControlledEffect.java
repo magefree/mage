@@ -9,7 +9,6 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -26,10 +25,6 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     protected FilterPermanent filter;
     protected boolean forceQuotes = false;
     protected boolean durationRuleAtStart = false; // put duration rule to the start of the rules instead end
-
-    public GainAbilityControlledEffect(Ability ability, Duration duration) {
-        this(ability, duration, StaticFilters.FILTER_PERMANENTS);
-    }
 
     public GainAbilityControlledEffect(Ability ability, Duration duration, FilterPermanent filter) {
         this(ability, duration, filter, false);
@@ -65,7 +60,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (perm.isControlledBy(source.getControllerId())
                         && !(excludeSource && perm.getId().equals(source.getSourceId()))) {
@@ -82,7 +77,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent perm = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (perm != null) {

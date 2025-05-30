@@ -81,7 +81,7 @@ class LanternOfRevealingEffect extends OneShotEffect {
         if (game.getState().getZone(card.getId()) == Zone.LIBRARY && player.chooseUse(
                 outcome, "Put " + card.getName() + " on the bottom of your library?", source, game
         )) {
-            player.putCardsOnBottomOfLibrary(card, game, source, false);
+            player.putCardsOnBottomOfLibrary(card, game, source);
         }
         return true;
     }

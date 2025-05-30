@@ -31,7 +31,7 @@ public final class FblthpLostOnTheRange extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // You may look at the top card of your library any time.
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));

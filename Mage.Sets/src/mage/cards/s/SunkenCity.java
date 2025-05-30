@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -33,9 +32,9 @@ public final class SunkenCity extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");
 
         // At the beginning of your upkeep, sacrifice Sunken City unless you pay {U}{U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}{U}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}{U}"))));
         // Blue creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private SunkenCity(final SunkenCity card) {

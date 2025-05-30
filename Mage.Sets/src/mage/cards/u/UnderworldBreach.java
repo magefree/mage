@@ -1,7 +1,7 @@
 package mage.cards.u;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -28,7 +28,7 @@ public final class UnderworldBreach extends CardImpl {
 
         // At the beginning of the end step, sacrifice Underworld Breach.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new SacrificeSourceEffect(), TargetController.NEXT, false
+                TargetController.NEXT, new SacrificeSourceEffect(), false
         ));
     }
 

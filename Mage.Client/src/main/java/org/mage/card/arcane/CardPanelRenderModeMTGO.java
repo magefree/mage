@@ -23,6 +23,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class CardPanelRenderModeMTGO extends CardPanel {
 
+    // TODO: share code and use for all images/rendering (potential injection point - images cache), see #969
+    private static final boolean MTGO_MODE_RENDER_SMOOTH_IMAGES_ENABLED = false;
+    private static final int MTGO_MODE_RENDER_SCALED_IMAGES_COEF = 1; // TODO: experiment with scale settings, is it useful to render in x2-x4 sizes?
+
     // https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
 
     private static final Cache<ImageKey, BufferedImage> MTGO_MODE_RENDERED_CACHE = ImageCaches.register(
@@ -46,6 +50,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     private CardRenderer cardRenderer;
 
     private int updateArtImageStamp;
+    private final int cardRenderMode;
 
     private static class ImageKey {
         final BufferedImage artImage;
@@ -80,7 +85,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             sb.append((char) (this.view.isCanAttack() ? 1 : 0));
             sb.append((char) (this.view.isCanBlock() ? 1 : 0));
             sb.append((char) (this.view.isFaceDown() ? 1 : 0));
-            sb.append((char) this.view.getFrameStyle().ordinal());
+            sb.append((char) (this.view.getFrameStyle() != null ? this.view.getFrameStyle().ordinal() : -1));
             if (this.view instanceof PermanentView) {
                 sb.append((char) (((PermanentView) this.view).hasSummoningSickness() ? 1 : 0));
                 sb.append((char) (((PermanentView) this.view).getDamage()));
@@ -139,12 +144,13 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     }
 
     public CardPanelRenderModeMTGO(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback,
-                                   final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
+                                   final boolean foil, Dimension dimension, boolean needFullPermanentRender, int renderMode) {
         // Call to super
         super(newGameCard, gameId, loadImage, callback, foil, dimension, needFullPermanentRender);
 
         // Renderer
-        cardRenderer = cardRendererFactory.create(getGameCard());
+        cardRenderMode = renderMode;
+        cardRenderer = cardRendererFactory.create(getGameCard(), cardRenderMode);
 
         // Draw the parts
         initialDraw();
@@ -166,8 +172,8 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             ImageKey key = new ImageKey(
                     getGameCard(),
                     artImage,
-                    getCardWidth(),
-                    getCardHeight(),
+                    getCardWidth() * MTGO_MODE_RENDER_SCALED_IMAGES_COEF,
+                    getCardHeight() * MTGO_MODE_RENDER_SCALED_IMAGES_COEF,
                     isChoosable(),
                     isSelected(),
                     isTransformed()
@@ -183,7 +189,25 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // And draw the image we now have
         int cardOffsetX = 0;
         int cardOffsetY = 0;
-        g.drawImage(cardImage, cardOffsetX, cardOffsetY, null);
+
+        Graphics2D g2 = (Graphics2D) g.create();
+        try {
+            // render with antialiasing
+            if (MTGO_MODE_RENDER_SMOOTH_IMAGES_ENABLED) {
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+                g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            }
+
+            // render scaled
+            if (MTGO_MODE_RENDER_SCALED_IMAGES_COEF > 1) {
+                g2.drawImage(cardImage, cardOffsetX, cardOffsetY, getCardWidth(), getCardHeight(), null);
+            } else {
+                g2.drawImage(cardImage, cardOffsetX, cardOffsetY, null);
+            }
+        } finally {
+            g2.dispose();
+        }
     }
 
     @Override
@@ -243,7 +267,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
         // Update renderer
         cardImage = null;
-        cardRenderer = cardRendererFactory.create(getGameCard());
+        cardRenderer = cardRendererFactory.create(getGameCard(), cardRenderMode);
         cardRenderer.setArtImage(artImage);
 
         // Repaint
@@ -309,18 +333,19 @@ public class CardPanelRenderModeMTGO extends CardPanel {
         // Create image to render to
         BufferedImage image
                 = GraphicsUtilities.createCompatibleTranslucentImage(cardWidth, cardHeight);
-        Graphics2D g2d = image.createGraphics();
+        Graphics2D g2 = image.createGraphics();
+        try {
+            // Render with Antialialsing
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-        // Render with Antialialsing
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            // Draw card itself
+            cardRenderer.draw(g2, getAttributes(), image);
+        } finally {
+            g2.dispose();
+        }
 
-        // Draw card itself
-        cardRenderer.draw(g2d, getAttributes(), image);
-
-        // Done
-        g2d.dispose();
         return image;
     }
 }

@@ -1,7 +1,5 @@
 package mage.cards.v;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +15,9 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author North
@@ -37,7 +38,7 @@ public final class ViridianBetrayers extends CardImpl {
 
         // Viridian Betrayers has infect as long as an opponent is poisoned.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(InfectAbility.getInstance()), PoisonedCondition.instance, rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private ViridianBetrayers(final ViridianBetrayers card) {
@@ -61,7 +62,7 @@ enum PoisonedCondition implements Condition {
             Player opponent = game.getPlayer(opponentUuid);
             if (opponent != null
                     && opponent.isInGame()
-                    && opponent.getCounters().getCount(CounterType.POISON) > 0) {
+                    && opponent.getCountersCount(CounterType.POISON) > 0) {
                 return true;
             }
         }

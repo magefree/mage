@@ -7,6 +7,7 @@ import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -17,13 +18,23 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public interface Target extends Serializable {
+public interface Target extends Copyable<Target>, Serializable {
 
-    boolean isChosen();
+    /**
+     * All targets selected by a player
+     * <p>
+     * Warning, for "up to" targets it will return true all the time, so make sure your dialog
+     * use do-while logic and call "choose" one time min or use isChoiceCompleted
+     */
+    boolean isChosen(Game game);
 
-    boolean doneChoosing();
+    boolean isChoiceCompleted(Game game);
+
+    boolean isChoiceCompleted(UUID abilityControllerId, Ability source, Game game);
 
     void clearChosen();
+
+    boolean isChoiceSelected();
 
     boolean isNotTarget();
 
@@ -53,8 +64,14 @@ public interface Target extends Serializable {
      */
     Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game);
 
+    /**
+     * Priority method to make a choice from cards and other places, not a player.chooseXXX
+     */
     boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game);
 
+    /**
+     * Add target from targeting methods like chooseTarget (will check and generate target events and effects)
+     */
     void addTarget(UUID id, Ability source, Game game);
 
     void addTarget(UUID id, int amount, Ability source, Game game);
@@ -73,20 +90,35 @@ public interface Target extends Serializable {
      */
     boolean canTarget(UUID id, Ability source, Game game);
 
-    boolean stillLegalTarget(UUID id, Ability source, Game game);
+    boolean stillLegalTarget(UUID playerId, UUID id, Ability source, Game game);
 
     boolean canTarget(UUID playerId, UUID id, Ability source, Game game);
 
     boolean isLegal(Ability source, Game game);
 
+    /**
+     * AI related code. Returns all possible different target combinations
+     */
     List<? extends Target> getTargetOptions(Ability source, Game game);
 
     boolean canChoose(UUID sourceControllerId, Game game);
 
     Set<UUID> possibleTargets(UUID sourceControllerId, Game game);
 
+    @Deprecated // TODO: need replace to source only version?
     boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Ability source, Game game);
 
+    /**
+     * Priority method to make a choice from cards and other places, not a player.chooseXXX
+     */
+    default boolean choose(Outcome outcome, UUID playerId, Ability source, Game game) {
+        return choose(outcome, playerId, source == null ? null : source.getSourceId(), source, game);
+    }
+
+    /**
+     * Add target from non targeting methods like choose
+     * TODO: need usage research, looks like there are wrong usage of addTarget, e.g. in choose method (must be add)
+     */
     void add(UUID id, Game game);
 
     void remove(UUID targetId);
@@ -98,22 +130,27 @@ public interface Target extends Serializable {
      */
     String getDescription();
 
-    String getMessage();
+    /**
+     * @return message displayed on choosing targets (can be dynamically changed on more target selected)
+     */
+    String getMessage(Game game);
 
     /**
      * @return single target name
      */
     String getTargetName();
 
-    void setTargetName(String name);
+    /**
+     * Overwrites the name automatically generated from the filter text.
+     * If you want to add additional info for usability, use `withChooseHint` instead.
+     */
+    Target withTargetName(String name);
 
     String getTargetedName(Game game);
 
     Zone getZone();
 
     int getTargetAmount(UUID targetId);
-
-    int getNumberOfTargets();
 
     int getMinNumberOfTargets();
 
@@ -147,6 +184,7 @@ public interface Target extends Serializable {
 
     UUID getFirstTarget();
 
+    @Override
     Target copy();
 
     // some targets are chosen from players that are not the controller of the ability (e.g. Pandemonium)
@@ -169,6 +207,10 @@ public interface Target extends Serializable {
     // used for cards like Spellskite
     void setTargetAmount(UUID targetId, int amount, Game game);
 
+    /**
+     * Adds a clarification during target selection (in parentheses).
+     * Useful for abilities that have multiple targets and different effects.
+     */
     Target withChooseHint(String chooseHint);
 
     String getChooseHint();

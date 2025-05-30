@@ -29,8 +29,8 @@ public final class StarvedRusalka extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ColoredManaCost(ColoredManaSymbol.G));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new ColoredManaCost(ColoredManaSymbol.G));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

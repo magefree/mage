@@ -27,11 +27,11 @@ import mage.game.permanent.Permanent;
 public final class FavorOfTheMighty extends CardImpl {
 
     public FavorOfTheMighty(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.GIANT);
 
         // Each creature with the highest converted mana cost has protection from all colors.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FavorOfTheMightyEffect()));
+        this.addAbility(new SimpleStaticAbility(new FavorOfTheMightyEffect()));
     }
 
     private FavorOfTheMighty(final FavorOfTheMighty card) {

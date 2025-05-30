@@ -96,27 +96,33 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                 case STACK:
                 case HAND: // Miracle
                 case LIBRARY:
-                case OUTSIDE:
                     sourceObject = game.getObject(ability.getSourceId());
                     if (sourceObject instanceof Card) {
                         isCard = true;
                     }
                     break;
+                case OUTSIDE:
+                    sourceObject = game.getObject(ability.getSourceId());
+                    if (sourceObject instanceof Card) {
+                        isCard = true;
+                    }
+                    if (sourceObject instanceof Emblem) {
+                        // emblems are not normally OUTSIDE, except the helper emblems like Radiation
+                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject, game)));
+                        abilityView.setName(sourceObject.getName());
+                    }
+                    break;
                 case COMMAND:
                     sourceObject = game.getObject(ability.getSourceId());
                     if (sourceObject instanceof Emblem) {
-//                        Card sourceCard = (Card) ((Emblem) sourceObject).getSourceObject();
-//                        if (sourceCard == null) {
-//                            throw new IllegalArgumentException("Source card for emblem not found.");
-//                        }
-                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject)));
+                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject, game)));
                         abilityView.setName(sourceObject.getName());
                         // abilityView.setExpansionSetCode(sourceCard.getExpansionSetCode());
                     } else if (sourceObject instanceof Dungeon) {
                         abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new DungeonView((Dungeon) sourceObject)));
                         abilityView.setName(sourceObject.getName());
                     } else if (sourceObject instanceof Plane) {
-                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new PlaneView((Plane) sourceObject)));
+                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new PlaneView((Plane) sourceObject, game)));
                         abilityView.setName(sourceObject.getName());
                     }
                     break;

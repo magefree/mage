@@ -39,7 +39,7 @@ public final class RecklessCohort extends CardImpl {
                 new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 1));
         effect.setText("{this} attacks each combat if able unless you control another Ally");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private RecklessCohort(final RecklessCohort card) {

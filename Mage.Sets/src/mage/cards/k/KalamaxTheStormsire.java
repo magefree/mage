@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -56,7 +56,7 @@ public final class KalamaxTheStormsire extends CardImpl {
 
 class KalamaxTheStormsireSpellCastAbility extends SpellCastControllerTriggeredAbility {
     KalamaxTheStormsireSpellCastAbility() {
-        super(new CopyTargetSpellEffect(true), new FilterInstantSpell(), false);
+        super(new CopyTargetStackObjectEffect(true), new FilterInstantSpell(), false);
     }
 
     private KalamaxTheStormsireSpellCastAbility(final KalamaxTheStormsireSpellCastAbility ability) {

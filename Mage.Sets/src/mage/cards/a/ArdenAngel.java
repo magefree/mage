@@ -2,9 +2,8 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -32,11 +31,8 @@ public final class ArdenAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, if Arden Angel is in your graveyard, roll a four-sided die. If the result is 1, return Arden Angel from your graveyard to the battlefield.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ArdenAngelEffect(), TargetController.YOU, false),
-                ArdenAngelCondition.instance, "At the beginning of your upkeep, if {this} is in your graveyard, " +
-                "roll a four-sided die. If the result is 1, return {this} from your graveyard to the battlefield."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, TargetController.YOU, new ArdenAngelEffect(), false)
+                .withInterveningIf(SourceInGraveyardCondition.instance));
     }
 
     private ArdenAngel(final ArdenAngel card) {
@@ -49,19 +45,11 @@ public final class ArdenAngel extends CardImpl {
     }
 }
 
-enum ArdenAngelCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
-    }
-}
-
 class ArdenAngelEffect extends OneShotEffect {
 
     ArdenAngelEffect() {
         super(Outcome.Benefit);
+        this.staticText = "roll a four-sided die. If the result is 1, return {this} from your graveyard to the battlefield";
     }
 
     private ArdenAngelEffect(final ArdenAngelEffect effect) {

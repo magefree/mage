@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
@@ -38,7 +38,7 @@ public final class MerenOfClanNelToth extends CardImpl {
 
         // At the beginning of your end step, choose target creature card in your graveyard. 
         // If that card's converted mana cost is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand.
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new MerenOfClanNelTothEffect(), false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new MerenOfClanNelTothEffect());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
@@ -78,7 +78,7 @@ class MerenOfClanNelTothEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        boolean flag = card.getManaValue() <= player.getCounters().getCount(CounterType.EXPERIENCE);
+        boolean flag = card.getManaValue() <= player.getCountersCount(CounterType.EXPERIENCE);
         return player.moveCards(card, flag ? Zone.BATTLEFIELD : Zone.HAND, source, game);
     }
 }

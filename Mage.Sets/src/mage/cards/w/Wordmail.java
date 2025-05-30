@@ -40,7 +40,7 @@ public final class Wordmail extends CardImpl {
         
         // Enchanted creature gets +1/+1 for each word in its name.
         WordmailCount count = new WordmailCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
     private Wordmail(final Wordmail card) {

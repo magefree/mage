@@ -24,10 +24,64 @@ import java.util.stream.Collectors;
 public abstract class ExpansionSet implements Serializable {
 
     private static final Logger logger = Logger.getLogger(ExpansionSet.class);
-    public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
+
+    // TODO: remove all usage to default (see below), keep bfz/zen/ust art styles for specific sets only
+    //  the main different in art styles - full art lands can have big mana icon at the bottom
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_UST_VARIOUS = new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true);
+
+    // default art styles in single set:
+    // - normal M15/image art (default)
+    // - normal M15/image art for multiple cards in set with same name
+    // - full art
+    // - full art for multiple cards in set with same name
+    // TODO: find or implement really full art in m15 render mode (without card name header)
+    public static final CardGraphicInfo NORMAL_ART = null;
+    public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true); // TODO: rename to NORMAL_ART_USE_VARIOUS
+    public static final CardGraphicInfo RETRO_ART = new CardGraphicInfo(FrameStyle.RETRO, false);
+    public static final CardGraphicInfo RETRO_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.RETRO, true);
+    public static final CardGraphicInfo FULL_ART = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, false);
+    public static final CardGraphicInfo FULL_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, true);
+
+    // TODO: enable after mutate implementation
+    public static final boolean HIDE_MUTATE_CARDS = true;
+    public static final Set<String> MUTATE_CARD_NAMES = new HashSet<>(Arrays.asList(
+            "Archipelagore",
+            "Auspicious Starrix",
+            "Boneyard Lurker",
+            "Cavern Whisperer",
+            "Chittering Harvester",
+            "Cloudpiercer",
+            "Cubwarden",
+            "Dirge Bat",
+            "Dreamtail Heron",
+            "Everquill Phoenix",
+            "Gemrazer",
+            "Glowstone Recluse",
+            "Huntmaster Liger",
+            "Illuna, Apex of Wishes",
+            "Insatiable Hemophage",
+            "Lore Drakkis",
+            "Majestic Auricorn",
+            "Mindleecher",
+            "Migratory Greathorn",
+            "Necropanther",
+            "Nethroi, Apex of Death",
+            "Otrimi, the Ever-Playful",
+            "Parcelbeast",
+            "Porcuparrot",
+            "Pouncing Shoreshark",
+            "Regal Leosaur",
+            "Sawtusk Demolisher",
+            "Sea-Dasher Octopus",
+            "Snapdax, Apex of the Hunt",
+            "Souvenir Snatcher",
+            "Sawtusk Demolisher",
+            "Trumpeting Gnarr",
+            "Vadrok, Apex of Thunder",
+            "Vulpikeet"
+    ));
 
     public static class SetCardInfo implements Serializable {
 
@@ -86,6 +140,13 @@ public abstract class ExpansionSet implements Serializable {
                     && this.graphicInfo.getFrameStyle() != null
                     && this.graphicInfo.getFrameStyle().isFullArt();
         }
+
+        public boolean isRetroFrame() {
+            return this.graphicInfo != null
+                    && this.graphicInfo.getFrameStyle() != null
+                    && (this.graphicInfo.getFrameStyle() == FrameStyle.RETRO
+                    || this.graphicInfo.getFrameStyle() == FrameStyle.LEA_ORIGINAL_DUAL_LAND_ART_BASIC);
+        }
     }
 
     private enum ExpansionSetComparator implements Comparator<ExpansionSet> {
@@ -113,6 +174,7 @@ public abstract class ExpansionSet implements Serializable {
     protected boolean hasBasicLands = true;
 
     protected String blockName; // used to group sets in some GUI dialogs like choose set dialog
+    protected boolean rotationSet = false; // used to determine if a set is a standard rotation
     protected boolean hasBoosters = false;
     protected int numBoosterSpecial;
 
@@ -136,7 +198,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterCommon;
     protected int numBoosterUncommon;
     protected int numBoosterRare;
-    protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
+    protected int numBoosterDoubleFaced; // -1 = include by rarity slots, 0 = fail on tests, 1-n = include explicit
     protected double ratioBoosterMythic;
 
     protected boolean hasUnbalancedColors = false;
@@ -505,6 +567,10 @@ public abstract class ExpansionSet implements Serializable {
         return hasBasicLands;
     }
 
+    public boolean isRotationSet() {
+        return rotationSet;
+    }
+
     /**
      * Keep only unique cards for booster generation and card ratio calculation
      *
@@ -675,4 +741,128 @@ public abstract class ExpansionSet implements Serializable {
         return numBoosterDoubleFaced;
     }
 
+    protected static void addCardInfoToList(List<CardInfo> boosterList, String name, String expansion, String cardNumber) {
+        CardInfo cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(name, expansion, cardNumber);
+        if (cardInfo != null && cardInfo.getSetCode().equals(expansion) && cardInfo.getCardNumber().equals(cardNumber)) {
+            boosterList.add(cardInfo);
+        } else {
+            throw new IllegalStateException("CardInfo not found: " + name + " (" + expansion + ":" + cardNumber + ")");
+        }
+    }
+
+    /**
+     * Old default booster configuration (before 2024 - MKM)
+     */
+    public void enableDraftBooster(int maxCardNumberInBooster, int land, int common, int uncommon, int rare) {
+        // https://draftsim.com/draft-booster-vs-set-booster-mtg/
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        this.numBoosterLands = land;
+        this.hasBasicLands = land > 0;
+
+        this.numBoosterCommon = common;
+        this.numBoosterUncommon = uncommon;
+        this.numBoosterRare = rare;
+        this.ratioBoosterMythic = 8; // 12.5% chance of a mythic rare
+    }
+
+    /**
+     * Old default booster configuration (after 2020 - ZNR and before 2024 - MKM)
+     */
+    public void enableSetBooster(int maxCardNumberInBooster) {
+        // https://draftsim.com/draft-booster-vs-set-booster-mtg/
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        this.hasBasicLands = true;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 0;
+        this.numBoosterUncommon = 0;
+        this.numBoosterRare = 0;
+
+        // Set boosters contain 12 cards — fewer cards than a Draft booster — but the distribution is much more complex:
+        // 1 art card (5% chance of having a gold signature)
+        this.numBoosterCommon += 1;
+        // 1 basic land (15% chance of being foil)
+        this.numBoosterLands += 1;
+        // 6 commons/uncommons (different combinations possible, the most common is 4 commons and 2 uncommons)
+        this.numBoosterCommon += 4;
+        this.numBoosterUncommon += 2;
+        // 1 unique common/uncommon
+        this.numBoosterCommon += 1;
+        // 2 “wild cards” (any rarity from common to mythic)
+        this.numBoosterUncommon += 1;
+        this.numBoosterRare += 1;
+        // 1 rare (13.5% chance of being a mythic)
+        this.numBoosterRare += 1;
+        this.ratioBoosterMythic = 8;
+        // 1 foil card
+        // - ignore
+        // 1 marketing card/token (25% chance of being a card from The List)
+        // - ignore
+
+        // total 12:
+        // 1 land
+        // 6 common
+        // 3 uncommon
+        // 2 rare
+    }
+
+    /**
+     * New default booster configuration (after 2024 - MKM)
+     */
+    public void enablePlayBooster(int maxCardNumberInBooster) {
+        // https://mtg.fandom.com/wiki/Play_Booster
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        // #1-6 Common
+        this.numBoosterCommon = 6;
+
+        // #7 Common or The List
+        // simplify: ignore 1.5% chance of a Special Guest card
+        this.numBoosterCommon++;
+
+        // #8-10 Uncommon
+        this.numBoosterUncommon = 3;
+
+        // #12 Rare or Mythic Rare
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8; // 12.5% chance of a mythic rare
+
+        // #13 Basic land
+        this.hasBasicLands = true;
+        this.numBoosterLands = 1;
+
+        // #11 Non-foil Wildcard (A card of any rarity from the set. Guaranteed to be non-foil.)
+        // #14 Foil Wildcard (A card of any rarity from the set. Guaranteed to be foil.)
+        // simplify: use U + R instead x2 wild cards
+        this.numBoosterUncommon++;
+        this.numBoosterRare++;
+    }
+
+    public void enableArenaBooster(int maxCardNumberInBooster) {
+        // same as play booster on 2024
+        enablePlayBooster(maxCardNumberInBooster);
+    }
+
+    public void enableCollectorBooster(int maxCardNumberInBooster) {
+        // simplified rarity distribution
+        enableCollectorBooster(maxCardNumberInBooster, 1, 5, 4, 5);
+    }
+
+    public void enableCollectorBooster(int maxCardNumberInBooster, int land, int common, int uncommon, int rare) {
+        // https://mtg.fandom.com/wiki/Collector_Booster
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        this.numBoosterLands = land;
+        this.hasBasicLands = land > 0;
+
+        this.numBoosterCommon = common;
+        this.numBoosterUncommon = uncommon;
+        this.numBoosterRare = rare;
+        this.ratioBoosterMythic = 8; // 12.5% chance of a mythic rare
+    }
 }

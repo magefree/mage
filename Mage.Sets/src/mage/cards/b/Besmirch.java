@@ -1,7 +1,5 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -11,11 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
-import mage.target.targetpointer.TargetPointer;
 
 import java.util.UUID;
 
@@ -28,7 +22,14 @@ public final class Besmirch extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Until end of turn, gain control of target creature and it gains haste. Untap and goad that creature.
-        this.getSpellAbility().addEffect(new BesmirchEffect());
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
+                .setText("Until end of turn, gain control of target creature"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and it gains haste"));
+        this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap"));
+        this.getSpellAbility().addEffect(new GoadTargetEffect()
+                .setText("and goad that creature. <i>(Until your next turn, that creature " +
+                        "attacks each combat if able and attacks a player other than you if able.)</i>"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -39,47 +40,5 @@ public final class Besmirch extends CardImpl {
     @Override
     public Besmirch copy() {
         return new Besmirch(this);
-    }
-}
-
-class BesmirchEffect extends OneShotEffect {
-
-    BesmirchEffect() {
-        super(Outcome.GainControl);
-        staticText = "Until end of turn, gain control of target creature and it gains haste. Untap and goad that creature";
-    }
-
-    private BesmirchEffect(final BesmirchEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BesmirchEffect copy() {
-        return new BesmirchEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (game.getPermanent(source.getFirstTarget()) != null) {
-            TargetPointer blueprintTarget = new FixedTarget(source.getFirstTarget(), game);
-
-            // gain control
-            game.addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
-                    .setTargetPointer(blueprintTarget.copy()), source);
-
-            // haste
-            game.addEffect(new GainAbilityTargetEffect(
-                    HasteAbility.getInstance(), Duration.EndOfTurn
-            ).setTargetPointer(blueprintTarget.copy()), source);
-
-            // goad
-            game.addEffect(new GoadTargetEffect().setTargetPointer(blueprintTarget.copy()), source);
-
-            // untap
-            new UntapTargetEffect().setTargetPointer(blueprintTarget.copy()).apply(game, source);
-
-            return true;
-        }
-        return false;
     }
 }

@@ -19,11 +19,13 @@ public enum MageIdentifier {
     // e.g. [[Johann, Apprentice Sorcerer]]
     // "Once each turn, you may cast an instant or sorcery spell from the top of your library."
     //
-    CastFromGraveyardOnceWatcher,
+    OnceOnYourTurnCastFromGraveyard,
+    OnceOnYourTurnCastFromGraveyardEntersTapped,
     OnceEachTurnCastWatcher,
     HaukensInsightWatcher,
     IntrepidPaleontologistWatcher,
     KessDissidentMageWatcher,
+    IanMalcolmChaoticianWatcher,
     MuldrothaTheGravetideWatcher,
     ShareTheSpoilsWatcher,
     WishWatcher,
@@ -33,6 +35,8 @@ public enum MageIdentifier {
     KaghaShadowArchdruidWatcher,
     CourtOfLocthwainWatcher("Without paying manacost"),
     LaraCroftTombRaiderWatcher,
+    CoramTheUndertakerWatcher,
+    ThundermanDragonWatcher,
 
     // ----------------------------//
     //       alternate casts       //
@@ -57,8 +61,11 @@ public enum MageIdentifier {
     DemonicEmbraceAlternateCast,
     FalcoSparaPactweaverAlternateCast,
     HelbruteAlternateCast,
+    IntoThePitAlternateCast,
     MaestrosAscendencyAlternateCast,
     NashiMoonSagesScionAlternateCast,
+    NoctisPrinceOfLucisAlternateCast,
+    OsteomancerAdeptAlternateCast,
     RafinnesGuidanceAlternateCast,
     RonaSheoldredsFaithfulAlternateCast,
     ScourgeOfNelTothAlternateCast,
@@ -66,8 +73,16 @@ public enum MageIdentifier {
     WorldheartPhoenixAlternateCast,
     XandersPactAlternateCast,
     TheTombOfAclazotzWatcher,
-
-    MeTheImmortalAlternateCast;
+    MeTheImmortalAlternateCast,
+    WithoutPayingManaCostAlternateCast,
+    AlurenAlternateCast,
+    OfferingAlternateCast,
+    TheRuinousPowersAlternateCast,
+    FiresOfMountDoomAlternateCast,
+    PrimalPrayersAlternateCast,
+    QuilledGreatwurmAlternateCast,
+    WickerfolkIndomitableAlternateCast,
+    ValgavothTerrorEaterAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects

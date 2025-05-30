@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.permanent.token.Wurm55Token;
@@ -34,7 +33,7 @@ public final class SandwurmConvergence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter, true)));
 
         // At the beginning of your end step, create a 5/5 green Wurm creature token.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new Wurm55Token()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new Wurm55Token())));
     }
 
     private SandwurmConvergence(final SandwurmConvergence card) {

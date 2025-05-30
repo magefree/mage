@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -48,8 +48,7 @@ public final class LitaMechanicalEngineer extends CardImpl {
         // At the beginning of your end step, untap each other artifact creature you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new UntapAllEffect(filter)
-                        .setText("untap each other artifact creature you control"),
-                TargetController.YOU, false
+                        .setText("untap each other artifact creature you control")
         ));
 
         // {3}{W}, {T}: Create a 5/5 colorless Vehicle artifact token named Zeppelin with flying and crew 3.

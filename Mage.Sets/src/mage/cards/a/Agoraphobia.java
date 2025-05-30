@@ -38,10 +38,10 @@ public final class Agoraphobia extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets -5/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-5, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-5, 0)));
         
          // {2}{U}: Return Agoraphobia to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{2}{U}")));
     }
 
     private Agoraphobia(final Agoraphobia card) {

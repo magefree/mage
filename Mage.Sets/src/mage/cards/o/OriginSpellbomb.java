@@ -27,7 +27,7 @@ public final class OriginSpellbomb extends CardImpl {
 
     public OriginSpellbomb (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new MyrToken(), 1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new MyrToken(), 1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

@@ -32,7 +32,7 @@ public final class FowlPlay extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature is a Bird with base power and toughness 1/1 and loses all abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BecomesCreatureAttachedEffect(new CreatureToken(1, 1, "1/1 Bird creature", SubType.BIRD),
                         "Enchanted creature is a Bird with base power and toughness 1/1 and loses all abilities",
                         Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE)));

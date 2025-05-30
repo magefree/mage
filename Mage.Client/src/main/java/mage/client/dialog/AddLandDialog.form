@@ -180,7 +180,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblForestIcon">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[22, 20]"/>
         </Property>

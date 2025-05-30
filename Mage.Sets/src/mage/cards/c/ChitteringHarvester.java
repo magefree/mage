@@ -29,7 +29,7 @@ public final class ChitteringHarvester extends CardImpl {
 
         // Whenever this creature mutates, each opponent sacrifices a creature.
         this.addAbility(new MutatesSourceTriggeredAbility(
-                new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE)
         ));
     }
 

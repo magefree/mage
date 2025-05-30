@@ -41,7 +41,7 @@ public final class BattleBrawler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you control a red or white permanent, Battle Brawler gets +1/+0 and has first strike.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(1,0, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), "As long as you control a red or white permanent, {this} gets +1/+0"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),

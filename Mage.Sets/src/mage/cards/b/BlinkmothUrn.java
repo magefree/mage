@@ -1,11 +1,9 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author nickmyers
@@ -28,10 +28,8 @@ public final class BlinkmothUrn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // At the beginning of each player's precombat main phase, if Blinkmoth Urn is untapped, that player adds {C} for each artifact they control.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfPreCombatMainTriggeredAbility(new BlinkmothUrnEffect(), TargetController.ANY, false), SourceTappedCondition.UNTAPPED,
-                "At the beginning of each player's precombat main phase, if {this} is untapped, that player adds {C} for each artifact they control."
-        ));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(TargetController.EACH_PLAYER, new BlinkmothUrnEffect(), false)
+                        .withInterveningIf(SourceTappedCondition.UNTAPPED));
     }
 
     private BlinkmothUrn(final BlinkmothUrn card) {
@@ -69,7 +67,7 @@ class BlinkmothUrnEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             player.getManaPool().addMana(Mana.ColorlessMana(
-                    game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).
+                    game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).
                     size()), game, source, false);
             return true;
         }

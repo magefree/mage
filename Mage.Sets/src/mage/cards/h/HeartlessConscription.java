@@ -74,10 +74,10 @@ class HeartlessConscriptionEffect extends OneShotEffect {
                 cards.getCards(game), source, game, true,
                 CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
         );
-        game.getState().processAction(game);
+        game.processAction();
         cards.retainZone(Zone.EXILED, game);
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfGame, true);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfGame, true);
         }
         return true;
     }

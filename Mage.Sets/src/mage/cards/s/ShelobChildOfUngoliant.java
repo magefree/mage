@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -145,6 +146,7 @@ class ShelobChildOfUngoliantTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
         this.addWatcher(new ShelobChildOfUngoliantWatcher());
         this.setTriggerPhrase("Whenever another creature dealt damage this turn by a Spider you controlled dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private ShelobChildOfUngoliantTriggeredAbility(final ShelobChildOfUngoliantTriggeredAbility ability) {
@@ -185,6 +187,11 @@ class ShelobChildOfUngoliantTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class ShelobChildOfUngoliantEffect extends OneShotEffect {
@@ -221,7 +228,7 @@ class ShelobChildOfUngoliantEffect extends OneShotEffect {
                 token.addSubType(SubType.FOOD);
 
                 // {2}, {T}, Sacrifice this artifact: You gain 3 life.
-                token.addAbility(new FoodAbility(false));
+                token.addAbility(new FoodAbility());
             }).apply(game, source);
     }
 }

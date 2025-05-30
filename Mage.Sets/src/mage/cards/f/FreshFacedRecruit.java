@@ -31,7 +31,7 @@ public final class FreshFacedRecruit extends CardImpl {
         // As long as it's your turn, Fresh-Faced Recruit has first strike.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "As long as it's your turn, {this} has first strike."
+                MyTurnCondition.instance, "During your turn, {this} has first strike."
         )).addHint(MyTurnHint.instance));
     }
 

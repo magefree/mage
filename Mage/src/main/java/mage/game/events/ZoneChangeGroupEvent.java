@@ -19,8 +19,9 @@ public class ZoneChangeGroupEvent extends GameEvent {
     private final Set<PermanentToken> tokens;
     /* added this */ Ability source;
 
+    // TODO: investigate why we just discard sourceId and provide source directly?
     public ZoneChangeGroupEvent(Set<Card> cards, Set<PermanentToken> tokens, UUID sourceId, Ability source, UUID playerId, Zone fromZone, Zone toZone) {
-        super(GameEvent.EventType.ZONE_CHANGE_GROUP, null, null, playerId);
+        super(GameEvent.EventType.ZONE_CHANGE_GROUP, null, (Ability) null, playerId);
         this.fromZone = fromZone;
         this.toZone = toZone;
         this.cards = cards;

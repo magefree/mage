@@ -35,7 +35,7 @@ public final class AlmsCollector extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // If an opponent would draw two or more cards, instead you and that player each draw a card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AlmsCollectorReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new AlmsCollectorReplacementEffect()));
     }
 
     private AlmsCollector(final AlmsCollector card) {
@@ -78,7 +78,7 @@ class AlmsCollectorReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DRAW_CARDS;
+        return event.getType() == GameEvent.EventType.DRAW_TWO_OR_MORE_CARDS;
     }
 
     @Override

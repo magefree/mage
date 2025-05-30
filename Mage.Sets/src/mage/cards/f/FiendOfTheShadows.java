@@ -16,7 +16,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 
@@ -89,7 +88,7 @@ class FiendOfTheShadowsEffect extends OneShotEffect {
                 card, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source),
                 source, game, Zone.HAND, true
         );
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, false);
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.Custom, false);
         return true;
     }
 }

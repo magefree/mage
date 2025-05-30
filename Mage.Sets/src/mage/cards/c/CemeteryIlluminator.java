@@ -30,7 +30,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class CemeteryIlluminator extends CardImpl {
@@ -53,7 +52,7 @@ public final class CemeteryIlluminator extends CardImpl {
 
         // Once each turn, you may cast a spell from the top of your library if it shares a card type with a card exiled with Cemetery Illuminator.
         this.addAbility(new SimpleStaticAbility(new CemeteryIlluminatorPlayTopEffect())
-                .setIdentifier(MageIdentifier.OnceEachTurnCastWatcher)
+                        .setIdentifier(MageIdentifier.OnceEachTurnCastWatcher)
                         .addHint(OnceEachTurnCastWatcher.getHint()),
                 new OnceEachTurnCastWatcher());
     }
@@ -106,7 +105,7 @@ class CemeteryIlluminatorExileEffect extends OneShotEffect {
 class CemeteryIlluminatorPlayTopEffect extends AsThoughEffectImpl {
 
     CemeteryIlluminatorPlayTopEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may cast a spell from the top of your library if it shares a card type with a card exiled with {this}";
     }
 

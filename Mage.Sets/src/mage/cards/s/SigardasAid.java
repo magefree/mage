@@ -36,9 +36,9 @@ public final class SigardasAid extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // You may cast Aura and Equipment spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filterCard, false)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filterCard, false)));
 
-        // Whenever an Equipment enters the battlefield under your control, you may attach it to target creature you control.
+        // Whenever an Equipment you control enters, you may attach it to target creature you control.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new SigardasAidEffect(), filter, true, SetTargetPointer.PERMANENT);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

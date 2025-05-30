@@ -34,7 +34,6 @@ public final class TorpidMoloch extends CardImpl {
         
         // Sacrifice three lands: Torpid Moloch loses defender until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn), 
                 new SacrificeTargetCost(3, StaticFilters.FILTER_LANDS)));
     }

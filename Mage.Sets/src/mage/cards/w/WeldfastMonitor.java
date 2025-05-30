@@ -29,7 +29,6 @@ public final class WeldfastMonitor extends CardImpl {
 
         // {R}: Weldfast Monitor gains menace until end of turn
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(new MenaceAbility(false), Duration.EndOfTurn),
                 new ColoredManaCost(ColoredManaSymbol.R)));
 

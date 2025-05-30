@@ -59,19 +59,21 @@ class PrimalSurgeEffect extends OneShotEffect {
             return false;
         }
 
-        boolean repeat;
         do {
-            repeat = false;
             Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                controller.moveCards(card, Zone.EXILED, source, game);
-                if (card.isPermanent(game)
-                        && controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    repeat = true;
-                }
+            if (card == null) {
+                break;
             }
-        } while (controller.canRespond() && repeat);
+            if (!controller.moveCards(card, Zone.EXILED, source, game)) {
+                break;
+            }
+            if (card.isPermanent(game)
+                    && controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                continue;
+            }
+            break;
+        } while (controller.canRespond());
 
         return true;
     }

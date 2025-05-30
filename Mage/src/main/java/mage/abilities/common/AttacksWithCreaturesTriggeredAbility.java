@@ -48,12 +48,8 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         if (minAttackers == 1 && StaticFilters.FILTER_PERMANENT_CREATURES.equals(filter)) {
             setTriggerPhrase("Whenever you attack, ");
         } else {
-            StringBuilder sb = new StringBuilder("Whenever you attack with ");
-            sb.append(CardUtil.numberToText(minAttackers));
-            sb.append(" or more ");
-            sb.append(filter.getMessage());
-            sb.append(", ");
-            setTriggerPhrase(sb.toString());
+            setTriggerPhrase("Whenever you attack with " + CardUtil.numberToText(minAttackers)
+                    + " or more " + filter.getMessage() + ", ");
         }
     }
 

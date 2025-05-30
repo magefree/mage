@@ -28,7 +28,7 @@ public final class ThroneOfTheHighCity extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {4}, {T}, Sacrifice Throne of the High City: You become the monarch.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesMonarchSourceEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new BecomesMonarchSourceEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addHint(MonarchHint.instance);

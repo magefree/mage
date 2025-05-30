@@ -44,7 +44,7 @@ public final class UnyaroGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice Unyaro Griffin: Counter target red instant or sorcery spell.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new CounterTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);

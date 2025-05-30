@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -45,13 +44,8 @@ public final class TajuruParagon extends CardImpl {
         this.addAbility(new KickerAbility("{3}"));
 
         // When Tajuru Paragon enters the battlefield, if it was kicked, reveal the top six cards of your library. You may put a card that shares a creature type with it from among them into your hand. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TajuruParagonEffect()),
-                KickedCondition.ONCE, "When {this} enters the battlefield, " +
-                "if it was kicked, reveal the top six cards of your library. " +
-                "You may put a card that shares a creature type with it from among them into your hand. " +
-                "Put the rest on the bottom of your library in a random order."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TajuruParagonEffect())
+                .withInterveningIf(KickedCondition.ONCE));
     }
 
     private TajuruParagon(final TajuruParagon card) {
@@ -68,6 +62,9 @@ class TajuruParagonEffect extends OneShotEffect {
 
     TajuruParagonEffect() {
         super(Outcome.Benefit);
+        this.staticText = "reveal the top six cards of your library. " +
+                "You may put a card that shares a creature type with it from among them into your hand. " +
+                "Put the rest on the bottom of your library in a random order";
     }
 
     private TajuruParagonEffect(final TajuruParagonEffect effect) {

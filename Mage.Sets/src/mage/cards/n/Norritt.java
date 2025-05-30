@@ -55,7 +55,7 @@ public final class Norritt extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Untap target blue creature.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability1 = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         ability1.addTarget(new TargetCreaturePermanent(filterBlue));
         this.addAbility(ability1);
 

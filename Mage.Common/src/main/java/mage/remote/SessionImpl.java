@@ -13,13 +13,12 @@ import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.PlayerType;
 import mage.players.net.UserData;
-import mage.utils.CompressUtil;
 import mage.util.ThreadUtils;
+import mage.utils.CompressUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
 import org.jboss.remoting.callback.Callback;
-import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
@@ -31,6 +30,7 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.CancellationException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,6 +41,13 @@ import java.util.concurrent.TimeUnit;
 public class SessionImpl implements Session {
 
     private static final Logger logger = Logger.getLogger(SessionImpl.class);
+
+    // connection validation on client side (jboss's ping implementation, depends on server config's leasePeriod)
+    // client's validation ping must be less than server's leasePeriod
+    private static final int SESSION_VALIDATOR_PING_PERIOD_SECS = 4;
+    private static final int SESSION_VALIDATOR_PING_TIMEOUT_SECS = 3;
+
+    private static final int CONNECT_WAIT_BEFORE_PROCESS_ANY_CALLBACKS_SECS = 3;
 
     public static final String ADMIN_NAME = "Admin"; // if you change here then change in User too
     public static final String KEEP_MY_OLD_SESSION = "keep_my_old_session"; // for disconnects without active session lose (keep tables/games)
@@ -65,15 +72,10 @@ public class SessionImpl implements Session {
     private static final int PING_CYCLES = 10;
     private final LinkedList<Long> pingTime = new LinkedList<>();
     private String lastPingInfo = "";
-    private static boolean debugMode = false;
 
     private boolean canceled = false;
     private boolean jsonLogActive = false;
     private String lastError = "";
-
-    static {
-        debugMode = System.getProperty("debug.mage") != null;
-    }
 
     public SessionImpl(MageClient client) {
         this.client = client;
@@ -269,6 +271,7 @@ public class SessionImpl implements Session {
                 }
 
                 if (result) {
+                    // server state used in client side to setup game panels and dialogs, e.g. test mode info or available game types
                     serverState = server.getServerState();
                     if (serverState == null) {
                         throw new MageVersionException(client.getVersion(), null);
@@ -381,7 +384,7 @@ public class SessionImpl implements Session {
                 clientMetadata.put("generalizeSocketException", "true");
 
                 /* A remoting server also has the capability to detect when a client is no longer available.
-                 * This is done by estabilishing a lease with the remoting clients that connect to a server.
+                 * This is done by establishing a lease with the remoting clients that connect to a server.
                  * On the client side, an org.jboss.remoting.LeasePinger periodically sends PING messages to
                  * the server, and on the server side an org.jboss.remoting.Lease informs registered listeners
                  * if the PING doesn't arrive withing the specified timeout period. */
@@ -437,15 +440,10 @@ public class SessionImpl implements Session {
                 clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");
                 callbackClient = new Client(clientLocator, "callback", clientMetadata);
 
+                // client side connection validator (jboss's implementation of ping)
                 Map<String, String> listenerMetadata = new HashMap<>();
-                if (debugMode) {
-                    // prevent client from disconnecting while debugging
-                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "1000000");
-                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "900000");
-                } else {
-                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "15000");
-                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "13000");
-                }
+                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, String.valueOf(SESSION_VALIDATOR_PING_PERIOD_SECS * 1000));
+                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, String.valueOf(SESSION_VALIDATOR_PING_TIMEOUT_SECS * 1000));
                 callbackClient.connect(new MageClientConnectionListener(), listenerMetadata);
 
                 Map<String, String> callbackMetadata = new HashMap<>();
@@ -503,9 +501,25 @@ public class SessionImpl implements Session {
                 message = "Server is not responding." + message;
                 break;
             }
+            if (t.toString().contains("to make private")) {
+                // example: Unable to make private void java.io.ObjectOutputStream.clear() accessible: module java.base does not "opens java.io" to unnamed module
+                // TODO: show that error as error dialog, so users can report to github
+                message = "Wrong java version - check your client running scripts and params." + message;
+                break;
+            }
             if (t.getCause() != null && logger.isDebugEnabled()) {
                 message = '\n' + t.getCause().getMessage() + message;
                 logger.debug(t.getCause().getMessage());
+            }
+
+            if (t.getCause() == null) {
+                // last chance to find real reason
+                if (Arrays.stream(t.getStackTrace()).anyMatch(stack -> Objects.equals("ObjectInputStream.java", stack.getFileName()))) {
+                    // how-to fix: non-standard java version require additional params, see https://github.com/magefree/mage/issues/12768
+                    // TODO: show that error as error dialog, so users can report to github
+                    message = "Wrong client-server protocol - report to server's admin about compatibility problems. " + message;
+                    break;
+                }
             }
 
             t = t.getCause();
@@ -552,7 +566,7 @@ public class SessionImpl implements Session {
             if (askForReconnect) {
                 client.showError("Network error. Can't connect to  " + connection.getHost());
             }
-            client.disconnected(askForReconnect); // MageFrame with check to reconnect
+            client.disconnected(askForReconnect, keepMySessionActive); // MageFrame with check to reconnect
             pingTime.clear();
         }
 
@@ -568,32 +582,61 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized void connectReconnect(Throwable throwable) {
-        client.disconnected(true);
+        client.disconnected(true, true);
     }
 
     @Override
     public synchronized boolean sendFeedback(String title, String type, String message, String email) {
-        if (isConnected()) {
-            try {
+        try {
+            if (isConnected()) {
                 server.serverAddFeedbackMessage(sessionId, connection.getUsername(), title, type, message, email);
                 return true;
-            } catch (MageException e) {
-                logger.error(e);
             }
+        } catch (MageException ex) {
+            handleMageException(ex);
         }
         return false;
     }
 
     class CallbackHandler implements InvokerCallbackHandler {
 
+        final CopyOnWriteArrayList<ClientCallback> waitingCallbacks = new CopyOnWriteArrayList<>();
+
         @Override
-        public void handleCallback(Callback callback) throws HandleCallbackException {
+        public void handleCallback(Callback callback) {
+            // keep callbacks
+            ClientCallback clientCallback = (ClientCallback) callback.getCallbackObject();
+            waitingCallbacks.add(clientCallback);
+
+            // wait for client ready
+            // on connection client will receive all waiting callbacks from a server, e.g. started table, draft pick, etc
+            // but it's require to get server settings first (server state), e.g. for test mode
+            // possible bugs:
+            // - hidden cheat button or enabled clicks protection in draft
+            // - miss dialogs like draft or game panels
+            // so wait for server state some time
+            if (serverState == null) {
+                ThreadUtils.sleep(CONNECT_WAIT_BEFORE_PROCESS_ANY_CALLBACKS_SECS * 1000);
+                if (serverState == null) {
+                    logger.error("Can't receive server state before other data (possible reason: unstable network): "
+                            + clientCallback.getInfo());
+                }
+            }
+
+            // execute waiting queue
+            // client.onCallback must process and ignore outdated data inside
+            List<ClientCallback> executingCallbacks;
+            synchronized (waitingCallbacks) {
+                executingCallbacks = new ArrayList<>(waitingCallbacks);
+                executingCallbacks.sort(Comparator.comparingInt(ClientCallback::getMessageId));
+                waitingCallbacks.clear();
+            }
+
             try {
-                client.onCallback((ClientCallback) callback.getCallbackObject());
+                executingCallbacks.forEach(client::onCallback);
             } catch (Exception ex) {
                 logger.error("handleCallback error", ex);
             }
-
         }
     }
 
@@ -1297,20 +1340,6 @@ public class SessionImpl implements Session {
         return false;
     }
 
-    //    @Override
-//    public boolean startChallenge(UUID roomId, UUID tableId, UUID challengeId) {
-//        try {
-//            if (isConnected()) {
-//                server.startChallenge(sessionId, roomId, tableId, challengeId);
-//                return true;
-//            }
-//        } catch (MageException ex) {
-//            handleMageException(ex);
-//        } catch (Throwable t) {
-//            handleThrowable(t);
-//        }
-//        return false;
-//    }
     @Override
     public boolean submitDeck(UUID tableId, DeckCardLists deck) {
         try {
@@ -1662,12 +1691,12 @@ public class SessionImpl implements Session {
 
     private void handleMageException(MageException ex) {
         logger.fatal("Server error", ex);
-        client.showError(ex.getMessage());
+        client.showError("Server error: " + ex.getMessage());
     }
 
     private void handleGameException(GameException ex) {
         logger.warn(ex.getMessage());
-        client.showError(ex.getMessage());
+        client.showError("Game error: " + ex.getMessage());
     }
 
     @Override
@@ -1704,10 +1733,12 @@ public class SessionImpl implements Session {
     @Override
     public void ping() {
         try {
+            // client side connection validator (xmage's implementation)
+            //
             // jboss uses lease mechanic for connection check but xmage needs additional data like pings stats
             // ping must work after login only, all other actions are single call (example: register new user)
-            // sessionId fills on connection
-            // serverState fills on good login
+            // - sessionId fills on connection
+            // - serverState fills on good login
             if (!isConnected() || sessionId == null || serverState == null) {
                 return;
             }

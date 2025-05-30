@@ -12,14 +12,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -97,10 +96,10 @@ class KarnsSylexDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterNonlandPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1));
 
         boolean destroyed = false;
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             destroyed |= permanent.destroy(source, game);
         }
         return destroyed;

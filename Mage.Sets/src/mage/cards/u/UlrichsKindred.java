@@ -41,7 +41,7 @@ public final class UlrichsKindred extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // {3}{G}: Target attacking Wolf or Werewolf gains indestructible until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{3}{G}"));
         ability.addTarget(new TargetCreaturePermanent(filter));

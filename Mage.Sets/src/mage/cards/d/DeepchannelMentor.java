@@ -36,7 +36,7 @@ public final class DeepchannelMentor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Blue creatures you control can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAllEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private DeepchannelMentor(final DeepchannelMentor card) {

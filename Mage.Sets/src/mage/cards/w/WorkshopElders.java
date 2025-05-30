@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -53,7 +52,7 @@ public final class WorkshopElders extends CardImpl {
         // At the beginning of combat on your turn, you may have target noncreature artifact you control become a 0/0 artifact creature. If you do, put four +1/+1 counters on it.
         Ability ability = new BeginningOfCombatTriggeredAbility(new AddCardTypeTargetEffect(
                 Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE
-        ).setText("target noncreature artifact you control become a 0/0 artifact creature"), TargetController.YOU, true);
+        ).setText("target noncreature artifact you control become a 0/0 artifact creature"), true);
         ability.addEffect(new SetBasePowerToughnessTargetEffect(
                 0, 0, Duration.EndOfGame
         ).setText("If you do"));

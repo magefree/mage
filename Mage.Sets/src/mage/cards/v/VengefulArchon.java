@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.common.PreventDamageToControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -37,7 +37,7 @@ public final class VengefulArchon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {X}: Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VengefulArchonEffect(), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(new VengefulArchonEffect(), new ManaCostsImpl<>("{X}"));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
@@ -56,7 +56,7 @@ public final class VengefulArchon extends CardImpl {
 class VengefulArchonEffect extends PreventDamageToControllerEffect {
 
     VengefulArchonEffect() {
-        super(Duration.EndOfTurn, false, true, ManacostVariableValue.REGULAR);
+        super(Duration.EndOfTurn, false, true, GetXValue.instance);
         staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player or planeswalker";
     }
 

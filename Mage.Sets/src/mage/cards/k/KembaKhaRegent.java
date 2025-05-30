@@ -3,7 +3,7 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.CatToken;
 
 /**
@@ -29,8 +28,8 @@ public final class KembaKhaRegent extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new CatToken(), new EquipmentAttachedCount()),
-                TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new CatToken(), new EquipmentAttachedCount())
+        ));
     }
 
     private KembaKhaRegent(final KembaKhaRegent card) {

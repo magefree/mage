@@ -31,7 +31,7 @@ public final class JovensTools extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {4}, {T}: Target creature can't be blocked this turn except by Walls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

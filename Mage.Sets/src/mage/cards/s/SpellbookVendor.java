@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateRoleAttachedTargetEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.RoleType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -40,7 +39,7 @@ public final class SpellbookVendor extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DoWhenCostPaid(
                 ability, new GenericManaCost(1), "Pay {1}?"
-        ), TargetController.YOU, false));
+        )));
     }
 
     private SpellbookVendor(final SpellbookVendor card) {

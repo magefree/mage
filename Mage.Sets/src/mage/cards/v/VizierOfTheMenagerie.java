@@ -28,7 +28,7 @@ public final class VizierOfTheMenagerie extends CardImpl {
 
     public VizierOfTheMenagerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
@@ -57,7 +57,7 @@ class VizierOfTheMenagerieManaEffect extends AsThoughEffectImpl implements AsTho
 
     public VizierOfTheMenagerieManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may spend mana as though it were mana of any type to cast creature spells";
+        staticText = "You can spend mana of any type to cast creature spells";
     }
 
     private VizierOfTheMenagerieManaEffect(final VizierOfTheMenagerieManaEffect effect) {

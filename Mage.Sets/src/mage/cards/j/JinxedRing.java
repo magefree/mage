@@ -36,8 +36,8 @@ public final class JinxedRing extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new DamageControllerEffect(1), false, filter, false, true));
 
         // Sacrifice a creature: Target opponent gains control of Jinxed Ring.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TargetPlayerGainControlSourceEffect(),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(new TargetPlayerGainControlSourceEffect(),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

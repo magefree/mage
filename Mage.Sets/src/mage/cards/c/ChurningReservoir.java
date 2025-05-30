@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -11,7 +11,6 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -53,8 +52,7 @@ public final class ChurningReservoir extends CardImpl {
 
         // At the beginning of your upkeep, put an oil counter on another target nontoken artifact or creature you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.OIL.createInstance()),
-                TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.OIL.createInstance())
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

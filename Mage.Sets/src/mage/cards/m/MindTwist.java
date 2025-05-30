@@ -2,7 +2,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class MindTwist extends CardImpl {
 
 
         // Target player discards X cards at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(ManacostVariableValue.REGULAR, true));
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(GetXValue.instance, true));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

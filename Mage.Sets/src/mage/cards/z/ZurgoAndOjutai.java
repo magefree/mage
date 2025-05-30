@@ -2,6 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
@@ -56,7 +57,7 @@ public final class ZurgoAndOjutai extends CardImpl {
         // Zurgo and Ojutai has hexproof as long as it entered the battlefield this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
-                SourceEnteredThisTurnCondition.instance, "{this} has hexproof as long as it entered the battlefield this turn"
+                SourceEnteredThisTurnCondition.DID, "{this} has hexproof as long as it entered the battlefield this turn"
         )));
 
         // Whenever one or more Dragons you control deal combat damage to a player or battle, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. You may return one of those Dragons to its owner's hand.
@@ -73,7 +74,7 @@ public final class ZurgoAndOjutai extends CardImpl {
     }
 }
 
-class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl {
+class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
     ZurgoAndOjutaiTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
@@ -96,23 +97,24 @@ class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(DamagedEvent event, Game game) {
+        if (!event.isCombatDamage()) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        Permanent defender = game.getPermanent(event.getTargetId());
+        return permanent != null
+                && permanent.hasSubtype(SubType.DRAGON, game)
+                && permanent.isControlledBy(getControllerId())
+                && ((defender != null && defender.isBattle(game)) || game.getPlayer(event.getTargetId()) != null);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        List<Permanent> permanents = ((DamagedBatchAllEvent) event)
-                .getEvents()
+        List<Permanent> permanents = getFilteredEvents((DamagedBatchAllEvent) event, game)
                 .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .map(e -> {
-                    Permanent permanent = game.getPermanent(e.getSourceId());
-                    Permanent defender = game.getPermanent(e.getTargetId());
-                    if (permanent != null
-                            && permanent.hasSubtype(SubType.DRAGON, game)
-                            && permanent.isControlledBy(this.getControllerId())
-                            && ((defender != null && defender.isBattle(game))
-                            || game.getPlayer(e.getTargetId()) != null)) {
-                        return permanent;
-                    }
-                    return null;
-                })
+                .map(GameEvent::getSourceId)
+                .map(game::getPermanent)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         if (permanents.isEmpty()) {

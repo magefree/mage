@@ -69,14 +69,13 @@ class StartledAwakeReturnTransformedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (controller == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (controller == null || card == null) {
             return false;
         }
         if (game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
             return true;
         }
-        Card card = (Card) sourceObject;
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), true);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         return true;

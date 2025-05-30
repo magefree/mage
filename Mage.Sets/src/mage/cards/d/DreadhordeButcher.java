@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -40,7 +40,7 @@ public final class DreadhordeButcher extends CardImpl {
 
         // When Dreadhorde Butcher dies, it deals damage equal to its power to any target.
         Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(
-                new SourcePermanentPowerCount()
+                SourcePermanentPowerValue.NOT_NEGATIVE
         ).setText("it deals damage equal to its power to any target"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

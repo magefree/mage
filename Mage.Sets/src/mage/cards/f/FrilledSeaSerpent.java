@@ -28,7 +28,6 @@ public final class FrilledSeaSerpent extends CardImpl {
 
         // {5}{U}{U}: Frilled Sea Serpent can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{5}{U}{U}")
         ));

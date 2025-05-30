@@ -11,7 +11,6 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
 import mage.util.CardUtil;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,8 +22,6 @@ import java.util.stream.Collectors;
  * mana burn with Yurlok of Scorch Thrash, and anything else players might think of.
  */
 public final class EmblemOfCard extends Emblem {
-
-    private final boolean usesVariousArt;
     
     public static Card lookupCard(
             String cardName,
@@ -50,7 +47,7 @@ public final class EmblemOfCard extends Emblem {
     public static Card cardFromDeckInfo(DeckCardInfo info) {
         return lookupCard(
                 info.getCardName(),
-                info.getCardNum(),
+                info.getCardNumber(),
                 info.getSetCode(),
                 "DeckCardInfo"
         );
@@ -77,34 +74,30 @@ public final class EmblemOfCard extends Emblem {
         this.getAbilities().setSourceId(this.getId());
 
         this.setExpansionSetCode(card.getExpansionSetCode());
+        this.setUsesVariousArt(card.getUsesVariousArt());
         this.setCardNumber(card.getCardNumber());
         this.setImageFileName(card.getImageFileName());
         this.setImageNumber(card.getImageNumber());
-        this.usesVariousArt = card.getUsesVariousArt();
     }
     
     public EmblemOfCard(Card card) {
         this(card, Zone.BATTLEFIELD);
     }
 
-    private EmblemOfCard(EmblemOfCard eoc) {
+    private EmblemOfCard(final EmblemOfCard eoc) {
         super(eoc);
-        this.usesVariousArt = eoc.usesVariousArt;
     }
+
     @Override
     public EmblemOfCard copy() {
         return new EmblemOfCard(this);
     }
 
     @Override
-    public void setSourceObject(MageObject sourceObject) {
+    public void setSourceObjectAndInitImage(MageObject sourceObject) {
         this.sourceObject = sourceObject;
         // super method would try and fail to find the emblem image here
         // (not sure why that would be setSoureObject's job; we get our image during construction)
-    }
-    
-    public boolean getUsesVariousArt() {
-        return usesVariousArt;
     }
 }
 

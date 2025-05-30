@@ -52,7 +52,6 @@ public final class PalladiaMorsTheRuiner extends CardImpl {
 
         // Palladia-Mors, the Ruiner has hexproof if it hasn't dealt damage yet.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(HexproofAbility.getInstance()),
                         PalladiaMorsTheRuinerCondition.instance,
@@ -77,7 +76,7 @@ enum PalladiaMorsTheRuinerCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         PalladiaMorsTheRuinerWatcher watcher = game.getState().getWatcher(PalladiaMorsTheRuinerWatcher.class);
         return permanent != null && !watcher.getDamagers().contains(new MageObjectReference(permanent, game));
     }

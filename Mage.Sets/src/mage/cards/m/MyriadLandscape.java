@@ -42,7 +42,7 @@ public final class MyriadLandscape extends CardImpl {
         // {2}, {tap}, Sacrifice Myriad Landscape: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle your library.
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrarySharingLandType(0, 2), true);
         effect.setText("Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

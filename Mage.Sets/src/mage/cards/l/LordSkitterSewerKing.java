@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -42,7 +41,7 @@ public final class LordSkitterSewerKing extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever another Rat enters the battlefield under your control, exile up to one target card from an opponent's graveyard.
+        // Whenever another Rat you control enters, exile up to one target card from an opponent's graveyard.
         Ability trigger = new EntersBattlefieldControlledTriggeredAbility(
                 new ExileTargetEffect(), filter
         );
@@ -51,8 +50,7 @@ public final class LordSkitterSewerKing extends CardImpl {
 
         // At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This creature can't block."
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new CreateTokenEffect(new RatCantBlockToken()),
-                TargetController.YOU, false
+                new CreateTokenEffect(new RatCantBlockToken())
         ));
     }
 

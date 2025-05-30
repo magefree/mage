@@ -16,8 +16,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +40,12 @@ public final class GaladrielsDismissal extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GaladrielsDismissalPhaseOutTargetPlayerEffect(),
                 new PhaseOutTargetEffect(),
-                KickedCondition.ONCE, "Target creature phases out. If this spell was kicked, each creature target player controls phases out instead. "+
+                KickedCondition.ONCE, "Target creature phases out. If this spell was kicked, each creature target player controls phases out instead. " +
                 "<i>(Treat phased-out creatures and anything attached to them as though they don't exist until their controller's next turn.)</i>"
         ));
-        this.getSpellAbility().setTargetAdjuster(GaladrielsDismissalAdjuster.instance);
-
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
+                new TargetCreaturePermanent(), new TargetPlayer()));
     }
 
     private GaladrielsDismissal(final GaladrielsDismissal card) {
@@ -83,19 +85,5 @@ class GaladrielsDismissalPhaseOutTargetPlayerEffect extends OneShotEffect {
             return new PhaseOutAllEffect(permIds).apply(game, source);
         }
         return false;
-    }
-}
-
-enum GaladrielsDismissalAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        if (KickedCondition.ONCE.apply(game, ability)) {
-            ability.addTarget(new TargetPlayer());
-        } else {
-            ability.addTarget(new TargetCreaturePermanent());
-        }
     }
 }

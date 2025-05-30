@@ -32,7 +32,7 @@ public final class NearheathPilgrim extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Nearheath Pilgrim is paired with another creature, both creatures have lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(LifelinkAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(LifelinkAbility.getInstance(), ruleText)));
     }
 
     private NearheathPilgrim(final NearheathPilgrim card) {

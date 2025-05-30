@@ -5,8 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -68,8 +67,6 @@ public final class AgathaOfTheVileCauldron extends CardImpl {
 
 class AgathaOfTheVileCauldronEffect extends CostModificationEffectImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     AgathaOfTheVileCauldronEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Activated abilities of creatures you control cost {X} less to activate, "
@@ -88,7 +85,7 @@ class AgathaOfTheVileCauldronEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int amount = xValue.calculate(game, source, this);
+        int amount = SourcePermanentPowerValue.NOT_NEGATIVE.calculate(game, source, this);
         if (amount <= 0) {
             return true;
         }
@@ -107,7 +104,7 @@ class AgathaOfTheVileCauldronEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         // Activated abilities you control
-        if (abilityToModify.getAbilityType() != AbilityType.ACTIVATED
+        if (!abilityToModify.getAbilityType().isActivatedAbility()
                 || !abilityToModify.isControlledBy(source.getControllerId())) {
             return false;
         }

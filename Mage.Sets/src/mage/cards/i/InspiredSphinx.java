@@ -37,7 +37,7 @@ public final class InspiredSphinx extends CardImpl {
         ));
 
         // {3}{U}: Create a colorless 1/1 Thopter artifact creature token with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken()), new ManaCostsImpl<>("{3}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new ThopterColorlessToken()), new ManaCostsImpl<>("{3}{U}")));
     }
 
     private InspiredSphinx(final InspiredSphinx card) {

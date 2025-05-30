@@ -39,7 +39,7 @@ public final class SleepersGuile extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has fear.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
 
         // When Sleeper's Guile is put into a graveyard from the battlefield, return Sleeper's Guile to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));

@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -41,7 +41,7 @@ public final class Triskaidekaphile extends CardImpl {
         // At the beginning of your upkeep, if you have exactly thirteen cards in your hand, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new WinGameSourceControllerEffect(), TargetController.YOU, false
+                        new WinGameSourceControllerEffect(), false
                 ), condition, "At the beginning of your upkeep, " +
                 "if you have exactly thirteen cards in your hand, you win the game."
         ));

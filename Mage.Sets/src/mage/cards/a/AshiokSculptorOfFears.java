@@ -2,19 +2,17 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.continuous.GainControlAllEffect;
+import mage.abilities.effects.common.continuous.GainControlAllControlledTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetOpponent;
 
@@ -46,7 +44,7 @@ public final class AshiokSculptorOfFears extends CardImpl {
         this.addAbility(ability);
 
         // −11: Gain control of all creatures target opponent controls.
-        ability = new LoyaltyAbility(new AshiokSculptorOfFearsEffect(), -11);
+        ability = new LoyaltyAbility(new GainControlAllControlledTargetEffect(StaticFilters.FILTER_PERMANENT_CREATURES), -11);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -58,31 +56,5 @@ public final class AshiokSculptorOfFears extends CardImpl {
     @Override
     public AshiokSculptorOfFears copy() {
         return new AshiokSculptorOfFears(this);
-    }
-}
-
-class AshiokSculptorOfFearsEffect extends OneShotEffect {
-
-    AshiokSculptorOfFearsEffect() {
-        super(Outcome.Benefit);
-        staticText = "gain control of all creatures target opponent controls";
-    }
-
-    private AshiokSculptorOfFearsEffect(final AshiokSculptorOfFearsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AshiokSculptorOfFearsEffect copy() {
-        return new AshiokSculptorOfFearsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        FilterPermanent filter = new FilterCreaturePermanent();
-        filter.add(new ControllerIdPredicate(source.getFirstTarget()));
-
-        new GainControlAllEffect(Duration.Custom, filter).apply(game, source);
-        return true;
     }
 }

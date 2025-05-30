@@ -76,7 +76,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl();
-        game.getOpponents(source.getControllerId())
+        game.getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
@@ -91,7 +91,7 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
             if (card.isLand(game)) {
                 continue;
             }
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
         }
         cards.retainZone(Zone.EXILED, game);
         game.addDelayedTriggeredAbility(new MnemonicBetrayalDelayedTriggeredAbility(

@@ -28,7 +28,7 @@ public final class Chill extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Red spells cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(2, filter, TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(2, filter, TargetController.ANY)));
     }
 
     private Chill(final Chill card) {

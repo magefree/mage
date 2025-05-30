@@ -1,7 +1,6 @@
 
 package mage.cards.x;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,22 +8,16 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author MarcoMarin
  */
 public final class XenicPoltergeist extends CardImpl {
@@ -42,8 +35,8 @@ public final class XenicPoltergeist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new XenicPoltergeistEffect(), new TapSourceCost());
-        ability.addTarget(new TargetArtifactPermanent(filter));
+        Ability ability = new SimpleActivatedAbility(new XenicPoltergeistEffect(), new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
     }
@@ -69,6 +62,7 @@ class XenicPoltergeistEffect extends ContinuousEffectImpl {
     public XenicPoltergeistEffect() {
         super(Duration.Custom, Outcome.BecomeCreature);
         staticText = "Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private XenicPoltergeistEffect(final XenicPoltergeistEffect effect) {

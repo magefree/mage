@@ -41,9 +41,9 @@ public final class SamiteBlessing extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has "{tap}: The next time a source of your choice would deal damage to target creature this turn, prevent that damage."
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        Ability ability2 = new SimpleActivatedAbility(new PreventNextDamageFromChosenSourceToTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability2, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
 
     }
 

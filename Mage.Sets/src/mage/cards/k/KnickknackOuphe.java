@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.Card;
@@ -76,7 +76,7 @@ class KnickknackOuphePutOntoBattlefieldEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int count = ManacostVariableValue.ETB.calculate(game, source, null);
+            int count = GetXValue.instance.calculate(game, source, null);
             if (count > 0) {
                 Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, count));
                 controller.revealCards(source, cards, game);
@@ -87,7 +87,6 @@ class KnickknackOuphePutOntoBattlefieldEffect extends OneShotEffect {
                 
                 if (cards.count(filter, controller.getId(), source, game) > 0) {
                     TargetCard targetAuras = new TargetCard(0, count, Zone.LIBRARY, filter);
-                    targetAuras.setRequired(false);
 
                     if (controller.choose(Outcome.PutCardInPlay, cards, targetAuras, source, game)) {
                         targetAuras.getTargets().stream().forEach(t -> {

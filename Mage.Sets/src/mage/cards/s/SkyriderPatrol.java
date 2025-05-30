@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoWhenCostPaid;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
@@ -46,7 +45,7 @@ public final class SkyriderPatrol extends CardImpl {
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DoWhenCostPaid(
                 ability, new ManaCostsImpl<>("{G}{U}"), "Pay {G}{U}?"
-        ), TargetController.YOU, false));
+        )));
     }
 
     private SkyriderPatrol(final SkyriderPatrol card) {

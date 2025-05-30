@@ -28,7 +28,7 @@ public final class CephalidIllusionist extends CardImpl {
 
     public CephalidIllusionist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);
@@ -41,7 +41,7 @@ public final class CephalidIllusionist extends CardImpl {
         Effect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt to");
         // and dealt by target creature you control this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{2}{U}"));
         effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("and dealt by target creature you control this turn.");
         ability.addEffect(effect);

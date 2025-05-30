@@ -46,6 +46,7 @@ class MajesticMetamorphosisEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, target artifact or creature becomes " +
                 "a 4/4 Angel artifact creature and gains flying";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private MajesticMetamorphosisEffect(final MajesticMetamorphosisEffect effect) {

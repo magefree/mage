@@ -28,7 +28,7 @@ public final class UnstableObelisk extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {7}, {tap}, Sacrifice Unstable Obelisk: Destroy target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(7));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(7));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent());

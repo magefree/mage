@@ -28,7 +28,6 @@ public final class PlanarBridge extends CardImpl {
 
         // {8}, {T}: Search your library for a permanent card, put it onto the battlefield, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterPermanentCard())),
                 new GenericManaCost(8)
         );

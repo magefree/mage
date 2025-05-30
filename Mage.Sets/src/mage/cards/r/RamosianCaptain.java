@@ -43,7 +43,7 @@ public final class RamosianCaptain extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {5}, {T}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
         ability.addCost(new GenericManaCost(5));
         this.addAbility(ability);
     }

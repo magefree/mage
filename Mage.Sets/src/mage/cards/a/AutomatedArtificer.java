@@ -13,6 +13,7 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
@@ -76,15 +77,14 @@ class AutomatedArtificerManaCondition extends ManaCondition {
         if (source == null || source.isActivated()) {
             return false;
         }
-        switch (source.getAbilityType()) {
-            case MANA:
-            case ACTIVATED:
-                return true;
-            case SPELL:
-                if (source instanceof SpellAbility) {
-                    MageObject object = game.getObject(source);
-                    return object != null && object.isArtifact(game);
-                }
+        if (source.isActivatedAbility()) {
+            return true;
+        }
+        if (source.getAbilityType() == AbilityType.SPELL) {
+            if (source instanceof SpellAbility) {
+                MageObject object = game.getObject(source);
+                return object != null && object.isArtifact(game);
+            }
         }
         return false;
     }

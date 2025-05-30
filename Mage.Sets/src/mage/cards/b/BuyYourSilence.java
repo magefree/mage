@@ -1,6 +1,6 @@
 package mage.cards.b;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class BuyYourSilence extends CardImpl {
 
         // Exile target nonland permanent. Its controller creates a Treasure token.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new TreasureToken()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new TreasureToken()));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 

@@ -29,7 +29,7 @@ public final class ShelkinBrownie extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target creature loses all "bands with other" abilities until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilityTargetEffect(new BandsWithOtherAbility(), Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LoseAbilityTargetEffect(new BandsWithOtherAbility(), Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

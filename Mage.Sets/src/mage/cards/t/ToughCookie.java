@@ -56,7 +56,7 @@ public final class ToughCookie extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Tough Cookie: You gain 3 life.
-        this.addAbility(new FoodAbility(true));
+        this.addAbility(new FoodAbility());
     }
 
     private ToughCookie(final ToughCookie card) {

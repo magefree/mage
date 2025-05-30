@@ -9,7 +9,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -22,6 +22,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -58,7 +60,7 @@ public final class NamelessRace extends CardImpl {
     }
 }
 
-class NamelessRaceEffect extends OneShotEffect {
+class NamelessRaceEffect extends ReplacementEffectImpl {
 
     private static final FilterPermanent filter
             = new FilterPermanent("white nontoken permanents your opponents control");
@@ -74,7 +76,7 @@ class NamelessRaceEffect extends OneShotEffect {
     }
 
     NamelessRaceEffect() {
-        super(Outcome.LoseLife);
+        super(Duration.EndOfGame, Outcome.LoseLife);
         staticText = "pay any amount of life. The amount you pay can't be more than " +
                 "the total number of white nontoken permanents your opponents control " +
                 "plus the total number of white cards in their graveyards";
@@ -90,16 +92,26 @@ class NamelessRaceEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getTargetId().equals(source.getSourceId());
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (controller == null || permanent == null) {
+        if (creature == null || controller == null) {
             return false;
         }
         int permanentsInPlay = new PermanentsOnBattlefieldCount(filter).calculate(game, source, null);
         int cardsInGraveyards = new CardsInAllGraveyardsCount(filter2).calculate(game, source, null);
         int maxAmount = Math.min(permanentsInPlay + cardsInGraveyards, controller.getLife());
-        int payAmount = controller.getAmount(0, maxAmount, "Pay up to " + maxAmount + " life", game);
+        int payAmount = controller.getAmount(0, maxAmount, "Pay up to " + maxAmount + " life", source, game);
         Cost cost = new PayLifeCost(payAmount);
         if (!cost.pay(source, game, source, source.getControllerId(), true)) {
             return false;
@@ -108,9 +120,10 @@ class NamelessRaceEffect extends OneShotEffect {
         game.informPlayers((sourceCard != null ? sourceCard.getLogName() : "") + ": " + controller.getLogName() +
                 " pays " + payAmount + " life");
         game.addEffect(new SetBasePowerToughnessSourceEffect(
-                payAmount, payAmount, Duration.Custom
+                payAmount, payAmount, Duration.WhileOnBattlefield
         ), source);
-        permanent.addInfo("life paid", CardUtil.addToolTipMarkTags("Life paid: " + payAmount), game);
-        return true;
+        creature.addInfo("life paid", CardUtil.addToolTipMarkTags("Life paid: " + payAmount), game);
+        this.discard(); // prevent multiple replacements e.g. on blink
+        return false;
     }
 }

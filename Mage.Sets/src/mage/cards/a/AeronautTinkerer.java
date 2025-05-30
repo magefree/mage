@@ -34,7 +34,7 @@ public final class AeronautTinkerer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Aeronaut Tinkerer has flying as long as you control an artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()), rule)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()), rule)));
 
     }
 

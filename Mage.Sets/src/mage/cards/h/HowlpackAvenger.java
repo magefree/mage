@@ -1,7 +1,8 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DealtDamageAnyTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
@@ -12,11 +13,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.DamagedBatchForPermanentsEvent;
-import mage.game.events.GameEvent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -36,7 +35,10 @@ public final class HowlpackAvenger extends CardImpl {
         this.nightCard = true;
 
         // Whenever a permanent you control is dealt damage, Howlpack Avenger deals that much damage to any target.
-        this.addAbility(new HowlpackAvengerTriggeredAbility());
+        Ability ability = new DealtDamageAnyTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH),
+                StaticFilters.FILTER_CONTROLLED_A_PERMANENT, SetTargetPointer.NONE, false);
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
 
         // {1}{R}: Howlpack Avenger gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
@@ -54,43 +56,5 @@ public final class HowlpackAvenger extends CardImpl {
     @Override
     public HowlpackAvenger copy() {
         return new HowlpackAvenger(this);
-    }
-}
-
-class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
-
-    HowlpackAvengerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
-        this.addTarget(new TargetAnyTarget());
-        setTriggerPhrase("Whenever a permanent you control is dealt damage, ");
-    }
-
-    private HowlpackAvengerTriggeredAbility(final HowlpackAvengerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public HowlpackAvengerTriggeredAbility copy() {
-        return new HowlpackAvengerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        int damage = ((DamagedBatchForPermanentsEvent) event)
-                .getEvents()
-                .stream()
-                .filter(damagedEvent -> isControlledBy(game.getControllerId(damagedEvent.getTargetId())))
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-        if (damage < 1) {
-            return false;
-        }
-        this.getEffects().setValue("damage", damage);
-        return true;
     }
 }

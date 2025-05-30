@@ -30,7 +30,7 @@ public final class GeneralsRegalia extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {3}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GeneralsRegaliaEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new GeneralsRegaliaEffect(), new GenericManaCost(3));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

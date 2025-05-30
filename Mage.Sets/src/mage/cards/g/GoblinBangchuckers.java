@@ -32,7 +32,7 @@ public final class GoblinBangchuckers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Flip a coin. If you win the flip, Goblin Bangchuckers deals 2 damage to any target. If you lose the flip, Goblin Bangchuckers deals 2 damage to itself.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinBangchuckersEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GoblinBangchuckersEffect(), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

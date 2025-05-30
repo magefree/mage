@@ -5,7 +5,10 @@ import mage.abilities.Mode;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -16,15 +19,17 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
     private final Counters counters;
     private final String counterText;
 
-    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter) {
-        this(counter, false);
+    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter... counters) {
+        this(false, counters);
     }
 
-    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional) {
+    public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(boolean additional, Counter... counters) {
         super(false);
         this.counters = new Counters();
-        this.counters.addCounter(counter);
-        this.counterText = makeText(counter, additional);
+        for (Counter counter : counters) {
+            this.counters.addCounter(counter);
+        }
+        this.counterText = makeText(additional, counters);
     }
 
     protected ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(final ReturnFromGraveyardToBattlefieldWithCounterTargetEffect effect) {
@@ -46,27 +51,26 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
         return super.apply(game, source);
     }
 
-    private String makeText(Counter counter, boolean additional) {
-        StringBuilder sb = new StringBuilder(" with ");
-        if (additional) {
+    private static String makeText(boolean additional, Counter... counters) {
+        List<String> strings = new ArrayList<>();
+        for (Counter counter : counters) {
+            StringBuilder sb = new StringBuilder();
             if (counter.getCount() == 1) {
-                sb.append("an");
+                if (additional) {
+                    sb.append("an additional ").append(counter.getName());
+                } else {
+                    sb.append(CardUtil.addArticle(counter.getName()));
+                }
+                sb.append(" counter");
             } else {
-                sb.append(counter.getCount());
+                sb.append(CardUtil.numberToText(counter.getCount()));
+                sb.append(additional ? " additional " : " ");
+                sb.append(counter.getName());
+                sb.append(" counters");
             }
-            sb.append(" additional");
-        } else if (counter.getCount() == 1) {
-            sb.append("a");
-        } else {
-            sb.append(counter.getCount());
+            strings.add(sb.toString());
         }
-        sb.append(' ');
-        sb.append(counter.getName());
-        sb.append(" counter");
-        if (counter.getCount() != 1) {
-            sb.append('s');
-        }
-        return sb.toString();
+        return " with " + CardUtil.concatWithAnd(strings);
     }
 
     @Override

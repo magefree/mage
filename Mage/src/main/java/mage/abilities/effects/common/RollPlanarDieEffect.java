@@ -75,7 +75,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                     }
                     boolean done = false;
                     while (controller.canRespond() && effect != null && !done) {
-                        if (target != null && !target.isChosen() && target.canChoose(controller.getId(), source, game)) {
+                        if (target != null && !target.isChosen(game) && target.canChoose(controller.getId(), source, game)) {
                             controller.chooseTarget(Outcome.Benefit, target, source, game);
                             source.addTarget(target);
                         }

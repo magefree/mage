@@ -29,7 +29,7 @@ public final class SithHolocron extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {T}: Put a charge counter on Sith Holocron.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
 
         // {T}, Remove a charge counter from Sith Holocron: Add {U}, {B} or {R}.
         Cost cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1));

@@ -1,6 +1,7 @@
 package mage.abilities;
 
 import mage.ApprovingObject;
+import mage.abilities.hint.common.CanPlayAdditionalLandsHint;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
@@ -19,6 +20,8 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
         super(AbilityType.PLAY_LAND, Zone.HAND);
         this.usesStack = false;
         this.name = "Play " + cardName;
+
+        this.addHint(CanPlayAdditionalLandsHint.instance);
     }
 
     protected PlayLandAbility(final PlayLandAbility ability) {
@@ -41,7 +44,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
         }
 
         //20091005 - 114.2a
-        if(!game.isActivePlayer(playerId)
+        if (!game.isActivePlayer(playerId)
                 || !game.getPlayer(playerId).canPlayLand()
                 || !game.canPlaySorcery(playerId)) {
             return ActivationStatus.getFalse();
@@ -52,16 +55,15 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
         if (!approvingObjects.isEmpty()) {
             Card card = game.getCard(sourceId);
             Zone zone = game.getState().getZone(sourceId);
-            if(card != null && card.isOwnedBy(playerId) && Zone.HAND.match(zone)) {
+            if (card != null && card.isOwnedBy(playerId) && Zone.HAND.match(zone)) {
                 // Regular casting, to be an alternative to the AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE from hand (e.g. One with the Multiverse):
                 approvingObjects.add(new ApprovingObject(this, game));
             }
         }
 
-        if(approvingObjects.isEmpty()) {
+        if (approvingObjects.isEmpty()) {
             return ActivationStatus.withoutApprovingObject(true);
-        }
-        else {
+        } else {
             return new ActivationStatus(approvingObjects);
         }
     }
@@ -85,5 +87,4 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
     public PlayLandAbility copy() {
         return new PlayLandAbility(this);
     }
-
 }

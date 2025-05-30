@@ -41,11 +41,11 @@ public final class DrogskolCavalry extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another Spirit enters the battlefield under your control, you gain 2 life.
+        // Whenever another Spirit you control enters, you gain 2 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(2), filter));
 
         // {3}{W}: Create a 1/1 white Spirit creature token with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{3}{W}")));
     }
 
     private DrogskolCavalry(final DrogskolCavalry card) {

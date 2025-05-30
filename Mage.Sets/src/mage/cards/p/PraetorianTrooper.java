@@ -34,7 +34,7 @@ public final class PraetorianTrooper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Trooper creatures you control have double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
     private PraetorianTrooper(final PraetorianTrooper card) {

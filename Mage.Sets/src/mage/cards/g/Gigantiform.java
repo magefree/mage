@@ -52,7 +52,7 @@ public final class Gigantiform extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GigantiformEffect(), true),
                 KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle."));
+                "When {this} enters, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle."));
     }
 
     private Gigantiform(final Gigantiform card) {
@@ -70,7 +70,6 @@ class GigantiformAbility extends StaticAbility {
     public GigantiformAbility() {
         super(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA));
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new SetBasePowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield)
         );
         this.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA));

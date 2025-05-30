@@ -78,7 +78,7 @@ class MarchOfRecklessJoyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (player == null || xValue < 1 || player.getLibrary().size() < 1) {
             return false;
         }
@@ -90,7 +90,7 @@ class MarchOfRecklessJoyEffect extends OneShotEffect {
         );
         for (Card card : cards) {
             CardUtil.makeCardPlayable(
-                    game, source, card, Duration.UntilEndOfYourNextTurn,
+                    game, source, card, false, Duration.UntilEndOfYourNextTurn,
                     false, null, MarchOfRecklessJoyCondition.instance
             );
         }
@@ -117,11 +117,11 @@ class MarchOfRecklessJoyWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
         morMap.compute(event
-                        .getAdditionalReference()
+                        .getApprovingObject()
                         .getApprovingMageObjectReference(),
                 CardUtil::setOrIncrementValue
         );

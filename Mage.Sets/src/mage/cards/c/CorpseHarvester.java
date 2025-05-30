@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -16,7 +16,6 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class CorpseHarvester extends CardImpl {
                 new CorpseHarvesterTarget(), true
         ).setText(ruleText), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

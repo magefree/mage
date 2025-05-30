@@ -38,7 +38,7 @@ public final class ObservantAlseid extends CardImpl {
         // Enchanted creature gets +2/+2 and has vigilance.
         Effect effect = new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has vigilance");
         ability.addEffect(effect);

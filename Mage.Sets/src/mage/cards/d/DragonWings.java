@@ -47,7 +47,7 @@ public final class DragonWings extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
         // Cycling {1}{U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
         
@@ -83,7 +83,7 @@ class DragonWingsEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceCard = (Card) source.getSourceObjectIfItStillExists(game);
+        Card sourceCard = source.getSourceCardIfItStillExists(game);
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceCard != null && permanent != null && controller != null) {

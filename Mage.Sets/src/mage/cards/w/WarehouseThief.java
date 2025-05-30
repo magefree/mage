@@ -34,7 +34,7 @@ public final class WarehouseThief extends CardImpl {
                 new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
     }
 

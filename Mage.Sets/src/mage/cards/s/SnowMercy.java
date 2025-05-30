@@ -44,7 +44,7 @@ public final class SnowMercy extends CardImpl {
         this.addAbility(new AddGlobeCountersAbility());
 
         // {t},{q},{t},{q},{t}: Tap all creatures with globe counters on them.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(filter), new SnowMercyCost());
+        Ability ability = new SimpleActivatedAbility(new TapAllEffect(filter), new SnowMercyCost());
         this.addAbility(ability);
     }
 

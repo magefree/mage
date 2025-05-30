@@ -88,6 +88,7 @@ public class ConjureCardEffect extends OneShotEffect {
         switch (zone) {
             case HAND:
             case GRAVEYARD:
+            case LIBRARY:
                 sb.append("into your");
                 break;
             case BATTLEFIELD:

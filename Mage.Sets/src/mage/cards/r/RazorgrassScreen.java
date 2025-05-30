@@ -29,7 +29,7 @@ public final class RazorgrassScreen extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Razorgrass Screen blocks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
     }
 
     private RazorgrassScreen(final RazorgrassScreen card) {

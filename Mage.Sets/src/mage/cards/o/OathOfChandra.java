@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -42,8 +42,8 @@ public final class OathOfChandra extends CardImpl {
 
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, Oath of Chandra deals 2 damage to each opponent.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT),
-                TargetController.ANY, false), OathOfChandraCondition.instance,
+                TargetController.ANY, new DamagePlayersEffect(Outcome.Damage, StaticValue.get(2), TargetController.OPPONENT),
+                false), OathOfChandraCondition.instance,
                 "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, {this} deals 2 damage to each opponent."), new OathOfChandraWatcher());
     }
 

@@ -9,6 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -39,6 +40,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
     ChimericStaffEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private ChimericStaffEffect(final ChimericStaffEffect effect) {
@@ -69,7 +71,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
                 break;
             case PTChangingEffects_7:
                 if (sublayer == SubLayer.SetPT_7b) {
-                    int xValue = source.getManaCostsToPay().getX();
+                    int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
                     permanent.getPower().setModifiedBaseValue(xValue);
                     permanent.getToughness().setModifiedBaseValue(xValue);
                 }

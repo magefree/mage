@@ -27,7 +27,6 @@ public final class MysticArchaeologist extends CardImpl {
 
         // {3}{U}{U}: Draw two cards.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(2),
                 new ManaCostsImpl<>("{3}{U}{U}")
         ));

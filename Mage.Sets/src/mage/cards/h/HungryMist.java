@@ -3,14 +3,13 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class HungryMist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, sacrifice Hungry Mist unless you pay {G}{G}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}{G}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}{G}"))));
     }
 
     private HungryMist(final HungryMist card) {

@@ -26,7 +26,7 @@ public final class MishrasGroundbreaker extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {tap}, Sacrifice Mishra's Groundbreaker: Target land becomes a 3/3 artifact creature that's still a land. (This effect lasts indefinitely.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new MishrasGroundbreakerToken(), false, true, Duration.Custom), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(new MishrasGroundbreakerToken(), false, true, Duration.Custom), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

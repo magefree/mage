@@ -31,7 +31,7 @@ public final class MasakoTheHumorless extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Tapped creatures you control can block as though they were untapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlockTappedEffect()));
+        this.addAbility(new SimpleStaticAbility(new BlockTappedEffect()));
     }
 
     private MasakoTheHumorless(final MasakoTheHumorless card) {

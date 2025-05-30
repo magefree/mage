@@ -34,7 +34,7 @@ public final class DuskMangler extends CardImpl {
         // As an additional cost to cast this spell, sacrifice a creature, discard a card, or pay 4 life.
         this.getSpellAbility().addCost(new OrCost(
                 "sacrifice a creature, discard a card, or pay 4 life",
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
                 new DiscardCardCost(), new PayLifeCost(4)
         ));
 

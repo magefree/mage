@@ -41,7 +41,7 @@ public final class AbundantGrowth extends CardImpl {
         Ability gainedAbility = new AnyColorManaAbility(new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{T}: Add one mana of any color.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private AbundantGrowth(final AbundantGrowth card) {

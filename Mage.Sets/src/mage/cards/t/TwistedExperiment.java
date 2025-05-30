@@ -34,7 +34,7 @@ public final class TwistedExperiment extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, -1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3, -1, Duration.WhileOnBattlefield)));
     }
 
     private TwistedExperiment(final TwistedExperiment card) {

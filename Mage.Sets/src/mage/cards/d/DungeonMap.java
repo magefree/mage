@@ -5,6 +5,7 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,6 +29,7 @@ public final class DungeonMap extends CardImpl {
                 new VentureIntoTheDungeonEffect(), new GenericManaCost(3)
         );
         ability.addCost(new TapSourceCost());
+        ability.addHint(CurrentDungeonHint.instance);
         this.addAbility(ability);
     }
 

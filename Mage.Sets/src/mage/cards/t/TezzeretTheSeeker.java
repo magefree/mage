@@ -1,12 +1,8 @@
 
 package mage.cards.t;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -22,6 +18,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -79,12 +79,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
             return false;
         }
 
-        int cmc = 0;
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                cmc = ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
+        int cmc = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         FilterArtifactCard filter = new FilterArtifactCard("artifact card with mana value " + cmc + " or less");
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, cmc + 1));
@@ -108,6 +103,7 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
     public TezzeretTheSeekerEffect3() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         this.staticText = "Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private TezzeretTheSeekerEffect3(final TezzeretTheSeekerEffect3 effect) {

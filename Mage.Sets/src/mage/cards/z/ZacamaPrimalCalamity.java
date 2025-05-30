@@ -54,20 +54,20 @@ public final class ZacamaPrimalCalamity extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new UntapAllLandsControllerEffect(), false),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, untap all lands you control."));
+                "When {this} enters, if you cast it, untap all lands you control."));
 
         // {2}{R}: Zacama deals 3 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl<>("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new ManaCostsImpl<>("{2}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {2}{G}: Destroy target artifact or enchantment.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{G}"));
+        ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
 
         // {2}{W}: You gain 3 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(3), new ManaCostsImpl<>("{2}{W}")));
     }
 
     private ZacamaPrimalCalamity(final ZacamaPrimalCalamity card) {

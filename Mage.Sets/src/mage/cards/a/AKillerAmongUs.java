@@ -59,11 +59,7 @@ public final class AKillerAmongUs extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // When A Killer Among Us enters the battlefield, create a 1/1 white Human creature token, a 1/1 blue Merfolk creature token, and a 1/1 red Goblin creature token. Then secretly choose Human, Merfolk, or Goblin.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanToken()));
-        ability.addEffect(new CreateTokenEffect(new MerfolkToken())
-                .setText(", a 1/1 blue Merfolk creature token"));
-        ability.addEffect(new CreateTokenEffect(new GoblinToken())
-                .setText(", and a 1/1 red Goblin creature token."));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanToken()).withAdditionalTokens(new MerfolkToken(), new GoblinToken()));
         ability.addEffect(new ChooseHumanMerfolkOrGoblinEffect());
         this.addAbility(ability);
 
@@ -114,7 +110,7 @@ class ChooseHumanMerfolkOrGoblinEffect extends OneShotEffect {
             return false;
         }
 
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceImpl(true);
         Set<String> choices = new LinkedHashSet<>();
         choices.add("Human");
         choices.add("Merfolk");
@@ -125,7 +121,7 @@ class ChooseHumanMerfolkOrGoblinEffect extends OneShotEffect {
         controller.choose(outcome, choice, game);
         game.informPlayers(permanent.getName() + ": " + controller.getLogName() + " has secretly chosen a creature type.");
 
-        SubType chosenType = SubType.fromString(choice.getChoice());
+        SubType chosenType = SubType.byDescription(choice.getChoice());
         setSecretCreatureType(chosenType, source, game);
         setSecretOwner(source.getControllerId(), source, game);
         return true;
@@ -195,7 +191,7 @@ class AKillerAmongUsEffect extends OneShotEffect {
             return false;
         }
         SubType creatureType = ChooseHumanMerfolkOrGoblinEffect.getSecretCreatureType(source, game);
-        if (creatureType != null && creature.getSubtype().contains(creatureType)) {
+        if (creatureType != null && creature.hasSubtype(creatureType, game)) {
             creature.addCounters(CounterType.P1P1.createInstance(3), source, game);
             game.addEffect(new GainAbilityTargetEffect(
                     DeathtouchAbility.getInstance(), Duration.EndOfTurn

@@ -43,7 +43,7 @@ public final class KahoMinamoHistorian extends CardImpl {
 
         // {X}, {tap}: You may cast a card with converted mana cost X exiled with 
         // Kaho without paying its mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new KahoMinamoHistorianCastEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -132,7 +132,7 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
         }
 
         FilterCard filter = new FilterCard();
-        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         return CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, filter);
     }
 }

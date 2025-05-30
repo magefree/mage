@@ -2,7 +2,7 @@ package mage.cards.q;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -41,7 +41,7 @@ public final class QuartzwoodCrasher extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever one or more creatures you control with trample deal combat damage to a player, create an X/X green Dinosaur Beast creature token with trample, where X is the amount of damage those creatures dealt to that player.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new QuartzwoodCrasherEffect(), filter));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new QuartzwoodCrasherEffect(), filter));
     }
 
     private QuartzwoodCrasher(final QuartzwoodCrasher card) {

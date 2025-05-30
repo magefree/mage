@@ -63,7 +63,7 @@ class JoragaInvocationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
                 ContinuousEffect effect = new MustBeBlockedByAtLeastOneTargetEffect();
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 game.addEffect(effect, source);

@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -16,7 +15,6 @@ public class MephidrossVampireTest extends CardTestPlayerBase {
 
     /**
      * Checks if only one triggered ability is handleded in the pool
-     *
      */
     @Test
     public void testMultiTriggers() {
@@ -35,9 +33,10 @@ public class MephidrossVampireTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerB, "Mephidross Vampire", 1);
-        assertPowerToughness(playerB,  "Mephidross Vampire", 4, 5);
+        assertPowerToughness(playerB, "Mephidross Vampire", 4, 5);
 
-        Assert.assertEquals("There should only be one triggered ability in the list of triggers of the State", 1,  currentGame.getState().getTriggers().size());
-        
+        // (Since the introduction of Rad Counters, there is one inherent trigger per player in the state, hence the "+ 2")
+        Assert.assertEquals("There should only be one triggered ability in the list of triggers of the State", 1 + 2, currentGame.getState().getTriggers().size());
+
     }
 }

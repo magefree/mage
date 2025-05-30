@@ -13,11 +13,12 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.effects.common.counter.RemoveAllCountersTargetEffect;
+import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
@@ -25,7 +26,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
@@ -36,7 +37,7 @@ import java.util.*;
  */
 public final class CyclopeanTomb extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
         filter.add(Predicates.not(SubType.SWAMP.getPredicate()));
@@ -48,7 +49,7 @@ public final class CyclopeanTomb extends CardImpl {
         // {2}, {tap}: Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.MIRE.createInstance()), new GenericManaCost(2), new IsStepCondition(PhaseStep.UPKEEP), "{2}, {T}: Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate only during your upkeep.");
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new BecomeSwampEffect());
         this.addAbility(ability, new CyclopeanTombCounterWatcher());
 
@@ -160,7 +161,7 @@ class CyclopeanTombEffect extends OneShotEffect {
                 }
             }
             filter.add(Predicates.or(idPref));
-            TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, true);
+            TargetPermanent target = new TargetPermanent(1, 1, filter, true);
             /*Player must choose a land each upkeep. Using the message are above the player hand where frequent interactions
              * take place is the most logical way to prompt for this scenario. A new constructor added to provide a not optional
              * option for any cards like this where the player must choose a target in such the way this card requires.
@@ -168,7 +169,7 @@ class CyclopeanTombEffect extends OneShotEffect {
             if (controller.chooseTarget(Outcome.Neutral, target, source, game)) {
                 Permanent chosenLand = game.getPermanent(target.getFirstTarget());
                 if (chosenLand != null) {
-                    Effect effect = new RemoveAllCountersTargetEffect(CounterType.MIRE);
+                    Effect effect = new RemoveAllCountersPermanentTargetEffect(CounterType.MIRE);
                     effect.setTargetPointer(new FixedTarget(chosenLand, game));
                     effect.apply(game, source);
                     landRef.remove(new MageObjectReference(chosenLand, game));

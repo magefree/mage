@@ -1,6 +1,5 @@
 package mage.client.game;
 
-import mage.cards.decks.importer.DckDeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.cards.BigCard;
@@ -8,8 +7,8 @@ import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.dialog.PreferencesDialog;
-import mage.client.themes.ThemeType;
 import mage.client.util.CardsViewUtil;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.client.util.gui.countryBox.CountryUtil;
@@ -17,9 +16,8 @@ import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.CardType;
 import mage.constants.ManaType;
-import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.designations.DesignationType;
+import mage.util.DebugUtil;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
 import org.mage.card.arcane.ManaSymbols;
@@ -37,12 +35,21 @@ import static mage.constants.Constants.*;
 
 /**
  * Game GUI: player panel with avatar and icons
+ * <p>
+ * Lifecycle:
+ * - create and put to parent panel
+ * - init by static data like player info
+ * - update by dynamic data like timer and game view data
+ * <p>
+ * Warning, it un-support GUI or fonts settings in real time, so must re-create it
  *
- * @author nantuko, JayDi85
+ * @author nantuko, JayDi85, Susucr
  */
 public class PlayerPanelExt extends javax.swing.JPanel {
 
-    // TODO: *.form file was lost, panel must be reworks in designer
+    // TODO: *.form file was lost, panel must be reworks in designer:
+    //  - new form file useless cause player panel must support gui scale (see sizeMod) - it can be done by dynamic components creating only
+    //  - so it must migrate to new flow/box layout and runtime creating (current code uses "magic" GroupLayout from NetBeans GUI designer)
     private UUID playerId;
     private UUID gameId;
     private PlayerView player;
@@ -53,34 +60,72 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final String DEFAULT_AVATAR_PATH = "/avatars/" + DEFAULT_AVATAR_ID + ".jpg";
 
     private static final int PANEL_WIDTH = 94;
-    private static final int PANEL_HEIGHT = 262;
-    private static final int PANEL_HEIGHT_SMALL = 210;
-    private static final int PANEL_HEIGHT_EXTRA_FOR_ME = 25;
-    private static final int MANA_LABEL_SIZE_HORIZONTAL = 20;
+    private static final int PANEL_HEIGHT = 270; // full mode (with avatar image)
+    private static final int PANEL_HEIGHT_SMALL = 218; // small mode (with avatar button) // TODO: no need in small mode after GUI scale added
+    private static final int PANEL_HEIGHT_EXTRA_FOR_ME = 25; // hints button
 
-    private static final Border GREEN_BORDER = new LineBorder(Color.green, 3);
-    private static final Border RED_BORDER = new LineBorder(Color.red, 2);
-    private static final Border YELLOW_BORDER = new LineBorder(Color.yellow, 3);
-    private static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
+    private Border GREEN_BORDER;
+    private Border RED_BORDER;
+    private Border YELLOW_BORDER;
+    private Border EMPTY_BORDER;
 
-    private final Color activeValueColor = new Color(244, 9, 47);
-    private final Font fontValuesZero = this.getFont().deriveFont(Font.PLAIN);
-    private final Font fontValuesNonZero = this.getFont().deriveFont(Font.BOLD);
+    float guiScaleMod = 1.0f;
+
+    private Color activeValueColor = new Color(244, 9, 47);
+    private Font fontValuesZero;
+    private Font fontValuesNonZero;
 
     private int avatarId = -1;
     private String flagName;
     private String basicTooltipText;
     private static final Map<UUID, Integer> playerLives = new HashMap<>();
 
+    private final Font defaultFont;
+
     private PriorityTimer timer;
 
-    /**
-     * Creates new form PlayerPanel
-     */
     public PlayerPanelExt() {
-        setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        this(1.0f);
+    }
+
+    public PlayerPanelExt(float guiScaleMod) {
+        // save default font cause panel can be recreated manually
+        this.defaultFont = this.getFont();
+
+        createAllComponents(guiScaleMod);
+    }
+
+    /**
+     * Refresh full panel's components due actual GUI settings
+     */
+    public void fullRefresh(float guiScaleMod) {
+        this.cleanUp();
+        this.removeAll();
+        this.createAllComponents(guiScaleMod);
+        this.invalidate();
+    }
+
+    public void createAllComponents(float guiScaleMod) {
+        this.guiScaleMod = guiScaleMod;
+        this.setFont(this.defaultFont.deriveFont(sizeMod(this.defaultFont.getSize2D())));
+        this.fontValuesZero = this.getFont().deriveFont(Font.PLAIN);
+        this.fontValuesNonZero = this.getFont().deriveFont(Font.BOLD);
+        this.GREEN_BORDER = new LineBorder(Color.green, sizeMod(3));
+        this.RED_BORDER = new LineBorder(Color.red, sizeMod(2));
+        this.YELLOW_BORDER = new LineBorder(Color.yellow, sizeMod(3));
+        this.EMPTY_BORDER = BorderFactory.createEmptyBorder(0, 0, 0, 0);
+
+        setPreferredSize(new Dimension(sizeMod(PANEL_WIDTH), sizeMod(PANEL_HEIGHT)));
         initComponents();
         setGUISize();
+    }
+
+    private int sizeMod(int value) {
+        return GUISizeHelper.guiSizeScale(value, this.guiScaleMod);
+    }
+
+    private float sizeMod(float value) {
+        return GUISizeHelper.guiSizeScale(value, this.guiScaleMod);
     }
 
     public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime) {
@@ -93,7 +138,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         toolHintsHelper.setVisible(this.isMe);
         toolHintsHelper.setFocusable(false);
         flagName = null;
-        if (priorityTime > 0) {
+        avatarId = -1;
+        if (priorityTime > 0 && priorityTime != Integer.MAX_VALUE) {
             long delay = 1000L;
 
             timer = new PriorityTimer(priorityTime, delay, () -> {
@@ -189,7 +235,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         return false;
     }
 
-    public void update(GameView game, PlayerView player, Set<UUID> possibleTargets) {
+    // Not the most optimized, but we just query a few counterName here.
+    // More optimized would use a Map<String, CounterView>
+    private static int counterOfName(PlayerView player, String name) {
+        return player
+                .getCounters()
+                .stream()
+                .filter(counter -> counter.getName().equals(name))
+                .map(CounterView::getCount)
+                .findFirst()
+                .orElse(0);
+    }
+
+    public void update(GameView game, PlayerView player, Set<UUID> possibleTargets, Set<UUID> chosenTargets) {
         this.player = player;
         int pastLife = player.getLife();
         if (playerLives != null) {
@@ -219,54 +277,55 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         if (playerLife > 99) {
             Font font = lifeLabel.getFont();
-            font = font.deriveFont(9f);
+            font = font.deriveFont(sizeMod(9f));
             lifeLabel.setFont(font);
             changedFontLife = true;
         } else if (changedFontLife) {
             Font font = lifeLabel.getFont();
-            font = font.deriveFont(12f);
+            font = font.deriveFont(sizeMod(12f));
             lifeLabel.setFont(font);
             changedFontLife = false;
         }
-        setTextForLabel("life", lifeLabel, life, playerLife, true);
-        setTextForLabel("poison", poisonLabel, poison, player.getCounters().getCount(CounterType.POISON), false);
-        setTextForLabel("energy", energyLabel, energy, player.getCounters().getCount(CounterType.ENERGY), false);
-        setTextForLabel("experience", experienceLabel, experience, player.getCounters().getCount(CounterType.EXPERIENCE), false);
-        setTextForLabel("hand zone", handLabel, hand, player.getHandCount(), true);
+        setTextForLabel("life", lifeLabel, life, playerLife, false, PreferencesDialog.getCurrentTheme().getTextColor());
+        setTextForLabel("poison", poisonLabel, poison, counterOfName(player, "poison"), false, PreferencesDialog.getCurrentTheme().getTextColor());
+        setTextForLabel("energy", energyLabel, energy, counterOfName(player, "energy"), false, PreferencesDialog.getCurrentTheme().getTextColor());
+        setTextForLabel("experience", experienceLabel, experience, counterOfName(player, "experience"), false, PreferencesDialog.getCurrentTheme().getTextColor());
+        setTextForLabel("rad", radLabel, rad, counterOfName(player, "rad"), false, PreferencesDialog.getCurrentTheme().getTextColor());
+        setTextForLabel("hand zone", handLabel, hand, player.getHandCount(), false, PreferencesDialog.getCurrentTheme().getTextColor());
         int libraryCards = player.getLibraryCount();
         if (libraryCards > 99) {
             Font font = libraryLabel.getFont();
-            font = font.deriveFont(9f);
+            font = font.deriveFont(sizeMod(9f));
             libraryLabel.setFont(font);
             changedFontLibrary = true;
         } else if (changedFontLibrary) {
             Font font = libraryLabel.getFont();
-            font = font.deriveFont(12f);
+            font = font.deriveFont(sizeMod(12f));
             libraryLabel.setFont(font);
             changedFontLibrary = false;
         }
-        setTextForLabel("library zone", libraryLabel, library, libraryCards, true);
+        setTextForLabel("library zone", libraryLabel, library, libraryCards, false, PreferencesDialog.getCurrentTheme().getTextColor());
 
         int graveCards = player.getGraveyard().size();
         if (graveCards > 99) {
             if (!changedFontGrave) {
                 Font font = graveLabel.getFont();
-                font = font.deriveFont(9f);
+                font = font.deriveFont(sizeMod(9f));
                 graveLabel.setFont(font);
                 changedFontGrave = true;
             }
         } else if (changedFontGrave) {
             Font font = lifeLabel.getFont();
-            font = font.deriveFont(12f);
+            font = font.deriveFont(sizeMod(12f));
             graveLabel.setFont(font);
             changedFontGrave = false;
         }
 
-        Color graveColor = isCardsPlayable(player.getGraveyard().values(), game, possibleTargets) ? activeValueColor : Color.BLACK;
+        Color graveColor = isCardsPlayable(player.getGraveyard().values(), game, possibleTargets) ? activeValueColor : PreferencesDialog.getCurrentTheme().getTextColor();
         setTextForLabel("graveyard zone", graveLabel, grave, graveCards, false, graveColor);
         graveLabel.setToolTipText("Card Types: " + qtyCardTypes(player.getGraveyard()));
 
-        Color commandColor = Color.BLACK;
+        Color commandColor = PreferencesDialog.getCurrentTheme().getTextColor();
         for (CommandObjectView com : player.getCommandObjectList()) {
             if (game != null && game.getCanPlayObjects() != null && game.getCanPlayObjects().containsObject(com.getId())) {
                 commandColor = activeValueColor;
@@ -280,21 +339,21 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         setTextForLabel("command zone", commandLabel, commandZone, player.getCommandObjectList().size(), false, commandColor);
 
         int exileCards = player.getExile().size();
-        Color excileColor = isCardsPlayable(player.getExile().values(), game, possibleTargets) ? activeValueColor : Color.BLACK;
+        Color exileColor = isCardsPlayable(player.getExile().values(), game, possibleTargets) ? activeValueColor : PreferencesDialog.getCurrentTheme().getTextColor();
         if (exileCards > 99) {
             if (!changedFontExile) {
                 Font font = exileLabel.getFont();
-                font = font.deriveFont(9f);
+                font = font.deriveFont(sizeMod(9f));
                 exileLabel.setFont(font);
                 changedFontExile = true;
             }
         } else if (changedFontExile) {
             Font font = lifeLabel.getFont();
-            font = font.deriveFont(12f);
+            font = font.deriveFont(sizeMod(12f));
             exileLabel.setFont(font);
             changedFontExile = false;
         }
-        setTextForLabel("exile zone", exileLabel, exileZone, exileCards, false, excileColor);
+        setTextForLabel("exile zone", exileLabel, exileZone, exileCards, false, exileColor);
 
         if (!MageFrame.isLite()) {
             int id = player.getUserData().getAvatarId();
@@ -311,15 +370,15 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                     path = "/avatars/special/" + avatarId + ".gif";
                 }
                 Image image = ImageHelper.getImageFromResources(path);
-                Rectangle r = new Rectangle(80, 80);
-                BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                this.avatar.update(this.player.getName(), resized, resized, resized, resized, r);
+                Rectangle buttonRect = new Rectangle(sizeMod(80), sizeMod(80));
+                BufferedImage buttonImage = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), buttonRect);
+                this.avatar.update(this.player.getName(), buttonImage, buttonImage, buttonImage, buttonImage, buttonRect);
             }
         }
         if (this.timer != null) {
-            if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
+            if (player.getPriorityTimeLeftSecs() != Integer.MAX_VALUE) {
                 String priorityTimeValue = getPriorityTimeLeftString(player);
-                this.timer.setCount(player.getPriorityTimeLeft());
+                this.timer.setCount(player.getPriorityTimeLeftSecs());
                 this.timer.setBufferCount(player.getBufferTimeLeft());
                 this.avatar.setTopText(priorityTimeValue);
                 this.timerLabel.setText(priorityTimeValue);
@@ -329,7 +388,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 if (player.getBufferTimeLeft() > 0) {
                     textColor = Color.GREEN;
                     foregroundColor = Color.GREEN.darker().darker();
-                } else if (player.getPriorityTimeLeft() < 300) { // visual indication for under 5 minutes
+                } else if (player.getPriorityTimeLeftSecs() < 300) { // visual indication for under 5 minutes
                     textColor = Color.RED;
                     foregroundColor = Color.RED.darker().darker();
                 } else {
@@ -368,6 +427,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             this.btnPlayer.setBorder(YELLOW_BORDER);
         }
 
+        // selected targeting (draw as priority)
+        if (chosenTargets != null && chosenTargets.contains(this.playerId)) {
+            this.avatar.setBorder(GREEN_BORDER); // TODO: use diff green color for chosen targeting and current priority?
+            this.btnPlayer.setBorder(GREEN_BORDER);
+        }
+
         update(player.getManaPool());
     }
 
@@ -390,11 +455,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (flagName == null) { // do only once
             avatar.setText(this.player.getName());
             flagName = player.getUserData().getFlagName();
-            this.avatar.setTopTextImage(CountryUtil.getCountryFlagIconSize(flagName, 11).getImage());
+            String flagPath = "/flags/" + flagName + (flagName.endsWith(".png") ? "" : ".png");
+            this.avatar.setTopTextImage(ImageHelper.getImageFromResourcesScaledToHeight(flagPath, sizeMod(11)));
             String countryName = CountryUtil.getCountryName(flagName);
             basicTooltipText = "<HTML>Name: " + player.getName()
                     + "<br/>Flag: " + (countryName == null ? "Unknown" : countryName)
-                    + "<br/>Deck hash code: " + player.getDeckHashCode()
                     + "<br/>This match wins: " + player.getWins() + " of " + player.getWinsNeeded() + " (to win the match)";
         }
 
@@ -403,24 +468,24 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         tooltipText.append("<br/>Match time remaining: ").append(getPriorityTimeLeftString(player));
 
         // designations
-        this.avatar.setTopTextImageRight(null);
+        this.avatar.clearTopTextImagesRight();
         for (String name : player.getDesignationNames()) {
             tooltipText.append("<br/>").append(name);
             if (DesignationType.CITYS_BLESSING.toString().equals(name)) {
-                this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/city_blessing.png"));
+                this.avatar.addTopTextImageRight(ImageHelper.getImageFromResourcesScaledToHeight("/info/city_blessing.png", sizeMod(11)));
             }
         }
         if (player.isMonarch()) {
             tooltipText.append("<br/>").append("The Monarch");
-            this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/crown.png"));
+            this.avatar.addTopTextImageRight(ImageHelper.getImageFromResourcesScaledToHeight("/info/crown.png", sizeMod(11)));
         }
         if (player.isInitiative()) {
             tooltipText.append("<br/>").append("Have the Initiative");
-            this.avatar.setTopTextImageRight(ImageHelper.getImageFromResources("/info/initiative.png"));
+            this.avatar.addTopTextImageRight(ImageHelper.getImageFromResourcesScaledToHeight("/info/initiative.png", sizeMod(11)));
         }
 
         // counters
-        for (Counter counter : player.getCounters().values()) {
+        for (CounterView counter : player.getCounters()) {
             tooltipText.append("<br/>").append(counter.getName()).append(" counters: ").append(counter.getCount());
         }
 
@@ -433,7 +498,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private String getPriorityTimeLeftString(PlayerView player) {
-        int priorityTimeLeft = player.getPriorityTimeLeft() + player.getBufferTimeLeft();
+        int priorityTimeLeft = player.getPriorityTimeLeftSecs() + player.getBufferTimeLeft();
         return getPriorityTimeLeftString(priorityTimeLeft);
     }
 
@@ -467,10 +532,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                     setTextForLabel(category, mana.getKey(), manaButtons.get(mana.getKey()), pool.getColorless(), false, activeValueColor);
                     break;
             }
-
-            //HoverButton btn = manaButtons.get(mana.getKey());
-            //mana.getKey().setOpaque(true);
-            //mana.getKey().setBackground(Color.green);
         }
     }
 
@@ -484,172 +545,187 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private void initComponents() {
 
         panelBackground = new MageRoundPane();
-        panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT));
-        Rectangle r = new Rectangle(80, 80);
-//        avatarFlag = new JLabel();
-//        monarchIcon = new JLabel();
+        panelBackground.setPreferredSize(new Dimension(sizeMod(PANEL_WIDTH - 2), sizeMod(PANEL_HEIGHT)));
         timerLabel = new JLabel();
         lifeLabel = new JLabel();
         handLabel = new JLabel();
         poisonLabel = new JLabel();
         energyLabel = new JLabel();
         experienceLabel = new JLabel();
+        radLabel = new JLabel();
         graveLabel = new JLabel();
         commandLabel = new JLabel();
         libraryLabel = new JLabel();
         setOpaque(false);
 
-        panelBackground.setXOffset(3);
-        panelBackground.setYOffset(3);
+        panelBackground.setXOffset(sizeMod(3));
+        panelBackground.setYOffset(sizeMod(3));
         panelBackground.setVisible(true);
 
-        // Avatar
+        if (DebugUtil.GUI_GAME_DRAW_PLAYER_PANEL_BORDER) {
+            setBorder(BorderFactory.createLineBorder(Color.green));
+            panelBackground.setBorder(BorderFactory.createLineBorder(Color.yellow));
+        }
+
+        // avatar in normal mode (image)
+        Rectangle r = new Rectangle(sizeMod(80), sizeMod(80));
         Image image = ImageHelper.getImageFromResources(DEFAULT_AVATAR_PATH);
-
         BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-        avatar = new HoverButton("", resized, resized, resized, r);
-
+        avatar = new HoverButton("", resized, resized, resized, r, this.guiScaleMod);
         String showPlayerNamePermanently = MageFrame.getPreferences().get(PreferencesDialog.KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
         if (showPlayerNamePermanently.equals("true")) {
             avatar.setTextAlwaysVisible(true);
         }
-        avatar.setTextOffsetButtonY(10);
+        avatar.setTextOffsetButtonY(sizeMod(10));
         avatar.setObserver(() -> SessionHandler.sendPlayerUUID(gameId, playerId));
 
-        // timer area /small layout)
+        // avatar in small mode (button)
+        btnPlayer = new JButton();
+        btnPlayer.setFont(this.getFont());
+        btnPlayer.setText("Player");
+        btnPlayer.setVisible(false);
+        btnPlayer.setToolTipText("Player");
+        btnPlayer.setPreferredSize(new Dimension(sizeMod(20), sizeMod(40)));
+        btnPlayer.addActionListener(e -> SessionHandler.sendPlayerUUID(gameId, playerId));
+
+        // timer area /small layout
         timerLabel.setToolTipText("Time left");
-        timerLabel.setSize(80, 12);
+        timerLabel.setSize(sizeMod(80), sizeMod(12));
         timerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // life area
-        r = new Rectangle(18, 18);
+        // life
+        r = new Rectangle(sizeMod(18), sizeMod(18));
         lifeLabel.setToolTipText("Life");
+        lifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         Image imageLife = ImageHelper.getImageFromResources("/info/life.png");
         BufferedImage resizedLife = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageLife, BufferedImage.TYPE_INT_ARGB), r);
         life = new ImagePanel(resizedLife, ImagePanelStyle.ACTUAL);
         life.setToolTipText("Life");
         life.setOpaque(false);
-        // hand area
-        r = new Rectangle(18, 18);
+
+        // hand
+        r = new Rectangle(sizeMod(18), sizeMod(18));
         handLabel.setToolTipText("Hand");
+        handLabel.setHorizontalAlignment(SwingConstants.CENTER);
         Image imageHand = ImageHelper.getImageFromResources("/info/hand.png");
         BufferedImage resizedHand = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageHand, BufferedImage.TYPE_INT_ARGB), r);
         hand = new ImagePanel(resizedHand, ImagePanelStyle.ACTUAL);
         hand.setToolTipText("Hand");
         hand.setOpaque(false);
 
-        // Poison count
-        r = new Rectangle(18, 18);
+        // poison
+        r = new Rectangle(sizeMod(18), sizeMod(18));
         Image imagePoison = ImageHelper.getImageFromResources("/info/poison.png");
         BufferedImage resizedPoison = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imagePoison, BufferedImage.TYPE_INT_ARGB), r);
         poison = new ImagePanel(resizedPoison, ImagePanelStyle.ACTUAL);
         poison.setOpaque(false);
         setTextForLabel("poison", poisonLabel, poison, 0, false);
+        poisonLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Library
-        r = new Rectangle(19, 19);
+        // library
+        r = new Rectangle(sizeMod(19), sizeMod(19));
         libraryLabel.setToolTipText("Library");
+        libraryLabel.setHorizontalAlignment(SwingConstants.CENTER);
         Image imageLibrary = ImageHelper.getImageFromResources("/info/library.png");
         BufferedImage resizedLibrary = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageLibrary, BufferedImage.TYPE_INT_ARGB), r);
-
-        library = new HoverButton(null, resizedLibrary, resizedLibrary, resizedLibrary, r);
+        library = new HoverButton(null, resizedLibrary, resizedLibrary, resizedLibrary, r, this.guiScaleMod);
         library.setToolTipText("Library");
         library.setOpaque(false);
         library.setObserver(() -> btnLibraryActionPerformed(null));
 
-        // Grave count and open graveyard button
-        r = new Rectangle(21, 21);
-        graveLabel.setToolTipText("Card Types: 0");
-        Image imageGrave = ImageHelper.getImageFromResources("/info/grave.png");
-        BufferedImage resizedGrave = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageGrave, BufferedImage.TYPE_INT_ARGB), r);
-
-        grave = new HoverButton(null, resizedGrave, resizedGrave, resizedGrave, r);
-        grave.setToolTipText("Graveyard");
-        grave.setOpaque(false);
-        grave.setObserver(() -> btnGraveActionPerformed(null));
-
-        exileLabel = new JLabel();
-        exileLabel.setToolTipText("Exile");
-        image = ImageHelper.getImageFromResources("/info/exile.png");
-        r = new Rectangle(21, 21);
-        resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-        exileZone = new HoverButton(null, resized, resized, resized, r);
-        exileZone.setToolTipText("Exile");
-        exileZone.setOpaque(false);
-        exileZone.setObserver(() -> btnExileZoneActionPerformed(null));
-        exileZone.setBounds(25, 0, 21, 21);
-
-        // Cheat button
-        r = new Rectangle(25, 21);
-        image = ImageHelper.getImageFromResources("/info/cheat.png");
-        resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-        cheat = new JButton();
-        cheat.setIcon(new ImageIcon(resized));
-        cheat.setToolTipText("Cheat button (activate it on your priority only)");
-        cheat.addActionListener(e -> btnCheatActionPerformed(e));
-
-        // tools button like hints
-        toolHintsHelper = new JButton();
-        toolHintsHelper.setText("hints");
-        toolHintsHelper.setToolTipText("Open new card hints helper window");
-        toolHintsHelper.addActionListener(e -> btnToolHintsHelperActionPerformed(e));
-
-        zonesPanel = new JPanel();
-        zonesPanel.setPreferredSize(new Dimension(100, 60));
-        zonesPanel.setSize(100, 60);
-        zonesPanel.setLayout(null);
-        zonesPanel.setOpaque(false);
-
-        image = ImageHelper.getImageFromResources("/info/command_zone.png");
-        r = new Rectangle(21, 21);
-        resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-        commandZone = new HoverButton(null, resized, resized, resized, r);
-        commandZone.setToolTipText("Command Zone (Commanders, Emblems and Planes)");
-        commandZone.setOpaque(false);
-        commandZone.setObserver(() -> btnCommandZoneActionPerformed(null));
-        commandZone.setBounds(3, 0, 21, 21);
-        zonesPanel.add(commandZone);
-
-        commandLabel.setToolTipText("Command zone");
-        commandLabel.setBounds(25, 0, 21, 21);
-        zonesPanel.add(commandLabel);
-
-        cheat.setBounds(40, 2, 25, 21);
-        zonesPanel.add(cheat);
-
-        toolHintsHelper.setBounds(3, 2 + 21 + 2, 73, 21);
-        zonesPanel.add(toolHintsHelper);
-
-        energyExperiencePanel = new JPanel();
-        energyExperiencePanel.setPreferredSize(new Dimension(100, 20));
-        energyExperiencePanel.setSize(100, 20);
-        energyExperiencePanel.setLayout(null);
-        energyExperiencePanel.setOpaque(false);
-
-        // Energy count
-        r = new Rectangle(18, 18);
+        // energy
+        r = new Rectangle(sizeMod(18), sizeMod(18));
         Image imageEnergy = ImageHelper.getImageFromResources("/info/energy.png");
         BufferedImage resizedEnergy = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageEnergy, BufferedImage.TYPE_INT_ARGB), r);
         energy = new ImagePanel(resizedEnergy, ImagePanelStyle.ACTUAL);
         energy.setToolTipText("Energy");
         energy.setOpaque(false);
         setTextForLabel("energy", energyLabel, energy, 0, false);
+        energyLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Experience count
-        r = new Rectangle(18, 18);
+        // experience
+        r = new Rectangle(sizeMod(18), sizeMod(18));
         Image imageExperience = ImageHelper.getImageFromResources("/info/experience.png");
         BufferedImage resizedExperience = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageExperience, BufferedImage.TYPE_INT_ARGB), r);
         experience = new ImagePanel(resizedExperience, ImagePanelStyle.ACTUAL);
         experience.setToolTipText("Experience");
         experience.setOpaque(false);
         setTextForLabel("experience", experienceLabel, experience, 0, false);
+        experienceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        btnPlayer = new JButton();
-        btnPlayer.setText("Player");
-        btnPlayer.setVisible(false);
-        btnPlayer.setToolTipText("Player");
-        btnPlayer.setPreferredSize(new Dimension(20, 40));
-        btnPlayer.addActionListener(e -> SessionHandler.sendPlayerUUID(gameId, playerId));
+        // rad
+        r = new Rectangle(sizeMod(16), sizeMod(16));
+        Image imageRad = ImageHelper.getImageFromResources("/info/rad.png");
+        BufferedImage resizedRad = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageRad, BufferedImage.TYPE_INT_ARGB), r);
+        rad = new ImagePanel(resizedRad, ImagePanelStyle.ACTUAL);
+        rad.setToolTipText("Rad");
+        rad.setOpaque(false);
+        setTextForLabel("rad", radLabel, rad, 0, false);
+        radLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // graveyard
+        r = new Rectangle(sizeMod(21), sizeMod(21));
+        graveLabel.setToolTipText("Card Types: 0");
+        graveLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        Image imageGrave = ImageHelper.getImageFromResources("/info/grave.png");
+        BufferedImage resizedGrave = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(imageGrave, BufferedImage.TYPE_INT_ARGB), r);
+        grave = new HoverButton(null, resizedGrave, resizedGrave, resizedGrave, r, this.guiScaleMod);
+        grave.setToolTipText("Graveyard");
+        grave.setOpaque(false);
+        grave.setObserver(() -> btnGraveActionPerformed(null));
+
+        // exile
+        exileLabel = new JLabel();
+        exileLabel.setToolTipText("Exile");
+        exileLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        image = ImageHelper.getImageFromResources("/info/exile.png");
+        r = new Rectangle(sizeMod(21), sizeMod(21));
+        resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+        exileZone = new HoverButton(null, resized, resized, resized, r, this.guiScaleMod);
+        exileZone.setToolTipText("Exile");
+        exileZone.setOpaque(false);
+        exileZone.setObserver(() -> btnExileZoneActionPerformed(null));
+        exileZone.setBounds(sizeMod(25), 0, sizeMod(21), sizeMod(21));
+
+        zonesPanel = new JPanel();
+        zonesPanel.setPreferredSize(new Dimension(sizeMod(100), sizeMod(60)));
+        zonesPanel.setSize(sizeMod(100), sizeMod(60));
+        zonesPanel.setLayout(null);
+        zonesPanel.setOpaque(false);
+
+        // hints
+        toolHintsHelper = new JButton();
+        toolHintsHelper.setFont(this.getFont());
+        toolHintsHelper.setText("Hints");
+        toolHintsHelper.setToolTipText("Open card hints helper window");
+        toolHintsHelper.addActionListener(this::btnToolHintsHelperActionPerformed);
+        toolHintsHelper.setBounds(sizeMod(3), sizeMod(2 + 21 + 2), sizeMod(73), sizeMod(21));
+        zonesPanel.add(toolHintsHelper);
+
+        // command
+        r = new Rectangle(sizeMod(21), sizeMod(21));
+        image = ImageHelper.getImageFromResources("/info/command_zone.png");
+        resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+        commandZone = new HoverButton(null, resized, resized, resized, r, this.guiScaleMod);
+        commandZone.setToolTipText("Command Zone (Commanders, Emblems, and Planes)");
+        commandZone.setOpaque(false);
+        commandZone.setObserver(() -> btnCommandZoneActionPerformed(null));
+        commandZone.setBounds(sizeMod(3), 0, sizeMod(21), sizeMod(21));
+        zonesPanel.add(commandZone);
+        commandLabel.setToolTipText("Command zone");
+        commandLabel.setBounds(sizeMod(25), 0, sizeMod(21), sizeMod(21));
+        zonesPanel.add(commandLabel);
+
+        // cheat
+        r = new Rectangle(sizeMod(25), sizeMod(21));
+        image = ImageHelper.getImageFromResources("/info/cheat.png");
+        resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+        cheat = new JButton();
+        cheat.setIcon(new ImageIcon(resized));
+        cheat.setToolTipText("Cheat button (activate it on your priority only)");
+        cheat.addActionListener(this::btnCheatActionPerformed);
+        cheat.setBounds(sizeMod(40), sizeMod(2), sizeMod(25), sizeMod(21));
+        zonesPanel.add(cheat);
 
         // Add mana symbols
         // TODO: replace "button + label" to label on rework
@@ -667,264 +743,244 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         JLabel manaCountLabelW = new JLabel();
         manaCountLabelW.setToolTipText("White mana");
         setTextForLabel(manaCountLabelW, 0, false);
-        manaCountLabelW.setIcon(new ImageIcon(ManaSymbols.getSizedManaSymbol("W", 15)));
+        manaCountLabelW.setIcon(new ImageIcon(ManaSymbols.getSizedManaSymbol("W", sizeMod(15))));
         manaCountLabelW.addMouseListener(manaMouseAdapter);
         manaLabels.put(manaCountLabelW, ManaType.WHITE);l
         //*/
         ///*
+
+        // mana W
         JLabel manaCountLabelW = new JLabel();
+        manaCountLabelW.setHorizontalAlignment(SwingConstants.CENTER);
         manaLabels.put(manaCountLabelW, ManaType.WHITE);
-        r = new Rectangle(15, 15);
-        BufferedImage imageManaW = ManaSymbols.getSizedManaSymbol("W", 15);
-        HoverButton btnWhiteMana = new HoverButton(null, imageManaW, imageManaW, imageManaW, r);
+        r = new Rectangle(sizeMod(15), sizeMod(15));
+        BufferedImage imageManaW = ManaSymbols.getSizedManaSymbol("W", sizeMod(15));
+        HoverButton btnWhiteMana = new HoverButton(null, imageManaW, imageManaW, imageManaW, r, this.guiScaleMod);
         btnWhiteMana.setOpaque(false);
         btnWhiteMana.setObserver(() -> btnManaActionPerformed(ManaType.WHITE));
         manaButtons.put(manaCountLabelW, btnWhiteMana);
         setTextForLabel(ManaType.WHITE.toString() + " mana", manaCountLabelW, btnWhiteMana, 0, false);
         //*/
 
+        // mana U
         JLabel manaCountLabelU = new JLabel();
         manaLabels.put(manaCountLabelU, ManaType.BLUE);
-        r = new Rectangle(15, 15);
-        BufferedImage imageManaU = ManaSymbols.getSizedManaSymbol("U", 15);
-        HoverButton btnBlueMana = new HoverButton(null, imageManaU, imageManaU, imageManaU, r);
+        manaCountLabelU.setHorizontalAlignment(SwingConstants.CENTER);
+        r = new Rectangle(sizeMod(15), sizeMod(15));
+        BufferedImage imageManaU = ManaSymbols.getSizedManaSymbol("U", sizeMod(15));
+        HoverButton btnBlueMana = new HoverButton(null, imageManaU, imageManaU, imageManaU, r, this.guiScaleMod);
         btnBlueMana.setOpaque(false);
         btnBlueMana.setObserver(() -> btnManaActionPerformed(ManaType.BLUE));
         manaButtons.put(manaCountLabelU, btnBlueMana);
         setTextForLabel(ManaType.BLUE.toString() + " mana", manaCountLabelU, btnBlueMana, 0, false);
 
+        // mana B
         JLabel manaCountLabelB = new JLabel();
         manaLabels.put(manaCountLabelB, ManaType.BLACK);
-        r = new Rectangle(15, 15);
-        BufferedImage imageManaB = ManaSymbols.getSizedManaSymbol("B", 15);
-        HoverButton btnBlackMana = new HoverButton(null, imageManaB, imageManaB, imageManaB, r);
+        manaCountLabelB.setHorizontalAlignment(SwingConstants.CENTER);
+        r = new Rectangle(sizeMod(15), sizeMod(15));
+        BufferedImage imageManaB = ManaSymbols.getSizedManaSymbol("B", sizeMod(15));
+        HoverButton btnBlackMana = new HoverButton(null, imageManaB, imageManaB, imageManaB, r, this.guiScaleMod);
         btnBlackMana.setOpaque(false);
         btnBlackMana.setObserver(() -> btnManaActionPerformed(ManaType.BLACK));
         manaButtons.put(manaCountLabelB, btnBlackMana);
         setTextForLabel(ManaType.BLACK.toString() + " mana", manaCountLabelB, btnBlackMana, 0, false);
 
+        // mana R
         JLabel manaCountLabelR = new JLabel();
         manaLabels.put(manaCountLabelR, ManaType.RED);
-        r = new Rectangle(15, 15);
-        BufferedImage imageManaR = ManaSymbols.getSizedManaSymbol("R", 15);
-        HoverButton btnRedMana = new HoverButton(null, imageManaR, imageManaR, imageManaR, r);
+        manaCountLabelR.setHorizontalAlignment(SwingConstants.CENTER);
+        r = new Rectangle(sizeMod(15), sizeMod(15));
+        BufferedImage imageManaR = ManaSymbols.getSizedManaSymbol("R", sizeMod(15));
+        HoverButton btnRedMana = new HoverButton(null, imageManaR, imageManaR, imageManaR, r, this.guiScaleMod);
         btnRedMana.setOpaque(false);
         btnRedMana.setObserver(() -> btnManaActionPerformed(ManaType.RED));
         manaButtons.put(manaCountLabelR, btnRedMana);
         setTextForLabel(ManaType.RED.toString() + " mana", manaCountLabelR, btnRedMana, 0, false);
 
+        // mana G
         JLabel manaCountLabelG = new JLabel();
         manaLabels.put(manaCountLabelG, ManaType.GREEN);
-        r = new Rectangle(15, 15);
-        BufferedImage imageManaG = ManaSymbols.getSizedManaSymbol("G", 15);
-        HoverButton btnGreenMana = new HoverButton(null, imageManaG, imageManaG, imageManaG, r);
+        manaCountLabelG.setHorizontalAlignment(SwingConstants.CENTER);
+        r = new Rectangle(sizeMod(15), sizeMod(15));
+        BufferedImage imageManaG = ManaSymbols.getSizedManaSymbol("G", sizeMod(15));
+        HoverButton btnGreenMana = new HoverButton(null, imageManaG, imageManaG, imageManaG, r, this.guiScaleMod);
         btnGreenMana.setOpaque(false);
         btnGreenMana.setObserver(() -> btnManaActionPerformed(ManaType.GREEN));
         manaButtons.put(manaCountLabelG, btnGreenMana);
         setTextForLabel(ManaType.GREEN.toString() + " mana", manaCountLabelG, btnGreenMana, 0, false);
 
+        // mana C
         JLabel manaCountLabelX = new JLabel();
         manaLabels.put(manaCountLabelX, ManaType.COLORLESS);
-        r = new Rectangle(15, 15);
-        BufferedImage imageManaX = ManaSymbols.getSizedManaSymbol("C", 15);
-        HoverButton btnColorlessMana = new HoverButton(null, imageManaX, imageManaX, imageManaX, r);
+        manaCountLabelX.setHorizontalAlignment(SwingConstants.CENTER);
+        r = new Rectangle(sizeMod(15), sizeMod(15));
+        BufferedImage imageManaX = ManaSymbols.getSizedManaSymbol("C", sizeMod(15));
+        HoverButton btnColorlessMana = new HoverButton(null, imageManaX, imageManaX, imageManaX, r, this.guiScaleMod);
         btnColorlessMana.setOpaque(false);
         btnColorlessMana.setObserver(() -> btnManaActionPerformed(ManaType.COLORLESS));
         manaButtons.put(manaCountLabelX, btnColorlessMana);
-        setTextForLabel(ManaType.COLORLESS.toString() + " mana", manaCountLabelX, btnColorlessMana, 0, false);
+        setTextForLabel(ManaType.COLORLESS + " mana", manaCountLabelX, btnColorlessMana, 0, false);
 
+        // STRUCTURE
+        // TODO: rework to readable/editable layout logic
         GroupLayout gl_panelBackground = new GroupLayout(panelBackground);
         gl_panelBackground.setHorizontalGroup(
                 gl_panelBackground.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                .addGap(9)
-                                .addComponent(life, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-                                .addGap(3)
-                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(18)
-                                                .addComponent(hand, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(lifeLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                                .addGap(4)
-                                .addComponent(handLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                .addGap(9)
-                                .addComponent(poison, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-                                .addGap(3)
-                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(18)
-                                                .addComponent(library, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(poisonLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                                .addGap(4)
-                                .addComponent(libraryLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                .addGap(9)
-                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addComponent(energy, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(2)
-                                                .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(2)
-                                                .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(2)
-                                                .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(grave, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-                                )
-                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                                .addGap(18)
-                                                                .addComponent(experience, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(energyLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                                .addGap(20)
-                                                                .addComponent(btnRedMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                                .addGap(1)
-                                                                .addComponent(manaCountLabelW, GroupLayout.PREFERRED_SIZE, MANA_LABEL_SIZE_HORIZONTAL, GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(3)
-                                                .addComponent(manaCountLabelR, GroupLayout.PREFERRED_SIZE, MANA_LABEL_SIZE_HORIZONTAL, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(1)
-                                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                                        .addComponent(manaCountLabelB, GroupLayout.PREFERRED_SIZE, MANA_LABEL_SIZE_HORIZONTAL, GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                                .addGap(19)
-                                                                .addComponent(btnColorlessMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(5)
-                                                .addComponent(manaCountLabelX, GroupLayout.PREFERRED_SIZE, MANA_LABEL_SIZE_HORIZONTAL, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(20)
-                                                .addComponent(btnGreenMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(40)
-                                                .addComponent(manaCountLabelG, GroupLayout.PREFERRED_SIZE, MANA_LABEL_SIZE_HORIZONTAL, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(40)
-                                                .addComponent(experienceLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(18)
-                                                .addComponent(exileZone, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                                        )
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(5)
-                                                .addComponent(graveLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(40)
-                                                .addComponent(exileLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(1)
-                                                .addComponent(manaCountLabelU, GroupLayout.PREFERRED_SIZE, MANA_LABEL_SIZE_HORIZONTAL, GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                .addGap(6)
+                                .addGap(sizeMod(7))
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addComponent(btnPlayer, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(timerLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(avatar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
-                                .addGap(8))
+                                        .addComponent(avatar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, sizeMod(80), Short.MAX_VALUE))
+                                .addGap(sizeMod(6)))
                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                .addGap(6)
+                                .addGap(sizeMod(9))
+                                // The left column of icon+label
+                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(life, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lifeLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(poison, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(poisonLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(energy, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(energyLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(rad, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(radLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(sizeMod(2))
+                                                .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(manaCountLabelW, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(sizeMod(2))
+                                                .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(manaCountLabelU, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(sizeMod(2))
+                                                .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(manaCountLabelB, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(grave, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(graveLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE)))
+                                // The right column of icon+label
+                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(hand, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(handLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(library, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(libraryLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(experience, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(experienceLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(sizeMod(2))
+                                                .addComponent(btnRedMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(manaCountLabelR, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(sizeMod(2))
+                                                .addComponent(btnGreenMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(manaCountLabelG, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(sizeMod(2))
+                                                .addComponent(btnColorlessMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(manaCountLabelX, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(exileZone, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(exileLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE)))
+                                .addGap(sizeMod(4)))
+                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                .addGap(sizeMod(6))
                                 .addComponent(zonesPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(14))
-        );
+                                .addGap(sizeMod(6))));
         gl_panelBackground.setVerticalGroup(
                 gl_panelBackground.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                .addGap(6)
-                                .addComponent(avatar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                                .addGap(sizeMod(6))
+                                .addComponent(avatar, GroupLayout.PREFERRED_SIZE, sizeMod(80), GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(btnPlayer, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnPlayer, GroupLayout.PREFERRED_SIZE, sizeMod(30), GroupLayout.PREFERRED_SIZE)
                                 .addComponent(timerLabel)
-                                .addGap(2)
+                                .addGap(sizeMod(2))
                                 // Life & Hand
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(1)
-                                                .addComponent(life, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+                                                .addGap(sizeMod(1))
+                                                .addComponent(life, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lifeLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(1)
-                                                .addComponent(hand, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(lifeLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(handLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+                                                .addGap(sizeMod(1))
+                                                .addComponent(hand, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(handLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
                                 // Poison & Library
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(1)
-                                                .addComponent(poison, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+                                                .addGap(sizeMod(1))
+                                                .addComponent(poison, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(poisonLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(1)
-                                                .addComponent(library, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(poisonLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(libraryLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-                                .addGap(1)
-                                // Poison
+                                                .addGap(sizeMod(1))
+                                                .addComponent(library, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(libraryLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                // Energy & Experience
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(2)
-                                                .addComponent(energy, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(2)
-                                                .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(2)
-                                                .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(2)
-                                                .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(3)
-                                                .addComponent(grave, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-                                        )
+                                                .addGap(sizeMod(1))
+                                                .addComponent(energy, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(energyLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                                                .addGap(1)
-                                                                                .addComponent(experience, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-                                                                        .addComponent(energyLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-                                                                .addGap(2)
-                                                                .addComponent(btnRedMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                                .addGap(14)
-                                                                .addComponent(manaCountLabelW, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                                .addGap(14)
-                                                                .addComponent(manaCountLabelR, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(4)
-                                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
-                                                        .addComponent(manaCountLabelB, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(gl_panelBackground.createSequentialGroup()
-                                                                .addGap(8)
-                                                                .addComponent(btnColorlessMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(manaCountLabelX, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(sizeMod(1))
+                                                .addComponent(experience, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(experienceLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                // Rad & <empty>
+                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(39)
-                                                .addComponent(btnGreenMana, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE))
+                                                .addGap(sizeMod(1))
+                                                .addComponent(rad, GroupLayout.PREFERRED_SIZE, sizeMod(18), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(radLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                // W & R
+                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(31)
-                                                .addComponent(manaCountLabelG, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(experienceLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(sizeMod(1))
+                                                .addComponent(btnWhiteMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(manaCountLabelW, GroupLayout.PREFERRED_SIZE, sizeMod(17), GroupLayout.PREFERRED_SIZE)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(76)
-                                                .addComponent(exileZone, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-                                        )
+                                                .addGap(sizeMod(1))
+                                                .addComponent(btnRedMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(manaCountLabelR, GroupLayout.PREFERRED_SIZE, sizeMod(17), GroupLayout.PREFERRED_SIZE))
+                                // U & G
+                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(76)
-                                                .addComponent(graveLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+                                                .addGap(sizeMod(1))
+                                                .addComponent(btnBlueMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(manaCountLabelU, GroupLayout.PREFERRED_SIZE, sizeMod(17), GroupLayout.PREFERRED_SIZE)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(76)
-                                                .addComponent(exileLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+                                                .addGap(sizeMod(1))
+                                                .addComponent(btnGreenMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(manaCountLabelG, GroupLayout.PREFERRED_SIZE, sizeMod(17), GroupLayout.PREFERRED_SIZE))
+                                // B & X
+                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
-                                                .addGap(31)
-                                                .addComponent(manaCountLabelU, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                        )
-                                )
-                                .addGap(2)
-                                .addComponent(zonesPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-                        )
-        );
+                                                .addGap(sizeMod(1))
+                                                .addComponent(btnBlackMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(manaCountLabelB, GroupLayout.PREFERRED_SIZE, sizeMod(17), GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addGap(sizeMod(1))
+                                                .addComponent(btnColorlessMana, GroupLayout.PREFERRED_SIZE, sizeMod(15), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(manaCountLabelX, GroupLayout.PREFERRED_SIZE, sizeMod(17), GroupLayout.PREFERRED_SIZE))
+                                // grave & exile
+                                .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(grave, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(graveLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(gl_panelBackground.createSequentialGroup()
+                                                .addComponent(exileZone, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(exileLabel, GroupLayout.PREFERRED_SIZE, sizeMod(20), GroupLayout.PREFERRED_SIZE))
+                                .addGap(sizeMod(2))
+                                .addComponent(zonesPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)));
         panelBackground.setLayout(gl_panelBackground);
         GroupLayout groupLayout = new GroupLayout(this);
         groupLayout.setHorizontalGroup(
@@ -941,20 +997,21 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
-    protected void sizePlayerPanel(boolean smallMode) {
+    public void sizePlayerPanel(boolean smallMode) {
+        // TODO: after few releases - delete small mode code, no needs anymore with gui scale, 2024-08-12
         int extraForMe = this.isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
         if (smallMode) {
             avatar.setVisible(false);
             btnPlayer.setVisible(true);
             timerLabel.setVisible(true);
-            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL + extraForMe));
-            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL + extraForMe);
+            panelBackground.setPreferredSize(new Dimension(sizeMod(PANEL_WIDTH - 2), sizeMod(PANEL_HEIGHT_SMALL + extraForMe)));
+            panelBackground.setBounds(0, 0, sizeMod(PANEL_WIDTH - 2), sizeMod(PANEL_HEIGHT_SMALL + extraForMe));
         } else {
             avatar.setVisible(true);
             btnPlayer.setVisible(false);
             timerLabel.setVisible(false);
-            panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT + extraForMe));
-            panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT + extraForMe);
+            panelBackground.setPreferredSize(new Dimension(sizeMod(PANEL_WIDTH - 2), sizeMod(PANEL_HEIGHT + extraForMe)));
+            panelBackground.setBounds(0, 0, sizeMod(PANEL_WIDTH - 2), sizeMod(PANEL_HEIGHT + extraForMe));
         }
     }
 
@@ -1014,6 +1071,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private ImagePanel poison;
     private ImagePanel energy;
     private ImagePanel experience;
+    private ImagePanel rad;
     private ImagePanel hand;
     private HoverButton grave;
     private HoverButton library;
@@ -1028,12 +1086,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private JLabel poisonLabel;
     private JLabel energyLabel;
     private JLabel experienceLabel;
+    private JLabel radLabel;
     private JLabel graveLabel;
     private JLabel commandLabel;
     private JLabel exileLabel;
 
     private JPanel zonesPanel;
-    private JPanel energyExperiencePanel;
     private HoverButton exileZone;
     private HoverButton commandZone;
     // End of variables declaration//GEN-END:variables

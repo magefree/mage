@@ -155,7 +155,7 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you cast your next creature spell this turn, "
+        return "When you next cast a creature spell this turn, "
                 + "search your library for a creature card with lesser mana value, "
                 + "put it onto the battlefield, then shuffle.";
     }

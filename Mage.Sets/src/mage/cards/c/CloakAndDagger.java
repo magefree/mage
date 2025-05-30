@@ -26,12 +26,12 @@ public final class CloakAndDagger extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.ROGUE, "a Rogue creature");
 
     public CloakAndDagger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.ROGUE);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0 and has shroud.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
         ability.addEffect(new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has shroud"));
         this.addAbility(ability);
         // Whenever a Rogue creature enters the battlefield, you may attach Cloak and Dagger to it.

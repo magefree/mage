@@ -39,7 +39,7 @@ public final class ArmoryGuard extends CardImpl {
 
         // Armory Guard has vigilance as long as you control a Gate.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private ArmoryGuard(final ArmoryGuard card) {

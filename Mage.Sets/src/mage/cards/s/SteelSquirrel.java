@@ -36,7 +36,7 @@ public final class SteelSquirrel extends CardImpl {
         this.addAbility(new SteelSquirrelTriggeredAbility());
 
         // 6: Roll a six-sided die.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(null, 6), new GenericManaCost(6));
+        Ability ability = new SimpleActivatedAbility(new RollDiceEffect(6), new GenericManaCost(6));
         this.addAbility(ability);
     }
 

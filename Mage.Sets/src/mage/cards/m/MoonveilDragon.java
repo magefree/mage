@@ -26,7 +26,7 @@ public final class MoonveilDragon extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // {R}: Each creature you control gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     private MoonveilDragon(final MoonveilDragon card) {

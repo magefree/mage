@@ -32,7 +32,7 @@ public final class SongOfTheDryads extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted permanent is a colorless Forest land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesColorlessForestLandEffect()));
+        this.addAbility(new SimpleStaticAbility(new BecomesColorlessForestLandEffect()));
     }
 
     private SongOfTheDryads(final SongOfTheDryads card) {

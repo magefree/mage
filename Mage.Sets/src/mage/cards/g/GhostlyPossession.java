@@ -32,10 +32,10 @@ public final class GhostlyPossession extends CardImpl {
         this.addAbility(ability);
 
         //Enchanted creature has flying
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
 
         //Prevent all combat damage that would be dealt to and dealt by enchanted creature
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
     }
 
     private GhostlyPossession(final GhostlyPossession card) {

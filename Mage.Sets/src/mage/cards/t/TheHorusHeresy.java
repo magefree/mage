@@ -22,7 +22,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.HashSet;
@@ -57,7 +57,8 @@ public final class TheHorusHeresy extends CardImpl {
         // I -- For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as The Horus Heresy remains on the battlefield.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, ability -> {
             ability.addEffect(new TheHorusHeresyControlEffect());
-            ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetPermanent(0, 1, filterNonlegendary)));
+            ability.addTarget(new TargetPermanent(0, 1, filterNonlegendary));
+            ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         });
 
         // II -- Draw a card for each creature you control but don't own.

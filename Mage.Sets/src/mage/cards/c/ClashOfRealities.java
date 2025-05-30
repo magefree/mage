@@ -37,14 +37,14 @@ public final class ClashOfRealities extends CardImpl {
 
 
         // All Spirits have "When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature."
-        Ability ability1 = new ClashOfRealitiesTriggeredAbility(new DamageTargetEffect(3), "When this permanent enters the battlefield, ");
+        Ability ability1 = new ClashOfRealitiesTriggeredAbility(new DamageTargetEffect(3), "When this permanent enters, ");
         ability1.addTarget(new TargetCreaturePermanent(filterNotSpirit));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability1, Duration.WhileOnBattlefield, filterSpirit, "All Spirits have \"When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature.\"")));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(ability1, Duration.WhileOnBattlefield, filterSpirit, "All Spirits have \"When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature.\"")));
 
         // Non-Spirit creatures have "When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature."
-        Ability ability2 = new ClashOfRealitiesTriggeredAbility(new DamageTargetEffect(3), "When this creature enters the battlefield, ");
+        Ability ability2 = new ClashOfRealitiesTriggeredAbility(new DamageTargetEffect(3), "When this creature enters, ");
         ability2.addTarget(new TargetCreaturePermanent(filterSpirit));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability2, Duration.WhileOnBattlefield, filterNotSpirit, "Non-Spirit creatures have \"When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature.\"")));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(ability2, Duration.WhileOnBattlefield, filterNotSpirit, "Non-Spirit creatures have \"When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature.\"")));
     }
 
     private ClashOfRealities(final ClashOfRealities card) {

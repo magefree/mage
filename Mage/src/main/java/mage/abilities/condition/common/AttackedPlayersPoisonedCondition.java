@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * A condition which checks whether any players being attacked are poisoned
  * (have one or more poison counters on them)
- * 
+ *
  * @author alexander-novo
  */
 public enum AttackedPlayersPoisonedCondition implements Condition {
@@ -27,7 +27,7 @@ public enum AttackedPlayersPoisonedCondition implements Condition {
                 .distinct()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .anyMatch(player -> player.getCounters().containsKey(CounterType.POISON));
+                .anyMatch(player -> player.getCountersCount(CounterType.POISON) > 0);
     }
 
     @Override

@@ -35,7 +35,7 @@ public final class VagrantPlowbeasts extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new RegenerateTargetEffect(),
                 new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetCreaturePermanent(filter));

@@ -24,7 +24,7 @@ public final class CoralHelm extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {3}, Discard a card at random: Target creature gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(3));
         ability.addCost(new DiscardCardCost(true));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

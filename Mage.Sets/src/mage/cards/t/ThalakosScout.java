@@ -31,7 +31,7 @@ public final class ThalakosScout extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
         
         // Discard a card: Return Thalakos Scout to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(), new DiscardCardCost()));
     }
 
     private ThalakosScout(final ThalakosScout card) {

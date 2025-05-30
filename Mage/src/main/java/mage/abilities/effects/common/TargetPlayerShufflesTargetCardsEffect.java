@@ -15,12 +15,20 @@ import mage.util.CardUtil;
  */
 public class TargetPlayerShufflesTargetCardsEffect extends OneShotEffect {
 
+    private final int targetPlayerIndex;
+
     public TargetPlayerShufflesTargetCardsEffect() {
+        this(0);
+    }
+
+    public TargetPlayerShufflesTargetCardsEffect(int targetPlayerIndex) {
         super(Outcome.Neutral);
+        this.targetPlayerIndex = targetPlayerIndex;
     }
 
     private TargetPlayerShufflesTargetCardsEffect(final TargetPlayerShufflesTargetCardsEffect effect) {
         super(effect);
+        this.targetPlayerIndex = effect.targetPlayerIndex;
     }
 
     @Override
@@ -30,8 +38,8 @@ public class TargetPlayerShufflesTargetCardsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        Cards cards = new CardsImpl(source.getTargets().get(1).getTargets());
+        Player targetPlayer = game.getPlayer(source.getTargets().get(targetPlayerIndex).getFirstTarget());
+        Cards cards = new CardsImpl(source.getTargets().get(targetPlayerIndex + 1).getTargets());
         if (targetPlayer != null && !cards.isEmpty()) {
             return targetPlayer.shuffleCardsToLibrary(cards, game, source);
         }
@@ -44,7 +52,7 @@ public class TargetPlayerShufflesTargetCardsEffect extends OneShotEffect {
             return staticText;
         }
         String rule = "target player shuffles ";
-        int targetNumber = mode.getTargets().get(1).getMaxNumberOfTargets();
+        int targetNumber = mode.getTargets().get(targetPlayerIndex + 1).getMaxNumberOfTargets();
         if (targetNumber == Integer.MAX_VALUE) {
             rule += "any number of target cards";
         } else {

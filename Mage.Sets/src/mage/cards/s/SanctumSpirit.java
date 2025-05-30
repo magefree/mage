@@ -35,7 +35,6 @@ public final class SanctumSpirit extends CardImpl {
         // Discard a historic card: Sanctum Spirit gains indestructible until end of turn.
         this.addAbility(
             new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), 
                 new DiscardCardCost(new FilterHistoricCard())
             )

@@ -1,9 +1,7 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -21,17 +19,18 @@ import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class GoblinFestival extends CardImpl {
 
     public GoblinFestival(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // {2}: Goblin Festival deals 1 damage to any target. Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of Goblin Festival.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{2}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new GoblinFestivalChangeControlEffect());
         this.addAbility(ability);
@@ -72,7 +71,7 @@ class GoblinFestivalChangeControlEffect extends OneShotEffect {
                 if (sourcePermanent != null) {
                     Target target = new TargetOpponent(true);
                     if (target.canChoose(controller.getId(), source, game)) {
-                        while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+                        while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                             controller.chooseTarget(outcome, target, source, game);
                         }
                     }

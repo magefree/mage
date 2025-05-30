@@ -31,7 +31,7 @@ public final class SageOfLatNam extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Sacrifice an artifact: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         this.addAbility(ability);
     }

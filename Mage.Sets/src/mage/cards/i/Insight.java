@@ -28,7 +28,7 @@ public final class Insight extends CardImpl {
 
 
         // Whenever an opponent casts a green spell, you draw a card.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), filter, false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1, true), filter, false));
     }
 
     private Insight(final Insight card) {

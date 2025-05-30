@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -37,7 +36,7 @@ public final class AngelOfJubilation extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other nonblack creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, true)));
 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities.
         Ability ability = new SimpleStaticAbility(new AngelOfJubilationEffect());
@@ -107,9 +106,7 @@ class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl 
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-
-        return (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || abilityToModify instanceof SpellAbility)
+        return (abilityToModify.isActivatedAbility() || abilityToModify.getAbilityType() == AbilityType.SPELL)
                 && game.getState().getPlayersInRange(source.getControllerId(), game).contains(abilityToModify.getControllerId());
     }
 

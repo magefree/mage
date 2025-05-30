@@ -39,7 +39,7 @@ public final class RootKinAlly extends CardImpl {
         this.addAbility(new ConvokeAbility());
         
         // Tap two untapped creatures you control: Root-Kin Ally gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true))));
     }
 
     private RootKinAlly(final RootKinAlly card) {

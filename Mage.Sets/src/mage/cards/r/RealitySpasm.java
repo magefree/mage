@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -8,7 +7,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XTargetsAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +26,7 @@ public final class RealitySpasm extends CardImpl {
         Mode mode = new Mode(new UntapTargetEffect("untap X target permanents"));
         mode.addTarget(new TargetPermanent());
         this.getSpellAbility().addMode(mode);
-        this.getSpellAbility().setTargetAdjuster(XTargetsAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private RealitySpasm(final RealitySpasm card) {

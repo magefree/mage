@@ -27,7 +27,7 @@ public final class Howlgeist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Creatures with power less than Howlgeist's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
         this.addAbility(new UndyingAbility());
     }
 

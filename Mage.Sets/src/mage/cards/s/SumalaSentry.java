@@ -13,7 +13,6 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.card.FaceDownPredicate;
 
 import java.util.UUID;
 
@@ -23,10 +22,6 @@ import java.util.UUID;
 public final class SumalaSentry extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent("a face-down permanent you control");
-
-    static {
-        filter.add(FaceDownPredicate.instance);
-    }
 
     public SumalaSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");

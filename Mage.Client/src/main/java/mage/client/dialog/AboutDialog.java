@@ -20,7 +20,6 @@ public class AboutDialog extends MageDialog {
 
     public AboutDialog() {
         initComponents();
-        this.modal = false;
         panelDevs.setText(devsList + " and hundreds of other developers from https://github.com/magefree/mage/graphs/contributors");
     }
 
@@ -30,11 +29,7 @@ public class AboutDialog extends MageDialog {
 
         // windows settings
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         this.makeWindowCentered();
 
         // Close on "ESC"
@@ -147,7 +142,7 @@ public class AboutDialog extends MageDialog {
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsNewActionPerformed
-        MageFrame.showWhatsNewDialog();
+        MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_btnWhatsNewActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

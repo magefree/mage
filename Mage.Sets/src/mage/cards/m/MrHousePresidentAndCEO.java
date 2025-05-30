@@ -38,7 +38,7 @@ public final class MrHousePresidentAndCEO extends CardImpl {
         this.addAbility(new MrHousePresidentAndCEOTriggeredAbility());
 
         // {4}, {T}: Roll a six-sided die plus an additional six-sided die for each mana from Treasures spent to activate this ability.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MrHousePresidentAndCEODieRollEffect(), new ManaCostsImpl<>("{4}"));
+        Ability ability = new SimpleActivatedAbility(new MrHousePresidentAndCEODieRollEffect(), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

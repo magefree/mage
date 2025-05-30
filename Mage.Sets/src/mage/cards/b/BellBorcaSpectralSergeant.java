@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -52,8 +52,7 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
-                TargetController.YOU, false
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
         ), new BellBorcaSpectralSergeantWatcher());
     }
 

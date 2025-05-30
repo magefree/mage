@@ -79,7 +79,7 @@ class ObscuraConfluenceConniveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         return ConniveSourceEffect.connive(permanent, 1, source, game);
     }
 }

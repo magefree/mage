@@ -32,7 +32,6 @@ public final class Hackrobat extends CardImpl {
 
         // {B}: Hackrobat gains deathtouch until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(
                         DeathtouchAbility.getInstance(),
                         Duration.EndOfTurn
@@ -41,7 +40,6 @@ public final class Hackrobat extends CardImpl {
 
         // {R}: Hackrobat gets +2/-2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, -2, Duration.EndOfTurn),
                 new ColoredManaCost(ColoredManaSymbol.R)
         ));

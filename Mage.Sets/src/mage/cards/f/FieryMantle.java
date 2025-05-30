@@ -34,7 +34,7 @@ public final class FieryMantle extends CardImpl {
         this.addAbility(ability);
         
         // {R}: Enchanted creature gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
         
         // When Fiery Mantle is put into a graveyard from the battlefield, return Fiery Mantle to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));

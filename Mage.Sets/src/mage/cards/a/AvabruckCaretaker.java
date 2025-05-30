@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.HexproofAbility;
@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
@@ -38,7 +37,7 @@ public final class AvabruckCaretaker extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AddCountersTargetEffect(
                         CounterType.P1P1.createInstance(2)
-                ), TargetController.YOU, false
+                )
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);

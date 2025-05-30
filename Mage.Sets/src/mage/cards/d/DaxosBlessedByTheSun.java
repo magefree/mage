@@ -54,6 +54,7 @@ class DaxosBlessedByTheSunAbility extends TriggeredAbilityImpl {
 
     DaxosBlessedByTheSunAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private DaxosBlessedByTheSunAbility(DaxosBlessedByTheSunAbility ability) {

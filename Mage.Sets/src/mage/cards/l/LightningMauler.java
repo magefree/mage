@@ -34,7 +34,7 @@ public final class LightningMauler extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Lightning Mauler is paired with another creature, both creatures have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(HasteAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(HasteAbility.getInstance(), ruleText)));
     }
 
     private LightningMauler(final LightningMauler card) {

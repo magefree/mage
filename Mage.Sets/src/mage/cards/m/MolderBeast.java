@@ -3,6 +3,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -47,6 +48,7 @@ class MolderBeastTriggeredAbility extends TriggeredAbilityImpl {
 
     public MolderBeastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MolderBeastTriggeredAbility(final MolderBeastTriggeredAbility ability) {
@@ -73,5 +75,10 @@ class MolderBeastTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public MolderBeastTriggeredAbility copy() {
         return new MolderBeastTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

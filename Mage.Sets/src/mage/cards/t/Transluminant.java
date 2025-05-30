@@ -31,7 +31,7 @@ public final class Transluminant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, Sacrifice Transluminant: Create a 1/1 white Spirit creature token with flying at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(
+        Ability ability = new SimpleActivatedAbility(new CreateDelayedTriggeredAbilityEffect(
             new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()))),
             new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());

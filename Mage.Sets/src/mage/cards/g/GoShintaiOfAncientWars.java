@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -50,8 +49,7 @@ public final class GoShintaiOfAncientWars extends CardImpl {
         );
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DoWhenCostPaid(ability, new GenericManaCost(1), "Pay {1}?"),
-                TargetController.YOU, false
+                new DoWhenCostPaid(ability, new GenericManaCost(1), "Pay {1}?")
         ).addHint(hint));
     }
 

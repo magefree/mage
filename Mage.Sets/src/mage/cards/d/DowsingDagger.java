@@ -42,7 +42,7 @@ public final class DowsingDagger extends CardImpl {
         this.addAbility(ability);
 
         // Equipped creature gets +2/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 1)));
 
         // Whenever equipped creature deals combat damage to a player, you may transform Dowsing Dagger.
         this.addAbility(new TransformAbility());

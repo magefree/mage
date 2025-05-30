@@ -33,9 +33,10 @@ public class LightningStormTest extends CardTestPlayerBase {
 
         // B discard and re-target
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Discard");
+        setChoice(playerB, "Mountain"); // discard cost
         setChoice(playerB, true); // change target
         addTarget(playerB, playerA); // new target
-        setChoice(playerB, "Mountain"); // discard cost
+
 
         // A discard and re-target
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard");

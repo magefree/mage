@@ -1,7 +1,6 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -18,6 +17,7 @@ public class CantBlockAllEffect extends RestrictionEffect {
     public CantBlockAllEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration);
         this.filter = filter;
+        this.staticText = filter.getMessage() + " can't block" + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 
     protected CantBlockAllEffect(final CantBlockAllEffect effect) {
@@ -40,16 +40,4 @@ public class CantBlockAllEffect extends RestrictionEffect {
         return new CantBlockAllEffect(this);
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage()).append(" can't block");
-        if (this.duration == Duration.EndOfTurn) {
-            sb.append(" this turn");
-        }
-        return sb.toString();
-    }
 }

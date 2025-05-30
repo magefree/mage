@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -9,17 +8,18 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
-import mage.constants.*;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ChosenNamePredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class AnointedPeacekeeper extends CardImpl {
@@ -88,7 +88,7 @@ class AnointedPeacekeeperEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() != AbilityType.ACTIVATED) {
+        if (!abilityToModify.getAbilityType().isNonManaActivatedAbility()) {
             return false;
         }
         MageObject activatedSource = game.getObject(abilityToModify.getSourceId());

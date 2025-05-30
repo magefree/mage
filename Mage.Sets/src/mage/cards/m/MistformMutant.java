@@ -28,7 +28,7 @@ public final class MistformMutant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}{U}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new BecomesChosenCreatureTypeTargetEffect(true), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

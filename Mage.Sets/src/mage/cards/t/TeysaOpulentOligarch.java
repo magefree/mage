@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -53,9 +53,7 @@ public final class TeysaOpulentOligarch extends CardImpl {
         this.addAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new InvestigateEffect(TeysaOpulentOligarchDynamicValue.instance)
-                                .setText("investigate for each opponent who lost life this turn"),
-                        TargetController.YOU,
-                        false
+                                .setText("investigate for each opponent who lost life this turn")
                 ).addHint(hint)
         );
 
@@ -67,7 +65,7 @@ public final class TeysaOpulentOligarch extends CardImpl {
                 "Whenever a Clue you control is put into a graveyard from the battlefield, ",
                 false
         );
-        trigger.setTriggersOnceEachTurn(true);
+        trigger.setTriggersLimitEachTurn(1);
         this.addAbility(trigger);
     }
 

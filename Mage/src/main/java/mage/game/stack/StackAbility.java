@@ -16,6 +16,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
+import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.*;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
@@ -135,6 +136,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public void setExpansionSetCode(String expansionSetCode) {
         throw new IllegalStateException("Wrong code usage: you can't change set code for the stack ability");
+    }
+
+    @Override
+    public boolean getUsesVariousArt() {
+        return false;
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        throw new IllegalStateException("Wrong code usage: you can't change usesVariousArt for the stack ability");
     }
 
     @Override
@@ -377,8 +388,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        return ability.activate(game, noMana);
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        return ability.activate(game, allowedIdentifiers, noMana);
     }
 
     @Override
@@ -416,6 +427,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void setVariableCostsMinMax(int min, int max) {
+        ability.setVariableCostsMinMax(min, max);
+    }
+
+    @Override
+    public void setVariableCostsValue(int xValue) {
+        ability.setVariableCostsValue(xValue);
+    }
+
+    @Override
     public Map<String, Object> getCostsTagMap() {
         return ability.getCostsTagMap();
     }
@@ -428,6 +449,31 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public AbilityType getAbilityType() {
         return ability.getAbilityType();
+    }
+
+    @Override
+    public boolean isActivatedAbility() {
+        return ability.isActivatedAbility();
+    }
+
+    @Override
+    public boolean isTriggeredAbility() {
+        return ability.isTriggeredAbility();
+    }
+
+    @Override
+    public boolean isNonManaActivatedAbility() {
+        return ability.isNonManaActivatedAbility();
+    }
+
+    @Override
+    public boolean isManaActivatedAbility() {
+        return ability.isManaActivatedAbility();
+    }
+
+    @Override
+    public boolean isManaAbility() {
+        return ability.isManaAbility();
     }
 
     @Override
@@ -481,12 +527,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
-    public boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event) {
+    public boolean hasSourceObjectAbility(Game game, MageObject sourceObject, GameEvent event) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
@@ -548,7 +594,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
+    public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, Set<MageIdentifier> allowedIdentifiers, boolean noMana, Player controller, Game game) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -605,6 +651,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
         return this.ability.getSourceObjectIfItStillExists(game);
+    }
+
+    @Override
+    public Card getSourceCardIfItStillExists(Game game) {
+        return this.ability.getSourceCardIfItStillExists(game);
     }
 
     @Override
@@ -672,6 +723,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public boolean canBeCopied() {
+        return ability.canBeCopied();
+    }
+
+    @Override
+    public Ability withCanBeCopied(boolean canBeCopied) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public void createSingleCopy(UUID newControllerId, StackObjectCopyApplier applier, MageObjectReferencePredicate newTargetFilterPredicate, Game game, Ability source, boolean chooseNewTargets) {
         Ability newAbility = this.ability.copy();
         newAbility.newId();
@@ -704,6 +765,19 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+    }
+
+    @Override
     public StackAbility setTargetAdjuster(TargetAdjuster targetAdjuster) {
         this.targetAdjuster = targetAdjuster;
         return this;
@@ -733,9 +807,23 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void adjustCosts(Game game) {
+    public void adjustX(Game game) {
         if (costAdjuster != null) {
-            costAdjuster.adjustCosts(this, game);
+            costAdjuster.prepareX(this, game);
+        }
+    }
+
+    @Override
+    public void adjustCostsPrepare(Game game) {
+        if (costAdjuster != null) {
+            costAdjuster.prepareCost(this, game);
+        }
+    }
+
+    @Override
+    public void adjustCostsModify(Game game, CostModificationType costModificationType) {
+        if (costAdjuster != null) {
+            costAdjuster.modifyCost(this, game, costModificationType);
         }
     }
 

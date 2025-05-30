@@ -33,7 +33,7 @@ public final class BloodsporeThrinax extends CardImpl {
         this.addAbility(new DevourAbility(1));
         
         // Each other creature you control enters the battlefield with an additional X +1/+1 counters on it, where X is the number of +1/+1 counters on Bloodspire Thrinax.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodsporeThrinaxEntersBattlefieldEffect()));
+        this.addAbility(new SimpleStaticAbility(new BloodsporeThrinaxEntersBattlefieldEffect()));
     }
 
     private BloodsporeThrinax(final BloodsporeThrinax card) {

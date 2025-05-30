@@ -1,21 +1,14 @@
 
 package mage.cards.i;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksOrBlocksAttachedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.RemoveFromCombatTargetEffect;
+import mage.abilities.effects.common.*;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -29,8 +22,10 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Imprison extends CardImpl {
@@ -38,7 +33,7 @@ public final class Imprison extends CardImpl {
     public Imprison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.subtype.add(SubType.AURA);
-        
+
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -48,7 +43,7 @@ public final class Imprison extends CardImpl {
 
         // Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, you may pay {1}. If you do, counter that ability. If you don't, destroy Imprison.
         this.addAbility(new ImprisonTriggeredAbility());
-        
+
         // Whenever enchanted creature attacks or blocks, you may pay {1}. If you do, tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked. If you don't, destroy Imprison.
         this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(new DoIfCostPaid(new ImprisonUnblockEffect(), new DestroySourceEffect(), new ManaCostsImpl<>("{1}")), AttachmentType.AURA));
     }
@@ -91,7 +86,7 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
             Permanent enchantedPermanent = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
             if (event.getSourceId().equals(enchantedPermanent.getId())) {
                 StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (!(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+                if (!stackAbility.getStackAbility().isManaActivatedAbility()) {
                     String abilityText = stackAbility.getRule(true);
                     if (abilityText.contains("{T},") || abilityText.contains("{T}:") || abilityText.contains("{T} or")) {
                         getEffects().get(0).setTargetPointer(new FixedTarget(stackAbility.getId()));
@@ -127,15 +122,15 @@ class ImprisonUnblockEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
             if (permanent != null) {
                 if (permanent.isCreature(game)) {
-                    
+
                     // Tap the creature
                     permanent.tap(source, game);
-    
+
                     // Remove it from combat
                     Effect effect = new RemoveFromCombatTargetEffect();
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     effect.apply(game, source);
-    
+
                     // Make blocked creatures unblocked
                     BlockedByOnlyOneCreatureThisCombatWatcher watcher = game.getState().getWatcher(BlockedByOnlyOneCreatureThisCombatWatcher.class);
                     if (watcher != null) {

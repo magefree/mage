@@ -1,9 +1,7 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Mode;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -13,12 +11,13 @@ import mage.constants.ComparisonType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class FerocityOfTheUnderworld extends CardImpl {
@@ -30,14 +29,14 @@ public final class FerocityOfTheUnderworld extends CardImpl {
     }
 
     public FerocityOfTheUnderworld(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{R}{G}");
 
         // Choose one - Destroy target nonland permanent with converted mana cost 3 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(filterMode1));
+        this.getSpellAbility().addTarget(new TargetPermanent(filterMode1));
 
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
-        Mode mode = new Mode(new CopyTargetSpellEffect());
+        Mode mode = new Mode(new CopyTargetStackObjectEffect());
         mode.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
         this.getSpellAbility().addMode(mode);
 

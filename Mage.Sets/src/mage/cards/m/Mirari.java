@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -54,7 +54,7 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
 
     MirariTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(
-                new CopyTargetSpellEffect(true),
+                new CopyTargetStackObjectEffect(true),
                 new GenericManaCost(3)), false);
     }
 

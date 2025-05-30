@@ -6,16 +6,15 @@ import mage.client.cards.BigCard;
 import mage.client.components.ColorPane;
 import mage.client.dialog.MageDialog;
 import mage.client.game.GamePanel;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
-import mage.remote.Session;
+import mage.util.CardUtil;
 import mage.view.AbilityPickerView;
 import org.apache.log4j.Logger;
 import org.jdesktop.layout.GroupLayout;
 import org.jdesktop.layout.LayoutStyle;
 import org.jdesktop.swingx.JXPanel;
-import org.jsoup.Jsoup;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,21 +23,26 @@ import java.util.List;
 import java.util.*;
 
 /**
- * GUI: Dialog for choosing abilities (list)
+ * GUI: dialog for choosing abilities (list). Example: ability for activate/cast
  *
  * @author nantuko, JayDi85
  */
 public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
+    // TODO: add gui scale support (form file lost, so it's ok for scale, see PlayerPanelExt)
+
     private static final String DEFAULT_MESSAGE = "Choose spell or ability to play (single-click)";
     private static final int DIALOG_WIDTH = 440;
     private static final int DIALOG_HEIGHT = 260;
+    private static final String CHOICE_PREFIX = "<html>";
 
     private static final Logger log = Logger.getLogger(AbilityPicker.class);
 
     private JList rows;
     private List<Object> choices;
     private String message = DEFAULT_MESSAGE;
+
+    float guiScaleMod = 1.0f;
 
     private UUID gameId;
 
@@ -53,31 +57,15 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private static final String IMAGE_RIGHT_HOVERED_PATH = "/game/right_hovered.png";
 
     private static final Color SELECTED_COLOR = new Color(64, 147, 208);
-    private static Color BORDER_COLOR = new Color(0, 0, 0, 50);
 
     private boolean selected = false;
 
     public AbilityPicker() {
-        setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
-        initComponents();
-
-        jScrollPane2.setOpaque(false);
-        jScrollPane2.getViewport().setOpaque(false);
-        UIManager.put("ScrollBar.width", 17);
-        jScrollPane2.getHorizontalScrollBar().setUI(new MageScrollbarUI());
-        jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
+        this(1.0f);
     }
 
-    public AbilityPicker(List<Object> choices, String message) {
-        this.choices = choices;
-        setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
-        setMessageAndPrepare(message);
-        initComponents();
-        jScrollPane2.setOpaque(false);
-        jScrollPane2.getViewport().setOpaque(false);
-        UIManager.put("ScrollBar.width", 17);
-        jScrollPane2.getHorizontalScrollBar().setUI(new MageScrollbarUI());
-        jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
+    public AbilityPicker(float guiScaleMod) {
+        createAllComponents(guiScaleMod);
     }
 
     public void init(UUID gameId, BigCard bigCard) {
@@ -91,6 +79,37 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         }
     }
 
+    private int sizeMod(int value) {
+        return GUISizeHelper.guiSizeScale(value, this.guiScaleMod);
+    }
+
+    private float sizeMod(float value) {
+        return GUISizeHelper.guiSizeScale(value, this.guiScaleMod);
+    }
+
+    /**
+     * Refresh full panel's components due actual GUI settings
+     */
+    public void fullRefresh(float guiScaleMod) {
+        this.cleanUp();
+        this.removeAll();
+        this.createAllComponents(guiScaleMod);
+        this.invalidate();
+    }
+
+    public void createAllComponents(float guiScaleMod) {
+        this.guiScaleMod = guiScaleMod;
+
+        setSize(sizeMod(DIALOG_WIDTH), sizeMod(DIALOG_HEIGHT));
+        initComponents();
+
+        jScrollPane2.setOpaque(false);
+        jScrollPane2.getViewport().setOpaque(false);
+        UIManager.put("ScrollBar.width", sizeMod(17)); // TODO: is it work?
+        jScrollPane2.getHorizontalScrollBar().setUI(new MageScrollbarUI());
+        jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
+    }
+
     public void show(AbilityPickerView choices, Point p) {
         this.choices = new ArrayList<>();
         this.selected = true; // to stop previous modal
@@ -100,7 +119,8 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         boolean wasCancelButton = false;
         for (Map.Entry<UUID, String> choice : choices.getChoices().entrySet()) {
             wasCancelButton = wasCancelButton || choice.getKey().equals(Modes.CHOOSE_OPTION_CANCEL_ID);
-            this.choices.add(new AbilityPickerAction(choice.getKey(), choice.getValue()));
+            String htmlText = CHOICE_PREFIX + ManaSymbols.replaceSymbolsWithHTML(CardUtil.getTextWithFirstCharUpperCase(choice.getValue()), ManaSymbols.Type.DIALOG);
+            this.choices.add(new AbilityPickerAction(choice.getKey(), htmlText));
         }
         if (!wasCancelButton) {
             this.choices.add(new AbilityPickerAction(null, "Cancel"));
@@ -119,7 +139,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         this.title.setText(this.message);
         setVisible(true);
 
-        MageDialog.makeWindowCentered(this, DIALOG_WIDTH, DIALOG_HEIGHT);
+        MageDialog.makeWindowCentered(this, this.getWidth(), this.getHeight());
         //startModal();
     }
 
@@ -132,7 +152,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         setBackgroundPainter(mwPanelPainter);
 
         title = new ColorPane();
-        title.setFont(new Font("Times New Roman", 1, 15));
+        title.setFont(new Font("Times New Roman", Font.BOLD, sizeMod(15)));
         title.setEditable(false);
         title.setFocusCycleRoot(false);
         title.setOpaque(false);
@@ -159,20 +179,21 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         rows.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         rows.setLayoutOrientation(JList.VERTICAL);
         rows.setMaximumSize(new Dimension(32767, 32767));
-        rows.setMinimumSize(new Dimension(67, 16));
+        rows.setMinimumSize(new Dimension(sizeMod(67), sizeMod(16)));
         rows.setOpaque(false);
 
         // mouse actions
         rows.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                if (SwingUtilities.isLeftMouseButton(evt)) {
+                if (SwingUtilities.isLeftMouseButton(evt) && !rows.isSelectionEmpty()) {
                     objectMouseClicked(evt);
                 }
             }
         });
+
         rows.setSelectedIndex(0);
-        rows.setFont(new Font("Times New Roman", 1, 17));
+        rows.setFont(new Font("Times New Roman", 1, sizeMod(17)));
         rows.setBorder(BorderFactory.createEmptyBorder());
         rows.addMouseWheelListener(this);
 
@@ -186,45 +207,43 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.LEADING).add(
                 GroupLayout.TRAILING,
                 layout.createSequentialGroup().addContainerGap().add(
-                        layout.createParallelGroup(GroupLayout.TRAILING).add(GroupLayout.LEADING, jScrollPane2, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE).add(GroupLayout.LEADING,
-                                layout.createSequentialGroup().add(title).addPreferredGap(LayoutStyle.RELATED, 5, Short.MAX_VALUE).add(1, 1, 1)).add(
+                        layout.createParallelGroup(GroupLayout.TRAILING).add(GroupLayout.LEADING, jScrollPane2, GroupLayout.DEFAULT_SIZE, sizeMod(422), Short.MAX_VALUE).add(GroupLayout.LEADING,
+                                layout.createSequentialGroup().add(title).addPreferredGap(LayoutStyle.RELATED, sizeMod(5), Short.MAX_VALUE).add(sizeMod(1), sizeMod(1), sizeMod(1))).add(
                                 GroupLayout.LEADING,
                                 layout.createSequentialGroup().add(layout.createParallelGroup(GroupLayout.LEADING)
-                                )
+                                        )
                                         .addPreferredGap(LayoutStyle.RELATED)
                                         .add(
                                                 layout.createParallelGroup(GroupLayout.TRAILING)
                                                         .add(
-                                                                GroupLayout.LEADING, layout.createParallelGroup(GroupLayout.LEADING))))).add(10, 10, 10)));
+                                                                GroupLayout.LEADING, layout.createParallelGroup(GroupLayout.LEADING))))).add(sizeMod(10), sizeMod(10), sizeMod(10))));
 
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.LEADING).add(
                 layout.createSequentialGroup().add(
-                        layout.createParallelGroup(GroupLayout.LEADING).add(
-                                layout.createSequentialGroup().add(title, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
-                                        .add(5, 5, 5)
-                                        .add(
-                                                layout.createParallelGroup(GroupLayout.BASELINE)
-                                        )
-                        ).add(layout.createSequentialGroup().add(8, 8, 8)))
+                                layout.createParallelGroup(GroupLayout.LEADING).add(
+                                        layout.createSequentialGroup().add(title, GroupLayout.PREFERRED_SIZE, sizeMod(72), GroupLayout.PREFERRED_SIZE)
+                                                .add(sizeMod(5), sizeMod(5), sizeMod(5))
+                                                .add(
+                                                        layout.createParallelGroup(GroupLayout.BASELINE)
+                                                )
+                                ).add(layout.createSequentialGroup().add(sizeMod(8), sizeMod(8), sizeMod(8))))
                         .addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(
-                        layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.LEADING)).addPreferredGap(
-                        LayoutStyle.RELATED).add(jScrollPane2, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE).addContainerGap(23, Short.MAX_VALUE)));
+                                layout.createParallelGroup(GroupLayout.BASELINE)).addPreferredGap(LayoutStyle.RELATED).add(layout.createParallelGroup(GroupLayout.LEADING)).addPreferredGap(
+                                LayoutStyle.RELATED).add(jScrollPane2, GroupLayout.PREFERRED_SIZE, sizeMod(180), GroupLayout.PREFERRED_SIZE).addContainerGap(sizeMod(23), Short.MAX_VALUE)));
     }
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        int notches = e.getWheelRotation();
-        int index = rows.getSelectedIndex();
-
-        if (notches < 0) {
-            if (index > 0) {
-                rows.setSelectedIndex(index - 1);
-                rows.repaint();
-            }
-        } else if (index < choices.size() - 1) {
-            rows.setSelectedIndex(index + 1);
-            rows.repaint();
+        int direction = e.getWheelRotation() < 0 ? -1 : +1;
+        int index = rows.getSelectedIndex() + direction;
+        if (index < 0) {
+            index = 0;
+        } else if (index >= choices.size()) {
+            index = choices.size() - 1;
         }
+
+        rows.setSelectedIndex(index);
+        rows.repaint();
     }
 
     private void objectMouseClicked(MouseEvent event) {
@@ -266,6 +285,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         private static final long serialVersionUID = 7689696087189956997L;
     }
 
+    @Deprecated // do not use modal for it (use PickChoice instead)
     private synchronized void startModal() {
         try {
             if (SwingUtilities.isEventDispatchThread()) {
@@ -310,43 +330,9 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                     wait();
                 }
             }
-        } catch (InterruptedException ignored) {
+        } catch (InterruptedException ignore) {
         }
 
-    }
-
-    public static void main(String[] argv) {
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception ex) {
-        }
-
-        JFrame jframe = new JFrame("Test");
-
-        List<Object> objectList = new ArrayList<>();
-        objectList.add("T: add {R}. 111111111111111111111111111");
-        objectList.add("T: add {B}. {this} deals 1 damage to you.");
-        objectList.add("{T}: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("T: add {B}");
-        objectList.add("Cancel");
-        AbilityPicker panel = new AbilityPicker(objectList, "Choose ability");
-        jframe.add(panel);
-        panel.show(objectList);
-        jframe.setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
-        jframe.setVisible(true);
     }
 
     public class AbilityPickerAction extends AbstractAction {
@@ -355,15 +341,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         public AbilityPickerAction(UUID id, String choice) {
             this.id = id;
-            putValue(Action.NAME, capitalizeFirstLetter(choice));
-        }
-
-        private String capitalizeFirstLetter(String choice) {
-            if (choice == null || choice.isEmpty()) {
-                return choice;
-            }
-            choice = Jsoup.parse(choice).text(); // decode HTML entities and strip tags
-            return choice.substring(0, 1).toUpperCase(Locale.ENGLISH) + choice.substring(1);
+            putValue(Action.NAME, choice);
         }
 
         @Override
@@ -447,7 +425,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         String need = choiceNumber + ".";
         for (Object obj : choices) {
             AbilityPickerAction action = (AbilityPickerAction) obj;
-            if (action.toString().startsWith(need)) {
+            if (action.toString().startsWith(CHOICE_PREFIX + need)) {
                 action.actionPerformed(null);
                 break;
             }
@@ -455,7 +433,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     }
 
     public void injectHotkeys(GamePanel panel, String commandsPrefix) {
-        // TODO: fix that GamePanel recive imput from any place, not only active (e.g. F9 works from lobby)
+        // TODO: fix that GamePanel receive input from any place, not only active (e.g. F9 works from lobby)
         int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
 
         // choice keys

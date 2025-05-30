@@ -43,7 +43,7 @@ public final class HeadstrongBrute extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // Headstrong Brute has menace as long as you control another Pirate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter), "{this} has menace as long as you control another Pirate")));
     }

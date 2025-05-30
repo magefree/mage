@@ -40,7 +40,7 @@ public final class NoviceKnight extends CardImpl {
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 EnchantedOrEquippedSourceCondition.instance);
         effect.setText("As long as {this} is enchanted or equipped, it can attack as though it didn't have defender");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private NoviceKnight(final NoviceKnight card) {
@@ -59,10 +59,10 @@ enum EnchantedOrEquippedSourceCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
-                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                Permanent attached = game.getPermanent(uuid);
                 if (attached != null
                         && (attached.isEnchantment(game)
                         || attached.hasSubtype(SubType.EQUIPMENT, game))) {

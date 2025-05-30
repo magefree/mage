@@ -32,7 +32,7 @@ public final class AngrathsMarauders extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngrathsMaraudersEffect()));
+        this.addAbility(new SimpleStaticAbility(new AngrathsMaraudersEffect()));
     }
 
     private AngrathsMarauders(final AngrathsMarauders card) {

@@ -7,7 +7,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -31,12 +31,12 @@ public final class CalciformPools extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {T}: Put a storage counter on Calciform Pools.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                new AddManaInAnyCombinationEffect(RemovedCountersForCostValue.instance,
+                new AddManaInAnyCombinationEffect(GetXValue.instance,
                         new CountersSourceCount(CounterType.STORAGE), ColoredManaSymbol.W, ColoredManaSymbol.U),
                 new GenericManaCost(1));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE));

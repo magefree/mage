@@ -10,7 +10,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.awt.*;
 
 /**
- * GUI: global window message with additional action to choose (example: close the app)
+ * App GUI: global window message with additional action to choose (example: close the app)
  * Can be used in any places (in games, in app, etc)
  *
  * @author BetaSteward_at_googlemail.com
@@ -19,16 +19,13 @@ public class UserRequestDialog extends MageDialog {
 
     private UserRequestMessage userRequestMessage;
 
-    /**
-     * Creates new form AskDialog
-     */
     public UserRequestDialog() {
         initComponents();
         setGUISize();
     }
 
     private void setGUISize() {
-        Font font = GUISizeHelper.gameRequestsFont;
+        Font font = GUISizeHelper.dialogFont;
         lblText.setFont(font);
         lblText.setMaximumSize(new Dimension(300 + font.getSize() * 15, 200 + font.getSize() * 5));
         lblText.setMinimumSize(new Dimension(300 + font.getSize() * 15, 20 + font.getSize() * 5));

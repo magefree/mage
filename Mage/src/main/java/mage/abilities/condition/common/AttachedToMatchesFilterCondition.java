@@ -26,9 +26,9 @@ public class AttachedToMatchesFilterCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.getAttachedTo() != null) {
-            Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
+            Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
             if (attachedTo == null) {
                 attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
             }

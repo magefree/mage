@@ -32,7 +32,7 @@ public final class TelJiladStylus extends CardImpl {
 
         // {T}: Put target permanent you own on the bottom of your library.
         Effect effect = new PutOnLibraryTargetEffect(false,"put target permanent you own on the bottom of your library");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

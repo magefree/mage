@@ -38,7 +38,7 @@ public final class DreamDevourer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by 2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DreamDevourerAddAbilityEffect()));
+        this.addAbility(new SimpleStaticAbility(new DreamDevourerAddAbilityEffect()));
 
         // Whenever you foretell a card, Dream Devourer gets +2/+0 until end of turn.
         this.addAbility(new ForetellSourceControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)));
@@ -103,9 +103,9 @@ class DreamDevourerAddAbilityEffect extends ContinuousEffectImpl {
                         foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
                     }
                 }
-            } else if (card instanceof AdventureCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 String creatureCost = CardUtil.reduceCost(card.getMainCard().getManaCost(), 2).getText();
-                String spellCost = CardUtil.reduceCost(((AdventureCard) card).getSpellCard().getManaCost(), 2).getText();
+                String spellCost = CardUtil.reduceCost(((CardWithSpellOption) card).getSpellCard().getManaCost(), 2).getText();
                 foretellAbility = new ForetellAbility(card, creatureCost, spellCost);
             } else {
                 String costText = CardUtil.reduceCost(card.getManaCost(), 2).getText();

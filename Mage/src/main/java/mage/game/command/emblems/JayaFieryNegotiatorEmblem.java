@@ -5,6 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -26,8 +28,8 @@ public final class JayaFieryNegotiatorEmblem extends Emblem {
     // −8: You get an emblem with "Whenever you cast a red instant or sorcery spell, copy it twice. You may choose new targets for the copies."
     public JayaFieryNegotiatorEmblem() {
         super("Emblem Jaya");
-        this.getAbilities().add(new SpellCastControllerTriggeredAbility(
-                new JayaFieryNegotiatorEmblemEffect(), filter, false
+        this.getAbilities().add(new SpellCastControllerTriggeredAbility(Zone.COMMAND,
+                new JayaFieryNegotiatorEmblemEffect(), filter, false, SetTargetPointer.NONE
         ));
     }
 

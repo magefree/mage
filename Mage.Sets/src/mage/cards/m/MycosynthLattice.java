@@ -29,13 +29,13 @@ public final class MycosynthLattice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // All permanents are artifacts in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PermanentsAreArtifactsEffect()));
+        this.addAbility(new SimpleStaticAbility(new PermanentsAreArtifactsEffect()));
 
         // All cards that aren't on the battlefield, spells, and permanents are colorless.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EverythingIsColorlessEffect()));
+        this.addAbility(new SimpleStaticAbility(new EverythingIsColorlessEffect()));
 
         // Players may spend mana as though it were mana of any color.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaCanBeSpentAsAnyColorEffect());
+        Ability ability = new SimpleStaticAbility(new ManaCanBeSpentAsAnyColorEffect());
         ability.addHint(new StaticHint("(XMage hint: You can use floating mana by clicking on the related symbol of the needed mana type in your mana pool player area.)"));
         this.addAbility(ability);
     }

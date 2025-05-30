@@ -27,7 +27,7 @@ public final class GhostflameSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Slivers are colorless.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostflameSliverEffect()));
+        this.addAbility(new SimpleStaticAbility(new GhostflameSliverEffect()));
     }
 
     private GhostflameSliver(final GhostflameSliver card) {

@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -37,12 +37,12 @@ public final class SpiritMirror extends CardImpl {
 
         // At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, create a 2/2 white Reflection creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new ReflectionToken()), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new ReflectionToken())),
                 new PermanentsOnTheBattlefieldCondition(filterToken, ComparisonType.EQUAL_TO, 0, false),
                 "At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, create a 2/2 white Reflection creature token."));
 
         // {0}: Destroy target Reflection.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(0));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

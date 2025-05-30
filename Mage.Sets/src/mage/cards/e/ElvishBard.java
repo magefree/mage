@@ -27,7 +27,7 @@ public final class ElvishBard extends CardImpl {
         this.toughness = new MageInt(4);
 
         // All creatures able to block Elvish Bard do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAllSourceEffect()));
     }
 
     private ElvishBard(final ElvishBard card) {

@@ -27,7 +27,7 @@ public final class HomicideInvestigator extends CardImpl {
         // Whenever one or more nontoken creatures you control die, investigate. This ability triggers only once each turn.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new InvestigateEffect(), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN
-        ).setTriggerPhrase("Whenever one or more nontoken creatures you control die, ").setTriggersOnceEachTurn(true));
+        ).setTriggerPhrase("Whenever one or more nontoken creatures you control die, ").setTriggersLimitEachTurn(1));
     }
 
     private HomicideInvestigator(final HomicideInvestigator card) {

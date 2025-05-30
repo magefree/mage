@@ -30,14 +30,13 @@ public final class KnowledgeVault extends CardImpl {
 
         // {2}, {T}: Exile the top card of your library face down.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ExileCardsFromTopOfLibraryControllerEffect(1, true, true),
                 new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {0}: Sacrifice Knowledge Vault. If you do, discard your hand, then put all cards exiled with Knowledge Vault into their owner’s hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnowledgeVaultReturnEffect(), new GenericManaCost(0)));
+        this.addAbility(new SimpleActivatedAbility(new KnowledgeVaultReturnEffect(), new GenericManaCost(0)));
 
         // When Knowledge Vault leaves the battlefield, put all cards exiled with Knowledge Vault into their owner’s graveyard.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(

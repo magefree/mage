@@ -1,9 +1,8 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -13,16 +12,14 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Smokestack extends CardImpl {
@@ -31,10 +28,10 @@ public final class Smokestack extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of your upkeep, you may put a soot counter on Smokestack.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SOOT.createInstance()), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SOOT.createInstance()), true));
 
         // At the beginning of each player's upkeep, that player sacrifices a permanent for each soot counter on Smokestack.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SmokestackEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new SmokestackEffect(), false));
     }
 
     private Smokestack(final Smokestack card) {
@@ -75,7 +72,7 @@ class SmokestackEffect extends OneShotEffect {
                 //A spell or ability could have removed the only legal target this player
                 //had, if thats the case this ability should fizzle.
                 if (target.canChoose(activePlayer.getId(), source, game)) {
-                    while (!target.isChosen() && target.canChoose(activePlayer.getId(), source, game) && activePlayer.canRespond()) {
+                    while (!target.isChosen(game) && target.canChoose(activePlayer.getId(), source, game) && activePlayer.canRespond()) {
                         activePlayer.choose(Outcome.Sacrifice, target, source, game);
                     }
 

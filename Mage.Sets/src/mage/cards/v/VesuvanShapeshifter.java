@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsTurnedFaceUpEffect;
@@ -41,7 +41,7 @@ public final class VesuvanShapeshifter extends CardImpl {
         // As Vesuvan Shapeshifter turned face up, may choose another creature. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
         Ability ability = new SimpleStaticAbility(new AsTurnedFaceUpEffect(
                 new VesuvanShapeshifterEffect(), false
-        ).setText("As {this} enters the battlefield or is turned face up, " +
+        ).setText("As {this} enters or is turned face up, " +
                 "you may choose another creature on the battlefield. If you do, " +
                 "until {this} is turned face down, it becomes a copy of that creature, " +
                 "except it has \"At the beginning of your upkeep, you may turn this creature face down.\"")
@@ -76,7 +76,7 @@ class VesuvanShapeShifterFaceUpCopyApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
-                new VesuvanShapeshifterFaceDownEffect(), TargetController.YOU, true
+                new VesuvanShapeshifterFaceDownEffect(), true
         ));
         return true;
     }
@@ -114,7 +114,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
                 if (copyFromCreature != null) {
                     game.copyPermanent(Duration.Custom, copyFromCreature, copyToCreature.getId(), source, new VesuvanShapeShifterFaceUpCopyApplier());
                     source.getTargets().clear();
-                    game.getState().processAction(game); // needed to get effects ready if copy happens in replacment and the copied abilities react of the same event (e.g. turn face up)
+                    game.processAction(); // needed to get effects ready if copy happens in replacement and the copied abilities react of the same event (e.g. turn face up)
                     return true;
                 }
             }
@@ -162,6 +162,7 @@ class VesuvanShapeshifterFaceDownEffect extends OneShotEffect {
         permanent.turnFaceDown(source, game, source.getControllerId());
         permanent.setManifested(false);
         permanent.setDisguised(false);
+        permanent.setCloaked(false);
         permanent.setMorphed(true); // cause it morph card TODO: smells bad
         return permanent.isFaceDown(game);
 

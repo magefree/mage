@@ -1,5 +1,6 @@
 package mage.cards.f;
 
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -25,23 +26,22 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class FiresOfMountDoom extends CardImpl {
 
     public FiresOfMountDoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
 
         // When Fires of Mount Doom enters the battlefield, it deals 2 damage to target creature
         // an opponent controls. Destroy all Equipment attached to that creature.
         TriggeredAbility trigger = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2));
         trigger.addEffect(
-            new DestroyAllAttachedToTargetEffect(
-                StaticFilters.FILTER_PERMANENT_EQUIPMENT,
-                "that creature")
+                new DestroyAllAttachedToTargetEffect(
+                        StaticFilters.FILTER_PERMANENT_EQUIPMENT,
+                        "that creature")
         );
         trigger.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(trigger);
@@ -49,9 +49,9 @@ public final class FiresOfMountDoom extends CardImpl {
         // {2}{R}: Exile the top card of your library. You may play that card this turn.
         // When you play a card this way, Fires of Mount Doom deals 2 damage to each player.
         this.addAbility(new SimpleActivatedAbility(
-            Zone.BATTLEFIELD,
-            new FiresOfMountDoomEffect(),
-            new ManaCostsImpl<>("{2}{R}")));
+                new FiresOfMountDoomEffect(),
+                new ManaCostsImpl<>("{2}{R}")
+        ).setIdentifier(MageIdentifier.FiresOfMountDoomAlternateCast));
     }
 
     private FiresOfMountDoom(final FiresOfMountDoom card) {
@@ -69,7 +69,7 @@ class FiresOfMountDoomEffect extends OneShotEffect {
     FiresOfMountDoomEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile the top card of your library. You may play that card this turn. " +
-            "When you play a card this way, Fires of Mount Doom deals 2 damage to each player";
+                "When you play a card this way, {this} deals 2 damage to each player";
     }
 
     private FiresOfMountDoomEffect(final FiresOfMountDoomEffect effect) {
@@ -85,7 +85,7 @@ class FiresOfMountDoomEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
-        if(controller == null || sourceObject == null){
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
@@ -95,25 +95,15 @@ class FiresOfMountDoomEffect extends OneShotEffect {
         }
 
         controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
-        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         game.addDelayedTriggeredAbility(new FiresOfMountDoomDelayedTriggeredAbility(card.getId()), source);
         return true;
     }
 }
 
-// TODO: this is not quite right in corner cases.
-//       Inspired by Havengul Lich which I feel has similar problems.
-//       For instance what if the card is [[Squee, the Immortal]] and
-//       is cast with squee AsThought.
-//       Or if the card is played with the AsThought, then replayed
-//       during the same turn. With current code, that would trigger
-//       incorrectly again.
-//       Is mor the solution there? Or having a way to get the specific
-//       used AsThought and having a way to identify that it was the
-//       same one as the FiresOfMountDoomEffect makeCardPlayable.
 class FiresOfMountDoomDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    private UUID cardId;
+    private final UUID cardId;
 
     public FiresOfMountDoomDelayedTriggeredAbility(UUID cardId) {
         super(new DamagePlayersEffect(2, TargetController.ANY), Duration.EndOfTurn);
@@ -129,11 +119,14 @@ class FiresOfMountDoomDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkEventType(GameEvent event, Game game) {
         GameEvent.EventType type = event.getType();
         return type == GameEvent.EventType.PLAY_LAND
-            || type == GameEvent.EventType.SPELL_CAST;
+                || type == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.hasApprovingIdentifier(MageIdentifier.FiresOfMountDoomAlternateCast)){
+            return false;
+        }
         return event.getSourceId().equals(cardId);
     }
 

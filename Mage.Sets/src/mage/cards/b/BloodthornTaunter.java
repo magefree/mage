@@ -34,7 +34,7 @@ public final class BloodthornTaunter extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(HasteAbility.getInstance());
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));

@@ -42,7 +42,7 @@ public final class TinWingChimera extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice Tin-Wing Chimera: Put a +2/+2 counter on target Chimera creature. It gains flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield)
                 .setText("It gains flying. <i>(This effect lasts indefinitely.)</i>"));
         ability.addTarget(new TargetCreaturePermanent(filter));

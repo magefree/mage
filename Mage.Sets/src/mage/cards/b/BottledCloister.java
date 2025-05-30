@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,12 +28,12 @@ public final class BottledCloister extends CardImpl {
 
         // At the beginning of each opponent's upkeep, exile all cards from your hand face down.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new BottledCloisterExileEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new BottledCloisterExileEffect(), false
         ));
 
         // At the beginning of your upkeep, return all cards you own exiled with Bottled Cloister to your hand, then draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new BottledCloisterReturnEffect(), TargetController.YOU, false
+                new BottledCloisterReturnEffect()
         ));
     }
 

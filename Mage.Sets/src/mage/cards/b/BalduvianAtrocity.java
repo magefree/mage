@@ -24,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -55,7 +56,7 @@ public final class BalduvianAtrocity extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BalduvianAtrocityEffect()),
                 KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains haste. Sacrifice it at the beginning of the next end step."
+                "When {this} enters, if it was kicked, return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains haste. Sacrifice it at the beginning of the next end step."
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
@@ -98,7 +99,7 @@ class BalduvianAtrocityEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

@@ -1,7 +1,7 @@
 package org.mage.test.cards.copy;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.SetTargetPointer;
@@ -21,7 +21,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCustomCardWithAbility(
                 "Forker", playerA,
                 new SpellCastControllerTriggeredAbility(
-                        new CopyTargetSpellEffect(true),
+                        new CopyTargetStackObjectEffect(true),
                         StaticFilters.FILTER_SPELL, false,
                         SetTargetPointer.SPELL
                 )

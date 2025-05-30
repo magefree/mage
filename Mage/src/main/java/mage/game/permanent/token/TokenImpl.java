@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.repository.TokenInfo;
@@ -160,7 +161,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         // - use random set code
         // - use default set code
 
-        // token from a card - must use card image instead (example: Embalm ability)
+        // token from a card - must use card image instead, no need to choose new image (example: Embalm ability, copy of card, etc)
         if (!token.getCardNumber().isEmpty()) {
             return new TokenInfo(TokenType.TOKEN, token.getName(), token.getExpansionSetCode(), 0);
         }
@@ -218,8 +219,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, true);
     }
 
-    @Override
     public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, created, Collections.singletonList(this));
+    }
+
+    @Override
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created, List<Token> tokens) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
@@ -229,7 +234,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         lastAddedTokenIds.clear();
 
-        CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, this);
+        if (tokens == null || tokens.get(0) != this) {
+            throw new IllegalArgumentException("Wrong code usage. token.putOntoBattlefield parameter tokens must be initialized to a list of all tokens to be made, with the first element being the token you are calling putOntoBattlefield() on.");
+        }
+
+        CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, tokens);
         if (!created || !game.replaceEvent(event)) {
             int currentTokens = game.getBattlefield().countTokens(event.getPlayerId());
             int tokenSlots = Math.max(MAX_TOKENS_PER_GAME - currentTokens, 0);
@@ -292,13 +301,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             // front side
             TokenInfo tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token, game, source == null ? null : source.getSourceId());
             token.setExpansionSetCode(tokenInfo.getSetCode());
-            //token.setCardNumber(""); // if token from a card then don't change a card number
             token.setImageNumber(tokenInfo.getImageNumber());
+            // if token from a card then keep card number and var art info
+            //token.setCardNumber("");
+            //token.setUsesVariousArt(false);
             if (token.getBackFace() != null) {
                 // back side
                 tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token.getBackFace(), game, source == null ? null : source.getSourceId());
                 token.getBackFace().setExpansionSetCode(tokenInfo.getSetCode());
                 token.getBackFace().setImageNumber(tokenInfo.getImageNumber());
+                //token.setCardNumber("");
+                //token.setUsesVariousArt(false);
             }
 
             List<Permanent> needTokens = new ArrayList<>();
@@ -426,7 +439,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 // end of messy target-groping code to handle auras
 
                 // this section is for tokens created attached to a specific known object
-                if (permanentAttachedTo != null) {
+                boolean isBestow = permanent.getAbilities().stream()
+                        .anyMatch(ability -> ability instanceof BestowAbility);
+                if (permanentAttachedTo != null && !isBestow) {
                     if (permanent.hasSubtype(SubType.AURA, game)) {
                         permanent.getAbilities().get(0).getTargets().get(0).add(permanentAttachedTo.getId(), game);
                         permanent.getAbilities().get(0).getEffects().get(0).apply(game, permanent.getAbilities().get(0));
@@ -450,7 +465,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         CreatedTokensEvent.addEvents(allAddedTokens, source, game);
 
-        game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
+        game.applyEffects(); // without LKI reset
     }
 
     @Override

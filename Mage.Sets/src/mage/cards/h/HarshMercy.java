@@ -66,18 +66,14 @@ class HarshMercyEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         if (controller != null && sourceObject != null) {
             Set<String> chosenTypes = new HashSet<>();
-            PlayerIteration:
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                Choice typeChoice = new ChoiceCreatureType(sourceObject);
+                Choice typeChoice = new ChoiceCreatureType(game, source);
                 if (player != null && !player.choose(Outcome.DestroyPermanent, typeChoice, game)) {
-                    continue PlayerIteration;
+                    continue;
                 }
-                String chosenType = typeChoice.getChoice();
-                if (chosenType != null) {
-                    game.informPlayers(sourceObject.getIdName() + ": " + player.getLogName() + " has chosen " + chosenType);
-                    chosenTypes.add(chosenType);
-                }
+                game.informPlayers(sourceObject.getIdName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+                chosenTypes.add(typeChoice.getChoiceKey());
             }
 
             FilterPermanent filter = new FilterCreaturePermanent("creatures");

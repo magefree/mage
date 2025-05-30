@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -31,7 +31,7 @@ public final class RiskyMove extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}{R}");
 
         // At the beginning of each player's upkeep, that player gains control of Risky Move.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RiskyMoveGetControlEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new RiskyMoveGetControlEffect(), false));
 
         // When you gain control of Risky Move from another player, choose a creature you control and an opponent. Flip a coin. If you lose the flip, that opponent gains control of that creature.
         this.addAbility(new RiskyMoveTriggeredAbility());
@@ -147,14 +147,14 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
             Target target2 = new TargetOpponent(true);
 
             if (target1.canChoose(controller.getId(), source, game)) {
-                while (!target1.isChosen()
+                while (!target1.isChosen(game)
                         && target1.canChoose(controller.getId(), source, game)
                         && controller.canRespond()) {
                     controller.chooseTarget(outcome, target1, source, game);
                 }
             }
             if (target2.canChoose(controller.getId(), source, game)) {
-                while (!target2.isChosen()
+                while (!target2.isChosen(game)
                         && target2.canChoose(controller.getId(), source, game)
                         && controller.canRespond()) {
                     controller.chooseTarget(outcome, target2, source, game);

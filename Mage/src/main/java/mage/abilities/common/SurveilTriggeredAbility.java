@@ -17,7 +17,7 @@ public class SurveilTriggeredAbility extends TriggeredAbilityImpl {
 
     public SurveilTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect);
-        setTriggerPhrase("Whenever you surveil, " + (zone == Zone.GRAVEYARD ? "if {this} is in your graveyard, " : ""));
+        setTriggerPhrase("Whenever you surveil, ");
     }
 
     private SurveilTriggeredAbility(final SurveilTriggeredAbility ability) {

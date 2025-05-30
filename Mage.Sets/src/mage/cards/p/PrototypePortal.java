@@ -4,11 +4,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.costadjusters.ImprintedManaValueXCostAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -42,10 +39,10 @@ public final class PrototypePortal extends CardImpl {
                 .setAbilityWord(AbilityWord.IMPRINT)
         );
 
-        // {X}, {tap}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
+        // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
         Ability ability = new SimpleActivatedAbility(new PrototypePortalCreateTokenEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
-        ability.setCostAdjuster(PrototypePortalAdjuster.instance);
+        ability.setCostAdjuster(ImprintedManaValueXCostAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -56,31 +53,6 @@ public final class PrototypePortal extends CardImpl {
     @Override
     public PrototypePortal copy() {
         return new PrototypePortal(this);
-    }
-}
-
-enum PrototypePortalAdjuster implements CostAdjuster {
-    instance;
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Permanent card = game.getPermanent(ability.getSourceId());
-        if (card != null) {
-            if (!card.getImprinted().isEmpty()) {
-                Card imprinted = game.getCard(card.getImprinted().get(0));
-                if (imprinted != null) {
-                    ability.clearManaCostsToPay();
-                    ability.addManaCostsToPay(new GenericManaCost(imprinted.getManaValue()));
-                }
-            }
-        }
-
-        // no {X} anymore as we already have imprinted the card with defined manacost
-        for (ManaCost cost : ability.getManaCostsToPay()) {
-            if (cost instanceof VariableCost) {
-                cost.setPaid();
-            }
-        }
     }
 }
 

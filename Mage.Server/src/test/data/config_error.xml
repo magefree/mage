@@ -32,7 +32,7 @@
     />
     <playerTypes>
         <playerType name="Human" jar="mage-player-human.jar" className="mage.player.human.HumanPlayer"/>
-        <playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer7"/>
+        <playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayerControllableProxy"/>
         <playerType name="Computer - monte carlo" jar="mage-player-aimcts.jar" className="mage.player.ai.ComputerPlayerMCTS"/>
         <playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
     </playerTypes>
@@ -61,13 +61,13 @@
         <tournamentType name="Booster Draft Elimination" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationCubeTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Random)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RandomBoosterDraftEliminationTournament" typeName="mage.tournament.RandomBoosterDraftEliminationTournamentType"/>
-        <tournamentType name="Booster Draft Elimination (Remixed)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RemixedBoosterDraftEliminationTournament" typeName="mage.tournament.RemixedBoosterDraftEliminationTournamentType"/>
+        <tournamentType name="Booster Draft Elimination (Reshuffled)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.ReshuffledBoosterDraftEliminationTournament" typeName="mage.tournament.ReshuffledBoosterDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Rich Man)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManDraftEliminationTournament" typeName="mage.tournament.RichManDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Rich Man Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManCubeDraftEliminationTournament" typeName="mage.tournament.RichManCubeDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Swiss" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissCubeTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Random)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RandomBoosterDraftSwissTournament" typeName="mage.tournament.RandomBoosterDraftSwissTournamentType"/>
-        <tournamentType name="Booster Draft Swiss (Remixed)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RemixedBoosterDraftSwissTournament" typeName="mage.tournament.RemixedBoosterDraftSwissTournamentType"/>
+        <tournamentType name="Booster Draft Swiss (Reshuffled)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.ReshuffledBoosterDraftSwissTournament" typeName="mage.tournament.ReshuffledBoosterDraftSwissTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Rich Man)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManDraftSwissTournament" typeName="mage.tournament.RichManDraftSwissTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Rich Man Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManCubeDraftSwissTournament" typeName="mage.tournament.RichManCubeDraftSwissTournamentType"/>
         <tournamentType name="Sealed Elimination" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>

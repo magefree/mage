@@ -35,13 +35,13 @@ public final class GaeasEmbrace extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +3/+3 and has trample.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, 3));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has trample");
         ability.addEffect(effect);
         this.addAbility(ability);
         // {G}: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ColoredManaCost(ColoredManaSymbol.G)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateAttachedEffect(AttachmentType.AURA), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
     private GaeasEmbrace(final GaeasEmbrace card) {

@@ -33,7 +33,7 @@ public final class TreeOfPerdition extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {tap}: Exchange target opponent's life total with Tree of Perdition's toughness.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TreeOfPerditionEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TreeOfPerditionEffect(), new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

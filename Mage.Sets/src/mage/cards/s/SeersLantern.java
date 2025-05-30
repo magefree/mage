@@ -26,7 +26,7 @@ public final class SeersLantern extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {T}: Scry 1.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

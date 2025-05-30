@@ -29,7 +29,7 @@ public final class KavuRecluse extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Target land becomes a Forest until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.FOREST), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.FOREST), new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

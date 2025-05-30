@@ -27,10 +27,10 @@ public final class RatchetBomb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         
         // {T}: Put a charge counter on Ratchet Bomb.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
         
         // {T}, Sacrifice Ratchet Bomb: Destroy each nonland permanent with a converted mana cost equal to the number of charge counters on Ratchet Bomb.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RatchetBombEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new RatchetBombEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -59,7 +59,7 @@ class RatchetBombEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent p = game.getPermanent(source.getSourceId());
         if (p == null) {
             p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (p == null) {

@@ -2,6 +2,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.common.*;
@@ -15,9 +16,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BlueBirdToken;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -62,9 +65,9 @@ public final class TheRavensWarning extends CardImpl {
     }
 }
 
-class TheRavensWarningTriggeredAbility extends DelayedTriggeredAbility {
+class TheRavensWarningTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
-    public TheRavensWarningTriggeredAbility() {
+    TheRavensWarningTriggeredAbility() {
         super(new LookAtTargetPlayerHandEffect(), Duration.EndOfTurn, false);
         this.addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -78,30 +81,30 @@ class TheRavensWarningTriggeredAbility extends DelayedTriggeredAbility {
         return new TheRavensWarningTriggeredAbility(this);
     }
 
-    // Code based on ControlledCreaturesDealCombatDamagePlayerTriggeredAbility
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
+    public boolean checkEvent(DamagedPlayerEvent event, Game game) {
+        if (!event.isCombatDamage()) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return permanent != null
+                && permanent.isCreature(game)
+                && permanent.isControlledBy(getControllerId())
+                && permanent.hasAbility(FlyingAbility.getInstance(), game);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-
-        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-
-        int flyingDamage = dEvent.getEvents()
-                .stream()
-                .filter(ev -> {
-                    if (!ev.getSourceId().equals(controllerId)) {
-                        return false;
-                    }
-                    Permanent permanent = game.getPermanentOrLKIBattlefield(ev.getSourceId());
-                    return permanent != null && permanent.isCreature() && permanent.hasAbility(FlyingAbility.getInstance(), game);
-                })
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-
-        return flyingDamage > 0 && dEvent.isCombatDamage();
+        if (getFilteredEvents((DamagedBatchForOnePlayerEvent) event, game).isEmpty()) {
+            return false;
+        }
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+        return true;
     }
 
     @Override

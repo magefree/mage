@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -35,8 +34,7 @@ public final class StormChargedSlasher extends CardImpl {
         // At the beginning of combat on your turn, target creature you control gets +2/+0 and gains trample and haste until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 0)
-                        .setText("target creature you control gets +2/+0"),
-                TargetController.YOU, false
+                        .setText("target creature you control gets +2/+0")
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn

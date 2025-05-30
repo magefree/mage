@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -17,11 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceCreatureType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,15 +25,16 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class CallousOppressor extends CardImpl {
 
     public CallousOppressor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
@@ -53,7 +49,7 @@ public final class CallousOppressor extends CardImpl {
                 new GainControlTargetEffect(Duration.OneUse),
                 SourceTappedCondition.TAPPED,
                 "Gain control of target creature for as long as {this} remains tapped");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new CallousOppressorFilter()));
         this.addAbility(ability);
     }
@@ -118,7 +114,7 @@ class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {
         if (controller != null) {
             TargetOpponent target = new TargetOpponent(true);
             if (target.canChoose(controller.getId(), source, game)) {
-                while (!target.isChosen() && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
+                while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
                     controller.chooseTarget(outcome, target, source, game);
                 }
             } else {
@@ -126,20 +122,19 @@ class CallousOppressorChooseCreatureTypeEffect extends OneShotEffect {
             }
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null && mageObject != null) {
-                Choice typeChoice = new ChoiceCreatureType(mageObject);
-                typeChoice.setMessage("Choose creature type");
+                Choice typeChoice = new ChoiceCreatureType(game, source);
                 if (!opponent.choose(outcome, typeChoice, game)) {
                     return false;
                 }
-                if (typeChoice.getChoice() == null) {
+                if (typeChoice.getChoiceKey() == null) {
                     return false;
                 }
                 if (!game.isSimulation()) {
-                    game.informPlayers(mageObject.getName() + ": " + opponent.getLogName() + " has chosen " + typeChoice.getChoice());
+                    game.informPlayers(mageObject.getName() + ": " + opponent.getLogName() + " has chosen " + typeChoice.getChoiceKey());
                 }
-                game.getState().setValue(mageObject.getId() + "_type", SubType.byDescription(typeChoice.getChoice()));
+                game.getState().setValue(mageObject.getId() + "_type", SubType.byDescription(typeChoice.getChoiceKey()));
                 if (mageObject instanceof Permanent) {
-                    ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
+                    ((Permanent) mageObject).addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoiceKey()), game);
                 }
                 return true;
             }

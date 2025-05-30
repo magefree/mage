@@ -54,7 +54,7 @@ public final class RankleAndTorbran extends CardImpl {
         ability.getModes().setMaxModes(3);
 
         // * Each player sacrifices a creature.
-        ability.addMode(new Mode(new SacrificeAllEffect(1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addMode(new Mode(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE)));
 
         // * If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.
         ability.addMode(new Mode(new RankleAndTorbranEffect()));

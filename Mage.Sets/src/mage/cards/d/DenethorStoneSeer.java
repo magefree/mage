@@ -38,7 +38,7 @@ public final class DenethorStoneSeer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2)));
 
         // {3}{R}, {T}, Sacrifice Denethor: Target player becomes the monarch. Denethor deals 3 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DenethorStoneSeerEffect(),
                 new ManaCostsImpl<>("{3}{R}")
         );

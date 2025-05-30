@@ -9,7 +9,7 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -40,15 +40,15 @@ public final class IndrikUmbra extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +4/+4 and has first strike, and all creatures able to block it do so.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)
                 .setText("and has first strike"));
         ability.addEffect(new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA)
                 .setText(", and all creatures able to block it do so"));
         this.addAbility(ability);
 
-        // Totem armor
-        this.addAbility(new TotemArmorAbility());
+        // Umbra armor
+        this.addAbility(new UmbraArmorAbility());
     }
 
     private IndrikUmbra(final IndrikUmbra card) {

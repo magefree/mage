@@ -36,7 +36,7 @@ public final class HarshJudgment extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // If an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HarshJudgmentEffect()));
+        this.addAbility(new SimpleStaticAbility(new HarshJudgmentEffect()));
     }
 
     private HarshJudgment(final HarshJudgment card) {

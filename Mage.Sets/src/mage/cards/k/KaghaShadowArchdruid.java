@@ -54,7 +54,7 @@ public final class KaghaShadowArchdruid extends CardImpl {
         this.addAbility(ability);
 
         // Once during each of your turns, you may play a land or cast a permanent spell from among cards in your graveyard that were put there from your library this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KaghaShadowArchdruidEffect())
+        this.addAbility(new SimpleStaticAbility(new KaghaShadowArchdruidEffect())
             .setIdentifier(MageIdentifier.KaghaShadowArchdruidWatcher),
             new KaghaShadowArchdruidWatcher());
     }
@@ -123,7 +123,7 @@ class KaghaShadowArchdruidWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if ((GameEvent.EventType.SPELL_CAST.equals(event.getType()) || GameEvent.EventType.LAND_PLAYED.equals(event.getType()))
                 && event.hasApprovingIdentifier(MageIdentifier.KaghaShadowArchdruidWatcher)) {
-            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            usedFrom.add(event.getApprovingObject().getApprovingMageObjectReference());
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;

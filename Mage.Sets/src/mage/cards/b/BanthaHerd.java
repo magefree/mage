@@ -1,21 +1,18 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.GetMonstrosityXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
 import mage.game.permanent.token.TuskenRaiderToken;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +30,7 @@ public final class BanthaHerd extends CardImpl {
         this.addAbility(new MonstrosityAbility("{X}{W}{W}", Integer.MAX_VALUE));
 
         // When Batha Herd becomes monstrous, create X 1/1 white Tusken Raider tokens.
-        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new BathaHerdEffect()));
+        this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new CreateTokenEffect(new TuskenRaiderToken(), GetMonstrosityXValue.instance)));
     }
 
     private BanthaHerd(final BanthaHerd card) {
@@ -43,34 +40,5 @@ public final class BanthaHerd extends CardImpl {
     @Override
     public BanthaHerd copy() {
         return new BanthaHerd(this);
-    }
-}
-
-class BathaHerdEffect extends OneShotEffect {
-
-    BathaHerdEffect() {
-        super(Outcome.PutCreatureInPlay);
-        this.staticText = "create X 1/1 white Tusken Raider tokens";
-    }
-
-    private BathaHerdEffect(final BathaHerdEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BathaHerdEffect copy() {
-        return new BathaHerdEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        int xValue = ((BecomesMonstrousSourceTriggeredAbility) source).getMonstrosityValue();
-
-        return new CreateTokenEffect(new TuskenRaiderToken(), xValue).apply(game, source);
     }
 }

@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,7 +35,7 @@ public final class GabrielAngelfire extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. Gabriel Angelfire gains that ability until your next upkeep.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GabrielAngelfireGainAbilityEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GabrielAngelfireGainAbilityEffect()));
     }
 
     private GabrielAngelfire(final GabrielAngelfire card) {

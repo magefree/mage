@@ -35,7 +35,7 @@ public final class LazavFamiliarStranger extends CardImpl {
         // Whenever you commit a crime, put a +1/+1 counter on Lazav, Familiar Stranger. Then you may exile a card from a graveyard. If a creature card was exiled this way, you may have Lazav become a copy of that card until end of turn. This ability triggers only once each turn.
         Ability ability = new CommittedCrimeTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-        ).setTriggersOnceEachTurn(true);
+        ).setTriggersLimitEachTurn(1);
         ability.addEffect(new LazavFamiliarStrangerEffect());
         this.addAbility(ability);
     }

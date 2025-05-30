@@ -1,15 +1,10 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -17,6 +12,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,7 +25,6 @@ import mage.constants.CardType;
 public final class FaerieBladecrafter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.FAERIE, "Faeries");
-    private static final DynamicValue count = new SourcePermanentPowerCount();
 
     public FaerieBladecrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -39,11 +38,11 @@ public final class FaerieBladecrafter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever one or more Faeries you control deal combat damage to a player, put a +1/+1 counter on Faerie Bladecrafter.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
         
         //  When Faerie Bladecrafter dies, each opponent loses X life and you gain X life, where X is its power.
-        Ability ability = new DiesSourceTriggeredAbility(new LoseLifeOpponentsEffect(count).setText("each opponent loses X life"));
-        ability.addEffect(new GainLifeEffect(count).setText("and you gain X life, where X is its power"));
+        Ability ability = new DiesSourceTriggeredAbility(new LoseLifeOpponentsEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("each opponent loses X life"));
+        ability.addEffect(new GainLifeEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("and you gain X life, where X is its power"));
         this.addAbility(ability);
     }
 

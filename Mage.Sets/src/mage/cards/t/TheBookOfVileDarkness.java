@@ -2,8 +2,7 @@ package mage.cards.t;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -25,7 +24,6 @@ import mage.game.permanent.token.Token;
 import mage.game.permanent.token.VecnaToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
@@ -46,8 +44,8 @@ public final class TheBookOfVileDarkness extends CardImpl {
 
         // At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), TargetController.YOU,
-                TheBookOfVileDarknessCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new ZombieToken()),
+                false, TheBookOfVileDarknessCondition.instance
         ).addHint(new ConditionHint(TheBookOfVileDarknessCondition.instance, "You lost 2 or more life this turn")));
 
         // {T}, Exile The Book of Vile Darkness and artifacts you control named Eye of Vecna and Hand of Vecna: Create Vecna, a legendary 8/8 black Zombie God creature token with indestructible and all triggered abilities of the exiled cards.
@@ -187,7 +185,7 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
                 continue;
             }
             for (Ability ability : card.getAbilities(game)) {
-                if (ability instanceof TriggeredAbility) {
+                if (ability.isTriggeredAbility()) {
                     Ability copyAbility = ability.copy();
                     copyAbility.newId();
                     copyAbility.setControllerId(source.getControllerId());

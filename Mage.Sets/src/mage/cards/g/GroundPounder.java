@@ -35,7 +35,7 @@ public final class GroundPounder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // 3G: Roll a six-sided die. Ground Pounder gets +X/+X until end of turn, where X is the result.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GroundPounderEffect(), new ManaCostsImpl<>("{3}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new GroundPounderEffect(), new ManaCostsImpl<>("{3}{G}")));
 
         // Whenever you roll a 5 or higher on a die, Ground Pounder gains trample until end of turn.
         this.addAbility(new GroundPounderTriggeredAbility());

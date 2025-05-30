@@ -30,7 +30,7 @@ public final class PantlazaSunFavored extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever Pantlaza, Sun-Favored or another Dinosaur enters the battlefield under your control,
+        // Whenever Pantlaza, Sun-Favored or another Dinosaur you control enters,
         // you may discover X, where X is that creature's toughness. Do this only once each turn.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new PantlazaSunFavoredEffect(), filter, true, SetTargetPointer.PERMANENT, true

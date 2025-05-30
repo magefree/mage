@@ -39,7 +39,7 @@ public final class QuagSickness extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, -1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
 
     }
 

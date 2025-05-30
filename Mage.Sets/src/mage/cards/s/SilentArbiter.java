@@ -27,10 +27,10 @@ public final class SilentArbiter extends CardImpl {
         this.toughness = new MageInt(5);
 
         // No more than one creature can attack each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SilentArbiterAttackRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new SilentArbiterAttackRestrictionEffect()));
 
         // No more than one creature can block each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SilentArbiterBlockRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new SilentArbiterBlockRestrictionEffect()));
     }
 
     private SilentArbiter(final SilentArbiter card) {

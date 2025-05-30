@@ -35,7 +35,7 @@ public final class SwordOfVengeance extends CardImpl {
         
         
         // Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
         Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has first strike");
         ability.addEffect(effect);

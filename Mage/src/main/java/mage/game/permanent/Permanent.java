@@ -78,10 +78,6 @@ public interface Permanent extends Card, Controllable {
 
     void setSuspected(boolean value, Game game, Ability source);
 
-    boolean isSaddled();
-
-    void setSaddled(boolean value);
-
     boolean isPrototyped();
 
     void setPrototyped(boolean value);
@@ -132,19 +128,9 @@ public interface Permanent extends Card, Controllable {
 
     void unattach(Game game);
 
-    boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
+    boolean canBeTargetedBy(MageObject sourceObject, UUID controllerId, Ability source, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);
-
-    /**
-     * @param attachment can be any object: card, permanent, token
-     * @param source     can be null for default checks like state base
-     * @param game
-     * @param silentMode - use it to ignore warning message for users (e.g. for
-     *                   checking only)
-     * @return
-     */
-    boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode);
 
     boolean wasControlledFromStartOfControllerTurn();
 
@@ -453,6 +439,10 @@ public interface Permanent extends Card, Controllable {
     void setManifested(boolean value);
 
     boolean isManifested();
+
+    void setCloaked(boolean value);
+
+    boolean isCloaked();
 
     boolean isRingBearer();
 

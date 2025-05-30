@@ -81,7 +81,7 @@ class YouFindSomePrisonersEffect extends OneShotEffect {
         player.choose(Outcome.PlayForFree, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.UntilEndOfYourNextTurn, true);
         }
         return true;
     }

@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
@@ -132,7 +131,7 @@ class AgathasSoulCauldronAbilityEffect extends ContinuousEffectImpl {
                 .stream()
                 .map(card -> card.getAbilities(game))
                 .flatMap(Collection::stream)
-                .filter(ActivatedAbility.class::isInstance)
+                .filter(Ability::isActivatedAbility)
                 .collect(Collectors.toSet());
         if (abilities.isEmpty()) {
             return false;

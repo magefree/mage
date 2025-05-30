@@ -33,7 +33,7 @@ public final class ShadowSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Sliver creatures have shadow.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ShadowAbility.getInstance(), Duration.WhileOnBattlefield,
                 filter, "All Sliver creatures have shadow.")));
     }

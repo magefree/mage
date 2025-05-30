@@ -63,14 +63,15 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean returnValue = false;
-        List<UUID> targetedPermanentIds = new ArrayList<>(0);
+        List<UUID> targetedPermanentIds = new ArrayList<>();
         Player player = game.getPlayer(this.getControllerId());
         if (player != null) {
             if (event.getPlayerId().equals(this.getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null) {
                     SpellAbility spellAbility = spell.getSpellAbility();
-                    for (Mode mode : spellAbility.getModes().values()) {
+                    for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                        Mode mode = spellAbility.getModes().get(modeId);
                         for (Target target : mode.getTargets()) {
                             if (!target.isNotTarget()) {
                                 for (UUID targetId : target.getTargets()) {

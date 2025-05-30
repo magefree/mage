@@ -41,11 +41,11 @@ public final class RunesOfTheDeus extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // As long as enchanted creature is red, it gets +1/+1 and has double strike.
-        SimpleStaticAbility redAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.RED), "As long as enchanted creature is red, it gets +1/+1"));
+        SimpleStaticAbility redAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.RED), "As long as enchanted creature is red, it gets +1/+1"));
         redAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.RED), "and has double strike"));
         this.addAbility(redAbility);
         // As long as enchanted creature is green, it gets +1/+1 and has trample.
-        SimpleStaticAbility greenAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.GREEN), "As long as enchanted creature is green, it gets +1/+1"));
+        SimpleStaticAbility greenAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.GREEN), "As long as enchanted creature is green, it gets +1/+1"));
         greenAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.GREEN), "and has trample"));
         this.addAbility(greenAbility);
     }

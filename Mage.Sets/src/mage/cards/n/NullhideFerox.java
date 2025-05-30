@@ -44,7 +44,7 @@ public final class NullhideFerox extends CardImpl {
 
         // You can't cast noncreature spells.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new NullhideFeroxCantCastEffect()
+                new NullhideFeroxCantCastEffect()
         ));
 
         // {2}: Nullhide Ferox loses all abilities until end of turn. Any player may activate this ability.

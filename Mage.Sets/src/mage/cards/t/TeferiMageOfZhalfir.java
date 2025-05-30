@@ -35,10 +35,10 @@ public final class TeferiMageOfZhalfir extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Creature cards you own that aren't on the battlefield have flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeferiMageOfZhalfirAddFlashEffect()));
+        this.addAbility(new SimpleStaticAbility(new TeferiMageOfZhalfirAddFlashEffect()));
 
         // Each opponent can cast spells only any time they could cast a sorcery.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeferiMageOfZhalfirReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new TeferiMageOfZhalfirReplacementEffect()));
 
     }
 

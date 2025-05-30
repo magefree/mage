@@ -45,7 +45,7 @@ public final class MairsilThePretender extends CardImpl {
 
         // Mairsil, the Pretender has all activated abilities of all cards you own in exile with cage counters on them. 
         // You may activate each of those abilities only once each turn.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new MairsilThePretenderGainAbilitiesEffect());
+        Ability ability = new SimpleStaticAbility(new MairsilThePretenderGainAbilitiesEffect());
         this.addAbility(ability);
     }
 
@@ -138,7 +138,7 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
         for (Card card : game.getExile().getAllCards(game)) {
             if (filter.match(card, game) && Objects.equals(card.getOwnerId(), perm.getControllerId())) {
                 for (Ability ability : card.getAbilities(game)) {
-                    if (ability instanceof ActivatedAbility) {
+                    if (ability.isActivatedAbility()) {
                         ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
                         copyAbility.setMaxActivationsPerTurn(1);
                         perm.addAbility(copyAbility, source.getSourceId(), game, true);

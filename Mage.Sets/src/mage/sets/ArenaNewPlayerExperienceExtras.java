@@ -16,7 +16,7 @@ public final class ArenaNewPlayerExperienceExtras extends ExpansionSet {
     }
 
     private ArenaNewPlayerExperienceExtras() {
-        super("Arena New Player Experience Extras", "XANA", ExpansionSet.buildDate(2018, 7, 14), SetType.MAGIC_ONLINE);
+        super("Arena New Player Experience Extras", "XANA", ExpansionSet.buildDate(2018, 7, 14), SetType.MAGIC_ARENA);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
@@ -40,11 +40,5 @@ public final class ArenaNewPlayerExperienceExtras extends ExpansionSet {
         cards.add(new SetCardInfo("Take Vengeance", 13, Rarity.COMMON, mage.cards.t.TakeVengeance.class));
         cards.add(new SetCardInfo("Volcanic Dragon", 45, Rarity.UNCOMMON, mage.cards.v.VolcanicDragon.class));
         cards.add(new SetCardInfo("Waterknot", 22, Rarity.COMMON, mage.cards.w.Waterknot.class));
-
-        // cards removed entirely - no longer exist on scryfall at all.
-        // cards.add(new SetCardInfo("Blinding Radiance", 2, Rarity.UNCOMMON, mage.cards.b.BlindingRadiance.class));
-        // cards.add(new SetCardInfo("Goblin Bruiser", 39, Rarity.UNCOMMON, mage.cards.g.GoblinBruiser.class));
-        // cards.add(new SetCardInfo("Ogre Painbringer", 42, Rarity.RARE, mage.cards.o.OgrePainbringer.class));
-        // cards.add(new SetCardInfo("Titanic Pelagosaur", 19, Rarity.UNCOMMON, mage.cards.t.TitanicPelagosaur.class));
     }
 }

@@ -1,12 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
-import mage.constants.SuperType;
-import mage.game.ExileZone;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,20 +11,23 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
+import mage.game.ExileZone;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Xanderhall
  */
 public final class KaylasMusicBox extends CardImpl {
 
     public KaylasMusicBox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
 
         // {W}, {T}: Look at the top card of your library, then exile it face down.
@@ -163,7 +159,7 @@ class KaylasMusicBoxPlayFromExileEffect extends AsThoughEffectImpl {
         if (exileZone == null || !exileZone.contains(sourceId)) {
             return false;
         }
-        CardUtil.makeCardPlayable(game, source, exileZone.get(sourceId, game), Duration.EndOfTurn, false);
+        CardUtil.makeCardPlayable(game, source, exileZone.get(sourceId, game), false, Duration.EndOfTurn, false);
         return true;
     }
 }

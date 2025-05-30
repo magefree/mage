@@ -2,6 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -52,6 +53,7 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
     MassacreWurmTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
         setTriggerPhrase("Whenever a creature an opponent controls dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MassacreWurmTriggeredAbility(final MassacreWurmTriggeredAbility ability) {
@@ -80,5 +82,10 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

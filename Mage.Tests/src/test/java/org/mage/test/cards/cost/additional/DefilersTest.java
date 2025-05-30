@@ -63,7 +63,7 @@ public class DefilersTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, bear);
         setChoice(playerA, true);
         setChoice(playerA, true);
-        setChoice(playerA, "");
+        setChoice(playerA, "Whenever you cast a green permanent spell"); // x2 triggers from Defiler of Vigor
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -83,7 +83,7 @@ public class DefilersTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, tusker);
         setChoice(playerA, true);
         setChoice(playerA, true);
-        setChoice(playerA, "");
+        setChoice(playerA, "Whenever you cast a green permanent spell"); // x2 triggers from Defiler of Vigor
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -103,7 +103,7 @@ public class DefilersTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, goblin);
         setChoice(playerA, true);
         setChoice(playerA, true);
-        setChoice(playerA, "");
+        setChoice(playerA, "Whenever you cast a green permanent spell"); // x2 triggers from red and green defilers
         addTarget(playerA, playerB);
 
         setStopAt(1, PhaseStep.END_TURN);

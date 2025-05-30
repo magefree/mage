@@ -27,7 +27,7 @@ public final class LivingLands extends CardImpl {
                 new CreatureToken(1, 1, "1/1 creatures"),
                 "lands", filter, Duration.WhileOnBattlefield, false);
         effect.getDependencyTypes().add(DependencyType.BecomeForest); // TODO: are these dependencies correct/complete?
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private LivingLands(final LivingLands card) {

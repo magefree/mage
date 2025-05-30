@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -53,7 +53,7 @@ public final class ArvinoxTheMindFlail extends CardImpl {
 
         // At the beginning of your end step, exile the bottom card of each opponent's library face down. For as long as those cards remain exiled, you may look at them, you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ArvinoxTheMindFlailExileEffect(), TargetController.YOU, false
+                new ArvinoxTheMindFlailExileEffect()
         ));
     }
 
@@ -119,7 +119,7 @@ class ArvinoxTheMindFlailExileEffect extends OneShotEffect {
 class ArvinoxTheMindFlailCastFromExileEffect extends AsThoughEffectImpl {
 
     ArvinoxTheMindFlailCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
     }
 
     private ArvinoxTheMindFlailCastFromExileEffect(final ArvinoxTheMindFlailCastFromExileEffect effect) {

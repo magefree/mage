@@ -28,6 +28,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -39,7 +40,7 @@ public final class ImpromptuRaid extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R/G}");
 
         // {2}{RG}: Reveal the top card of your library. If it isn't a creature card, put it into your graveyard. Otherwise, put that card onto the battlefield. That creature gains haste. Sacrifice it at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ImpromptuRaidEffect(), new ManaCostsImpl<>("{2}{R/G}")));
+        this.addAbility(new SimpleActivatedAbility(new ImpromptuRaidEffect(), new ManaCostsImpl<>("{2}{R/G}")));
 
     }
 
@@ -90,7 +91,7 @@ class ImpromptuRaidEffect extends OneShotEffect {
                     return true;
                 }
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    Permanent permanent = game.getPermanent(card.getId());
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(permanent, game));

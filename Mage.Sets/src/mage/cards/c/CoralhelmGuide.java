@@ -30,7 +30,7 @@ public final class CoralhelmGuide extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {4}{U}: Target creature can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{4}{U}"));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{4}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

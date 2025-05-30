@@ -44,7 +44,7 @@ class CircleOfTheMoonDruidBearEffect extends ContinuousEffectImpl {
 
     CircleOfTheMoonDruidBearEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "as long as it's your turn, {this} is a Bear with base power and toughness 4/2";
+        staticText = "during your turn, {this} is a Bear with base power and toughness 4/2";
     }
 
     private CircleOfTheMoonDruidBearEffect(final CircleOfTheMoonDruidBearEffect effect) {

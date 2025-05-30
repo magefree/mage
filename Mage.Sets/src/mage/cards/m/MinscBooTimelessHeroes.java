@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
@@ -60,9 +60,9 @@ public final class MinscBooTimelessHeroes extends CardImpl {
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(new BooToken()),
                 true,
-                "When {this} enters the battlefield and at the beginning of your upkeep, ",
+                "When {this} enters and at the beginning of your upkeep, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false))
+                new BeginningOfUpkeepTriggeredAbility(null))
         );
 
         // +1: Put three +1/+1 counters on up to one target creature with trample or haste.

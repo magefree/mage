@@ -26,7 +26,7 @@ public final class ThrashingFrontliner extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
         this.subtype.add(SubType.PHYREXIAN);
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -74,7 +74,6 @@ class ThrashingFrontlinerTriggeredAbility extends TriggeredAbilityImpl {
                 .ofNullable(this.getSourceId())
                 .map(game.getCombat()::getDefenderId)
                 .map(game::getPermanent)
-                .filter(Objects::nonNull)
                 .map(permanent -> permanent.isBattle(game))
                 .orElse(false);
     }

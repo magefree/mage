@@ -1,17 +1,15 @@
-
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class PutCountersSourceCost extends CostImpl {
@@ -20,7 +18,7 @@ public class PutCountersSourceCost extends CostImpl {
 
     public PutCountersSourceCost(Counter counter) {
         this.counter = counter.copy();
-        this.text = "Put " + counter.getDescription() + " on {this}";
+        this.text = "put " + counter.getDescription() + " on {this}";
     }
 
     public PutCountersSourceCost(PutCountersSourceCost cost) {
@@ -30,6 +28,7 @@ public class PutCountersSourceCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
+        // TODO: implement permanent.canAddCounters with replacement events check, see tests with Devoted Druid
         return true;
     }
 

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -15,8 +15,6 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
@@ -37,7 +35,7 @@ public final class SerendibDjinn extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a land. If you sacrifice an Island this way, Serendib Djinn deals 3 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SerendibDjinnEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SerendibDjinnEffect()));
         // When you control no lands, sacrifice Serendib Djinn.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
                 filter, ComparisonType.EQUAL_TO, 0,

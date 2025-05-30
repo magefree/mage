@@ -1,6 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -65,6 +66,7 @@ class RhukHexgoldNabberTriggeredAbility extends TriggeredAbilityImpl {
 
     RhukHexgoldNabberTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RhukHexgoldNabberEffect(), true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private RhukHexgoldNabberTriggeredAbility(final RhukHexgoldNabberTriggeredAbility ability) {
@@ -109,6 +111,15 @@ class RhukHexgoldNabberTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever an equipped creature you control other than {this} attacks or dies, " +
                 "you may attach all Equipment attached to that creature to {this}.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+            return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+        } else {
+            return super.isInUseableZone(game, sourceObject, event);
+        }
     }
 }
 

@@ -30,7 +30,7 @@ public final class SkywardEyeProphets extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {tap}: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealTopLandToBattlefieldElseHandEffect("it"), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new RevealTopLandToBattlefieldElseHandEffect("it"), new TapSourceCost()));
     }
 
     private SkywardEyeProphets(final SkywardEyeProphets card) {

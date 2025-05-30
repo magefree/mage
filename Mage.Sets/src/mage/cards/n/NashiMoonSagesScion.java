@@ -121,7 +121,7 @@ class NashiMoonSagesScionWatcher extends Watcher {
             morMap.values().removeIf(Set::isEmpty);
             return;
         }
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
         Spell spell = game.getSpell(event.getTargetId());
@@ -129,7 +129,7 @@ class NashiMoonSagesScionWatcher extends Watcher {
             return;
         }
         morMap.getOrDefault(
-                event.getAdditionalReference().getApprovingMageObjectReference(), Collections.emptySet()
+                event.getApprovingObject().getApprovingMageObjectReference(), Collections.emptySet()
         ).removeIf(set -> set
                 .stream()
                 .anyMatch(mor -> mor.getSourceId().equals(spell.getMainCard().getId())
@@ -167,7 +167,7 @@ class NashiMoonSagesScionWatcher extends Watcher {
 class NashiMoonSagesScionPlayEffect extends CanPlayCardControllerEffect {
 
     NashiMoonSagesScionPlayEffect(Game game, Card card) {
-        super(game, card.getMainCard().getId(), card.getZoneChangeCounter(game), Duration.EndOfTurn);
+        super(game, card.getMainCard().getId(), card.getZoneChangeCounter(game), false, Duration.EndOfTurn);
     }
 
     private NashiMoonSagesScionPlayEffect(final NashiMoonSagesScionPlayEffect effect) {

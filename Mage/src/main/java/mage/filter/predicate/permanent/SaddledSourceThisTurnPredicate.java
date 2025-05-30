@@ -1,5 +1,6 @@
 package mage.filter.predicate.permanent;
 
+import mage.MageObjectReference;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
@@ -17,7 +18,7 @@ public enum SaddledSourceThisTurnPredicate implements ObjectSourcePlayerPredicat
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         return SaddledMountWatcher.checkIfSaddledThisTurn(
-                input.getObject(), input.getSource().getSourcePermanentOrLKI(game), game
+                input.getObject(), new MageObjectReference(input.getSourceId(), input.getSource().getSourceObjectZoneChangeCounter(), game), game
         );
     }
 

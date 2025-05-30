@@ -33,7 +33,7 @@ public final class DarkDwellerOracle extends CardImpl {
                 new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn).withTextOptions("that card", true),
                 new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

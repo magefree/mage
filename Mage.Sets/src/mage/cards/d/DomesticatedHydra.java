@@ -34,7 +34,6 @@ public final class DomesticatedHydra extends CardImpl {
 
         // As long as Domesticated Hydra is monstrous, it has trample.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                         MonstrousCondition.instance,
                         "As long as {this} is monstrous, it has trample"));

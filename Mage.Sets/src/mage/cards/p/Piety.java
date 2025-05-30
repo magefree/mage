@@ -23,7 +23,7 @@ public final class Piety extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Blocking creatures get +0/+3 until end of turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false)));
     }
 
     private Piety(final Piety card) {

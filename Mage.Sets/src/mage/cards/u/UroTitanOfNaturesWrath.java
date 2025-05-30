@@ -61,7 +61,7 @@ public final class UroTitanOfNaturesWrath extends CardImpl {
 class UroTitanOfNaturesWrathEffect extends OneShotEffect {
 
     UroTitanOfNaturesWrathEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Sacrifice);
         staticText = "sacrifice it unless it escaped";
     }
 

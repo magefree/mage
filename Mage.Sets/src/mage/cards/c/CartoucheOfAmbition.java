@@ -45,7 +45,7 @@ public final class CartoucheOfAmbition extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 and has lifelink.
-        ability =new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
+        ability =new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has lifelink");
         ability.addEffect(effect);

@@ -28,7 +28,7 @@ public final class ParallaxTide extends CardImpl {
         this.addAbility(new FadingAbility(5, this));
 
         // Remove a fade counter from Parallax Tide: Exile target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new RemoveCountersSourceCost(CounterType.FADE.createInstance()));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new RemoveCountersSourceCost(CounterType.FADE.createInstance()));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
 

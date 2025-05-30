@@ -1,25 +1,25 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.constants.SubType;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class WhiptongueHydra extends CardImpl {
@@ -74,14 +74,13 @@ class WhiptongueHydraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int destroyedPermanents = 0;
-        destroyedPermanents = game.getBattlefield().getActivePermanents(
-                filter, source.getControllerId(), source, game
-        ).stream().filter(
-                (permanent) -> (permanent.destroy(source, game, false))
-        ).map((_item) -> 1).reduce(destroyedPermanents, Integer::sum);
+        int destroyedPermanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)
+                .stream()
+                .filter(permanent -> permanent.destroy(source, game, false))
+                .mapToInt(x -> 1)
+                .sum();
         if (destroyedPermanents > 0) {
-            game.getState().processAction(game);
+            game.processAction();
             new AddCountersSourceEffect(
                     CounterType.P1P1.createInstance(destroyedPermanents), true
             ).apply(game, source);

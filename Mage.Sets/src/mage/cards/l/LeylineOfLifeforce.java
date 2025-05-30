@@ -30,7 +30,7 @@ public final class LeylineOfLifeforce extends CardImpl {
         this.addAbility(LeylineAbility.getInstance());
         
         // Creature spells can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfLifeforceEffect()));
+        this.addAbility(new SimpleStaticAbility(new LeylineOfLifeforceEffect()));
     }
 
     private LeylineOfLifeforce(final LeylineOfLifeforce card) {

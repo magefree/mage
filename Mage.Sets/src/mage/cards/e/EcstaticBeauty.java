@@ -68,7 +68,7 @@ class EcstaticBeautyEffect extends OneShotEffect {
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
             if (card.getAbilities(game).containsClass(SuspendAbility.class)) {
                 card.addCounters(CounterType.TIME.createInstance(4), source, game);
             }

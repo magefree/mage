@@ -21,10 +21,14 @@ public class JudgeGiftCards2020 extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Arena Rector", 1, Rarity.RARE, mage.cards.a.ArenaRector.class));
+        cards.add(new SetCardInfo("Birthing Pod", 7, Rarity.RARE, mage.cards.b.BirthingPod.class));
         cards.add(new SetCardInfo("Demonic Tutor", 4, Rarity.RARE, mage.cards.d.DemonicTutor.class));
         cards.add(new SetCardInfo("Enlightened Tutor", 2, Rarity.RARE, mage.cards.e.EnlightenedTutor.class));
+        cards.add(new SetCardInfo("Eye of Ugin", 10, Rarity.RARE, mage.cards.e.EyeOfUgin.class));
         cards.add(new SetCardInfo("Gamble", 6, Rarity.RARE, mage.cards.g.Gamble.class));
+        cards.add(new SetCardInfo("Infernal Tutor", 5, Rarity.RARE, mage.cards.i.InfernalTutor.class));
         cards.add(new SetCardInfo("Spellseeker", 3, Rarity.RARE, mage.cards.s.Spellseeker.class));
+        cards.add(new SetCardInfo("Sterling Grove", 9, Rarity.RARE, mage.cards.s.SterlingGrove.class));
         cards.add(new SetCardInfo("Sylvan Tutor", 8, Rarity.RARE, mage.cards.s.SylvanTutor.class));
      }
 }

@@ -27,7 +27,7 @@ public final class CollectorsCage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}");
 
         // Hideaway 5
-        this.addAbility(new HideawayAbility(5));
+        this.addAbility(new HideawayAbility(this, 5));
 
         // {1}, {T}: Put a +1/+1 counter on target creature you control. Then if you control three or more creatures with different powers, you may play the exiled card without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(

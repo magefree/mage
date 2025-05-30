@@ -23,7 +23,7 @@ public final class GurmagAngler extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
     }
 
     private GurmagAngler(final GurmagAngler card) {

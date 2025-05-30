@@ -31,7 +31,7 @@ public final class DwarvenDriller extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Destroy target land unless its controller has Dwarven Driller deal 2 damage to them.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DwarvenDrillerEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DwarvenDrillerEffect(), new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

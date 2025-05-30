@@ -31,7 +31,7 @@ public final class SigilOfDistinction extends CardImpl {
 
         // Equipped creature gets +1/+1 for each charge counter on Sigil of Distinction.
         BoostEquippedEffect effect = new BoostEquippedEffect(new CountersSourceCount(CounterType.CHARGE), new CountersSourceCount(CounterType.CHARGE));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Equip—Remove a charge counter from Sigil of Distinction.
         this.addAbility(new EquipAbility(Outcome.AddAbility, new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()), false));

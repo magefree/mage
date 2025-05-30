@@ -31,7 +31,7 @@ public final class BalloonPeddler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, {tap}, Discard a card: Target creature gains flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
             FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

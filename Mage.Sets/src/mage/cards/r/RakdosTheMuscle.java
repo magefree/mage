@@ -95,7 +95,7 @@ class RakdosTheMuscleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
-        Permanent sacrificed = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        Permanent sacrificed = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (player == null || controller == null || sacrificed == null) {
             return false;
         }
@@ -112,7 +112,7 @@ class RakdosTheMuscleEffect extends OneShotEffect {
         // remove cards that could not be moved to exile
         cards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));
         for (Card card : cards) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextEndStep, true, controller.getId(), null);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.UntilYourNextEndStep, true, controller.getId(), null);
         }
         return true;
     }

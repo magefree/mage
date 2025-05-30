@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.condition.common.OnOpponentsTurnCondition;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
+import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +26,7 @@ public final class Festival extends CardImpl {
                 "Cast this spell only during an opponent's upkeep"));
 
         // Creatures can't attack this turn.
-        this.getSpellAbility().addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new CantAttackAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
 
     }
 

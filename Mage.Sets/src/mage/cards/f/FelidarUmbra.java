@@ -10,7 +10,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -41,15 +41,15 @@ public final class FelidarUmbra extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA)));
 
         // {1}{W}: Attach Felidar Umbra to target creature you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "Attach {this} to target creature you control"), new ManaCostsImpl<>("{1}{W}"));
+        ability = new SimpleActivatedAbility(new AttachEffect(Outcome.Detriment, "Attach {this} to target creature you control"), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
-        // Totem armor
-        this.addAbility(new TotemArmorAbility());
+        // Umbra armor
+        this.addAbility(new UmbraArmorAbility());
     }
 
     private FelidarUmbra(final FelidarUmbra card) {

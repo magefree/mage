@@ -31,7 +31,6 @@ public final class HorrorOfTheDim extends CardImpl {
 
         // {U}: Horror of the Dim gains hexproof until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn),
                 new ColoredManaCost(ColoredManaSymbol.U)));
     }

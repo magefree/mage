@@ -36,7 +36,7 @@ public final class HostileInvestigator extends CardImpl {
         // Whenever one or more players discard one or more cards, investigate. This ability triggers only once each turn.
         this.addAbility(new DiscardCardPlayerTriggeredAbility(new InvestigateEffect(), false)
                 .setTriggerPhrase("Whenever one or more players discard one or more cards, ")
-                .setTriggersOnceEachTurn(true));
+                .setTriggersLimitEachTurn(1));
     }
 
     private HostileInvestigator(final HostileInvestigator card) {

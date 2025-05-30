@@ -31,7 +31,7 @@ public final class DivineVisitation extends CardImpl {
         // that many 4/4 white Angel creature tokens with flying and 
         // vigilance are created instead.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new DivineVisitationEffect()
+                new DivineVisitationEffect()
         ));
     }
 

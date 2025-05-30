@@ -30,7 +30,7 @@ public final class NyxbornShieldmate extends CardImpl {
         // Bestow {2}{W}
         this.addAbility(new BestowAbility(this, "{2}{W}"));
         // Enchanted creature gets +1/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1,2, Duration.WhileOnBattlefield)));
     }
 
     private NyxbornShieldmate(final NyxbornShieldmate card) {

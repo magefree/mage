@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainControlAllOwnedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class BroodingSaurian extends CardImpl {
 
         // At the beginning of each end step, each player gains control of all nontoken permanents they own.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GainControlAllOwnedEffect(filter), TargetController.ANY, false
+                TargetController.ANY, new GainControlAllOwnedEffect(filter), false
         ));
     }
 

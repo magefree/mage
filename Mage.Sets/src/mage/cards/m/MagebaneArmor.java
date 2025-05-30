@@ -33,7 +33,7 @@ public final class MagebaneArmor extends CardImpl {
         // Equipped creature gets +2/+4 and loses flying.
         this.addAbility(new MagebaneArmorAbility());
         // Prevent all noncombat damage that would be dealt to equipped creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MagebaneArmorPreventionEffect()));
+        this.addAbility(new SimpleStaticAbility(new MagebaneArmorPreventionEffect()));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }

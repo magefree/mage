@@ -35,10 +35,10 @@ public final class AuraGnarlid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Creatures with power less than Aura Gnarlid's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
         // Aura Gnarlid gets +1/+1 for each Aura on the battlefield.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
     private AuraGnarlid(final AuraGnarlid card) {

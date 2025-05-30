@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -47,13 +46,11 @@ public final class ThousandMoonsSmithy extends CardImpl {
 
         // At the beginning of your precombat main phase, you may tap five untapped artifacts and/or creatures you control. If you do, transform Thousand Moons Smithy.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new DoIfCostPaid(
                         new TransformSourceEffect(),
                         new TapTargetCost(new TargetControlledPermanent(5, filter))
-                ),
-                TargetController.YOU,
-                false
+                )
         ));
     }
 

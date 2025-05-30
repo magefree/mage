@@ -32,7 +32,7 @@ public final class NaomiPillarOfOrder extends CardImpl {
         // Whenever Naomi, Pillar of Order enters the battlefield or attacks, if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldOrAttacksSourceTriggeredAbility(new CreateTokenEffect(new SamuraiToken())),
-                ControlArtifactAndEnchantmentCondition.instance, "Whenever {this} enters the battlefield or " +
+                ControlArtifactAndEnchantmentCondition.instance, "Whenever {this} enters or " +
                 "attacks, if you control an artifact and an enchantment, create a 2/2 white Samurai creature token with vigilance."
         ).addHint(ControlArtifactAndEnchantmentHint.instance));
     }

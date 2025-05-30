@@ -1,6 +1,7 @@
 package mage.cards.l;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -56,6 +57,7 @@ class LuminousBroodmothTriggeredAbility extends TriggeredAbilityImpl {
 
     LuminousBroodmothTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LuminousBroodmothEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private LuminousBroodmothTriggeredAbility(final LuminousBroodmothTriggeredAbility ability) {
@@ -96,6 +98,11 @@ class LuminousBroodmothTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever a creature you control without flying dies, "
                 + "return it to the battlefield under its owner's control with a flying counter on it.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 

@@ -12,7 +12,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -29,7 +30,8 @@ public final class TheBattleOfNaboo extends CardImpl {
         effect.setText("Return X target creatures to their owner's hands");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new TheBattleOfNabooEffect());
-        this.getSpellAbility().setTargetAdjuster(TheBattleOfNabooAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private TheBattleOfNaboo(final TheBattleOfNaboo card) {
@@ -39,16 +41,6 @@ public final class TheBattleOfNaboo extends CardImpl {
     @Override
     public TheBattleOfNaboo copy() {
         return new TheBattleOfNaboo(this);
-    }
-}
-
-enum TheBattleOfNabooAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
     }
 }
 
@@ -72,7 +64,7 @@ class TheBattleOfNabooEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int x = source.getManaCostsToPay().getX();
+            int x = CardUtil.getSourceCostsTag(game, source, "X", 0);
             if (x > 0) {
                 player.drawCards(2 * x, source, game);
             }

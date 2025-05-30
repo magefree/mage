@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class StrokeOfMidnight extends CardImpl {
 
         // Destroy target nonland permanent. Its controller creates a 1/1 white Human creature token.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new HumanToken()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new HumanToken()));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 

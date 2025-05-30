@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -30,7 +30,7 @@ public final class ArchwingDragon extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of the end step, return Archwing Dragon to its owner's hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.NEXT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new ReturnToHandSourceEffect(true), false));
 
     }
 

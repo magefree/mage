@@ -34,7 +34,7 @@ public final class GimlisRecklessMight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
         // Formidable -- Whenever you attack, if creatures you control have total power 8 or greater, target attacking creature you control fights up to one target creature you don't control.
         TriggeredAbility ability = new AttacksWithCreaturesTriggeredAbility(new FightTargetsEffect(),1);

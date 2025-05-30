@@ -21,7 +21,7 @@ public final class InfernalPlunge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // As an additional cost to cast Infernal Plunge, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         // Add {R}{R}{R}.
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
     }

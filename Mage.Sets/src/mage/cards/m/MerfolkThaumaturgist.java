@@ -29,7 +29,7 @@ public final class MerfolkThaumaturgist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Switch target creature's power and toughness until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -38,7 +38,7 @@ public final class Invisibility extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't be blocked except by Walls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.AURA)));
     }
 

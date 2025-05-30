@@ -44,7 +44,6 @@ public final class PestilentSpirit extends CardImpl {
 
         // Instant and sorcery spells you control have deathtouch.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledSpellsEffect(DeathtouchAbility.getInstance(), filter)
         ));
     }

@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -23,9 +23,8 @@ public final class VirtueOfLoyalty extends AdventureCard {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, new CardType[]{CardType.INSTANT}, "{3}{W}{W}", "Ardenvale Fealty", "{1}{W}");
 
         // At the beginning of your end step, put a +1/+1 counter on each creature you control. Untap those creatures.
-        TriggeredAbility trigger = new BeginningOfYourEndStepTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE),
-                false
+        TriggeredAbility trigger = new BeginningOfEndStepTriggeredAbility(
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE)
         );
         trigger.addEffect(new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE).setText("untap those creatures"));
         this.addAbility(trigger);

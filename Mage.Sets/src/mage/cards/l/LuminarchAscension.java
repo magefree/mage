@@ -3,7 +3,7 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,8 +37,8 @@ public final class LuminarchAscension extends CardImpl {
         // At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.QUEST.createInstance()),
-                        TargetController.OPPONENT, true
+                        TargetController.OPPONENT, new AddCountersSourceEffect(CounterType.QUEST.createInstance()),
+                        true
                 ), LuminarchAscensionCondition.instance, rule
         ));
 

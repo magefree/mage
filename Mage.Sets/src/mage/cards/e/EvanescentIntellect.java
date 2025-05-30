@@ -36,10 +36,10 @@ public final class EvanescentIntellect extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has "{1}{U}, {T}: Target player puts the top three cards of their library into their graveyard."
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(3), new ManaCostsImpl<>("{1}{U}"));
+        ability = new SimpleActivatedAbility(new MillCardsTargetEffect(3), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
     private EvanescentIntellect(final EvanescentIntellect card) {

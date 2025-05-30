@@ -28,7 +28,7 @@ public final class GracebladeArtisan extends CardImpl {
 
         // Graceblade Artisan gets +2/+2 for each Aura attached to it.
         AuraAttachedCount count = new AuraAttachedCount(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
     private GracebladeArtisan(final GracebladeArtisan card) {

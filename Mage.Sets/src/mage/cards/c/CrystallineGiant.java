@@ -2,14 +2,13 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -35,7 +34,7 @@ public final class CrystallineGiant extends CardImpl {
 
         // At the beginning of combat on your turn, choose a kind of counter at random that Crystalline Giant doesn't have on it from among flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, or +1/+1. Put a counter of that kind on Crystalline Giant.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new CrystallineGiantEffect(), TargetController.YOU, false
+                new CrystallineGiantEffect()
         ));
     }
 

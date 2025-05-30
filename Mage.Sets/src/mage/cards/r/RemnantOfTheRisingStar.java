@@ -65,7 +65,7 @@ public final class RemnantOfTheRisingStar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another creature enters the battlefield under your control, you may pay {X}. When you do, put X +1/+1 counters on that creature.
+        // Whenever another creature you control enters, you may pay {X}. When you do, put X +1/+1 counters on that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new RemnantOfTheRisingStarEffect(), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         ));
@@ -116,7 +116,7 @@ class RemnantOfTheRisingStarEffect extends OneShotEffect {
         )) {
             return false;
         }
-        int xValue = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+        int xValue = player.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay to add counters)", game, source, true);
         cost.add(new GenericManaCost(xValue));
         if (!cost.pay(source, game, source, source.getControllerId(), false, null)) {
             return false;

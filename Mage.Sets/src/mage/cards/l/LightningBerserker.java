@@ -28,7 +28,7 @@ public final class LightningBerserker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}: Lightning Berserker gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}")));
         

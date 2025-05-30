@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldWithCounterTargetEffect;
 import mage.cards.CardImpl;
@@ -39,9 +39,8 @@ public final class FromTheRubble extends CardImpl {
 
         // At the beginning of your end step, return target creature card of the chosen type from your graveyard to
         // the battlefield with a finality counter on it.
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance()),
-                false
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
+                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance())
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

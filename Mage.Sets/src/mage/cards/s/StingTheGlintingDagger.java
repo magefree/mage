@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -45,8 +45,8 @@ public final class StingTheGlintingDagger extends CardImpl {
 
         // At the beginning of each combat, untap equipped creature.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-            new UntapAttachedEffect(AttachmentType.EQUIPMENT, "creature"),
-            TargetController.ANY, false));
+                TargetController.ANY, new UntapAttachedEffect(AttachmentType.EQUIPMENT, "creature"),
+                false));
 
         // Equipped creature has first strike as long as it's blocking or blocked by a Goblin or Orc.
         this.addAbility(new SimpleStaticAbility(

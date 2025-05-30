@@ -3,6 +3,7 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -14,9 +15,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForPermanentsEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -51,9 +54,9 @@ public final class ImodaneThePyrohammer extends CardImpl {
     }
 }
 
-class ImodaneThePyrohammerTriggeredAbility extends TriggeredAbilityImpl {
+class ImodaneThePyrohammerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
-    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell you control that targets only a single creature");
+    private static final FilterSpell filter = new FilterInstantOrSorcerySpell("instant or sorcery spell you control that targets only a single creature");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
@@ -84,28 +87,27 @@ class ImodaneThePyrohammerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(DamagedPermanentEvent event, Game game) {
+        MageObject sourceObject = game.getObject(event.getSourceId());
+        Permanent target = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        // We keep only the events
+        // 1/ That have sourceId matching the spell filter
+        // 2/ That have targetId as the spell's only target
+        return target != null
+                && sourceObject instanceof StackObject
+                && filter.match((StackObject) sourceObject, getControllerId(), this, game)
+                && target.getId().equals(((StackObject) sourceObject).getStackAbility().getFirstTarget());
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPermanentsEvent dEvent = (DamagedBatchForPermanentsEvent) event;
-        int damage = dEvent
-                .getEvents()
+        int damage = getFilteredEvents((DamagedBatchForPermanentsEvent) event, game)
                 .stream()
-                .filter(damagedEvent -> {
-                    MageObject sourceObject = game.getObject(damagedEvent.getSourceId());
-                    Permanent target = game.getPermanentOrLKIBattlefield(damagedEvent.getTargetId());
-                    // We keep only the events
-                    // 1/ That have sourceId matching the spell filter
-                    // 2/ That have targetId as the spell's only target
-                    return sourceObject != null && target != null
-                            && sourceObject instanceof StackObject
-                            && filter.match((StackObject) sourceObject, controllerId, this, game)
-                            && target.getId().equals(((StackObject) sourceObject).getStackAbility().getFirstTarget());
-                })
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (damage < 1) {
             return false;
         }
-
         this.getEffects().setValue(ImodaneThePyrohammerDynamicValue.IMODANE_VALUE_KEY, damage);
         return true;
     }

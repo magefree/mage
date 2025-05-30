@@ -46,12 +46,12 @@ public final class Fylgja extends CardImpl {
                         .setText("with four healing counters on it.")));
 
         // Remove a healing counter from Fylgja: Prevent the next 1 damage that would be dealt to enchanted creature this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA, 1, false)
+        this.addAbility(new SimpleActivatedAbility(new PreventDamageToAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA, 1, false)
                 .setText("Prevent the next 1 damage that would be dealt to enchanted creature this turn"),
                 new RemoveCountersSourceCost(CounterType.HEALING.createInstance(1))));
 
         // {2}{W}: Put a healing counter on Fylgja.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.HEALING.createInstance(1)),
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.HEALING.createInstance(1)),
                 new ManaCostsImpl<>("{2}{W}")));
     }
 

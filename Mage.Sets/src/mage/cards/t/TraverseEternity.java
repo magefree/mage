@@ -1,17 +1,13 @@
 package mage.cards.t;
 
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
-import mage.game.Game;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 
 import java.util.UUID;
 
@@ -20,13 +16,22 @@ import java.util.UUID;
  */
 public final class TraverseEternity extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("historic permanents you control");
+
+    static {
+        filter.add(HistoricPredicate.instance);
+    }
+
+    private static final GreatestAmongPermanentsValue xValue = new GreatestAmongPermanentsValue(GreatestAmongPermanentsValue.Quality.ManaValue, filter);
+    private static final Hint hint = xValue.getHint();
+
     public TraverseEternity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
-        // Draw cards equal to the highest mana value among historic permanents you control.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(TraverseEternityValue.instance)
-                .setText("draw cards equal to the highest mana value among historic permanents you control"));
-        this.getSpellAbility().addHint(TraverseEternityValue.getHint());
+        // Draw cards equal to the greatest mana value among historic permanents you control.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(xValue)
+                .setText("draw cards equal to the greatest mana value among historic permanents you control"));
+        this.getSpellAbility().addHint(hint);
     }
 
     private TraverseEternity(final TraverseEternity card) {
@@ -36,43 +41,5 @@ public final class TraverseEternity extends CardImpl {
     @Override
     public TraverseEternity copy() {
         return new TraverseEternity(this);
-    }
-}
-
-enum TraverseEternityValue implements DynamicValue {
-    instance;
-    private static final Hint hint = new ValueHint("Highest mana value among your historic permanents", instance);
-
-    public static Hint getHint() {
-        return hint;
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game
-                .getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT,
-                        sourceAbility.getControllerId(), sourceAbility, game
-                ).stream()
-                .filter(permanent -> permanent.isHistoric(game))
-                .mapToInt(MageObject::getManaValue)
-                .max()
-                .orElse(0);
-    }
-
-    @Override
-    public TraverseEternityValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }

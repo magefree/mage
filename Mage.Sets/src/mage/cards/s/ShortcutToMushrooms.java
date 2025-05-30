@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -29,9 +29,9 @@ public final class ShortcutToMushrooms extends CardImpl {
 
         // At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on target creature you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, RevoltCondition.instance, false
-        );
+                TargetController.YOU, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                false, RevoltCondition.instance
+        ).addHint(RevoltCondition.getHint());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability, new RevoltWatcher());
     }

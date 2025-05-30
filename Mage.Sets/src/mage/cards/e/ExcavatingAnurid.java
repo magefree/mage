@@ -4,8 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -20,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -28,8 +26,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ExcavatingAnurid extends CardImpl {
-
-    private static final Condition condition = new CardsInControllerGraveyardCondition(7);
 
     public ExcavatingAnurid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
@@ -42,17 +38,17 @@ public final class ExcavatingAnurid extends CardImpl {
         // When Excavating Anurid enters the battlefield, you may sacrifice a land. If you do, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)
+                new SacrificeTargetCost(StaticFilters.FILTER_LAND)
         )));
 
         // Threshold — As long as seven or more cards are in your graveyard, Excavating Anurid gets +1/+1 and has vigilance.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
-                condition, "As long as seven or more cards are in your graveyard, {this} gets +1/+1"
+                new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), ThresholdCondition.instance,
+                "as long as seven or more cards are in your graveyard, {this} gets +1/+1"
         ));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                 VigilanceAbility.getInstance(), Duration.WhileOnBattlefield
-        ), condition, "and has vigilance"));
+        ), ThresholdCondition.instance, "and has vigilance"));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

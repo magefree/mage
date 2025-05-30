@@ -12,6 +12,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -63,7 +64,7 @@ class ItDoesntAddUpEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Optional.ofNullable(game.getPermanent(card.getId()))
+        Optional.ofNullable(CardUtil.getPermanentFromCardPutToBattlefield(card, game))
                 .ifPresent(permanent -> permanent.setSuspected(true, game, source));
         return true;
     }

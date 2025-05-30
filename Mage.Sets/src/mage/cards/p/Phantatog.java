@@ -32,12 +32,10 @@ public final class Phantatog extends CardImpl {
 
         // Sacrifice an enchantment: Phantatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ENCHANTMENT)));
         // Discard a card: Phantatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
                 new DiscardCardCost()));
     }

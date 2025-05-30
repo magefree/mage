@@ -2,7 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -50,7 +50,7 @@ public final class ZopandrelHungerDominus extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // At the beginning of each combat, double the power and toughness of each creature you control until end of turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new ZopandrelHungerDominusEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new ZopandrelHungerDominusEffect(), false));
 
         // {G/P}{G/P}, Sacrifice two other creatures: Put an indestructible counter on Zopandrel, Hunger Dominus.
         Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()), new ManaCostsImpl<>("{G/P}{G/P}"));

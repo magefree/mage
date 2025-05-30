@@ -34,9 +34,9 @@ public final class SkyhunterCub extends CardImpl {
 
         // As long as Skyhunter Cub is equipped, it gets +1/+1 and has flying.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), EquippedSourceCondition.instance, rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
+        this.addAbility(new SimpleStaticAbility(effect1));
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), EquippedSourceCondition.instance, rule2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
+        this.addAbility(new SimpleStaticAbility(effect2));
     }
 
     private SkyhunterCub(final SkyhunterCub card) {

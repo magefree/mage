@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -21,14 +20,15 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DieYoung extends CardImpl {
 
     public DieYoung(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Choose target creature. You get {E}{E}, then you may pay any amount of {E}. The creature gets -1/-1 until end of turn for each {E} paid this way.
         this.getSpellAbility().addEffect(new DieYoungEffect());
@@ -66,8 +66,8 @@ class DieYoungEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             new GetEnergyCountersControllerEffect(2).apply(game, source);
-            int max = controller.getCounters().getCount(CounterType.ENERGY);
-            int numberToPayed = controller.getAmount(0, max, "How many energy counters do you like to pay? (maximum = " + max + ')', game);
+            int max = controller.getCountersCount(CounterType.ENERGY);
+            int numberToPayed = controller.getAmount(0, max, "How many energy counters do you like to pay? (maximum = " + max + ')', source, game);
             if (numberToPayed > 0) {
                 Cost cost = new PayEnergyCost(numberToPayed);
                 if (cost.pay(source, game, source, source.getControllerId(), true)) {

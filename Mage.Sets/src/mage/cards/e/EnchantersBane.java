@@ -1,13 +1,12 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -25,7 +24,7 @@ public final class EnchantersBane extends CardImpl {
 
         // At the beginning of your end step, target enchantment deals damage equal to its converted mana cost to its controller unless that player sacrifices it.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new EnchantersBaneEffect(), TargetController.YOU, false
+                new EnchantersBaneEffect()
         );
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);

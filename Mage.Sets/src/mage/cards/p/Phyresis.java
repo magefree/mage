@@ -36,7 +36,7 @@ public final class Phyresis extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private Phyresis(final Phyresis card) {

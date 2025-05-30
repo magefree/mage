@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
@@ -35,7 +35,7 @@ public final class OptimusPrimeHero extends CardImpl {
         this.addAbility(new MoreThanMeetsTheEyeAbility(this, "{2}{U}{R}{W}"));
 
         // At the beginning of each end step, bolster 1.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BolsterEffect(1), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new BolsterEffect(1), false));
 
         // When Optimus Prime dies, return it to the battlefield converted under its owner’s control.
         this.addAbility(new DiesSourceTriggeredAbility(new OptimusPrimeHeroEffect()));

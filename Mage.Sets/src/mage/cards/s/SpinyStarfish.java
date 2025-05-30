@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -35,16 +35,15 @@ public final class SpinyStarfish extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}: Regenerate Spiny Starfish.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{U}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{U}")));
 
         // At the beginning of each end step, if Spiny Starfish regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn.
         this.addAbility(
                 new ConditionalInterveningIfTriggeredAbility(
                         new BeginningOfEndStepTriggeredAbility(
-                                new CreateTokenEffect(
+                                TargetController.ANY, new CreateTokenEffect(
                                         new StarfishToken(),
                                         new SpinyStarfishDynamicValue()),
-                                TargetController.ANY,
                                 false),
                         SpinyStarfishCondition.instance,
                         "At the beginning of each end step, if {this} regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn."),

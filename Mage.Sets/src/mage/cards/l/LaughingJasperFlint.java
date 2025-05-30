@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
@@ -50,7 +50,7 @@ public final class LaughingJasperFlint extends CardImpl {
 
         // At the beginning of your upkeep, exile the top X cards of target opponent's library, where X is the number of outlaws you control. Until end of turn, you may cast spells from among those cards, and mana of any type can be spent to cast those spells.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new LaughingJasperFlintEffect(), TargetController.YOU, false
+                new LaughingJasperFlintEffect()
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability.addHint(LaughingJasperFlintEffect.getHint()));
@@ -112,7 +112,7 @@ class LaughingJasperFlintEffect extends OneShotEffect {
         }
         controller.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
         }
         return true;
     }

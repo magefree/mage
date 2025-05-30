@@ -49,7 +49,7 @@ public final class FiligreeVector extends CardImpl {
         // {1}, {T}, Sacrifice another artifact: Proliferate.
         ability = new SimpleActivatedAbility(new ProliferateEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT));
         this.addAbility(ability);
     }
 

@@ -27,7 +27,7 @@ public final class LightOfSanction extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         // Prevent all damage that would be dealt to creatures you control by sources you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LightOfSanctionEffect()));
+        this.addAbility(new SimpleStaticAbility(new LightOfSanctionEffect()));
     }
 
     private LightOfSanction(final LightOfSanction card) {

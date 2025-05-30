@@ -66,7 +66,7 @@ class AshiokNightmareMuseTokenEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = game
-                .getOpponents(source.getControllerId())
+                .getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

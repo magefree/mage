@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class NoeticScales extends CardImpl {
 
         // At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new NoeticScalesEffect(), TargetController.ANY, false
+                TargetController.EACH_PLAYER, new NoeticScalesEffect(), false
         ));
     }
 

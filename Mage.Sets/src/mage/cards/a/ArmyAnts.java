@@ -30,10 +30,10 @@ public final class ArmyAnts extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice a land: Destroy target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DestroyTargetEffect(),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

@@ -26,7 +26,7 @@ public final class GratuitousViolence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}{R}");
 
         // If a creature you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GratuitousViolenceReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new GratuitousViolenceReplacementEffect()));
     }
 
     private GratuitousViolence(final GratuitousViolence card) {
@@ -43,7 +43,7 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
 
     GratuitousViolenceReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
-        staticText = "If a creature you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead";
+        staticText = "If a creature you control would deal damage to a permanent or player, it deals double that damage instead";
     }
 
     private GratuitousViolenceReplacementEffect(final GratuitousViolenceReplacementEffect effect) {

@@ -37,7 +37,7 @@ public final class KoboldDrillSergeant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other Kobold creatures you control get +0/+1 and have trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true));
         Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
         effect.setText("and have trample");
         ability.addEffect(effect);

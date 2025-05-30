@@ -4,7 +4,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class VaporousDjinn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of your upkeep, Vaporous Djinn phases out unless you pay {U}{U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VaporousDjinnEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VaporousDjinnEffect()));
     }
 
     private VaporousDjinn(final VaporousDjinn card) {

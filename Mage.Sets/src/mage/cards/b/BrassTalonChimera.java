@@ -41,7 +41,7 @@ public final class BrassTalonChimera extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Sacrifice Brass-Talon Chimera: Put a +2/+2 counter on target Chimera creature. It gains first strike. (This effect lasts indefinitely.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield)
                 .setText("It gains first strike. <i>(This effect lasts indefinitely.)</i>"));
         ability.addTarget(new TargetCreaturePermanent(filter));

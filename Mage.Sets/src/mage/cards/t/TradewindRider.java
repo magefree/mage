@@ -37,7 +37,7 @@ public final class TradewindRider extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

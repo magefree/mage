@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -43,14 +42,14 @@ public final class TitanHunter extends CardImpl {
         // At the beginning of each player's end step, if no creatures died this turn, Titan Hunter deals 4 damage to that player.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new TitanHunterEffect(), TargetController.EACH_PLAYER, false
+                        TargetController.EACH_PLAYER, new TitanHunterEffect(), false
                 ), condition, "At the beginning of each player's end step, " +
                 "if no creatures died this turn, {this} deals 4 damage to that player."
         ).addHint(MorbidHint.instance));
 
         // {1}{B}, Sacrifice a creature: You gain 4 life.
         Ability ability = new SimpleActivatedAbility(new GainLifeEffect(4), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

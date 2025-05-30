@@ -102,7 +102,7 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
 class DraugrNecromancerCastFromExileEffect extends AsThoughEffectImpl {
 
     DraugrNecromancerCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast spells from among cards in exile your opponents own with ice counters on them";
     }
 
@@ -180,7 +180,7 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
             CardState cardState;
             if (card instanceof SplitCard) {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
-            } else if (card instanceof AdventureCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             } else if (card instanceof ModalDoubleFacedCard) {
                 cardState = game.getLastKnownInformationCard(((ModalDoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);

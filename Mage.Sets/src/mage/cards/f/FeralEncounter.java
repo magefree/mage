@@ -72,7 +72,7 @@ class FeralEncounterEffect extends LookLibraryAndPickControllerEffect {
         boolean result = putPickedCards.moveCards(player, pickedCards, source, game);
         pickedCards.retainZone(Zone.EXILED, game);
         for (Card card : pickedCards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, false);
         }
         result |= putLookedCards.moveCards(player, otherCards, source, game);
         return result;

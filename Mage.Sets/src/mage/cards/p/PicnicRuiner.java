@@ -3,7 +3,6 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -12,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -32,22 +30,15 @@ public final class PicnicRuiner extends AdventureCard {
         this.toughness = new MageInt(2);
 
         // Whenever Picnic Ruiner attacks while you control a creature with power 4 or greater, Picnic Ruiner gains double strike until end of turn.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new AttacksTriggeredAbility(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), false),
-                FerociousCondition.instance,
-                "Whenever {this} attacks while you control a creature with power 4 or greater, {this} gains double strike until end of turn."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(
+                new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), false
+        ).withTriggerCondition(FerociousCondition.instance));
 
         // Stolen Goodies
         // Distribute three +1/+1 counters among any number of target creatures you control.
-        this.getSpellCard().getSpellAbility().addEffect(
-                new DistributeCountersEffect(
-                        CounterType.P1P1, 3, false,
-                        "any number of target creatures you control"
-                )
-        );
+        this.getSpellCard().getSpellAbility().addEffect(new DistributeCountersEffect());
         this.getSpellCard().getSpellAbility().addTarget(
-                new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES)
+                new TargetCreaturePermanentAmount(3, 0, 3, StaticFilters.FILTER_CONTROLLED_CREATURES)
         );
 
         this.finalizeAdventure();

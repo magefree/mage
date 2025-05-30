@@ -51,7 +51,7 @@ public final class GlacialPlating extends CardImpl {
         DynamicValue boostValue = new MultipliedValue(new CountersSourceCount(CounterType.AGE), 3);
         Effect effect = new BoostEnchantedEffect(boostValue, boostValue, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +3/+3 for each age counter on {this}");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private GlacialPlating(final GlacialPlating card) {

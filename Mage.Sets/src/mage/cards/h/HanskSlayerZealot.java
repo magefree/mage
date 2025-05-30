@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -45,8 +45,7 @@ public final class HanskSlayerZealot extends CardImpl {
 
         // At the beginning of your upkeep, target opponent creates three Walker tokens.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenTargetEffect(new WalkerToken(), 3),
-                TargetController.YOU, false
+                new CreateTokenTargetEffect(new WalkerToken(), 3)
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

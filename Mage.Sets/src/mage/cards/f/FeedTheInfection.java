@@ -24,7 +24,7 @@ public final class FeedTheInfection extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // You draw three cards and lose 3 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3, "you"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3, true));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3).concatBy("and"));
 
         // Corrupted -- Each opponent with three or more poison counters loses 3 life.
@@ -62,7 +62,7 @@ class FeedTheInfectionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
-            if (player != null && player.getCounters().getCount(CounterType.POISON) >= 3) {
+            if (player != null && player.getCountersCount(CounterType.POISON) >= 3) {
                 player.loseLife(3, game, source, false);
             }
         }

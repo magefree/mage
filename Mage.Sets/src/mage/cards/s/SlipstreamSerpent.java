@@ -30,7 +30,7 @@ public final class SlipstreamSerpent extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Slipstream Serpent can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
 
         // When you control no Islands, sacrifice Slipstream Serpent.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(

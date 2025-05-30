@@ -19,7 +19,7 @@ public final class VillageRites extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

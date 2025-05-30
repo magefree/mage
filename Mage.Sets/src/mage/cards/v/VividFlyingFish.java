@@ -30,7 +30,6 @@ public final class VividFlyingFish extends CardImpl {
 
         // Vivid Flying Fish has flying as long as it's attacking.        
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 FlyingAbility.getInstance(),

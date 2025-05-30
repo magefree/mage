@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
@@ -10,11 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.choices.VoteHandler;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.CitizenGreenWhiteToken;
 import mage.game.permanent.token.Token;
@@ -41,9 +39,8 @@ public class MasterOfCeremonies extends CardImpl {
         // For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token.
         // For each player who chose secrets, you and that player each draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MasterOfCeremoniesChoiceEffect(),
-                TargetController.YOU,
-                false)
+                        new MasterOfCeremoniesChoiceEffect(), false
+                )
         );
     }
 
@@ -114,7 +111,7 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
             Token treasureOpponent = new TreasureToken();
             treasureOpponent.putOntoBattlefield(1, game, source, opponentId);
         }
-        game.applyEffects();
+        game.processAction();
 
         // Friends - You and that player each create a 1/1 green and white Citizen creature token.
         for (UUID opponentId : friendChoosers) {
@@ -124,7 +121,7 @@ class MasterOfCeremoniesChoiceEffect extends OneShotEffect {
             Token citizenOpponent = new CitizenGreenWhiteToken();
             citizenOpponent.putOntoBattlefield(1, game, source, opponentId);
         }
-        game.applyEffects();
+        game.processAction();
 
         // Secrets - You and that player each draw a card.
         for (UUID opponentId : secretsChoosers) {

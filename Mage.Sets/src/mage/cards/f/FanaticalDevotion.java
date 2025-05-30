@@ -24,9 +24,9 @@ public final class FanaticalDevotion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Sacrifice a creature: Regenerate target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new RegenerateTargetEffect(),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

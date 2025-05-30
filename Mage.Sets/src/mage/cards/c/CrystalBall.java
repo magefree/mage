@@ -19,7 +19,7 @@ public final class CrystalBall extends CardImpl {
 
     public CrystalBall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(2), new TapSourceCost());
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
     }

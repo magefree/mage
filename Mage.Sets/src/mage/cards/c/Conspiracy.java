@@ -36,7 +36,7 @@ public final class Conspiracy extends CardImpl {
 
         // Creature cards you own that aren't on the battlefield, creature 
         // spells you control, and creatures you control are the chosen type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConspiracyEffect()));
+        this.addAbility(new SimpleStaticAbility(new ConspiracyEffect()));
 
     }
 
@@ -123,7 +123,7 @@ public final class Conspiracy extends CardImpl {
                 }
             }
             // creatures you control
-            List<Permanent> permanents = game.getState().getBattlefield().getAllActivePermanents(controller.getId());
+            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(controller.getId());
             for (Permanent permanent : permanents) {
                 if (permanent.isCreature(game)) {
                     permanent.removeAllCreatureTypes(game);

@@ -37,7 +37,7 @@ public final class ContaminatedGround extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land is a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.SWAMP)));
+        this.addAbility(new SimpleStaticAbility(new BecomesBasicLandEnchantedEffect(SubType.SWAMP)));
 
         // Whenever enchanted land becomes tapped, its controller loses 2 life.
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), "enchanted land"));

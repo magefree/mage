@@ -31,7 +31,7 @@ public final class QuickbeamUpstartEnt extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
-        // Whenever Quickbeam, Upstart Ent or another Treefolk enters the battlefield under your control, up to two target creatures each get +2/+2 and gain trample until the end of turn.
+        // Whenever Quickbeam, Upstart Ent or another Treefolk you control enters, up to two target creatures each get +2/+2 and gain trample until the end of turn.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostTargetEffect(2, 2)
                         .setText("up to two target creatures each get +2/+2"),

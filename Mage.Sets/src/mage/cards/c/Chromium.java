@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -35,7 +34,7 @@ public final class Chromium extends CardImpl {
         this.addAbility(new RampageAbility(2));
         // At the beginning of your upkeep, sacrifice Chromium unless you pay {W}{U}{B}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
-            new ManaCostsImpl<>("{W}{U}{B}")), TargetController.YOU, false));
+            new ManaCostsImpl<>("{W}{U}{B}"))));
     }
 
     private Chromium(final Chromium card) {

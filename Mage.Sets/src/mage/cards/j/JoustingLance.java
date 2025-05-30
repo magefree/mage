@@ -26,13 +26,13 @@ public final class JoustingLance extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
 
         // As long as it's your turn, equipped creature has first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield),
                 MyTurnCondition.instance,
-                "As long as it's your turn, equipped creature has first strike."))
+                "During your turn, equipped creature has first strike."))
                 .addHint(MyTurnHint.instance));
 
         // Equip {3}

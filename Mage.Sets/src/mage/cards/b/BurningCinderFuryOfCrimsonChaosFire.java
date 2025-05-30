@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.ContinuousEffect;
@@ -38,8 +38,8 @@ public final class BurningCinderFuryOfCrimsonChaosFire extends CardImpl {
         this.addAbility(new BurningCinderFuryOfCrimsonChaosFireAbility());
 
         // At the beginning of each player’s end step, if that player didn’t tap any nonland permanents that turn, Burning Cinder Fury of Crimson Chaos Fire deals 3 damage to that player.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3).setText("{this} deals 3 damage to that player"),
-                TargetController.ANY, new BurningCinderFuryOfCrimsonChaosFireCondition(), false), new BurningCinderFuryOfCrimsonChaosFireWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new DamageTargetEffect(3).setText("{this} deals 3 damage to that player"),
+                false, new BurningCinderFuryOfCrimsonChaosFireCondition()), new BurningCinderFuryOfCrimsonChaosFireWatcher());
     }
 
     private BurningCinderFuryOfCrimsonChaosFire(final BurningCinderFuryOfCrimsonChaosFire card) {

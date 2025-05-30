@@ -1,9 +1,8 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -13,14 +12,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.HumanKnightToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author Susucr
  */
 public final class ForthEorlingas extends CardImpl {
@@ -30,7 +30,7 @@ public final class ForthEorlingas extends CardImpl {
 
         // Create X 2/2 red Human Knight creature tokens with trample and haste.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
-                new HumanKnightToken(), ManacostVariableValue.REGULAR, false, false
+                new HumanKnightToken(), GetXValue.instance, false, false
         ));
 
         // Whenever one or more creatures you control deal combat damage to one or more players this turn, you become the monarch.
@@ -50,7 +50,7 @@ public final class ForthEorlingas extends CardImpl {
     }
 }
 
-class ForthEorlingasTriggeredAbility extends DelayedTriggeredAbility {
+class ForthEorlingasTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     public ForthEorlingasTriggeredAbility() {
         super(new BecomesMonarchSourceEffect(), Duration.EndOfTurn, false);
@@ -68,18 +68,19 @@ class ForthEorlingasTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
-            if (!damagedEvent.isCombatDamage()) {
-                continue;
-            }
-            Permanent permanent = game.getPermanent(damagedEvent.getSourceId());
-            if (permanent != null && permanent.isControlledBy(getControllerId())) {
-                return true;
-            }
+    public boolean checkEvent(DamagedPlayerEvent event, Game game) {
+        if (!event.isCombatDamage()) {
+            return false;
         }
-        return false;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return permanent != null
+                && permanent.isCreature(game)
+                && permanent.isControlledBy(getControllerId());
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return !getFilteredEvents((DamagedBatchForPlayersEvent) event, game).isEmpty();
     }
 
     @Override

@@ -30,7 +30,7 @@ public final class GhalmasWarden extends CardImpl {
         // Metalcraft — Ghalma’s Warden gets +2/+2 as long as you control three or more artifacts.
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect)
+        this.addAbility(new SimpleStaticAbility(effect)
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance)
         );

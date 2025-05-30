@@ -35,7 +35,7 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
         this.text = text;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever {this} attacks, ");
-        this.replaceRuleText = true; // default true to replace "{this}" with "it"
+        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
     }
 
     protected AttacksTriggeredAbility(final AttacksTriggeredAbility ability) {

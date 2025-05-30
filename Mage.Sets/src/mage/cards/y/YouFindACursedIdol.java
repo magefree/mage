@@ -4,6 +4,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,6 +37,7 @@ public final class YouFindACursedIdol extends CardImpl {
         mode = new Mode(new CreateTokenEffect(new TreasureToken()));
         mode.addEffect(new VentureIntoTheDungeonEffect().concatBy("and"));
         this.getSpellAbility().addMode(mode.withFlavorWord("Steal Its Eyes"));
+        this.getSpellAbility().addHint(CurrentDungeonHint.instance);
     }
 
     private YouFindACursedIdol(final YouFindACursedIdol card) {

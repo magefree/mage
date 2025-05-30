@@ -21,7 +21,7 @@ public class DraftPlayer {
     protected Deck deck;
     protected List<Card> booster;
     protected boolean picking;
-    protected boolean boosterLoaded;
+    protected boolean boosterLoaded; // client confirmed that it got a booster data (for computer must be always false)
     protected boolean joined = false;
     protected Set<UUID> hiddenCards;
 
@@ -64,14 +64,13 @@ public class DraftPlayer {
         if (hiddenCards != null) {
             this.hiddenCards = hiddenCards;
         }
-        synchronized (booster) {
-            booster.remove(card);
-        }
+        booster.remove(card);
         picking = false;
     }
 
-    public void setBooster(List<Card> booster) {
+    public void setBoosterAndLoad(List<Card> booster) {
         this.booster = booster;
+        this.boosterLoaded = false; // human will receive new pick, computer with choose new pick
     }
 
     public List<Card> getBooster() {
@@ -83,8 +82,9 @@ public class DraftPlayer {
         }
     }
 
-    public void setPicking() {
-        picking = true;
+    public void setPickingAndSending() {
+        this.picking = true;
+        this.boosterLoaded = false;
     }
 
     public boolean isPicking() {

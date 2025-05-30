@@ -40,7 +40,7 @@ public final class VanquishersBanner extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Benefit)));
 
         // Creatures you control of the chosen type get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // Whenever you cast a creature spell of the chosen type, draw a card.
         this.addAbility(new DrawCardIfCreatureTypeAbility());

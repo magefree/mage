@@ -61,7 +61,7 @@ enum UrgentNecropsyAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void prepareCost(Ability ability, Game game) {
         int xValue = ability
                 .getTargets()
                 .stream()

@@ -23,7 +23,7 @@ public final class ThoughtVessel extends CardImpl {
 
         // You have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
         
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());

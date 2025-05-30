@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -9,13 +8,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForetellAbility;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.ModalDoubleFacedCardHalf;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -25,6 +18,8 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
@@ -115,13 +110,13 @@ class EtherealValkyrieEffect extends OneShotEffect {
                     foretellAbility = new ForetellAbility(exileCard, leftHalfCost, rightHalfCost);
                 }
             }
-        } else if (exileCard instanceof AdventureCard) {
+        } else if (exileCard instanceof CardWithSpellOption) {
             String creatureCost = CardUtil.reduceCost(exileCard.getMainCard().getManaCost(), 2).getText();
-            String spellCost = CardUtil.reduceCost(((AdventureCard) exileCard).getSpellCard().getManaCost(), 2).getText();
+            String spellCost = CardUtil.reduceCost(((CardWithSpellOption) exileCard).getSpellCard().getManaCost(), 2).getText();
             game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Cost", creatureCost);
             game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Split Cost", spellCost);
             foretellAbility = new ForetellAbility(exileCard, creatureCost, spellCost);
-        } else if (!exileCard.isLand(game)){
+        } else if (!exileCard.isLand(game)) {
             // normal card
             String costText = CardUtil.reduceCost(exileCard.getManaCost(), 2).getText();
             game.getState().setValue(exileCard.getId().toString() + "Foretell Cost", costText);

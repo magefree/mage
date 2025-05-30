@@ -3,7 +3,7 @@ package mage.cards.h;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
@@ -39,7 +39,7 @@ public final class HornOfValhalla extends AdventureCard {
         // Ysgard's Call
         // Create X 1/1 white Soldier creature tokens.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(
-                new SoldierToken(), ManacostVariableValue.REGULAR
+                new SoldierToken(), GetXValue.instance
         ));
         
         this.finalizeAdventure();

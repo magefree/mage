@@ -52,7 +52,7 @@ public final class WildbornPreserver extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Whenever another non-Human creature enters the battlefield under your control, you may pay {X}. When you do, put X +1/+1 counters on Wildborn Preserver.
+        // Whenever another non-Human creature you control enters, you may pay {X}. When you do, put X +1/+1 counters on Wildborn Preserver.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new WildbornPreserverCreateReflexiveTriggerEffect(), filter
         ));
@@ -94,7 +94,7 @@ class WildbornPreserverCreateReflexiveTriggerEffect extends OneShotEffect {
         if (!player.chooseUse(outcome, "Pay " + cost.getText() + "?", source, game)) {
             return false;
         }
-        int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+        int costX = player.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay for counters)", game, source, true);
         cost.add(new GenericManaCost(costX));
         if (!cost.pay(source, game, source, source.getControllerId(), false, null)) {
             return false;

@@ -34,7 +34,7 @@ public final class MoldervineCloak extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
         // Enchanted creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
         // Dredge 2
         this.addAbility(new DredgeAbility(2));
     }

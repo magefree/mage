@@ -41,7 +41,7 @@ public final class SpiresOfOrazca extends CardImpl {
         // {T}: Untap target attacking creature an opponent controls and remove it from combat.
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap target attacking creature an opponent controls and remove it from combat.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         effect = new RemoveFromCombatTargetEffect();
         effect.setText(" ");
         ability.addEffect(effect);

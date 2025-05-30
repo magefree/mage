@@ -64,10 +64,10 @@ public class MageTable extends JTable {
                 // html tooltip
                 java.awt.Point p = e.getPoint();
                 int colIndex = columnModel.getColumnIndexAtX(p.x);
-                TableColumn col = columnModel.getColumn(colIndex);
                 if (colIndex < 0) {
                     return "";
                 }
+                TableColumn col = columnModel.getColumn(colIndex);
                 int realIndex = col.getModelIndex();
 
                 String tip;
@@ -107,7 +107,7 @@ public class MageTable extends JTable {
 
     public static String textToHtmlWithSize(String text, Font font) {
         if (text != null && !text.toLowerCase(Locale.ENGLISH).startsWith("<html>")) {
-            return "<html><p style=\"font-size: " + font.getSize() + ";\">" + text + "</p>";
+            return "<html><p style=\"font-size: " + font.getSize() + "pt;\">" + text + "</p>";
         }
         return text;
     }

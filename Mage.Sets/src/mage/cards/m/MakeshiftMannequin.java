@@ -24,6 +24,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -84,11 +85,11 @@ class MakeshiftMannequinEffect extends OneShotEffect {
                 counters.addCounter(CounterType.MANNEQUIN.createInstance());
                 game.setEnterWithCounters(cardId, counters);
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                    Permanent permanent = game.getPermanent(cardId);
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         ContinuousEffect gainedEffect = new MakeshiftMannequinGainAbilityEffect();
                         // Bug #6885 Fixed when owner/controller leaves the game the effect still applies
-                        SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, gainedEffect);
+                        SimpleStaticAbility gainAbility = new SimpleStaticAbility(gainedEffect);
                         gainAbility.setSourceId(cardId);
                         gainAbility.getTargets().add(source.getTargets().get(0));
                         game.addEffect(gainedEffect, gainAbility);

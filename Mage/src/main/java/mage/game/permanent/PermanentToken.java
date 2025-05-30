@@ -71,7 +71,7 @@ public class PermanentToken extends PermanentImpl {
     @Override
     public String getName() {
         if (name.isEmpty()) {
-            return EmptyNames.FACE_DOWN_TOKEN.toString();
+            return EmptyNames.FACE_DOWN_TOKEN.getObjectName();
         } else {
             return name;
         }

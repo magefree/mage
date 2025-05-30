@@ -26,7 +26,6 @@ public final class AuraFracture extends CardImpl {
 
         // Sacrifice a land: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new DestroyTargetEffect(), 
                 new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         ability.addTarget(new TargetEnchantmentPermanent());

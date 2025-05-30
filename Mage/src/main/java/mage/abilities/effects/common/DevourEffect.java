@@ -6,8 +6,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicate;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -45,9 +44,9 @@ public class DevourEffect extends ReplacementEffectImpl {
     // "creature" is a special case as the rule will not mention it.
     //
     // 's' will be added to pluralize, so far so good with the current text generation.
-    private final FilterControlledPermanent filterDevoured;
+    private final FilterPermanent filterDevoured;
 
-    public DevourEffect(int devourFactor, FilterControlledPermanent filterDevoured) {
+    public DevourEffect(int devourFactor, FilterPermanent filterDevoured) {
         super(Duration.EndOfGame, Outcome.Detriment);
         this.devourFactor = devourFactor;
         this.filterDevoured = filterDevoured;
@@ -81,11 +80,8 @@ public class DevourEffect extends ReplacementEffectImpl {
         if (creature == null || controller == null) {
             return false;
         }
-
-        FilterControlledPermanent filter = new FilterControlledPermanent(filterDevoured.getMessage() + "s to devour");
-        for (Predicate predicate : filterDevoured.getPredicates()) {
-            filter.add(predicate);
-        }
+        FilterPermanent filter = filterDevoured.copy();
+        filter.setMessage(filterDevoured.getMessage() + "s (to devour)");
         filter.add(AnotherPredicate.instance);
 
         Target target = new TargetSacrifice(1, Integer.MAX_VALUE, filter);
@@ -114,7 +110,7 @@ public class DevourEffect extends ReplacementEffectImpl {
                 + filterDevoured.getMessage() + (devouredCreatures > 1 ? "s" : "")
         );
         
-        game.getState().processAction(game); // need for multistep effects
+        game.processAction(); // need for multistep effects
 
         int amountCounters;
         if (devourFactor == Integer.MAX_VALUE) {
@@ -129,6 +125,10 @@ public class DevourEffect extends ReplacementEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+
         String text = "Devour ";
 
         String filterMessage = filterDevoured.getMessage();
@@ -142,9 +142,9 @@ public class DevourEffect extends ReplacementEffectImpl {
             text += devourFactor;
         }
 
-        text += " <i>(As this enters the battlefield, you may sacrifice any number of "
+        text += " <i>(As this creature enters, you may sacrifice any number of "
                 + filterMessage + "s. "
-                + "This creature enters the battlefield with ";
+                + "This creature enters with ";
 
         if (devourFactor == Integer.MAX_VALUE) {
             text += "X +1/+1 counters on it for each of those creatures";

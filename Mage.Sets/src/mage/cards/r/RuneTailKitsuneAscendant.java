@@ -87,7 +87,7 @@ class RuneTailEssence extends TokenImpl {
         color.setWhite(true);
 
         // Prevent all damage that would be dealt to creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES)));
     }
 

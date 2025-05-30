@@ -28,7 +28,7 @@ public final class DriftingShade extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
     private DriftingShade(final DriftingShade card) {

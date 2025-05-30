@@ -30,7 +30,7 @@ public final class DedicatedMartyr extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}, Sacrifice Dedicated Martyr: You gain 3 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(3), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         

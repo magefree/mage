@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -9,17 +8,19 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TwoHeadedGiant extends CardImpl {
@@ -69,14 +70,11 @@ class TwoHeadedGiantEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        boolean head1 = player.flipCoin(source, game, false);
-        boolean head2 = player.flipCoin(source, game, false);
-        if (head1 == head2) {
-            if (head1) {
-                game.addEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), source);
-            } else {
-                game.addEffect(new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn), source);
-            }
+        List<Boolean> flips = player.flipCoins(source, game, 2, false);
+        if (flips.get(0) == flips.get(1)) {
+            game.addEffect(new GainAbilitySourceEffect(
+                    flips.get(0) ? DoubleStrikeAbility.getInstance() : new MenaceAbility(), Duration.EndOfTurn
+            ), source);
         }
         return true;
     }

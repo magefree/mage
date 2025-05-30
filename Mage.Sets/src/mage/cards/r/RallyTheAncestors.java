@@ -21,6 +21,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int xValue = source.getManaCostsToPay().getX();
+            int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
             FilterCreatureCard filter = new FilterCreatureCard();
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
             Set<Card> cards = player.getGraveyard().getCards(filter, game);
@@ -80,7 +81,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
             List<Permanent> toExile = new ArrayList<>(cards.size());
             for (Card card : cards) {
                 if (card != null) {
-                    Permanent permanent = game.getPermanent(card.getId());
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         toExile.add(permanent);
                     }

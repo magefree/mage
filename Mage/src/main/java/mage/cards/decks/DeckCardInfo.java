@@ -1,5 +1,3 @@
-
-
 package mage.cards.decks;
 
 import mage.util.Copyable;
@@ -7,14 +5,18 @@ import mage.util.Copyable;
 import java.io.Serializable;
 
 /**
+ * Client side: card record in deck file
+ *
  * @author LevelX2
  */
 public class DeckCardInfo implements Serializable, Copyable<DeckCardInfo> {
 
+    static final int MAX_AMOUNT_PER_CARD = 99;
+
     private String cardName;
     private String setCode;
-    private String cardNum;
-    private int quantity;
+    private String cardNumber;
+    private int amount;
 
     public DeckCardInfo() {
         super();
@@ -23,19 +25,29 @@ public class DeckCardInfo implements Serializable, Copyable<DeckCardInfo> {
     protected DeckCardInfo(final DeckCardInfo info) {
         this.cardName = info.cardName;
         this.setCode = info.setCode;
-        this.cardNum = info.cardNum;
-        this.quantity = info.quantity;
+        this.cardNumber = info.cardNumber;
+        this.amount = info.amount;
     }
 
-    public DeckCardInfo(String cardName, String cardNum, String setCode) {
-        this(cardName, cardNum, setCode, 1);
+    public DeckCardInfo(String cardName, String cardNumber, String setCode) {
+        this(cardName, cardNumber, setCode, 1);
     }
 
-    public DeckCardInfo(String cardName, String cardNum, String setCode, int quantity) {
+    public static void makeSureCardAmountFine(int amount, String cardName) {
+        // runtime check
+        if (amount > MAX_AMOUNT_PER_CARD) {
+            // xmage uses 1 for amount all around, but keep that protection anyway
+            throw new IllegalArgumentException("Found too big amount for a deck's card: " + cardName + " - " + amount);
+        }
+    }
+
+    public DeckCardInfo(String cardName, String cardNumber, String setCode, int amount) {
+        makeSureCardAmountFine(amount, cardName);
+
         this.cardName = cardName;
-        this.cardNum = cardNum;
+        this.cardNumber = cardNumber;
         this.setCode = setCode;
-        this.quantity = quantity;
+        this.amount = amount;
     }
 
     public String getCardName() {
@@ -46,21 +58,16 @@ public class DeckCardInfo implements Serializable, Copyable<DeckCardInfo> {
         return setCode;
     }
 
-    public String getCardNum() {
-        return cardNum;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public DeckCardInfo increaseQuantity() {
-        quantity++;
-        return this;
+    public int getAmount() {
+        return amount;
     }
 
     public String getCardKey() {
-        return setCode + cardNum;
+        return setCode + cardNumber;
     }
 
     @Override

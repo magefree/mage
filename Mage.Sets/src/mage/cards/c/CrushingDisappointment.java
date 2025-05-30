@@ -18,7 +18,7 @@ public final class CrushingDisappointment extends CardImpl {
 
         // Each player loses 2 life. You draw two cards.
         this.getSpellAbility().addEffect(new LoseLifeAllPlayersEffect(2));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).concatBy("You"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true));
     }
 
     private CrushingDisappointment(final CrushingDisappointment card) {

@@ -68,6 +68,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Commander's Sphere", 276, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Consider", 187, Rarity.COMMON, mage.cards.c.Consider.class));
         cards.add(new SetCardInfo("Corsairs of Umbar", 19, Rarity.RARE, mage.cards.c.CorsairsOfUmbar.class));
+        cards.add(new SetCardInfo("Courageous Resolve", 506, Rarity.RARE, mage.cards.c.CourageousResolve.class));
         cards.add(new SetCardInfo("Court of Ire", 213, Rarity.RARE, mage.cards.c.CourtOfIre.class));
         cards.add(new SetCardInfo("Crown of Gondor", 75, Rarity.RARE, mage.cards.c.CrownOfGondor.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 302, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
@@ -137,6 +138,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Galadriel's Dismissal", 500, Rarity.RARE, mage.cards.g.GaladrielsDismissal.class));
         cards.add(new SetCardInfo("Galadriel, Elven-Queen", 3, Rarity.MYTHIC, mage.cards.g.GaladrielElvenQueen.class));
         cards.add(new SetCardInfo("Galadriel, Light of Valinor", 498, Rarity.MYTHIC, mage.cards.g.GaladrielLightOfValinor.class));
+        cards.add(new SetCardInfo("Gandalf of the Secret Fire", 507, Rarity.MYTHIC, mage.cards.g.GandalfOfTheSecretFire.class));
         cards.add(new SetCardInfo("Gandalf, Westward Voyager", 6, Rarity.MYTHIC, mage.cards.g.GandalfWestwardVoyager.class));
         cards.add(new SetCardInfo("Gemstone Caverns", 364, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class));
         cards.add(new SetCardInfo("Genesis Wave", 245, Rarity.RARE, mage.cards.g.GenesisWave.class));

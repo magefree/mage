@@ -33,7 +33,7 @@ public final class IceCage extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
 
         // When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
         this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroySourceEffect()));

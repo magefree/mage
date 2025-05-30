@@ -36,7 +36,7 @@ public final class HellBentRaider extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Discard a card at random: Hell-Bent Raider gains protection from white until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.WHITE), Duration.EndOfTurn),
                 new DiscardCardCost(true));
         this.addAbility(ability);

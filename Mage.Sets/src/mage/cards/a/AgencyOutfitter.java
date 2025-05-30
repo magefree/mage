@@ -56,7 +56,8 @@ class AgencyOutfitterEffect extends OneShotEffect {
 
     AgencyOutfitterEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "you may search your graveyard, hand, and/or library for a card named Magnifying Glass and/or a card named Thinking Cap and put them onto the battlefield. If you search your library this way, shuffle.";
+        this.staticText = "you may search your graveyard, hand and/or library for a card named Magnifying Glass" +
+                " and/or a card named Thinking Cap and put them onto the battlefield. If you search your library this way, shuffle.";
     }
 
     private AgencyOutfitterEffect(final AgencyOutfitterEffect effect) {

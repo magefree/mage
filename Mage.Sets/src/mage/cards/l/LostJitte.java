@@ -49,7 +49,7 @@ public final class LostJitte extends CardImpl {
         this.addAbility(ability);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(1));
+        this.addAbility(new EquipAbility(1, false));
     }
 
     private LostJitte(final LostJitte card) {

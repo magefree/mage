@@ -31,7 +31,7 @@ public class KayaSpiritsJusticeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Astrid Peth");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
-        // Exile all creatures and graveyards
+        // Exile all creatures. Exile all graveyards.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Farewell");
         setModeChoice(playerA, "2");
         setModeChoice(playerA, "4");

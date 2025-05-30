@@ -1,9 +1,10 @@
 package mage.abilities.condition.common;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.watchers.common.SaddledMountWatcher;
 
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public enum SaddledCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .map(Permanent::isSaddled)
+                .map(p -> SaddledMountWatcher.hasBeenSaddledThisTurn(new MageObjectReference(p, game), game))
                 .orElse(false);
     }
 }

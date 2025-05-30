@@ -31,7 +31,7 @@ public final class BondedFetch extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // {tap}: Draw a card, then discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
     private BondedFetch(final BondedFetch card) {

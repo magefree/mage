@@ -29,7 +29,7 @@ public class PoisonousAbility extends DealsCombatDamageToAPlayerTriggeredAbility
 
     @Override
     public String getRule() {
-        return String.format("Poisonous %d. <i>(%s)</i>", n, super.getRule());
+        return String.format("Poisonous %d <i>(%s)</i>", n, super.getRule());
     }
 
     @Override

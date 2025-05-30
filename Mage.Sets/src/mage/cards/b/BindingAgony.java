@@ -29,7 +29,7 @@ public final class BindingAgony extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature is dealt damage, Binding Agony deals that much damage to that creature's controller.
-        this.addAbility(new DealtDamageAttachedTriggeredAbility(new DamageAttachedControllerEffect(SavedDamageValue.MUCH), false));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(new DamageAttachedControllerEffect(SavedDamageValue.MUCH)));
     }
 
     private BindingAgony(final BindingAgony card) {

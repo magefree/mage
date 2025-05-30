@@ -32,7 +32,7 @@ public final class NightshadePeddler extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Nightshade Peddler is paired with another creature, both creatures have deathtouch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(DeathtouchAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(DeathtouchAbility.getInstance(), ruleText)));
     }
 
     private NightshadePeddler(final NightshadePeddler card) {

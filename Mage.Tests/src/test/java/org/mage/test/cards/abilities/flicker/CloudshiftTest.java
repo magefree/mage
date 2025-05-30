@@ -61,8 +61,10 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Cloudshift");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Knight of Meadowgrain");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Knight of Meadowgrain"); // clone has name of copied permanent
+        setChoice(playerA, true); // Use Clone's ability
         setChoice(playerA, "Heirs of Stromkirk");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -120,6 +122,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addTarget(playerB, "Timberland Guide");
         attack(2, playerB, "Fervent Cathar");
         castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Cloudshift", "Timberland Guide");
+        addTarget(playerA, "Timberland Guide"); // where to put counter
         block(2, playerA, "Timberland Guide", "Fervent Cathar");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
@@ -136,7 +139,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
     @Test
     public void testThatCardIsHandledAsNewInstanceAfterCloudshift() {
-        // Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // Whenever another creature you control enters, you gain life equal to that creature's toughness.
         // {1}{G}{W}, {T}: Populate. (Create a tokenonto the battlefield that's a copy of a creature token you control.)
         addCard(Zone.BATTLEFIELD, playerA, "Trostani, Selesnya's Voice");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
@@ -175,7 +178,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
         attack(3, playerA, "Silvercoat Lion");
 
-        activateAbility(3, PhaseStep.END_COMBAT, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull  Equipped creature gets");
+        activateAbility(3, PhaseStep.END_COMBAT, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull Equipped creature gets");
         setModeChoice(playerA, "1");
         castSpell(3, PhaseStep.END_COMBAT, playerA, "Cloudshift", "Silvercoat Lion", "Remove a charge counter from");
 
@@ -212,7 +215,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
         attack(3, playerA, "Silvercoat Lion");
 
-        activateAbility(4, PhaseStep.DRAW, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull  Equipped creature gets");
+        activateAbility(4, PhaseStep.DRAW, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull Equipped creature gets");
         setModeChoice(playerA, "1");
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Flickerwisp");
         addTarget(playerB, "Silvercoat Lion");
@@ -314,8 +317,10 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "Silvercoat Lion");
-        // Silvercoat Lion is autochosen
+        setChoice(playerA, true); // yes to flicker
+        addTarget(playerA, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -356,6 +361,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flickerwisp");
         addTarget(playerA, "Flickerwisp");
         addTarget(playerA, "Courser of Kruphix");
+        setChoice(playerA, "At the beginning"); // order triggers
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -431,7 +437,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Savannah", 3);
         addCard(Zone.BATTLEFIELD, playerA, mystic);
         addCard(Zone.BATTLEFIELD, playerA, vanguard);
-        addCard(Zone.BATTLEFIELD, playerA, "Orchard Warden"); // Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature’s toughness.
+        addCard(Zone.BATTLEFIELD, playerA, "Orchard Warden"); // Whenever another Treefolk creature you control enters, you may gain life equal to that creature’s toughness.
         addCard(Zone.HAND, playerA, lignify);
         addCard(Zone.HAND, playerA, cloudshift);
 

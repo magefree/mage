@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
@@ -13,7 +13,6 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
@@ -37,7 +36,7 @@ public final class DelverOfSecrets extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelverOfSecretsEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelverOfSecretsEffect()));
     }
 
     private DelverOfSecrets(final DelverOfSecrets card) {

@@ -34,7 +34,6 @@ public final class DarksteelMonolith extends CardImpl {
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell that you cast from your hand.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new DarksteelMonolithAddAltCostEffect()
         ));
     }
@@ -55,7 +54,7 @@ enum IsBeingCastFromHandCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        if (object instanceof SplitCardHalf || object instanceof AdventureCardSpell || object instanceof ModalDoubleFacedCardHalf) {
+        if (object instanceof SplitCardHalf || object instanceof SpellOptionCard || object instanceof ModalDoubleFacedCardHalf) {
             UUID mainCardId = ((Card) object).getMainCard().getId();
             object = game.getObject(mainCardId);
         }
@@ -96,22 +95,17 @@ class DarksteelMonolithAlternativeCost extends AlternativeCostSourceAbility {
     }
 
     @Override
-    public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        Permanent monolith = game.getPermanent(getSourceId());
-        if (controller != null
-                && monolith != null) {
-            if (controller.chooseUse(Outcome.Neutral, "Use "
-                    + monolith.getLogName() + " to pay the alternative cost?", ability, game)) {
-                wasActivated = super.askToActivateAlternativeCosts(ability, game);
-                if (wasActivated) {
-                    game.getState().setValue(monolith.getId().toString()
-                            + monolith.getZoneChangeCounter(game)
-                            + monolith.getTurnsOnBattlefield(), true);
-                }
-            }
+    public boolean activateAlternativeCosts(Ability ability, Game game) {
+        if (!super.activateAlternativeCosts(ability, game)) {
+            return false;
         }
-        return wasActivated;
+        Permanent monolith = game.getPermanent(getSourceId());
+        if (monolith != null) {
+            game.getState().setValue(monolith.getId().toString()
+                    + monolith.getZoneChangeCounter(game)
+                    + monolith.getTurnsOnBattlefield(), true);
+        }
+        return true;
     }
 }
 

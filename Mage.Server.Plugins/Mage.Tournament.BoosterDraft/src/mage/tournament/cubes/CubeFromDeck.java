@@ -13,15 +13,13 @@ public class CubeFromDeck extends DraftCube {
     public CubeFromDeck(Deck cubeFromDeck) {
         super("Cube From Deck");
 
-        DeckCardLists cards = null;
-        if (cubeFromDeck != null) {
-            cards = cubeFromDeck.getDeckCardLists();
+        if (cubeFromDeck == null) {
+            return;
         }
 
-        if (cards != null) {
-            for (DeckCardInfo card : cards.getCards()) {
-                cubeCards.add(new CardIdentity(card.getCardName(), card.getSetCode(), card.getCardNum()));
-            }
+        DeckCardLists cards = cubeFromDeck.prepareCardsOnlyDeck();
+        for (DeckCardInfo card : cards.getCards()) {
+            cubeCards.add(new CardIdentity(card.getCardName(), card.getSetCode(), card.getCardNumber()));
         }
     }
 }

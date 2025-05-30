@@ -7,6 +7,9 @@ import java.io.File;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Deck import: base class for all importers
+ */
 public abstract class DeckImporter {
 
     public static class FixedInfo {

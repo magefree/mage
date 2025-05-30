@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -39,13 +38,13 @@ public class PutOnLibrarySourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (player == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (player == null || card == null) {
             return false;
         }
         if (onTop) {
-            return player.putCardsOnTopOfLibrary((Card) sourceObject, game, source, false);
+            return player.putCardsOnTopOfLibrary(card, game, source, false);
         }
-        return player.putCardsOnBottomOfLibrary((Card) sourceObject, game, source, false);
+        return player.putCardsOnBottomOfLibrary(card, game, source);
     }
 }

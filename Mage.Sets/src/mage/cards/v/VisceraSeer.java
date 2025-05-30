@@ -28,8 +28,8 @@ public final class VisceraSeer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Sacrifice a creature: Scry 1. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.addAbility(new SimpleActivatedAbility(new ScryEffect(1),
+                new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private VisceraSeer(final VisceraSeer card) {

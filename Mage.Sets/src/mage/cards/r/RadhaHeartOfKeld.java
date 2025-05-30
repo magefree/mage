@@ -42,7 +42,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
         // As long as it's your turn, Radha, Heart of Keld has first strike.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "As long as it's your turn, {this} has first strike."
+                MyTurnCondition.instance, "During your turn, {this} has first strike."
         )).addHint(MyTurnHint.instance));
 
         // You may look at the top card of your library any time, and you may play lands from the top of your library.

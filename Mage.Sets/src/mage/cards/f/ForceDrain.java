@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class ForceDrain extends CardImpl {
 
     public ForceDrain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // ForceDrain deals 2 damage to any target. If player was dealt damage this way, you gain 2 life.
         this.getSpellAbility().addTarget(new TargetAnyTarget());

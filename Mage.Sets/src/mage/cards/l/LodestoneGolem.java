@@ -33,7 +33,7 @@ public final class LodestoneGolem extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Nonartifact spells cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
     }
 
     private LodestoneGolem(final LodestoneGolem card) {

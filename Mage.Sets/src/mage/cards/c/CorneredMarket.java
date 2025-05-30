@@ -32,7 +32,7 @@ public final class CorneredMarket extends CardImpl {
 
         // Players can't cast spells with the same name as a nontoken permanent.
         // Players can't play nonbasic lands with the same name as a nontoken permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CorneredMarketReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new CorneredMarketReplacementEffect()));
 
     }
 
@@ -87,7 +87,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             // play land check
             if (card.isLand(game)
                     && !card.isBasic(game)) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (permanent != null) {
                         if (CardUtil.haveSameNames(card, permanent.getName(), game)) {
                             return true;
@@ -98,7 +98,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             }
             // cast spell check
             if (spell != null) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (permanent != null) {
                         if (CardUtil.haveSameNames(card, permanent.getName(), game)) {
                             return true;

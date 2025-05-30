@@ -29,7 +29,7 @@ public final class BlightedSteppe extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {3}{W}, {T}, Sacrifice Blighted Steppe: You gain 2 life for each creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainLifeEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED, 2)),
                 new ManaCostsImpl<>("{3}{W}"));
         ability.addCost(new TapSourceCost());

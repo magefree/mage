@@ -33,7 +33,7 @@ public final class CursedFlesh extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets -1/-1 and has fear.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "and has fear"));
         this.addAbility(ability);               
     }

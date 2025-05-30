@@ -37,10 +37,10 @@ public final class UrzasEngine extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // {3}: Urza's Engine gains banding until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{3}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{3}")));
 
         // {3}: Attacking creatures banded with Urza's Engine gain trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasEngineEffect(), new ManaCostsImpl<>("{3}")));
+        this.addAbility(new SimpleActivatedAbility(new UrzasEngineEffect(), new ManaCostsImpl<>("{3}")));
     }
 
     private UrzasEngine(final UrzasEngine card) {

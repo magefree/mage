@@ -3,6 +3,7 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -64,7 +65,7 @@ public final class FranticScapegoat extends CardImpl {
 }
 
 //Based on Lightmine Field
-class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
+class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     FranticScapegoatTriggeredAbility() {
         super(Zone.BATTLEFIELD, new FranticScapegoatSuspectEffect(), true);
@@ -82,18 +83,24 @@ class FranticScapegoatTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Permanent source = getSourcePermanentIfItStillExists(game);
-        return (source != null && source.isSuspected());
+        return source != null && source.isSuspected();
+    }
+
+    @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.BATTLEFIELD) {
+            return false;
+        }
+        Permanent permanent = event.getTarget();
+        return permanent != null && permanent.isCreature(game) && permanent.isControlledBy(getControllerId());
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-        Set<MageObjectReference> enteringCreatures = zEvent.getEvents().stream()
-                .filter(z -> z.getToZone() == Zone.BATTLEFIELD)
-                .filter(z -> this.controllerId.equals(z.getPlayerId()))
+        Set<MageObjectReference> enteringCreatures = getFilteredEvents((ZoneChangeBatchEvent) event, game)
+                .stream()
                 .map(ZoneChangeEvent::getTarget)
                 .filter(Objects::nonNull)
-                .filter(permanent -> permanent.isCreature(game))
                 .map(p -> new MageObjectReference(p, game))
                 .collect(Collectors.toSet());
         if (!enteringCreatures.isEmpty()) {

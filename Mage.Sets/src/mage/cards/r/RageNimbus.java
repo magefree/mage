@@ -31,7 +31,7 @@ public final class RageNimbus extends CardImpl {
 
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new AttacksIfAbleTargetEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetCreaturePermanent());

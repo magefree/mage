@@ -28,7 +28,7 @@ public final class BogSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Bog Serpent can't attack unless defending player controls a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.SWAMP, "a Swamp"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.SWAMP, "a Swamp"))));
 
         // When you control no Swamps, sacrifice Bog Serpent.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(

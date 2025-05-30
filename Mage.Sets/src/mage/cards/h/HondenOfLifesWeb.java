@@ -2,7 +2,7 @@
 
 package mage.cards.h;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SpiritToken;
 
@@ -34,7 +33,7 @@ public final class HondenOfLifesWeb extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHRINE);
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritToken(), xValue), TargetController.YOU, false).addHint(hint));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritToken(), xValue)).addHint(hint));
     }
 
     private HondenOfLifesWeb(final HondenOfLifesWeb card) {

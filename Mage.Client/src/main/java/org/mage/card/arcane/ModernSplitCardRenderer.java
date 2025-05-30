@@ -56,7 +56,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     private boolean isAftermath = false;
 
     private static String trimAdventure(String rule) {
-        if (rule.startsWith("Adventure")) {
+        if (rule.startsWith("Adventure") || rule.startsWith("Omen")) {
             return rule.substring(rule.lastIndexOf("&mdash;") + 8);
         }
         return rule;
@@ -71,7 +71,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         rightHalf.color = new ObjectColor(cardView.getRightSplitCostsStr());
         leftHalf.color = new ObjectColor(cardView.getLeftSplitCostsStr());
 
-        if (isAdventure()) {
+        if (isCardWithSpellOption()) {
             List<String> trimmedRules = new ArrayList<>();
             for (String rule : view.getRightSplitRules()) {
                 trimmedRules.add(trimAdventure(rule));
@@ -95,7 +95,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         // they "rotate" in opposite directions making consquence and normal split cards
         // have the "right" vs "left" as the top half.
         // Adventures are treated differently and not rotated at all.
-        if (isAdventure()) {
+        if (isCardWithSpellOption()) {
             manaCostString = leftHalf.manaCostString;
             textboxKeywords = leftHalf.keywords;
             textboxRules = leftHalf.rules;
@@ -159,7 +159,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     protected void drawBackground(Graphics2D g) {
         if (cardView.isFaceDown()) {
             drawCardBackTexture(g);
-        } if (isAdventure()) {
+        } if (isCardWithSpellOption()) {
             super.drawBackground(g);
         } else {
             { // Left half background (top of the card)
@@ -204,7 +204,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     @Override
     protected void drawArt(Graphics2D g) {
-        if (isAdventure) {
+        if (isCardWithSpellOption) {
             super.drawArt(g);
         } else if (artImage != null) {
             if (isAftermath()) {
@@ -318,7 +318,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     @Override
     protected void drawFrame(Graphics2D g, CardPanelAttributes attribs, BufferedImage image, boolean lessOpaqueRulesTextBox) {
-        if (isAdventure()) {
+        if (isCardWithSpellOption()) {
             super.drawFrame(g, attribs, image, lessOpaqueRulesTextBox);
 
             CardPanelAttributes adventureAttribs = new CardPanelAttributes(
@@ -355,24 +355,48 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
                     totalContentInset + 3, typeLineY + boxHeight * 3 - 1,
                     contentWidth / 2 - 8, cardHeight - borderWidth * 3 - typeLineY - boxHeight * 3 + 2, false);
         } else if (isAftermath()) {
-            drawSplitHalfFrame(getUnmodifiedHalfContext(g), attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
-            drawSplitHalfFrame(getAftermathHalfContext(g), attribs, rightHalf, (rightHalf.ch - boxHeight) / 2);
+            Graphics2D g2 = getUnmodifiedHalfContext(g);
+            try {
+                drawSplitHalfFrame(g2, attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
+            } finally {
+                g2.dispose();
+            }
+            g2 = getAftermathHalfContext(g);
+            try {
+                drawSplitHalfFrame(g2, attribs, rightHalf, (rightHalf.ch - boxHeight) / 2);
+            } finally {
+                g2.dispose();
+            }
         } else {
-            drawSplitHalfFrame(getLeftHalfContext(g), attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
-            drawSplitHalfFrame(getRightHalfContext(g), attribs, rightHalf, (int) (rightHalf.ch * TYPE_LINE_Y_FRAC));
+            Graphics2D g2 = getLeftHalfContext(g);
+            try {
+                drawSplitHalfFrame(g2, attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
+            } finally {
+                g2.dispose();
+            }
+            g2 = getRightHalfContext(g);
+            try {
+                drawSplitHalfFrame(g2, attribs, rightHalf, (int) (rightHalf.ch * TYPE_LINE_Y_FRAC));
+            } finally {
+                g2.dispose();
+            }
             if (isFuse()) {
-                Graphics2D g2 = getRightHalfContext(g);
-                int totalFuseBoxWidth = rightHalf.cw * 2 + 2 * borderWidth + dividerSize;
-                Paint boxColor = getTextboxPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth, false);
-                Paint borderPaint = getBorderPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth);
-                CardRendererUtils.drawRoundedBox(g2,
-                        -borderWidth, rightHalf.ch,
-                        totalFuseBoxWidth, boxHeight,
-                        contentInset,
-                        borderPaint, boxColor);
-                drawNameLine(g2, attribs, SplitCard.FUSE_RULE, "",
-                        0, rightHalf.ch,
-                        totalFuseBoxWidth - 2 * borderWidth, boxHeight);
+                g2 = getRightHalfContext(g);
+                try {
+                    int totalFuseBoxWidth = rightHalf.cw * 2 + 2 * borderWidth + dividerSize;
+                    Paint boxColor = getTextboxPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth, false);
+                    Paint borderPaint = getBorderPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth);
+                    CardRendererUtils.drawRoundedBox(g2,
+                            -borderWidth, rightHalf.ch,
+                            totalFuseBoxWidth, boxHeight,
+                            contentInset,
+                            borderPaint, boxColor);
+                    drawNameLine(g2, attribs, SplitCard.FUSE_RULE, "",
+                            0, rightHalf.ch,
+                            totalFuseBoxWidth - 2 * borderWidth, boxHeight);
+                } finally {
+                    g2.dispose();
+                }
             }
         }
     }

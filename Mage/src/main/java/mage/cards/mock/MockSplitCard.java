@@ -34,7 +34,6 @@ public class MockSplitCard extends SplitCard implements MockableCard {
 
         this.frameColor = card.getFrameColor();
         this.frameStyle = card.getFrameStyle();
-        this.usesVariousArt = card.usesVariousArt();
 
         this.color = card.getColor();
         this.flipCard = card.isFlipCard();
@@ -120,8 +119,7 @@ public class MockSplitCard extends SplitCard implements MockableCard {
         // so a MockSplitCard must ignore it (duplicate fix)
         Abilities<Ability> sourceAbilities = this.getAbilities();
         return CardUtil.getCardRulesWithAdditionalInfo(
-                this.getId(),
-                this.getName(),
+                this,
                 sourceAbilities,
                 sourceAbilities
         );

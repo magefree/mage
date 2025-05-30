@@ -42,7 +42,7 @@ public final class KeeperOfTheNineGales extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {tap}, Tap two untapped Birds you control: Return target permanent to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

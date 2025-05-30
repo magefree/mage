@@ -9,6 +9,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessPlusOneSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +44,9 @@ public final class UrborgLhurgoyf extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new MillCardsControllerEffect(millValue)));
 
         // Urborg Lhurgoyf's power is equal to the number of creature cards in your graveyard and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessPlusOneSourceEffect(powerValue)
+        ).addHint(new ValueHint("Creature cards in your graveyard", powerValue)));
     }
 
     private UrborgLhurgoyf(final UrborgLhurgoyf card) {

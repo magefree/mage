@@ -67,7 +67,7 @@ public class DisguiseTest extends CardTestPlayerBase {
         });
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dog Walker", 0);
-        checkPermanentCount("after face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        checkPermanentCount("after face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         runCode("after face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // server side
             Permanent permanent = currentGame.getBattlefield().getAllPermanents()
@@ -76,7 +76,7 @@ public class DisguiseTest extends CardTestPlayerBase {
                     .findFirst()
                     .orElse(null);
             Assert.assertNotNull("server side: can't find disguised permanent", permanent);
-            Assert.assertEquals("server side: wrong name", EmptyNames.FACE_DOWN_CREATURE.toString(), permanent.getName());
+            Assert.assertEquals("server side: wrong name", EmptyNames.FACE_DOWN_CREATURE.getObjectName(), permanent.getName());
             Assert.assertEquals("server side: wrong color", "", permanent.getColor(currentGame).toString());
             Assert.assertEquals("server side: wrong power", "2", permanent.getPower().toString());
             Assert.assertEquals("server side: wrong toughness", "2", permanent.getToughness().toString());
@@ -145,7 +145,7 @@ public class DisguiseTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{R/W}{R/W}: Turn");
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN, playerA);
         checkPermanentCount("after face up", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Dog Walker", 1);
-        checkPermanentCount("after face up", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        checkPermanentCount("after face up", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         checkPermanentCount("after face up", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Dog Token", 2);
         runCode("after face up", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
             Permanent permanent = currentGame.getBattlefield().getAllPermanents()
@@ -193,7 +193,7 @@ public class DisguiseTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
         assertLife(playerA, 20);
     }
 

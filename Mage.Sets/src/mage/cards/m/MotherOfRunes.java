@@ -30,7 +30,7 @@ public final class MotherOfRunes extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target creature you control gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

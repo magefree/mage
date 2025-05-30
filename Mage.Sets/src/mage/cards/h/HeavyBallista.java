@@ -29,7 +29,7 @@ public final class HeavyBallista extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Heavy Ballista deals 2 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);
     }

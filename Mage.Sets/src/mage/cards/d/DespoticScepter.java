@@ -30,7 +30,7 @@ public final class DespoticScepter extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {tap}: Destroy target permanent you own. It can't be regenerated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new TapSourceCost());
         ability.addTarget(new TargetPermanent(FILTER));
         this.addAbility(ability);
     }

@@ -35,7 +35,7 @@ public final class MagusOfTheArena extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {3}, {tap}: Tap target creature you control and target creature of an opponent's choice they control. Those creatures fight each other.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagusOfTheArenaEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new MagusOfTheArenaEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_CREATURE, false));

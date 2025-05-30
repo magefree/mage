@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
@@ -43,13 +43,13 @@ public final class EzuriClawOfProgress extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever a creature with power 2 or less enters the battlefield under your control, you get an experience counter.
+        // Whenever a creature with power 2 or less you control enters, you get an experience counter.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersPlayersEffect(
                 CounterType.EXPERIENCE.createInstance(), TargetController.YOU
         ), filter));
 
         // At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new EzuriClawOfProgressEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new EzuriClawOfProgressEffect());
         ability.addTarget(new TargetControlledCreaturePermanent(filter2));
         this.addAbility(ability);
     }
@@ -86,7 +86,7 @@ class EzuriClawOfProgressEffect extends OneShotEffect {
         if (controller != null) {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
-                int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
+                int amount = controller.getCountersCount(CounterType.EXPERIENCE);
                 target.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
             }
             return true;

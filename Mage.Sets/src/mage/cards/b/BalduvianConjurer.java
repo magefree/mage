@@ -35,7 +35,7 @@ public final class BalduvianConjurer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Target snow land becomes a 2/2 creature until end of turn. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new CreatureToken(2, 2), false, true, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(new CreatureToken(2, 2), false, true, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

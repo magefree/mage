@@ -29,7 +29,7 @@ public final class PardicMiner extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Pardic Miner: Target player can't play lands this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PardicMinerEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PardicMinerEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

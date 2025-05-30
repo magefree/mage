@@ -31,7 +31,7 @@ public final class CalmingLicid extends CardImpl {
         this.addAbility(new LicidAbility(new ColoredManaCost(ColoredManaSymbol.W), new ColoredManaCost(ColoredManaSymbol.W)));
         
         // Enchanted creature can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAttachedEffect(AttachmentType.AURA)));
     }
 
     private CalmingLicid(final CalmingLicid card) {

@@ -3,8 +3,7 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HeroicAbility;
@@ -27,7 +26,6 @@ import java.util.UUID;
  */
 public final class LegolasMasterArcher extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
     private static final FilterSpell filter = new FilterSpell("a spell that targets a creature you don't control");
 
     static {
@@ -50,7 +48,7 @@ public final class LegolasMasterArcher extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())).setAbilityWord(null));
 
         // Whenever you cast a spell that targets a creature you don't control, Legolas deals damage equal to its power to up to one target creature.
-        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(xValue)
+        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("{this} deals damage equal to its power to up to one target creature"), filter, false);
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);

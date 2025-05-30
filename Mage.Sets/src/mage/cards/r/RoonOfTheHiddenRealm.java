@@ -38,7 +38,7 @@ public final class RoonOfTheHiddenRealm extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // {2}, {tap}: Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldNextEndStepTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new ExileReturnBattlefieldNextEndStepTargetEffect(), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

@@ -1,31 +1,21 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
+import mage.abilities.effects.common.replacement.GraveyardFromAnywhereExileReplacementEffect;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,10 +31,12 @@ public final class MagusOfTheWill extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {2}{B}, {T}, Exile Magus of the Will: Until end of turn, you may play cards from your graveyard.
+        // {2}{B}, {T}, Exile Magus of the Will: Until end of turn, you may play lands and cast spells from your graveyard.
         // If a card would be put into your graveyard from anywhere else this turn, exile that card instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanPlayCardsFromGraveyardEffect(), new ManaCostsImpl<>("{2}{B}"));
-        ability.addEffect(new MagusOfTheWillReplacementEffect());
+        Ability ability = new SimpleActivatedAbility(
+                PlayFromGraveyardControllerEffect.playLandsAndCastSpells(Duration.EndOfTurn),
+                new ManaCostsImpl<>("{2}{B}"));
+        ability.addEffect(new GraveyardFromAnywhereExileReplacementEffect(Duration.EndOfTurn));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
@@ -58,79 +50,4 @@ public final class MagusOfTheWill extends CardImpl {
     public MagusOfTheWill copy() {
         return new MagusOfTheWill(this);
     }
-}
-
-class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
-
-    CanPlayCardsFromGraveyardEffect() {
-        this(Duration.EndOfTurn);
-    }
-
-    public CanPlayCardsFromGraveyardEffect(Duration duration) {
-        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "Until end of turn, you may play cards from your graveyard";
-    }
-
-    private CanPlayCardsFromGraveyardEffect(final CanPlayCardsFromGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CanPlayCardsFromGraveyardEffect copy() {
-        return new CanPlayCardsFromGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.setPlayCardsFromGraveyard(true);
-            return true;
-        }
-        return false;
-    }
-
-}
-
-class MagusOfTheWillReplacementEffect extends ReplacementEffectImpl {
-
-    MagusOfTheWillReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Detriment);
-        this.staticText = "If a card would be put into your graveyard from anywhere else this turn, exile that card instead";
-    }
-
-    private MagusOfTheWillReplacementEffect(final MagusOfTheWillReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MagusOfTheWillReplacementEffect copy() {
-        return new MagusOfTheWillReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && card.isOwnedBy(source.getControllerId())) {
-                Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (!(permanent instanceof PermanentToken)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
 }

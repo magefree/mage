@@ -20,6 +20,9 @@ import mage.players.Player;
  */
 public interface Draft extends MageItem, Serializable {
 
+    UUID getTableId();
+    void setTableId(UUID tableId);
+
     void addPlayer(Player player);
     Collection<DraftPlayer> getPlayers();
     boolean replacePlayer(Player oldPlayer, Player newPlayer);
@@ -31,6 +34,7 @@ public interface Draft extends MageItem, Serializable {
     int getCardNum();
     boolean addPick(UUID playerId, UUID cardId, Set<UUID> hiddenCards);
     void setBoosterLoaded(UUID playerID);
+    void boosterSendingStart();
     void start();
     boolean isStarted();
     void setStarted();

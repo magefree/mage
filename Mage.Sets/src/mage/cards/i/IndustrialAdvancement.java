@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -9,16 +9,14 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -32,7 +30,7 @@ public final class IndustrialAdvancement extends CardImpl {
 
         // At the beginning of your end step, you may sacrifice a creature. If you do, look at the top X cards of your library, when X is that creature's mana value. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new IndustrialAdvancementEffect(), TargetController.YOU, false
+                new IndustrialAdvancementEffect()
         ));
     }
 
@@ -70,9 +68,8 @@ class IndustrialAdvancementEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetPermanent target = new TargetControlledCreaturePermanent(0, 1);
-        target.withNotTarget(true);
-        player.choose(outcome, target, source, game);
+        TargetSacrifice target = new TargetSacrifice(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE);
+        player.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {
             return false;
@@ -84,7 +81,7 @@ class IndustrialAdvancementEffect extends OneShotEffect {
         TargetCard targetCard = new TargetCardInLibrary(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
         );
-        player.choose(outcome, cards, targetCard, source, game);
+        player.choose(Outcome.PutCreatureInPlay, cards, targetCard, source, game);
         player.moveCards(game.getCard(targetCard.getFirstTarget()), Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);

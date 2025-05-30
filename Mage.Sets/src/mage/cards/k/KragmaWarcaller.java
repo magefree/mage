@@ -39,7 +39,7 @@ public final class KragmaWarcaller extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Minotaur creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter1, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter1, false)));
 
         // Whenever a Minotaur you control attacks, it gets +2/+0 until end of turn.
         Effect effect = new BoostTargetEffect(2,0, Duration.EndOfTurn);

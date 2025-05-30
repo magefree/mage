@@ -36,7 +36,7 @@ public final class EmbermawHellion extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // If another red source you control would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmbermawHellionEffect()));
+        this.addAbility(new SimpleStaticAbility(new EmbermawHellionEffect()));
     }
 
     private EmbermawHellion(final EmbermawHellion card) {

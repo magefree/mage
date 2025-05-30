@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -39,6 +38,7 @@ public final class CallerOfTheClaw extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
+
         // When Caller of the Claw enters the battlefield, create a 2/2 green Bear creature token for each nontoken creature put into your graveyard from the battlefield this turn.
         this.getSpellAbility().addWatcher(new CallerOfTheClawWatcher());
         Effect effect = new CreateTokenEffect(new BearToken(), new CallerOfTheClawDynamicValue());

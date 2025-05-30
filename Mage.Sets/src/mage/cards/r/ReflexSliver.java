@@ -34,7 +34,7 @@ public final class ReflexSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Sliver creatures have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 HasteAbility.getInstance(), Duration.WhileOnBattlefield,
                 filter, "All Sliver creatures have haste.")));
     }

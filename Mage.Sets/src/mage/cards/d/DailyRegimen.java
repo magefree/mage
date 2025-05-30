@@ -37,7 +37,6 @@ public final class DailyRegimen extends CardImpl {
         this.addAbility(ability);
         // {1}{W}: Put a +1/+1 counter on enchanted creature.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersAttachedEffect(CounterType.P1P1.createInstance(),"enchanted creature"),
                 new ManaCostsImpl<>("{1}{W}")));
     }

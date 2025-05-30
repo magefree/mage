@@ -36,7 +36,7 @@ public final class EternalWarrior extends CardImpl {
         this.addAbility(ability);
 
         // Enchant creature has vigilance
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private EternalWarrior(final EternalWarrior card) {

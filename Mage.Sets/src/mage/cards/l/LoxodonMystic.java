@@ -29,7 +29,7 @@ public final class LoxodonMystic extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

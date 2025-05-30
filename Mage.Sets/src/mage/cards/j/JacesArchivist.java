@@ -33,7 +33,7 @@ public final class JacesArchivist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}, {T}: Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JacesArchivistEffect(), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new JacesArchivistEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

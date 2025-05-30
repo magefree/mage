@@ -1,9 +1,8 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedToCounterCondition;
@@ -24,6 +23,9 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author L_J
@@ -46,12 +48,12 @@ public final class VenarianGold extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature doesn’t untap during its controller’s untap step if it has a sleep counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
                 new AttachedToCounterCondition(CounterType.SLEEP, 1)).setText("Enchanted creature doesn't untap during its controller's untap step if it has a sleep counter on it")));
 
         // At the beginning of the upkeep of enchanted creature’s controller, remove a sleep counter from that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCountersAttachedEffect(CounterType.SLEEP.createInstance(), "that creature"),
-                TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new RemoveCountersAttachedEffect(CounterType.SLEEP.createInstance(), "that creature"),
+                false));
 
     }
 
@@ -71,7 +73,7 @@ class VenarianGoldValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         MageObject mageObject = game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.STACK);
         if (mageObject instanceof StackObject) {
-            return ((StackObject) mageObject).getStackAbility().getManaCostsToPay().getX();
+            return CardUtil.getSourceCostsTag(game, ((StackObject) mageObject).getStackAbility(), "X", 0);
         }
         return 0;
     }

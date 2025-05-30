@@ -59,7 +59,7 @@ class SakashimaTheImpostorCopyApplier extends CopyApplier {
         blueprint.addSuperType(SuperType.LEGENDARY);
         blueprint.setName("Sakashima the Impostor");
         // {2}{U}{U}: Return Sakashima the Impostor to its owner's hand at the beginning of the next end step
-        blueprint.getAbilities().add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        blueprint.getAbilities().add(new SimpleActivatedAbility(
                 new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandSourceEffect(true)), false),
                 new ManaCostsImpl<>("{2}{U}{U}")
         ));

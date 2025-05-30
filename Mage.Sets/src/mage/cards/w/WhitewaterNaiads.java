@@ -26,7 +26,7 @@ public final class WhitewaterNaiads extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Constellation - Whenever Whitewater Naiads or another enchantment enters the battlefield under your control, target creature can't be blocked this turn.
+        // Constellation - Whenever Whitewater Naiads or another enchantment you control enters, target creature can't be blocked this turn.
         Ability ability = new ConstellationAbility(new CantBeBlockedTargetEffect(Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());        
         this.addAbility(ability);

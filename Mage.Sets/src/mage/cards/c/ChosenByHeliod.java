@@ -41,7 +41,7 @@ public final class ChosenByHeliod extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
         // Enchanted creature gets +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0,2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0,2, Duration.WhileOnBattlefield)));
     }
 
     private ChosenByHeliod(final ChosenByHeliod card) {

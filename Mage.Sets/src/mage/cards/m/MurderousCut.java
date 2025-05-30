@@ -20,7 +20,7 @@ public final class MurderousCut extends CardImpl {
 
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
         
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

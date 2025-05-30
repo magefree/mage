@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
 /**
@@ -45,7 +44,7 @@ public final class Dracoplasm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new DracoplasmEffect()));
 
         // {R}: Dracoplasm gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     private Dracoplasm(final Dracoplasm card) {
@@ -66,9 +65,9 @@ class DracoplasmEffect extends ReplacementEffectImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    public DracoplasmEffect() {
+    DracoplasmEffect() {
         super(Duration.EndOfGame, Outcome.BoostCreature);
-        this.staticText = "As {this} enters the battlefield, sacrifice any number of creatures. {this}'s power becomes the total power of those creatures and its toughness becomes their total toughness";
+        this.staticText = "As {this} enters, sacrifice any number of creatures. {this}'s power becomes the total power of those creatures and its toughness becomes their total toughness";
     }
 
     private DracoplasmEffect(final DracoplasmEffect effect) {
@@ -98,12 +97,12 @@ class DracoplasmEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
+        Target target = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
 
-        controller.chooseTarget(Outcome.Detriment, target, source, game);
+        controller.choose(Outcome.Detriment, target, source, game);
         if (target.getTargets().isEmpty()) {
             return false;
         }
@@ -117,8 +116,9 @@ class DracoplasmEffect extends ReplacementEffectImpl {
                 toughness = CardUtil.overflowInc(toughness, targetCreature.getToughness().getValue());
             }
         }
-        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.Custom);
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield);
         game.addEffect(effect, source);
+        this.discard(); // prevent multiple replacements e.g. on blink
         return false;
     }
 }

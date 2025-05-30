@@ -5,8 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -23,8 +22,6 @@ import java.util.UUID;
  */
 public final class GoblinFireleaper extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public GoblinFireleaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
@@ -39,7 +36,7 @@ public final class GoblinFireleaper extends CardImpl {
         ));
 
         // When Goblin Fireleaper dies, it deals damage equal to its power to target creature an opponent controls.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(xValue)
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("it deals damage equal to its power to target creature an opponent controls"));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);

@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CopyTargetStackAbilityEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.replacement.AdditionalTriggerControlledETBReplacementEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class VirtueOfKnowledge extends AdventureCard {
 
         // Vantress Visions
         // Copy target activated or triggered ability you control. You may choose new targets for the copy.
-        this.getSpellCard().getSpellAbility().addEffect(new CopyTargetStackAbilityEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new CopyTargetStackObjectEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
 
         this.finalizeAdventure();

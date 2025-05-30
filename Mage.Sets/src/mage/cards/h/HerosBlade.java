@@ -31,9 +31,9 @@ public final class HerosBlade extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 2)));
 
-        // Whenever a legendary creature enters the battlefield under your control, you may attach Hero's Blade to it.
+        // Whenever a legendary creature you control enters, you may attach Hero's Blade to it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 filter, true, SetTargetPointer.PERMANENT));

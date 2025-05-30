@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -14,12 +14,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -37,7 +34,7 @@ public final class HappilyEverAfter extends CardImpl {
         // At the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new WinGameSourceControllerEffect(), TargetController.YOU, false
+                        new WinGameSourceControllerEffect(), false
                 ), HappilyEverAfterCondition.instance, "At the beginning of your upkeep, " +
                 "if there are five colors among permanents you control, there are six or more card types " +
                 "among permanents you control and/or cards in your graveyard, and your life total is " +

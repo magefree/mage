@@ -27,7 +27,7 @@ public final class ChoMannoRevolutionary extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield)));
     }
 
     private ChoMannoRevolutionary(final ChoMannoRevolutionary card) {

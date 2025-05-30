@@ -1,9 +1,5 @@
 package mage.cards.a;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -17,6 +13,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -68,8 +68,7 @@ class AnointWithAfflictionEffect extends OneShotEffect {
                 || Optional
                 .ofNullable(game.getPlayer(permanent.getControllerId()))
                 .filter(Objects::nonNull)
-                .map(Player::getCounters)
-                .map(counters -> counters.getCount(CounterType.POISON) >= 3)
+                .map(p -> p.getCountersCount(CounterType.POISON) >= 3)
                 .orElse(false))
                 && player.moveCards(permanent, Zone.EXILED, source, game);
     }

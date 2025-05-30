@@ -5,7 +5,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.MayExileCardFromHandPlottedEffect;
@@ -109,7 +109,7 @@ class CantCastJaceReawakenedEffect extends ContinuousRuleModifyingEffectImpl {
 class JaceReawakenedDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     JaceReawakenedDelayedTriggeredAbility() {
-        super(new CopyTargetSpellEffect(true), Duration.EndOfTurn, false);
+        super(new CopyTargetStackObjectEffect(true), Duration.EndOfTurn, false);
     }
 
     private JaceReawakenedDelayedTriggeredAbility(final JaceReawakenedDelayedTriggeredAbility ability) {

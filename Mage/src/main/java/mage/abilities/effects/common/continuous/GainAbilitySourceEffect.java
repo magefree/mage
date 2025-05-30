@@ -36,8 +36,9 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.onCard = onCard;
-        this.staticText = "{this} gains " + CardUtil.stripReminderText(ability.getRule())
-                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
+        this.staticText = "{this} " + (duration == Duration.WhileOnBattlefield ? "has" : "gains") +
+                ' ' + CardUtil.stripReminderText(ability.getRule()) +
+                (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
         this.generateGainAbilityDependencies(ability, null);
     }
 
@@ -63,7 +64,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
                 return;
             }
         }
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             Permanent permanent = game.getPermanentEntering(source.getSourceId());
             if (permanent != null) {
                 affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1, game));
@@ -77,7 +78,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         if (onCard) {
             Card card;
-            if (affectedObjectsSet) {
+            if (getAffectedObjectsSet()) {
                 card = affectedObjectList.get(0).getCard(game);
             } else {
                 card = game.getCard(source.getSourceId());
@@ -89,7 +90,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
             }
         } else {
             Permanent permanent;
-            if (affectedObjectsSet) {
+            if (getAffectedObjectsSet()) {
                 permanent = affectedObjectList.get(0).getPermanent(game);
             } else {
                 permanent = game.getPermanent(source.getSourceId());

@@ -6,7 +6,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,8 +40,8 @@ public final class MammothUmbra extends CardImpl {
         ).setText("and has vigilance"));
         this.addAbility(ability);
 
-        // Totem armor
-        this.addAbility(new TotemArmorAbility());
+        // Umbra armor
+        this.addAbility(new UmbraArmorAbility());
     }
 
     private MammothUmbra(final MammothUmbra card) {

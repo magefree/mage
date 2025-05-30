@@ -34,7 +34,7 @@ import mage.watchers.Watcher;
  */
 public final class MelekReforgedResearcher extends CardImpl {
 
-    private static final FilterCard filter = new FilterInstantOrSorceryCard("the first instant or sorcery spell");
+    private static final FilterCard filter = new FilterInstantOrSorceryCard("The first instant or sorcery spell you cast each turn");
 
     static {
         filter.add(MelekReforgedResearcherPredicate.instance);
@@ -57,8 +57,7 @@ public final class MelekReforgedResearcher extends CardImpl {
 
         // The first instant or sorcery spell you cast each turn costs {3} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filter, 3);
-        effect.setText("The first instant or sorcery spell you cast each turn costs {3} less to cast");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect),
+        this.addAbility(new SimpleStaticAbility(effect),
                 new MelekReforgedResearcherWatcher());
     }
 
@@ -72,13 +71,13 @@ public final class MelekReforgedResearcher extends CardImpl {
     }
 }
 
-enum MelekReforgedResearcherPredicate implements ObjectSourcePlayerPredicate<Controllable> {
+enum MelekReforgedResearcherPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
-        if (input.getObject() instanceof Card &&
-                ((Card) input.getObject()).isInstantOrSorcery(game)) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        if (input.getObject() != null &&
+                input.getObject().isInstantOrSorcery(game)) {
             MelekReforgedResearcherWatcher watcher = game.getState().getWatcher(MelekReforgedResearcherWatcher.class);
             return watcher != null &&
                     watcher.getInstantOrSorcerySpellsCastThisTurn(input.getPlayerId()) == 0;

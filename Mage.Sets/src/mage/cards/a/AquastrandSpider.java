@@ -35,7 +35,7 @@ public final class AquastrandSpider extends CardImpl {
         this.addAbility(new GraftAbility(this, 2));
 
         // {G}: Target creature with a +1/+1 counter on it gains reach until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(ReachAbility.getInstance(),
                         Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_P1P1));

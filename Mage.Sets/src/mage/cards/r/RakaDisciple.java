@@ -28,11 +28,11 @@ public final class RakaDisciple extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability firstAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability firstAbility  = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
         firstAbility.addCost(new TapSourceCost());
         firstAbility.addTarget(new TargetAnyTarget());
         this.addAbility(firstAbility);
-        Ability secondAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability secondAbility  = new SimpleActivatedAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U));
         secondAbility.addCost(new TapSourceCost());
         secondAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(secondAbility);

@@ -7,6 +7,7 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,8 +31,8 @@ public abstract class MeldCard extends CardImpl {
 
     protected MeldCard(final MeldCard card) {
         super(card);
-        this.topHalfCard = card.topHalfCard;
-        this.bottomHalfCard = card.bottomHalfCard;
+        this.topHalfCard = CardUtil.deepCopyObject(card.topHalfCard);
+        this.bottomHalfCard = CardUtil.deepCopyObject(card.bottomHalfCard);
         this.topLastZoneChangeCounter = card.topLastZoneChangeCounter;
         this.bottomLastZoneChangeCounter = card.bottomLastZoneChangeCounter;
         this.halves = new CardsImpl(card.halves);
@@ -135,6 +136,7 @@ public abstract class MeldCard extends CardImpl {
         boolean value = topLastZoneChangeCounter == topHalfCard.getZoneChangeCounter(game)
                 && halves.contains(topHalfCard.getId());
         if (!value) {
+            // TODO: sync code with deleting halfs ref smells bad - looks like melds have problems with zcc sync (topLastZoneChangeCounter)
             halves.remove(topHalfCard);
         }
         return value;
@@ -144,6 +146,7 @@ public abstract class MeldCard extends CardImpl {
         boolean value = bottomLastZoneChangeCounter == bottomHalfCard.getZoneChangeCounter(game)
                 && halves.contains(bottomHalfCard.getId());
         if (!value) {
+            // TODO: sync code with deleting halfs ref smells bad - looks like melds have problems with zcc sync (bottomLastZoneChangeCounter)
             halves.remove(bottomHalfCard);
         }
         return value;

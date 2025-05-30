@@ -4,7 +4,7 @@ package mage.cards.c;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.InfoEffect;
@@ -38,8 +38,8 @@ public final class ConsumeSpirit extends CardImpl {
 
         // Consume Spirit deals X damage to any target and you gain X life.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.REGULAR).concatBy("and"));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
+        this.getSpellAbility().addEffect(new GainLifeEffect(GetXValue.instance).concatBy("and"));
         VariableCost variableCost = this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0);
         if (variableCost instanceof VariableManaCost) {
             ((VariableManaCost) variableCost).setFilter(filterBlack);

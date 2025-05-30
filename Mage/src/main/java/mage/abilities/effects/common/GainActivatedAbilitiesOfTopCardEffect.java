@@ -1,7 +1,6 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.constants.Duration;
@@ -42,7 +41,7 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     for (Ability ability : card.getAbilities(game)) {
-                        if (ability instanceof ActivatedAbility) {
+                        if (ability.isActivatedAbility()) {
                             permanent.addAbility(ability, source.getSourceId(), game, true);
                         }
                     }

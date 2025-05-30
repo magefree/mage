@@ -35,7 +35,7 @@ public final class PhyrexianHydra extends CardImpl {
         this.toughness = new MageInt(7);
 
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianHydraEffect()));
+        this.addAbility(new SimpleStaticAbility(new PhyrexianHydraEffect()));
     }
 
     private PhyrexianHydra(final PhyrexianHydra card) {

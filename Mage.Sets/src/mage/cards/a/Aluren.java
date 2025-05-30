@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceIsSpellCondition;
@@ -35,17 +36,16 @@ public final class Aluren extends CardImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with mana value 3 or less");
 
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
     }
 
     public Aluren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
 
-        // Any player may play creature cards with converted mana cost 3 or less without paying their mana cost
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AlurenRuleEffect());
-        // and as though they had flash.
-        // TODO: This as thought effect may only be used if the creature is cast by the aluren effect
+        // Any player may play creature cards with converted mana cost 3 or less without paying their mana cost and as though they had flash.
+        Ability ability = new SimpleStaticAbility(new AlurenRuleEffect());
+        ability.setIdentifier(MageIdentifier.AlurenAlternateCast); // Is the link allowing the Flash part to only affect that Alternative Cast
         Effect effect = new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, true);
         effect.setText("and as though they had flash");
         ability.addEffect(effect);
@@ -67,18 +67,23 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with mana value 3 or less");
 
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
     }
 
-    private final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(null, SourceIsSpellCondition.instance, null, filter, true);
+    private final AlternativeCostSourceAbility alternativeCastingCostAbility;
 
     public AlurenRuleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Any player may cast creature cards with mana value 3 or less without paying their mana cost";
+        alternativeCastingCostAbility = new AlternativeCostSourceAbility(
+                null, SourceIsSpellCondition.instance, null, filter, true
+        );
+        alternativeCastingCostAbility.setIdentifier(MageIdentifier.AlurenAlternateCast);
     }
 
     private AlurenRuleEffect(final AlurenRuleEffect effect) {
         super(effect);
+        this.alternativeCastingCostAbility = effect.alternativeCastingCostAbility.copy();
     }
 
     @Override
@@ -87,33 +92,19 @@ class AlurenRuleEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game, UUID activePlayerId) {
-        super.init(source, game, activePlayerId);
-        alternativeCastingCostAbility.setSourceId(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        return false;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+            }
+        }
+        return true;
     }
 
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
-    }
 }

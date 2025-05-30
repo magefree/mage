@@ -31,7 +31,7 @@ public final class PariahsShield extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // All damage that would be dealt to you is dealt to equipped creature instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahsShieldEffect()));
+        this.addAbility(new SimpleStaticAbility(new PariahsShieldEffect()));
         
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), new TargetControlledCreaturePermanent(), false));

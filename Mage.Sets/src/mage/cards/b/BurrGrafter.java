@@ -30,7 +30,7 @@ public final class BurrGrafter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice Burr Grafter: Target creature gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         this.addAbility(new SoulshiftAbility(3));

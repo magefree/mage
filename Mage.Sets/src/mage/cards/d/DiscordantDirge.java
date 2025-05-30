@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -30,11 +29,11 @@ public final class DiscordantDirge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // At the beginning of your upkeep, you may put a verse counter on Discordant Dirge.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // {B}, Sacrifice Discordant Dirge: Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on Discordant Dirge. That player discards those cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DiscordantDirgeEffect(),
                 new ManaCostsImpl<>("{B}"));
         ability.addCost(new SacrificeSourceCost());

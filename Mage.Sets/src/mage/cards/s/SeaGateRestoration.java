@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class SeaGateRestoration extends ModalDoubleFacedCard {
 
-    private static final DynamicValue xValue = new IntPlusDynamicValue(1, CardsInControllerHandCount.instance);
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, CardsInControllerHandCount.ANY);
 
     public SeaGateRestoration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -46,10 +46,10 @@ public final class SeaGateRestoration extends ModalDoubleFacedCard {
         // Sea Gate, Reborn
         // Land
 
-        // As Sea Gate, Reborn enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Sea Gate, Reborn enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(
                 new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
-                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+                "you may pay 3 life. If you don't, it enters tapped"
         ));
 
         // {T}: Add {U}.

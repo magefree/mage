@@ -34,7 +34,7 @@ public final class DarksteelGarrison extends CardImpl {
         Ability gainedAbility = IndestructibleAbility.getInstance();
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
         effect.setText("Fortified land has indestructible");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Whenever fortified land becomes tapped, target creature gets +1/+1 until end of turn.
         Ability ability = new BecomesTappedAttachedTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), "fortified land");

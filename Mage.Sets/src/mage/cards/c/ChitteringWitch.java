@@ -43,8 +43,8 @@ public final class ChitteringWitch extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 
         // {1}{B}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

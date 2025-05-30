@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -13,14 +13,11 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.CanBeSacrificedPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KnightToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
@@ -35,7 +32,7 @@ public final class DoomForetold extends CardImpl {
 
         // At the beginning of each player's upkeep, that player sacrifices a nonland, nontoken permanent. If that player can't, they discard a card, they lose 2 life, you draw a card, you gain 2 life, you create a 2/2 white Knight creature token with vigilance, then you sacrifice Doom Foretold.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoomForetoldEffect(), TargetController.ACTIVE, false
+                TargetController.EACH_PLAYER, new DoomForetoldEffect(), false
         ));
     }
 
@@ -55,7 +52,6 @@ class DoomForetoldEffect extends OneShotEffect {
 
     static {
         filter.add(TokenPredicate.FALSE);
-        filter.add(CanBeSacrificedPredicate.instance);
     }
 
     private static final Effect effect1 = new CreateTokenEffect(new KnightToken());
@@ -84,8 +80,8 @@ class DoomForetoldEffect extends OneShotEffect {
         if (controller == null || player == null) {
             return false;
         }
-        if (game.getBattlefield().countAll(filter, player.getId(), game) > 0) {
-            TargetSacrifice target = new TargetSacrifice(filter);
+        TargetSacrifice target = new TargetSacrifice(filter);
+        if (target.canChoose(player.getId(), source, game)) {
             if (player.choose(Outcome.Sacrifice, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null && permanent.sacrifice(source, game)) {

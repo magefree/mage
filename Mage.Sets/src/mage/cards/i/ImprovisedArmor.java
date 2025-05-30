@@ -36,7 +36,7 @@ public final class ImprovisedArmor extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +2/+5.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 5, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 5, Duration.WhileOnBattlefield)));
         // Cycling {3}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }

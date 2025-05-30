@@ -31,7 +31,7 @@ public final class FoundryScreecher extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Foundry Screecher gets +1/+0 as long as you control an artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
                 "{this} gets +1/+0 as long as you control an artifact")));

@@ -14,6 +14,7 @@ public abstract class CommandObjectImpl implements CommandObject {
     private String name = "";
 
     private String expansionSetCode = "";
+    private boolean usesVariousArt = false;
     private String cardNumber = "";
     private String imageFileName = "";
     private int imageNumber;
@@ -27,6 +28,7 @@ public abstract class CommandObjectImpl implements CommandObject {
         this.id = object.id;
         this.name = object.name;
         this.expansionSetCode = object.expansionSetCode;
+        this.usesVariousArt = object.usesVariousArt;
         this.cardNumber = object.cardNumber;
         this.imageFileName = object.imageFileName;
         this.imageNumber = object.imageNumber;
@@ -45,6 +47,16 @@ public abstract class CommandObjectImpl implements CommandObject {
     @Override
     public void setExpansionSetCode(String expansionSetCode) {
         this.expansionSetCode = expansionSetCode;
+    }
+
+    @Override
+    public boolean getUsesVariousArt() {
+        return usesVariousArt;
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        this.usesVariousArt = usesVariousArt;
     }
 
     @Override

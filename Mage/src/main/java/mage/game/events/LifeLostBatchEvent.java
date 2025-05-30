@@ -1,5 +1,6 @@
 package mage.game.events;
 
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -8,13 +9,12 @@ import java.util.UUID;
 public class LifeLostBatchEvent extends BatchEvent<LifeLostEvent> {
 
     public LifeLostBatchEvent(LifeLostEvent firstEvent) {
-        super(EventType.LOST_LIFE_BATCH, false, firstEvent);
+        super(EventType.LOST_LIFE_BATCH, false, false, false, firstEvent);
     }
 
-    public int getLifeLostByPlayer(UUID playerID) {
-        return getEvents()
-                .stream()
-                .filter(ev -> ev.getTargetId().equals(playerID))
+    public static int getLifeLostByPlayer(Collection<LifeLostEvent> events, UUID playerId) {
+        return events.stream()
+                .filter(ev -> ev.getTargetId().equals(playerId))
                 .mapToInt(GameEvent::getAmount)
                 .sum();
     }

@@ -13,6 +13,10 @@ import mage.constants.Zone;
  */
 public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
+    public ActivateIfConditionActivatedAbility(Effect effect, Cost cost, Condition condition) {
+        this(Zone.BATTLEFIELD, effect, cost, condition, TimingRule.INSTANT);
+    }
+
     public ActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         this(zone, effect, cost, condition, TimingRule.INSTANT);
     }
@@ -30,6 +34,10 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder(super.getRule());
+        if (condition.toString().startsWith("You may also")) {
+            sb.append(' ').append(condition.toString()).append('.');
+            return sb.toString();
+        }
         if (condition instanceof InvertCondition) {
             sb.append(" You can't activate this ability ");
         } else {

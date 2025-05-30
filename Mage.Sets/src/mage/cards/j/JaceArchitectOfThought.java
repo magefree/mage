@@ -1,19 +1,19 @@
 package mage.cards.j;
 
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.common.AttacksAllTriggeredAbility;
+import mage.abilities.common.delayed.UntilYourNextTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.RevealAndSeparatePilesEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -31,7 +31,16 @@ public final class JaceArchitectOfThought extends CardImpl {
         this.setStartingLoyalty(4);
 
         // +1: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
-        this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtStartEffect1(), 1));
+        this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(
+                new UntilYourNextTurnDelayedTriggeredAbility(
+                        new AttacksAllTriggeredAbility(
+                                new BoostTargetEffect(-1, 0, Duration.EndOfTurn)
+                                        .setText("it gets -1/-0 until end of turn"),
+                                false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE,
+                                SetTargetPointer.PERMANENT, false
+                        )
+                )
+        ), 1));
 
         // -2: Reveal the top three cards of your library. An opponent separates those cards into two piles. 
         // Put one pile into your hand and the other on the bottom of your library in any order.
@@ -51,78 +60,6 @@ public final class JaceArchitectOfThought extends CardImpl {
     @Override
     public JaceArchitectOfThought copy() {
         return new JaceArchitectOfThought(this);
-    }
-}
-
-class JaceArchitectOfThoughtStartEffect1 extends OneShotEffect {
-
-    public JaceArchitectOfThoughtStartEffect1() {
-        super(Outcome.UnboostCreature);
-        this.staticText = "Until your next turn, whenever a creature an opponent "
-                + "controls attacks, it gets -1/-0 until end of turn";
-    }
-
-    private JaceArchitectOfThoughtStartEffect1(final JaceArchitectOfThoughtStartEffect1 effect) {
-        super(effect);
-    }
-
-    @Override
-    public JaceArchitectOfThoughtStartEffect1 copy() {
-        return new JaceArchitectOfThoughtStartEffect1(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = new JaceArchitectOfThoughtDelayedTriggeredAbility(game.getTurnNum());
-        game.addDelayedTriggeredAbility(delayedAbility, source);
-        return true;
-    }
-}
-
-class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbility {
-
-    private final int startingTurn;
-
-    public JaceArchitectOfThoughtDelayedTriggeredAbility(int startingTurn) {
-        super(new BoostTargetEffect(-1, 0, Duration.EndOfTurn), Duration.Custom, false);
-        this.startingTurn = startingTurn;
-    }
-
-    private JaceArchitectOfThoughtDelayedTriggeredAbility(final JaceArchitectOfThoughtDelayedTriggeredAbility ability) {
-        super(ability);
-        this.startingTurn = ability.startingTurn;
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
-            getEffects().forEach((effect) -> {
-                effect.setTargetPointer(new FixedTarget(event.getSourceId(), game));
-            });
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public JaceArchitectOfThoughtDelayedTriggeredAbility copy() {
-        return new JaceArchitectOfThoughtDelayedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean isInactive(Game game) {
-        return game.isActivePlayer(getControllerId())
-                && game.getTurnNum() != startingTurn;
-    }
-
-    @Override
-    public String getRule() {
-        return "Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.";
     }
 }
 

@@ -45,7 +45,7 @@ public final class CreepingInn extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CreepingInnEffect()));
 
         // {4}: Creeping Inn phases out.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutSourceEffect(), new ManaCostsImpl<>("{4}")));
+        this.addAbility(new SimpleActivatedAbility(new PhaseOutSourceEffect(), new ManaCostsImpl<>("{4}")));
     }
 
     private CreepingInn(final CreepingInn card) {

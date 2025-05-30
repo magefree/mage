@@ -32,7 +32,7 @@ public final class ThranTemporalGateway extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // {4}, {t}: You may put a historic permanent card from your hand onto the battlefield. (Artifacts, legendaries, and Sagas are historic.)
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new PutCardFromHandOntoBattlefieldEffect(filter)
                         .setText("You may put a historic permanent card from your hand onto the battlefield. "
                                 + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>"),

@@ -40,7 +40,7 @@ public final class LaurineTheDiversion extends CardImpl {
 
         // {2}, Sacrifice an artifact or creature: Goad target creature.
         Ability ability = new SimpleActivatedAbility(new GoadTargetEffect(), new GenericManaCost(2));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

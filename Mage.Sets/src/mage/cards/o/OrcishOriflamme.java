@@ -24,7 +24,7 @@ public final class OrcishOriflamme extends CardImpl {
 
         // Attacking creatures you control get +1/+0.
         BoostControlledEffect boostEffect = new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_ATTACKING_CREATURES, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
+        this.addAbility(new SimpleStaticAbility(boostEffect));
     }
 
     private OrcishOriflamme(final OrcishOriflamme card) {

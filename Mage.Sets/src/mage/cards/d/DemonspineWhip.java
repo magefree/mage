@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -13,12 +12,11 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +29,7 @@ public final class DemonspineWhip extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // {X}: Equipped creature gets +X/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new XPaid(), StaticValue.get(0), Duration.EndOfTurn), new ManaCostsImpl<>("{X}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostEquippedEffect(new XPaid(), StaticValue.get(0), Duration.EndOfTurn), new ManaCostsImpl<>("{X}")));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
@@ -51,7 +49,7 @@ class XPaid implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int paid = sourceAbility.getManaCostsToPay().getX();
+        int paid = CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
         return paid;
     }
 

@@ -29,7 +29,7 @@ public final class JohnnyComboPlayer extends CardImpl {
         this.toughness = new MageInt(1);
         
         // {4}: Search your library for a card, put that card into your hand, then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(
+        this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_A), false, true), new ManaCostsImpl<>("{4}")));
     }
 

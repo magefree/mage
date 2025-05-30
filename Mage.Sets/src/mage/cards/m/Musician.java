@@ -2,13 +2,12 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DynamicValueGenericManaCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
@@ -41,18 +40,13 @@ public final class Musician extends CardImpl {
         // Cumulative upkeep {1}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
-        // {tap}: Put a music counter on target creature. If it doesn't have "At the beginning of your upkeep,
-        // destroy this creature unless you pay {1} for each music counter on it," it gains that ability
-        Effect effect2 = new AddCountersTargetEffect(CounterType.MUSIC.createInstance());
-        effect2.setText("Put a music counter on target creature");
-
-        Ability ability2 = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                effect2,
+        // : Put a music counter on target creature. If it doesn’t have "At the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it," it gains that ability.
+        Ability ability = new SimpleActivatedAbility(
+                new AddCountersTargetEffect(CounterType.MUSIC.createInstance()),
                 new TapSourceCost());
-        ability2.addTarget(new TargetCreaturePermanent());
-        ability2.addEffect(new MusicianEffect());
-        this.addAbility(ability2);
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.addEffect(new MusicianEffect());
+        this.addAbility(ability);
     }
 
     private Musician(final Musician card) {
@@ -70,8 +64,8 @@ class MusicianEffect extends OneShotEffect {
     MusicianEffect() {
         super(Outcome.Benefit);
         staticText = "If it doesn't have \"At the beginning of your upkeep, " +
-            "destroy this creature unless you pay {1} " +
-            "for each music counter on it,\" it gains that ability";
+                "destroy this creature unless you pay {1} " +
+                "for each music counter on it,\" it gains that ability";
     }
 
     private MusicianEffect(final MusicianEffect effect) {
@@ -89,42 +83,31 @@ class MusicianEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        if(permanent.getAbilities().stream().anyMatch(ability -> ability instanceof MusicianTriggerAbility)){
+        if (permanent.getAbilities().stream().anyMatch(MusicianTriggeredAbility.class::isInstance)) {
             return true;
         }
-
-        OneShotEffect effect = new DoUnlessControllerPaysEffect(
-            new DestroySourceEffect(),
-            new DynamicValueGenericManaCost(
-                new CountersSourceCount(CounterType.MUSIC),
-                "{1} for each music counter on {this}"));
-        effect.setText("destroy this creature unless you pay {1} for each music counter on it");
-
-        game.addEffect(new GainAbilityTargetEffect(
-            new MusicianTriggerAbility(effect),
-            Duration.WhileOnBattlefield), source);
+        game.addEffect(new GainAbilityTargetEffect(new MusicianTriggeredAbility(), Duration.WhileOnBattlefield), source);
         return true;
     }
 }
 
-// This wrapper class is used to identify if the targetted creature already has the ability.
-class MusicianTriggerAbility extends BeginningOfUpkeepTriggeredAbility  {
-    public MusicianTriggerAbility(OneShotEffect effect) {
-        super(
-            Zone.BATTLEFIELD,
-            effect,
-            TargetController.YOU,
-            false,
-            false,
-            "At the beginning of your upkeep, ");
+// This wrapper class is used to identify if the targeted creature already has the ability.
+class MusicianTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
+
+    MusicianTriggeredAbility() {
+        super(new DoUnlessControllerPaysEffect(
+                new DestroySourceEffect(),
+                new DynamicValueGenericManaCost(new CountersSourceCount(CounterType.MUSIC),
+                        "{1} for each music counter on {this}")
+        ).setText("destroy this creature unless you pay {1} for each music counter on it"));
     }
 
-    private MusicianTriggerAbility(final MusicianTriggerAbility ability) {
+    private MusicianTriggeredAbility(final MusicianTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public MusicianTriggerAbility copy() {
-        return new MusicianTriggerAbility(this);
+    public MusicianTriggeredAbility copy() {
+        return new MusicianTriggeredAbility(this);
     }
 }

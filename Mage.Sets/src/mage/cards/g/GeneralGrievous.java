@@ -37,7 +37,7 @@ public final class GeneralGrievous extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, true));
 
         // Remove two +1/+1 counters from General Grievous: Return General Grievous to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
     private GeneralGrievous(final GeneralGrievous card) {

@@ -65,6 +65,7 @@ class TheBlackstaffOfWaterdeepEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Outcome.Benefit);
         staticText = "another target nontoken artifact you control becomes " +
                 "a 4/4 artifact creature for as long as {this} remains tapped";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private TheBlackstaffOfWaterdeepEffect(final TheBlackstaffOfWaterdeepEffect effect) {

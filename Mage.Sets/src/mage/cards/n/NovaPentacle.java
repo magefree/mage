@@ -31,7 +31,7 @@ public final class NovaPentacle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NovaPentacleEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new NovaPentacleEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponentsChoicePermanent(1, 1, new FilterCreaturePermanent(), false));
         this.addAbility(ability);

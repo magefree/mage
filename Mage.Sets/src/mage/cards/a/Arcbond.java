@@ -1,10 +1,10 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
@@ -21,6 +21,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,11 +50,11 @@ public final class Arcbond extends CardImpl {
     }
 }
 
-class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
+class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     MageObjectReference targetObject;
 
-    public ArcbondDelayedTriggeredAbility() {
+    ArcbondDelayedTriggeredAbility() {
         super(new ArcbondEffect(), Duration.EndOfTurn, false);
     }
 
@@ -65,6 +66,7 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public void init(Game game) {
         // because target can already be gone from battlefield if triggered ability resolves, we need to hold an own object reference
+        // TODO: this doesn't seem like it can actually work as described, wtf
         targetObject = new MageObjectReference(getTargets().getFirstTarget(), game);
         if (targetObject != null) {
             for (Effect effect : this.getEffects()) {
@@ -91,9 +93,7 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(targetObject.getSourceId())
                 && targetObject.getPermanentOrLKIBattlefield(game) != null) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("damage", event.getAmount());
-            }
+            getEffects().setValue("damage", event.getAmount());
             return true;
         }
         return false;

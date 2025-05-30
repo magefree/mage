@@ -1,6 +1,6 @@
 package mage.cards.a;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class AngelicAscension extends CardImpl {
 
         // Exile target creature or planeswalker. Its controller creates a 4/4 white Angel creature token with flying.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new AngelToken()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new AngelToken()));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 

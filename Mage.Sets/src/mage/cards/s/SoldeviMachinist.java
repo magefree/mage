@@ -72,12 +72,8 @@ class ArtifactAbilityManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        switch (source.getAbilityType()) {
-            case ACTIVATED:
-            case MANA:
-                break;
-            default:
-                return false;
+        if (!source.isActivatedAbility()) {
+            return false;
         }
         MageObject object = game.getObject(source);
         return object != null && object.isArtifact(game) && !source.isActivated();

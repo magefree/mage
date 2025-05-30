@@ -136,7 +136,7 @@ enum HakimLoreweaverCondition implements Condition {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(permanent -> permanent.hasSubtype(SubType.AURA, game));
+                .noneMatch(permanent -> permanent.hasSubtype(SubType.AURA, game));
     }
 
     @Override

@@ -35,7 +35,7 @@ public final class MeddlingMage extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
 
         // Spells with the chosen name can't be cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeddlingMageReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new MeddlingMageReplacementEffect()));
     }
 
     private MeddlingMage(final MeddlingMage card) {

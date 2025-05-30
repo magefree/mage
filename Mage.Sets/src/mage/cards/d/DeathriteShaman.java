@@ -47,7 +47,7 @@ public final class DeathriteShaman extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Exile target land card from a graveyard. Add one mana of any color.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new TapSourceCost());
         // Because this is no mana ability, this mana will not be calculated during available mana calculation
         ability.addEffect(new AddManaOfAnyColorEffect(1, new LimitedDynamicValue(1,
                 new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_LAND)), false));
@@ -55,14 +55,14 @@ public final class DeathriteShaman extends CardImpl {
         this.addAbility(ability);
 
         // {B}, {T}: Exile target instant or sorcery card from a graveyard. Each opponent loses 2 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{B}"));
+        ability = new SimpleActivatedAbility(new ExileTargetEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new LoseLifeOpponentsEffect(2));
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
 
         // {G}, {T}: Exile target creature card from a graveyard. You gain 2 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{G}"));
+        ability = new SimpleActivatedAbility(new ExileTargetEffect(), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new GainLifeEffect(2));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));

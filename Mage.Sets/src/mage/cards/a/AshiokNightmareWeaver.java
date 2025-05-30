@@ -2,8 +2,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.costs.VariableCostImpl;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
 import mage.cards.*;
@@ -111,9 +109,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
             return false;
         }
 
-        int cmc = CardUtil.castStream(
-                source.getCosts().stream(), PayVariableLoyaltyCost.class
-        ).mapToInt(VariableCostImpl::getAmount).sum();
+        int cmc = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + cmc);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
@@ -129,7 +125,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
             return true;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             game.addEffect(new AddCardSubTypeTargetEffect(
                     SubType.NIGHTMARE, Duration.EndOfTurn

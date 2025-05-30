@@ -24,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -97,8 +98,8 @@ class ClericClassReturnEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        game.getState().processAction(game);
-        Permanent permanent = game.getPermanent(card.getId());
+        game.processAction();
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         int toughness = permanent != null ? permanent.getToughness().getValue() : card.getToughness().getValue();
         player.gainLife(toughness, game, source);
         return true;

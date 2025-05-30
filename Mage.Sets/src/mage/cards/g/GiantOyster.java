@@ -12,7 +12,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapAsLongAsSourceTappedEffect;
 import mage.abilities.effects.common.RemoveDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.effects.common.counter.RemoveAllCountersTargetEffect;
+import mage.abilities.effects.common.counter.RemoveAllCountersPermanentTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -51,7 +51,9 @@ public final class GiantOyster extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {tap}: For as long as Giant Oyster remains tapped, target tapped creature doesn't untap during its controller's untap step, and at the beginning of each of your draw steps, put a -1/-1 counter on that creature. When Giant Oyster leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GiantOysterDontUntapAsLongAsSourceTappedEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DontUntapAsLongAsSourceTappedEffect()
+                .setText("For as long as {this} remains tapped, target tapped creature doesn't untap during its controller's untap step"),
+                new TapSourceCost());
         ability.addEffect(new GiantOysterCreateDelayedTriggerEffects());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
@@ -67,26 +69,9 @@ public final class GiantOyster extends CardImpl {
     }
 }
 
-class GiantOysterDontUntapAsLongAsSourceTappedEffect extends DontUntapAsLongAsSourceTappedEffect {
-
-    GiantOysterDontUntapAsLongAsSourceTappedEffect() {
-        super();
-        staticText = "For as long as {this} remains tapped, target tapped creature doesn't untap during its controller's untap step";
-    }
-
-    private GiantOysterDontUntapAsLongAsSourceTappedEffect(final GiantOysterDontUntapAsLongAsSourceTappedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GiantOysterDontUntapAsLongAsSourceTappedEffect copy() {
-        return new GiantOysterDontUntapAsLongAsSourceTappedEffect(this);
-    }
-}
-
 class GiantOysterCreateDelayedTriggerEffects extends OneShotEffect {
 
-    public GiantOysterCreateDelayedTriggerEffects() {
+    GiantOysterCreateDelayedTriggerEffects() {
         super(Outcome.Detriment);
         this.staticText = "at the beginning of each of your draw steps, put a -1/-1 counter on that creature. When {this} leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.";
     }
@@ -105,13 +90,12 @@ class GiantOysterCreateDelayedTriggerEffects extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent oyster = game.getPermanent(source.getSourceId());
         Permanent tappedCreature = game.getPermanent(source.getFirstTarget());
-        FixedTarget fixedTarget = getTargetPointer().getFirstAsFixedTarget(game, source);
-        if (controller == null || oyster == null || tappedCreature == null || fixedTarget == null) {
+        if (controller == null || oyster == null || tappedCreature == null) {
             return false;
         }
 
         Effect addCountersEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(1));
-        addCountersEffect.setTargetPointer(fixedTarget);
+        addCountersEffect.setTargetPointer(new FixedTarget(tappedCreature, game));
         DelayedTriggeredAbility drawStepAbility = new AtTheBeginOfYourNextDrawStepDelayedTriggeredAbility(addCountersEffect, Duration.Custom, false);
         drawStepAbility.setControllerId(source.getControllerId());
         UUID drawStepAbilityUUID = game.addDelayedTriggeredAbility(drawStepAbility, source);
@@ -127,7 +111,7 @@ class GiantOysterCreateDelayedTriggerEffects extends OneShotEffect {
 class GiantOysterLeaveUntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public GiantOysterLeaveUntapDelayedTriggeredAbility(UUID abilityToCancel) {
-        super(new RemoveAllCountersTargetEffect(CounterType.M1M1), Duration.EndOfGame, true, false);
+        super(new RemoveAllCountersPermanentTargetEffect(CounterType.M1M1), Duration.EndOfGame, true, false);
         this.addEffect(new RemoveDelayedTriggeredAbilityEffect(abilityToCancel));
     }
 

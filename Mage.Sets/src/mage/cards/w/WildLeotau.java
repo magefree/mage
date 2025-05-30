@@ -3,7 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.TargetController;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class WildLeotau extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, sacrifice Wild Leotau unless you pay {G}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ColoredManaCost(ColoredManaSymbol.G)), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ColoredManaCost(ColoredManaSymbol.G))));
     }
 
     private WildLeotau(final WildLeotau card) {

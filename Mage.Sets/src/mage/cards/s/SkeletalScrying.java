@@ -4,10 +4,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.ExileFromGraveCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,6 +15,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -39,10 +40,10 @@ public final class SkeletalScrying extends CardImpl {
 
         // You draw X cards and you lose X life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
-                ManacostVariableValue.REGULAR
+                GetXValue.instance
         ).setText("you draw X cards"));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(
-                ManacostVariableValue.REGULAR
+                GetXValue.instance
         ).concatBy("and"));
     }
 
@@ -60,8 +61,8 @@ enum SkeletalScryingAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+    public void prepareCost(Ability ability, Game game) {
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         if (xValue > 0) {
             ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(xValue, xValue, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));
         }

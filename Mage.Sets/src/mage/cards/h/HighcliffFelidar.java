@@ -80,7 +80,7 @@ class HighcliffFelidarEffect extends OneShotEffect {
             return false;
         }
         Set<UUID> toDestroy = new HashSet();
-        game.getOpponents(source.getControllerId())
+        game.getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

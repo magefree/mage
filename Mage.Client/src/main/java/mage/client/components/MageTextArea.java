@@ -1,11 +1,9 @@
 package mage.client.components;
 
 import java.awt.Color;
-import javax.swing.JEditorPane;
 import javax.swing.SwingUtilities;
 import mage.client.util.GUISizeHelper;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.card.arcane.UI;
 
 /**
  * GUI: component for displaying text in feedback panel. Support html, mana symbols and popups.
@@ -43,10 +41,10 @@ public class MageTextArea extends MageEditorPane {
 
         // prepare text format as header and details texts
 
-        final StringBuilder buffer = new StringBuilder(512);
+        final StringBuilder buffer = new StringBuilder();
         // Dialog is a java logical font family, so it should work on all systems
         buffer.append("<body style='font-family:Dialog;font-size:");
-        buffer.append(GUISizeHelper.gameDialogAreaFontSizeBig);
+        buffer.append(GUISizeHelper.gameFeedbackPanelMainMessageFontSize);
         buffer.append("pt;margin:3px 3px 3px 3px;color: #FFFFFF'><b><center>");
 
         // Don't know what it does (easy italc?) but it bugs with multiple #HTML color codes (LevelX2)
@@ -66,8 +64,8 @@ public class MageTextArea extends MageEditorPane {
             // in case the text don't fit in the panel a tooltip with the text is added
             if (panelWidth > 0 && MageTextArea.this.getPreferredSize().getWidth() > panelWidth) {
                 String tooltip = "<html><center><body style='font-family:Dialog;font-size:"
-                        + GUISizeHelper.gameDialogAreaFontSizeBig
-                        + ";color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
+                        + GUISizeHelper.gameFeedbackPanelMainMessageFontSize
+                        + "pt;color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
                 MageTextArea.super.setToolTipText(tooltip);
             } else {
                 MageTextArea.super.setToolTipText(null);

@@ -35,7 +35,7 @@ public final class NissasChosen extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If Nissa's Chosen would be put into a graveyard from the battlefield, put it on the bottom of its owner's library instead
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NissasChosenEffect()));
+        this.addAbility(new SimpleStaticAbility(new NissasChosenEffect()));
     }
 
     private NissasChosen(final NissasChosen card) {

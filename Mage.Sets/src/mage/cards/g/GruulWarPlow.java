@@ -27,10 +27,10 @@ public final class GruulWarPlow extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Creatures you control have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // {1}{R}{G}: Gruul War Plow becomes a 4/4 Juggernaut artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GruulWarPlowToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(new GruulWarPlowToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}{G}")));
     }
 
     private GruulWarPlow(final GruulWarPlow card) {

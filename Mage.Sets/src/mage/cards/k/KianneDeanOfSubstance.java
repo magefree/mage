@@ -20,6 +20,7 @@ import mage.game.permanent.token.FractalToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
+import mage.util.CardUtil;
 
 import java.util.List;
 import java.util.Objects;
@@ -203,7 +204,7 @@ class ImbrahamDeanOfTheoryEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards.getCards(game)) {
             if (card == null) {
@@ -211,7 +212,7 @@ class ImbrahamDeanOfTheoryEffect extends OneShotEffect {
             }
             card.addCounters(CounterType.STUDY.createInstance(), source.getControllerId(), source, game);
         }
-        TargetCard targetCard = new TargetCardInExile(0, 1, filter, null);
+        TargetCard targetCard = new TargetCardInExile(0, 1, filter);
         targetCard.withNotTarget(true);
         player.choose(outcome, targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());

@@ -33,7 +33,6 @@ public final class AerialEngineer extends CardImpl {
 
         // As long as you control an artifact, Aerial Engineer gets +2/+0 and has flying.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(

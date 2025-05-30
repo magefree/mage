@@ -33,7 +33,7 @@ public final class HarvesterOfMisery extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Harvester of Misery enters the battlefield, other creatures get -2/-2 until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(

@@ -4,7 +4,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -40,11 +39,11 @@ public final class TrustedAdvisor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Your maximum hand size is increased by two.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(2, Duration.WhileOnBattlefield, HandSizeModification.INCREASE)));
 
         // At the beginning of your upkeep, return a blue creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter)));
 
     }
 

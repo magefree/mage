@@ -2,7 +2,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
@@ -32,7 +31,7 @@ public final class BarrenGlory extends CardImpl {
 
         // At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect()),
                 new CompoundCondition(
                         new CardsInHandCondition(ComparisonType.EQUAL_TO, 0),
                         new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0)

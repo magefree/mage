@@ -37,7 +37,7 @@ public final class ParallelThoughts extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ParallelThoughtsSearchEffect()));
 
         // If you would draw a card, you may instead put the top card of the pile you exiled into your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ParallelThoughtsReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ParallelThoughtsReplacementEffect()));
 
     }
 

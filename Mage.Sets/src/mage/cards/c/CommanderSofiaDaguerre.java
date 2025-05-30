@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -43,7 +43,7 @@ public final class CommanderSofiaDaguerre extends CardImpl {
         // Crash Landing -- When Commander Sofia Daguerre enters the battlefield,
         // destroy up to one target legendary permanent. That permanent's controller creates a Junk token.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addEffect(new CreateTokenControllerTargetPermanentEffect(new JunkToken())
+        ability.addEffect(new CreateTokenControllerTargetEffect(new JunkToken())
                 .setText("that permanent's controller creates a Junk token"));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability.withFlavorWord("Crash Landing"));

@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class ShadowOfTheEnemy extends CardImpl {
@@ -52,8 +51,8 @@ class ShadowOfTheEnemyEffect extends OneShotEffect {
     ShadowOfTheEnemyEffect() {
         super(Outcome.Detriment);
         staticText = "Exile all creature cards from target player's graveyard. " +
-            "You may cast spells from among those cards for as long as " +
-            "they remain exiled, and mana of any type can be spent to cast them.";
+                "You may cast spells from among those cards for as long as " +
+                "they remain exiled, and mana of any type can be spent to cast them.";
     }
 
     private ShadowOfTheEnemyEffect(final ShadowOfTheEnemyEffect effect) {
@@ -70,16 +69,16 @@ class ShadowOfTheEnemyEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(player == null || targetPlayer == null || sourceObject == null){
+        if (player == null || targetPlayer == null || sourceObject == null) {
             return false;
         }
 
         Set<Card> cards =
-            targetPlayer
-                .getGraveyard()
-                .getCards(StaticFilters.FILTER_CARD_CREATURE, game);
+                targetPlayer
+                        .getGraveyard()
+                        .getCards(StaticFilters.FILTER_CARD_CREATURE, game);
 
-        if(cards.isEmpty()){
+        if (cards.isEmpty()) {
             return true;
         }
 
@@ -101,7 +100,7 @@ class ShadowOfTheEnemyEffect extends OneShotEffect {
 class ShadowOfTheEnemyCastFromExileEffect extends AsThoughEffectImpl {
 
     ShadowOfTheEnemyCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast spells from among them as long as they remain exiled";
     }
 
@@ -133,7 +132,7 @@ class ShadowOfTheEnemyCastFromExileEffect extends AsThoughEffectImpl {
         objectId = theCard.getMainCard().getId(); // for split cards
 
         if (objectId.equals(cardId)
-            && affectedControllerId.equals(source.getControllerId())) {
+                && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
             return card != null;
         }
@@ -166,7 +165,7 @@ class ShadowOfTheEnemySpendManaEffect extends AsThoughEffectImpl implements AsTh
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
-            && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
+                && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
             // if the card moved from exile to spell the zone change counter is increased by 1
             // (effect must applies before and on stack, use isCheckPlayableMode?)
             return source.isControlledBy(affectedControllerId);

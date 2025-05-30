@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ public final class DreamshackleGeist extends CardImpl {
         // At the beginning of combat on your turn, choose up to one —
         // • Tap target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new TapTargetEffect(), TargetController.YOU, false
+                new TapTargetEffect()
         );
         ability.addTarget(new TargetCreaturePermanent());
         ability.getModes().setMinModes(0);

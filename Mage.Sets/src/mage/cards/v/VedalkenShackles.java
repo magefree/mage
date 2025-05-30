@@ -46,7 +46,7 @@ public final class VedalkenShackles extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom), SourceTappedCondition.TAPPED,
                 "Gain control of target creature with power less than or equal to the number of Islands you control for as long as {this} remains tapped");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(controllableCreatures));
         this.addAbility(ability);

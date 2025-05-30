@@ -1,6 +1,6 @@
 package mage.cards.a;
 
-import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -11,9 +11,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -21,8 +21,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class AsmodeusTheArchfiend extends CardImpl {
@@ -90,7 +92,7 @@ class AsmodeusTheArchfiendReplacementEffect extends ReplacementEffectImpl {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 UUID exileZoneId = CardUtil.getExileZoneId(game, sourcePermanent.getId(), sourcePermanent.getZoneChangeCounter(game));
-                String exileName = CardUtil.createObjectRealtedWindowTitle(source, game, null);
+                String exileName = CardUtil.createObjectRelatedWindowTitle(source, game, null);
                 controller.moveCardsToExile(card, source, game, false, exileZoneId, exileName);
                 card.setFaceDown(true, game);
             }
@@ -115,8 +117,8 @@ class AsmodeusTheArchfiendReturnAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (super.activate(game, allowedIdentifiers, noMana)) {
             Permanent sourcePermanent = this.getSourcePermanentIfItStillExists(game);
             if (sourcePermanent != null) {
                 // Needed to save zcc on activation so it still works if the permanent changes zones in response to the ability being activated.

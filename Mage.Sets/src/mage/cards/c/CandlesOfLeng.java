@@ -28,7 +28,7 @@ public final class CandlesOfLeng extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {4}, {tap}: Reveal the top card of your library. If it has the same name as a card in your graveyard, put it into your graveyard. Otherwise, draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CandlesOfLengEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new CandlesOfLengEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -21,7 +21,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
  */
 public final class KrosanDrover extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Creature spells with mana value 6 or greater");
+    private static final FilterCard filter = new FilterCard("Creature spells you cast with mana value 6 or greater");
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
@@ -36,8 +36,7 @@ public final class KrosanDrover extends CardImpl {
 
         // Creature spells you cast with converted mana cost 6 or greater cost {2} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filter, 2);
-        effect.setText("Creature spells you cast with mana value 6 or greater cost {2} less to cast.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private KrosanDrover(final KrosanDrover card) {

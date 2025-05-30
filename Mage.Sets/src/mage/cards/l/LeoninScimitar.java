@@ -23,7 +23,7 @@ public final class LeoninScimitar extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }

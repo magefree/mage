@@ -24,7 +24,7 @@ public final class DragonAppeasement extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{R}{G}");
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // Whenever you sacrifice a creature, you may draw a card.
         this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,

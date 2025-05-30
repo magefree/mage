@@ -48,10 +48,10 @@ public final class DragonBreath extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)));
         
         // {R}: Enchanted creature gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
         
         // When a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Breath from your graveyard to the battlefield attached to that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonBreathEffect(), filter, true, SetTargetPointer.PERMANENT));
@@ -85,7 +85,7 @@ class DragonBreathEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceCard = (Card) source.getSourceObjectIfItStillExists(game);
+        Card sourceCard = source.getSourceCardIfItStillExists(game);
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceCard != null && permanent != null && controller != null) {

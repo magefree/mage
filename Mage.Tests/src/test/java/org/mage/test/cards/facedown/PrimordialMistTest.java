@@ -35,7 +35,7 @@ public class PrimordialMistTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exile a face-down permanent you control");
-        setChoice(playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
+        setChoice(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Brine Elemental");
         

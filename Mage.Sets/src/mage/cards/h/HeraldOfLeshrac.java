@@ -54,7 +54,7 @@ public final class HeraldOfLeshrac extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new HeraldOfLeshracCumulativeCost()));
 
         // Herald of Leshrac gets +1/+1 for each land you control but don't own.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
 
         // When Herald of Leshrac leaves the battlefield, each player gains control of each land they own that you control.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new HeraldOfLeshracLeavesEffect(), false));
@@ -93,7 +93,7 @@ class HeraldOfLeshracCumulativeCost extends CostImpl {
             ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame);
             effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));
             game.addEffect(effect, ability);
-            game.getState().processAction(game);
+            game.processAction();
             paid = true;
         }
         return paid;

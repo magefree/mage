@@ -95,7 +95,7 @@ class HoardingBroodlordEffect extends OneShotEffect {
         if (card != null) {
             player.moveCards(card, Zone.EXILED, source, game);
             card.setFaceDown(true, game);
-            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.Custom, false);
         }
         return true;
     }

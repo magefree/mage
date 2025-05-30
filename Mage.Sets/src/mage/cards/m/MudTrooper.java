@@ -37,11 +37,11 @@ public final class MudTrooper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Trooper creatures you control have "2: This creature gets +1/+1 until end of turn."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                         .setText("This creature gets +1/+1 until end of turn"),
                 new GenericManaCost(2));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)
                         .withForceQuotes()
         ));

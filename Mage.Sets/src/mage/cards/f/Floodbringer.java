@@ -37,7 +37,7 @@ public final class Floodbringer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}, Return a land you control to its owner's hand: Tap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new GenericManaCost(2));
         ReturnToHandChosenControlledPermanentCost cost = new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter));
         cost.setText("Return a land you control to its owner's hand");
         ability.addCost(cost);

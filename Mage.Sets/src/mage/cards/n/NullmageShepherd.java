@@ -39,7 +39,7 @@ public final class NullmageShepherd extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Tap four untapped creatures you control: Destroy target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(4, 4, filterCost, true)));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(4, 4, filterCost, true)));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
     }

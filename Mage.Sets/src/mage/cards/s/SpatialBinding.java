@@ -69,7 +69,7 @@ class SpatialBindingReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         super.init(source, game);
         affectedObjectList.clear();
         affectedObjectList.add(new MageObjectReference(source.getFirstTarget(), game));
-        affectedObjectsSet = true;
+        setAffectedObjectsSet(true);
     }
 
     @Override

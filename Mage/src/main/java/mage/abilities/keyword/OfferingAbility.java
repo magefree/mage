@@ -177,7 +177,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                         && player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + '?', source, game)) {
                     Target target = new TargetSacrifice(filter);
                     player.choose(Outcome.Sacrifice, target, source, game);
-                    if (!target.isChosen()) {
+                    if (!target.isChosen(game)) {
                         return false;
                     }
                     game.getState().setValue("offering_" + card.getId(), true);

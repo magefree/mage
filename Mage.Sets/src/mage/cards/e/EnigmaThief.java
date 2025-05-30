@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetNonlandPermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -39,7 +39,8 @@ public final class EnigmaThief extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()
                 .setTargetPointer(new EachTargetPointer())
                 .setText("for each opponent, return up to one target nonland permanent that player controls to its owner's hand"));
-        ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster(new TargetNonlandPermanent(0,1)));
+        ability.addTarget(new TargetNonlandPermanent(0,1));
+        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         this.addAbility(ability);
     }
 

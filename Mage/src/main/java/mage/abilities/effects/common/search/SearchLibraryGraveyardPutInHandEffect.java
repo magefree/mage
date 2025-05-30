@@ -34,8 +34,10 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.filter = filter;
         this.forceToSearchBoth = forceToSearchBoth;
-        staticText = (youMay ? "you may " : "") + "search your library and" + (forceToSearchBoth ? "" : "/or") + " graveyard for a card named " + filter.getMessage()
-                + ", reveal it, and put it into your hand. " + (forceToSearchBoth ? "Then shuffle" : "If you search your library this way, shuffle");
+        staticText = (youMay ? "you may " : "") + "search your library and" + (forceToSearchBoth ? "" : "/or") +
+                " graveyard for " + (filter.getMessage().contains(" card") ? "" : "a card named ") +
+                filter.getMessage() + ", reveal it, and put it into your hand. " +
+                (forceToSearchBoth ? "Then shuffle" : "If you search your library this way, shuffle");
     }
 
     protected SearchLibraryGraveyardPutInHandEffect(final SearchLibraryGraveyardPutInHandEffect effect) {

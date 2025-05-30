@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -34,8 +34,8 @@ public final class CommandersAuthority extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has "At the beginning of your upkeep, create a 1/1 white Human creature token."
-        ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new HumanToken()), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
+        ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new HumanToken()));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }
 
     private CommandersAuthority(final CommandersAuthority card) {

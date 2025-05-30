@@ -129,10 +129,14 @@ class PossibilityStormEffect extends OneShotEffect {
         Card card;
         do {
             card = library.getFromTop(game);
-            if (card != null) {
-                spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
+            if (card == null) {
+                break;
             }
-        } while (library.hasCards() && card != null && !sharesType(card, spell.getCardType(game), game));
+
+            if (!spellController.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName())) {
+                break;
+            };
+        } while (library.hasCards() && !sharesType(card, spell.getCardType(game), game));
 
         if (card != null && sharesType(card, spell.getCardType(game), game)
                 && !card.isLand(game)

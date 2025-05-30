@@ -1,7 +1,6 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,9 +13,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,11 +31,9 @@ public final class KeldonArsonist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, Sacrifice two lands: Destroy target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS));
-        TargetLandPermanent target = new TargetLandPermanent();
-        target.setTargetName("land (to destroy)");
-        ability.addTarget(target);
+        ability.addTarget(new TargetLandPermanent().withChooseHint("to destroy"));
         this.addAbility(ability);
     }
 

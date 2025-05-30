@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -27,7 +27,7 @@ public final class RazorPendulum extends CardImpl {
         // At the beginning of each player’s end step, if that player has 5 or less life, Razor Pendulum deals 2 damage to that player.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new RazorPendulumEffect(), TargetController.ANY, false
+                        TargetController.ANY, new RazorPendulumEffect(), false
                 ), RazorPendulumCondition.instance, "At the beginning of each player's end step, " +
                 "if that player has 5 or less life, {this} deals 2 damage to that player."
         ));

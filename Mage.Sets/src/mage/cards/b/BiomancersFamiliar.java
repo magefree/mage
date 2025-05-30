@@ -2,7 +2,6 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -73,7 +72,7 @@ class BiomancersFamiliarCostReductionEffect extends CostModificationEffectImpl {
         if (controller == null) {
             return false;
         }
-        int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 2, 1);        
+        int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 2, 1);
         if (reduceMax <= 0) {
             return true;
         }
@@ -84,9 +83,7 @@ class BiomancersFamiliarCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() != AbilityType.ACTIVATED
-                && (abilityToModify.getAbilityType() != AbilityType.MANA
-                || !(abilityToModify instanceof ActivatedAbility))) {
+        if (!abilityToModify.getAbilityType().isActivatedAbility()) {
             return false;
         }
         //Activated abilities of creatures you control

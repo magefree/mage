@@ -1,25 +1,19 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SqueeTheImmortal extends CardImpl {
@@ -49,7 +43,7 @@ public final class SqueeTheImmortal extends CardImpl {
 class SqueePlayEffect extends AsThoughEffectImpl {
 
     SqueePlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard or from exile";
     }
 

@@ -52,7 +52,6 @@ public final class DizzyingGaze extends CardImpl {
         Ability ability2 = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
         ability2.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityAttachedEffect(
                         ability2,
                         AttachmentType.AURA,

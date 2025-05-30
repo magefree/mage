@@ -28,7 +28,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class OboroEnvoy extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.ANY);
 
     public OboroEnvoy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -44,7 +44,7 @@ public final class OboroEnvoy extends CardImpl {
         Effect effect = new BoostTargetEffect(xValue, StaticValue.get(0), Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-0 until end of turn, where X is the number of cards in your hand");
         Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(2));
-        ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

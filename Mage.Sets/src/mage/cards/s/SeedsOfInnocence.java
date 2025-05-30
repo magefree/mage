@@ -57,7 +57,7 @@ class SeedsOfInnocenceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent artifact : game.getState().getBattlefield().getActivePermanents(new FilterArtifactPermanent(), controller.getId(), game)) {
+            for (Permanent artifact : game.getBattlefield().getActivePermanents(new FilterArtifactPermanent(), controller.getId(), game)) {
                 Player artifactController = game.getPlayer(artifact.getControllerId());
                 int cmc = artifact.getManaValue();
                 if (artifact.destroy(source, game, true)) {

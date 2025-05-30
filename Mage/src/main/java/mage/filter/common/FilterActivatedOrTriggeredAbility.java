@@ -1,13 +1,12 @@
 package mage.filter.common;
 
 import mage.abilities.Ability;
-import mage.constants.AbilityType;
 import mage.filter.FilterStackObject;
+import mage.filter.predicate.other.ActivatedOrTriggeredAbilityPredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 
 import java.util.UUID;
-import mage.filter.predicate.other.ActivatedOrTriggeredAbilityPredicate;
 
 /**
  * @author TheElk801
@@ -29,25 +28,23 @@ public class FilterActivatedOrTriggeredAbility extends FilterStackObject {
 
     @Override
     public boolean match(StackObject stackObject, UUID playerId, Ability source, Game game) {
-        
+
         if (!super.match(stackObject, playerId, source, game)
                 || !(stackObject instanceof Ability)) {
             return false;
         }
         Ability ability = (Ability) stackObject;
-        return ability.getAbilityType() == AbilityType.TRIGGERED
-                || ability.getAbilityType() == AbilityType.ACTIVATED;
+        return ability.isTriggeredAbility() || ability.isActivatedAbility();
     }
 
     @Override
     public boolean match(StackObject stackObject, Game game) {
-        
+
         if (!super.match(stackObject, game)
                 || !(stackObject instanceof Ability)) {
             return false;
         }
         Ability ability = (Ability) stackObject;
-        return ability.getAbilityType() == AbilityType.TRIGGERED
-                || ability.getAbilityType() == AbilityType.ACTIVATED;
+        return ability.getAbilityType().isTriggeredAbility() || ability.isActivatedAbility();
     }
 }

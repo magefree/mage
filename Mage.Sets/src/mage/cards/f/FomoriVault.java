@@ -27,9 +27,11 @@ public final class FomoriVault extends CardImpl {
         // {T}: Add {1}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {3}, {T}, Discard a card: Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in random order.
+        // {3}, {T}, Discard a card: Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in a random order.
         Ability ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
                 ArtifactYouControlCount.instance, 1, PutCards.HAND, PutCards.BOTTOM_RANDOM
+        ).setText("Look at the top X cards of your library, where X is the number of artifacts you control. " +
+                "Put one of those cards into your hand and the rest on the bottom of your library in a random order"
         ), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

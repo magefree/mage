@@ -31,17 +31,17 @@ public final class ThornbiteStaff extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.SHAMAN, "a Shaman creature");
 
     public ThornbiteStaff(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.SHAMAN);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{2}, {T}: This creature deals 1 damage to any target" and "Whenever a creature dies, untap this creature."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(2));
+        Ability gainedAbility = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(2));
         gainedAbility.addCost(new TapSourceCost());
         gainedAbility.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has \"{2}, {T}: This creature deals 1 damage to any target\"");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(new DiesCreatureTriggeredAbility(new UntapSourceEffect(),false), AttachmentType.EQUIPMENT);
         effect.setText("and \"Whenever a creature dies, untap this creature.\"");
         ability.addEffect(effect);

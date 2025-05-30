@@ -33,7 +33,7 @@ public final class StormclawRager extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }

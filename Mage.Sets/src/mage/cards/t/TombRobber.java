@@ -35,7 +35,7 @@ public final class TombRobber extends CardImpl {
 
         // {1}, Discard a card: Tomb Robber explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
         Effect effect = new ExploreSourceEffect(true, "{this}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardCardCost());
+        Ability ability = new SimpleActivatedAbility(effect, new DiscardCardCost());
         ability.addCost(new ManaCostsImpl<>("{1}"));
         this.addAbility(ability);
     }

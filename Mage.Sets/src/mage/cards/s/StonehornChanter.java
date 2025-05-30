@@ -30,7 +30,7 @@ public final class StonehornChanter extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {5}{W}: Stonehorn Chanter gains vigilance and lifelink until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn)
+        Ability ability = new SimpleActivatedAbility(new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn)
                 .setText("{this} gains vigilance"), new ManaCostsImpl<>("{5}{W}"));
         ability.addEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and lifelink until end of turn"));

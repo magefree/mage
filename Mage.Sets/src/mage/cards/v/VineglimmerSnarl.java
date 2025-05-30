@@ -37,7 +37,7 @@ public final class VineglimmerSnarl extends CardImpl {
                 new TapSourceUnlessPaysEffect(
                         new RevealTargetFromHandCost(new TargetCardInHand(filter))
                 ), "you may reveal a Forest or Island card from your hand. " +
-                "If you don't, {this} enters the battlefield tapped"
+                "If you don't, {this} enters tapped"
         ));
 
         // {T}: Add {G} or {U}.

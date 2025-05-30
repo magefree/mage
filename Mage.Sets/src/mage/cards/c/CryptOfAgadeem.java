@@ -7,7 +7,9 @@ import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -36,8 +38,10 @@ public final class CryptOfAgadeem extends CardImpl {
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
         // {2}, {T}: Add {B} for each black creature card in your graveyard.
-        DynamicManaAbility ability = new DynamicManaAbility(Mana.BlackMana(1), new CardsInControllerGraveyardCount(filter), new GenericManaCost(2));
+        DynamicValue blackCardsInGraveyard = new CardsInControllerGraveyardCount(filter);
+        DynamicManaAbility ability = new DynamicManaAbility(Mana.BlackMana(1), blackCardsInGraveyard, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
+        ability.addHint(new ValueHint("Black creature cards in your graveyard", blackCardsInGraveyard));
         this.addAbility(ability);
     }
 

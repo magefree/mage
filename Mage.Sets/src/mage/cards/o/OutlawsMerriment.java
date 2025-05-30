@@ -2,12 +2,11 @@ package mage.cards.o;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.OutlawsMerrimentClericToken;
 import mage.game.permanent.token.OutlawsMerrimentRogueToken;
 import mage.game.permanent.token.OutlawsMerrimentWarriorToken;
@@ -26,8 +25,7 @@ public final class OutlawsMerriment extends CardImpl {
         // • 3/1 Human Warrior with trample and haste.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new CreateTokenEffect(new OutlawsMerrimentWarriorToken())
-                        .setText("3/1 Human Warrior with trample and haste"),
-                TargetController.YOU, false
+                        .setText("3/1 Human Warrior with trample and haste")
         );
 
         // • 2/1 Human Cleric with lifelink and haste.

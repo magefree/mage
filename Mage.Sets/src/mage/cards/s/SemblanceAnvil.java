@@ -32,7 +32,7 @@ public final class SemblanceAnvil extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SemblanceAnvilEffect(), true).setAbilityWord(AbilityWord.IMPRINT));
 
         // Spells you cast that share a card type with the exiled card cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SemblanceAnvilCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new SemblanceAnvilCostReductionEffect()));
     }
 
     private SemblanceAnvil(final SemblanceAnvil card) {

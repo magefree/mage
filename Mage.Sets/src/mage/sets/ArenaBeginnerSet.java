@@ -16,7 +16,7 @@ public class ArenaBeginnerSet extends ExpansionSet {
     }
 
     private ArenaBeginnerSet() {
-        super("Arena Beginner Set", "ANB", ExpansionSet.buildDate(2020, 8, 13), SetType.MAGIC_ONLINE);
+        super("Arena Beginner Set", "ANB", ExpansionSet.buildDate(2020, 8, 13), SetType.MAGIC_ARENA);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

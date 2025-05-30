@@ -24,9 +24,9 @@ public final class SaiOfTheShinobi extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
-        // Whenever a creature enters the battlefield under your control, you may attach Sai of the Shinobi to it.
+        // Whenever a creature you control enters, you may attach Sai of the Shinobi to it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE, true, SetTargetPointer.PERMANENT));

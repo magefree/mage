@@ -38,7 +38,7 @@ public final class FieldSurgeon extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Tap an untapped creature you control: Prevent the next 1 damage that would be dealt to target creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1),
+        Ability ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1),
                 new TapTargetCost(new TargetControlledCreaturePermanent(filter)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

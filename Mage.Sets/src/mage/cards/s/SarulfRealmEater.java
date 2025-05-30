@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.MageItem;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -57,7 +57,7 @@ public final class SarulfRealmEater extends CardImpl {
         // At the beginning of your upkeep, if Sarulf has one or more +1/+1 counters on it, you may remove all of them. If you do, exile each other nonland permanent with converted mana cost less than or equal to the number of counters removed this way.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new SarulfRealmEaterEffect(), TargetController.YOU, true
+                        new SarulfRealmEaterEffect(), true
                 ), condition, "At the beginning of your upkeep, if {this} has one or more +1/+1 counters on it, " +
                 "you may remove all of them. If you do, exile each other nonland permanent with mana value " +
                 "less than or equal to the number of counters removed this way."
@@ -96,10 +96,9 @@ class SarulfRealmEaterEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        int counterCount = permanent.getCounters(game).getCount(CounterType.P1P1);
-        permanent.removeCounters(CounterType.P1P1.createInstance(counterCount), source, game);
+        int removedThisWay = permanent.removeAllCounters(CounterType.P1P1.getName(), source, game);
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, counterCount + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, removedThisWay));
         filter.add(AnotherPredicate.instance);
         Cards cards = new CardsImpl();
         game.getBattlefield()

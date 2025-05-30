@@ -24,7 +24,7 @@ public final class BowerPassage extends CardImpl {
 
 
         // Creatures with flying can't block creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BowerPassageEffect()));
+        this.addAbility(new SimpleStaticAbility(new BowerPassageEffect()));
     }
 
     private BowerPassage(final BowerPassage card) {

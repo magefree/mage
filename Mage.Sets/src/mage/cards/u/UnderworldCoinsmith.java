@@ -30,10 +30,10 @@ public final class UnderworldCoinsmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Constellation - Whenever Underworld Coinsmith or an enchantment enters the battlefield under your control, you gain 1 life.
+        // Constellation - Whenever Underworld Coinsmith or an enchantment you control enters, you gain 1 life.
         this.addAbility(new ConstellationAbility(new GainLifeEffect(1)));
         // {W}{B}, Pay 1 life: Each opponent loses 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), new ManaCostsImpl<>("{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(1), new ManaCostsImpl<>("{W}{B}"));
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }

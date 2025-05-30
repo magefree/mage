@@ -36,7 +36,7 @@ public final class JeskaiInfiltrator extends CardImpl {
         // Jeskai Infiltrator can't be blocked as long as you control no other creatures.
         Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedSourceEffect(), new CreatureCountCondition(1, TargetController.YOU));
         effect.setText("{this} can't be blocked as long as you control no other creatures");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Whenever Jeskai Infiltrator deals combat damage to a player, exile it and the top card of your library in a face-down pile, shuffle that pile, then manifest those cards.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new JeskaiInfiltratorEffect(), false));
@@ -93,7 +93,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
         }
         Collections.shuffle(cardsToManifest);
         game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
-        game.getState().processAction(game);
+        game.processAction();
         ManifestEffect.doManifestCards(game, source, controller, new LinkedHashSet<>(cardsToManifest));
         return true;
     }

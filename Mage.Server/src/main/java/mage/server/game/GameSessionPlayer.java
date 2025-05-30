@@ -183,7 +183,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
         game.getPlayer(playerId).setResponseString(data);
     }
 
-    public void sendPlayerManaType(ManaType manaType, UUID manaTypePlayerId) {
+    public void sendPlayerManaType(UUID manaTypePlayerId, ManaType manaType) {
         game.getPlayer(playerId).setResponseManaType(manaTypePlayerId, manaType);
     }
 
@@ -209,16 +209,21 @@ public class GameSessionPlayer extends GameSessionWatcher {
      * @return
      */
     public static GameView prepareGameView(Game game, UUID playerId, UUID userId) {
-        Player player = game.getPlayer(playerId); // null for watcher
-        GameView gameView = new GameView(game.getState(), game, playerId, null);
-        if (player != null) {
-            if (gameView.getPriorityPlayerName().equals(player.getName())) {
-                gameView.setCanPlayObjects(player.getPlayableObjects(game, Zone.ALL));
-            }
+        // game view calculation can take some time and can be called from non-game thread,
+        // so use copy for thread save (protection from ConcurrentModificationException)
+        Game sourceGame = game.copy();
+        GameView gameView = new GameView(sourceGame.getState(), sourceGame, playerId, null);
+
+        // playable info (if opponent under control then show opponent's playable)
+        Player player = sourceGame.getPlayer(playerId); // null for watcher
+        Player priorityPlayer = sourceGame.getPlayer(sourceGame.getPriorityPlayerId());
+        Player controllingPlayer = priorityPlayer == null ? null : sourceGame.getPlayer(priorityPlayer.getTurnControlledBy());
+        if (controllingPlayer != null && player == controllingPlayer) {
+            gameView.setCanPlayObjects(priorityPlayer.getPlayableObjects(sourceGame, Zone.ALL));
         }
 
-        processControlledPlayers(game, player, gameView);
-        processWatchedHands(game, userId, gameView);
+        processControlledPlayers(sourceGame, player, gameView);
+        processWatchedHands(sourceGame, userId, gameView);
         //TODO: should player who controls another player's turn be able to look at all these cards?
 
         return gameView;

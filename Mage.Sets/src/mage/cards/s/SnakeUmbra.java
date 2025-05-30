@@ -11,7 +11,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -36,7 +36,7 @@ public final class SnakeUmbra extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
 
         // and has "Whenever this creature deals damage to an opponent, you may draw a card."
         Ability gainedAbility = new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), true);
@@ -45,8 +45,8 @@ public final class SnakeUmbra extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
 
-        // Totem armor
-        this.addAbility(new TotemArmorAbility());
+        // Umbra armor
+        this.addAbility(new UmbraArmorAbility());
     }
 
     private SnakeUmbra(final SnakeUmbra card) {

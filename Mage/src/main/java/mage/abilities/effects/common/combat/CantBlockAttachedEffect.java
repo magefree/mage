@@ -49,7 +49,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
@@ -59,7 +59,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             return getTargetPointer().getFirst(game, source).equals(permanent.getId());
         }
         return permanent.getAttachments().contains(source.getSourceId());

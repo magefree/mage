@@ -2,7 +2,6 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.UndyingAbility;
@@ -22,7 +21,6 @@ import java.util.UUID;
  */
 public final class HancockGhoulishMayor extends CardImpl {
 
-    private static final DynamicValue xValue = new CountersSourceCount(null);
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
@@ -44,7 +42,7 @@ public final class HancockGhoulishMayor extends CardImpl {
 
         // Each other creature you control that's a Zombie or Mutant gets +X/+X, where X is the number of counters on Hancock, Ghoulish Mayor.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                xValue, xValue, Duration.WhileOnBattlefield, filter, true
+                CountersSourceCount.ANY, CountersSourceCount.ANY, Duration.WhileOnBattlefield, filter, true
         ).setText("each other creature you control that's a Zombie or Mutant " +
                 "gets +X/+X, where X is the number of counters on {this}")));
 

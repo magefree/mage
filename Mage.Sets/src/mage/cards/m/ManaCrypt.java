@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.SimpleManaAbility;
@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -26,7 +25,7 @@ public final class ManaCrypt extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, Mana Crypt deals 3 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ManaCryptEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ManaCryptEffect()));
 
         // {T}: Add {C}{C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));

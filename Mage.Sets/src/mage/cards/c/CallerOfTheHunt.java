@@ -59,7 +59,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void prepareCost(Ability ability, Game game) {
         if (game.inCheckPlayableState()) {
             return;
         }
@@ -103,6 +103,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
             game.getState().setValue(sourceObject.getId() + "_type", maxSubType);
         } else {
             // human choose
+            // TODO: need early target cost instead dialog here
             Effect effect = new ChooseCreatureTypeEffect(Outcome.Benefit);
             effect.apply(game, ability);
         }
@@ -139,16 +140,16 @@ class ChooseCreatureTypeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source);
-        Choice typeChoice = new ChoiceCreatureType(mageObject);
+        Choice typeChoice = new ChoiceCreatureType(game, source);
         if (controller != null
                 && mageObject != null
                 && controller.choose(outcome, typeChoice, game)) {
             if (!game.isSimulation()) {
                 game.informPlayers(mageObject.getName() + ": "
-                        + controller.getLogName() + " has chosen " + typeChoice.getChoice());
+                        + controller.getLogName() + " has chosen " + typeChoice.getChoiceKey());
             }
             game.getState().setValue(mageObject.getId()
-                    + "_type", SubType.byDescription(typeChoice.getChoice()));
+                    + "_type", SubType.byDescription(typeChoice.getChoiceKey()));
             return true;
         }
         return false;

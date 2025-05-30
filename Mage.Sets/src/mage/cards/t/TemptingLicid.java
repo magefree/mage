@@ -31,7 +31,7 @@ public final class TemptingLicid extends CardImpl {
         this.addAbility(new LicidAbility(new ColoredManaCost(ColoredManaSymbol.G), new ColoredManaCost(ColoredManaSymbol.G)));
         
         // All creatures able to block enchanted creature do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA)));
     }
 
     private TemptingLicid(final TemptingLicid card) {

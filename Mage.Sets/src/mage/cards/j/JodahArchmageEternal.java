@@ -29,7 +29,7 @@ public final class JodahArchmageEternal extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // You may pay WUBRG rather than pay the mana cost for spells that you cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WUBRGInsteadEffect()));
+        this.addAbility(new SimpleStaticAbility(new WUBRGInsteadEffect()));
     }
 
     private JodahArchmageEternal(final JodahArchmageEternal card) {

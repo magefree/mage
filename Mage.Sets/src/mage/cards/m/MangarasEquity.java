@@ -4,7 +4,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -40,7 +39,7 @@ public final class MangarasEquity extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Mangara's Equity unless you pay {1}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{W}")), TargetController.YOU, false));
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{W}"))));
 
         // Whenever a creature of the chosen color deals damage to you or a white creature you control, Mangara's Equity deals that much damage to that creature.
         this.addAbility(new MangarasEquityTriggeredAbility());

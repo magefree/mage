@@ -9,7 +9,6 @@ import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.abilities.keyword.RiotAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
@@ -78,7 +77,6 @@ enum RavagerWurmPredicate implements Predicate<Permanent> {
                 && input
                 .getAbilities(game)
                 .stream()
-                .map(Ability::getAbilityType)
-                .anyMatch(AbilityType.ACTIVATED::equals);
+                .anyMatch(Ability::isNonManaActivatedAbility);
     }
 }

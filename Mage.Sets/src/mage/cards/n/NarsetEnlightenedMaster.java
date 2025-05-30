@@ -1,7 +1,5 @@
 package mage.cards.n;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -19,8 +17,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class NarsetEnlightenedMaster extends CardImpl {
@@ -94,7 +94,7 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
 class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
 
     NarsetEnlightenedMasterCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, you may cast noncreature cards exiled with {this} this turn without paying their mana costs";
     }
 

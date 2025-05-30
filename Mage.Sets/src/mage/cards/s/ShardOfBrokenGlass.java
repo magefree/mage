@@ -26,7 +26,7 @@ public final class ShardOfBrokenGlass extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
 
         // Whenever equipped creature attacks, you may put the top two cards of your library into your graveyard.
         this.addAbility(new AttacksAttachedTriggeredAbility(new MillCardsControllerEffect(2), true));

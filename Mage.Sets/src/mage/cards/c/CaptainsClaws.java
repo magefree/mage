@@ -27,7 +27,7 @@ public final class CaptainsClaws extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
         // Whenever equipped creature attacks, create a 1/1 white Kor Ally creature token tapped and attacking.
         this.addAbility(new AttacksAttachedTriggeredAbility(new CreateTokenEffect(new KorAllyToken(), 1, true, true)));
         // Equip {1}
@@ -43,4 +43,3 @@ public final class CaptainsClaws extends CardImpl {
         return new CaptainsClaws(this);
     }
 }
-

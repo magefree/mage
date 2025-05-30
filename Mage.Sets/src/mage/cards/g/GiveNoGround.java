@@ -27,7 +27,7 @@ public final class GiveNoGround extends CardImpl {
         // Target creature gets +2/+6 until end of turn and can block any number of creatures this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 6, Duration.EndOfTurn));
-        Ability gainedAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0));
+        Ability gainedAbility = new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(0));
         Effect effect = new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn);
         effect.setText("and can block any number of creatures this turn");
         this.getSpellAbility().addEffect(effect);

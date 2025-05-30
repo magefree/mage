@@ -39,6 +39,7 @@ public class LeavesBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever " + filter.getMessage() + " leaves the battlefield, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     protected LeavesBattlefieldAllTriggeredAbility(final LeavesBattlefieldAllTriggeredAbility ability) {

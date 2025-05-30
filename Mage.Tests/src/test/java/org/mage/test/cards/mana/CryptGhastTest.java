@@ -64,11 +64,14 @@ public class CryptGhastTest extends CardTestPlayerBase {
 
         // Without Crypt Ghast, the land won't give extra mana
         checkPlayableAbility("Not enough mana", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Erebos's", false);
+        setChoice(playerA, true);
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertTapped("Nin, the Pain Artist", true);
         assertExileCount("Crypt Ghast", 1);
+        assertHandCount(playerA, 1 + 2 + 1);
     }
 }

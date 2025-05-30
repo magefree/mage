@@ -29,7 +29,7 @@ public final class Aquamoeba extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Discard a card: Switch Aquamoeba's power and toughness until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new DiscardCardCost()));
     }
 
     private Aquamoeba(final Aquamoeba card) {

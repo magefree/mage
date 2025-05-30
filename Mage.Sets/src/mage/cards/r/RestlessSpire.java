@@ -38,16 +38,16 @@ public final class RestlessSpire extends CardImpl {
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
 
-        // {U}{R}: Until end of turn, Restless Spire becomes a 2/1 blue and red Elemental creature with "As long as it's your turn, this creature has first strike". It's still a land.
+        // {U}{R}: Until end of turn, Restless Spire becomes a 2/1 blue and red Elemental creature with "During your turn, this creature has first strike". It's still a land.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new CreatureToken(2, 1, "2/1 blue and red Elemental creature with \"As long as it's your turn, this creature has first strike.\"")
+                new CreatureToken(2, 1, "2/1 blue and red Elemental creature with \"During your turn, this creature has first strike.\"")
                         .withColor("UR").withSubType(SubType.ELEMENTAL)
                         .withAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
-                                MyTurnCondition.instance, "As long as it's your turn, this creature has first strike."
+                                MyTurnCondition.instance, "During your turn, this creature has first strike."
                         )).addHint(MyTurnHint.instance)),
-                CardType.LAND, Duration.EndOfTurn, true
-        ), new ManaCostsImpl<>("{U}{R}")));
+                CardType.LAND, Duration.EndOfTurn
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{U}{R}")));
 
         // Whenever Restless Spire attacks, scry 1.
         this.addAbility(new AttacksTriggeredAbility(new ScryEffect(1, false), false));

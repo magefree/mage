@@ -27,7 +27,7 @@ public final class DeepmuckDesperado extends CardImpl {
         // Whenever you commit a crime, each opponent mills three cards. This ability triggers only once each turn.
         this.addAbility(new CommittedCrimeTriggeredAbility(
                 new MillCardsEachPlayerEffect(3, TargetController.OPPONENT)
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
     }
 
     private DeepmuckDesperado(final DeepmuckDesperado card) {

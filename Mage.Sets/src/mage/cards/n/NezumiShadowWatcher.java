@@ -35,7 +35,7 @@ public final class NezumiShadowWatcher extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Sacrifice Nezumi Shadow-Watcher: Destroy target Ninja.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -33,7 +33,7 @@ public final class AlloyGolem extends CardImpl {
         Ability ability = new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral));
         ability.addEffect(new EnterAttributeSetChosenColorEffect());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetChosenColorEffect()));
+        this.addAbility(new SimpleStaticAbility(new SetChosenColorEffect()));
     }
 
     private AlloyGolem(final AlloyGolem card) {

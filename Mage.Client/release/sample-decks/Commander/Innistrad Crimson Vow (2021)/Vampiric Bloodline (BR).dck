@@ -1,0 +1,79 @@
+1 [VOC:117] Ancient Craving
+1 [VOC:141] Anje's Ravager
+1 [WWK:49] Anowon, the Ruin Sage
+1 [ELD:331] Arcane Signet
+1 [VOC:23] Arterial Alchemy
+1 [SOI:145] Avacyn's Judgment
+1 [ISD:130] Blasphemous Act
+1 [AVR:86] Blood Artist
+1 [LCC:185] Bloodline Necromancer
+1 [M12:82] Bloodlord of Vaasgoth
+1 [VOC:144] Bloodsworn Steward
+1 [VOW:232] Bloodtithe Harvester
+1 [LCC:186] Bloodtracker
+1 [WWK:53] Butcher of Malakir
+1 [RIX:64] Champion of Dusk
+1 [7ED:289] Charcoal Diamond
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [LCC:189] Cordial Vampire
+1 [VOC:145] Crimson Honor Guard
+1 [LCC:190] Crossway Troublemakers
+1 [DTK:93] Damnable Pact
+1 [AVR:92] Dark Impostor
+1 [CON:142] Exotic Orchard
+1 [SOI:155] Falkenrath Gorger
+1 [ISD:100] Falkenrath Noble
+1 [ZNR:102] Feed the Swarm
+1 [7ED:296] Fire Diamond
+1 [SOI:272] Foreboding Ruins
+1 [LCC:199] Glass-Cast Heart
+1 [VOC:24] Imposing Grandeur
+1 [SOI:118] Indulgent Aristocrat
+1 [OTC:137] Kamber, the Plunderer
+1 [OTC:172] Laurine, the Diversion
+1 [ZEN:100] Malakir Bloodwitch
+1 [VOC:26] Markov Enforcer
+1 [VOC:27] Midnight Arsonist
+1 [FRF:109] Mob Rule
+1 [VOC:148] Molten Echoes
+11 [BLB:274] Mountain
+1 [M3C:358] Myriad Landscape
+1 [RTR:71] Necropolis Regent
+1 [5DN:55] Night's Whisper
+1 [ROE:120] Nirkana Revenant
+1 [LCC:205] Olivia's Wrath
+1 [M3C:363] Path of Ancestry
+1 [LCC:207] Patron of the Vein
+1 [OTC:147] Predators' Hour
+1 [CLU:243] Rakdos Carnarium
+1 [RTR:184] Rakdos Charm
+1 [CLU:226] Rakdos Signet
+1 [ISD:158] Rakish Heir
+1 [XLN:120] Sanctum Seeker
+1 [VOC:28] Scion of Opulence
+1 [ODY:326] Shadowblood Ridge
+1 [VOC:22] Shadowgrange Archfiend
+1 [VOC:30] Sinister Waltz
+1 [BFZ:247] Smoldering Marsh
+1 [SUM:274] Sol Ring
+1 [SOI:184] Stensia Masquerade
+1 [DKA:143] Stromkirk Captain
+1 [EMN:106] Stromkirk Condemned
+1 [EMN:146] Stromkirk Occultist
+14 [OTJ:274] Swamp
+1 [M12:219] Swiftfoot Boots
+1 [TOR:142] Tainted Peak
+1 [THB:247] Temple of Malice
+1 [SCG:143] Temple of the False God
+1 [LCC:210] Timothar, Baron of Bats
+1 [XLN:258] Unclaimed Territory
+1 [RTR:83] Underworld Connections
+1 [CMM:416] Unstable Obelisk
+1 [WWK:70] Urge to Feed
+1 [M13:112] Vampire Nighthawk
+1 [ODY:296] Vampiric Dragon
+1 [RTR:111] Vandalblast
+SB: 1 [VOC:2] Strefan, Maurer Progenitor
+LAYOUT MAIN:(1,6)(CARD_TYPE,false,61)|([ELD:331],[7ED:289],[LCC:301],[7ED:296],[LCC:199],[CLU:226],[SUM:274],[M12:219],[CMM:416])([VOC:141],[WWK:49],[AVR:86],[LCC:185],[M12:82],[VOC:144],[VOW:232],[LCC:186],[WWK:53],[RIX:64],[LCC:189],[VOC:145],[LCC:190],[AVR:92],[SOI:155],[ISD:100],[SOI:118],[OTC:137],[OTC:172],[ZEN:100],[VOC:26],[VOC:27],[RTR:71],[ROE:120],[LCC:207],[ISD:158],[XLN:120],[VOC:28],[VOC:22],[DKA:143],[EMN:106],[EMN:146],[LCC:210],[M13:112],[ODY:296])([VOC:23],[VOC:148],[SOI:184],[RTR:83])([RTR:184],[WWK:70])([ELD:333],[CON:142],[SOI:272],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[M3C:358],[M3C:363],[CLU:243],[ODY:326],[BFZ:247],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[TOR:142],[THB:247],[SCG:143],[XLN:258])([VOC:117],[SOI:145],[ISD:130],[DTK:93],[ZNR:102],[VOC:24],[FRF:109],[5DN:55],[LCC:205],[OTC:147],[VOC:30],[RTR:111])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([VOC:2])

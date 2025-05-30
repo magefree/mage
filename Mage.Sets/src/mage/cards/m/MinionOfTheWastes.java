@@ -6,7 +6,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -15,6 +15,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -52,10 +54,10 @@ public final class MinionOfTheWastes extends CardImpl {
     }
 }
 
-class MinionOfTheWastesEffect extends OneShotEffect {
+class MinionOfTheWastesEffect extends ReplacementEffectImpl {
 
     MinionOfTheWastesEffect() {
-        super(Outcome.LoseLife);
+        super(Duration.EndOfGame, Outcome.LoseLife);
         staticText = "pay any amount of life";
     }
 
@@ -69,13 +71,23 @@ class MinionOfTheWastesEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getTargetId().equals(source.getSourceId());
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (controller == null || permanent == null) {
+        if (creature == null || controller == null) {
             return false;
         }
-        int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", game);
+        int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", source, game);
         Cost cost = new PayLifeCost(payAmount);
         if (!cost.pay(source, game, source, source.getControllerId(), true)) {
             return false;
@@ -84,9 +96,10 @@ class MinionOfTheWastesEffect extends OneShotEffect {
         game.informPlayers((sourceCard != null ? sourceCard.getLogName() : "") + ": " + controller.getLogName() +
                 " pays " + payAmount + " life");
         game.addEffect(new SetBasePowerToughnessSourceEffect(
-                payAmount, payAmount, Duration.Custom
+                payAmount, payAmount, Duration.WhileOnBattlefield
         ), source);
-        permanent.addInfo("life paid", CardUtil.addToolTipMarkTags("Life paid: " + payAmount), game);
-        return true;
+        creature.addInfo("life paid", CardUtil.addToolTipMarkTags("Life paid: " + payAmount), game);
+        this.discard(); // prevent multiple replacements e.g. on blink
+        return false;
     }
 }

@@ -63,7 +63,7 @@ public class TargetCardInGraveyardBattlefieldOrStack extends TargetCard {
         }
         MageObject targetSource = game.getObject(source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, source, game)) {
-            if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+            if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                 return true;
             }
         }
@@ -110,7 +110,7 @@ public class TargetCardInGraveyardBattlefieldOrStack extends TargetCard {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game); // in graveyard first
         MageObject targetSource = game.getObject(source);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, source, game)) {
-            if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+            if (notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }

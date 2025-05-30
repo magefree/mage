@@ -36,7 +36,7 @@ public final class Siegecraft extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +2/+4.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 4, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 4, Duration.WhileOnBattlefield)));
     }
 
     private Siegecraft(final Siegecraft card) {

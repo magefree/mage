@@ -18,7 +18,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class NightmarishEnd extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.ANY);
 
     public NightmarishEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");

@@ -1,10 +1,11 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchAllEvent;
+import mage.game.events.DamagedBatchBySourceEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 
@@ -15,12 +16,12 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX, xenohedron
  */
-public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
+public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
     public DealsCombatDamageTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase(getWhen() + "{this} deals combat damage, ");
-        this.replaceRuleText = true;
+        this.withRuleTextReplacement(true);
     }
 
     protected DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
@@ -34,22 +35,15 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ALL;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int amount = ((DamagedBatchAllEvent) event)
-                .getEvents()
-                .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> e.getAttackerId().equals(getSourceId()))
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-        if (amount < 1) {
+        if (!event.getSourceId().equals(getSourceId()) || !((DamagedBatchBySourceEvent) event).isCombatDamage() ) {
             return false;
         }
-        this.getEffects().setValue("damage", amount);
+        this.getEffects().setValue("damage", event.getAmount());
         return true;
     }
 }

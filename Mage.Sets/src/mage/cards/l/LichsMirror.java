@@ -27,7 +27,7 @@ public final class LichsMirror extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LichsMirrorEffect()));
+        this.addAbility(new SimpleStaticAbility(new LichsMirrorEffect()));
     }
 
     private LichsMirror(final LichsMirror card) {
@@ -69,7 +69,7 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
                 toLib.add(permanent);
             }            
             player.shuffleCardsToLibrary(toLib, game, source);
-            game.getState().processAction(game);
+            game.processAction();
             player.drawCards(7, source, game); // original event is not a draw event, so skip it in params
             player.setLife(20, game, source);            
         }

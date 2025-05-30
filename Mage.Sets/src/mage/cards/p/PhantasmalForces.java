@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class PhantasmalForces extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, sacrifice Phantasmal Forces unless you pay {U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}"))));
     }
 
     private PhantasmalForces(final PhantasmalForces card) {

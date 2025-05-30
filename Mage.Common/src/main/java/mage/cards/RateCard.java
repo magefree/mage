@@ -90,17 +90,17 @@ public final class RateCard {
         }
 
         String name = card.getName();
-        if (useCache && allowedColors == null && ratedCard.containsKey(name)) {
-            int rate = ratedCard.get(name);
-            return rate;
+        if (useCache && allowedColors.isEmpty() && ratedCard.containsKey(name)) {
+            return ratedCard.get(name);
         }
 
         int typeMultiplier = typeMultiplier(card);
         int score = getBaseCardScore(card) + 2 * typeMultiplier + getManaCostScore(card, allowedColors)
                 + 40 * isRemoval(card);
 
-        if (useCache && allowedColors == null)
+        if (useCache && allowedColors.isEmpty()) {
             ratedCard.put(name, score);
+        }
 
         return score;
     }
@@ -111,17 +111,17 @@ public final class RateCard {
         }
 
         String name = cardview.getName();
-        if (useCache && allowedColors == null && ratedCardView.containsKey(name)) {
-            int rate = ratedCardView.get(name);
-            return rate;
+        if (useCache && allowedColors.isEmpty() && ratedCardView.containsKey(name)) {
+            return ratedCardView.get(name);
         }
 
         int typeMultiplier = typeMultiplier(cardview);
         int score = getBaseCardScore(cardview) + 2 * typeMultiplier + getManaCostScore(cardview, allowedColors);
         // Cardview does not have enough info to know the card is a removal.
 
-        if (useCache && allowedColors == null)
+        if (useCache && allowedColors.isEmpty()) {
             ratedCardView.put(name, score);
+        }
 
         return score;
     }
@@ -402,7 +402,7 @@ public final class RateCard {
     }
 
     private static int getManaCostScore(String name, int manaValue, List<String> manaCostSymbols, List<ColoredManaSymbol> allowedColors) {
-        if (allowedColors == null) {
+        if (allowedColors.isEmpty()) {
             int colorPenalty = 0;
             for (String symbol : manaCostSymbols) {
                 if (isColoredMana(symbol)) {

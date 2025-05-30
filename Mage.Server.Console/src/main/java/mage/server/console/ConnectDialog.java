@@ -365,12 +365,17 @@ public class ConnectDialog extends JDialog {
         connection.setPort(Integer.parseInt(this.txtPort.getText()));
         connection.setAdminPassword(new String(txtPassword.getPassword()));
         connection.setUsername(SessionImpl.ADMIN_NAME);
-        connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
-        if (!this.cbProxyType.getSelectedItem().equals(ProxyType.NONE)) {
-            connection.setProxyHost(this.txtProxyServer.getText());
-            connection.setProxyPort(Integer.parseInt(this.txtProxyPort.getText()));
-            connection.setProxyUsername(this.txtProxyUserName.getText());
-            connection.setProxyPassword(new String(this.txtPasswordField.getPassword()));
+
+        if (false) { // TODO: delete proxy at all after few releases, 2025-02-09
+            connection.setProxyType((ProxyType) this.cbProxyType.getSelectedItem());
+            if (!this.cbProxyType.getSelectedItem().equals(ProxyType.NONE)) {
+                connection.setProxyHost(this.txtProxyServer.getText());
+                connection.setProxyPort(Integer.parseInt(this.txtProxyPort.getText()));
+                connection.setProxyUsername(this.txtProxyUserName.getText());
+                connection.setProxyPassword(new String(this.txtPasswordField.getPassword()));
+            }
+        } else {
+            connection.setProxyType(ProxyType.NONE);
         }
 
         logger.debug("connecting: " + connection.getProxyType() + ' ' + connection.getProxyHost() + ' ' + connection.getProxyPort());

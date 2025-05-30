@@ -161,10 +161,10 @@ public class Spell extends StackObjectImpl implements Card {
         this.startingDefense = spell.startingDefense;
     }
 
-    public boolean activate(Game game, boolean noMana) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.BEFORE); // mana payment step started, can use any mana abilities, see AlternateManaPaymentAbility
 
-        if (!ability.activate(game, noMana)) {
+        if (!ability.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
 
@@ -182,7 +182,7 @@ public class Spell extends StackObjectImpl implements Card {
             // see https://github.com/magefree/mage/issues/6603
             payNoMana |= ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED;
 
-            if (!spellAbility.activate(game, payNoMana)) {
+            if (!spellAbility.activate(game, allowedIdentifiers, payNoMana)) {
                 return false;
             }
         }
@@ -190,14 +190,16 @@ public class Spell extends StackObjectImpl implements Card {
         return true;
     }
 
-    public String getActivatedMessage(Game game) {
+    public String getActivatedMessage(Game game, Zone fromZone) {
         StringBuilder sb = new StringBuilder();
+        sb.append(" casts ");
         if (isCopy()) {
-            sb.append(" copies ");
-        } else {
-            sb.append(" casts ");
+            sb.append("a copied ");
         }
-        return sb.append(ability.getGameLogMessage(game)).toString();
+        sb.append(ability.getGameLogMessage(game));
+        sb.append(" from ");
+        sb.append(fromZone.toString().toLowerCase(Locale.ENGLISH));
+        return sb.toString();
     }
 
     public String getSpellCastText(Game game) {
@@ -207,10 +209,11 @@ public class Spell extends StackObjectImpl implements Card {
                     + " using " + this.getSpellAbility().getSpellAbilityCastMode();
         }
 
-        if (card instanceof AdventureCardSpell) {
-            AdventureCard adventureCard = ((AdventureCardSpell) card).getParentCard();
-            return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), adventureCard)
-                    + " as Adventure spell of " + GameLog.getColoredObjectIdName(adventureCard);
+        if (card instanceof SpellOptionCard) {
+            CardWithSpellOption parentCard = ((SpellOptionCard) card).getParentCard();
+            String type = ((SpellOptionCard) card).getSpellType();
+            return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), parentCard)
+                    + " as " + type + " spell of " + GameLog.getColoredObjectIdName(parentCard);
         }
 
         if (card instanceof ModalDoubleFacedCardHalf) {
@@ -537,8 +540,8 @@ public class Spell extends StackObjectImpl implements Card {
     public String getIdName() {
         String idName;
         if (card != null) {
-            if (card instanceof AdventureCardSpell) {
-                idName = ((AdventureCardSpell) card).getParentCard().getId().toString().substring(0, 3);
+            if (card instanceof SpellOptionCard) {
+                idName = ((SpellOptionCard) card).getParentCard().getId().toString().substring(0, 3);
             } else {
                 idName = card.getId().toString().substring(0, 3);
             }
@@ -1090,13 +1093,23 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public void removeCounters(String name, int amount, Ability source, Game game) {
-        card.removeCounters(name, amount, source, game);
+    public int removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
+        return card.removeCounters(counterName, amount, source, game, isDamage);
     }
 
     @Override
-    public void removeCounters(Counter counter, Ability source, Game game) {
-        card.removeCounters(counter, source, game);
+    public int removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
+        return card.removeCounters(counter, source, game, isDamage);
+    }
+
+    @Override
+    public int removeAllCounters(Ability source, Game game, boolean isDamage) {
+        return card.removeAllCounters(source, game, isDamage);
+    }
+
+    @Override
+    public int removeAllCounters(String counterName, Ability source, Game game, boolean isDamage) {
+        return card.removeAllCounters(counterName, source, game, isDamage);
     }
 
     public Card getCard() {
@@ -1157,6 +1170,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean canBeCopied() {
+        return this.getSpellAbility().canBeCopied();
+    }
+
+    @Override
     public boolean isAllCreatureTypes(Game game) {
         return card.isAllCreatureTypes(game);
     }
@@ -1172,7 +1190,27 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return card.isAllNonbasicLandTypes(game);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        card.setIsAllNonbasicLandTypes(value);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        card.setIsAllNonbasicLandTypes(game, value);
+    }
+
+    @Override
     public List<UUID> getAttachments() {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode) {
         throw new UnsupportedOperationException("Not supported.");
     }
 

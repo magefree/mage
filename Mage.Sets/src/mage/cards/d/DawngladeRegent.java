@@ -14,6 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -35,7 +36,7 @@ public final class DawngladeRegent extends CardImpl {
         // As long as you're the monarch, permanents you control have hexproof.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(
-                        HexproofAbility.getInstance(), Duration.WhileOnBattlefield
+                        HexproofAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS
                 ), MonarchIsSourceControllerCondition.instance,
                 "as long as you're the monarch, permanents you control have hexproof"
         )));

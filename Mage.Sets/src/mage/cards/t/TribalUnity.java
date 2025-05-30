@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class TribalUnity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{2}{G}");
 
         // Creatures of the creature type of your choice get +X/+X until end of turn.
-        this.getSpellAbility().addEffect(new TribalUnityEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new TribalUnityEffect(GetXValue.instance));
     }
 
     private TribalUnity(final TribalUnity card) {
@@ -64,14 +64,12 @@ class TribalUnityEffect extends OneShotEffect {
             return false;
         }
         Player player = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(sourceObject);
+        Choice typeChoice = new ChoiceCreatureType(game, source);
         if (player != null && player.choose(outcome, typeChoice, game)) {
             int boost = amount.calculate(game, source, this);
-            if (typeChoice.getChoice() != null) {
-                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-            }
+            game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoiceKey());
             FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-            filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+            filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
             game.addEffect(new BoostAllEffect(
                     boost, boost, Duration.EndOfTurn, filterCreaturePermanent, false), source);
             return true;

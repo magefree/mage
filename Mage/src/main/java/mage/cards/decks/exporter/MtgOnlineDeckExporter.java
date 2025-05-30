@@ -38,7 +38,7 @@ public class MtgOnlineDeckExporter extends DeckExporter {
             if (curAmount == 0) {
                 res.add(card.getCardName());
             }
-            amount.put(code, curAmount + card.getQuantity());
+            amount.put(code, curAmount + card.getAmount());
         }
         return res;
     }

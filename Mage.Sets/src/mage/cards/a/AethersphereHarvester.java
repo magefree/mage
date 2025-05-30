@@ -38,7 +38,7 @@ public final class AethersphereHarvester extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
 
         // Pay {E}: Aethersphere Harvester gains lifelink until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new PayEnergyCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new PayEnergyCost(1)));
 
         // Crew 1 <i>(Tap any number of creature you control with power 1 or more: This Vehicle becomes an artifact creature until end of turn.)
         this.addAbility(new CrewAbility(1));

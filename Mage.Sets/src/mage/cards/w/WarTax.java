@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class WarTax extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // {X}{U}: This turn, creatures can't attack unless their controller pays {X} for each attacking creature they control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarTaxCantAttackUnlessPaysEffect(), new ManaCostsImpl<>("{X}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new WarTaxCantAttackUnlessPaysEffect(), new ManaCostsImpl<>("{X}{U}")));
     }
 
     private WarTax(final WarTax card) {
@@ -45,7 +45,7 @@ public final class WarTax extends CardImpl {
 
 class WarTaxCantAttackUnlessPaysEffect extends PayCostToAttackBlockEffectImpl {
 
-    DynamicValue xCosts = ManacostVariableValue.REGULAR;
+    DynamicValue xCosts = GetXValue.instance;
 
     WarTaxCantAttackUnlessPaysEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral, RestrictType.ATTACK);

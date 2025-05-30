@@ -39,7 +39,7 @@ public final class EternalThirst extends CardImpl {
         // Enchanted creature has lifelink
         Effect effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA);
         effect.setText("Enchanted creature has lifelink");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         // and "Whenever a creature an opponent controls dies, put a +1/+1 counter on this creature."
         effect = new GainAbilityAttachedEffect(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE), AttachmentType.AURA);
         ability.addEffect(effect);

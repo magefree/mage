@@ -3,7 +3,7 @@ package mage.game.permanent.token;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TotemArmorAbility;
+import mage.abilities.keyword.UmbraArmorAbility;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -18,7 +18,7 @@ public final class MaskToken extends TokenImpl {
         super(
                 "Mask", "white Aura enchantment token named Mask "
                         + "attached to another target permanent. "
-                        + "The token has enchant permanent and totem armor."
+                        + "The token has enchant permanent and umbra armor."
         );
         cardType.add(CardType.ENCHANTMENT);
         color.setWhite(true);
@@ -30,8 +30,8 @@ public final class MaskToken extends TokenImpl {
         ability.addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(ability);
 
-        // Totem armor
-        this.addAbility(new TotemArmorAbility());
+        // Umbra armor
+        this.addAbility(new UmbraArmorAbility());
     }
 
     private MaskToken(final MaskToken token) {

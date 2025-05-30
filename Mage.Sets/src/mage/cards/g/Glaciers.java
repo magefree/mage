@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -12,6 +12,7 @@ import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import java.util.List;
@@ -30,10 +31,10 @@ public final class Glaciers extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Glaciers unless you pay {W}{U}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{U}")), TargetController.YOU, false));
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{U}"))));
 
         // All Mountains are Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlaciersEffect()));
+        this.addAbility(new SimpleStaticAbility(new GlaciersEffect()));
     }
 
     private Glaciers(final Glaciers card) {
@@ -68,7 +69,7 @@ public final class Glaciers extends CardImpl {
 
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-            for (Permanent land : game.getBattlefield().getAllActivePermanents(CardType.LAND, game)) {
+            for (Permanent land : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game)) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         // the land mana ability is intrinsic, so apply at this layer not layer 6

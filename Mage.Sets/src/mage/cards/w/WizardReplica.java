@@ -30,7 +30,7 @@ public final class WizardReplica extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new CounterUnlessPaysEffect(new GenericManaCost(2)), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);

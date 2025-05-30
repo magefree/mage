@@ -30,7 +30,7 @@ public final class GhostsOfTheInnocent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // If a source would deal damage to a creature or player, it deals half that damage, rounded down, to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostsOfTheInnocentPreventDamageEffect()));
+        this.addAbility(new SimpleStaticAbility(new GhostsOfTheInnocentPreventDamageEffect()));
     }
 
     private GhostsOfTheInnocent(final GhostsOfTheInnocent card) {

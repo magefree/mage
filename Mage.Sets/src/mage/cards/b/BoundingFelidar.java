@@ -15,9 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -26,14 +24,8 @@ import java.util.UUID;
  */
 public final class BoundingFelidar extends CardImpl {
 
-    private final static FilterPermanent filter = new FilterControlledCreaturePermanent("other creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
-    private final static DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
-    private final static Hint hint = new ValueHint("Other creatures you control", xValue);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE);
+    private static final Hint hint = new ValueHint("Other creatures you control", xValue);
 
     public BoundingFelidar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");
@@ -45,7 +37,7 @@ public final class BoundingFelidar extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Whenever Bounding Felidar attacks while saddled, put a +1/+1 counter on each other creature you control. You gain 1 life for each of those creatures.
-        Ability ability = new AttacksWhileSaddledTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter));
+        Ability ability = new AttacksWhileSaddledTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE));
         ability.addEffect(new GainLifeEffect(xValue).setText("You gain 1 life for each of those creatures"));
         ability.addHint(hint);
         this.addAbility(ability);

@@ -1,13 +1,12 @@
 
 package mage.cards.a;
 
-import java.util.*;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -18,11 +17,12 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
 import mage.watchers.Watcher;
 
+import java.util.*;
+
 /**
- *
  * @author TheElk801
  */
 public final class AdmiralBeckettBrass extends CardImpl {
@@ -33,7 +33,7 @@ public final class AdmiralBeckettBrass extends CardImpl {
     static {
         filter.add(SubType.PIRATE.getPredicate());
         filter.add(TargetController.YOU.getControllerPredicate());
-        filter2.add(new ControllerDealtDamageByPiratesPredicate());
+        filter2.add(ControllerDealtDamageByPiratesPredicate.instance);
     }
 
     public AdmiralBeckettBrass(UUID ownerId, CardSetInfo setInfo) {
@@ -46,11 +46,11 @@ public final class AdmiralBeckettBrass extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Pirates you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // At the beginning of your end step, gain control of target nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom, true), TargetController.YOU, false);
-        ability.addTarget(new TargetNonlandPermanent(filter2));
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new GainControlTargetEffect(Duration.Custom, true));
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability, new DamagedByPiratesWatcher());
     }
 
@@ -101,7 +101,8 @@ class DamagedByPiratesWatcher extends Watcher {
     }
 }
 
-class ControllerDealtDamageByPiratesPredicate implements Predicate<Permanent> {
+enum ControllerDealtDamageByPiratesPredicate implements Predicate<Permanent> {
+    instance;
 
     @Override
     public boolean apply(Permanent input, Game game) {

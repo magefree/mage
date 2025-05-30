@@ -23,7 +23,7 @@ public final class UrzasArmor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // If a source would deal damage to you, prevent 1 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UrzasArmorEffect()));
+        this.addAbility(new SimpleStaticAbility(new UrzasArmorEffect()));
     }
 
     private UrzasArmor(final UrzasArmor card) {

@@ -27,7 +27,7 @@ public final class FurySliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // All Sliver creatures have double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(),
                         Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_ALL_SLIVERS

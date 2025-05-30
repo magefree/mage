@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageAttachedEffect;
@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -38,7 +37,7 @@ public final class FatalAttraction extends CardImpl {
         // When Fatal Attraction enters the battlefield, it deals 2 damage to enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAttachedEffect(2, "it")));
         // At the beginning of your upkeep, Fatal Attraction deals 4 damage to enchanted creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageAttachedEffect(4), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageAttachedEffect(4)));
     }
 
     private FatalAttraction(final FatalAttraction card) {

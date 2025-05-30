@@ -50,7 +50,7 @@ public final class TomBombadil extends CardImpl {
         this.addAbility(ability.addHint(hint));
 
         // Whenever the final chapter ability of a Saga you control resolves, reveal cards from the top of your library until you reveal a Saga card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. This ability triggers only once each turn.
-        this.addAbility(new FinalChapterAbilityResolvesTriggeredAbility(new TomBombadilEffect()).setTriggersOnceEachTurn(true));
+        this.addAbility(new FinalChapterAbilityResolvesTriggeredAbility(new TomBombadilEffect()).setTriggersLimitEachTurn(1));
     }
 
     private TomBombadil(final TomBombadil card) {

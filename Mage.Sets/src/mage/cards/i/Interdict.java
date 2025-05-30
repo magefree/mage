@@ -7,7 +7,6 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -61,7 +60,7 @@ class InterdictPredicate implements Predicate<StackObject> {
 
     @Override
     public boolean apply(StackObject input, Game game) {
-        if (input instanceof StackAbility && ((StackAbility) input).getAbilityType() == AbilityType.ACTIVATED) {
+        if (input instanceof StackAbility && ((StackAbility) input).isActivatedAbility()){
             MageObject sourceObject = ((StackAbility) input).getSourceObject(game);
             if (sourceObject != null) {
                 return (sourceObject.isArtifact(game)

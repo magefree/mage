@@ -24,11 +24,11 @@ public final class TitanForge extends CardImpl {
 
     public TitanForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TitanForgeGolemToken()), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new CreateTokenEffect(new TitanForgeGolemToken()), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3)));
         this.addAbility(ability);
 

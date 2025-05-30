@@ -36,7 +36,7 @@ public final class DireWolves extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Dire Wolves has banding as long as you control a Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(BandingAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule)));
     }
 

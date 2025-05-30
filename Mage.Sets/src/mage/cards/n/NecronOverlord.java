@@ -1,26 +1,28 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
-import mage.abilities.costs.VariableCostImpl;
-import mage.abilities.costs.VariableCostType;
-import mage.game.Game;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +39,7 @@ public final class NecronOverlord extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Relentless March -- {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}"));
         ability.addTarget(new TargetOpponent());
         ability.addCost(new TapSourceCost());
         ability.addCost(new NecronOverlordTapVariableArtifactCost());
@@ -80,6 +82,6 @@ class NecronOverlordTapVariableArtifactCost extends VariableCostImpl {
 
     @Override
     public int announceXValue(Ability source, Game game) {
-        return source.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, source, "X", 0);
     }
 }

@@ -34,7 +34,7 @@ public final class SamuraiOfThePaleCurtain extends CardImpl {
         this.addAbility(new BushidoAbility(1));
 
         // If a permanent would be put into a graveyard, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SamuraiOfThePaleCurtainEffect()));
+        this.addAbility(new SimpleStaticAbility(new SamuraiOfThePaleCurtainEffect()));
     }
 
     private SamuraiOfThePaleCurtain(final SamuraiOfThePaleCurtain card) {

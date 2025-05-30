@@ -50,7 +50,6 @@ public final class VigorsporeWurm extends CardImpl {
 
         // Vigorspore Wurm can't be blocked by more than one creature.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedByMoreThanOneSourceEffect()
         ));
     }

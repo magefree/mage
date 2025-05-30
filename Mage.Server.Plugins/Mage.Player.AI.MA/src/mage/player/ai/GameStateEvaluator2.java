@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.player.ai;
 
 import mage.game.Game;
@@ -27,21 +23,29 @@ public final class GameStateEvaluator2 {
     public static final int WIN_GAME_SCORE = 100000000;
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
 
+    public static final int HAND_CARD_SCORE = 5;
+
     public static PlayerEvaluateScore evaluate(UUID playerId, Game game) {
+        return evaluate(playerId, game, true);
+    }
+
+    public static PlayerEvaluateScore evaluate(UUID playerId, Game game, boolean useCombatPermanentScore) {
+        // TODO: add multi opponents support, so AI can take better actions
         Player player = game.getPlayer(playerId);
-        Player opponent = game.getPlayer(game.getOpponents(playerId).stream().findFirst().orElse(null)); // TODO: add multi opponent support?
+        // must find all leaved opponents
+        Player opponent = game.getPlayer(game.getOpponents(playerId, false).stream().findFirst().orElse(null));
         if (opponent == null) {
-            return new PlayerEvaluateScore(WIN_GAME_SCORE);
+            return new PlayerEvaluateScore(playerId, WIN_GAME_SCORE);
         }
 
         if (game.checkIfGameIsOver()) {
             if (player.hasLost()
                     || opponent.hasWon()) {
-                return new PlayerEvaluateScore(LOSE_GAME_SCORE);
+                return new PlayerEvaluateScore(playerId, LOSE_GAME_SCORE);
             }
             if (opponent.hasLost()
                     || player.hasWon()) {
-                return new PlayerEvaluateScore(WIN_GAME_SCORE);
+                return new PlayerEvaluateScore(playerId, WIN_GAME_SCORE);
             }
         }
 
@@ -64,7 +68,7 @@ public final class GameStateEvaluator2 {
 
             // add values of player
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
-                int onePermScore = evaluatePermanent(permanent, game);
+                int onePermScore = evaluatePermanent(permanent, game, useCombatPermanentScore);
                 playerPermanentsScore += onePermScore;
                 if (logger.isDebugEnabled()) {
                     sbPlayer.append(permanent.getName()).append('[').append(onePermScore).append("] ");
@@ -78,7 +82,7 @@ public final class GameStateEvaluator2 {
 
             // add values of opponent
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponent.getId())) {
-                int onePermScore = evaluatePermanent(permanent, game);
+                int onePermScore = evaluatePermanent(permanent, game, useCombatPermanentScore);
                 opponentPermanentsScore += onePermScore;
                 if (logger.isDebugEnabled()) {
                     sbOpponent.append(permanent.getName()).append('[').append(onePermScore).append("] ");
@@ -92,8 +96,22 @@ public final class GameStateEvaluator2 {
         } catch (Throwable t) {
         }
 
-        int playerHandScore = player.getHand().size() * 5;
-        int opponentHandScore = opponent.getHand().size() * 5;
+        // TODO: add card evaluator like permanent evaluator
+        // - same card on battlefield must score x2 compared to hand, so AI will want to play it;
+        // - other zones must score cards same way, example: battlefield = x, hand = x * 0.1, graveyard = x * 0.5, exile = x * 0.3
+        // - possible bug in wrong score: instant and sorcery on hand will be more valuable compared to other zones,
+        //   so AI will keep it in hand. Possible fix: look at card type and apply zones multipliers due special
+        //   table like:
+        //   * battlefield needs in creatures and enchantments/auras;
+        //   * hand needs in instants and sorceries
+        //   * graveyard needs in anything after battlefield and hand;
+        //   * exile needs in nothing;
+        //   * commander zone needs in nothing;
+        // - additional improve: use revealed data to score opponent's hand:
+        //   * known card by card evaluator;
+        //   * unknown card by max value (so AI will use reveal to make opponent's total score lower -- is it helps???)
+        int playerHandScore = player.getHand().size() * HAND_CARD_SCORE;
+        int opponentHandScore = opponent.getHand().size() * HAND_CARD_SCORE;
 
         int score = (playerLifeScore - opponentLifeScore)
                 + (playerPermanentsScore - opponentPermanentsScore)
@@ -103,11 +121,12 @@ public final class GameStateEvaluator2 {
                 + " permanents:" + (playerPermanentsScore - opponentPermanentsScore)
                 + " hand:" + (playerHandScore - opponentHandScore) + ')');
         return new PlayerEvaluateScore(
+                playerId,
                 playerLifeScore, playerHandScore, playerPermanentsScore,
                 opponentLifeScore, opponentHandScore, opponentPermanentsScore);
     }
 
-    public static int evaluatePermanent(Permanent permanent, Game game) {
+    public static int evaluatePermanent(Permanent permanent, Game game, boolean useCombatPermanentScore) {
         // prevent AI from attaching bad auras to its own permanents ex: Brainwash and Demonic Torment (no immediate penalty on the battlefield)
         int value = 0;
         if (!permanent.getAttachments().isEmpty()) {
@@ -123,19 +142,17 @@ public final class GameStateEvaluator2 {
                 }
             }
         }
-        value += ArtificialScoringSystem.getFixedPermanentScore(game, permanent)
-                + ArtificialScoringSystem.getVariablePermanentScore(game, permanent);
-        return value;
-    }
-
-    public static int evaluateCreature(Permanent creature, Game game) {
-        int value = ArtificialScoringSystem.getFixedPermanentScore(game, creature)
-                + ArtificialScoringSystem.getVariablePermanentScore(game, creature);
+        value += ArtificialScoringSystem.getFixedPermanentScore(game, permanent);
+        value += ArtificialScoringSystem.getDynamicPermanentScore(game, permanent);
+        if (useCombatPermanentScore) {
+            value += ArtificialScoringSystem.getCombatPermanentScore(game, permanent);
+        }
         return value;
     }
 
     public static class PlayerEvaluateScore {
 
+        private UUID playerId;
         private int playerLifeScore = 0;
         private int playerHandScore = 0;
         private int playerPermanentsScore = 0;
@@ -144,20 +161,27 @@ public final class GameStateEvaluator2 {
         private int opponentHandScore = 0;
         private int opponentPermanentsScore = 0;
 
-        private int specialScore = 0; // special score (ignore all other)
+        private int specialScore = 0; // special score (ignore all others, e.g. for win/lose game states)
 
-        public PlayerEvaluateScore(int specialScore) {
+        public PlayerEvaluateScore(UUID playerId, int specialScore) {
+            this.playerId = playerId;
             this.specialScore = specialScore;
         }
 
-        public PlayerEvaluateScore(int playerLifeScore, int playerHandScore, int playerPermanentsScore,
-                int opponentLifeScore, int opponentHandScore, int opponentPermanentsScore) {
+        public PlayerEvaluateScore(UUID playerId,
+                                   int playerLifeScore, int playerHandScore, int playerPermanentsScore,
+                                   int opponentLifeScore, int opponentHandScore, int opponentPermanentsScore) {
+            this.playerId = playerId;
             this.playerLifeScore = playerLifeScore;
             this.playerHandScore = playerHandScore;
             this.playerPermanentsScore = playerPermanentsScore;
             this.opponentLifeScore = opponentLifeScore;
             this.opponentHandScore = opponentHandScore;
             this.opponentPermanentsScore = opponentPermanentsScore;
+        }
+
+        public UUID getPlayerId() {
+            return this.playerId;
         }
 
         public int getPlayerScore() {

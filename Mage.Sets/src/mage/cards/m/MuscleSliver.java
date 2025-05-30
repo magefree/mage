@@ -32,7 +32,7 @@ public final class MuscleSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Sliver creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private MuscleSliver(final MuscleSliver card) {

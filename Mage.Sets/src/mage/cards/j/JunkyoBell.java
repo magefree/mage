@@ -2,7 +2,7 @@ package mage.cards.j;
 
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.OneShotEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -33,9 +32,8 @@ public final class JunkyoBell extends CardImpl {
         // At the beginning of your upkeep, you may have target creature you control get +X/+X until end of turn,
         // where X is the number of creatures you control. If you do, sacrifice that creature at the beginning of the next end step.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn),
-                TargetController.YOU,
-                true);
+                new BoostTargetEffect(CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn), true
+        );
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addEffect(new JunkyoBellSacrificeEffect());
         ability.addHint(CreaturesYouControlHint.instance);

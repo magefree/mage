@@ -35,7 +35,7 @@ public final class FoundryStreetDenizen extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever another red creature enters the battlefield under your control, Foundry Street Denizen gets +1/+0 until end of turn.
+        // Whenever another red creature you control enters, Foundry Street Denizen gets +1/+0 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn), filter, false));
     }

@@ -1,10 +1,9 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.keyword.SunburstAbility;
@@ -40,13 +39,9 @@ public final class LuxArtillery extends CardImpl {
         // Whenever you cast an artifact creature spell, it gains sunburst.
         this.addAbility(new SpellCastControllerTriggeredAbility(new LuxArtilleryEffect(this), filter, false, SetTargetPointer.SPELL));
 
-        // At the beginning of your end step, if there are thirty or more counters among artifacts
-        // and creatures you control, Lux Artillery deals 10 damage to each opponent.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new DamagePlayersEffect(10, TargetController.OPPONENT), false), LuxArtilleryCondition.instance,
-                "At the beginning of your end step, if there are thirty or more counters among artifacts " +
-                        "and creatures you control, {this} deals 10 damage to each opponent"
-        ));
+        // At the beginning of your end step, if there are thirty or more counters among artifacts and creatures you control, Lux Artillery deals 10 damage to each opponent.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamagePlayersEffect(10, TargetController.OPPONENT))
+                .withInterveningIf(LuxArtilleryCondition.instance));
     }
 
     private LuxArtillery(final LuxArtillery card) {

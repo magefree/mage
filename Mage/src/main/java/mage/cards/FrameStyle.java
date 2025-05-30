@@ -47,7 +47,11 @@ public enum FrameStyle {
     /**
      * Original Dual lands (box pattern in the text box)
      */
-    LEA_ORIGINAL_DUAL_LAND_ART_BASIC(BorderType.M15, false);
+    LEA_ORIGINAL_DUAL_LAND_ART_BASIC(BorderType.OLD, false),
+    /**
+     * Retro frame
+     */
+    RETRO(BorderType.OLD, false);
 
 
     /**

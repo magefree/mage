@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.MoveCountersFromTargetToSourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.ModularAbility;
@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class ArcboundFiend extends CardImpl {
         this.addAbility(FearAbility.getInstance());
 
         // At the beginning of your upkeep, you may move a +1/+1 counter from target creature onto Arcbound Fiend.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new MoveCountersFromTargetToSourceEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new MoveCountersFromTargetToSourceEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

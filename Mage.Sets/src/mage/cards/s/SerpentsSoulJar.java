@@ -93,7 +93,7 @@ class SerpentsSoulJarExileEffect extends OneShotEffect {
 class SerpentsSoulJarCastFromExileEffect extends AsThoughEffectImpl {
 
     SerpentsSoulJarCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, you may cast a creature spell from among cards exiled with {this}";
     }
 
@@ -142,10 +142,10 @@ class SerpentsSoulJarWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            if (event.getAdditionalReference() == null) {
+            if (event.getApprovingObject() == null) {
                 return;
             }
-            morMap.computeIfAbsent(event.getAdditionalReference().getApprovingMageObjectReference(), m -> new HashMap<>())
+            morMap.computeIfAbsent(event.getApprovingObject().getApprovingMageObjectReference(), m -> new HashMap<>())
                     .compute(event.getPlayerId(), (u, i) -> i == null ? 0 : Integer.sum(i, -1));
             return;
         }

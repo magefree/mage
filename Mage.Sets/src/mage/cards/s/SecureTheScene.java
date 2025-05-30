@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class SecureTheScene extends CardImpl {
 
         // Exile target nonland permanent. Its controller creates a 1/1 white Soldier creature token.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new SoldierToken()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new SoldierToken()));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 

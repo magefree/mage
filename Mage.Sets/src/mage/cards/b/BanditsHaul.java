@@ -27,7 +27,7 @@ public final class BanditsHaul extends CardImpl {
         // Whenever you commit a crime, put a loot counter on Bandit's Haul. This ability triggers only once each turn.
         this.addAbility(new CommittedCrimeTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.LOOT.createInstance())
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());

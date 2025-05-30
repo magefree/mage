@@ -23,13 +23,13 @@ public final class CephalidBroker extends CardImpl {
 
     public CephalidBroker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // {tap}: Target player draws two cards, then discards two cards.        
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(2), new TapSourceCost());
         ability.addEffect(new DiscardTargetEffect(2).setText(", then discards two cards"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

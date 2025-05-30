@@ -39,7 +39,7 @@ public final class SkarrgGuildmage extends CardImpl {
                 Zone.BATTLEFIELD, new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), "Creatures you control gain trample until end of turn"),
                 new ManaCostsImpl<>("{R}{G}")));
         // {1}{R}{G}: Target land you control becomes a 4/4 Elemental creature until end of turn. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(
+        Ability ability = new SimpleActivatedAbility(new BecomesCreatureTargetEffect(
                 new CreatureToken(4, 4, "4/4 Elemental creature", SubType.ELEMENTAL),
                 false, true, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}{G}") );
         ability.addTarget(new TargetPermanent(new FilterControlledLandPermanent()));

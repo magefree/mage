@@ -38,7 +38,7 @@ public final class DwarvenBloodboiler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap an untapped Dwarf you control: Target creature gets +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn),
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn),
             new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

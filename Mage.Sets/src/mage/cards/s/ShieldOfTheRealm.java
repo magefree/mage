@@ -27,7 +27,7 @@ public final class ShieldOfTheRealm extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // If a source would deal damage to equipped creature, prevent 2 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new PreventDamageToAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT, 2, false)));
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(1), false));

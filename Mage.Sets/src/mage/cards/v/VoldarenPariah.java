@@ -45,7 +45,7 @@ public final class VoldarenPariah extends CardImpl {
 
         // Sacrifice three other creatures: Transform Voldaren Pariah.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(),
+        this.addAbility(new SimpleActivatedAbility(new TransformSourceEffect(),
                 new SacrificeTargetCost(3, filter)));
 
         // Madness {B}{B}{B}

@@ -66,7 +66,7 @@ class ChainedThroatseekerCantAttackEffect extends RestrictionEffect {
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
         Player targetPlayer = game.getPlayerOrPlaneswalkerController(defenderId);
-        return targetPlayer != null && targetPlayer.getCounters().containsKey(CounterType.POISON);
+        return targetPlayer != null && targetPlayer.getCountersCount(CounterType.POISON) > 0;
     }
 
     @Override

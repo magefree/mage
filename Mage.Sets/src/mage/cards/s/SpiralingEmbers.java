@@ -23,7 +23,7 @@ public final class SpiralingEmbers extends CardImpl {
 
 
         // Spiraling Embers deals damage to any target equal to the number of cards in your hand.
-        Effect effect = new DamageTargetEffect(CardsInControllerHandCount.instance);
+        Effect effect = new DamageTargetEffect(CardsInControllerHandCount.ANY);
         effect.setText("{this} deals damage to any target equal to the number of cards in your hand.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());

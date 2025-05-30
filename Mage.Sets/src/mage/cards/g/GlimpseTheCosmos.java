@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class GlimpseTheCosmos extends CardImpl {
@@ -66,7 +65,7 @@ public class GlimpseTheCosmos extends CardImpl {
 class GlimpseTheCosmosPlayEffect extends AsThoughEffectImpl {
 
     GlimpseTheCosmosPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "As long as you control a Giant, you may cast {this} from your graveyard by paying {U} rather than paying its mana cost";
     }
 
@@ -163,7 +162,7 @@ class GlimpseTheCosmosWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL
                 && event.hasApprovingIdentifier(MageIdentifier.GlimpseTheCosmosWatcher)) {
-            Ability approvingAbility = event.getAdditionalReference().getApprovingAbility();
+            Ability approvingAbility = event.getApprovingObject().getApprovingAbility();
             if (approvingAbility != null
                     && approvingAbility.getSourceId().equals(event.getSourceId())) {
                 sourceCards.add(game.getCard(event.getSourceId()));

@@ -5,6 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SurveilTriggeredAbility;
+import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -42,7 +43,7 @@ public final class BloodOperative extends CardImpl {
         // Whenever you surveil, if Blood Operative is in your graveyard, you may pay 3 life. If you do, return Blood Operative to your hand.
         this.addAbility(new SurveilTriggeredAbility(Zone.GRAVEYARD, new DoIfCostPaid(
                 new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"), new PayLifeCost(3)
-        )));
+        )).withInterveningIf(SourceInGraveyardCondition.instance));
     }
 
     private BloodOperative(final BloodOperative card) {

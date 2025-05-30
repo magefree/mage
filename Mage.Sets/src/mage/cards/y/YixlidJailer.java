@@ -30,8 +30,8 @@ public final class YixlidJailer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Cards in graveyards lose all abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new YixlidJailerEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new YixlidJailerRulesEffect()));
+        this.addAbility(new SimpleStaticAbility(new YixlidJailerEffect()));
+        this.addAbility(new SimpleStaticAbility(new YixlidJailerRulesEffect()));
     }
 
     private YixlidJailer(final YixlidJailer card) {

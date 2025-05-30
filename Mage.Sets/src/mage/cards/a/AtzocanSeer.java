@@ -39,7 +39,7 @@ public final class AtzocanSeer extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // Sacrifice Atzocan Seer: Return target Dinosaur from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

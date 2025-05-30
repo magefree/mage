@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnTargetEffect;
@@ -29,7 +29,7 @@ public final class Timesifter extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // At the beginning of each upkeep, each player exiles the top card of their library. The player who exiled the card with the highest converted mana cost takes an extra turn after this one. If two or more players' cards are tied for highest cost, the tied players repeat this process until the tie is broken.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TimesifterEffect(), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new TimesifterEffect(), false));
     }
 
     private Timesifter(final Timesifter card) {
@@ -63,7 +63,7 @@ class TimesifterEffect extends OneShotEffect {
         List<UUID> playersExiling = game.getState().getPlayersInRange(source.getControllerId(), game);
         do {
             int highestCMC = Integer.MIN_VALUE;
-            List<UUID> playersWithHighestCMC = new ArrayList<>(1);
+            List<UUID> playersWithHighestCMC = new ArrayList<>();
             for (UUID playerId : playersExiling) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -84,6 +84,7 @@ class TimesifterEffect extends OneShotEffect {
             }
             playersExiling = new ArrayList<>(playersWithHighestCMC);
         } while (playersExiling.size() > 1);
+
         for (UUID playerId : playersExiling) {
             Effect effect = new AddExtraTurnTargetEffect();
             effect.setTargetPointer(new FixedTarget(playerId));

@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -15,11 +15,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -39,7 +37,7 @@ public final class IndulgentTormentor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, draw a card unless target opponent sacrifices a creature or pays 3 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new IndulgentTormentorEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new IndulgentTormentorEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -74,7 +72,7 @@ class IndulgentTormentorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (opponent != null) {
-            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
+            Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (cost.canPay(source, source, opponent.getId(), game)
                     && opponent.chooseUse(outcome, "Sacrifice a creature to prevent the card draw?", source, game)) {
                 if (cost.pay(source, game, source, opponent.getId(), false, null)) {

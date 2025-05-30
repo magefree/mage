@@ -83,7 +83,7 @@ class BindingNegotiationEffect extends OneShotEffect {
             FilterCard filter = new FilterCard("face-up exiled card owned by " + player.getName());
             filter.add(Predicates.not(FaceDownPredicate.instance));
             filter.add(new OwnerIdPredicate(player.getId()));
-            TargetCard targetExiled = new TargetCardInExile(0, 1, filter, null);
+            TargetCard targetExiled = new TargetCardInExile(0, 1, filter);
             controller.choose(outcome, targetExiled, source, game);
             Set<Card> chosenExiledCard = targetExiled
                     .getTargets()

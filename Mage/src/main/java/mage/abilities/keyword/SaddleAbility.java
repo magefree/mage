@@ -1,17 +1,18 @@
 package mage.abilities.keyword;
 
-import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.CrewSaddleIncreasedPowerAbility;
+import mage.abilities.common.CrewSaddleWithToughnessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SaddledCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.constants.*;
+import mage.constants.Outcome;
+import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -24,11 +25,10 @@ import mage.watchers.common.SaddledMountWatcher;
 
 import java.awt.*;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author TheElk801, Susucr
  */
 public class SaddleAbility extends SimpleActivatedAbility {
 
@@ -36,7 +36,7 @@ public class SaddleAbility extends SimpleActivatedAbility {
     private static final Hint hint = new ConditionHint(SaddledCondition.instance, "This permanent is saddled");
 
     public SaddleAbility(int value) {
-        super(new SaddleEffect(), new SaddleCost(value));
+        super(new SaddleEventEffect(), new SaddleCost(value));
         this.value = value;
         this.addHint(hint);
         this.setTiming(TimingRule.SORCERY);
@@ -46,6 +46,23 @@ public class SaddleAbility extends SimpleActivatedAbility {
     private SaddleAbility(final SaddleAbility ability) {
         super(ability);
         this.value = ability.value;
+    }
+
+    public static boolean applySaddle(Permanent permanent, Game game) {
+        if (permanent == null) {
+            return false;
+        }
+        SaddleAbility saddleAbility = permanent.getAbilities().stream()
+                .filter(a -> a instanceof SaddleAbility)
+                .map(a -> (SaddleAbility) a)
+                .findFirst()
+                .orElse(null);
+        if (saddleAbility != null) {
+            SaddleEventEffect effect = new SaddleEventEffect();
+            effect.apply(game, saddleAbility);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -60,41 +77,35 @@ public class SaddleAbility extends SimpleActivatedAbility {
     }
 }
 
-class SaddleEffect extends ContinuousEffectImpl {
+class SaddleEventEffect extends OneShotEffect {
 
-    SaddleEffect() {
-        super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+    SaddleEventEffect() {
+        super(Outcome.Benefit);
     }
 
-    private SaddleEffect(final SaddleEffect effect) {
+    private SaddleEventEffect(final SaddleEventEffect effect) {
         super(effect);
     }
 
     @Override
-    public SaddleEffect copy() {
-        return new SaddleEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        game.fireEvent(GameEvent.getEvent(
-                GameEvent.EventType.MOUNT_SADDLED,
-                source.getSourceId(),
-                source, source.getControllerId()
-        ));
+    public SaddleEventEffect copy() {
+        return new SaddleEventEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .ifPresent(permanent -> permanent.setSaddled(true));
+        if (source.getSourcePermanentIfItStillExists(game) != null) {
+            game.fireEvent(GameEvent.getEvent(
+                    GameEvent.EventType.MOUNT_SADDLED,
+                    source.getSourceId(),
+                    source, source.getControllerId()
+            ));
+        }
         return true;
     }
 }
 
 class SaddleCost extends CostImpl {
-
 
     private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("another untapped creature you control");
@@ -119,19 +130,18 @@ class SaddleCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
-            public String getMessage() {
+            public String getMessage(Game game) {
                 // shows selected power
                 int selectedPower = this.targets.keySet().stream()
                         .map(game::getPermanent)
                         .filter(Objects::nonNull)
-                        .map(MageObject::getPower)
-                        .mapToInt(MageInt::getValue)
+                        .mapToInt(p -> getSaddlePower(p, game))
                         .sum();
                 String extraInfo = "(selected power " + selectedPower + " of " + value + ")";
                 if (selectedPower >= value) {
                     extraInfo = HintUtils.prepareText(extraInfo, Color.GREEN);
                 }
-                return super.getMessage() + " " + extraInfo;
+                return super.getMessage(game) + " " + extraInfo;
             }
         };
 
@@ -143,7 +153,7 @@ class SaddleCost extends CostImpl {
                 if (!game.replaceEvent(event)) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null && permanent.tap(source, game)) {
-                        sumPower += permanent.getPower().getValue();
+                        sumPower += getSaddlePower(permanent, game);
                     }
                 }
             }
@@ -164,7 +174,7 @@ class SaddleCost extends CostImpl {
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         int sumPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
-            sumPower += Math.max(permanent.getPower().getValue(), 0);
+            sumPower += Math.max(getSaddlePower(permanent, game), 0);
             if (sumPower >= value) {
                 return true;
             }
@@ -175,5 +185,15 @@ class SaddleCost extends CostImpl {
     @Override
     public SaddleCost copy() {
         return new SaddleCost(this);
+    }
+
+    private static int getSaddlePower(Permanent permanent, Game game) {
+        if (permanent.hasAbility(CrewSaddleWithToughnessAbility.getInstance(), game)) {
+            return permanent.getToughness().getValue();
+        } else if (permanent.getAbilities(game).containsClass(CrewSaddleIncreasedPowerAbility.class)) {
+            return permanent.getPower().getValue() + 2;
+        } else {
+            return permanent.getPower().getValue();
+        }
     }
 }

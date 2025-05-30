@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -15,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -36,7 +37,7 @@ public final class ShadowKin extends CardImpl {
 
         // At the beginning of your upkeep, each player mills three cards. You may exile a creature card from among the cards milled this way. If you do, Shadow Kin becomes a copy of that card, except it has this ability.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ShadowKinEffect(), TargetController.YOU, false
+                new ShadowKinEffect()
         ));
     }
 
@@ -94,7 +95,7 @@ class ShadowKinEffect extends OneShotEffect {
             return true;
         }
         controller.moveCards(card, Zone.EXILED, source, game);
-        Permanent blueprint = new PermanentCard(card, source.getControllerId(), game);
+        Permanent blueprint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game);
         blueprint.assignNewId();
         CopyApplier applier = new ShadowKinApplier();
         applier.apply(game, blueprint, source, sourcePermanent.getId());
@@ -112,7 +113,7 @@ class ShadowKinApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
         blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
-                new ShadowKinEffect(), TargetController.YOU, false
+                new ShadowKinEffect()
         ));
         return true;
     }

@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -45,7 +45,7 @@ public final class BeckoningWillOWisp extends CardImpl {
 
         // Lure the Unwary — At the beginning of combat on your turn, choose an opponent.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new BeckoningWillOWispEffect(), TargetController.YOU, false
+                new BeckoningWillOWispEffect()
         ).withFlavorWord("Lure the Unwary"));
 
         // Creatures attacking the last chosen player get +1/+0.
@@ -70,7 +70,7 @@ enum BeckoningWillOWispPredicate implements ObjectSourcePlayerPredicate<Permanen
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         UUID playerId = (UUID) game.getState().getValue(input.getSourceId() + "_" + game.getState().getZoneChangeCounter(input.getSourceId()) + "_chosenOpponent");
-        return playerId != null && playerId.equals(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game));
+        return playerId != null && playerId.equals(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game, false));
     }
 }
 

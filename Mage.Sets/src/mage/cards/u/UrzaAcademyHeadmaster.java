@@ -144,7 +144,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 2: // AJANI MENTOR OF HEROES 1
                                 sb.append("Distribute three +1/+1 counters among one, two, or three target creatures you control.");
-                                effects.add(new DistributeCountersEffect(CounterType.P1P1, 3, false, "one, two, or three target creatures you control"));
+                                effects.add(new DistributeCountersEffect());
                                 target = new TargetCreaturePermanentAmount(3, filter1);
                                 break;
                             case 3: // NICOL BOLAS PLANESWALKER 1
@@ -389,7 +389,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new GetEmblemEffect(new VenserTheSojournerEmblem()));
                                 break;
                             case 13: // KIORA MASTER OF THE DEPTHS 3
-                                sb.append("You get an emblem with “Whenever a creature enters the battlefield under your control, you may have it fight target creature.” Then create three 8/8 blue Octopus creature tokens.");
+                                sb.append("You get an emblem with “Whenever a creature you control enters, you may have it fight target creature.” Then create three 8/8 blue Octopus creature tokens.");
                                 effects.add(new CreateTokenEffect(new OctopusToken(), 3));
                                 effects.add(new GetEmblemEffect(new KioraMasterOfTheDepthsEmblem()));
                                 break;
@@ -443,7 +443,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                     }
                     source.addTarget(target);
                 }
-                if (target == null || target.isChosen()) {
+                if (target == null || target.isChosen(game)) {
                     for (Effect effect : effects) {
                         if (effect instanceof ContinuousEffect) {
                             game.addEffect((ContinuousEffect) effect, source);
@@ -486,7 +486,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game);
-            Choice manaChoice = new ChoiceImpl();
+            Choice manaChoice = new ChoiceImpl(false);
             Set<String> choices = new LinkedHashSet<>();
             choices.add("White");
             choices.add("Blue");

@@ -28,7 +28,7 @@ public final class TrainingDrone extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrainingDroneEffect()));
+        this.addAbility(new SimpleStaticAbility(new TrainingDroneEffect()));
 
     }
 
@@ -58,7 +58,7 @@ class TrainingDroneEffect extends RestrictionEffect {
         if (permanent.getId().equals(source.getSourceId())) {
             List<UUID> attachments = permanent.getAttachments();
             for (UUID uuid : attachments) {
-                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                Permanent attached = game.getPermanent(uuid);
                 if (attached.hasSubtype(SubType.EQUIPMENT, game)) {
                     return false;
                 }

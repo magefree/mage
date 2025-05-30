@@ -27,7 +27,7 @@ public final class LumberingSatyr extends CardImpl {
         this.toughness = new MageInt(4);
 
         // All creatures have forestwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
     }
 

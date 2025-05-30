@@ -4,13 +4,12 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -29,7 +28,7 @@ public final class SpitefulBully extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, Spiteful Bully deals 3 damage to target creature you control.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(3), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(3));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

@@ -25,6 +25,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class ApprenticeNecromancer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}, Sacrifice Apprentice Necromancer: Return target creature card from your graveyard to the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ApprenticeNecromancerEffect(), new ColoredManaCost(ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(new ApprenticeNecromancerEffect(), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
@@ -80,7 +81,7 @@ class ApprenticeNecromancerEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                Permanent creature = game.getPermanent(card.getId());
+                Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (creature != null) {
                     // Gains haste
                     ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);

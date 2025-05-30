@@ -17,6 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public final class PerniciousDeed extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{G}");
 
         // {X}, Sacrifice Pernicious Deed: Destroy each artifact, creature, and enchantment with converted mana cost X or less.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PerniciousDeedEffect(), new VariableManaCost(VariableCostType.NORMAL));
+        Ability ability = new SimpleActivatedAbility(new PerniciousDeedEffect(), new VariableManaCost(VariableCostType.NORMAL));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -69,7 +70,7 @@ class PerniciousDeedEffect extends OneShotEffect {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()));
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1));
 
         return new DestroyAllEffect(filter).apply(game, source);
     }

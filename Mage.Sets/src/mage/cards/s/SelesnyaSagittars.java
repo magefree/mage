@@ -28,7 +28,7 @@ public final class SelesnyaSagittars extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Selesnya Sagittars can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect()));
     }
 
     private SelesnyaSagittars(final SelesnyaSagittars card) {

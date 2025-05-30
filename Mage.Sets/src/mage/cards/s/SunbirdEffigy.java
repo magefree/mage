@@ -110,7 +110,7 @@ enum SunbirdEffigyValue implements DynamicValue {
                 .getCards(game)
                 .stream()
                 .map(card -> card.getColor(game))
-                .reduce(new ObjectColor(), (c1, c2) -> c1.union(c2));
+                .reduce(new ObjectColor(), ObjectColor::union);
     }
 }
 
@@ -171,7 +171,7 @@ class SunbirdEffigyEffect extends ManaEffect {
                 .getCards(game)
                 .stream()
                 .map(card -> card.getColor(game))
-                .reduce(new ObjectColor(), (c1, c2) -> c1.union(c2));
+                .reduce(new ObjectColor(), ObjectColor::union);
         if (color.isWhite()) {
             mana.increaseWhite();
         }

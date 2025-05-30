@@ -43,7 +43,7 @@ public final class LunarHatchling extends CardImpl {
         // Escape-{4}{G}{U}, Exile a land you control, Exile five other cards from your graveyard.
         CostsImpl<Cost> additionalCost = new CostsImpl();
         additionalCost.add(new ExileTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_A_LAND)));
-        this.addAbility(new EscapeAbility(this, "{4}{G}{U}", 5, additionalCost));
+        this.addAbility(new EscapeAbility(this, "{4}{G}{U}", additionalCost, 5));
     }
 
     private LunarHatchling(final LunarHatchling card) {

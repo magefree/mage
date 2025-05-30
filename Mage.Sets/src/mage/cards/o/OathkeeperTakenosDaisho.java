@@ -32,7 +32,7 @@ public final class OathkeeperTakenosDaisho extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 1, Duration.WhileOnBattlefield)));
 
         // Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.
         this.addAbility(new DiesAttachedTriggeredAbility(new ConditionalOneShotEffect(
@@ -98,14 +98,14 @@ enum OathkeeperEquippedSamuraiCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
         if (permanent != null) {
             Permanent attachedTo = null;
             if (permanent.getAttachedTo() != null) {
-                attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
+                attachedTo = game.getPermanent(permanent.getAttachedTo());
                 if (attachedTo == null) {
                     attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
                 }

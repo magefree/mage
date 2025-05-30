@@ -32,7 +32,7 @@ public final class SludgeStrider extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever another artifact enters the battlefield under your control or another artifact you control leaves the battlefield, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.
+        // Whenever another artifact you control enters or another artifact you control leaves the battlefield, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.
         Ability ability = new SludgeStriderTriggeredAbility();
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -61,6 +61,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
     public SludgeStriderTriggeredAbility() {
         // setting optional = false because DoIfCostPaid already asks the player
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SludgeStriderEffect(), new GenericManaCost(1)), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
@@ -69,7 +70,8 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD || event.getType() == GameEvent.EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -101,7 +103,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever another artifact enters the battlefield under your control or another artifact you control leaves the battlefield, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.";
+        return "Whenever another artifact you control enters or another artifact you control leaves the battlefield, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.";
     }
 }
 

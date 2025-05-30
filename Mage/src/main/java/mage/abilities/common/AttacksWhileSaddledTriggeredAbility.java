@@ -1,9 +1,10 @@
 package mage.abilities.common;
 
+import mage.MageObjectReference;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.watchers.common.SaddledMountWatcher;
 
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ public class AttacksWhileSaddledTriggeredAbility extends AttacksTriggeredAbility
     public AttacksWhileSaddledTriggeredAbility(Effect effect) {
         super(effect);
         this.setTriggerPhrase("Whenever {this} attacks while saddled, ");
+        this.addWatcher(new SaddledMountWatcher());
     }
 
     private AttacksWhileSaddledTriggeredAbility(final AttacksWhileSaddledTriggeredAbility ability) {
@@ -31,7 +33,7 @@ public class AttacksWhileSaddledTriggeredAbility extends AttacksTriggeredAbility
         return super.checkTrigger(event, game)
                 && Optional
                 .ofNullable(getSourcePermanentIfItStillExists(game))
-                .map(Permanent::isSaddled)
+                .map(p -> SaddledMountWatcher.hasBeenSaddledThisTurn(new MageObjectReference(p, game), game))
                 .orElse(false);
     }
 }

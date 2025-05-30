@@ -2,7 +2,6 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -27,13 +26,13 @@ public final class ViashinoHeretic extends CardImpl {
 
     public ViashinoHeretic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // {1}{R}, {tap}: Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoHereticEffect(), new ManaCostsImpl<>("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(new ViashinoHereticEffect(), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

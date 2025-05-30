@@ -42,6 +42,8 @@ public class GameSessionWatcher {
         if (!killed) {
             Optional<User> user = userManager.getUser(userId);
             if (user.isPresent()) {
+                // TODO: can be called outside of the game thread, e.g. user start watching already running game
+                //    possible fix: getGameView must use last cached value in non game thread call (split by sessions)
                 user.get().fireCallback(new ClientCallback(ClientCallbackMethod.GAME_INIT, game.getId(), getGameView()));
                 return true;
             }
@@ -97,7 +99,8 @@ public class GameSessionWatcher {
     }
 
     public GameView getGameView() {
-        // game view calculation can take some time, so use copy for thread save (protection from ConcurrentModificationException)
+        // game view calculation can take some time and can be called from non-game thread,
+        // so use copy for thread save (protection from ConcurrentModificationException)
         Game sourceGame = game.copy();
 
         GameView gameView = new GameView(sourceGame.getState(), sourceGame, null, userId);

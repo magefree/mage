@@ -30,7 +30,7 @@ public final class Mortivore extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterCreatureCard("creature cards")))));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
     private Mortivore(final Mortivore card) {

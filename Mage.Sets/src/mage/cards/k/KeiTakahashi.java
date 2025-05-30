@@ -31,7 +31,7 @@ public final class KeiTakahashi extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Prevent the next 2 damage that would be dealt to target creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

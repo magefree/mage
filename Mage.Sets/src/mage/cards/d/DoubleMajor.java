@@ -1,6 +1,6 @@
 package mage.cards.d;
 
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,7 +29,7 @@ public final class DoubleMajor extends CardImpl {
 
         // Copy target creature spell you control, except it isn't legendary if the spell is legendary.
         this.getSpellAbility().addEffect(
-                new CopyTargetSpellEffect(false, false, false, 1, new RemoveTypeCopyApplier(SuperType.LEGENDARY))
+                new CopyTargetStackObjectEffect(false, false, false, 1, new RemoveTypeCopyApplier(SuperType.LEGENDARY))
                         .setText(
                                 "Copy target creature spell you control, except it isn't legendary if the spell is legendary."));
         this.getSpellAbility().addTarget(new TargetSpell(filter));

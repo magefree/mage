@@ -15,8 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -25,15 +24,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class SwashbucklersWhip extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()
-        ));
-    }
 
     public SwashbucklersWhip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
@@ -50,7 +40,7 @@ public final class SwashbucklersWhip extends CardImpl {
                 new GenericManaCost(2)
         );
         tapAbility.addCost(new TapSourceCost());
-        tapAbility.addTarget(new TargetPermanent(filter));
+        tapAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         ability.addEffect(new GainAbilityAttachedEffect(tapAbility, AttachmentType.EQUIPMENT)
                 .setText(", \"{2}, {T}: Tap target artifact or creature,\""));
 

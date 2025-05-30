@@ -26,7 +26,7 @@ public final class SilentAttendant extends CardImpl {
 
     this.power = new MageInt(0);
     this.toughness = new MageInt(2);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(1), new TapSourceCost()));
     }
 
     private SilentAttendant(final SilentAttendant card) {

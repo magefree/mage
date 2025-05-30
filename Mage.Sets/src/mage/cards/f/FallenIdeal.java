@@ -43,7 +43,7 @@ public final class FallenIdeal extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 new SimpleActivatedAbility(
                         new BoostSourceEffect(2, 1, Duration.EndOfTurn),
-                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
+                        new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)
                 ), AttachmentType.AURA, Duration.WhileOnBattlefield
         ).setText("and \"Sacrifice a creature: This creature gets +2/+1 until end of turn.\""));
         this.addAbility(ability);

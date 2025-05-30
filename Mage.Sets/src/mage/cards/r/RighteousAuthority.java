@@ -3,7 +3,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -41,11 +41,11 @@ public final class RighteousAuthority extends CardImpl {
 
         // Enchanted creature gets +1/+1 for each card in its controller's hand.
         CardsInEnchantedControllerHandCount boost = new CardsInEnchantedControllerHandCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(boost, boost, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(boost, boost, Duration.WhileOnBattlefield)));
 
         // At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1)
-                .setText("that player draws an additional card"), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new DrawCardTargetEffect(1)
+                .setText("that player draws an additional card"), false));
     }
 
     private RighteousAuthority(final RighteousAuthority card) {

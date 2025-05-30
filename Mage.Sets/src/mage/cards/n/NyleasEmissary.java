@@ -35,7 +35,7 @@ public final class NyleasEmissary extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Enchanted creature gets +3/+3 and has trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(3,3, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield,"and has trample"));
         this.addAbility(ability);
         

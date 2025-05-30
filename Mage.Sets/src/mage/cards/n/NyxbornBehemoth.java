@@ -18,9 +18,10 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -30,9 +31,11 @@ import java.util.UUID;
 public final class NyxbornBehemoth extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledEnchantmentPermanent("noncreature enchantments you control");
+    private static final FilterEnchantmentPermanent filterSac = new FilterEnchantmentPermanent("another enchantment");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filterSac.add(AnotherPredicate.instance);
     }
 
     private static final TotalPermanentsManaValue xValue = new TotalPermanentsManaValue(filter);
@@ -60,7 +63,7 @@ public final class NyxbornBehemoth extends CardImpl {
             new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
             new ManaCostsImpl<>("{1}{G}")
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(filterSac));
 
         this.addAbility(ability);
     }

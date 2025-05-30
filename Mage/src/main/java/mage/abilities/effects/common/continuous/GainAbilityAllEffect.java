@@ -61,7 +61,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         setRuntimeData(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
@@ -77,7 +77,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent permanent = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (permanent != null) {

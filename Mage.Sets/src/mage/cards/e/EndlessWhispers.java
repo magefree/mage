@@ -41,7 +41,7 @@ public final class EndlessWhispers extends CardImpl {
 
         effect = new GainAbilityAllEffect(gainAbility, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Each creature"));
         effect.setText("Each creature has \"When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

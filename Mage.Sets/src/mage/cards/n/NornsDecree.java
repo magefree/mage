@@ -11,6 +11,7 @@ import mage.abilities.effects.common.counter.AddPoisonCounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Zone;
 
 /**
  *
@@ -22,7 +23,9 @@ public final class NornsDecree extends CardImpl {
         super(ownerId, setInfo, new CardType[] { CardType.ENCHANTMENT }, "{2}{W}");
 
         // Whenever one or more creatures an opponent controls deal combat damage to you, that opponent gets a poison counter.
-        this.addAbility(new CombatDamageDealtToYouTriggeredAbility(new AddPoisonCounterTargetEffect(1).setText("that opponent gets a poison counter."), true));
+        this.addAbility(new CombatDamageDealtToYouTriggeredAbility(Zone.BATTLEFIELD,
+                new AddPoisonCounterTargetEffect(1).setText("that opponent gets a poison counter"),
+                true, false));
 
         // Whenever a player attacks, if one or more players being attacked are poisoned, the attacking player draws a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

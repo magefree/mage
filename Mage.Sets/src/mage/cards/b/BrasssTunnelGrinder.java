@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DescendedThisTurnCondition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -42,8 +42,8 @@ public final class BrasssTunnelGrinder extends CardImpl {
         // At the beginning of your end step, if you descended this turn, put a bore counter on Brass's Tunnel-Grinder. Then if there are three or more bore counters on it, remove those counters and transform it.
         this.addAbility(new TransformAbility());
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.BORE.createInstance()),
-                TargetController.YOU, DescendedThisTurnCondition.instance, false
+                TargetController.YOU, new AddCountersSourceEffect(CounterType.BORE.createInstance()),
+                false, DescendedThisTurnCondition.instance
         );
 
         ConditionalOneShotEffect secondCheck = new ConditionalOneShotEffect(

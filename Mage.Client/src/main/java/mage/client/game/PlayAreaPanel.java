@@ -11,8 +11,6 @@ import mage.view.PlayerView;
 import mage.view.UserRequestMessage;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
@@ -25,7 +23,7 @@ import static mage.client.dialog.PreferencesDialog.*;
 /**
  * GUI: play area panel (player with avatar/mana panel + battlefield panel)
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class PlayAreaPanel extends javax.swing.JPanel {
 
@@ -45,20 +43,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private JCheckBoxMenuItem allowViewHandCardsMenuItem;
     private JCheckBoxMenuItem holdPriorityMenuItem;
 
-    public static final int PANEL_HEIGHT = 263;
-    public static final int PANEL_HEIGHT_SMALL = 210;
+    public static final int PANEL_HEIGHT = 273;
+    public static final int PANEL_HEIGHT_SMALL = 220;
     private static final int PANEL_HEIGHT_EXTRA_FOR_ME = 25;
 
-    /**
-     * Creates new form PlayAreaPanel
-     *
-     * @param player
-     * @param bigCard
-     * @param gameId
-     * @param priorityTime
-     * @param gamePanel
-     * @param options
-     */
     public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime, GamePanel gamePanel,
             PlayAreaPanelOptions options) {
         this.gamePanel = gamePanel;
@@ -69,7 +57,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         // data init
         init(player, bigCard, gameId, priorityTime);
-        update(null, player, null);
+        update(null, player, null, null);
+        playerPanel.sizePlayerPanel(isSmallMode());
 
         // init popup menu (must run after data init)
         popupMenu = new JPopupMenu();
@@ -78,7 +67,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         } else {
             addPopupMenuWatcher();
         }
-        this.add(popupMenu);
 
         setGUISize();
     }
@@ -86,10 +74,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public void CleanUp() {
         battlefieldPanel.cleanUp();
         playerPanel.cleanUp();
-
-        for (ActionListener al : btnCheat.getActionListeners()) {
-            btnCheat.removeActionListener(al);
-        }
 
         // Taken form : https://community.oracle.com/thread/2183145
         // removed the internal focus of a popupMenu data to allow GC before another popup menu is selected
@@ -524,11 +508,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.playerId = player.getPlayerId();
         this.playerName = player.getName();
         this.isMe = player.getControlled();
-        this.btnCheat.setVisible(SessionHandler.isTestMode());
     }
 
-    public final void update(GameView game, PlayerView player, Set<UUID> possibleTargets) {
-        this.playerPanel.update(game, player, possibleTargets);
+    public final void update(GameView game, PlayerView player, Set<UUID> possibleTargets, Set<UUID> chosenTargets) {
+        this.playerPanel.update(game, player, possibleTargets, chosenTargets);
         this.battlefieldPanel.update(player.getBattlefield());
         if (this.allowViewHandCardsMenuItem != null) {
             this.allowViewHandCardsMenuItem.setSelected(player.getUserData().isAllowRequestHandToAll());
@@ -545,52 +528,15 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     private void initComponents() {
         setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 0)));
-        playerPanel = new PlayerPanelExt();
-        btnCheat = new javax.swing.JButton();
+        playerPanel = new PlayerPanelExt(GUISizeHelper.playerPanelGuiScale);
         battlefieldPanel = new mage.client.game.BattlefieldPanel();
         battlefieldPanel.setTopPanelBattlefield(options.topRow);
+        battlefieldPanel.setPreferredSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
 
-        btnCheat.setText("Cheat");
-        btnCheat.addActionListener(evt -> btnCheatActionPerformed(evt));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        layout.setHorizontalGroup(
-                layout.createSequentialGroup()
-                        .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(battlefieldPanel, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(Alignment.LEADING)
-                        .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(battlefieldPanel, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-        );
-        this.setLayout(layout);
-    }
-
-    public void setSizeMode(boolean smallMode) {
-        this.smallMode = smallMode;
-        sizePlayerPanel(this.playerPanel, this.isMe, this.smallMode);
-        sizeBattlefieldPanel(this.battlefieldPanel, this.isMe, this.smallMode);
-    }
-
-    public static void sizePlayerPanel(PlayerPanelExt playerPanel, boolean isMe, boolean smallMode) {
-        playerPanel.sizePlayerPanel(smallMode);
-        int extraForMe = isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
-        if (smallMode) {
-            playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT_SMALL + extraForMe));
-        } else {
-            playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT + extraForMe));
-        }
-    }
-
-    public static void sizeBattlefieldPanel(BattlefieldPanel battlefieldPanel, boolean isMe, boolean smallMode) {
-        int extraForMe = isMe ? PANEL_HEIGHT_EXTRA_FOR_ME : 0;
-        if (smallMode) {
-            battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT_SMALL + extraForMe));
-        } else {
-            battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT + extraForMe));
-        }
+        this.setLayout(new BorderLayout());
+        this.add(playerPanel, BorderLayout.WEST);
+        this.add(battlefieldPanel, BorderLayout.CENTER);
+        this.add(Box.createRigidArea(new Dimension(0, 10)), BorderLayout.SOUTH); // bottom free space
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {
@@ -621,8 +567,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     private mage.client.game.BattlefieldPanel battlefieldPanel;
-    private javax.swing.JButton btnCheat;
     //private javax.swing.JScrollPane jScrollPane1;
     private PlayerPanelExt playerPanel;
-
 }

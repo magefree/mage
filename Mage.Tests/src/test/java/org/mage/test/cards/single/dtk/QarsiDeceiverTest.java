@@ -34,7 +34,7 @@ public class QarsiDeceiverTest extends CardTestPlayerBase {
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, mystic + " using Morph");
 
-        checkPT("morph", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        checkPT("morph", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
 
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U}: Turn");
 

@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class CephalidScout extends CardImpl {
 
     public CephalidScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.WIZARD);
         this.subtype.add(SubType.SCOUT);
 
@@ -35,8 +34,8 @@ public final class CephalidScout extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {2}{U}, Sacrifice a land: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{2}{U}"));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         this.addAbility(ability);
     }
 

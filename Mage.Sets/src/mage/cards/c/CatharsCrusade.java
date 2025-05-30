@@ -19,7 +19,7 @@ public final class CatharsCrusade extends CardImpl {
     public CatharsCrusade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
 
-        // Whenever a creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.
+        // Whenever a creature you control enters, put a +1/+1 counter on each creature you control.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE),

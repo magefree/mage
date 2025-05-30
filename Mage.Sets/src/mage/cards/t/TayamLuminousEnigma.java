@@ -8,7 +8,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.EntersWithCountersControlledEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,20 +18,18 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -51,15 +49,17 @@ public final class TayamLuminousEnigma extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Each other creature you control enters the battlefield with an additional vigilance counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TayamLuminousEnigmaReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new EntersWithCountersControlledEffect(
+                StaticFilters.FILTER_PERMANENT_CREATURE,
+                CounterType.VIGILANCE.createInstance(), true
+        )));
 
         // {3}, Remove three counters from among creatures you control: Put the top three cards of your library into your graveyard, then return a permanent card with converted mana cost 3 or less from your graveyard to the battlefield.
-        MillCardsControllerEffect millEffect = new MillCardsControllerEffect(3);
-        millEffect.concatBy(".");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, millEffect, new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(
+                new MillCardsControllerEffect(3).concatBy("."), new GenericManaCost(3)
+        );
         ability.addCost(new TayamLuminousEnigmaCost());
-        TayamLuminousEnigmaEffect effect = new TayamLuminousEnigmaEffect();
-        ability.addEffect(effect);
+        ability.addEffect(new TayamLuminousEnigmaEffect());
         this.addAbility(ability);
     }
 
@@ -190,45 +190,5 @@ class TayamLuminousEnigmaEffect extends OneShotEffect {
             return false;
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.BATTLEFIELD, source, game);
-    }
-}
-
-class TayamLuminousEnigmaReplacementEffect extends ReplacementEffectImpl {
-
-    TayamLuminousEnigmaReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "Each other creature you control enters the battlefield with an additional vigilance counter on it.";
-    }
-
-    private TayamLuminousEnigmaReplacementEffect(final TayamLuminousEnigmaReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        return creature != null
-                && creature.isCreature(game)
-                && !source.getSourceId().equals(creature.getId())
-                && creature.isControlledBy(source.getControllerId());
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (creature != null) {
-            creature.addCounters(CounterType.VIGILANCE.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-        }
-        return false;
-    }
-
-    @Override
-    public TayamLuminousEnigmaReplacementEffect copy() {
-        return new TayamLuminousEnigmaReplacementEffect(this);
     }
 }

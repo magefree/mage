@@ -37,7 +37,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class TableController {
 
@@ -204,7 +204,7 @@ public class TableController {
             if (seat.getPlayer().isHuman()) {
                 seat.getPlayer().setUserData(user.getUserData());
                 user.addTable(player.getId(), table);
-                user.ccJoinedTable(table.getRoomId(), table.getId(), true);
+                user.ccJoinedTable(table.getRoomId(), table.getId(), table.getParentTableId(), true);
                 userPlayerMap.put(userId, player.getId());
             }
 
@@ -236,35 +236,51 @@ public class TableController {
         return true;
     }
 
+    /**
+     * Check and join real player
+     */
     public synchronized boolean joinTable(UUID userId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
+        // user - must exist
         Optional<User> _user = managerFactory.userManager().getUser(userId);
         if (!_user.isPresent()) {
             logger.error("Join Table: can't find user to join " + name + " Id = " + userId);
             return false;
         }
+
+        // table - already joined
         User user = _user.get();
         if (userPlayerMap.containsKey(userId) && playerType == PlayerType.HUMAN) {
             user.showUserMessage("Join Table", new StringBuilder("You can join a table only one time.").toString());
             return false;
         }
+
+        // table - already started
         if (table.getState() != TableState.WAITING) {
             user.showUserMessage("Join Table", "No available seats.");
             return false;
         }
-        // check password
+
+        // table - wrong password
         if (!table.getMatch().getOptions().getPassword().isEmpty() && playerType == PlayerType.HUMAN) {
             if (!table.getMatch().getOptions().getPassword().equals(password)) {
                 user.showUserMessage("Join Table", "Wrong password.");
                 return false;
             }
         }
+
+        // table - no more free seats
         Seat seat = table.getNextAvailableSeat(playerType);
         if (seat == null) {
             user.showUserMessage("Join Table", "No available seats.");
             return false;
         }
+
+        // deck - try to load real deck (any unknown cards will raise exception error here)
+        // P.S. Quick start button can raise error here on memory problems, but it's ok
+        // (real table creating is unaffected and will not create empty table)
         Deck deck = Deck.load(deckList, false, false);
 
+        // deck - validate
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
             StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
             List<DeckValidatorError> errorsList = table.getValidator().getErrorsListSorted();
@@ -273,13 +289,16 @@ public class TableController {
             });
             sb.append("\n\nSelect a deck that is appropriate for the selected format and try again!");
             user.showUserMessage("Join Table", sb.toString());
+
+            // owner must create table with valid deck only
             if (isOwner(userId)) {
                 logger.debug("New table removed because owner submitted invalid deck tableId " + table.getId());
                 managerFactory.tableManager().removeTable(table.getId());
             }
             return false;
         }
-        // Check quit ratio.
+
+        // user - restrict by quit ratio
         int quitRatio = table.getMatch().getOptions().getQuitRatio();
         if (quitRatio < user.getMatchQuitRatio()) {
             String message = new StringBuilder("Your quit ratio ").append(user.getMatchQuitRatio())
@@ -288,7 +307,7 @@ public class TableController {
             return false;
         }
 
-        // Check minimum rating.
+        // user - restrict by rating
         int minimumRating = table.getMatch().getOptions().getMinimumRating();
         int userRating;
         if (table.getMatch().getOptions().isLimited()) {
@@ -303,10 +322,10 @@ public class TableController {
             return false;
         }
 
-        // Check power level for table (currently only used for EDH/Commander table)
+        // user - restrict by deck power level and cards colors (see edh power level for details)
         int edhPowerLevel = table.getMatch().getOptions().getEdhPowerLevel();
         if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase(Locale.ENGLISH).equals("commander")) {
-            int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
+            int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck, new ArrayList<>(), new ArrayList<>());
             if (deckEdhPowerLevel % 100 > edhPowerLevel) {
                 String message = new StringBuilder("Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. ")
                         .append("\nThe table requirement has a maximum power level of ").append(edhPowerLevel).append(" whilst your deck has a calculated power level of ")
@@ -349,6 +368,7 @@ public class TableController {
             }
         }
 
+        // player - try to create (human, ai, etc)
         Optional<Player> playerOpt = createPlayer(name, seat.getPlayerType(), skill);
         if (!playerOpt.isPresent()) {
             String message = "Could not create player " + name + " of type " + seat.getPlayerType();
@@ -356,23 +376,28 @@ public class TableController {
             user.showUserMessage("Join Table", message);
             return false;
         }
+
+        // player - restrict by player type, e.g. draft bot can join to tourney only
         Player player = playerOpt.get();
         if (!player.canJoinTable(table)) {
             user.showUserMessage("Join Table", "A " + seat.getPlayerType() + " player can't join this table.");
             return false;
         }
+
+        // all fine, player can be added
         match.addPlayer(player, deck);
         table.joinTable(player, seat);
-        logger.trace(player.getName() + " joined tableId: " + table.getId());
+
         //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
             seat.getPlayer().setUserData(user.getUserData());
             if (!table.isTournamentSubTable()) {
                 user.addTable(player.getId(), table);
             }
-            user.ccJoinedTable(table.getRoomId(), table.getId(), false);
+            user.ccJoinedTable(table.getRoomId(), table.getId(), table.getParentTableId(), false);
             userPlayerMap.put(userId, player.getId());
         }
+
         return true;
     }
 
@@ -391,8 +416,22 @@ public class TableController {
         }
     }
 
+    /**
+     * Submit deck on sideboarding/construction (final deck)
+     */
     public synchronized boolean submitDeck(UUID userId, DeckCardLists deckList) throws MageException {
         UUID playerId = userPlayerMap.get(userId);
+
+        // player - update tourney's player status
+        // TODO: need research, why it here instead real time check?
+        if (table.isTournamentSubTable()) {
+            TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(playerId);
+            if (tournamentPlayer != null) {
+                tournamentPlayer.setStateInfo(""); // reset sideboarding state
+            }
+        }
+
+        // player - already quit
         if (table.isTournament()) {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player == null || player.hasQuit()) {
@@ -403,23 +442,26 @@ public class TableController {
             if (mPlayer == null || mPlayer.hasQuit()) {
                 return true; // so the construct panel closes after submit
             }
-            if (table.isTournamentSubTable()) {
-                TournamentPlayer tournamentPlayer = table.getTournament().getPlayer(mPlayer.getPlayer().getId());
-                if (tournamentPlayer != null) {
-                    tournamentPlayer.setStateInfo(""); // reset sideboarding state
-                }
-            }
         }
-        if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
+
+        // tourney - too late for submit
+        if (table.getState() != TableState.SIDEBOARDING
+                && table.getState() != TableState.CONSTRUCTING) {
             return false;
         }
+
+        // deck - try to load real deck (any unknown cards will raise exception error here)
         Deck deck = Deck.load(deckList, false, false);
+
+        // workaround to keep deck name for Tiny Leaders because it must be hidden for players
         if (table.getState() == TableState.SIDEBOARDING && table.getMatch() != null) {
             MatchPlayer mPlayer = table.getMatch().getPlayer(playerId);
             if (mPlayer != null) {
                 deck.setName(mPlayer.getDeck().getName());
             }
         }
+
+        // deck - validate
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
             Optional<User> _user = managerFactory.userManager().getUser(userId);
             if (!_user.isPresent()) {
@@ -434,21 +476,20 @@ public class TableController {
             _user.get().showUserMessage("Submit deck", sb.toString());
             return false;
         }
+
         submitDeck(userId, playerId, deck);
         return true;
     }
 
     public void updateDeck(UUID userId, DeckCardLists deckList) throws MageException {
-        boolean validDeck;
         UUID playerId = userPlayerMap.get(userId);
-        if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
+        // TODO: need refactor, many duplicated code like state check
+        if (table.getState() != TableState.SIDEBOARDING
+                && table.getState() != TableState.CONSTRUCTING) {
             return;
         }
         Deck deck = Deck.load(deckList, false, false);
-        validDeck = updateDeck(userId, playerId, deck);
-        if (!validDeck && getTableState() == TableState.SIDEBOARDING) {
-            logger.warn(" userId: " + userId + " - Modified deck card list!");
-        }
+        updateDeck(userId, playerId, deck);
     }
 
     private void submitDeck(UUID userId, UUID playerId, Deck deck) {
@@ -461,25 +502,29 @@ public class TableController {
         }
     }
 
-    private boolean updateDeck(UUID userId, UUID playerId, Deck deck) {
-        boolean validDeck = true;
+    private void updateDeck(UUID userId, UUID playerId, Deck deck) {
+        // strict mode - players can't add any lands while sideboarding in single game
+        // ignore mode - players can add any lands while construction/sideboarding in draft tourney
+        boolean ignoreMainBasicLands = table.isTournament() || table.isTournamentSubTable();
         if (table.isTournament()) {
             if (tournament != null) {
-                validDeck = managerFactory.tournamentManager().updateDeck(tournament.getId(), playerId, deck);
+                // TODO: is it possible to update from direct call command in game?!
+                managerFactory.tournamentManager().updateDeck(tournament.getId(), playerId, deck, ignoreMainBasicLands);
             } else {
                 logger.fatal("Tournament == null  table: " + table.getId() + " userId: " + userId);
             }
-        } else if (TableState.SIDEBOARDING == table.getState()) {
-            validDeck = match.updateDeck(playerId, deck);
+        } else if (table.getState() == TableState.SIDEBOARDING) {
+            match.updateDeck(playerId, deck, ignoreMainBasicLands);
         } else {
             // deck was meanwhile submitted so the autoupdate can be ignored
+            // TODO: need research
+            logger.warn("wtf, why it submitting?!");
         }
-        return validDeck;
     }
 
     public boolean watchTable(UUID userId) {
         if (table.isTournament()) {
-            managerFactory.userManager().getUser(userId).ifPresent(user -> user.ccShowTournament(table.getTournament().getId()));
+            managerFactory.userManager().getUser(userId).ifPresent(user -> user.ccShowTournament(table.getId(), table.getTournament().getId()));
             return true;
         } else {
             if (table.isTournamentSubTable() && !table.getTournament().getOptions().isWatchingAllowed()) {
@@ -496,7 +541,7 @@ public class TableController {
             if (!_user.isPresent()) {
                 return false;
             }
-            return _user.get().ccWatchGame(match.getGame().getId());
+            return _user.get().ccWatchGame(table.getId(), table.getParentTableId(), match.getGame().getId());
         }
     }
 
@@ -538,6 +583,7 @@ public class TableController {
         } else {
             UUID playerId = userPlayerMap.get(userId);
             if (playerId != null) {
+                // TODO: wtf, need research and document all that checks, can be never used code
                 if (table.getState() == TableState.WAITING || table.getState() == TableState.READY_TO_START) {
                     table.leaveNotStartedTable(playerId);
                     if (table.isTournament()) {
@@ -639,7 +685,7 @@ public class TableController {
                     Optional<User> _user = managerFactory.userManager().getUser(entry.getKey());
                     if (_user.isPresent()) {
                         User user = _user.get();
-                        user.ccGameStarted(match.getGame().getId(), entry.getValue());
+                        user.ccGameStarted(table.getId(), table.getParentTableId(), match.getGame().getId(), entry.getValue());
 
                         if (creator == null) {
                             creator = user.getName();
@@ -698,7 +744,7 @@ public class TableController {
                 for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
                     managerFactory.userManager().getUser(entry.getKey()).ifPresent(user -> {
                         logger.info(new StringBuilder("User ").append(user.getName()).append(" tournament started: ").append(tournament.getId()).append(" userId: ").append(user.getId()));
-                        user.ccTournamentStarted(tournament.getId(), entry.getValue());
+                        user.ccTournamentStarted(table.getId(), tournament.getId(), entry.getValue());
                     });
                 }
                 ServerMessagesUtil.instance.incTournamentsStarted();
@@ -711,13 +757,13 @@ public class TableController {
     }
 
     public void startDraft(Draft draft) {
-        table.initDraft();
+        table.initDraft(draft);
         managerFactory.draftManager().createDraftSession(draft, userPlayerMap, table.getId());
         for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
             Optional<User> user = managerFactory.userManager().getUser(entry.getKey());
             if (user.isPresent()) {
                 logger.info(new StringBuilder("User ").append(user.get().getName()).append(" draft started: ").append(draft.getId()).append(" userId: ").append(user.get().getId()));
-                user.get().ccDraftStarted(draft.getId(), entry.getValue());
+                user.get().ccDraftStarted(table.getId(), draft.getId(), entry.getValue());
             } else {
                 logger.fatal(new StringBuilder("Start draft user not found userId: ").append(entry.getKey()));
             }
@@ -730,7 +776,7 @@ public class TableController {
             if (entry.getValue().equals(playerId)) {
                 Optional<User> user = managerFactory.userManager().getUser(entry.getKey());
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                user.ifPresent(user1 -> user1.ccSideboard(deck, table.getId(), remaining, options.isLimited()));
+                user.ifPresent(user1 -> user1.ccSideboard(deck, table.getId(), table.getParentTableId(), remaining, options.isLimited()));
                 break;
             }
         }
@@ -884,7 +930,7 @@ public class TableController {
     private void autoSideboard() {
         for (MatchPlayer player : match.getPlayers()) {
             if (!player.isDoneSideboarding()) {
-                match.submitDeck(player.getPlayer().getId(), player.generateDeck(table.getValidator()));
+                match.submitDeck(player.getPlayer().getId(), player.autoCompleteDeck(table.getValidator()));
             }
         }
     }

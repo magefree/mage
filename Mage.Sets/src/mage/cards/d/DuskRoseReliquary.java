@@ -24,7 +24,7 @@ public final class DuskRoseReliquary extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{W}");
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
 
         // Ward {2}
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));

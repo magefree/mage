@@ -28,7 +28,7 @@ public final class ScryingGlass extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {3}, {tap}: Choose a number greater than 0 and a color. Target opponent reveals their hand. If that opponent reveals exactly the chosen number of cards of the chosen color, you draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryingGlassEffect(), new ManaCostsImpl<>("{3}"));
+        Ability ability = new SimpleActivatedAbility(new ScryingGlassEffect(), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -64,7 +64,7 @@ class ScryingGlassEffect extends OneShotEffect {
         int amount = 0;
         if (controller != null
                 && targetOpponent != null) {
-            amount = controller.getAmount(1, Integer.MAX_VALUE, "Choose a number", game);
+            amount = controller.getAmount(1, Integer.MAX_VALUE, "Choose a number", source, game);
             controller.choose(Outcome.Discard, color, game);
             FilterCard filter = new FilterCard();
             filter.add(new ColorPredicate(color.getColor()));

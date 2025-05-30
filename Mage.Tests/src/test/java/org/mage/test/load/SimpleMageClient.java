@@ -28,6 +28,10 @@ public class SimpleMageClient implements MageClient {
         callbackClient = new LoadCallbackClient(joinGameChat, logsPrefix, showLogsAsHtml);
     }
 
+    protected void updateGlobalProgress(String globalProgress) {
+        callbackClient.updateGlobalProgress(globalProgress);
+    }
+
     @Override
     public MageVersion getVersion() {
         return version;
@@ -39,7 +43,7 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public void disconnected(boolean askToReconnect) {
+    public void disconnected(boolean askToReconnect, boolean keepMySessionActive) {
         // do nothing
     }
 

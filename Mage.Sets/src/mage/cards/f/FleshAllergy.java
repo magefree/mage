@@ -34,7 +34,7 @@ public final class FleshAllergy extends CardImpl {
 
         // As an additional cost to cast Flesh Allergy, sacrifice a creature.
         // Destroy target creature. Its controller loses life equal to the number of creatures that died this turn.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new FleshAllergyEffect());

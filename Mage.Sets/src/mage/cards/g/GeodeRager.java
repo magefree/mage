@@ -37,7 +37,7 @@ public final class GeodeRager extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // Landfall — Whenever a land enters the battlefield under your control, goad each creature target player controls.
+        // Landfall — Whenever a land you control enters, goad each creature target player controls.
         Ability ability = new LandfallAbility(new GoadAllEffect(filter).setText("goad each creature target player controls"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -39,7 +39,7 @@ public final class MarduAscendancy extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 1, true, true), false, attackFilter));
 
         // Sacrifice Mardu Ascendancy: Creatures you control get +0/+3 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false),
+        this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false),
                 new SacrificeSourceCost()));
     }
 

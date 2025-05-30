@@ -31,11 +31,11 @@ public final class DiscipleOfTeveshSzat extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // {4}{B}{B}, {tap}, Sacrifice Disciple of Tevesh Szat: Target creature gets -6/-6 until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-6, -6, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{B}{B}"));
+        ability = new SimpleActivatedAbility(new BoostTargetEffect(-6, -6, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

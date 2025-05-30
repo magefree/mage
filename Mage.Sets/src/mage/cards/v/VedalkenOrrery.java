@@ -28,7 +28,7 @@ public final class VedalkenOrrery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // You may cast spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private VedalkenOrrery(final VedalkenOrrery card) {

@@ -40,7 +40,7 @@ public final class DrudgeSpell extends CardImpl {
         // {B}, Exile two creature cards from your graveyard: Create a 1/1 black Skeleton creature token. It has "{B}: Regenerate this creature."
         Effect effect = new CreateTokenEffect(new SkeletonRegenerateToken());
         effect.setText("create a 1/1 black Skeleton creature token. It has \"{B}: Regenerate this creature.\"");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ColoredManaCost(ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(effect, new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, 2, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD)));
         this.addAbility(ability);
 

@@ -31,7 +31,7 @@ public final class ThrabenHeretic extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Exile target creature card from a graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
     }

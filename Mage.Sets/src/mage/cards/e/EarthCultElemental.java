@@ -30,7 +30,7 @@ public final class EarthCultElemental extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect).withFlavorWord("Siege Monster"));
 
         // 1-9 | Each player sacrifices a permanent.
-        effect.addTableEntry(1, 9, new SacrificeAllEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_SHORT_TEXT));
+        effect.addTableEntry(1, 9, new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT));
 
         // 10-19 | Each opponent sacrifices a permanent.
         effect.addTableEntry(10, 19, new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT));

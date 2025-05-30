@@ -1,8 +1,5 @@
-
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,24 +9,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX
  */
 public final class Opportunist extends CardImpl {
 
-    private static final  FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
-
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
-
     public Opportunist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -37,8 +28,8 @@ public final class Opportunist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Opportunist deals 1 damage to target creature that was dealt damage this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
         this.addAbility(ability);
     }
 
@@ -50,5 +41,4 @@ public final class Opportunist extends CardImpl {
     public Opportunist copy() {
         return new Opportunist(this);
     }
-
 }

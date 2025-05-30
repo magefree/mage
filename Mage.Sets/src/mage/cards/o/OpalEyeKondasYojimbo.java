@@ -43,10 +43,10 @@ public final class OpalEyeKondasYojimbo extends CardImpl {
         this.addAbility(new BushidoAbility(1));
 
         // {T}: The next time a source of your choice would deal damage this turn, that damage is dealt to Opal-Eye, Konda's Yojimbo instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OpalEyeKondasYojimboRedirectionEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new OpalEyeKondasYojimboRedirectionEffect(), new TapSourceCost()));
 
         // {1}{W}: Prevent the next 1 damage that would be dealt to Opal-Eye this turn.        
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{1}{W}")));
 
     }
 

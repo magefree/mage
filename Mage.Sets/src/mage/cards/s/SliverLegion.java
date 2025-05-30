@@ -36,7 +36,7 @@ public final class SliverLegion extends CardImpl {
         this.toughness = new MageInt(7);
 
         // All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new PermanentsOnBattlefieldCount(countfilter) , new PermanentsOnBattlefieldCount(countfilter), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(new PermanentsOnBattlefieldCount(countfilter) , new PermanentsOnBattlefieldCount(countfilter), Duration.WhileOnBattlefield, filter, false)));
     }
 
     private SliverLegion(final SliverLegion card) {

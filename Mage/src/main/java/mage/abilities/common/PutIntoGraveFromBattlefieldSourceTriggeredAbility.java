@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -20,7 +21,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
     }
 
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect, boolean optional, boolean onlyToControllerGraveyard) {
-        super(Zone.ALL, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
         setTriggerPhrase("When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, ");
@@ -54,5 +55,10 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
         }
         this.getEffects().setValue("permanentWasCreature", permanent.isCreature(game));
         return true;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

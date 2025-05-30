@@ -1,9 +1,11 @@
 package mage.cards.n;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.*;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.SacrificeCost;
+import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
@@ -13,8 +15,6 @@ import mage.constants.ComparisonType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
@@ -41,11 +41,10 @@ public final class NahirisSacrifice extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeXManaValueCost(filter,true));
 
         // Nahiri’s Sacrifice deals X damage divided as you choose among any number of target creatures.
-        DynamicValue damage = new SacrificeXCostConvertedMana("artifact or creature");
-        Effect effect = new DamageMultiEffect(damage);
+        Effect effect = new DamageMultiEffect();
         effect.setText("{this} deals X damage divided as you choose among any number of target creatures.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(damage));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(GetXValue.instance));
     }
 
     private NahirisSacrifice(final NahirisSacrifice card) {
@@ -91,43 +90,4 @@ class SacrificeXManaValueCost extends VariableCostImpl implements SacrificeCost 
         return new SacrificeTargetCost(manavaluefilter);
     }
 
-}
-
-class SacrificeXCostConvertedMana implements DynamicValue {
-
-    private final String type;
-
-    public SacrificeXCostConvertedMana(String type) {
-        this.type = type;
-    }
-
-    private SacrificeXCostConvertedMana(final SacrificeXCostConvertedMana value) {
-        this.type = value.type;
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for (VariableCost cost : sourceAbility.getCosts().getVariableCosts()) {
-            if (cost instanceof SacrificeXManaValueCost) {
-                //Announced X Value
-                return cost.getAmount();
-            }
-        }
-        return 0;
-    }
-
-    @Override
-    public SacrificeXCostConvertedMana copy() {
-        return new SacrificeXCostConvertedMana(this);
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "the sacrificed " + type + "'s mana value";
-    }
 }

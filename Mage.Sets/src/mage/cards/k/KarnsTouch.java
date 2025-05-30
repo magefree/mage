@@ -6,11 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -52,6 +48,7 @@ class KarnsTouchEffect extends ContinuousEffectImpl {
     KarnsTouchEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private KarnsTouchEffect(final KarnsTouchEffect effect) {

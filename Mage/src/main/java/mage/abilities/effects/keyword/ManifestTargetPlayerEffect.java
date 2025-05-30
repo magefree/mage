@@ -40,7 +40,7 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
             return false;
         }
 
-        return ManifestEffect.doManifestCards(game, source, targetPlayer, targetPlayer.getLibrary().getTopCards(game, amount));
+        return !ManifestEffect.doManifestCards(game, source, targetPlayer, targetPlayer.getLibrary().getTopCards(game, amount)).isEmpty();
     }
 
     private String setText() {

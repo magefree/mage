@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
 import mage.cards.CardImpl;
@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
@@ -33,8 +32,7 @@ public final class PrimordialPlasm extends CardImpl {
         // At the beginning of combat on your turn, another target creature gets +2/+2 and loses all abilities until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 2)
-                        .setText("another target creature gets +2/+2"),
-                TargetController.YOU, false
+                        .setText("another target creature gets +2/+2")
         );
         ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
                 .setText("and loses all abilities until end of turn"));

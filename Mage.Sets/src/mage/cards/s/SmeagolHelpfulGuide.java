@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.TheRingTemptsYouTriggeredAbility;
 import mage.abilities.condition.common.CreatureDiedControlledCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -34,8 +34,8 @@ public final class SmeagolHelpfulGuide extends CardImpl {
 
         // At the beginning of your end step, if a creature died under your control this turn, the Ring tempts you.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-            new TheRingTemptsYouEffect(), TargetController.YOU,
-            CreatureDiedControlledCondition.instance, false
+                TargetController.YOU, new TheRingTemptsYouEffect(),
+                false, CreatureDiedControlledCondition.instance
         ).addHint(CreatureDiedControlledCondition.getHint()));
 
         // Whenever the Ring tempts you, target opponent reveals cards from the top of their library until they reveal

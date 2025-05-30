@@ -14,8 +14,8 @@ import mage.game.permanent.Permanent;
  */
 public class CountersCount implements DynamicValue {
 
-    private CounterType counter;
-    private FilterPermanent filter;
+    private final CounterType counter;
+    private final FilterPermanent filter;
 
     public CountersCount(CounterType counterType) {
         this(counterType, new FilterPermanent());
@@ -34,7 +34,7 @@ public class CountersCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceAbility.getControllerId(), sourceAbility, game)) {
             count += permanent.getCounters(game).getCount(counter);
         }
         return count;

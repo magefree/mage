@@ -1,11 +1,8 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -14,8 +11,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.Target;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,9 +40,8 @@ public final class MoldShambler extends CardImpl {
 
         // When Mold Shambler enters the battlefield, if it was kicked, destroy target noncreature permanent.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        Target target = new TargetPermanent(filter);
-        ability.addTarget(target);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, destroy target noncreature permanent."));
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability.withInterveningIf(KickedCondition.ONCE));
     }
 
     private MoldShambler(final MoldShambler card) {

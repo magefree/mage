@@ -40,8 +40,8 @@ public final class CharredGraverobber extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
-        // Escape---{3}{B}, Exile four other cards from your graveyard.
-        this.addAbility(new EscapeAbility(this, "{3}{B}", 4));
+        // Escape---{3}{B}{B}, Exile four other cards from your graveyard.
+        this.addAbility(new EscapeAbility(this, "{3}{B}{B}", 4));
 
         // Charred Graverobber escapes with a +1/+1 counter on it.
         this.addAbility(new EscapesWithAbility(1));

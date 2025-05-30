@@ -13,7 +13,7 @@ public class RoleTest extends CardTestPlayerBase {
 
     private static final String courtier = "Cursed Courtier"; // When Cursed Courtier enters the battlefield, create a Cursed Role token attached to it.
     private static final String rage = "Monstrous Rage"; // Target creature gets +2/+0 until end of turn. Create a Monster Role token attached to it.
-    private static final String wardens = "Nexus Wardens"; // Whenever an enchantment enters the battlefield under your control, you gain 2 life.
+    private static final String wardens = "Nexus Wardens"; // Whenever an enchantment you control enters, you gain 2 life.
     private static final String murder = "Murder";
 
     @Test
@@ -163,7 +163,7 @@ public class RoleTest extends CardTestPlayerBase {
 
         addTarget(playerA, bear + "^" + wardens);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, become);
-        setChoice(playerA, ""); // order triggers
+        setChoice(playerA, "<i>Constellation</i>"); // x2 triggers from Nexus Wardens
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

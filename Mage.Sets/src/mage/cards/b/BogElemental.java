@@ -4,7 +4,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.ProtectionAbility;
@@ -12,10 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -33,10 +30,9 @@ public final class BogElemental extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         
         // At the beginning of your upkeep, sacrifice Bog Elemental unless you sacrifice a land.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)),
-                TargetController.YOU, 
-                false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_LAND))
+        ));
     }
 
     private BogElemental(final BogElemental card) {

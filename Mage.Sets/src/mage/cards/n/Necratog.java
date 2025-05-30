@@ -26,7 +26,7 @@ public final class Necratog extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Exile the top creature card of your graveyard: Necratog gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ExileTopCreatureCardOfGraveyardCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ExileTopCreatureCardOfGraveyardCost(1)));
     }
 
     private Necratog(final Necratog card) {

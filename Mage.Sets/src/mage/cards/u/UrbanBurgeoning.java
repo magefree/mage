@@ -36,8 +36,8 @@ public final class UrbanBurgeoning extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land has "Untap this land during each other player's untap step."
-        Ability gainedAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new UrbanBurgeoningUntapEffect());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        Ability gainedAbility = new SimpleStaticAbility(new UrbanBurgeoningUntapEffect());
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
     private UrbanBurgeoning(final UrbanBurgeoning card) {

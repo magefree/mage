@@ -4,7 +4,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -35,7 +34,7 @@ public final class MyrServitor extends CardImpl {
 
         // At the beginning of your upkeep, if Myr Servitor is on the battlefield, each player returns all cards named Myr Servitor from their graveyard to the battlefield.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new MyrServitorReturnEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new MyrServitorReturnEffect()),
                 SourceOnBattlefieldCondition.instance,
                 "At the beginning of your upkeep, if {this} is on the battlefield, each player returns all cards named Myr Servitor from their graveyard to the battlefield"
         ));

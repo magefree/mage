@@ -1,7 +1,8 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsDamageToYouAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
@@ -11,17 +12,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.WhiteBlackSpiritToken;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.filter.common.FilterCreatureCard;
-
 
 /**
  * @author LevelX2
@@ -44,7 +39,10 @@ public final class TeysaEnvoyOfGhosts extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterCreatureCard("creatures")));
 
         // Whenever a creature deals combat damage to you, destroy that creature. Create a 1/1 white and black Spirit creature token with flying.
-        this.addAbility(new TeysaEnvoyOfGhostsTriggeredAbility());
+        Ability ability = new DealsDamageToYouAllTriggeredAbility(StaticFilters.FILTER_PERMANENT_CREATURE,
+                new DestroyTargetEffect(), true);
+        ability.addEffect(new CreateTokenEffect(new WhiteBlackSpiritToken(), 1));
+        this.addAbility(ability);
 
     }
 
@@ -56,47 +54,4 @@ public final class TeysaEnvoyOfGhosts extends CardImpl {
     public TeysaEnvoyOfGhosts copy() {
         return new TeysaEnvoyOfGhosts(this);
     }
-}
-
-class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
-
-    public TeysaEnvoyOfGhostsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
-        this.addEffect(new CreateTokenEffect(new WhiteBlackSpiritToken(), 1));
-    }
-
-    private TeysaEnvoyOfGhostsTriggeredAbility(final TeysaEnvoyOfGhostsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TeysaEnvoyOfGhostsTriggeredAbility copy() {
-        return new TeysaEnvoyOfGhostsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        if (damageEvent.getPlayerId().equals(getControllerId())
-                && damageEvent.isCombatDamage()
-                && sourcePermanent != null
-                && sourcePermanent.isCreature(game)) {
-            game.getState().setValue(sourceId.toString(), sourcePermanent.getControllerId());
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature deals combat damage to you, destroy that creature. Create a 1/1 white and black Spirit creature token with flying.";
-    }
-
 }

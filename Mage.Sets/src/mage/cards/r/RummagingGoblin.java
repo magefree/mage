@@ -29,7 +29,7 @@ public final class RummagingGoblin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Discard a card: Draw a card.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability);
     }

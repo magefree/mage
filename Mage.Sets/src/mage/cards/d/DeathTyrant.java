@@ -59,9 +59,10 @@ public final class DeathTyrant extends CardImpl {
 
 class DeathTyrantTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DeathTyrantTriggeredAbility() {
-        super(Zone.ALL, new CreateTokenEffect(new ZombieToken()));
+    DeathTyrantTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()));
         setTriggerPhrase("Whenever an attacking creature you control or a blocking creature an opponent controls dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private DeathTyrantTriggeredAbility(final DeathTyrantTriggeredAbility ability) {
@@ -94,7 +95,7 @@ class DeathTyrantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

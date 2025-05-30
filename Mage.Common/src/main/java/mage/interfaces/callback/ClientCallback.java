@@ -14,8 +14,8 @@ import java.util.UUID;
  */
 public class ClientCallback implements Serializable {
 
-    // for debug only: simulate bad connection on client side, use launcher's client param like -Dxmage.badconnection
-    private static final String SIMULATE_BAD_CONNECTION_PROP = "xmage.badconnection";
+    // for debug only: simulate bad connection on client side, use launcher's client param like -Dxmage.badConnection
+    private static final String SIMULATE_BAD_CONNECTION_PROP = "xmage.badConnection";
     public static final boolean SIMULATE_BAD_CONNECTION;
 
     static {
@@ -99,4 +99,7 @@ public class ClientCallback implements Serializable {
         return messageId;
     }
 
+    public String getInfo() {
+        return String.format("message %d - %s - %s", this.getMessageId(), this.getMethod().getType(), this.getMethod());
+    }
 }

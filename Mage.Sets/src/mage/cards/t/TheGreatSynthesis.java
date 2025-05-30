@@ -41,7 +41,7 @@ public class TheGreatSynthesis extends CardImpl {
         //I — Draw cards equal to the number of cards in your hand. You have no maximum hand size for as long as you
         //control The Great Synthesis.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
-                new DrawCardSourceControllerEffect(CardsInControllerHandCount.instance)
+                new DrawCardSourceControllerEffect(CardsInControllerHandCount.ANY)
                         .setText("draw cards equal to the number of cards in your hand"),
                 new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield,
                         MaximumHandSizeControllerEffect.HandSizeModification.SET)

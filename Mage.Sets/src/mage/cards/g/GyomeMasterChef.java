@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -25,7 +25,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.FoodToken;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
@@ -58,8 +57,7 @@ public final class GyomeMasterChef extends CardImpl {
                 new CreateTokenEffect(
                         new FoodToken(), GyomeMasterChefValue.instance
                 ).setText("create a number of Food tokens equal to the number of nontoken creatures " +
-                        "you had enter the battlefield under your control this turn"),
-                TargetController.YOU, false
+                        "you had enter the battlefield under your control this turn")
         ).addHint(hint), new GyomeMasterChefWatcher());
 
         // {1}, Sacrifice a Food: Target creature gains indestructible until end of turn. Tap it.

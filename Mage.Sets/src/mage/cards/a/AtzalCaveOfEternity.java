@@ -34,7 +34,7 @@ public final class AtzalCaveOfEternity extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // {3}{B}{G}, {T}: Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{3}{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl<>("{3}{B}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);

@@ -158,8 +158,8 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
         if (controller != null
                 && (source instanceof ManaAbility
                 || stackObject != null)) {
-            xValue = controller.announceXCost(getMinValue(source, game), getMaxValue(source, game),
-                    "Announce the number of " + actionText, game, source, this);
+            xValue = controller.announceX(getMinValue(source, game), getMaxValue(source, game),
+                    "Announce the value for {X} (" + actionText + ")", game, source, false);
         }
         return xValue;
     }

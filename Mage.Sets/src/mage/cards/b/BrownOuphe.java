@@ -37,7 +37,7 @@ public final class BrownOuphe extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{G}, {tap}: Counter target activated ability from an artifact source.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetActivatedAbility(filter));
         this.addAbility(ability);

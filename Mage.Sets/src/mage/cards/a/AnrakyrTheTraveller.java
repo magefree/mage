@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 public final class AnrakyrTheTraveller extends CardImpl {
 
     public AnrakyrTheTraveller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT, CardType.CREATURE }, "{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{B}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NECRON);
@@ -72,17 +72,17 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        
+
         Set<Card> cards = player.getHand().getCards(filter, source.getControllerId(), source, game);
         cards.addAll(player.getGraveyard().getCards(filter, source.getControllerId(), source, game));
-        
+
         Map<UUID, List<Card>> cardMap = new HashMap<>();
         for (Card card : cards) {
             List<Card> castableComponents = CardUtil.getCastableComponents(card, filter, source, player, game, null, false);
             if (!castableComponents.isEmpty()) {
                 cardMap.put(card.getId(), castableComponents);
             }
-        }      
+        }
         Card cardToCast;
         if (cardMap.isEmpty()) {
             return false;
@@ -109,10 +109,10 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
             return true;
         }
         partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
-        
+
         // pay life
         // copied from BolassCitadelPlayTheTopCardEffect.applies
-        PayLifeCost lifeCost = new PayLifeCost(cardToCast.getSpellAbility().getManaCosts().manaValue());
+        PayLifeCost lifeCost = new PayLifeCost(cardToCast.getSpellAbility().getManaCosts().manaValue()); // TODO: Cost is most likely wrong for multi part cards. See Amped Raptor way for a rework.
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.add(lifeCost);
         newCosts.addAll(cardToCast.getSpellAbility().getCosts());

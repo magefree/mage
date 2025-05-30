@@ -32,9 +32,9 @@ public final class SkirsdagCultist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, {T}, Sacrifice a creature: Skirsdag Cultist deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

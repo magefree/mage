@@ -33,7 +33,7 @@ public final class RiotTrooper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each trooper creature you control can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CanBlockAdditionalCreatureAllEffect(1, filter, Duration.WhileOnBattlefield)
                     .setText("Each trooper creature you control can block an additional creature each combat")));
     }

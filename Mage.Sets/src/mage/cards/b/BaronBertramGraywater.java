@@ -44,11 +44,11 @@ public final class BaronBertramGraywater extends CardImpl {
         // Whenever one or more tokens enter the battlefield under your control, create a 1/1 black Vampire Rogue creature token with lifelink. This ability triggers only once each turn.
         this.addAbility(new EntersBattlefieldOneOrMoreTriggeredAbility(
                 new CreateTokenEffect(new VampireRogueToken()), filter, TargetController.YOU
-        ).setTriggersOnceEachTurn(true));
+        ).setTriggersLimitEachTurn(1));
 
         // {1}{B}, Sacrifice another creature or artifact: Draw a card.
         Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT));
         this.addAbility(ability);
     }
 

@@ -1,29 +1,26 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  *
@@ -54,7 +51,7 @@ public final class WoodElemental extends CardImpl {
     }
 }
 
-class WoodElementalEffect extends OneShotEffect {
+class WoodElementalEffect extends ReplacementEffectImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Forests you control");
     
@@ -64,7 +61,7 @@ class WoodElementalEffect extends OneShotEffect {
     }
 
     public WoodElementalEffect() {
-        super(Outcome.Sacrifice);
+        super(Duration.EndOfGame, Outcome.Sacrifice);
         staticText = "sacrifice any number of untapped Forests";
     }
 
@@ -78,27 +75,39 @@ class WoodElementalEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getTargetId().equals(source.getSourceId());
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (controller != null && sourceCard != null) {
-            Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
-            if (target.canChoose(source.getControllerId(), source, game)
-                    && controller.chooseTarget(Outcome.Detriment, target, source, game)) {
-                if (!target.getTargets().isEmpty()) {
-                    int sacrificedForests = target.getTargets().size();
-                    game.informPlayers(controller.getLogName() + " sacrifices " + sacrificedForests + " untapped Forests for " + sourceCard.getLogName());
-                    for (UUID targetId : target.getTargets()) {
-                        Permanent targetPermanent = game.getPermanent(targetId);
-                        if (targetPermanent != null) {
-                            targetPermanent.sacrifice(source, game);
-                        }
-                    }
-                    game.addEffect(new SetBasePowerToughnessSourceEffect(sacrificedForests, sacrificedForests, Duration.Custom), source);
-                    return true;
-                }
+        if (creature == null || controller == null) {
+            return false;
+        }
+        Target target = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
+        if (!target.canChoose(source.getControllerId(), source, game)) {
+            return false;
+        }
+        controller.choose(Outcome.Detriment, target, source, game);
+        if (target.getTargets().isEmpty()) {
+            return false;
+        }
+        int value = 0;
+        for (UUID targetId : target.getTargets()) {
+            Permanent targetCreature = game.getPermanent(targetId);
+            if (targetCreature != null && targetCreature.sacrifice(source, game)) {
+                value++;
             }
         }
+        game.addEffect(new SetBasePowerToughnessSourceEffect(value, value, Duration.WhileOnBattlefield), source);
+        this.discard(); // prevent multiple replacements e.g. on blink
         return false;
     }
 }

@@ -6,9 +6,11 @@ import mage.util.Copyable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
+ * Client side deck with text only.
+ * <p>
+ * Can contain restricted, un-implemented or unknown cards
  *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
@@ -46,12 +48,15 @@ public class DeckCardLists implements Serializable, Copyable<DeckCardLists> {
     public DeckCardLayout getCardLayout() {
         return cardLayout;
     }
+
     public void setCardLayout(DeckCardLayout layout) {
         this.cardLayout = layout;
     }
+
     public DeckCardLayout getSideboardLayout() {
         return sideboardLayout;
     }
+
     public void setSideboardLayout(DeckCardLayout layout) {
         this.sideboardLayout = layout;
     }

@@ -38,9 +38,10 @@ public class ManaPool implements Serializable {
     private boolean forcedToPay; // for Word of Command
     private final List<ManaPoolItem> poolBookmark = new ArrayList<>(); // mana pool bookmark for rollback purposes
 
-    private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
-    private boolean manaBecomesBlack = false;
-    private boolean manaBecomesColorless = false;
+    // empty mana pool effects
+    private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>(); // keep some colors
+    private boolean manaBecomesBlack = false; // replace all pool by black
+    private boolean manaBecomesColorless = false; // replace all pool by colorless
 
     private static final class ConditionalManaInfo {
         private final ManaType manaType;
@@ -147,10 +148,10 @@ public class ManaPool implements Serializable {
                 if (ability.getSourceId().equals(mana.getSourceId())
                         || !(mana.getSourceObject() instanceof Spell)
                         || ((Spell) mana.getSourceObject())
-                                .getAbilities(game)
-                                .stream()
-                                .flatMap(a -> a.getAllEffects().stream())
-                                .anyMatch(ManaEffect.class::isInstance)) {
+                        .getAbilities(game)
+                        .stream()
+                        .flatMap(a -> a.getAllEffects().stream())
+                        .anyMatch(ManaEffect.class::isInstance)) {
                     continue; // if any of the above cases, not an alt mana payment ability, thus excluded by filter
                 }
             }
@@ -251,6 +252,28 @@ public class ManaPool implements Serializable {
 
     public void init() {
         manaItems.clear();
+    }
+
+    public boolean canLostManaOnEmpty() {
+        for (ManaPoolItem item : manaItems) {
+            for (ManaType manaType : ManaType.values()) {
+                if (item.get(manaType) == 0) {
+                    continue;
+                }
+                if (doNotEmptyManaTypes.contains(manaType)) {
+                    continue;
+                }
+                if (manaBecomesBlack) {
+                    continue;
+                }
+                if (manaBecomesColorless) {
+                    continue;
+                }
+                // found real mana to empty
+                return true;
+            }
+        }
+        return false;
     }
 
     public int emptyPool(Game game) {

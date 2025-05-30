@@ -43,7 +43,7 @@ public final class FlamestickCourier extends CardImpl {
         // You may choose not to untap Flamestick Courier during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}{R}, {tap}: Target Goblin creature gets +2/+2 and has haste for as long as Flamestick Courier remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(
             new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.TAPPED,
             "target Goblin creature gets +2/+2"), new ManaCostsImpl<>("{2}{R}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(),

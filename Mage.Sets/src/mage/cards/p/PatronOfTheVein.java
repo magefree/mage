@@ -70,6 +70,7 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
 
     public PatronOfTheVeinCreatureDiesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PatronOfTheVeinExileCreatureEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private PatronOfTheVeinCreatureDiesTriggeredAbility(final PatronOfTheVeinCreatureDiesTriggeredAbility ability) {
@@ -106,6 +107,11 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature an opponent controls dies, exile it and put a +1/+1 counter on each Vampire you control.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 
@@ -146,7 +152,7 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
             effect.apply(game, source);
         }
 
-        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
             permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             game.informPlayers(sourceObject.getName() + ": Put a +1/+1 counter on " + permanent.getLogName());
         }

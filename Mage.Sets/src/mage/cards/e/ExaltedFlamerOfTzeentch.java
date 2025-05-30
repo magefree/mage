@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardAtRandomEffect;
@@ -26,7 +26,7 @@ public final class ExaltedFlamerOfTzeentch extends CardImpl {
 
         // Sorcerous Inspiration -- At the beginning of your upkeep, return an instant or sorcery card at random from your graveyard to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ReturnFromGraveyardAtRandomEffect(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, Zone.HAND), TargetController.YOU, false
+                new ReturnFromGraveyardAtRandomEffect(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, Zone.HAND)
         ).withFlavorWord("Sorcerous Inspiration"));
 
         // Fire of Tzeentch -- Whenever you cast an instant or sorcery spell, Exalted Flamer of Tzeentch deals 1 damage to each opponent.

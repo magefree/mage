@@ -3,7 +3,7 @@ package mage.cards.p;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseColorEffect;
@@ -18,7 +18,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -40,14 +39,13 @@ public final class PsychicAllergy extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Damage)));
 
         // At the beginning of each opponent's upkeep, Psychic Allergy deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PsychicAllergyEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new PsychicAllergyEffect(), false));
 
         // At the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoUnlessControllerPaysEffect(new DestroySourceEffect(),
-                        new SacrificeTargetCost(2, filter)).setText("destroy {this} unless you sacrifice two Islands"),
-                TargetController.YOU,
-                false));
+                        new SacrificeTargetCost(2, filter)).setText("destroy {this} unless you sacrifice two Islands")
+        ));
     }
 
     private PsychicAllergy(final PsychicAllergy card) {

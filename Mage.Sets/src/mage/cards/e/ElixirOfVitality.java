@@ -26,11 +26,11 @@ public final class ElixirOfVitality extends CardImpl {
         // Elixir of Vitality enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}, Sacrifice Elixir of Vitality: You gain 4 life.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), new TapSourceCost());
+        Ability ability1 = new SimpleActivatedAbility(new GainLifeEffect(4), new TapSourceCost());
         ability1.addCost(new SacrificeSourceCost());
         this.addAbility(ability1);
         // {8}, {tap}, Sacrifice Elixir of Vitality: You gain 8 life.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(8), new ManaCostsImpl<>("{8}"));
+        Ability ability2 = new SimpleActivatedAbility(new GainLifeEffect(8), new ManaCostsImpl<>("{8}"));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new SacrificeSourceCost());
         this.addAbility(ability2);

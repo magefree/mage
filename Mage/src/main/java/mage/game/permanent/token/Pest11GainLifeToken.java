@@ -20,7 +20,7 @@ public final class Pest11GainLifeToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(1)));
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(1)).setTriggerPhrase("When this creature dies, "));
     }
 
     private Pest11GainLifeToken(final Pest11GainLifeToken token) {

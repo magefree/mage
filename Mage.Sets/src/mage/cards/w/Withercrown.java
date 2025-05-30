@@ -1,8 +1,7 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.Effect;
@@ -14,17 +13,13 @@ import mage.abilities.effects.common.continuous.SetBasePowerEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Withercrown extends CardImpl {
@@ -48,8 +43,8 @@ public final class Withercrown extends CardImpl {
         Effect effect2 = new DoUnlessControllerPaysEffect(new LoseLifeSourceControllerEffect(1),
                 new SacrificeSourceCost(), rule);
         effect2.setText("you lose 1 life unless you sacrifice this creature.");
-        Effect effect3 = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                effect2, TargetController.YOU, false, false, null), AttachmentType.AURA);
+        Effect effect3 = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(
+                effect2), AttachmentType.AURA);
         effect3.setText("and has \"At the beginning of your upkeep, you lose 1 life unless you sacrifice this creature.\"");
         abilityTest.addEffect(effect3);
         this.addAbility(abilityTest);

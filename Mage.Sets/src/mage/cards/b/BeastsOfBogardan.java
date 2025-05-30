@@ -41,7 +41,7 @@ public final class BeastsOfBogardan extends CardImpl {
         // Protection from red
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         // Beasts of Bogardan gets +1/+1 as long as an opponent controls a nontoken white permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new OpponentControlsPermanentCondition(controlFilter),
                 "{this} gets +1/+1 as long as an opponent controls a nontoken white permanent")));

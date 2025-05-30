@@ -4,13 +4,12 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.common.TargetArtifactPermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class VoltaicServant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your end step, untap target artifact.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new UntapTargetEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new UntapTargetEffect());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }

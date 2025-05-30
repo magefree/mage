@@ -38,7 +38,7 @@ public final class CloudreachCavalry extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As long as you control a Bird, Cloudreach Cavalry gets +2/+2 and has flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
             new PermanentsOnTheBattlefieldCondition(filter),
             "As long as you control a Bird, {this} gets +2/+2"));

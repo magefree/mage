@@ -34,7 +34,7 @@ public final class MerryWardenOfIsengard extends CardImpl {
         // Whenever one or more artifacts enter the battlefield under your control, create a 1/1 white Soldier creature token with lifelink. This ability triggers only once each turn.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new CreateTokenEffect(new SoldierLifelinkToken()), StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT
-        ).setTriggerPhrase("Whenever one or more artifacts enter the battlefield under your control, ").setTriggersOnceEachTurn(true));
+        ).setTriggerPhrase("Whenever one or more artifacts enter the battlefield under your control, ").setTriggersLimitEachTurn(1));
     }
 
     private MerryWardenOfIsengard(final MerryWardenOfIsengard card) {

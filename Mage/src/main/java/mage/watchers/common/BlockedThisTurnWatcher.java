@@ -1,4 +1,3 @@
-
 package mage.watchers.common;
 
 import mage.MageObjectReference;
@@ -34,12 +33,7 @@ public class BlockedThisTurnWatcher extends Watcher {
     }
 
     public boolean checkIfBlocked(Permanent permanent, Game game) {
-        for (MageObjectReference mor : blockedThisTurnCreatures) {
-            if (mor.refersTo(permanent, game)) {
-                return true;
-            }
-        }
-        return false;
+        return blockedThisTurnCreatures.stream().anyMatch(mor -> mor.refersTo(permanent, game));
     }
 
     @Override

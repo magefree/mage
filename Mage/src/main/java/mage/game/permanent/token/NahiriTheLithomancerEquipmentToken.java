@@ -29,7 +29,7 @@ public final class NahiriTheLithomancerEquipmentToken extends TokenImpl {
 
         this.addAbility(IndestructibleAbility.getInstance());
 
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 5));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(5, 5));
         ability.addEffect(new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield, "and has double strike"));
         this.addAbility(ability);
 

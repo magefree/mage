@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -43,8 +43,7 @@ public final class AkroanHorse extends CardImpl {
 
         // At the beginning of your upkeep, each opponent create a 1/1 white Soldier creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenAllEffect(new SoldierToken(), TargetController.OPPONENT),
-                TargetController.YOU, false
+                new CreateTokenAllEffect(new SoldierToken(), TargetController.OPPONENT)
         ));
     }
 

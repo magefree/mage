@@ -32,10 +32,10 @@ public final class GnawingZombie extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{B}, Sacrifice a creature: Target player loses 1 life and you gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetPlayer());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

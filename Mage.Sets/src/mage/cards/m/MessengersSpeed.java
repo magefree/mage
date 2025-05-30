@@ -40,7 +40,7 @@ public final class MessengersSpeed extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature has trample and haste.
         ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
+                new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and haste");
         ability.addEffect(effect);

@@ -37,10 +37,10 @@ public final class MetallicMimic extends CardImpl {
         // Metallic Mimic is the chosen type in addition to its other types.
         ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddChosenSubtypeEffect()));
+        this.addAbility(new SimpleStaticAbility(new AddChosenSubtypeEffect()));
 
         // Each other creature you control of the chosen type enters the battlefield with an additional +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MetallicMimicReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new MetallicMimicReplacementEffect()));
 
     }
 

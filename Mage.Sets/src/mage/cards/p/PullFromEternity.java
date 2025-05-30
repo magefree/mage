@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -17,8 +16,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PullFromEternity extends CardImpl {
@@ -30,12 +30,12 @@ public final class PullFromEternity extends CardImpl {
     }
 
     public PullFromEternity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
 
         // Put target face-up exiled card into its owner's graveyard.
         this.getSpellAbility().addEffect(new PullFromEternityEffect());
-        this.getSpellAbility().addTarget(new TargetCardInExile(1,1,filter, null, true));
+        this.getSpellAbility().addTarget(new TargetCardInExile(filter));
 
     }
 

@@ -33,7 +33,7 @@ public final class KorHaven extends CardImpl {
         // {1}{W}, {tap}: Prevent all combat damage that would be dealt by target attacking creature this turn.
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt by target attacking creature this turn");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);

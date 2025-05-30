@@ -1,8 +1,8 @@
-
 package mage.cards.t;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -12,15 +12,13 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.command.emblems.TamiyoFieldResearcherEmblem;
+import mage.game.events.DamagedBatchBySourceEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -31,10 +29,8 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.SuperType;
 
 /**
- *
  * @author LevelX2
  */
 public final class TamiyoFieldResearcher extends CardImpl {
@@ -113,15 +109,19 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
     }
 }
 
-class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbility {
+// batch per source:
+// > If Tamiyo’s first ability targets two creatures, and both deal combat damage at the same time, the delayed triggered ability triggers twice.
+// > (2016-08-23)
+class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedEvent> {
 
-    private int startingTurn;
-    private List<MageObjectReference> creatures;
+    private final int startingTurn;
+    private final List<MageObjectReference> creatures;
 
-    public TamiyoFieldResearcherDelayedTriggeredAbility(List<MageObjectReference> creatures, int startingTurn) {
-        super(new DrawCardSourceControllerEffect(1), Duration.Custom, false);
+    TamiyoFieldResearcherDelayedTriggeredAbility(List<MageObjectReference> creatures, int startingTurn) {
+        super(new DrawCardSourceControllerEffect(1, true), Duration.Custom, false);
         this.creatures = creatures;
         this.startingTurn = startingTurn;
+        setTriggerPhrase("Until your next turn, whenever either of those creatures deals combat damage, ");
     }
 
     private TamiyoFieldResearcherDelayedTriggeredAbility(final TamiyoFieldResearcherDelayedTriggeredAbility ability) {
@@ -132,18 +132,24 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event instanceof DamagedEvent;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
+    }
+
+    @Override
+    public boolean checkEvent(DamagedEvent event, Game game) {
+        if (!event.isCombatDamage() || event.getAmount() <= 0) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        return creatures.contains(new MageObjectReference(permanent.getId(), game));
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedEvent) event).isCombatDamage()) {
-            Permanent damageSource = game.getPermanent(event.getSourceId());
-            if (damageSource != null) {
-                return creatures.contains(new MageObjectReference(damageSource, game));
-            }
-        }
-        return false;
+        return !getFilteredEvents((DamagedBatchBySourceEvent) event, game).isEmpty();
     }
 
     @Override
@@ -156,8 +162,4 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
         return new TamiyoFieldResearcherDelayedTriggeredAbility(this);
     }
 
-    @Override
-    public String getRule() {
-        return "Until your next turn, whenever either of those creatures deals combat damage, you draw a card.";
-    }
 }

@@ -37,7 +37,7 @@ public final class MeriekeRiBerit extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Merieke Ri Berit doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // {tap}: Gain control of target creature for as long as you control Merieke Ri Berit. When Merieke Ri Berit leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated.
         Ability ability = new SimpleActivatedAbility(new GainControlTargetEffect(Duration.WhileControlled), new TapSourceCost());

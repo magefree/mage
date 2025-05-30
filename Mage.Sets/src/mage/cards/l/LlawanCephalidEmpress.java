@@ -38,7 +38,7 @@ public final class LlawanCephalidEmpress extends CardImpl {
     public LlawanCephalidEmpress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CEPHALID, SubType.NOBLE);
+        this.subtype.add(SubType.OCTOPUS, SubType.NOBLE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
@@ -47,7 +47,7 @@ public final class LlawanCephalidEmpress extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter), false));
 
         // Your opponents can't cast blue creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LlawanCephalidRuleModifyingEffect()));
+        this.addAbility(new SimpleStaticAbility(new LlawanCephalidRuleModifyingEffect()));
     }
 
     private LlawanCephalidEmpress(final LlawanCephalidEmpress card) {

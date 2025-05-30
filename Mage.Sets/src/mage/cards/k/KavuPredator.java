@@ -1,32 +1,29 @@
 
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class KavuPredator extends CardImpl {
 
     public KavuPredator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.KAVU);
 
         this.power = new MageInt(2);
@@ -51,7 +48,7 @@ public final class KavuPredator extends CardImpl {
 class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
 
     public KavuPredatorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new KavuPredatorEffect());
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(), SavedGainedLifeValue.MANY));
         setTriggerPhrase("Whenever an opponent gains life, ");
     }
 
@@ -69,46 +66,13 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.GAINED_LIFE;
     }
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            this.getEffects().get(0).setValue("gainedLife", event.getAmount());
-            return true;
+        if (!game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+            return false;
         }
-        return false;
-    }
-}
-
-class KavuPredatorEffect extends OneShotEffect {
-
-    KavuPredatorEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "put that many +1/+1 counters on {this}";
-    }
-
-    private KavuPredatorEffect(final KavuPredatorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KavuPredatorEffect copy() {
-        return new KavuPredatorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Integer gainedLife  = (Integer) this.getValue("gainedLife");
-            if (gainedLife != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(gainedLife), source.getControllerId(), source, game);
-                Player player = game.getPlayer(source.getControllerId());
-                if (player != null) {
-                    game.informPlayers(player.getLogName() + " puts " + gainedLife + " +1/+1 counter on " + permanent.getName());
-                }
-            }
-            return true;
-        }
-        return false;
+        this.getEffects().setValue(SavedGainedLifeValue.VALUE_KEY, event.getAmount());
+        return true;
     }
 }

@@ -142,6 +142,7 @@ class LaraCroftTombRaiderCastEffect extends AsThoughEffectImpl {
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         Card card = game.getCard(sourceId);
         return card != null
+                && affectedControllerId.equals(source.getControllerId())
                 && game.getState().getZone(sourceId) == Zone.EXILED
                 && card.getCounters(game).containsKey(CounterType.DISCOVERY)
                 && LaraCroftTombRaiderWatcher.checkPlayer(source.getControllerId(), game);

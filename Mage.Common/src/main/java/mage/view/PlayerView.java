@@ -1,7 +1,7 @@
 package mage.view;
 
 import mage.cards.Card;
-import mage.counters.Counters;
+import mage.counters.Counter;
 import mage.designations.Designation;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -27,10 +27,9 @@ public class PlayerView implements Serializable {
     private final boolean controlled; // gui: player is current user
     private final boolean isHuman; // human or computer
     private final int life;
-    private final Counters counters;
+    private final List<CounterView> counters;
     private final int wins;
     private final int winsNeeded;
-    private final long deckHashCode;
     private final int libraryCount;
     private final int handCount;
     private final boolean isActive;
@@ -41,13 +40,15 @@ public class PlayerView implements Serializable {
     private final CardsView graveyard = new CardsView();
     private final CardsView exile = new CardsView();
     private final CardsView sideboard = new CardsView();
+    private final CardsView helperCards = new CardsView();
     private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<>();
     private final CardView topCard;
     private final UserData userData;
     private final List<CommandObjectView> commandList = new ArrayList<>();
     private final List<UUID> attachments = new ArrayList<>();
     private final int statesSavedSize;
-    private final int priorityTimeLeft;
+    private final long priorityTimeSavedTimeMs;
+    private final int priorityTimeLeftSecs;
     private final int bufferTimeLeft;
     private final boolean passedTurn; // F4
     private final boolean passedUntilEndOfTurn; // F5
@@ -65,17 +66,15 @@ public class PlayerView implements Serializable {
         this.controlled = player.getId().equals(createdForPlayerId);
         this.isHuman = player.isHuman();
         this.life = player.getLife();
-        this.counters = player.getCounters();
         this.wins = player.getMatchPlayer().getWins();
         this.winsNeeded = player.getMatchPlayer().getWinsNeeded();
-        // If match ended immediately before, deck can be set to null so check is necessarry here
-        this.deckHashCode = player.getMatchPlayer().getDeck() != null ? player.getMatchPlayer().getDeck().getDeckHashCode() : 0;
         this.libraryCount = player.getLibrary().size();
         this.handCount = player.getHand().size();
         this.manaPool = new ManaPoolView(player.getManaPool());
         this.isActive = (player.getId().equals(state.getActivePlayerId()));
         this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
-        this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.priorityTimeLeftSecs = player.getPriorityTimeLeft();
+        this.priorityTimeSavedTimeMs = System.currentTimeMillis();
         this.bufferTimeLeft = player.getBufferTimeLeft();
         this.timerActive = (this.hasPriority && player.isGameUnderControl())
                 || (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId()))
@@ -98,17 +97,13 @@ public class PlayerView implements Serializable {
                 sideboard.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
             }
         }
-
-        try {
-            for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
-                if (showInBattlefield(permanent, state)) {
-                    PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
-                    battlefield.put(view.getId(), view);
-                }
+        for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
+            if (showInBattlefield(permanent, state)) {
+                PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
+                battlefield.put(view.getId(), view);
             }
-        } catch (ConcurrentModificationException e) {
-            // can happen as a player left battlefield while PlayerView is created
         }
+
         Card cardOnTop = (player.isTopCardRevealed() && player.getLibrary().hasCards())
                 ? player.getLibrary().getFromTop(game) : null;
         this.topCard = cardOnTop != null ? new CardView(cardOnTop, game) : null;
@@ -122,7 +117,7 @@ public class PlayerView implements Serializable {
             if (commandObject instanceof Emblem) {
                 Emblem emblem = (Emblem) commandObject;
                 if (emblem.getControllerId().equals(this.playerId)) {
-                    commandList.add(new EmblemView(emblem));
+                    commandList.add(new EmblemView(emblem, game));
                 }
             } else if (commandObject instanceof Dungeon) {
                 Dungeon dungeon = (Dungeon) commandObject;
@@ -132,7 +127,7 @@ public class PlayerView implements Serializable {
             } else if (commandObject instanceof Plane) {
                 Plane plane = (Plane) commandObject;
                 // Planes are universal and all players can see them.
-                commandList.add(new PlaneView(plane));
+                commandList.add(new PlaneView(plane, game));
             } else if (commandObject instanceof Commander) {
                 Commander commander = (Commander) commandObject;
                 if (commander.getControllerId().equals(this.playerId)) {
@@ -160,6 +155,10 @@ public class PlayerView implements Serializable {
         this.initiative = player.getId().equals(game.getInitiativeId());
         for (Designation designation : player.getDesignations()) {
             this.designationNames.add(designation.getName());
+        }
+        this.counters = new ArrayList<>();
+        for (Counter counter : player.getCountersAsCopy().values()) {
+            counters.add(new CounterView(counter));
         }
     }
 
@@ -190,7 +189,7 @@ public class PlayerView implements Serializable {
         return this.life;
     }
 
-    public Counters getCounters() {
+    public List<CounterView> getCounters() {
         return this.counters;
     }
 
@@ -204,10 +203,6 @@ public class PlayerView implements Serializable {
 
     public int getWinsNeeded() {
         return winsNeeded;
-    }
-
-    public long getDeckHashCode() {
-        return deckHashCode;
     }
 
     public int getHandCount() {
@@ -274,8 +269,10 @@ public class PlayerView implements Serializable {
         return statesSavedSize;
     }
 
-    public int getPriorityTimeLeft() {
-        return priorityTimeLeft;
+    public int getPriorityTimeLeftSecs() {
+        // workaround to find real time
+        int secsAfterUpdate = (int) ((System.currentTimeMillis() - this.priorityTimeSavedTimeMs) / 1000);
+        return Math.max(0, this.priorityTimeLeftSecs - secsAfterUpdate);
     }
 
     public int getBufferTimeLeft() {

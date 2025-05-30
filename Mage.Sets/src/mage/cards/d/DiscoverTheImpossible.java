@@ -79,7 +79,7 @@ class DiscoverTheImpossibleEffect extends OneShotEffect {
         player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
-            player.putCardsOnBottomOfLibrary(card, game, source, false);
+            player.putCardsOnBottomOfLibrary(card, game, source);
             return true;
         }
         player.moveCards(card, Zone.EXILED, source, game);

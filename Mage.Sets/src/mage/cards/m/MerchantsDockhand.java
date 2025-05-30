@@ -23,6 +23,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public final class MerchantsDockhand extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {3}{U}, {T}, Tap X untapped artifacts you control: Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MerchantsDockhandEffect(), new ManaCostsImpl<>("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(new MerchantsDockhandEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapXTargetCost());
         this.addAbility(ability);
@@ -79,14 +80,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
             return false;
         }
 
-        int xValue = source.getManaCostsToPay().getX();
-
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof TapXTargetCost) {
-                xValue = ((TapXTargetCost) cost).getAmount();
-                break;
-            }
-        }
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         controller.lookAtCards(sourceObject.getIdName(), cards, game);

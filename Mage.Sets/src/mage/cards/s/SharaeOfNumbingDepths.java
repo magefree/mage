@@ -61,7 +61,7 @@ class SharaeOfNumbingDepthsTriggeredAbility extends TriggeredAbilityImpl {
 
     SharaeOfNumbingDepthsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.setTriggersOnceEachTurn(true);
+        this.setTriggersLimitEachTurn(1);
         setTriggerPhrase("Whenever you tap one or more untapped creatures your opponents control, ");
     }
 
@@ -83,7 +83,7 @@ class SharaeOfNumbingDepthsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null
-                && StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE.match(permanent, game)
-                && isControlledBy(event.getPlayerId());
+                && isControlledBy(event.getPlayerId()) // whenever you tap
+                && StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE.match(permanent, this.getControllerId(), this, game);
     }
 }

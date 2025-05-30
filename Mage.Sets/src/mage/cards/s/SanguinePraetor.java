@@ -35,8 +35,8 @@ public final class SanguinePraetor extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {B}, Sacrifice a creature: Destroy each creature with the same converted mana cost as the sacrificed creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SanguinePraetorEffect(), new ManaCostsImpl<>("{B}"));
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        Ability ability = new SimpleActivatedAbility(new SanguinePraetorEffect(), new ManaCostsImpl<>("{B}"));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
 
     }

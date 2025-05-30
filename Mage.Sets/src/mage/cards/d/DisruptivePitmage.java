@@ -31,7 +31,7 @@ public final class DisruptivePitmage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Counter target spell unless its controller pays {1}.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1)), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)), new TapSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
         

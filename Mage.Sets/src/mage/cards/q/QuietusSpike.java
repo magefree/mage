@@ -28,7 +28,7 @@ public final class QuietusSpike extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has deathtouch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // Whenever equipped creature deals combat damage to a player, that player loses half their life, rounded up.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new LoseHalfLifeTargetEffect(), "equipped creature", false, true));

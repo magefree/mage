@@ -3,8 +3,9 @@ package mage.game.permanent.token;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessEnchantedEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -29,7 +30,7 @@ public final class CursedRoleToken extends TokenImpl {
         this.addAbility(ability);
 
         // Enchanted creature is 1/1.
-        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessEnchantedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessAttachedEffect(1, 1, AttachmentType.AURA)));
     }
 
     private CursedRoleToken(final CursedRoleToken token) {

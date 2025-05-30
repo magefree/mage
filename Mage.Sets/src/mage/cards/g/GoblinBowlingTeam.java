@@ -33,7 +33,7 @@ public final class GoblinBowlingTeam extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If Goblin Bowling Team would deal damage to a permanent or player, it deals that much damage plus the result of a six-sided die roll to that permanent or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinBowlingTeamEffect()));
+        this.addAbility(new SimpleStaticAbility(new GoblinBowlingTeamEffect()));
 
     }
 

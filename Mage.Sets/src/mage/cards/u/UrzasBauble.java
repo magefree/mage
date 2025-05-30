@@ -32,10 +32,10 @@ public final class UrzasBauble extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // {tap}, Sacrifice Urza's Bauble: Look at a card at random in target player's hand. You draw a card at the beginning of the next turn's upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookAtRandomCardEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LookAtRandomCardEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1, "you")), false));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1, true)), false));
         this.addAbility(ability);
     }
 

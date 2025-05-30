@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -35,7 +35,7 @@ public final class GrowingRitesOfItlimoc extends CardImpl {
         // At the beginning of your end step, if you control four or more creatures, transform Growing Rites of Itlimoc.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
+                new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect()),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_A_CREATURE, ComparisonType.MORE_THAN, 3),
                 "At the beginning of your end step, if you control four or more creatures, transform {this}"));
     }

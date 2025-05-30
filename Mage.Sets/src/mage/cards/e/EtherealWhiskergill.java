@@ -29,7 +29,7 @@ public final class EtherealWhiskergill extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Ethereal Whiskergill can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
     private EtherealWhiskergill(final EtherealWhiskergill card) {

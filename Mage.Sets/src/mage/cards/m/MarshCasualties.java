@@ -1,8 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.Iterator;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.LockedInCondition;
@@ -18,8 +16,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
+import java.util.Iterator;
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class MarshCasualties extends CardImpl {
@@ -27,7 +27,7 @@ public final class MarshCasualties extends CardImpl {
     private static final String ruleText = "Creatures target player controls get -1/-1 until end of turn. If this spell was kicked, those creatures get -2/-2 until end of turn instead";
 
     public MarshCasualties(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}");
 
         this.color.setBlack(true);
 
@@ -78,7 +78,7 @@ class MarshCasualtiesEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getFirstTarget(), game)) {
                 affectedObjectList.add(new MageObjectReference(creature, game));
             }
@@ -87,7 +87,7 @@ class MarshCasualtiesEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
             Permanent permanent = it.next().getPermanent(game);
             if (permanent != null) {
                 permanent.addPower(power);

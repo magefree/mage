@@ -79,8 +79,7 @@ class BlessingOfFrostEffect extends OneShotEffect {
         int snow = ManaPaidSourceWatcher.getSnowPaid(source.getId(), game);
         int potentialTarget = game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game);
         if (snow > 0 && potentialTarget > 0) {
-            TargetAmount target = new TargetCreaturePermanentAmount(snow, StaticFilters.FILTER_CONTROLLED_CREATURE);
-            target.setMinNumberOfTargets(1);
+            TargetAmount target = new TargetCreaturePermanentAmount(snow, 0, snow, StaticFilters.FILTER_CONTROLLED_CREATURE);
             target.withNotTarget(true);
             target.chooseTarget(outcome, player.getId(), source, game);
             for (UUID targetId : target.getTargets()) {
@@ -91,7 +90,7 @@ class BlessingOfFrostEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.P1P1.createInstance(target.getTargetAmount(targetId)), source.getControllerId(), source, game);
             }
         }
-        game.getState().processAction(game);
+        game.processAction();
         player.drawCards(game.getBattlefield().count(
                 filter, source.getControllerId(), source, game
         ), source, game);

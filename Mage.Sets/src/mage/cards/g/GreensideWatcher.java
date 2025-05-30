@@ -35,7 +35,7 @@ public final class GreensideWatcher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Untap target Gate.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

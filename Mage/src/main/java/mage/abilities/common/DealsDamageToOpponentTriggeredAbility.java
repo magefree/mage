@@ -14,7 +14,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final boolean onlyCombat, setTargetPointer;
+    private final boolean onlyCombat;
+    private final boolean setTargetPointer;
 
     public DealsDamageToOpponentTriggeredAbility(Effect effect) {
         this(effect, false, false, false);
@@ -33,6 +34,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
         this.onlyCombat = onlyCombat;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever {this} deals " + (onlyCombat ? "combat " : "") + "damage to an opponent, ");
+        this.withRuleTextReplacement(true);
     }
 
     protected DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {
@@ -53,22 +55,16 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId)
-                && game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
-            if (onlyCombat && event instanceof DamagedPlayerEvent) {
-                DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-                if (!damageEvent.isCombatDamage()) {
-                    return false;
-                }
-            }
-            if (setTargetPointer) {
-                for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                    effect.setValue("damage", event.getAmount());
-                }
-            }
-            return true;
+        if (!event.getSourceId().equals(this.getSourceId())
+                || !game.getOpponents(this.getControllerId()).contains(event.getTargetId())
+                || onlyCombat
+                && !((DamagedPlayerEvent) event).isCombatDamage()) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("damage", event.getAmount());
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        }
+        return true;
     }
 }

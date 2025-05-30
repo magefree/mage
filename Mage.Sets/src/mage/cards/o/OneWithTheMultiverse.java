@@ -77,7 +77,7 @@ enum OneWithTheMultiverseCondition implements Condition {
 class OneWithTheMultiverseEffect extends AsThoughEffectImpl {
 
     OneWithTheMultiverseEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
         staticText = "once during each of your turns, you may cast a spell from your hand " +
                 "or the top of your library without paying its mana cost.";
     }
@@ -136,7 +136,7 @@ class OneWithTheMultiverseWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST
                 && event.hasApprovingIdentifier(MageIdentifier.OneWithTheMultiverseWatcher)) {
-            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            usedFrom.add(event.getApprovingObject().getApprovingMageObjectReference());
         }
     }
 

@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class PalaceJailerTest extends CardTestPlayerBase {
@@ -25,7 +24,7 @@ public class PalaceJailerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Palace Jailer");
-        setChoice(playerA, "When {this} enters the battlefield, you become the monarch.");
+        setChoice(playerA, "When {this} enters, you become the monarch.");
         addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -39,9 +38,9 @@ public class PalaceJailerTest extends CardTestPlayerBase {
 
     /**
      * TheGibber on reddit
-     *
+     * <p>
      * Palace Jailer
-     *
+     * <p>
      * When exile effect is on more than one target from the same palace jailer
      * card, and you lose monarch, only the most recent card is returned to play
      * instead of all of them
@@ -63,17 +62,17 @@ public class PalaceJailerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Palace Jailer");
-        setChoice(playerA, "When {this} enters the battlefield, you become the monarch.");
+        setChoice(playerA, "When {this} enters, you become the monarch.");
         addTarget(playerA, "Silvercoat Lion");
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Palace Jailer");
-        setChoice(playerA, "When {this} enters the battlefield, you become the monarch.");
+        setChoice(playerA, "When {this} enters, you become the monarch.");
         addTarget(playerA, "Pillarfield Ox");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Palace Jailer");
-        setChoice(playerB, "When {this} enters the battlefield, you become the monarch.");
+        setChoice(playerB, "When {this} enters, you become the monarch.");
         addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);

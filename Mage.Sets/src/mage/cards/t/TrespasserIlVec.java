@@ -28,7 +28,7 @@ public final class TrespasserIlVec extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Discard a card: Trespasser il-Vec gains shadow until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), 
                 new DiscardCardCost()));
     }

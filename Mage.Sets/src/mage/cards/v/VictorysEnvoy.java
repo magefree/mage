@@ -1,17 +1,14 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,13 +16,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class VictorysEnvoy extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("other creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public VictorysEnvoy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
@@ -37,8 +27,7 @@ public final class VictorysEnvoy extends CardImpl {
 
         // At the beginning of your upkeep, put a +1/1 counter on each other creature you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter),
-                TargetController.YOU, false
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE)
         ));
     }
 

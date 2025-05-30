@@ -73,10 +73,10 @@ class DeathmistRaptorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (controller != null && (sourceObject instanceof Card)) {
-            return controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game, false,
-                    controller.chooseUse(Outcome.Detriment, "Return " + sourceObject.getLogName() + " face down to battlefield (otherwise face up)?", source, game),
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (controller != null && card != null) {
+            return controller.moveCards(card, Zone.BATTLEFIELD, source, game, false,
+                    controller.chooseUse(Outcome.Detriment, "Return " + card.getLogName() + " face down to battlefield (otherwise face up)?", source, game),
                     false, null);
         }
         return false;

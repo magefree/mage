@@ -39,7 +39,7 @@ public final class WildernessHypnotist extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

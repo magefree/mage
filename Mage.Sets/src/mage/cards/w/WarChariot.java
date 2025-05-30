@@ -25,7 +25,7 @@ public final class WarChariot extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {3}, {tap}: Target creature gains trample until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(TrampleAbility.getInstance(),
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(TrampleAbility.getInstance(),
             Duration.EndOfTurn), new ManaCostsImpl<>("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

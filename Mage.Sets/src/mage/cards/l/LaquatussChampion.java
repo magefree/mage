@@ -1,6 +1,6 @@
 package mage.cards.l;
 
-import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -23,8 +23,10 @@ import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LaquatussChampion extends CardImpl {
@@ -44,7 +46,7 @@ public final class LaquatussChampion extends CardImpl {
         // When Laquatus's Champion leaves the battlefield, that player gains 6 life.
         this.addAbility(new LaquatussChampionLeavesBattlefieldTriggeredAbility());
         // {B}: Regenerate Laquatus's Champion.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private LaquatussChampion(final LaquatussChampion card) {
@@ -68,8 +70,8 @@ class LaquatussChampionEntersBattlefieldTriggeredAbility extends EntersBattlefie
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (super.activate(game, allowedIdentifiers, noMana)) {
             Player player = game.getPlayer(getFirstTarget());
             if (player != null) {
                 String key = CardUtil.getCardZoneString("targetPlayer", getSourceId(), game);

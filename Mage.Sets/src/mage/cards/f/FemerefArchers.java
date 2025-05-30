@@ -36,7 +36,7 @@ public final class FemerefArchers extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(4), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

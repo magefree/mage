@@ -34,7 +34,7 @@ public final class DeathTrooper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Trooper creatures you control have deathtouch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
 
     }
 

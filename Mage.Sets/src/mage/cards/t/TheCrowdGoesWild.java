@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import mage.abilities.Ability;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.AssistAbility;
@@ -12,9 +11,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -39,8 +37,8 @@ public final class TheCrowdGoesWild extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                 .setText("Support X <i>(Put a +1/+1 counter on each of up to X target creatures.)</i><br>")
         );
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(TheCrowdGoesWildAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
         // Each creature with a +1/+1 counter on it gains trample until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
@@ -53,15 +51,5 @@ public final class TheCrowdGoesWild extends CardImpl {
     @Override
     public TheCrowdGoesWild copy() {
         return new TheCrowdGoesWild(this);
-    }
-}
-
-enum TheCrowdGoesWildAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(0, ability.getManaCostsToPay().getX()));
     }
 }

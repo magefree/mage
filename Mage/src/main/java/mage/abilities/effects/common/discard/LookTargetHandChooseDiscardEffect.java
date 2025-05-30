@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -21,25 +22,28 @@ public class LookTargetHandChooseDiscardEffect extends OneShotEffect {
 
     private final boolean upTo;
     private final DynamicValue numberToDiscard;
+    private final FilterCard filter;
 
     public LookTargetHandChooseDiscardEffect() {
         this(false, 1);
     }
 
     public LookTargetHandChooseDiscardEffect(boolean upTo, int numberToDiscard) {
-        this(upTo, StaticValue.get(numberToDiscard));
+        this(upTo, StaticValue.get(numberToDiscard), numberToDiscard == 1 ? StaticFilters.FILTER_CARD : StaticFilters.FILTER_CARD_CARDS);
     }
 
-    public LookTargetHandChooseDiscardEffect(boolean upTo, DynamicValue numberToDiscard) {
+    public LookTargetHandChooseDiscardEffect(boolean upTo, DynamicValue numberToDiscard, FilterCard filter) {
         super(Outcome.Discard);
         this.upTo = upTo;
         this.numberToDiscard = numberToDiscard;
+        this.filter = filter;
     }
 
     protected LookTargetHandChooseDiscardEffect(final LookTargetHandChooseDiscardEffect effect) {
         super(effect);
         this.upTo = effect.upTo;
         this.numberToDiscard = effect.numberToDiscard;
+        this.filter = effect.filter;
     }
 
     @Override
@@ -56,8 +60,11 @@ public class LookTargetHandChooseDiscardEffect extends OneShotEffect {
             }
             return true;
         }
-        TargetCard target = new TargetCardInHand(upTo ? 0 : num, num, num > 1 ? StaticFilters.FILTER_CARD_CARDS : StaticFilters.FILTER_CARD);
+        TargetCard target = new TargetCardInHand(upTo ? 0 : num, num, filter);
         if (controller.choose(Outcome.Discard, player.getHand(), target, source, game)) {
+            // TODO: must fizzle discard effect on not full choice
+            // - tests: affected (allow to choose and discard 1 instead 2)
+            // - real game: need to check
             player.discard(new CardsImpl(target.getTargets()), false, source, game);
         }
         return true;

@@ -34,9 +34,9 @@ public final class VoidstoneGargoyle extends CardImpl {
         // As Voidstone Gargoyle enters the battlefield, name a nonland card.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
         // The named card can't be cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidstoneGargoyleReplacementEffect1()));
+        this.addAbility(new SimpleStaticAbility(new VoidstoneGargoyleReplacementEffect1()));
         // Activated abilities of sources with the chosen name can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidstoneGargoyleRuleModifyingEffect2()));
+        this.addAbility(new SimpleStaticAbility(new VoidstoneGargoyleRuleModifyingEffect2()));
     }
 
     private VoidstoneGargoyle(final VoidstoneGargoyle card) {

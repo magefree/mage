@@ -41,7 +41,7 @@ public final class FencersMagemark extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Creatures you control that are enchanted get +1/+1 and have first strike.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.WhileOnBattlefield, filter, false));
+        ability = new SimpleStaticAbility(new BoostAllEffect(1,1, Duration.WhileOnBattlefield, filter, false));
         Effect effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(),Duration.WhileOnBattlefield,filter, " and have first strike");
         ability.addEffect(effect);
         this.addAbility(ability);

@@ -42,7 +42,7 @@ public final class MysticVeil extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private MysticVeil(final MysticVeil card) {

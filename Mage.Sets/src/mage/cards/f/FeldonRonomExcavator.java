@@ -92,7 +92,7 @@ class FeldonRonomExcavatorEffect extends OneShotEffect {
                 card = game.getCard(target.getFirstTarget());
         }
         if (card != null) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.UntilEndOfYourNextTurn, false);
         }
         return true;
     }

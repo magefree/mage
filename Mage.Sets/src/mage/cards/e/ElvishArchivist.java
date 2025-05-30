@@ -30,14 +30,14 @@ public final class ElvishArchivist extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT
-        ).setTriggersOnceEachTurn(true)
+        ).setTriggersLimitEachTurn(1)
                 .setTriggerPhrase("Whenever one or more artifacts enter the battlefield under your control, "));
 
         // Whenever one or more enchantments enter the battlefield under your control, draw a card. This ability triggers only once each turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawCardSourceControllerEffect(1),
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ENCHANTMENT
-        ).setTriggersOnceEachTurn(true)
+        ).setTriggersLimitEachTurn(1)
                 .setTriggerPhrase("Whenever one or more enchantments enter the battlefield under your control, "));
     }
 

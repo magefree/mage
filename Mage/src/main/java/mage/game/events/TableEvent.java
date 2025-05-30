@@ -57,7 +57,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 
     public TableEvent(EventType eventType, String message, boolean withTime, boolean withTurnInfo, Game game) {
         super(game);
-        this.game = game;
+        this.game = game; // TODO: potentially bugged and need game copy? See related makeSureCalledOutsideLayersEffects
         this.message = message;
         this.eventType = eventType;
         this.withTime = withTime;

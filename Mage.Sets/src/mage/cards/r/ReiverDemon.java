@@ -44,7 +44,7 @@ public final class ReiverDemon extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter, true), false),
                 CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated."),
+                "When {this} enters, if you cast it from your hand, destroy all nonartifact, nonblack creatures. They can't be regenerated."),
                 new CastFromHandWatcher());
     }
 

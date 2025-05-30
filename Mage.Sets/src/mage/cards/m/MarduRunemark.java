@@ -49,9 +49,9 @@ public final class MarduRunemark extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         // Enchanted creature has first strike as long as you control a white or black permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA),
                 new PermanentsOnTheBattlefieldCondition(filter), "Enchanted creature has first strike as long as you control a white or black permanent")));
     }

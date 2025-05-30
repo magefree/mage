@@ -34,7 +34,7 @@ public final class SagesOfTheAnima extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If you would draw a card, instead reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SagesOfTheAnimaReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new SagesOfTheAnimaReplacementEffect()));
 
     }
 

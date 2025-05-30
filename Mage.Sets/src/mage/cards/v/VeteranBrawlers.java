@@ -39,10 +39,10 @@ public final class VeteranBrawlers extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Veteran Brawlers can't attack if defending player controls an untapped land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfDefenderControlsPermanent(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackIfDefenderControlsPermanent(filter)));
 
         // Veteran Brawlers can't block if you control an untapped land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VeteranBrawlersCantBlockEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new VeteranBrawlersCantBlockEffect(filter)));
     }
 
     private VeteranBrawlers(final VeteranBrawlers card) {

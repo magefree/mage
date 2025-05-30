@@ -1,25 +1,15 @@
 
 package mage.cards.u;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
@@ -27,8 +17,13 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -90,12 +85,7 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
             return false;
         }
 
-        int cmc = 0;
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof PayVariableLoyaltyCost) {
-                cmc = ((PayVariableLoyaltyCost) cost).getAmount();
-            }
-        }
+        int cmc = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         FilterPermanent filter = new FilterPermanent("permanent with mana value X or less that's one or more colors");
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, cmc + 1));

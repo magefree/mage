@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
@@ -29,11 +29,10 @@ import java.util.UUID;
 public final class KembaKhaEnduring extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.CAT, "Cat");
-    private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.EQUIPMENT);
-    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("equipped creatures");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("equipped creatures");
 
     static {
-        filter3.add(EquippedPredicate.instance);
+        filter2.add(EquippedPredicate.instance);
     }
 
     public KembaKhaEnduring(UUID ownerId, CardSetInfo setInfo) {
@@ -45,16 +44,16 @@ public final class KembaKhaEnduring extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Kemba, Kha Enduring or another Cat enters the battlefield under your control, attach up to one target Equipment you control to that creature.
+        // Whenever Kemba, Kha Enduring or another Cat you control enters, attach up to one target Equipment you control to that creature.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new KembaKhaEnduringEffect(), filter, false, true
         );
-        ability.addTarget(new TargetPermanent(0, 1, filter2));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
 
         // Equipped creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                1, 1, Duration.WhileOnBattlefield, filter3
+                1, 1, Duration.WhileOnBattlefield, filter2
         )));
 
         // {3}{W}{W}: Create a 2/2 white Cat creature token.

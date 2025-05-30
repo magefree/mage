@@ -2,7 +2,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,7 +20,7 @@ public final class BottomlessPit extends CardImpl {
 
 
         // At the beginning of each player's upkeep, that player discards a card at random.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1, true), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new DiscardTargetEffect(1, true), false));
     }
 
     private BottomlessPit(final BottomlessPit card) {

@@ -28,7 +28,7 @@ public final class SkarrganPitSkulk extends CardImpl {
 
         this.addAbility(new BloodthirstAbility(1));
         // Creatures with power less than Skarrgan Pit-Skulk's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
     }
 
     private SkarrganPitSkulk(final SkarrganPitSkulk card) {

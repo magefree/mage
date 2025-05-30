@@ -37,7 +37,7 @@ public final class Buoyancy extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private Buoyancy(final Buoyancy card) {

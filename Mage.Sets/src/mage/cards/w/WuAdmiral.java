@@ -31,7 +31,7 @@ public final class WuAdmiral extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Wu Admiral gets +1/+1 as long as an opponent controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
             new OpponentControlsPermanentCondition(filter),
             "{this} gets +1/+1 as long as an opponent controls an Island")));

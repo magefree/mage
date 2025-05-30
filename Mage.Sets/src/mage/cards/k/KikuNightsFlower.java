@@ -38,7 +38,6 @@ public final class KikuNightsFlower extends CardImpl {
         // {2}{B}{B}, {T}: Target creature deals damage to itself equal to its power.
         Ability ability;
         ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new KikuNightsFlowerEffect(), 
                 new ManaCostsImpl<>("{2}{B}{B}")
         );
@@ -83,4 +82,3 @@ class KikuNightsFlowerEffect extends OneShotEffect {
         return false;
     }
 }
-

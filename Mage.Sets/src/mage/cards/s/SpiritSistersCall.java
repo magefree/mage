@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousEffect;
@@ -26,6 +26,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class SpiritSistersCall extends CardImpl {
         // At the beginning of your end step, choose target permanent card in your graveyard.
         // You may sacrifice a permanent that shares a card type with the chosen card.
         // If you do, return the chosen card from your graveyard to the battlefield and it gains "If this permanent would leave the battlefield, exile it instead of putting it anywhere else."
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new SpiritSistersCallDoIfEffect(), false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new SpiritSistersCallDoIfEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
@@ -106,13 +107,12 @@ class SpiritSistersCallReturnToBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        UUID targetId = source.getFirstTarget();
-        Card card = game.getCard(targetId);
-        if (controller == null || card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
+        Card card = game.getCard(source.getFirstTarget());
+        if (controller == null || card == null || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(targetId);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             ContinuousEffect effect = new GainAbilityTargetEffect(
                     new SimpleStaticAbility(new LeaveBattlefieldExileSourceReplacementEffect("this permanent")),

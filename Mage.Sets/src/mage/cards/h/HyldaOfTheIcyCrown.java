@@ -37,21 +37,21 @@ public final class HyldaOfTheIcyCrown extends CardImpl {
 
         // Whenever you tap an untapped creature an opponent controls, you may pay {1}. When you do, choose one --
         // * Create a 4/4 white and blue Elemental creature token.
-        ReflexiveTriggeredAbility delayed = new ReflexiveTriggeredAbility(
+        ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
                 new CreateTokenEffect(new Elemental44WUToken()), false
         );
         // * Put a +1/+1 counter on each creature you control.
-        delayed.addMode(new Mode(new AddCountersAllEffect(
+        reflexive.addMode(new Mode(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
         )));
-        
+
         // * Scry 2, then draw a card.
         Mode mode = new Mode(new ScryEffect(2, false));
         mode.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
-        delayed.addMode(mode);
+        reflexive.addMode(mode);
 
         this.addAbility(new TapUntappedPermanentTriggeredAbility(
-                new DoWhenCostPaid(delayed, new GenericManaCost(1), "Pay {1}?"),
+                new DoWhenCostPaid(reflexive, new GenericManaCost(1), "Pay {1}?"),
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
         ));
     }

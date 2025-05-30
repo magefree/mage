@@ -1,9 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -18,8 +15,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class RaziasPurification extends CardImpl {
@@ -63,7 +63,7 @@ class RaziasPurificationEffect extends OneShotEffect {
 
             if (player != null && target1.canChoose(player.getId(), source, game)) {
                 int chosenPermanents = 0;
-                while (player.canRespond() && !target1.isChosen() && target1.canChoose(player.getId(), source, game) && chosenPermanents < 3) {
+                while (player.canRespond() && !target1.isChosen(game) && target1.canChoose(player.getId(), source, game) && chosenPermanents < 3) {
                     player.chooseTarget(Outcome.Benefit, target1, source, game);
                     for (UUID targetId : target1.getTargets()) {
                         Permanent p = game.getPermanent(targetId);

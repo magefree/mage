@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class GateToTheAether extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // At the beginning of each player's upkeep, that player reveals the top card of their library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GateToTheAetherEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new GateToTheAetherEffect(), false));
     }
 
     private GateToTheAether(final GateToTheAether card) {

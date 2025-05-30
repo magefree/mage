@@ -44,7 +44,7 @@ public final class AnaraWolvidFamiliar extends CardImpl {
                 new GainAbilityControlledEffect(
                         IndestructibleAbility.getInstance(),
                         Duration.WhileOnBattlefield, filter
-                ), MyTurnCondition.instance, "as long as it's your turn, " +
+                ), MyTurnCondition.instance, "during your turn, " +
                 "commanders you control have indestructible"
         )));
 

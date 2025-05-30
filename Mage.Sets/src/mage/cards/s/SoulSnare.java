@@ -25,7 +25,7 @@ public final class SoulSnare extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
         // {W}, Sacrifice Soul Snare: Exile target creature that's attacking you or a planeswalker you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new ExileTargetEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterCreatureAttackingYou(true)));

@@ -42,7 +42,7 @@ public final class Heroism extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Sacrifice a white creature: For each attacking red creature, prevent all combat damage that would be dealt by that creature this turn unless its controller pays {2}{R}.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HeroismEffect(), new SacrificeTargetCost(filter)));
+        this.addAbility(new SimpleActivatedAbility(new HeroismEffect(), new SacrificeTargetCost(filter)));
     }
 
     private Heroism(final Heroism card) {
@@ -84,7 +84,7 @@ class HeroismEffect extends OneShotEffect {
             Player player = game.getPlayer(game.getActivePlayerId());
             Cost cost = new ManaCostsImpl<>("{2}{R}");
             List<Permanent> permanentsToPrevent = new ArrayList<>();
-            for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game)) {
                 cost.clearPaid();
                 String message = "Pay " + cost.getText() + "? If you don't, " + permanent.getLogName() + "'s combat damage will be prevented this turn.";
                 if (player != null) {

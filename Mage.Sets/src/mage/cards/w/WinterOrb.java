@@ -27,7 +27,7 @@ public final class WinterOrb extends CardImpl {
 
         // As long as Winter Orb is untapped, players can't untap more than one land during their untap steps.
         // Players can't untap more than one land during their untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WinterOrbEffect()));
+        this.addAbility(new SimpleStaticAbility(new WinterOrbEffect()));
 
     }
 
@@ -47,7 +47,7 @@ class WinterOrbEffect extends RestrictionUntapNotMoreThanEffect {
 
     public WinterOrbEffect() {
         super(Duration.WhileOnBattlefield, 1, filter);
-        staticText = "As long as Winter Orb is untapped, players can't untap more than one land during their untap steps";
+        staticText = "As long as {this} is untapped, players can't untap more than one land during their untap steps";
     }
 
     private WinterOrbEffect(final WinterOrbEffect effect) {

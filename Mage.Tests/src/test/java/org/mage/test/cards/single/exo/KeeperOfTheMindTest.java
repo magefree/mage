@@ -23,7 +23,7 @@ public class KeeperOfTheMindTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}, {T}: Choose target opponent ");
 
-        // setStrictChooseMode(true); // targetting is weird due to targetAdjuster.
+        setStrictChooseMode(false); // targetting is weird due to targetAdjuster.
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -38,7 +38,7 @@ public class KeeperOfTheMindTest extends CardTestPlayerBase {
 
         activateAbility(2, PhaseStep.UPKEEP, playerA, "{U}, {T}: Choose target opponent ");
 
-        // setStrictChooseMode(true); // targetting is weird due to targetAdjuster.
+        setStrictChooseMode(false); // targetting is weird due to targetAdjuster.
         setStopAt(2, PhaseStep.DRAW);
         execute();
 
@@ -69,7 +69,7 @@ public class KeeperOfTheMindTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}, {T}: Choose target opponent ");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}, {T}: Choose target opponent ");
 
-        // setStrictChooseMode(true); // targetting is weird due to targetAdjuster.
+        setStrictChooseMode(false); // targetting is weird due to targetAdjuster.
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

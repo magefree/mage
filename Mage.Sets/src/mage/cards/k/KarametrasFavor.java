@@ -46,7 +46,7 @@ public final class KarametrasFavor extends CardImpl {
         // Enchanted creature has "{T}: Add one mana of any color."
         Effect effect = new GainAbilityAttachedEffect(new AnyColorManaAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature has \"{T}: Add one mana of any color.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

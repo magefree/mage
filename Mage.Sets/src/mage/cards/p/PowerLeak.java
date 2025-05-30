@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -38,7 +38,9 @@ public final class PowerLeak extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of the upkeep of enchanted enchantment's controller, that player may pay any amount of mana. Power Leak deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PowerLeakEffect(), TargetController.CONTROLLER_ATTACHED_TO, false, true, "At the beginning of the upkeep of enchanted enchantment's controller, "));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new PowerLeakEffect(),
+                false
+        ).setTriggerPhrase("At the beginning of the upkeep of enchanted enchantment's controller, "));
     }
 
     private PowerLeak(final PowerLeak card) {
@@ -78,7 +80,7 @@ class PowerLeakEffect extends OneShotEffect {
         String message = "Pay {X} to prevent X damage from " + permanent.getLogName() + "?";
         int xValue = 0;
         if (player.chooseUse(Outcome.Neutral, message, source, game)) {
-            xValue = player.announceXMana(0, Integer.MAX_VALUE, "Choose the amount of mana to pay", game, source);
+            xValue = player.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay to prevent damage)", game, source, true);
             cost.add(new GenericManaCost(xValue));
             if (cost.pay(source, game, source, player.getId(), false, null)) {
                 game.informPlayers(player.getLogName() + " paid {" + xValue + "} for " + permanent.getLogName());

@@ -23,13 +23,13 @@ public final class ViashinoSkeleton extends CardImpl {
 
     public ViashinoSkeleton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability);
     }

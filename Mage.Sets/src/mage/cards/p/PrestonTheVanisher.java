@@ -47,7 +47,7 @@ public final class PrestonTheVanisher extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        // Whenever another nontoken creature enters the battlefield under your control,
+        // Whenever another nontoken creature you control enters,
         // if it wasn’t cast, create a token that’s a copy of that creature, except it’s
         // a 0/1 white Illusion.
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
@@ -59,7 +59,7 @@ public final class PrestonTheVanisher extends CardImpl {
         this.addAbility(new EntersBattlefieldCastTriggeredAbility(Zone.BATTLEFIELD, effect, triggerFilter,
                 false, SetTargetPointer.PERMANENT, false));
         // {1}{W}, Sacrifice five Illusions: Exile target nonland permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(),
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(),
                 new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new SacrificeTargetCost(5, activeCostFilter));
         ability.addTarget(new TargetNonlandPermanent());

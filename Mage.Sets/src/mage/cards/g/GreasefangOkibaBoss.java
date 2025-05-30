@@ -3,7 +3,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class GreasefangOkibaBoss extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of combat on your turn, return target Vehicle card from your graveyard to the battlefield. It gains haste. Return it your hand at beginning of the next end step.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new GreasefangOkibaBossEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new GreasefangOkibaBossEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
@@ -83,7 +84,7 @@ class GreasefangOkibaBossEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
             hasteEffect.setTargetPointer(new FixedTarget(permanent, game));

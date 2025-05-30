@@ -29,7 +29,7 @@ public final class VampireWarlord extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice another creature: Regenerate Vampire Warlord.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
 
     }

@@ -29,7 +29,7 @@ public final class LightOfDay extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // Black creatures can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
 
     }
 

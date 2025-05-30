@@ -125,7 +125,6 @@ class AirtightAlibiReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
                 .map(Permanent::getAttachedTo)
                 .map(event.getTargetId()::equals)
                 .orElse(false);

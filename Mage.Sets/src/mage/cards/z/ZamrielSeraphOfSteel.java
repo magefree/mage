@@ -47,7 +47,7 @@ public final class ZamrielSeraphOfSteel extends CardImpl {
                 new GainAbilityControlledEffect(
                         IndestructibleAbility.getInstance(),
                         Duration.WhileOnBattlefield, filter
-                ), MyTurnCondition.instance, "as long as it's your turn, " +
+                ), MyTurnCondition.instance, "during your turn, " +
                 "equipped creatures you control have indestructible"
         )).addHint(MyTurnHint.instance));
     }

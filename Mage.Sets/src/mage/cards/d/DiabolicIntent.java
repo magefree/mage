@@ -21,7 +21,7 @@ public final class DiabolicIntent extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // As an additional cost to cast Diabolic Intent, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Search your library for a card and put that card into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true));

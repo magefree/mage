@@ -20,7 +20,7 @@ public final class SphereOfReason extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // If a blue source would deal damage to you, prevent 2 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageByColorEffect(ObjectColor.BLUE, 2)));
+        this.addAbility(new SimpleStaticAbility(new PreventDamageByColorEffect(ObjectColor.BLUE, 2)));
     }
 
     private SphereOfReason(final SphereOfReason card) {

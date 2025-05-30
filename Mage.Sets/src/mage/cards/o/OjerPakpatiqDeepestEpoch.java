@@ -143,16 +143,13 @@ class OjerPakpatiqDeepestEpochTrigger extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (!(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (controller == null || card == null) {
             return false;
         }
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        game.setEnterWithCounters(sourceObject.getId(), new Counters().addCounter(CounterType.TIME.createInstance(3)));
-        controller.moveCards((Card) sourceObject, Zone.BATTLEFIELD, source, game, true, false, true, null);
+        game.setEnterWithCounters(card.getId(), new Counters().addCounter(CounterType.TIME.createInstance(3)));
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
         return true;
     }
 }

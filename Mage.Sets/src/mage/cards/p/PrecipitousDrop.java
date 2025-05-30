@@ -8,6 +8,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +39,8 @@ public final class PrecipitousDrop extends CardImpl {
         this.addAbility(ability);
 
         // When Precipitous Drop enters the battlefield, venture into the dungeon.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect())
+                .addHint(CurrentDungeonHint.instance));
 
         // Enchanted creature gets -2/-2. It gets -5/-5 instead as long as you've completed a dungeon.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

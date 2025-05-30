@@ -13,8 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -30,7 +30,7 @@ import java.util.UUID;
 public final class SaradocMasterOfBuckland extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("nontoken creature with power 2 or less");
+            = new FilterControlledCreaturePermanent("nontoken creature you control with power 2 or less");
     private static final FilterControlledPermanent filter2
             = new FilterControlledPermanent(SubType.HALFLING, "other untapped Halflings you control");
 
@@ -50,9 +50,9 @@ public final class SaradocMasterOfBuckland extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever Saradoc, Master of Buckland or another nontoken creature with power 2 or less enters the battlefield under your control, create a 1/1 white Halfling creature token.
+        // Whenever Saradoc, Master of Buckland or another nontoken creature with power 2 or less you control enters, create a 1/1 white Halfling creature token.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new CreateTokenEffect(new HalflingToken()), filter, false, true
+                new CreateTokenEffect(new HalflingToken()), filter, false, false
         ));
 
         // Tap two other untapped Halflings you control: Saradoc gets +2/+0 and gains lifelink until end of turn.

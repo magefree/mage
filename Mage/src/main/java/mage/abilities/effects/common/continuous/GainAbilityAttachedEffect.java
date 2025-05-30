@@ -77,7 +77,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSetAtInit(source)) {
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
@@ -89,7 +89,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent;
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
                 discard();

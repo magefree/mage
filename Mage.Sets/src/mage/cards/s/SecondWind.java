@@ -34,10 +34,10 @@ public final class SecondWind extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
         
         // {tap}: Tap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapEnchantedEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new TapEnchantedEffect(), new TapSourceCost()));
         
         // {tap}: Untap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapAttachedEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new UntapAttachedEffect(), new TapSourceCost()));
     }
 
     private SecondWind(final SecondWind card) {

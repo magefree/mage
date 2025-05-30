@@ -108,7 +108,7 @@ class DeadMansChestEffect extends OneShotEffect {
 class DeadMansChestCastFromExileEffect extends AsThoughEffectImpl {
 
     DeadMansChestCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast nonland cards from among them as long as they remain exiled";
     }
 

@@ -19,36 +19,47 @@ public class AddCardApiTest extends CardTestPlayerBase {
         List<String> info;
 
         info = SystemUtil.parseSetAndCardNameCommand("");
-        Assert.assertEquals(2, info.size());
-        Assert.assertEquals("", info.get(0));
-        Assert.assertEquals("", info.get(1));
+        Assert.assertEquals(info.toString(), 2, info.size());
+        Assert.assertEquals(info.toString(), "", info.get(0));
+        Assert.assertEquals(info.toString(), "", info.get(1));
 
         info = SystemUtil.parseSetAndCardNameCommand("single name");
-        Assert.assertEquals(2, info.size());
-        Assert.assertEquals("", info.get(0));
-        Assert.assertEquals("single name", info.get(1));
+        Assert.assertEquals(info.toString(), 2, info.size());
+        Assert.assertEquals(info.toString(), "", info.get(0));
+        Assert.assertEquals(info.toString(), "single name", info.get(1));
 
         info = SystemUtil.parseSetAndCardNameCommand("SET-name");
-        Assert.assertEquals(2, info.size());
-        Assert.assertEquals("SET", info.get(0));
-        Assert.assertEquals("name", info.get(1));
+        Assert.assertEquals(info.toString(), 2, info.size());
+        Assert.assertEquals(info.toString(), "SET", info.get(0));
+        Assert.assertEquals(info.toString(), "name", info.get(1));
 
         // only upper case set codes can be used
         info = SystemUtil.parseSetAndCardNameCommand("non-set-code-name");
-        Assert.assertEquals(2, info.size());
-        Assert.assertEquals("", info.get(0));
-        Assert.assertEquals("non-set-code-name", info.get(1));
+        Assert.assertEquals(info.toString(), 2, info.size());
+        Assert.assertEquals(info.toString(), "", info.get(0));
+        Assert.assertEquals(info.toString(), "non-set-code-name", info.get(1));
 
         info = SystemUtil.parseSetAndCardNameCommand("SET-card-name");
-        Assert.assertEquals(2, info.size());
-        Assert.assertEquals("SET", info.get(0));
-        Assert.assertEquals("card-name", info.get(1));
+        Assert.assertEquals(info.toString(), 2, info.size());
+        Assert.assertEquals(info.toString(), "SET", info.get(0));
+        Assert.assertEquals(info.toString(), "card-name", info.get(1));
 
         // must find first symbols before delimeter, e.g. TOO
         info = SystemUtil.parseSetAndCardNameCommand("TOO-LONG-SET-card-name");
-        Assert.assertEquals(2, info.size());
-        Assert.assertEquals("TOO", info.get(0));
-        Assert.assertEquals("LONG-SET-card-name", info.get(1));
+        Assert.assertEquals(info.toString(), 2, info.size());
+        Assert.assertEquals(info.toString(), "TOO", info.get(0));
+        Assert.assertEquals(info.toString(), "LONG-SET-card-name", info.get(1));
+
+        // short cards names like ED-E, Lonesome Eyebot (set code must be x3 length)
+        info = SystemUtil.parseSetAndCardNameCommand("ED-E, Lonesome Eyebot");
+        Assert.assertEquals(info.toString(), 2, info.size());
+        Assert.assertEquals(info.toString(), "", info.get(0));
+        Assert.assertEquals(info.toString(), "ED-E, Lonesome Eyebot", info.get(1));
+        //
+        info = SystemUtil.parseSetAndCardNameCommand("XLN-ED-E, Lonesome Eyebot");
+        Assert.assertEquals(info.toString(), 2, info.size());
+        Assert.assertEquals(info.toString(), "XLN", info.get(0));
+        Assert.assertEquals(info.toString(), "ED-E, Lonesome Eyebot", info.get(1));
     }
 
     @Test

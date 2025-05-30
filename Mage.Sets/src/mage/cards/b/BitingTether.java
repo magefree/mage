@@ -3,7 +3,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
@@ -35,10 +35,10 @@ public final class BitingTether extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
         // At the beginning of your upkeep, put a -1/-1 counter on enchanted creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(CounterType.M1M1.createInstance(), "enchanted creature"), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(CounterType.M1M1.createInstance(), "enchanted creature")));
 
     }
 

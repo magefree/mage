@@ -1,9 +1,8 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -21,8 +20,9 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TemporalDistortion extends CardImpl {
@@ -44,10 +44,11 @@ public final class TemporalDistortion extends CardImpl {
         this.addAbility(new BecomesTappedTriggeredAbility(effect, false, filter, true));
 
         // Permanents with hourglass counters on them don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter2)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter2)
+                .setText("each permanent with an hourglass counter on it doesn't untap during its controller's untap step")));
 
         // At the beginning of each player's upkeep, remove all hourglass counters from permanents that player controls.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TemporalDistortionRemovalEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new TemporalDistortionRemovalEffect(), false));
     }
 
     private TemporalDistortion(final TemporalDistortion card) {
@@ -74,7 +75,7 @@ class TemporalDistortionRemovalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(game.getActivePlayerId())) {
-            permanent.removeCounters(CounterType.HOURGLASS.createInstance(permanent.getCounters(game).getCount(CounterType.HOURGLASS)), source, game);
+            permanent.removeAllCounters(CounterType.HOURGLASS.getName(), source, game);
         }
         return true;
     }

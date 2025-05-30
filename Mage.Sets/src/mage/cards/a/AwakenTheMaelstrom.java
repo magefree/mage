@@ -91,7 +91,7 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
             return false;
         }
         makeToken(player, game, source);
-        game.getState().processAction(game);
+        game.processAction();
         distributeCounters(player, game, source);
         return true;
     }
@@ -115,8 +115,6 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
             return;
         }
         TargetPermanentAmount target = new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURE);
-        target.setMinNumberOfTargets(1);
-        target.setMaxNumberOfTargets(3);
         target.withNotTarget(true);
         target.withChooseHint("to distribute counters");
         target.chooseTarget(outcome, player.getId(), source, game);

@@ -39,7 +39,7 @@ public final class DiscipleOfTheRing extends CardImpl {
 
         // {1}, Exile an instant or sorcery card from your graveyard:
         // Choose one - Counter target noncreature spell unless its controller pay {2};
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new CounterUnlessPaysEffect(new GenericManaCost(2)), new GenericManaCost(1));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(1, new FilterInstantOrSorceryCard("an instant or sorcery card from your graveyard"))));
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         

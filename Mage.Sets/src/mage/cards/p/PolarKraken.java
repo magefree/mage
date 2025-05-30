@@ -32,7 +32,7 @@ public final class PolarKraken extends CardImpl {
         // Polar Kraken enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // Cumulative upkeep-Sacrifice a land.
-        this.addAbility(new CumulativeUpkeepAbility(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
+        this.addAbility(new CumulativeUpkeepAbility(new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
     }
 
     private PolarKraken(final PolarKraken card) {

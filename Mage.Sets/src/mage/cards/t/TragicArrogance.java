@@ -1,8 +1,5 @@
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -20,10 +17,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetArtifactPermanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class TragicArrogance extends CardImpl {
@@ -71,7 +70,7 @@ class TragicArroganceEffect extends OneShotEffect {
                 if (player != null) {
                     FilterArtifactPermanent filterArtifactPermanent = new FilterArtifactPermanent("an artifact of " + player.getName());
                     filterArtifactPermanent.add(new ControllerIdPredicate(playerId));
-                    Target target1 = new TargetArtifactPermanent(1, 1, filterArtifactPermanent, true);
+                    Target target1 = new TargetPermanent(1, 1, filterArtifactPermanent, true);
 
                     FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent("a creature of " + player.getName());
                     filterCreaturePermanent.add(new ControllerIdPredicate(playerId));

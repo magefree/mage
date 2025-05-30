@@ -31,7 +31,7 @@ public final class SeaGateLoremaster extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Draw a card for each Ally you control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)),
                 new TapSourceCost()));
     }

@@ -1,14 +1,14 @@
 
 package mage.game.turn;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.util.Copyable;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Game's step
@@ -60,6 +60,12 @@ public abstract class Step implements Serializable, Copyable<Step> {
         stepPart = StepPart.PRE;
     }
 
+    /**
+     * Play priority by all players
+     *
+     * @param activePlayerId starting priority player
+     * @param resuming false to reset passed priority and ask it again
+     */
     public void priority(Game game, UUID activePlayerId, boolean resuming) {
         if (hasPriority) {
             stepPart = StepPart.PRIORITY;
@@ -85,4 +91,7 @@ public abstract class Step implements Serializable, Copyable<Step> {
         return stepPart;
     }
 
+    public String toString() {
+        return type.getStepText();
+    }
 }

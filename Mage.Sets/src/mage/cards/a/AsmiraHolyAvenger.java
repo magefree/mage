@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -37,7 +37,7 @@ public final class AsmiraHolyAvenger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of each end step, put a +1/+1 counter on Asmira, Holy Avenger for each creature put into your graveyard from the battlefield this turn.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new AsmiraHolyAvengerDynamicValue(), true), TargetController.ANY, false), new AsmiraHolyAvengerWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new AsmiraHolyAvengerDynamicValue(), true), false), new AsmiraHolyAvengerWatcher());
     }
 
     private AsmiraHolyAvenger(final AsmiraHolyAvenger card) {

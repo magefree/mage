@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
@@ -14,20 +13,21 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class BoneDancer extends CardImpl {
 
     public BoneDancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Whenever Bone Dancer attacks and isn't blocked, you may put the top creature card of defending player's graveyard onto the battlefield under your control. If you do, Bone Dancer assigns no combat damage this turn.
-        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new BoneDancerEffect(), true, true);
+        Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new BoneDancerEffect(), true, SetTargetPointer.PLAYER);
         ability.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true));
         this.addAbility(ability);
     }

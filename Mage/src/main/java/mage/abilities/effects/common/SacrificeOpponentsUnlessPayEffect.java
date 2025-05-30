@@ -34,7 +34,7 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect {
         super(Outcome.Sacrifice);
         this.cost = cost;
         this.filter = filter;
-        this.staticText = "each opponent sacrifices " + CardUtil.addArticle(filter.getMessage()) + " unless they " + CardUtil.addCostVerb(cost.getText());
+        this.staticText = "each opponent sacrifices " + CardUtil.addArticle(filter.getMessage()) + " of their choice unless they " + CardUtil.addCostVerb(cost.getText());
     }
 
     protected SacrificeOpponentsUnlessPayEffect(final SacrificeOpponentsUnlessPayEffect effect) {

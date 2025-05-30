@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -16,13 +16,12 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -41,8 +40,7 @@ public final class MagusLuceaKane extends CardImpl {
 
         // Spiritual Leader -- At the beginning of combat on your turn, put a +1/+1 counter on target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Spiritual Leader"));
@@ -66,7 +64,9 @@ public final class MagusLuceaKane extends CardImpl {
 class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
 
     MagusLuceaKaneTriggeredAbility() {
-        super(new CopyStackObjectEffect(), Duration.EndOfTurn, true, false);
+        super(new CopyStackObjectEffect("that spell or ability"), Duration.EndOfTurn, true, false);
+        setTriggerPhrase("When you next cast a spell with {X} in its mana cost " +
+                "or activate an ability with {X} in its activation cost this turn, ");
     }
 
     private MagusLuceaKaneTriggeredAbility(final MagusLuceaKaneTriggeredAbility ability) {
@@ -93,9 +93,9 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
         // activated ability
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-            if (stackAbility != null && !(stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl)) {
+            if (stackAbility != null) {
                 if (stackAbility.getManaCostsToPay().containsX()) {
-                    this.getEffects().setValue("stackObject", (StackObject) stackAbility);
+                    getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                     return true;
                 }
             }
@@ -105,16 +105,10 @@ class MagusLuceaKaneTriggeredAbility extends DelayedTriggeredAbility {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getSpellAbility().getManaCostsToPay().containsX()) {
-                this.getEffects().setValue("stackObject", (StackObject) spell);
+                getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 return true;
             }
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When you next cast a spell with {X} in its mana cost or activate an ability with {X} in its "
-                + "activation cost this turn, copy that spell or ability. You may choose new targets for the copy.";
     }
 }

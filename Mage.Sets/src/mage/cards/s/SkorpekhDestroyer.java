@@ -29,7 +29,7 @@ public final class SkorpekhDestroyer extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
 
-        // Hyperphase Threshers -- Whenever an artifact enters the battlefield under your control, Skorpekh Destroyer gains first strike until end of turn.
+        // Hyperphase Threshers -- Whenever an artifact you control enters, Skorpekh Destroyer gains first strike until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
                 , StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN

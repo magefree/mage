@@ -4,14 +4,13 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -36,7 +35,7 @@ public final class WeldfastEngineer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of combat on your turn, target artifact creature you control gets +2/+0 until end of turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }

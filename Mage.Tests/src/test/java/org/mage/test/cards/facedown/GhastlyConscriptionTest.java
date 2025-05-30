@@ -38,7 +38,7 @@ public class GhastlyConscriptionTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         assertGraveyardCount(playerA, 2);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
 
     }
 

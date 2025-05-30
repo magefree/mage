@@ -1,10 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.common.CrewIncreasedPowerAbility;
-import mage.abilities.common.CrewWithToughnessAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.*;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -151,18 +148,18 @@ class CrewCost extends CostImpl {
         }
         Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
-            public String getMessage() {
+            public String getMessage(Game game) {
                 // shows selected power
                 int selectedPower = this.targets.keySet().stream()
                         .map(game::getPermanent)
                         .filter(Objects::nonNull)
-                        .mapToInt(p -> (getCrewPower(p, game)))
+                        .mapToInt(p -> getCrewPower(p, game))
                         .sum();
                 String extraInfo = "(selected power " + selectedPower + " of " + value + ")";
                 if (selectedPower >= value) {
                     extraInfo = HintUtils.prepareText(extraInfo, Color.GREEN);
                 }
-                return super.getMessage() + " " + extraInfo;
+                return super.getMessage(game) + " " + extraInfo;
             }
         };
 
@@ -215,10 +212,12 @@ class CrewCost extends CostImpl {
         return new CrewCost(this);
     }
 
-    private int getCrewPower(Permanent permanent, Game game) {
-        if (permanent.hasAbility(CrewWithToughnessAbility.getInstance(), game)) {
+    private static int getCrewPower(Permanent permanent, Game game) {
+        if (permanent.hasAbility(CrewWithToughnessAbility.getInstance(), game)
+                || permanent.hasAbility(CrewSaddleWithToughnessAbility.getInstance(), game)) {
             return permanent.getToughness().getValue();
-        } else if (permanent.getAbilities(game).containsClass(CrewIncreasedPowerAbility.class)) {
+        } else if (permanent.getAbilities(game).containsClass(CrewIncreasedPowerAbility.class)
+                || permanent.getAbilities(game).containsClass(CrewSaddleIncreasedPowerAbility.class)) {
             return permanent.getPower().getValue() + 2;
         } else {
             return permanent.getPower().getValue();

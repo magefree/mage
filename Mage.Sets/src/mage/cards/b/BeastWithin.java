@@ -1,6 +1,6 @@
 package mage.cards.b;
 
-import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.CreateTokenControllerTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class BeastWithin extends CardImpl {
         // Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetPermanentEffect(new BeastToken()));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new BeastToken()));
     }
 
     private BeastWithin(final BeastWithin card) {

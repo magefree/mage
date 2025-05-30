@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class MoonCircuitHacker extends CardImpl {
 
-    private static final Condition condition = new InvertCondition(SourceEnteredThisTurnCondition.instance);
+    private static final Condition condition = new InvertCondition(SourceEnteredThisTurnCondition.DID);
 
     public MoonCircuitHacker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{U}");
@@ -41,7 +41,7 @@ public final class MoonCircuitHacker extends CardImpl {
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new DiscardControllerEffect(1), condition,
-                "If you do, discard a card unless {this} entered the battlefield this turn"
+                "If you do, discard a card unless {this} entered this turn"
         ));
         this.addAbility(ability);
     }

@@ -51,7 +51,7 @@ public final class TaigamOjutaiMaster extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Instant, sorcery, and Dragon spells you control can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filter, null, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(filter, null, Duration.WhileOnBattlefield)));
 
         // Whenever you cast an instant or sorcery spell from your hand, if Taigam, Ojutai Master attacked this turn, that spell gains rebound.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new TaigamOjutaiMasterTriggeredAbility(),

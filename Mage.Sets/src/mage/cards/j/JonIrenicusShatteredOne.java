@@ -3,7 +3,7 @@ package mage.cards.j;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -50,13 +50,13 @@ public final class JonIrenicusShatteredOne extends CardImpl {
 
         // At the beginning of your end step, target opponent gains control of up to one target creature you control. Put two +1/+1 counters on it and tap it.
         // It's goaded for the rest of the game and it gains “This creature can't be sacrificed.”
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new JonIrenicusShatteredOneEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new JonIrenicusShatteredOneEffect());
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);
 
         // Whenever a creature you own but don't control attacks, you draw a card.
-        this.addAbility(new AttacksAllTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), false, filter, SetTargetPointer.NONE, false));
+        this.addAbility(new AttacksAllTriggeredAbility(new DrawCardSourceControllerEffect(1, true), false, filter, SetTargetPointer.NONE, false));
     }
 
     private JonIrenicusShatteredOne(final JonIrenicusShatteredOne card) {super(card);}
@@ -93,7 +93,7 @@ class JonIrenicusShatteredOneEffect extends OneShotEffect {
         ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfGame, opponent.getId());
         effect.setTargetPointer(new FixedTarget(creature, game));
         game.addEffect(effect, source);
-        game.getState().processAction(game);
+        game.processAction();
         creature.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
         creature.tap(source, game);
         game.addEffect(new GoadTargetEffect()

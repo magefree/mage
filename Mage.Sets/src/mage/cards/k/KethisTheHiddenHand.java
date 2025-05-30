@@ -78,7 +78,7 @@ class KethisTheHiddenHandEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (!this.affectedObjectsSet) {
+        if (!getAffectedObjectsSet()) {
             return;
         }
         Player player = game.getPlayer(source.getControllerId());
@@ -106,13 +106,13 @@ class KethisTheHiddenHandEffect extends ContinuousEffectImpl {
                         .stream()
                         .anyMatch(mor -> mor.refersTo(card, game))
                 ).forEach(card -> {
-            Ability ability = new SimpleStaticAbility(
-                    Zone.GRAVEYARD, new KethisTheHiddenHandGraveyardEffect()
-            );
-            ability.setSourceId(card.getId());
-            ability.setControllerId(card.getOwnerId());
-            game.getState().addOtherAbility(card, ability);
-        });
+                    Ability ability = new SimpleStaticAbility(
+                            Zone.GRAVEYARD, new KethisTheHiddenHandGraveyardEffect()
+                    );
+                    ability.setSourceId(card.getId());
+                    ability.setControllerId(card.getOwnerId());
+                    game.getState().addOtherAbility(card, ability);
+                });
         return true;
     }
 

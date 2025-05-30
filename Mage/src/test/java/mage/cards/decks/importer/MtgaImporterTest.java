@@ -1,6 +1,7 @@
 package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardLists;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -26,8 +27,9 @@ public class MtgaImporterTest {
                 false
         );
 
+        Assert.assertEquals("", errors.toString());
         TestDeckChecker.checker()
-                .addMain("Niv-Mizzet Reborn", 1)
+                .addMain("Niv-Mizzet Reborn", 2)
                 .addMain("Teferi, Time Raveler", 1)
                 .addMain("Dovin's Veto", 1)
                 .addMain("Knight of Autumn", 1)
@@ -35,12 +37,10 @@ public class MtgaImporterTest {
                 .addMain("Forest", 1)
                 .addMain("Teferi, Hero of Dominaria", 1)
 
-                .addSide("Unmoored Ego", 1)
+                .addSide("Unmoored Ego", 3)
                 .addSide("Beacon Bolt", 1)
 
-                .verify(deck, 7, 2);
-
-        assertEquals("", errors.toString());
+                .verify(deck, 8, 4);
     }
 
 }

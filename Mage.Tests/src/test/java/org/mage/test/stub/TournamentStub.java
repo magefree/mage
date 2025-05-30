@@ -1,10 +1,6 @@
 
 package org.mage.test.stub;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.game.draft.Draft;
@@ -16,7 +12,13 @@ import mage.game.tournament.*;
 import mage.players.Player;
 import mage.players.PlayerType;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 /**
+ * Tests only
  *
  * @author Quercitron
  */
@@ -85,8 +87,7 @@ public class TournamentStub implements Tournament {
     }
 
     @Override
-    public boolean updateDeck(UUID playerId, Deck deck) {
-        return true;
+    public void updateDeck(UUID playerId, Deck deck, boolean ignoreMainBasicLands) {
     }
 
     @Override

@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.ruleModifying.LegendRuleDoesntApplyEffect;
@@ -47,7 +46,7 @@ public final class TheMasterMultiplied extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LegendRuleDoesntApplyEffect(filter)));
 
         // Triggered abilities you control can't cause you to sacrifice or exile creature tokens you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheMasterMultipliedEffect()));
+        this.addAbility(new SimpleStaticAbility(new TheMasterMultipliedEffect()));
     }
 
     private TheMasterMultiplied(final TheMasterMultiplied card) {
@@ -109,7 +108,7 @@ class TheMasterMultipliedEffect extends ContinuousRuleModifyingEffectImpl {
 
         return controller != null && permanent != null
                 && filter.match(permanent, source.getControllerId(), source, game)
-                && stackAbility instanceof TriggeredAbility
+                && stackAbility.isTriggeredAbility()
                 && source.getControllerId().equals(eventSourceControllerId);
     }
 }

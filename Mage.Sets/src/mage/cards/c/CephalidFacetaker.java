@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -27,7 +27,7 @@ public final class CephalidFacetaker extends CardImpl {
     public CephalidFacetaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
@@ -37,7 +37,7 @@ public final class CephalidFacetaker extends CardImpl {
 
         // At the beginning of combat on your turn, you may have Cephalid Facetaker become a copy of another target creature until end of turn, except its a 1/4 and has "This creature can't be blocked."
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new CephalidFacetakerEffect(), TargetController.YOU, true
+                new CephalidFacetakerEffect(), true
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);

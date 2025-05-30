@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -16,22 +17,29 @@ import mage.watchers.common.AbilityResolvedWatcher;
 public class IfAbilityHasResolvedXTimesEffect extends OneShotEffect {
 
     private final int resolutionNumber;
-    private final Effect effect;
+    private final Effects effects;
+    private final boolean orMore;
 
     public IfAbilityHasResolvedXTimesEffect(int resolutionNumber, Effect effect) {
         this(effect.getOutcome(), resolutionNumber, effect);
     }
 
-    public IfAbilityHasResolvedXTimesEffect(Outcome outcome, int resolutionNumber, Effect effect) {
+    public IfAbilityHasResolvedXTimesEffect(Outcome outcome, int resolutionNumber, Effect... effects) {
+        this(outcome, resolutionNumber, false, effects);
+    }
+
+    public IfAbilityHasResolvedXTimesEffect(Outcome outcome, int resolutionNumber, boolean orMore, Effect... effects) {
         super(outcome);
         this.resolutionNumber = resolutionNumber;
-        this.effect = effect;
+        this.effects = new Effects(effects);
+        this.orMore = orMore;
     }
 
     private IfAbilityHasResolvedXTimesEffect(final IfAbilityHasResolvedXTimesEffect effect) {
         super(effect);
         this.resolutionNumber = effect.resolutionNumber;
-        this.effect = effect.effect;
+        this.effects = effect.effects.copy();
+        this.orMore = effect.orMore;
     }
 
     @Override
@@ -41,14 +49,20 @@ public class IfAbilityHasResolvedXTimesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (AbilityResolvedWatcher.getResolutionCount(game, source) != resolutionNumber) {
+        int resolutionCount = AbilityResolvedWatcher.getResolutionCount(game, source);
+        if (resolutionCount < resolutionNumber || (!orMore && resolutionCount > resolutionNumber)) {
             return false;
         }
-        if (effect instanceof OneShotEffect) {
-            return effect.apply(game, source);
+        boolean result = false;
+        for (Effect effect : effects) {
+            if (effect instanceof OneShotEffect) {
+                result |= effect.apply(game, source);
+                continue;
+            }
+            game.addEffect((ContinuousEffect) effect, source);
+            result = true;
         }
-        game.addEffect((ContinuousEffect) effect, source);
-        return true;
+        return result;
     }
 
     @Override
@@ -56,7 +70,10 @@ public class IfAbilityHasResolvedXTimesEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
+        if (orMore) {
+            return "otherwise, " + effects.getText(mode);
+        }
         return "if this is the " + CardUtil.numberToOrdinalText(resolutionNumber) +
-                " time this ability has resolved this turn, " + effect.getText(mode);
+                " time this ability has resolved this turn, " + effects.getText(mode);
     }
 }

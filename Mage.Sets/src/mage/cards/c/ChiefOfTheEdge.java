@@ -34,7 +34,7 @@ public final class ChiefOfTheEdge extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other Warrior creatures you control get +1/+0
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
     }
 
     private ChiefOfTheEdge(final ChiefOfTheEdge card) {

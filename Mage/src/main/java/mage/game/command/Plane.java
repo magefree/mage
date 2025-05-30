@@ -65,13 +65,14 @@ public abstract class Plane extends CommandObjectImpl {
         return frameStyle;
     }
 
-    public void setSourceObject() {
+    public void setSourceObjectAndInitImage() {
         this.sourceObject = null;
 
         // choose set code due source
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
             this.setCardNumber("");
             this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());
@@ -265,6 +266,19 @@ public abstract class Plane extends CommandObjectImpl {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
     }
 
     public void discardEffects() {

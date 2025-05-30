@@ -8,12 +8,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DemonFlyingToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.ArrayList;
@@ -71,7 +69,7 @@ class ReignOfThePitEffect extends OneShotEffect {
             if (player != null) {
                 TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
                 if (target.canChoose(player.getId(), source, game)) {
-                    while (!target.isChosen() && player.canRespond()) {
+                    while (!target.isChosen(game) && player.canRespond()) {
                         player.choose(Outcome.Sacrifice, target, source, game);
                     }
                     perms.addAll(target.getTargets());

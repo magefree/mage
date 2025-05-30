@@ -25,7 +25,6 @@ import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -46,7 +45,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private UUID attachedTo = null;
     private final boolean attacking;
     private boolean becomesArtifact;
-    private ObjectColor color;
+    private ObjectColor onlyColor;
+    private ObjectColor extraColor;
     private CounterType counter;
     private final boolean gainsFlying;
     private boolean hasHaste;
@@ -61,7 +61,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final int tokenPower;
     private final int tokenToughness;
     private boolean useLKI = false;
-    private PermanentModifier permanentModifier = null; // TODO: miss copy constructor? Make serializable?
+    private PermanentModifier permanentModifier = null;
 
     // TODO: These constructors are a mess. Copy effects need to be reworked altogether, hopefully clean it up then.
 
@@ -139,7 +139,8 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.attachedTo = effect.attachedTo;
         this.attacking = effect.attacking;
         this.becomesArtifact = effect.becomesArtifact;
-        this.color = effect.color;
+        this.onlyColor = effect.onlyColor;
+        this.extraColor = effect.extraColor;
         this.counter = effect.counter;
         this.gainsFlying = effect.gainsFlying;
         this.hasHaste = effect.hasHaste;
@@ -154,6 +155,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.tokenPower = effect.tokenPower;
         this.tokenToughness = effect.tokenToughness;
         this.useLKI = effect.useLKI;
+        this.permanentModifier = effect.permanentModifier;
     }
 
     @Override
@@ -204,7 +206,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
 
         // create token and modify all attributes permanently (without game usage)
-        Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+        Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefield triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
         if (becomesArtifact) {
             token.addCardType(CardType.ARTIFACT);
@@ -242,8 +244,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
                 token.addSubType(additionalSubType);
             }
         }
-        if (color != null) {
-            token.setColor(color);
+        if (onlyColor != null) {
+            token.setColor(onlyColor);
+        }
+        if (extraColor != null) {
+            token.getColor().addColor(extraColor);
         }
         additionalAbilities.stream().forEach(token::addAbility);
         if (permanentModifier != null) {
@@ -335,7 +340,12 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     }
 
     public CreateTokenCopyTargetEffect setOnlyColor(ObjectColor color) {
-        this.color = color;
+        this.onlyColor = color;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect setExtraColor(ObjectColor extraColor) {
+        this.extraColor = extraColor;
         return this;
     }
 

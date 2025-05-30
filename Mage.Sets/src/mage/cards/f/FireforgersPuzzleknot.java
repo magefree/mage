@@ -30,7 +30,7 @@ public final class FireforgersPuzzleknot extends CardImpl {
         this.addAbility(ability);
 
         // {2}{R}, Sacrifice Fireforger's Puzzleknot: It deals 1 damage to any target.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "It"), new ManaCostsImpl<>("{2}{R}"));
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(1, "It"), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

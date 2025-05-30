@@ -3,6 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.MageObject;
 import mage.MageObjectReference;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -11,7 +12,9 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -44,7 +47,7 @@ public final class AegarTheFreezingFlame extends CardImpl {
     }
 }
 
-class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl {
+class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     AegarTheFreezingFlameTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
@@ -62,17 +65,15 @@ class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
-
-        int excess = dEvent.getEvents()
+        // all events in the batch are always relevant if triggers at all
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (permanent == null || !game.getOpponents(getControllerId()).contains(permanent.getControllerId())) {
+            return false;
+        }
+        if (getFilteredEvents((DamagedBatchForOnePermanentEvent) event, game)
                 .stream()
                 .mapToInt(DamagedEvent::getExcess)
-                .sum();
-
-        boolean controlledByOpponent =
-                game.getOpponents(getControllerId()).contains(game.getControllerId(event.getTargetId()));
-
-        if (excess < 1 || !controlledByOpponent) {
+                .sum() < 1) {
             return false;
         }
         AegarTheFreezingFlameWatcher watcher = game.getState().getWatcher(AegarTheFreezingFlameWatcher.class);
@@ -105,7 +106,6 @@ class AegarTheFreezingFlameWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT) {
             return;
         }
-        DamagedEvent dEvent = (DamagedEvent) event;
         MageObject sourceObject = game.getObject(event.getSourceId());
         if (sourceObject == null) {
             return;

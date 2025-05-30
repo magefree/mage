@@ -28,7 +28,7 @@ public final class MournfulZombie extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability ability = new SimpleActivatedAbility(new GainLifeTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer(1));
         this.addAbility(ability);

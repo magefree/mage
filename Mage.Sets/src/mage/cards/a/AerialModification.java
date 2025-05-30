@@ -1,10 +1,7 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureIfVehicleEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -13,23 +10,19 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class AerialModification extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
-
-    static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()));
-    }
 
     public AerialModification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
@@ -37,22 +30,19 @@ public final class AerialModification extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant creature or Vehicle
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureIfVehicleEffect()));
+        this.addAbility(new SimpleStaticAbility(new BecomesCreatureIfVehicleEffect()));
 
         // Enchanted creature gets +2/+2 and has flying.
-        Effect effect = new BoostEnchantedEffect(2, 2);
-        effect.setText("Enchanted creature gets +2/+2");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
-        effect.setText(" and has flying");
-        ability.addEffect(effect);
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                FlyingAbility.getInstance(), AttachmentType.AURA
+        ).setText(" and has flying"));
         this.addAbility(ability);
     }
 

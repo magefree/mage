@@ -42,7 +42,7 @@ public final class FainTheBroker extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

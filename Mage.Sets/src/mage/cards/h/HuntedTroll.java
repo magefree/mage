@@ -39,7 +39,7 @@ public final class HuntedTroll extends CardImpl {
         ability.addTarget(target);
         this.addAbility(ability);
         // {G}: Regenerate Hunted Troll.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.G)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
     private HuntedTroll(final HuntedTroll card) {

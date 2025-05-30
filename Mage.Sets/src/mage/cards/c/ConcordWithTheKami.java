@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -14,7 +14,6 @@ import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,7 +59,7 @@ public final class ConcordWithTheKami extends CardImpl {
         // At the beginning of your end step, choose one or more —
         // • Put a +1/+1 counter on target creature with a counter on it.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addTarget(new TargetPermanent(counterFilter));
         ability.getModes().setMinModes(1);

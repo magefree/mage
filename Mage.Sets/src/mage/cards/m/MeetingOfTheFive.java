@@ -85,7 +85,7 @@ class MeetingOfTheFiveExileEffect extends OneShotEffect {
 class MeetingOfTheFiveCastEffect extends CanPlayCardControllerEffect {
 
     MeetingOfTheFiveCastEffect(Game game, Card card) {
-        super(game, card.getId(), card.getZoneChangeCounter(game), Duration.EndOfTurn);
+        super(game, card.getId(), card.getZoneChangeCounter(game), true, Duration.EndOfTurn);
     }
 
     private MeetingOfTheFiveCastEffect(final MeetingOfTheFiveCastEffect effect) {

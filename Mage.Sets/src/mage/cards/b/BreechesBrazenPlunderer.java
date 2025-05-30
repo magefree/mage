@@ -2,6 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -10,7 +11,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForPlayersEvent;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,7 +56,7 @@ public final class BreechesBrazenPlunderer extends CardImpl {
     }
 }
 
-class BreechesBrazenPlundererTriggeredAbility extends TriggeredAbilityImpl {
+class BreechesBrazenPlundererTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     BreechesBrazenPlundererTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -71,18 +72,23 @@ class BreechesBrazenPlundererTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(DamagedPlayerEvent event, Game game) {
+        if (!game.getOpponents(getControllerId()).contains(event.getTargetId())) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return permanent != null
+                && permanent.isControlledBy(getControllerId())
+                && permanent.hasSubtype(SubType.PIRATE, game);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Set<UUID> opponents = new HashSet<>();
-        for (DamagedEvent damagedEvent : ((DamagedBatchForPlayersEvent) event).getEvents()) {
-            Permanent permanent = game.getPermanent(damagedEvent.getSourceId());
-            if (permanent == null
-                    || !permanent.isControlledBy(getControllerId())
-                    || !permanent.hasSubtype(SubType.PIRATE, game)
-                    || !game.getOpponents(getControllerId()).contains(damagedEvent.getTargetId())) {
-                continue;
-            }
-            opponents.add(damagedEvent.getTargetId());
-        }
+        getFilteredEvents((DamagedBatchForPlayersEvent) event, game)
+                .stream()
+                .map(GameEvent::getTargetId)
+                .forEach(opponents::add);
         if (opponents.isEmpty()) {
             return false;
         }
@@ -143,7 +149,7 @@ class BreechesBrazenPlundererEffect extends OneShotEffect {
             return false;
         }
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, true);
         }
         return true;
     }

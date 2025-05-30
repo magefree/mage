@@ -40,7 +40,7 @@ public final class PyreOfHeroes extends CardImpl {
                 Zone.BATTLEFIELD, new PyreOfHeroesEffect(), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }
 

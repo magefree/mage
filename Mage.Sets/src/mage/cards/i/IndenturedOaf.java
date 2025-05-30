@@ -31,7 +31,7 @@ public final class IndenturedOaf extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Prevent all damage that Indentured Oaf would deal to red creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndenturedOafPreventEffectEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new IndenturedOafPreventEffectEffect(Duration.WhileOnBattlefield)));
     }
 
     private IndenturedOaf(final IndenturedOaf card) {

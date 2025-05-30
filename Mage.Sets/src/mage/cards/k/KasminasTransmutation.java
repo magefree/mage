@@ -1,6 +1,5 @@
 package mage.cards.k;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -12,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -37,7 +36,7 @@ public final class KasminasTransmutation extends CardImpl {
 
         // Enchanted creature loses all abilities and has base power and toughness 1/1.
         this.addAbility(new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
-                new KasminasTransmutationToken(), "Enchanted creature loses all abilities " +
+                new CreatureToken(1, 1), "Enchanted creature loses all abilities " +
                 "and has base power and toughness 1/1", Duration.WhileOnBattlefield,
                 BecomesCreatureAttachedEffect.LoseType.ABILITIES
         )));
@@ -51,23 +50,4 @@ public final class KasminasTransmutation extends CardImpl {
     public KasminasTransmutation copy() {
         return new KasminasTransmutation(this);
     }
-}
-
-class KasminasTransmutationToken extends TokenImpl {
-
-    KasminasTransmutationToken() {
-        super("", "loses all abilities and has base power and toughness 1/1");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-
-    private KasminasTransmutationToken(final KasminasTransmutationToken token) {
-        super(token);
-    }
-
-    public KasminasTransmutationToken copy() {
-        return new KasminasTransmutationToken(this);
-    }
-
 }

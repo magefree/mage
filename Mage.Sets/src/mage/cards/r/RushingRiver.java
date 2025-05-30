@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -9,10 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.common.TargetNonlandPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
-import mage.target.targetpointer.EachTargetPointer;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -29,10 +26,11 @@ public final class RushingRiver extends CardImpl {
 
         // Return target nonland permanent to its owner's hand. If Rushing River was kicked, return another target nonland permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect()
-                .setTargetPointer(new EachTargetPointer())
                 .setText("Return target nonland permanent to its owner's hand. " +
                         "If this spell was kicked, return another target nonland permanent to its owner's hand"));
-        this.getSpellAbility().setTargetAdjuster(RushingRiverAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
+                new TargetNonlandPermanent(2)));
     }
 
     private RushingRiver(final RushingRiver card) {
@@ -42,17 +40,5 @@ public final class RushingRiver extends CardImpl {
     @Override
     public RushingRiver copy() {
         return new RushingRiver(this);
-    }
-}
-
-enum RushingRiverAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetNonlandPermanent(
-                KickedCondition.ONCE.apply(game, ability) ? 2 : 1
-        ));
     }
 }

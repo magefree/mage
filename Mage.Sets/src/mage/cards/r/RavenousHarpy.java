@@ -35,7 +35,6 @@ public final class RavenousHarpy extends CardImpl {
 
         // {1}, Sacrifice another creature: Put a +1/+1 counter on Ravenous Harpy.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new GenericManaCost(1)
         );

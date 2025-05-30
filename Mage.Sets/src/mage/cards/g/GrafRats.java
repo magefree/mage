@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MeldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -34,7 +33,7 @@ public final class GrafRats extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new MeldEffect(
                         "Midnight Scavengers", "Chittering Host"
-                ), TargetController.YOU, false), condition, "At the beginning " +
+                )), condition, "At the beginning " +
                 "of combat on your turn, if you both own and control {this} and a creature " +
                 "named Midnight Scavengers, exile them, then meld them into Chittering Host."
         ));

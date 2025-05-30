@@ -54,7 +54,7 @@ public final class TalionTheKindlyLord extends CardImpl {
                 .setText("that player loses 2 life"),
                 filter, false, SetTargetPointer.PLAYER
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(1, "you").concatBy("and"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1, true).concatBy("and"));
         this.addAbility(ability);
     }
 
@@ -109,7 +109,7 @@ class TalionTheKindlyLordEffect extends OneShotEffect {
         if (controller == null) {
             return true;
         }
-        int numberChoice = controller.getAmount(1, 10, "Choose a number.", game);
+        int numberChoice = controller.getAmount(1, 10, "Choose a number.", source, game);
         game.getState().setValue("chosenNumber_" + source.getSourceId()
                 + '_' + source.getSourceObjectZoneChangeCounter(), numberChoice);
         Permanent permanent = game.getPermanentEntering(source.getSourceId());

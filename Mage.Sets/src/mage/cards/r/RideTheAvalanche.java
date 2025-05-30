@@ -152,7 +152,7 @@ class RideTheAvalancheTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you cast your next spell this turn, " +
+        return "When you next cast a spell this turn, " +
                 "put X +1/+1 counters on up to one target creature, " +
                 "where X is the mana value of that spell.";
     }

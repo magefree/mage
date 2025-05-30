@@ -2,9 +2,8 @@ package mage.cards.h;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,17 +35,19 @@ public final class HuatliWarriorPoet extends CardImpl {
         this.setStartingLoyalty(3);
 
         // +2: You gain life equal to the greatest power among creatures you control.
-        this.addAbility(new LoyaltyAbility(new GainLifeEffect(
-                GreatestPowerAmongControlledCreaturesValue.instance,
-                "You gain life equal to the greatest power among creatures you control"
-        ), 2));
+        this.addAbility(new LoyaltyAbility(
+                new GainLifeEffect(
+                        GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
+                        "You gain life equal to the greatest power among creatures you control"
+                ), 2
+        ).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // 0: Create a 3/3 green Dinosaur creature token with trample.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DinosaurToken()), 0));
 
         // -X: Huatli, Warrior Poet deals X damage divided as you choose among any number of target creatures. Creatures dealt damage this way can't block this turn.
         Ability ability = new LoyaltyAbility(new HuatliWarriorPoetDamageEffect());
-        ability.addTarget(new TargetCreaturePermanentAmount(GetXLoyaltyValue.instance));
+        ability.addTarget(new TargetCreaturePermanentAmount(GetXValue.instance));
         this.addAbility(ability);
     }
 

@@ -16,6 +16,7 @@ import java.util.UUID;
 public enum TargetController {
 
     ACTIVE,
+    INACTIVE,
     ANY,
     YOU,
     NOT_YOU,
@@ -83,6 +84,10 @@ public enum TargetController {
                     return card.isOwnedBy(input.getSource().getControllerId());
                 case SOURCE_TARGETS:
                     return card.isOwnedBy(input.getSource().getFirstTarget());
+                case ACTIVE:
+                    return card.isOwnedBy(game.getActivePlayerId());
+                case INACTIVE:
+                    return !card.isOwnedBy(game.getActivePlayerId());
                 case MONARCH:
                     return card.isOwnedBy(game.getMonarchId());
                 case ANY:
@@ -126,6 +131,10 @@ public enum TargetController {
                     return player.getId().equals(input.getSource().getControllerId());
                 case SOURCE_TARGETS:
                     return player.getId().equals(input.getSource().getFirstTarget());
+                case ACTIVE:
+                    return game.isActivePlayer(player.getId());
+                case INACTIVE:
+                    return !game.isActivePlayer(player.getId());
                 case MONARCH:
                     return player.getId().equals(game.getMonarchId());
                 default:
@@ -164,6 +173,8 @@ public enum TargetController {
                     return !object.isControlledBy(playerId);
                 case ACTIVE:
                     return object.isControlledBy(game.getActivePlayerId());
+                case INACTIVE:
+                    return !object.isControlledBy(game.getActivePlayerId());
                 case ENCHANTED:
                     Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
                     return permanent != null && input.getObject().isControlledBy(permanent.getAttachedTo());

@@ -29,7 +29,7 @@ public final class MindExtraction extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Target player reveals their hand and discards all cards of each of the sacrificed creature’s colors.
         this.getSpellAbility().addEffect(new MindExtractionEffect());

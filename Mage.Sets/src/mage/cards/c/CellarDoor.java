@@ -28,7 +28,7 @@ public final class CellarDoor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {3}, {tap}: Target player puts the bottom card of their library into their graveyard. If it's a creature card, you create a 2/2 black Zombie creature token.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CellarDoorEffect(), new GenericManaCost(3));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new CellarDoorEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -64,7 +64,7 @@ class CellarDoorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null && player.getLibrary().hasCards()) {
-            Card card = player.getLibrary().removeFromBottom(game);
+            Card card = player.getLibrary().getFromBottom(game);
             if (card != null) {
                 player.moveCards(card, Zone.GRAVEYARD, source, game);
                 if (card.isCreature(game)) {

@@ -28,7 +28,7 @@ public final class HardbristleBandit extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // Whenever you commit a crime, untap Hardbristle Bandit. This ability triggers only once each turn.
-        this.addAbility(new CommittedCrimeTriggeredAbility(new UntapSourceEffect()).setTriggersOnceEachTurn(true));
+        this.addAbility(new CommittedCrimeTriggeredAbility(new UntapSourceEffect()).setTriggersLimitEachTurn(1));
     }
 
     private HardbristleBandit(final HardbristleBandit card) {

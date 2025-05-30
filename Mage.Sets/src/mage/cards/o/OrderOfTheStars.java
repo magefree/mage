@@ -35,7 +35,7 @@ public final class OrderOfTheStars extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // Order of the Stars has protection from the chosen color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new ProtectionChosenColorSourceEffect()));
     }
 
     private OrderOfTheStars(final OrderOfTheStars card) {

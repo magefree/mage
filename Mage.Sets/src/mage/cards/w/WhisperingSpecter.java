@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -12,20 +11,21 @@ import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class WhisperingSpecter extends CardImpl {
 
     public WhisperingSpecter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.SPECTER);
 
@@ -67,7 +67,7 @@ class WhisperingSpecterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            int value = player.getCounters().getCount(CounterType.POISON);
+            int value = player.getCountersCount(CounterType.POISON);
             if (value > 0) {
                 player.discard(value, false, false, source, game);
                 return true;

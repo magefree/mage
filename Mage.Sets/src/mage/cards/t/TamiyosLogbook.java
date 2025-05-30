@@ -61,7 +61,7 @@ enum TamiyosLogbookAdjuster implements CostAdjuster {
     );
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         int count = game.getBattlefield().count(filter, ability.getControllerId(), ability, game);
         CardUtil.reduceCost(ability, count);
     }

@@ -21,7 +21,7 @@ public final class Thud extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Thud deals damage equal to the sacrificed creature's power to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(SacrificeCostCreaturesPower.instance)

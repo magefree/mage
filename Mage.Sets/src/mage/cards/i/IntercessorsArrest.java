@@ -89,7 +89,7 @@ class IntercessorsArrestEffect extends ContinuousRuleModifyingEffectImpl {
             case ACTIVATE_ABILITY:
                 if (enchantment.isAttachedTo(event.getSourceId())) {
                     Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                    return ability.isPresent() && ability.get().getAbilityType() != AbilityType.MANA;
+                    return ability.isPresent() && ability.get().isNonManaActivatedAbility();
                 }
         }
         return false;

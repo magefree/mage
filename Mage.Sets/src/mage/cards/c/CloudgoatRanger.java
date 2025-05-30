@@ -50,7 +50,7 @@ public final class CloudgoatRanger extends CardImpl {
         // Tap three untapped Kithkin you control: Cloudgoat Ranger gets +2/+0 and gains flying until end of turn.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+0");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
+        Ability ability = new SimpleActivatedAbility(effect, new TapTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
         ability.addEffect(effect);

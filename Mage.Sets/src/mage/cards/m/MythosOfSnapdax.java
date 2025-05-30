@@ -8,7 +8,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -18,6 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -92,8 +92,7 @@ class MythosOfSnapdaxEffect extends OneShotEffect {
         Set<UUID> toKeep = new HashSet();
         for (Player player : playerList) {
             for (CardType cardType : cardTypes) {
-                String message = cardType.toString().equals("Artifact") ? "an " : "a ";
-                message += cardType.toString().toLowerCase(Locale.ENGLISH);
+                String message = CardUtil.addArticle(cardType.toString());
                 message += (conditionMet && player != controller) ? " controlled by " + player.getName() : " you control";
                 FilterPermanent filter = new FilterNonlandPermanent(message);
                 filter.add(cardType.getPredicate());

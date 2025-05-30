@@ -52,7 +52,7 @@ public final class BINGO extends CardImpl {
 
         // B-I-N-G-O gets +9/+9 for each set of three numbers in a row with chip counters on them.
         BingoCount count = new BingoCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
     private BINGO(final BINGO card) {

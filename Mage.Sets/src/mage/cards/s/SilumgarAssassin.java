@@ -42,7 +42,7 @@ public final class SilumgarAssassin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Creatures with power greater than Silumgar Assassin's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithGreaterPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithGreaterPowerEffect()));
 
         // Megamorph {2}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{B}"), true));

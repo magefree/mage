@@ -16,12 +16,17 @@ public class Vintage extends Constructed {
                 setCodes.add(set.getCode());
             }
         }
+
+        // All attractions & sticker cards are banned. (to add if/when implemented)
+        // this also includes the mtgo replacement "Name Sticker" Goblin.
+        banned.add("\"Name Sticker\" Goblin");
+
         restricted.add("Ancestral Recall");
         restricted.add("Balance");
         restricted.add("Black Lotus");
         restricted.add("Brainstorm");
-        restricted.add("Channel");
         restricted.add("Chalice of the Void");
+        restricted.add("Channel");
         restricted.add("Demonic Consultation");
         restricted.add("Demonic Tutor");
         restricted.add("Dig Through Time");
@@ -51,7 +56,6 @@ public class Vintage extends Constructed {
         restricted.add("Mystical Tutor");
         restricted.add("Narset, Parter of Veils");
         restricted.add("Necropotence");
-        restricted.add("Ponder");
         restricted.add("Sol Ring");
         restricted.add("Strip Mine");
         restricted.add("Thorn of Amethyst");
@@ -62,7 +66,9 @@ public class Vintage extends Constructed {
         restricted.add("Tolarian Academy");
         restricted.add("Treasure Cruise");
         restricted.add("Trinisphere");
+        restricted.add("Urza's Saga");
         restricted.add("Vampiric Tutor");
+        restricted.add("Vexing Bauble");
         restricted.add("Wheel of Fortune");
         restricted.add("Windfall");
         restricted.add("Yawgmoth's Will");

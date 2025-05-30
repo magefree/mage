@@ -25,7 +25,6 @@ public final class TibaltRakishInstigator extends CardImpl {
 
         // Your opponents can't gain life.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantGainLifeAllEffect(
                         Duration.WhileOnBattlefield,
                         TargetController.OPPONENT

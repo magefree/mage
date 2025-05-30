@@ -68,7 +68,7 @@ class InvasionOfKaldheimEffect extends OneShotEffect {
         player.moveCards(cards, Zone.EXILED, source, game);
         player.drawCards(cards.size(), source, game);
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, false);
+            CardUtil.makeCardPlayable(game, source, card, false, Duration.UntilEndOfYourNextTurn, false);
         }
         return true;
     }

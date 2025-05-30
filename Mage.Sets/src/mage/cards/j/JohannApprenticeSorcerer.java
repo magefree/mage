@@ -58,7 +58,7 @@ public final class JohannApprenticeSorcerer extends CardImpl {
 class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
 
     JohannApprenticeSorcererPlayTopEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may cast an instant or sorcery spell from the top of your library";
     }
 
@@ -106,7 +106,7 @@ class JohannApprenticeSorcererPlayTopEffect extends AsThoughEffectImpl {
         if (affectedAbility instanceof SpellAbility) {
             SpellAbility spellAbility = (SpellAbility) affectedAbility;
             if (spellAbility.getManaCosts().isEmpty()
-                    || !spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)) {
+                    || !spellAbility.spellCanBeActivatedNow(playerId, game).contains(MageIdentifier.Default)) {
                 return false;
             }
             Card cardToCheck = spellAbility.getCharacteristics(game);

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.Pronoun;
+import mage.constants.Pronoun;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.SourceDealtDamageCondition;
@@ -50,7 +50,7 @@ public final class ChandraFireOfKaladesh extends CardImpl {
 
         // {T}: Chandra, Fire of Kaladesh deals 1 damage to target player. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.        
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.SHE), new SourceDealtDamageCondition(3)));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability, new DamageDoneWatcher());

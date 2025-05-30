@@ -70,17 +70,6 @@ public class ArrowBuilder {
     }
 
     /**
-     * Not synchronized method for arrows panel.
-     * Doesn't create JPanel in case the panel doesn't exist.
-     * Works faster.
-     *
-     * @return
-     */
-    /*public JPanel getPanelRef() {
-        return arrowsManagerPanel;
-    }*/
-
-    /**
      * Adds new arrow.
      *
      * @param startX

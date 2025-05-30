@@ -163,7 +163,7 @@ class AminatouUltimateEffect extends OneShotEffect {
                 }
                 FilterNonlandPermanent nextPlayerNonlandPermanentsFilter = new FilterNonlandPermanent();
                 nextPlayerNonlandPermanentsFilter.add(new ControllerIdPredicate(nextPlayer));
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(nextPlayerNonlandPermanentsFilter, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(nextPlayerNonlandPermanentsFilter, source.getControllerId(), source, game)) {
                     if (permanent.getId().equals(source.getSourceId())) {
                         continue;
                     }

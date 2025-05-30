@@ -10,12 +10,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -31,7 +26,7 @@ public final class TitaniasSong extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // Each noncreature artifact loses all abilities and becomes an artifact creature with power and toughness each equal to its converted mana cost. If Titania's Song leaves the battlefield, this effect continues until end of turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TitaniasSongEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new TitaniasSongEffect(Duration.WhileOnBattlefield)));
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new TitaniasSongEffect(Duration.EndOfTurn), false));
     }
 
@@ -56,6 +51,7 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
     public TitaniasSongEffect(Duration duration) {
         super(duration, Outcome.BecomeCreature);
         staticText = "Each noncreature artifact loses its abilities and is an artifact creature with power and toughness each equal to its mana value";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private TitaniasSongEffect(final TitaniasSongEffect effect) {
@@ -73,7 +69,7 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
             case TypeChangingEffects_4:
                 if (sublayer == SubLayer.NA) {
                     affectedObjectList.clear();
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                         if (permanent != null) {
                             affectedObjectList.add(new MageObjectReference(permanent, game));
                             permanent.addCardType(game, CardType.CREATURE);

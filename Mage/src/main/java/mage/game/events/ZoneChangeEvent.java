@@ -14,8 +14,8 @@ import mage.game.permanent.Permanent;
 public class ZoneChangeEvent extends GameEvent {
 
     private Zone fromZone;
-    private Zone toZone;
-    private Zone originalToZone;
+    private Zone toZone; // real toZone after apply some replacements effects
+    private Zone originalToZone; // original toZone before any replacement effects
     private Permanent target;
     private Ability source; // link to source ability, can be null in rare situations
 
@@ -96,8 +96,6 @@ public class ZoneChangeEvent extends GameEvent {
 
     /**
      * Source ability of the event, can be null in rare cases
-     *
-     * @return
      */
     public Ability getSource() {
         return this.source;
@@ -105,6 +103,9 @@ public class ZoneChangeEvent extends GameEvent {
 
     @Override
     public String toString() {
-        return super.toString() + ", from " + getFromZone() + " to " + getToZone();
+        return super.toString()
+                + ", from " + getFromZone() + " to " + getToZone()
+                + ", " + (this.target == null ? "no target" : "target " + this.target)
+                + ", " + (this.source == null ? "no source" : "source " + this.source);
     }
 }

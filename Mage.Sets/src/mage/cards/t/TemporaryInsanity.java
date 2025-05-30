@@ -19,13 +19,12 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author FenrisulfrX
  */
 public final class TemporaryInsanity extends CardImpl {
 
     public TemporaryInsanity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // Untap target creature with power less than the number of cards in your graveyard
         this.getSpellAbility().addTarget(new TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard());
@@ -78,9 +77,9 @@ class TargetCreatureWithPowerLessThanNumberOfCardsInYourGraveyard extends Target
     @Override
     public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
         MageObject targetSource = game.getObject(source);
-        if(targetSource != null) {
+        if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     if (permanent.getPower().getValue() < game.getPlayer(sourceControllerId).getGraveyard().size()) {
                         return true;
                     }

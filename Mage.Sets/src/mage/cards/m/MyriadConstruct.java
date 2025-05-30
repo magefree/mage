@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -40,7 +40,6 @@ public final class MyriadConstruct extends CardImpl {
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
-    private static final DynamicValue xValue2 = new SourcePermanentPowerCount(false);
 
     public MyriadConstruct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -52,10 +51,10 @@ public final class MyriadConstruct extends CardImpl {
         // Kicker {3}
         this.addAbility(new KickerAbility("{3}"));
 
-        // If Myriad Construct was kicked, it enters the battlefield with a +1/+1 counter on it for each nonbasic land your opponents control.
+        // If Myriad Construct was kicked, it enters with a +1/+1 counter on it for each nonbasic land your opponents control.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), xValue, false),
-                KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield " +
+                KickedCondition.ONCE, "If {this} was kicked, it enters " +
                 "with a +1/+1 counter on it for each nonbasic land your opponents control.", ""
         ));
 
@@ -63,7 +62,7 @@ public final class MyriadConstruct extends CardImpl {
         Ability ability = new BecomesTargetSourceTriggeredAbility(
                 new SacrificeSourceEffect().setText("sacrifice it"), StaticFilters.FILTER_SPELL_A
         );
-        ability.addEffect(new CreateTokenEffect(new ConstructToken(), xValue2)
+        ability.addEffect(new CreateTokenEffect(new ConstructToken(), SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("and create a number of 1/1 colorless Construct artifact creature tokens equal to its power"));
         this.addAbility(ability);
     }

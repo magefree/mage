@@ -43,7 +43,7 @@ public final class NovijenSages extends CardImpl {
         this.addAbility(new GraftAbility(this, 4));
 
         // {1}, Remove two +1/+1 counters from among creatures you control: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability.addCost(new RemoveCounterCost(new TargetPermanent(1, 2, filter, true), CounterType.P1P1, 2));
         this.addAbility(ability);
     }

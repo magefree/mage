@@ -29,7 +29,7 @@ public final class UrzasTome extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {3}, {T}: Draw a card. Then discard a card unless you exile a historic card from your graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasTomeEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new UrzasTomeEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
