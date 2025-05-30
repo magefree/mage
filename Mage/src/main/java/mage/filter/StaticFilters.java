@@ -97,6 +97,13 @@ public final class StaticFilters {
         FILTER_CARD_CREATURE_A.setLockedFilter(true);
     }
 
+    // for checks on cards to be cast as "a creature spell", this is a FilterCard, but the text is about spell
+    public static final FilterCreatureCard FILTER_CARD_A_CREATURE_SPELL = new FilterCreatureCard("a creature spell");
+
+    static {
+        FILTER_CARD_A_CREATURE_SPELL.setLockedFilter(true);
+    }
+
     public static final FilterCreatureCard FILTER_CARD_CREATURE_YOUR_HAND = new FilterCreatureCard("a creature card from your hand");
 
     static {

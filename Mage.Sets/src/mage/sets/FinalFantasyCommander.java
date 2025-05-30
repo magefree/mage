@@ -49,6 +49,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Avalanche of Sector 7", 53, Rarity.RARE, mage.cards.a.AvalancheOfSector7.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baleful Strix", 318, Rarity.RARE, mage.cards.b.BalefulStrix.class));
         cards.add(new SetCardInfo("Bane of Progress", 299, Rarity.RARE, mage.cards.b.BaneOfProgress.class));
+        cards.add(new SetCardInfo("Banon, the Returners' Leader", 78, Rarity.RARE, mage.cards.b.BanonTheReturnersLeader.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Banon, the Returners' Leader", 165, Rarity.RARE, mage.cards.b.BanonTheReturnersLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barret, Avalanche Leader", 166, Rarity.RARE, mage.cards.b.BarretAvalancheLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barret, Avalanche Leader", 79, Rarity.RARE, mage.cards.b.BarretAvalancheLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bastion Protector", 233, Rarity.RARE, mage.cards.b.BastionProtector.class));
@@ -94,6 +96,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 202, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 210, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloud, Ex-SOLDIER", 221, Rarity.MYTHIC, mage.cards.c.CloudExSOLDIER.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coin of Fate", 15, Rarity.RARE, mage.cards.c.CoinOfFate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coin of Fate", 104, Rarity.RARE, mage.cards.c.CoinOfFate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Collective Effort", 237, Rarity.RARE, mage.cards.c.CollectiveEffort.class));
         cards.add(new SetCardInfo("Colossus Hammer", 338, Rarity.UNCOMMON, mage.cards.c.ColossusHammer.class));
         cards.add(new SetCardInfo("Combustible Gearhulk", 292, Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class));
@@ -125,6 +129,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonskull Summit", 387, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 388, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Duskshell Crawler", 301, Rarity.COMMON, mage.cards.d.DuskshellCrawler.class));
+        cards.add(new SetCardInfo("Edgar, Master Machinist", 169, Rarity.RARE, mage.cards.e.EdgarMasterMachinist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Edgar, Master Machinist", 80, Rarity.RARE, mage.cards.e.EdgarMasterMachinist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elena, Turk Recruit", 133, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elena, Turk Recruit", 18, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emet-Selch of the Third Seat", 170, Rarity.RARE, mage.cards.e.EmetSelchOfTheThirdSeat.class, NON_FULL_USE_VARIOUS));
@@ -438,5 +444,10 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Yuna's Decision", 74, Rarity.RARE, mage.cards.y.YunasDecision.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna's Whistle", 126, Rarity.RARE, mage.cards.y.YunasWhistle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna's Whistle", 75, Rarity.RARE, mage.cards.y.YunasWhistle.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 192, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 208, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 216, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 227, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yuna, Grand Summoner", 8, Rarity.MYTHIC, mage.cards.y.YunaGrandSummoner.class, NON_FULL_USE_VARIOUS));
     }
 }
