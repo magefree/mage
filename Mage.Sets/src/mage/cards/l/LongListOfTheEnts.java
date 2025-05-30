@@ -54,7 +54,7 @@ public final class LongListOfTheEnts extends CardImpl {
     }
 
     static String getKey(Game game, Ability source) {
-        return "EntList_" + source.getSourceId() + "_" + (CardUtil.getActualSourceObjectZoneChangeCounter(game, source));
+        return "EntList_" + source.getSourceId() + "_" + CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
     }
 
 }
@@ -109,7 +109,7 @@ class LongListOfTheEntsEffect extends OneShotEffect {
             return false;
         }
 
-        Object existingEntList = game.getState().getValue(LongListOfTheEnts.getKey(game, source, 0));
+        Object existingEntList = game.getState().getValue(LongListOfTheEnts.getKey(game, source));
         Set<SubType> newEntList;
         if (existingEntList == null) {
             newEntList = new LinkedHashSet<>();
@@ -129,7 +129,7 @@ class LongListOfTheEntsEffect extends OneShotEffect {
         SubType subType = SubType.byDescription(choice.getChoiceKey());
         game.informPlayers(player.getLogName() + " notes the creature type " + subType);
         newEntList.add(subType);
-        game.getState().setValue(LongListOfTheEnts.getKey(game, source, offset), newEntList);
+        game.getState().setValue(LongListOfTheEnts.getKey(game, source), newEntList);
         FilterSpell filter = new FilterCreatureSpell("a creature spell of that type");
         filter.add(subType.getPredicate());
         game.addDelayedTriggeredAbility(new AddCounterNextSpellDelayedTriggeredAbility(filter), source);
