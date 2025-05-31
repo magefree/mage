@@ -5,10 +5,13 @@ import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.FilterSource;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.TargetSource;
 import mage.util.CardUtil;
 
@@ -20,12 +23,12 @@ import java.util.UUID;
  */
 public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImpl {
 
-    protected final TargetSource targetSource;
+    protected final Target target;
     private final boolean toYou;
     private final ApplierOnPrevention onPrevention;
 
     public interface ApplierOnPrevention extends Serializable {
-        boolean apply(PreventionEffectData data, TargetSource targetsource, GameEvent event, Ability source, Game game);
+        boolean apply(PreventionEffectData data, Target target, GameEvent event, Ability source, Game game);
 
         String getText();
     }
@@ -35,7 +38,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
             return "You gain life equal to the damage prevented this way";
         }
 
-        public boolean apply(PreventionEffectData data, TargetSource targetSource, GameEvent event, Ability source, Game game) {
+        public boolean apply(PreventionEffectData data, Target target, GameEvent event, Ability source, Game game) {
             if (data == null || data.getPreventedDamage() <= 0) {
                 return false;
             }
@@ -53,21 +56,33 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
         this(duration, toYou, new FilterSource());
     }
 
-    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterSource filter) {
-        this(duration, toYou, filter, false, null);
+    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterSource filterSource) {
+        this(duration, toYou, filterSource, false, null);
     }
 
     public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, ApplierOnPrevention onPrevention) {
         this(duration, toYou, new FilterSource(), onPrevention);
     }
 
-    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterSource filter, ApplierOnPrevention onPrevention) {
-        this(duration, toYou, filter, false, onPrevention);
+    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterSource filterSource, ApplierOnPrevention onPrevention) {
+        this(duration, toYou, filterSource, false, onPrevention);
     }
 
-    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterSource filter, boolean onlyCombat, ApplierOnPrevention onPrevention) {
+    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterSource filterSource, boolean onlyCombat, ApplierOnPrevention onPrevention) {
+        this(duration, toYou, new TargetSource(filterSource), onlyCombat, onPrevention);
+    }
+
+    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterPermanent filterPermanent) {
+        this(duration, toYou, filterPermanent, false, null);
+    }
+
+    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterPermanent filterPermanent, boolean onlyCombat, ApplierOnPrevention onPrevention) {
+        this(duration, toYou, new TargetPermanent(filterPermanent), onlyCombat, onPrevention);
+    }
+
+    private PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, Target target, boolean onlyCombat, ApplierOnPrevention onPrevention) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
-        this.targetSource = new TargetSource(filter);
+        this.target = target;
         this.toYou = toYou;
         this.onPrevention = onPrevention;
         this.staticText = setText();
@@ -75,7 +90,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
 
     protected PreventNextDamageFromChosenSourceEffect(final PreventNextDamageFromChosenSourceEffect effect) {
         super(effect);
-        this.targetSource = effect.targetSource.copy();
+        this.target = effect.target.copy();
         this.toYou = effect.toYou;
         this.onPrevention = effect.onPrevention;
     }
@@ -89,8 +104,8 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
     public void init(Ability source, Game game) {
         super.init(source, game);
         UUID controllerId = source.getControllerId();
-        if (this.targetSource.canChoose(controllerId, source, game)) {
-            this.targetSource.choose(Outcome.PreventDamage, controllerId, source.getSourceId(), source, game);
+        if (this.target.canChoose(controllerId, source, game)) {
+            this.target.choose(Outcome.PreventDamage, controllerId, source.getSourceId(), source, game);
         }
     }
 
@@ -99,7 +114,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
         PreventionEffectData data = preventDamageAction(event, source, game);
         discard();
         if (onPrevention != null) {
-            onPrevention.apply(data, targetSource, event, source, game);
+            onPrevention.apply(data, target, event, source, game);
         }
         return false;
     }
@@ -108,12 +123,12 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
     public boolean applies(GameEvent event, Ability source, Game game) {
         return super.applies(event, source, game)
                 && (!toYou || event.getTargetId().equals(source.getControllerId()))
-                && event.getSourceId().equals(targetSource.getFirstTarget());
+                && target.getTargets().contains(event.getSourceId());
     }
 
     private String setText() {
         StringBuilder sb = new StringBuilder("The next time ")
-                .append(CardUtil.addArticle(targetSource.getFilter().getMessage()));
+                .append(CardUtil.addArticle(target.getFilter().getMessage()));
         sb.append(" of your choice would deal damage");
         if (toYou) {
             sb.append(" to you");
