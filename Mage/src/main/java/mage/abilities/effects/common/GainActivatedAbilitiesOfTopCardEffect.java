@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
@@ -11,6 +12,10 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl {
 
@@ -28,28 +33,41 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
     }
 
     @Override
-    public GainActivatedAbilitiesOfTopCardEffect copy() {
-        return new GainActivatedAbilitiesOfTopCardEffect(this);
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Card card = controller.getLibrary().getFromTop(game);
+        if (!filter.match(card, game)) {
+            return false;
+        }
+        List<Ability> activatedAbilities = new ArrayList<>();
+        for (Ability ability : card.getAbilities()) {
+            if (ability.isActivatedAbility()) {
+                activatedAbilities.add(ability);
+            }
+        }
+        for (MageObject mageObject : objects) {
+            if (!(mageObject instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) mageObject;
+            for (Ability ability : activatedAbilities) {
+                permanent.addAbility(ability, source.getSourceId(), game, true);
+            }
+        }
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Card card = player.getLibrary().getFromTop(game);
-            if (filter.match(card, game)) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    for (Ability ability : card.getAbilities(game)) {
-                        if (ability.isActivatedAbility()) {
-                            permanent.addAbility(ability, source.getSourceId(), game, true);
-                        }
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }
 
+    @Override
+    public GainActivatedAbilitiesOfTopCardEffect copy() {
+        return new GainActivatedAbilitiesOfTopCardEffect(this);
+    }
 }

@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.MageObject;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -13,6 +14,9 @@ import mage.game.permanent.Permanent;
 
 
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Quercitron
@@ -31,7 +35,7 @@ public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
     }
 
     public CantBeBlockedByMoreThanOneAllEffect(int amount, FilterPermanent filter, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
         staticText = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked by more than ")
@@ -50,24 +54,30 @@ public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case RulesEffects:
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    perm.setMaxBlockedBy(amount);
-                }
-                break;
-        }
-        return true;
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
         return false;
     }
 
     @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
+            permanent.setMaxBlocks(amount);
+        }
+        return true;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        List<MageObject> objects = new ArrayList<>();
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            if (perm != null) {
+                objects.add(perm);
+            }
+        }
+        return objects;
     }
 }
