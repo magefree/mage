@@ -6,8 +6,10 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.*;
@@ -62,6 +64,14 @@ public final class LockeTreasureHunter extends CardImpl {
     @Override
     public LockeTreasureHunter copy() {
         return new LockeTreasureHunter(this);
+    }
+
+    public static Ability makeTestAbility() {
+        Ability ability = new SimpleActivatedAbility(
+                new LockeTreasureHunterEffect(), new GenericManaCost(0)
+        ).setIdentifier(MageIdentifier.LockeTreasureHunterWatcher);
+        ability.addWatcher(new LockeTreasureHunterWatcher());
+        return ability;
     }
 }
 
