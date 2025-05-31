@@ -63,7 +63,7 @@ public class MageBase {
             connect("player", "localhost", 17171);
             UUID roomId = server.getMainRoomId();
 
-            MatchOptions options = new MatchOptions("1", "Two Player Duel");
+            MatchOptions options = new MatchOptions("1", "Two Player Duel", false);
             options.getPlayerTypes().add("Human");
             options.getPlayerTypes().add("Computer - default");
             options.setDeckType("Limited");
