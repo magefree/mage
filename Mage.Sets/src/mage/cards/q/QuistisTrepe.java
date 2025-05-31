@@ -36,7 +36,7 @@ public final class QuistisTrepe extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new MayCastTargetCardEffect(CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, true)
         );
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability.withFlavorWord("Blue Magic"));
     }
 

@@ -294,16 +294,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder();
-        String prefix;
-        if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = "";
-        }
-        sb.append(prefix);
-
         sb.append(triggerPhrase == null ? "" : triggerPhrase);
 
         if (interveningIfCondition != null) {
@@ -376,7 +366,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" Do this only once each turn.");
             }
         }
-        return sb.toString();
+        return addRulePrefix(sb.toString());
     }
 
     private static boolean startsWithVerb(String ruleLow) {

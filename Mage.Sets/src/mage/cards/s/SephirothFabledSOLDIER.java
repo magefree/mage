@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetOpponent;
 import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
@@ -47,6 +48,7 @@ public final class SephirothFabledSOLDIER extends CardImpl {
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(4, new TransformSourceEffect()));
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new AbilityResolvedWatcher());
     }
 

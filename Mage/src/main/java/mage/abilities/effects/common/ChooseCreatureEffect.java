@@ -29,7 +29,7 @@ public class ChooseCreatureEffect extends OneShotEffect {
     public ChooseCreatureEffect(FilterPermanent filter, boolean useOffset) {
         super(Outcome.Benefit);
         this.filter = filter;
-        this.staticText = "choose " + filter.getMessage();
+        this.staticText = "choose " + CardUtil.addArticle(filter.getMessage());
         this.useOffset = useOffset;
     }
 

@@ -38,7 +38,8 @@ public final class CliveIfritsDominant extends CardImpl {
 
         // When Clive enters, you may discard your hand, then draw cards equal to your devotion to red.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardHandControllerEffect(), true);
-        ability.addEffect(new DrawCardSourceControllerEffect(DevotionCount.R).concatBy(", then"));
+        ability.addEffect(new DrawCardSourceControllerEffect(DevotionCount.R)
+                .setText(", then draw cards equal to your devotion to red"));
         this.addAbility(ability.addHint(DevotionCount.R.getHint()));
 
         // {4}{R}{R}, {T}: Exile Clive, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
