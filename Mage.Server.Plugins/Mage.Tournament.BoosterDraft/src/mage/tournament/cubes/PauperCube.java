@@ -3,14 +3,18 @@ package mage.tournament.cubes;
 import mage.game.draft.DraftCube;
 
 /**
+ * Formerly maintained by Adam Styborski and now curated by a committee and the community surrounding it.
+ * <p>
+ * Data sources:
+ * - <a href="https://cubecobra.com/cube/overview/thepaupercube">actual</a>
+ *
  * @author fireshoes
  */
-public class AdamStyborskisPauperCube extends DraftCube {
+public class PauperCube extends DraftCube {
 
-    public AdamStyborskisPauperCube() {
-        super("Adam Styborkski's Pauper Cube"); // https://docs.google.com/spreadsheets/d/12iQhC4bHqFW7hEWxPBjyC8yBDehFZ0_4DkqzyA8EL3o/edit#gid=0
+    public PauperCube() {
+        super("The Pauper Cube", "", 2025, 5, 7);
 
-        // last updated with Dominaria 5/1/18
         cubeCards.add(new CardIdentity("Academy Journeymage", ""));
         cubeCards.add(new CardIdentity("Act of Treason", ""));
         cubeCards.add(new CardIdentity("Adventuring Gear", ""));

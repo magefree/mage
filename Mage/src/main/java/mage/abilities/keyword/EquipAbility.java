@@ -109,6 +109,6 @@ public class EquipAbility extends ActivatedAbilityImpl {
         if (showAbilityHint) {
             sb.append(reminderText);
         }
-        return sb.toString();
+        return sb.toString().replace("..", ".");
     }
 }

@@ -222,6 +222,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lethal Scheme", 277, Rarity.RARE, mage.cards.l.LethalScheme.class));
         cards.add(new SetCardInfo("Lightning Greaves", 349, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lingering Souls", 245, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
+        cards.add(new SetCardInfo("Locke, Treasure Hunter", 177, Rarity.RARE, mage.cards.l.LockeTreasureHunter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Locke, Treasure Hunter", 87, Rarity.RARE, mage.cards.l.LockeTreasureHunter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord Jyscal Guado", 137, Rarity.RARE, mage.cards.l.LordJyscalGuado.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord Jyscal Guado", 23, Rarity.RARE, mage.cards.l.LordJyscalGuado.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lulu, Stern Guardian", 143, Rarity.RARE, mage.cards.l.LuluSternGuardian.class, NON_FULL_USE_VARIOUS));
