@@ -15,8 +15,9 @@ import mage.game.permanent.Permanent;
 
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author Quercitron
@@ -54,11 +55,6 @@ public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
         for (MageObject object : objects) {
             if (!(object instanceof Permanent)) {
@@ -72,12 +68,10 @@ public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
 
     @Override
     public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        List<MageObject> objects = new ArrayList<>();
-        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            if (perm != null) {
-                objects.add(perm);
-            }
-        }
-        return objects;
+        return game.getBattlefield()
+                .getActivePermanents(filter, source.getControllerId(), source, game)
+                .stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 }

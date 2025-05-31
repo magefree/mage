@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.MageObject;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -12,6 +13,9 @@ import mage.game.Game;
 
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Quercitron
@@ -29,7 +33,7 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
     }
 
     public CantBeBlockedByMoreThanOneSourceEffect(int amount, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         staticText = "{this} can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount > 1 ? "s" : "")
                 + (duration == Duration.EndOfTurn ? " each combat this turn" : "");
@@ -46,24 +50,20 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            if (layer == Layer.RulesEffects) {
-                perm.setMaxBlockedBy(amount);
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
             }
-            return true;
+            Permanent permanent = (Permanent) object;
+            permanent.setMaxBlockedBy(amount);
         }
-        return false;
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }
 }

@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.combat;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -11,6 +12,11 @@ import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -44,6 +50,22 @@ public class GoadAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        if (objects.isEmpty()) {
+            discard();
+            return false;
+        }
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
+            permanent.addGoadingPlayer(source.getControllerId());
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet()) {
@@ -57,23 +79,24 @@ public class GoadAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        ArrayList<MageObject> objects = new ArrayList<>();
         if (getAffectedObjectsSet()) {
-            this.affectedObjectList.removeIf(mor -> !mor.zoneCounterIsCurrent(game)
-                    || mor.getPermanent(game) == null);
-            if (affectedObjectList.isEmpty()) {
-                discard();
-                return false;
+            affectedObjectList.removeIf(mor -> !mor.zoneCounterIsCurrent(game));
+            for (MageObjectReference mor : affectedObjectList) {
+                Permanent permanent = mor.getPermanent(game);
+                if (permanent != null) {
+                    objects.add(permanent);
+                }
             }
-            for (MageObjectReference mor : this.affectedObjectList) {
-                mor.getPermanent(game).addGoadingPlayer(source.getControllerId());
-            }
-            return true;
+        } else {
+            objects.addAll(game.getBattlefield()
+                    .getActivePermanents(filter, source.getControllerId(), source, game)
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList()));
         }
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            creature.addGoadingPlayer(source.getControllerId());
-        }
-        return true;
+        return objects;
     }
 
     @Override

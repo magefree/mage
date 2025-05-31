@@ -13,8 +13,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author emerald000
@@ -85,12 +86,10 @@ public class CanBlockAdditionalCreatureAllEffect extends ContinuousEffectImpl {
 
     @Override
     public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        List<MageObject> objects = new ArrayList<>();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            if (permanent != null) {
-                objects.add(permanent);
-            }
-        }
-        return objects;
+        return game.getBattlefield()
+                .getActivePermanents(filter, source.getControllerId(), source, game)
+                .stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 }

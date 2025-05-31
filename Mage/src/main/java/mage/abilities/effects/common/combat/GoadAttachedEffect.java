@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.combat;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -8,6 +9,9 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -24,17 +28,18 @@ public class GoadAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        return false;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return false;
+        if (permanent != null && permanent.getAttachedTo() != null) {
+            Permanent attached = game.getPermanent(permanent.getAttachedTo());
+            return attached != null ? Collections.singletonList(attached) : Collections.emptyList();
         }
-        Permanent attached = game.getPermanent(permanent.getAttachedTo());
-        if (attached == null) {
-            return false;
-        }
-        attached.addGoadingPlayer(source.getControllerId());
-        return true;
+        return Collections.emptyList();
     }
 
     @Override

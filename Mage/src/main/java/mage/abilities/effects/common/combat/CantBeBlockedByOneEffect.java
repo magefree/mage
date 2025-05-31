@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.combat;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -9,6 +10,9 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author North
@@ -33,17 +37,24 @@ public class CantBeBlockedByOneEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public CantBeBlockedByOneEffect copy() {
-        return new CantBeBlockedByOneEffect(this);
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            ((Permanent) object).setMinBlockedBy(amount);
+        }
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent perm = source.getSourcePermanentIfItStillExists(game);
-        if (perm != null) {
-            perm.setMinBlockedBy(amount);
-            return true;
-        }
-        return false;
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
+    }
+
+    @Override
+    public CantBeBlockedByOneEffect copy() {
+        return new CantBeBlockedByOneEffect(this);
     }
 }
