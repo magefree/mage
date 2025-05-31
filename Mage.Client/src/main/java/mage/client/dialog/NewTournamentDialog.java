@@ -41,7 +41,7 @@ public class NewTournamentDialog extends MageDialog {
     private static final Logger logger = Logger.getLogger(NewTournamentDialog.class);
 
     // it's ok to have 4 players at the screen, 6 is fine for big screens too
-    private static final int MAX_PLAYERS_PER_GAME = 6;
+    private static final int MAX_WORKABLE_PLAYERS_PER_GAME = 6;
 
     // temp settings on loading players list
     private final List<PlayerType> prefPlayerTypes = new ArrayList<>();
@@ -699,12 +699,12 @@ public class NewTournamentDialog extends MageDialog {
         // draft bots are loses and hide at the start, so count only human and AI
         if (tOptions.getMatchOptions().isSingleGameTourney()) {
             int workablePlayers = tOptions.getPlayerTypes().stream()
-                    .mapToInt(p -> p.equals(PlayerType.COMPUTER_DRAFT_BOT) ? 0 : 1)
+                    .mapToInt(p -> p.isWorkablePlayer() ? 1 : 0)
                     .sum();
-            if (workablePlayers > MAX_PLAYERS_PER_GAME) {
+            if (workablePlayers > MAX_WORKABLE_PLAYERS_PER_GAME) {
                 JOptionPane.showMessageDialog(
                         MageFrame.getDesktop(),
-                        String.format("Warning, in single game mode you can choose %d human/ai players but selected %d", MAX_PLAYERS_PER_GAME, workablePlayers),
+                        String.format("Warning, in single game mode you can choose %d human/ai players but selected %d", MAX_WORKABLE_PLAYERS_PER_GAME, workablePlayers),
                         "Warning",
                         JOptionPane.WARNING_MESSAGE
                 );

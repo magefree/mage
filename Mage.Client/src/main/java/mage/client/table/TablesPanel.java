@@ -1163,7 +1163,7 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeMatch);
 
         btnTypeTourneyConstructed.setSelected(true);
-        btnTypeTourneyConstructed.setText("Constructed tourn.");
+        btnTypeTourneyConstructed.setText("Constructed tourney");
         btnTypeTourneyConstructed.setToolTipText("Shows all constructed tournament tables.");
         btnTypeTourneyConstructed.setActionCommand("typeTourneyConstructed");
         btnTypeTourneyConstructed.setFocusPainted(false);
@@ -1178,7 +1178,7 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeTourneyConstructed);
 
         btnTypeTourneyLimited.setSelected(true);
-        btnTypeTourneyLimited.setText("Limited tourn.");
+        btnTypeTourneyLimited.setText("Limited tourney");
         btnTypeTourneyLimited.setToolTipText("Shows all limited tournament tables.");
         btnTypeTourneyLimited.setActionCommand("typeTourneyLimited");
         btnTypeTourneyLimited.setFocusPainted(false);
