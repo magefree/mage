@@ -50,7 +50,7 @@ class DarkSpherePreventionEffect extends PreventNextDamageFromChosenSourceEffect
     private static final FilterSource filter = new FilterSource("source of your choice");
 
     public DarkSpherePreventionEffect() {
-        super(Duration.OneUse, true, filter);
+        super(Duration.EndOfTurn, true, filter);
         this.staticText = "The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down";
     }
 
