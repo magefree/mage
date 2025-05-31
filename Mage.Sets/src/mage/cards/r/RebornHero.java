@@ -40,7 +40,7 @@ public final class RebornHero extends CardImpl {
                         new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{W}{W}")
                 ))), ThresholdCondition.instance, "As long as seven or more cards are in " +
                 "your graveyard, {this} has \"When {this} dies, you may pay {W}{W}. If you do, " +
-                "return {this} to the battlefield under your control.\""
+                "return this card to the battlefield under your control.\""
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 

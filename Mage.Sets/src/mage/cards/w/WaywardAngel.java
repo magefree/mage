@@ -56,7 +56,7 @@ public final class WaywardAngel extends CardImpl {
         );
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(gainedAbility), ThresholdCondition.instance,
-                "and has \"At the beginning of your upkeep, sacrifice a creature.\""
+                ", and has \"At the beginning of your upkeep, sacrifice a creature.\""
         ));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

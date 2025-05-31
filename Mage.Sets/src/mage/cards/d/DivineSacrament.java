@@ -37,7 +37,7 @@ public final class DivineSacrament extends CardImpl {
         // Threshold - White creatures get an additional +1/+1 as long as seven or more cards are in your graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false),
-                ThresholdCondition.instance, "If seven or more cards are in your graveyard, white creatures get an additional +1/+1."
+                ThresholdCondition.instance, "white creatures get an additional +1/+1 as long as seven or more cards are in your graveyard"
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 

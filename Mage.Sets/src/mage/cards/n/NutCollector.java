@@ -43,7 +43,7 @@ public final class NutCollector extends CardImpl {
         // Threshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false),
-                ThresholdCondition.instance, "Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard"
+                ThresholdCondition.instance, "All Squirrels get +2/+2 as long as seven or more cards are in your graveyard"
         ));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

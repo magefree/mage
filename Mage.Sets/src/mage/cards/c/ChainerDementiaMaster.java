@@ -36,7 +36,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class ChainerDementiaMaster extends CardImpl {
     
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Nightmare creatures");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("All Nightmares");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Nightmares");
     static {
         filterCreature.add(SubType.NIGHTMARE.getPredicate());
