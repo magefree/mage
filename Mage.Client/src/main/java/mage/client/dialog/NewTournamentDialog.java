@@ -40,7 +40,8 @@ public class NewTournamentDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(NewTournamentDialog.class);
 
-    private static final int MAX_PLAYERS_PER_GAME = 6; // it's ok to have 6 players at the screen, 8+ is too big
+    // it's ok to have 4 players at the screen, 6 is fine for big screens too
+    private static final int MAX_PLAYERS_PER_GAME = 6;
 
     // temp settings on loading players list
     private final List<PlayerType> prefPlayerTypes = new ArrayList<>();
@@ -694,6 +695,23 @@ public class NewTournamentDialog extends MageDialog {
             }
         }
 
+        // players count limited by GUI size
+        // draft bots are loses and hide at the start, so count only human and AI
+        if (tOptions.getMatchOptions().isSingleGameTourney()) {
+            int workablePlayers = tOptions.getPlayerTypes().stream()
+                    .mapToInt(p -> p.equals(PlayerType.COMPUTER_DRAFT_BOT) ? 0 : 1)
+                    .sum();
+            if (workablePlayers > MAX_PLAYERS_PER_GAME) {
+                JOptionPane.showMessageDialog(
+                        MageFrame.getDesktop(),
+                        String.format("Warning, in single game mode you can choose %d human/ai players but selected %d", MAX_PLAYERS_PER_GAME, workablePlayers),
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+        }
+
         // save last settings
         onSaveSettings(0, tOptions);
 
@@ -884,7 +902,8 @@ public class NewTournamentDialog extends MageDialog {
         int compatibleMax = tournamentType.getMaxPlayers();
 
         if (chkSingleMultiplayerGame.isSelected()) {
-            compatibleMax = Math.min(MAX_PLAYERS_PER_GAME, compatibleMax);
+            // user can select any amount of draft bots, real amount checks on submit
+            //compatibleMax = Math.min(MAX_PLAYERS_PER_GAME, compatibleMax);
         }
 
         int compatibleCount = count;
