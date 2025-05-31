@@ -11,7 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ScrollOfIsildurTest extends CardTestPlayerBase {
 
     /**
-     * {@link mage.cards.t.TrialOfATimeLord Scroll of Isildur} {2}{U}
+     * {@link mage.cards.s.ScrollOfIsildur Scroll of Isildur} {2}{U}
      * Enchantment — Saga
      * (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
      * I — Gain control of up to one target artifact for as long as you control this Saga. The Ring tempts you.

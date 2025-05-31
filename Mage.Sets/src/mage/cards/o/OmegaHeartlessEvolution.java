@@ -52,7 +52,7 @@ public final class OmegaHeartlessEvolution extends CardImpl {
         ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance(), xValue)
                 .setTargetPointer(new EachTargetPointer())
                 .setText("Put X stun counters on each of those permanents"));
-        ability.addEffect(new GainLifeEffect(xValue).concatBy("and"));
+        ability.addEffect(new GainLifeEffect(xValue).setText("and you gain X life, where X is the number of nonbasic lands you control"));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_NON_LAND));
         this.addAbility(ability.withFlavorWord("Wave Cannon").setTargetAdjuster(new ForEachOpponentTargetsAdjuster()));
     }

@@ -2,10 +2,12 @@ package mage.cards.e;
 
 import mage.MageIdentifier;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +38,9 @@ public final class EdgarMasterMachinist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Once during each of your turns, you may cast an artifact spell from your graveyard. If you cast a spell this way, that artifact enters tapped.
-        this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(filter, MageIdentifier.OnceOnYourTurnCastFromGraveyardEntersTapped));
+        Ability ability = new CastFromGraveyardOnceDuringEachOfYourTurnAbility(filter, MageIdentifier.OnceOnYourTurnCastFromGraveyardEntersTapped);
+        ability.addEffect(new InfoEffect("If you cast a spell this way, that artifact enters tapped"));
+        this.addAbility(ability);
 
         // Tools -- Whenever Edgar attacks, it gets +X/+0 until end of turn, where X is the greatest mana value among artifacts you control.
         this.addAbility(new AttacksTriggeredAbility(

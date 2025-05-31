@@ -69,7 +69,7 @@ public final class WakkaDevotedGuardian extends CardImpl {
         // Blitzball Captain -- At the beginning of your end step, if a counter was put on Wakka this turn, put a +1/+1 counter on each other creature you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersAllEffect(
                 CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE
-        )).withInterveningIf(WakkaDevotedGuardianCondition.instance), new WakkaDevotedGuardianWatcher());
+        )).withInterveningIf(WakkaDevotedGuardianCondition.instance).withFlavorWord("Blitzball Captain"), new WakkaDevotedGuardianWatcher());
     }
 
     private WakkaDevotedGuardian(final WakkaDevotedGuardian card) {

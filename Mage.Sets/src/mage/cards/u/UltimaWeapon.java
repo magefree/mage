@@ -1,7 +1,7 @@
 package mage.cards.u;
 
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
@@ -27,7 +27,7 @@ public final class UltimaWeapon extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks, destroy target creature an opponent controls.
-        Ability ability = new AttacksTriggeredAbility(new DestroyTargetEffect());
+        Ability ability = new AttacksAttachedTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
 

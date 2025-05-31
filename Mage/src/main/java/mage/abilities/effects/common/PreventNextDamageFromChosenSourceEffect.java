@@ -12,6 +12,7 @@ import mage.players.Player;
 import mage.target.TargetSource;
 import mage.util.CardUtil;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -23,7 +24,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
     private final boolean toYou;
     private final ApplierOnPrevention onPrevention;
 
-    public interface ApplierOnPrevention {
+    public interface ApplierOnPrevention extends Serializable {
         boolean apply(PreventionEffectData data, TargetSource targetsource, GameEvent event, Ability source, Game game);
 
         String getText();

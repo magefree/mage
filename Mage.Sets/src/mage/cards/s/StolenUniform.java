@@ -59,8 +59,7 @@ class StolenUniformAttachEffect extends OneShotEffect {
 
     StolenUniformAttachEffect() {
         super(Outcome.Benefit);
-        staticText = "Attach it to the chosen creature. When you lose control of that Equipment this turn, " +
-                "if it's attached to a creature you control, unattach it";
+        staticText = "Attach it to the chosen creature";
         this.setTargetPointer(new EachTargetPointer());
     }
 

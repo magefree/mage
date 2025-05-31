@@ -47,7 +47,7 @@ class FatalPushEffect extends OneShotEffect {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature if it has mana value 2 or less.<br>" +
                 AbilityWord.REVOLT.formatWord() + "Destroy that creature if it has mana value 4 " +
-                "or less instead if a permanent you controlled left the battlefield this turn";
+                "or less instead if a permanent left the battlefield under your control this turn";
     }
 
     private FatalPushEffect(final FatalPushEffect effect) {

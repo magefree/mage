@@ -1016,38 +1016,28 @@ public abstract class AbilityImpl implements Ability {
 
         String ruleStart = sbRule.toString();
         String text = getModes().getText();
-        String rule;
+        StringBuilder rule = new StringBuilder();
         if (!text.isEmpty()) {
             if (ruleStart.length() > 1) {
                 String end = ruleStart.substring(ruleStart.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
-                    rule = ruleStart + CardUtil.getTextWithFirstCharUpperCase(text);
+                    rule.append(ruleStart + CardUtil.getTextWithFirstCharUpperCase(text));
                 } else {
-                    rule = ruleStart + text;
+                    rule.append(ruleStart + text);
                 }
             } else {
-                rule = ruleStart + text;
+                rule.append(ruleStart + text);
             }
         } else {
-            rule = ruleStart;
-        }
-        String prefix;
-        if (this instanceof TriggeredAbility || this instanceof EntersBattlefieldAbility) {
-            prefix = null;
-        } else if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = null;
-        }
-        if (prefix != null) {
-            rule = prefix + CardUtil.getTextWithFirstCharUpperCase(rule);
+            rule.append(ruleStart);
         }
         if (appendToRule != null) {
-            rule = rule.concat(appendToRule);
+            rule.append(appendToRule);
         }
-        return rule;
+        if (this instanceof TriggeredAbility || this instanceof EntersBattlefieldAbility) {
+            return rule.toString();
+        }
+        return addRulePrefix(rule.toString());
     }
 
     @Override
@@ -1475,6 +1465,17 @@ public abstract class AbilityImpl implements Ability {
     public Ability withFlavorWord(String flavorWord) {
         this.flavorWord = flavorWord;
         return this;
+    }
+
+    @Override
+    public String addRulePrefix(String rule) {
+        if (abilityWord != null) {
+            return abilityWord.formatWord() + CardUtil.getTextWithFirstCharUpperCase(rule);
+        } else if (flavorWord != null) {
+            return CardUtil.italicizeWithEmDash(flavorWord) + CardUtil.getTextWithFirstCharUpperCase(rule);
+        } else {
+            return rule;
+        }
     }
 
     @Override
