@@ -37,6 +37,7 @@ public enum MageIdentifier {
     LaraCroftTombRaiderWatcher,
     CoramTheUndertakerWatcher,
     ThundermanDragonWatcher,
+    LockeTreasureHunterWatcher,
 
     // ----------------------------//
     //       alternate casts       //
