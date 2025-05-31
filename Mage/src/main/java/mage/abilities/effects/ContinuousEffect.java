@@ -1,6 +1,6 @@
 package mage.abilities.effects;
 
-import mage.MageObjectReference;
+import mage.*;
 import mage.abilities.Ability;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
@@ -33,7 +33,7 @@ public interface ContinuousEffect extends Effect {
 
     void setOrder(long order);
 
-    boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game);
+    boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects);
 
     boolean hasLayer(Layer layer);
 
@@ -51,6 +51,8 @@ public interface ContinuousEffect extends Effect {
     Layer getLayer();
 
     SubLayer getSublayer();
+
+    List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game);
 
     List<MageObjectReference> getAffectedObjects();
 

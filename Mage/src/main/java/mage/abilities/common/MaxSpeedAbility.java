@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.StaticAbility;
@@ -14,6 +15,9 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -65,26 +69,34 @@ class MaxSpeedAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public MaxSpeedAbilityEffect copy() {
-        return new MaxSpeedAbilityEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
         if (ControllerSpeedCount.instance.calculate(game, source, null) < 4) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.addAbility(ability, source.getSourceId(), game);
-            return true;
+        for (MageObject object : objects) {
+            if (object instanceof Permanent) {
+                ((Permanent) object).addAbility(ability, source.getSourceId(), game);
+                continue;
+            }
+            if (object instanceof Card) {
+                game.getState().addOtherAbility((Card) object, ability);
+            }
         }
-        Card card = game.getCard(source.getSourceId());
-        if (card == null) {
-            return false;
-        }
-        game.getState().addOtherAbility(card, ability);
         return true;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        MageObject object = game.getPermanent(source.getSourceId());
+        if (object == null) {
+            object = game.getCard(source.getSourceId());
+        }
+        return object != null ? Collections.singletonList(object) : Collections.emptyList();
+    }
+
+    @Override
+    public MaxSpeedAbilityEffect copy() {
+        return new MaxSpeedAbilityEffect(this);
     }
 
     @Override

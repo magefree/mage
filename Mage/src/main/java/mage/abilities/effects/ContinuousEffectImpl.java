@@ -113,11 +113,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (this.layer == layer && this.sublayer == sublayer) {
-            return apply(game, source);
-        }
-        return false;
+    public boolean apply(Game game, Ability source) {
+        throw new UnsupportedOperationException("apply unsupported for continuous effect, use applyToObjects instead");
     }
 
     @Override
