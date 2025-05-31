@@ -21,7 +21,7 @@ import mage.game.stack.StackObject;
 public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
 
     private FilterPermanent filterTarget;
-    private FilterObject filterSource;
+    private FilterObject filterSource; // TODO: should be FilterStackObject
 
     public CantBeTargetedAllEffect(FilterPermanent filterTarget, Duration duration) {
         this(filterTarget, null, duration);
@@ -65,10 +65,12 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
                     // only spells have to be selected
                     return false;
                 }
+                // TODO: this is a hack for Spellbane Centaur?
                 sourceObject = ((StackAbility) stackObject).getSourceObject(game);
             } else {
                 sourceObject = stackObject;
             }
+            // TODO: this should be 4-argument match instead?
             if (filterSource.match(sourceObject, game)) {
                 return true;
             }
