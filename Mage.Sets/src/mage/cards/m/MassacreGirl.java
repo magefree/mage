@@ -12,6 +12,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -94,7 +95,10 @@ class MassacreGirlDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.isDiesEvent() && zEvent.getTarget().isCreature(game);
+        if (zEvent.isDiesEvent() && zEvent.getTarget() != null && StaticFilters.FILTER_PERMANENT_CREATURES.match(zEvent.getTarget(), controllerId, this, game)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
