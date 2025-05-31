@@ -128,6 +128,8 @@
         <draftCube name="MTGO Khans Expanded Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.KhansExpandedCube"/>
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
         <draftCube name="MTGO Legacy Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCube"/>
+        <!-- outdated cubes - will be removed on next releases -->
+        <!--
         <draftCube name="MTGO Legacy Cube 2015 March" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeMarch2015"/>
         <draftCube name="MTGO Legacy Cube 2015 September" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeSeptember2015"/>
         <draftCube name="MTGO Legacy Cube 2016 January" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeJanuary2016"/>
@@ -137,10 +139,11 @@
         <draftCube name="MTGO Legacy Cube 2018 February" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCube2018February"/>
         <draftCube name="MTGO Legacy Cube 2019 July" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeJuly2019"/>
         <draftCube name="MTGO Legacy Cube 2021 May" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegacyCubeMay2021"/>
+        -->
         <draftCube name="MTGO Legendary Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCube"/>
         <draftCube name="MTGO Legendary Cube April 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCubeApril2016"/>
         <draftCube name="MTGO Modern Cube 2017" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.ModernCube2017"/>
-        <draftCube name="MTGO Vintage Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOVintageCube"/>
+        <draftCube name="MTGO Vintage Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCube"/>
         <!-- outdated cubes - will be removed on next releases -->
         <!--
         <draftCube name="MTGO Vintage Cube 2013" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCube2013"/>

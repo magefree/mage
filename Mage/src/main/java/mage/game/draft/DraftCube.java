@@ -8,17 +8,14 @@ import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author LevelX2, JayDi85
  */
 public abstract class DraftCube {
 
-    SimpleDateFormat UPDATE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat UPDATE_DATE_FORMAT = new SimpleDateFormat("yyyy MMMM", Locale.ENGLISH); // 2025 April
     private static final Logger logger = Logger.getLogger(DraftCube.class);
 
 

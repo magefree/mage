@@ -9,9 +9,9 @@ import mage.game.draft.DraftCube;
  *
  * @author JayDi85
  */
-public class MTGOVintageCube extends DraftCube {
+public class VintageCube extends DraftCube {
 
-    public MTGOVintageCube() {
+    public VintageCube() {
         super("MTGO Vintage Cube", "", 2025, 4, 23);
 
         cubeCards.add(new CardIdentity("\"Name Sticker\" Goblin", ""));
