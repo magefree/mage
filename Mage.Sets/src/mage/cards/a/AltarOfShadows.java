@@ -57,7 +57,7 @@ class AltarOfShadowsEffect extends OneShotEffect {
 
     AltarOfShadowsEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "add {B} for each charge counter on Altar of Shadows";
+        this.staticText = "add {B} for each charge counter on {this}";
     }
 
     private AltarOfShadowsEffect(final AltarOfShadowsEffect effect) {

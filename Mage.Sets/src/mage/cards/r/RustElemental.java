@@ -2,9 +2,9 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,10 +13,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
@@ -34,8 +32,9 @@ public final class RustElemental extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // At the beginning of your upkeep, sacrifice an artifact other than Rust Elemental. If you can't, tap Rust Elemental and you lose 4 life.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new RustElementalEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RustElementalEffect()));
     }
 
     private RustElemental(final RustElemental card) {
@@ -56,9 +55,9 @@ class RustElementalEffect extends OneShotEffect {
         filter.add(AnotherPredicate.instance);
     }
 
-    public RustElementalEffect() {
+    RustElementalEffect() {
         super(Outcome.Damage);
-        this.staticText = "sacrifice an artifact other than {this}. If you can't, tap {this} and you lose 4 life.";
+        this.staticText = "sacrifice another artifact. If you can't, tap {this} and you lose 4 life.";
     }
 
     private RustElementalEffect(final RustElementalEffect effect) {
