@@ -61,7 +61,7 @@ public final class AkromasWill extends CardImpl {
         mode.addEffect(new GainAbilityControlledEffect(
                 new ProtectionAbility(filter), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURE
-        ).setText(", and protection from all colors until end of turn"));
+        ).setText(", and protection from each color until end of turn"));
         this.getSpellAbility().addMode(mode);
     }
 
