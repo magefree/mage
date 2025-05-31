@@ -63,7 +63,7 @@ class KainTraitorousDragoonEffect extends OneShotEffect {
 
     KainTraitorousDragoonEffect() {
         super(Outcome.Benefit);
-        staticText = ", that player gains control of {this}. If they do, you draw that many cards, " +
+        staticText = "that player gains control of {this}. If they do, you draw that many cards, " +
                 "create that many tapped Treasure tokens, then lose that much life";
     }
 

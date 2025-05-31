@@ -31,7 +31,7 @@ import java.util.function.Consumer;
 public class SagaAbility extends SimpleStaticAbility {
 
     private final SagaChapter maxChapter;
-    private final boolean showSacText;
+    private boolean showSacText;
     private final boolean readAhead;
 
     public SagaAbility(Card card) {
@@ -132,6 +132,11 @@ public class SagaAbility extends SimpleStaticAbility {
 
     public SagaChapter getMaxChapter() {
         return maxChapter;
+    }
+
+    public SagaAbility withShowSacText(boolean showSacText) {
+        this.showSacText = showSacText;
+        return this;
     }
 
     @Override

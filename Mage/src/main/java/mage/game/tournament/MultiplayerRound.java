@@ -15,27 +15,18 @@ public class MultiplayerRound {
 
     private final int roundNum;
     private final Tournament tournament;
-    private final int numSeats;
     private final List<TournamentPlayer> allPlayers = new ArrayList<>();
     private Match match;
     private UUID tableId;
 
 
-    public MultiplayerRound(int roundNum, Tournament tournament, int numSeats) {
+    public MultiplayerRound(int roundNum, Tournament tournament) {
         this.roundNum = roundNum;
         this.tournament = tournament;
-        this.numSeats = numSeats;
     }
     
     public List<TournamentPlayer> getAllPlayers () {
         return allPlayers;
-    }
-    
-    public TournamentPlayer getPlayer (int i) {
-        if (i >= 0 && i < numSeats && i < allPlayers.size()) {
-            return allPlayers.get(i);
-        }
-        return null;
     }
 
     public void addPairing(TournamentPairing match) {

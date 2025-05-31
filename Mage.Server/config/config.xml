@@ -21,7 +21,7 @@
     minUserNameLength   - minmal allowed length of a user name to connect to the server
     maxUserNameLength   - maximal allowed length of a user name to connect to the server
     userNamePattern     - pattern for user name validity check
-    maxAiOpponents      - number of allowed AI opponents on the server
+    maxAiOpponents      - number of allowed workable AI opponents on the server (draft bots are unlimited)
     saveGameActivated   - allow game save and replay options (not working correctly yet)
 
     authenticationActivated - "true" = user have to register to signon "false" = user need not to register

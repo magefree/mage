@@ -208,9 +208,18 @@ public class TournamentController {
     }
 
     private void endTournament() {
-        for (TournamentPlayer player : tournament.getPlayers()) {
-            player.setStateAtTournamentEnd();
+        boolean setFinishPlayersStatus = true;
+        if (tournament.getRounds().isEmpty() && tournament.getOptions().getMatchOptions().isSingleGameTourney()) {
+            // single multiplayer game immediately finish the tourney, so keep dueling info all the time in tourney window
+            setFinishPlayersStatus = false;
         }
+
+        if (setFinishPlayersStatus) {
+            for (TournamentPlayer player : tournament.getPlayers()) {
+                player.setStateAtTournamentEnd();
+            }
+        }
+
         for (final TournamentSession tournamentSession : tournamentSessions.values()) {
             tournamentSession.tournamentOver();
         }
@@ -270,9 +279,14 @@ public class TournamentController {
             table.setTournamentSubTable(this.tableId);
             table.setTournament(tournament);
             table.setState(TableState.WAITING);
-            if (round.getAllPlayers().stream().allMatch(tournamentPlayer -> getPlayerUserId(tournamentPlayer.getPlayer().getId()).isPresent())) {
+            if (round.getAllPlayers().stream()
+                    .filter(t -> t.getPlayerType().equals(PlayerType.HUMAN))
+                    .allMatch(t -> getPlayerUserId(t.getPlayer().getId()).isPresent())
+            ) {
                 for (TournamentPlayer player : round.getAllPlayers()) {
-                    tableManager.addPlayer(getPlayerUserId(player.getPlayer().getId()).get(), table.getId(), player);
+                    // userId = null - it's AI opponent
+                    UUID userId = getPlayerUserId(player.getPlayer().getId()).orElse(null);
+                    tableManager.addPlayer(userId, table.getId(), player);
                 }
                 table.setState(TableState.STARTING);
                 tableManager.startTournamentSubMatch(null, table.getId());
@@ -284,9 +298,11 @@ public class TournamentController {
                         player.setState(TournamentPlayerState.DUELING);
                     }
                 });
+            } else {
+                logger.error("tourney - startMultiplayerMatch can't start due disconnected players");
             }
         } catch (GameException ex) {
-            logger.fatal("TournamentController startMatch error", ex);
+            logger.fatal("tourney - startMultiplayerMatch error", ex);
         }
     }
 

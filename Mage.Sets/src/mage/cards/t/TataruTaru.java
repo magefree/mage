@@ -37,7 +37,7 @@ public final class TataruTaru extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Tataru Taru enters, you draw a card and target opponent may draw a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1, true));
         ability.addEffect(new TataruTaruEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -67,6 +67,11 @@ enum TataruTaruCondition implements Condition {
                 .getEffectValueFromAbility(source, "playerDrew", UUID.class)
                 .map(game::isActivePlayer)
                 .orElse(true);
+    }
+
+    @Override
+    public String toString() {
+        return "it isn't that player's turn";
     }
 }
 

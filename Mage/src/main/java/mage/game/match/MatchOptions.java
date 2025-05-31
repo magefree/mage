@@ -31,8 +31,7 @@ public class MatchOptions implements Serializable {
     protected String deckType;
     protected boolean limited;
     protected List<PlayerType> playerTypes = new ArrayList<>();
-    protected boolean multiPlayer;
-    protected int numSeats;
+    protected boolean multiPlayer; // allow to play single game with all tourney's players
     protected String password;
     protected SkillLevel skillLevel = SkillLevel.CASUAL;
     protected boolean rollbackTurnsAllowed;
@@ -51,27 +50,14 @@ public class MatchOptions implements Serializable {
     protected Collection<DeckCardInfo> perPlayerEmblemCards = Collections.emptySet();
     protected Collection<DeckCardInfo> globalEmblemCards = Collections.emptySet();
 
-    public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats) {
+    public MatchOptions(String name, String gameType, boolean multiPlayer) {
         this.name = name;
         this.gameType = gameType;
         this.password = "";
         this.multiPlayer = multiPlayer;
-        this.numSeats = numSeats;
     }
 
-    public void setNumSeats(int numSeats) {
-        this.numSeats = numSeats;
-    }
-
-    public int getNumSeats() {
-        return numSeats;
-    }
-
-    public void setMultiPlayer(boolean multiPlayer) {
-        this.multiPlayer = multiPlayer;
-    }
-
-    public boolean getMultiPlayer() {
+    public boolean isSingleGameTourney() {
         return multiPlayer;
     }
 

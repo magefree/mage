@@ -12,6 +12,7 @@ import mage.players.Player;
 import mage.target.TargetSource;
 import mage.util.CardUtil;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -23,7 +24,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
     private final boolean toYou;
     private final ApplierOnPrevention onPrevention;
 
-    public interface ApplierOnPrevention {
+    public interface ApplierOnPrevention extends Serializable {
         boolean apply(PreventionEffectData data, TargetSource targetsource, GameEvent event, Ability source, Game game);
 
         String getText();
@@ -96,7 +97,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData data = preventDamageAction(event, source, game);
-        this.used = true;
+        discard();
         if (onPrevention != null) {
             onPrevention.apply(data, targetSource, event, source, game);
         }
@@ -105,8 +106,7 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return !this.used
-                && super.applies(event, source, game)
+        return super.applies(event, source, game)
                 && (!toYou || event.getTargetId().equals(source.getControllerId()))
                 && event.getSourceId().equals(targetSource.getFirstTarget());
     }

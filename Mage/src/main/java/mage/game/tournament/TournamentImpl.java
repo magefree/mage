@@ -25,6 +25,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public abstract class TournamentImpl implements Tournament {
 
+    private static final Logger logger = Logger.getLogger(TournamentImpl.class);
+
     protected UUID id = UUID.randomUUID();
     protected UUID tableId = null; // assign on table create
     protected List<Round> rounds = new CopyOnWriteArrayList<>();
@@ -223,9 +225,11 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     protected void playMultiplayerRound(MultiplayerRound round) {
+        // it's a single game, so tourney will be ends immediately
+        // and will keep one game active for better performance
+        // and less max tourney restrictions on the server
+        updateResults();
         playMultiPlayerMatch(round);
-
-        updateResults(); // show points from byes
     }
 
     protected List<TournamentPlayer> getActivePlayers() {
@@ -248,6 +252,8 @@ public abstract class TournamentImpl implements Tournament {
             player.setPoints(0);
             player.setStateInfo("");
         }
+
+        // multiple games tourney
         for (Round round : rounds) {
             for (TournamentPairing pair : round.getPairs()) {
                 Match match = pair.getMatch();
@@ -256,8 +262,10 @@ public abstract class TournamentImpl implements Tournament {
                     TournamentPlayer tp2 = pair.getPlayer2();
                     MatchPlayer mp1 = match.getPlayer(pair.getPlayer1().getPlayer().getId());
                     MatchPlayer mp2 = match.getPlayer(pair.getPlayer2().getPlayer().getId());
+
                     // set player state if they finished the round
-                    if (round.getRoundNumber() == rounds.size()) { // for elimination getRoundNumber = 0 so never true here
+                    // for elimination getRoundNumber = 0 so never true here
+                    if (round.getRoundNumber() == rounds.size()) {
                         match.setTournamentRound(round.getRoundNumber());
                         if (tp1.getState() == TournamentPlayerState.DUELING) {
                             if (round.getRoundNumber() == getNumberRounds()) {
@@ -274,6 +282,7 @@ public abstract class TournamentImpl implements Tournament {
                             }
                         }
                     }
+
                     // Add round result
                     tp1.setResults(addRoundResult(round.getRoundNumber(), pair, tp1, tp2));
                     tp2.setResults(addRoundResult(round.getRoundNumber(), pair, tp2, tp1));

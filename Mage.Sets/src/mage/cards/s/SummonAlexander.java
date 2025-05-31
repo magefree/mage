@@ -46,7 +46,7 @@ public final class SummonAlexander extends CardImpl {
                 this, SagaChapter.CHAPTER_III,
                 new TapAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES)
         );
-        this.addAbility(sagaAbility);
+        this.addAbility(sagaAbility.withShowSacText(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

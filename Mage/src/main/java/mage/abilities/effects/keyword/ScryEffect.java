@@ -59,7 +59,7 @@ public class ScryEffect extends OneShotEffect {
     private String generateText() {
         StringBuilder sb = new StringBuilder("scry ");
         String value = amount.toString();
-        sb.append(CardUtil.numberToText(value));
+        sb.append(value);
         String message = amount.getMessage();
         if (!message.isEmpty()) {
             sb.append(value.equals("X") ? ", where X is " : " for each ");

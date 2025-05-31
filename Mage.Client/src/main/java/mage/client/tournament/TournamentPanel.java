@@ -234,11 +234,14 @@ public class TournamentPanel extends javax.swing.JPanel {
                 if (tournament.getStepStartTime() != null) {
                     usedTime = Format.getDuration((tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime()) / 1000);
                 }
-                txtTournamentState.setText(tournament.getTournamentState() + " (" + usedTime + ") " + tournament.getRunningInfo());
+                txtTournamentState.setText(tournament.getTournamentState() + " (" + usedTime + ")");
                 break;
             default:
                 txtTournamentState.setText(tournament.getTournamentState());
                 break;
+        }
+        if (!tournament.getRunningInfo().isEmpty()) {
+            txtTournamentState.setText(txtTournamentState.getText() + ", " + tournament.getRunningInfo());
         }
 
         if (txtEndTime == null) {

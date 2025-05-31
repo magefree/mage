@@ -99,19 +99,21 @@
                   <Component id="pnlPacks" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblPacks" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPlayer1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblNbrPlayers" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spnNumPlayers" min="-2" pref="46" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblNbrSeats" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="spnNumSeats" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="chkSingleMultiplayerGame" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lblPacks" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPlayer1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -119,10 +121,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="lblNumRounds" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblConstructionTime" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblConstructionTime" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -200,11 +199,7 @@
                               <Component id="lbBufferTime" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cbBufferTime" min="-2" pref="101" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                               <Component id="chkRollbackTurnsAllowed" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cbAllowSpectators" min="-2" max="-2" attributes="0"/>
@@ -222,8 +217,6 @@
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="lblNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="spnNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chkRollbackTurnsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbAllowSpectators" alignment="3" max="32767" attributes="0"/>
                   </Group>
@@ -287,7 +280,7 @@
                   <Group type="102" attributes="0">
                       <Component id="pnlPacks" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlRandomPacks" pref="9" max="32767" attributes="0"/>
+                      <Component id="pnlRandomPacks" pref="20" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -295,15 +288,17 @@
                               <Component id="lblNumRounds" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="lblNbrPlayers" alignment="1" max="32767" attributes="0"/>
-                          <Component id="spnNumPlayers" alignment="1" pref="23" max="32767" attributes="1"/>
-                          <Component id="pnlDraftOptions" alignment="1" pref="23" max="32767" attributes="1"/>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="spnNumPlayers" alignment="3" max="32767" attributes="1"/>
+                              <Component id="chkSingleMultiplayerGame" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                                  <Component id="lblNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="spnNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="pnlDraftOptions" alignment="1" pref="0" max="32767" attributes="1"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lblNbrSeats" alignment="1" max="32767" attributes="0"/>
-                          <Component id="spnNumSeats" alignment="1" max="32767" attributes="1"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="lblPlayer1" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -504,19 +499,18 @@
         <Property name="text" type="java.lang.String" value="Players:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblNbrSeats">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Seats:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JSpinner" name="spnNumPlayers">
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumPlayersStateChanged"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JSpinner" name="spnNumSeats">
+    <Component class="javax.swing.JCheckBox" name="chkSingleMultiplayerGame">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="play as single game"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Allow to play single game with all tourney&apos;s players -- e.g. play one game after draft with 4 players"/>
+      </Properties>
       <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spnNumSeatsStateChanged"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="chkSingleMultiplayerGameItemStateChanged"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="pnlDraftOptions">
@@ -615,7 +609,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnlOtherPlayers" alignment="0" pref="8" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" alignment="0" pref="15" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -672,8 +666,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnQuitRatio">
-      <Properties>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMinimumRating">
       <Properties>

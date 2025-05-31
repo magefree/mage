@@ -11,6 +11,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
@@ -46,7 +47,7 @@ public final class YiazmatUltimateMark extends CardImpl {
 
         // {1}{B}, Sacrifice another creature or artifact: Yiazmat gains indestructible until end of turn. Tap it.
         Ability ability = new SimpleActivatedAbility(
-                new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), new ManaCostsImpl<>("{1}{B}")
+                new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new SacrificeTargetCost(filter));
         ability.addEffect(new TapSourceEffect().setText("tap it"));

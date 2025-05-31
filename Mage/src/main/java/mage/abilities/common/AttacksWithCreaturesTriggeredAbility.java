@@ -41,7 +41,11 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public AttacksWithCreaturesTriggeredAbility(Zone zone, Effect effect, int minAttackers, FilterPermanent filter, boolean setTargetPointer) {
-        super(zone, effect);
+        this(zone, effect, minAttackers, filter, setTargetPointer, false);
+    }
+
+    public AttacksWithCreaturesTriggeredAbility(Zone zone, Effect effect, int minAttackers, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
+        super(zone, effect, optional);
         this.filter = filter;
         this.minAttackers = minAttackers;
         this.setTargetPointer = setTargetPointer;

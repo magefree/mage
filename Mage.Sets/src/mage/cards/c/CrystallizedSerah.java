@@ -30,7 +30,7 @@ public final class CrystallizedSerah extends CardImpl {
 
         // Legendary creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                2, 2, Duration.WhileControlled, StaticFilters.FILTER_CREATURES_LEGENDARY
+                2, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_LEGENDARY
         )));
     }
 

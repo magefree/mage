@@ -22,6 +22,7 @@ public class WonCoinFlipControllerTriggeredAbility extends TriggeredAbilityImpl 
 
     public WonCoinFlipControllerTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
+        this.setTriggerPhrase("Whenever you win a coin flip, ");
     }
 
     private WonCoinFlipControllerTriggeredAbility(final WonCoinFlipControllerTriggeredAbility ability) {

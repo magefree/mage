@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.custom.CreatureToken;
+import mage.game.permanent.token.TreasureToken;
 
 import java.util.UUID;
 
@@ -33,13 +33,13 @@ public final class TheGoldSaucer extends CardImpl {
 
         // {2}, {T}: Flip a coin. If you win the flip, create a Treasure token.
         Ability ability = new SimpleActivatedAbility(
-                new FlipCoinEffect(new CreateTokenEffect(new CreatureToken())), new GenericManaCost(2)
+                new FlipCoinEffect(new CreateTokenEffect(new TreasureToken())), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {3}, {T}, Sacrifice two artifacts: Draw a card.
-        ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(2), new GenericManaCost(3));
+        ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_ARTIFACTS));
         this.addAbility(ability);

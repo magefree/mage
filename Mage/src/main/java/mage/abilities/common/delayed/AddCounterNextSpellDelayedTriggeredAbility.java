@@ -48,7 +48,7 @@ class AddCounterNextSpellEffect extends ReplacementEffectImpl {
     AddCounterNextSpellEffect(int amount) {
         super(Duration.EndOfStep, Outcome.BoostCreature);
         this.amount = amount;
-        staticText = "that creature enters the battlefield with " + CardUtil.numberToText(amount, "an") +
+        staticText = "that creature enters with " + CardUtil.numberToText(amount, "an") +
                 " additional +1/+1 counter" + (amount > 1 ? "s" : "") + " on it";
     }
 

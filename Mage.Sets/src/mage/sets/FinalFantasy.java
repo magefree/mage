@@ -72,6 +72,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Bard's Bow", 174, Rarity.COMMON, mage.cards.b.BardsBow.class));
         cards.add(new SetCardInfo("Baron, Airship Kingdom", 273, Rarity.COMMON, mage.cards.b.BaronAirshipKingdom.class));
         cards.add(new SetCardInfo("Barret Wallace", 129, Rarity.UNCOMMON, mage.cards.b.BarretWallace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Barret Wallace", 457, Rarity.UNCOMMON, mage.cards.b.BarretWallace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Barret Wallace", 584, Rarity.UNCOMMON, mage.cards.b.BarretWallace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bartz and Boko", 175, Rarity.RARE, mage.cards.b.BartzAndBoko.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bartz and Boko", 469, Rarity.RARE, mage.cards.b.BartzAndBoko.class, NON_FULL_USE_VARIOUS));
@@ -83,8 +84,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Black Waltz No. 3", 214, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Waltz No. 3", 478, Rarity.UNCOMMON, mage.cards.b.BlackWaltzNo3.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blazing Bomb", 130, Rarity.COMMON, mage.cards.b.BlazingBomb.class));
-        cards.add(new SetCardInfo("Blitzball", 254, Rarity.COMMON, mage.cards.b.Blitzball.class));
         cards.add(new SetCardInfo("Blitzball Shot", 176, Rarity.COMMON, mage.cards.b.BlitzballShot.class));
+        cards.add(new SetCardInfo("Blitzball", 254, Rarity.COMMON, mage.cards.b.Blitzball.class));
         cards.add(new SetCardInfo("Braska's Final Aeon", 104, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Braska's Final Aeon", 363, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Braska's Final Aeon", 448, Rarity.RARE, mage.cards.b.BraskasFinalAeon.class, NON_FULL_USE_VARIOUS));
@@ -191,7 +192,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Evil Reawakened", 98, Rarity.UNCOMMON, mage.cards.e.EvilReawakened.class));
         cards.add(new SetCardInfo("Excalibur II", 257, Rarity.RARE, mage.cards.e.ExcaliburII.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Excalibur II", 352, Rarity.RARE, mage.cards.e.ExcaliburII.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Exdeath, Void Warlock", 220, Rarity.UNCOMMON, mage.cards.e.ExdeathVoidWarlock.class));
+        cards.add(new SetCardInfo("Exdeath, Void Warlock", 220, Rarity.UNCOMMON, mage.cards.e.ExdeathVoidWarlock.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Exdeath, Void Warlock", 485, Rarity.UNCOMMON, mage.cards.e.ExdeathVoidWarlock.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 381, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 446, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang, Fearless l'Cie", 526, Rarity.UNCOMMON, mage.cards.f.FangFearlessLCie.class, NON_FULL_USE_VARIOUS));
@@ -238,7 +240,10 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Gogo, Master of Mimicry", 522, Rarity.MYTHIC, mage.cards.g.GogoMasterOfMimicry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gogo, Master of Mimicry", 54, Rarity.MYTHIC, mage.cards.g.GogoMasterOfMimicry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gohn, Town of Ruin", 278, Rarity.COMMON, mage.cards.g.GohnTownOfRuin.class));
-        cards.add(new SetCardInfo("Golbez, Crystal Collector", 225, Rarity.RARE, mage.cards.g.GolbezCrystalCollector.class));
+        cards.add(new SetCardInfo("Golbez, Crystal Collector", 225, Rarity.RARE, mage.cards.g.GolbezCrystalCollector.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Golbez, Crystal Collector", 395, Rarity.RARE, mage.cards.g.GolbezCrystalCollector.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Golbez, Crystal Collector", 490, Rarity.RARE, mage.cards.g.GolbezCrystalCollector.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Golbez, Crystal Collector", 540, Rarity.RARE, mage.cards.g.GolbezCrystalCollector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gongaga, Reactor Town", 280, Rarity.COMMON, mage.cards.g.GongagaReactorTown.class));
         cards.add(new SetCardInfo("Goobbue Gardener", 188, Rarity.COMMON, mage.cards.g.GoobbueGardener.class));
         cards.add(new SetCardInfo("Gran Pulse Ochu", 189, Rarity.COMMON, mage.cards.g.GranPulseOchu.class));
@@ -359,7 +364,8 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 575, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mysidian Elder", 145, Rarity.COMMON, mage.cards.m.MysidianElder.class));
         cards.add(new SetCardInfo("Namazu Trader", 107, Rarity.COMMON, mage.cards.n.NamazuTrader.class));
-        cards.add(new SetCardInfo("Neo Exdeath, Dimension's End", 220, Rarity.UNCOMMON, mage.cards.n.NeoExdeathDimensionsEnd.class));
+        cards.add(new SetCardInfo("Neo Exdeath, Dimension's End", 220, Rarity.UNCOMMON, mage.cards.n.NeoExdeathDimensionsEnd.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Neo Exdeath, Dimension's End", 485, Rarity.UNCOMMON, mage.cards.n.NeoExdeathDimensionsEnd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nibelheim Aflame", 146, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nibelheim Aflame", 339, Rarity.MYTHIC, mage.cards.n.NibelheimAflame.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ninja's Blades", 108, Rarity.RARE, mage.cards.n.NinjasBlades.class));
@@ -663,6 +669,7 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 404, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 517, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yuna, Hope of Spira", 549, Rarity.MYTHIC, mage.cards.y.YunaHopeOfSpira.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Zack Fair", 435, Rarity.UNCOMMON, mage.cards.z.ZackFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zack Fair", 45, Rarity.UNCOMMON, mage.cards.z.ZackFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zack Fair", 580, Rarity.UNCOMMON, mage.cards.z.ZackFair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zanarkand, Ancient Metropolis", 293, Rarity.RARE, mage.cards.z.ZanarkandAncientMetropolis.class, NON_FULL_USE_VARIOUS));

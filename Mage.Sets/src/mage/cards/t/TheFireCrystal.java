@@ -47,7 +47,7 @@ public final class TheFireCrystal extends CardImpl {
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.WhileControlled,
+                HasteAbility.getInstance(), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_PERMANENT_CREATURES
         )));
 

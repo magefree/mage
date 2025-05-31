@@ -11,7 +11,7 @@ import mage.game.match.MatchOptions;
 public class FakeMatch extends MatchImpl {
 
     public FakeMatch() {
-        super(new MatchOptions("fake match", "fake game type", true, 2));
+        super(new MatchOptions("fake match", "fake game type", false));
     }
 
     @Override

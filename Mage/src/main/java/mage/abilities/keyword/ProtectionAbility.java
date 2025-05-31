@@ -81,8 +81,8 @@ public class ProtectionAbility extends StaticAbility {
         if (this.staticText != null && !this.staticText.isEmpty()) {
             return this.staticText;
         }
-        return (flavorWord == null ? "protection from " : CardUtil.italicizeWithEmDash(flavorWord) + "Protection from ")
-                + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove Auras.");
+        return addRulePrefix("protection from ") + filter.getMessage() +
+                (removeAuras ? "" : ". This effect doesn't remove Auras.");
     }
 
     public ProtectionAbility setText(String text) {
