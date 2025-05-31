@@ -47,7 +47,7 @@ public final class DarkSphere extends CardImpl {
 
 class DarkSpherePreventionEffect extends PreventNextDamageFromChosenSourceEffect {
 
-    private static final FilterSource filter = new FilterSource("source of your choice");
+    private static final FilterSource filter = new FilterSource("source");
 
     public DarkSpherePreventionEffect() {
         super(Duration.EndOfTurn, true, filter);
