@@ -3,7 +3,6 @@ package org.mage.test.cards.single.woe;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -21,7 +20,6 @@ public class ThePrincessTakesFlightTest extends CardTestPlayerBase {
      */
     private static final String flight = "The Princess Takes Flight";
 
-    @Ignore // goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay() {
         addCard(Zone.HAND, playerA, flight, 1);
