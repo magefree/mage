@@ -20,4 +20,7 @@ public interface TargetAdjuster extends Serializable {
      */
     default void addDefaultTargets(Ability ability) {
     }
+
+    default void clearDefaultTargets() {
+    }
 }

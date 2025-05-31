@@ -1,9 +1,9 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.abilities.keyword.DisguiseAbility;
 import mage.cards.CardImpl;
@@ -32,10 +32,9 @@ public final class Boltbender extends CardImpl {
         this.addAbility(new DisguiseAbility(this, new ManaCostsImpl<>("{1}{R}")));
 
         // When Boltbender is turned face up, you may choose new targets for any number of other spells and/or abilities.
-        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ChooseNewTargetsTargetEffect()
-                .setText("you may choose new targets for any number of other spells and/or abilities"));
-        ability.addTarget(new TargetStackObject(0, Integer.MAX_VALUE, StaticFilters.FILTER_SPELL_OR_ABILITY));
-        this.addAbility(ability);
+        this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new OneShotNonTargetEffect(
+                new ChooseNewTargetsTargetEffect().setText("you may choose new targets for any number of other spells and/or abilities"),
+                new TargetStackObject(0, Integer.MAX_VALUE, StaticFilters.FILTER_SPELL_OR_ABILITY))));
     }
 
     private Boltbender(final Boltbender card) {

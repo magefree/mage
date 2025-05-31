@@ -1,22 +1,25 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.PartnerWithAbility;
-import mage.cards.*;
-import mage.constants.*;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.keyword.DoctorsCompanionAbility;
+import mage.abilities.keyword.PartnerWithAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSuspendedCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,10 +44,9 @@ public final class AmyPond extends CardImpl {
         this.addAbility(new PartnerWithAbility("Rory Williams"));
 
         // Whenever Amy Pond deals combat damage to a player, choose a suspended card you own and remove that many time counters from it.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new AmyPondEffect(SavedDamageValue.MANY),
-                false, true);
-        ability.addTarget(new TargetCardInExile(filter).withNotTarget(true));
-        this.addAbility(ability);
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new OneShotNonTargetEffect(
+                new AmyPondEffect(SavedDamageValue.MANY), new TargetCardInExile(filter)),
+                false, true));
 
         // Doctor's companion
         this.addAbility(DoctorsCompanionAbility.getInstance());
@@ -68,7 +70,7 @@ class AmyPondEffect extends OneShotEffect {
     AmyPondEffect(DynamicValue numberCounters) {
         super(Outcome.Benefit);
         this.numberCounters = numberCounters;
-        this.staticText= "choose a suspended card you own and remove that many time counters from it";
+        this.staticText = "choose a suspended card you own and remove that many time counters from it";
     }
 
     private AmyPondEffect(final AmyPondEffect effect) {
