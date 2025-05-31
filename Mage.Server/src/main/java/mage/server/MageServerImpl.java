@@ -998,7 +998,7 @@ public class MageServerImpl implements MageServer {
 
     public void handleException(Exception ex) throws MageException {
         if (ex.getMessage() != null && !ex.getMessage().equals("No message")) {
-            throw new MageException("Server error: " + ex.getMessage());
+            throw new MageException(ex.getMessage());
         }
 
         if (ex instanceof ConcurrentModificationException) {
