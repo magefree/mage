@@ -47,7 +47,7 @@ public final class ShantottoTacticianMagician extends CardImpl {
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
                 ShantottoTacticianMagicianCondition.instance,
-                "If X is 4 or greater, draw a card"
+                "If X is 4 or more, draw a card"
         ));
         this.addAbility(ability);
     }

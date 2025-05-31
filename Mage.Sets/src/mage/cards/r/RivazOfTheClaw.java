@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
+import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -50,7 +50,7 @@ public final class RivazOfTheClaw extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(2, new ConditionalSpellManaBuilder(manaAbilityFilter)));
 
         // Once during each of your turns, you may cast a Dragon creature spell from your graveyard.
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(staticAbilityFilter));
+        this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(staticAbilityFilter));
 
         // Whenever you cast a Dragon creature spell from your graveyard, it gains "When this creature dies, exile it."
         this.addAbility(new SpellCastControllerTriggeredAbility(

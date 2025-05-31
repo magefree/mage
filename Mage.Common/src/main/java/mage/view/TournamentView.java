@@ -54,6 +54,8 @@ public class TournamentView implements Serializable {
 
         if (tournament.getTournamentState().equals("Drafting") && tournament.getDraft() != null) {
             runningInfo = "booster/card: " + tournament.getDraft().getBoosterNum() + '/' + (tournament.getDraft().getCardNum());
+        } else if (tournament.getOptions().getMatchOptions().isSingleGameTourney()) {
+            runningInfo = "running single game match";
         } else {
             runningInfo = "";
         }

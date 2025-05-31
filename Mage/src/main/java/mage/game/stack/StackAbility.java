@@ -584,6 +584,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public String addRulePrefix(String rule) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public Ability withFirstModeFlavorWord(String flavorWord) {
         throw new UnsupportedOperationException("Not supported.");
     }

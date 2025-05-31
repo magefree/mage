@@ -578,7 +578,7 @@ public class LoadTest {
     }
 
     private MatchOptions createSimpleGameOptions(String gameName, GameTypeView gameTypeView, Session session, PlayerType playersType) {
-        MatchOptions options = new MatchOptions(gameName, gameTypeView.getName(), true, 2);
+        MatchOptions options = new MatchOptions(gameName, gameTypeView.getName(), true);
 
         options.getPlayerTypes().add(playersType);
         options.getPlayerTypes().add(playersType);

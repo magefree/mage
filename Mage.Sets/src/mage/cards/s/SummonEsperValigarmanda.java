@@ -48,7 +48,7 @@ public final class SummonEsperValigarmanda extends CardImpl {
 
         // II, III, IV -- Add {R} for each lore counter on this Saga. You may cast an instant or sorcery card exiled with this Saga, and mana of any type can be spent to cast that spell.
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_IV,
+                this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_IV,
                 new SummonEsperValigarmandaCastEffect()
         );
         this.addAbility(sagaAbility);

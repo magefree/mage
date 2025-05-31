@@ -156,13 +156,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public boolean checkUsedAlready(Game game) {
-        if (!doOnlyOnceEachTurn) {
-            return false;
-        }
-        Integer lastTurnUsed = (Integer) game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnUsed" + getOriginalId(), sourceId, game)
-        );
-        return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
+        return doOnlyOnceEachTurn && TriggeredAbility.checkDidThisTurn(this, game);
     }
 
     @Override
@@ -209,7 +203,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce) {
         this.doOnlyOnceEachTurn = doOnlyOnce;
-        setOptional();
+        if (CardUtil.castStream(this.getAllEffects(), DoIfCostPaid.class).noneMatch(DoIfCostPaid::isOptional)) {
+            this.optional = true;
+        }
         return this;
     }
 
@@ -268,11 +264,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             )) {
                 return false;
             }
-        }
-        if (doOnlyOnceEachTurn) {
-            game.getState().setValue(CardUtil.getCardZoneString(
-                    "lastTurnUsed" + getOriginalId(), sourceId, game
-            ), game.getTurnNum());
+            if (doOnlyOnceEachTurn) {
+                TriggeredAbility.setDidThisTurn(this, game);
+            }
         }
         //20091005 - 603.4
         if (!super.resolve(game)) {
@@ -300,16 +294,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder();
-        String prefix;
-        if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = "";
-        }
-        sb.append(prefix);
-
         sb.append(triggerPhrase == null ? "" : triggerPhrase);
 
         if (interveningIfCondition != null) {
@@ -382,11 +366,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" Do this only once each turn.");
             }
         }
-        return sb.toString();
+        return addRulePrefix(sb.toString());
     }
 
     private static boolean startsWithVerb(String ruleLow) {
         return ruleLow.startsWith("attach")
+                || ruleLow.startsWith("cast")
                 || ruleLow.startsWith("change")
                 || ruleLow.startsWith("counter")
                 || ruleLow.startsWith("create")
@@ -499,20 +484,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean isOptional() {
         return optional;
-    }
-
-    @Override
-    public TriggeredAbility setOptional() {
-        this.optional = true;
-
-        if (getEffects().stream().anyMatch(
-                effect -> effect instanceof DoIfCostPaid && ((DoIfCostPaid) effect).isOptional())) {
-            throw new IllegalArgumentException(
-                    "DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): "
-                            + this.getClass().getSimpleName());
-        }
-
-        return this;
     }
 
     @Override

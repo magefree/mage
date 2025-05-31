@@ -129,8 +129,12 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonskull Summit", 387, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 388, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Duskshell Crawler", 301, Rarity.COMMON, mage.cards.d.DuskshellCrawler.class));
+        cards.add(new SetCardInfo("Edgar, Master Machinist", 169, Rarity.RARE, mage.cards.e.EdgarMasterMachinist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Edgar, Master Machinist", 80, Rarity.RARE, mage.cards.e.EdgarMasterMachinist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elena, Turk Recruit", 133, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elena, Turk Recruit", 18, Rarity.RARE, mage.cards.e.ElenaTurkRecruit.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emet-Selch of the Third Seat", 170, Rarity.RARE, mage.cards.e.EmetSelchOfTheThirdSeat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emet-Selch of the Third Seat", 81, Rarity.RARE, mage.cards.e.EmetSelchOfTheThirdSeat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Endless Detour", 324, Rarity.RARE, mage.cards.e.EndlessDetour.class));
         cards.add(new SetCardInfo("Espers to Magicite", 114, Rarity.RARE, mage.cards.e.EspersToMagicite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Espers to Magicite", 43, Rarity.RARE, mage.cards.e.EspersToMagicite.class, NON_FULL_USE_VARIOUS));
@@ -158,6 +162,11 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fortified Village", 396, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
         cards.add(new SetCardInfo("Furious Rise", 294, Rarity.UNCOMMON, mage.cards.f.FuriousRise.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 397, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 172, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 203, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 211, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 222, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("G'raha Tia, Scion Reborn", 3, Rarity.MYTHIC, mage.cards.g.GrahaTiaScionReborn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Game Trail", 398, Rarity.RARE, mage.cards.g.GameTrail.class));
         cards.add(new SetCardInfo("Gatta and Luzzu", 134, Rarity.RARE, mage.cards.g.GattaAndLuzzu.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gatta and Luzzu", 19, Rarity.RARE, mage.cards.g.GattaAndLuzzu.class, NON_FULL_USE_VARIOUS));

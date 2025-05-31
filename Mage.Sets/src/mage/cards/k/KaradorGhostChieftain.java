@@ -3,14 +3,13 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
+import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -18,12 +17,9 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class KaradorGhostChieftain extends CardImpl {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a creature spell");
 
     public KaradorGhostChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{B}{G}");
@@ -39,7 +35,7 @@ public final class KaradorGhostChieftain extends CardImpl {
                 new KaradorGhostChieftainCostReductionEffect()));
 
         // Once during each of your turns, you may cast a creature spell from your graveyard.
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter));
+        this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(StaticFilters.FILTER_CARD_A_CREATURE_SPELL));
     }
 
     private KaradorGhostChieftain(final KaradorGhostChieftain card) {

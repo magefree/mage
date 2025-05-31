@@ -16,33 +16,38 @@ import mage.target.TargetSource;
  * @author LevelX2
  */
 
-public class PreventDamageBySourceEffect extends PreventionEffectImpl {
+public class PreventDamageByChosenSourceEffect extends PreventionEffectImpl {
 
     private TargetSource target;
     private MageObjectReference mageObjectReference;
 
-    public PreventDamageBySourceEffect() {
-        this(new FilterObject("a"));
+    public PreventDamageByChosenSourceEffect() {
+        this(new FilterObject("a source"));
     }
 
-    public PreventDamageBySourceEffect(FilterObject filterObject) {
-        super(Duration.EndOfTurn);
+    public PreventDamageByChosenSourceEffect(FilterObject filterObject) {
+        this(filterObject, false);
+    }
+
+    public PreventDamageByChosenSourceEffect(FilterObject filterObject, boolean onlyCombat) {
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, onlyCombat);
         if (!filterObject.getMessage().endsWith("source")) {
             filterObject.setMessage(filterObject.getMessage() + " source");
         }
         this.target = new TargetSource(filterObject);
-        staticText = "Prevent all damage " + filterObject.getMessage() + " of your choice would deal this turn";
+        staticText = "Prevent all" + (onlyCombat ? " combat" : "")
+                + " damage " + filterObject.getMessage() + " of your choice would deal this turn";
     }
 
-    protected PreventDamageBySourceEffect(final PreventDamageBySourceEffect effect) {
+    protected PreventDamageByChosenSourceEffect(final PreventDamageByChosenSourceEffect effect) {
         super(effect);
         this.target = effect.target.copy();
         this.mageObjectReference = effect.mageObjectReference;
     }
 
     @Override
-    public PreventDamageBySourceEffect copy() {
-        return new PreventDamageBySourceEffect(this);
+    public PreventDamageByChosenSourceEffect copy() {
+        return new PreventDamageByChosenSourceEffect(this);
     }
 
     @Override

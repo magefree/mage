@@ -244,7 +244,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_PACKS_DRAFT = "newTournamentPacksDraft";
     public static final String KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT = "newTournamentPacksRandomDraft";
     public static final String KEY_NEW_TOURNAMENT_NUMBER_PLAYERS = "newTournamentNumberPlayers";
-    public static final String KEY_NEW_TOURNAMENT_NUMBER_SEATS = "newTournamentNumberSeats";
+    public static final String KEY_NEW_TOURNAMENT_SINGLE_MULTIPLAYER_GAME = "newTournamentSingleMultiplayerGame";
     public static final String KEY_NEW_TOURNAMENT_PLAYER_TYPES = "newTournamentPlayerTypes";
     public static final String KEY_NEW_TOURNAMENT_PLAYER_SKILLS = "newTournamentPlayerSkills";
     public static final String KEY_NEW_TOURNAMENT_DRAFT_TIMING = "newTournamentDraftTiming";

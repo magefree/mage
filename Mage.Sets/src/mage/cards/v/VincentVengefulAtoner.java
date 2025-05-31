@@ -44,7 +44,7 @@ public final class VincentVengefulAtoner extends CardImpl {
         // Chaos -- Whenever Vincent deals combat damage to an opponent, it deals that much damage to each other opponent if Vincent's power is 7 or greater.
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(
                 new VincentVengefulAtonerEffect(), false, true, true
-        ));
+        ).withFlavorWord("Chaos"));
     }
 
     private VincentVengefulAtoner(final VincentVengefulAtoner card) {

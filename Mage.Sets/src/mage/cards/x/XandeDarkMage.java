@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class XandeDarkMage extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("noncreature, nonland card in your graveyard");
+    private static final FilterCard filter = new FilterCard("noncreature, nonland card");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));

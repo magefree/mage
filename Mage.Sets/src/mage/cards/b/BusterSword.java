@@ -1,10 +1,10 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageEquippedTriggeredAbility;
+import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -36,7 +36,9 @@ public final class BusterSword extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 2)));
 
         // Whenever equipped creature deals combat damage to a player, draw a card, then you may cast a spell from your hand with mana value less than or equal to that damage without paying its mana cost.
-        Ability ability = new DealsCombatDamageEquippedTriggeredAbility(new DrawCardTargetEffect(1));
+        Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), "equipped", false
+        );
         ability.addEffect(new BusterSwordEffect());
         this.addAbility(ability);
 

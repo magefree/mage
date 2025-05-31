@@ -32,6 +32,7 @@ public final class MonksFist extends CardImpl {
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.MONK, AttachmentType.EQUIPMENT
         ).setText("and is a Monk in addition to its other types"));
+        this.addAbility(ability);
 
         // Equip {2}
         this.addAbility(new EquipAbility(2));

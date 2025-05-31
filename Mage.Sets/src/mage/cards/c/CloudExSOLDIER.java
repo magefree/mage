@@ -87,7 +87,7 @@ class CloudExSOLDIEREntersEffect extends OneShotEffect {
 
     CloudExSOLDIEREntersEffect() {
         super(Outcome.Benefit);
-        staticText = "attach up to one target Equipment you control to {this}";
+        staticText = "attach up to one target Equipment you control to it";
     }
 
     private CloudExSOLDIEREntersEffect(final CloudExSOLDIEREntersEffect effect) {

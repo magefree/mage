@@ -126,7 +126,7 @@ class TheDayOfTheDoctorChooseEffect extends OneShotEffect {
                 game.getBattlefield()
                         .getActivePermanents(
                                 StaticFilters.FILTER_PERMANENT_CREATURE,
-                                source.getSourceId(), source, game
+                                source.getControllerId(), source, game
                         )
                         .stream()
                         .filter(permanent -> !target.getTargets()

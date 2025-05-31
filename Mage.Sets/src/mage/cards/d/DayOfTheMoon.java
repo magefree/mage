@@ -79,7 +79,7 @@ class DayOfTheMoonEffect extends OneShotEffect {
         String cardName = cardChoice.getChoice();
         List<String> names = getOrSetValue(game, source);
         names.add(cardName);
-        names.removeIf(Objects::nonNull);
+        names.removeIf(Objects::isNull);
         if (names.isEmpty()) {
             return true;
         }
