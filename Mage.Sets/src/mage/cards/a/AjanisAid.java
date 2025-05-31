@@ -11,8 +11,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterSource;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.PermanentPredicate;
 
 import java.util.UUID;
 
@@ -22,8 +23,11 @@ import java.util.UUID;
 public final class AjanisAid extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Ajani, Valiant Protector");
+    private static final FilterSource filterSource = new FilterSource("creature of your choice");
 
     static {
+        filter.add(PermanentPredicate.instance);
+        filter.add(CardType.CREATURE.getPredicate());
         filter.add(new NamePredicate("Ajani, Valiant Protector"));
     }
 
@@ -35,7 +39,7 @@ public final class AjanisAid extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter), true));
 
         // Sacrifice Ajani's Aid: Prevent all combat damage a creature of your choice would deal this turn.
-        Effect effect = new PreventDamageByChosenSourceEffect(new FilterCreaturePermanent("creature of your choice"), true);
+        Effect effect = new PreventDamageByChosenSourceEffect(filterSource, true);
         this.addAbility(new SimpleActivatedAbility(effect, new SacrificeSourceCost()));
     }
 

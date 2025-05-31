@@ -5,7 +5,7 @@ import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterObject;
+import mage.filter.FilterSource;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -50,22 +50,22 @@ public class PreventNextDamageFromChosenSourceEffect extends PreventionEffectImp
     };
 
     public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou) {
-        this(duration, toYou, new FilterObject("source"));
+        this(duration, toYou, new FilterSource());
     }
 
-    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterObject filter) {
+    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterSource filter) {
         this(duration, toYou, filter, false, null);
     }
 
     public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, ApplierOnPrevention onPrevention) {
-        this(duration, toYou, new FilterObject("source"), onPrevention);
+        this(duration, toYou, new FilterSource(), onPrevention);
     }
 
-    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterObject filter, ApplierOnPrevention onPrevention) {
+    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterSource filter, ApplierOnPrevention onPrevention) {
         this(duration, toYou, filter, false, onPrevention);
     }
 
-    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterObject filter, boolean onlyCombat, ApplierOnPrevention onPrevention) {
+    public PreventNextDamageFromChosenSourceEffect(Duration duration, boolean toYou, FilterSource filter, boolean onlyCombat, ApplierOnPrevention onPrevention) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.targetSource = new TargetSource(filter);
         this.toYou = toYou;

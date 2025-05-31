@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,23 +12,23 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterObject;
+import mage.filter.FilterSource;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetSource;
 
+import java.util.UUID;
+
 /**
- *
  * @author ThomasLerner
  */
 public final class DarkSphere extends CardImpl {
 
     public DarkSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
-        
+
 
         // {tap}, Sacrifice Dark Sphere: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
         Ability ability = new SimpleActivatedAbility(new DarkSpherePreventionEffect(), new TapSourceCost());
@@ -51,13 +50,13 @@ public final class DarkSphere extends CardImpl {
 class DarkSpherePreventionEffect extends ReplacementEffectImpl {
 
     private final TargetSource targetSource;
-    
+
     public DarkSpherePreventionEffect() {
         super(Duration.OneUse, Outcome.RedirectDamage);
         this.staticText = "The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down";
-        this.targetSource = new TargetSource(new FilterObject("source of your choice"));
+        this.targetSource = new TargetSource(new FilterSource("source of your choice"));
     }
-    
+
     private DarkSpherePreventionEffect(final DarkSpherePreventionEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
@@ -95,7 +94,7 @@ class DarkSpherePreventionEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getSourceId().equals(targetSource.getFirstTarget()) && event.getTargetId().equals(source.getControllerId())) {
@@ -103,5 +102,5 @@ class DarkSpherePreventionEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-    
+
 }
