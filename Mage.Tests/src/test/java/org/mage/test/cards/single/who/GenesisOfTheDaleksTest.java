@@ -34,6 +34,7 @@ public class GenesisOfTheDaleksTest extends CardTestPlayerBase {
         checkPermanentCount("T5: after III", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Dalek Token", 6);
 
         // turn 7
+        addTarget(playerA, playerB);
         setChoice(playerB, true); // choose Destroy all Dalek creatures and each of your opponents loses life equal to the total power of Daleks that died this turn
 
         setStrictChooseMode(true);
