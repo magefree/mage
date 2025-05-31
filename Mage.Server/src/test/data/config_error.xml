@@ -105,6 +105,9 @@
         <draftCube name="MTGO Legendary Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCube"/>
         <draftCube name="MTGO Legendary Cube April 2016" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.LegendaryCubeApril2016"/>
         <draftCube name="MTGO Modern Cube 2017" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.ModernCube2017"/>
+        <draftCube name="MTGO Vintage Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOVintageCube"/>
+        <!-- outdated cubes - will be removed on next releases -->
+        <!--
         <draftCube name="MTGO Vintage Cube 2013" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCube2013"/>
         <draftCube name="MTGO Vintage Cube 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCube2014"/>
         <draftCube name="MTGO Vintage Cube 2015" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCube2015"/>
@@ -119,6 +122,7 @@
         <draftCube name="MTGO Vintage Cube December 2019" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCubeDecember2019"/>
         <draftCube name="MTGO Vintage Cube April 2020" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCubeApril2020"/>
         <draftCube name="MTGO Vintage Cube July 2020" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.VintageCubeJuly2020"/>
+        -->
         <draftCube name="SCG Con Cube 2018 December" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.ScgConCube2018December"/>
         <draftCube name="The Peasant's Toolbox" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.PeasantsToolboxCube"/>
         <draftCube name="www.MTGCube.com" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGCube"/>

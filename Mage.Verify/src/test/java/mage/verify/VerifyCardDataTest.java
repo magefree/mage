@@ -24,6 +24,8 @@ import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
+import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.*;
@@ -42,6 +44,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 import mage.game.permanent.token.custom.XmageToken;
 import mage.sets.TherosBeyondDeath;
 import mage.target.targetpointer.TargetPointer;
+import mage.tournament.cubes.CubeFromDeck;
 import mage.util.CardUtil;
 import mage.utils.SystemUtil;
 import mage.verify.mtgjson.MtgJsonCard;
@@ -3090,7 +3093,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void test_checkCardsInCubes() {
+    public void test_checkCardsInCubes() throws Exception {
         Reflections reflections = new Reflections("mage.tournament.cubes.");
         Set<Class<? extends DraftCube>> cubesList = reflections.getSubTypesOf(DraftCube.class);
         Assert.assertFalse("Can't find any cubes", cubesList.isEmpty());
@@ -3103,7 +3106,24 @@ public class VerifyCardDataTest {
                 continue;
             }
 
-            DraftCube cube = (DraftCube) createNewObject(cubeClass);
+            // cube from deck must use real deck to check complete
+            DraftCube cube;
+            if (cubeClass.isAssignableFrom(CubeFromDeck.class)) {
+                DeckCardLists deckCardLists = new DeckCardLists();
+                deckCardLists.setCards(Arrays.asList(
+                        new DeckCardInfo("Adanto Vanguard", "1", "XLN"),
+                        new DeckCardInfo("Boneyard Parley", "94", "XLN"),
+                        new DeckCardInfo("Forest", "276", "XLN")
+                ));
+                Deck deck = Deck.load(deckCardLists, true);
+                Constructor<?> con = cubeClass.getConstructor(Deck.class);
+                cube = (DraftCube) con.newInstance(deck);
+                Assert.assertFalse(deckCardLists.getCards().isEmpty());
+                Assert.assertEquals("deck must be loaded to cube", cube.getCubeCards().size(), deckCardLists.getCards().size());
+                Assert.assertTrue("cube's name must contains cards count", cube.getName().contains(deckCardLists.getCards().size() + " cards"));
+            } else {
+                cube = (DraftCube) createNewObject(cubeClass);
+            }
             if (cube.getCubeCards().isEmpty()) {
                 errorsList.add("Error: broken cube, empty cards list: " + cube.getClass().getCanonicalName());
             }
