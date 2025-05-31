@@ -1,12 +1,11 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterObject;
+import mage.filter.FilterSource;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
@@ -19,14 +18,14 @@ public class PreventNextDamageFromChosenSourceToTargetEffect extends PreventionE
     protected final TargetSource targetSource;
 
     public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration) {
-        this(duration, new FilterObject<>("source"));
+        this(duration, new FilterSource());
     }
 
-    public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration, FilterObject<MageObject> filter) {
+    public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration, FilterSource filter) {
         this(duration, filter, false);
     }
 
-    public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration, FilterObject<MageObject> filter, boolean onlyCombat) {
+    public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration, FilterSource filter, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.targetSource = new TargetSource(filter);
     }

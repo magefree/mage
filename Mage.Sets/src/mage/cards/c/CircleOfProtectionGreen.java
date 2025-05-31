@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.FilterObject;
+import mage.filter.FilterSource;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class CircleOfProtectionGreen extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("green source");
+    private static final FilterSource filter = new FilterSource("green source");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
