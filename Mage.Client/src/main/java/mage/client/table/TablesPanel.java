@@ -1694,13 +1694,13 @@ public class TablesPanel extends javax.swing.JPanel {
             DeckCardLists testDeck = DeckImporter.importDeckFromFile(testDeckFile, false);
 
             PlayerType aiType = useMonteCarloAI ? PlayerType.COMPUTER_MONTE_CARLO : PlayerType.COMPUTER_MAD;
-            int numSeats = gameName.contains("2") || gameName.contains("Monte Carlo") ? 2 : 4;
-            boolean multiPlayer = numSeats > 2;
+            int numPlayers = gameName.contains("2") || gameName.contains("Monte Carlo") ? 2 : 4;
+            boolean multiPlayer = numPlayers > 2;
 
-            MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer, numSeats);
+            MatchOptions options = new MatchOptions(gameName, gameType, multiPlayer);
             options.getPlayerTypes().add(PlayerType.HUMAN);
             options.getPlayerTypes().add(aiType);
-            for (int i=2 ; i < numSeats ; i++) {
+            for (int i=2 ; i < numPlayers ; i++) {
                 options.getPlayerTypes().add(aiType);
             }
             options.setDeckType("Variant Magic - Freeform Commander");
@@ -1720,7 +1720,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
             SessionHandler.joinTable(roomId, table.getTableId(), "Human", PlayerType.HUMAN, 1, testDeck, "");
             SessionHandler.joinTable(roomId, table.getTableId(), "Computer", aiType, 1, testDeck, "");
-            for (int i=2 ; i < numSeats ; i++) {
+            for (int i=2 ; i < numPlayers ; i++) {
                 SessionHandler.joinTable(roomId, table.getTableId(), "Computer" + i, aiType, 1, testDeck, "");
             }
             SessionHandler.startMatch(roomId, table.getTableId());
