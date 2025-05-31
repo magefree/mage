@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterSource;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.mageobject.PermanentPredicate;
+import mage.filter.predicate.mageobject.InstanceOfPermanentPredicate;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public final class CircleOfProtectionShadow extends CardImpl {
     private static final FilterSource filter = new FilterSource("a creature of your choice with shadow");
 
     static {
-        filter.add(PermanentPredicate.instance);
+        filter.add(InstanceOfPermanentPredicate.instance);
         filter.add(CardType.CREATURE.getPredicate());
         filter.add(new AbilityPredicate(ShadowAbility.class));
     }

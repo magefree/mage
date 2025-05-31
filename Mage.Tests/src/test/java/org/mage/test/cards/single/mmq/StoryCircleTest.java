@@ -97,7 +97,7 @@ public class StoryCircleTest extends CardTestPlayerBase {
         setChoice(playerA, "Green"); // color chosen
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{W}");
-        setChoice(playerA, "Goblin Piker"); // TODO: this should not be a valid choice for TargetSource(chosencolor)
+        // no valid choice
 
         attack(2, playerB, "Goblin Piker", playerA);
 
@@ -105,7 +105,7 @@ public class StoryCircleTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertLife(playerA, 20); // TODO: Should not prevent.
+        assertLife(playerA, 20 - 2);
         assertTappedCount("Plains", true, 4);
     }
 
@@ -144,13 +144,13 @@ public class StoryCircleTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{W}", null, "Lightning Bolt");
-        setChoice(playerA, "Lightning Bolt"); // TODO: this should not be a valid choice for TargetSource(chosencolor)
+        // no valid choice
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertLife(playerA, 20); // TODO: Should not prevent.
+        assertLife(playerA, 20 - 3);
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertTappedCount("Plains", true, 4);
     }
@@ -192,13 +192,13 @@ public class StoryCircleTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Blisterstick Shaman");
         addTarget(playerB, playerA); // target for Shaman trigger
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{W}", null, "stack ability (When");
-        setChoice(playerA, "Blisterstick Shaman");  // TODO: this should not be a valid choice for TargetSource(chosencolor)
+        // no valid choice
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertLife(playerA, 20); // TODO: Should not prevent.
+        assertLife(playerA, 20 - 1);
         assertPermanentCount(playerB, "Blisterstick Shaman", 1);
         assertTappedCount("Plains", true, 4);
     }
@@ -238,14 +238,14 @@ public class StoryCircleTest extends CardTestPlayerBase {
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{R},", playerA);
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{W}", null, "stack ability ({R}");
-        setChoice(playerA, "Anaba Shaman"); // TODO: this should not be a valid choice for TargetSource(chosencolor)
+        // no valid choice
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         assertTappedCount("Anaba Shaman", true, 1);
-        assertLife(playerA, 20); // TODO: Should not prevent.
+        assertLife(playerA, 20 - 1);
         assertTappedCount("Plains", true, 4);
     }
 }

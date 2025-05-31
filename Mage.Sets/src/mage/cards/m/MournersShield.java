@@ -95,6 +95,7 @@ class MournersShieldImprintEffect extends OneShotEffect {
     }
 }
 
+// TODO: should not be needed with the proper FilterSource and PreventDamageByChosenSourceEffect
 class MournersShieldEffect extends PreventionEffectImpl {
 
     private TargetSource target;
