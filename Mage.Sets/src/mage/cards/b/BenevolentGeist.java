@@ -35,7 +35,7 @@ public final class BenevolentGeist extends CardImpl {
 
         // Noncreature spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(
-                StaticFilters.FILTER_SPELLS_NON_CREATURE, null, Duration.WhileOnBattlefield
+                StaticFilters.FILTER_SPELLS_NON_CREATURE, Duration.WhileOnBattlefield
         )));
 
         // If Benevolent Geist would be put into a graveyard from anywhere, exile it instead.

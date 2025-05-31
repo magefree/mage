@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,13 +8,13 @@ import mage.abilities.effects.common.CantBeCounteredControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class ProwlingSerpopard extends CardImpl {
@@ -38,7 +37,7 @@ public final class ProwlingSerpopard extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility());
 
         // Creature spells you control can't be countered.
-        this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(filterTarget, Duration.WhileOnBattlefield)));
     }
 
     private ProwlingSerpopard(final ProwlingSerpopard card) {
