@@ -48,7 +48,7 @@ public final class GrahaTiaScionReborn extends CardImpl {
                 new GrahaTiaScionRebornEffect(),
                 new PayLifeCost(
                         GrahaTiaScionRebornValue.instance,
-                        "pay X life, where X is that spell's mana value"
+                        "X life, where X is that spell's mana value"
                 )
         ), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false).setDoOnlyOnceEachTurn(true).withFlavorWord("Throw Wide the Gates"));
     }

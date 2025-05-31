@@ -31,6 +31,7 @@ public final class SOLDIERMilitaryProgram extends CardImpl {
         // At the beginning of combat on your turn, choose one. If you control a commander, you may choose both instead.
         // * Create a 1/1 white Soldier creature token.
         Ability ability = new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new SoldierToken()));
+        ability.getModes().setChooseText("choose one. If you control a commander, you may choose both instead.");
         ability.getModes().setMoreCondition(2, ControlACommanderCondition.instance);
 
         // * Put a +1/+1 counter on each of up to two Soldiers you control.
