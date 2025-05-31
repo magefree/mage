@@ -2224,7 +2224,6 @@ public abstract class GameImpl implements Game {
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
         if (source != null) {
-            newAbility.initSourceObjectZoneChangeCounter(this, true);
             // Relevant ruling:
             // 603.7e If an activated or triggered ability creates a delayed triggered ability,
             // the source of that delayed triggered ability is the same as the source of that other ability.
@@ -2236,11 +2235,13 @@ public abstract class GameImpl implements Game {
             //
             // There are two possibility for the zcc:
             // 1/ the source is an Ability with a valid (not 0) zcc, and we must use the same.
-            if (newAbility.getSourceObjectZoneChangeCounter() == 0) {
+            int zcc = source.getSourceObjectZoneChangeCounter();
+            if (zcc == 0) {
                 // 2/ the source has not a valid zcc (it is most likely a StaticAbility instantiated at beginning of game)
                 //    we use the source objects's zcc
-                newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+                zcc = getState().getZoneChangeCounter(source.getSourceId());
             }
+            newAbility.setSourceObjectZoneChangeCounter(zcc);
             newAbility.setSourcePermanentTransformCount(this);
         }
         newAbility.init(this);

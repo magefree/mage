@@ -1709,7 +1709,7 @@ public abstract class AbilityImpl implements Ability {
 
     private int getCurrentSourceObjectZoneChangeCounter(Game game){
         int zcc = game.getState().getZoneChangeCounter(getSourceId());
-        if (game.getPermanentEntering(getSourceId()) != null){
+        if (game.getPermanentEntering(getSourceId()) != null && game.getPermanent(getSourceId()) == null){
             // If the triggered ability triggered while the permanent is entering the battlefield
             // then add 1 zcc so that it triggers as if the permanent was already on the battlefield
             // So "Enters with counters" causes "Whenever counters are placed" to trigger with battlefield zcc

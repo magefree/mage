@@ -38,7 +38,7 @@ public class SigardasSplendorTest extends CardTestPlayerBase {
         checkHandCount("Did not draw on 1st upkeep (2)", 3, PhaseStep.END_TURN, playerA, 2); //-2 sigarda, +1 natural draw, +1 trigger
         checkLife("Initial life", 3, PhaseStep.END_TURN, playerA, 21);
 
-        setChoice(playerA, ""); //stack triggers
+        setChoice(playerA, "At the beginning of your upkeep"); //stack triggers
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertPermanentCount(playerA, sigardasSplendor, 2);
@@ -67,7 +67,7 @@ public class SigardasSplendorTest extends CardTestPlayerBase {
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Scorching Spear", playerA);
         checkLife("Post-spear 2", 4, PhaseStep.END_TURN, playerA, 19);
 
-        setChoice(playerA, ""); //stack triggers
+        setChoice(playerA, "At the beginning of your upkeep"); //stack triggers
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
         execute();
         assertPermanentCount(playerA, sigardasSplendor, 2);
