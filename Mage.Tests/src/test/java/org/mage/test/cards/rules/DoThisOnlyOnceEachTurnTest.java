@@ -124,4 +124,31 @@ public class DoThisOnlyOnceEachTurnTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
     }
+
+    private static final String emetSelch = "Emet-Selch of the Third Seat";
+    private static final String hazard = "Tectonic Hazard";
+    private static final String slinger = "Goblin Fireslinger";
+
+    @Test
+    public void testEmetSelch() {
+        addCard(Zone.HAND, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, emetSelch);
+        addCard(Zone.BATTLEFIELD, playerA, slinger, 2);
+        addCard(Zone.GRAVEYARD, playerA, hazard);
+
+        // player is unable to cast spell despite choosing to, choice is reset
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:", playerB);
+        addTarget(playerA, hazard);
+        setChoice(playerA, true);
+
+        // this time player can cast and does, so ability doesn't trigger again
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mountain");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}:", playerB);
+        addTarget(playerA, hazard);
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        execute();
+        assertLife(playerB, 20 - 1 - 1 - 1);
+    }
 }
