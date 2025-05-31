@@ -108,6 +108,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 485, Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", 486, Rarity.COMMON, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Commander's Sphere", 339, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+        cards.add(new SetCardInfo("Conformer Shuriken", 127, Rarity.RARE, mage.cards.c.ConformerShuriken.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Conformer Shuriken", 98, Rarity.RARE, mage.cards.c.ConformerShuriken.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Conqueror's Flail", 340, Rarity.RARE, mage.cards.c.ConquerorsFlail.class));
         cards.add(new SetCardInfo("Contaminated Aquifer", 383, Rarity.COMMON, mage.cards.c.ContaminatedAquifer.class));
         cards.add(new SetCardInfo("Coveted Jewel", 341, Rarity.RARE, mage.cards.c.CovetedJewel.class));
