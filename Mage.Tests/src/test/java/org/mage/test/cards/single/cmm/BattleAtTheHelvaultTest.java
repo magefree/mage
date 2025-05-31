@@ -19,7 +19,7 @@ public class BattleAtTheHelvaultTest extends CardTestPlayerBase {
      */
     private static final String battle = "Battle at the Helvault";
 
-    @Ignore // goal of #11619 is to fix this nicely
+    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay() {
         addCard(Zone.HAND, playerA, battle, 1);

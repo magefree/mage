@@ -20,7 +20,7 @@ public class TrialOfATimeLordTest extends CardTestPlayerBase {
      */
     private static final String trial = "Trial of a Time Lord";
 
-    @Ignore // goal of #11619 is to fix this nicely
+    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay() {
         addCard(Zone.HAND, playerA, trial, 1);

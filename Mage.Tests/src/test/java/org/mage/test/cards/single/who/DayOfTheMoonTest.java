@@ -18,7 +18,7 @@ public class DayOfTheMoonTest extends CardTestPlayerBase {
      */
     private static final String day = "Day of the Moon";
 
-    @Ignore // goal of #11619 is to fix this nicely
+    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay() {
         addCard(Zone.HAND, playerA, day, 1);
