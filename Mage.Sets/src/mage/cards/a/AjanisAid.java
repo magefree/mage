@@ -12,8 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.FilterSource;
+import mage.filter.predicate.mageobject.InstanceOfPermanentPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.mageobject.PermanentPredicate;
 
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ public final class AjanisAid extends CardImpl {
     private static final FilterSource filterSource = new FilterSource("creature of your choice");
 
     static {
-        filter.add(PermanentPredicate.instance);
+        filter.add(InstanceOfPermanentPredicate.instance);
         filter.add(CardType.CREATURE.getPredicate());
         filter.add(new NamePredicate("Ajani, Valiant Protector"));
     }

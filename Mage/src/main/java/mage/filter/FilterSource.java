@@ -11,7 +11,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
-import mage.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,7 @@ public class FilterSource extends FilterObject<MageObject> {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
 
-        // verify check
+        // verify check -- make sure predicates work with all 3 Class that could be a Source
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class, Card.class, StackObject.class);
 
         extraPredicates.add(predicate);
@@ -56,7 +55,9 @@ public class FilterSource extends FilterObject<MageObject> {
 
     @Override
     public boolean checkObjectClass(Object object) {
-        return object instanceof Player;
+        return object instanceof Permanent
+                || object instanceof Card
+                || object instanceof StackObject;
     }
 
     public boolean match(MageObject object, UUID sourceControllerId, Ability source, Game game) {
