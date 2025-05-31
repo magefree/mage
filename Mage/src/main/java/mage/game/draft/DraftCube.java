@@ -11,6 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * Data sources by priority:
+ * - official mtgo website
+ * - cubecobra (big amount of cubes but can be outdated)
+ *
  * @author LevelX2, JayDi85
  */
 public abstract class DraftCube {

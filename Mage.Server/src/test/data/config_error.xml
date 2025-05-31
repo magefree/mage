@@ -33,16 +33,4 @@
     <playerTypes>
         <playerType name="Human" jar="mage-player-human.jar" className="mage.player.human.HumanPlayer"/>
     </playerTypes>
-    <gameTypes>
-        <gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
-    </gameTypes>
-    <tournamentTypes>
-        <tournamentType name="Constructed Elimination" jar="mage-tournament-constructed.jar" className="mage.tournament.ConstructedEliminationTournament" typeName="mage.tournament.ConstructedEliminationTournamentType"/>
-    </tournamentTypes>
-    <draftCubes>
-        <draftCube name="Adam Styborski's Pauper Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.AdamStyborskisPauperCube"/>
-    </draftCubes>
-    <deckTypes>
-        <deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
-    </deckTypes>
 </config>

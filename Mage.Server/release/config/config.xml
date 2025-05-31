@@ -107,7 +107,7 @@
         <tournamentType name="Jumpstart Elimination (Custom)" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.JumpstartCustomEliminationTournament" typeName="mage.tournament.JumpstartCustomEliminationTournamentType"/>
     </tournamentTypes>
     <draftCubes>
-        <draftCube name="Adam Styborski's Pauper Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.AdamStyborskisPauperCube"/>
+        <draftCube name="The Pauper Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.PauperCube"/>
         <draftCube name="Ben's Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.BensCube"/>
         <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
         <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor720"/>
