@@ -979,7 +979,11 @@ public final class CardUtil {
             sb.append(counter.getDescription());
         }
         if (!targetPlayerGets) {
-            sb.append(add ? " on " : " from ").append(description);
+            sb.append(add ? " on " : " from ");
+            if (description.contains("up to")) {
+                sb.append("each of ");
+            }
+            sb.append(description);
         }
         if (!amount.getMessage().isEmpty()) {
             sb.append(xValue ? ", where X is " : " for each ").append(amount.getMessage());
