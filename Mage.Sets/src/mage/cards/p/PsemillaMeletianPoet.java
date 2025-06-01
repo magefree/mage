@@ -3,14 +3,20 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.NymphToken;
@@ -25,6 +31,14 @@ import java.util.stream.Collectors;
  * @author TheElk801
  */
 public final class PsemillaMeletianPoet extends CardImpl {
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledEnchantmentPermanent("you control five or more enchantments"),
+            ComparisonType.MORE_THAN, 4
+    );
+    private static final Hint hint = new ValueHint(
+            "Enchantments you control", new PermanentsOnBattlefieldCount(new FilterControlledEnchantmentPermanent())
+    );
 
     public PsemillaMeletianPoet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -44,11 +58,11 @@ public final class PsemillaMeletianPoet extends CardImpl {
                 new BoostSourceEffect(4, 4, Duration.EndOfTurn)
                         .setText("{this} gets +4/+4"),
                 false
-        );
+        ).withInterveningIf(condition);
         ability.addEffect(new GainAbilitySourceEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains lifelink until end of turn"));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(hint));
     }
 
     private PsemillaMeletianPoet(final PsemillaMeletianPoet card) {
