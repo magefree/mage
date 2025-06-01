@@ -6,8 +6,10 @@ import mage.abilities.hint.ValueHint;
 import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.hint.common.GatesYouControlHint;
-import mage.filter.StaticFilters;
 import mage.filter.common.*;
+import mage.filter.predicate.mageobject.HistoricPredicate;
+import mage.filter.predicate.mageobject.OutlawPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.util.CardUtil;
 
 /**
@@ -16,14 +18,14 @@ import mage.util.CardUtil;
 public enum AffinityType {
     ARTIFACTS(new FilterControlledArtifactPermanent("artifacts"), ArtifactYouControlHint.instance),
     CREATURES(new FilterControlledCreaturePermanent("creatures"), CreaturesYouControlHint.instance),
-    ARTIFACT_CREATURES(StaticFilters.FILTER_AFFINITY_ARTIFACT_CREATURES),
+    ARTIFACT_CREATURES(AffinityFilters.ARTIFACT_CREATURES),
     ENCHANTMENTS(new FilterControlledEnchantmentPermanent("enchantments")),
     PLANESWALKERS(new FilterControlledPlaneswalkerPermanent("planeswalker")),
 
     EQUIPMENT(new FilterControlledPermanent(SubType.EQUIPMENT, "Equipment"), "Equipment"),
     AURAS(new FilterControlledPermanent(SubType.AURA, "Auras")),
     FOOD(new FilterControlledPermanent(SubType.FOOD, "Food"), "Food"),
-    TOKENS(StaticFilters.FILTER_AFFINITY_TOKENS),
+    TOKENS(AffinityFilters.TOKENS),
 
     PLAINS(new FilterControlledPermanent(SubType.PLAINS, "Plains")),
     ISLANDS(new FilterControlledPermanent(SubType.ISLAND, "Islands")),
@@ -41,9 +43,9 @@ public enum AffinityType {
     CITIZENS(new FilterControlledPermanent(SubType.CITIZEN, "Citizens")),
     TOWNS(new FilterControlledPermanent(SubType.TOWN, "Towns")),
     GATES(new FilterControlledPermanent(SubType.GATE, "Gates"), GatesYouControlHint.instance),
-    SNOW_LANDS(StaticFilters.FILTER_AFFINITY_SNOW_LANDS),
-    HISTORIC(StaticFilters.FILTER_AFFINITY_HISTORIC),
-    OUTLAWS(StaticFilters.FILTER_AFFINITY_OUTLAWS);
+    SNOW_LANDS(AffinityFilters.SNOW_LANDS),
+    HISTORIC(AffinityFilters.HISTORIC),
+    OUTLAWS(AffinityFilters.OUTLAWS);
 
     private final FilterControlledPermanent filter;
     private final Hint hint;
@@ -80,5 +82,38 @@ public enum AffinityType {
 
     public String getSingularName() {
         return singularName;
+    }
+}
+
+class AffinityFilters {
+    public static final FilterControlledPermanent TOKENS = new FilterControlledPermanent("tokens");
+
+    static {
+        TOKENS.add(TokenPredicate.TRUE);
+    }
+
+    public static final FilterControlledPermanent SNOW_LANDS = new FilterControlledLandPermanent("snow lands");
+
+    static {
+        SNOW_LANDS.add(SuperType.SNOW.getPredicate());
+    }
+
+    public static final FilterControlledPermanent OUTLAWS = new FilterControlledPermanent("outlaws");
+
+    static {
+        OUTLAWS.add(OutlawPredicate.instance);
+    }
+
+    public static final FilterControlledPermanent HISTORIC = new FilterControlledPermanent("historic permanents");
+
+    static {
+        HISTORIC.add(HistoricPredicate.instance);
+    }
+
+    public static final FilterControlledPermanent ARTIFACT_CREATURES = new FilterControlledPermanent("artifact creatures");
+
+    static {
+        ARTIFACT_CREATURES.add(CardType.ARTIFACT.getPredicate());
+        ARTIFACT_CREATURES.add(CardType.CREATURE.getPredicate());
     }
 }
