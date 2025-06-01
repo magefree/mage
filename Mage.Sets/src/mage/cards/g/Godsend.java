@@ -167,7 +167,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     GodsendRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Your opponents can't cast cards with the same name as cards exiled with {this}";
+        staticText = "Your opponents can't cast spells with the same name as a card exiled with {this}";
     }
 
     private GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {
