@@ -1774,8 +1774,9 @@ public final class CardUtil {
             // Waiting on actual ruling of Ashiok, Wicked Manipulator.
             return true;
         }
-        if (player.loseLife(lifeToPay, game, source, false) >= lifeToPay) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lifeToPay));
+        int lostLife = player.loseLife(lifeToPay, game, source, false);
+        if (lostLife > 0) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lostLife));
             return true;
         }
 
