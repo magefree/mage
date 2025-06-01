@@ -17,7 +17,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -61,7 +61,7 @@ public final class KitesailLarcenist extends CardImpl {
                 "remains on the battlefield, the chosen permanents become Treasure artifacts with " +
                 "\"{T}, Sacrifice this artifact: Add one mana of any color\" and lose all other abilities"));
         ability.addTarget(new TargetPermanent(0, 1, filter));
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(false, true));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
         this.addAbility(ability);
     }
 

@@ -25,7 +25,7 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
@@ -44,7 +44,7 @@ public final class TurfWar extends CardImpl {
                 new AddCountersTargetEffect(CounterType.CONTESTED.createInstance()).setTargetPointer(new EachTargetPointer())
                         .setText("for each player, put a contested counter on target land that player controls"));
         ability.addTarget(new TargetLandPermanent());
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(false, true));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
         this.addAbility(ability);
 
         // Whenever a creature deals combat damage to a player, if that player controls one or more lands with contested counters on them, that creature's controller gains control of one of those lands of their choice and untaps it.

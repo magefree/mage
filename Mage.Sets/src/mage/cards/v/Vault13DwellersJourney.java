@@ -22,7 +22,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInExile;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
@@ -62,7 +62,7 @@ public final class Vault13DwellersJourney extends CardImpl {
                                     "creature that player controls until {this} leaves the battlefield")
                             .setTargetPointer(new EachTargetPointer()));
                     triggeredAbility.addTarget(new TargetPermanent(0, 1, filter));
-                    triggeredAbility.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(false, true));
+                    triggeredAbility.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
                 }
         );
 

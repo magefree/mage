@@ -13,7 +13,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.util.CardUtil;
 
@@ -48,7 +48,7 @@ public final class GuffRewritesHistory extends CardImpl {
                                 + "Each player may cast the nonland card they exiled without paying its mana cost.")
         );
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster(false, true));
+        this.getSpellAbility().setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
     }
 
     private GuffRewritesHistory(final GuffRewritesHistory card) {

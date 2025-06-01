@@ -16,25 +16,19 @@ import java.util.stream.Stream;
 /**
  * @author notgreat
  */
-public class ForEachOpponentTargetsAdjuster extends GenericTargetAdjuster {
+public class ForEachPlayerTargetsAdjuster extends GenericTargetAdjuster {
     private final boolean owner;
-    private final boolean includeSelf; //Makes this a "For Each Player" adjuster
+    private final boolean onlyOpponents; //Makes this a "For Each Opponent" adjuster
 
     /**
-     * Duplicates the permanent target for each opponent.
+     * Duplicates the permanent target for each player (or opponent).
      * Filtering of permanent's controllers will be handled inside, so
      * do not pass a blueprint target with a controller restriction filter/predicate.
      */
-    public ForEachOpponentTargetsAdjuster() {
-        this(false);
-    }
 
-    public ForEachOpponentTargetsAdjuster(boolean owner) {
-        this(owner, false);
-    }
-    public ForEachOpponentTargetsAdjuster(boolean owner, boolean includeSelf) {
+    public ForEachPlayerTargetsAdjuster(boolean owner, boolean onlyOpponents) {
         this.owner = owner;
-        this.includeSelf = includeSelf;
+        this.onlyOpponents = onlyOpponents;
     }
 
     @Override
@@ -50,10 +44,10 @@ public class ForEachOpponentTargetsAdjuster extends GenericTargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
         Stream<UUID> ids;
-        if (includeSelf) {
-            ids = game.getState().getPlayersInRange(ability.getControllerId(), game).stream();
-        } else {
+        if (onlyOpponents) {
             ids = game.getOpponents(ability.getControllerId()).stream();
+        } else {
+            ids = game.getState().getPlayersInRange(ability.getControllerId(), game).stream();
         }
         ids.forEach( id -> {
             Player opponent = game.getPlayer(id);

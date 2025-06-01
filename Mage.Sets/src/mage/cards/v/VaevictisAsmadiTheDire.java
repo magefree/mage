@@ -15,7 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public final class VaevictisAsmadiTheDire extends CardImpl {
         // Whenever Vaevictis Asmadi, the Dire attacks, for each player, choose target permanent that player controls. Those players sacrifice those permanents. Each player who sacrificed a permanent this way reveals the top card of their library, then puts it onto the battlefield if it's a permanent card.
         Ability ability = new AttacksTriggeredAbility(new VaevictisAsmadiTheDireEffect());
         ability.addTarget(new TargetPermanent());
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(false, true));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
         this.addAbility(ability);
     }
 

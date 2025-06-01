@@ -15,7 +15,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -41,7 +41,7 @@ public final class DemonicJunker extends CardImpl {
                 .setTargetPointer(new EachTargetPointer()))
                 .setTriggerPhrase("When this Vehicle enters, ");
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(false, true));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
         this.addAbility(ability);
 
         // Crew 2

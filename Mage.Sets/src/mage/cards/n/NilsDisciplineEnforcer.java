@@ -16,7 +16,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class NilsDisciplineEnforcer extends CardImpl {
                 new NilsDisciplineEnforcerCountersEffect()
         );
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(false, true));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
         this.addAbility(ability);
 
         // Each creature with one or more counters on it can't attack you or planeswalkers you control unless its controller pays {X}, where X is the number of counters on that creature.

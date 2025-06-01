@@ -12,7 +12,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.AvacynToken;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -44,7 +44,7 @@ public final class BattleAtTheHelvault extends CardImpl {
                                     "nonland permanent that player controls until {this} leaves the battlefield")
                             .setTargetPointer(new EachTargetPointer()));
                     ability.addTarget(new TargetPermanent(0, 1, filter));
-                    ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(false, true));
+                    ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
                 });
 
         // III -- Create Avacyn, a legendary 8/8 white Angel creature token with flying, vigilance, and indestructible.
