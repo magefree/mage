@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
@@ -7,6 +8,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,6 +37,16 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
     protected CantGainLifeAllEffect(final CantGainLifeAllEffect effect) {
         super(effect);
         this.targetController = effect.targetController;
+    }
+
+    @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        return false;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return List.of();
     }
 
     @Override

@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -9,6 +10,8 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.*;
 
 /**
  * @author noxx
@@ -29,6 +32,33 @@ public class BoostPairedEffect extends ContinuousEffectImpl {
         super(effect);
         power = effect.power;
         toughness = effect.toughness;
+    }
+
+    @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
+            permanent.addPower(power);
+            permanent.addToughness(toughness);
+        }
+        return true;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Permanent paired = Optional.ofNullable(permanent.getPairedCard())
+                    .map(pairedCard -> pairedCard.getPermanent(game))
+                    .orElse(null);
+            if (paired != null) {
+                return Arrays.asList(permanent, paired);
+            }
+        }
+        return Collections.emptyList();
     }
 
     @Override

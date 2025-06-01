@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -15,8 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
-import java.util.Iterator;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -74,6 +75,19 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
+            permanent.addPower(power.calculate(game, source, this));
+            permanent.addToughness(toughness.calculate(game, source, this));
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet()) {
@@ -89,27 +103,26 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
         if (getAffectedObjectsSet()) {
+            ArrayList<MageObject> objects = new ArrayList<>();
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
                 Permanent permanent = it.next().getPermanent(game);
-                if (permanent != null) {
-                    permanent.addPower(power.calculate(game, source, this));
-                    permanent.addToughness(toughness.calculate(game, source, this));
-                } else {
-                    it.remove(); // no longer on the battlefield, remove reference to object
+                if (permanent == null) {
+                    it.remove();
+                    continue;
                 }
+                objects.add(permanent);
             }
-        } else {
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if (perm.isControlledBy(source.getControllerId())
-                        && (!(excludeSource && perm.getId().equals(source.getSourceId())))) {
-                    perm.addPower(power.calculate(game, source, this));
-                    perm.addToughness(toughness.calculate(game, source, this));
-                }
-            }
+            return objects;
         }
-        return true;
+        return game.getBattlefield()
+                .getActivePermanents(filter, source.getControllerId(), source, game)
+                .stream()
+                .filter(permanent -> permanent.isControlledBy(source.getControllerId())
+                        && !(excludeSource && permanent.getId().equals(source.getSourceId())))
+                .collect(Collectors.toList());
+
     }
 
     private void setText() {
