@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -33,12 +33,12 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (objects.isEmpty()) {
             this.discard();
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
@@ -57,7 +57,7 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         return affectedObjectList.stream()
                 .map(mor -> mor.getPermanent(game))
                 .filter(Objects::nonNull)

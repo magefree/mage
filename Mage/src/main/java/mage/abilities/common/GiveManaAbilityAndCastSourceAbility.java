@@ -96,12 +96,12 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (WasCastFromExileWatcher.check((MageObjectReference) getValue("exiledHandCardRef"), game)) {
             discard();
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
@@ -111,7 +111,7 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }

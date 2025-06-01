@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
@@ -64,7 +64,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         return affectedObjectList.stream()
                 .map(mor -> mor.getPermanent(game))
                 .filter(Objects::nonNull)
@@ -73,19 +73,19 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (objects.isEmpty()) {
             this.discard();
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
             Permanent permanent = (Permanent) object;
             BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(game, permanent);
             if (faceDownType != null) {
-                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, source.getId(), object, faceDownType, null);
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, source.getId(), permanent, faceDownType, null);
             }
         }
         return true;

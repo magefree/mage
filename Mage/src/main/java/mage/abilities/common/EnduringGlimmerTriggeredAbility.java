@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
-import mage.*;
+import mage.MageItem;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -11,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -80,12 +80,12 @@ class EnduringGlimmerTypeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (objects.isEmpty()) {
             discard();
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (object instanceof Permanent) {
                 Permanent permanent = (Permanent) object;
                 permanent.retainAllEnchantmentSubTypes(game);
@@ -97,7 +97,7 @@ class EnduringGlimmerTypeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }

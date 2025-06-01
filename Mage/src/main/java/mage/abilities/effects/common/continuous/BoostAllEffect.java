@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -102,8 +102,8 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
-        for (MageObject object : objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
@@ -130,8 +130,8 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        ArrayList<MageObject> objects = new ArrayList<>();
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        ArrayList<MageItem> objects = new ArrayList<>();
         if (getAffectedObjectsSet()) {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
                 Permanent permanent = it.next().getPermanent(game);

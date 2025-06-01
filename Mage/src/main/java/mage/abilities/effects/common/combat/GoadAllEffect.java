@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.combat;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -50,12 +50,12 @@ public class GoadAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (objects.isEmpty()) {
             discard();
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
@@ -79,8 +79,8 @@ public class GoadAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        ArrayList<MageObject> objects = new ArrayList<>();
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        ArrayList<MageItem> objects = new ArrayList<>();
         if (getAffectedObjectsSet()) {
             affectedObjectList.removeIf(mor -> !mor.zoneCounterIsCurrent(game));
             for (MageObjectReference mor : affectedObjectList) {

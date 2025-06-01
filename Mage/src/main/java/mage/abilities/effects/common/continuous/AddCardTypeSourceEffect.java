@@ -1,12 +1,13 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +43,16 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (objects.isEmpty() && this.duration == Duration.Custom) {
             this.discard();
             return false;
         }
-        for (MageObject object : objects) {
-            object.addCardType(game, addedCardTypes.toArray(new CardType[0]));
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            ((Permanent) object).addCardType(game, addedCardTypes.toArray(new CardType[0]));
         }
         return true;
     }
@@ -60,14 +64,14 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        List<MageObject> mageObjects = new ArrayList<>();
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        List<MageItem> objects = new ArrayList<>();
         for (MageObjectReference mor : affectedObjectList) {
             if (mor.refersTo(source.getSourceId(), game) || !duration.isOnlyValidIfNoZoneChange()) {
-                mageObjects.add(mor.getPermanent(game));
+                objects.add(mor.getPermanent(game));
             }
         }
-        return mageObjects;
+        return objects;
     }
 
     @Override

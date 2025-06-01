@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -86,12 +86,12 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (objects.isEmpty() && this.duration == Duration.Custom) {
             this.discard();
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
@@ -170,7 +170,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         return getTargetPointer().getTargets(game, source)
                 .stream()
                 .map(game::getPermanent)

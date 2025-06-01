@@ -100,9 +100,9 @@ class TransformedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         boolean result = false;
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Spell)) {
                 continue;
             }
@@ -113,7 +113,7 @@ class TransformedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Spell spell = game.getSpell(source.getSourceId());
         if (spell != null && spell.getCard().getSecondCardFace() != null) {
             return Collections.singletonList(spell);

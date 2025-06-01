@@ -30,12 +30,12 @@ public class ApplyStatusEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
-        for (MageObject mageObject : objects) {
-            if (!(mageObject instanceof Permanent)) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
                 continue;
             }
-            Permanent permanent = (Permanent) mageObject;
+            Permanent permanent = (Permanent) object;
             if (layer == Layer.AbilityAddingRemovingEffects_6) {
                 for (AbilityCounter counter : permanent.getCounters(game).getAbilityCounters()) {
                     permanent.addAbility(counter.getAbility(), source == null ? permanent.getId() : source.getSourceId(), game);
@@ -59,8 +59,8 @@ public class ApplyStatusEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        List<MageObject> objects = new ArrayList<>();
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        List<MageItem> objects = new ArrayList<>();
         if (layer == Layer.AbilityAddingRemovingEffects_6) {
             objects.addAll(game.getBattlefield().getAllActivePermanents());
         }

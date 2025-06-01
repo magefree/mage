@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
@@ -42,22 +42,23 @@ public class AddCreatureTypeAdditionEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (objects.isEmpty()) {
             this.discard();
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
+            Permanent permanent = (Permanent) object;
             switch (layer) {
                 case TypeChangingEffects_4:
-                    object.addSubType(game, subType);
+                    permanent.addSubType(game, subType);
                     break;
                 case ColorChangingEffects_5:
                     if (this.giveBlackColor) {
-                        object.getColor(game).setBlack(true);
+                        permanent.getColor(game).setBlack(true);
                     }
                     break;
             }
@@ -71,7 +72,7 @@ public class AddCreatureTypeAdditionEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         UUID targetId = Optional.ofNullable(source.getTargets().getFirstTarget())
                 .orElseGet(() -> getTargetPointer().getFirst(game, source));
 

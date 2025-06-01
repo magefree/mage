@@ -33,7 +33,7 @@ public interface ContinuousEffect extends Effect {
 
     void setOrder(long order);
 
-    boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects);
+    boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects);
 
     boolean hasLayer(Layer layer);
 
@@ -52,7 +52,7 @@ public interface ContinuousEffect extends Effect {
 
     SubLayer getSublayer();
 
-    List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game);
+    List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game);
 
     List<MageObjectReference> getAffectedObjects();
 

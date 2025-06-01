@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
@@ -25,21 +25,22 @@ public class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
 
     protected BecomesCreatureIfVehicleEffect(final BecomesCreatureIfVehicleEffect effect) {
         super(effect);
+        this.addedType = effect.addedType;
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
-        for (MageObject object : objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
-            object.addCardType(game, addedType);
+            ((Permanent) object).addCardType(game, addedType);
         }
         return true;
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent aura = game.getPermanent(source.getSourceId());
         if (aura == null) {
             return Collections.emptyList();

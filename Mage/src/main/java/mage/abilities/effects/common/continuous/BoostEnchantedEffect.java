@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -55,12 +55,12 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (getAffectedObjectsSet() && objects.isEmpty()) {
             this.discard();
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
@@ -75,7 +75,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet()) {
-            // Added boosts of activated or triggered abilities exist independent from the source they are created by
+            // Added boosts of activated or triggered abilities exist independent of the source they are created by
             // so a continuous effect for the permanent itself with the attachment is created
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
@@ -87,7 +87,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         if (getAffectedObjectsSet()) {
             Permanent equipment = game.getPermanent(getTargetPointer().getFirst(game, source));
             return equipment != null ? Collections.singletonList(equipment) : Collections.emptyList();

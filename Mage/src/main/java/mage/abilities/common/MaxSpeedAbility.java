@@ -69,11 +69,11 @@ class MaxSpeedAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (ControllerSpeedCount.instance.calculate(game, source, null) < 4) {
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (object instanceof Permanent) {
                 ((Permanent) object).addAbility(ability, source.getSourceId(), game);
                 continue;
@@ -86,7 +86,7 @@ class MaxSpeedAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         MageObject object = game.getPermanent(source.getSourceId());
         if (object == null) {
             object = game.getCard(source.getSourceId());

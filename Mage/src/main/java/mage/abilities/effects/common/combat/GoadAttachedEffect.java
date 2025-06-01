@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.combat;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -28,12 +28,12 @@ public class GoadAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         return false;
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && permanent.getAttachedTo() != null) {
             Permanent attached = game.getPermanent(permanent.getAttachedTo());

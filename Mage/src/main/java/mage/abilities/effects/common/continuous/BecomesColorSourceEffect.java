@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -43,13 +44,16 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (objects.isEmpty()) {
             this.discard();
             return false;
         }
-        for (MageObject object : objects) {
-            object.getColor(game).setColor(setColor);
+        for (MageItem object : objects) {
+            if (!(object instanceof MageObject)) {
+                continue;
+            }
+            ((MageObject) object).getColor(game).setColor(setColor);
         }
         return true;
     }
@@ -77,7 +81,7 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         return sourceObject != null ? Collections.singletonList(sourceObject) : Collections.emptyList();
     }

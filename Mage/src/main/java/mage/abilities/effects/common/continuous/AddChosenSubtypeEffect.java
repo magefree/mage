@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -23,16 +23,19 @@ public class AddChosenSubtypeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-        for (MageObject object : objects) {
-            object.addSubType(game, subType);
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            ((Permanent) object).addSubType(game, subType);
         }
         return true;
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }

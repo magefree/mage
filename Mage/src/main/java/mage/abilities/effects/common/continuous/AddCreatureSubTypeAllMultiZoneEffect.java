@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -69,19 +69,22 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         SubType subType = this.chosenType;
         if (subType == null) {
             subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
         }
-        for (MageObject object : objects) {
-            object.addSubType(subType);
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            ((Permanent) object).addSubType(subType);
         }
         return true;
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         UUID controllerId = source.getControllerId();
         Player controller = game.getPlayer(controllerId);
         SubType subType = this.chosenType;
@@ -91,7 +94,7 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
         if (controller == null || subType == null) {
             return Collections.emptyList();
         }
-        List<MageObject> mageObjects = new ArrayList<>();
+        List<MageItem> mageObjects = new ArrayList<>();
         // creatures cards you own that aren't on the battlefield
         // in graveyard
         for (UUID cardId : controller.getGraveyard()) {

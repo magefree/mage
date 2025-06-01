@@ -99,8 +99,8 @@ class AnimateDeadReplaceAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        List<MageObject> objects = new ArrayList<>();
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        List<MageItem> objects = new ArrayList<>();
         for (MageObjectReference mor : affectedObjectList) {
             Permanent permanent = mor.getPermanent(game);
             if (permanent != null) {
@@ -111,12 +111,12 @@ class AnimateDeadReplaceAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         if (objects.isEmpty()) {
             discard();
             return true;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }

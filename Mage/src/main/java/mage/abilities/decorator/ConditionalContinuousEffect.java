@@ -92,7 +92,7 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         if (!initDone) { // if simpleStaticAbility, init won't be called
             init(source, game);
         }
@@ -107,7 +107,7 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         boolean conditionState = condition.apply(game, source);
         if (conditionState) {
             return effect.applyToObjects(layer, sublayer, source, game, objects);

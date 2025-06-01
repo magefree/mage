@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
@@ -52,7 +52,7 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         Ability ability;
         switch (subType) {
             case PLAINS:
@@ -76,7 +76,7 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
         if (ability == null) {
             return false;
         }
-        for (MageObject object : objects) {
+        for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
             }
@@ -93,7 +93,7 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         return game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), game)
                 .stream()
                 .filter(Objects::nonNull)

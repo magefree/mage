@@ -1,7 +1,7 @@
 
 package mage.abilities.effects.common.combat;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -75,7 +75,7 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         for (Object object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;
@@ -93,7 +93,7 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }

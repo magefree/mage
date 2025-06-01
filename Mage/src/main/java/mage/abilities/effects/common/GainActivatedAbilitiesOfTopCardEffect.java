@@ -1,6 +1,6 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
@@ -33,7 +33,7 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
@@ -48,7 +48,7 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
                 activatedAbilities.add(ability);
             }
         }
-        for (MageObject mageObject : objects) {
+        for (MageItem mageObject : objects) {
             if (!(mageObject instanceof Permanent)) {
                 continue;
             }
@@ -61,7 +61,7 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
     }
 
     @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }
