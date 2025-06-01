@@ -35,8 +35,8 @@ public final class SelfDestruct extends CardImpl {
 
         // Target creature you control deals X damage to any other target and X damage to itself, where X is its power.
         this.getSpellAbility().addEffect(new SelfDestructEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetAnyTarget().setTargetTag(2));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
+        this.getSpellAbility().addTarget(new TargetAnyTarget(filter).setTargetTag(2));
     }
 
     private SelfDestruct(final SelfDestruct card) {

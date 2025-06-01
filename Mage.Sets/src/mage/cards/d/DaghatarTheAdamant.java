@@ -53,7 +53,7 @@ public final class DaghatarTheAdamant extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new MoveCounterTargetsEffect(CounterType.P1P1), new ManaCostsImpl<>("{1}{B/G}{B/G}")
         );
-        ability.addTarget(new TargetCreaturePermanent().withChooseHint("to remove a counter from"));
+        ability.addTarget(new TargetCreaturePermanent().withChooseHint("to remove a counter from").setTargetTag(1));
         ability.addTarget(new TargetPermanent(filter).withChooseHint("to move a counter to").setTargetTag(2));
         this.addAbility(ability);
     }
