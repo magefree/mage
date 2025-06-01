@@ -9,11 +9,11 @@ import mage.game.Game;
 /**
  * @author JayDi85
  */
-public enum GateYouControlHint implements Hint {
+public enum GatesYouControlHint implements Hint {
 
     instance;
 
-    private static final Hint hint = new ValueHint("Gate you control", GateYouControlCount.instance);
+    private static final Hint hint = new ValueHint("Gates you control", GateYouControlCount.instance);
 
     @Override
     public String getText(Game game, Ability ability) {

@@ -1331,4 +1331,43 @@ public final class StaticFilters {
         FILTER_CONTROLLED_CLUE.setLockedFilter(true);
     }
 
+    /**
+     * Affinity Filters
+     * These filters are specifically for affinity abilities
+     */
+    public static final FilterControlledPermanent FILTER_AFFINITY_TOKENS = new FilterControlledPermanent("tokens");
+
+    static {
+        FILTER_AFFINITY_TOKENS.add(TokenPredicate.TRUE);
+        FILTER_AFFINITY_TOKENS.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_AFFINITY_SNOW_LANDS = new FilterControlledLandPermanent("snow lands");
+
+    static {
+        FILTER_AFFINITY_SNOW_LANDS.add(SuperType.SNOW.getPredicate());
+        FILTER_AFFINITY_SNOW_LANDS.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_AFFINITY_OUTLAWS = new FilterControlledPermanent("outlaws");
+
+    static {
+        FILTER_AFFINITY_OUTLAWS.add(OutlawPredicate.instance);
+        FILTER_AFFINITY_OUTLAWS.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_AFFINITY_HISTORIC = new FilterControlledPermanent("historic permanents");
+
+    static {
+        FILTER_AFFINITY_HISTORIC.add(HistoricPredicate.instance);
+        FILTER_AFFINITY_HISTORIC.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_AFFINITY_ARTIFACT_CREATURES = new FilterControlledPermanent("artifact creatures");
+
+    static {
+        FILTER_AFFINITY_ARTIFACT_CREATURES.add(CardType.ARTIFACT.getPredicate());
+        FILTER_AFFINITY_ARTIFACT_CREATURES.add(CardType.CREATURE.getPredicate());
+        FILTER_AFFINITY_ARTIFACT_CREATURES.setLockedFilter(true);
+    }
 }
