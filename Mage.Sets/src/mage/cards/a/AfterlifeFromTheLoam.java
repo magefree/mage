@@ -1,8 +1,5 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
-import mage.abilities.Ability;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
 import mage.abilities.keyword.DelveAbility;
@@ -11,13 +8,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.card.OwnerIdPredicate;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,7 +35,8 @@ public final class AfterlifeFromTheLoam extends CardImpl {
         this.getSpellAbility().addEffect(new AddCardSubTypeTargetEffect(SubType.ZOMBIE, Duration.WhileOnBattlefield)
                 .setTargetPointer(new EachTargetPointer())
                 .setText("they're Zombies in addition to their other types"));
-        this.getSpellAbility().setTargetAdjuster(AfterlifeFromTheLoamAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
+        this.getSpellAbility().setTargetAdjuster(new ForEachPlayerTargetsAdjuster(true, false));
     }
 
     private AfterlifeFromTheLoam(final AfterlifeFromTheLoam card) {
@@ -49,24 +46,5 @@ public final class AfterlifeFromTheLoam extends CardImpl {
     @Override
     public AfterlifeFromTheLoam copy() {
         return new AfterlifeFromTheLoam(this);
-    }
-}
-
-enum AfterlifeFromTheLoamAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            String playerName = ability.isControlledBy(playerId) ? "your" : player.getName() + "'s";
-            FilterCreatureCard filter = new FilterCreatureCard("creature card in " + playerName + " graveyard");
-            filter.add(new OwnerIdPredicate(playerId));
-            ability.addTarget(new TargetCardInGraveyard(0, 1, filter));
-        }
     }
 }

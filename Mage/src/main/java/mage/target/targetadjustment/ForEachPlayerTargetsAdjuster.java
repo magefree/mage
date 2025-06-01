@@ -11,24 +11,24 @@ import mage.target.TargetCard;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author notgreat
  */
-public class ForEachOpponentTargetsAdjuster extends GenericTargetAdjuster {
+public class ForEachPlayerTargetsAdjuster extends GenericTargetAdjuster {
     private final boolean owner;
+    private final boolean onlyOpponents; //Makes this a "For Each Opponent" adjuster
 
     /**
-     * Duplicates the permanent target for each opponent.
+     * Duplicates the permanent target for each player (or opponent).
      * Filtering of permanent's controllers will be handled inside, so
      * do not pass a blueprint target with a controller restriction filter/predicate.
      */
-    public ForEachOpponentTargetsAdjuster() {
-        this(false);
-    }
 
-    public ForEachOpponentTargetsAdjuster(boolean owner) {
+    public ForEachPlayerTargetsAdjuster(boolean owner, boolean onlyOpponents) {
         this.owner = owner;
+        this.onlyOpponents = onlyOpponents;
     }
 
     @Override
@@ -43,21 +43,27 @@ public class ForEachOpponentTargetsAdjuster extends GenericTargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
+        Stream<UUID> ids;
+        if (onlyOpponents) {
+            ids = game.getOpponents(ability.getControllerId()).stream();
+        } else {
+            ids = game.getState().getPlayersInRange(ability.getControllerId(), game).stream();
+        }
+        ids.forEach( id -> {
+            Player opponent = game.getPlayer(id);
             if (opponent == null) {
-                continue;
+                return;
             }
             Target newTarget = blueprintTarget.copy();
             Filter filter = newTarget.getFilter();
             if (owner) {
-                filter.add(new OwnerIdPredicate(opponentId));
+                filter.add(new OwnerIdPredicate(id));
                 newTarget.withTargetName(filter.getMessage() + " (owned by " + opponent.getLogName() + ")");
             } else {
-                filter.add(new ControllerIdPredicate(opponentId));
+                filter.add(new ControllerIdPredicate(id));
                 newTarget.withTargetName(filter.getMessage() + " (controlled by " + opponent.getLogName() + ")");
             }
             ability.addTarget(newTarget);
-        }
+        });
     }
 }

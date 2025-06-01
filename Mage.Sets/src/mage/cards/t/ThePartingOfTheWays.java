@@ -12,7 +12,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public final class ThePartingOfTheWays extends CardImpl {
                     ability.addEffect(new DestroyTargetEffect()
                             .setText("For each opponent, destroy up to one target artifact that player controls"));
                     ability.addTarget(new TargetArtifactPermanent(0, 1));
-                    ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+                    ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
                 }
         );
         this.addAbility(sagaAbility);
