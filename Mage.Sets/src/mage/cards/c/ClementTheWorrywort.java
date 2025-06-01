@@ -94,6 +94,7 @@ class ClementTheWorrywortTriggeredAbility extends EntersBattlefieldThisOrAnother
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
+            this.getTargets().clear();
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent == null) {
                 return false;

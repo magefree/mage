@@ -1,40 +1,40 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterObject;
 import mage.filter.FilterSpell;
+import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
+
+import java.util.UUID;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, Susucr
  */
 public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private FilterSpell filterTarget;
-    private FilterObject filterSource;
+    private FilterSpell filterTarget; // what can't be countered
+    private FilterStackObject filterSource; // can filter on what is countering
 
-    public CantBeCounteredControlledEffect(FilterSpell filterTarget, FilterObject filterSource, Duration duration) {
+    public CantBeCounteredControlledEffect(FilterSpell filterTarget, Duration duration) {
+        this(filterTarget, null, duration);
+    }
+
+    public CantBeCounteredControlledEffect(FilterSpell filterTarget, FilterStackObject filterSource, Duration duration) {
         super(duration, Outcome.Benefit);
         this.filterTarget = filterTarget;
         this.filterSource = filterSource;
         setText();
     }
 
-    public CantBeCounteredControlledEffect(FilterSpell filterTarget, Duration duration) {
-        this(filterTarget, null, duration);
-    }
-
     protected CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
         super(effect);
-        if (effect.filterTarget != null) {
-            this.filterTarget = effect.filterTarget.copy();
-        }
+        this.filterTarget = effect.filterTarget.copy();
         if (effect.filterSource != null) {
             this.filterSource = effect.filterSource.copy();
         }
@@ -52,19 +52,13 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        UUID controllerId = source.getControllerId();
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.isControlledBy(source.getControllerId())
-                && filterTarget.match(spell, source.getControllerId(), source, game)) {
-            if (filterSource == null) {
-                return true;
-            } else {
-                MageObject sourceObject = game.getObject(event.getSourceId());
-                if (filterSource.match(sourceObject, game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        StackObject counterSource = game.getStack().getStackObject(event.getSourceId());
+        return spell != null
+                && spell.isControlledBy(controllerId)
+                && filterTarget.match(spell, controllerId, source, game)
+                && (filterSource == null || filterSource.match(counterSource, controllerId, source, game));
     }
 
     private void setText() {

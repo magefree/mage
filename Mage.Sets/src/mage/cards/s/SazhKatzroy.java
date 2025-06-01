@@ -16,6 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -37,7 +38,7 @@ public final class SazhKatzroy extends CardImpl {
     }
 
     public SazhKatzroy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
@@ -47,13 +48,14 @@ public final class SazhKatzroy extends CardImpl {
 
         // When Sazh Katzroy enters, you may search your library for a Bird or basic land card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true
         ));
 
         // Whenever Sazh Katzroy attacks, put counter on target creature, then double the number of +1/+1 counters on that creature.
         Ability ability = new AttacksTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new DoubleCountersTargetEffect(CounterType.P1P1)
                 .setText(", then double the number of +1/+1 counters on that creature"));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

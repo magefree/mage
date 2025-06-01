@@ -18,6 +18,7 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 import mage.game.permanent.PermanentToken;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -81,7 +82,7 @@ class ComeBackWrongEffect extends OneShotEffect {
             return true;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent creature = game.getPermanent(card.getId());
+        Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (creature != null) {
             game.addDelayedTriggeredAbility(new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(
                     new SacrificeTargetEffect("sacrifice it")

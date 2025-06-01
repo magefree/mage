@@ -47,7 +47,9 @@ public final class SummonEsperRamuh extends CardImpl {
 
         // I -- Judgment Bolt -- This creature deals damage equal to the number of noncreature, nonland cards in your graveyard to target creature an opponent controls.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, ability -> {
-            ability.addEffect(new DamageTargetEffect(xValue));
+            ability.addEffect(new DamageTargetEffect(xValue)
+                    .setText("{this} deals damage equal to the number of noncreature, nonland " +
+                            "cards in your graveyard to target creature an opponent controls"));
             ability.addTarget(new TargetOpponentsCreaturePermanent());
             ability.withFlavorWord("Judgment Bolt");
         });

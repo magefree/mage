@@ -1,34 +1,29 @@
-
 package mage.cards.n;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class NowIKnowMyABCs extends CardImpl {
 
     public NowIKnowMyABCs(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
 
         // At the beginning of your upkeep, if you control permanents with names that include all twenty-six letters of the English alphabet, you win the game.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect()),
-                new NowIKnowMyABCsCondition(),
-                "At the beginning of your upkeep, if you control permanents with names that include all twenty-six letters of the English alphabet, you win the game."));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect()).withInterveningIf(NowIKnowMyABCsCondition.instance));
     }
 
     private NowIKnowMyABCs(final NowIKnowMyABCs card) {
@@ -41,10 +36,8 @@ public final class NowIKnowMyABCs extends CardImpl {
     }
 }
 
-class NowIKnowMyABCsCondition implements Condition {
-
-    public NowIKnowMyABCsCondition() {
-    }
+enum NowIKnowMyABCsCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

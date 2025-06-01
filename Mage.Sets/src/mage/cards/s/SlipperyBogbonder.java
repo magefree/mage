@@ -120,7 +120,7 @@ class SlipperyBogbonderEffect extends OneShotEffect {
                         int num = player.getAmount(
                                 0, entry.getValue().getCount(),
                                 "Choose how many " + entry.getKey()
-                                        + " counters to remove from " + permanent.getLogName(), game
+                                        + " counters to remove from " + permanent.getLogName(), source, game
                         );
                         counterMap.computeIfAbsent(
                                 permanent.getId(), x -> new HashMap<>()

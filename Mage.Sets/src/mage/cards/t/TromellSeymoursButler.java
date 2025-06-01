@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.EnteredThisTurnPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -34,6 +33,12 @@ import java.util.UUID;
  */
 public final class TromellSeymoursButler extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("nontoken creature");
+
+    static {
+        filter.add(TokenPredicate.FALSE);
+    }
+
     public TromellSeymoursButler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
@@ -45,8 +50,7 @@ public final class TromellSeymoursButler extends CardImpl {
 
         // Each other nontoken creature you control enters with an additional +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(new EntersWithCountersControlledEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN,
-                CounterType.P1P1.createInstance(), true
+                filter, CounterType.P1P1.createInstance(), true
         )));
 
         // {1}, {T}: Proliferate X times, where X is the number of nontoken creatures you control that entered this turn.

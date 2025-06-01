@@ -186,8 +186,8 @@ public class StubPlayer extends PlayerImpl {
     }
 
     @Override
-    public int getAmount(int min, int max, String message, Game game) {
-        return 0;
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
+        return min;
     }
 
     @Override

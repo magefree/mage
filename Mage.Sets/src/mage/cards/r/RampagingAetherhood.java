@@ -86,7 +86,7 @@ class RampagingAetherhoodEffect extends OneShotEffect {
         int totalEnergy = controller.getCountersCount(CounterType.ENERGY);
         if (totalEnergy > 0) {
             if (controller.chooseUse(Outcome.Benefit, "Pay one or more {E}? Put that many +1/+1 counters on this creature", source, game)) {
-                int energyToPay = controller.getAmount(1, totalEnergy, "Pay one or more {E}", game);
+                int energyToPay = controller.getAmount(1, totalEnergy, "Pay one or more {E}", source, game);
                 Cost cost = new PayEnergyCost(energyToPay);
                 if (cost.pay(source, game, source, controller.getId(), true)) {
                     new AddCountersSourceEffect(CounterType.P1P1.createInstance(energyToPay), true).apply(game, source);

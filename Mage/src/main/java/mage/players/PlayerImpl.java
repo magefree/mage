@@ -1034,8 +1034,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
-        return putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, anyOrder);
+    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source) {
+        return putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, false);
     }
 
     @Override
@@ -3054,44 +3054,66 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public boolean flipCoin(Ability source, Game game, boolean winnable) {
-        boolean chosen = false;
-        if (winnable) {
-            chosen = this.chooseUse(Outcome.Benefit, "Heads or tails?", "", "Heads", "Tails", source, game);
-            game.informPlayers(getLogName() + " chose " + CardUtil.booleanToFlipName(chosen));
-        }
-        boolean result = this.flipCoinResult(game);
-        FlipCoinEvent event = new FlipCoinEvent(playerId, source, result, chosen, winnable);
-        game.replaceEvent(event);
-        game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(event.getResult())
-                + CardUtil.getSourceLogName(game, source));
-        if (event.getFlipCount() > 1) {
-            boolean canChooseHeads = event.getResult();
-            boolean canChooseTails = !event.getResult();
-            for (int i = 1; i < event.getFlipCount(); i++) {
-                boolean tempFlip = this.flipCoinResult(game);
-                canChooseHeads = canChooseHeads || tempFlip;
-                canChooseTails = canChooseTails || !tempFlip;
-                game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(tempFlip));
+        return flipCoins(source, game, 1, winnable).get(0);
+    }
+
+    @Override
+    public List<Boolean> flipCoins(Ability source, Game game, int amount, boolean winnable) {
+        List<Boolean> results = new ArrayList<>();
+        FlipCoinsEvent flipsEvent = new FlipCoinsEvent(this.getId(), amount, source);
+        game.replaceEvent(flipsEvent);
+        for (int i = 0; i < flipsEvent.getAmount(); i++) {
+            if (flipsEvent.isHeadsAndWon()) {
+                if (winnable) {
+                    game.informPlayers(getLogName() + " chose " + CardUtil.booleanToFlipName(true));
+                }
+                game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(true) + CardUtil.getSourceLogName(game, source));
+                if (winnable) {
+                    game.informPlayers(getLogName() + " won the flip" + CardUtil.getSourceLogName(game, source));
+                }
+                game.fireEvent(new FlipCoinEvent(playerId, source, true, true, winnable).createFlippedEvent());
+                results.add(true);
+                continue;
             }
-            if (canChooseHeads && canChooseTails) {
-                event.setResult(chooseUse(Outcome.Benefit, "Choose which flip to keep",
-                        (event.isWinnable() ? "(You called " + event.getChosenName() + ")" : null),
-                        "Heads", "Tails", source, game
-                ));
+            boolean chosen;
+            if (winnable) {
+                chosen = this.chooseUse(Outcome.Benefit, "Heads or tails?", "", "Heads", "Tails", source, game);
+                game.informPlayers(getLogName() + " chose " + CardUtil.booleanToFlipName(chosen));
             } else {
-                event.setResult(canChooseHeads);
+                chosen = false;
             }
-            game.informPlayers(getLogName() + " chose to keep " + CardUtil.booleanToFlipName(event.getResult()));
-        }
-        if (event.isWinnable()) {
-            game.informPlayers(getLogName() + " " + (event.getResult() == event.getChosen() ? "won" : "lost") + " the flip"
+            boolean result = this.flipCoinResult(game);
+            FlipCoinEvent event = new FlipCoinEvent(playerId, source, result, chosen, winnable);
+            game.replaceEvent(event);
+            game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(event.getResult())
                     + CardUtil.getSourceLogName(game, source));
+            if (event.getFlipCount() > 1) {
+                boolean canChooseHeads = event.getResult();
+                boolean canChooseTails = !event.getResult();
+                for (int j = 1; j < event.getFlipCount(); j++) {
+                    boolean tempFlip = this.flipCoinResult(game);
+                    canChooseHeads = canChooseHeads || tempFlip;
+                    canChooseTails = canChooseTails || !tempFlip;
+                    game.informPlayers(getLogName() + " flipped " + CardUtil.booleanToFlipName(tempFlip));
+                }
+                if (canChooseHeads && canChooseTails) {
+                    event.setResult(chooseUse(Outcome.Benefit, "Choose which flip to keep",
+                            (event.isWinnable() ? "(You called " + event.getChosenName() + ")" : null),
+                            "Heads", "Tails", source, game
+                    ));
+                } else {
+                    event.setResult(canChooseHeads);
+                }
+                game.informPlayers(getLogName() + " chose to keep " + CardUtil.booleanToFlipName(event.getResult()));
+            }
+            if (event.isWinnable()) {
+                game.informPlayers(getLogName() + " " + (event.getResult() == event.getChosen() ? "won" : "lost") + " the flip"
+                        + CardUtil.getSourceLogName(game, source));
+            }
+            game.fireEvent(event.createFlippedEvent());
+            results.add(event.isWinnable() ? event.getResult() == event.getChosen() : event.getResult());
         }
-        game.fireEvent(event.createFlippedEvent());
-        if (event.isWinnable()) {
-            return event.getResult() == event.getChosen();
-        }
-        return event.getResult();
+        return results;
     }
 
     /**

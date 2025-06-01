@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
+import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
@@ -24,14 +24,13 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author justinjohnson14
  */
 public final class ArcadeGannon extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on {this}");
 
-    static{
+    static {
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
                 SubType.HUMAN.getPredicate()
@@ -41,7 +40,7 @@ public final class ArcadeGannon extends CardImpl {
 
     public ArcadeGannon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DOCTOR);
@@ -49,12 +48,12 @@ public final class ArcadeGannon extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Draw a card, then discard a card. Put a quest counter on Arcade Gannon.
-        Ability ability = (new SimpleActivatedAbility(new DrawDiscardControllerEffect(1,1), new TapSourceCost()));
+        Ability ability = (new SimpleActivatedAbility(new DrawDiscardControllerEffect(1, 1), new TapSourceCost()));
         ability.addEffect(new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)));
         this.addAbility(ability);
 
         // For Auld Lang Syne -- Once during each of your turns, you may cast an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon.
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter).withFlavorWord("For Auld Lang Syne"));
+        this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(filter).withFlavorWord("For Auld Lang Syne"));
     }
 
     private ArcadeGannon(final ArcadeGannon card) {

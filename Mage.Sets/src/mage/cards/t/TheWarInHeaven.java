@@ -97,7 +97,7 @@ class TheWarInHeavenEffect extends OneShotEffect {
             Card card = game.getCard(targetId);
             if (card != null) {
                 card.moveToZone(Zone.BATTLEFIELD, source, game, false);
-                Permanent permanent = game.getPermanent(card.getId());
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (permanent != null) {
                     permanent.addCounters(CounterType.NECRODERMIS.createInstance(), source, game);
                     game.addEffect(new AddCardTypeTargetEffect(Duration.Custom, CardType.ARTIFACT)

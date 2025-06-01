@@ -1,9 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -16,16 +13,19 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ThoughtsOfRuin extends CardImpl {
 
     public ThoughtsOfRuin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
 
         // Each player sacrifices a land for each card in your hand.
@@ -78,7 +78,7 @@ class ThoughtsOfRuinEffect extends OneShotEffect {
                         } else {
                             FilterLandPermanent playerFilter = filter.copy();
                             playerFilter.add(new ControllerIdPredicate(playerId));
-                            Target target = new TargetLandPermanent(amount, amount, playerFilter, true);
+                            Target target = new TargetPermanent(amount, amount, playerFilter, true);
                             player.choose(outcome, target, source, game);
                             for (UUID landId : target.getTargets()) {
                                 Permanent permanent = game.getPermanent(landId);
@@ -91,7 +91,7 @@ class ThoughtsOfRuinEffect extends OneShotEffect {
                     }
                 }
                 // sacrifice all lands
-                for (Permanent permanent :permanentsToSacrifice) {
+                for (Permanent permanent : permanentsToSacrifice) {
                     permanent.sacrifice(source, game);
                 }
             }

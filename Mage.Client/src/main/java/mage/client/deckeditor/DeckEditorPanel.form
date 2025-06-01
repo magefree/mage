@@ -533,10 +533,10 @@
                 <Component class="mage.client.deckeditor.DeckLegalityPanel" name="deckLegalityDisplay">
                   <Properties>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[245, 155]"/>
+                      <Dimension value="[245, 255]"/>
                     </Property>
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[85, 155]"/>
+                      <Dimension value="[85, 255]"/>
                     </Property>
                     <Property name="opaque" type="boolean" value="false"/>
                   </Properties>

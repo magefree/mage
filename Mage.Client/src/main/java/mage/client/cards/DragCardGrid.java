@@ -114,12 +114,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         int cardWidth = getCardWidth();
         int cardHeight = getCardHeight();
         int cardTopHeight = CardRenderer.getCardTopHeight(cardWidth);
-        int dx = x % (cardWidth + GRID_PADDING);
-        int col = x / (cardWidth + GRID_PADDING);
+        int dx = x % (cardWidth + getGridPadding());
+        int col = x / (cardWidth + getGridPadding());
         int gridWidth = cardGrid.isEmpty() ? 0 : cardGrid.get(0).size();
 
         int countLabelHeight = getCountLabelHeight();
-        if (dx < GRID_PADDING && col < gridWidth) {
+        if (dx < getGridPadding() && col < gridWidth) {
             // Which row to add to?
             int curY = countLabelHeight;
             int rowIndex = 0;
@@ -142,7 +142,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Insert between two columns
             insertArrow.setIcon(INSERT_COL_ICON);
             insertArrow.setSize(64, 64);
-            insertArrow.setLocation((cardWidth + GRID_PADDING) * col + GRID_PADDING / 2 - 32, curY);
+            insertArrow.setLocation((cardWidth + getGridPadding()) * col + getGridPadding() / 2 - 32, curY);
         } else {
             // Clamp to a new col one after the current last one
             col = Math.min(col, gridWidth);
@@ -184,7 +184,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Position arrow
             insertArrow.setIcon(INSERT_ROW_ICON);
             insertArrow.setSize(64, 32);
-            insertArrow.setLocation((cardWidth + GRID_PADDING) * col + GRID_PADDING + cardWidth / 2 - 32, curY + stackInsertIndex * cardTopHeight - 32);
+            insertArrow.setLocation((cardWidth + getGridPadding()) * col + getGridPadding() + cardWidth / 2 - 32, curY + stackInsertIndex * cardTopHeight - 32);
         }
     }
 
@@ -225,12 +225,12 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         int cardWidth = getCardWidth();
         int cardHeight = getCardHeight();
         int cardTopHeight = CardRenderer.getCardTopHeight(cardWidth);
-        int dx = x % (cardWidth + GRID_PADDING);
-        int col = x / (cardWidth + GRID_PADDING);
+        int dx = x % (cardWidth + getGridPadding());
+        int col = x / (cardWidth + getGridPadding());
         int gridWidth = cardGrid.isEmpty() ? 0 : cardGrid.get(0).size();
 
         int countLabelHeight = getCountLabelHeight();
-        if (dx < GRID_PADDING && col < gridWidth) {
+        if (dx < getGridPadding() && col < gridWidth) {
             // Which row to add to?
             int curY = countLabelHeight;
             int rowIndex = 0;
@@ -334,7 +334,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             // Add new cards to grid
             for (CardView card : cards) {
                 card.setSelected(true);
-                addCardView(card, false);
+                addCardView(card, null);
                 eventSource.fireEvent(card, ClientEventType.DECK_ADD_SPECIFIC_CARD);
             }
             layoutGrid();
@@ -575,7 +575,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
     // Constants
     private static final int DEFAULT_COUNT_LABEL_HEIGHT = 40; // can contain 1 or 2 lines
-    public static final int GRID_PADDING = 10;
+    public static final int GRID_PADDING = 20;
 
     private static final ImageIcon INSERT_ROW_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_row.png"));
     private static final ImageIcon INSERT_COL_ICON = new ImageIcon(DragCardGrid.class.getClassLoader().getResource("editor_insert_col.png"));
@@ -1044,7 +1044,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             selectBySearchPanelC.fill = GridBagConstraints.VERTICAL;
 
             searchByTextField = new JTextField();
-            searchByTextField.setToolTipText("Searches for card names, types, rarity, casting cost and rules text.  NB: Mana symbols are written like {W},{U},{C} etc");
+            searchByTextField.setToolTipText("Search cards by any data like name or mana symbols like {W}, {U}, {C}, etc (use quotes for exact search)");
             searchByTextField.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyReleased(KeyEvent e) {
@@ -1253,10 +1253,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         selectionPanel.setSize(x2 - x1, y2 - y1);
 
         // First and last cols
-        int col1 = x1 / (cardWidth + GRID_PADDING);
-        int col2 = x2 / (cardWidth + GRID_PADDING);
-        int offsetIntoCol2 = x2 % (cardWidth + GRID_PADDING);
-        if (offsetIntoCol2 < GRID_PADDING) {
+        int col1 = x1 / (cardWidth + getGridPadding());
+        int col2 = x2 / (cardWidth + getGridPadding());
+        int offsetIntoCol2 = x2 % (cardWidth + getGridPadding());
+        if (offsetIntoCol2 < getGridPadding()) {
             --col2;
         }
 
@@ -1322,7 +1322,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         // re-insert
         for (CardView card : allCards) {
-            sortIntoGrid(card);
+            sortIntoGrid(card, null);
         }
         trimGrid();
 
@@ -1717,7 +1717,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
                             if (acard.getName().equals(card.getName())) {
                                 CardView pimpedCard = new CardView(acard);
-                                addCardView(pimpedCard, false);
+                                addCardView(pimpedCard, null);
                                 eventSource.fireEvent(pimpedCard, ClientEventType.DECK_ADD_SPECIFIC_CARD);
                                 pimpedCards.put(pimpedCard, 1);
                                 didModify = true;
@@ -1729,7 +1729,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
             if (didModify) {
                 for (CardView c : pimpedCards.keySet()) {
-                    sortIntoGrid(c);
+                    sortIntoGrid(c, null);
                 }
                 trimGrid();
 
@@ -1762,7 +1762,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                         CardView oldestCardView = new CardView(oldestCardInfo.createMockCard());
                         this.removeCardView(card);
                         eventSource.fireEvent(card, ClientEventType.DECK_REMOVE_SPECIFIC_CARD);
-                        this.addCardView(oldestCardView, false);
+                        this.addCardView(oldestCardView, null);
                         eventSource.fireEvent(oldestCardView, ClientEventType.DECK_ADD_SPECIFIC_CARD);
                         newStack.add(oldestCardView);
                     } else {
@@ -1814,10 +1814,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             for (CardView newCard : cardsView.values()) {
                 if (!cardViews.containsKey(newCard.getId())) {
                     // Is a new card
-                    addCardView(newCard, false);
+                    addCardView(newCard, null);
 
                     // Put it into the appropirate place in the grid given the current sort
-                    sortIntoGrid(newCard);
+                    sortIntoGrid(newCard, null);
 
                     // Mark
                     didModify = true;
@@ -1837,7 +1837,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             for (CardView newCard : cardsView.values()) {
                 if (!cardViews.containsKey(newCard.getId())) {
                     // Add the new card
-                    addCardView(newCard, false);
+                    addCardView(newCard, null);
 
                     // Add the new card to tracking
                     Map<String, List<CardView>> forSetCode;
@@ -1889,7 +1889,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 for (List<CardView> orphans : tracked.values()) {
                     for (CardView orphan : orphans) {
                         logger.info("Orphan when setting with layout: ");
-                        sortIntoGrid(orphan);
+                        sortIntoGrid(orphan, null);
                     }
                 }
             }
@@ -1984,7 +1984,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         menu.show(e.getComponent(), e.getX(), e.getY());
     }
 
-    public void addCardView(final CardView card, boolean duplicated) {
+    public void addCardView(final CardView card, final CardView duplicatedFromCard) {
         allCards.add(card);
 
         // Update counts
@@ -2019,8 +2019,8 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         cardContent.add(cardPanel);
         cardViews.put(card.getId(), cardPanel);
 
-        if (duplicated) {
-            sortIntoGrid(card);
+        if (duplicatedFromCard != null) {
+            sortIntoGrid(card, duplicatedFromCard);
             eventSource.fireEvent(card, ClientEventType.DECK_ADD_SPECIFIC_CARD);
 
             // clear grid from empty rows
@@ -2094,7 +2094,21 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
      *
      * @param newCard Card to add to the cardGrid array.
      */
-    private void sortIntoGrid(CardView newCard) {
+    private void sortIntoGrid(CardView newCard, CardView duplicatedFromCard) {
+        // fast put duplicated card to the same place as original
+        if (duplicatedFromCard != null) {
+            for (List<List<CardView>> gridRow : cardGrid) {
+                for (List<CardView> gridStack : gridRow) {
+                    for (int i = 0; i < gridStack.size(); i++) {
+                        if (gridStack.get(i).equals(duplicatedFromCard)) {
+                            gridStack.add(i, newCard);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
         // row 1 must exists
         if (cardGrid.isEmpty()) {
             cardGrid.add(0, new ArrayList<>());
@@ -2336,7 +2350,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 } else {
                     String description = cardSort.getComparator().getCategoryName(stack.get(0));
                     DragCardGrid.updateCountLabel(countLabel, stack.size(), description);
-                    countLabel.setLocation(GRID_PADDING + (cardWidth + GRID_PADDING) * colIndex, currentY - countLabelHeight);
+                    countLabel.setLocation(getGridPadding() + (cardWidth + getGridPadding()) * colIndex, currentY - countLabelHeight);
                     countLabel.setSize(cardWidth, countLabelHeight);
                     countLabel.setVisible(true);
                 }
@@ -2348,7 +2362,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                 for (int i = 0; i < stack.size(); ++i) {
                     CardView card = stack.get(i);
                     MageCard view = cardViews.get(card.getId());
-                    int x = GRID_PADDING + (cardWidth + GRID_PADDING) * colIndex;
+                    int x = getGridPadding() + (cardWidth + getGridPadding()) * colIndex;
                     int y = currentY + i * cardTopHeight;
                     view.setCardBounds(x, y, cardWidth, cardHeight);
                     cardContent.setLayer(view, layerIndex++);
@@ -2356,14 +2370,18 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             }
 
             // Update the max stack size for this row and the max width
-            maxWidth = Math.max(maxWidth, GRID_PADDING + (GRID_PADDING + cardWidth) * gridRow.size());
+            maxWidth = Math.max(maxWidth, getGridPadding() + (getGridPadding() + cardWidth) * gridRow.size());
             maxStackSize.set(rowIndex, rowMaxStackSize);
             currentY += (cardTopHeight * (rowMaxStackSize - 1) + cardHeight) + countLabelHeight;
         }
 
         // Resize card container
-        cardContent.setPreferredSize(new Dimension(maxWidth, currentY - countLabelHeight + GRID_PADDING));
-        //cardContent.setSize(maxWidth, currentY - COUNT_LABEL_HEIGHT + GRID_PADDING);
+        cardContent.setPreferredSize(new Dimension(maxWidth, currentY - countLabelHeight + getGridPadding()));
+        //cardContent.setSize(maxWidth, currentY - COUNT_LABEL_HEIGHT + getGridPadding());
+    }
+
+    private int getGridPadding() {
+        return Math.max(GRID_PADDING, Math.round(cardSizeMod * GRID_PADDING * GUISizeHelper.dialogGuiScale));
     }
 
     public static int getCountLabelHeight() {

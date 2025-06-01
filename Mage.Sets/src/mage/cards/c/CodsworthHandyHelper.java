@@ -10,7 +10,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachTargetToTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.abilities.mana.ConditionalColoredManaAbility;
@@ -18,17 +18,17 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -65,7 +65,7 @@ public final class CodsworthHandyHelper extends CardImpl {
         ));
 
         // {T}: Attach target Aura or Equipment you control to target creature you control. Activate only as a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(new CodsworthHandyHelperEffect(), new TapSourceCost());
+        Ability ability = new ActivateAsSorceryActivatedAbility(new AttachTargetToTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter2));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
@@ -118,51 +118,9 @@ class CodsworthHandyHelperManaCondition implements Condition {
         if (source instanceof SpellAbility) {
             Card card = game.getCard(source.getSourceId());
             return card != null && (
-                    card.getSubtype(game).contains(SubType.AURA) || card.getSubtype(game).contains(SubType.EQUIPMENT)
+                    card.hasSubtype(SubType.AURA, game) || card.hasSubtype(SubType.EQUIPMENT, game)
             );
         }
         return false;
-    }
-}
-class CodsworthHandyHelperEffect extends OneShotEffect {
-
-    CodsworthHandyHelperEffect() {
-        super(Outcome.Benefit);
-        staticText = "Attach target Aura or Equipment you control to target creature you control";
-    }
-
-    private CodsworthHandyHelperEffect(final CodsworthHandyHelperEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CodsworthHandyHelperEffect copy() {
-        return new CodsworthHandyHelperEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent attachment = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (controller == null || attachment == null || creature == null) {
-            return false;
-        }
-
-        if (creature.cantBeAttachedBy(attachment, source, game, true)) {
-            game.informPlayers(attachment.getLogName() + " was not attached to " + creature.getLogName()
-                    + " because it's not a legal target" + CardUtil.getSourceLogName(game, source));
-            return false;
-        }
-        Permanent oldCreature = game.getPermanent(attachment.getAttachedTo());
-        if (oldCreature != null) {
-            oldCreature.removeAttachment(attachment.getId(), source, game);
-        }
-        creature.addAttachment(attachment.getId(), source, game);
-        game.informPlayers(attachment.getLogName() + " was "
-                + (oldCreature != null ? "unattached from " + oldCreature.getLogName() + " and " : "")
-                + "attached to " + creature.getLogName()
-        );
-        return true;
     }
 }

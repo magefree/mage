@@ -1170,6 +1170,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean canBeCopied() {
+        return this.getSpellAbility().canBeCopied();
+    }
+
+    @Override
     public boolean isAllCreatureTypes(Game game) {
         return card.isAllCreatureTypes(game);
     }
@@ -1201,6 +1206,11 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public List<UUID> getAttachments() {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode) {
         throw new UnsupportedOperationException("Not supported.");
     }
 

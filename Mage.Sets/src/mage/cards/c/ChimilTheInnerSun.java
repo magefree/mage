@@ -27,7 +27,7 @@ public final class ChimilTheInnerSun extends CardImpl {
 
         // Spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(
-                new CantBeCounteredControlledEffect(filter, null, Duration.WhileOnBattlefield)
+                new CantBeCounteredControlledEffect(filter, Duration.WhileOnBattlefield)
         ));
 
         // At the beginning of your end step, discover 5.

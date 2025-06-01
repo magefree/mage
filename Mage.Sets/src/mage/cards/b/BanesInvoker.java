@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -30,6 +31,7 @@ public final class BanesInvoker extends CardImpl {
         // Wind Walk — {8}: Up to two target creatures each get +2/+2 and gain flying until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2).setText("up to two target creatures each get +2/+2"), new GenericManaCost(8));
         ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance()).setText("and gain flying until end of turn"));
+        ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability.withFlavorWord("Wind Walk"));
     }
 

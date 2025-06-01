@@ -24,6 +24,8 @@ import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.*;
 import mage.cards.*;
 import mage.cards.decks.CardNameUtil;
+import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.*;
@@ -32,6 +34,7 @@ import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.game.Game;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
@@ -41,6 +44,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 import mage.game.permanent.token.custom.XmageToken;
 import mage.sets.TherosBeyondDeath;
 import mage.target.targetpointer.TargetPointer;
+import mage.tournament.cubes.CubeFromDeck;
 import mage.util.CardUtil;
 import mage.utils.SystemUtil;
 import mage.verify.mtgjson.MtgJsonCard;
@@ -70,7 +74,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "WHO"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "FIN"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
@@ -132,6 +136,7 @@ public class VerifyCardDataTest {
 
         // color
         // skipListAddName(SKIP_LIST_COLOR, set, cardName);
+        skipListAddName(SKIP_LIST_COLOR, "FIN", "Summon: Alexander");
 
         // cost
         // skipListAddName(SKIP_LIST_COST, set, cardName);
@@ -144,16 +149,12 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "FIC", "Sabin, Master Monk"); // temporary
-        skipListAddName(SKIP_LIST_TYPE, "FIN", "Freya Crescent"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        skipListAddName(SKIP_LIST_SUBTYPE, "FIC", "Sabin, Master Monk"); // temporary
-        skipListAddName(SKIP_LIST_SUBTYPE, "FIN", "Freya Crescent"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -311,9 +312,6 @@ public class VerifyCardDataTest {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
                 check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
             } else if (card instanceof CardWithSpellOption) {
-                if (card.isLand()) { // temporary until scryfall fixes the mana cost issue for adventure lands
-                    continue;
-                }
                 check(card, cardIndex);
                 check(((CardWithSpellOption) card).getSpellCard(), cardIndex);
             } else {
@@ -1053,7 +1051,7 @@ public class VerifyCardDataTest {
         // CHECK: miss booster settings
         Set<String> ignoreBoosterSets = new HashSet<>();
         // temporary, TODO: remove after set release and mtgjson get info
-        ignoreBoosterSets.add("Innistrad Remastered");
+        ignoreBoosterSets.add("Final Fantasy");
         // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
         ignoreBoosterSets.add("Jumpstart");
         ignoreBoosterSets.add("Jumpstart 2022");
@@ -1069,9 +1067,12 @@ public class VerifyCardDataTest {
         ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
         ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
 
+        // make sure mtgjson has booster data
+        boolean hasBoostersInfo = MtgJsonService.sets().values().stream().anyMatch(s -> s.booster != null && !s.booster.isEmpty());
         for (ExpansionSet set : sets) {
-            if (true) { // temporary fix for upstream mtgjson issue
-                continue;
+            if (!hasBoostersInfo) {
+                System.out.println("Warning, mtgjson data lost boosters info");
+                break;
             }
             MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
             if (jsonSet == null) {
@@ -1129,9 +1130,6 @@ public class VerifyCardDataTest {
             }
 
             for (ExpansionSet.SetCardInfo card : set.getSetCardInfo()) {
-                if (OmenCard.class.isAssignableFrom(card.getCardClass())) { // temporary until mtgjson fixed
-                    continue;
-                }
                 boolean cardHaveDoubleName = (doubleNames.getOrDefault(card.getName(), 0) > 1);
                 boolean cardHaveVariousSetting = card.getGraphicInfo() != null && card.getGraphicInfo().getUsesVariousArt();
 
@@ -1729,12 +1727,16 @@ public class VerifyCardDataTest {
             return;
         }
 
+        // TODO: temporary fix - scryfall/mtgjson wrongly add [colors, mana cost] from spell part to main part/card,
+        //  example: Ishgard, the Holy See // Faith & Grief
+        if (card instanceof CardWithSpellOption && card.isLand()
+                || card instanceof SpellOptionCard && ((SpellOptionCard) card).getParentCard().isLand()) {
+            return;
+        }
+
         Set<String> expected = new HashSet<>();
         if (ref.colors != null) {
             expected.addAll(ref.colors);
-        }
-        if (card.isFlipCard()) {
-            expected.addAll(ref.colorIdentity);
         }
 
         ObjectColor color = card.getColor(null);
@@ -2174,7 +2176,7 @@ public class VerifyCardDataTest {
         //    - it's can be a keyword action (only mtg rules contains a target word), so add it to the targetedKeywords
         // * on "must be targeted":
         //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
-        boolean checkMissNonTargeted = !(card instanceof OmenCard); // must set withNotTarget(true) temporarily set to ignore omen cards
+        boolean checkMissNonTargeted = true; // must set withNotTarget(true)
         boolean checkMissTargeted = false; // must be targeted
         List<String> targetedKeywords = Arrays.asList(
                 "target",
@@ -2184,9 +2186,10 @@ public class VerifyCardDataTest {
                 "modular",
                 "partner"
         );
-        // card can contain rules text from both sides, so must search ref card for all sides too
+        // xmage card can contain rules text from both sides, so must search ref card for all sides too
         String additionalName;
-        if (card instanceof AdventureCard) { // temporary to prevent failure due to upstream error
+        if (card instanceof CardWithSpellOption) {
+            // adventure/omen cards
             additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
         } else if (card.isTransformable() && !card.isNightCard()) {
             additionalName = card.getSecondCardFace().getName();
@@ -2204,6 +2207,7 @@ public class VerifyCardDataTest {
                 }
             }
         }
+
         boolean needTargetedAbility = targetedKeywords.stream().anyMatch(refLowerText::contains);
         boolean foundTargetedAbility = card.getAbilities()
                 .stream()
@@ -2320,7 +2324,81 @@ public class VerifyCardDataTest {
         // TODO: add legality checks (by sets and cards, by banned)
     }
 
-    private String prepareRule(String cardName, String rule) {
+    private static final List<SubType> selfRefNamedSubtypes = Arrays.asList(
+            SubType.EQUIPMENT,
+            SubType.VEHICLE,
+            SubType.AURA,
+            SubType.CLASS,
+            SubType.SAGA,
+            SubType.SIEGE
+    );
+
+    private static String applySelfReference(String rule, MageObject mageObject, Game game) {
+        return rule
+                .replace("{this}", getCardSelfReference(mageObject, game))
+                .replace(". this", ". This")
+                .replace("\nthis", "\nThis")
+                .replace("-this", "-This")
+                .replace(": this", ": This")
+                .replace("&bull this", "&bull This")
+                .replace("&mdash; this", "&mdash; This")
+                .replace("&mdash;this", "&mdash;This")
+                .replace("- this", "- This");
+    }
+
+    /**
+     * Returns the description of the card for rules text that references itself.
+     * Applies to abilities that function only on the battlefield.
+     * Does not account for every exception.
+     * <a href="https://scryfall.com/blog/errata-notice-aetherdrift-231">Details here</a>
+     */
+    private static String getCardSelfReference(MageObject mageObject, Game game) {
+        if (!mageObject.isPermanent(game)) {
+            return mageObject.getName();
+        }
+        if (mageObject.isPlaneswalker(game)) {
+            // try to ref by planeswalker name which is subtype
+            return mageObject
+                    .getSubtype(game)
+                    .stream()
+                    .filter(SubType.getPlaneswalkerTypes()::contains)
+                    .findFirst()
+                    .map(SubType::getDescription)
+                    .orElse(mageObject.getName());
+        }
+        if (mageObject.isLegendary(game)) {
+            // Generate shortname for legendary permanent (other than planeswalker)
+            List<String> parts = Arrays.asList(mageObject.getName().split("(, | of the )"));
+            if (parts.size() > 1) {
+                return parts.get(0);
+            } else {
+                return mageObject.getName();
+            }
+        }
+        if (mageObject.isCreature(game)) {
+            return "this creature";
+        }
+        if (mageObject.isLand(game)) {
+            return "this land";
+        }
+        for (SubType subType : selfRefNamedSubtypes) {
+            if (mageObject.hasSubtype(subType, game)) {
+                return "this " + subType.getDescription();
+            }
+        }
+        if (mageObject.isBattle(game)) {
+            return "this battle";
+        }
+        if (mageObject.isEnchantment(game)) {
+            return "this enchantment";
+        }
+        if (mageObject.isArtifact(game)) {
+            return "this artifact";
+        }
+        return "this permanent";
+    }
+
+    private String prepareRule(Card card, String rule) {
         // remove and optimize rule text for analyze
         String newRule = rule;
 
@@ -2336,8 +2414,7 @@ public class VerifyCardDataTest {
         }
 
         // replace special text and symbols
-        newRule = newRule
-                .replace("{this}", cardName)
+        newRule = applySelfReference(newRule, card, null)
                 .replace("−", "-")
                 .replace("—", "-")
                 .replace("&mdash;", "-");
@@ -2349,7 +2426,7 @@ public class VerifyCardDataTest {
 
         newRule = CardNameUtil.normalizeCardName(newRule);
 
-        return newRule.trim();
+        return CardUtil.getTextWithFirstCharUpperCase(newRule.trim());
     }
 
     @Test
@@ -2582,7 +2659,7 @@ public class VerifyCardDataTest {
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
-            refRules[i] = prepareRule(card.getName(), refRules[i]);
+            refRules[i] = prepareRule(card, refRules[i]);
         }
 
         if (ref.subtypes.contains("Adventure")) {
@@ -2615,7 +2692,7 @@ public class VerifyCardDataTest {
                 .replace("</b>", "")
                 .split("[\\$\\\n]");
         for (int i = 0; i < cardRules.length; i++) {
-            cardRules[i] = prepareRule(card.getName(), cardRules[i]);
+            cardRules[i] = prepareRule(card, cardRules[i]);
         }
 
         boolean isFine = true;
@@ -2883,6 +2960,13 @@ public class VerifyCardDataTest {
             return;
         }
 
+        // TODO: temporary fix - scryfall/mtgjson wrongly add [colors, mana cost] from spell part to main part/card,
+        //  example: Ishgard, the Holy See // Faith & Grief
+        if (card instanceof CardWithSpellOption && card.isLand()
+                || card instanceof SpellOptionCard && ((SpellOptionCard) card).getParentCard().isLand()) {
+            return;
+        }
+
         String expected = ref.manaCost;
         String cost = String.join("", card.getManaCostSymbols());
         if (cost.isEmpty()) {
@@ -3009,7 +3093,7 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    public void test_checkCardsInCubes() {
+    public void test_checkCardsInCubes() throws Exception {
         Reflections reflections = new Reflections("mage.tournament.cubes.");
         Set<Class<? extends DraftCube>> cubesList = reflections.getSubTypesOf(DraftCube.class);
         Assert.assertFalse("Can't find any cubes", cubesList.isEmpty());
@@ -3022,7 +3106,24 @@ public class VerifyCardDataTest {
                 continue;
             }
 
-            DraftCube cube = (DraftCube) createNewObject(cubeClass);
+            // cube from deck must use real deck to check complete
+            DraftCube cube;
+            if (cubeClass.isAssignableFrom(CubeFromDeck.class)) {
+                DeckCardLists deckCardLists = new DeckCardLists();
+                deckCardLists.setCards(Arrays.asList(
+                        new DeckCardInfo("Adanto Vanguard", "1", "XLN"),
+                        new DeckCardInfo("Boneyard Parley", "94", "XLN"),
+                        new DeckCardInfo("Forest", "276", "XLN")
+                ));
+                Deck deck = Deck.load(deckCardLists, true);
+                Constructor<?> con = cubeClass.getConstructor(Deck.class);
+                cube = (DraftCube) con.newInstance(deck);
+                Assert.assertFalse(deckCardLists.getCards().isEmpty());
+                Assert.assertEquals("deck must be loaded to cube", cube.getCubeCards().size(), deckCardLists.getCards().size());
+                Assert.assertTrue("cube's name must contains cards count", cube.getName().contains(deckCardLists.getCards().size() + " cards"));
+            } else {
+                cube = (DraftCube) createNewObject(cubeClass);
+            }
             if (cube.getCubeCards().isEmpty()) {
                 errorsList.add("Error: broken cube, empty cards list: " + cube.getClass().getCanonicalName());
             }

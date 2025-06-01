@@ -1,7 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -14,15 +12,17 @@ import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -49,7 +49,7 @@ public final class MiglozMazeCrusher extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.EndOfTurn
         ).setText("it gains vigilance"), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.OIL.createInstance()));
-        ability.addEffect(new GainAbilitySourceEffect(new MenaceAbility(false))
+        ability.addEffect(new GainAbilitySourceEffect(new MenaceAbility(false), Duration.EndOfTurn)
                 .setText("and menace until end of turn"));
         this.addAbility(ability);
 

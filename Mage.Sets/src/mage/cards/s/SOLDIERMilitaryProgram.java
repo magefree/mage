@@ -5,18 +5,21 @@ import mage.abilities.Mode;
 import mage.abilities.condition.common.ControlACommanderCondition;
 import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.game.Game;
 import mage.game.permanent.token.SoldierToken;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -32,6 +35,7 @@ public final class SOLDIERMilitaryProgram extends CardImpl {
         // At the beginning of combat on your turn, choose one. If you control a commander, you may choose both instead.
         // * Create a 1/1 white Soldier creature token.
         Ability ability = new BeginningOfCombatTriggeredAbility(new CreateTokenEffect(new SoldierToken()));
+        ability.getModes().setChooseText("choose one. If you control a commander, you may choose both instead.");
         ability.getModes().setMoreCondition(2, ControlACommanderCondition.instance);
         ability.getModes().setChooseText(
                 "choose one. If you control a commander, you may choose both instead."

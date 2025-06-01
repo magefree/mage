@@ -3,7 +3,6 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.OpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.hint.common.OpponentsTurnHint;
 import mage.abilities.keyword.FlashAbility;
@@ -32,12 +31,9 @@ public final class BrinebornCutthroat extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Whenever you cast a spell during an opponent's turn, put a +1/+1 counter on Brineborn Cutthroat.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false
-                ), OpponentsTurnCondition.instance, "Whenever you cast a spell during an opponent's turn, " +
-                "put a +1/+1 counter on {this}."
-        ).addHint(OpponentsTurnHint.instance));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false
+        ).withTriggerCondition(OpponentsTurnCondition.instance).addHint(OpponentsTurnHint.instance));
     }
 
     private BrinebornCutthroat(final BrinebornCutthroat card) {

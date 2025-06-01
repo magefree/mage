@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.*;
 import mage.MageInt;
 import mage.MageItem;
 import mage.abilities.Ability;
@@ -9,17 +8,21 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author NinthWorld
  */
 public final class SalvageTrader extends CardImpl {
@@ -38,11 +41,11 @@ public final class SalvageTrader extends CardImpl {
                 new TapSourceCost());
         FilterArtifactPermanent filterYou = new FilterArtifactPermanent("artifact you control");
         filterYou.add(TargetController.YOU.getControllerPredicate());
-        ability.addTarget(new TargetArtifactPermanent(filterYou));
+        ability.addTarget(new TargetPermanent(filterYou));
         FilterArtifactPermanent filterOpponent = new FilterArtifactPermanent("artifact an opponent controls with the same casting cost as your targeted artifact");
         filterOpponent.add(TargetController.OPPONENT.getControllerPredicate());
         filterOpponent.add(new SameCastingCostPredicate());
-        ability.addTarget(new TargetArtifactPermanent(filterOpponent));
+        ability.addTarget(new TargetPermanent(filterOpponent));
 
         this.addAbility(ability);
     }

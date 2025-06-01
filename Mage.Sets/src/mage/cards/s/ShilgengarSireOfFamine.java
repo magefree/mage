@@ -97,7 +97,7 @@ enum ShilgengarSireOfFamineCondition implements Condition {
                 .castStream(source.getCosts().stream(), SacrificeTargetCost.class)
                 .map(SacrificeTargetCost::getPermanents)
                 .flatMap(Collection::stream)
-                .anyMatch(p -> p.getSubtype(game).contains(SubType.ANGEL));
+                .anyMatch(p -> p.hasSubtype(SubType.ANGEL, game));
     }
 
     @Override

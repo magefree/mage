@@ -533,6 +533,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
+    List<Boolean> flipCoins(Ability source, Game game, int amount, boolean winnable);
+
     boolean flipCoin(Ability source, Game game, boolean winnable);
 
     boolean flipCoinResult(Game game);
@@ -715,7 +717,7 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
 
-    boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source, boolean anyOrder);
+    boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source);
 
     /**
      * Moves the card to the top x position of the library
@@ -748,11 +750,12 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Set the value for X in spells and abilities
+     *
      * @param isManaPay helper param for better AI logic
      */
     int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay);
 
-     // TODO: rework to use pair's list of effect + ability instead string's map
+    // TODO: rework to use pair's list of effect + ability instead string's map
     int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game);
 
     TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);
@@ -763,7 +766,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void selectBlockers(Ability source, Game game, UUID defendingPlayerId);
 
-    int getAmount(int min, int max, String message, Game game);
+    /**
+     * @param source can be null for system actions like define damage
+     */
+    int getAmount(int min, int max, String message, Ability source, Game game);
 
     /**
      * Player distributes amount among multiple options

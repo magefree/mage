@@ -31,7 +31,7 @@ import java.util.function.Consumer;
 public class SagaAbility extends SimpleStaticAbility {
 
     private final SagaChapter maxChapter;
-    private final boolean showSacText;
+    private boolean showSacText;
     private final boolean readAhead;
 
     public SagaAbility(Card card) {
@@ -134,6 +134,11 @@ public class SagaAbility extends SimpleStaticAbility {
         return maxChapter;
     }
 
+    public SagaAbility withShowSacText(boolean showSacText) {
+        this.showSacText = showSacText;
+        return this;
+    }
+
     @Override
     public String getRule() {
         return (readAhead
@@ -204,7 +209,7 @@ class SagaLoreCountersEffect extends OneShotEffect {
         }
         int counters = player.getAmount(
                 1, maxChapter.getNumber(),
-                "Choose the number of lore counters to enter with", game
+                "Choose the number of lore counters to enter with", source, game
         );
         return permanent.addCounters(CounterType.LORE.createInstance(counters), source, game);
     }

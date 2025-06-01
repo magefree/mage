@@ -71,7 +71,7 @@ class AmassTheComponentsEffect extends OneShotEffect {
             if (player.choose(Outcome.Detriment, player.getHand(), target, source, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    return player.putCardsOnBottomOfLibrary(card, game, source, true);
+                    return player.putCardsOnBottomOfLibrary(card, game, source);
                 }
             }
         }

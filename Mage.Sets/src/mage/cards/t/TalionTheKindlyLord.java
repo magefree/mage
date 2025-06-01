@@ -109,7 +109,7 @@ class TalionTheKindlyLordEffect extends OneShotEffect {
         if (controller == null) {
             return true;
         }
-        int numberChoice = controller.getAmount(1, 10, "Choose a number.", game);
+        int numberChoice = controller.getAmount(1, 10, "Choose a number.", source, game);
         game.getState().setValue("chosenNumber_" + source.getSourceId()
                 + '_' + source.getSourceObjectZoneChangeCounter(), numberChoice);
         Permanent permanent = game.getPermanentEntering(source.getSourceId());

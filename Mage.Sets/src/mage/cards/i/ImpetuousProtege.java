@@ -1,30 +1,39 @@
 
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.PartnerWithAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class ImpetuousProtege extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("tapped creatures your opponents control");
+
+    static {
+        filter.add(TappedPredicate.TAPPED);
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+    }
+
+    private static final GreatestAmongPermanentsValue xValue = new GreatestAmongPermanentsValue(GreatestAmongPermanentsValue.Quality.Power, filter);
+    private static final Hint hint = xValue.getHint();
 
     public ImpetuousProtege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -38,7 +47,9 @@ public final class ImpetuousProtege extends CardImpl {
         this.addAbility(new PartnerWithAbility("Proud Mentor"));
 
         // Whenever Impetuous Protege attacks, it gets +X/+0 until end of turn, where X is the greatest power among tapped creatures your opponents control
-        this.addAbility(new AttacksTriggeredAbility(new ImpetuousProtegeEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(
+                new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, "it")
+        ).addHint(hint));
     }
 
     private ImpetuousProtege(final ImpetuousProtege card) {
@@ -48,39 +59,5 @@ public final class ImpetuousProtege extends CardImpl {
     @Override
     public ImpetuousProtege copy() {
         return new ImpetuousProtege(this);
-    }
-}
-
-class ImpetuousProtegeEffect extends OneShotEffect {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TappedPredicate.TAPPED);
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
-    ImpetuousProtegeEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "it gets +X/+0 until end of turn, where X is the greatest power among tapped creatures your opponents control";
-    }
-
-    private ImpetuousProtegeEffect(final ImpetuousProtegeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ImpetuousProtegeEffect copy() {
-        return new ImpetuousProtegeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int maxPower = 0;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            maxPower = Math.max(maxPower, creature.getPower().getValue());
-        }
-        game.addEffect(new BoostSourceEffect(maxPower, 0, Duration.EndOfTurn), source);
-        return true;
     }
 }
