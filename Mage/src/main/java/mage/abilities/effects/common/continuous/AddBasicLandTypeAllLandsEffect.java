@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
@@ -7,6 +8,10 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author Plopman, TheElk801
@@ -47,12 +52,7 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public AddBasicLandTypeAllLandsEffect copy() {
-        return new AddBasicLandTypeAllLandsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
         Ability ability;
         switch (subType) {
             case PLAINS:
@@ -73,17 +73,35 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
             default:
                 ability = null;
         }
-        for (Permanent land : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_LAND, source.getControllerId(), game
-        )) {
+        if (ability == null) {
+            return false;
+        }
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent land = (Permanent) object;
+            land.addSubType(game, subType);
             // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
             // So the ability removing has to be done before Layer 6
             // Lands have their mana ability intrinsically, so that is added in layer 4
-            land.addSubType(game, subType);
-            if (ability != null && !land.getAbilities().containsRule(ability)) {
+            if (!land.getAbilities(game).contains(ability)) {
                 land.addAbility(ability, source.getSourceId(), game);
             }
         }
         return true;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), game)
+                .stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public AddBasicLandTypeAllLandsEffect copy() {
+        return new AddBasicLandTypeAllLandsEffect(this);
     }
 }

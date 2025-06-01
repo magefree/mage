@@ -1,12 +1,12 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,26 +42,32 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        if (objects.isEmpty() && this.duration == Duration.Custom) {
+            this.discard();
+            return false;
+        }
+        for (MageObject object : objects) {
+            object.addCardType(game, addedCardTypes.toArray(new CardType[0]));
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()), game));
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null
-                && (affectedObjectList.contains(new MageObjectReference(permanent, game))
-                // Workaround to support abilities like "As long as __, this permanent is a __ in addition to its other types."
-                || !duration.isOnlyValidIfNoZoneChange())) {
-            for (CardType cardType : addedCardTypes) {
-                permanent.addCardType(game, cardType);
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        List<MageObject> mageObjects = new ArrayList<>();
+        for (MageObjectReference mor : affectedObjectList) {
+            if (mor.refersTo(source.getSourceId(), game) || !duration.isOnlyValidIfNoZoneChange()) {
+                mageObjects.add(mor.getPermanent(game));
             }
-            return true;
-        } else if (this.getDuration() == Duration.Custom) {
-            this.discard();
         }
-        return false;
+        return mageObjects;
     }
 
     @Override

@@ -1,15 +1,17 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
-import java.util.UUID;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author nantuko, Susucr
@@ -29,21 +31,24 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        boolean result = false;
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            Permanent target = game.getPermanent(targetId);
-            if (target != null) {
-                target.addSubType(game, addedSubType);
-                result = true;
-            }
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        if (objects.isEmpty()) {
+            this.discard();
+            return false;
         }
-        if (!result) {
-            if (this.getDuration() == Duration.Custom) {
-                this.discard();
-            }
+        for (MageObject object : objects) {
+            object.addSubType(game, addedSubType);
         }
-        return result;
+        return true;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     @Override

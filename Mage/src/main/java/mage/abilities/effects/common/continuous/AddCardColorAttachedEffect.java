@@ -1,11 +1,15 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author noxx
@@ -27,24 +31,25 @@ public class AddCardColorAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject mageObject : objects) {
+            if (!((mageObject instanceof Permanent))) {
+                continue;
+            }
+            Permanent permanent = (Permanent) mageObject;
+            permanent.getColor(game).addColor(addedColor);
+        }
+        return true;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null) {
-                if (addedColor.isBlack())
-                    target.getColor(game).setBlack(true);
-                if (addedColor.isBlue())
-                    target.getColor(game).setBlue(true);
-                if (addedColor.isWhite())
-                    target.getColor(game).setWhite(true);
-                if (addedColor.isGreen())
-                    target.getColor(game).setGreen(true);
-                if (addedColor.isRed())
-                    target.getColor(game).setRed(true);
-            }
+            return target != null ? Collections.singletonList(target) : Collections.emptyList();
         }
-        return true;
+        return Collections.emptyList();
     }
 
     @Override

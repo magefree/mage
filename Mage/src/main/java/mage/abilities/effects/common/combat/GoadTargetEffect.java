@@ -89,17 +89,6 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-            Permanent targetCreature = game.getPermanent(targetId);
-            if (targetCreature != null) {
-                targetCreature.addGoadingPlayer(source.getControllerId());
-            }
-        }
-        return true;
-    }
-
-    @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
