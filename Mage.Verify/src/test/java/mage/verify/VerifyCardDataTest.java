@@ -2006,34 +2006,33 @@ public class VerifyCardDataTest {
     Pattern targetRegexPattern = Pattern.compile("\\b((?<!(new|the|that|choosing|the copy|each copy|with one or more|could|it) )targets?|^enchant|^(.*— )?equip|backup|modular|partner with|^bestow|soulshift|provoke)\\b(?! (cost|abilit))", Pattern.MULTILINE);
     Pattern recursiveTargetRegexPattern = Pattern.compile("\\b((?<!^|— )when(ever)?|gain|have|has|\\. At the beginning|with|until)\\b(.|—\\n)*targets?\\b", Pattern.MULTILINE);
 
+    boolean recursiveTargetObjectCheck(Object obj, int depth) {
+        if (obj instanceof Effect) {
+            return recursiveTargetEffectCheck((Effect) obj, depth+1);
+        }
+        if (obj instanceof Ability) {
+            return recursiveTargetAbilityCheck((Ability) obj, depth+1);
+        }
+        if (obj instanceof Token) {
+            return ((Token) obj).getAbilities().stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, depth+1));
+        }
+        if (obj instanceof Collection) {
+            return ((Collection)obj).stream().anyMatch(x -> recursiveTargetObjectCheck(x, depth+1));
+        }
+        return false;
+    }
     boolean recursiveTargetEffectCheck(Effect effect, int depth) {
         if (depth > 5){
             return false;
         }
         return Arrays.stream(effect.getClass().getDeclaredFields())
                 .anyMatch(f -> {
-                    Class fieldType = f.getType();
                     f.setAccessible(true);
                     try {
-                        Object obj = f.get(effect);
-                        if (obj != null) {
-                            if (Effect.class.isAssignableFrom(fieldType)) {
-                                return recursiveTargetEffectCheck((Effect) obj, depth+1);
-                            }
-                            if (Ability.class.isAssignableFrom(fieldType)) {
-                                return recursiveTargetAbilityCheck((Ability) obj, depth+1);
-                            }
-                            if (Token.class.isAssignableFrom(fieldType)) {
-                                return ((Token) obj).getAbilities().stream().anyMatch(ability -> recursiveTargetAbilityCheck(ability, depth+1));
-                            }
-                            if (Collection.class.isAssignableFrom(fieldType)) {
-                                return true;
-                            }
-                        }
+                        return recursiveTargetObjectCheck(f.get(effect), depth);
                     } catch (IllegalAccessException ex) {
                         throw new RuntimeException(ex);//Should never happen due to setAccessible
                     }
-                    return false;
                 });
     }
 
