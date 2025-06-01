@@ -52,6 +52,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Gift", 165, Rarity.COMMON, mage.cards.a.AngelicGift.class));
         cards.add(new SetCardInfo("Anje's Ravager", 517, Rarity.RARE, mage.cards.a.AnjesRavager.class));
         //cards.add(new SetCardInfo("Aphelia, Viper Whisperer", 40, Rarity.MYTHIC, mage.cards.a.ApheliaViperWhisperer.class));
+        cards.add(new SetCardInfo("Aphelia, Viper Whisperer", 40, Rarity.MYTHIC, mage.cards.a.ApheliaViperWhisperer.class));
         cards.add(new SetCardInfo("Arbor Armament", 628, Rarity.COMMON, mage.cards.a.ArborArmament.class));
         cards.add(new SetCardInfo("Archaeomancer", 285, Rarity.COMMON, mage.cards.a.Archaeomancer.class));
         cards.add(new SetCardInfo("Archfiend's Vessel", 398, Rarity.UNCOMMON, mage.cards.a.ArchfiendsVessel.class));
