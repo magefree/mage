@@ -1852,7 +1852,7 @@ public abstract class GameImpl implements Game {
                     if (turnController != null) {
                         Player targetPlayer = getPlayer(spellControllerId);
                         if (targetPlayer != null) {
-                            targetPlayer.setGameUnderYourControl(true, false);
+                            targetPlayer.setGameUnderYourControl(this, true, false);
                             informPlayers(turnController.getLogName() + " lost control over " + targetPlayer.getLogName());
                             if (targetPlayer.getTurnControlledBy().equals(turnController.getId())) {
                                 turnController.getPlayersUnderYourControl().remove(targetPlayer.getId());

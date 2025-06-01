@@ -160,6 +160,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
 
     // TODO: rework turn controller to use single list (see other todos)
+    //  see PlayerUnderControlTest
     //protected Stack<UUID> allTurnControllers = new Stack<>();
     protected boolean isGameUnderControl = true; // TODO: replace with allTurnControllers.isEmpty
     protected UUID turnController; // null on own control TODO: replace with allTurnControllers.last
@@ -619,7 +620,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!playerUnderControlId.equals(this.getId())) {
             this.playersUnderYourControl.add(playerUnderControlId);
             if (!playerUnderControl.hasLeft() && !playerUnderControl.hasLost()) {
-                playerUnderControl.setGameUnderYourControl(false);
+                playerUnderControl.setGameUnderYourControl(game, false);
             }
             // control will reset on start of the turn
         }
@@ -663,14 +664,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setGameUnderYourControl(boolean value) {
-        setGameUnderYourControl(value, true);
+    public void setGameUnderYourControl(Game game, boolean value) {
+        setGameUnderYourControl(game, value, true);
     }
 
     @Override
-    public void setGameUnderYourControl(boolean value, boolean fullRestore) {
+    public void setGameUnderYourControl(Game game, boolean value, boolean fullRestore) {
         this.isGameUnderControl = value;
         if (isGameUnderControl) {
+            removeMeFromPlayersUnderControl(game);
             if (fullRestore) {
                 // to own
                 this.turnControllers.clear();
@@ -687,9 +689,24 @@ public abstract class PlayerImpl implements Player, Serializable {
                 } else {
                     this.turnController = turnControllers.get(turnControllers.size() - 1);
                     isGameUnderControl = false;
+                    addMeToPlayersUnderControl(game, this.turnController);
                 }
             }
         }
+    }
+
+    private void removeMeFromPlayersUnderControl(Game game) {
+        game.getPlayers().values().forEach(p -> {
+            p.getPlayersUnderYourControl().remove(this.getId());
+        });
+    }
+
+    private void addMeToPlayersUnderControl(Game game, UUID newTurnController) {
+        game.getPlayers().values().forEach(p -> {
+            if (p.getId().equals(newTurnController)) {
+                p.getPlayersUnderYourControl().add(this.getId());
+            }
+        });
     }
 
     @Override

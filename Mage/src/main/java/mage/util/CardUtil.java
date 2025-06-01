@@ -1434,7 +1434,7 @@ public final class CardUtil {
      * @param playerUnderControl
      */
     public static void takeControlUnderPlayerEnd(Game game, Ability source, Player controller, Player playerUnderControl) {
-        playerUnderControl.setGameUnderYourControl(true, false);
+        playerUnderControl.setGameUnderYourControl(game, true, false);
         if (!playerUnderControl.getTurnControlledBy().equals(controller.getId())) {
             game.informPlayers(controller.getLogName() + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
             controller.getPlayersUnderYourControl().remove(playerUnderControl.getId());

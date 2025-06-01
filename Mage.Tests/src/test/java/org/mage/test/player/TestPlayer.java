@@ -3134,13 +3134,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setGameUnderYourControl(boolean value) {
-        computerPlayer.setGameUnderYourControl(value);
+    public void setGameUnderYourControl(Game game, boolean value) {
+        computerPlayer.setGameUnderYourControl(game, value);
     }
 
     @Override
-    public void setGameUnderYourControl(boolean value, boolean fullRestore) {
-        computerPlayer.setGameUnderYourControl(value, fullRestore);
+    public void setGameUnderYourControl(Game game, boolean value, boolean fullRestore) {
+        computerPlayer.setGameUnderYourControl(game, value, fullRestore);
     }
 
     @Override
