@@ -13,6 +13,9 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @author LoneFox
  */
@@ -40,6 +43,18 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        if (objects.isEmpty()) {
+            this.discard();
+            return false;
+        }
+        for (MageObject object : objects) {
+            object.getColor(game).setColor(setColor);
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
 
@@ -62,21 +77,9 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        if (setColor != null) {
-            MageObject sourceObject = game.getObject(source);
-            if (sourceObject != null) {
-                sourceObject.getColor(game).setColor(setColor);
-            } else {
-                this.discard();
-            }
-            return true;
-        }
-        return false;
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        return sourceObject != null ? Collections.singletonList(sourceObject) : Collections.emptyList();
     }
 
     @Override

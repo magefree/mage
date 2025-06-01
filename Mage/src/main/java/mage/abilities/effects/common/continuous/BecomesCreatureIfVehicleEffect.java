@@ -1,10 +1,14 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by IGOUDT on 5-4-2017.
@@ -24,16 +28,24 @@ public class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent aura = game.getPermanent(source.getSourceId());
-        if (aura != null && aura.getAttachedTo() != null) {
-            Permanent enchanted = game.getPermanent(aura.getAttachedTo());
-            if (enchanted != null && enchanted.hasSubtype(SubType.VEHICLE, game)) {
-                enchanted.addCardType(game, addedType);
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
             }
+            object.addCardType(game, addedType);
         }
-
         return true;
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Permanent aura = game.getPermanent(source.getSourceId());
+        if (aura == null) {
+            return Collections.emptyList();
+        }
+        Permanent enchanted = game.getPermanent(aura.getAttachedTo());
+        return enchanted != null ? Collections.singletonList(enchanted) : Collections.emptyList();
     }
 
     @Override

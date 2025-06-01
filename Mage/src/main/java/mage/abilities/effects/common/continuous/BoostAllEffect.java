@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -16,7 +17,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -99,6 +102,19 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
+            permanent.addPower(power.calculate(game, source, this));
+            permanent.addToughness(toughness.calculate(game, source, this));
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         setRuntimeData(source, game);
@@ -114,28 +130,22 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        ArrayList<MageObject> objects = new ArrayList<>();
         if (getAffectedObjectsSet()) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
                 Permanent permanent = it.next().getPermanent(game);
-                if (permanent != null) {
-                    permanent.addPower(power.calculate(game, source, this));
-                    permanent.addToughness(toughness.calculate(game, source, this));
-                } else {
-                    it.remove(); // no longer on the battlefield, remove reference to object
+                if (permanent == null) {
+                    it.remove();
+                    continue;
                 }
+                objects.add(permanent);
             }
         } else {
             setRuntimeData(source, game);
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
-                    perm.addPower(power.calculate(game, source, this));
-                    perm.addToughness(toughness.calculate(game, source, this));
-                }
-            }
-
+            objects.addAll(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
         }
-        return true;
+        return objects;
     }
 
     /**

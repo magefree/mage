@@ -1,6 +1,7 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -9,6 +10,10 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -46,9 +51,29 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
-        if (permanent != null) {
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return affectedObjectList.stream()
+                .map(mor -> mor.getPermanent(game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        if (objects.isEmpty()) {
+            this.discard();
+            return false;
+        }
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
@@ -62,15 +87,8 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl {
                         permanent.getSpellAbility().getTargets().add(target);
                     }
             }
-            return true;
         }
-        this.discard();
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+        return true;
     }
 
     @Override

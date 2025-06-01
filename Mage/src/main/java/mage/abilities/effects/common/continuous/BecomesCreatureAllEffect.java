@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -10,8 +11,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -65,26 +66,29 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        if (getAffectedObjectsSet()) {
+            return affectedObjectList.stream()
+                    .map(mor -> mor.getPermanent(game))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+        }
+        return new ArrayList<>(game.getBattlefield()
+                .getActivePermanents(filter, source.getControllerId(), source, game));
+    }
+
+    @Override
     public BecomesCreatureAllEffect copy() {
         return new BecomesCreatureAllEffect(this);
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Set<Permanent> affectedPermanents = new HashSet<>();
-        if (getAffectedObjectsSet()) {
-            for (MageObjectReference ref : affectedObjectList) {
-                affectedPermanents.add(ref.getPermanent(game));
-            }
-        } else {
-            affectedPermanents = new HashSet<>(game.getBattlefield()
-                    .getActivePermanents(filter, source.getControllerId(), source, game));
-        }
-
-        for (Permanent permanent : affectedPermanents) {
-            if (permanent == null) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
                 continue;
             }
+            Permanent permanent = (Permanent) object;
             switch (layer) {
                 case TextChangingEffects_3:
                     if (loseName) {
@@ -141,11 +145,6 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
             }
         }
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

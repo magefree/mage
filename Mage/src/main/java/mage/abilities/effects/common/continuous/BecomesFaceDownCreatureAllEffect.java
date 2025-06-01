@@ -1,7 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.MageObjectReference;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnFaceUpAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -13,10 +13,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * TODO: must be reworked to use same face down logic as BecomesFaceDownCreatureEffect
- *
  * @author LevelX2
  */
 
@@ -26,16 +25,14 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
     protected FilterPermanent filter;
 
     public BecomesFaceDownCreatureAllEffect(FilterPermanent filter) {
-        super(Duration.EndOfGame, Outcome.BecomeCreature);
+        super(Duration.EndOfGame, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.BecomeCreature);
         this.filter = filter;
         staticText = "turn all " + filter.getMessage() + " face down. (They're 2/2 creatures.)";
     }
 
     protected BecomesFaceDownCreatureAllEffect(final BecomesFaceDownCreatureAllEffect effect) {
         super(effect);
-        for (Map.Entry<UUID, Ability> entry : effect.turnFaceUpAbilityMap.entrySet()) {
-            this.turnFaceUpAbilityMap.put(entry.getKey(), entry.getValue());
-        }
+        this.turnFaceUpAbilityMap.putAll(effect.turnFaceUpAbilityMap);
         this.filter = effect.filter.copy();
     }
 
@@ -67,80 +64,30 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        boolean targetExists = false;
-        for (MageObjectReference mor : affectedObjectList) {
-            // TODO: wtf, why it not use a BecomesFaceDownCreatureEffect.makeFaceDownObject and applied by layers?! Looks buggy
-            Permanent permanent = mor.getPermanent(game);
-            if (permanent != null && permanent.isFaceDown(game)) {
-                targetExists = true;
-                switch (layer) {
-                    case TypeChangingEffects_4:
-                        permanent.setName("");
-                        permanent.removeAllSuperTypes(game);
-                        permanent.removeAllCardTypes(game);
-                        permanent.addCardType(game, CardType.CREATURE);
-                        permanent.removeAllSubTypes(game);
-                        permanent.getManaCost().clear();
-                        break;
-                    case ColorChangingEffects_5:
-                        permanent.getColor(game).setColor(new ObjectColor());
-                        break;
-                    case AbilityAddingRemovingEffects_6:
-                        Card card = game.getCard(permanent.getId()); //
-                        List<Ability> abilitiesToRemove = new ArrayList<>();
-                        for (Ability ability : permanent.getAbilities()) {
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return affectedObjectList.stream()
+                .map(mor -> mor.getPermanent(game))
+                .filter(Objects::nonNull)
+                .filter(permanent -> permanent.isFaceDown(game))
+                .collect(Collectors.toList());
+    }
 
-                            // keep gained abilities from other sources, removes only own (card text)
-                            if (card != null && !card.getAbilities().contains(ability)) {
-                                continue;
-                            }
-
-                            // 701.33c
-                            // If a card with morph is manifested, its controller may turn that card face up using
-                            // either the procedure described in rule 702.36e to turn a face-down permanent with morph face up
-                            // or the procedure described above to turn a manifested permanent face up.
-                            //
-                            // so keep all tune face up abilities and other face down compatible
-                            if (ability.getWorksFaceDown()) {
-                                ability.setRuleVisible(false);
-                                continue;
-                            }
-
-                            if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
-                                if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureAllEffect) {
-                                    continue;
-                                }
-                            }
-                            abilitiesToRemove.add(ability);
-                        }
-                        permanent.removeAbilities(abilitiesToRemove, source.getSourceId(), game);
-                        if (turnFaceUpAbilityMap.containsKey(permanent.getId())) {
-                            permanent.addAbility(turnFaceUpAbilityMap.get(permanent.getId()), source.getSourceId(), game);
-                        }
-                        break;
-                    case PTChangingEffects_7:
-                        if (sublayer == SubLayer.SetPT_7b) {
-                            permanent.getPower().setModifiedBaseValue(2);
-                            permanent.getToughness().setModifiedBaseValue(2);
-                        }
-                }
-            }
+    @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        if (objects.isEmpty()) {
+            this.discard();
+            return false;
         }
-        if (!targetExists) {
-            discard();
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
+            BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(game, permanent);
+            if (faceDownType != null) {
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, source.getId(), object, faceDownType, null);
+            }
         }
         return true;
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
-    }
-
 }

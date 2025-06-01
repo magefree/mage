@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -13,10 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -77,32 +75,13 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-
-        if (chooseLandType) {
-            this.chooseLandType(source, game);
-        }
-    }
-
-    protected void chooseLandType(Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Choice choice = new ChoiceBasicLandType();
-        if (controller != null && controller.choose(outcome, choice, game)) {
-            landTypes.add(SubType.byDescription(choice.getChoice()));
-        } else {
-            this.discard();
-        }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID targetPermanent : getTargetPointer().getTargets(game, source)) {
-            Permanent land = game.getPermanent(targetPermanent);
-            if (land == null) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        for (MageObject object : objects) {
+            if (!(object instanceof Permanent)) {
                 continue;
             }
-            if (!land.isLand(game)) {
+            Permanent land = (Permanent) object;
+            if (!land.isLand()) {
                 land.addCardType(game, CardType.LAND);
             }
             if (loseOther) {
@@ -114,7 +93,6 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                 land.removeAllSubTypes(game, SubTypeSet.NonBasicLandType);
             }
             land.addSubType(game, landTypes);
-
             // add intrinsic land abilities here not in layer 6
             Abilities<Ability> landAbilities = land.getAbilities(game);
             for (SubType landType : landTypes) {
@@ -148,6 +126,34 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
             }
         }
         return true;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+
+        if (chooseLandType) {
+            this.chooseLandType(source, game);
+        }
+    }
+
+    @Override
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    protected void chooseLandType(Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Choice choice = new ChoiceBasicLandType();
+        if (controller != null && controller.choose(outcome, choice, game)) {
+            landTypes.add(SubType.byDescription(choice.getChoice()));
+        } else {
+            this.discard();
+        }
     }
 
     @Override

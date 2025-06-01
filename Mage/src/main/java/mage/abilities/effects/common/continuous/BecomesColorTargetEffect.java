@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import mage.MageObject;
 import mage.ObjectColor;
@@ -49,6 +50,25 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
+        if (objects.isEmpty() && this.duration == Duration.Custom) {
+            this.discard();
+            return false;
+        }
+        for (MageObject object : objects) {
+            if (!(object instanceof Spell) && !(object instanceof Permanent)) {
+                continue;
+            }
+            if (retainColor) {
+                object.getColor(game).addColor(setColor);
+            } else {
+                object.getColor(game).setColor(setColor);
+            }
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
 
@@ -71,35 +91,12 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        if (setColor != null) {
-            boolean objectFound = false;
-            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-                MageObject targetObject = game.getObject(targetId);
-                if (targetObject != null) {
-                    if (targetObject instanceof Spell || targetObject instanceof Permanent) {
-                        objectFound = true;
-                        if (retainColor) {
-                            targetObject.getColor(game).addColor(setColor);
-                        } else {
-                            targetObject.getColor(game).setColor(setColor);
-                        }
-                    } else {
-                        objectFound = false;
-                    }
-                }
-            }
-            if (!objectFound && this.getDuration() == Duration.Custom) {
-                this.discard();
-            }
-            return true;
-        } else {
-            throw new UnsupportedOperationException("No color set");
-        }
+    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getObject)
+                .filter(obj -> obj instanceof Permanent || obj instanceof Spell)
+                .collect(Collectors.toList());
     }
 
     @Override
