@@ -134,6 +134,8 @@ public class TableView implements Serializable {
             // TOURNAMENT
             if (table.getTournament().getOptions().getNumberRounds() > 0) {
                 this.gameType = this.gameType + ' ' + table.getTournament().getOptions().getNumberRounds() + " Rounds";
+            } else if (table.getTournament().getOptions().getMatchOptions().isSingleGameTourney()) {
+                this.gameType = this.gameType + " Single Game";
             }
             StringBuilder sb1 = new StringBuilder();
             for (TournamentPlayer tp : table.getTournament().getPlayers()) {
@@ -166,6 +168,10 @@ public class TableView implements Serializable {
                         DraftOptions draftOptions = (DraftOptions) table.getTournament().getOptions().getLimitedOptions();
                         infoTextShort.append(", Pick time: ").append(draftOptions.getTiming().getShortName());
                         infoTextLong.append("<br>Pick time: ").append(draftOptions.getTiming().getName());
+                    }
+                    if (table.getTournament().getOptions().getMatchOptions().isSingleGameTourney()) {
+                        infoTextShort.append(", 1 GAME");
+                        infoTextLong.append("<br>Single Game with all players (1 GAME)");
                     }
                     if (table.getTournament().getOptions().isWatchingAllowed()) {
                         infoTextShort.append(", SP");

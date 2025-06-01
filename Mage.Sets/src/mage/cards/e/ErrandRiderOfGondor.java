@@ -85,6 +85,6 @@ class ErrandRiderOfGondorEffect extends OneShotEffect {
         TargetCard target = new TargetCardInHand();
         player.choose(outcome, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
-        return card == null || player.putCardsOnBottomOfLibrary(card, game, source, false);
+        return card == null || player.putCardsOnBottomOfLibrary(card, game, source);
     }
 }

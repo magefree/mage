@@ -91,7 +91,7 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent fromPermanent = game.getPermanent(source.getFirstTarget());
         Permanent toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if(controller == null || fromPermanent == null || toPermanent == null) {
+        if (controller == null || fromPermanent == null || toPermanent == null) {
             return false;
         }
 
@@ -143,7 +143,7 @@ class ResourcefulDefenseTriggeredAbility extends LeavesBattlefieldAllTriggeredAb
 
     ResourcefulDefenseTriggeredAbility() {
         super(new ResourcefulDefenseLeaveEffect(), StaticFilters.FILTER_CONTROLLED_PERMANENT);
-        setTriggerPhrase("Whenever a creature you control leaves the battlefield, if it had counters on it, ");
+        setTriggerPhrase("Whenever a permanent you control leaves the battlefield, if it had counters on it, ");
     }
 
     private ResourcefulDefenseTriggeredAbility(final ResourcefulDefenseTriggeredAbility ability) {

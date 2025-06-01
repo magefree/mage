@@ -30,6 +30,7 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 /**
@@ -158,7 +159,7 @@ class ThroneOfTheDeadThreeEffect extends OneShotEffect {
         }
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
-            Permanent permanent = game.getPermanent(card.getId());
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (permanent != null) {
                 permanent.addCounters(CounterType.P1P1.createInstance(3), source, game);
                 game.addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.UntilYourNextTurn)

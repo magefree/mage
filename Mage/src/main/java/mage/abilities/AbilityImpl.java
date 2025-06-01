@@ -83,6 +83,7 @@ public abstract class AbilityImpl implements Ability {
     private List<Watcher> watchers = new ArrayList<>(); // access to it by GetWatchers only (it can be overridden by some abilities)
     private List<Ability> subAbilities = null;
     private boolean canFizzle = true; // for Gilded Drake
+    private boolean canBeCopied = true;
     private TargetAdjuster targetAdjuster = null;
     private CostAdjuster costAdjuster = null;
     private List<Hint> hints = new ArrayList<>();
@@ -129,6 +130,7 @@ public abstract class AbilityImpl implements Ability {
         this.flavorWord = ability.flavorWord;
         this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
         this.canFizzle = ability.canFizzle;
+        this.canBeCopied = ability.canBeCopied;
         this.targetAdjuster = ability.targetAdjuster;
         this.costAdjuster = ability.costAdjuster;
         this.hints = CardUtil.deepCopyObject(ability.hints);
@@ -1016,38 +1018,28 @@ public abstract class AbilityImpl implements Ability {
 
         String ruleStart = sbRule.toString();
         String text = getModes().getText();
-        String rule;
+        StringBuilder rule = new StringBuilder();
         if (!text.isEmpty()) {
             if (ruleStart.length() > 1) {
                 String end = ruleStart.substring(ruleStart.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
-                    rule = ruleStart + CardUtil.getTextWithFirstCharUpperCase(text);
+                    rule.append(ruleStart + CardUtil.getTextWithFirstCharUpperCase(text));
                 } else {
-                    rule = ruleStart + text;
+                    rule.append(ruleStart + text);
                 }
             } else {
-                rule = ruleStart + text;
+                rule.append(ruleStart + text);
             }
         } else {
-            rule = ruleStart;
-        }
-        String prefix;
-        if (this instanceof TriggeredAbility || this instanceof EntersBattlefieldAbility) {
-            prefix = null;
-        } else if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = null;
-        }
-        if (prefix != null) {
-            rule = prefix + CardUtil.getTextWithFirstCharUpperCase(rule);
+            rule.append(ruleStart);
         }
         if (appendToRule != null) {
-            rule = rule.concat(appendToRule);
+            rule.append(appendToRule);
         }
-        return rule;
+        if (this instanceof TriggeredAbility || this instanceof EntersBattlefieldAbility) {
+            return rule.toString();
+        }
+        return addRulePrefix(rule.toString());
     }
 
     @Override
@@ -1478,6 +1470,17 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public String addRulePrefix(String rule) {
+        if (abilityWord != null) {
+            return abilityWord.formatWord() + CardUtil.getTextWithFirstCharUpperCase(rule);
+        } else if (flavorWord != null) {
+            return CardUtil.italicizeWithEmDash(flavorWord) + CardUtil.getTextWithFirstCharUpperCase(rule);
+        } else {
+            return rule;
+        }
+    }
+
+    @Override
     public Ability withFirstModeFlavorWord(String flavorWord) {
         this.modes.getMode().withFlavorWord(flavorWord);
         return this;
@@ -1731,6 +1734,17 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setCanFizzle(boolean canFizzle) {
         this.canFizzle = canFizzle;
+    }
+
+    @Override
+    public boolean canBeCopied() {
+        return canBeCopied;
+    }
+
+    @Override
+    public Ability withCanBeCopied(boolean canBeCopied) {
+        this.canBeCopied = canBeCopied;
+        return this;
     }
 
     @Override

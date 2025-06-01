@@ -2,15 +2,18 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * @author emerald000
@@ -39,7 +42,6 @@ class EscalateEffect extends CostModificationEffectImpl {
     EscalateEffect(Cost cost) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.INCREASE_COST);
         this.cost = cost;
-        this.staticText = "Escalate " + cost.getText() + " <i>(Pay this cost for each mode chosen beyond the first.)</i>";
     }
 
     private EscalateEffect(final EscalateEffect effect) {
@@ -67,5 +69,20 @@ class EscalateEffect extends CostModificationEffectImpl {
     @Override
     public EscalateEffect copy() {
         return new EscalateEffect(this);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder("Escalate");
+        if (cost instanceof ManaCost) {
+            sb.append(' ');
+            sb.append(cost.getText());
+        } else {
+            sb.append("&mdash;");
+            sb.append(CardUtil.getTextWithFirstCharUpperCase(cost.getText()));
+            sb.append('.');
+        }
+        sb.append(" <i>(Pay this cost for each mode chosen beyond the first.)</i>");
+        return sb.toString();
     }
 }

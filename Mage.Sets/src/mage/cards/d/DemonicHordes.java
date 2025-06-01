@@ -1,23 +1,20 @@
 
 package mage.cards.d;
 
-import java.util.Locale;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -25,11 +22,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
 import mage.target.common.TargetOpponent;
 
+import java.util.Locale;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class DemonicHordes extends CardImpl {
@@ -97,7 +95,7 @@ class DemonicHordesEffect extends OneShotEffect {
             if (controller.choose(Outcome.Neutral, choiceOpponent, source, game)) {
                 Player opponent = game.getPlayer(choiceOpponent.getFirstTarget());
                 if (opponent != null) {
-                    Target chosenLand = new TargetLandPermanent(filterLand);
+                    Target chosenLand = new TargetPermanent(filterLand);
                     chosenLand.withNotTarget(true);
                     if (opponent.chooseTarget(Outcome.Sacrifice, chosenLand, source, game)) {
                         Permanent land = game.getPermanent(chosenLand.getFirstTarget());

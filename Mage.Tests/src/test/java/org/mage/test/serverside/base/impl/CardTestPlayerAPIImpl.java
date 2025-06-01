@@ -178,8 +178,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         // prepare fake match (needs for testing some client-server code)
-        // always 4 seats
-        MatchOptions matchOptions = new MatchOptions("test match", "test game type", true, 4);
+        MatchOptions matchOptions = new MatchOptions("test match", "test game type", true);
         currentMatch = new FreeForAllMatch(matchOptions);
         currentGame = createNewGameAndPlayers();
 

@@ -1170,6 +1170,11 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
+    public boolean canBeCopied() {
+        return this.getSpellAbility().canBeCopied();
+    }
+
+    @Override
     public boolean isAllCreatureTypes(Game game) {
         return card.isAllCreatureTypes(game);
     }

@@ -26,6 +26,7 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.util.ManaUtil;
 
 import java.util.UUID;
@@ -144,7 +145,7 @@ class NimDeathmantleEffect extends OneShotEffect {
                         // check if it's still in graveyard
                         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                                Permanent permanent = game.getPermanent(card.getId());
+                                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                                 if (permanent != null) {
                                     permanent.addAttachment(equipment.getId(), source, game);
                                 }

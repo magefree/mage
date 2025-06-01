@@ -584,6 +584,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public String addRulePrefix(String rule) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public Ability withFirstModeFlavorWord(String flavorWord) {
         throw new UnsupportedOperationException("Not supported.");
     }
@@ -715,6 +720,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public void setCanFizzle(boolean canFizzle) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public boolean canBeCopied() {
+        return ability.canBeCopied();
+    }
+
+    @Override
+    public Ability withCanBeCopied(boolean canBeCopied) {
         throw new UnsupportedOperationException("Not supported.");
     }
 

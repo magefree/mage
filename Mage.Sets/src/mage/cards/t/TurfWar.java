@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,7 +8,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
@@ -23,12 +24,13 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class TurfWar extends CardImpl {
@@ -105,7 +107,7 @@ enum TurfWarAdjuster implements TargetAdjuster {
             }
             FilterLandPermanent filter = new FilterLandPermanent("land controlled by " + player.getName());
             filter.add(new ControllerIdPredicate(playerId));
-            ability.addTarget(new TargetLandPermanent(filter));
+            ability.addTarget(new TargetPermanent(filter));
         }
     }
 }
@@ -191,7 +193,7 @@ class TurfWarControlEffect extends OneShotEffect {
         FilterLandPermanent filter = new FilterLandPermanent("land with a contested counter controlled by " + damagedPlayer.getName());
         filter.add(new ControllerIdPredicate(damagedPlayer.getId()));
         filter.add(TurfWarPredicate.instance);
-        TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, true);
+        TargetPermanent target = new TargetPermanent(1, 1, filter, true);
         if (!target.canChoose(creatureController.getId(), source, game)) {
             return false;
         }

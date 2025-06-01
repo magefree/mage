@@ -11,7 +11,6 @@ import mage.abilities.hint.Hint;
 import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
@@ -84,9 +83,7 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         if (abilityText == null || abilityText.isEmpty()) {
             return ability.getRule();
         }
-        return (flavorWord != null ? CardUtil.italicizeWithEmDash(flavorWord) : "") +
-                (abilityWord != null ? abilityWord.formatWord() : "") +
-                abilityText + (abilityText.endsWith(".") || abilityText.endsWith("\"") || abilityText.endsWith(">") ? "" : ".");
+        return addRulePrefix(abilityText + (abilityText.endsWith(".") || abilityText.endsWith("\"") || abilityText.endsWith(">") ? "" : "."));
     }
 
     @Override

@@ -587,6 +587,7 @@ public class ScryfallImageSupportCards {
             add("TDC"); // Tarkir: Dragonstorm Commander
             add("FIN"); // Final Fantasy
             add("FIC"); // Final Fantasy Commander
+            add("FCA"); // Final Fantasy: Through the Ages
             add("SPE"); // Marvel's Spider-Man Eternal
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks

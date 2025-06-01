@@ -103,7 +103,7 @@ public class MoveCounterTargetsEffect extends OneShotEffect {
                 .ofNullable(counterType)
                 .map(c -> counterType.getArticle() + ' ' + counterType.getName())
                 .orElse("a"));
-        sb.append(" counter from target ");
+        sb.append(" counter from ");
         sb.append(mode.getTargets().get(0).getDescription());
         sb.append(" onto ");
         sb.append(mode.getTargets().get(1).getDescription());

@@ -16,6 +16,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -72,7 +73,7 @@ class RampagingGrowthEffect extends OneShotEffect {
             return true;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             game.addEffect(new BecomesCreatureTargetEffect(
                     new CreatureToken(4, 3, "", SubType.INSECT

@@ -3,7 +3,9 @@ package mage.abilities;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -97,8 +99,6 @@ public interface TriggeredAbility extends Ability {
 
     boolean isOptional();
 
-    TriggeredAbility setOptional();
-
     /**
      * Allow trigger to fire after source leave the battlefield (example: will use LKI on itself sacrifice)
      */
@@ -131,4 +131,34 @@ public interface TriggeredAbility extends Ability {
     TriggeredAbility setTriggerPhrase(String triggerPhrase);
 
     String getTriggerPhrase();
+
+    static String makeDidThisTurnString(Ability ability, Game game) {
+        return CardUtil.getCardZoneString("lastTurnUsed" + ability.getOriginalId(), ability.getSourceId(), game);
+    }
+
+    static void setDidThisTurn(Ability ability, Game game) {
+        game.getState().setValue(makeDidThisTurnString(ability, game), game.getTurnNum());
+    }
+
+    /**
+     * For abilities which say "Do this only once each turn".
+     * Most of the time this is handled automatically by calling setDoOnlyOnceEachTurn(true),
+     * but sometimes the ability will need a way to clear whether it's been used this turn within an effect.
+     *
+     * @param ability
+     * @param game
+     */
+    static void clearDidThisTurn(Ability ability, Game game) {
+        game.getState().removeValue(makeDidThisTurnString(ability, game));
+    }
+
+    static boolean checkDidThisTurn(Ability ability, Game game) {
+        return Optional
+                .ofNullable(makeDidThisTurnString(ability, game))
+                .map(game.getState()::getValue)
+                .filter(Integer.class::isInstance)
+                .map(Integer.class::cast)
+                .filter(x -> x == game.getTurnNum())
+                .isPresent();
+    }
 }

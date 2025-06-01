@@ -55,7 +55,7 @@ public final class SummonEsperMaduin extends CardImpl {
                         StaticFilters.FILTER_PERMANENT_CREATURE, true
                 ).setText("and gain trample until end of turn")
         );
-        this.addAbility(sagaAbility);
+        this.addAbility(sagaAbility.withShowSacText(true));
     }
 
     private SummonEsperMaduin(final SummonEsperMaduin card) {

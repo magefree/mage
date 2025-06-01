@@ -10,10 +10,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.WatcherScope;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -41,7 +38,7 @@ public final class LordJyscalGuado extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each end step, if you put a counter on a creature this turn, investigate.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new InvestigateEffect())
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new InvestigateEffect(), false)
                         .withInterveningIf(LordJyscalGuadoCondition.instance)
                         .addHint(LordJyscalGuadoCondition.getHint()),
                 new LordJyscalGuadoWatcher()

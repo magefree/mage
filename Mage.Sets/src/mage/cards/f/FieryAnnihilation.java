@@ -7,8 +7,8 @@ import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterEquipmentPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class FieryAnnihilation extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterEquipmentPermanent("Equipment attached to that creature");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.EQUIPMENT, "Equipment attached to that creature");
 
     static {
         filter.add(FieryAnnihilationPredicate.instance);

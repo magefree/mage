@@ -19,13 +19,12 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class DeusOfCalamity extends CardImpl {
 
     public DeusOfCalamity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}{R/G}{R/G}{R/G}{R/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}{R/G}{R/G}{R/G}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.AVATAR);
 
