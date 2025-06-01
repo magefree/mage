@@ -74,7 +74,7 @@ class NikoLightOfHopeEffect extends OneShotEffect {
 
     NikoLightOfHopeEffect() {
         super(Outcome.Benefit);
-        staticText = "Exile target nonlegendary creature you control. Shards you control become copies of it until the beginning of the next end step. Return it to the battlefield under its owner's control at the beginning of the next end step.";
+        staticText = "Exile target nonlegendary creature you control. Shards you control become copies of it until the next end step. Return it to the battlefield under its owner's control at the beginning of the next end step.";
     }
 
     private NikoLightOfHopeEffect(final NikoLightOfHopeEffect effect) {

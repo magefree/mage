@@ -55,7 +55,7 @@ class PlaguecrafterEffect extends OneShotEffect {
 
     PlaguecrafterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player sacrifices a creature or planeswalker. "
+        this.staticText = "each player sacrifices a creature or planeswalker of their choice. "
                 + "Each player who can't discards a card.";
     }
 
