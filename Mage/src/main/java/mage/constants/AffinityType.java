@@ -86,31 +86,31 @@ public enum AffinityType {
 }
 
 class AffinityFilters {
-    public static final FilterControlledPermanent TOKENS = new FilterControlledPermanent("tokens");
+    static final FilterControlledPermanent TOKENS = new FilterControlledPermanent("tokens");
 
     static {
         TOKENS.add(TokenPredicate.TRUE);
     }
 
-    public static final FilterControlledPermanent SNOW_LANDS = new FilterControlledLandPermanent("snow lands");
+    static final FilterControlledPermanent SNOW_LANDS = new FilterControlledLandPermanent("snow lands");
 
     static {
         SNOW_LANDS.add(SuperType.SNOW.getPredicate());
     }
 
-    public static final FilterControlledPermanent OUTLAWS = new FilterControlledPermanent("outlaws");
+    static final FilterControlledPermanent OUTLAWS = new FilterControlledPermanent("outlaws");
 
     static {
         OUTLAWS.add(OutlawPredicate.instance);
     }
 
-    public static final FilterControlledPermanent HISTORIC = new FilterControlledPermanent("historic permanents");
+    static final FilterControlledPermanent HISTORIC = new FilterControlledPermanent("historic permanents");
 
     static {
         HISTORIC.add(HistoricPredicate.instance);
     }
 
-    public static final FilterControlledPermanent ARTIFACT_CREATURES = new FilterControlledPermanent("artifact creatures");
+    static final FilterControlledPermanent ARTIFACT_CREATURES = new FilterControlledPermanent("artifact creatures");
 
     static {
         ARTIFACT_CREATURES.add(CardType.ARTIFACT.getPredicate());
