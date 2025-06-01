@@ -25,6 +25,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.BlankTargetAdjuster;
 
 import java.util.UUID;
 
@@ -80,6 +81,7 @@ class ClementTheWorrywortTriggeredAbility extends EntersBattlefieldThisOrAnother
     ClementTheWorrywortTriggeredAbility() {
         super(new ReturnToHandTargetEffect().setText("return up to one target creature you control with lesser mana value to its owner's hand"),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true);
+        setTargetAdjuster(BlankTargetAdjuster.instance);
     }
 
     ClementTheWorrywortTriggeredAbility(final ClementTheWorrywortTriggeredAbility ability) {

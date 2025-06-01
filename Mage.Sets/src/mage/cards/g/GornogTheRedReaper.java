@@ -1,7 +1,9 @@
 package mage.cards.g;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -23,6 +25,8 @@ import mage.game.Game;
 import mage.game.events.DefenderAttackedEvent;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -58,7 +62,12 @@ public final class GornogTheRedReaper extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CowardsCantBlockWarriorsEffect()));
 
         // Whenever one or more Warriors you control attack a player, target creature that player controls becomes a Coward.
-        this.addAbility(new GornogTheRedReaperTriggeredAbility());
+        Ability ability = new AttacksWithCreaturesTriggeredAbility(Zone.BATTLEFIELD,
+                new BecomesCreatureTypeTargetEffect(Duration.EndOfGame, SubType.COWARD),
+                1, filter, true);
+        ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        this.addAbility(ability);
 
         // Attacking Warriors you control get +X/+0, where X is the number of Cowards your opponents control.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
