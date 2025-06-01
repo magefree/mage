@@ -9,6 +9,7 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 
@@ -47,7 +48,7 @@ public class FilterSource extends FilterObject<MageObject> {
         }
 
         // verify check -- make sure predicates work with all 3 Class that could be a Source
-        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class, Card.class, StackObject.class);
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class, Card.class, StackObject.class, CommandObject.class);
 
         extraPredicates.add(predicate);
         return this;
@@ -57,7 +58,8 @@ public class FilterSource extends FilterObject<MageObject> {
     public boolean checkObjectClass(Object object) {
         return object instanceof Permanent
                 || object instanceof Card
-                || object instanceof StackObject;
+                || object instanceof StackObject
+                || object instanceof CommandObject;
     }
 
     public boolean match(MageObject object, UUID sourceControllerId, Ability source, Game game) {

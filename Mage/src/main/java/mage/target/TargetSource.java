@@ -8,6 +8,7 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterSource;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -17,6 +18,17 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
+ * 609.7a. If an effect requires a player to choose a source of damage, they may choose a permanent;
+ * a spell on the stack (including a permanent spell); any object referred to by an object on the stack,
+ * by a replacement or prevention effect that's waiting to apply, or by a delayed triggered ability
+ * that's waiting to trigger (even if that object is no longer in the zone it used to be in); or a
+ * face-up object in the command zone. A source doesn't need to be capable of dealing damage to be
+ * a legal choice. The source is chosen when the effect is created. If the player chooses a permanent,
+ * the effect will apply to the next damage dealt by that permanent, regardless of whether it's combat
+ * damage or damage dealt as the result of a spell or ability. If the player chooses a permanent spell,
+ * the effect will apply to any damage dealt by that spell and any damage dealt by the permanent that
+ * spell becomes when it resolves.
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetSource extends TargetObject {
@@ -120,6 +132,14 @@ public class TargetSource extends TargetObject {
                 }
             }
         }
+        for (CommandObject commandObject : game.getState().getCommand()) {
+            if (filter.match(commandObject, sourceControllerId, source, game)) {
+                count++;
+                if (count >= this.minNumberOfTargets) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -152,6 +172,11 @@ public class TargetSource extends TargetObject {
         for (Card card : game.getExile().getAllCards(game)) {
             if (filter.match(card, sourceControllerId, source, game)) {
                 possibleTargets.add(card.getId());
+            }
+        }
+        for (CommandObject commandObject : game.getState().getCommand()) {
+            if (filter.match(commandObject, sourceControllerId, source, game)) {
+                possibleTargets.add(commandObject.getId());
             }
         }
         return possibleTargets;
