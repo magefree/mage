@@ -96,7 +96,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Decomposition", 212, Rarity.UNCOMMON, mage.cards.d.Decomposition.class, RETRO_ART));
         cards.add(new SetCardInfo("Delirium", 260, Rarity.UNCOMMON, mage.cards.d.Delirium.class, RETRO_ART));
         cards.add(new SetCardInfo("Dirtwater Wraith", 117, Rarity.COMMON, mage.cards.d.DirtwaterWraith.class, RETRO_ART));
-//        cards.add(new SetCardInfo("Discordant Spirit", 261, Rarity.RARE, mage.cards.d.DiscordantSpirit.class, RETRO_ART));
+        cards.add(new SetCardInfo("Discordant Spirit", 261, Rarity.RARE, mage.cards.d.DiscordantSpirit.class, RETRO_ART));
         cards.add(new SetCardInfo("Disempower", 9, Rarity.COMMON, mage.cards.d.Disempower.class, RETRO_ART));
         cards.add(new SetCardInfo("Disenchant", 10, Rarity.COMMON, mage.cards.d.Disenchant.class, RETRO_ART));
         cards.add(new SetCardInfo("Dissipate", 61, Rarity.UNCOMMON, mage.cards.d.Dissipate.class, RETRO_ART));
