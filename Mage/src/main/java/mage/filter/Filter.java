@@ -1,5 +1,7 @@
 package mage.filter;
 
+import mage.abilities.Ability;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.util.Copyable;
@@ -7,6 +9,7 @@ import mage.util.Copyable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @param <E>
@@ -20,6 +23,8 @@ public interface Filter<E> extends Serializable, Copyable<Filter<E>> {
     }
 
     boolean match(E o, Game game);
+
+    boolean match(E object, UUID sourceControllerId, Ability source, Game game);
 
     Filter<E> add(Predicate<? super E> predicate);
 
@@ -37,7 +42,7 @@ public interface Filter<E> extends Serializable, Copyable<Filter<E>> {
 
     List<Predicate<? super E>> getPredicates();
 
-    default List<Predicate> getExtraPredicates() {
+    default List<ObjectSourcePlayerPredicate<E>> getExtraPredicates() {
         return new ArrayList<>();
     }
 }

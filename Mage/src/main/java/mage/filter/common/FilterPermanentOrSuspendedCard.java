@@ -1,7 +1,5 @@
 package mage.filter.common;
 
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.keyword.SuspendAbility;
@@ -9,16 +7,17 @@ import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.FilterImpl;
-import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  * @author emerald000
  */
-public class FilterPermanentOrSuspendedCard extends FilterImpl<MageObject> implements FilterInPlay<MageObject> {
+public class FilterPermanentOrSuspendedCard extends FilterImpl<MageObject> {
 
     protected FilterCard cardFilter;
     protected FilterPermanent permanentFilter;

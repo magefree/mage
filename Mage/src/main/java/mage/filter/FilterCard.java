@@ -1,9 +1,7 @@
 package mage.filter;
 
-import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.TargetController;
-import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -24,7 +22,6 @@ import java.util.stream.Collectors;
 public class FilterCard extends FilterObject<Card> {
 
     private static final long serialVersionUID = 1L;
-    protected final List<ObjectSourcePlayerPredicate<Card>> extraPredicates = new ArrayList<>();
 
     public FilterCard() {
         super("card");
@@ -36,56 +33,6 @@ public class FilterCard extends FilterObject<Card> {
 
     protected FilterCard(final FilterCard filter) {
         super(filter);
-        this.extraPredicates.addAll(filter.extraPredicates);
-    }
-
-    //20130711 708.6c
-    /* If anything performs a comparison involving multiple characteristics or
-     * values of one or more split cards in any zone other than the stack or
-     * involving multiple characteristics or values of one or more fused split
-     * spells, each characteristic or value is compared separately. If each of
-     * the individual comparisons would return a “yes” answer, the whole
-     * comparison returns a “yes” answer. The individual comparisons may involve
-     * different halves of the same split card.
-     */
-    @Override
-    public boolean match(Card card, Game game) {
-        if (card == null) {
-            return false;
-        }
-        return super.match(card, game);
-    }
-
-    public boolean match(Card card, UUID playerId, Game game) {
-        return match(card, playerId, null, game);
-    }
-
-    public boolean match(Card card, UUID playerId, Ability source, Game game) {
-        if (!this.match(card, game)) {
-            return false;
-        }
-        ObjectSourcePlayer<Card> osp = new ObjectSourcePlayer<>(card, playerId, source);
-        return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
-    }
-
-    public final void add(ObjectSourcePlayerPredicate predicate) {
-        if (isLockedFilter()) {
-            throw new UnsupportedOperationException("You may not modify a locked filter");
-        }
-
-        // verify check
-        checkPredicateIsSuitableForCardFilter(predicate);
-        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Card.class);
-
-        extraPredicates.add(predicate);
-    }
-
-    public Set<Card> filter(Set<Card> cards, Game game) {
-        return cards.stream().filter(card -> match(card, game)).collect(Collectors.toSet());
-    }
-
-    public boolean hasPredicates() {
-        return !predicates.isEmpty() || !extraPredicates.isEmpty();
     }
 
     @Override
@@ -93,13 +40,16 @@ public class FilterCard extends FilterObject<Card> {
         return new FilterCard(this);
     }
 
-    @Override
-    public List<Predicate> getExtraPredicates() {
-        return new ArrayList<>(extraPredicates);
+    public boolean match(Card card, UUID playerId, Game game) {
+        return match(card, playerId, null, game);
+    }
+
+    public Set<Card> filter(Set<Card> cards, Game game) {
+        return cards.stream().filter(card -> match(card, game)).collect(Collectors.toSet());
     }
 
     public static void checkPredicateIsSuitableForCardFilter(Predicate predicate) {
-        // card filter can't contain controller predicate (only permanents on battlefield have controller)
+        // card filter can't contain controller predicate (only permanents on battlefield and StackObjects have controller)
         List<Predicate> list = new ArrayList<>();
         Predicates.collectAllComponents(predicate, list);
         if (list.stream().anyMatch(TargetController.ControllerPredicate.class::isInstance)) {
@@ -107,8 +57,22 @@ public class FilterCard extends FilterObject<Card> {
         }
     }
 
+
     public FilterCard withMessage(String message) {
         this.setMessage(message);
         return this;
+    }
+
+    @Override
+    public void add(ObjectSourcePlayerPredicate predicate) {
+        // verify checks
+        checkPredicateIsSuitableForCardFilter(predicate);
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Card.class);
+        this.addExtra(predicate);
+    }
+
+    @Override
+    public boolean checkObjectClass(Object object) {
+        return object instanceof Card;
     }
 }

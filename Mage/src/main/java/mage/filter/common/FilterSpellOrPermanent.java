@@ -3,7 +3,6 @@ package mage.filter.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.FilterImpl;
-import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.game.Game;
@@ -15,7 +14,7 @@ import java.util.UUID;
 /**
  * @author LevelX
  */
-public class FilterSpellOrPermanent extends FilterImpl<MageObject> implements FilterInPlay<MageObject> {
+public class FilterSpellOrPermanent extends FilterImpl<MageObject> {
 
     protected FilterPermanent permanentFilter;
     protected FilterSpell spellFilter;

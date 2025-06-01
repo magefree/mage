@@ -1,25 +1,16 @@
 package mage.filter;
 
-import mage.abilities.Ability;
 import mage.constants.SubType;
-import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author North
  */
-public class FilterPermanent extends FilterObject<Permanent> implements FilterInPlay<Permanent> {
-
-    protected final List<ObjectSourcePlayerPredicate<Permanent>> extraPredicates = new ArrayList<>();
+public class FilterPermanent extends FilterObject<Permanent> {
 
     public FilterPermanent() {
         super("permanent");
@@ -43,32 +34,6 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
 
     protected FilterPermanent(final FilterPermanent filter) {
         super(filter);
-        this.extraPredicates.addAll(filter.extraPredicates);
-    }
-
-    @Override
-    public boolean checkObjectClass(Object object) {
-        return object instanceof Permanent;
-    }
-
-    @Override
-    public boolean match(Permanent permanent, UUID playerId, Ability source, Game game) {
-        if (!this.match(permanent, game) || !permanent.isPhasedIn()) {
-            return false;
-        }
-        ObjectSourcePlayer<Permanent> osp = new ObjectSourcePlayer<>(permanent, playerId, source);
-        return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
-    }
-
-    public final void add(ObjectSourcePlayerPredicate predicate) {
-        if (isLockedFilter()) {
-            throw new UnsupportedOperationException("You may not modify a locked filter");
-        }
-
-        // verify check
-        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class);
-
-        extraPredicates.add(predicate);
     }
 
     @Override
@@ -77,7 +42,14 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
     }
 
     @Override
-    public List<Predicate> getExtraPredicates() {
-        return new ArrayList<>(extraPredicates);
+    public void add(ObjectSourcePlayerPredicate predicate) {
+        // verify checks
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class);
+        this.addExtra(predicate);
+    }
+
+    @Override
+    public boolean checkObjectClass(Object object) {
+        return object instanceof Permanent;
     }
 }

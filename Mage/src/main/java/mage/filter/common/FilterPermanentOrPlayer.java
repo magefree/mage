@@ -3,11 +3,8 @@ package mage.filter.common;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.filter.FilterImpl;
-import mage.filter.FilterInPlay;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterPlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -17,7 +14,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements FilterInPlay<MageItem> {
+public class FilterPermanentOrPlayer extends FilterImpl<MageItem> {
 
     protected final FilterPermanent permanentFilter;
     protected final FilterPlayer playerFilter;
