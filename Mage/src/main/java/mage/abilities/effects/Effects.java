@@ -6,8 +6,10 @@ import mage.constants.Outcome;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -190,6 +192,20 @@ public class Effects extends ArrayList<Effect> {
     public void newId() {
         for (Effect effect : this) {
             effect.newId();
+        }
+    }
+
+    /**
+     * Generates new UUIDs for all effects deterministically, using seed ID.
+     * @param newID ID to use as seed for PRNG
+     */
+    public void newId(UUID newID) {
+        SecureRandom numberGenerator = new SecureRandom(newID.toString().getBytes());
+        long msb, lsb;
+        for (Effect effect : this) {
+            msb = numberGenerator.nextLong();
+            lsb = numberGenerator.nextLong();
+            effect.newId(new UUID(msb, lsb));
         }
     }
 
