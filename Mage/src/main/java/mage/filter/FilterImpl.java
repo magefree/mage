@@ -34,7 +34,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
     protected FilterImpl(final FilterImpl<E> filter) {
         this.message = filter.message;
         this.predicates = new ArrayList<>(filter.predicates);
-        this.extraPredicates.addAll(filter.extraPredicates);
+        this.extraPredicates = new ArrayList<>(filter.extraPredicates);
         this.lockedFilter = false;// After copying a filter it's allowed to modify
     }
 
@@ -46,6 +46,7 @@ public abstract class FilterImpl<E> implements Filter<E> {
         return false;
     }
 
+    @Override
     public boolean match(E object, UUID sourceControllerId, Ability source, Game game) {
         if (!this.match(object, game)) {
             return false;

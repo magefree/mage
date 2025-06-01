@@ -73,6 +73,9 @@ public class FilterCard extends FilterObject<Card> {
 
     @Override
     public boolean checkObjectClass(Object object) {
+        // TODO: investigate if we can/should exclude Permanent here.
+        //       as it does extend Card (if so do cleanup the
+        //       MultiFilterImpl that match Permanent and Card/Spell)
         return object instanceof Card;
     }
 }

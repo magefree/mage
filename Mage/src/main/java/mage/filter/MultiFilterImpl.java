@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 
 /**
  * Make a Filter out of multiple inner filters.
+ * If making a multi filter out of filterA and filterB,
+ * any object match the multi filter if it either match
+ * filterA or match filterB.
  *
  * @author Susucr
  */
@@ -26,6 +29,9 @@ public abstract class MultiFilterImpl<E> implements Filter<E> {
 
     protected MultiFilterImpl(String name, Filter<? extends E>... filters) {
         this.message = name;
+        if (filters.length < 2) {
+            throw new IllegalArgumentException("Wrong code usage: MultiFilterImpl should have at least 2 inner filters");
+        }
         this.innerFilters.addAll(Arrays.stream(filters).collect(Collectors.toList()));
     }
 
@@ -43,6 +49,7 @@ public abstract class MultiFilterImpl<E> implements Filter<E> {
                 .anyMatch((Filter filter) -> filter.match(object, game));
     }
 
+    @Override
     public boolean match(E object, UUID sourceControllerId, Ability source, Game game) {
         return innerFilters
                 .stream()
