@@ -2,9 +2,11 @@ package mage.cards.v;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,6 +23,8 @@ import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetpointer.EachTargetPointer;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 import java.util.Optional;
@@ -55,9 +59,10 @@ public final class Vault13DwellersJourney extends CardImpl {
                 triggeredAbility -> {
                     triggeredAbility.addEffect(new ExileUntilSourceLeavesEffect()
                             .setText("for each player, exile up to one other target enchantment or " +
-                                    "creature that player controls until {this} leaves the battlefield"));
-                    triggeredAbility.addTarget(new TargetPermanent(filter));
-                    triggeredAbility.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+                                    "creature that player controls until {this} leaves the battlefield")
+                            .setTargetPointer(new EachTargetPointer()));
+                    triggeredAbility.addTarget(new TargetPermanent(0, 1, filter));
+                    triggeredAbility.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(false, true));
                 }
         );
 
@@ -126,7 +131,11 @@ class Vault13DwellersJourneyEffect extends OneShotEffect {
             );
             cards.retainZone(Zone.EXILED, game);
         }
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
+        if (!cards.isEmpty()) {
+            Effect e = new PutOnLibraryTargetEffect(false);
+            e.setTargetPointer(new FixedTargets(cards, game));
+            e.apply(game, source);
+        }
         return true;
     }
 }
