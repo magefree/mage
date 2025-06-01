@@ -13,7 +13,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.target.Target;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetadjustment.GenericTargetAdjuster;
 import mage.target.targetpointer.FirstTargetPointer;
 
@@ -39,8 +39,8 @@ public final class BladegriffPrototype extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Bladegriff Prototype deals combat damage to a player, destroy target nonland permanent of that player's choice that one of your opponents controls.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetNonlandPermanent(filter));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true);
+        ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new ThatPlayersChoiceTargetAdjuster());
         this.addAbility(ability);
     }
