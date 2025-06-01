@@ -63,6 +63,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                         }
                         break;
                     case GRAVEYARD:
+                    case EXILED:
                         Card graveyardCard = game.getCard(targetId);
                         if (graveyardCard != null) {
                             cards.add(graveyardCard);

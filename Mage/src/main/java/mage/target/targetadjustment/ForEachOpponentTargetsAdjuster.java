@@ -11,12 +11,14 @@ import mage.target.TargetCard;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * @author notgreat
  */
 public class ForEachOpponentTargetsAdjuster extends GenericTargetAdjuster {
     private final boolean owner;
+    private final boolean includeSelf; //Makes this a "For Each Player" adjuster
 
     /**
      * Duplicates the permanent target for each opponent.
@@ -28,7 +30,11 @@ public class ForEachOpponentTargetsAdjuster extends GenericTargetAdjuster {
     }
 
     public ForEachOpponentTargetsAdjuster(boolean owner) {
+        this(owner, false);
+    }
+    public ForEachOpponentTargetsAdjuster(boolean owner, boolean includeSelf) {
         this.owner = owner;
+        this.includeSelf = includeSelf;
     }
 
     @Override
@@ -43,21 +49,27 @@ public class ForEachOpponentTargetsAdjuster extends GenericTargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
+        Stream<UUID> ids;
+        if (includeSelf) {
+            ids = game.getState().getPlayersInRange(ability.getControllerId(), game).stream();
+        } else {
+            ids = game.getOpponents(ability.getControllerId()).stream();
+        }
+        ids.forEach( id -> {
+            Player opponent = game.getPlayer(id);
             if (opponent == null) {
-                continue;
+                return;
             }
             Target newTarget = blueprintTarget.copy();
             Filter filter = newTarget.getFilter();
             if (owner) {
-                filter.add(new OwnerIdPredicate(opponentId));
+                filter.add(new OwnerIdPredicate(id));
                 newTarget.withTargetName(filter.getMessage() + " (owned by " + opponent.getLogName() + ")");
             } else {
-                filter.add(new ControllerIdPredicate(opponentId));
+                filter.add(new ControllerIdPredicate(id));
                 newTarget.withTargetName(filter.getMessage() + " (controlled by " + opponent.getLogName() + ")");
             }
             ability.addTarget(newTarget);
-        }
+        });
     }
 }
