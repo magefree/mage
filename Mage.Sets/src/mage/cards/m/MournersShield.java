@@ -95,7 +95,10 @@ class MournersShieldImprintEffect extends OneShotEffect {
     }
 }
 
-// TODO: should not be needed with the proper FilterSource and PreventDamageByChosenSourceEffect
+/**
+ * TODO: custom effect should not be needed with the properly set up {@link FilterSource}
+ *       and {@link mage.abilities.effects.common.PreventDamageByChosenSourceEffect}
+ */
 class MournersShieldEffect extends PreventionEffectImpl {
 
     private TargetSource target;

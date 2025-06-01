@@ -122,7 +122,10 @@ class DesperateGambitEffect extends PreventionEffectImpl {
     }
 }
 
-// TODO: should not be needed with the proper FilterSource
+/**
+ * TODO: should not be needed with the proper {@link FilterSource}.
+ *       make sure it works properly with 108.4a if you do
+ */
 class TargetControlledSource extends TargetSource {
 
     public TargetControlledSource() {
