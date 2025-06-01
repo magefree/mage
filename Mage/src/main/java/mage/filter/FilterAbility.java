@@ -4,11 +4,13 @@ package mage.filter;
 import mage.abilities.Ability;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.stack.StackObject;
 
 /**
- *
  * @author North
  */
 public class FilterAbility extends FilterImpl<Ability> {
@@ -36,6 +38,18 @@ public class FilterAbility extends FilterImpl<Ability> {
 
     public static Predicate<Ability> type(AbilityType type) {
         return new AbilityTypePredicate(type);
+    }
+
+    @Override
+    public Filter<Ability> add(Predicate<? super Ability> predicate) {
+        return super.add(predicate);
+    }
+
+    @Override
+    public void add(ObjectSourcePlayerPredicate predicate) {
+        // Verify Checks
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Ability.class, StackObject.class);
+        this.addExtra(predicate);
     }
 
     @Override

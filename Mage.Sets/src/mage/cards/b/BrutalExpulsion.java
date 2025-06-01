@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterSpellOrPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.common.TargetSpellOrPermanent;
@@ -26,7 +25,7 @@ public final class BrutalExpulsion extends CardImpl {
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature");
 
     static {
-        filter.setPermanentFilter(new FilterCreaturePermanent());
+        filter.getPermanentFilter().add(CardType.CREATURE.getPredicate());
     }
 
     public BrutalExpulsion(UUID ownerId, CardSetInfo setInfo) {

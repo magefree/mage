@@ -38,6 +38,7 @@ public class FilterStackObject extends FilterObject<StackObject> {
 
     @Override
     public boolean checkObjectClass(Object object) {
-        return object instanceof StackObject;
+        return object instanceof StackObject
+                || object instanceof Card; // TODO: investigate. Is sometimes used for checking a spell's characteristic before cast
     }
 }

@@ -14,7 +14,7 @@ public class FilterAnyTarget extends FilterPermanentOrPlayer {
 
     public FilterAnyTarget(String name) {
         super(name);
-        this.permanentFilter.add(Predicates.or(
+        this.getPermanentFilter().add(Predicates.or(
                 CardType.CREATURE.getPredicate(),
                 CardType.PLANESWALKER.getPredicate(),
                 CardType.BATTLE.getPredicate()

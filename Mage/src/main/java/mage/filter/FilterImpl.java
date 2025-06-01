@@ -63,18 +63,8 @@ public abstract class FilterImpl<E> implements Filter<E> {
         return this;
     }
 
-    /**
-     * Make sure on setting a new Filter that you overwrite this method
-     * and call Predicates.makeSurePredicateCompatibleWithFilter
-     * to check that the filter is able to process objects
-     * of the right kind. Helps with checks the Compiler can't do
-     * due to ObjectSourcePlayer casting in the this.match(4 arguments).
-     */
-    public void add(ObjectSourcePlayerPredicate predicate) {
-        addExtra(predicate);
-    }
-
-    public void addExtra(ObjectSourcePlayerPredicate predicate) {
+    @Override
+    public final void addExtra(ObjectSourcePlayerPredicate predicate) {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
