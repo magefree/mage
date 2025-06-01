@@ -1,27 +1,24 @@
 package mage.cards.d;
 
-import java.util.*;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +40,9 @@ public final class DemonicJunker extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new DemonicJunkerEffect()
                 .setTargetPointer(new EachTargetPointer()))
                 .setTriggerPhrase("When this Vehicle enters, ");
-        this.addAbility(ability.setTargetAdjuster(DemonicJunkerAdjuster.instance));
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
+        this.addAbility(ability);
 
         // Crew 2
         this.addAbility(new CrewAbility(2));
@@ -57,24 +56,6 @@ public final class DemonicJunker extends CardImpl {
     @Override
     public DemonicJunker copy() {
         return new DemonicJunker(this);
-    }
-}
-
-enum DemonicJunkerAdjuster implements TargetAdjuster {
-    instance;
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            String playerName = ability.isControlledBy(playerId) ? "you" : player.getName();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + playerName);
-            filter.add(new ControllerIdPredicate(playerId));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
     }
 }
 

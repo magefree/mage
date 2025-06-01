@@ -1,8 +1,5 @@
 package mage.cards.l;
 
-import java.util.HashSet;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -18,10 +15,12 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.HashSet;
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class LegionsToAshes extends CardImpl {
@@ -31,7 +30,7 @@ public final class LegionsToAshes extends CardImpl {
 
         // Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent.
         this.getSpellAbility().addEffect(new LegionsToAshesEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
     }
 
     private LegionsToAshes(final LegionsToAshes card) {

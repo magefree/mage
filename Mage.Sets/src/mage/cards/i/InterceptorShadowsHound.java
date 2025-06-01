@@ -36,7 +36,7 @@ public final class InterceptorShadowsHound extends CardImpl {
 
         // Assassins you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new MenaceAbility(false), Duration.WhileControlled, filter
+                new MenaceAbility(false), Duration.WhileOnBattlefield, filter
         )));
 
         // Whenever you attack with one or more legendary creatures, you may pay {2}{B}. If you do, return this card from your graveyard to the battlefield tapped and attacking.

@@ -475,6 +475,11 @@ public interface Ability extends Controllable, Serializable {
     Ability withFlavorWord(String flavorWord);
 
     /**
+     * Gets rule prefix for text generation
+     */
+    String addRulePrefix(String rule);
+
+    /**
      * Sets flavor word for first mode
      */
     Ability withFirstModeFlavorWord(String flavorWord);
@@ -533,6 +538,10 @@ public interface Ability extends Controllable, Serializable {
     void setCanFizzle(boolean canFizzle);
 
     boolean canFizzle();
+
+    Ability withCanBeCopied(boolean canBeCopied);
+
+    boolean canBeCopied();
 
     /**
      * Adds a target adjuster to this ability.

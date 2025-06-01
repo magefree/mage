@@ -33,7 +33,9 @@ public final class FangFearlessLCie extends CardImpl {
         this.meldsToClazz = mage.cards.r.RagnarokDivineDeliverance.class;
 
         // Whenever one or more cards leave your graveyard, you draw a card and you lose 1 life. This ability triggers only once each turn.
-        Ability ability = new CardsLeaveGraveyardTriggeredAbility(new DrawCardSourceControllerEffect(1, true));
+        Ability ability = new CardsLeaveGraveyardTriggeredAbility(
+                new DrawCardSourceControllerEffect(1, true)
+        ).setTriggersLimitEachTurn(1);
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 

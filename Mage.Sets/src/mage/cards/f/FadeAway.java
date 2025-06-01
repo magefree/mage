@@ -64,7 +64,7 @@ class FadeAwayEffect extends OneShotEffect {
                     int payAmount = 0;
                     boolean paid = false;
                     while (player.canRespond() && !paid) {
-                        payAmount = player.getAmount(0, creaturesNumber, message, game);
+                        payAmount = player.getAmount(0, creaturesNumber, message, source, game);
                         ManaCostsImpl cost = new ManaCostsImpl<>();
                         cost.add(new GenericManaCost(payAmount));
                         cost.clearPaid();

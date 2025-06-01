@@ -17,15 +17,10 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.mageobject.ManaValueEqualToCountersSourceCountPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -33,10 +28,12 @@ import java.util.UUID;
  */
 public final class TheFiligreeSylex extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterNonlandPermanent();
+    private static final FilterPermanent filter = new FilterNonlandPermanent(
+            "each nonland permanent with mana value equal to the number of oil counters on {this}"
+    );
 
     static {
-        filter.add(TheFiligreeSylexPredicate.instance);
+        filter.add(new ManaValueEqualToCountersSourceCountPredicate(CounterType.OIL));
     }
 
     public TheFiligreeSylex(UUID ownerId, CardSetInfo setInfo) {
@@ -50,12 +47,7 @@ public final class TheFiligreeSylex extends CardImpl {
         ));
 
         // {T}, Sacrifice The Filigree Sylex: Destroy each nonland permanent with mana value equal to the number of oil counters on The Filigree Sylex.
-        Ability ability = new SimpleActivatedAbility(
-                new DestroyAllEffect(filter)
-                        .setText("destroy each nonland permanent with mana value " +
-                                "equal to the number of oil counters on {this}"),
-                new TapSourceCost()
-        );
+        Ability ability = new SimpleActivatedAbility(new DestroyAllEffect(filter), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 
@@ -79,20 +71,5 @@ public final class TheFiligreeSylex extends CardImpl {
     @Override
     public TheFiligreeSylex copy() {
         return new TheFiligreeSylex(this);
-    }
-}
-
-enum TheFiligreeSylexPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return Optional
-                .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
-                .map(permanent -> permanent.getCounters(game))
-                .map(counters -> counters.getCount(CounterType.OIL))
-                .orElse(-1)
-                .equals(input.getObject().getManaValue());
     }
 }

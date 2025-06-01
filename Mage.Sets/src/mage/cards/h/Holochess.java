@@ -67,7 +67,7 @@ class HolochessEffect extends OneShotEffect {
         if (player == null || opponent == null) {
             return false;
         }
-        int chosenNumber = player.getAmount(0, 3, "Choose a number between 0 and 3", game);
+        int chosenNumber = player.getAmount(0, 3, "Choose a number between 0 and 3", source, game);
         List<Permanent> creaturesControlledByOpponent = game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT_CREATURES, opponent.getId(), game);
         if (chosenNumber < creaturesControlledByOpponent.size()) {

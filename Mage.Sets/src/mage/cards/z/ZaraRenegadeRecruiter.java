@@ -21,6 +21,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -94,7 +95,7 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
                 card, Zone.BATTLEFIELD, source, game, true,
                 false, false, null
         );
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

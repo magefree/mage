@@ -10,8 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -23,9 +22,6 @@ import java.util.UUID;
  */
 public final class KazuulsTollCollector extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledPermanent(SubType.EQUIPMENT, "Equipment you control");
-
     public KazuulsTollCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.OGRE);
@@ -35,7 +31,7 @@ public final class KazuulsTollCollector extends CardImpl {
 
         // {0}: Attach target Equipment you control to Kazuul's Toll Collector. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new KazuulsTollCollectorEffect(), new GenericManaCost(0));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
     }
 

@@ -38,7 +38,7 @@ public final class MachinistsArsenal extends CardImpl {
                 .setText("equipped creature gets +2/+2 for each artifact you control"));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.ARTIFICER, AttachmentType.EQUIPMENT
-        ).setText(", and is a Artificer in addition to its other types"));
+        ).setText("and is an Artificer in addition to its other types"));
         this.addAbility(ability.addHint(ArtifactYouControlHint.instance));
 
         // Machina -- Equip {4}

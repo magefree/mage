@@ -35,7 +35,7 @@ public final class PardicArsonist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(ability), ThresholdCondition.instance, "As long as " +
                 "seven or more cards are in your graveyard, {this} has \"When {this} " +
-                "enters the battlefield, it deals 3 damage to any target.\""
+                "enters, it deals 3 damage to any target.\""
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 

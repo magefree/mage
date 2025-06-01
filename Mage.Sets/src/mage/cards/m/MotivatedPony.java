@@ -69,7 +69,7 @@ class MotivatedPonyWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                && ((EntersTheBattlefieldEvent) event).getTarget().getSubtype(game).contains(SubType.FOOD)) {
+                && ((EntersTheBattlefieldEvent) event).getTarget().hasSubtype(SubType.FOOD, game)) {
             players.add(event.getPlayerId());
         }
     }

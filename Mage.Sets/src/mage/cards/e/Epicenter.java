@@ -32,7 +32,7 @@ public final class Epicenter extends CardImpl {
         // Target player sacrifices a land.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SacrificeEffect(StaticFilters.FILTER_LAND, 1, "Target player"),
-                condition, "Target player sacrifices a land"
+                condition, "Target player sacrifices a land of their choice"
         ));
         this.getSpellAbility().addTarget(new TargetPlayer());
 

@@ -72,6 +72,6 @@ class TemporalCleansingEffect extends OneShotEffect {
         )) {
             return player.putCardOnTopXOfLibrary(permanent, game, source, 2, true);
         }
-        return player.putCardsOnBottomOfLibrary(permanent, game, source, false);
+        return player.putCardsOnBottomOfLibrary(permanent, game, source);
     }
 }

@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -12,26 +10,27 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetEnchantmentPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class EmeraldCharm extends CardImpl {
-    
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("non-Aura enchantment");
-    
+
+    private static final FilterPermanent filter = new FilterEnchantmentPermanent("non-Aura enchantment");
+
     static {
         filter.add(Predicates.not(SubType.AURA.getPredicate()));
     }
 
     public EmeraldCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Choose one - Untap target permanent;
         this.getSpellAbility().addEffect(new UntapTargetEffect());
@@ -39,7 +38,7 @@ public final class EmeraldCharm extends CardImpl {
 
         // or destroy target non-Aura enchantment;
         Mode mode = new Mode(new DestroyTargetEffect());
-        mode.addTarget(new TargetEnchantmentPermanent(filter));
+        mode.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addMode(mode);
 
         // or target creature loses flying until end of turn.

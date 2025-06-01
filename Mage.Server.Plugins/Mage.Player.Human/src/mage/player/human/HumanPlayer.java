@@ -2158,28 +2158,37 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public int getAmount(int min, int max, String message, Game game) {
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
         if (!canCallFeedback(game)) {
             return min;
         }
 
+        // fast calc on nothing to choose
+        if (min >= max) {
+            return min;
+        }
+
+        int xValue = min;
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireGetAmountEvent(playerId, message, min, max);
+                game.fireGetAmountEvent(playerId, message + CardUtil.getSourceLogName(game, source), min, max);
             }
             waitForResponse(game);
 
-            if (response.getInteger() != null) {
-                break;
+            if (response.getInteger() == null) {
+                continue;
             }
+
+            xValue = response.getInteger();
+            if (xValue < min || xValue > max) {
+                continue;
+            }
+
+            break;
         }
 
-        if (response.getInteger() != null) {
-            return response.getInteger();
-        } else {
-            return 0;
-        }
+        return  xValue;
     }
 
     @Override

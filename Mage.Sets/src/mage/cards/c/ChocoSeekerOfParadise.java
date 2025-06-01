@@ -38,7 +38,9 @@ public final class ChocoSeekerOfParadise extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever one or more Birds you control attack, look at that many cards from the top of your library. You may put one of them into your hand. Then put any number of land cards from among them onto the battlefield tapped and the rest into your graveyard.
-        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new ChocoSeekerOfParadiseEffect(), 1, filter));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(
+                new ChocoSeekerOfParadiseEffect(), 1, filter
+        ).setTriggerPhrase("Whenever one or more Birds you control attack, "));
 
         // Landfall -- Whenever a land you control enters, Choco gets +1/+0 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn)));

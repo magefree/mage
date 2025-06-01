@@ -49,7 +49,7 @@ class ProwlingPangolinEffect extends OneShotEffect {
 
     ProwlingPangolinEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "any player may sacrifice two creatures. If a player does, sacrifice {this}";
+        this.staticText = "any player may sacrifice two creatures of their choice. If a player does, sacrifice {this}";
     }
 
     private ProwlingPangolinEffect(final ProwlingPangolinEffect effect) {

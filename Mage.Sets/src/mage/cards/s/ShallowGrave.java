@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -21,6 +20,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -74,7 +74,7 @@ class ShallowGraveEffect extends OneShotEffect {
             }
             if (lastCreatureCard != null) {
                 if (controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game)) {
-                    Permanent returnedCreature = game.getPermanent(lastCreatureCard.getId());
+                    Permanent returnedCreature = CardUtil.getPermanentFromCardPutToBattlefield(lastCreatureCard, game);
                     if (returnedCreature != null) {
                         FixedTarget blueprintTarget = new FixedTarget(returnedCreature, game);
                         // Gains Haste

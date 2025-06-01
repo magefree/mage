@@ -41,6 +41,10 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         this.newPlayerPanel.setSkillLevel(playerSkill);
     }
 
+    public static String extractAiPlayerNumberFromLabel(String label) {
+        return ClientDefaultSettings.computerName + " " + label.substring(Math.max(0, label.length() - 2)).trim();
+    }
+
     public boolean joinTable(UUID roomId, UUID tableId) throws IOException, ClassNotFoundException {
         if (this.cbPlayerType.getSelectedItem() != PlayerType.HUMAN) {
             return SessionHandler.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), (PlayerType) this.cbPlayerType.getSelectedItem(), this.newPlayerPanel.getSkillLevel(), DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), "");
@@ -124,7 +128,7 @@ public class TablePlayerPanel extends javax.swing.JPanel {
     private void cbPlayerTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlayerTypeActionPerformed
         if (getPlayerType() != PlayerType.HUMAN) {
             this.newPlayerPanel.setVisible(true);
-            this.newPlayerPanel.setPlayerName(ClientDefaultSettings.computerName + " " + this.lblPlayerNum.getText().charAt(this.lblPlayerNum.getText().length() - 1));
+            this.newPlayerPanel.setPlayerName(extractAiPlayerNumberFromLabel(this.lblPlayerNum.getText()));
         } else {
             this.newPlayerPanel.setVisible(false);
         }

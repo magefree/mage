@@ -65,6 +65,7 @@ public final class SummonYojimbo extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_III,
                 new CantAttackYouUnlessPayAllEffect(Duration.UntilYourNextTurn, new GenericManaCost(2))
+                        .setText("until your next turn, creatures can't attack you unless their controller pays {2} for each of those creatures")
         );
 
         // IV - Create X Treasure tokens, where X is the number of opponents who control a creature with power 4 or greater.

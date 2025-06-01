@@ -26,6 +26,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -106,13 +107,12 @@ class SpiritSistersCallReturnToBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        UUID targetId = source.getFirstTarget();
-        Card card = game.getCard(targetId);
-        if (controller == null || card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
+        Card card = game.getCard(source.getFirstTarget());
+        if (controller == null || card == null || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(targetId);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             ContinuousEffect effect = new GainAbilityTargetEffect(
                     new SimpleStaticAbility(new LeaveBattlefieldExileSourceReplacementEffect("this permanent")),

@@ -1,7 +1,6 @@
 
 package mage.cards.x;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,10 +13,11 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author MarcoMarin
  */
 public final class XenicPoltergeist extends CardImpl {
@@ -36,7 +36,7 @@ public final class XenicPoltergeist extends CardImpl {
 
         // {tap}: Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost.
         Ability ability = new SimpleActivatedAbility(new XenicPoltergeistEffect(), new TapSourceCost());
-        ability.addTarget(new TargetArtifactPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
     }

@@ -375,11 +375,11 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public int getAmount(int min, int max, String message, Game game) {
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
         if (this.isHuman()) {
-            return RandomUtil.nextInt(max - min) + min;
+            return RandomUtil.nextInt(max - min + 1) + min;
         }
-        return super.getAmount(min, max, message, game);
+        return super.getAmount(min, max, message, source, game);
     }
 
 }

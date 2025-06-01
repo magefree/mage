@@ -276,11 +276,11 @@ public class ComputerPlayerControllableProxy extends ComputerPlayer7 {
     }
 
     @Override
-    public int getAmount(int min, int max, String message, Game game) {
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
         if (isUnderMe(game)) {
-            return super.getAmount(min, max, message, game);
+            return super.getAmount(min, max, message, source, game);
         } else {
-            return getControllingPlayer(game).getAmount(min, max, message, game);
+            return getControllingPlayer(game).getAmount(min, max, message, source, game);
         }
     }
 

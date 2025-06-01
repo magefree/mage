@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
@@ -16,7 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KorSoldierToken;
@@ -24,10 +23,11 @@ import mage.game.permanent.token.NahiriTheLithomancerEquipmentToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class NahiriTheLithomancer extends CardImpl {
@@ -72,12 +72,6 @@ public final class NahiriTheLithomancer extends CardImpl {
 
 class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Equipment you control");
-
-    static {
-        filter.add(SubType.EQUIPMENT.getPredicate());
-    }
-
     NahiriTheLithomancerFirstAbilityEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it";
@@ -102,7 +96,7 @@ class NahiriTheLithomancerFirstAbilityEffect extends OneShotEffect {
                     Permanent tokenPermanent = game.getPermanent(tokenId);
                     if (tokenPermanent != null) {
                         //TODO: Make sure the Equipment can legally enchant the token, preferably on targetting.
-                        Target target = new TargetControlledPermanent(0, 1, filter, true);
+                        Target target = new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT, true);
                         if (target.canChoose(controller.getId(), source, game)
                                 && controller.chooseUse(outcome, "Attach an Equipment you control to the created " + tokenPermanent.getIdName() + '?', source, game)) {
                             if (target.choose(Outcome.Neutral, source.getControllerId(), source.getSourceId(), source, game)) {

@@ -83,7 +83,7 @@ class PiaNalaarChiefMechanicEffect extends OneShotEffect {
             return false;
         }
         int energyToPay = controller.getAmount(1, controller.getCountersCount(CounterType.ENERGY),
-                "Pay 1 or more {E}", game);
+                "Pay 1 or more {E}", source, game);
         if (energyToPay == 0) {
             return true;
         }

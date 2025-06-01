@@ -88,7 +88,7 @@ class ArdentDustspeakerCost extends CostImpl {
         if (controller != null && (controller.chooseTarget(Outcome.Benefit, this.getTargets().get(0), source, game))) {
             Card card = game.getCard(this.getTargets().get(0).getFirstTarget());
             if (card != null) {
-                controller.putCardsOnBottomOfLibrary(card, game, source, true);
+                controller.putCardsOnBottomOfLibrary(card, game, source);
                 paid = true;
             }
         }

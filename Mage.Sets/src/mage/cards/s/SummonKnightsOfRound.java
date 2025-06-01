@@ -35,11 +35,14 @@ public final class SummonKnightsOfRound extends CardImpl {
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_V);
 
         // I, II, III, IV -- Create three 2/2 white Knight creature tokens.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_IV, new CreateTokenEffect(new WaylayToken()));
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_IV,
+                new CreateTokenEffect(new WaylayToken(), 3)
+        );
 
         // V -- Ultimate End -- Other creatures you control get +2/+2 until end of turn. Put an indestructible counter on each of them.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_V, ability -> {
-            ability.addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn));
+            ability.addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn, true));
             ability.addEffect(new AddCountersAllEffect(
                     CounterType.INDESTRUCTIBLE.createInstance(),
                     StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES

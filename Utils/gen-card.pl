@@ -19,7 +19,7 @@ my %keywords;
 sub toCamelCase {
     my $string = $_[0];
     $string =~ s/\b([\w']+)\b/ucfirst($1)/ge;
-    $string =~ s/[-,\s\':.!]//g;
+    $string =~ s/[-,\s\':.!\/]//g;
     $string;
 }
 
@@ -155,7 +155,7 @@ foreach my $setName (keys %{$cards{$originalName}}) {
                     print $last;
                 }
                 # print card line as last
-                if (defined($currName) && ($cardName cmp $currName) > 0) {
+                if (defined($currName) && ($cardName cmp $currName) > -1) {
                     print $line;
                     undef $currName;
                 }

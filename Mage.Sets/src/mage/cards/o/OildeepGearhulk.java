@@ -1,39 +1,35 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawDiscardTargetEffect;
-import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
-import mage.abilities.effects.common.discard.DiscardAndDrawThatManyEffect;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.WardAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author Jmlundeen
  */
 public final class OildeepGearhulk extends CardImpl {
 
     public OildeepGearhulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{U}{U}{B}{B}");
-        
+
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -86,12 +82,15 @@ class OildeepGearhulkEffect extends OneShotEffect {
 
         controller.lookAtCards(targetPlayer.getName() + " Hand", targetPlayer.getHand(), game);
         TargetCard chosenCard = new TargetCardInHand(0, 1, new FilterCard("card to discard"));
-        if (controller.choose(Outcome.Discard, targetPlayer.getHand(), chosenCard, source, game)) {
-            Card card = game.getCard(chosenCard.getFirstTarget());
-            targetPlayer.discard(card, false, source, game);
-            targetPlayer.drawCards(1, source, game);
-            return true;
+        if (!controller.choose(Outcome.Discard, targetPlayer.getHand(), chosenCard, source, game)) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(chosenCard.getFirstTarget());
+        if (card == null) {
+            return false;
+        }
+        targetPlayer.discard(card, false, source, game);
+        targetPlayer.drawCards(1, source, game);
+        return true;
     }
 }

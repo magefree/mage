@@ -175,7 +175,7 @@ public class DamageTargetEffect extends OneShotEffect {
                         if (maxTargets == Integer.MAX_VALUE) {
                             sb.append("any number of ");
                         } else {
-                            sb.append("up to ");
+                            sb.append("each of up to ");
                             sb.append(CardUtil.numberToText(maxTargets));
                             sb.append(' ');
                         }

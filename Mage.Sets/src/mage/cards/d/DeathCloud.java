@@ -31,10 +31,10 @@ public final class DeathCloud extends CardImpl {
         effect.setText(", discards X cards");
         this.getSpellAbility().addEffect(effect);
         effect = new SacrificeAllEffect(xValue, new FilterControlledCreaturePermanent("creatures"));
-        effect.setText(", sacrifices X creatures");
+        effect.setText(", sacrifices X creatures of their choice");
         this.getSpellAbility().addEffect(effect);
         effect = new SacrificeAllEffect(xValue, new FilterControlledLandPermanent("lands"));
-        effect.setText(", then sacrifices X lands");
+        effect.setText(", then sacrifices X lands of their choice");
         this.getSpellAbility().addEffect(effect);
     }
 

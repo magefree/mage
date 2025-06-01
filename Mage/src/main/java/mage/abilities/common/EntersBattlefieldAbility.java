@@ -6,7 +6,6 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.constants.Zone;
-import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -81,19 +80,8 @@ public class EntersBattlefieldAbility extends StaticAbility {
             return abilityRule;
         }
         String superRule = super.getRule();
-        String prefix;
-        if (abilityWord != null) {
-            prefix = abilityWord.formatWord();
-        } else if (flavorWord != null) {
-            prefix = CardUtil.italicizeWithEmDash(flavorWord);
-        } else {
-            prefix = null;
-        }
         String rule = (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s")
                 + (!superRule.isEmpty() && superRule.charAt(0) == ' ' ? "" : " ") + superRule;
-        if (prefix != null) {
-            return prefix + CardUtil.getTextWithFirstCharUpperCase(rule);
-        }
-        return rule;
+        return addRulePrefix(rule);
     }
 }

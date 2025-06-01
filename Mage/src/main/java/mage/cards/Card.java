@@ -250,6 +250,16 @@ public interface Card extends MageObject, Ownerable {
 
     List<UUID> getAttachments();
 
+    /**
+     * @param attachment can be any object: card, permanent, token
+     * @param source     can be null for default checks like state base
+     * @param game
+     * @param silentMode - use it to ignore warning message for users (e.g. for
+     *                   checking only)
+     * @return
+     */
+    boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode);
+
     boolean addAttachment(UUID permanentId, Ability source, Game game);
 
     boolean removeAttachment(UUID permanentId, Ability source, Game game);

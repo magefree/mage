@@ -88,7 +88,7 @@ class NightshadeAssassinEffect extends OneShotEffect {
         FilterCard filter = new FilterCard();
         filter.add(new ColorPredicate(ObjectColor.BLACK));
         int blackCards = controller.getHand().count(filter, source.getControllerId(), source, game);
-        int cardsToReveal = controller.getAmount(0, blackCards, "Reveal how many black cards?", game);
+        int cardsToReveal = controller.getAmount(0, blackCards, "Reveal how many black cards?", source, game);
         game.informPlayers(controller.getLogName() + " chooses to reveal " + cardsToReveal + " black cards.");
         if (cardsToReveal > 0) {
             TargetCardInHand target = new TargetCardInHand(cardsToReveal, cardsToReveal, filter);

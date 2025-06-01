@@ -168,7 +168,7 @@ class AlaniaDivergentStormWatcher extends Watcher {
         if (spell.getCardType(game).contains(CardType.SORCERY)) {
             playerFirstSorceryCast.putIfAbsent(spellControllerID, spellMOR);
         }
-        if (spell.getSubtype(game).contains(SubType.OTTER)){
+        if (spell.hasSubtype(SubType.OTTER, game)) {
             if (playerFirstOtterCast.containsKey(spellControllerID)) {
                 // We already cast an otter this turn, put it on the second otter list
                 playerSecondOtterCast.putIfAbsent(spellControllerID, spellMOR);

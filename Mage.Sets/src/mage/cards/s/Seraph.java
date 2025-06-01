@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -10,20 +9,19 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -75,18 +73,19 @@ class SeraphEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card creatureCard = game.getCard(getTargetPointer().getFirst(game, source));
-        if (controller != null
-                && creatureCard != null
-                && game.getState().getZone(creatureCard.getId()) == Zone.GRAVEYARD) { // must be still in the graveyard
-            controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game, false, false, false, null);
-            OneShotEffect effect = new SacrificeTargetEffect();
+        if (controller == null || creatureCard == null) {
+            return false;
+        }
+        controller.moveCards(creatureCard, Zone.BATTLEFIELD, source, game, false, false, false, null);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(creatureCard, game);
+        if (permanent != null) {
+            SacrificeTargetEffect effect = new SacrificeTargetEffect();
             effect.setText("Sacrifice this if Seraph leaves the battlefield or its current controller loses control of it.");
-            effect.setTargetPointer(new FixedTarget(creatureCard.getId()));
+            effect.setTargetPointer(new FixedTarget(permanent, game));
             SeraphDelayedTriggeredAbility dTA = new SeraphDelayedTriggeredAbility(effect, source.getSourceId());
             game.addDelayedTriggeredAbility(dTA, source);
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -117,15 +116,7 @@ class SeraphDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LOST_CONTROL
-                && event.getTargetId().equals(seraph)) {
-            return true;
-        }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && event.getTargetId().equals(seraph)) {
-            return true;
-        }
-        return false;
+        return event.getTargetId().equals(seraph);
     }
 
     @Override

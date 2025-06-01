@@ -12,13 +12,15 @@ import mage.abilities.effects.common.continuous.CreaturesBecomeOtherTypeEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
-import mage.filter.FilterSpell;
 
 public class AllosaurusShepherd extends CardImpl {
 
@@ -43,7 +45,7 @@ public class AllosaurusShepherd extends CardImpl {
 
         //Green spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(
-                new CantBeCounteredControlledEffect(greenSpellsFilter, null, Duration.WhileOnBattlefield)));
+                new CantBeCounteredControlledEffect(greenSpellsFilter, Duration.WhileOnBattlefield)));
 
         //4GG: Until end of turn, each Elf creature you control has base power and toughness 5/5 
         // and becomes a Dinosaur in addition to its other creature types.

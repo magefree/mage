@@ -28,7 +28,7 @@ public final class IceMagic extends CardImpl {
         // * Blizzard -- {0} -- Return target creature to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().withFirstModeCost(new GenericManaCost(2));
+        this.getSpellAbility().withFirstModeCost(new GenericManaCost(0));
         this.getSpellAbility().withFirstModeFlavorWord("Blizzard");
 
         // * Blizzara -- {2} -- Target creature's owner puts it on their choice of the top or bottom of their library.

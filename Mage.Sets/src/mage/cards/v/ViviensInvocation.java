@@ -15,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -78,7 +79,7 @@ class ViviensInvocationEffect extends OneShotEffect {
         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             cards.remove(card);
         }
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             controller.putCardsOnBottomOfLibrary(cards, game, source, false);
             return true;

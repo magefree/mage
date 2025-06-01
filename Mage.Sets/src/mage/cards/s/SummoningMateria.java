@@ -48,7 +48,7 @@ public final class SummoningMateria extends CardImpl {
         ).setText("and has vigilance"));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new GreenManaAbility(), AttachmentType.EQUIPMENT
-        ).setText("and {T}: Add {G}."));
+        ).setText("and \"{T}: Add {G}.\""));
         this.addAbility(ability);
 
         // Equip {2}

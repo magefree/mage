@@ -133,7 +133,7 @@ class YggdrasilRebirthEngineReturnCreatureEffect extends OneShotEffect {
         if (!player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
-        Permanent movedCard = game.getPermanent(card.getId());
+        Permanent movedCard = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (movedCard == null){
             return false;
         }

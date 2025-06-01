@@ -56,7 +56,7 @@ class RenoAndRudeEffect extends OneShotEffect {
 
     RenoAndRudeEffect() {
         super(Outcome.Benefit);
-        staticText = ", exile the top card of that player's library. " +
+        staticText = "exile the top card of that player's library. " +
                 "Then you may sacrifice another creature or artifact. If you do, " +
                 "you may play the exiled card this turn, and mana of any type can be spent to cast it";
     }

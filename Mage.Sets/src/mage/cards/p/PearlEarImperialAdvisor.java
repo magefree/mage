@@ -3,19 +3,16 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AffinityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledPermanent;
@@ -36,11 +33,6 @@ public final class PearlEarImperialAdvisor extends CardImpl {
     static {
         filter.add(CardType.ENCHANTMENT.getPredicate());
     }
-
-    private static final FilterControlledPermanent filterPermanentAura = new FilterControlledPermanent(SubType.AURA, "Auras");
-    private static final Hint hint = new ValueHint(
-            "Auras you control", new PermanentsOnBattlefieldCount(filterPermanentAura)
-    );
 
     private static final FilterPermanent filterModified = new FilterControlledPermanent();
     private static final FilterSpell filterAura = new FilterSpell("an Aura spell that targets a modified permanent you control");
@@ -64,12 +56,7 @@ public final class PearlEarImperialAdvisor extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Enchantment spells you cast have affinity for Auras.
-        this.addAbility(new SimpleStaticAbility(
-                new GainAbilityControlledSpellsEffect(
-                        new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filterPermanentAura)).addHint(hint),
-                        filter
-                )
-        ));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new AffinityAbility(AffinityType.AURAS), filter)));
 
         // Whenever you cast an Aura spell that targets a modified permanent you control, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filterAura, false));

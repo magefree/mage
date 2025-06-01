@@ -44,7 +44,9 @@ public final class GeneralLeoCristophe extends CardImpl {
         // When General Leo Cristophe enters, return up to one target creature card with mana value 3 or less from your graveyard to the battlefield. Then put a +1/+1 counter on General Leo Cristophe for each creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), CreaturesYouControlCount.instance));
+        ability.addEffect(new AddCountersSourceEffect(
+                CounterType.P1P1.createInstance(), CreaturesYouControlCount.instance
+        ).setText("Then put a +1/+1 counter on {this} for each creature you control"));
         this.addAbility(ability.addHint(CreaturesYouControlHint.instance));
     }
 

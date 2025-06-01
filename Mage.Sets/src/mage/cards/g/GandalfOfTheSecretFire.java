@@ -87,16 +87,20 @@ class GandalfOfTheSecretFireTriggeredAbility extends TriggeredAbilityImpl {
 
 class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
 
-    private final MageObjectReference mor;
+    // we store both Spell and Card to work properly on split cards.
+    private final MageObjectReference morSpell;
+    private final MageObjectReference morCard;
 
     GandalfOfTheSecretFireEffect(Spell spell, Game game) {
         super(Duration.OneUse, Outcome.Benefit);
-        this.mor = new MageObjectReference(spell.getCard(), game);
+        this.morSpell = new MageObjectReference(spell.getCard(), game);
+        this.morCard = new MageObjectReference(spell.getMainCard(), game);
     }
 
     private GandalfOfTheSecretFireEffect(final GandalfOfTheSecretFireEffect effect) {
         super(effect);
-        this.mor = effect.mor;
+        this.morSpell = effect.morSpell;
+        this.morCard = effect.morCard;
     }
 
     @Override
@@ -107,7 +111,7 @@ class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        Spell sourceSpell = game.getStack().getSpell(event.getTargetId());
+        Spell sourceSpell = morSpell.getSpell(game);
         if (controller == null || sourceSpell == null || sourceSpell.isCopy()) {
             return false;
         }
@@ -124,14 +128,9 @@ class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
-        if (zEvent.getFromZone() != Zone.STACK
-                || zEvent.getToZone() != Zone.GRAVEYARD
-                || event.getSourceId() == null
-                || !event.getSourceId().equals(event.getTargetId())
-                || !mor.equals(new MageObjectReference(event.getTargetId(), game))) {
-            return false;
-        }
-        Spell spell = game.getStack().getSpell(mor.getSourceId());
-        return spell != null && spell.isInstantOrSorcery(game);
+        return Zone.STACK.equals(zEvent.getFromZone())
+                && Zone.GRAVEYARD.equals(zEvent.getToZone())
+                && morSpell.refersTo(event.getSourceId(), game) // this is how we check that the spell resolved properly (and was not countered or the like)
+                && morCard.refersTo(event.getTargetId(), game); // this is how we check that the card being moved is the one we want.
     }
 }

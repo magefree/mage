@@ -1,19 +1,15 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -36,7 +32,9 @@ public final class SpotterThopter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Spotter Thopter enters the battlefield, scry X, where X is its power.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SpotterThopterEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new ScryEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
+                        .setText("scry X, where X is its power")));
     }
 
     private SpotterThopter(final SpotterThopter card) {
@@ -46,33 +44,5 @@ public final class SpotterThopter extends CardImpl {
     @Override
     public SpotterThopter copy() {
         return new SpotterThopter(this);
-    }
-}
-
-class SpotterThopterEffect extends OneShotEffect {
-
-    SpotterThopterEffect() {
-        super(Outcome.Benefit);
-        staticText = "scry X, where X is its power";
-    }
-
-    private SpotterThopterEffect(final SpotterThopterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpotterThopterEffect copy() {
-        return new SpotterThopterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
-        if (player == null || permanent == null) {
-            return false;
-        }
-        int power = permanent.getPower().getValue();
-        return power > 0 && player.scry(power, source, game);
     }
 }

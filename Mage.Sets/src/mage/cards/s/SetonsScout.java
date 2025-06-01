@@ -35,7 +35,7 @@ public final class SetonsScout extends CardImpl {
         // Threshold - Seton's Scout gets +2/+2 as long as seven or more cards are in your graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), ThresholdCondition.instance,
-                "As long as seven or more cards are in your graveyard, {this} gets +2/+2"
+                "{this} gets +2/+2 as long as seven or more cards are in your graveyard"
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 

@@ -76,7 +76,7 @@ class ValleyFlamecallerEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return permanent != null
-                && permanent.isControlledBy(permanent.getControllerId())
+                && permanent.isControlledBy(source.getControllerId())
                 && (permanent.hasSubtype(SubType.LIZARD, game)
                 || permanent.hasSubtype(SubType.MOUSE, game)
                 || permanent.hasSubtype(SubType.OTTER, game)

@@ -18,7 +18,7 @@ public class RemoveAllCountersSourceEffect extends OneShotEffect {
     public RemoveAllCountersSourceEffect(CounterType counterType) {
         super(Outcome.Neutral);
         this.counterType = counterType;
-        staticText = "remove all " + counterType.getName() + " counters from it.";
+        staticText = "remove all " + counterType.getName() + " counters from {this}";
     }
 
     protected RemoveAllCountersSourceEffect(final RemoveAllCountersSourceEffect effect) {

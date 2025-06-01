@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -71,7 +72,7 @@ class PresumedDeadEffect extends OneShotEffect {
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
         game.processAction();
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             permanent.setSuspected(true, game, source);
         }

@@ -1,27 +1,25 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.target.common.TargetEquipmentPermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class CarryAway extends CardImpl {
@@ -32,15 +30,14 @@ public final class CarryAway extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant Equipment
-        TargetPermanent auraTarget = new TargetEquipmentPermanent();
+        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_EQUIPMENT);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Carry Away enters the battlefield, unattach enchanted Equipment.
-        ability = new EntersBattlefieldTriggeredAbility(new CarryAwayEffect());
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CarryAwayEffect()));
+
         // You control enchanted Equipment.
         this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect("Equipment")));
     }

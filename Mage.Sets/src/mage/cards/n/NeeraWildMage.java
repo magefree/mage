@@ -75,7 +75,7 @@ class NeeraWildMageEffect extends OneShotEffect {
             return false;
         }
 
-        if (!spellController.putCardsOnBottomOfLibrary(spell, game, source, true)) {
+        if (!spellController.putCardsOnBottomOfLibrary(spell, game, source)) {
             return false;
         }
 

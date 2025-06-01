@@ -34,6 +34,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -113,7 +114,7 @@ class NahiriTheHarbingerEffect extends SearchEffect {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        Permanent permanent = game.getPermanent(card.getId());
+                        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                         if (permanent != null) {
                             ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                             effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));

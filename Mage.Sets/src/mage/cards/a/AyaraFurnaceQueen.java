@@ -15,9 +15,11 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -90,17 +92,18 @@ class AyaraFurnaceQueenEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        if (game.getPermanent(card.getId()) == null) {
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+        if (permanent == null) {
             return false;
         }
         game.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.Custom
-        ).setTargetPointer(new FixedTarget(card.getId(), game)), source);
+        ).setTargetPointer(new FixedTarget(permanent.getId(), game)), source);
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new ExileTargetEffect().setText("exile it")
-                        .setTargetPointer(new FixedTarget(card.getId(), game)),
+                        .setTargetPointer(new FixedTarget(permanent.getId(), game)),
                 TargetController.ANY
         ), source);
-    return true;}
+    return true;
+    }
 }

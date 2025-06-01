@@ -13,9 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterEquipmentPermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.game.Game;
 import mage.game.events.DefenderAttackedEvent;
 import mage.game.events.GameEvent;
@@ -103,21 +102,11 @@ class AkiriFearlessVoyagerTriggeredAbility extends TriggeredAbilityImpl {
 
 class AkiriFearlessVoyagerEffect extends OneShotEffect {
 
-    private static enum AkiriFearlessVoyagerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-        instance;
-
-        @Override
-        public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-            return game.getPermanent(input.getObject().getAttachedTo()) != null
-                    && game.getControllerId(input.getObject().getAttachedTo()).equals(input.getPlayerId());
-        }
-    }
-
     private static final FilterPermanent filter
-            = new FilterEquipmentPermanent("equipment attached to a creature you control");
+            = new FilterPermanent(SubType.EQUIPMENT, "equipment attached to a creature you control");
 
     static {
-        filter.add(AkiriFearlessVoyagerPredicate.instance);
+        filter.add(new AttachedToPredicate(StaticFilters.FILTER_CONTROLLED_CREATURE));
     }
 
     AkiriFearlessVoyagerEffect() {

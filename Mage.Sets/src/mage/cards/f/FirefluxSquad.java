@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -102,7 +103,7 @@ class FirefluxSquadEffect extends OneShotEffect {
             return player.putCardsOnBottomOfLibrary(cards, game, source, false);
         }
         player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, true, false, true, null);
-        permanent = game.getPermanent(toBattlefield.getId());
+        permanent = CardUtil.getPermanentFromCardPutToBattlefield(toBattlefield, game);
         if (permanent != null) {
             cards.remove(toBattlefield);
             game.getCombat().addAttackingCreature(permanent.getId(), game);

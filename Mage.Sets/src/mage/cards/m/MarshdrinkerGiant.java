@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,27 +10,29 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class MarshdrinkerGiant extends CardImpl {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Island or Swamp an opponent controls");
-    
+
+    private static final FilterPermanent filter = new FilterPermanent("Island or Swamp an opponent controls");
+
     static {
         filter.add(Predicates.or(
                 SubType.ISLAND.getPredicate(),
-                SubType.SWAMP.getPredicate()));
+                SubType.SWAMP.getPredicate()
+        ));
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public MarshdrinkerGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
 
@@ -40,9 +41,8 @@ public final class MarshdrinkerGiant extends CardImpl {
 
         // When Marshdrinker Giant enters the battlefield, destroy target Island or Swamp an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
-        
     }
 
     private MarshdrinkerGiant(final MarshdrinkerGiant card) {

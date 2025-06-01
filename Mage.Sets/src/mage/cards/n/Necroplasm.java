@@ -1,32 +1,34 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DredgeAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.filter.predicate.mageobject.ManaValueEqualToCountersSourceCountPredicate;
+
+import java.util.UUID;
 
 /**
  *
  * @author emerald000
  */
 public final class Necroplasm extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent(
+            "each creature with mana value equal to the number of +1/+1 counters on {this}"
+    );
+    static {
+        filter.add(new ManaValueEqualToCountersSourceCountPredicate(CounterType.P1P1));
+    }
 
     public Necroplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
@@ -39,7 +41,7 @@ public final class Necroplasm extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
         
         // At the beginning of your end step, destroy each creature with converted mana cost equal to the number of +1/+1 counters on Necroplasm.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new NecroplasmEffect()));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DestroyAllEffect(filter)));
         
         // Dredge 2
         this.addAbility(new DredgeAbility(2));
@@ -52,40 +54,5 @@ public final class Necroplasm extends CardImpl {
     @Override
     public Necroplasm copy() {
         return new Necroplasm(this);
-    }
-}
-
-class NecroplasmEffect extends OneShotEffect {
-    
-    NecroplasmEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "destroy each creature with mana value equal to the number of +1/+1 counters on {this}.";
-    }
-    
-    private NecroplasmEffect(final NecroplasmEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public NecroplasmEffect copy() {
-        return new NecroplasmEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            int numCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, numCounters));
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if(permanent != null) {
-                    permanent.destroy(source, game, false);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

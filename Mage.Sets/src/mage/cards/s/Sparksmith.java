@@ -6,6 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -27,6 +28,7 @@ public final class Sparksmith extends CardImpl {
     static {
         filter.add(SubType.GOBLIN.getPredicate());
     }
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
     
     public Sparksmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
@@ -36,9 +38,11 @@ public final class Sparksmith extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Sparksmith deals X damage to target creature and X damage to you, where X is the number of Goblins on the battlefield.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(xValue)
+                .setText("{this} deals X damage to target creature"), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addEffect(new DamageControllerEffect(new PermanentsOnBattlefieldCount(filter)));
+        ability.addEffect(new DamageControllerEffect(xValue)
+                .setText("and X damage to you, where X is the number of Goblins on the battlefield"));
         this.addAbility(ability);
     }
 

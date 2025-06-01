@@ -48,7 +48,7 @@ public final class CallousOppressor extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.OneUse),
                 SourceTappedCondition.TAPPED,
-                "Gain control of target creature for as long as {this} remains tapped");
+                "Gain control of target creature that isn't of the chosen type for as long as {this} remains tapped");
         Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new CallousOppressorFilter()));
         this.addAbility(ability);

@@ -6,8 +6,9 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.GreatestToughnessAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +54,7 @@ public final class AbzanMonument extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability.addHint(GreatestToughnessAmongControlledCreaturesValue.ALL.getHint()));
+        this.addAbility(ability.addHint(GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES.getHint()));
     }
 
     private AbzanMonument(final AbzanMonument card) {
@@ -85,8 +86,7 @@ class AbzanMonumentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return new SpiritXXToken(
-                GreatestToughnessAmongControlledCreaturesValue.ALL.calculate(game, source, this)
-        ).putOntoBattlefield(1, game, source);
+        int value = GreatestAmongPermanentsValue.TOUGHNESS_CONTROLLED_CREATURES.calculate(game, source, this);
+        return new CreateTokenEffect(new SpiritXXToken(value)).apply(game, source);
     }
 }

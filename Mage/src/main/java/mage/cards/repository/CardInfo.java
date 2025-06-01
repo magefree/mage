@@ -167,7 +167,9 @@ public class CardInfo {
             this.modalDoubleFacedSecondSideName = ((ModalDoubleFacedCard) card).getRightHalfCard().getName();
         }
 
-        this.frameStyle = card.getFrameStyle().toString();
+        if (card.getFrameStyle() != null) {
+            this.frameStyle = card.getFrameStyle().toString();
+        }
         this.frameColor = card.getFrameColor(null).toString();
         this.variousArt = card.getUsesVariousArt();
         this.blue = card.getColor(null).isBlue();

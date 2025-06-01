@@ -41,7 +41,7 @@ public final class Bloodcurdler extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."
         Ability thresholdAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), ThresholdCondition.instance,
-                "If seven or more cards are in your graveyard, {this} gets +1/+1"
+                "As long as seven or more cards are in your graveyard, {this} gets +1/+1"
         ));
         thresholdAbility.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new BeginningOfEndStepTriggeredAbility(

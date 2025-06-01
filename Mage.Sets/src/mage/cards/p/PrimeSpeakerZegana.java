@@ -1,10 +1,9 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -15,14 +14,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class PrimeSpeakerZegana extends CardImpl {
@@ -37,10 +32,13 @@ public final class PrimeSpeakerZegana extends CardImpl {
         this.toughness = new MageInt(1);
 
         //Prime Speaker Zegana enters the battlefield with X +1/+1 counters on it, where X is the greatest power among other creatures you control.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0),
-                new GreatestPowerCount(), true);
+        Effect effect = new AddCountersSourceEffect(
+                CounterType.P1P1.createInstance(0),
+                GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES,
+                true
+        );
         effect.setText("with X +1/+1 counters on it, where X is the greatest power among other creatures you control.");
-        this.addAbility(new EntersBattlefieldAbility(effect));
+        this.addAbility(new EntersBattlefieldAbility(effect).addHint(GreatestAmongPermanentsValue.POWER_OTHER_CONTROLLED_CREATURES.getHint()));
         //When Prime Speaker Zegana enters the battlefield, draw cards equal to its power.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("draw cards equal to its power")));
@@ -53,34 +51,5 @@ public final class PrimeSpeakerZegana extends CardImpl {
     @Override
     public PrimeSpeakerZegana copy() {
         return new PrimeSpeakerZegana(this);
-    }
-}
-
-class GreatestPowerCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int value = 0;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), sourceAbility.getControllerId(), game)) {
-            if (creature != null && creature.getPower().getValue() > value && !sourceAbility.getSourceId().equals(creature.getId())) {
-                value = creature.getPower().getValue();
-            }
-        }
-        return value;
-    }
-
-    @Override
-    public GreatestPowerCount copy() {
-        return new GreatestPowerCount();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "greatest power among other creatures you control";
     }
 }

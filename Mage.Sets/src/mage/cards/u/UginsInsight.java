@@ -1,28 +1,29 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.HighestManaValueCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class UginsInsight extends CardImpl {
 
     public UginsInsight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
-        // Scry X, where X is the highest converted mana cost among permanents you control, then draw three cards.
-        this.getSpellAbility().addEffect(new UginsInsightEffect());
+        // Scry X, where X is the greatest mana value among permanents you control, then draw three cards.
+        this.getSpellAbility().addEffect(
+                new ScryEffect(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS)
+        );
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.MANAVALUE_CONTROLLED_PERMANENTS.getHint());
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3).concatBy(", then"));
     }
 
     private UginsInsight(final UginsInsight card) {
@@ -32,36 +33,5 @@ public final class UginsInsight extends CardImpl {
     @Override
     public UginsInsight copy() {
         return new UginsInsight(this);
-    }
-}
-
-class UginsInsightEffect extends OneShotEffect {
-
-    UginsInsightEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Scry X, where X is the highest mana value among permanents you control, then draw three cards";
-    }
-
-    private UginsInsightEffect(final UginsInsightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UginsInsightEffect copy() {
-        return new UginsInsightEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int highCMC = new HighestManaValueCount().calculate(game, source, this);
-            if (highCMC > 0) {
-                controller.scry(highCMC, source, game);
-            }
-            controller.drawCards(3, source, game);
-            return true;
-        }
-        return false;
     }
 }

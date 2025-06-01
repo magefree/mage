@@ -101,7 +101,7 @@ class EmperorOfBonesEffect extends OneShotEffect {
         }
         game.setEnterWithCounters(card.getId(), new Counters().addCounter(CounterType.FINALITY.createInstance()));
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return true;
         }

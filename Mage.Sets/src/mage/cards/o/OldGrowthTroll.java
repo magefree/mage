@@ -32,6 +32,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TrollWarriorToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -117,7 +118,7 @@ class OldGrowthTrollReturnEffect extends OneShotEffect {
         }
         game.addEffect(new OldGrowthTrollContinuousEffect(game.getState().getZoneChangeCounter(source.getSourceId()) + 1), source);
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent aura = game.getPermanent(card.getId());
+        Permanent aura = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         Permanent creature = game.getPermanent(target.getFirstTarget());
         if (aura == null || creature == null) {
             return true;
@@ -198,7 +199,7 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
         return new OldGrowthTrollContinuousEffect(this);
     }
 
-    private static final Ability makeAbility() {
+    private static Ability makeAbility() {
         Ability activatedAbility = new SimpleActivatedAbility(
                 new CreateTokenEffect(new TrollWarriorToken(), 1, true, false), new GenericManaCost(1)
         );

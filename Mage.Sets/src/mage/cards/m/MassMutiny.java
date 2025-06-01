@@ -15,7 +15,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -32,7 +32,7 @@ public final class MassMutiny extends CardImpl {
         // For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
         this.getSpellAbility().addEffect(new MassMutinyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,1));
-        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
     }
 
     private MassMutiny(final MassMutiny card) {

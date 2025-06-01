@@ -67,14 +67,14 @@ class DoublingChantEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Set<String> names = game.getBattlefield().getActivePermanents(
+        List<String> names = game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
                 source.getControllerId(), source, game
         )
                 .stream()
                 .filter(Objects::nonNull)
                 .map(MageObject::getName)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         TargetCardInLibrary targetCardInLibrary = new DoublingChantTarget(names);
         player.searchLibrary(targetCardInLibrary, source, game);
         Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
@@ -88,7 +88,7 @@ class DoublingChantTarget extends TargetCardInLibrary {
 
     private final Map<String, Integer> nameMap = new HashMap<>();
 
-    DoublingChantTarget(Set<String> names) {
+    DoublingChantTarget(List<String> names) {
         super(0, names.size(), makeFilter(names));
         this.populateNameMap(names);
     }
@@ -103,13 +103,13 @@ class DoublingChantTarget extends TargetCardInLibrary {
         return new DoublingChantTarget(this);
     }
 
-    private static FilterCard makeFilter(Set<String> names) {
+    private static FilterCard makeFilter(List<String> names) {
         FilterCard filter = new FilterCreatureCard();
         filter.add(Predicates.or(names.stream().map(name -> new NamePredicate(name)).collect(Collectors.toSet())));
         return filter;
     }
 
-    private void populateNameMap(Set<String> names) {
+    private void populateNameMap(List<String> names) {
         names.stream().forEach(name -> this.nameMap.compute(name, CardUtil::setOrIncrementValue));
     }
 

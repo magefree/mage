@@ -1,8 +1,8 @@
 package mage.cards.y;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.OneShotNonTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,9 +26,9 @@ public final class YaroksWavecrasher extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Yarok’s Wavecrasher enters the battlefield, return another creature you control to its owner’s hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL).withNotTarget(true));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new OneShotNonTargetEffect(
+                new ReturnToHandTargetEffect().setText("return another creature you control to its owner's hand"),
+                new TargetControlledPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL))));
     }
 
     private YaroksWavecrasher(final YaroksWavecrasher card) {

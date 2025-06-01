@@ -1,17 +1,17 @@
-
 package mage.filter.predicate.permanent;
 
-import java.util.UUID;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Optional;
+
 /**
- *
  * @author LoneFox
  */
-public class AttachedToPredicate implements Predicate<Permanent> {
+public class AttachedToPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     private final FilterPermanent filter;
 
@@ -20,10 +20,14 @@ public class AttachedToPredicate implements Predicate<Permanent> {
     }
 
     @Override
-    public boolean apply(Permanent input, Game game) {
-        UUID attachedTo = input.getAttachedTo();
-        Permanent permanent = game.getPermanent(attachedTo);
-        return filter.match(permanent, game);
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return Optional
+                .ofNullable(input)
+                .map(ObjectSourcePlayer::getObject)
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanent)
+                .map(permanent -> filter.match(permanent, input.getPlayerId(), input.getSource(), game))
+                .orElse(false);
     }
 
     @Override

@@ -166,7 +166,7 @@ class CemeteryDesecratorRemoveCountersEffect extends OneShotEffect {
             remainingCounters -= numCounters;
             int min = Math.max(0, countersLeftToRemove - remainingCounters);
             int max = Math.min(countersLeftToRemove, numCounters);
-            int toRemove = controller.getAmount(min, max, counterName + " counters to remove", game);
+            int toRemove = controller.getAmount(min, max, counterName + " counters to remove", source, game);
             // Sanity check in case of GUI bugs/disconnects
             toRemove = Math.max(toRemove, min);
             toRemove = Math.min(toRemove, max);

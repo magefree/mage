@@ -64,7 +64,7 @@ public final class FlameBurst extends CardImpl {
 class CountAsFlameBurstAbility extends SimpleStaticAbility {
 
     public CountAsFlameBurstAbility() {
-        super(Zone.GRAVEYARD, new InfoEffect("If {this} is in a graveyard, effects from spells named Flame Burst count it as a card named Flame Burst"));
+        super(Zone.GRAVEYARD, new InfoEffect("If this card is in a graveyard, effects from spells named Flame Burst count it as a card named Flame Burst"));
     }
 
     private CountAsFlameBurstAbility(CountAsFlameBurstAbility ability) {

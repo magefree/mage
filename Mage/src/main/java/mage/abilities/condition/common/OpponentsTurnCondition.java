@@ -17,6 +17,6 @@ public enum OpponentsTurnCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if it's an opponent's turn";
+        return "during an opponent's turn";
     }
 }

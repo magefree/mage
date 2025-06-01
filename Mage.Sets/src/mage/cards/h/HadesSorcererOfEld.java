@@ -1,16 +1,19 @@
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.replacement.GraveyardFromAnywhereExileReplacementEffect;
 import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  * @author balazskristof
@@ -19,7 +22,7 @@ public final class HadesSorcererOfEld extends CardImpl {
 
     public HadesSorcererOfEld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(6);
@@ -33,7 +36,9 @@ public final class HadesSorcererOfEld extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Echo of the Lost -- During your turn you may play cards from your graveyard.
-        this.addAbility(new SimpleStaticAbility(PlayFromGraveyardControllerEffect.playCards()).withFlavorWord("Echo of the Lost"));
+        this.addAbility(new SimpleStaticAbility(new ConditionalAsThoughEffect(
+                PlayFromGraveyardControllerEffect.playCards(), MyTurnCondition.instance
+        ).setText("during your turn, you may play cards from your graveyard")).withFlavorWord("Echo of the Lost"));
 
         // If a card or token would be put into your graveyard from anywhere, exile it instead.
         this.addAbility(new SimpleStaticAbility(new GraveyardFromAnywhereExileReplacementEffect(true, true)));

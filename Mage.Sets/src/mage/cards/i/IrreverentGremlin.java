@@ -1,7 +1,5 @@
 package mage.cards.i;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -17,6 +15,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
+
+import java.util.UUID;
 
 /**
  * @author paasar
@@ -41,15 +41,9 @@ public final class IrreverentGremlin extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Whenever another creature you control with power 2 or less enters, you may discard a card. If you do, draw a card. Do this only once each turn.
-        this.addAbility(
-                new EntersBattlefieldAllTriggeredAbility(
-                        new DoIfCostPaid(
-                                new DrawCardSourceControllerEffect(1),
-                                new DiscardCardCost(),
-                                null,
-                                false), // since triggered ability is optional (do only once), DoIfCostPaid must not be
-                        filter)
-                        .setDoOnlyOnceEachTurn(true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), filter
+        ).setDoOnlyOnceEachTurn(true));
     }
 
     private IrreverentGremlin(final IrreverentGremlin card) {

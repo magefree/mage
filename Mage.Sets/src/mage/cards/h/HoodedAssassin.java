@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -13,24 +12,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class HoodedAssassin extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
-    
     public HoodedAssassin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(1);
@@ -41,9 +34,9 @@ public final class HoodedAssassin extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
         // * Destroy target creature that was dealt damage this turn.
         Mode mode = new Mode(new DestroyTargetEffect());
-        mode.addTarget(new TargetCreaturePermanent(filter));
+        mode.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
         ability.addMode(mode);
-        this.addAbility(ability);        
+        this.addAbility(ability);
     }
 
     private HoodedAssassin(final HoodedAssassin card) {

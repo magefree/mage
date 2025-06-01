@@ -22,6 +22,7 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author nomage
@@ -76,7 +77,7 @@ class CauldronDanceReturnFromGraveyardToBattlefieldTargetEffect extends OneShotE
             Card card = game.getCard(targetId);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                Permanent creature = game.getPermanent(card.getId());
+                Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (creature != null) {
                     ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                     hasteEffect.setTargetPointer(new FixedTarget(creature, game));
@@ -123,7 +124,7 @@ class CauldronDancePutCreatureFromHandOntoBattlefieldEffect extends OneShotEffec
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            Permanent permanent = game.getPermanent(card.getId());
+                            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                             if (permanent != null) {
                                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                                 effect.setTargetPointer(new FixedTarget(permanent, game));

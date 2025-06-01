@@ -32,7 +32,7 @@ public class DeckGeneratorDialog {
     private static String selectedColors;
     private static JComboBox cbSets, cbDeckSize, cbCMC;
     private static JButton btnGenerate, btnCancel, btnReset;
-    private static JCheckBox cArtifacts, cSingleton, cNonBasicLands, cColorless, cAdvanced;
+    private static JCheckBox cArtifacts, cSingleton, cNonBasicLands, cColorless, cAdvanced, cCommander;
     private static JLabel averageCMCLabel;
     private static SimpleDateFormat dateFormat;
     private static RatioAdjustingSliderPanel adjustingSliderPanel;
@@ -63,7 +63,7 @@ public class DeckGeneratorDialog {
         c.insets = new Insets(5, 10, 0, 10);
         c.gridx = 1;
         c.gridy = 0;
-        String chosen = MageFrame.getPreferences().get("genDeckColor", "u");
+        String chosen = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_COLORS, "u");
         final ColorsChooser colorsChooser = new ColorsChooser(chosen);
         mainPanel.add(colorsChooser, c);
 
@@ -135,7 +135,7 @@ public class DeckGeneratorDialog {
         c.ipadx = 30;
         c.insets = new Insets(5, 10, 0, 10);
         c.weightx = 0.90;
-        cbDeckSize = new JComboBox<>(new String[]{"40", "60"});
+        cbDeckSize = new JComboBox<>(new String[]{"40", "60", "100"});
         cbDeckSize.setSelectedIndex(0);
         cbDeckSize.setAlignmentX(Component.LEFT_ALIGNMENT);
         mainPanel.add(cbDeckSize, c);
@@ -148,31 +148,33 @@ public class DeckGeneratorDialog {
         JPanel jCheckBoxes = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         // Singletons
+        boolean commanderEnabled = Boolean.parseBoolean(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_COMMANDER, "false"));
         cSingleton = new JCheckBox("Singleton", false);
         cSingleton.setToolTipText("Allow only a single copy of each non-land card in your deck.");
         String singletonEnabled = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_SINGLETON, "false");
-        cSingleton.setSelected(Boolean.valueOf(singletonEnabled));
+        cSingleton.setSelected(Boolean.parseBoolean(singletonEnabled));
         jCheckBoxes.add(cSingleton);
+        cSingleton.setEnabled(!commanderEnabled);
 
         // Artifacts
         cArtifacts = new JCheckBox("Artifacts", false);
         cArtifacts.setToolTipText("Use artifacts and artifact creatures in your deck.");
         String artifactEnabled = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_ARTIFACTS, "false");
-        cArtifacts.setSelected(Boolean.valueOf(artifactEnabled));
+        cArtifacts.setSelected(Boolean.parseBoolean(artifactEnabled));
         jCheckBoxes.add(cArtifacts);
 
         // Non-basic lands
         cNonBasicLands = new JCheckBox("Non-basic Lands", false);
         cNonBasicLands.setToolTipText("Use non-basic lands in your deck (if applicable).");
         String nonBasicEnabled = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_NON_BASIC_LANDS, "false");
-        cNonBasicLands.setSelected(Boolean.valueOf(nonBasicEnabled));
+        cNonBasicLands.setSelected(Boolean.parseBoolean(nonBasicEnabled));
         jCheckBoxes.add(cNonBasicLands);
 
         // Colorless mana
         cColorless = new JCheckBox("Colorless mana", false);
         cColorless.setToolTipText("Allow cards with colorless mana cost.");
         String colorlessEnabled = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_COLORLESS, "false");
-        cColorless.setSelected(Boolean.valueOf(colorlessEnabled));
+        cColorless.setSelected(Boolean.parseBoolean(colorlessEnabled));
         jCheckBoxes.add(cColorless);
         c.ipadx = 0;
         c.gridx = 0;
@@ -181,12 +183,28 @@ public class DeckGeneratorDialog {
         c.gridwidth = 3;
         mainPanel.add(jCheckBoxes, c);
 
+        // Commander
+        cCommander = new JCheckBox("Commander", false);
+        cCommander.setToolTipText("Add legendary creature as commander");
+        cCommander.setSelected(commanderEnabled);
+        jCheckBoxes.add(cCommander);
+        c.ipadx = 0;
+        c.gridx = 0;
+        c.gridy = 3;
+        c.weightx = 1;
+        c.gridwidth = 3;
+        mainPanel.add(jCheckBoxes, c);
+        cCommander.addItemListener(itemEvent -> {
+            // commander require singletone mode
+            cSingleton.setEnabled(!cCommander.isSelected());
+        });
+
         // Create the advanced configuration panel
         JPanel advancedPanel = createAdvancedPanel();
 
         // Advanced checkbox (enable/disable advanced configuration)
-        cAdvanced = new JCheckBox("Advanced");
-        cAdvanced.setToolTipText("Enable advanced configuration options");
+        cAdvanced = new JCheckBox("Customize distribution");
+        cAdvanced.setToolTipText("Customize cards distribution due mana values and types");
         cAdvanced.addItemListener(itemEvent -> {
             boolean enable = cAdvanced.isSelected();
             enableAdvancedPanel(enable);
@@ -194,7 +212,7 @@ public class DeckGeneratorDialog {
 
         // Advanced Checkbox
         String advancedSavedValue = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_ADVANCED, "false");
-        boolean advancedEnabled = Boolean.valueOf(advancedSavedValue);
+        boolean advancedEnabled = Boolean.parseBoolean(advancedSavedValue);
         enableAdvancedPanel(advancedEnabled);
         cAdvanced.setSelected(advancedEnabled);
         c.gridy = 4;
@@ -212,7 +230,7 @@ public class DeckGeneratorDialog {
             colorsChooser.setEnabled(false);
             selectedColors = (String) colorsChooser.getSelectedItem();
             dlg.setVisible(false);
-            MageFrame.getPreferences().put("genDeckColor", selectedColors);
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_COLORS, selectedColors);
         });
         btnCancel = new JButton("Cancel");
         btnCancel.addActionListener(e -> {
@@ -297,7 +315,7 @@ public class DeckGeneratorDialog {
         c.gridwidth = 1;
         c.gridy = 2;
         btnReset = new JButton("Reset");
-        btnReset.setToolTipText("Reset advanced dialog to default values");
+        btnReset.setToolTipText("Reset custom cards distribution to default values");
         btnReset.addActionListener(actionEvent -> {
             cbCMC.setSelectedItem(DeckGeneratorCMC.Default);
             adjustingSliderPanel.resetValues();
@@ -371,6 +389,12 @@ public class DeckGeneratorDialog {
     public boolean useNonBasicLand() {
         boolean selected = cNonBasicLands.isSelected();
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_NON_BASIC_LANDS, Boolean.toString(selected));
+        return selected;
+    }
+
+    public boolean isCommander() {
+        boolean selected = cCommander.isSelected();
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_COMMANDER, Boolean.toString(selected));
         return selected;
     }
 

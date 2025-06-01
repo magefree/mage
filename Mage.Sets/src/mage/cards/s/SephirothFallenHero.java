@@ -28,12 +28,10 @@ import java.util.UUID;
  */
 public final class SephirothFallenHero extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-    private static final FilterPermanent filter2 = new FilterPermanent("a modified creature");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a modified creature");
 
     static {
         filter.add(ModifiedPredicate.instance);
-        filter2.add(ModifiedPredicate.instance);
     }
 
     public SephirothFallenHero(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +46,9 @@ public final class SephirothFallenHero extends CardImpl {
 
         // Jenova Cells -- Whenever Sephiroth attacks, you may put a cell counter on target creature. Until end of turn, each modified creature you control has base power and toughness 7/5.
         Ability ability = new AttacksTriggeredAbility(new SephirothFallenHeroEffect());
-        ability.addEffect(new SetBasePowerToughnessAllEffect(7, 5, Duration.EndOfTurn, filter));
+        ability.addEffect(new SetBasePowerToughnessAllEffect(
+                7, 5, Duration.EndOfTurn, filter
+        ).setText("until end of turn, each modified creature you control has base power and toughness 7/5"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Jenova Cells"));
 
@@ -56,7 +56,7 @@ public final class SephirothFallenHero extends CardImpl {
         ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new GenericManaCost(3)
         );
-        ability.addCost(new SacrificeTargetCost(filter2));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability.withFlavorWord("The Reunion"));
     }
 

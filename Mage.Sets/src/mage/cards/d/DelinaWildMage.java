@@ -57,7 +57,7 @@ class DelinaWildMageEffect extends OneShotEffect {
         super(Outcome.Benefit);
         staticText = "choose target creature you control, then roll a d20." +
                 "<br>1-14 | Create a tapped and attacking token that's a copy of that creature, " +
-                "except it's not legendary and it has \"Exile this creature at end of combat.\"" +
+                "except it's not legendary and it has \"At end of combat, exile this token.\"" +
                 "<br>15-20 | Create one of those tokens. You may roll again.";
     }
 
@@ -81,9 +81,7 @@ class DelinaWildMageEffect extends OneShotEffect {
                 false, 1, true, true
         );
         effect.setIsntLegendary(true);
-        effect.addAdditionalAbilities(new EndOfCombatTriggeredAbility(
-                new ExileSourceEffect(), false, "Exile this creature at end of combat."
-        ));
+        effect.addAdditionalAbilities(new EndOfCombatTriggeredAbility(new ExileSourceEffect(), false));
         effect.setTargetPointer(this.getTargetPointer().copy());
         while (true) {
             int result = player.rollDice(outcome, source, game, 20);

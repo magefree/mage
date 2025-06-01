@@ -67,7 +67,7 @@ public final class MuscleBurst extends CardImpl {
 class CountAsMuscleBurstAbility extends SimpleStaticAbility {
 
     public CountAsMuscleBurstAbility() {
-        super(Zone.GRAVEYARD, new InfoEffect("If {this} is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst"));
+        super(Zone.GRAVEYARD, new InfoEffect("If this card is in a graveyard, effects from spells named Muscle Burst count it as a card named Muscle Burst"));
     }
 
     private CountAsMuscleBurstAbility(CountAsMuscleBurstAbility ability) {

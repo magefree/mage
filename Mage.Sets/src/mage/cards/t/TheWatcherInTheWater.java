@@ -6,7 +6,6 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.OpponentsTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -52,12 +51,9 @@ public final class TheWatcherInTheWater extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you draw a card during an opponent's turn, create a 1/1 blue Tentacle creature token.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new DrawCardControllerTriggeredAbility(
-                        new CreateTokenEffect(new TentacleToken()), false
-                ), OpponentsTurnCondition.instance, "Whenever you draw a card " +
-                "during an opponent's turn, create a 1/1 blue Tentacle creature token."
-        ));
+        this.addAbility(new DrawCardControllerTriggeredAbility(
+                new CreateTokenEffect(new TentacleToken()), false
+        ).withTriggerCondition(OpponentsTurnCondition.instance));
 
         // Whenever a Tentacle you control dies, untap up to one target Kraken and put a stun counter on up to one target nonland permanent.
         ability = new DiesCreatureTriggeredAbility(new UntapTargetEffect(), false, filter);

@@ -18,6 +18,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -103,7 +104,7 @@ class Vault101BirthdayPartyEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent equipment = game.getPermanent(card.getId());
+        Permanent equipment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (equipment == null || !equipment.hasSubtype(SubType.EQUIPMENT, game)) {
             return true;
         }

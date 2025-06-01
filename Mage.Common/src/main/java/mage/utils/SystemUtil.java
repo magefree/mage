@@ -448,7 +448,7 @@ public final class SystemUtil {
                         cardName = cardChoice.getChoice();
 
                         // amount
-                        int cardAmount = feedbackPlayer.getAmount(1, 100, "How many [" + cardName + "] to add?", game);
+                        int cardAmount = feedbackPlayer.getAmount(1, 100, "How many [" + cardName + "] to add?", null, game);
                         if (cardAmount == 0) {
                             break;
                         }

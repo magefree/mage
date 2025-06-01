@@ -36,7 +36,7 @@ public final class StoneTongueBasilisk extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, all creatures able to block Stone-Tongue Basilisk do so.
         this.addAbility(new SimpleStaticAbility(new ConditionalRequirementEffect(
                 new MustBeBlockedByAllSourceEffect(), ThresholdCondition.instance, "As long as seven " +
-                "or more cards are in your graveyard,  all creatures able to block {this} do so"
+                "or more cards are in your graveyard, all creatures able to block {this} do so"
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 

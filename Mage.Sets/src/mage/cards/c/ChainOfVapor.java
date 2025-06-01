@@ -48,7 +48,7 @@ class ChainOfVaporEffect extends OneShotEffect {
 
     ChainOfVaporEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy";
+        this.staticText = "Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land of their choice. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
     private ChainOfVaporEffect(final ChainOfVaporEffect effect) {

@@ -2,6 +2,8 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -60,10 +62,8 @@ class GravenLoreEffect extends OneShotEffect {
             return false;
         }
         int snow = ManaPaidSourceWatcher.getSnowPaid(source.getId(), game);
-        if (snow > 0) {
-            player.scry(snow, source, game);
-        }
-        player.drawCards(3, source, game);
-        return true;
+        boolean result = new ScryEffect(snow).apply(game, source);
+        result |= new DrawCardSourceControllerEffect(3).apply(game, source);
+        return result;
     }
 }

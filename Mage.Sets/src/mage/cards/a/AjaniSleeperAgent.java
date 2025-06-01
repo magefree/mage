@@ -90,7 +90,7 @@ class AjaniSleeperAgentEffect extends OneShotEffect {
         if (card.isCreature(game) || card.isPlaneswalker(game)) {
             controller.moveCards(card, Zone.HAND, source, game);
         } else if (controller.chooseUse(Outcome.Neutral, "Put " + card.getName() + " on the bottom of your library?", source, game)) {
-            controller.putCardsOnBottomOfLibrary(card, game, source, true);
+            controller.putCardsOnBottomOfLibrary(card, game, source);
         }
         return true;
     }

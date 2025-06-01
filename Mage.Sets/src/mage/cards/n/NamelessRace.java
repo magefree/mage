@@ -111,7 +111,7 @@ class NamelessRaceEffect extends ReplacementEffectImpl {
         int permanentsInPlay = new PermanentsOnBattlefieldCount(filter).calculate(game, source, null);
         int cardsInGraveyards = new CardsInAllGraveyardsCount(filter2).calculate(game, source, null);
         int maxAmount = Math.min(permanentsInPlay + cardsInGraveyards, controller.getLife());
-        int payAmount = controller.getAmount(0, maxAmount, "Pay up to " + maxAmount + " life", game);
+        int payAmount = controller.getAmount(0, maxAmount, "Pay up to " + maxAmount + " life", source, game);
         Cost cost = new PayLifeCost(payAmount);
         if (!cost.pay(source, game, source, source.getControllerId(), true)) {
             return false;

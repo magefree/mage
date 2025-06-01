@@ -15,7 +15,7 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.card.ManaValueLessThanControlledLandCountPredicate;
+import mage.filter.predicate.mageobject.ManaValueLessThanControlledLandCountPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;

@@ -1,38 +1,26 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.keyword.AffinityAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterControlledPlaneswalkerPermanent;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author DominionSpy
  */
 public final class TomikWielderOfLaw extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPlaneswalkerPermanent("planeswalkers");
-    private static final Hint hint = new ValueHint("planeswalkers you control", new PermanentsOnBattlefieldCount(filter));
 
     public TomikWielderOfLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
@@ -44,8 +32,7 @@ public final class TomikWielderOfLaw extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Affinity for planeswalkers
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter))
-                .addHint(hint));
+        this.addAbility(new AffinityAbility(AffinityType.PLANESWALKERS));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

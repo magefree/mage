@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.card.ManaValueLessThanControlledLandCountPredicate;
+import mage.filter.predicate.mageobject.ManaValueLessThanControlledLandCountPredicate;
 import mage.target.common.TargetCardInLibrary;
 
 /**

@@ -1,11 +1,11 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PlayCardTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -57,7 +57,7 @@ class ProsperTomeBoundTriggeredAbility extends PlayCardTriggeredAbility {
 
     ProsperTomeBoundTriggeredAbility() {
         super(TargetController.YOU, Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
-        this.flavorWord = "Pact Boon";
+        this.withFlavorWord("Pact Boon");
         setTriggerPhrase("Whenever you play a card from exile, ");
     }
 

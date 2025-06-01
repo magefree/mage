@@ -1,7 +1,5 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -10,24 +8,18 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
-import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class OrzhovEuthanist extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
-
     public OrzhovEuthanist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ASSASSIN);
 
@@ -37,8 +29,7 @@ public final class OrzhovEuthanist extends CardImpl {
         // Haunt
         // When Orzhov Euthanist enters the battlefield or the creature it haunts dies, destroy target creature that was dealt damage this turn.
         Ability ability = new HauntAbility(this, new DestroyTargetEffect());
-        Target target = new TargetCreaturePermanent(filter);
-        ability.addTarget(target);
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
         this.addAbility(ability);
     }
 

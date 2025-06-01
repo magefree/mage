@@ -156,7 +156,11 @@ public class MayCastTargetCardEffect extends OneShotEffect {
         }
         text += ".";
         if (thenExile) {
-            text += " " + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
+            if (text.contains("a graveyard")) {
+                text += " " + ThatSpellGraveyardExileReplacementEffect.RULE_A;
+            } else {
+                text += " " + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
+            }
         }
         return text;
     }

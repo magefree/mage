@@ -45,7 +45,7 @@ public final class ZellDincht extends CardImpl {
 
         // At the beginning of your end step, return a land you control to its owner's hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_A_LAND)
+                new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND)
         ));
     }
 

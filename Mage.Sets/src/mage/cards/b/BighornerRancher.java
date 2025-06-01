@@ -5,8 +5,7 @@ import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
-import mage.abilities.dynamicvalue.common.GreatestToughnessAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.DynamicManaAbility;
@@ -35,16 +34,16 @@ public final class BighornerRancher extends CardImpl {
 
         // {T}: Add an amount of {G} equal to the greatest power among creatures you control.
         this.addAbility(new DynamicManaAbility(
-                Mana.GreenMana(1), GreatestPowerAmongControlledCreaturesValue.instance, new TapSourceCost(),
+                Mana.GreenMana(1), GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES, new TapSourceCost(),
                 "Add an amount of {G} equal to the greatest power among creatures you control."
-        ).addHint(GreatestPowerAmongControlledCreaturesValue.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // Sacrifice Bighorner Rancher: You gain life equal to the greatest toughness among other creatures you control.
         this.addAbility(new SimpleActivatedAbility(
-                new GainLifeEffect(GreatestToughnessAmongControlledCreaturesValue.OTHER)
+                new GainLifeEffect(GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES)
                         .setText("You gain life equal to the greatest toughness among other creatures you control."),
                 new SacrificeSourceCost()
-        ).addHint(GreatestToughnessAmongControlledCreaturesValue.OTHER.getHint()));
+        ).addHint(GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES.getHint()));
     }
 
     private BighornerRancher(final BighornerRancher card) {

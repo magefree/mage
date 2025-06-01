@@ -1,18 +1,17 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterControlledPermanent;
+import mage.constants.AffinityType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.RebelRedToken;
@@ -28,18 +27,11 @@ import java.util.UUID;
  */
 public final class GoldwardensGambit extends CardImpl {
 
-    private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent(SubType.EQUIPMENT, "Equipment");
-
-    private static final Hint hint = new ValueHint(
-            "Equipment you control", new PermanentsOnBattlefieldCount(filter)
-    );
-
     public GoldwardensGambit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");
 
         // Affinity for Equipment
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).addHint(hint));
+        this.addAbility(new AffinityAbility(AffinityType.EQUIPMENT));
 
         // Create five 2/2 red Rebel creature tokens. They gain haste until end of turn. For each of those tokens, you may attach an Equipment you control to it.
         this.getSpellAbility().addEffect(new GoldwardensGambitEffect());
@@ -52,10 +44,6 @@ public final class GoldwardensGambit extends CardImpl {
     @Override
     public GoldwardensGambit copy() {
         return new GoldwardensGambit(this);
-    }
-
-    public static FilterControlledPermanent getFilter() {
-        return filter;
     }
 }
 
@@ -87,7 +75,7 @@ class GoldwardensGambitEffect extends OneShotEffect {
         game.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
         ).setTargetPointer(new FixedTargets(token, game)), source);
-        if (game.getBattlefield().count(GoldwardensGambit.getFilter(), source.getControllerId(), source, game) < 1) {
+        if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT, source.getControllerId(), source, game) < 1) {
             return true;
         }
         for (UUID tokenId : token.getLastAddedTokenIds()) {
@@ -98,7 +86,7 @@ class GoldwardensGambitEffect extends OneShotEffect {
             )) {
                 continue;
             }
-            TargetPermanent target = new TargetPermanent(0, 1, GoldwardensGambit.getFilter(), true);
+            TargetPermanent target = new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT, true);
             player.choose(Outcome.BoostCreature, target, source, game);
             permanent.addAttachment(target.getFirstTarget(), source, game);
         }

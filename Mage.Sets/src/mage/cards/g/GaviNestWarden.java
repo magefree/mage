@@ -93,13 +93,17 @@ class CyclingZeroCostEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(outcome, "Pay {0} to cycle this card?", source, game)) {
+        if (player == null) {
+            return false;
+        }
+        if (game.inCheckPlayableState() || player.chooseUse(outcome, "Pay {0} to cycle this card?", source, game)) {
+            abilityToModify.clearManaCostsToPay();
+            abilityToModify.getCosts().removeIf(cost -> !CyclingDiscardCost.class.isInstance(cost));
+            abilityToModify.addManaCostsToPay(new GenericManaCost(0));
             return true;
         }
-        abilityToModify.clearManaCostsToPay();
-        abilityToModify.getCosts().removeIf(cost -> !CyclingDiscardCost.class.isInstance(cost));
-        abilityToModify.addManaCostsToPay(new GenericManaCost(0));
-        return true;
+
+        return false;
     }
 
     @Override

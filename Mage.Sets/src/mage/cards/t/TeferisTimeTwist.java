@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -111,7 +112,7 @@ class TeferisTimeTwistReturnEffect extends OneShotEffect {
         if (!player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return true;
         }
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null && permanent.isCreature(game)) {
             // TODO: This is technically wrong as it should enter with the counters,
             // however there's currently no way to know that for sure

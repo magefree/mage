@@ -20,7 +20,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public final class IridescentAngel extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("all colors");
+    private static final FilterCard filter = new FilterCard("each color");
 
     static {
         filter.add(Predicates.or(

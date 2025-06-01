@@ -93,21 +93,25 @@ class RodOfAbsorptionTriggeredAbility extends TriggeredAbilityImpl {
 
 class RodOfAbsorptionExileEffect extends ReplacementEffectImpl {
 
-    private final MageObjectReference mor;
+    // we store both Spell and Card to work properly on split cards.
+    private final MageObjectReference morSpell;
+    private final MageObjectReference morCard;
 
     RodOfAbsorptionExileEffect(Spell spell, Game game) {
         super(Duration.WhileOnStack, Outcome.Benefit);
-        this.mor = new MageObjectReference(spell, game);
+        this.morSpell = new MageObjectReference(spell.getCard(), game);
+        this.morCard = new MageObjectReference(spell.getMainCard(), game);
     }
 
     private RodOfAbsorptionExileEffect(final RodOfAbsorptionExileEffect effect) {
         super(effect);
-        this.mor = effect.mor;
+        this.morSpell = effect.morSpell;
+        this.morCard = effect.morCard;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Spell sourceSpell = game.getStack().getSpell(event.getTargetId());
+        Spell sourceSpell = morSpell.getSpell(game);
         if (sourceSpell == null || sourceSpell.isCopy()) {
             return false;
         }
@@ -131,15 +135,10 @@ class RodOfAbsorptionExileEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
-        if (zEvent.getFromZone() != Zone.STACK
-                || zEvent.getToZone() != Zone.GRAVEYARD
-                || event.getSourceId() == null
-                || !event.getSourceId().equals(event.getTargetId())
-                || mor.getZoneChangeCounter() != game.getState().getZoneChangeCounter(event.getSourceId())) {
-            return false;
-        }
-        Spell spell = game.getStack().getSpell(mor.getSourceId());
-        return spell != null && spell.isInstantOrSorcery(game);
+        return Zone.STACK.equals(zEvent.getFromZone())
+                && Zone.GRAVEYARD.equals(zEvent.getToZone())
+                && morSpell.refersTo(event.getSourceId(), game) // this is how we check that the spell resolved properly (and was not countered or the like)
+                && morCard.refersTo(event.getTargetId(), game); // this is how we check that the card being moved is the one we want.
     }
 
     @Override

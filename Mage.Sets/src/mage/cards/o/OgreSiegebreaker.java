@@ -9,9 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -20,13 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class OgreSiegebreaker extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature that was dealt damage this turn");
-
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
 
     public OgreSiegebreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
@@ -38,7 +29,7 @@ public final class OgreSiegebreaker extends CardImpl {
 
         // {2}{B}{R}: Destroy target creature that was dealt damage this turn.
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{2}{B}{R}"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
         this.addAbility(ability);
     }
 

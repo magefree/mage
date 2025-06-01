@@ -9,12 +9,13 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ import java.util.UUID;
  */
 public final class ChokingSands extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("non-Swamp land");
+    private static final FilterPermanent filter = new FilterLandPermanent("non-Swamp land");
 
     static {
         filter.add(Predicates.not(SubType.SWAMP.getPredicate()));
@@ -34,7 +35,7 @@ public final class ChokingSands extends CardImpl {
 
         // Destroy target non-Swamp land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetLandPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // If that land was nonbasic, Choking Sands deals 2 damage to the land's controller.
         this.getSpellAbility().addEffect(new ChokingSandsEffect());
@@ -54,7 +55,7 @@ class ChokingSandsEffect extends OneShotEffect {
 
     ChokingSandsEffect() {
         super(Outcome.Damage);
-        this.staticText = "If that land was nonbasic, Choking Sands deals 2 damage to the land's controller";
+        this.staticText = "If that land was nonbasic, {this} deals 2 damage to the land's controller";
     }
 
     private ChokingSandsEffect(final ChokingSandsEffect effect) {

@@ -8,8 +8,8 @@ package mage.game.tournament;
  */
 public class TournamentSealedOptions extends TournamentOptions {
 
-    public TournamentSealedOptions(String name, String matchType, int numSeats) {
-        super(name, matchType, numSeats);
+    public TournamentSealedOptions(String name, String matchType, boolean isSingleMultiplayerGame) {
+        super(name, matchType, isSingleMultiplayerGame);
     }
 
 }

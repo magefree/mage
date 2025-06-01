@@ -131,7 +131,7 @@ class KenessosPriestOfThassaActivatedEffect extends OneShotEffect {
             return player.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
         if (player.chooseUse(outcome, "Put " + card.getName() + " on the bottom of your library?", source, game)) {
-            return player.putCardsOnBottomOfLibrary(card, game, source, true);
+            return player.putCardsOnBottomOfLibrary(card, game, source);
         }
         return true;
     }

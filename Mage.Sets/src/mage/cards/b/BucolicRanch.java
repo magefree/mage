@@ -108,7 +108,7 @@ class BucolicRanchEffect extends OneShotEffect {
         if (Zone.LIBRARY.equals(game.getState().getZone(card.getId())) && player.chooseUse(
                 outcome, "Put " + card.getName() + " on the bottom of your library?", source, game
         )) {
-            player.putCardsOnBottomOfLibrary(card, game, source, false);
+            player.putCardsOnBottomOfLibrary(card, game, source);
         }
         return true;
     }

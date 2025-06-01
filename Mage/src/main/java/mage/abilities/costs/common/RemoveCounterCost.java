@@ -136,7 +136,8 @@ public class RemoveCounterCost extends CostImpl {
                 int numberOfCountersSelected = 1;
                 if (countersLeft > 1 && countersOnPermanent > 1) {
                     numberOfCountersSelected = controller.getAmount(1, Math.min(countersLeft, countersOnPermanent),
-                            "Choose how many counters (" + counterName + ") to remove from " + targetObject.getLogName() + " as payment", game);
+                            "Choose how many counters (" + counterName + ") to remove from " + targetObject.getLogName() + " as payment",
+                            source, game);
                 }
                 targetObject.removeCounters(counterName, numberOfCountersSelected, source, game);
                 countersRemoved += numberOfCountersSelected;

@@ -24,7 +24,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class Valor extends CardImpl {
 
-    private static final String ruleText = "As long as Valor is in your graveyard and you control a Plains, creatures you control have first strike";
+    private static final String ruleText = "As long as this card is in your graveyard and you control a Plains, creatures you control have first strike";
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plains");
 

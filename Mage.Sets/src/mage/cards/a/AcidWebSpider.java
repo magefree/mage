@@ -1,8 +1,5 @@
-
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,29 +9,25 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class AcidWebSpider extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("Equipment");
 
-    static {
-        filter.add(SubType.EQUIPMENT.getPredicate());
-    }
-
-    public AcidWebSpider (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+    public AcidWebSpider(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
         this.addAbility(ReachAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
     }
 

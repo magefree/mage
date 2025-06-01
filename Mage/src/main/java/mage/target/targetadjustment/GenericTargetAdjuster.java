@@ -14,4 +14,8 @@ public abstract class GenericTargetAdjuster implements TargetAdjuster {
             throw new IllegalStateException("Wrong code usage: target adjuster already has blueprint target - " + blueprintTarget);
         }
     }
+    @Override
+    public void clearDefaultTargets() {
+        blueprintTarget = null;
+    }
 }

@@ -14,7 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -71,7 +71,7 @@ class SunderingTitanDestroyLandEffect extends OneShotEffect {
             for (SubType landName : SubType.getBasicLands()) {
                 FilterLandPermanent filter = new FilterLandPermanent(landName + " to destroy");
                 filter.add(landName.getPredicate());
-                Target target = new TargetLandPermanent(1, 1, filter, true);
+                Target target = new TargetPermanent(1, 1, filter, true);
                 if (target.canChoose(source.getControllerId(), source, game)) {
                     controller.chooseTarget(outcome, target, source, game);
                     lands.add(target.getFirstTarget());

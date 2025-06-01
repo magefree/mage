@@ -121,8 +121,10 @@ public class MatchView implements Serializable {
             for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
                 sb2.append(tPlayer.getPlayer().getName()).append(": ").append(tPlayer.getResults()).append(' ');
             }
+        } else if (table.getTournament().getOptions().getMatchOptions().isSingleGameTourney()) {
+          sb2.append("Started single game");
         } else {
-          sb2.append("Canceled");
+            sb2.append("Canceled");
         }
         this.result = sb2.toString();
         this.startTime = table.getTournament().getStartTime();

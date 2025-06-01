@@ -32,7 +32,7 @@ public final class DelightfulDiscovery extends CardImpl {
                 new SpellCostReductionForEachSourceEffect(
                         1, DelightfulDiscoveryValue.instance
                 ).setCanWorksOnStackOnly(true)
-        ).setRuleAtTheTop(true).addHint(DelightfulDiscoveryValue.getHint()), new SpellsCastWatcher());
+        ).setRuleAtTheTop(true).addHint(DelightfulDiscoveryValue.getHint()));
 
         // Scry 2, then draw two cards.
         this.getSpellAbility().addEffect(new ScryEffect(2, false));

@@ -1,17 +1,19 @@
 package mage.cards.s;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
-import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
+import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -50,7 +52,6 @@ public final class ShiningShoal extends CardImpl {
         this.getSpellAbility().addEffect(new ShiningShoalRedirectDamageTargetEffect(
                 Duration.EndOfTurn, ExileFromHandCostCardConvertedMana.instance
         ));
-        this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
@@ -64,9 +65,10 @@ public final class ShiningShoal extends CardImpl {
     }
 }
 
-class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToTargetEffect {
+class ShiningShoalRedirectDamageTargetEffect extends RedirectionEffect {
 
     private final DynamicValue dynamicAmount;
+    private MageObjectReference mageObjectReference;
 
     public ShiningShoalRedirectDamageTargetEffect(Duration duration, DynamicValue dynamicAmount) {
         super(duration, 0, UsageType.ONE_USAGE_AT_THE_SAME_TIME);
@@ -77,6 +79,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
     private ShiningShoalRedirectDamageTargetEffect(final ShiningShoalRedirectDamageTargetEffect effect) {
         super(effect);
         this.dynamicAmount = effect.dynamicAmount;
+        this.mageObjectReference = effect.mageObjectReference;
     }
 
     @Override
@@ -88,6 +91,9 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
     public void init(Ability source, Game game) {
         super.init(source, game);
         amountToRedirect = dynamicAmount.calculate(game, source, this);
+        TargetSource target = new TargetSource();
+        target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
+        mageObjectReference = new MageObjectReference(target.getFirstTarget(), game);
     }
 
     @Override
@@ -96,15 +102,13 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
 
             // get source of the damage event
             MageObject sourceObject = game.getObject(event.getSourceId());
-            // get the chosen damage source
-            MageObject chosenSourceObject = game.getObject(source.getFirstTarget());
             // does the source of the damage exist?
             if (sourceObject == null) {
                 game.informPlayers("Couldn't find source of damage");
                 return false;
             }
             // do the 2 objects match?
-            if (chosenSourceObject == null || !sourceObject.getId().equals(chosenSourceObject.getId())) {
+            if (!mageObjectReference.refersTo(sourceObject, game)) {
                 return false;
             }
 
@@ -114,7 +118,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
             if (permanent != null && permanent.isCreature(game)) {
                 if (permanent.isControlledBy(source.getControllerId())) {
                     // it's your creature
-                    redirectTarget = source.getTargets().get(1);
+                    redirectTarget = source.getTargets().get(0);
                     return true;
                 }
             }
@@ -123,7 +127,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
             if (player != null) {
                 if (player.getId().equals(source.getControllerId())) {
                     // it is you
-                    redirectTarget = source.getTargets().get(1);
+                    redirectTarget = source.getTargets().get(0);
                     return true;
                 }
             }

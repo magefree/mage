@@ -12,12 +12,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetLandPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.*;
 
@@ -26,7 +27,7 @@ import java.util.*;
  */
 public final class BenthicExplorers extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("tapped land an opponent controls");
+    private static final FilterPermanent filter = new FilterLandPermanent("tapped land an opponent controls");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
@@ -43,9 +44,7 @@ public final class BenthicExplorers extends CardImpl {
 
         // {T}, Untap a tapped land an opponent controls: Add one mana of any type that land could produce.
         Ability ability = new BenthicExplorersManaAbility();
-        ability.addCost(new UntapTargetCost(
-                new TargetLandPermanent(filter)
-        ));
+        ability.addCost(new UntapTargetCost(new TargetPermanent(filter)));
         this.addAbility(ability);
     }
 

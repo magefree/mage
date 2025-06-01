@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +22,7 @@ import java.util.UUID;
  */
 public final class PugnaciousHammerskull extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DINOSAUR);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DINOSAUR, "you don't control another Dinosaur");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -40,10 +39,9 @@ public final class PugnaciousHammerskull extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Whenever Pugnacious Hammerskull attacks while you don't control another Dinosaur, put a stun counter on it.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.STUN.createInstance())), condition,
-                "Whenever {this} attacks while you don't control another Dinosaur, put a stun counter on it."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.STUN.createInstance()).setText("put a stun counter on it")
+        ).withTriggerCondition(condition));
     }
 
     private PugnaciousHammerskull(final PugnaciousHammerskull card) {

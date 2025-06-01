@@ -10,9 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -22,14 +20,7 @@ import java.util.UUID;
  */
 public final class BitterDownfall extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("a creature that was dealt damage this turn");
-
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
-
-    private static final Condition condition = new SourceTargetsPermanentCondition(filter);
+    private static final Condition condition = new SourceTargetsPermanentCondition(StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN);
 
     public BitterDownfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");

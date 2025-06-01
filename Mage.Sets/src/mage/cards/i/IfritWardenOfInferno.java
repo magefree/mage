@@ -50,10 +50,11 @@ public final class IfritWardenOfInferno extends CardImpl {
 
         // II, III -- Brimstone -- Add {R}{R}{R}{R}. If Ifrit has three or more lore counters on it, exile it, then return it to the battlefield
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_III, ability -> {
-            ability.addEffect(new BasicManaEffect(Mana.RedMana(5)));
+            ability.addEffect(new BasicManaEffect(Mana.RedMana(4)));
             ability.addEffect(new ConditionalOneShotEffect(
                     new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD), condition,
-                    "If {this} has three or more lore counters on it, exile it, then return it to the battlefield"
+                    "If {this} has three or more lore counters on it, exile it, " +
+                            "then return it to the battlefield <i>(front face up.)</i>."
             ));
             ability.withFlavorWord("Brimstone");
         });

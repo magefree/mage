@@ -1,25 +1,6 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterEquipmentPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.EnchantedPredicate;
-import mage.filter.predicate.permanent.EquippedPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.InsectToken;
-import mage.game.permanent.token.TreasureToken;
-import mage.target.TargetPermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -32,36 +13,40 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
+import mage.constants.*;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.EquippedPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TreasureToken;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author balazskristof
  */
 public final class CloudExSOLDIER extends CardImpl {
 
-    private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("Equipment you control");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("equipped attacking creature you control");
-    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("equipped attacking creature you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
 
     static {
-        filter.add(SubType.EQUIPMENT.getPredicate());
-        filter2.add(Predicates.and(
-            AttackingPredicate.instance,
-            EquippedPredicate.instance
+        filter.add(Predicates.and(
+                AttackingPredicate.instance,
+                EquippedPredicate.instance
         ));
-        filter3.add(new PowerPredicate(ComparisonType.MORE_THAN, 6));
-    }
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
+        filter2.add(new PowerPredicate(ComparisonType.MORE_THAN, 6));
     }
 
     public CloudExSOLDIER(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
@@ -74,15 +59,15 @@ public final class CloudExSOLDIER extends CardImpl {
 
         // When Cloud enters, attach up to one target Equipment you control to it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CloudExSOLDIEREntersEffect());
-        ability.addTarget(new TargetPermanent(0, 1, filter));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
 
         // Whenever Cloud attacks, draw a card for each equipped attacking creature you control. Then if Cloud has power 7 or greater, create two Treasure tokens.
-        Ability ability2 = new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter2)));
+        Ability ability2 = new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));
         ability2.addEffect(new ConditionalOneShotEffect(
-            new CreateTokenEffect(new TreasureToken(), 2), 
-            new SourceMatchesFilterCondition(filter3),
-            "Then if {this} has power 7 or greater, create two Treasure tokens."
+                new CreateTokenEffect(new TreasureToken(), 2),
+                new SourceMatchesFilterCondition(filter2),
+                "Then if {this} has power 7 or greater, create two Treasure tokens."
         ));
         this.addAbility(ability2);
     }
@@ -102,7 +87,7 @@ class CloudExSOLDIEREntersEffect extends OneShotEffect {
 
     CloudExSOLDIEREntersEffect() {
         super(Outcome.Benefit);
-        staticText = "attach up to one target Equipment you control to {this}";
+        staticText = "attach up to one target Equipment you control to it";
     }
 
     private CloudExSOLDIEREntersEffect(final CloudExSOLDIEREntersEffect effect) {

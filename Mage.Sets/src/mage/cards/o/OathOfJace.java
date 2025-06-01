@@ -1,26 +1,31 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPlaneswalkerPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class OathOfJace extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledPlaneswalkerPermanent("planeswalkers you control");
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
+    private static final Hint hint = new ValueHint("Planeswalkers you control", xValue);
 
     public OathOfJace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
@@ -30,8 +35,7 @@ public final class OathOfJace extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(3, 2), false));
 
         // At the beginning of your upkeep, scry X, where X is the number of planeswalkers you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OathOfJaceEffect()));
-
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ScryEffect(xValue)).addHint(hint));
     }
 
     private OathOfJace(final OathOfJace card) {
@@ -41,35 +45,5 @@ public final class OathOfJace extends CardImpl {
     @Override
     public OathOfJace copy() {
         return new OathOfJace(this);
-    }
-}
-
-class OathOfJaceEffect extends OneShotEffect {
-
-    OathOfJaceEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "scry X, where X is the number of planeswalkers you control";
-    }
-
-    private OathOfJaceEffect(final OathOfJaceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OathOfJaceEffect copy() {
-        return new OathOfJaceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int planeswalker = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_PLANESWALKER, source.getControllerId(), game);
-            if (planeswalker > 0) {
-                controller.scry(planeswalker, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

@@ -35,7 +35,7 @@ public final class GhastlyRemains extends CardImpl {
 
         // At the beginning of your upkeep, if Ghastly Remains is in your graveyard, you may pay {B}{B}{B}. If you do, return Ghastly Remains to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"), new ManaCostsImpl<>("{B}{B}{B}")),
+                TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return it to your hand"), new ManaCostsImpl<>("{B}{B}{B}")),
                 false).withInterveningIf(SourceInGraveyardCondition.instance));
 
     }

@@ -34,7 +34,7 @@ public final class Gigapede extends CardImpl {
 
         // At the beginning of your upkeep, if Gigapede is in your graveyard, you may discard a card. If you do, return Gigapede to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"), new DiscardCardCost()),
+                TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return this card to your hand"), new DiscardCardCost()),
                 false).withInterveningIf(SourceInGraveyardCondition.instance));
     }
 

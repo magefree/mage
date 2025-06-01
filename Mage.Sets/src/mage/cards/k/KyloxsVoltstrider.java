@@ -157,7 +157,7 @@ class KyloxsVoltstriderReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        controller.putCardsOnBottomOfLibrary(card, game, source, false);
+        controller.putCardsOnBottomOfLibrary(card, game, source);
         return true;
     }
 }

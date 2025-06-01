@@ -107,7 +107,7 @@ class ForgottenAncientEffect extends OneShotEffect {
                 break;
             }
 
-            int amountToMove = controller.getAmount(0, numCounters, "Choose how many counters to move (" + numCounters + " counters remaining.)", game);
+            int amountToMove = controller.getAmount(0, numCounters, "Choose how many counters to move (" + numCounters + " counters remaining.)", source, game);
             if (amountToMove == 0) {
                 break;
             }

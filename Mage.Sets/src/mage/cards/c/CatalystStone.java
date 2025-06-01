@@ -53,7 +53,7 @@ class CatalystStoneCostReductionEffect extends CostModificationEffectImpl {
 
     CatalystStoneCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "Flashback costs you pay cost up to {2} less";
+        this.staticText = "Flashback costs you pay cost {2} less";
     }
 
     protected CatalystStoneCostReductionEffect(final CatalystStoneCostReductionEffect effect) {

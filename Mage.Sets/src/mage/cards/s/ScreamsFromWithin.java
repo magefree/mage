@@ -63,7 +63,7 @@ class ScreamsFromWithinEffect extends OneShotEffect {
 
     ScreamsFromWithinEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "return {this} from your graveyard to the battlefield";
+        staticText = "return this card from your graveyard to the battlefield";
     }
 
     private ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {

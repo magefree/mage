@@ -96,7 +96,7 @@ class BladegraftAspirantCostReductionEffect extends CostModificationEffectImpl {
 
         Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
 
-        if (!(permanent != null && permanent.getSubtype(game).contains(SubType.EQUIPMENT) && permanent.isControlledBy(source.getControllerId()))) {
+        if (!(permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game) && permanent.isControlledBy(source.getControllerId()))) {
             return false;
         }
 

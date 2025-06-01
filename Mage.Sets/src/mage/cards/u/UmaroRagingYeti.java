@@ -42,7 +42,7 @@ public final class UmaroRagingYeti extends CardImpl {
         // * Other creatures you control get +3/+0 and gain trample until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new BoostControlledEffect(
                 3, 0, Duration.EndOfTurn, true
-        ));
+        ).setText("other creatures you control get +3/+0"));
         ability.addEffect(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE, true

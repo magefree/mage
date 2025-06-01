@@ -116,7 +116,7 @@ class GeralfTheFleshwrightWatcher extends Watcher {
         }
 
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent == null || !permanent.getSubtype().contains(SubType.ZOMBIE)) {
+        if (permanent == null || !permanent.hasSubtype(SubType.ZOMBIE, game)) {
             return;
         }
 

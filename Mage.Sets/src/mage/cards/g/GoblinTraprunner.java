@@ -10,10 +10,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.token.GoblinToken;
-import mage.players.Player;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -50,17 +51,16 @@ enum GoblinTraprunnerValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player player = game.getPlayer(sourceAbility.getControllerId());
-        if (player == null) {
-            return 0;
-        }
-        int count = 0;
-        for (int i = 0; i < 3; i++) {
-            if (player.flipCoin(sourceAbility, game, true)) {
-                count++;
-            }
-        }
-        return count;
+        return Optional
+                .ofNullable(sourceAbility)
+                .map(Controllable::getControllerId)
+                .map(game::getPlayer)
+                .map(player -> player
+                        .flipCoins(sourceAbility, game, 3, true)
+                        .stream()
+                        .mapToInt(x -> x ? 1 : 0)
+                        .sum()
+                ).orElse(0);
     }
 
     @Override

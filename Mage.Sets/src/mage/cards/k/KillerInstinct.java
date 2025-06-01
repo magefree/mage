@@ -25,6 +25,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -82,7 +83,7 @@ class KillerInstinctEffect extends OneShotEffect {
         }
         player.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
         if (card.isCreature(game) && player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-            Permanent permanent = game.getPermanent(card.getId());
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (permanent != null) {
                 FixedTarget blueprintTarget = new FixedTarget(permanent, game);
                 ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);

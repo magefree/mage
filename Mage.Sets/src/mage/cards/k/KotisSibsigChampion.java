@@ -1,7 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
+import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.common.EntersBattlefieldOneOrMoreTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -12,7 +12,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -23,21 +22,19 @@ import mage.target.common.TargetCardInYourGraveyard;
 import java.util.UUID;
 
 /**
- *
  * @author Jmlundeen
  */
 public final class KotisSibsigChampion extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a creature spell");
-    private static final FilterCard filter2 = new FilterCard("other cards");
+    private static final FilterCard filter = new FilterCard("other cards");
 
     static {
-        filter2.add(AnotherPredicate.instance);
+        filter.add(AnotherPredicate.instance);
     }
 
     public KotisSibsigChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}{U}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
@@ -45,9 +42,9 @@ public final class KotisSibsigChampion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Once during each of your turns, you may cast a creature spell from your graveyard by exiling three other cards from your graveyard in addition to paying its other costs.
-        Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard(3, filter2));
+        Cost cost = new ExileFromGraveCost(new TargetCardInYourGraveyard(3, filter));
         cost.setText(cost.getText().replace("exile", "exiling"));
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter, cost));
+        this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(StaticFilters.FILTER_CARD_A_CREATURE_SPELL, cost));
 
         // Whenever one or more creatures you control enter, if one or more of them entered from a graveyard or was cast from a graveyard, put two +1/+1 counters on Kotis.
         this.addAbility(new KotisSibsigTriggeredAbility());

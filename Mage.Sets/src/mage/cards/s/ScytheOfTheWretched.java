@@ -15,8 +15,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -67,14 +69,17 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            Effect effect = new AttachEffect(Outcome.AddAbility);
-            effect.setTargetPointer(new FixedTarget(card.getId()));
-            effect.apply(game, source);
-            return true;
+        if (card == null || controller == null) {
+            return false;
         }
-        return false;
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+        if (permanent != null) {
+            Effect effect = new AttachEffect(Outcome.AddAbility);
+            effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
+            effect.apply(game, source);
+        }
+        return true;
     }
 
     @Override

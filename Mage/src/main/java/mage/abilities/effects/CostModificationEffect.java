@@ -21,6 +21,8 @@ public interface CostModificationEffect extends ContinuousEffect {
     /**
      * Called by the {@link ContinuousEffects#costModification(java.util.UUID, mage.abilities.Ability, mage.game.Game) ContinuousEffects.costModification}
      * method.
+     * <p>
+     * Warning, choose dialogs restricted in plyable calculation, so you must check inCheckPlayableState
      *
      * @param game The game for which this effect should be applied.
      * @param source The source ability of this effect.

@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.abilities.Mode;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -35,9 +34,7 @@ public final class CollectiveBrutality extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Escalate - Discard a card.
-        Cost cost = new DiscardCardCost();
-        cost.setText("&mdash; Discard a card");
-        this.addAbility(new EscalateAbility(cost));
+        this.addAbility(new EscalateAbility(new DiscardCardCost()));
 
         // Choose one or more &mdash;
         this.getSpellAbility().getModes().setMinModes(1);

@@ -1,4 +1,3 @@
-
 package mage.server.draft;
 
 import mage.cards.decks.Deck;
@@ -11,8 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public enum CubeFactory {
 
@@ -22,13 +20,12 @@ public enum CubeFactory {
     private final Map<String, Class> draftCubes = new LinkedHashMap<>();
 
 
-
     public DraftCube createDraftCube(String draftCubeName) {
 
         DraftCube draftCube;
         try {
             Constructor<?> con = draftCubes.get(draftCubeName).getConstructor();
-            draftCube = (DraftCube)con.newInstance();
+            draftCube = (DraftCube) con.newInstance();
         } catch (Exception ex) {
             logger.fatal("CubeFactory error", ex);
             return null;
@@ -43,7 +40,7 @@ public enum CubeFactory {
         DraftCube draftCube;
         try {
             Constructor<?> con = draftCubes.get(draftCubeName).getConstructor(Deck.class);
-            draftCube = (DraftCube)con.newInstance(cubeFromDeck);
+            draftCube = (DraftCube) con.newInstance(cubeFromDeck);
         } catch (Exception ex) {
             logger.fatal("CubeFactory error", ex);
             return null;
@@ -57,10 +54,24 @@ public enum CubeFactory {
         return draftCubes.keySet();
     }
 
-    public void addDraftCube(String name, Class draftCube) {
-        if (draftCube != null) {
-            this.draftCubes.put(name, draftCube);
+    public void addDraftCube(String configName, Class configCubeClass) {
+        // store cubes by auto-generated names, not from config
+        if (configCubeClass == null) {
+            return;
         }
-    }
 
+        DraftCube draftCube = null;
+        try {
+            Constructor<?> con = configCubeClass.getConstructor();
+            draftCube = (DraftCube) con.newInstance();
+            if (this.draftCubes.containsKey(draftCube.getName())) {
+                throw new IllegalArgumentException("already exists " + draftCube.getName());
+            }
+        } catch (Exception e) {
+            logger.error("Can't create draft cube named by " + configName, e);
+            return;
+        }
+
+        this.draftCubes.put(draftCube.getName(), configCubeClass);
+    }
 }

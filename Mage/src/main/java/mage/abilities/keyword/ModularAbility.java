@@ -17,7 +17,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetArtifactPermanent;
+import mage.target.TargetPermanent;
 import mage.util.CardUtil;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class ModularAbility extends DiesSourceTriggeredAbility {
 
     public ModularAbility(Card card, int amount, boolean sunburst) {
         super(new ModularDistributeCounterEffect(), true);
-        this.addTarget(new TargetArtifactPermanent(filter));
+        this.addTarget(new TargetPermanent(filter));
         this.amount = amount;
         this.sunburst = sunburst;
         if (sunburst) {
@@ -91,7 +91,7 @@ public class ModularAbility extends DiesSourceTriggeredAbility {
     public String getRule() {
         if (sunburst) {
             return "Modular&mdash;Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each"
-            + " color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>";
+                    + " color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>";
         } else {
             return "Modular " + amount + " <i>(This creature enters the battlefield with " +
                     CardUtil.getOneOneCountersText(amount) +

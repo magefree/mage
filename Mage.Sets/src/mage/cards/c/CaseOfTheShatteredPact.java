@@ -1,33 +1,30 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SolvedSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.constants.SubType;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author DominionSpy
  */
 public final class CaseOfTheShatteredPact extends CardImpl {
@@ -42,16 +39,14 @@ public final class CaseOfTheShatteredPact extends CardImpl {
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
         // To solve -- There are five colors among permanents you control.
         // Solved -- At the beginning of combat on your turn, target creature you control gains flying, double strike, and vigilance until end of turn.
-        TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance())
+        Ability solvedAbility = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance())
                 .setText("target creature you control gains flying")
-        );
-        triggeredAbility.addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())
+        ).withTriggerCondition(SolvedSourceCondition.SOLVED);
+        solvedAbility.addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())
                 .setText(", double strike,"));
-        triggeredAbility.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance())
+        solvedAbility.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance())
                 .setText("and vigilance until end of turn."));
-        triggeredAbility.addTarget(new TargetControlledCreaturePermanent());
-        Ability solvedAbility = new ConditionalTriggeredAbility(
-                triggeredAbility, SolvedSourceCondition.SOLVED, "");
+        solvedAbility.addTarget(new TargetControlledCreaturePermanent());
 
         this.addAbility(new CaseAbility(initialAbility, CaseOfTheShatteredPactCondition.instance, solvedAbility)
                 .addHint(new CaseOfTheShatteredPactHint(CaseOfTheShatteredPactCondition.instance)));

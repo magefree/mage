@@ -24,7 +24,7 @@ public final class ArcboundOverseer extends CardImpl {
     private static final FilterControlledCreaturePermanent filter;
 
     static {
-        filter = new FilterControlledCreaturePermanent("creature with modular you control");
+        filter = new FilterControlledCreaturePermanent("creature you control with modular");
         filter.add(new AbilityPredicate(ModularAbility.class));
     }
 

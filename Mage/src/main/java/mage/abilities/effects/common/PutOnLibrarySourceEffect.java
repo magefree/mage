@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -46,6 +45,6 @@ public class PutOnLibrarySourceEffect extends OneShotEffect {
         if (onTop) {
             return player.putCardsOnTopOfLibrary(card, game, source, false);
         }
-        return player.putCardsOnBottomOfLibrary(card, game, source, false);
+        return player.putCardsOnBottomOfLibrary(card, game, source);
     }
 }

@@ -6,8 +6,9 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
-import mage.target.common.TargetEquipmentPermanent;
 
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public final class MoltenRebuke extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
 
         // * Destroy target Equipment.
-        this.getSpellAbility().addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetEquipmentPermanent()));
+        this.getSpellAbility().addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_EQUIPMENT)));
     }
 
     private MoltenRebuke(final MoltenRebuke card) {

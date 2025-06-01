@@ -11,9 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterOpponentsCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
@@ -23,13 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DownwindAmbusher extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterOpponentsCreaturePermanent("creature an opponent controls that was dealt damage this turn");
-
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
 
     public DownwindAmbusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -48,7 +39,7 @@ public final class DownwindAmbusher extends CardImpl {
         ability.addTarget(new TargetOpponentsCreaturePermanent());
 
         // * Destroy target creature an opponent controls that was dealt damage this turn.
-        ability.addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(filter)));
+        ability.addMode(new Mode(new DestroyTargetEffect()).addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN)));
         this.addAbility(ability);
     }
 

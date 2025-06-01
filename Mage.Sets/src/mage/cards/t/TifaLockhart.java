@@ -36,7 +36,7 @@ public final class TifaLockhart extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(
                 SourcePermanentPowerValue.ALLOW_NEGATIVE,
                 StaticValue.get(0), Duration.EndOfTurn
-        ).setText(" double {this}'s power until end of turn")));
+        ).setText("double {this}'s power until end of turn")));
     }
 
     private TifaLockhart(final TifaLockhart card) {

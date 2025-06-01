@@ -23,7 +23,11 @@ public class DestroyAllEffect extends OneShotEffect {
         super(Outcome.DestroyPermanent);
         this.filter = filter;
         this.noRegen = noRegen;
-        this.staticText = "destroy all " + filter.getMessage() + (noRegen ? ". They can't be regenerated" : "");
+        String filterMessage = filter.getMessage();
+        if (!filterMessage.startsWith("each") && !filterMessage.startsWith("all")) {
+            filterMessage = "all " + filterMessage;
+        }
+        this.staticText = "destroy " + filterMessage + (noRegen ? ". They can't be regenerated" : "");
     }
 
     protected DestroyAllEffect(final DestroyAllEffect effect) {

@@ -5,20 +5,21 @@ import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.ExpansionRepository;
-import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.SuperType;
 import mage.util.RandomUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Generates random card pool and builds a deck.
  *
- * @author nantuko
- * @author Simown
+ * @author nantuko, Simown, JayDi85
  */
 public final class DeckGenerator {
 
@@ -124,7 +125,7 @@ public final class DeckGenerator {
 
         genPool = new DeckGeneratorPool(deckSize, genDialog.getCreaturePercentage(), genDialog.getNonCreaturePercentage(),
                 genDialog.getLandPercentage(), allowedColors, genDialog.isSingleton(), genDialog.isColorless(),
-                genDialog.isAdvanced(), genDialog.getDeckGeneratorCMC());
+                genDialog.isCommander(), genDialog.isAdvanced(), genDialog.getDeckGeneratorCMC());
 
         final String[] sets = setsToUse.toArray(new String[setsToUse.size()]);
 
@@ -155,8 +156,8 @@ public final class DeckGenerator {
         // Generate basic land cards
         Map<String, List<CardInfo>> basicLands = DeckGeneratorPool.generateBasicLands(setsToUse);
 
-        DeckGeneratorPool.generateSpells(creatureCriteria, genPool.getCreatureCount());
-        DeckGeneratorPool.generateSpells(nonCreatureCriteria, genPool.getNonCreatureCount());
+        DeckGeneratorPool.generateSpells(creatureCriteria, genPool.getCreatureCount(), genPool.getCommandersCount());
+        DeckGeneratorPool.generateSpells(nonCreatureCriteria, genPool.getNonCreatureCount(), 0);
         DeckGeneratorPool.generateLands(genDialog.useNonBasicLand(), nonBasicLandCriteria, basicLands);
 
         // Reconstructs the final deck and adjusts for Math rounding and/or missing cards

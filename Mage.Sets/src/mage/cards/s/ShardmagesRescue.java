@@ -42,7 +42,7 @@ public final class ShardmagesRescue extends CardImpl {
         // As long as Shardmage's Rescue entered this turn, enchanted creature has hexproof.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA),
-                SourceEnteredThisTurnCondition.instance,
+                SourceEnteredThisTurnCondition.DID,
                 "as long as {this} entered this turn, enchanted creature has hexproof"
         )));
 

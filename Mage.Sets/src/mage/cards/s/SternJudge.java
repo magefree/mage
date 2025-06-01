@@ -69,8 +69,8 @@ class SternJudgeEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            player.loseLife(game.getBattlefield().count(
-                    filter, source.getSourceId(), source, game
+            player.loseLife(game.getBattlefield().countAll(
+                    filter, player.getId(), game
             ), game, source, false);
         }
         return true;

@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,6 +14,8 @@ import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -48,7 +49,7 @@ public final class ThryxTheSuddenStorm extends CardImpl {
         // Spells you cast with converted mana cost 5 or greater cost {1} less to cast and can't be countered.
         Ability ability = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1));
         ability.addEffect(new CantBeCounteredControlledEffect(
-                filter2, null, Duration.WhileOnBattlefield
+                filter2, Duration.WhileOnBattlefield
         ).setText("and can't be countered"));
         this.addAbility(ability);
     }

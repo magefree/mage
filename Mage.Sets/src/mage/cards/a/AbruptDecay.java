@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -10,10 +8,11 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class AbruptDecay extends CardImpl {
@@ -25,14 +24,14 @@ public final class AbruptDecay extends CardImpl {
     }
 
     public AbruptDecay(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{G}");
 
         // This spell can't be countered.
         this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Destroy target nonland permanent with converted mana cost 3 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private AbruptDecay(final AbruptDecay card) {

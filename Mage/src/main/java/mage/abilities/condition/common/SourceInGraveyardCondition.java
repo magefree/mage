@@ -20,7 +20,7 @@ public enum SourceInGraveyardCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is in your graveyard";
+        return "this card is in your graveyard";
     }
 
 }

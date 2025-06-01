@@ -17,7 +17,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -59,7 +59,7 @@ public final class HaythamKenway extends CardImpl {
                 .setText("for each opponent, exile up to one target creature that player controls until {this} leaves the battlefield")
         );
         ability2.addTarget(new TargetCreaturePermanent(0, 1));
-        ability2.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+        ability2.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
         this.addAbility(ability2);
     }
 

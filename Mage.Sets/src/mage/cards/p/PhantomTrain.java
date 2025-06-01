@@ -37,13 +37,14 @@ public final class PhantomTrain extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT)
+                        .setText("sacrifice another artifact or creature")
         );
         ability.addEffect(new AddCardTypeSourceEffect(
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
         ).setText("it becomes a"));
         ability.addEffect(new AddCardSubTypeSourceEffect(
                 Duration.EndOfTurn, true, SubType.SPIRIT
-        ).setText("Spirit artifact creature in addition to its other types until end of turn"));
+        ).setText(" Spirit artifact creature in addition to its other types until end of turn"));
         this.addAbility(ability);
     }
 

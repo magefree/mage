@@ -63,7 +63,7 @@ class WheelOfMisfortuneEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            playerMap.put(playerId, player.getAmount(0, 1000, "Choose a number", game));
+            playerMap.put(playerId, player.getAmount(0, 1000, "Choose a number", source, game));
         }
         for (Map.Entry<UUID, Integer> entry : playerMap.entrySet()) {
             Player player = game.getPlayer(entry.getKey());

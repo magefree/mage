@@ -1085,7 +1085,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        jTextFieldSearch.setToolTipText("Searches for card names and in the rule text of the card.");
+        jTextFieldSearch.setToolTipText("Search cards by any data like name or mana symbols like {W}, {U}, {C}, etc (use quotes for exact search)");
 
         chkNames.setSelected(true);
         chkNames.setText("Names");

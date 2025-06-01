@@ -47,7 +47,7 @@ public final class SummonPrimalOdin extends CardImpl {
                     new DealsCombatDamageToAPlayerTriggeredAbility(
                             new LoseGameTargetPlayerEffect(), false, true
                     ), Duration.Custom
-            ));
+            ).setText("{this} gains \"Whenever this creature deals combat damage to a player, that player loses the game.\""));
             ability.withFlavorWord("Zantetsuken");
         });
 

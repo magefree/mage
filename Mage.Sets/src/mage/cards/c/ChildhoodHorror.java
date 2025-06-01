@@ -36,7 +36,7 @@ public final class ChildhoodHorror extends CardImpl {
         // Threshold - As long as seven or more cards are in your graveyard, Childhood Horror gets +2/+2 and can't block.
         Ability thresholdAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
-                ThresholdCondition.instance, "If seven or more cards are in your graveyard, {this} gets +2/+2"
+                ThresholdCondition.instance, "As long as seven or more cards are in your graveyard, {this} gets +2/+2"
         ));
         thresholdAbility.addEffect(new ConditionalRestrictionEffect(
                 new CantBlockSourceEffect(Duration.WhileOnBattlefield), ThresholdCondition.instance

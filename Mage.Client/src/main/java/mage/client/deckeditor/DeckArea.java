@@ -110,7 +110,7 @@ public class DeckArea extends javax.swing.JPanel {
                 sideboardList.deselectAll();
                 for (CardView card : cards) {
                     CardView newCard = new CardView(card);
-                    deckList.addCardView(newCard, true);
+                    deckList.addCardView(newCard, card);
                 }
             }
 
@@ -150,7 +150,7 @@ public class DeckArea extends javax.swing.JPanel {
                 deckList.deselectAll();
                 for (CardView card : cards) {
                     CardView newCard = new CardView(card);
-                    sideboardList.addCardView(newCard, true);
+                    sideboardList.addCardView(newCard, card);
                 }
             }
 

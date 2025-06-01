@@ -11,9 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterOpponentsCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -22,13 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class RooftopAssassin extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterOpponentsCreaturePermanent("creature an opponent controls that was dealt damage this turn");
-
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
 
     public RooftopAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -49,7 +40,7 @@ public final class RooftopAssassin extends CardImpl {
 
         // When Rooftop Assassin enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN));
         this.addAbility(ability);
     }
 

@@ -103,7 +103,7 @@ class TetravusCreateTokensEffect extends OneShotEffect {
         if (countersToRemove == 0) {
             return false;
         }
-        countersToRemove = player.getAmount(0, countersToRemove, "Choose an amount of counters to remove", game);
+        countersToRemove = player.getAmount(0, countersToRemove, "Choose an amount of counters to remove", source, game);
         Cost cost = new RemoveCountersSourceCost(CounterType.P1P1.createInstance(countersToRemove));
         if (cost.pay(source, game, source, source.getControllerId(), true)) {
             CreateTokenEffect effect = new CreateTokenEffect(new TetraviteToken(), countersToRemove);

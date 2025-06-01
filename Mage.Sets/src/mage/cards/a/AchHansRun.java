@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -82,7 +83,7 @@ class AchHansRunEffect extends OneShotEffect {
         if (card == null || !controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
-        Permanent creature = game.getPermanent(card.getId());
+        Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (creature == null) {
             return false;
         }

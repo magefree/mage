@@ -19,7 +19,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -44,7 +44,7 @@ public final class DiluvianPrimordial extends CardImpl {
         // When Diluvian Primordial enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that player's graveyard without paying its mana cost. If a card cast this way would be put into a graveyard this turn, exile it instead.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiluvianPrimordialEffect(), false);
         ability.addTarget(new TargetCardInOpponentsGraveyard(0, 1, filter));
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(true));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(true, true));
         this.addAbility(ability);
     }
 

@@ -88,6 +88,6 @@ class MistveilPlainsGraveyardToLibraryEffect extends OneShotEffect {
                 || game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
             return false;
         }
-        return player.putCardsOnBottomOfLibrary(card, game, source, false);
+        return player.putCardsOnBottomOfLibrary(card, game, source);
     }
 }

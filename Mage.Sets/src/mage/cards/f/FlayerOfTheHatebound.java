@@ -82,7 +82,7 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to any target.";
+        return "Whenever {this} or another creature enters from your graveyard, that creature deals damage equal to its power to any target.";
     }
 
     @Override

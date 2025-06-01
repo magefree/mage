@@ -157,7 +157,7 @@ class AnzragsRampageEffect extends OneShotEffect {
         }
 
         if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-            Permanent permanent = game.getPermanent(card.getId());
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (permanent == null) {
                 return true;
             }

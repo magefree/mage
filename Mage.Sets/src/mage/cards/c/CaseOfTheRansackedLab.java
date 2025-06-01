@@ -1,23 +1,18 @@
 package mage.cards.c;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SolvedSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -27,8 +22,11 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author DominionSpy
  */
 public final class CaseOfTheRansackedLab extends CardImpl {
@@ -51,10 +49,10 @@ public final class CaseOfTheRansackedLab extends CardImpl {
         Ability initialAbility = new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1));
         // To solve -- You've cast four or more instant and sorcery spells this turn.
         // Solved -- Whenever you cast an instant or sorcery spell, draw a card.
-        Ability solvedAbility = new ConditionalTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1),
-                        StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false),
-                SolvedSourceCondition.SOLVED, "");
+        Ability solvedAbility = new SpellCastControllerTriggeredAbility(
+                new DrawCardSourceControllerEffect(1),
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
+        ).withTriggerCondition(SolvedSourceCondition.SOLVED);
 
         this.addAbility(new CaseAbility(initialAbility, CaseOfTheRansackedLabCondition.instance, solvedAbility)
                         .addHint(new CaseOfTheRansackedLabHint(CaseOfTheRansackedLabCondition.instance)),

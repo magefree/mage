@@ -3,7 +3,6 @@ package mage.cards.y;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.CastFromHandWithoutPayingManaCostEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -69,22 +68,17 @@ class YusriFortunesFlameEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int flips = player.getAmount(1, 5, "Choose a number between 1 and 5", game);
-        int wins = 0;
-        int losses = 0;
-        for (int i = 0; i < flips; i++) {
-            if (player.flipCoin(source, game, true)) {
-                wins++;
-            } else {
-                losses++;
-            }
-        }
+        int flips = player.getAmount(1, 5, "Choose a number between 1 and 5", source, game);
+        int wins = player
+                .flipCoins(source, game, flips, true)
+                .stream()
+                .mapToInt(x -> x ? 1 : 0)
+                .sum();
+        int losses = flips - wins;
         player.drawCards(wins, source, game);
         player.damage(2 * losses, source.getSourceId(), source, game);
         if (wins >= 5) {
-            ContinuousEffect effect = new CastFromHandWithoutPayingManaCostEffect();
-            effect.setDuration(Duration.EndOfTurn);
-            game.addEffect(effect, source);
+            game.addEffect(new CastFromHandWithoutPayingManaCostEffect().setDuration(Duration.EndOfTurn), source);
         }
         return true;
     }

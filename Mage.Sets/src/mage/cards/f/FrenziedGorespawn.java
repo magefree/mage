@@ -16,7 +16,7 @@ import mage.game.Game;
 import mage.game.events.DefenderAttackedEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.FixedTargets;
 
 import java.util.UUID;
@@ -37,7 +37,7 @@ public final class FrenziedGorespawn extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new GoadTargetEffect()
                 .setText("for each opponent, goad target creature that player controls"));
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
         this.addAbility(ability);
 
         // Whenever one or more creatures attack one of your opponents, those creatures gain menace until end of turn.

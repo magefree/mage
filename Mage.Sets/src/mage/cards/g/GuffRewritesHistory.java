@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -8,15 +7,13 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 import mage.util.CardUtil;
 
@@ -26,6 +23,15 @@ import java.util.*;
  * @author Susucr
  */
 public final class GuffRewritesHistory extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("target nonenchantment, nonland permanent");
+
+    static {
+        filter.add(Predicates.and(
+                Predicates.not(CardType.ENCHANTMENT.getPredicate()),
+                Predicates.not(CardType.LAND.getPredicate())
+        ));
+    }
 
     public GuffRewritesHistory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
@@ -41,8 +47,8 @@ public final class GuffRewritesHistory extends CardImpl {
                                 + "nonland card, then puts the rest on the bottom of their library in a random order. "
                                 + "Each player may cast the nonland card they exiled without paying its mana cost.")
         );
-
-        this.getSpellAbility().setTargetAdjuster(GuffRewritesHistoryAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
     }
 
     private GuffRewritesHistory(final GuffRewritesHistory card) {
@@ -52,33 +58,6 @@ public final class GuffRewritesHistory extends CardImpl {
     @Override
     public GuffRewritesHistory copy() {
         return new GuffRewritesHistory(this);
-    }
-}
-
-enum GuffRewritesHistoryAdjuster implements TargetAdjuster {
-    instance;
-    private static final Predicate<MageObject> predicate =
-            Predicates.and(
-                    Predicates.not(CardType.ENCHANTMENT.getPredicate()),
-                    Predicates.not(CardType.LAND.getPredicate())
-            );
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterPermanent(
-                    "nonenchantment, nonland permanent "
-                            + (ability.isControlledBy(playerId) ? "you control" : "controlled by " + player.getName())
-            );
-            filter.add(predicate);
-            filter.add(new ControllerIdPredicate(playerId));
-            ability.addTarget(new TargetPermanent(filter));
-        }
     }
 }
 

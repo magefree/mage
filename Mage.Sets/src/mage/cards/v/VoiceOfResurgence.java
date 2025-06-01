@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.hint.common.MyTurnHint;
@@ -14,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.VoiceOfResurgenceToken;
 
@@ -33,17 +31,14 @@ public final class VoiceOfResurgence extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."
-        OrTriggeredAbility ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()),
-                new ConditionalTriggeredAbility(
-                        new SpellCastOpponentTriggeredAbility(null, StaticFilters.FILTER_SPELL_A, false),
-                        MyTurnCondition.instance,
-                        "Whenever an opponent casts a spell during your turn, "),
-                new DiesSourceTriggeredAbility(null, false));
+        OrTriggeredAbility ability = new OrTriggeredAbility(
+                Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()),
+                new SpellCastOpponentTriggeredAbility(null, StaticFilters.FILTER_SPELL_A, false)
+                        .withTriggerCondition(MyTurnCondition.instance),
+                new DiesSourceTriggeredAbility(null, false)
+        );
         ability.setLeavesTheBattlefieldTrigger(true);
-        ability.addHint(MyTurnHint.instance);
-        ability.addHint(CreaturesYouControlHint.instance);
-        this.addAbility(ability);
-
+        this.addAbility(ability.addHint(MyTurnHint.instance).addHint(CreaturesYouControlHint.instance));
     }
 
     private VoiceOfResurgence(final VoiceOfResurgence card) {
@@ -56,4 +51,3 @@ public final class VoiceOfResurgence extends CardImpl {
     }
 
 }
-

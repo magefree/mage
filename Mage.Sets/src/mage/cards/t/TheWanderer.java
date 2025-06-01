@@ -12,10 +12,9 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -26,13 +25,10 @@ import java.util.UUID;
 public final class TheWanderer extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent("other permanents you control");
-    private static final FilterPermanent filter2
             = new FilterCreaturePermanent("creature with power 4 or greater");
 
     static {
-        filter.add(AnotherPredicate.instance);
-        filter2.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
+        filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
     public TheWanderer(UUID ownerId, CardSetInfo setInfo) {
@@ -43,12 +39,12 @@ public final class TheWanderer extends CardImpl {
 
         // Prevent all noncombat damage that would be dealt to you and other permanents you control.
         this.addAbility(new SimpleStaticAbility(new PreventAllNonCombatDamageToAllEffect(
-                Duration.WhileOnBattlefield, filter, true
+                Duration.WhileOnBattlefield, StaticFilters.FILTER_OTHER_CONTROLLED_PERMANENTS, true
         )));
 
         // -2: Exile target creature with power 4 or greater.
         Ability ability = new LoyaltyAbility(new ExileTargetEffect(), -2);
-        ability.addTarget(new TargetPermanent(filter2));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 

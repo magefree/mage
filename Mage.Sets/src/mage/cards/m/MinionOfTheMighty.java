@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -88,7 +89,7 @@ class MinionOfTheMightyEffect extends OneShotEffect {
                 card, Zone.BATTLEFIELD, source, game, true,
                 false, true, null
         );
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent != null) {
             game.getCombat().addAttackingCreature(permanent.getId(), game);
         }

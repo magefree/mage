@@ -18,6 +18,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -94,7 +95,7 @@ class ArmoredSkyhunterEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.LIBRARY);
-        Permanent equipment = game.getPermanent(card.getId());
+        Permanent equipment = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (equipment == null || !equipment.hasSubtype(SubType.EQUIPMENT, game)) {
             return player.putCardsOnBottomOfLibrary(cards, game, source, false);
         }

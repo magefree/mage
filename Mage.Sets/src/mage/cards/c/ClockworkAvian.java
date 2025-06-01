@@ -104,7 +104,7 @@ class ClockworkAvianEffect extends OneShotEffect {
             return false;
         }
         int toAdd = player.getAmount(
-                0, maxCounters, "Choose how many +1/+0 counters to put on " + permanent.getName(), game
+                0, maxCounters, "Choose how many +1/+0 counters to put on " + permanent.getName(), source, game
         );
         return toAdd > 0 && permanent.addCounters(
                 CounterType.P1P0.createInstance(toAdd), source.getControllerId(),

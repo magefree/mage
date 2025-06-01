@@ -24,7 +24,7 @@ public final class FireMagic extends CardImpl {
 
         // * Fire -- {0} -- Fire Magic deals 1 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, StaticFilters.FILTER_PERMANENT_CREATURE));
-        this.getSpellAbility().withFirstModeCost(new GenericManaCost(1));
+        this.getSpellAbility().withFirstModeCost(new GenericManaCost(0));
         this.getSpellAbility().withFirstModeFlavorWord("Fire");
 
         // * Fira -- {2} -- Fire Magic deals 2 damage to each creature.

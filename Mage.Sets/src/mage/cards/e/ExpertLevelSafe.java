@@ -72,8 +72,8 @@ class ExpertLevelSafeEffect extends OneShotEffect {
             return false;
         }
 
-        int controllerChoice = controller.getAmount(1, 3, "Choose a number", game);
-        int opponentChoice = opponent.getAmount(1, 3, "Choose a number", game);
+        int controllerChoice = controller.getAmount(1, 3, "Choose a number", source, game);
+        int opponentChoice = opponent.getAmount(1, 3, "Choose a number", source, game);
 
         game.informPlayers(controller.getLogName() + " chose " + controllerChoice);
         game.informPlayers(opponent.getLogName() + " chose " + opponentChoice);

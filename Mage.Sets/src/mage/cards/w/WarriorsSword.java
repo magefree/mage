@@ -31,7 +31,7 @@ public final class WarriorsSword extends CardImpl {
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 2));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.WARRIOR, AttachmentType.EQUIPMENT
-        ).setText(", and is a Warrior in addition to its other types"));
+        ).setText("and is a Warrior in addition to its other types"));
         this.addAbility(ability);
 
         // Equip {5}

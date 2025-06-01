@@ -51,7 +51,7 @@ public final class DestinySpinner extends CardImpl {
 
         // Creature and enchantment spells you control can't be countered.
         this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(
-                filter, null, Duration.WhileOnBattlefield
+                filter, Duration.WhileOnBattlefield
         )));
 
         // {3}{G}: Target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is the number of enchantments you control. It's still a land.

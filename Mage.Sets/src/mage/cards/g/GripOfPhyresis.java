@@ -7,8 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PhyrexianGermToken;
@@ -23,13 +22,6 @@ import java.util.UUID;
  */
 public final class GripOfPhyresis extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Equipment");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(SubType.EQUIPMENT.getPredicate());
-    }
-
     public GripOfPhyresis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
@@ -37,7 +29,7 @@ public final class GripOfPhyresis extends CardImpl {
         GainControlTargetEffect effect = new GainControlTargetEffect(Duration.EndOfGame, true);
         effect.setText("Gain control of target Equipment");
         this.getSpellAbility().addEffect(effect);
-        Target targetEquipment = new TargetPermanent(filter);
+        Target targetEquipment = new TargetPermanent(StaticFilters.FILTER_PERMANENT_EQUIPMENT);
         this.getSpellAbility().addTarget(targetEquipment);
         this.getSpellAbility().addEffect(new GripOfPhyresisEffect());
     }

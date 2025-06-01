@@ -81,7 +81,7 @@ class MenacingOgreEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                number = player.getAmount(0, 1000, message, game);
+                number = player.getAmount(0, 1000, message, source, game);
                 numberChosen.put(player, number);
             }
         }

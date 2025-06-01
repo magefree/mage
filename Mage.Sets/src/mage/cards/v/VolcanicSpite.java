@@ -85,7 +85,7 @@ class VolcanicSpiteEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        if (player.putCardsOnBottomOfLibrary(card, game, source, false)) {
+        if (player.putCardsOnBottomOfLibrary(card, game, source)) {
             player.drawCards(1, source, game);
         }
         return true;

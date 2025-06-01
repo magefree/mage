@@ -75,8 +75,8 @@ class ArdynTheUsurperEffect extends OneShotEffect {
 
     ArdynTheUsurperEffect() {
         super(Outcome.Benefit);
-        staticText = "at the beginning of combat on your turn, exile up to one target creature card from a graveyard. " +
-                "If you exiled a card this way, create a token that's a copy of that card, except it's a 5/5 black Demon";
+        staticText = "exile up to one target creature card from a graveyard. If you exiled a card this way, " +
+                "create a token that's a copy of that card, except it's a 5/5 black Demon";
     }
 
     private ArdynTheUsurperEffect(final ArdynTheUsurperEffect effect) {

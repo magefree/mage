@@ -2368,9 +2368,15 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     // TODO: add AI support with outcome and replace random with min/max
-    public int getAmount(int min, int max, String message, Game game) {
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
         log.debug("getAmount");
-        if (min < max && min == 0) {
+
+        // fast calc on nothing to choose
+        if (min >= max) {
+            return min;
+        }
+
+        if (min == 0) {
             return RandomUtil.nextInt(CardUtil.overflowInc(max, 1));
         }
         return min;

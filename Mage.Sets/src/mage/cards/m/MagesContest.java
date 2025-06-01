@@ -79,7 +79,7 @@ class MagesContestEffect extends OneShotEffect {
                             }
                         } else if (currentPlayer.chooseUse(Outcome.Benefit, winner.getLogName() + " has bet " + highBid + " life. Top the bid?", source, game)) {
                             // Human choose
-                            newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", game);
+                            newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", source, game);
                         }
                         if (newBid > highBid) {
                             highBid = newBid;

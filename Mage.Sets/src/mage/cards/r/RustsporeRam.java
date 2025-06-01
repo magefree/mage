@@ -11,6 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -19,19 +20,13 @@ import mage.target.TargetPermanent;
  */
 public final class RustsporeRam extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Equipment");
-
-    static {
-        filter.add(SubType.EQUIPMENT.getPredicate());
-    }
-
     public RustsporeRam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
         this.subtype.add(SubType.SHEEP);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_EQUIPMENT));
         this.addAbility(ability);
     }
 

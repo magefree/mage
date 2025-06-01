@@ -191,15 +191,15 @@
      }
 
      public void updateDraft(DraftView draftView) {
-         if (draftView.getSets().size() != 3) {
+         if (draftView.getSetNames().size() != 3) {
              // Random draft - TODO: can we access the type of draft here?
              this.editPack1.setText("Random Boosters");
              this.editPack2.setText("Random Boosters");
              this.editPack3.setText("Random Boosters");
          } else {
-             this.editPack1.setText(String.format("%s - %s", draftView.getSetCodes().get(0), draftView.getSets().get(0)));
-             this.editPack2.setText(String.format("%s - %s", draftView.getSetCodes().get(1), draftView.getSets().get(1)));
-             this.editPack3.setText(String.format("%s - %s", draftView.getSetCodes().get(2), draftView.getSets().get(2)));
+             this.editPack1.setText(draftView.getBoosterInfo(0));
+             this.editPack2.setText(draftView.getBoosterInfo(1));
+             this.editPack3.setText(draftView.getBoosterInfo(2));
          }
 
          // scroll too long text to the start

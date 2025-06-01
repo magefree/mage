@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.predicate.card.ManaValueLessThanControlledLandCountPredicate;
+import mage.filter.predicate.mageobject.ManaValueLessThanControlledLandCountPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.common.CastSpellLastTurnWatcher;

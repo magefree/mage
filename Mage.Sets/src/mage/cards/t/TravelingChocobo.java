@@ -66,7 +66,7 @@ class TravelingChocoboEffect extends ReplacementEffectImpl {
 
     TravelingChocoboEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if land or Bird entering the battlefield causes a triggered ability " +
+        staticText = "if a land or Bird you control entering the battlefield causes a triggered ability " +
                 "of a permanent you control to trigger, that ability triggers an additional time";
     }
 
@@ -102,6 +102,7 @@ class TravelingChocoboEffect extends ReplacementEffectImpl {
         EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
         return (entersTheBattlefieldEvent.getTarget().isLand(game)
                 || entersTheBattlefieldEvent.getTarget().hasSubtype(SubType.BIRD, game))
+                && entersTheBattlefieldEvent.getTarget().isControlledBy(source.getControllerId())
                 && game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
     }
 

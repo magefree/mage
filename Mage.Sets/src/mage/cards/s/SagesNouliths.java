@@ -38,7 +38,7 @@ public final class SagesNouliths extends CardImpl {
         triggeredAbility.addTarget(new TargetAttackingCreature());
         ability.addEffect(new GainAbilityAttachedEffect(
                 triggeredAbility, AttachmentType.EQUIPMENT
-        ).setText("has \"Whenever this creature attacks, untap target attacking creature,\""));
+        ).setText(", has \"Whenever this creature attacks, untap target attacking creature,\""));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
                 SubType.CLERIC, AttachmentType.EQUIPMENT
         ).setText("and is a Cleric in addition to its other types"));

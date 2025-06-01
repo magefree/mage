@@ -75,7 +75,7 @@ class PsychoticEpisodeEffect extends OneShotEffect {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
                     game.informPlayers(card.getLogName() + " was chosen.");
-                    player.putCardsOnBottomOfLibrary(card, game, source, true);
+                    player.putCardsOnBottomOfLibrary(card, game, source);
                 }
             }
             return true;

@@ -780,7 +780,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldSearch">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Searches for card names and in the rule text of the card."/>
+            <Property name="toolTipText" type="java.lang.String" value="Search cards by any data like name or mana symbols like {W}, {U}, {C}, etc (use quotes for exact search)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkNames">

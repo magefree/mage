@@ -1,19 +1,27 @@
 package mage.game.draft;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 /**
+ * Data sources by priority:
+ * - official mtgo website
+ * - cubecobra (big amount of cubes but can be outdated)
  *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public abstract class DraftCube {
+
+    SimpleDateFormat UPDATE_DATE_FORMAT = new SimpleDateFormat("yyyy MMMM", Locale.ENGLISH); // 2025 April
+    private static final Logger logger = Logger.getLogger(DraftCube.class);
+
 
     public static class CardIdentity {
 
@@ -38,34 +46,76 @@ public abstract class DraftCube {
         public String getName() {
             return name;
         }
+
         public String getExtension() {
             return extension;
         }
+
         public String getCardNumber() {
             return number;
         }
     }
 
-    private static final Logger logger = Logger.getLogger(DraftCube.class);
-
     private final String name;
     private final String code;
+    private String updateInfo;
+    private final Date updateDate;
     private static final int boosterSize = 15;
 
     protected List<CardIdentity> cubeCards = new ArrayList<>();
     protected List<CardIdentity> leftCubeCards = new ArrayList<>();
 
     protected DraftCube(String name) {
+        this(name, "", 0, 0, 0);
+    }
+
+    public DraftCube(String name, String updateInfo, int updateYear, int updateMonth, int updateDay) {
         this.name = name;
         this.code = getClass().getSimpleName();
+        this.updateInfo = updateInfo;
+        this.updateDate = updateYear == 0 ? null : ExpansionSet.buildDate(updateYear, updateMonth, updateDay);
     }
 
     public String getName() {
-        return name;
+        String res = this.name;
+
+        List<String> extra = new ArrayList<>();
+        if (this.updateInfo != null && !this.updateInfo.isEmpty()) {
+            extra.add(this.updateInfo);
+        }
+        if (this.updateDate != null) {
+            extra.add(UPDATE_DATE_FORMAT.format(this.updateDate));
+        }
+        if (!extra.isEmpty()) {
+            res += String.format(" (%s)", String.join(", ", extra));
+        }
+
+        return res;
+    }
+
+    /**
+     * Validate inner data - is it fine to start (example: cube from deck must has loaded cards)
+     */
+    public void validateData() {
+        if (cubeCards.isEmpty()) {
+            throw new IllegalArgumentException("Can't create cube draft - found empty cards list: " + this.getName());
+        }
     }
 
     public String getCode() {
         return code;
+    }
+
+    public String getUpdateInfo() {
+        return updateInfo;
+    }
+
+    public void setUpdateInfo(String info) {
+        this.updateInfo = info;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
     public List<CardIdentity> getCubeCards() {

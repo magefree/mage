@@ -23,6 +23,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,10 +96,13 @@ class NecromanticSelectionEffect extends OneShotEffect {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);
-                    effect.setText("It's a black Zombie in addition to its other colors and types");
-                    effect.setTargetPointer(new FixedTarget(card.getId(), game));
-                    game.addEffect(effect, source);
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
+                    if (permanent != null) {
+                        ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);
+                        effect.setText("It's a black Zombie in addition to its other colors and types");
+                        effect.setTargetPointer(new FixedTarget(permanent.getId(), game));
+                        game.addEffect(effect, source);
+                    }
                 }
             }
             return true;

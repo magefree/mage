@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -16,18 +14,18 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.hint.common.CaseSolvedHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
+
+import java.util.UUID;
 
 /**
  * Case of the Gorgon's Kiss {B}
@@ -40,13 +38,6 @@ import mage.watchers.common.CardsPutIntoGraveyardWatcher;
  */
 public final class CaseOfTheGorgonsKiss extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature that was dealt damage this turn");
-
-    static {
-        filter.add(WasDealtDamageThisTurnPredicate.instance);
-    }
-
     public CaseOfTheGorgonsKiss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
@@ -55,7 +46,7 @@ public final class CaseOfTheGorgonsKiss extends CardImpl {
         // When this Case enters the battlefield, destroy up to one target creature that was dealt damage this turn.
         Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect())
                 .setTriggerPhrase("When this Case enters, ");
-        initialAbility.addTarget(new TargetPermanent(0, 1, filter));
+        initialAbility.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_DAMAGED_THIS_TURN));
         // To solve -- Three or more creature cards were put into graveyards from anywhere this turn.
         Condition toSolveCondition = new CaseOfTheGorgonsKissCondition();
         // Solved -- This Case is a 4/4 Gorgon creature with deathtouch and lifelink in addition to its other types.
@@ -66,7 +57,7 @@ public final class CaseOfTheGorgonsKiss extends CardImpl {
                 .setText("This Case is a 4/4 Gorgon creature with deathtouch and lifelink in addition to its other types."));
 
         this.addAbility(new CaseAbility(initialAbility, toSolveCondition, solvedAbility)
-                .addHint(new CaseOfTheGorgonsKissHint(toSolveCondition)),
+                        .addHint(new CaseOfTheGorgonsKissHint(toSolveCondition)),
                 new CardsPutIntoGraveyardWatcher());
     }
 
@@ -115,7 +106,7 @@ class CaseOfTheGorgonsKissHint extends CaseSolvedHint {
 
     @Override
     public String getConditionText(Game game, Ability ability) {
-        int creatures = (int)game.getState()
+        int creatures = (int) game.getState()
                 .getWatcher(CardsPutIntoGraveyardWatcher.class)
                 .getCardsPutIntoGraveyardFromAnywhere(game)
                 .stream()

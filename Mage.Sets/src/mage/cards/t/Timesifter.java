@@ -46,7 +46,7 @@ class TimesifterEffect extends OneShotEffect {
 
     TimesifterEffect() {
         super(Outcome.ExtraTurn);
-        this.staticText = "each player exiles the top card of their library. The player who exiled the card with the highest mana value takes an extra turn after this one. If two or more players' cards are tied for highest, the tied players repeat this process until the tie is broken";
+        this.staticText = "each player exiles the top card of their library. The player who exiled the card with the greatest mana value takes an extra turn after this one. If two or more players' cards are tied for greatest, the tied players repeat this process until the tie is broken";
     }
 
     private TimesifterEffect(final TimesifterEffect effect) {

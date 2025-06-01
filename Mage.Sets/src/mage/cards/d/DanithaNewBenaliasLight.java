@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.CastFromGraveyardOnceEachTurnAbility;
+import mage.abilities.common.CastFromGraveyardOnceDuringEachOfYourTurnAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -21,6 +21,7 @@ import java.util.UUID;
 public final class DanithaNewBenaliasLight extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Aura or Equipment spell");
+
     static {
         filter.add(Predicates.or(
                 SubType.AURA.getPredicate(), SubType.EQUIPMENT.getPredicate()
@@ -46,7 +47,7 @@ public final class DanithaNewBenaliasLight extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Once during each of your turns, you may cast an Aura or Equipment spell from your graveyard.
-        this.addAbility(new CastFromGraveyardOnceEachTurnAbility(filter));
+        this.addAbility(new CastFromGraveyardOnceDuringEachOfYourTurnAbility(filter));
     }
 
     private DanithaNewBenaliasLight(final DanithaNewBenaliasLight card) {

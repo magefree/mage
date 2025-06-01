@@ -44,7 +44,7 @@ public final class BraskasFinalAeon extends CardImpl {
             ability.addEffect(new SacrificeOpponentsEffect(2, StaticFilters.FILTER_PERMANENT_CREATURES));
             ability.withFlavorWord("Ultimate Jecht Shot");
         });
-        this.addAbility(sagaAbility);
+        this.addAbility(sagaAbility.withShowSacText(true));
 
         // Menace
         this.addAbility(new MenaceAbility());

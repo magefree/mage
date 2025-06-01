@@ -97,6 +97,6 @@ enum WarElementalCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if an opponent was dealt damage this turn";
+        return "an opponent was dealt damage this turn";
     }
 }

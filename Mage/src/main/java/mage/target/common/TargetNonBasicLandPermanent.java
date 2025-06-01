@@ -5,11 +5,12 @@ package mage.target.common;
 import mage.constants.SuperType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
+import mage.target.TargetPermanent;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class TargetNonBasicLandPermanent extends TargetLandPermanent {
+public class TargetNonBasicLandPermanent extends TargetPermanent {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("nonbasic land");
 

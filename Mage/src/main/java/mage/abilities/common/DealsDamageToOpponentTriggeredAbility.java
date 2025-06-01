@@ -55,22 +55,16 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId)
-                && game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
-            if (onlyCombat && event instanceof DamagedPlayerEvent) {
-                DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-                if (!damageEvent.isCombatDamage()) {
-                    return false;
-                }
-            }
-            if (setTargetPointer) {
-                for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                    effect.setValue("damage", event.getAmount());
-                }
-            }
-            return true;
+        if (!event.getSourceId().equals(this.getSourceId())
+                || !game.getOpponents(this.getControllerId()).contains(event.getTargetId())
+                || onlyCombat
+                && !((DamagedPlayerEvent) event).isCombatDamage()) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("damage", event.getAmount());
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        }
+        return true;
     }
 }

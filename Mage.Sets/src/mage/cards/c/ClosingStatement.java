@@ -44,11 +44,11 @@ public final class ClosingStatement extends CardImpl {
         this.addAbility(ability);
 
         // Destroy target creature or planeswalker you don't control. Put a +1/+1 counter on up to one target creature you control.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(1, 1, filter, false));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(1, 1, filter, false)
+                .setTargetTag(1));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetControlledCreaturePermanent(0, 1);
-        target.setTargetTag(2);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1)
+                .setTargetTag(2));
         this.getSpellAbility().addEffect(new ClosingStatementEffect());
     }
 
