@@ -2,7 +2,6 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -16,10 +15,8 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPlayer;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,12 +32,10 @@ import java.util.UUID;
  */
 public final class CollectiveEffort extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent("untapped creature you control");
     private static final FilterCreaturePermanent filterDestroyCreature = new FilterCreaturePermanent("creature with power 4 or greater");
     private static final FilterPlayer filterPlayer = new FilterPlayer("player whose creatures get +1/+1 counters");
 
     static {
-        filterUntapped.add(TappedPredicate.UNTAPPED);
         filterDestroyCreature.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
@@ -48,9 +43,7 @@ public final class CollectiveEffort extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
 
         // Escalate &mdash; Tap an untapped creature you control.
-        Cost cost = new TapTargetCost(new TargetControlledCreaturePermanent(filterUntapped));
-        cost.setText("&mdash; Tap an untapped creature you control");
-        this.addAbility(new EscalateAbility(cost));
+        this.addAbility(new EscalateAbility(new TapTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE))));
 
         // Choose one or more &mdash;
         this.getSpellAbility().getModes().setMinModes(1);

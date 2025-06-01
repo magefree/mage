@@ -38,7 +38,7 @@ public final class TerraMagicalAdept extends CardImpl {
         // When Terra enters, mill five cards. Put up to one enchantment milled this this way into your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillThenPutInHandEffect(
                 5, StaticFilters.FILTER_CARD_ENCHANTMENT, true
-        ).setText("mill five cards. Put up to one enchantment milled this this way into your hand")));
+        ).setText("mill five cards. Put up to one enchantment card milled this way into your hand")));
 
         // Trance -- {4}{R}{G}, {T}: Exile Terra, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
         this.addAbility(new TransformAbility());

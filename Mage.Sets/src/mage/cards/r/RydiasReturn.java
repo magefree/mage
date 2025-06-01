@@ -26,7 +26,7 @@ public final class RydiasReturn extends CardImpl {
 
         // * Return up to two target permanent cards from your graveyard to your hand.
         this.getSpellAbility().addMode(new Mode(new ReturnFromGraveyardToHandTargetEffect())
-                .addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENTS)));
+                .addTarget(new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_PERMANENTS)));
     }
 
     private RydiasReturn(final RydiasReturn card) {
