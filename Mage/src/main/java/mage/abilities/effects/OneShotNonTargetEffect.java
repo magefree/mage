@@ -56,8 +56,7 @@ public class OneShotNonTargetEffect extends OneShotEffect {
             source.setTargetAdjuster(null);
         }
 
-        if (source.canChooseTarget(game, source.getControllerId())){
-            source.getTargets().choose(outcome, source.getControllerId(), source.getId(), source, game);
+        if (source.getTargets().choose(outcome, source.getControllerId(), source.getId(), source, game)) {
             result = effect.apply(game, source);
         }
         source.getTargets().clear();
