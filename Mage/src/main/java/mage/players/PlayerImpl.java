@@ -3088,7 +3088,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (winnable) {
                     game.informPlayers(getLogName() + " won the flip" + CardUtil.getSourceLogName(game, source));
                 }
-                game.fireEvent(new FlipCoinEvent(playerId, source, true, true, winnable).createFlippedEvent());
+                game.fireEvent(new FlipCoinEvent(playerId, source, true, true, true).createFlippedEvent());
                 results.add(true);
                 continue;
             }
