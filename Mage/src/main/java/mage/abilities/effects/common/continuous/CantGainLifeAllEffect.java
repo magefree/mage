@@ -1,6 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
@@ -8,9 +8,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author LevelX2
@@ -40,26 +38,26 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageObject> objects) {
-        return false;
-    }
-
-    @Override
-    public List<MageObject> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return List.of();
-    }
-
-    @Override
-    public CantGainLifeAllEffect copy() {
-        return new CantGainLifeAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
             return false;
         }
+        for (MageItem object : objects) {
+            if (!(object instanceof Player)) {
+                continue;
+            }
+            ((Player) object).setCanGainLife(false);
+        }
+        return true;
+    }
+
+    @Override
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return Collections.emptyList();
+        }
+        List<MageItem> objects = new ArrayList<>();
         switch (targetController) {
             case YOU:
                 controller.setCanGainLife(false);
@@ -68,7 +66,7 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null && !player.equals(controller)) {
-                        player.setCanGainLife(false);
+                        objects.add(player);
                     }
                 }
                 break;
@@ -77,7 +75,7 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
                     if (controller.hasOpponent(playerId, game)) {
                         Player player = game.getPlayer(playerId);
                         if (player != null) {
-                            player.setCanGainLife(false);
+                            objects.add(player);
                         }
                     }
                 }
@@ -86,7 +84,7 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.setCanGainLife(false);
+                        objects.add(player);
                     }
                 }
                 break;
@@ -95,9 +93,14 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
                         .ofNullable(source.getSourcePermanentIfItStillExists(game))
                         .map(Permanent::getAttachedTo)
                         .map(game::getPlayer)
-                        .ifPresent(player -> player.setCanGainLife(false));
+                        .ifPresent(objects::add);
         }
-        return true;
+        return objects;
+    }
+
+    @Override
+    public CantGainLifeAllEffect copy() {
+        return new CantGainLifeAllEffect(this);
     }
 
     private String setText() {

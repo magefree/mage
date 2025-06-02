@@ -2,8 +2,7 @@
 
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
-
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -12,6 +11,11 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -34,6 +38,29 @@ public class CantGainLifeTargetEffect extends ContinuousEffectImpl {
 
     protected CantGainLifeTargetEffect(final CantGainLifeTargetEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Player)) {
+                continue;
+            }
+            ((Player) object).setCanGainLife(false);
+        }
+        return true;
+    }
+
+    @Override
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     @Override
