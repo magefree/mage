@@ -43,7 +43,7 @@ public final class InvocationOfSaintTraft extends CardImpl {
         // Enchanted creature has "Whenever this creature attacks, create a 4/4 white Angel creature token with flying tapped
         // and attacking. Exile that token at end of combat."
         Ability gainedAbility = new AttacksTriggeredAbility(new InvocationOfSaintTraftEffect(), false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 
     private InvocationOfSaintTraft(final InvocationOfSaintTraft card) {

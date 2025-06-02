@@ -30,7 +30,7 @@ public final class MoonlitStrider extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Sacrifice Moonlit Strider: Target creature you control gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new SacrificeSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);        
         
@@ -47,4 +47,3 @@ public final class MoonlitStrider extends CardImpl {
         return new MoonlitStrider(this);
     }
 }
-

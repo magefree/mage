@@ -10,11 +10,20 @@ import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 /**
+ * Used to setup discard cost WITHOUT {X} mana cost
+ * <p>
+ * If you have {X} in spell's mana cost then use DiscardXCardsCostAdjuster instead
+ * <p>
+ * Example:
+ * - {2}{U}{R}
+ * - As an additional cost to cast this spell, discard X cards.
+ *
  * @author LevelX2
  */
 public class DiscardXTargetCost extends VariableCostImpl {
 
     protected FilterCard filter;
+    protected boolean isRandom = false;
 
     public DiscardXTargetCost(FilterCard filter) {
         this(filter, false);
@@ -30,6 +39,13 @@ public class DiscardXTargetCost extends VariableCostImpl {
     protected DiscardXTargetCost(final DiscardXTargetCost cost) {
         super(cost);
         this.filter = cost.filter;
+        this.isRandom = cost.isRandom;
+    }
+
+    public DiscardXTargetCost withRandom() {
+        this.isRandom = true;
+        this.text += " at random";
+        return this;
     }
 
     @Override
@@ -49,6 +65,6 @@ public class DiscardXTargetCost extends VariableCostImpl {
     @Override
     public Cost getFixedCostsFromAnnouncedValue(int xValue) {
         TargetCardInHand target = new TargetCardInHand(xValue, filter);
-        return new DiscardTargetCost(target);
+        return new DiscardTargetCost(target, this.isRandom);
     }
 }

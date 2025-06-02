@@ -166,7 +166,7 @@ class TheCreationOfAvacynThreeEffect extends OneShotEffect {
         UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         ExileZone exileZone = game.getExile().getExileZone(exileId);
         Player controller = game.getPlayer(source.getControllerId());
-        if (exileZone == null || exileZone.isEmpty()) {
+        if (controller == null || exileZone == null || exileZone.isEmpty()) {
             return false;
         }
         boolean creatureCard = false;

@@ -32,7 +32,7 @@ public final class BloodlineShaman extends CardImpl {
 
         // {tap}: Choose a creature type. Reveal the top card of your library. If that card is a creature card of the chosen type, put it into your hand.
         // Otherwise, put it into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BloodlineShamanEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new BloodlineShamanEffect(), new TapSourceCost()));
     }
 
     private BloodlineShaman(final BloodlineShaman card) {
@@ -89,7 +89,7 @@ class BloodlineShamanEffect extends OneShotEffect {
 
             if (card != null) {
                 // If that card is a creature card of the chosen type, put it into your hand.
-                if (card.isCreature(game) && subType != null && card.getSubtype(game).contains(subType)) {
+                if (card.isCreature(game) && subType != null && card.hasSubtype(subType, game)) {
                     controller.moveCards(card, Zone.HAND, source, game);
                     // Otherwise, put it into your graveyard.
                 } else {

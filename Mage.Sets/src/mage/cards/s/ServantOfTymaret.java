@@ -31,7 +31,7 @@ public final class ServantOfTymaret extends CardImpl {
         this.addAbility(new InspiredAbility(new LoseLifeOpponentsYouGainLifeLostEffect(1)));
 
         // {2}{B}: Regenerate Servant of Tymaret.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private ServantOfTymaret(final ServantOfTymaret card) {

@@ -50,6 +50,7 @@ class ThreeTreeScribeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.setTriggerPhrase("Whenever {this} or another creature you control leaves the battlefield without dying, ");
         this.addTarget(new TargetControlledCreaturePermanent());
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private ThreeTreeScribeTriggeredAbility(final ThreeTreeScribeTriggeredAbility ability) {
@@ -74,7 +75,12 @@ class ThreeTreeScribeTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Permanent permanent = zEvent.getTarget();
-        return (permanent != null || !permanent.isControlledBy(getControllerId()))
-                && (permanent.getId().equals(getSourceId()) || permanent.isCreature(game));
+        if (permanent == null) {
+            return false;
+        }
+        if (permanent.getId().equals(getSourceId())) {
+            return true; // {this} or another
+        }
+        return permanent.isCreature(game) && permanent.isControlledBy(getControllerId());
     }
 }

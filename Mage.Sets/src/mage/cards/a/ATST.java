@@ -33,7 +33,7 @@ public final class ATST extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Trooper creatures you control get +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3, 3, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(3, 3, Duration.WhileOnBattlefield, filter, false)));
 
     }
 

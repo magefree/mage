@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedOrLostLifeCondition;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -32,8 +32,8 @@ public final class StarlitSoothsayer extends CardImpl {
 
         // At the beginning of your end step, if you gained or lost life this turn, surveil 1.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new SurveilEffect(1), TargetController.YOU,
-                YouGainedOrLostLifeCondition.instance, false
+                TargetController.YOU, new SurveilEffect(1),
+                false, YouGainedOrLostLifeCondition.instance
         ).addHint(YouGainedOrLostLifeCondition.getHint()), new PlayerGainedLifeWatcher());
     }
 

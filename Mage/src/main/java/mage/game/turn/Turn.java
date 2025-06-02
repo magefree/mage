@@ -3,7 +3,6 @@ package mage.game.turn;
 import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.PhaseChangedEvent;
 import mage.game.permanent.Permanent;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -53,13 +53,6 @@ public class Turn implements Serializable {
 
     }
 
-    public TurnPhase getPhaseType() {
-        if (currentPhase != null) {
-            return currentPhase.getType();
-        }
-        return null;
-    }
-
     public Phase getPhase() {
         return currentPhase;
     }
@@ -85,14 +78,9 @@ public class Turn implements Serializable {
     }
 
     /**
-     * @param game
-     * @param activePlayer
      * @return true if turn is skipped
      */
     public boolean play(Game game, Player activePlayer) {
-        // uncomment this to trace triggered abilities and/or continous effects 
-        // TraceUtil.traceTriggeredAbilities(game);
-        // game.getState().getContinuousEffects().traceContinuousEffects(game);
         activePlayer.becomesActivePlayer();
         this.setDeclareAttackersStepStarted(false);
         if (game.isPaused() || game.checkIfGameIsOver()) {
@@ -107,12 +95,16 @@ public class Turn implements Serializable {
             ));
             return true;
         }
-        logStartOfTurn(game, activePlayer);
 
-        checkTurnIsControlledByOtherPlayer(game, activePlayer.getId());
+        logStartOfTurn(game, activePlayer);
+        resetCounts();
 
         this.activePlayerId = activePlayer.getId();
-        resetCounts();
+        this.currentPhase = null;
+
+        // turn control must be called after potential turn skip due 720.1.
+        checkTurnIsControlledByOtherPlayer(game, activePlayer.getId());
+
         game.getPlayer(activePlayer.getId()).beginTurn(game);
         for (Phase phase : phases) {
             if (game.isPaused() || game.checkIfGameIsOver()) {
@@ -146,7 +138,12 @@ public class Turn implements Serializable {
             game.saveState(false);
 
             //20091005 - 500.8
-            while (playExtraPhases(game, phase.getType())) ;
+            while (true) {
+                // TODO: make sure it work fine (without freeze) on game errors inside extra phases
+                if (!playExtraPhases(game, phase.getType())) {
+                    break;
+                }
+            }
         }
         return false;
     }
@@ -154,7 +151,6 @@ public class Turn implements Serializable {
     public void resumePlay(Game game, boolean wasPaused) {
         activePlayerId = game.getActivePlayerId();
         Player activePlayer = game.getPlayer(activePlayerId);
-        UUID priorityPlayerId = game.getPriorityPlayerId();
         TurnPhase needPhaseType = game.getTurnPhaseType();
         PhaseStep needStepType = game.getTurnStepType();
 
@@ -220,6 +216,28 @@ public class Turn implements Serializable {
     }
 
     private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
+        // 720.1.
+        // Some cards allow a player to control another player during that player’s next turn.
+        // This effect applies to the next turn that the affected player actually takes.
+        // The affected player is controlled during the entire turn; the effect doesn’t end until
+        // the beginning of the next turn.
+        //
+        // 720.1b
+        // If a turn is skipped, any pending player-controlling effects wait until the player who would be
+        // affected actually takes a turn.
+
+        // remove old under control
+        game.getPlayers().values().forEach(player -> {
+            if (player.isInGame() && !player.isGameUnderControl()) {
+                Player controllingPlayer = game.getPlayer(player.getTurnControlledBy());
+                if (player != controllingPlayer && controllingPlayer != null) {
+                    game.informPlayers(controllingPlayer.getLogName() + " lost control over " + player.getLogName());
+                }
+                player.setGameUnderYourControl(game, true);
+            }
+        });
+
+        // add new under control
         TurnMod newControllerMod = game.getState().getTurnMods().useNextNewController(activePlayerId);
         if (newControllerMod != null && !newControllerMod.getNewControllerId().equals(activePlayerId)) {
             // game logs added in child's call (controlPlayersTurn)
@@ -233,10 +251,16 @@ public class Turn implements Serializable {
         }
     }
 
+    /**
+     * Play additional phases one by one
+     *
+     * @return false to finish
+     */
     private boolean playExtraPhases(Game game, TurnPhase afterPhase) {
         while (true) {
             TurnMod extraPhaseMod = game.getState().getTurnMods().useNextExtraPhase(activePlayerId, afterPhase);
             if (extraPhaseMod == null) {
+                // no more extra phases
                 return false;
             }
             TurnPhase extraPhase = extraPhaseMod.getExtraPhase();
@@ -290,12 +314,8 @@ public class Turn implements Serializable {
 
     /**
      * Used for some spells with end turn effect (e.g. Time Stop).
-     *
-     * @param game
-     * @param activePlayerId
-     * @param source
      */
-    public void endTurn(Game game, UUID activePlayerId, Ability source) {
+    public void endTurn(Game game, Ability source) {
         // Ending the turn this way (Time Stop) means the following things happen in order:
 
         setEndTurnRequested(true);
@@ -365,23 +385,18 @@ public class Turn implements Serializable {
     }
 
     private void logStartOfTurn(Game game, Player player) {
-        StringBuilder sb = new StringBuilder(game.getState().isExtraTurn() ? "Extra turn" : "Turn ");
-        sb.append(game.getState().getTurnNum()).append(' ');
-        sb.append(player.getLogName());
-        sb.append(" (");
-        int delimiter = game.getPlayers().size() - 1;
-        for (Player gamePlayer : game.getPlayers().values()) {
-            sb.append(gamePlayer.getLife());
-            int poison = gamePlayer.getCountersCount(CounterType.POISON);
-            if (poison > 0) {
-                sb.append("[P:").append(poison).append(']');
-            }
-            if (delimiter > 0) {
-                sb.append(" - ");
-                delimiter--;
-            }
-        }
-        sb.append(')');
-        game.fireStatusEvent(sb.toString(), true, false);
+        // example: 0:40: TURN 1 for Human (40 - 40)
+
+        String infoTurn = String.format("TURN %d%s for %s",
+                game.getState().getTurnNum(),
+                game.getState().isExtraTurn() ? " (extra)" : "",
+                player.getLogName()
+        );
+
+        String infoLife = game.getPlayers().values().stream()
+                .map(p -> String.valueOf(p.getLife()))
+                .collect(Collectors.joining(" - "));
+
+        game.fireStatusEvent(infoTurn + " (" + infoLife + ")", true, false);
     }
 }

@@ -22,7 +22,8 @@ public final class MeteorShower extends CardImpl {
 
         // Meteor Shower deals X plus 1 damage divided as you choose among any number of targets.
         DynamicValue xValue = new IntPlusDynamicValue(1, GetXValue.instance);
-        this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
+        this.getSpellAbility().addEffect(new DamageMultiEffect()
+                .setText("{this} deals X plus 1 damage divided as you choose among any number of targets"));
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
     }
 

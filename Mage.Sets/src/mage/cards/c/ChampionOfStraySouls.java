@@ -49,7 +49,7 @@ public final class ChampionOfStraySouls extends CardImpl {
         // {3}{B}{B}, {T}, Sacrifice X other creatures: Return X target creatures from your graveyard to the battlefield.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
         effect.setText("Return X target creature cards from your graveyard to the battlefield");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{3}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeXTargetCost(filter));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));

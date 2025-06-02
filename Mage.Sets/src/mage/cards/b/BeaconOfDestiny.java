@@ -36,7 +36,7 @@ public final class BeaconOfDestiny extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to Beacon of Destiny instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BeaconOfDestinyEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new BeaconOfDestinyEffect(), new TapSourceCost()));
     }
 
     private BeaconOfDestiny(final BeaconOfDestiny card) {

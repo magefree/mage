@@ -37,7 +37,7 @@ public final class ImperialLancer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Imperial Lancer has double strike as long as you control a Dinosaur.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter), "{this} has double strike as long as you control a Dinosaur")));
     }

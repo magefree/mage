@@ -41,14 +41,14 @@ public final class CloutOfTheDominus extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // As long as enchanted creature is blue, it gets +1/+1 and has shroud.
-        SimpleStaticAbility blueAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        SimpleStaticAbility blueAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "As long as enchanted creature is blue, it gets +1/+1"));
         blueAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA), 
                 new EnchantedCreatureColorCondition(ObjectColor.BLUE), "and has shroud"));
         this.addAbility(blueAbility);
         
         // As long as enchanted creature is red, it gets +1/+1 and has haste.
-        SimpleStaticAbility redAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        SimpleStaticAbility redAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.RED), "As long as enchanted creature is red, it gets +1/+1"));
         redAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA), 
                 new EnchantedCreatureColorCondition(ObjectColor.RED), "and has haste"));

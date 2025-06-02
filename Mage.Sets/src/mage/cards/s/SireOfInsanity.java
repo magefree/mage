@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class SireOfInsanity extends CardImpl {
 
         // At the beginning of each end step, each player discards their hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new SireOfInsanityEffect(), TargetController.ANY, false
+                TargetController.ANY, new SireOfInsanityEffect(), false
         ));
     }
 

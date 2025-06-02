@@ -40,7 +40,7 @@ public final class CastleLocthwain extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1).setText("draw a card,"), new ManaCostsImpl<>("{1}{B}{B}")
         );
-        ability.addEffect(new LoseLifeSourceControllerEffect(CardsInControllerHandCount.instance)
+        ability.addEffect(new LoseLifeSourceControllerEffect(CardsInControllerHandCount.ANY)
                 .setText("then you lose life equal to the number of cards in your hand"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

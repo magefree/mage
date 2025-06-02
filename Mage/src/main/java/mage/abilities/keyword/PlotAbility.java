@@ -268,11 +268,11 @@ class PlotSpellAbility extends SpellAbility {
                     } else if (((CardWithHalves) mainCard).getRightHalfCard().getName().equals(faceCardName)) {
                         return ((CardWithHalves) mainCard).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
-                } else if (card instanceof AdventureCard) {
+                } else if (card instanceof CardWithSpellOption) {
                     if (card.getMainCard().getName().equals(faceCardName)) {
                         return card.getMainCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((AdventureCard) card).getSpellCard().getName().equals(faceCardName)) {
-                        return ((AdventureCard) card).getSpellCard().getSpellAbility().canActivate(playerId, game);
+                    } else if (((CardWithSpellOption) card).getSpellCard().getName().equals(faceCardName)) {
+                        return ((CardWithSpellOption) card).getSpellCard().getSpellAbility().canActivate(playerId, game);
                     }
                 }
                 return card.getSpellAbility().canActivate(playerId, game);
@@ -294,11 +294,11 @@ class PlotSpellAbility extends SpellAbility {
                     } else if (((CardWithHalves) card).getRightHalfCard().getName().equals(faceCardName)) {
                         spellAbilityCopy = ((CardWithHalves) card).getRightHalfCard().getSpellAbility().copy();
                     }
-                } else if (card instanceof AdventureCard) {
+                } else if (card instanceof CardWithSpellOption) {
                     if (card.getMainCard().getName().equals(faceCardName)) {
                         spellAbilityCopy = card.getMainCard().getSpellAbility().copy();
-                    } else if (((AdventureCard) card).getSpellCard().getName().equals(faceCardName)) {
-                        spellAbilityCopy = ((AdventureCard) card).getSpellCard().getSpellAbility().copy();
+                    } else if (((CardWithSpellOption) card).getSpellCard().getName().equals(faceCardName)) {
+                        spellAbilityCopy = ((CardWithSpellOption) card).getSpellCard().getSpellAbility().copy();
                     }
                 } else {
                     spellAbilityCopy = card.getSpellAbility().copy();

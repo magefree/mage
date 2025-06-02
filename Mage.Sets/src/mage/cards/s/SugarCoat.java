@@ -60,7 +60,7 @@ public final class SugarCoat extends CardImpl {
 // Based on MinimusContainmentEffect
 class SugarCoatEffect extends ContinuousEffectImpl {
 
-    private static final Ability ability = new FoodAbility(false);
+    private static final Ability ability = new FoodAbility();
 
     SugarCoatEffect() {
         super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
@@ -112,4 +112,3 @@ class SugarCoatEffect extends ContinuousEffectImpl {
         return layer == Layer.TypeChangingEffects_4 || layer == Layer.AbilityAddingRemovingEffects_6;
     }
 }
-

@@ -35,7 +35,7 @@ public final class MarshalsAnthem extends CardImpl {
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)
+                new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)
         ));
 
         // When Marshal's Anthem enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times Marshal's Anthem was kicked.

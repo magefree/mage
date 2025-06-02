@@ -33,7 +33,7 @@ public final class BrassclawOrcs extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Brassclaw Orcs can't block creatures with power 2 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockCreaturesSourceEffect(filter)));
 
     }
 

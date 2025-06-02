@@ -66,7 +66,7 @@ class MyrkulsEdictEffect extends OneShotEffect {
 
     MyrkulsEdictEffect() {
         super(Outcome.Benefit);
-        staticText = "choose an opponent. That player sacrifices a creature";
+        staticText = "choose an opponent. That player sacrifices a creature of their choice";
     }
 
     private MyrkulsEdictEffect(final MyrkulsEdictEffect effect) {

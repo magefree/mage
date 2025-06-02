@@ -28,7 +28,7 @@ public final class JungleDelver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}{G}: Put a +1/+1 counter on Jungle Delver.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{3}{G}")));
     }
 

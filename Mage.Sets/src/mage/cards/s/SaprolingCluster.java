@@ -24,7 +24,7 @@ public final class SaprolingCluster extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // {1}, Discard a card: Create a 1/1 green Saproling creature token. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()) , new GenericManaCost(1));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()) , new GenericManaCost(1));
         ability.addCost(new DiscardCardCost());
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));

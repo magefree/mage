@@ -44,7 +44,6 @@ public final class VarinaLichQueen extends CardImpl {
 
         // {2}, Exile two cards from your graveyard: Create a tapped 2/2 black Zombie creature token.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(
                         new ZombieToken(),
                         1, true, false

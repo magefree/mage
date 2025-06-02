@@ -36,7 +36,7 @@ public final class HixusPrisonWarden extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DealsDamageToYouAllTriggeredAbility(
                 StaticFilters.FILTER_PERMANENT_CREATURE, new ExileUntilSourceLeavesEffect(), true
         ).setTriggerPhrase("Whenever a creature deals combat damage to you, if {this} entered the battlefield this turn, "),
-                SourceEnteredThisTurnCondition.instance, null
+                SourceEnteredThisTurnCondition.DID, null
         ));
     }
 

@@ -41,7 +41,7 @@ public final class MiteOverseer extends CardImpl {
         // As long as it's your turn, creature tokens you control get +1/+0 and have first strike.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostControlledEffect(
                 1, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURE_TOKEN
-        ), MyTurnCondition.instance, "as long as it's your turn, creature tokens you control get +1/+0"));
+        ), MyTurnCondition.instance, "during your turn, creature tokens you control get +1/+0"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(
                 FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURE_TOKEN
         ), MyTurnCondition.instance, "and have first strike"));

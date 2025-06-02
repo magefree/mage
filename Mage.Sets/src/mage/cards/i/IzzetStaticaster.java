@@ -42,7 +42,7 @@ public final class IzzetStaticaster extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {T}: Izzet Staticaster deals 1 damage to target creature and each other creature with the same name as that creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IzzetStaticasterDamageEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new IzzetStaticasterDamageEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

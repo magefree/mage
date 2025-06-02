@@ -26,7 +26,7 @@ public final class DeepwoodGhoul extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Pay 2 life: Regenerate Deepwood Ghoul.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new PayLifeCost(2)));
    }
 
     private DeepwoodGhoul(final DeepwoodGhoul card) {

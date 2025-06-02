@@ -37,7 +37,7 @@ public final class PterodonKnight extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Pterodon Knight has flying as long as you control a Dinosaur.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter), "{this} has flying as long as you control a Dinosaur")));
     }

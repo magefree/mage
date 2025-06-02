@@ -62,7 +62,7 @@ public final class PhyrexianSplicer extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {2}, {T}, Choose flying, first strike, trample, or shadow: Until end of turn, target creature with the chosen ability loses it and another target creature gains it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianSplicerEffect(), new ManaCostsImpl<>("{2}"));
+        Ability ability = new SimpleActivatedAbility(new PhyrexianSplicerEffect(), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new PhyrexianSplicerChooseCost());
         ability.addTarget(new TargetPermanent(filterLose).withChooseHint("to lose ability").setTargetTag(1));

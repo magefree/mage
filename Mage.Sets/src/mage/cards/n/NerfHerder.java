@@ -29,10 +29,10 @@ public final class NerfHerder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Monstrosity abilities you activate cost {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbilitiesCostReductionControllerEffect(MonstrosityAbility.class, "Monstrosity")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(MonstrosityAbility.class, "Monstrosity")));
 
         // Each creature you control with a +1/+1 counter on it has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(),
                 Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1))

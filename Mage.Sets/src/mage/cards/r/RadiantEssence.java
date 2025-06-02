@@ -36,7 +36,7 @@ public final class RadiantEssence extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Radiant Essence gets +1/+2 as long as an opponent controls a black permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new ConditionalContinuousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
             new OpponentControlsPermanentCondition(filter),
             "{this} gets +1/+2 as long as an opponent controls a black permanent")));

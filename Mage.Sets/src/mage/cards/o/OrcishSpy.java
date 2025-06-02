@@ -28,7 +28,7 @@ public final class OrcishSpy extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Look at the top three cards of target player's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryTopCardTargetPlayerEffect(3), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LookLibraryTopCardTargetPlayerEffect(3), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

@@ -37,10 +37,10 @@ public final class FlinthoofBoar extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Flinthoof Boar gets +1/+1 as long as you control a Mountain.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceWhileControlsEffect(filter, 1, 1)));
 
         // {R}: Flinthoof Boar gains haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}")));
     }

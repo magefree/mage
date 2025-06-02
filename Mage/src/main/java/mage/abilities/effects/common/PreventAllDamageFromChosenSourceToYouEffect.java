@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterObject;
+import mage.filter.FilterSource;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
@@ -17,14 +17,14 @@ public class PreventAllDamageFromChosenSourceToYouEffect extends PreventionEffec
     protected final TargetSource targetSource;
 
     public PreventAllDamageFromChosenSourceToYouEffect(Duration duration) {
-        this(duration, new FilterObject("source"));
+        this(duration, new FilterSource());
     }
 
-    public PreventAllDamageFromChosenSourceToYouEffect(Duration duration, FilterObject filter) {
+    public PreventAllDamageFromChosenSourceToYouEffect(Duration duration, FilterSource filter) {
         this(duration, filter, false);
     }
 
-    public PreventAllDamageFromChosenSourceToYouEffect(Duration duration, FilterObject filter, boolean onlyCombat) {
+    public PreventAllDamageFromChosenSourceToYouEffect(Duration duration, FilterSource filter, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.targetSource = new TargetSource(filter);
         this.staticText = setText();

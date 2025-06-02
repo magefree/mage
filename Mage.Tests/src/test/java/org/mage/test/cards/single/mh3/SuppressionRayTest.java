@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -39,6 +40,7 @@ public class SuppressionRayTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suppression Ray", playerB);
         setChoiceAmount(playerA, 3); // decide to pay 3 energy
         setChoice(playerA, "Zodiac Pig^Zodiac Rabbit"); // put stun on those 2 creatures
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -20,7 +20,7 @@ public final class PresenceOfTheWise extends CardImpl {
 
         // You gain 2 life for each card in your hand.
         this.getSpellAbility().addEffect(new GainLifeEffect(
-                new MultipliedValue(CardsInControllerHandCount.instance, 2),"You gain 2 life for each card in your hand"));
+                new MultipliedValue(CardsInControllerHandCount.ANY, 2),"You gain 2 life for each card in your hand"));
     }
 
     private PresenceOfTheWise(final PresenceOfTheWise card) {

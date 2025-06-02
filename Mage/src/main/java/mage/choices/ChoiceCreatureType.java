@@ -10,7 +10,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Game's choose dialog to ask about creature type. Return getChoice
+ * Game's choose dialog to ask about creature type.
+ * <p>
+ * Warning, must use getChoiceKey as result
  */
 public class ChoiceCreatureType extends ChoiceImpl {
 

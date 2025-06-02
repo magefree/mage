@@ -2,8 +2,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -44,7 +43,7 @@ public final class RingOfKalonia extends CardImpl {
                 new AttachedToMatchesFilterCondition(filter),
                 "put a +1/+1 counter on equipped creature if it's green"
         );
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));

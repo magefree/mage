@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -32,7 +32,7 @@ public final class DoomForetold extends CardImpl {
 
         // At the beginning of each player's upkeep, that player sacrifices a nonland, nontoken permanent. If that player can't, they discard a card, they lose 2 life, you draw a card, you gain 2 life, you create a 2/2 white Knight creature token with vigilance, then you sacrifice Doom Foretold.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoomForetoldEffect(), TargetController.ACTIVE, false
+                TargetController.EACH_PLAYER, new DoomForetoldEffect(), false
         ));
     }
 

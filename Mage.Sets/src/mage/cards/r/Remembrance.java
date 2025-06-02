@@ -70,4 +70,9 @@ class RemembranceEffect extends OneShotEffect {
         filter.add(new SharesNamePredicate(permanent));
         return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true).apply(game, source);
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }

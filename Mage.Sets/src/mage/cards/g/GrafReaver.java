@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.ExploitCreatureTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetPlaneswalkerPermanent;
 
 import java.util.UUID;
@@ -39,7 +38,7 @@ public final class GrafReaver extends CardImpl {
 
         // At the beginning of your upkeep, Graf Reaver deals 1 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DamageControllerEffect(1), TargetController.YOU, false
+                new DamageControllerEffect(1)
         ));
     }
 

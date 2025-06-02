@@ -84,7 +84,8 @@ public class CopyTokenFunction {
                 return;
             }
 
-            Card sourceObj = source.getMainCard();
+            // must use real card side, e.g. half from MDFC (not main)
+            Card sourceObj = sourcePermanent.getCard();
             target.setCopySourceCard(sourceObj);
             // main side
             copyToToken(target, sourceObj, game);

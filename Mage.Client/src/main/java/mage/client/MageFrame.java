@@ -26,6 +26,7 @@ import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.preference.MagePreferences;
 import mage.client.remote.CallbackClientImpl;
+import mage.client.remote.XmageURLConnection;
 import mage.client.table.TablesPane;
 import mage.client.table.TablesPanel;
 import mage.client.tournament.TournamentPane;
@@ -54,6 +55,7 @@ import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.SvgUtils;
 import org.mage.plugins.card.images.DownloadPicturesService;
@@ -196,19 +198,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public MageFrame() throws MageException {
-        File cacertsFile = new File(System.getProperty("user.dir") + "/release/cacerts").getAbsoluteFile();
-        if (!cacertsFile.exists()) { // When running from the jar file the contents of the /release folder will have been expanded into the home folder as part of packaging
-            cacertsFile = new File(System.getProperty("user.dir") + "/cacerts").getAbsoluteFile();
-        }
-        if (cacertsFile.exists()) {
-            LOGGER.info("Custom (or bundled) Java certificate file (cacerts) file found");
-            String cacertsPath = cacertsFile.getPath();
-            System.setProperty("javax.net.ssl.trustStore", cacertsPath);
-            System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
-        } else {
-            LOGGER.info("custom Java certificate file not found at: " + cacertsFile.getAbsolutePath());
-        }
-
         setWindowTitle();
 
         // mac os only: enable full screen support in java 8 (java 11+ try to use it all the time)
@@ -401,6 +390,41 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SwingUtilities.invokeLater(() -> {
             showWhatsNewDialog(false);
         });
+    }
+
+    /**
+     * Init certificates store for https work (if java version is outdated)
+     * Debug with -Djavax.net.debug=SSL,trustmanager
+     */
+    @Deprecated // TODO: replaced by enableAIAcaIssuers, delete that code after few releases (2025-01-01)
+    private void initSSLCertificates() {
+        // from dev build (runtime)
+        boolean cacertsUsed = false;
+        File cacertsFile = new File(System.getProperty("user.dir") + "/release/cacerts").getAbsoluteFile();
+        if (cacertsFile.exists()) {
+            cacertsUsed = true;
+            LOGGER.info("SSL certificates: used runtime cacerts bundle");
+        }
+
+        // from release build (jar)
+        // When running from the jar file the contents of the /release folder will have been expanded into the home folder as part of packaging
+        if (!cacertsUsed) {
+            cacertsFile = new File(System.getProperty("user.dir") + "/cacerts").getAbsoluteFile();
+            if (cacertsFile.exists()) {
+                cacertsUsed = true;
+                LOGGER.info("SSL certificates: used release cacerts bundle");
+            }
+        }
+
+        if (cacertsUsed && cacertsFile.exists()) {
+            String cacertsPath = cacertsFile.getPath();
+            System.setProperty("javax.net.ssl.trustStoreType", "PKCS12"); // cacerts file format from java 9+ instead "jks" from java 8
+            System.setProperty("javax.net.ssl.trustStore", cacertsPath);
+            System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+        } else {
+            LOGGER.info("SSL certificates: used default cacerts bundle from " + System.getProperty("java.version"));
+        }
+        System.setProperty("com.sun.security.enableAIAcaIssuers", "true");
     }
 
     private void bootstrapSetsAndFormats() {
@@ -925,11 +949,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             } catch (SocketException ex) {
             }
             currentConnection.setUserIdStr(System.getProperty("user.name") + ":" + System.getProperty("os.name") + ":" + MagePreferences.getUserNames() + ":" + allMAC);
-            currentConnection.setProxyType(proxyType);
-            currentConnection.setProxyHost(proxyServer);
-            currentConnection.setProxyPort(proxyPort);
-            currentConnection.setProxyUsername(proxyUsername);
-            currentConnection.setProxyPassword(proxyPassword);
+            if (PreferencesDialog.NETWORK_ENABLE_PROXY_SUPPORT) {
+                currentConnection.setProxyType(proxyType);
+                currentConnection.setProxyHost(proxyServer);
+                currentConnection.setProxyPort(proxyPort);
+                currentConnection.setProxyUsername(proxyUsername);
+                currentConnection.setProxyPassword(proxyPassword);
+            } else {
+                currentConnection.setProxyType(ProxyType.NONE);
+            }
             setUserPrefsToConnection(currentConnection);
         }
 
@@ -1502,7 +1530,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (!Charset.defaultCharset().toString().equals("UTF-8")) {
             LOGGER.warn("WARNING, bad charset. Some images will not be downloaded. You must:");
             LOGGER.warn("* Open launcher -> settings -> java -> client java options");
-            LOGGER.warn("* Insert additional command at the the end: -Dfile.encoding=UTF-8");
+            LOGGER.warn("* Insert at the the end: -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8");
         }
 
         startTime = System.currentTimeMillis();

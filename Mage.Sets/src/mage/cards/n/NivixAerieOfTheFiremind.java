@@ -33,7 +33,7 @@ public final class NivixAerieOfTheFiremind extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}{U}{R}, {tap}: Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NivixAerieOfTheFiremindEffect(), new ManaCostsImpl<>("{2}{U}{R}"));
+        Ability ability = new SimpleActivatedAbility(new NivixAerieOfTheFiremindEffect(), new ManaCostsImpl<>("{2}{U}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -72,7 +72,7 @@ class NivixAerieOfTheFiremindEffect extends OneShotEffect {
             if (library.hasCards()) {
                 Card card = library.getFromTop(game);
                 if (card != null
-                        && controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null))
+                        && controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, null))
                         && card.isInstantOrSorcery(game)) {
                     ContinuousEffect effect = new NivixAerieOfTheFiremindCanCastEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));

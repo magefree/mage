@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -48,7 +48,7 @@ public final class LordSkittersBlessing extends CardImpl {
         // At the beginning of your draw step, if you control an enchanted creature, you lose 1 life and you draw an additional card.
         ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfDrawTriggeredAbility(
-                        new LoseLifeSourceControllerEffect(1), TargetController.YOU, false
+                        TargetController.YOU, new LoseLifeSourceControllerEffect(1), false
                 ), condition, "At the beginning of your draw step, if you control " +
                 "an enchanted creature, you lose 1 life and you draw an additional card."
         );

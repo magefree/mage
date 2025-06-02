@@ -35,7 +35,7 @@ public final class StormcloudDjinn extends CardImpl {
         // Stormcloud Djinn can block only creatures with flying.
         this.addAbility(new CanBlockOnlyFlyingAbility());
         // {R}{R}: Stormcloud Djinn gets +2/+0 until end of turn and deals 1 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn),
+        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn),
             new ManaCostsImpl<>("{R}{R}"));
         Effect effect = new DamageControllerEffect(1);
         effect.setText("and deals 1 damage to you");

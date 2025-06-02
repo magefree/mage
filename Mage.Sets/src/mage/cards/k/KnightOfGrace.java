@@ -38,7 +38,7 @@ public final class KnightOfGrace extends CardImpl {
 
 
         //Knight of Grace gets +1/+0 as long as any player controls a black permanent.
-        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 new AnyPlayerControlsCondition(filter),
                 "{this} gets +1/+0 as long as any player controls a black permanent.")));

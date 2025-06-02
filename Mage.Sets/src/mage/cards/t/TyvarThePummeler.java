@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -56,9 +56,10 @@ public final class TyvarThePummeler extends CardImpl {
 
         // {3}{G}{G}: Creatures you control get +X/+X until end of turn, where X is the greatest power among creatures you control.
         this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(
-                GreatestPowerAmongControlledCreaturesValue.instance,
-                GreatestPowerAmongControlledCreaturesValue.instance, Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{3}{G}{G}")));
+                GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
+                GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
+                Duration.EndOfTurn
+        ), new ManaCostsImpl<>("{3}{G}{G}")).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
     }
 
     private TyvarThePummeler(final TyvarThePummeler card) {

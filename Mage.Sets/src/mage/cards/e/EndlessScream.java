@@ -41,7 +41,7 @@ public final class EndlessScream extends CardImpl {
         // Endless Scream enters the battlefield with X scream counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.SCREAM.createInstance())));
         // Enchanted creature gets +1/+0 for each scream counter on Endless Scream.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new CountersSourceCount(CounterType.SCREAM), StaticValue.get(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(new CountersSourceCount(CounterType.SCREAM), StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
     private EndlessScream(final EndlessScream card) {

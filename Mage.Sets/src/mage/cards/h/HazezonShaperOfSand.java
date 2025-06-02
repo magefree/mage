@@ -4,14 +4,13 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardControllerEffect;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.game.permanent.token.SandWarriorToken;
@@ -46,7 +45,7 @@ public final class HazezonShaperOfSand extends CardImpl {
         this.addAbility(new LandwalkAbility(filter));
 
         // You may play Desert lands from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayLandsFromGraveyardControllerEffect(filter2)));
+        this.addAbility(new SimpleStaticAbility(new PlayFromGraveyardControllerEffect(filter2)));
 
         // Whenever a Desert you control enters create two 1/1 red, green, and white Sand Warrior creature tokens.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new CreateTokenEffect(

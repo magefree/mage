@@ -86,9 +86,6 @@ public interface Ability extends Controllable, Serializable {
      * Gets the id of the object which put this ability in motion.
      * <p>
      * WARNING, MageSingleton abilities contains dirty data here, so you can't use sourceId with it
-     *
-     * @return The {@link java.util.UUID} of the object this ability is
-     * associated with.
      */
     UUID getSourceId();
 
@@ -129,7 +126,7 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Gets all {@link ManaCosts} associated with this ability. These returned
      * costs should never be modified as they represent the base costs before
-     * any modifications.
+     * any modifications (only cost adjusters can change it, e.g. set min/max values)
      *
      * @return All {@link ManaCosts} that must be paid.
      */
@@ -153,6 +150,17 @@ public interface Ability extends Controllable, Serializable {
     ManaCosts<ManaCost> getManaCostsToPay();
 
     void addManaCostsToPay(ManaCost manaCost);
+
+    /**
+     * Helper method to setup actual min/max limits of current X costs BEFORE player's X announcement
+     */
+    void setVariableCostsMinMax(int min, int max);
+
+    /**
+     * Helper method to replace X by direct value BEFORE player's X announcement
+     * If you need additional target for X then use CostAdjuster + EarlyTargetCost (example: Bargaining Table)
+     */
+    void setVariableCostsValue(int xValue);
 
     /**
      * Gets a map of the cost tags (set while casting/activating) of this ability, can be null if no tags have been set yet.
@@ -351,16 +359,24 @@ public interface Ability extends Controllable, Serializable {
     void addWatcher(Watcher watcher);
 
     /**
-     * Returns true if this abilities source is in the zone for the ability
+     * Allow to control ability/trigger's lifecycle
+     * <p>
+     * How-to use:
+     * - for normal abilities and triggers - keep default
+     * - for leave battlefield triggers - keep default + set setLeavesTheBattlefieldTrigger(true)
+     * - for dies triggers - override and use TriggeredAbilityImpl.isInUseableZoneDiesTrigger inside + set setLeavesTheBattlefieldTrigger(true)
+     *
+     * @param sourceObject can be null for static continues effects checking like rules modification (example: Yixlid Jailer)
+     * @param event        can be null for state base effects checking like "when you control seven or more" (example: Endrek Sahr, Master Breeder)
      */
-    boolean isInUseableZone(Game game, MageObject source, GameEvent event);
+    boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event);
 
     /**
      * Returns true if the source object has currently the ability (e.g. The
      * object can have lost all or some abilities for some time (e.g. Turn to
      * Frog)
      */
-    boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event);
+    boolean hasSourceObjectAbility(Game game, MageObject sourceObject, GameEvent event);
 
     /**
      * Returns true if the ability has a tap itself in their costs
@@ -459,6 +475,11 @@ public interface Ability extends Controllable, Serializable {
     Ability withFlavorWord(String flavorWord);
 
     /**
+     * Gets rule prefix for text generation
+     */
+    String addRulePrefix(String rule);
+
+    /**
      * Sets flavor word for first mode
      */
     Ability withFirstModeFlavorWord(String flavorWord);
@@ -478,10 +499,22 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Finds the source object regardless of its zcc. Can be LKI from battlefield in some cases.
+     * Warning, do not use with singleton abilities
      */
     MageObject getSourceObject(Game game);
 
     void setSourceObjectZoneChangeCounter(int zoneChangeCounter);
+    /**
+     * Initializes the internally stored Source Object ZCC value
+     * to be equal to the source object's current ZCC.
+     * <p>
+     * If the source is an entering permanent, then
+     * the ZCC is set as if the permanent had already entered the battlefield.
+     *
+     * @param game
+     * @param force Update only occurs if stored ZCC is zero or if force is true.
+     */
+    void initSourceObjectZoneChangeCounter(Game game, boolean force);
 
     int getSourceObjectZoneChangeCounter();
 
@@ -517,6 +550,10 @@ public interface Ability extends Controllable, Serializable {
 
     boolean canFizzle();
 
+    Ability withCanBeCopied(boolean canBeCopied);
+
+    boolean canBeCopied();
+
     /**
      * Adds a target adjuster to this ability.
      * If using a generic adjuster, only use after adding the blueprint target!
@@ -527,11 +564,27 @@ public interface Ability extends Controllable, Serializable {
 
     void adjustTargets(Game game);
 
+    /**
+     * Dynamic X and cost modification, see CostAdjuster for more details on usage
+     */
     Ability setCostAdjuster(CostAdjuster costAdjuster);
 
     CostAdjuster getCostAdjuster();
 
-    void adjustCosts(Game game);
+    /**
+     * Prepare {X} settings for announce
+     */
+    void adjustX(Game game);
+
+    /**
+     * Prepare costs (generate due game state or announce)
+     */
+    void adjustCostsPrepare(Game game);
+
+    /**
+     * Apply additional cost modifications logic/effects
+     */
+    void adjustCostsModify(Game game, CostModificationType costModificationType);
 
     List<Hint> getHints();
 

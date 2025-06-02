@@ -39,7 +39,7 @@ public final class CrownOfGondor extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each creature you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(xValue, xValue)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, xValue)));
 
         // When a legendary creature you control enters, if there is no monarch, you become the monarch.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
@@ -72,7 +72,7 @@ enum CrownOfGondorAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         if (MonarchIsSourceControllerCondition.instance.apply(game, ability)) {
             CardUtil.reduceCost(ability, 3);
         }

@@ -474,7 +474,7 @@ public final class GuiDisplayUtil {
     public static void refreshThemeSettings() {
         // apply Nimbus's look and fill
         // possible settings:
-        // https://docs.oracle.com/en%2Fjava%2Fjavase%2F17%2Fdocs%2Fapi%2F%2F/java.desktop/javax/swing/plaf/nimbus/doc-files/properties.html
+        // https://docs.oracle.com/en/java/javase/23/docs/api/java.desktop/javax/swing/plaf/nimbus/doc-files/properties.html
 
         // enable nimbus
         try {

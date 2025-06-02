@@ -30,7 +30,7 @@ public final class MercadianBazaar extends CardImpl {
         // Mercadian Bazaar enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}: Put a storage counter on Mercadian Bazaar.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
         // {tap}, Remove any number of storage counters from Mercadian Bazaar: Add {R} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.RedMana(1),

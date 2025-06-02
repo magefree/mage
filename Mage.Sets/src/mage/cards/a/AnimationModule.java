@@ -42,7 +42,7 @@ public final class AnimationModule extends CardImpl {
         this.addAbility(new AnimationModuleTriggeredAbility());
 
         // {3}, {T}: Choose a counter on target permanent or player. Give that permanent or player another counter of that kind.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AnimationModuleEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new AnimationModuleEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanentOrPlayer());
         this.addAbility(ability);

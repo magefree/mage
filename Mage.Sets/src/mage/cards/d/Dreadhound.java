@@ -53,6 +53,7 @@ class DreadhoundTriggeredAbility extends TriggeredAbilityImpl {
     public DreadhoundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1));
         setTriggerPhrase("Whenever a creature dies or a creature card is put into a graveyard from a library, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private DreadhoundTriggeredAbility(final DreadhoundTriggeredAbility ability) {

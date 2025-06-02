@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -30,8 +29,8 @@ public final class DrossHarvester extends CardImpl {
         // Protection from white
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         // At the beginning of your end step, you lose 4 life.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new LoseLifeSourceControllerEffect(4),
-           TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new LoseLifeSourceControllerEffect(4)
+        ));
         // Whenever a creature dies, you gain 2 life.
         this.addAbility(new DiesCreatureTriggeredAbility(new GainLifeEffect(2), false));
     }

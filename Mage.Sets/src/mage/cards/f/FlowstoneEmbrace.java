@@ -35,7 +35,7 @@ public final class FlowstoneEmbrace extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // {tap}: Enchanted creature gets +2/-2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, -2, Duration.EndOfTurn), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new BoostEnchantedEffect(2, -2, Duration.EndOfTurn), new TapSourceCost()));
     }
 
     private FlowstoneEmbrace(final FlowstoneEmbrace card) {

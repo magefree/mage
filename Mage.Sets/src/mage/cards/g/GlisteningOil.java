@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -40,10 +40,10 @@ public final class GlisteningOil extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has infect.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
         
         // At the beginning of your upkeep, put a -1/-1 counter on enchanted creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect()));
         
         // When Glistening Oil is put into a graveyard from the battlefield, return Glistening Oil to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));

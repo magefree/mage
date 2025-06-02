@@ -427,6 +427,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void setVariableCostsMinMax(int min, int max) {
+        ability.setVariableCostsMinMax(min, max);
+    }
+
+    @Override
+    public void setVariableCostsValue(int xValue) {
+        ability.setVariableCostsValue(xValue);
+    }
+
+    @Override
     public Map<String, Object> getCostsTagMap() {
         return ability.getCostsTagMap();
     }
@@ -517,12 +527,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
-    public boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event) {
+    public boolean hasSourceObjectAbility(Game game, MageObject sourceObject, GameEvent event) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
@@ -570,6 +580,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public Ability withFlavorWord(String flavorWord) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public String addRulePrefix(String rule) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
@@ -659,6 +674,10 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
+        ability.initSourceObjectZoneChangeCounter(game, force);
+    }
+    @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
     }
@@ -705,6 +724,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public void setCanFizzle(boolean canFizzle) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public boolean canBeCopied() {
+        return ability.canBeCopied();
+    }
+
+    @Override
+    public Ability withCanBeCopied(boolean canBeCopied) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
@@ -783,9 +812,23 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void adjustCosts(Game game) {
+    public void adjustX(Game game) {
         if (costAdjuster != null) {
-            costAdjuster.adjustCosts(this, game);
+            costAdjuster.prepareX(this, game);
+        }
+    }
+
+    @Override
+    public void adjustCostsPrepare(Game game) {
+        if (costAdjuster != null) {
+            costAdjuster.prepareCost(this, game);
+        }
+    }
+
+    @Override
+    public void adjustCostsModify(Game game, CostModificationType costModificationType) {
+        if (costAdjuster != null) {
+            costAdjuster.modifyCost(this, game, costModificationType);
         }
     }
 

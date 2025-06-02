@@ -20,6 +20,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -57,7 +58,7 @@ class ShiftyDoppelgangerExileEffect extends OneShotEffect {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "You may put a creature card from your hand onto the battlefield. If you do, " +
                 "that creature gains haste until end of turn. At the beginning of the next end step, " +
-                "sacrifice that creature. If you do, return {this} to the battlefield";
+                "sacrifice that creature. If you do, return this card to the battlefield";
     }
 
     private ShiftyDoppelgangerExileEffect(final ShiftyDoppelgangerExileEffect effect) {
@@ -87,7 +88,7 @@ class ShiftyDoppelgangerExileEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent creature = game.getPermanent(card.getId());
+        Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (creature == null) {
             return false;
         }

@@ -35,7 +35,7 @@ public final class ContagionEngine extends CardImpl {
         this.addAbility(ability);
 
         // {4}, {T}: Proliferate, then proliferate again. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there. Then do it again.)
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect("", false), new GenericManaCost(4));
+        ability = new SimpleActivatedAbility(new ProliferateEffect("", false), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ProliferateEffect(" again", true).concatBy(", then"));
         this.addAbility(ability);

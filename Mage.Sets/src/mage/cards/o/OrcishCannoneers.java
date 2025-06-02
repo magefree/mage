@@ -31,7 +31,7 @@ public final class OrcishCannoneers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Orcish Cannoneers deals 2 damage to any target and 3 damage to you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());                                                                                         ability.addTarget(new TargetAnyTarget());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());                                                                                         ability.addTarget(new TargetAnyTarget());
         Effect effect = new DamageControllerEffect(3);
         effect.setText("and 3 damage to you");
         ability.addEffect(effect);

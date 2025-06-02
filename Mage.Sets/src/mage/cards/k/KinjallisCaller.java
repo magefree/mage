@@ -33,7 +33,7 @@ public final class KinjallisCaller extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Dinosaur spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private KinjallisCaller(final KinjallisCaller card) {

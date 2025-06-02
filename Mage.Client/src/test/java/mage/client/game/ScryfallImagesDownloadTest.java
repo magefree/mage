@@ -43,7 +43,7 @@ public class ScryfallImagesDownloadTest {
                 .anyMatch(c -> c.getCardNumber().equals("001"))
         );
         urls = imageSource.generateCardUrl(new CardDownloadData("The One Ring", "LTR", "001", false, 0));
-        Assert.assertEquals("https://api.scryfall.com/cards/ltr/0/en?format=image", urls.getBaseUrl());
+        Assert.assertEquals("https://api.scryfall.com/cards/ltr/0/qya?format=image", urls.getBaseUrl());
 
 
         // added same tests for small images
@@ -74,6 +74,6 @@ public class ScryfallImagesDownloadTest {
                 .anyMatch(c -> c.getCardNumber().equals("001"))
         );
         urls = imageSourceSmall.generateCardUrl(new CardDownloadData("The One Ring", "LTR", "001", false, 0));
-        Assert.assertEquals("https://api.scryfall.com/cards/ltr/0/en?format=image&version=small", urls.getBaseUrl());
+        Assert.assertEquals("https://api.scryfall.com/cards/ltr/0/qya?format=image&version=small", urls.getBaseUrl());
     }
 }

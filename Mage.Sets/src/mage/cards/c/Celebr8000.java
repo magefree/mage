@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -40,7 +40,7 @@ public final class Celebr8000 extends CardImpl {
         // * 5 -- flying
         // * 6 -- indestructible
         this.addAbility(
-                new BeginningOfCombatTriggeredAbility(new Celebr8000Effect(), TargetController.YOU, false));
+                new BeginningOfCombatTriggeredAbility(new Celebr8000Effect()));
     }
 
     private Celebr8000(final Celebr8000 card) {

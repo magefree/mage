@@ -2,13 +2,12 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawCardAllEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,13 +36,13 @@ public final class WinterMisanthropicGuide extends CardImpl {
 
         // At the beginning of your upkeep, each player draws two cards.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DrawCardAllEffect(2), TargetController.YOU, false
+                new DrawCardAllEffect(2)
         ));
 
         // Delirium -- As long as there are four or more card types among cards in your graveyard, each opponent's maximum hand size is equal to seven minus the number of those card types.
         this.addAbility(new SimpleStaticAbility(new WinterMisanthropicGuideEffect())
                 .setAbilityWord(AbilityWord.DELIRIUM)
-                .addHint(CardTypesInGraveyardHint.YOU));
+                .addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private WinterMisanthropicGuide(final WinterMisanthropicGuide card) {

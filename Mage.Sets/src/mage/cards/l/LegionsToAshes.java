@@ -12,7 +12,10 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPermanent;
+
+import java.util.HashSet;
+import java.util.UUID;
 
 import java.util.Set;
 import java.util.UUID;
@@ -28,7 +31,7 @@ public final class LegionsToAshes extends CardImpl {
 
         // Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent.
         this.getSpellAbility().addEffect(new LegionsToAshesEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
     }
 
     private LegionsToAshes(final LegionsToAshes card) {

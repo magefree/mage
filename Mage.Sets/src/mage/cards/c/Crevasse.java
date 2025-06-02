@@ -24,7 +24,7 @@ public final class Crevasse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Creatures with mountainwalk can be blocked as though they didn't have mountainwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CrevasseEffect()));
+        this.addAbility(new SimpleStaticAbility(new CrevasseEffect()));
     }
 
     private Crevasse(final Crevasse card) {

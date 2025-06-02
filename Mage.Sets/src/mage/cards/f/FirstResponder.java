@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class FirstResponder extends CardImpl {
 
         // At the beginning of your end step, you may return another creature you control to its owner's hand, then put a number of +1/+1 counters equal to that creature's power on First Responder.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new FirstResponderEffect(), TargetController.YOU, false
+                new FirstResponderEffect()
         ));
     }
 
@@ -84,7 +84,7 @@ class FirstResponderEffect extends OneShotEffect {
         player.moveCards(permanent, Zone.HAND, source, game);
         int power = permanent.getPower().getValue();
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (power < 1 || sourcePermanent == null) {
+        if (power > 0 && sourcePermanent != null) {
             sourcePermanent.addCounters(CounterType.P1P1.createInstance(power), source, game);
         }
         return true;

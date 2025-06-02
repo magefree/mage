@@ -28,11 +28,11 @@ public final class SharedFate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
         // If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new SharedFateReplacementEffect()));
 
         // Each player may look at and play cards they exiled with Shared Fate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFatePlayEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateLookEffect()));
+        this.addAbility(new SimpleStaticAbility(new SharedFatePlayEffect()));
+        this.addAbility(new SimpleStaticAbility(new SharedFateLookEffect()));
     }
 
     private SharedFate(final SharedFate card) {

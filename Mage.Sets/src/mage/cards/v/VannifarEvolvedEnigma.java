@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.keyword.ManifestEffect;
@@ -46,7 +46,7 @@ public final class VannifarEvolvedEnigma extends CardImpl {
         // At the beginning of combat on your turn, choose one --
         // * Cloak a card from your hand.
         // * Put a +1/+1 counter on each colorless creature you control.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new VannifarCloakAbility(), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new VannifarCloakAbility());
         ability.addMode(new Mode(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)));
         this.addAbility(ability);
     }

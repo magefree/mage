@@ -77,7 +77,6 @@ enum GuardianScalelordPredicate implements ObjectSourcePlayerPredicate<Card> {
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         return Optional
                 .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
                 .map(p -> input.getObject().getManaValue() <= p)

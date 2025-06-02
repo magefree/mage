@@ -1,5 +1,3 @@
-
-
 package mage.game.turn;
 
 import mage.constants.TurnPhase;

@@ -46,7 +46,7 @@ public final class MarkOfSakiko extends CardImpl {
         // Enchanted creature has "Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as steps and phases end."
         Effect effect = new GainAbilityAttachedEffect(new MarkOfSakikoTriggeredAbility(), AttachmentType.AURA);
         effect.setText("Enchanted creature has \"Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as steps and phases end.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

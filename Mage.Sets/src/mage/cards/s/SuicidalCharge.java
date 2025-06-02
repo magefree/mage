@@ -26,7 +26,7 @@ public final class SuicidalCharge extends CardImpl {
 
 
         // Sacrifice Suicidal Charge: Creatures your opponents control get -1/-1 until end of turn. Those creatures attack this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-1, -1, Duration.EndOfTurn), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostOpponentsEffect(-1, -1, Duration.EndOfTurn), new SacrificeSourceCost());
         ability.addEffect(new SuicidalChargeEffect());
         this.addAbility(ability);
         

@@ -35,7 +35,7 @@ public final class HazardTrooper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Trooper creatures you control have intimidate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IntimidateAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(IntimidateAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
 
     }
 

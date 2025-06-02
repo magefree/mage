@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.Mana;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -58,10 +58,11 @@ public final class ArniSlaysTheTroll extends CardImpl {
 
         // III — You gain life equal to the greatest power among creatures you control.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
-                new GainLifeEffect(GreatestPowerAmongControlledCreaturesValue.instance,
+                new GainLifeEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES,
                         "You gain life equal to the greatest power among creatures you control"
                 )
         );
+        sagaAbility.addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
         this.addAbility(sagaAbility);
     }
 

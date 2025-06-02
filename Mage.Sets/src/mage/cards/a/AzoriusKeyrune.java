@@ -30,7 +30,7 @@ public final class AzoriusKeyrune extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {W}{U}: Azorius Keyrune becomes a 2/2 white and blue Bird artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(2, 2, "2/2 white and blue Bird artifact creature with flying")
                         .withColor("WU")
                         .withSubType(SubType.BIRD)

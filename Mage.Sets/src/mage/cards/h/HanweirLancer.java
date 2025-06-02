@@ -32,7 +32,7 @@ public final class HanweirLancer extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Hanweir Lancer is paired with another creature, both creatures have first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(FirstStrikeAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(FirstStrikeAbility.getInstance(), ruleText)));
     }
 
     private HanweirLancer(final HanweirLancer card) {

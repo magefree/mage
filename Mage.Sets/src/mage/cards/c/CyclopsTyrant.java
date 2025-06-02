@@ -37,7 +37,7 @@ public final class CyclopsTyrant extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
 
         // Cyclops Tyrant can't block creatures with power 2 or less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockCreaturesSourceEffect(filter)));
     }
 
     private CyclopsTyrant(final CyclopsTyrant card) {

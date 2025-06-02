@@ -37,7 +37,7 @@ public final class HarvestriteHost extends CardImpl {
         );
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(
                 2, new DrawCardSourceControllerEffect(1)
-        ));
+        ).setText("Then draw a card if this is the second time this ability has resolved this turn"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability, new AbilityResolvedWatcher());
     }

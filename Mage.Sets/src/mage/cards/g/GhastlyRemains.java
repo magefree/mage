@@ -1,8 +1,8 @@
-
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AmplifyEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -14,8 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -36,7 +34,9 @@ public final class GhastlyRemains extends CardImpl {
         this.addAbility(new AmplifyAbility(AmplifyEffect.AmplifyFactor.Amplify1));
 
         // At the beginning of your upkeep, if Ghastly Remains is in your graveyard, you may pay {B}{B}{B}. If you do, return Ghastly Remains to your hand.
-        this.addAbility(new GhastlyRemainsTriggeredAbility());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
+                TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return it to your hand"), new ManaCostsImpl<>("{B}{B}{B}")),
+                false).withInterveningIf(SourceInGraveyardCondition.instance));
 
     }
 
@@ -48,35 +48,4 @@ public final class GhastlyRemains extends CardImpl {
     public GhastlyRemains copy() {
         return new GhastlyRemains(this);
     }
-}
-
-class GhastlyRemainsTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
-
-    GhastlyRemainsTriggeredAbility() {
-        super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{B}{B}{B}")), TargetController.YOU, false);
-    }
-
-    private GhastlyRemainsTriggeredAbility(final GhastlyRemainsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GhastlyRemainsTriggeredAbility copy() {
-        return new GhastlyRemainsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        Player controller = game.getPlayer(controllerId);
-        if (controller != null && controller.getGraveyard().contains(sourceId)) {
-            return super.checkInterveningIfClause(game);
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of your upkeep, if {this} is in your graveyard, you may pay {B}{B}{B}. If you do, return {this} to your hand.";
-    }
-
 }

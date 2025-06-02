@@ -80,7 +80,7 @@ class CullingRitualEffect extends OneShotEffect {
         }
         int black = player.getAmount(
                 0, counter, counter + " permanents were destroyed, " +
-                        "choose the amount of black mana to produce (the rest will be green)", game
+                        "choose the amount of black mana to produce (the rest will be green)", source, game
         );
         Mana mana = new Mana(ManaType.BLACK, black);
         if (black < counter) {

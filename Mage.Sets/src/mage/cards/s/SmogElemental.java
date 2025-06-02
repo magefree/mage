@@ -35,7 +35,7 @@ public final class SmogElemental extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Creatures with flying your opponents control get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1,-1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-1,-1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private SmogElemental(final SmogElemental card) {

@@ -24,9 +24,9 @@ public final class InvasionPlans extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // All creatures block each turn if able. 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
+        this.addAbility(new SimpleStaticAbility(new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
         // The attacking player chooses how each creature blocks each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InvasionPlansEffect()));
+        this.addAbility(new SimpleStaticAbility(new InvasionPlansEffect()));
     }
 
     private InvasionPlans(final InvasionPlans card) {

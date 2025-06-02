@@ -1,6 +1,6 @@
 package mage.cards.e;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
@@ -35,13 +35,12 @@ public final class EmergentHaunting extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn and Emergent Haunting isn't a creature, it becomes a 3/3 Spirit creature with flying in addition to its other types.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new BecomesCreatureSourceEffect(
+                TargetController.YOU, new BecomesCreatureSourceEffect(
                         new CreatureToken(3, 3, "3/3 Spirit creature with flying in addition to its other types")
                                 .withSubType(SubType.SPIRIT).withAbility(FlyingAbility.getInstance()),
                         null, Duration.WhileOnBattlefield
                 ),
-                TargetController.YOU, condition, false
+                false, condition
         ).withRuleTextReplacement(true).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
 
         // {2}{U}: Surveil 1.

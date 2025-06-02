@@ -29,7 +29,7 @@ public final class ElephantGraveyard extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Regenerate target Elephant.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

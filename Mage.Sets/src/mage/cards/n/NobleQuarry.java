@@ -36,14 +36,14 @@ public final class NobleQuarry extends CardImpl {
         // All creatures able to block Noble Quarry or enchanted creature do so.
         Effect effect = new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield);
         effect.setText("All creatures able to block Noble Quarry");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new MustBeBlockedByAllAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("or enchanted creature do so");
         ability.addEffect(effect);
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield)));
     }
 
     private NobleQuarry(final NobleQuarry card) {

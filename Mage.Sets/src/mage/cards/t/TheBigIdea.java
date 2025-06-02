@@ -43,12 +43,12 @@ public final class TheBigIdea extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{B/R}{B/R}, {T}: Roll a six-sided dice. Create a number of 1/1 red Brainiac creature tokens equal to the result.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheBigIdeaEffect(), new ManaCostsImpl<>("{2}{B/R}{B/R}"));
+        Ability ability = new SimpleActivatedAbility(new TheBigIdeaEffect(), new ManaCostsImpl<>("{2}{B/R}{B/R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // Tap three untapped Brainiacs you control: The next time you would roll a six-sided die, instead roll two six-sided dice and use the total of those results.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheBigIdeaReplacementEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(new TheBigIdeaReplacementEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
     }
 
     private TheBigIdea(final TheBigIdea card) {

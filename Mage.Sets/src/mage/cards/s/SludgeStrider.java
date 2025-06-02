@@ -61,6 +61,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
     public SludgeStriderTriggeredAbility() {
         // setting optional = false because DoIfCostPaid already asks the player
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SludgeStriderEffect(), new GenericManaCost(1)), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
@@ -69,7 +70,8 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD || event.getType() == GameEvent.EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override

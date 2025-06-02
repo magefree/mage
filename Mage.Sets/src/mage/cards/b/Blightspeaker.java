@@ -41,12 +41,12 @@ public final class Blightspeaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target player loses 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
         // {4}, {tap}: Search your library for a Rebel permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
-        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false),
                 new ManaCostsImpl<>("{4}"));
         ability2.addCost(new TapSourceCost());

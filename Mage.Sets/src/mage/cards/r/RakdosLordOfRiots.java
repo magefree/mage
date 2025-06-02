@@ -41,7 +41,7 @@ public final class RakdosLordOfRiots extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RakdosLordOfRiotsCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new RakdosLordOfRiotsCostReductionEffect()));
     }
 
     private RakdosLordOfRiots(final RakdosLordOfRiots card) {

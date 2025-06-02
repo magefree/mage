@@ -1,16 +1,16 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.permanent.token.SaprolingToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class FungalSprouting extends CardImpl {
@@ -18,8 +18,9 @@ public final class FungalSprouting extends CardImpl {
     public FungalSprouting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
-        // create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), GreatestPowerAmongControlledCreaturesValue.instance));
+        // Create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES));
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private FungalSprouting(final FungalSprouting card) {

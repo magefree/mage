@@ -1,6 +1,6 @@
 package mage.cards.d;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ThresholdCondition;
@@ -39,10 +39,8 @@ public final class DecayingSoil extends CardImpl {
 
         // At the beginning of your upkeep, exile a card from your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new ExileFromZoneTargetEffect(Zone.GRAVEYARD, false)
-                        .setText("exile a card from your graveyard"),
-                TargetController.YOU, false, true
+                        .setText("exile a card from your graveyard")
         ));
 
         // Threshold - As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."

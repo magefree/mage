@@ -34,7 +34,7 @@ public final class NimShrieker extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
     private NimShrieker(final NimShrieker card) {

@@ -33,7 +33,7 @@ public final class TundraKavu extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Target land becomes a Plains or an Island until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TundraKavuEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TundraKavuEffect(), new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

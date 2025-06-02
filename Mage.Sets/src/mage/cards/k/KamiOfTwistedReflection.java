@@ -26,7 +26,7 @@ public final class KamiOfTwistedReflection extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

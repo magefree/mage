@@ -29,12 +29,12 @@ public final class PhyrexianColossus extends CardImpl {
         this.toughness = new MageInt(8);
 
         // {this} doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // Pay 8 life: Untap {this}.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new UntapSourceEffect(), new PayLifeCost(8)));
         // {this} can't be blocked except by three or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByOneEffect(3)));
         
     }
 

@@ -41,7 +41,7 @@ public final class EverythingamajigE extends CardImpl {
 
         // Zuran Orb
         // Sacrifice a land: You gain 2 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(2), new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
 
         // Ashnod's Altar
         // Sacrifice a creature: Add {C}{C} to your mana pool.
@@ -52,7 +52,7 @@ public final class EverythingamajigE extends CardImpl {
 
         // Urza's Hot Tub
         // 2, Discard a card: Search your library for a card that shares a complete word in its name with the name of the discarded card, reveal it, put it into your hand, then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasHotTubEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new UrzasHotTubEffect(), new GenericManaCost(2));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         this.addAbility(ability);
     }

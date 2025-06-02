@@ -21,7 +21,7 @@ public final class CumberStone extends CardImpl {
 
 
         // Creatures your opponents control get -1/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-1, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostOpponentsEffect(-1, 0, Duration.WhileOnBattlefield)));
     }
 
     private CumberStone(final CumberStone card) {

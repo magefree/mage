@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
-import mage.abilities.common.OneOrMoreDealDamageTriggeredAbility;
+import mage.abilities.common.OneOrMoreDamagePlayerTriggeredAbility;
 import mage.abilities.effects.keyword.ExploreSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PartnerAbility;
@@ -38,7 +38,7 @@ public final class FranciscoFowlMarauder extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // Whenever one or more Pirates you control deal damage to a player, Francisco explores.
-        this.addAbility(new OneOrMoreDealDamageTriggeredAbility(
+        this.addAbility(new OneOrMoreDamagePlayerTriggeredAbility(
                 new ExploreSourceEffect(false, "{this}"),
                 filter, false, true
         ));

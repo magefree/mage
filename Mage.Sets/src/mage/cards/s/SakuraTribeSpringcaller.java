@@ -2,13 +2,12 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.mana.UntilEndOfTurnManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -26,8 +25,8 @@ public final class SakuraTribeSpringcaller extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, add {G}. Until end of turn, you don't lose this mana as steps and phases end.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UntilEndOfTurnManaEffect(Mana.GreenMana(1)),
-                TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UntilEndOfTurnManaEffect(Mana.GreenMana(1))
+        ));
     }
 
     private SakuraTribeSpringcaller(final SakuraTribeSpringcaller card) {

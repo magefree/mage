@@ -39,7 +39,7 @@ public final class WingedTempleOfOrazca extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // {1}{G}{U}, {T}: Target creature you control gains flying and gets +X/+X until end of turn, where X is its power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WingedTempleOfOrazcaEffect(), new ManaCostsImpl<>("{1}{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(new WingedTempleOfOrazcaEffect(), new ManaCostsImpl<>("{1}{G}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

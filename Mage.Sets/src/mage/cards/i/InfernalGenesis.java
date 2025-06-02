@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.permanent.token.MinionToken2;
+import mage.game.permanent.token.MinionToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -27,7 +27,7 @@ public final class InfernalGenesis extends CardImpl {
 
         // At the beginning of each player's upkeep, that player puts the top card of their library into their graveyard.
         // Then they create X 1/1 black Minion creature tokens, where X is that card's converted mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalGenesisEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new InfernalGenesisEffect(), false));
     }
 
     private InfernalGenesis(final InfernalGenesis card) {
@@ -42,7 +42,7 @@ public final class InfernalGenesis extends CardImpl {
 
 class InfernalGenesisEffect extends OneShotEffect {
 
-    private static final Token token = new MinionToken2();
+    private static final Token token = new MinionToken();
 
     InfernalGenesisEffect() {
         super(Outcome.PutCreatureInPlay);

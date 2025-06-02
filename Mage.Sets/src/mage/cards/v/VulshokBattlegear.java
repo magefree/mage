@@ -24,7 +24,7 @@ public final class VulshokBattlegear extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add(SubType.EQUIPMENT);
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 3)));
     }
 
     private VulshokBattlegear(final VulshokBattlegear card) {

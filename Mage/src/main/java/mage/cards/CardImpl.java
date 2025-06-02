@@ -4,12 +4,10 @@ import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
-import mage.abilities.keyword.ChangelingAbility;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.ReconfigureAbility;
-import mage.abilities.keyword.SunburstAbility;
+import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.mock.MockableCard;
 import mage.cards.repository.PluginClassloaderRegistery;
@@ -44,8 +42,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected Rarity rarity;
     protected Class<? extends Card> secondSideCardClazz;
     protected Class<? extends Card> meldsWithClazz;
-    protected Class<? extends Card> meldsToClazz;
-    protected Card meldsToCard;
+    protected Class<? extends MeldCard> meldsToClazz;
+    protected MeldCard meldsToCard;
     protected Card secondSideCard;
     protected boolean nightCard;
     protected SpellAbility spellAbility;
@@ -343,6 +341,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
             }
         }
+
+        // rules fix: workaround to fix "When {this} enters" into "When this xxx enters"
+        if (EntersBattlefieldTriggeredAbility.ENABLE_TRIGGER_PHRASE_AUTO_FIX) {
+            if (ability instanceof TriggeredAbility) {
+                TriggeredAbility triggeredAbility = ((TriggeredAbility) ability);
+                if (triggeredAbility.getTriggerPhrase() != null && triggeredAbility.getTriggerPhrase().startsWith("When {this} enters")) {
+                    // there are old sets with old oracle, but it's ok for newer sets, so keep that rules fix
+                    // see https://github.com/magefree/mage/issues/12791
+                    String etbDescription = EntersBattlefieldTriggeredAbility.getThisObjectDescription(this);
+                    triggeredAbility.setTriggerPhrase(triggeredAbility.getTriggerPhrase().replace("{this}", etbDescription));
+                }
+            }
+        }
     }
 
     protected void addAbility(Ability ability, Watcher watcher) {
@@ -516,8 +527,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         }
                     }
 
-                    if (stackObject == null && (this instanceof AdventureCard)) {
-                        stackObject = game.getStack().getSpell(((AdventureCard) this).getSpellCard().getId(), false);
+                    if (stackObject == null && (this instanceof CardWithSpellOption)) {
+                        stackObject = game.getStack().getSpell(((CardWithSpellOption) this).getSpellCard().getId(), false);
                     }
 
                     if (stackObject == null) {
@@ -694,14 +705,14 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public Card getMeldsToCard() {
+    public MeldCard getMeldsToCard() {
         // init card on first call
         if (meldsToClazz == null && meldsToCard == null) {
             return null;
         }
 
         if (meldsToCard == null) {
-            meldsToCard = initSecondSideCard(meldsToClazz);
+            meldsToCard = (MeldCard) initSecondSideCard(meldsToClazz);
         }
 
         return meldsToCard;
@@ -788,7 +799,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     game.fireEvent(addedOneEvent);
                 } else {
                     finalAmount--;
-                    returnCode = false;
+                    returnCode = false; // restricted by ADD_COUNTER
                 }
             }
             if (finalAmount > 0) {
@@ -796,28 +807,33 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 addedAllEvent.setFlag(isEffectFlag);
                 game.fireEvent(addedAllEvent);
             } else {
+                // TODO: must return true, cause it's not replaced here (rework Fangs of Kalonia and Spectacular Showdown)
+                // example from Devoted Druid
+                // If you can put counters on it, but that is modified by an effect (such as that of Vizier of Remedies),
+                // you can activate the ability even if paying the cost causes no counters to be put on Devoted Druid.
+                // (2018-12-07)
                 returnCode = false;
             }
         } else {
-            returnCode = false;
+            returnCode = false; // restricted by ADD_COUNTERS
         }
         return returnCode;
     }
 
     @Override
-    public void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
+    public int removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage) {
 
         if (amount <= 0) {
-            return;
+            return 0;
         }
 
         if (getCounters(game).getCount(counterName) <= 0) {
-            return;
+            return 0;
         }
 
         GameEvent removeCountersEvent = new RemoveCountersEvent(counterName, this, source, amount, isDamage);
         if (game.replaceEvent(removeCountersEvent)) {
-            return;
+            return 0;
         }
 
         int finalAmount = 0;
@@ -840,13 +856,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         GameEvent event = new CountersRemovedEvent(counterName, this, source, finalAmount, isDamage);
         game.fireEvent(event);
+        return finalAmount;
     }
 
     @Override
-    public void removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
-        if (counter != null) {
-            removeCounters(counter.getName(), counter.getCount(), source, game, isDamage);
-        }
+    public int removeCounters(Counter counter, Ability source, Game game, boolean isDamage) {
+        return counter != null ? removeCounters(counter.getName(), counter.getCount(), source, game, isDamage) : 0;
     }
 
     @Override
@@ -902,6 +917,32 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode) {
+        for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
+            if ((!attachment.hasSubtype(SubType.AURA, game) || ability.removesAuras())
+                    && (!attachment.hasSubtype(SubType.EQUIPMENT, game) || ability.removesEquipment())
+                    && !attachment.getId().equals(ability.getAuraIdNotToBeRemoved())
+                    && !ability.canTarget(attachment, game)) {
+                return !ability.getDoesntRemoveControlled() || Objects.equals(getControllerOrOwnerId(), game.getControllerId(attachment.getId()));
+            }
+        }
+
+        boolean canAttach = true;
+        Permanent attachmentPermanent = game.getPermanent(attachment.getId());
+        // If attachment is an aura, ensures this permanent can still be legally enchanted, according to the enchantment's Enchant ability
+        if (attachment.hasSubtype(SubType.AURA, game)
+                && attachmentPermanent != null
+                && attachmentPermanent.getSpellAbility() != null
+                && !attachmentPermanent.getSpellAbility().getTargets().isEmpty()) {
+            // Line of code below functionally gets the target of the aura's Enchant ability, then compares to this permanent. Enchant improperly implemented in XMage, see #9583
+            // Note: stillLegalTarget used exclusively to account for Dream Leash. Can be made canTarget in the event that that card is rewritten (and "stillLegalTarget" removed from TargetImpl).
+            canAttach = attachmentPermanent.getSpellAbility().getTargets().get(0).copy().withNotTarget(true).stillLegalTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
+        }
+
+        return !canAttach || game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
+    }
+
+    @Override
     public boolean addAttachment(UUID permanentId, Ability source, Game game) {
         if (permanentId == null
                 || this.attachments.contains(permanentId)
@@ -922,6 +963,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         if (attachment.hasSubtype(SubType.FORTIFICATION, game)
                 && (attachment.isCreature(game) || !this.isLand(game))) {
+            return false;
+        }
+        if (this.cantBeAttachedBy(attachment, source, game, false)) {
             return false;
         }
         if (game.replaceEvent(new AttachEvent(objectId, attachment, source))) {

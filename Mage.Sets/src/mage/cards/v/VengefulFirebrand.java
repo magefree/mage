@@ -36,13 +36,13 @@ public final class VengefulFirebrand extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Vengeful Firebrand has haste as long as a Warrior card is in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield),
                 VengefulFirebrandCondition.instance,
                 "{this} has haste as long as a Warrior card is in your graveyard")));
         
         // {R}: Vengeful Firebrand gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private VengefulFirebrand(final VengefulFirebrand card) {

@@ -33,7 +33,7 @@ public final class MysticPenitent extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Threshold - As long as seven or more cards are in your graveyard, Mystic Penitent gets +1/+1 and has flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), ThresholdCondition.instance,
                 "As long as seven or more cards are in your graveyard, {this} gets +1/+1"
         ));

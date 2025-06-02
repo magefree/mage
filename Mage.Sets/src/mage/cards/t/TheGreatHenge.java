@@ -1,12 +1,12 @@
 package mage.cards.t;
 
-import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -18,7 +18,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -34,7 +33,8 @@ public final class TheGreatHenge extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheGreatHengeCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheGreatHengeCostReductionEffect())
+                .addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
 
         // {T}: Add {G}{G}. You gain 2 life.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost());
@@ -73,14 +73,8 @@ class TheGreatHengeCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reductionAmount = game.getBattlefield()
-                .getAllActivePermanents(
-                        StaticFilters.FILTER_PERMANENT_CREATURE, abilityToModify.getControllerId(), game
-                ).stream()
-                .map(Permanent::getPower)
-                .mapToInt(MageInt::getValue)
-                .max()
-                .orElse(0);
+        // TODO: that abilityToModify should be source, but there is currently a bug with that #11166
+        int reductionAmount = GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.calculate(game, abilityToModify, this);
         CardUtil.reduceCost(abilityToModify, Math.max(0, reductionAmount));
         return true;
     }

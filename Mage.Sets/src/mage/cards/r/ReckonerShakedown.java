@@ -7,12 +7,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,15 +44,6 @@ public final class ReckonerShakedown extends CardImpl {
 
 class ReckonerShakedownEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("creature or Vehicle you control");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
-
     ReckonerShakedownEffect() {
         super(Outcome.Benefit);
         staticText = "target opponent reveals their hand. You may choose a nonland card from it. " +
@@ -88,10 +75,10 @@ class ReckonerShakedownEffect extends OneShotEffect {
             player.discard(card, false, source, game);
             return true;
         }
-        if (!game.getBattlefield().contains(filter, source, game, 1)) {
+        if (!game.getBattlefield().contains(StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_VEHICLE, source, game, 1)) {
             return true;
         }
-        TargetPermanent targetPermanent = new TargetPermanent(filter);
+        TargetPermanent targetPermanent = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_VEHICLE);
         targetPermanent.withNotTarget(true);
         controller.choose(Outcome.BoostCreature, targetPermanent, source, game);
         Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());

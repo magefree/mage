@@ -1,8 +1,7 @@
 package mage.cards.k;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +27,7 @@ public final class Karma extends CardImpl {
 
 
         // At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KarmaDamageTargetEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new KarmaDamageTargetEffect(), false));
     }
 
     private Karma(final Karma card) {

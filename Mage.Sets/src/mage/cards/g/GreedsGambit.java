@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.*;
@@ -9,7 +9,6 @@ import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.Bat21Token;
 
@@ -30,7 +29,7 @@ public final class GreedsGambit extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your end step, you discard a card, lose 2 life, and sacrifice a creature.
-        ability = new BeginningOfEndStepTriggeredAbility(new DiscardControllerEffect(1).setText("you discard a card"), TargetController.YOU, false);
+        ability = new BeginningOfEndStepTriggeredAbility(new DiscardControllerEffect(1).setText("you discard a card"));
         ability.addEffect(new LoseLifeSourceControllerEffect(2).setText(", lose 2 life"));
         ability.addEffect(new SacrificeControllerEffect(
                 StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, ""

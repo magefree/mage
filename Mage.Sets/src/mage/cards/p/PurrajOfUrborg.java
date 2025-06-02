@@ -46,7 +46,6 @@ public final class PurrajOfUrborg extends CardImpl {
 
         // Purraj of Urborg has first strike as long as it's attacking.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()),
                         SourceAttackingCondition.instance,

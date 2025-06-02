@@ -27,7 +27,7 @@ public final class HeapDoll extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Heap Doll: Exile target card from a graveyard.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new SacrificeSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new ExileTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
     }

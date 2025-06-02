@@ -40,7 +40,7 @@ public final class NoviceKnight extends CardImpl {
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 EnchantedOrEquippedSourceCondition.instance);
         effect.setText("As long as {this} is enchanted or equipped, it can attack as though it didn't have defender");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private NoviceKnight(final NoviceKnight card) {

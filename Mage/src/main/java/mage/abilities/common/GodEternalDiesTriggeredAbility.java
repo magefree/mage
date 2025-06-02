@@ -21,6 +21,7 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
 
     public GodEternalDiesTriggeredAbility() {
         super(Zone.ALL, null, true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private GodEternalDiesTriggeredAbility(GodEternalDiesTriggeredAbility ability) {
@@ -47,22 +48,6 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        Permanent sourcePermanent = null;
-        if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
-            sourcePermanent = game.getPermanent(getSourceId());
-        } else {
-            if (game.checkShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
-                sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
-            }
-        }
-        if (sourcePermanent == null) {
-            return false;
-        }
-        return hasSourceObjectAbility(game, sourcePermanent, event);
     }
 
     @Override

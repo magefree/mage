@@ -1,6 +1,6 @@
 package mage.game.command.emblems;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.TargetController;
@@ -21,7 +21,7 @@ public final class ChandraRoaringFlameEmblem extends Emblem {
         super("Emblem Chandra");
         Effect effect = new DamageTargetEffect(3);
         effect.setText("this emblem deals 3 damage to you");
-        this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, effect, TargetController.YOU, false, true));
+        this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, TargetController.YOU, effect, false));
     }
 
     private ChandraRoaringFlameEmblem(final ChandraRoaringFlameEmblem card) {

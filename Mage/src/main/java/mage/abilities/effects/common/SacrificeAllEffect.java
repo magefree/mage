@@ -91,9 +91,7 @@ public class SacrificeAllEffect extends OneShotEffect {
                 continue;
             }
             TargetSacrifice target = new TargetSacrifice(numTargets, filter);
-            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
-                player.choose(Outcome.Sacrifice, target, source, game);
-            }
+            target.choose(Outcome.Sacrifice, player.getId(), source, game);
             perms.addAll(target.getTargets());
         }
 
@@ -138,6 +136,9 @@ public class SacrificeAllEffect extends OneShotEffect {
                 sb.append(CardUtil.numberToText(amount.toString(), "a"));
                 sb.append(' ');
                 sb.append(filter.getMessage());
+        }
+        if (!filter.getMessage().contains("with")) {
+            sb.append(" of their choice");
         }
         staticText = sb.toString();
     }

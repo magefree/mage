@@ -38,7 +38,6 @@ public final class VolrathTheFallen extends CardImpl {
         effect.setText("{this} gets +X/+X until end of turn, where X is the discarded card's mana value");
 
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 effect,
                 new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new DiscardCardCost(StaticFilters.FILTER_CARD_CREATURE));

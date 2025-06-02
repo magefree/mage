@@ -31,7 +31,7 @@ public final class ConvulsingLicid extends CardImpl {
         this.addAbility(new LicidAbility(new ColoredManaCost(ColoredManaSymbol.R), new ColoredManaCost(ColoredManaSymbol.R)));
         
         // Enchanted creature can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttachedEffect(AttachmentType.AURA)));
     }
 
     private ConvulsingLicid(final ConvulsingLicid card) {

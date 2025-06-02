@@ -37,7 +37,7 @@ public final class MagmaSliver extends CardImpl {
 
         // All Slivers have "{tap}: Target Sliver creature gets +X/+0 until end of turn, 
         // where X is the number of Slivers on the battlefield."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(new PermanentsOnBattlefieldCount(
                         StaticFilters.FILTER_PERMANENT_ALL_SLIVERS),
                         StaticValue.get(0), Duration.EndOfTurn),
@@ -49,7 +49,7 @@ public final class MagmaSliver extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_ALL_SLIVERS);
         effect.setText("All Slivers have \"{T}: Target Sliver creature gets +X/+0 until end of turn, "
                 + "where X is the number of Slivers on the battlefield.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 effect));
     }
 

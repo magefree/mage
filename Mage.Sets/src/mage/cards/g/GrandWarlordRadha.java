@@ -73,7 +73,7 @@ class GrandWarlordRadhaEffect extends OneShotEffect {
         if (controller == null || amount < 1) {
             return false;
         }
-        List<Integer> manaList = controller.getMultiAmount(this.outcome, Arrays.asList("R", "G"), 0, amount, MultiAmountType.MANA, game);
+        List<Integer> manaList = controller.getMultiAmount(this.outcome, Arrays.asList("R", "G"), 0, amount, amount, MultiAmountType.MANA, game);
 
         Mana mana = new Mana();
         mana.add(new Mana(ColoredManaSymbol.R, manaList.get(0)));

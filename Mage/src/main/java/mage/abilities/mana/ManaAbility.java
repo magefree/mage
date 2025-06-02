@@ -1,13 +1,13 @@
 package mage.abilities.mana;
 
-import java.util.List;
-import java.util.Set;
 import mage.Mana;
 import mage.constants.ManaType;
 import mage.game.Game;
 
+import java.util.List;
+import java.util.Set;
+
 /**
- *
  * @author LevelX2
  */
 public interface ManaAbility {
@@ -20,7 +20,7 @@ public interface ManaAbility {
      * @return
      */
     List<Mana> getNetMana(Game game);
-    
+
     /**
      * Used to check the possible mana production to determine which spells
      * and/or abilities can be used. (player.getPlayable()).
@@ -28,7 +28,7 @@ public interface ManaAbility {
      *
      * @param game
      * @param possibleManaInPool The possible mana already produced by other sources for this calculation option
-     * @return 
+     * @return
      */
     List<Mana> getNetMana(Game game, Mana possibleManaInPool);
 
@@ -60,7 +60,12 @@ public interface ManaAbility {
      * @return
      */
     boolean isPoolDependant();
-    
+
+    /**
+     * How many more times can this ability be activated this turn
+     */
+    int getMaxMoreActivationsThisTurn(Game game);
+
     ManaAbility setPoolDependant(boolean pooleDependant);
-    
+
 }

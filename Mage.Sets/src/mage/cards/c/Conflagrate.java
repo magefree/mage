@@ -24,7 +24,7 @@ public final class Conflagrate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
 
         // Conflagrate deals X damage divided as you choose among any number of targets.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(GetXValue.instance));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(GetXValue.instance));
 
         // Flashback-{R}{R}, Discard X cards.

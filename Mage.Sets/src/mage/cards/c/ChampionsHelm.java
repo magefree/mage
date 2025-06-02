@@ -28,10 +28,10 @@ public final class ChampionsHelm extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
         
         // As long as equipped creature is legendary, it has hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT), 
                 new EquippedHasSupertypeCondition(SuperType.LEGENDARY), staticText)));
         

@@ -82,7 +82,7 @@ public interface Card extends MageObject, Ownerable {
         return null;
     }
 
-    default Card getMeldsToCard() {
+    default MeldCard getMeldsToCard() {
         return null;
     }
 
@@ -181,19 +181,21 @@ public interface Card extends MageObject, Ownerable {
      * Remove {@param amount} counters of the specified kind.
      *
      * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     * @return amount of counters removed
      */
-    void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage);
+    int removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage);
 
-    default void removeCounters(Counter counter, Ability source, Game game) {
-        removeCounters(counter, source, game, false);
+    default int removeCounters(Counter counter, Ability source, Game game) {
+        return removeCounters(counter, source, game, false);
     }
 
     /**
      * Remove all counters of any kind.
      *
      * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     * @return amount of counters removed
      */
-    void removeCounters(Counter counter, Ability source, Game game, boolean isDamage);
+    int removeCounters(Counter counter, Ability source, Game game, boolean isDamage);
 
     /**
      * Remove all counters of any kind.
@@ -247,6 +249,16 @@ public interface Card extends MageObject, Ownerable {
     FilterMana getColorIdentity();
 
     List<UUID> getAttachments();
+
+    /**
+     * @param attachment can be any object: card, permanent, token
+     * @param source     can be null for default checks like state base
+     * @param game
+     * @param silentMode - use it to ignore warning message for users (e.g. for
+     *                   checking only)
+     * @return
+     */
+    boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode);
 
     boolean addAttachment(UUID permanentId, Ability source, Game game);
 

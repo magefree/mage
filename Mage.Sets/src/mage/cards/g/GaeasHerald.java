@@ -31,7 +31,7 @@ public final class GaeasHerald extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Creature spells can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCounterEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantCounterEffect()));
     }
 
     private GaeasHerald(final GaeasHerald card) {

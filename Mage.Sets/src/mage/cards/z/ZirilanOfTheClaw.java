@@ -24,6 +24,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class ZirilanOfTheClaw extends CardImpl {
 
         // {1}{R}{R}, {tap}: Search your library for a Dragon permanent card and put that card onto the battlefield. Then shuffle your library.
         // That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZirilanOfTheClawEffect(), new ManaCostsImpl<>("{1}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(new ZirilanOfTheClawEffect(), new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -83,7 +84,7 @@ class ZirilanOfTheClawEffect extends OneShotEffect {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    Permanent permanent = game.getPermanent(card.getId());
+                    Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                     if (permanent != null) {
                         // gains haste
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);

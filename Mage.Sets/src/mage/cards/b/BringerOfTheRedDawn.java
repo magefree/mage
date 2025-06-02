@@ -4,7 +4,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -38,7 +38,7 @@ public final class BringerOfTheRedDawn extends CardImpl {
         // At the beginning of your upkeep, you may untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
         Effect effect = new UntapTargetEffect();
         effect.setText("untap target creature");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, true);
         
         effect = new GainControlTargetEffect(Duration.EndOfTurn);
         effect.setText("and gain control of it until end of turn");

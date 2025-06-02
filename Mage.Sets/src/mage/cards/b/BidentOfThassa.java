@@ -36,7 +36,7 @@ public final class BidentOfThassa extends CardImpl {
                 true, SetTargetPointer.NONE, true
         ));
         // {1}{U}, {T}: Creatures your opponents control attack this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES,Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES,Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

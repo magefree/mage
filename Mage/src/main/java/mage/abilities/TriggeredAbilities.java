@@ -209,7 +209,7 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
         if (ability.isInUseableZone(game, object, event)) {
             if (event == null || !game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
                 if (object != null) {
-                    boolean controllerSet = false;
+                    boolean controllerSet = false; // TODO: wtf?!?!? Need rework whole "set" logic here
                     Set<UUID> eventTargets = CardUtil.getEventTargets(event);
                     if (ability.getZone() != Zone.COMMAND
                             && event != null
@@ -244,7 +244,8 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
                     // event == null - state based triggers like StateTriggeredAbility, must be ignored for number event
                     if (event == null || !game.replaceEvent(numberOfTriggersEvent, ability)) {
-                        int numTriggers = Integer.min(ability.getRemainingTriggersLimitEachTurn(game), numberOfTriggersEvent.getAmount());
+                        int limit = Integer.min(ability.getRemainingTriggersLimitEachGame(game), ability.getRemainingTriggersLimitEachTurn(game));
+                        int numTriggers = Integer.min(limit, numberOfTriggersEvent.getAmount());
                         for (int i = 0; i < numTriggers; i++) {
                             if (this.enableIntegrityLogs) {
                                 logger.info("trigger will be USED: " + ability);

@@ -18,10 +18,8 @@ import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.filter.FilterMana;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
-import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -44,7 +42,9 @@ public class StubPlayer extends PlayerImpl {
     public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         if (target instanceof TargetPlayer) {
             for (Player player : game.getPlayers().values()) {
-                if (player.getId().equals(getId()) && target.canTarget(getId(), game)) {
+                if (player.getId().equals(getId())
+                        && target.canTarget(getId(), game)
+                        && !target.contains(getId())) {
                     target.add(player.getId(), game);
                     return true;
                 }
@@ -156,13 +156,8 @@ public class StubPlayer extends PlayerImpl {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        return 0;
-    }
-
-    @Override
-    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
-        return 0;
+    public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
+        return min;
     }
 
     @Override
@@ -191,28 +186,13 @@ public class StubPlayer extends PlayerImpl {
     }
 
     @Override
-    public UUID chooseAttackerOrder(List<Permanent> attacker, Game game) {
-        return null;
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
-        return null;
-    }
-
-    @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
-
-    }
-
-    @Override
-    public int getAmount(int min, int max, String message, Game game) {
-        return 0;
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
+        return min;
     }
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-                                                                 int min, int max, MultiAmountType type, Game game) {
+                                                                 int totalMin, int totalMax, MultiAmountType type, Game game) {
         return null;
     }
 

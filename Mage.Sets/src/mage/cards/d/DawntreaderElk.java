@@ -31,7 +31,7 @@ public final class DawntreaderElk extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}, Sacrifice Dawntreader Elk: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new SacrificeSourceCost());

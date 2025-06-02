@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -41,8 +41,8 @@ public final class GwaihirGreatestOfTheEagles extends CardImpl {
         // At the beginning of each end step, if you gained 3 or more life this turn, create a 3/3 white Bird creature token
         // with flying and "Whenever this creature attacks, target attacking creature gains flying until end of turn."
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new GwaihirBirdToken()), TargetController.ANY,
-                new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2), false
+                TargetController.ANY, new CreateTokenEffect(new GwaihirBirdToken()),
+                false, new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2)
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 

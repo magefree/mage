@@ -44,7 +44,7 @@ public final class GhosthelmCourier extends CardImpl {
         // You may choose not to untap Ghosthelm Courier during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}{U}, {tap}: Target Wizard creature gets +2/+2 and has shroud for as long as Ghosthelm Courier remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(
             new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.TAPPED,
             "target Wizard creature gets +2/+2"), new ManaCostsImpl<>("{2}{U}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(ShroudAbility.getInstance(),

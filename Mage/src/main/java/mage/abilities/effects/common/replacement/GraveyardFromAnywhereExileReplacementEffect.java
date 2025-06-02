@@ -35,6 +35,7 @@ public class GraveyardFromAnywhereExileReplacementEffect extends ReplacementEffe
     public GraveyardFromAnywhereExileReplacementEffect(Duration duration) {
         this(duration, StaticFilters.FILTER_CARD_A, true, false);
     }
+
     protected GraveyardFromAnywhereExileReplacementEffect(Duration duration, FilterCard filter, boolean onlyYou, boolean tokens) {
         super(duration, Outcome.Exile);
         this.filter = filter;
@@ -43,7 +44,7 @@ public class GraveyardFromAnywhereExileReplacementEffect extends ReplacementEffe
         this.setText();
     }
 
-    private GraveyardFromAnywhereExileReplacementEffect(final GraveyardFromAnywhereExileReplacementEffect effect) {
+    protected GraveyardFromAnywhereExileReplacementEffect(final GraveyardFromAnywhereExileReplacementEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.onlyYou = effect.onlyYou;

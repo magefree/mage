@@ -25,7 +25,8 @@ public final class SultaiScavenger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
     }

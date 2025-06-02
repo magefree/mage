@@ -25,7 +25,7 @@ public final class MarchOfTheMachines extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MarchOfTheMachinesEffect()));
+        this.addAbility(new SimpleStaticAbility(new MarchOfTheMachinesEffect()));
     }
 
     private MarchOfTheMachines(final MarchOfTheMachines card) {
@@ -50,6 +50,8 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
         staticText = "Each noncreature artifact is an artifact creature with power and toughness each equal to its mana value";
         dependendToTypes.add(DependencyType.ArtifactAddingRemoving);
+        
+        dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private MarchOfTheMachinesEffect(final MarchOfTheMachinesEffect effect) {

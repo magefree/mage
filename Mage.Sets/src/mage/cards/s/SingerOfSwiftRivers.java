@@ -49,7 +49,7 @@ public final class SingerOfSwiftRivers extends CardImpl {
         this.addAbility(ability);
 
         // You may cast Merfolk spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)));
     }
 
     private SingerOfSwiftRivers(final SingerOfSwiftRivers card) {

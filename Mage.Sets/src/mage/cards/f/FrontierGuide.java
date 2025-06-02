@@ -30,7 +30,7 @@ public final class FrontierGuide extends CardImpl {
         this.toughness = new MageInt(1);
 
         //{3}{G}, {T}: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new ManaCostsImpl<>("{3}{G}"));
         ability.addCost(new TapSourceCost());

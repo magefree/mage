@@ -25,22 +25,29 @@ public class ExileCardsFromHandAdjuster implements CostAdjuster {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (game.inCheckPlayableState()) {
-            return;
-        }
+    public void reduceCost(Ability ability, Game game) {
         Player player = game.getPlayer(ability.getControllerId());
         if (player == null) {
             return;
         }
+
         int cardCount = player.getHand().count(filter, game);
-        int toExile = cardCount > 0 ? player.getAmount(
-                0, cardCount, "Choose how many " + filter.getMessage() + " to exile", game
-        ) : 0;
-        if (toExile > 0) {
-            ability.addCost(new ExileFromHandCost(new TargetCardInHand(toExile, filter)));
-            CardUtil.reduceCost(ability, 2 * toExile);
+        int reduceCount;
+        if (game.inCheckPlayableState()) {
+            // possible
+            reduceCount = 2 * cardCount;
+        } else {
+            // real - need to choose
+            // TODO: need early target cost instead dialog here
+            int toExile = cardCount == 0 ? 0 : player.getAmount(
+                    0, cardCount, "Choose how many " + filter.getMessage() + " to exile", ability, game
+            );
+            reduceCount = 2 * toExile;
+            if (toExile > 0) {
+                ability.addCost(new ExileFromHandCost(new TargetCardInHand(toExile, filter)));
+            }
         }
+        CardUtil.reduceCost(ability, 2 * reduceCount);
     }
 
     public static final void addAdjusterAndMessage(Card card, FilterCard filter) {

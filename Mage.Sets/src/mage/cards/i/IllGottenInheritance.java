@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -26,8 +26,7 @@ public final class IllGottenInheritance extends CardImpl {
 
         // At the beginning of your upkeep, Ill-Gotten Inheritance deals 1 damage to each opponent and you gain 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new DamagePlayersEffect(1, TargetController.OPPONENT),
-                TargetController.YOU, false
+                new DamagePlayersEffect(1, TargetController.OPPONENT)
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);

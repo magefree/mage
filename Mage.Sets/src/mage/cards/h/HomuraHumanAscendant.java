@@ -111,11 +111,11 @@ class HomurasEssence2 extends TokenImpl {
         color.setRed(true);
         // Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false));
         Effect effect = new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("and have flying");
         ability.addEffect(effect);
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
+        Ability gainedAbility = new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         effect = new GainAbilityControlledEffect(gainedAbility, Duration.WhileOnBattlefield, filter);
         effect.setText("and \"{R}: This creature gets +1/+0 until end of turn.\"");
         ability.addEffect(effect);

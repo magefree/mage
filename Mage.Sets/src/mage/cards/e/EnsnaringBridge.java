@@ -23,7 +23,7 @@ public final class EnsnaringBridge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Creatures with power greater than the number of cards in your hand can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnsnaringBridgeRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new EnsnaringBridgeRestrictionEffect()));
     }
 
     private EnsnaringBridge(final EnsnaringBridge card) {

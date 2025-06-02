@@ -39,10 +39,10 @@ public final class Entangler extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can block any number of creatures.
-        SimpleStaticAbility blockAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,new CanBlockAdditionalCreatureEffect(0));
+        SimpleStaticAbility blockAbility = new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(0));
         Effect effect = new GainAbilityAttachedEffect(blockAbility,AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature can block any number of creatures.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private Entangler(final Entangler card) {

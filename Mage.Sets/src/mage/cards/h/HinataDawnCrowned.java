@@ -117,6 +117,10 @@ final class HinataDawnCrownedEffectUtility
     public static int getTargetCount(Game game, Ability abilityToModify)
     {
         if (game.inCheckPlayableState()) {
+            abilityToModify.getTargets().stream()
+                    .mapToInt(a -> !a.isRequired() ? 0 : a.getMinNumberOfTargets())
+                    .min()
+                    .orElse(0);
             Optional<Integer> max = abilityToModify.getTargets().stream().map(x -> x.getMaxNumberOfTargets()).max(Integer::compare);
             int allPossibleSize = CardUtil.getAllPossibleTargets(abilityToModify, game).size();
             return max.isPresent() ?

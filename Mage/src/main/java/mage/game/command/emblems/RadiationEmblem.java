@@ -1,7 +1,7 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -16,6 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
@@ -31,7 +32,7 @@ public class RadiationEmblem extends Emblem {
         this.frameStyle = FrameStyle.M15_NORMAL;
 
         this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfFirstMainTriggeredAbility(Zone.ALL, new RadiationEffect(), TargetController.YOU, false, false),
+                new BeginningOfFirstMainTriggeredAbility(Zone.ALL, TargetController.YOU, new RadiationEffect(), false),
                 RadiationCondition.instance,
                 "At the beginning of your precombat main phase, if you have any rad counters, "
                         + "mill that many cards. For each nonland card milled this way, you lose 1 life and a rad counter."
@@ -106,8 +107,13 @@ class RadiationEffect extends OneShotEffect {
         Cards milled = player.millCards(amount, source, game);
         int countNonLand = milled.count(StaticFilters.FILTER_CARD_NON_LAND, player.getId(), source, game);
         if (countNonLand > 0) {
-            // TODO: support gaining life instead with [[Strong, the Brutish Thespian]]
-            player.loseLife(countNonLand, game, source, false);
+            GameEvent event = new GameEvent(GameEvent.EventType.RADIATION_GAIN_LIFE, null, source, player.getId(), amount, false);
+            if (game.replaceEvent(event)) {
+                player.gainLife(countNonLand, game, source);
+            } else {
+                player.loseLife(countNonLand, game, source, false);
+            }
+
             player.loseCounters(CounterType.RAD.getName(), countNonLand, source, game);
         }
         return true;

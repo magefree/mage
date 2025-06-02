@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -37,7 +37,7 @@ public final class DreadmawsIre extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())
                 .setText("and gains trample"));
 
-        Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
+        Effect effect = new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE);
         effect.setText("have it deal damage equal to its power to target creature that player controls.");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true);
         ability.addTarget(new TargetPermanent(filter));

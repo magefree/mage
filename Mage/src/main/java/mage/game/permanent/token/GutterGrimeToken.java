@@ -33,7 +33,7 @@ public final class GutterGrimeToken extends TokenImpl {
         color.setGreen(true);
         power = new MageInt(0);
         toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(new GutterGrimeCountersCount(sourceId))));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(new GutterGrimeCountersCount(sourceId))));
     }
 
     private GutterGrimeToken(final GutterGrimeToken token) {

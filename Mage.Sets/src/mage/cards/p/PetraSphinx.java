@@ -31,7 +31,7 @@ public final class PetraSphinx extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {tap}: Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, that player puts it into their hand. If it doesn't, the player puts it into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PetraSphinxEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PetraSphinxEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

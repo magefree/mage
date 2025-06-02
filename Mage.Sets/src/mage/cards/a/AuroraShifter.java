@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -13,7 +13,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,8 +49,8 @@ public final class AuroraShifter extends CardImpl {
 
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new DoWhenCostPaid(reflexive, new PayEnergyCost(2),
-                        "Pay {E}{E}? When you do, {this} becomes a copy of another target creature you control, except it has this ability and \"Whenever this creature deals combat damage to a player, you get that many {E}.\""),
-                TargetController.YOU, false));
+                        "Pay {E}{E}? When you do, {this} becomes a copy of another target creature you control, except it has this ability and \"Whenever this creature deals combat damage to a player, you get that many {E}.\"")
+        ));
     }
 
     private AuroraShifter(final AuroraShifter card) {
@@ -107,8 +106,8 @@ class AuroraShifterCopyApplier extends CopyApplier {
 
         blueprint.getAbilities().add(new BeginningOfCombatTriggeredAbility(
                 new DoWhenCostPaid(reflexive, new PayEnergyCost(2),
-                        "Pay {E}{E}? When you do, {this} becomes a copy of another target creature you control, except it has this ability and \"Whenever this creature deals combat damage to a player, you get that many {E}.\""),
-                TargetController.YOU, false));
+                        "Pay {E}{E}? When you do, {this} becomes a copy of another target creature you control, except it has this ability and \"Whenever this creature deals combat damage to a player, you get that many {E}.\"")
+        ));
 
 
         blueprint.getAbilities().add(new DealsCombatDamageToAPlayerTriggeredAbility(

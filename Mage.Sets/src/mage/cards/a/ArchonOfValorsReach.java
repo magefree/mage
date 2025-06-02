@@ -53,7 +53,7 @@ public final class ArchonOfValorsReach extends CardImpl {
         ));
 
         // Players can't cast spells of the chosen type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchonOfValorsReachReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ArchonOfValorsReachReplacementEffect()));
     }
 
     private ArchonOfValorsReach(final ArchonOfValorsReach card) {

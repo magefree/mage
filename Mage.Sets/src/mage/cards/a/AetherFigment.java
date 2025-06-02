@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -15,20 +13,19 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
  * @author nantuko, BetaSteward_at_googlemail.com
  */
 public final class AetherFigment extends CardImpl {
 
     public AetherFigment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.ILLUSION);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-
-        // Aether Figment can't be blocked.
-        this.addAbility(new CantBeBlockedSourceAbility());
 
         // Kicker {3}
         this.addAbility(new KickerAbility("{3}"));
@@ -40,6 +37,9 @@ public final class AetherFigment extends CardImpl {
                 "If {this} was kicked, it enters with two +1/+1 counters on it.",
                 "");
         this.addAbility(ability);
+
+        // Aether Figment can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
     }
 
     private AetherFigment(final AetherFigment card) {

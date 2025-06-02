@@ -38,7 +38,7 @@ public final class GrotesqueHybrid extends CardImpl {
         // Discard a card: Grotesque Hybrid gains flying and protection from green and from white until end of turn.
         Effect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("{this} gains flying");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardCardCost());
+        Ability ability = new SimpleActivatedAbility(effect, new DiscardCardCost());
         effect = new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.WHITE), Duration.EndOfTurn);
         effect.setText("and protection from green and from white until end of turn");
         ability.addEffect(effect);

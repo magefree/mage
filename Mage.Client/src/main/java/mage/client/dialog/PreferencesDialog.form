@@ -2010,7 +2010,6 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="text" type="java.lang.String" value="GUI color style:"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="horizontalTextPosition" type="int" value="10"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[110, 16]"/>
@@ -2184,7 +2183,7 @@
                       <Component id="panelCardStyles" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelCardImages" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="306" max="32767" attributes="0"/>
+                      <EmptySpace pref="309" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2225,7 +2224,7 @@
                                           <Component id="cbPreferredImageLanguage" min="-2" pref="153" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="0" pref="480" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -2284,7 +2283,6 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cbPreferredImageLanguage">
                   <Properties>
-                    <Property name="maximumRowCount" type="int" value="20"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="4">
                         <StringItem index="0" value="Item 1"/>
@@ -2319,15 +2317,48 @@
                 </Property>
               </Properties>
 
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
-                <Property name="axis" type="int" value="1"/>
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="cbCardRenderIconsForAbilities" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbCardRenderIconsForPlayable" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSeparator1" min="-2" pref="775" max="-2" attributes="0"/>
+                      <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbCardRenderShowAbilityTextOverlay" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="labelRenderMode" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbCardRenderImageFallback" min="-2" pref="122" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="labelRenderMode" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbCardRenderImageFallback" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="cbCardRenderIconsForAbilities" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="cbCardRenderIconsForPlayable" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="cbCardRenderShowReminderText" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="cbCardRenderHideSetSymbol" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="cbCardRenderShowAbilityTextOverlay" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="cbCardRenderImageFallback">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Render mode: MTGO style (off) or IMAGE style (on)"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JCheckBox" name="cbCardRenderIconsForAbilities">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Enable card icons for abilities (example: flying, deathtouch)"/>
@@ -2354,6 +2385,28 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Show ability text as overlay in big card view"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="labelRenderMode">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Render Mode:"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Image - Renders card image with text overlay&lt;br&gt; MTGO - Renders card frame around card art&lt;br&gt; Forced M15 - Renders all cards in the modern frame&lt;br&gt; Forced Retro - Renders all cards in the retro frame"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="cbCardRenderImageFallback">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="4">
+                        <StringItem index="0" value="Item 1"/>
+                        <StringItem index="1" value="Item 2"/>
+                        <StringItem index="2" value="Item 3"/>
+                        <StringItem index="3" value="Item 4"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Image - Renders card image with text overlay&lt;br&gt; MTGO - Renders card frame around card art&lt;br&gt; Forced M15 - Renders all cards in the MTGO style with the modern frame&lt;br&gt; Forced Retro - Renders all cards in the MTGO style with the retro frame"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -2616,29 +2669,25 @@
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="STOP skips on declare attackers if attackers are available"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopBlockWithAny">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="STOP skips on declare blockers if ANY blockers are available"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" value="STOP skips when attacked and on declare blockers if ANY blockers are available"/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopBlockWithZero">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="STOP skips on declare blockers if ZERO blockers are available"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" value="STOP skips when attacked if ZERO blockers are available"/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopOnNewStackObjects">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" value="Skip to STACK resolved (F10): stop on new objects added (on) or stop when stack empty (off)"/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
@@ -2648,14 +2697,12 @@
                 <Component class="javax.swing.JCheckBox" name="cbStopOnAllMain">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Skip to MAIN step (F7): stop on any main steps (on) or stop on your main step (off)"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cbStopOnAllEnd">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Skip to END step (F5): stop on any end steps (on) or stop on opponents end step (off)"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[300, 25]"/>
@@ -3128,7 +3175,6 @@
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Playing from folder:"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtBattlefieldIBGMPath">
@@ -3178,7 +3224,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Proxy for server connection and images download">
+                    <TitledBorder title="Proxy for server connection and images download (DO NOT SUPPORTED)">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>

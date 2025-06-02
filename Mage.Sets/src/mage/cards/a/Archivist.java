@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -26,8 +25,8 @@ public final class Archivist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        //{T}: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost()));
+        // {T}: Draw a card.
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost()));
     }
 
     private Archivist(final Archivist card) {

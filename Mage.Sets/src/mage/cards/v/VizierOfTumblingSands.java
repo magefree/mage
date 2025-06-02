@@ -43,7 +43,7 @@ public final class VizierOfTumblingSands extends CardImpl {
         // {T}: Untap another target permanent.
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap another target permanent");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

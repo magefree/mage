@@ -1,5 +1,6 @@
 package mage.cards.n;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -25,6 +26,7 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.util.ManaUtil;
 
 import java.util.UUID;
@@ -72,6 +74,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
 
     NimDeathmantleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new NimDeathmantleEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private NimDeathmantleTriggeredAbility(final NimDeathmantleTriggeredAbility ability) {
@@ -108,6 +111,11 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach {this} to it.";
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class NimDeathmantleEffect extends OneShotEffect {
@@ -137,7 +145,7 @@ class NimDeathmantleEffect extends OneShotEffect {
                         // check if it's still in graveyard
                         if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
                             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                                Permanent permanent = game.getPermanent(card.getId());
+                                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                                 if (permanent != null) {
                                     permanent.addAttachment(equipment.getId(), source, game);
                                 }

@@ -4,9 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,8 +34,6 @@ public final class SharpshooterElf extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public SharpshooterElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
@@ -55,7 +52,7 @@ public final class SharpshooterElf extends CardImpl {
 
         // When Sharpshooter Elf enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(xValue, "it"), true
+                new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE, "it"), true
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

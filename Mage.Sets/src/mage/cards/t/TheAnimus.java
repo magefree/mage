@@ -1,17 +1,15 @@
 package mage.cards.t;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
-import mage.cards.*;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -20,14 +18,14 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.Targets;
-import mage.target.common.*;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.functions.EmptyCopyApplier;
+import mage.target.common.TargetCardInExile;
+import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
- *
  * @author grimreap124
  */
 public final class TheAnimus extends CardImpl {
@@ -42,17 +40,17 @@ public final class TheAnimus extends CardImpl {
 
     public TheAnimus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, exile up to one target legendary creature card from a graveyard with a memory counter on it.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new TheAnimusEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new TheAnimusEffect());
         ability.addTarget(new TargetCardInGraveyard(0, 1, filter));
         this.addAbility(ability);
 
         // {T}: Until your next turn, target legendary creature you control becomes a copy of target creature card in exile with a memory counter on it. Activate only as a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(new TheAnimusCopyEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanentSameController(1, StaticFilters.FILTER_CREATURE_LEGENDARY));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY));
         ability.addTarget(new TargetCardInExile(1, 1, exileFilter));
         this.addAbility(ability);
     }

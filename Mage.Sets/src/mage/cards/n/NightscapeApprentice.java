@@ -34,12 +34,12 @@ public final class NightscapeApprentice extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {T}: Put target creature you control on top of its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(true), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         // {R}, {T}: Target creature gains first strike until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(),
+        ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(),
             Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -25,7 +25,7 @@ public final class DaxosSpiritToken extends TokenImpl {
         subtype.add(SubType.SPIRIT);
         power = new MageInt(0);
         toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DaxosSpiritSetPTEffect()));
+        this.addAbility(new SimpleStaticAbility(new DaxosSpiritSetPTEffect()));
     }
 
     private DaxosSpiritToken(final DaxosSpiritToken token) {

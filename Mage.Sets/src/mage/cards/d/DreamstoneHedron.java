@@ -24,7 +24,7 @@ public final class DreamstoneHedron extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(3),
                 new GenericManaCost(3));
         ability.addCost(new TapSourceCost());

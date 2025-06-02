@@ -21,6 +21,6 @@ public class DragonCon extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Nalathni Dragon", 1, Rarity.RARE, mage.cards.n.NalathniDragon.class));
+        cards.add(new SetCardInfo("Nalathni Dragon", 1, Rarity.RARE, mage.cards.n.NalathniDragon.class, RETRO_ART));
     }
 }

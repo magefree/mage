@@ -43,7 +43,7 @@ public final class ArvadTheCursed extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Other legendary creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
     }
 
     private ArvadTheCursed(final ArvadTheCursed card) {

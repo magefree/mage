@@ -30,7 +30,7 @@ public final class TimeOfHeroes extends CardImpl {
 
         // Each creature you control with a level counter on it gets +2/+2.
         ContinuousEffect boost = new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boost));
+        this.addAbility(new SimpleStaticAbility(boost));
     }
 
     private TimeOfHeroes(final TimeOfHeroes card) {

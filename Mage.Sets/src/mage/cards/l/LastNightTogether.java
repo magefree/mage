@@ -82,7 +82,7 @@ class LastNightTogetherEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         // 15.07.2006 If it's somehow not a main phase when Fury of the Horde resolves, all it does is untap all creatures that attacked that turn. No new phases are created.
         // Same ruling applies here
-        if (game.getTurnPhaseType() == TurnPhase.PRECOMBAT_MAIN || game.getTurnPhaseType() == TurnPhase.POSTCOMBAT_MAIN) {
+        if (game.getTurnPhaseType().isMain()) {
             // At the start of that combat, add a restriction effect preventing other creatures from attacking.
             TurnMod combat = new TurnMod(game.getState().getActivePlayerId()).withExtraPhase(TurnPhase.COMBAT);
             game.getState().getTurnMods().add(combat);

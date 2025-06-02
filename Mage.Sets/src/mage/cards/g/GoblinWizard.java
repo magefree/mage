@@ -42,12 +42,12 @@ public final class GoblinWizard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: You may put a Goblin permanent card from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new PutCardFromHandOntoBattlefieldEffect(filterCard),
                 new TapSourceCost()));
 
         // {R}: Target Goblin gains protection from white until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.WHITE), Duration.EndOfTurn), new ManaCostsImpl<>("{R}"));
         Target target = new TargetPermanent(filter2);
         ability.addTarget(target);

@@ -6,6 +6,7 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +28,7 @@ public final class DivinersPortent extends CardImpl {
         // Roll a d20 and add the number of cards in your hand.
         RollDieWithResultTableEffect effect = new RollDieWithResultTableEffect(
                 20, "roll a d20 and add the number " +
-                "of cards in your hand", CardsInControllerHandCount.instance, 0
+                "of cards in your hand", CardsInControllerHandCount.ANY, 0
         );
         this.getSpellAbility().addEffect(effect);
 
@@ -35,7 +36,10 @@ public final class DivinersPortent extends CardImpl {
         effect.addTableEntry(1, 14, new DrawCardSourceControllerEffect(GetXValue.instance));
 
         // 15+ | Scry X, then draw X cards.
-        effect.addTableEntry(15, Integer.MAX_VALUE, new DivinersPortentEffect());
+        effect.addTableEntry(15, Integer.MAX_VALUE,
+                new ScryEffect(GetXValue.instance),
+                new DrawCardSourceControllerEffect(GetXValue.instance).concatBy(", then")
+        );
     }
 
     private DivinersPortent(final DivinersPortent card) {

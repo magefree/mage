@@ -4,14 +4,15 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +38,10 @@ public final class ThoughtGorger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ThoughtGorgerEffectEnters()));
 
         // When Thought Gorger leaves the battlefield, draw a card for each +1/+1 counter on it.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ThoughtGorgerEffectLeaves(), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(
+                new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.P1P1))
+                        .setText("draw a card for each +1/+1 counter on it"), false
+        ));
     }
 
     private ThoughtGorger(final ThoughtGorger card) {
@@ -83,33 +87,3 @@ class ThoughtGorgerEffectEnters extends OneShotEffect {
         return true;
     }
 }
-
-class ThoughtGorgerEffectLeaves extends OneShotEffect {
-
-    ThoughtGorgerEffectLeaves() {
-        super(Outcome.Neutral);
-        this.staticText = "draw a card for each +1/+1 counter on it.";
-    }
-
-    private ThoughtGorgerEffectLeaves(final ThoughtGorgerEffectLeaves effect) {
-        super(effect);
-    }
-
-    @Override
-    public ThoughtGorgerEffectLeaves copy() {
-        return new ThoughtGorgerEffectLeaves(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent thoughtGorgerLastState = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        int numberCounters = thoughtGorgerLastState.getCounters(game).getCount(CounterType.P1P1);
-        if (player != null) {
-            player.drawCards(numberCounters, source, game);
-            return true;
-        }
-        return false;
-    }
-}
-

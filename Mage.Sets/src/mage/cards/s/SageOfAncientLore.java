@@ -35,7 +35,7 @@ public final class SageOfAncientLore extends CardImpl {
         this.secondSideCardClazz = mage.cards.w.WerewolfOfAncientHunger.class;
 
         // Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.
-        DynamicValue xValue = CardsInControllerHandCount.instance;
+        DynamicValue xValue = CardsInControllerHandCount.ANY;
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 new ConditionalContinuousEffect(new SetBasePowerToughnessSourceEffect(xValue),
                         new TransformedCondition(true), "{this}'s power and toughness are each equal to the total number of cards in your hand")));

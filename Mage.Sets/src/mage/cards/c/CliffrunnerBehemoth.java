@@ -43,13 +43,11 @@ public final class CliffrunnerBehemoth extends CardImpl {
 
         // Cliffrunner Behemoth has haste as long as you control a red permanent.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                     new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield),
                     new PermanentsOnTheBattlefieldCondition(redPermanentFilter), "{this} has haste as long as you control a red permanent")));
         // Cliffrunner Behemoth has lifelink as long as you control a white permanent.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                     new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield),
                     new PermanentsOnTheBattlefieldCondition(whitePermanentFilter), "{this} has lifelink as long as you control a white permanent")));

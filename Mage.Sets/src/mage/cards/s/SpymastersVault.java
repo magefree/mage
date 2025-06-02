@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ConniveSourceEffect;
+import mage.abilities.hint.common.CreaturesDiedThisTurnHint;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -44,7 +45,7 @@ public final class SpymastersVault extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new SpymastersVaultEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability.addHint(CreaturesDiedThisTurnCount.getHint()));
+        this.addAbility(ability.addHint(CreaturesDiedThisTurnHint.instance));
 
     }
 

@@ -23,6 +23,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aesi, Tyrant of Gyre Strait", 210, Rarity.MYTHIC, mage.cards.a.AesiTyrantOfGyreStrait.class));
         cards.add(new SetCardInfo("Aether Gale", 109, Rarity.RARE, mage.cards.a.AetherGale.class));
         cards.add(new SetCardInfo("Aminatou's Augury", 71, Rarity.RARE, mage.cards.a.AminatousAugury.class));
+        cards.add(new SetCardInfo("Ancient Cellarspawn", 16, Rarity.RARE, mage.cards.a.AncientCellarspawn.class));
         cards.add(new SetCardInfo("Arachnogenesis", 169, Rarity.RARE, mage.cards.a.Arachnogenesis.class));
         cards.add(new SetCardInfo("Arcane Denial", 110, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Sanctum", 259, Rarity.UNCOMMON, mage.cards.a.ArcaneSanctum.class));
@@ -38,6 +39,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Auramancer", 97, Rarity.COMMON, mage.cards.a.Auramancer.class));
         cards.add(new SetCardInfo("Azorius Chancery", 261, Rarity.UNCOMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Signet", 240, Rarity.UNCOMMON, mage.cards.a.AzoriusSignet.class));
+        cards.add(new SetCardInfo("Barbflare Gremlin", 26, Rarity.RARE, mage.cards.b.BarbflareGremlin.class));
         cards.add(new SetCardInfo("Barren Moor", 262, Rarity.UNCOMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Basilisk Collar", 241, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 131, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
@@ -77,6 +79,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Crypt Ghast", 368, Rarity.MYTHIC, mage.cards.c.CryptGhast.class));
         cards.add(new SetCardInfo("Culling Ritual", 85, Rarity.RARE, mage.cards.c.CullingRitual.class));
         cards.add(new SetCardInfo("Cultivate", 174, Rarity.COMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Curator Beastie", 30, Rarity.RARE, mage.cards.c.CuratorBeastie.class));
         cards.add(new SetCardInfo("Damn", 369, Rarity.MYTHIC, mage.cards.d.Damn.class));
         cards.add(new SetCardInfo("Darkmoss Bridge", 269, Rarity.COMMON, mage.cards.d.DarkmossBridge.class));
         cards.add(new SetCardInfo("Deadbridge Chant", 215, Rarity.MYTHIC, mage.cards.d.DeadbridgeChant.class));
@@ -87,9 +90,11 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Deluge of Doom", 18, Rarity.RARE, mage.cards.d.DelugeOfDoom.class));
         cards.add(new SetCardInfo("Demolisher Spawn", 31, Rarity.RARE, mage.cards.d.DemolisherSpawn.class));
         cards.add(new SetCardInfo("Demon of Fate's Design", 137, Rarity.RARE, mage.cards.d.DemonOfFatesDesign.class));
+        cards.add(new SetCardInfo("Demonic Covenant", 19, Rarity.RARE, mage.cards.d.DemonicCovenant.class));
         cards.add(new SetCardInfo("Diabolic Vision", 87, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Dig Through Time", 115, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Dimir Aqueduct", 270, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
+        cards.add(new SetCardInfo("Disorienting Choice", 32, Rarity.RARE, mage.cards.d.DisorientingChoice.class));
         cards.add(new SetCardInfo("Doomwake Giant", 138, Rarity.RARE, mage.cards.d.DoomwakeGiant.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 271, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dream Eater", 116, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
@@ -104,16 +109,20 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Explosive Vegetation", 177, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
         cards.add(new SetCardInfo("Extravagant Replication", 117, Rarity.RARE, mage.cards.e.ExtravagantReplication.class));
         cards.add(new SetCardInfo("Ezuri's Predation", 178, Rarity.RARE, mage.cards.e.EzurisPredation.class));
-        cards.add(new SetCardInfo("Falkenrath Noble", 140, Rarity.UNCOMMON, mage.cards.f.FalkenrathNoble.class));
+        cards.add(new SetCardInfo("Falkenrath Noble", 140, Rarity.COMMON, mage.cards.f.FalkenrathNoble.class));
         cards.add(new SetCardInfo("Fate Unraveler", 141, Rarity.RARE, mage.cards.f.FateUnraveler.class));
+        cards.add(new SetCardInfo("Fear of Sleep Paralysis", 12, Rarity.RARE, mage.cards.f.FearOfSleepParalysis.class));
         cards.add(new SetCardInfo("Feed the Swarm", 78, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fellwar Stone", 245, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Flooded Grove", 276, Rarity.RARE, mage.cards.f.FloodedGrove.class));
         cards.add(new SetCardInfo("Florian, Voldaren Scion", 217, Rarity.RARE, mage.cards.f.FlorianVoldarenScion.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 277, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
+        cards.add(new SetCardInfo("Formless Genesis", 34, Rarity.RARE, mage.cards.f.FormlessGenesis.class));
         cards.add(new SetCardInfo("Geothermal Bog", 278, Rarity.COMMON, mage.cards.g.GeothermalBog.class));
         cards.add(new SetCardInfo("Giant Adephage", 179, Rarity.MYTHIC, mage.cards.g.GiantAdephage.class));
+        cards.add(new SetCardInfo("Giggling Skitterspike", 39, Rarity.RARE, mage.cards.g.GigglingSkitterspike.class));
         cards.add(new SetCardInfo("Gleeful Arsonist", 27, Rarity.RARE, mage.cards.g.GleefulArsonist.class));
+        cards.add(new SetCardInfo("Glitch Interpreter", 13, Rarity.RARE, mage.cards.g.GlitchInterpreter.class));
         cards.add(new SetCardInfo("Gnarlwood Dryad", 180, Rarity.UNCOMMON, mage.cards.g.GnarlwoodDryad.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 279, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Golgari Signet", 246, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
@@ -123,7 +132,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gray Merchant of Asphodel", 142, Rarity.UNCOMMON, mage.cards.g.GrayMerchantOfAsphodel.class));
         cards.add(new SetCardInfo("Greater Tanuki", 181, Rarity.COMMON, mage.cards.g.GreaterTanuki.class));
         cards.add(new SetCardInfo("Grim Backwoods", 281, Rarity.RARE, mage.cards.g.GrimBackwoods.class));
-        cards.add(new SetCardInfo("Grim Flayer", 218, Rarity.RARE, mage.cards.g.GrimFlayer.class));
+        cards.add(new SetCardInfo("Grim Flayer", 218, Rarity.MYTHIC, mage.cards.g.GrimFlayer.class));
         cards.add(new SetCardInfo("Grisly Salvage", 219, Rarity.COMMON, mage.cards.g.GrislySalvage.class));
         cards.add(new SetCardInfo("Grist, the Hunger Tide", 220, Rarity.MYTHIC, mage.cards.g.GristTheHungerTide.class));
         cards.add(new SetCardInfo("Growth Spiral", 88, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
@@ -139,6 +148,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Infernal Grasp", 143, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Inkshield", 221, Rarity.RARE, mage.cards.i.Inkshield.class));
         cards.add(new SetCardInfo("Inscription of Abundance", 186, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
+        cards.add(new SetCardInfo("Into the Pit", 20, Rarity.RARE, mage.cards.i.IntoThePit.class));
         cards.add(new SetCardInfo("Ishkanah, Grafwidow", 187, Rarity.MYTHIC, mage.cards.i.IshkanahGrafwidow.class));
         cards.add(new SetCardInfo("Jungle Hollow", 285, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kaervek the Merciless", 222, Rarity.RARE, mage.cards.k.KaervekTheMerciless.class));
@@ -146,6 +156,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kederekt Parasite", 144, Rarity.RARE, mage.cards.k.KederektParasite.class));
         cards.add(new SetCardInfo("Kefnet the Mindful", 118, Rarity.MYTHIC, mage.cards.k.KefnetTheMindful.class));
         cards.add(new SetCardInfo("Kheru Spellsnatcher", 119, Rarity.RARE, mage.cards.k.KheruSpellsnatcher.class));
+        cards.add(new SetCardInfo("Kianne, Corrupted Memory", 2, Rarity.MYTHIC, mage.cards.k.KianneCorruptedMemory.class));
         cards.add(new SetCardInfo("Leechridden Swamp", 286, Rarity.UNCOMMON, mage.cards.l.LeechriddenSwamp.class));
         cards.add(new SetCardInfo("Life Insurance", 224, Rarity.RARE, mage.cards.l.LifeInsurance.class));
         cards.add(new SetCardInfo("Light Up the Stage", 166, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
@@ -189,6 +200,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Oversimplify", 228, Rarity.RARE, mage.cards.o.Oversimplify.class));
         cards.add(new SetCardInfo("Overwhelming Stampede", 192, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class));
         cards.add(new SetCardInfo("Persistent Constrictor", 22, Rarity.RARE, mage.cards.p.PersistentConstrictor.class));
+        cards.add(new SetCardInfo("Phenomenon Investigators", 38, Rarity.RARE, mage.cards.p.PhenomenonInvestigators.class));
         cards.add(new SetCardInfo("Ponder", 73, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Portent", 74, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Primordial Mist", 123, Rarity.RARE, mage.cards.p.PrimordialMist.class));
@@ -207,8 +219,10 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reanimate", 155, Rarity.RARE, mage.cards.r.Reanimate.class));
         cards.add(new SetCardInfo("Redress Fate", 9, Rarity.RARE, mage.cards.r.RedressFate.class));
         cards.add(new SetCardInfo("Reliquary Tower", 295, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
+        cards.add(new SetCardInfo("Rendmaw, Creaking Nest", 5, Rarity.MYTHIC, mage.cards.r.RendmawCreakingNest.class));
         cards.add(new SetCardInfo("Retreat to Coralhelm", 126, Rarity.UNCOMMON, mage.cards.r.RetreatToCoralhelm.class));
         cards.add(new SetCardInfo("Return to Dust", 102, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
+        cards.add(new SetCardInfo("Sadistic Shell Game", 24, Rarity.RARE, mage.cards.s.SadisticShellGame.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 194, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Sandwurm Convergence", 195, Rarity.RARE, mage.cards.s.SandwurmConvergence.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 196, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
@@ -219,6 +233,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shark Typhoon", 127, Rarity.RARE, mage.cards.s.SharkTyphoon.class));
         cards.add(new SetCardInfo("Shigeki, Jukai Visionary", 198, Rarity.RARE, mage.cards.s.ShigekiJukaiVisionary.class));
         cards.add(new SetCardInfo("Shivan Gorge", 297, Rarity.RARE, mage.cards.s.ShivanGorge.class));
+        cards.add(new SetCardInfo("Shriekwood Devourer", 35, Rarity.RARE, mage.cards.s.ShriekwoodDevourer.class));
         cards.add(new SetCardInfo("Sigil of the Empty Throne", 103, Rarity.RARE, mage.cards.s.SigilOfTheEmptyThrone.class));
         cards.add(new SetCardInfo("Sign in Blood", 156, Rarity.COMMON, mage.cards.s.SignInBlood.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 298, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
@@ -226,16 +241,19 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Skaab Ruinator", 128, Rarity.MYTHIC, mage.cards.s.SkaabRuinator.class));
         cards.add(new SetCardInfo("Skola Grovedancer", 199, Rarity.COMMON, mage.cards.s.SkolaGrovedancer.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 299, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
+        cards.add(new SetCardInfo("Soaring Lightbringer", 11, Rarity.RARE, mage.cards.s.SoaringLightbringer.class));
         cards.add(new SetCardInfo("Sol Ring", 94, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 253, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Sphere of Safety", 104, Rarity.UNCOMMON, mage.cards.s.SphereOfSafety.class));
         cards.add(new SetCardInfo("Spinerock Knoll", 300, Rarity.RARE, mage.cards.s.SpinerockKnoll.class));
         cards.add(new SetCardInfo("Spirit-Sister's Call", 232, Rarity.MYTHIC, mage.cards.s.SpiritSistersCall.class));
         cards.add(new SetCardInfo("Spiteful Visions", 233, Rarity.RARE, mage.cards.s.SpitefulVisions.class));
+        cards.add(new SetCardInfo("Star Athlete", 29, Rarity.RARE, mage.cards.s.StarAthlete.class));
         cards.add(new SetCardInfo("Starfield Mystic", 105, Rarity.RARE, mage.cards.s.StarfieldMystic.class));
         cards.add(new SetCardInfo("Stitcher's Supplier", 157, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Stormfist Crusader", 234, Rarity.RARE, mage.cards.s.StormfistCrusader.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 301, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
+        cards.add(new SetCardInfo("Suspended Sentence", 25, Rarity.RARE, mage.cards.s.SuspendedSentence.class));
         cards.add(new SetCardInfo("Suspicious Bookcase", 95, Rarity.UNCOMMON, mage.cards.s.SuspiciousBookcase.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 106, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Syr Konrad, the Grim", 158, Rarity.UNCOMMON, mage.cards.s.SyrKonradTheGrim.class));
@@ -260,6 +278,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terminus", 70, Rarity.RARE, mage.cards.t.Terminus.class));
         cards.add(new SetCardInfo("The Eldest Reborn", 139, Rarity.UNCOMMON, mage.cards.t.TheEldestReborn.class));
         cards.add(new SetCardInfo("The Lord of Pain", 3, Rarity.MYTHIC, mage.cards.t.TheLordOfPain.class));
+        cards.add(new SetCardInfo("The Master of Keys", 4, Rarity.MYTHIC, mage.cards.t.TheMasterOfKeys.class));
         cards.add(new SetCardInfo("Theater of Horrors", 236, Rarity.RARE, mage.cards.t.TheaterOfHorrors.class));
         cards.add(new SetCardInfo("They Came from the Pipes", 14, Rarity.RARE, mage.cards.t.TheyCameFromThePipes.class));
         cards.add(new SetCardInfo("Thirst for Meaning", 129, Rarity.COMMON, mage.cards.t.ThirstForMeaning.class));
@@ -278,7 +297,10 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Trygon Predator", 238, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Twilight Mire", 320, Rarity.RARE, mage.cards.t.TwilightMire.class));
         cards.add(new SetCardInfo("Underground River", 321, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
+        cards.add(new SetCardInfo("Ursine Monstrosity", 36, Rarity.RARE, mage.cards.u.UrsineMonstrosity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ursine Monstrosity", 63, Rarity.RARE, mage.cards.u.UrsineMonstrosity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Utter End", 91, Rarity.RARE, mage.cards.u.UtterEnd.class));
+        cards.add(new SetCardInfo("Valgavoth, Harrower of Souls", 6, Rarity.MYTHIC, mage.cards.v.ValgavothHarrowerOfSouls.class));
         cards.add(new SetCardInfo("Vault of Whispers", 322, Rarity.COMMON, mage.cards.v.VaultOfWhispers.class));
         cards.add(new SetCardInfo("Verge Rangers", 108, Rarity.RARE, mage.cards.v.VergeRangers.class));
         cards.add(new SetCardInfo("Vial Smasher the Fierce", 239, Rarity.MYTHIC, mage.cards.v.VialSmasherTheFierce.class));

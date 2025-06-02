@@ -48,7 +48,7 @@ enum LoreseekersStoneAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void increaseCost(Ability ability, Game game) {
         Player player = game.getPlayer(ability.getControllerId());
         if (player != null) {
             CardUtil.increaseCost(ability, player.getHand().size());

@@ -33,7 +33,7 @@ public final class WaterfrontBouncer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}, {tap}, Discard a card: Return target creature to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         ability.addTarget(new TargetCreaturePermanent());

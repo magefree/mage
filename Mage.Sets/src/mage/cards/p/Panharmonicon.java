@@ -26,7 +26,7 @@ public final class Panharmonicon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // If an artifact or creature entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PanharmoniconEffect()));
+        this.addAbility(new SimpleStaticAbility(new PanharmoniconEffect()));
     }
 
     private Panharmonicon(final Panharmonicon card) {
@@ -43,7 +43,7 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
 
     PanharmoniconEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If an artifact or creature entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
+        staticText = "If an artifact or creature entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
     }
 
     private PanharmoniconEffect(final PanharmoniconEffect effect) {

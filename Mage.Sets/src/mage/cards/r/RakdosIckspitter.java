@@ -29,7 +29,7 @@ public final class RakdosIckspitter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Rakdos Ickspitter deals 1 damage to target creature and that creature's controller loses 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         Effect effect = new LoseLifeTargetControllerEffect(1);
         effect.setText("and that creature's controller loses 1 life");
         ability.addEffect(effect);

@@ -1,7 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
@@ -14,18 +12,20 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.WardAbility;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.common.FilterEquipmentPermanent;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class PlateArmor extends CardImpl {
@@ -66,11 +66,10 @@ public final class PlateArmor extends CardImpl {
 enum PlateArmorAdjuster implements CostAdjuster {
     instance;
 
-    private static final FilterEquipmentPermanent filter = new FilterEquipmentPermanent("Other Equipment you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.EQUIPMENT, "Other Equipment you control");
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final DynamicValue equipmentCount = new PermanentsOnBattlefieldCount(filter);
@@ -81,7 +80,7 @@ enum PlateArmorAdjuster implements CostAdjuster {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
             int count = equipmentCount.calculate(game, ability, null);

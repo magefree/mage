@@ -35,7 +35,8 @@ public final class PickYourPoison extends CardImpl {
         this.getSpellAbility().addMode(new Mode(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_ENCHANTMENT)));
 
         // * Each opponent sacrifices a creature with flying.
-        this.getSpellAbility().addMode(new Mode(new SacrificeOpponentsEffect(filter)));
+        this.getSpellAbility().addMode(new Mode(new SacrificeOpponentsEffect(filter)
+                .setText("each opponent sacrifices a creature of their choice with flying")));
     }
 
     private PickYourPoison(final PickYourPoison card) {

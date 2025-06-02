@@ -46,7 +46,7 @@ public final class BoneyardDesecrator extends CardImpl {
 
         // {1}{B}, Sacrifice another creature: Put a +1/+1 counter on Boneyard Desecrator. If an outlaw was sacrificed this way, create a Treasure token.
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addEffect(new BoneyardDesecratorEffect());
         this.addAbility(ability);

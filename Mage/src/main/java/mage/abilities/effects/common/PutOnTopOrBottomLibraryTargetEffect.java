@@ -49,6 +49,6 @@ public class PutOnTopOrBottomLibraryTargetEffect extends OneShotEffect {
         }
         String targetText = getTargetPointer().describeTargets(mode.getTargets(), "that permanent");
         return (textOwnerOf ? "the owner of " + targetText : targetText + "'s owner") +
-                " puts it on the top or bottom of their library";
+                " puts it on their choice of the top or bottom of their library";
     }
 }

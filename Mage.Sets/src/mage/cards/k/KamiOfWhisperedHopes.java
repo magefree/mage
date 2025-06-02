@@ -4,8 +4,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.replacement.ModifyCountersAddedEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -22,8 +21,6 @@ import java.util.UUID;
  */
 public final class KamiOfWhisperedHopes extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public KamiOfWhisperedHopes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
@@ -38,7 +35,7 @@ public final class KamiOfWhisperedHopes extends CardImpl {
 
         // {T}: Add X mana of any one color, where X is Kami of Whispered Hopes's power.
         this.addAbility(new DynamicManaAbility(
-                Mana.AnyMana(1), xValue, new TapSourceCost(), "Add X mana "
+                Mana.AnyMana(1), SourcePermanentPowerValue.NOT_NEGATIVE, new TapSourceCost(), "Add X mana "
                 + "of any one color, where X is {this}'s power", true
         ));
     }

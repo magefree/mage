@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -58,7 +57,7 @@ public final class CourtOfVantress extends CardImpl {
 
     static Ability makeAbility() {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CourtOfVantressEffect(), TargetController.YOU, false
+                new CourtOfVantressEffect()
         );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         return ability;

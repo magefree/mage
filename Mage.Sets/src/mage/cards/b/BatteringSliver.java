@@ -29,7 +29,7 @@ public final class BatteringSliver extends CardImpl {
         this.toughness = new MageInt(4);
 
         // All Sliver creatures have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(
                         TrampleAbility.getInstance(),
                         Duration.WhileOnBattlefield,

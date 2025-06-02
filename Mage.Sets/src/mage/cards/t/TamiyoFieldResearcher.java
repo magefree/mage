@@ -1,8 +1,8 @@
-
 package mage.cards.t;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -13,11 +13,10 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.command.emblems.TamiyoFieldResearcherEmblem;
+import mage.game.events.DamagedBatchBySourceEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -34,12 +33,6 @@ import java.util.UUID;
  */
 public final class TamiyoFieldResearcher extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
-
-    static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
-
     public TamiyoFieldResearcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{W}{U}");
         this.supertype.add(SuperType.LEGENDARY);
@@ -54,7 +47,7 @@ public final class TamiyoFieldResearcher extends CardImpl {
 
         // -2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
         ability = new LoyaltyAbility(new TapTargetEffect(), -2);
-        ability.addTarget(new TargetPermanent(0, 2, filter, false));
+        ability.addTarget(new TargetPermanent(0, 2, StaticFilters.FILTER_PERMANENTS_NON_LAND, false));
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("They"));
         this.addAbility(ability);
 
@@ -99,7 +92,7 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
                 creatures.add(new MageObjectReference(uuid, game));
             }
             if (!creatures.isEmpty()) {
-                DelayedTriggeredAbility delayedAbility = new TamiyoFieldResearcherDelayedTriggeredAbility(creatures);
+                DelayedTriggeredAbility delayedAbility = new TamiyoFieldResearcherDelayedTriggeredAbility(creatures, game.getTurnNum());
                 game.addDelayedTriggeredAbility(delayedAbility, source);
             }
             return true;
@@ -108,34 +101,52 @@ class TamiyoFieldResearcherEffect1 extends OneShotEffect {
     }
 }
 
-class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbility {
+// batch per source:
+// > If Tamiyo’s first ability targets two creatures, and both deal combat damage at the same time, the delayed triggered ability triggers twice.
+// > (2016-08-23)
+class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedEvent> {
 
-    private List<MageObjectReference> creatures;
+    private final int startingTurn;
+    private final List<MageObjectReference> creatures;
 
-    public TamiyoFieldResearcherDelayedTriggeredAbility(List<MageObjectReference> creatures) {
-        super(new DrawCardSourceControllerEffect(1), Duration.UntilYourNextTurn, false);
+    TamiyoFieldResearcherDelayedTriggeredAbility(List<MageObjectReference> creatures, int startingTurn) {
+        super(new DrawCardSourceControllerEffect(1, true), Duration.Custom, false);
         this.creatures = creatures;
+        this.startingTurn = startingTurn;
+        setTriggerPhrase("Until your next turn, whenever either of those creatures deals combat damage, ");
     }
 
     private TamiyoFieldResearcherDelayedTriggeredAbility(final TamiyoFieldResearcherDelayedTriggeredAbility ability) {
         super(ability);
         this.creatures = ability.creatures;
+        this.startingTurn = ability.startingTurn;
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event instanceof DamagedEvent;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
+    }
+
+    @Override
+    public boolean checkEvent(DamagedEvent event, Game game) {
+        if (!event.isCombatDamage() || event.getAmount() <= 0) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        return creatures.contains(new MageObjectReference(permanent.getId(), game));
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedEvent) event).isCombatDamage()) {
-            Permanent damageSource = game.getPermanent(event.getSourceId());
-            if (damageSource != null) {
-                return creatures.contains(new MageObjectReference(damageSource, game));
-            }
-        }
-        return false;
+        return !getFilteredEvents((DamagedBatchBySourceEvent) event, game).isEmpty();
+    }
+
+    @Override
+    public boolean isInactive(Game game) {
+        return game.isActivePlayer(getControllerId()) && game.getTurnNum() != startingTurn;
     }
 
     @Override
@@ -143,8 +154,4 @@ class TamiyoFieldResearcherDelayedTriggeredAbility extends DelayedTriggeredAbili
         return new TamiyoFieldResearcherDelayedTriggeredAbility(this);
     }
 
-    @Override
-    public String getRule() {
-        return "Until your next turn, whenever either of those creatures deals combat damage, you draw a card.";
-    }
 }

@@ -37,7 +37,7 @@ public final class IxalansBinding extends CardImpl {
         this.addAbility(ability);
 
         // Your opponents can't cast spells with the same name as the exiled card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IxalansBindingReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new IxalansBindingReplacementEffect()));
     }
 
     private IxalansBinding(final IxalansBinding card) {

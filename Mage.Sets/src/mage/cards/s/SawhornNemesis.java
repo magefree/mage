@@ -37,7 +37,7 @@ public final class SawhornNemesis extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlayerEffect(Outcome.Detriment)));
         // If a source would deal damage to the chosen player or a permanent they
         // control, it deals double that damage instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SawhornNemesisEffect()));
+        this.addAbility(new SimpleStaticAbility(new SawhornNemesisEffect()));
     }
 
     private SawhornNemesis(final SawhornNemesis card) {

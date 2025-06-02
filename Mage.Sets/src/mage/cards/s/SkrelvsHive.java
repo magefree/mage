@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CorruptedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -39,7 +38,7 @@ public final class SkrelvsHive extends CardImpl {
 
         // At the beginning of your upkeep, you lose 1 life and create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new LoseLifeSourceControllerEffect(1), TargetController.YOU, false
+                new LoseLifeSourceControllerEffect(1)
         );
         ability.addEffect(new CreateTokenEffect(new PhyrexianMiteToken()).concatBy("and"));
         this.addAbility(ability);

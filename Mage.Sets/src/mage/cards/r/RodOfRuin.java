@@ -21,7 +21,7 @@ public final class RodOfRuin extends CardImpl {
 
     public RodOfRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

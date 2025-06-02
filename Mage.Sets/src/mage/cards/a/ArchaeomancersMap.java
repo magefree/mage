@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
@@ -28,7 +27,7 @@ import java.util.UUID;
 public final class ArchaeomancersMap extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("basic Plains cards");
-    private static final FilterPermanent filter2 = new FilterLandPermanent();
+    private static final FilterPermanent filter2 = new FilterLandPermanent("a land an opponent controls");
 
     static {
         filter.add(SubType.PLAINS.getPredicate());
@@ -45,13 +44,9 @@ public final class ArchaeomancersMap extends CardImpl {
         ));
 
         // Whenever a land enters the battlefield under an opponent's control, if that player controls more lands than you, you may put a land card from your hand onto the battlefield.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldAllTriggeredAbility(
-                        new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), filter2
-                ), ArchaeomancersMapCondition.instance, "Whenever a land enters the battlefield " +
-                "under an opponent's control, if that player controls more lands than you, " +
-                "you may put a land card from your hand onto the battlefield."
-        ));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), filter2
+        ).withInterveningIf(ArchaeomancersMapCondition.instance));
     }
 
     private ArchaeomancersMap(final ArchaeomancersMap card) {
@@ -77,5 +72,10 @@ enum ArchaeomancersMapCondition implements Condition {
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
                 source.getControllerId(), source, game
         );
+    }
+
+    @Override
+    public String toString() {
+        return "that player controls more lands than you";
     }
 }

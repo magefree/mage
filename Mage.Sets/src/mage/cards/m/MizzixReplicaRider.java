@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -106,7 +106,7 @@ enum MizzixReplicaRiderApplier implements StackObjectCopyApplier {
         Spell spell = (Spell) stackObject;
         spell.addAbilityForCopy(HasteAbility.getInstance());
         spell.addAbilityForCopy(new BeginningOfEndStepTriggeredAbility(
-                new SacrificeSourceEffect().setText("sacrifice this permanent"), TargetController.YOU, false
+                new SacrificeSourceEffect().setText("sacrifice this permanent")
         ));
     }
 

@@ -34,7 +34,7 @@ public final class GlassblowersPuzzleknot extends CardImpl {
         this.addAbility(ability);
 
         // {2}{U}, Sacrifice Glassblower's Puzzleknot: Scry 2, then you get {E}{E}.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, scryEffect, new ManaCostsImpl<>("{2}{U}"));
+        ability = new SimpleActivatedAbility(scryEffect, new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(energyEffect);
         this.addAbility(ability);

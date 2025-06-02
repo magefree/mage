@@ -35,7 +35,7 @@ public final class CivilizedScholar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CivilizedScholarEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new CivilizedScholarEffect(), new TapSourceCost()));
         this.addAbility(new TransformAbility());
     }
 

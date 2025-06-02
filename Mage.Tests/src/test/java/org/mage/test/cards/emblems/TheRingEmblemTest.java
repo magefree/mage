@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  * @author JayDi85
  */
@@ -246,9 +248,10 @@ public class TheRingEmblemTest extends CardTestPlayerBase {
         attack(3, playerA, "Ashiok's Skulker");
         block(3, playerB, "Alabaster Kirin", "Ashiok's Skulker");
         block(3, playerB, "Alaborn Trooper", "Ashiok's Skulker");
-        setChoice(playerA, "Whenever your Ring-bearer becomes blocked"); // 2x triggers from two blockers
-        setChoice(playerA, "At end of combat, that permanent"); // 2x triggers from two blockers
         setChoice(playerA, "Mountain"); // draw/discard on attack trigger
+        setChoice(playerA, "Whenever your Ring-bearer becomes blocked"); // 2x triggers from two blockers
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
+        setChoice(playerA, "At end of combat, that permanent"); // 2x triggers from two blockers
         checkPermanentCount("after attack on 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, playerA, "Ashiok's Skulker", 1);
         checkPermanentCount("after attack on 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, playerB, "Academy Manufactor", 0);
         checkPermanentCount("after attack on 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, playerB, "Alabaster Kirin", 0);

@@ -38,7 +38,7 @@ public final class GlissaSunseeker extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // {tap}: Destroy target artifact if its converted mana cost is equal to the amount of mana in your mana pool.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GlissaSunseekerEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GlissaSunseekerEffect(), new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }

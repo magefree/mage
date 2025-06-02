@@ -32,10 +32,10 @@ public final class CatalystStone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Flashback costs you pay cost up to {2} less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CatalystStoneCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new CatalystStoneCostReductionEffect()));
 
         // Flashback costs your opponents pay cost {2} more.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CatalystStoneCostRaiseEffect()));
+        this.addAbility(new SimpleStaticAbility(new CatalystStoneCostRaiseEffect()));
 
     }
 
@@ -53,7 +53,7 @@ class CatalystStoneCostReductionEffect extends CostModificationEffectImpl {
 
     CatalystStoneCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.staticText = "Flashback costs you pay cost up to {2} less";
+        this.staticText = "Flashback costs you pay cost {2} less";
     }
 
     protected CatalystStoneCostReductionEffect(final CatalystStoneCostReductionEffect effect) {

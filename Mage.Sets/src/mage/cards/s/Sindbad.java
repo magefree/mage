@@ -30,7 +30,7 @@ public final class Sindbad extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Draw a card and reveal it. If it isn't a land card, discard it.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SindbadEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new SindbadEffect(), new TapSourceCost()));
     }
 
     private Sindbad(final Sindbad card) {

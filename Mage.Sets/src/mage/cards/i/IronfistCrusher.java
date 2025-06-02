@@ -27,7 +27,7 @@ public final class IronfistCrusher extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ironfist Crusher can block any number of creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(0)));
         
         // Morph {3}{W}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{W}")));

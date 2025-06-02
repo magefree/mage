@@ -32,11 +32,11 @@ public final class GoblinSharpshooter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Goblin Sharpshooter doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // Whenever a creature dies, untap Goblin Sharpshooter.
         this.addAbility(new DiesCreatureTriggeredAbility(new UntapSourceEffect(), false));
         // {T}: Goblin Sharpshooter deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

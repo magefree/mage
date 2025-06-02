@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CommanderInPlayCondition;
+import mage.abilities.condition.common.ControlYourCommanderCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -41,7 +41,7 @@ public final class SkyhunterStrikeForce extends CardImpl {
                 new GainAbilityControlledEffect(
                         new MeleeAbility(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CONTROLLED_CREATURES, true
-                ), CommanderInPlayCondition.instance, "as long as you control your commander, " +
+                ), ControlYourCommanderCondition.instance, "as long as you control your commander, " +
                 "other creatures you control have melee"
         )).setAbilityWord(AbilityWord.LIEUTENANT));
     }

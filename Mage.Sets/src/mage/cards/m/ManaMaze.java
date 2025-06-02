@@ -26,7 +26,7 @@ public final class ManaMaze extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Players can't cast spells that share a color with the spell most recently cast this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaMazeEffect()), new LastSpellCastWatcher());
+        this.addAbility(new SimpleStaticAbility(new ManaMazeEffect()), new LastSpellCastWatcher());
     }
 
     private ManaMaze(final ManaMaze card) {

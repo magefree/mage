@@ -28,7 +28,7 @@ public final class DosanTheFallingLeaf extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Players can cast spells only during their own turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DosanTheFallingLeafEffect()));
+        this.addAbility(new SimpleStaticAbility(new DosanTheFallingLeafEffect()));
     }
 
     private DosanTheFallingLeaf(final DosanTheFallingLeaf card) {

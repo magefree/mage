@@ -591,7 +591,7 @@ public class GameController implements GameCallback {
                 if (playerId != null) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        game.informPlayers(player.getLogName() + " want to concede");
+                        game.informPlayers(player.getLogName() + " wants to concede");
                         game.setConcedingPlayer(getPlayerId(userId));
                     }
                 }
@@ -786,23 +786,23 @@ public class GameController implements GameCallback {
     }
 
     public void sendPlayerUUID(UUID userId, final UUID data) {
-        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerUUID(data));
+        sendMessage(userId, playerId -> sendDirectPlayerUUID(playerId, data));
     }
 
     public void sendPlayerString(UUID userId, final String data) {
-        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerString(data));
+        sendMessage(userId, playerId -> sendDirectPlayerString(playerId, data));
     }
 
     public void sendPlayerManaType(UUID userId, final UUID manaTypePlayerId, final ManaType data) {
-        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerManaType(data, manaTypePlayerId));
+        sendMessage(userId, playerId -> sendDirectPlayerManaType(playerId, manaTypePlayerId, data));
     }
 
     public void sendPlayerBoolean(UUID userId, final Boolean data) {
-        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerBoolean(data));
+        sendMessage(userId, playerId -> sendDirectPlayerBoolean(playerId, data));
     }
 
     public void sendPlayerInteger(UUID userId, final Integer data) {
-        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerInteger(data));
+        sendMessage(userId, playerId -> sendDirectPlayerInteger(playerId, data));
     }
 
     private void updatePriorityTimers() {
@@ -906,14 +906,14 @@ public class GameController implements GameCallback {
         perform(playerId, playerId1 -> getGameSession(playerId1).getMultiAmount(messages, min, max, options));
     }
 
-    private void informOthers(UUID playerId) {
+    private void informOthers(UUID waitingPlayerId) {
         StringBuilder message = new StringBuilder();
         if (game.getStep() != null) {
             message.append(game.getTurnStepType().toString()).append(" - ");
         }
-        message.append("Waiting for ").append(game.getPlayer(playerId).getLogName());
+        message.append("Waiting for ").append(game.getPlayer(waitingPlayerId).getLogName());
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
-            if (!entry.getKey().equals(playerId)) {
+            if (!entry.getKey().equals(waitingPlayerId)) {
                 entry.getValue().inform(message.toString());
             }
         }
@@ -1030,7 +1030,7 @@ public class GameController implements GameCallback {
         // TODO: if watcher disconnects then game freezes with active timer, must be fix for such use case
         //  same for another player (can be fixed by super-duper connection)
         if (informOthers) {
-            informOthers(playerId);
+            informOthers(realPlayerController.getId());
         }
     }
 
@@ -1055,7 +1055,8 @@ public class GameController implements GameCallback {
             } else {
                 // otherwise execute the action under other player's control
                 for (UUID controlled : player.getPlayersUnderYourControl()) {
-                    if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
+                    Player controlledPlayer = game.getPlayer(controlled);
+                    if ((gameSessions.containsKey(controlled) || controlledPlayer.isComputer()) && game.getPriorityPlayerId().equals(controlled)) {
                         stopResponseIdleTimeout();
                         command.execute(controlled);
                     }
@@ -1098,7 +1099,6 @@ public class GameController implements GameCallback {
 
     @FunctionalInterface
     interface Command {
-
         void execute(UUID player);
     }
 
@@ -1136,6 +1136,81 @@ public class GameController implements GameCallback {
             r.unlock();
         }
         return newGameSessionWatchers;
+    }
+
+    private void sendDirectPlayerUUID(UUID playerId, UUID data) {
+        // real player
+        GameSessionPlayer session = getGameSession(playerId);
+        if (session != null) {
+            session.sendPlayerUUID(data);
+            return;
+        }
+
+        // computer under control
+        Player player = game.getPlayer(playerId);
+        if (player != null && player.isComputer()) {
+            player.setResponseUUID(data);
+        }
+    }
+
+    private void sendDirectPlayerString(UUID playerId, String data) {
+        // real player
+        GameSessionPlayer session = getGameSession(playerId);
+        if (session != null) {
+            session.sendPlayerString(data);
+            return;
+        }
+
+        // computer under control
+        Player player = game.getPlayer(playerId);
+        if (player != null && player.isComputer()) {
+            player.setResponseString(data);
+        }
+    }
+
+    private void sendDirectPlayerManaType(UUID playerId, UUID manaTypePlayerId, ManaType manaType) {
+        // real player
+        GameSessionPlayer session = getGameSession(playerId);
+        if (session != null) {
+            session.sendPlayerManaType(manaTypePlayerId, manaType);
+            return;
+        }
+
+        // computer under control
+        Player player = game.getPlayer(playerId);
+        if (player != null && player.isComputer()) {
+            player.setResponseManaType(manaTypePlayerId, manaType);
+        }
+    }
+
+    private void sendDirectPlayerBoolean(UUID playerId, Boolean data) {
+        // real player
+        GameSessionPlayer session = getGameSession(playerId);
+        if (session != null) {
+            session.sendPlayerBoolean(data);
+            return;
+        }
+
+        // computer under control
+        Player player = game.getPlayer(playerId);
+        if (player != null && player.isComputer()) {
+            player.setResponseBoolean(data);
+        }
+    }
+
+    private void sendDirectPlayerInteger(UUID playerId, Integer data) {
+        // real player
+        GameSessionPlayer session = getGameSession(playerId);
+        if (session != null) {
+            session.sendPlayerInteger(data);
+            return;
+        }
+
+        // computer under control
+        Player player = game.getPlayer(playerId);
+        if (player != null && player.isComputer()) {
+            player.setResponseInteger(data);
+        }
     }
 
     private GameSessionPlayer getGameSession(UUID playerId) {

@@ -20,7 +20,7 @@ public final class SphereOfDuty extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // If a green source would deal damage to you, prevent 2 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageByColorEffect(ObjectColor.GREEN, 2)));
+        this.addAbility(new SimpleStaticAbility(new PreventDamageByColorEffect(ObjectColor.GREEN, 2)));
     }
 
     private SphereOfDuty(final SphereOfDuty card) {

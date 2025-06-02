@@ -7,7 +7,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetAnyTargetAmount;
 
 /**
@@ -20,7 +19,7 @@ public final class VolleyOfBoulders extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{R}");
 
         // Volley of Boulders deals 6 damage divided as you choose among any number of targets.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(6));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(6));
         // Flashback {R}{R}{R}{R}{R}{R}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{R}{R}{R}{R}{R}{R}")));

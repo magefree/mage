@@ -32,12 +32,10 @@ public final class Lithatog extends CardImpl {
 
         // Sacrifice an artifact: Lithatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT)));
         // Sacrifice a land: Lithatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
                 new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
     }

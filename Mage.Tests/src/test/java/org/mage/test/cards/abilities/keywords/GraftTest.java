@@ -1,5 +1,3 @@
-
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -59,7 +57,6 @@ public class GraftTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Sporeback Troll", 1);
         assertPowerToughness(playerA, "Sporeback Troll", 2, 2);
         assertCounterCount("Sporeback Troll", CounterType.P1P1, 2);
-
     }
 
     @Test
@@ -102,6 +99,5 @@ public class GraftTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Cytoplast Root-Kin", 4, 4);
         assertCounterCount("Sporeback Troll", CounterType.P1P1, 2);
         assertCounterCount("Cytoplast Root-Kin", CounterType.P1P1, 4);
-    }   
-    
+    }
 }

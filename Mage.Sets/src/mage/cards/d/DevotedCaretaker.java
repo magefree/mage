@@ -26,7 +26,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class DevotedCaretaker extends CardImpl {
     
-    private static final FilterSpell filter = new FilterSpell("instant spells and sorcery spells");
+    private static final FilterSpell filter = new FilterSpell("instant spells and from sorcery spells");
     
     static{
         filter.add(Predicates.or(CardType.SORCERY.getPredicate(), CardType.INSTANT.getPredicate()));
@@ -41,7 +41,7 @@ public final class DevotedCaretaker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, {tap}: Target permanent you control gains protection from instant spells and from sorcery spells until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetControlledPermanent();
         ability.addTarget(target);

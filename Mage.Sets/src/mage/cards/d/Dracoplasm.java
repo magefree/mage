@@ -44,7 +44,7 @@ public final class Dracoplasm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new DracoplasmEffect()));
 
         // {R}: Dracoplasm gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     private Dracoplasm(final Dracoplasm card) {
@@ -118,6 +118,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
         }
         ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield);
         game.addEffect(effect, source);
+        this.discard(); // prevent multiple replacements e.g. on blink
         return false;
     }
 }

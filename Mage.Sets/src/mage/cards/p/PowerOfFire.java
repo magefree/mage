@@ -41,9 +41,9 @@ public final class PowerOfFire extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has "{tap}: This creature deals 1 damage to any target."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         gainedAbility.addTarget(new TargetAnyTarget());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, 
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, 
         "Enchanted creature has \"{T}: This creature deals 1 damage to any target.\"")));
         
     }
@@ -57,4 +57,3 @@ public final class PowerOfFire extends CardImpl {
         return new PowerOfFire(this);
     }
 }
-

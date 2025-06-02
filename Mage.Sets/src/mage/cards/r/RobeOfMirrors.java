@@ -33,7 +33,7 @@ public final class RobeOfMirrors extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private RobeOfMirrors(final RobeOfMirrors card) {

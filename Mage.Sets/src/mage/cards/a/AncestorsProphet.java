@@ -36,7 +36,7 @@ public final class AncestorsProphet extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Tap five untapped Clerics you control: You gain 10 life.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainLifeEffect(10),
                 new TapTargetCost(new TargetControlledPermanent(5, 5, filter, true)));
         this.addAbility(ability);

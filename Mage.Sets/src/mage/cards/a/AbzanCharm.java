@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -43,7 +42,7 @@ public final class AbzanCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // *Distribute two +1/+1 counters among one or two target creatures.
-        mode = new Mode(new DistributeCountersEffect(CounterType.P1P1, 2, false, "one or two target creatures"));
+        mode = new Mode(new DistributeCountersEffect());
         mode.addTarget(new TargetCreaturePermanentAmount(2));
         this.getSpellAbility().addMode(mode);
 

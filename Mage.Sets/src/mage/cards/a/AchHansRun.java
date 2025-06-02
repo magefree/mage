@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -21,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public final class AchHansRun extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}{G}{G}");
 
         // At the beginning of your upkeep, you may say "Ach! Hans, run! It’s the …" and the name of a creature card. If you do, search your library for a card with that name, put it onto the battlefield, then shuffle your library. That creature gains haste. Exile it at the beginning of the next end step.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AchHansRunEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AchHansRunEffect(), true));
     }
 
     private AchHansRun(final AchHansRun card) {
@@ -82,7 +83,7 @@ class AchHansRunEffect extends OneShotEffect {
         if (card == null || !controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
-        Permanent creature = game.getPermanent(card.getId());
+        Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (creature == null) {
             return false;
         }

@@ -3,7 +3,7 @@ package mage.cards.u;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -27,7 +27,7 @@ public final class UnnaturalGrowth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}{G}{G}");
 
         // At the beginning of each combat, double the power and toughness of each creature you control until end of turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new UnnaturalGrowthEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new UnnaturalGrowthEffect(), false));
     }
 
     private UnnaturalGrowth(final UnnaturalGrowth card) {

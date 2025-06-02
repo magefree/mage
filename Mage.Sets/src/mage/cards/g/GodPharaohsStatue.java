@@ -1,6 +1,6 @@
 package mage.cards.g;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
@@ -28,7 +28,7 @@ public final class GodPharaohsStatue extends CardImpl {
 
         // At the beginning of your end step, each opponent loses 1 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeOpponentsEffect(1), TargetController.YOU, false
+                new LoseLifeOpponentsEffect(1)
         ));
     }
 

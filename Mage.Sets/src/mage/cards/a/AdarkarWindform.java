@@ -29,7 +29,7 @@ public final class AdarkarWindform extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{S}: Target creature loses flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilityTargetEffect(
+        Ability ability = new SimpleActivatedAbility(new LoseAbilityTargetEffect(
             FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{S}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

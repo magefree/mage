@@ -43,7 +43,7 @@ public final class GalvanicArc extends CardImpl {
         triggeredAbility.addTarget(new TargetAnyTarget());
         this.addAbility(triggeredAbility);
         // Enchanted creature has first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private GalvanicArc(final GalvanicArc card) {

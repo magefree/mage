@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
@@ -36,8 +36,7 @@ public final class HarvesttideSentry extends CardImpl {
         // Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, Harvesttide Sentry can't be blocked by creatures with power 2 or less this turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn),
-                        TargetController.YOU, false
+                        new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn)
                 ), CovenCondition.instance, "At the beginning of combat on your turn, " +
                 "if you control three or more creatures with different powers, " +
                 "{this} can't be blocked by creatures with power 2 or less this turn."

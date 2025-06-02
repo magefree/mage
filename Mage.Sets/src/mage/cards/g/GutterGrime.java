@@ -48,6 +48,7 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
     public GutterGrimeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.SLIME.createInstance()), false);
         this.addEffect(new GutterGrimeEffect());
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private GutterGrimeTriggeredAbility(final GutterGrimeTriggeredAbility ability) {
@@ -82,6 +83,11 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a nontoken creature you control dies, put a slime counter on {this}, then create a green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on {this}.\"";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 

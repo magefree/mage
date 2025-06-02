@@ -36,7 +36,7 @@ public final class WonderscapeSage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {T}, Return a land you control to its owner's hand: Draw a card. Then discard a card unless that land had a nonbasic land type.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WonderscapeSageEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new WonderscapeSageEffect(), new TapSourceCost());
         ability.addCost(new WonderscapeSageReturnCost());
         this.addAbility(ability);
     }

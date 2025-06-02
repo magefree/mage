@@ -30,10 +30,10 @@ public final class ThousandYearElixir extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // You may activate abilities of creatures you control as though those creatures had haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThousandYearElixirEffect()));
+        this.addAbility(new SimpleStaticAbility(new ThousandYearElixirEffect()));
 
         // {1}, {tap}: Untap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

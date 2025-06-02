@@ -74,7 +74,6 @@ class ThrashingFrontlinerTriggeredAbility extends TriggeredAbilityImpl {
                 .ofNullable(this.getSourceId())
                 .map(game.getCombat()::getDefenderId)
                 .map(game::getPermanent)
-                .filter(Objects::nonNull)
                 .map(permanent -> permanent.isBattle(game))
                 .orElse(false);
     }

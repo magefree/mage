@@ -50,6 +50,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     private CardRenderer cardRenderer;
 
     private int updateArtImageStamp;
+    private final int cardRenderMode;
 
     private static class ImageKey {
         final BufferedImage artImage;
@@ -84,7 +85,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             sb.append((char) (this.view.isCanAttack() ? 1 : 0));
             sb.append((char) (this.view.isCanBlock() ? 1 : 0));
             sb.append((char) (this.view.isFaceDown() ? 1 : 0));
-            sb.append((char) this.view.getFrameStyle().ordinal());
+            sb.append((char) (this.view.getFrameStyle() != null ? this.view.getFrameStyle().ordinal() : -1));
             if (this.view instanceof PermanentView) {
                 sb.append((char) (((PermanentView) this.view).hasSummoningSickness() ? 1 : 0));
                 sb.append((char) (((PermanentView) this.view).getDamage()));
@@ -143,12 +144,13 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     }
 
     public CardPanelRenderModeMTGO(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback,
-                                   final boolean foil, Dimension dimension, boolean needFullPermanentRender) {
+                                   final boolean foil, Dimension dimension, boolean needFullPermanentRender, int renderMode) {
         // Call to super
         super(newGameCard, gameId, loadImage, callback, foil, dimension, needFullPermanentRender);
 
         // Renderer
-        cardRenderer = cardRendererFactory.create(getGameCard());
+        cardRenderMode = renderMode;
+        cardRenderer = cardRendererFactory.create(getGameCard(), cardRenderMode);
 
         // Draw the parts
         initialDraw();
@@ -265,7 +267,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
 
         // Update renderer
         cardImage = null;
-        cardRenderer = cardRendererFactory.create(getGameCard());
+        cardRenderer = cardRendererFactory.create(getGameCard(), cardRenderMode);
         cardRenderer.setArtImage(artImage);
 
         // Repaint

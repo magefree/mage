@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class DragonscaleGeneral extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your end step, bolster X, where X is the number of tapped creatures you control.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BolsterEffect(new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BolsterEffect(new PermanentsOnBattlefieldCount(filter))));
     }
 
     private DragonscaleGeneral(final DragonscaleGeneral card) {

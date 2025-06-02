@@ -19,7 +19,7 @@ public final class TempleBell extends CardImpl {
 
     public TempleBell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardAllEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardAllEffect(1), new TapSourceCost()));
     }
 
     private TempleBell(final TempleBell card) {

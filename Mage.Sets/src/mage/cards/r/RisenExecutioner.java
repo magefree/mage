@@ -45,7 +45,7 @@ public final class RisenExecutioner extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // Other Zombie creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // You may cast Risen Executioner from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new RisenExecutionerCastEffect())

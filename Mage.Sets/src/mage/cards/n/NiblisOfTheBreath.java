@@ -32,7 +32,7 @@ public final class NiblisOfTheBreath extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // {U}, {tap}: You may tap or untap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new MayTapOrUntapTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

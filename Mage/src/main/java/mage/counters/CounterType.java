@@ -22,6 +22,7 @@ public enum CounterType {
     ARROW("arrow"),
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
+    BAIT("bait"),
     BLAZE("blaze"),
     BLESSING("blessing"),
     BLIGHT("blight"),
@@ -37,6 +38,7 @@ public enum CounterType {
     BURDEN("burden"),
     CAGE("cage"),
     CARRION("carrion"),
+    CELL("cell"),
     CHARGE("charge"),
     CHIP("chip"),
     CHORUS("chorus"),
@@ -53,6 +55,7 @@ public enum CounterType {
     CURRENCY("currency"),
     DEATH("death"),
     DEATHTOUCH("deathtouch"),
+    DECAYED("decayed"),
     DEFENSE("defense"),
     DELAY("delay"),
     DEPLETION("depletion"),
@@ -79,6 +82,8 @@ public enum CounterType {
     FADE("fade"),
     FATE("fate"),
     FEATHER("feather"),
+    FEEDING("feeding"),
+    FELLOWSHIP("fellowship"),
     FETCH("fetch"),
     FILIBUSTER("filibuster"),
     FINALITY("finality"),
@@ -112,6 +117,7 @@ public enum CounterType {
     ICE("ice"),
     IMPOSTOR("impostor"),
     INCARNATION("incarnation"),
+    INCUBATION("incubation"),
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
     INFLUENCE("influence"),
@@ -180,11 +186,13 @@ public enum CounterType {
     PREY("prey"),
     PUPA("pupa"),
     RAD("rad"),
+    RALLY("rally"),
     REACH("reach"),
     REJECTION("rejection"),
     REPAIR("repair"),
     REPRIEVE("reprieve"),
     REV("rev"),
+    REVIVAL("revival"),
     RIBBON("ribbon"),
     RITUAL("ritual"),
     ROPE("rope"),
@@ -212,6 +220,7 @@ public enum CounterType {
     STUN("stun"),
     SUPPLY("supply"),
     SUSPECT("suspect"),
+    TAKEOVER("takeover"),
     TASK("task"),
     THEFT("theft"),
     TIDE("tide"),
@@ -309,6 +318,8 @@ public enum CounterType {
                 return new BoostCounter(-2, -2, amount);
             case DEATHTOUCH:
                 return new AbilityCounter(DeathtouchAbility.getInstance(), amount);
+            case DECAYED:
+                return new AbilityCounter(new DecayedAbility(), amount);
             case DOUBLE_STRIKE:
                 return new AbilityCounter(DoubleStrikeAbility.getInstance(), amount);
             case EXALTED:

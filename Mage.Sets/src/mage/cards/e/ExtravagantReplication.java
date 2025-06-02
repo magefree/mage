@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class ExtravagantReplication extends CardImpl {
 
         // At the beginning of your upkeep, create a token that's a copy of another target nonland permanent you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenCopyTargetEffect(), TargetController.YOU, false
+                new CreateTokenCopyTargetEffect()
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

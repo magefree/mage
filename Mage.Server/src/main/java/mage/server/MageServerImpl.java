@@ -29,7 +29,6 @@ import mage.server.managers.ManagerFactory;
 import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ServerMessagesUtil;
-import mage.utils.SystemUtil;
 import mage.utils.*;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
@@ -223,15 +222,12 @@ public class MageServerImpl implements MageServer {
                         throw new MageException("No message");
                     }
 
-                    // check AI players max
+                    // limit number of workable AI opponents (draft bots are unlimited)
                     String maxAiOpponents = managerFactory.configSettings().getMaxAiOpponents();
                     if (maxAiOpponents != null) {
-                        int aiPlayers = 0;
-                        for (PlayerType playerType : options.getPlayerTypes()) {
-                            if (playerType != PlayerType.HUMAN) {
-                                aiPlayers++;
-                            }
-                        }
+                        int aiPlayers = options.getPlayerTypes().stream()
+                                .mapToInt(t -> t.isAI() && t.isWorkablePlayer() ? 1 : 0)
+                                .sum();
                         int max = Integer.parseInt(maxAiOpponents);
                         if (aiPlayers > max) {
                             user.showUserMessage("Create tournament", "It's only allowed to use a maximum of " + max + " AI players.");
@@ -325,7 +321,7 @@ public class MageServerImpl implements MageServer {
                 UUID userId = session.get().getUserId();
                 if (logger.isTraceEnabled()) {
                     Optional<User> user = managerFactory.userManager().getUser(userId);
-                    user.ifPresent(user1 -> logger.trace("join tourn. tableId: " + tableId + ' ' + name));
+                    user.ifPresent(user1 -> logger.trace("join tourney tableId: " + tableId + ' ' + name));
                 }
                 if (userId == null) {
                     logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
@@ -1001,10 +997,18 @@ public class MageServerImpl implements MageServer {
     }
 
     public void handleException(Exception ex) throws MageException {
-        if (!ex.getMessage().equals("No message")) {
-            logger.fatal("", ex);
-            throw new MageException("Server error: " + ex.getMessage());
+        if (ex.getMessage() != null && !ex.getMessage().equals("No message")) {
+            throw new MageException(ex.getMessage());
         }
+
+        if (ex instanceof ConcurrentModificationException) {
+            // how-to fix: game objects must be accessible by game thread only, all other threads must work with copies
+            logger.error("wrong threads sync error", ex);
+        } else {
+            // TODO: on logs spamming (e.g. connection problems) move it inside condition block above
+            logger.error("unknown error", ex);
+        }
+
     }
 
     @Override
@@ -1292,29 +1296,30 @@ public class MageServerImpl implements MageServer {
 
         @Override
         public TableView execute() throws MageException {
-            Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
-            if (!session.isPresent()) {
+            Session session = managerFactory.sessionManager().getSession(sessionId).orElse(null);
+            if (session == null) {
                 return null;
             }
-            UUID userId = session.get().getUserId();
-            Optional<User> _user = managerFactory.userManager().getUser(userId);
-            if (!_user.isPresent()) {
-                logger.error("User for session not found. session = " + sessionId);
+            UUID userId = session.getUserId();
+            User user = managerFactory.userManager().getUser(userId).orElse(null);
+            if (user == null) {
                 return null;
             }
-            User user = _user.get();
+
             // check if user can create another table
             int notStartedTables = user.getNumberOfNotStartedTables();
             if (notStartedTables > 1) {
                 user.showUserMessage("Create table", "You have already " + notStartedTables + " not started tables. You can't create another.");
-                throw new MageException("No message");
+                throw new MageException("User " + user.getName() + " can't create table: too much started");
             }
+
             // check if the user itself satisfies the quitRatio requirement.
             int quitRatio = options.getQuitRatio();
             if (quitRatio < user.getMatchQuitRatio()) {
                 user.showUserMessage("Create table", "Your quit ratio " + user.getMatchQuitRatio() + "% is higher than the table requirement " + quitRatio + '%');
-                throw new MageException("No message");
+                throw new MageException("User " + user.getName() + " can't create table: incompatible quit ratio");
             }
+
             // check if the user satisfies the minimumRating requirement.
             int minimumRating = options.getMinimumRating();
             int userRating;
@@ -1326,20 +1331,15 @@ public class MageServerImpl implements MageServer {
             if (userRating < minimumRating) {
                 String message = new StringBuilder("Your rating ").append(userRating).append(" is lower than the table requirement ").append(minimumRating).toString();
                 user.showUserMessage("Create table", message);
-                throw new MageException("No message");
+                throw new MageException("User " + user.getName() + " can't create table: incompatible rating");
             }
-            Optional<GamesRoom> room = managerFactory.gamesRoomManager().getRoom(roomId);
-            if (room.isPresent()) {
-                TableView table = room.get().createTable(userId, options);
-                if (logger.isDebugEnabled()) {
-                    logger.debug("TABLE created - tableId: " + table.getTableId() + ' ' + table.getTableName());
-                    logger.debug("- " + user.getName() + " userId: " + user.getId());
-                    logger.debug("- chatId: " + managerFactory.tableManager().getChatId(table.getTableId()));
-                }
-                return table;
-            } else {
+
+            GamesRoom room = managerFactory.gamesRoomManager().getRoom(roomId).orElse(null);
+            if (room == null) {
                 return null;
             }
+
+            return room.createTable(userId, options);
         }
     }
 

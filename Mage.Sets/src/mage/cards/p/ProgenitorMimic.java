@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.util.functions.AbilityCopyApplier;
@@ -46,7 +45,7 @@ public final class ProgenitorMimic extends CardImpl {
 
         AbilityCopyApplier applier = new AbilityCopyApplier(
                 new ConditionalInterveningIfTriggeredAbility(
-                        new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false),
+                        new BeginningOfUpkeepTriggeredAbility(effect),
                         new SourceMatchesFilterCondition(filter),
                         "At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature.")
         );

@@ -34,7 +34,7 @@ public final class Riddleform extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_A_NON_CREATURE, true));
 
         // {2}{U}: Scry 1.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(1), new ManaCostsImpl<>("{2}{U}"));
         this.addAbility(ability);
     }
 

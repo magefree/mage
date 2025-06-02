@@ -29,7 +29,7 @@ public final class ElvishHerder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}: Target creature gains trample until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
             TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
        ability.addTarget(new TargetCreaturePermanent());
        this.addAbility(ability);

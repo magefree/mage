@@ -37,7 +37,7 @@ public final class WindwrightMage extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         // Windwright Mage has flying as long as an artifact card is in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
                 WindwrightMageCondition.instance,
                 "{this} has flying as long as an artifact card is in your graveyard")));

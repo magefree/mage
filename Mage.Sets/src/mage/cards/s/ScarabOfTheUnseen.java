@@ -36,7 +36,7 @@ public final class ScarabOfTheUnseen extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {T}, Sacrifice Scarab of the Unseen: Return all Auras attached to target permanent you own to their owners’ hands. Draw a card at the beginning of the next turn’s upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScarabOfTheUnseenEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ScarabOfTheUnseenEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));

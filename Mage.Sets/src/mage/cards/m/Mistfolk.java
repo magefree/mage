@@ -2,7 +2,6 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -17,8 +16,8 @@ import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.target.Target;
 import mage.target.TargetSpell;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -69,13 +68,10 @@ enum MistfolkPredicate implements ObjectSourcePlayerPredicate<Spell> {
         if (sourceObject == null || input.getObject() == null) {
             return false;
         }
+
         for (SpellAbility spellAbility : input.getObject().getSpellAbilities()) {
-            for (Mode mode : spellAbility.getModes().values()) {
-                for (Target target : spellAbility.getTargets()) {
-                    if (target.getTargets().contains(input.getSourceId())) {
-                        return true;
-                    }
-                }
+            if (CardUtil.getAllSelectedTargets(spellAbility, game).contains(input.getSourceId())) {
+                return true;
             }
         }
         return false;

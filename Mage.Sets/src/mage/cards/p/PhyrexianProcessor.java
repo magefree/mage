@@ -8,6 +8,7 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.MinionToken;
+import mage.game.permanent.token.PhyrexianMinionToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -73,7 +74,7 @@ class PhyrexianProcessorPayLifeEffect extends OneShotEffect {
         if (controller == null || permanent == null) {
             return false;
         }
-        int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", game);
+        int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", source, game);
         Cost cost = new PayLifeCost(payAmount);
         if (!cost.pay(source, game, source, source.getControllerId(), true)) {
             return false;
@@ -110,12 +111,8 @@ class PhyrexianProcessorCreateTokenEffect extends OneShotEffect {
         String key = CardUtil.getCardZoneString("lifePaid", source.getSourceId(), game, true);
         Object object = game.getState().getValue(key);
         if (object instanceof Integer) {
-            int lifePaid = (int) object;
-            MinionToken token = new MinionToken();
-            token.setPower(lifePaid);
-            token.setToughness(lifePaid);
-            token.putOntoBattlefield(1, game, source, source.getControllerId());
-            return true;
+            int xvalue = (int) object;
+            return new CreateTokenEffect(new PhyrexianMinionToken(xvalue)).apply(game, source);
         }
         return false;
     }

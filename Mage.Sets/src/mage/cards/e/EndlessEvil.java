@@ -1,10 +1,11 @@
 package mage.cards.e;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.*;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.game.events.GameEvent;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -43,9 +44,7 @@ public final class EndlessEvil extends CardImpl {
 
         // At the beginning of your upkeep, create a token that’s a copy of enchanted creature, except the token is 1/1.
         TriggeredAbility cloneAbility = new BeginningOfUpkeepTriggeredAbility(
-                new EndlessEvilCloneEffect(),
-                TargetController.YOU,
-                false
+                new EndlessEvilCloneEffect()
         );
         this.addAbility(cloneAbility);
 
@@ -99,6 +98,7 @@ class EndlessEvilBounceAbility extends TriggeredAbilityImpl {
 
     public EndlessEvilBounceAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(false, true));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private EndlessEvilBounceAbility(final EndlessEvilBounceAbility effect) {
@@ -127,5 +127,10 @@ class EndlessEvilBounceAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "When enchanted creature dies, if that creature was a Horror, return {this} to its owner's hand.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

@@ -33,7 +33,7 @@ public final class AggressiveMining extends CardImpl {
 
 
         // You can't play lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AggressiveMiningEffect()));
+        this.addAbility(new SimpleStaticAbility(new AggressiveMiningEffect()));
         
         // Sacrifice a land: Draw two cards.  Activate this ability only once each turn.
         Cost cost = new SacrificeTargetCost(StaticFilters.FILTER_LAND);

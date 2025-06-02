@@ -6,17 +6,16 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AffinityType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SuperType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.KnightToken;
 
 import java.util.UUID;
@@ -32,22 +31,13 @@ public final class TheCircleOfLoyalty extends CardImpl {
         filterLegendary.add(SuperType.LEGENDARY.getPredicate());
     }
 
-    static final FilterControlledPermanent filterKnight = new FilterControlledPermanent("Knight you control");
-
-    static {
-        filterKnight.add(SubType.KNIGHT.getPredicate());
-    }
-
     public TheCircleOfLoyalty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}{W}{W}");
 
         this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {1} less to cast for each Knight you control.
-        DynamicValue xValue = new PermanentsOnBattlefieldCount(filterKnight);
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue)
-        ).addHint(new ValueHint("Knight you control", xValue)));
+        this.addAbility(new AffinityAbility(AffinityType.KNIGHTS));
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(

@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class ImaginaryPet extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, if you have a card in hand, return Imaginary Pet to its owner's hand.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new CardsInHandCondition(ComparisonType.MORE_THAN, 0),
             "At the beginning of your upkeep, if you have a card in hand, return {this} to its owner's hand."));
     }

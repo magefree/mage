@@ -29,7 +29,7 @@ public final class LoxodonPunisher extends CardImpl {
 
         // Loxodon Punisher gets +2/+2 for each Equipment attached to it
         EquipmentAttachedCount amount = new EquipmentAttachedCount(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
     }
 
     private LoxodonPunisher(final LoxodonPunisher card) {

@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class RomanaII extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("token that entered the battlefield this turn");
+    private static final FilterPermanent filter = new FilterPermanent("token that entered this turn");
 
     static {
         filter.add(TokenPredicate.TRUE);

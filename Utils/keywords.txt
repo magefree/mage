@@ -1,3 +1,4 @@
+Affinity for artifacts|new|
 Afflict|number|
 Afterlife|number|
 Annihilator|number|
@@ -24,6 +25,7 @@ Cycling|cost|
 Dash|manaString|
 Daybound|new|
 Deathtouch|instance|
+Decayed|new|
 Demonstrate|new|
 Delve|new|
 Dethrone|new|
@@ -62,6 +64,7 @@ For Mirrodin!|new|
 Freerunning|manaString|
 Friends forever|instance|
 Gift|card|
+Harmonize|card, manaString|
 Haste|instance|
 Hexproof|instance|
 Hideaway|number|
@@ -73,6 +76,7 @@ Intimidate|instance|
 Ingest|new|
 Islandcycling|cost|
 Islandwalk|new|
+Job select|new|
 Jump-start|card|
 Kicker|manaString|
 Level up|cost|
@@ -84,6 +88,7 @@ Melee|new|
 Menace|new|
 Mentor|new|
 Miracle|manaString|
+Mobilize|number|
 Modular|card, number|
 Mountaincycling|cost|
 Mountainwalk|new|
@@ -122,12 +127,14 @@ Skulk|new|
 Spectacle|card, cost|
 Spree|card|
 Squad|cost|
+Start your engines!|new|
 Storm|new|
 Sunburst|new|
 Suspend|number, cost, card|
 Swampcycling|cost|
 Swampwalk|new|
 Umbra armor|new|
+Tiered|card|
 Toxic|number|
 Training|new|
 Trample|instance|

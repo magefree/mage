@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageWithExcessEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class RavenousTyrannosaurus extends CardImpl {
         this.addAbility(new DevourAbility(3));
 
         // Whenever Ravenous Tyrannosaurus attacks, it deals damage equal to its power to up to one other target creature. Excess damage is dealt to that creature's controller instead.
-        Ability ability = new AttacksTriggeredAbility(new DamageWithExcessEffect(new SourcePermanentPowerCount(false))
+        Ability ability = new AttacksTriggeredAbility(new DamageWithExcessEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("it deals damage equal to its power to up to one other target creature. Excess damage is dealt to that creature's controller instead."));
         ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
         this.addAbility(ability);

@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -57,7 +57,7 @@ public final class RadiantScrollwielder extends CardImpl {
 
         // At the beginning of your upkeep, exile an instant or sorcery card at random from your graveyard. You may cast it this turn. If a spell cast this way would be put into your graveyard, exile it instead.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new RadiantScrollwielderEffect(), TargetController.YOU, false
+                new RadiantScrollwielderEffect()
         ), new RadiantScrollwielderWatcher());
     }
 
@@ -159,12 +159,12 @@ class RadiantScrollwielderWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
         morMap.put(
                 new MageObjectReference(event.getSourceId(), game),
-                event.getAdditionalReference().getApprovingMageObjectReference()
+                event.getApprovingObject().getApprovingMageObjectReference()
         );
     }
 

@@ -41,10 +41,10 @@ public final class OketraTheTrue extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // Oketra the True can't attack or block unless you control three or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OketraTheTrueRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new OketraTheTrueRestrictionEffect()));
 
         // {3}{W}: Create a 1/1 white Warrior creature token with vigilance.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WarriorVigilantToken()), new ManaCostsImpl<>("{3}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new WarriorVigilantToken()), new ManaCostsImpl<>("{3}{W}")));
     }
 
     private OketraTheTrue(final OketraTheTrue card) {

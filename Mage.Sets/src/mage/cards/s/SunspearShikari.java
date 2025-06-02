@@ -33,7 +33,7 @@ public final class SunspearShikari extends CardImpl {
         // As long as Sunspear Shikari is equipped, it has first strike and lifelink.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), 
                 EquippedSourceCondition.instance, "As long as {this} is equipped, it has first strike");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), 
                 EquippedSourceCondition.instance, "and lifelink");
         ability.addEffect(effect2);

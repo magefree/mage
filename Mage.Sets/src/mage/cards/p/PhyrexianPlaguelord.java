@@ -34,14 +34,14 @@ public final class PhyrexianPlaguelord extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {tap}, Sacrifice Phyrexian Plaguelord: Target creature gets -4/-4 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(-4, -4, Duration.EndOfTurn),
                 new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Sacrifice a creature: Target creature gets -1/-1 until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(-1, -1, Duration.EndOfTurn),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetCreaturePermanent());

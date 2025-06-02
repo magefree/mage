@@ -42,13 +42,13 @@ public final class FirewakeSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Sliver creatures have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
 
         // All Slivers have "{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(1));
+        Ability gainedAbility = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(1));
         gainedAbility.addCost(new SacrificeSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent(targetSliverFilter));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 gainedAbility, Duration.WhileOnBattlefield,
                 filter, "All Slivers have \"{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn.\"")));
 

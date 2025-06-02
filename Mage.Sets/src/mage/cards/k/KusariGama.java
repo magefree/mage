@@ -39,10 +39,10 @@ public final class KusariGama extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{2}: This creature gets +1/+0 until end of turn."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2));
+        Ability gainedAbility = new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has \"{2}: This creature gets +1/+0 until end of turn.\"");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         this.addAbility(ability);
         // Whenever equipped creature deals damage to a blocking creature, Kusari-Gama deals that much damage to each other creature defending player controls.
         this.addAbility(new KusariGamaAbility());

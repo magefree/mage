@@ -35,7 +35,7 @@ public final class Defang extends CardImpl {
         this.addAbility(ability);
 
         // Prevent all damage that would be dealt by enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
     }
 
     private Defang(final Defang card) {

@@ -39,7 +39,7 @@ public final class JolraelEmpressOfBeasts extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{G}, {tap}, Discard two cards: All lands target player controls become 3/3 creatures until end of turn. They're still lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JolraelEmpressOfBeastsEffect(), new ManaCostsImpl<>("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new JolraelEmpressOfBeastsEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         ability.addTarget(new TargetPlayer());

@@ -40,11 +40,11 @@ public final class Godsend extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 3, Duration.WhileOnBattlefield)));
         // Whenever equipped creature blocks or becomes blocked by one or more creatures, you may exile one of those creatures.
         this.addAbility(new GodsendTriggeredAbility());
         // Opponents can't cast cards with the same name as cards exiled with Godsend.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GodsendRuleModifyingEffect()));
+        this.addAbility(new SimpleStaticAbility(new GodsendRuleModifyingEffect()));
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }
@@ -167,7 +167,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
     GodsendRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Your opponents can't cast cards with the same name as cards exiled with {this}";
+        staticText = "Your opponents can't cast spells with the same name as a card exiled with {this}";
     }
 
     private GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {

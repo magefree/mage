@@ -46,7 +46,7 @@ public final class SpiritBonds extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{W}")), StaticFilters.FILTER_CREATURE_NON_TOKEN, false));
 
         // {1}{W}, Sacrifice a Spirit: Target non-Spirit creature gains indestructible until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new SacrificeTargetCost(filterSpirit));
         ability.addTarget(new TargetCreaturePermanent(filter));

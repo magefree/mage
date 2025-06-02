@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CommittedCrimeCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -41,7 +41,7 @@ public final class OkoTheRingleader extends CardImpl {
 
         // At the beginning of combat on your turn, Oko, the Ringleader becomes a copy of up to one target creature you control until end of turn, except he has hexproof.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new OkoTheRingleaderCopySelfEffect(), TargetController.YOU, false
+                new OkoTheRingleaderCopySelfEffect()
         );
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);

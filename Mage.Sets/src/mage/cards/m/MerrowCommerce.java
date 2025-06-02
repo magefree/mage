@@ -2,7 +2,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class MerrowCommerce extends CardImpl {
 
 
         // At the beginning of your end step, untap all Merfolk you control.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new UntapAllControllerEffect(filter, "untap all Merfolk you control"), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new UntapAllControllerEffect(filter, "untap all Merfolk you control")));
     }
 
     private MerrowCommerce(final MerrowCommerce card) {

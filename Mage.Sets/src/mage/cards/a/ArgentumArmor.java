@@ -28,7 +28,7 @@ public final class ArgentumArmor extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +6/+6.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(6, 6)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(6, 6)));
 
         // Whenever equipped creature attacks, destroy target permanent.
         Ability ability = new AttacksAttachedTriggeredAbility(new DestroyTargetEffect());

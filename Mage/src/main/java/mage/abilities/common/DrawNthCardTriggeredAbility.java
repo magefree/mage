@@ -24,6 +24,14 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
     private final TargetController targetController;
     private final int cardNumber;
 
+    public DrawNthCardTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
+    public DrawNthCardTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, 2);
+    }
+
     public DrawNthCardTriggeredAbility(Effect effect, boolean optional, int cardNumber) {
         this(effect, optional, TargetController.YOU, cardNumber);
     }

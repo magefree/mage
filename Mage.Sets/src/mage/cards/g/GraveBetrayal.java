@@ -2,6 +2,8 @@
 package mage.cards.g;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -53,6 +55,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
 
     public GraveBetrayalTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private GraveBetrayalTriggeredAbility(final GraveBetrayalTriggeredAbility ability) {
@@ -92,6 +95,11 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever a creature you don't control dies, return it to the battlefield under your control with an additional +1/+1 counter on it at the beginning of the next end step. That creature is a black Zombie in addition to its other colors and types.";
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class GraveBetrayalEffect extends OneShotEffect {
@@ -125,7 +133,6 @@ class GraveBetrayalEffect extends OneShotEffect {
         }
         return false;
     }
-
 }
 
 class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {

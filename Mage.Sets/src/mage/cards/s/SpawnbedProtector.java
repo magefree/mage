@@ -2,14 +2,13 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.EldraziScionToken;
@@ -37,7 +36,7 @@ public final class SpawnbedProtector extends CardImpl {
 
         // At the beginning of your end step, return up to one target Eldrazi creature card from your graveyard to your hand. Create two 1/1 colorless Eldrazi Scion creature tokens with "Sacrifice this creature: Add {C}."
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, false
+                new ReturnFromGraveyardToHandTargetEffect()
         );
         ability.addEffect(new CreateTokenEffect(new EldraziScionToken(), 2));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));

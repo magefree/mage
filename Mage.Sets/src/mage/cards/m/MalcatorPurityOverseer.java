@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -48,8 +48,8 @@ public final class MalcatorPurityOverseer extends CardImpl {
 
         // At the beginning of your end step, if three or more artifacts entered the battlefield under your control this turn, create a 3/3 colorless Phyrexian Golem artifact creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new PhyrexianGolemToken()), TargetController.YOU,
-                MalcatorPurityOverseerCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new PhyrexianGolemToken()),
+                false, MalcatorPurityOverseerCondition.instance
         ), new MalcatorPurityOverseerWatcher());
     }
 

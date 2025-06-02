@@ -75,7 +75,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Watchers watchers;
     private Turn turn;
     private TurnMods turnMods; // one time turn modifications (turn, phase or step)
-    private UUID activePlayerId; // playerId which turn it is
+    private UUID activePlayerId; // player which turn it is
     private UUID priorityPlayerId; // player that has currently priority (setup before any choose)
     private UUID playerByOrderId; // player that has currently priority
     private UUID monarchId; // player that is the monarch
@@ -724,7 +724,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
-     *
+     * <p>
      * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList() {
@@ -734,7 +734,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Returns a list of all active players of the game, setting the playerId to
      * the current player of the list.
-     *
+     * <p>
      * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList(UUID playerId) {
@@ -845,6 +845,8 @@ public class GameState implements Serializable, Copyable<GameState> {
             // DAMAGED_BATCH_FOR_PERMANENTS + DAMAGED_BATCH_FOR_ONE_PERMANENT
             addSimultaneousDamageToPermanentBatches((DamagedPermanentEvent) damagedEvent, game);
         }
+        // DAMAGED_BATCH_BY_SOURCE
+        addSimultaneousDamageBySourceBatched(damagedEvent, game);
         // DAMAGED_BATCH_FOR_ALL
         addSimultaneousDamageToBatchForAll(damagedEvent, game);
     }
@@ -892,6 +894,22 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         if (!isSingleBatchUsed) {
             addSimultaneousEvent(new DamagedBatchForOnePermanentEvent(damagedPermanentEvent), game);
+        }
+    }
+
+    public void addSimultaneousDamageBySourceBatched(DamagedEvent damageEvent, Game game) {
+        // find existing batch first
+        boolean isBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchBySourceEvent
+                    && damageEvent.getSourceId().equals(event.getSourceId())) {
+                ((DamagedBatchBySourceEvent) event).addEvent(damageEvent);
+                isBatchUsed = true;
+            }
+        }
+        // new batch if necessary
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchBySourceEvent(damageEvent), game);
         }
     }
 
@@ -957,18 +975,26 @@ public class GameState implements Serializable, Copyable<GameState> {
         // Combine multiple life loss events in the single event (batch)
         // see GameEvent.LOST_LIFE_BATCH
 
-        // existing batch
+        // existing batchs
         boolean isLifeLostBatchUsed = false;
+        boolean isSingleBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
             if (event instanceof LifeLostBatchEvent) {
                 ((LifeLostBatchEvent) event).addEvent(lifeLossEvent);
                 isLifeLostBatchUsed = true;
+            } else if (event instanceof LifeLostBatchForOnePlayerEvent
+                    && event.getTargetId().equals(lifeLossEvent.getTargetId())) {
+                ((LifeLostBatchForOnePlayerEvent) event).addEvent(lifeLossEvent);
+                isSingleBatchUsed = true;
             }
         }
 
         // new batch
         if (!isLifeLostBatchUsed) {
             addSimultaneousEvent(new LifeLostBatchEvent(lifeLossEvent), game);
+        }
+        if (!isSingleBatchUsed) {
+            addSimultaneousEvent(new LifeLostBatchForOnePlayerEvent(lifeLossEvent), game);
         }
     }
 
@@ -1343,8 +1369,9 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param valueId
      * @param value
      */
-    public void setValue(String valueId, Object value) {
+    public <T> T setValue(String valueId, T value) {
         values.put(valueId, value);
+        return value;
     }
 
     /**
@@ -1613,14 +1640,14 @@ public class GameState implements Serializable, Copyable<GameState> {
             copiedParts.add(rightCopied);
             // sync parts
             ((ModalDoubleFacedCard) copiedCard).setParts(leftCopied, rightCopied);
-        } else if (copiedCard instanceof AdventureCard) {
+        } else if (copiedCard instanceof CardWithSpellOption) {
             // right
-            AdventureCardSpell rightOriginal = ((AdventureCard) copiedCard).getSpellCard();
-            AdventureCardSpell rightCopied = rightOriginal.copy();
+            SpellOptionCard rightOriginal = ((CardWithSpellOption) copiedCard).getSpellCard();
+            SpellOptionCard rightCopied = rightOriginal.copy();
             prepareCardForCopy(rightOriginal, rightCopied, newController);
             copiedParts.add(rightCopied);
             // sync parts
-            ((AdventureCard) copiedCard).setParts(rightCopied);
+            ((CardWithSpellOption) copiedCard).setParts(rightCopied);
         }
 
         // main part prepare (must be called after other parts cause it change ids for all)

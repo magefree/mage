@@ -38,7 +38,7 @@ public final class CorrosiveMentor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Black creatures you control have wither.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(WitherAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(WitherAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
     private CorrosiveMentor(final CorrosiveMentor card) {

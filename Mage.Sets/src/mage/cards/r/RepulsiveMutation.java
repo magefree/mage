@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -16,7 +16,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**
- *
  * @author DominionSpy
  */
 public final class RepulsiveMutation extends CardImpl {
@@ -30,10 +29,11 @@ public final class RepulsiveMutation extends CardImpl {
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Then counter up to one target spell unless its controller pays mana equal to the greatest power among creatures you control.
-        getSpellAbility().addEffect(new CounterUnlessPaysEffect(GreatestPowerAmongControlledCreaturesValue.instance)
+        getSpellAbility().addEffect(new CounterUnlessPaysEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
                 .setTargetPointer(new SecondTargetPointer())
                 .setText("Then counter up to one target spell unless its controller pays mana equal to the greatest power among creatures you control."));
         getSpellAbility().addTarget(new TargetSpell(0, 1, StaticFilters.FILTER_SPELL));
+        getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private RepulsiveMutation(final RepulsiveMutation card) {

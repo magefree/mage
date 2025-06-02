@@ -28,7 +28,7 @@ public final class TajuruPreserver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Spells and abilities your opponents control can't cause you to sacrifice permanents.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TajuruPreserverEffect()));
+        this.addAbility(new SimpleStaticAbility(new TajuruPreserverEffect()));
     }
 
     private TajuruPreserver(final TajuruPreserver card) {

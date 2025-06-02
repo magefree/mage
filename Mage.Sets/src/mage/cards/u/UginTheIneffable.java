@@ -124,7 +124,7 @@ class UginTheIneffableEffect extends OneShotEffect {
         // with return ability
         for (UUID addedTokenId : effect.getLastAddedTokenIds()) {
             // display referenced exiled face-down card on token
-            SimpleStaticAbility sa = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("Referenced object: "
+            SimpleStaticAbility sa = new SimpleStaticAbility(new InfoEffect("Referenced object: "
                     + card.getId().toString().substring(0, 3)));
             GainAbilityTargetEffect gainAbilityEffect = new GainAbilityTargetEffect(sa, Duration.WhileOnBattlefield);
             gainAbilityEffect.setTargetPointer(new FixedTarget(addedTokenId));

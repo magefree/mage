@@ -62,6 +62,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
     LiegeOfTheTangleEffect() {
         super(Duration.EndOfGame, Outcome.BecomeCreature);
         staticText = "each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private LiegeOfTheTangleEffect(final LiegeOfTheTangleEffect effect) {

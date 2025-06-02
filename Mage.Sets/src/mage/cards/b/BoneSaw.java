@@ -23,7 +23,7 @@ public final class BoneSaw extends CardImpl {
     public BoneSaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         this.subtype.add(SubType.EQUIPMENT);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
 }
 

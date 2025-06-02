@@ -169,6 +169,7 @@ public class SoulBurnTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Burn", "Craw Wurm");
 
+        setStrictChooseMode(false); // TODO: good test for AI's announceX - duplicate it as AI test (few examples)
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerB, "Craw Wurm", 1);

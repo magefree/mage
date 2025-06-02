@@ -28,7 +28,7 @@ public final class WallOfGlare extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         
         // Wall of Glare can block any number of creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(0)));
     }
 
     private WallOfGlare(final WallOfGlare card) {

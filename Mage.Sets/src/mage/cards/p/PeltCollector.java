@@ -64,6 +64,7 @@ class PeltCollectorTriggeredAbility extends TriggeredAbilityImpl {
 
     PeltCollectorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private PeltCollectorTriggeredAbility(PeltCollectorTriggeredAbility ability) {

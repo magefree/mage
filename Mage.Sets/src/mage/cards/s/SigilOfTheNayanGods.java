@@ -38,7 +38,7 @@ public final class SigilOfTheNayanGods extends CardImpl {
 
         // Enchanted creature gets +1/+1 for each creature you control.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE, 1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)));
 
         // Cycling {G/W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{G/W}")));

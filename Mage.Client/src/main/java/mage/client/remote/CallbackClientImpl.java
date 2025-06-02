@@ -10,6 +10,7 @@ import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.DeckUtil;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
@@ -22,9 +23,12 @@ import mage.util.DebugUtil;
 import mage.view.*;
 import mage.view.ChatMessage.MessageType;
 import org.apache.log4j.Logger;
+import org.mage.card.arcane.ManaSymbols;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.*;
 
 /**
@@ -72,7 +76,7 @@ public class CallbackClientImpl implements CallbackClient {
         SwingUtilities.invokeLater(() -> {
             try {
                 if (DebugUtil.NETWORK_SHOW_CLIENT_CALLBACK_MESSAGES_LOG) {
-                    logger.info("message " + callback.getMessageId() + " - " + callback.getMethod().getType() + " - " + callback.getMethod());
+                    logger.info(callback.getInfo());
                 }
 
                 // process bad connection (events can income in wrong order, so outdated data must be ignored)
@@ -203,11 +207,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case SERVER_MESSAGE: {
                         if (callback.getData() != null) {
                             ChatMessage message = (ChatMessage) callback.getData();
-                            if (message.getColor() == ChatMessage.MessageColor.RED) {
-                                JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
-                            } else {
-                                JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
-                            }
+                            showMessageDialog(null, message.getMessage(), "Server message");
                         }
                         break;
                     }
@@ -401,7 +401,7 @@ public class CallbackClientImpl implements CallbackClient {
                     case SHOW_USERMESSAGE: {
                         List<String> messageData = (List<String>) callback.getData();
                         if (messageData.size() == 2) {
-                            JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
+                            showMessageDialog(null, messageData.get(1), messageData.get(0));
                         }
                         break;
                     }
@@ -420,8 +420,7 @@ public class CallbackClientImpl implements CallbackClient {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message",
-                                    JOptionPane.INFORMATION_MESSAGE);
+                            showMessageDialog(panel, message.getMessage(), "Game message");
                         }
                         break;
                     }
@@ -508,6 +507,18 @@ public class CallbackClientImpl implements CallbackClient {
                 handleException(ex);
             }
         });
+    }
+
+    /**
+     * Show modal message box, so try to use it only for critical errors or global message. As less as possible.
+     */
+    private void showMessageDialog(Component parentComponent, String message, String title) {
+        // convert to html
+        // message - supported
+        // title - not supported
+        message = ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.DIALOG);
+        message = GUISizeHelper.textToHtmlWithSize(message, GUISizeHelper.dialogFont);
+        JOptionPane.showMessageDialog(parentComponent, message, title, JOptionPane.INFORMATION_MESSAGE);
     }
 
     private ActionData appendJsonEvent(String name, UUID gameId, Object value) {

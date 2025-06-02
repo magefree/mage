@@ -20,7 +20,7 @@ public final class NuisanceEngine extends CardImpl {
 
     public NuisanceEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PestToken(), 1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new PestToken(), 1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

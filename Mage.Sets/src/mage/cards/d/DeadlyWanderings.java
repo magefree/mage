@@ -32,7 +32,7 @@ public final class DeadlyWanderings extends CardImpl {
         ContinuousEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield);
         Effect effect = new ConditionalContinuousEffect(boostEffect, new CreatureCountCondition(1, TargetController.YOU),
                 "As long as you control exactly one creature, that creature gets +2/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ContinuousEffect deathtouchEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE);
         effect = new ConditionalContinuousEffect(deathtouchEffect, new CreatureCountCondition(1, TargetController.YOU),
                 "and has deathtouch");

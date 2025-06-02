@@ -5,6 +5,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.common.DiscardXTargetCost;
+import mage.abilities.costs.costadjusters.DiscardXCardsCostAdjuster;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
@@ -12,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -28,8 +31,8 @@ public final class DevastatingDreams extends CardImpl {
     public DevastatingDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}");
 
-        // As an additional cost to cast Devastating Dreams, discard X cards at random.
-        this.getSpellAbility().addCost(new DevastatingDreamsAdditionalCost());
+        // As an additional cost to cast this spell, discard X cards at random.
+        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, true).withRandom());
 
         // Each player sacrifices X lands.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(GetXValue.instance, new FilterControlledLandPermanent("lands")));

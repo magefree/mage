@@ -8,10 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
-import mage.target.common.TargetPermanentAmount;
 
 import java.util.UUID;
 
@@ -23,15 +21,10 @@ public final class StormTheSeedcore extends CardImpl {
     public StormTheSeedcore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
 
-        // Distribute four +1/+1 counter among up to four target creatures you control. Creatures you control gain vigilance and trample until end of turn.
-        this.getSpellAbility().addEffect(new DistributeCountersEffect(
-                CounterType.P1P1, 4, false,
-                "up to four target creatures you control"
-        ));
-        TargetPermanentAmount target = new TargetCreaturePermanentAmount(4, StaticFilters.FILTER_CONTROLLED_CREATURES);
-        target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(4);
-        this.getSpellAbility().addTarget(target);
+        // Distribute four +1/+1 counters among up to four target creatures you control. Creatures you control gain vigilance and trample until end of turn.
+        this.getSpellAbility().addEffect(new DistributeCountersEffect()
+                .setText("distribute four +1/+1 counters among up to four target creatures you control"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES

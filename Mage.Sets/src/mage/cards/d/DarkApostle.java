@@ -30,7 +30,7 @@ public final class DarkApostle extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Gift of Chaos -- {3}, {T}: The next noncreature spell you cast this turn has cascade.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new NextSpellCastHasAbilityEffect(new CascadeAbility(), StaticFilters.FILTER_CARD_NON_CREATURE),
                 new GenericManaCost(3));
         ability.addCost(new TapSourceCost());

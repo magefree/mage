@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -33,7 +33,7 @@ public final class DuskmantleSeer extends CardImpl {
 
         // At the beginning of your upkeep, each player reveals the top card of their library, loses life equal to that card's converted mana cost, then puts it into their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DuskmantleSeerEffect(), TargetController.YOU, false
+                new DuskmantleSeerEffect()
         ));
     }
 

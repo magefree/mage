@@ -41,12 +41,11 @@ public final class GruulSpellbreaker extends CardImpl {
 
         // As long as it's your turn, you and Gruul Spellbreaker have hexproof.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilityControllerEffect(
                                 HexproofAbility.getInstance(),
                                 Duration.WhileOnBattlefield
-                        ), MyTurnCondition.instance, "As long as it's your turn, you"
+                        ), MyTurnCondition.instance, "During your turn, you"
                 )
         );
         ability.addEffect(new ConditionalContinuousEffect(

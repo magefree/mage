@@ -27,7 +27,7 @@ public final class CrystalChimes extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {3}, {tap}, Sacrifice Crystal Chimes: Return all enchantment cards from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrystalChimesEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new CrystalChimesEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

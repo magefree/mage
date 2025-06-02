@@ -36,7 +36,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class ChainerDementiaMaster extends CardImpl {
     
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Nightmare creatures");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("All Nightmares");
     private static final FilterPermanent filterPermanent = new FilterPermanent("Nightmares");
     static {
         filterCreature.add(SubType.NIGHTMARE.getPredicate());
@@ -52,10 +52,10 @@ public final class ChainerDementiaMaster extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Nightmare creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterCreature, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterCreature, false)));
         
         // {B}{B}{B}, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChainerDementiaMasterEffect(), new ManaCostsImpl<>("{B}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(new ChainerDementiaMasterEffect(), new ManaCostsImpl<>("{B}{B}{B}"));
         ability.addCost(new PayLifeCost(3));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);

@@ -29,7 +29,7 @@ public final class NavigatorsCompass extends CardImpl {
         Ability etbAbility = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3));
         this.addAbility(etbAbility);
         // {tap}: Until end of turn, target land you control becomes the basic land type of your choice in addition to its other types.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, true, false)
+        Ability ability = new SimpleActivatedAbility(new BecomesBasicLandTargetEffect(Duration.EndOfTurn, true, false)
                 .setText("Until end of turn, target land you control becomes the basic land type of your choice in addition to its other types"),
                  new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));

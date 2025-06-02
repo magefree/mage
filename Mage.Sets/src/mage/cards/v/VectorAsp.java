@@ -27,7 +27,7 @@ public final class VectorAsp extends CardImpl {
         this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(InfectAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(InfectAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
     private VectorAsp(final VectorAsp card) {

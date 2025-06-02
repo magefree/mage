@@ -26,7 +26,7 @@ public final class DrownInDreams extends CardImpl {
 
         // Choose one. If you control a commander as you cast this spell, you may choose both.
         this.getSpellAbility().getModes().setChooseText(
-                "Choose one. If you control a commander as you cast this spell, you may choose both."
+                "Choose one. If you control a commander as you cast this spell, you may choose both instead."
         );
         this.getSpellAbility().getModes().setMoreCondition(2, ControlACommanderCondition.instance);
 

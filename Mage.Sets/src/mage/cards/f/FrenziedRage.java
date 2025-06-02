@@ -39,7 +39,7 @@ public final class FrenziedRage extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+1 and has menace.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 1));
         Effect effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA);
         effect.setText("and has menace. <i>(It can't be blocked except by two or more creatures.)</i>");
         ability.addEffect(effect);

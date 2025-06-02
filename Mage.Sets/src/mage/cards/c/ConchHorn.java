@@ -28,7 +28,7 @@ public final class ConchHorn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {1}, {tap}, Sacrifice Conch Horn: Draw two cards, then put a card from your hand on top of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConchHornEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new ConchHornEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

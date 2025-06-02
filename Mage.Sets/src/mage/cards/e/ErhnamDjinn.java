@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class ErhnamDjinn extends CardImpl {
         // At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep.
         GainAbilityTargetEffect effect = new GainAbilityTargetEffect(new ForestwalkAbility(false), Duration.UntilYourNextUpkeepStep,
         "target non-Wall creature an opponent controls gains forestwalk until your next upkeep");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

@@ -41,7 +41,7 @@ public final class DerangedHermit extends CardImpl {
         // When Deranged Hermit enters the battlefield, create four 1/1 green Squirrel creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SquirrelToken(), 4)));
         // Squirrel creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
     }
 

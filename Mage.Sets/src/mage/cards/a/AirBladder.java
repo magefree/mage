@@ -35,10 +35,10 @@ public final class AirBladder extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
 
         // Enchanted creature can block only creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockOnlyFlyingAttachedEffect(AttachmentType.AURA)));
 
     }
 

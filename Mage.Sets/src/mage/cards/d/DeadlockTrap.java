@@ -34,7 +34,7 @@ public final class DeadlockTrap extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
 
         // {t}, Pay {E}: Tap target creature or planeswalker. Its activated abilities can't be activated this turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         ability.addCost(new PayEnergyCost(1));
         ability.addTarget(new TargetCreatureOrPlaneswalker());
         ability.addEffect(new DeadlockTrapCantActivateEffect());

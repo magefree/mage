@@ -34,7 +34,7 @@ public final class PouncingLynx extends CardImpl {
                                 FirstStrikeAbility.getInstance(),
                                 Duration.WhileOnBattlefield
                         ), MyTurnCondition.instance,
-                        "As long as it's your turn, "
+                        "During your turn, "
                                 + "{this} has first strike."
                 )
         ).addHint(MyTurnHint.instance));

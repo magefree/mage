@@ -31,7 +31,7 @@ public final class FiresOfVictory extends CardImpl {
                 KickedCondition.ONCE,
                 "If this spell was kicked, draw a card."
         ));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(CardsInControllerHandCount.instance)
+        this.getSpellAbility().addEffect(new DamageTargetEffect(CardsInControllerHandCount.ANY)
                 .setText("{this} deals damage to target creature or planeswalker equal to the number of cards in your hand."));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }

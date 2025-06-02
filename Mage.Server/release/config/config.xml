@@ -18,7 +18,7 @@
     minUserNameLength   - minmal allowed length of a user name to connect to the server
     maxUserNameLength   - maximal allowed length of a user name to connect to the server
     userNamePattern     - pattern for user name validity check
-    maxAiOpponents      - number of allowed AI opponents on the server
+    maxAiOpponents      - number of allowed workable AI opponents on the server (draft bots are unlimited)
     saveGameActivated   - allow game save and replay options (not working correctly yet)
     authenticationActivated - "true" = user have to register to signon "false" = user need not to register
     * mail configs only needed if authentication is activated:
@@ -62,7 +62,7 @@
     />
     <playerTypes>
         <playerType name="Human" jar="mage-player-human-${project.version}.jar" className="mage.player.human.HumanPlayer"/>
-        <playerType name="Computer - mad" jar="mage-player-ai-ma-${project.version}.jar" className="mage.player.ai.ComputerPlayer7"/>
+        <playerType name="Computer - mad" jar="mage-player-ai-ma-${project.version}.jar" className="mage.player.ai.ComputerPlayerControllableProxy"/>
         <playerType name="Computer - draftbot" jar="mage-player-ai-draftbot-${project.version}.jar" className="mage.player.ai.ComputerDraftPlayer"/>
     </playerTypes>
     <gameTypes>
@@ -96,8 +96,8 @@
         <tournamentType name="Booster Draft Swiss (Cube)" jar="mage-tournament-boosterdraft-${project.version}.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissCubeTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Random)" jar="mage-tournament-boosterdraft-${project.version}.jar" className="mage.tournament.RandomBoosterDraftSwissTournament" typeName="mage.tournament.RandomBoosterDraftSwissTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Reshuffled)" jar="mage-tournament-boosterdraft-${project.version}.jar" className="mage.tournament.ReshuffledBoosterDraftSwissTournament" typeName="mage.tournament.ReshuffledBoosterDraftSwissTournamentType"/>
-        <tournamentType name="Booster Draft Swiss (Rich Man)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManDraftSwissTournament" typeName="mage.tournament.RichManDraftSwissTournamentType"/>
-        <tournamentType name="Booster Draft Swiss (Rich Man Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManCubeDraftSwissTournament" typeName="mage.tournament.RichManCubeDraftSwissTournamentType"/>
+        <tournamentType name="Booster Draft Swiss (Rich Man)" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.RichManDraftSwissTournament" typeName="mage.tournament.RichManDraftSwissTournamentType"/>
+        <tournamentType name="Booster Draft Swiss (Rich Man Cube)" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.RichManCubeDraftSwissTournament" typeName="mage.tournament.RichManCubeDraftSwissTournamentType"/>
         <tournamentType name="Sealed Elimination" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>
         <tournamentType name="Sealed Elimination (Cube)" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationCubeTournamentType"/>
         <tournamentType name="Sealed Swiss" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissTournamentType"/>
@@ -107,55 +107,64 @@
         <tournamentType name="Jumpstart Elimination (Custom)" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.JumpstartCustomEliminationTournament" typeName="mage.tournament.JumpstartCustomEliminationTournamentType"/>
     </tournamentTypes>
     <draftCubes>
-        <draftCube name="Adam Styborski's Pauper Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.AdamStyborskisPauperCube"/>
-        <draftCube name="Ben's Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.BensCube"/>
-        <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
-        <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeTutor720"/>
-        <draftCube name="Eric Klug's Pro Tour Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.EricKlugsProTourCube"/>
-        <draftCube name="Guillaume Matignon's Jenny's/Johnny's Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.GuillaumeMatignonsJennysJohnnysCube"/>
-        <draftCube name="Jim Davis's Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.JimDavisCube"/>
-        <draftCube name="Joseph Vasoli's Peasant Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.JosephVasolisPeasantCube"/>
-        <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MonoBlueCube"/>
-        <draftCube name="Sam Black's No Search Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.SamBlacksCube"/>
-        <draftCube name="Timothee Simonot's Twisted Color Pie Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.TimotheeSimonotsTwistedColorPieCube"/>
-        <draftCube name="MTGA Cube 2020 April" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGACube2020April"/>
-        <draftCube name="MTGO Khans Expanded Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.KhansExpandedCube"/>
-        <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
-        <draftCube name="MTGO Legacy Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCube"/>
-        <draftCube name="MTGO Legacy Cube 2015 March" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeMarch2015"/>
-        <draftCube name="MTGO Legacy Cube 2015 September" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeSeptember2015"/>
-        <draftCube name="MTGO Legacy Cube 2016 January" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeJanuary2016"/>
-        <draftCube name="MTGO Legacy Cube 2016 September" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeSeptember2016"/>
-        <draftCube name="MTGO Legacy Cube 2017 January" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeJanuary2017"/>
-        <draftCube name="MTGO Legacy Cube 2017 April" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeApril2017"/>
-        <draftCube name="MTGO Legacy Cube 2018 February" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCube2018February"/>
-        <draftCube name="MTGO Legacy Cube 2019 July" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeJuly2019"/>
-        <draftCube name="MTGO Legacy Cube 2021 May" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegacyCubeMay2021"/>
-        <draftCube name="MTGO Legendary Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegendaryCube"/>
-        <draftCube name="MTGO Legendary Cube April 2016" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.LegendaryCubeApril2016"/>
-        <draftCube name="MTGO Modern Cube 2017" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.ModernCube2017"/>
-        <draftCube name="MTGO Vintage Cube 2013" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCube2013"/>
-        <draftCube name="MTGO Vintage Cube 2014" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCube2014"/>
-        <draftCube name="MTGO Vintage Cube 2015" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCube2015"/>
-        <draftCube name="MTGO Vintage Cube 2016" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCube2016"/>
-        <draftCube name="MTGO Vintage Cube June 2016" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJune2016"/>
-        <draftCube name="MTGO Vintage Cube November 2016" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeNovember2016"/>
-        <draftCube name="MTGO Vintage Cube June 2017" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJune2017"/>
-        <draftCube name="MTGO Vintage Cube December 2017" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeDecember2017"/>
-        <draftCube name="MTGO Vintage Cube June 2018" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJune2018"/>
-        <draftCube name="MTGO Vintage Cube December 2018" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeDecember2018"/>
-        <draftCube name="MTGO Vintage Cube June 2019" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJune2019"/>
-        <draftCube name="MTGO Vintage Cube December 2019" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeDecember2019"/>
-        <draftCube name="MTGO Vintage Cube April 2020" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeApril2020"/>
-        <draftCube name="MTGO Vintage Cube July 2020" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJuly2020"/>
-        <draftCube name="MTGO Vintage Cube December 2020" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeDecember2020"/>
-        <draftCube name="MTGO Vintage Cube July 2021" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeJuly2021"/>
-        <draftCube name="MTGO Vintage Cube February 2022" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeFebruary2022"/>
-        <draftCube name="MTGO Vintage Cube October 2023" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.VintageCubeOctober2023"/>
-        <draftCube name="SCG Con Cube 2018 December" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.ScgConCube2018December"/>
-        <draftCube name="The Peasant's Toolbox" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.PeasantsToolboxCube"/>
-        <draftCube name="www.MTGCube.com" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.MTGCube"/>
-        <draftCube name="Cube From Deck" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.CubeFromDeck"/>
+        <!-- main cubes -->
+        <draftCube name="Cube From Deck" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.CubeFromDeck"/>
+        <draftCube name="MTGO Legacy Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCube"/>
+        <draftCube name="MTGO Vintage Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCube"/>
+        <draftCube name="MTGO Legendary Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegendaryCube"/>
+        <draftCube name="MTGO Legendary Cube April 2016" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegendaryCubeApril2016"/>
+        <draftCube name="MTGO Modern Cube 2017" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.ModernCube2017"/>
+        <draftCube name="MTGO Khans Expanded Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.KhansExpandedCube"/>
+        <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.MTGOMarchCube2014"/>
+        <draftCube name="MTGA Cube 2020 April" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.MTGACube2020April"/>
+        <!-- named cubes (will be removed someday) -->
+        <draftCube name="SCG Con Cube 2018 December" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.ScgConCube2018December"/>
+        <draftCube name="The Peasant's Toolbox" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.PeasantsToolboxCube"/>
+        <draftCube name="www.MTGCube.com" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.MTGCube"/>
+        <draftCube name="The Pauper Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.PauperCube"/>
+        <draftCube name="Ben's Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.BensCube"/>
+        <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.CubeTutor360Pauper"/>
+        <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.CubeTutor720"/>
+        <draftCube name="Eric Klug's Pro Tour Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.EricKlugsProTourCube"/>
+        <draftCube name="Guillaume Matignon's Jenny's/Johnny's Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.GuillaumeMatignonsJennysJohnnysCube"/>
+        <draftCube name="Jim Davis's Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.JimDavisCube"/>
+        <draftCube name="Joseph Vasoli's Peasant Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.JosephVasolisPeasantCube"/>
+        <draftCube name="Sam Black's No Search Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.SamBlacksCube"/>
+        <draftCube name="Timothee Simonot's Twisted Color Pie Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.TimotheeSimonotsTwistedColorPieCube"/>
+        <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.MonoBlueCube"/>
+        <!-- outdated cubes - will be removed on next releases -->
+        <!--
+        <draftCube name="MTGO Legacy Cube 2015 March" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCubeMarch2015"/>
+        <draftCube name="MTGO Legacy Cube 2015 September" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCubeSeptember2015"/>
+        <draftCube name="MTGO Legacy Cube 2016 January" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCubeJanuary2016"/>
+        <draftCube name="MTGO Legacy Cube 2016 September" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCubeSeptember2016"/>
+        <draftCube name="MTGO Legacy Cube 2017 January" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCubeJanuary2017"/>
+        <draftCube name="MTGO Legacy Cube 2017 April" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCubeApril2017"/>
+        <draftCube name="MTGO Legacy Cube 2018 February" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCube2018February"/>
+        <draftCube name="MTGO Legacy Cube 2019 July" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCubeJuly2019"/>
+        <draftCube name="MTGO Legacy Cube 2021 May" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.LegacyCubeMay2021"/>
+        -->
+        <!-- outdated cubes - will be removed on next releases -->
+        <!--
+        <draftCube name="MTGO Vintage Cube 2013" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCube2013"/>
+        <draftCube name="MTGO Vintage Cube 2014" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCube2014"/>
+        <draftCube name="MTGO Vintage Cube 2015" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCube2015"/>
+        <draftCube name="MTGO Vintage Cube 2016" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCube2016"/>
+        <draftCube name="MTGO Vintage Cube June 2016" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeJune2016"/>
+        <draftCube name="MTGO Vintage Cube November 2016" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeNovember2016"/>
+        <draftCube name="MTGO Vintage Cube June 2017" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeJune2017"/>
+        <draftCube name="MTGO Vintage Cube December 2017" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeDecember2017"/>
+        <draftCube name="MTGO Vintage Cube June 2018" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeJune2018"/>
+        <draftCube name="MTGO Vintage Cube December 2018" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeDecember2018"/>
+        <draftCube name="MTGO Vintage Cube June 2019" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeJune2019"/>
+        <draftCube name="MTGO Vintage Cube December 2019" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeDecember2019"/>
+        <draftCube name="MTGO Vintage Cube April 2020" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeApril2020"/>
+        <draftCube name="MTGO Vintage Cube July 2020" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeJuly2020"/>
+        <draftCube name="MTGO Vintage Cube December 2020" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeDecember2020"/>
+        <draftCube name="MTGO Vintage Cube July 2021" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeJuly2021"/>
+        <draftCube name="MTGO Vintage Cube February 2022" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeFebruary2022"/>
+        <draftCube name="MTGO Vintage Cube October 2023" jar="mage-tournament-booster-draft-${project.version}.jar" classNam="mage.tournament.cubes.VintageCubeOctober2023"/>
+        -->
     </draftCubes>
     <deckTypes>
         <deckType name="Constructed - Standard" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Standard"/>

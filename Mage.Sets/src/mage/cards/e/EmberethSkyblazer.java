@@ -38,7 +38,7 @@ public final class EmberethSkyblazer extends CardImpl {
         // As long as it's your turn, Embereth Skyblazer has flying.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "As long as it's your turn, {this} has flying."
+                MyTurnCondition.instance, "During your turn, {this} has flying."
         )).addHint(MyTurnHint.instance));
 
         // Whenever Embereth Skyblazer attacks, you may pay {2}{R}. If you do, creatures you control get +X/+0 until end of turn, where X is the number of opponents you have.

@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.DescendedThisTurnCondition;
 import mage.abilities.dynamicvalue.common.DescendedThisTurnCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -33,8 +33,8 @@ public final class ChildOfTheVolcano extends CardImpl {
 
         // At the beginning of your end step, if you descended this turn, put a +1/+1 counter on Child of the Volcano.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, DescendedThisTurnCondition.instance, false
+                TargetController.YOU, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, DescendedThisTurnCondition.instance
         ).addHint(DescendedThisTurnCount.getHint()), new DescendedWatcher());
     }
 

@@ -35,7 +35,7 @@ public final class SeasClaim extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted land is an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.ISLAND)));
+        this.addAbility(new SimpleStaticAbility(new BecomesBasicLandEnchantedEffect(SubType.ISLAND)));
     }
 
     private SeasClaim(final SeasClaim card) {

@@ -28,7 +28,7 @@ public final class HallOfTriumph extends CardImpl {
         // As Hall of Triumph enters the battlefield choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         // Creatures you control of the chosen color get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HallOfTriumphBoostControlledEffect()));
+        this.addAbility(new SimpleStaticAbility(new HallOfTriumphBoostControlledEffect()));
     }
 
     private HallOfTriumph(final HallOfTriumph card) {

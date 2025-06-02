@@ -22,7 +22,7 @@ public final class Revelation extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // Players play with their hands revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new PlayWithHandRevealedEffect(TargetController.ANY)));
     }
 
     private Revelation(final Revelation card) {

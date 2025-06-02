@@ -47,7 +47,7 @@ public class WeatheredSentinels extends CardImpl {
                 new ConditionalAsThoughEffect(
                         new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                         WeatheredSentinelsCanAttackSomeoneCondition.instance)
-                        .setText("Weathered Sentinels can attack players who attacked you during their last turn as though it didn't have defender.")),
+                        .setText("{this} can attack players who attacked you during their last turn as though it didn't have defender.")),
                 new WeatheredSentinelsLastTurnAttackersWatcher()
         );
 

@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -33,8 +33,8 @@ public final class GerrardCapashen extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, you gain 1 life for each card in target opponent's hand.
-        Ability ability1 = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GerrardCapashenEffect(),
-                TargetController.YOU, false, true);
+        Ability ability1 = new BeginningOfUpkeepTriggeredAbility(new GerrardCapashenEffect()
+        );
         ability1.addTarget(new TargetOpponent());
         this.addAbility(ability1);
 

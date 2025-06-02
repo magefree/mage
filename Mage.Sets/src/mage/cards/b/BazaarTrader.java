@@ -40,7 +40,7 @@ public final class BazaarTrader extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target player gains control of target artifact, creature, or land you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TargetPlayerGainControlTargetPermanentEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TargetPlayerGainControlTargetPermanentEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);

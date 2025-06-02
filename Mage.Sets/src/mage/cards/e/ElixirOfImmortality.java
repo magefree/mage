@@ -24,7 +24,7 @@ public final class ElixirOfImmortality extends CardImpl {
 
     public ElixirOfImmortality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElixerOfImmortalityEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ElixerOfImmortalityEffect(), new TapSourceCost());
         ability.addCost(new GenericManaCost(2));
         this.addAbility(ability);
     }

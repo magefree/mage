@@ -31,7 +31,7 @@ public final class FreyalisesWinds extends CardImpl {
         this.addAbility(new BecomesTappedTriggeredAbility(effect, false, new FilterPermanent("a permanent"), true));
 
         // If a permanent with a wind counter on it would untap during its controller's untap step, remove all wind counters from it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FreyalisesWindsReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new FreyalisesWindsReplacementEffect()));
 
     }
 

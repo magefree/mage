@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.AttachEffect;
@@ -48,8 +48,8 @@ public final class CoralNet extends CardImpl {
         
         // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you discard a card."
         Ability abilityToGain = new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new DiscardCardCost()), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new SacrificeSourceUnlessPaysEffect(new DiscardCardCost()));
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 

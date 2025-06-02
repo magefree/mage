@@ -41,7 +41,7 @@ public final class ScrapyardMongrel extends CardImpl {
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
                 "and has trample");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
+        Ability ability = new SimpleStaticAbility(boostEffect);
         ability.addEffect(gainAbilityEffect);
         this.addAbility(ability);
     }

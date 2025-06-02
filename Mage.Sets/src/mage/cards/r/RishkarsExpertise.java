@@ -1,6 +1,6 @@
 package mage.cards.r;
 
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.CastFromHandForFreeEffect;
@@ -28,9 +28,10 @@ public final class RishkarsExpertise extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // Draw cards equal to the greatest power among creatures you control.
-        Effect effect = new DrawCardSourceControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance);
+        Effect effect = new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES);
         effect.setText("Draw cards equal to the greatest power among creatures you control");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
 
         // You may cast a card with converted mana cost 5 or less from your hand without paying its mana cost.
         this.getSpellAbility().addEffect(new CastFromHandForFreeEffect(filter).concatBy("<br>"));

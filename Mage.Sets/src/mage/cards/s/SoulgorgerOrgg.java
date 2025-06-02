@@ -88,7 +88,7 @@ class SoulgorgerOrggGainLifeEffect extends OneShotEffect {
 
     SoulgorgerOrggGainLifeEffect() {
         super(Outcome.GainLife);
-        staticText = "you gain life equal to the life you lost when it entered the battlefield";
+        staticText = "you gain life equal to the life you lost when it entered";
     }
 
     private SoulgorgerOrggGainLifeEffect(final SoulgorgerOrggGainLifeEffect effect) {

@@ -28,7 +28,7 @@ public final class PrakhataPillarBug extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {B}: Prakhata Pillar-Bug gains lifelink until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
 
     }

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
@@ -13,7 +12,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
 
@@ -22,8 +23,13 @@ import java.util.UUID;
  */
 public final class SeasonedWarrenguard extends CardImpl {
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CREATURE_TOKEN, true);
+    private static final FilterPermanent filter = new FilterControlledPermanent("you control a token");
+
+    static {
+        filter.add(TokenPredicate.TRUE);
+    }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, true);
     private static final Hint hint = new ConditionHint(condition, "You control a token");
 
     public SeasonedWarrenguard(UUID ownerId, CardSetInfo setInfo) {
@@ -35,10 +41,9 @@ public final class SeasonedWarrenguard extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Seasoned Warrenguard attacks while you control a token, Seasoned Warrenguard gets +2/+0 until end of turn.
-        this.addAbility(new ConditionalTriggeredAbility(
-                new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)),
-                condition, "Whenever {this} attacks while you control a token, {this} gets +2/+0 until end of turn"
-        ).addHint(hint));
+        this.addAbility(new AttacksTriggeredAbility(
+                new BoostSourceEffect(2, 0, Duration.EndOfTurn)
+        ).withRuleTextReplacement(false).withTriggerCondition(condition).addHint(hint));
     }
 
     private SeasonedWarrenguard(final SeasonedWarrenguard card) {

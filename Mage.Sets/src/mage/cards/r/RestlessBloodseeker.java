@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -17,8 +17,6 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.BloodToken;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetSacrifice;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
@@ -47,8 +45,8 @@ public final class RestlessBloodseeker extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, create a Blood token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new BloodToken()),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new CreateTokenEffect(new BloodToken()),
+                false, condition
         ).addHint(hint), new PlayerGainedLifeWatcher());
 
         // Sacrifice two Blood tokens: Transform Restless Bloodseeker. Activate only as a sorcery.

@@ -1,16 +1,13 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.hint.common.CreaturesYouControlHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AffinityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -28,12 +25,8 @@ public final class ArgivianPhalanx extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // This spell costs {1} less to cast for each creature you control.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.ALL,
-                new SpellCostReductionSourceEffect(CreaturesYouControlCount.instance)
-                        .setText("This spell costs {1} less to cast for each creature you control.")
-        ).addHint(CreaturesYouControlHint.instance));
+        // Affinity for creatures
+        this.addAbility(new AffinityAbility(AffinityType.CREATURES));
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());

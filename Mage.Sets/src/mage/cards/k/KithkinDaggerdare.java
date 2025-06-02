@@ -26,7 +26,7 @@ public final class KithkinDaggerdare extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);

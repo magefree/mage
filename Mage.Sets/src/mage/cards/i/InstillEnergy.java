@@ -37,7 +37,7 @@ public final class InstillEnergy extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can attack as though it had haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItHadHasteEnchantedEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CanAttackAsThoughItHadHasteEnchantedEffect(Duration.WhileOnBattlefield)));
 
         // {0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD,

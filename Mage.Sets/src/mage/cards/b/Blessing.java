@@ -32,7 +32,7 @@ public final class Blessing extends CardImpl {
         // {W}: Enchanted creature gets +1/+1 until end of turn.
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new BoostEnchantedEffect(1, 1, Duration.EndOfTurn),
                 new ColoredManaCost(ColoredManaSymbol.W)));
     }

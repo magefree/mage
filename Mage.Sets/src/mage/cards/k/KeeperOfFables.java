@@ -1,7 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class KeeperOfFables extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
     private KeeperOfFables(final KeeperOfFables card) {

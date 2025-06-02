@@ -62,6 +62,9 @@ public class LookTargetHandChooseDiscardEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInHand(upTo ? 0 : num, num, filter);
         if (controller.choose(Outcome.Discard, player.getHand(), target, source, game)) {
+            // TODO: must fizzle discard effect on not full choice
+            // - tests: affected (allow to choose and discard 1 instead 2)
+            // - real game: need to check
             player.discard(new CardsImpl(target.getTargets()), false, source, game);
         }
         return true;

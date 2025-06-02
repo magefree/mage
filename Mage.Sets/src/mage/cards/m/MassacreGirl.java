@@ -1,8 +1,10 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -77,6 +79,7 @@ class MassacreGirlDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     MassacreGirlDelayedTriggeredAbility() {
         super(new BoostAllEffect(-1, -1, Duration.EndOfTurn, true), Duration.EndOfTurn, false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MassacreGirlDelayedTriggeredAbility(final MassacreGirlDelayedTriggeredAbility ability) {
@@ -102,5 +105,10 @@ class MassacreGirlDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "Whenever a creature dies this turn, each creature other than {this} gets -1/-1 until end of turn";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

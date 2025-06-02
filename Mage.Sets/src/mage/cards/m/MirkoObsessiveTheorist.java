@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SurveilTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldWithCounterTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -50,10 +50,10 @@ public final class MirkoObsessiveTheorist extends CardImpl {
         this.addAbility(new SurveilTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // At the beginning of your end step, you may return target creature card with power less than Mirko's from your graveyard to the battlefield with a finality counter on it.
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance())
                         .setText("you may return target creature card with power less than {this}'s from your graveyard to the " +
-                                "battlefield with a finality counter on it. <i>(If it would die, exile it instead.)</i>"),true
+                                "battlefield with a finality counter on it. <i>(If it would die, exile it instead.)</i>"), true
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
@@ -75,6 +75,6 @@ enum MirkoObsessiveTheoristPredicate implements ObjectSourcePlayerPredicate<Card
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
-        return sourcePermanent != null && input.getObject().getPower().getValue() <= sourcePermanent.getPower().getValue();
+        return sourcePermanent != null && input.getObject().getPower().getValue() < sourcePermanent.getPower().getValue();
     }
 }

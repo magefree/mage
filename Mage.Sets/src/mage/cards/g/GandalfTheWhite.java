@@ -48,7 +48,7 @@ public final class GandalfTheWhite extends CardImpl {
                 new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)
         ));
         // If a legendary permanent or an artifact entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GandalfTheWhiteDoublingEffect()));
+        this.addAbility(new SimpleStaticAbility(new GandalfTheWhiteDoublingEffect()));
     }
 
     private GandalfTheWhite(final GandalfTheWhite card) {

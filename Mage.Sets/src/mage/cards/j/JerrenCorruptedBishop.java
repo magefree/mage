@@ -3,7 +3,7 @@ package mage.cards.j;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -59,9 +59,9 @@ public final class JerrenCorruptedBishop extends CardImpl {
 
         // At the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform Jerren.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new DoIfCostPaid(
                 new TransformSourceEffect(), new ManaCostsImpl<>("{4}{B}{B}")
-        ), TargetController.YOU, JerrenCorruptedBishopCondition.instance, false));
+        ), false, JerrenCorruptedBishopCondition.instance));
     }
 
     private JerrenCorruptedBishop(final JerrenCorruptedBishop card) {
@@ -94,6 +94,7 @@ class JerrenCorruptedBishopTriggeredAbility extends TriggeredAbilityImpl {
     JerrenCorruptedBishopTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(1));
         this.addEffect(new CreateTokenEffect(new HumanToken()));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private JerrenCorruptedBishopTriggeredAbility(final JerrenCorruptedBishopTriggeredAbility ability) {

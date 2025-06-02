@@ -72,6 +72,7 @@ class IdolOfFalseGodsEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "as long as {this} has eight or more +1/+1 counters on it, " +
                 "it's a 0/0 creature in addition to its other types and it has annihilator 2";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private IdolOfFalseGodsEffect(final IdolOfFalseGodsEffect effect) {

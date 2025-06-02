@@ -28,7 +28,7 @@ public final class BonescytheSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control have double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(),
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_SLIVERS)));
     }

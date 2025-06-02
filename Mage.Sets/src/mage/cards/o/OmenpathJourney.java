@@ -1,7 +1,7 @@
 package mage.cards.o;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
@@ -37,7 +36,7 @@ public final class OmenpathJourney extends CardImpl {
 
         // At the beginning of your end step, choose a card at random exiled with Omenpath Journey and put it onto the battlefield tapped.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new OmenpathJourneyChooseEffect(), TargetController.YOU, false
+                new OmenpathJourneyChooseEffect()
         ));
     }
 

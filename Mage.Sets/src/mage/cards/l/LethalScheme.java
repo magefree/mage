@@ -54,7 +54,7 @@ class LethalSchemeEffect extends OneShotEffect {
 
     LethalSchemeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each creature that convoked {this} connives.";
+        this.staticText = "Each creature that convoked this spell connives.";
     }
 
     private LethalSchemeEffect(final LethalSchemeEffect effect) {

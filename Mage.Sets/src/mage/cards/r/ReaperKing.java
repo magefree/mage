@@ -39,7 +39,7 @@ public final class ReaperKing extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Other Scarecrow creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         // Whenever another Scarecrow you control enters, destroy target permanent.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new DestroyTargetEffect(), filterTrigger);
         ability.addTarget(new TargetPermanent());

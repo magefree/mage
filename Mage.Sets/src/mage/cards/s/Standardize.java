@@ -57,7 +57,6 @@ class StandardizeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
-        String chosenType = "";
         if (player != null && sourceObject != null) {
             Choice typeChoice = new ChoiceCreatureType(game, source);
             typeChoice.setMessage("Choose a creature type other than Wall");
@@ -66,16 +65,12 @@ class StandardizeEffect extends OneShotEffect {
                 return false;
             }
             game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
-            chosenType = typeChoice.getChoiceKey();
-            if (chosenType != null && !chosenType.isEmpty()) {
-                // ADD TYPE TO TARGET
-                game.addEffect(new BecomesSubtypeAllEffect(
-                        Duration.EndOfTurn, Arrays.asList(SubType.byDescription(chosenType)),
-                        StaticFilters.FILTER_PERMANENT_CREATURE, true
-                ), source);
-                return true;
-            }
-
+            // ADD TYPE TO TARGET
+            game.addEffect(new BecomesSubtypeAllEffect(
+                    Duration.EndOfTurn, Arrays.asList(SubType.byDescription(typeChoice.getChoiceKey())),
+                    StaticFilters.FILTER_PERMANENT_CREATURE, true
+            ), source);
+            return true;
         }
         return false;
     }

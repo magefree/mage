@@ -2,10 +2,13 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -36,9 +39,8 @@ public class TenuousTruce extends CardImpl {
 
         // At the beginning of enchanted opponent’s end step, you and that player each draw a card.
         Ability drawAbility = new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1).setText("you "),
-                TargetController.ENCHANTED,
-                false);
+                TargetController.ENCHANTED, new DrawCardSourceControllerEffect(1).setText("you"), false
+        ).setTriggerPhrase("At the beginning of enchanted opponent's end step, ");
         Effect enchantedPlayerDrawEffect = new DrawCardTargetEffect(1);
         enchantedPlayerDrawEffect.concatBy("and").setText("that player each draw a card");
         drawAbility.addEffect(enchantedPlayerDrawEffect);

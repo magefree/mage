@@ -9,18 +9,17 @@ import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.EnchantedTappedTriggeredManaAbility;
-import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterLandPermanent;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
 
 import java.util.UUID;
 
@@ -29,24 +28,23 @@ import java.util.UUID;
  */
 public final class UtopiaSprawl extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.FOREST, "Forest");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.FOREST, "Forest");
 
     public UtopiaSprawl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant Forest
-        TargetPermanent auraTarget = new TargetLandPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // As Utopia Sprawl enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
 
         // Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color.
-        this.addAbility(new EnchantedTappedTriggeredManaAbility(new UtopiaSprawlEffect(),"Forest"));
+        this.addAbility(new EnchantedTappedTriggeredManaAbility(new UtopiaSprawlEffect(), "Forest"));
     }
 
     private UtopiaSprawl(final UtopiaSprawl card) {
@@ -58,9 +56,10 @@ public final class UtopiaSprawl extends CardImpl {
         return new UtopiaSprawl(this);
     }
 }
+
 class UtopiaSprawlEffect extends ManaEffect {
 
-     UtopiaSprawlEffect() {
+    UtopiaSprawlEffect() {
         super();
         staticText = "its controller adds an additional one mana of the chosen color";
     }

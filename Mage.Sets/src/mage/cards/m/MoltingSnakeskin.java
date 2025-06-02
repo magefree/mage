@@ -41,8 +41,8 @@ public final class MoltingSnakeskin extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +2/+0 and has "{2}{B}: Regenerate this creature."
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0));
-        Effect effect = new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")), AttachmentType.AURA);
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 0));
+        Effect effect = new GainAbilityAttachedEffect(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{B}")), AttachmentType.AURA);
         effect.setText("and has \"{2}{B}: Regenerate this creature.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

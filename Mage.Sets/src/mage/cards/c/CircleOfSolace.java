@@ -26,7 +26,7 @@ public final class CircleOfSolace extends CardImpl {
         // As Circle of Solace enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Neutral)));
         // {1}{W}: The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CircleOfSolaceEffect(), new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new CircleOfSolaceEffect(), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private CircleOfSolace(final CircleOfSolace card) {
@@ -60,7 +60,7 @@ class CircleOfSolaceEffect extends PreventionEffectImpl {
                 Permanent perm = game.getPermanent(event.getSourceId());
                 if (perm != null) {
                     SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
-                    return perm.getCardType().contains(CardType.CREATURE) && perm.getSubtype().contains(subType);
+                    return perm.isCreature() && perm.hasSubtype(subType, game);
                 }
             }
         }

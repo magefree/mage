@@ -29,7 +29,7 @@ public final class Chronomaton extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, {tap}: Put a +1/+1 counter on Chronomaton.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

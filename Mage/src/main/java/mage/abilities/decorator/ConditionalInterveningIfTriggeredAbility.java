@@ -1,17 +1,19 @@
 package mage.abilities.decorator;
 
+import mage.MageObject;
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.hint.Hint;
 import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,7 +40,7 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     public ConditionalInterveningIfTriggeredAbility(TriggeredAbility ability, Condition condition, String text) {
         super(ability.getZone(), null);
         if (ability.isLeavesTheBattlefieldTrigger()) {
-            this.setLeavesTheBattlefieldTrigger(true);
+            setLeavesTheBattlefieldTrigger(true);
         }
         this.ability = ability;
         this.condition = condition;
@@ -79,9 +81,7 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         if (abilityText == null || abilityText.isEmpty()) {
             return ability.getRule();
         }
-        return (flavorWord != null ? CardUtil.italicizeWithEmDash(flavorWord) : "") +
-                (abilityWord != null ? abilityWord.formatWord() : "") +
-                abilityText + (abilityText.endsWith(".") || abilityText.endsWith("\"") || abilityText.endsWith(">") ? "" : ".");
+        return addRulePrefix(abilityText + (abilityText.endsWith(".") || abilityText.endsWith("\"") || abilityText.endsWith(">") ? "" : "."));
     }
 
     @Override
@@ -110,6 +110,13 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
+    public List<Hint> getHints() {
+        List<Hint> res = new ArrayList<>(super.getHints());
+        res.addAll(ability.getHints());
+        return res;
+    }
+
+    @Override
     public Effects getEffects(Game game, EffectType effectType) {
         return ability.getEffects(game, effectType);
     }
@@ -125,6 +132,11 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
+    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
+        ability.initSourceObjectZoneChangeCounter(game, force);
+    }
+
+    @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
     }
@@ -132,5 +144,15 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     @Override
     public boolean caresAboutManaColor() {
         return condition.caresAboutManaColor();
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        if (isLeavesTheBattlefieldTrigger()) {
+            // TODO: leaves battlefield and die are not same! Is it possible make a diff logic?
+            return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+        } else {
+            return super.isInUseableZone(game, sourceObject, event);
+        }
     }
 }

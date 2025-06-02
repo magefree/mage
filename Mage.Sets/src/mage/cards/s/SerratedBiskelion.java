@@ -30,7 +30,7 @@ public final class SerratedBiskelion extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Put a -1/-1 counter on Serrated Biskelion and a -1/-1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.M1M1.createInstance(), true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(), true), new TapSourceCost());
         ability.addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance()).setText("and a -1/-1 counter on target creature"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

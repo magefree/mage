@@ -458,10 +458,14 @@ public final class ZonesHandler {
         target.setRequired(true);
         while (player.canRespond() && cards.size() > 1) {
             player.choose(Outcome.Neutral, cards, target, source, game);
-            UUID targetObjectId = target.getFirstTarget();
-            order.add(cards.get(targetObjectId, game));
-            cards.remove(targetObjectId);
-            target.clearChosen();
+            Card card = cards.get(target.getFirstTarget(), game);
+            if (card != null) {
+                order.add(card);
+                cards.remove(target.getFirstTarget());
+                target.clearChosen();
+            } else {
+                break;
+            }
         }
         order.addAll(cards.getCards(game));
         return order;

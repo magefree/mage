@@ -174,7 +174,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      *
      *  Warning, it will return leaved players until end of turn. For dialogs and one shot effects use excludeLeavedPlayers
      */
-    // TODO: check usage of getOpponents in cards and replace with correct call of excludeLeavedPlayers
+    // TODO: check usage of getOpponents in cards and replace with correct call of excludeLeavedPlayers, see #13289
     default Set<UUID> getOpponents(UUID playerId) {
         return getOpponents(playerId, false);
     }
@@ -314,7 +314,9 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Player getLosingPlayer();
 
-    int getTotalErrorsCount();
+    int getTotalErrorsCount(); // debug only
+
+    int getTotalEffectsCount(); // debug only
 
     //client event methods
     void addTableEventListener(Listener<TableEvent> listener);
@@ -550,6 +552,12 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     @Deprecated // TODO: must research usage and remove it from all non engine code (example: Bestow ability, ProcessActions must be used instead)
     boolean checkStateAndTriggered();
 
+    /**
+     * Play priority by all players
+     *
+     * @param activePlayerId starting priority player
+     * @param resuming false to reset passed priority and ask it again
+     */
     void playPriority(UUID activePlayerId, boolean resuming);
 
     void resetControlAfterSpellResolve(UUID topId);

@@ -26,7 +26,7 @@ public final class PrecipiceOfMortis extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}{W}");
 
         // If a Jedi entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers additional time
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrecipiceOfMortisEffect()));
+        this.addAbility(new SimpleStaticAbility(new PrecipiceOfMortisEffect()));
 
     }
 

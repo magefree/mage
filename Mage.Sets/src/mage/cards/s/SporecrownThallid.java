@@ -38,7 +38,7 @@ public final class SporecrownThallid extends CardImpl {
 
         // Each other creature you control that's a Fungus or Saproling gets +1/+1.
         this.addAbility(
-                new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)
+                new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)
                         .setText("Each other creature you control that's a Fungus or Saproling gets +1/+1"))
         );
     }

@@ -201,9 +201,9 @@ class EvelynTheCovetousWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if ((event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED)
-                && event.getAdditionalReference() != null) {
+                && event.getApprovingObject() != null) {
             usedMap.computeIfAbsent(
-                    event.getAdditionalReference()
+                    event.getApprovingObject()
                             .getApprovingMageObjectReference(),
                     x -> new HashSet<>()
             ).add(event.getPlayerId());

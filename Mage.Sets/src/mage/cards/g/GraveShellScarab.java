@@ -29,7 +29,7 @@ public final class GraveShellScarab extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {1}, Sacrifice Grave-Shell Scarab: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // Dredge 1

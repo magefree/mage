@@ -27,7 +27,7 @@ public final class BalmOfRestoration extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {1}, {tap}, Sacrifice Balm of Restoration: Choose one - You gain 2 life;
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(2), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         

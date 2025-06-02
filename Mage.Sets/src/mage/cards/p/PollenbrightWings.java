@@ -45,7 +45,7 @@ public final class PollenbrightWings extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
         // Whenever enchanted creature deals combat damage to a player, create that many 1/1 green Saproling creature tokens.
         this.addAbility(new PollenbrightWingsAbility());

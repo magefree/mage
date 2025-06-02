@@ -1,16 +1,13 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.AdditionalTriggersAttackingReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 
 import java.util.UUID;
 
@@ -29,7 +26,7 @@ public final class IsshinTwoHeavensAsOne extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If a creature attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(new IsshinTwoHeavensAsOneEffect()));
+        this.addAbility(new SimpleStaticAbility(new AdditionalTriggersAttackingReplacementEffect(false)));
     }
 
     private IsshinTwoHeavensAsOne(final IsshinTwoHeavensAsOne card) {
@@ -39,56 +36,5 @@ public final class IsshinTwoHeavensAsOne extends CardImpl {
     @Override
     public IsshinTwoHeavensAsOne copy() {
         return new IsshinTwoHeavensAsOne(this);
-    }
-}
-
-class IsshinTwoHeavensAsOneEffect extends ReplacementEffectImpl {
-
-    IsshinTwoHeavensAsOneEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "if a creature attacking causes a triggered ability " +
-                "of a permanent you control to trigger, that ability triggers an additional time";
-    }
-
-    private IsshinTwoHeavensAsOneEffect(final IsshinTwoHeavensAsOneEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public IsshinTwoHeavensAsOneEffect copy() {
-        return new IsshinTwoHeavensAsOneEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-        Permanent sourcePermanent = game.getPermanent(numberOfTriggersEvent.getSourceId());
-        if (sourcePermanent == null || !sourcePermanent.isControlledBy(source.getControllerId())) {
-            return false;
-        }
-
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-        if (sourceEvent == null) {
-            return false;
-        }
-
-        switch (sourceEvent.getType()) {
-            case ATTACKER_DECLARED:
-            case DECLARED_ATTACKERS:
-            case DEFENDER_ATTACKED:
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
-        return false;
     }
 }

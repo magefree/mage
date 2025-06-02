@@ -21,7 +21,7 @@ public final class ShieldOfTheAges extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {2}: Prevent the next 1 damage that would be dealt to you this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, 1), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new PreventDamageToControllerEffect(Duration.EndOfTurn, 1), new GenericManaCost(2)));
     }
 
     private ShieldOfTheAges(final ShieldOfTheAges card) {

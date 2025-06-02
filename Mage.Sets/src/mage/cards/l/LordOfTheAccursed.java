@@ -35,10 +35,10 @@ public final class LordOfTheAccursed extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Zombie creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     
         //{2}{B}, Tap: All Zombies gain menace until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        Ability ability = new SimpleActivatedAbility(new GainAbilityAllEffect(
                 new MenaceAbility(),
                 Duration.EndOfTurn,
                 filter, "All Zombies gain menace until end of turn."),

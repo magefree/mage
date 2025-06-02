@@ -40,7 +40,7 @@ public final class MartyrOfBones extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}, Reveal X black cards from your hand, Sacrifice Martyr of Bones: Exile up to X target cards from a single graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new GenericManaCost(1));
         ability.addCost(new RevealVariableBlackCardsFromHandCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(0, 1, new FilterCard("up to X target cards")));

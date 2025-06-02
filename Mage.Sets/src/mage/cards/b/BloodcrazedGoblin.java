@@ -29,7 +29,7 @@ public final class BloodcrazedGoblin extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodcrazedGoblinEffect()));
+        this.addAbility(new SimpleStaticAbility(new BloodcrazedGoblinEffect()));
     }
 
     private BloodcrazedGoblin(final BloodcrazedGoblin card) {

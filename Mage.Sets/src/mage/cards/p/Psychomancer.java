@@ -57,6 +57,7 @@ class PsychomancerTriggeredAbility extends TriggeredAbilityImpl {
         this.setTriggerPhrase("Whenever {this} or another nontoken artifact you control is put " +
                 "into a graveyard from the battlefield or is put into exile from the battlefield, ");
         this.withFlavorWord("Harbinger of Despair");
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
     private PsychomancerTriggeredAbility(final PsychomancerTriggeredAbility ability) {

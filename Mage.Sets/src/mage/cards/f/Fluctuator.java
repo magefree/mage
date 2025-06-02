@@ -26,7 +26,7 @@ public final class Fluctuator extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Cycling abilities you activate cost you up to {2} less to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FluctuatorEffect()));
+        this.addAbility(new SimpleStaticAbility(new FluctuatorEffect()));
     }
 
     private Fluctuator(final Fluctuator card) {

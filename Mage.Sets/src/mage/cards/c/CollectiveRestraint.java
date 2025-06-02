@@ -28,7 +28,7 @@ public final class CollectiveRestraint extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Domain - Creatures can't attack you unless their controller pays {X} for each creature they control that's attacking you, where X is the number of basic land types you control.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CollectiveRestraintPayManaToAttackAllEffect());
+        Ability ability = new SimpleStaticAbility(new CollectiveRestraintPayManaToAttackAllEffect());
         ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability.addHint(DomainHint.instance));
 

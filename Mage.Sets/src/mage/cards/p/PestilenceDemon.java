@@ -35,7 +35,7 @@ public final class PestilenceDemon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {B}: Pestilence Demon deals 1 damage to each creature and each player.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PestilenceDemonEffect(), new ManaCostsImpl<>("{B}")));
+        this.addAbility(new SimpleActivatedAbility(new PestilenceDemonEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private PestilenceDemon(final PestilenceDemon card) {

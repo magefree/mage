@@ -45,7 +45,7 @@ public final class HogaakArisenNecropolis extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
 
         // You may cast Hogaak, Arisen Necropolis from your graveyard.
         this.addAbility(new MayCastFromGraveyardSourceAbility());

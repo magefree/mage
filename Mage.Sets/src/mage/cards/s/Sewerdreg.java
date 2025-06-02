@@ -31,7 +31,7 @@ public final class Sewerdreg extends CardImpl {
         this.addAbility(new SwampwalkAbility());
         
         // Sacrifice Sewerdreg: Exile target card from a graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new SacrificeSourceCost());
 	ability.addTarget(new TargetCardInGraveyard());
 	this.addAbility(ability);
     }

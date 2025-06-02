@@ -39,7 +39,7 @@ public final class SoltariGuerrillas extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
 
         // {0}: The next time Soltari Guerrillas would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoltariGuerrillasReplacementEffect(), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(new SoltariGuerrillasReplacementEffect(), new GenericManaCost(0));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

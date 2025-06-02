@@ -43,7 +43,7 @@ public final class EvergloveCourier extends CardImpl {
         // You may choose not to untap Everglove Courier during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}{G}, {tap}: Target Elf creature gets +2/+2 and has trample for as long as Everglove Courier remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(
             new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.TAPPED,
             "target Elf creature gets +2/+2"), new ManaCostsImpl<>("{2}{G}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(),

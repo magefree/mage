@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.FirstSpellOpponentsTurnTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -46,7 +46,7 @@ public final class AlelaCunningConqueror extends CardImpl {
 
         // Whenever one or more Faeries you control deal combat damage to a player, goad target creature that player controls.
         Effect effect = new GoadTargetEffect().setText("goad target creature that player controls");
-        Ability ability = new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, effect, faerieFilter, SetTargetPointer.PLAYER, false);
+        Ability ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(Zone.BATTLEFIELD, effect, faerieFilter, SetTargetPointer.PLAYER, false);
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
 

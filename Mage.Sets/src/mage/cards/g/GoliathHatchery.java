@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CorruptedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -41,7 +40,7 @@ public final class GoliathHatchery extends CardImpl {
         // Corrupted -- At the beginning of your upkeep, if an opponent has three or more poison counters, choose a creature you control, then draw cards equal to its total toxic value.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new GoliathHatcheryEffect(), TargetController.YOU, false
+                        new GoliathHatcheryEffect(), false
                 ).setAbilityWord(AbilityWord.CORRUPTED), CorruptedCondition.instance, null
         ).addHint(CorruptedCondition.getHint()));
     }

@@ -4,6 +4,8 @@ import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousEffectsList;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -27,14 +29,11 @@ import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.server.game.GameSessionPlayer;
+import mage.util.CardUtil;
 import mage.util.ThreadUtils;
 import mage.utils.SystemUtil;
-import mage.util.CardUtil;
 import mage.view.GameView;
 import org.junit.Assert;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.mage.test.player.PlayerAction;
 import org.mage.test.player.TestPlayer;
@@ -47,6 +46,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * API for test initialization and asserting the test results.
@@ -61,10 +62,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     private static final boolean SHOW_EXECUTE_TIME_PER_TEST = false;
 
     public static final String ALIAS_PREFIX = "@"; // don't change -- it uses in user's tests
-    public static final String CHECK_PARAM_DELIMETER = "#";
     public static final String CHECK_PREFIX = "check:"; // prefix for all check commands
+    public static final String CHECK_PARAM_DELIMETER = "#";
     public static final String SHOW_PREFIX = "show:"; // prefix for all show commands
     public static final String AI_PREFIX = "ai:"; // prefix for all ai commands
+    public static final String AI_PARAM_DELIMETER = "#";
     public static final String RUN_PREFIX = "run:"; // prefix for all run commands
 
     // prefix for activate commands
@@ -87,6 +89,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
     public static final String CHECK_COMMAND_PLAYABLE_ABILITY = "PLAYABLE_ABILITY";
+    public static final String CHECK_COMMAND_ATTACKERS = "ATTACKERS";
+    public static final String CHECK_COMMAND_BLOCKERS = "BLOCKERS";
     public static final String CHECK_COMMAND_MAY_ATTACK_DEFENDER = "MAY_ATTACK_DEFENDER";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
     public static final String CHECK_COMMAND_PERMANENT_TAPPED = "PERMANENT_TAPPED";
@@ -174,8 +178,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         // prepare fake match (needs for testing some client-server code)
-        // always 4 seats
-        MatchOptions matchOptions = new MatchOptions("test match", "test game type", true, 4);
+        MatchOptions matchOptions = new MatchOptions("test match", "test game type", true);
         currentMatch = new FreeForAllMatch(matchOptions);
         currentGame = createNewGameAndPlayers();
 
@@ -262,6 +265,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                         + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
                 (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
 
+        // check commands order
+        for (Player player : currentGame.getPlayers().values()) {
+            if (true) break; // TODO: delete/comment and fix all failed tests
+            if (player instanceof TestPlayer) {
+                TestPlayer testPlayer = (TestPlayer) player;
+                int lastActionIndex = 0;
+                PlayerAction lastAction = null;
+                for (PlayerAction currentAction : testPlayer.getActions()) {
+                    int currentActionIndex = 1000 * currentAction.getTurnNum() + currentAction.getStep().getIndex();
+                    if (currentActionIndex < lastActionIndex) {
+                        // how-to fix: find typo in step/turn number
+                        Assert.fail("Found wrong commands order for " + testPlayer.getName() + ":" + "\n"
+                                + lastAction + "\n"
+                                + currentAction);
+                    } else {
+                        lastActionIndex = currentActionIndex;
+                        lastAction = currentAction;
+                    }
+                }
+            }
+        }
+
         if (!currentGame.isPaused()) {
             // workaround to fill range info (cause real range fills after game start, but some cheated cards needs range on ETB)
             for (Player player : currentGame.getPlayers().values()) {
@@ -296,6 +321,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         assertAllCommandsUsed();
+
+        //assertNoDuplicatedEffects();
     }
 
     protected TestPlayer createNewPlayer(String playerName, RangeOfInfluence rangeOfInfluence) {
@@ -406,7 +433,33 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Checks whether or not a creature can attack on a given turn a defender (player only for now, could be extended to permanents)
+     * Make sure in last declared attackers
+     *
+     * @param attackers in any order, use empty string or params for no attackers check
+     */
+    public void checkAttackers(String checkName, int turnNum, TestPlayer player, String... attackers) {
+        String list = String.join("^", attackers);
+        if (list.isEmpty()) {
+            list = TestPlayer.ATTACK_SKIP;
+        }
+        check(checkName, turnNum, PhaseStep.DECLARE_ATTACKERS, player, CHECK_COMMAND_ATTACKERS, list);
+    }
+
+    /**
+     * Make sure in last declared blockers
+     *
+     * @param blockers in any order, use empty string or params for no blockers check
+     */
+    public void checkBlockers(String checkName, int turnNum, TestPlayer player, String... blockers) {
+        String list = String.join("^", blockers);
+        if (list.isEmpty()) {
+            list = TestPlayer.BLOCK_SKIP;
+        }
+        check(checkName, turnNum, PhaseStep.DECLARE_BLOCKERS, player, CHECK_COMMAND_BLOCKERS, list);
+    }
+
+    /**
+     * Checks whether a creature can attack on a given turn a defender (player only for now, could be extended to permanents)
      *
      * @param checkName       String to show up if the check fails, for display purposes only.
      * @param turnNum         The turn number to check on.
@@ -1621,7 +1674,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void assertChoicesCount(TestPlayer player, int count) throws AssertionError {
         String mes = String.format(
-                "(Choices of %s) Count are not equal (found %s). Some inner choose dialogs can be set up only in strict mode.",
+                "(Choices of %s) Count are not equal (found %s). Make sure you use target.chooseXXX instead player.choose. Also some inner choose dialogs can be set up only in strict mode.",
                 player.getName(),
                 player.getChoices()
         );
@@ -1630,7 +1683,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void assertTargetsCount(TestPlayer player, int count) throws AssertionError {
         String mes = String.format(
-                "(Targets of %s) Count are not equal (found %s). Some inner choose dialogs can be set up only in strict mode.",
+                "(Targets of %s) Count are not equal (found %s). Make sure you use target.chooseXXX instead player.choose. Also some inner choose dialogs can be set up only in strict mode.",
                 player.getName(),
                 player.getTargets()
         );
@@ -1649,6 +1702,57 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             assertActionsMustBeEmpty(testPlayer);
             assertChoicesCount(testPlayer, 0);
             assertTargetsCount(testPlayer, 0);
+        }
+    }
+
+    /**
+     * Make sure game state do not contain any duplicated effects, e.g. all effect's durations are fine
+     */
+    private void assertNoDuplicatedEffects() {
+        // to find bugs like https://github.com/magefree/mage/issues/12932
+
+        // TODO: simulate full end turn to end all effects and make it default?
+
+        // some effects can generate duplicated effects by design
+        // example: Tamiyo, Inquisitive Student + x2 attack in TamiyoInquisitiveStudentTest.test_PlusTwo
+        // +2: Until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -1/-0 until end of turn.
+        // TODO: add targets and affected objects check to unique key?
+
+        // one effect can be used multiple times by different sources
+        // so use group key like: effect + ability + source
+        Map<String, List<ContinuousEffect>> groups = new HashMap<>();
+        for (ContinuousEffectsList layer : currentGame.getState().getContinuousEffects().allEffectsLists) {
+            for (Object effectObj : layer) {
+                ContinuousEffect effect = (ContinuousEffect) effectObj;
+                for (Object abilityObj : layer.getAbility(effect.getId())) {
+                    Ability ability = (Ability) abilityObj;
+                    MageObject sourceObject = currentGame.getObject(ability.getSourceId());
+                    String groupKey = "effectClass_" + effect.getClass().getCanonicalName()
+                            + "_abilityClass_" + ability.getClass().getCanonicalName()
+                            + "_sourceName_" + (sourceObject == null ? "null" : sourceObject.getIdName());
+                    List<ContinuousEffect> groupList = groups.getOrDefault(groupKey, null);
+                    if (groupList == null) {
+                        groupList = new ArrayList<>();
+                        groups.put(groupKey, groupList);
+                    }
+                    groupList.add(effect);
+                }
+            }
+        }
+
+        // analyse
+        List<String> duplicatedGroups = groups.keySet().stream()
+                .filter(groupKey -> groups.get(groupKey).size() > 1)
+                .collect(Collectors.toList());
+        if (duplicatedGroups.size() > 0) {
+            System.out.println("Duplicated effect groups: " + duplicatedGroups.size());
+            duplicatedGroups.forEach(groupKey -> {
+                System.out.println("group " + groupKey + ": ");
+                groups.get(groupKey).forEach(e -> {
+                    System.out.println(" - " + e.getId() + " - " + e.getDuration() + " - " + e);
+                });
+            });
+            Assert.fail("Found duplicated effects: " + duplicatedGroups.size());
         }
     }
 
@@ -1769,36 +1873,59 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * AI play one PRIORITY with multi game simulations like real game
      * (calcs and play ONE best action, can be called with stack)
      * All choices must be made by AI (e.g.strict mode possible)
-     *
-     * @param turnNum
-     * @param step
-     * @param player
+     * <p>
+     * Warning, by default it will take control until stack resolved
      */
     public void aiPlayPriority(int turnNum, PhaseStep step, TestPlayer player) {
+        aiPlayPriority(turnNum, step, player, true);
+    }
+
+    /**
+     * AI play one PRIORITY
+     *
+     * @param untilStackResolved use false to stop AI after first cast
+     */
+    public void aiPlayPriority(int turnNum, PhaseStep step, TestPlayer player, boolean untilStackResolved) {
         assertAiPlayAndGameCompatible(player);
-        addPlayerAction(player, createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_PRIORITY));
+        addPlayerAction(player, createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_PRIORITY + AI_PARAM_DELIMETER + untilStackResolved));
     }
 
     /**
      * AI play STEP to the end with multi game simulations (calcs and play best
-     * actions until step ends, can be called in the middle of the step) All
-     * choices must be made by AI (e.g. strict mode possible)
+     * actions until step ends, can be called in the middle of the step)
+     * All choices must be made by AI (e.g. strict mode possible)
      * <p>
      * Can be used for AI's declare of attackers/blockers
      */
     public void aiPlayStep(int turnNum, PhaseStep step, TestPlayer player) {
+        aiPlayStep(turnNum, step, step, player);
+    }
+
+    public void aiPlayStep(int turnNum, PhaseStep startStep, PhaseStep endStep, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
-        addPlayerAction(player, createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_STEP));
+
+        // direct steps support removed to simplify AI enabling code
+        // (no needs in code duplicating in selectAttackers and selectBlockers methods anymore)
+        if (startStep == PhaseStep.DECLARE_ATTACKERS
+                || startStep == PhaseStep.DECLARE_BLOCKERS) {
+            PhaseStep newStartStep = PhaseStep.BEGIN_COMBAT;
+            PhaseStep newEndStep = endStep == startStep ? PhaseStep.END_COMBAT : endStep;
+            aiPlayStep(turnNum, newStartStep, newEndStep, player);
+            return;
+        }
+
+        if (startStep == PhaseStep.UPKEEP
+                || startStep == PhaseStep.CLEANUP
+                || startStep == PhaseStep.FIRST_COMBAT_DAMAGE
+                || startStep == PhaseStep.COMBAT_DAMAGE) {
+            Assert.fail("AI can't be started from step without priority");
+        }
+
+        addPlayerAction(player, createAIPlayerAction(turnNum, startStep, AI_COMMAND_PLAY_STEP + AI_PARAM_DELIMETER + endStep.toString()));
     }
 
     public PlayerAction createAIPlayerAction(int turnNum, PhaseStep step, String aiCommand) {
-        // AI commands must disable and enable real game simulation and strict mode
-        return new PlayerAction("", turnNum, step, AI_PREFIX + aiCommand) {
-            @Override
-            public void onActionRemovedLater(Game game, TestPlayer player) {
-                player.setAIRealGameSimulation(false);
-            }
-        };
+        return new PlayerAction("", turnNum, step, AI_PREFIX + aiCommand);
     }
 
     private void assertAiPlayAndGameCompatible(TestPlayer player) {
@@ -2141,11 +2268,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         setChoice(player, choice ? "Yes" : "No", timesToChoose);
     }
 
+    /**
+     * Declare non target choice. You can use multiple choices in one line like setChoice(name1^name2)
+     * Also support "up to" choices, e.g. choose 2 of 3 cards by setChoice(card1^card2) + setChoice(TestPlayer.CHOICE_SKIP)
+     */
     public void setChoice(TestPlayer player, String choice) {
         setChoice(player, choice, 1);
     }
 
     public void setChoice(TestPlayer player, String choice, int timesToChoose) {
+        if (choice.equals(TestPlayer.TARGET_SKIP)) {
+            Assert.fail("setChoice allow only TestPlayer.CHOICE_SKIP, but found " + choice);
+        }
         for (int i = 0; i < timesToChoose; i++) {
             player.addChoice(choice);
         }
@@ -2210,13 +2344,18 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player
      * @param target you can add multiple targets by separating them by the "^"
-     *               character e.g. "creatureName1^creatureName2" you can
-     *               qualify the target additional by setcode e.g.
+     *               character e.g. "creatureName1^creatureName2"
+     *               -
+     *               you can qualify the target additional by setcode e.g.
      *               "creatureName-M15" you can add [no copy] to the end of the
      *               target name to prohibit targets that are copied you can add
      *               [only copy] to the end of the target name to allow only
      *               targets that are copies. For modal spells use a prefix with
      *               the mode number: mode=1Lightning Bolt^mode=2Silvercoat Lion
+     *               -
+     *               it's also support multiple addTarget commands instead single line,
+     *               so you can declare not full "up to" targets list by addTarget(name)
+     *               and addTarget(TestPlayer.TARGET_SKIP)
      */
     // TODO: mode options doesn't work here (see BrutalExpulsionTest)
     public void addTarget(TestPlayer player, String target) {
@@ -2224,6 +2363,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void addTarget(TestPlayer player, String target, int timesToChoose) {
+        if (target.equals(TestPlayer.CHOICE_SKIP)) {
+            Assert.fail("addTarget allow only TestPlayer.TARGET_SKIP, but found " + target);
+        }
+
         for (int i = 0; i < timesToChoose; i++) {
             assertAliaseSupportInActivateCommand(target, true);
             player.addTarget(target);

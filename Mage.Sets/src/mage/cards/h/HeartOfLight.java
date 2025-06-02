@@ -37,7 +37,7 @@ public final class HeartOfLight extends CardImpl {
         this.addAbility(ability);
 
         // Prevent all damage that would be dealt to and dealt by enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeartOfLightEffect()));
+        this.addAbility(new SimpleStaticAbility(new HeartOfLightEffect()));
     }
 
     private HeartOfLight(final HeartOfLight card) {

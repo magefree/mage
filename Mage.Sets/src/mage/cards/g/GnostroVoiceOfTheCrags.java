@@ -7,17 +7,17 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
@@ -27,6 +27,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GnostroVoiceOfTheCrags extends CardImpl {
+
+    private static final Hint hint = new ValueHint("Number of spells you've cast this turn", GnostroVoiceOfTheCragsValue.instance);
 
     public GnostroVoiceOfTheCrags(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
@@ -38,7 +40,8 @@ public final class GnostroVoiceOfTheCrags extends CardImpl {
 
         // {T}: Choose one. X is the number of spells you've cast this turn.
         // • Scry X.
-        Ability ability = new SimpleActivatedAbility(new GnostroVoiceOfTheCragsEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(GnostroVoiceOfTheCragsValue.instance), new TapSourceCost());
+        ability.addHint(hint);
         ability.getModes().setChooseText("choose one. X is the number of spells you've cast this turn.");
 
         // • Gnostro, Voice of the Crags deals X damage to target creature.
@@ -76,36 +79,12 @@ enum GnostroVoiceOfTheCragsValue implements DynamicValue {
         return instance;
     }
 
+    public String toString() {
+        return "X";
+    }
+
     @Override
     public String getMessage() {
         return "";
-    }
-}
-
-class GnostroVoiceOfTheCragsEffect extends OneShotEffect {
-
-    GnostroVoiceOfTheCragsEffect() {
-        super(Outcome.Benefit);
-        staticText = "scry X";
-    }
-
-    private GnostroVoiceOfTheCragsEffect(final GnostroVoiceOfTheCragsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GnostroVoiceOfTheCragsEffect copy() {
-        return new GnostroVoiceOfTheCragsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        return player.scry (
-                GnostroVoiceOfTheCragsValue.instance.calculate(game, source, this), source, game
-        );
     }
 }

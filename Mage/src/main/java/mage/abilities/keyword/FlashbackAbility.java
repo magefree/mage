@@ -1,23 +1,8 @@
 package mage.abilities.keyword;
 
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
-import mage.constants.*;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
-
-import java.util.UUID;
+import mage.constants.SpellAbilityCastMode;
 
 /**
  * 702.32. Flashback
@@ -33,116 +18,19 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class FlashbackAbility extends SpellAbility {
-
-    private String abilityName;
-    private SpellAbility spellAbilityToResolve;
+public class FlashbackAbility extends CastFromGraveyardAbility {
 
     public FlashbackAbility(Card card, Cost cost) {
-        super(null, "", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.FLASHBACK);
-        this.setAdditionalCostsRuleVisible(false);
-        this.name = "Flashback " + cost.getText();
-        this.addCost(cost);
-        this.timing = card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT;
+        super(card, cost, SpellAbilityCastMode.FLASHBACK);
     }
 
     protected FlashbackAbility(final FlashbackAbility ability) {
         super(ability);
-        this.spellAbilityType = ability.spellAbilityType;
-        this.abilityName = ability.abilityName;
-        this.spellAbilityToResolve = ability.spellAbilityToResolve;
-    }
-
-    @Override
-    public ActivationStatus canActivate(UUID playerId, Game game) {
-        // flashback ability dynamicly added to all card's parts (split cards)
-        if (super.canActivate(playerId, game).canActivate()) {
-            Card card = game.getCard(getSourceId());
-            if (card != null) {
-                // Card must be in the graveyard zone
-                if (game.getState().getZone(card.getId()) != Zone.GRAVEYARD) {
-                    return ActivationStatus.getFalse();
-                }
-                // Cards with no Mana Costs cant't be flashbacked (e.g. Ancestral Vision)
-                if (card.getManaCost().isEmpty()) {
-                    return ActivationStatus.getFalse();
-                }
-                // Flashback can never cast a split card by Fuse, because Fuse only works from hand
-                // https://tappedout.net/mtg-questions/snapcaster-mage-and-flashback-on-a-fuse-card-one-or-both-halves-legal-targets/
-                if (card instanceof SplitCard) {
-                    if (((SplitCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        return ((SplitCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        return ((SplitCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
-                    }
-                } else if (card instanceof ModalDoubleFacedCard) {
-                    if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        return ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
-                    } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        return ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
-                    }
-                }
-                return card.getSpellAbility().canActivate(playerId, game);
-            }
-        }
-        return ActivationStatus.getFalse();
-    }
-
-    @Override
-    public SpellAbility getSpellAbilityToResolve(Game game) {
-        Card card = game.getCard(getSourceId());
-        if (card != null) {
-            if (spellAbilityToResolve == null) {
-                SpellAbility spellAbilityCopy = null;
-                if (card instanceof SplitCard) {
-                    if (((SplitCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((SplitCard) card).getLeftHalfCard().getSpellAbility().copy();
-                    } else if (((SplitCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((SplitCard) card).getRightHalfCard().getSpellAbility().copy();
-                    }
-                } else if (card instanceof ModalDoubleFacedCard) {
-                    if (((ModalDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().copy();
-                    } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
-                        spellAbilityCopy = ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().copy();
-                    }
-                } else {
-                    spellAbilityCopy = card.getSpellAbility().copy();
-                }
-                if (spellAbilityCopy == null) {
-                    return null;
-                }
-                spellAbilityCopy.setId(this.getId());
-                spellAbilityCopy.clearManaCosts();
-                spellAbilityCopy.clearManaCostsToPay();
-                spellAbilityCopy.addCost(this.getCosts().copy());
-                spellAbilityCopy.addCost(this.getManaCosts().copy());
-                spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
-                spellAbilityToResolve = spellAbilityCopy;
-                ContinuousEffect effect = new FlashbackReplacementEffect();
-                effect.setTargetPointer(new FixedTarget(getSourceId(), game.getState().getZoneChangeCounter(getSourceId())));
-                game.addEffect(effect, this);
-            }
-        }
-        return spellAbilityToResolve;
-    }
-
-    @Override
-    public Costs<Cost> getCosts() {
-        if (spellAbilityToResolve == null) {
-            return super.getCosts();
-        }
-        return spellAbilityToResolve.getCosts();
     }
 
     @Override
     public FlashbackAbility copy() {
         return new FlashbackAbility(this);
-    }
-
-    @Override
-    public String getRule(boolean all) {
-        return this.getRule();
     }
 
     @Override
@@ -169,67 +57,5 @@ public class FlashbackAbility extends SpellAbility {
         }
         sbRule.append(" <i>(You may cast this card from your graveyard for its flashback cost. Then exile it.)</i>");
         return sbRule.toString();
-    }
-
-    /**
-     * Used for split card in PlayerImpl method:
-     * getOtherUseableActivatedAbilities
-     *
-     * @param abilityName
-     */
-    public FlashbackAbility setAbilityName(String abilityName) {
-        this.abilityName = abilityName;
-        return this;
-    }
-
-}
-
-class FlashbackReplacementEffect extends ReplacementEffectImpl {
-
-    public FlashbackReplacementEffect() {
-        super(Duration.OneUse, Outcome.Exile);
-        staticText = "(If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack)";
-    }
-
-    protected FlashbackReplacementEffect(final FlashbackReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FlashbackReplacementEffect copy() {
-        return new FlashbackReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                discard();
-                return controller.moveCards(
-                        card, Zone.EXILED, source, game, false, false, false, event.getAppliedEffects());
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        UUID cardId = CardUtil.getMainCardId(game, source.getSourceId()); // for split cards
-        if (cardId.equals(event.getTargetId())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.STACK
-                && ((ZoneChangeEvent) event).getToZone() != Zone.EXILED) {
-
-            int zcc = game.getState().getZoneChangeCounter(cardId);
-            return ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == zcc;
-
-        }
-        return false;
     }
 }

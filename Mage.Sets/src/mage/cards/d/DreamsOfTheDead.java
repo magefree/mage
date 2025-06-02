@@ -25,6 +25,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class DreamsOfTheDead extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // {1}{U}: Return target white or black creature card from your graveyard to the battlefield. That creature gains "Cumulative upkeep {2}." If the creature would leave the battlefield, exile it instead of putting it anywhere else.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DreamsOfTheDeadEffect(), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new DreamsOfTheDeadEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addEffect(new LeaveBattlefieldExileTargetReplacementEffect("the creature"));
         this.addAbility(ability);
@@ -82,7 +83,7 @@ class DreamsOfTheDeadEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                Permanent creature = game.getPermanent(card.getId());
+                Permanent creature = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (creature != null) {
                     ContinuousEffect effect = new GainAbilityTargetEffect(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")), Duration.Custom);
                     effect.setTargetPointer(new FixedTarget(creature, game));

@@ -27,7 +27,7 @@ public final class ShoreSnapper extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(new IslandwalkAbility(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{U}")));
     }

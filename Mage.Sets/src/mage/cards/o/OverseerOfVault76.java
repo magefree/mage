@@ -1,9 +1,6 @@
 package mage.cards.o;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -13,21 +10,25 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.constants.*;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  * @author Cguy7777
  */
 public final class OverseerOfVault76 extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
+    private static final FilterControlledCreaturePermanent filter =
+            new FilterControlledCreaturePermanent("creature you control with power 3 or less");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
@@ -45,7 +46,7 @@ public final class OverseerOfVault76 extends CardImpl {
         // First Contact -- Whenever Overseer of Vault 76 or another creature with power 3 or less
         // you control enters, put a quest counter on Overseer of Vault 76.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.QUEST.createInstance()), filter, false, true)
+                new AddCountersSourceEffect(CounterType.QUEST.createInstance()), filter, false, false)
                 .withFlavorWord("First Contact"));
 
         // At the beginning of combat on your turn, you may remove three quest counters from
@@ -64,9 +65,8 @@ public final class OverseerOfVault76 extends CardImpl {
                 3)
                 .setText("remove three quest counters from among permanents you control");
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new DoWhenCostPaid(boostAbility, cost, "Remove three quest counters from among permanents you control?"),
-                TargetController.YOU,
-                false));
+                new DoWhenCostPaid(boostAbility, cost, "Remove three quest counters from among permanents you control?")
+        ));
     }
 
     private OverseerOfVault76(final OverseerOfVault76 card) {

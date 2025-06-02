@@ -37,7 +37,7 @@ public final class HeraldOfKozilek extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
         
         // Colorless spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private HeraldOfKozilek(final HeraldOfKozilek card) {

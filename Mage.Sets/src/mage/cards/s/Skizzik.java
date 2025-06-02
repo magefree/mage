@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -41,7 +41,7 @@ public final class Skizzik extends CardImpl {
 
         // At the beginning of the end step, if Skizzik wasn't kicked, sacrifice it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false),
+                new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new SacrificeSourceEffect(), false),
                 new InvertCondition(KickedCondition.ONCE),
                 "At the beginning of the end step, if {this} wasn't kicked, sacrifice it"
         ));

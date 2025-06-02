@@ -40,21 +40,21 @@ public final class SwordOfTheParuns extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // As long as equipped creature is tapped, tapped creatures you control get +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(2,0, Duration.WhileOnBattlefield, filterTapped),
                 new CompoundCondition(EquipmentAttachedCondition.instance, AttachedToTappedCondition.TAPPED),
                 "As long as equipped creature is tapped, tapped creatures you control get +2/+0"
         )));
 
         // As long as equipped creature is untapped, untapped creatures you control get +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(0,2, Duration.WhileOnBattlefield, filterUntapped),
                 new CompoundCondition(EquipmentAttachedCondition.instance, AttachedToTappedCondition.UNTAPPED),
                 "As long as equipped creature is untapped, untapped creatures you control get +0/+2"
         )));
 
         // {3}: You may tap or untap equipped creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapAttachedEffect(), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new MayTapOrUntapAttachedEffect(), new GenericManaCost(3)));
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }

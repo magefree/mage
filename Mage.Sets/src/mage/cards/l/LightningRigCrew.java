@@ -38,7 +38,7 @@ public final class LightningRigCrew extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {T}: Lightning-Rig Crew deals 1 damage to each opponent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost());
         this.addAbility(ability);
 
         // Whenever you cast a Pirate spell, untap Lightning-Rig Crew.

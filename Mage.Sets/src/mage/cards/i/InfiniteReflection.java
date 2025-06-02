@@ -50,7 +50,7 @@ public final class InfiniteReflection extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InfiniteReflectionTriggeredEffect()));
 
         // Nontoken creatures you control enter the battlefield as a copy of enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfiniteReflectionEntersBattlefieldEffect()));
+        this.addAbility(new SimpleStaticAbility(new InfiniteReflectionEntersBattlefieldEffect()));
     }
 
     private InfiniteReflection(final InfiniteReflection card) {

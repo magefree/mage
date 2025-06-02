@@ -32,7 +32,7 @@ public final class FungalReaches extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {tap}: Put a storage counter on Fungal Reaches.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

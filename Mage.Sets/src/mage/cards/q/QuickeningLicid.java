@@ -33,7 +33,7 @@ public final class QuickeningLicid extends CardImpl {
         this.addAbility(new LicidAbility(new ManaCostsImpl<>("{1}{W}"), new ColoredManaCost(ColoredManaSymbol.W)));
         
         // Enchanted creature has first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private QuickeningLicid(final QuickeningLicid card) {

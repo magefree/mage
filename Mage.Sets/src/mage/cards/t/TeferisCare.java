@@ -37,12 +37,12 @@ public final class TeferisCare extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // {W}, Sacrifice an enchantment: Destroy target enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
         // {3}{U}{U}: Counter target enchantment spell.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{3}{U}{U}"));
+        ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl<>("{3}{U}{U}"));
         ability.addTarget(new TargetSpell(filter2));
         this.addAbility(ability);
     }

@@ -32,7 +32,6 @@ public final class JudithTheScourgeDiva extends CardImpl {
 
         // Other creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, true)
         ));
 

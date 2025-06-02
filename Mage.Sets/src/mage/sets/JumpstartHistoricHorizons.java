@@ -302,7 +302,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Servant of the Scale", 635, Rarity.COMMON, mage.cards.s.ServantOfTheScale.class));
         cards.add(new SetCardInfo("Shambleshark", 714, Rarity.COMMON, mage.cards.s.Shambleshark.class));
         cards.add(new SetCardInfo("Shelter", 133, Rarity.COMMON, mage.cards.s.Shelter.class));
-        cards.add(new SetCardInfo("Shivan Drgaon", 788, Rarity.RARE, mage.cards.s.ShivanDragon.class));
+        cards.add(new SetCardInfo("Shivan Dragon", 788, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Shiv's Embrace", 511, Rarity.UNCOMMON, mage.cards.s.ShivsEmbrace.class));
         cards.add(new SetCardInfo("Shoreline Scout", 12, Rarity.UNCOMMON, mage.cards.s.ShorelineScout.class));
         cards.add(new SetCardInfo("Sinister Starfish", 383, Rarity.COMMON, mage.cards.s.SinisterStarfish.class));

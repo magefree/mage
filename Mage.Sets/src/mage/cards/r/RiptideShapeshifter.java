@@ -33,7 +33,7 @@ public final class RiptideShapeshifter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{U}{U}, Sacrifice Riptide Shapeshifter: Choose a creature type. Reveal cards from the top of your library until you reveal a creature card of that type. Put that card onto the battlefield and shuffle the rest into your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RiptideShapeshifterEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new RiptideShapeshifterEffect(), new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

@@ -10,6 +10,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.dynamicvalue.common.SavedDiscardValue;
 import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -83,7 +84,7 @@ public final class CardUtil {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     private static final List<String> costWords = Arrays.asList(
-            "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay", "collect"
+            "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay", "collect", "forage"
     );
 
     // search set code in commands like "set_code-card_name"
@@ -601,6 +602,14 @@ public final class CardUtil {
         return getExileZoneId(getCardZoneString(SOURCE_EXILE_ZONE_TEXT, sourceId, game, previous), game);
     }
 
+    /**
+     * Find exiled zone due source object's zcc
+     * <p>
+     * Warning, carefully use it from static abilities, cause:
+     * - static abilities init from start of the game, e.g. zcc = 0
+     * - activated abilities init on usage, e.g. zcc = 123
+     * - if you need to share some data between diff type of effects then find actual object's zcc manually
+     */
     public static UUID getExileZoneId(Game game, Ability source) {
         return getExileZoneId(game, source, 0);
     }
@@ -743,7 +752,7 @@ public final class CardUtil {
         return true;
     }
 
-    public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
+    public static String createObjectRelatedWindowTitle(Ability source, Game game, String textSuffix) {
         String title;
         if (source != null) {
             MageObject sourceObject = game.getObject(source);
@@ -962,13 +971,19 @@ public final class CardUtil {
         boolean xValue = amount.toString().equals("X");
         if (xValue) {
             sb.append("X ").append(counter.getName()).append(" counters");
-        } else if (amount == SavedDamageValue.MANY || amount == SavedGainedLifeValue.MANY) {
+        } else if (amount == SavedDamageValue.MANY
+                || amount == SavedGainedLifeValue.MANY
+                || amount == SavedDiscardValue.MANY) {
             sb.append("that many ").append(counter.getName()).append(" counters");
         } else {
             sb.append(counter.getDescription());
         }
         if (!targetPlayerGets) {
-            sb.append(add ? " on " : " from ").append(description);
+            sb.append(add ? " on " : " from ");
+            if (description.contains("up to") && !description.contains("up to one")) {
+                sb.append("each of ");
+            }
+            sb.append(description);
         }
         if (!amount.getMessage().isEmpty()) {
             sb.append(xValue ? ", where X is " : " for each ").append(amount.getMessage());
@@ -1071,46 +1086,70 @@ public final class CardUtil {
                 .collect(Collectors.toSet());
     }
 
-    /**
-     * For finding the spell or ability on the stack for "becomes the target" triggers.
-     *
-     * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
-     * @param game  the Game from checkTrigger() or watch()
-     * @return the StackObject which targeted the source, or null if not found
-     */
-    public static StackObject getTargetingStackObject(GameEvent event, Game game) {
-        // In case of multiple simultaneous triggered abilities from the same source,
-        // need to get the actual one that targeted, see #8026, #8378
-        // Also avoids triggering on cancelled selections, see #8802
-        for (StackObject stackObject : game.getStack()) {
-            Ability stackAbility = stackObject.getStackAbility();
-            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
-                continue;
-            }
-            if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {
-                return stackObject;
-            }
-        }
-        return null;
+    public static Set<UUID> getAllPossibleTargets(Cost cost, Game game, Ability source) {
+        return cost.getTargets()
+                .stream()
+                .map(t -> t.possibleTargets(source.getControllerId(), source, game))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
     }
 
     /**
-     * For ensuring that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
+     * Distribute values between min and max and make sure that the values will be evenly distributed
+     * Use it to limit possible values list like mana options
+     */
+    public static List<Integer> distributeValues(int count, int min, int max) {
+        List<Integer> res = new ArrayList<>();
+        if (count <= 0 || min > max) {
+            return res;
+        }
+
+        if (min == max) {
+            res.add(min);
+            return res;
+        }
+
+        int range = max - min + 1;
+
+        // low possible amount
+        if (range <= count) {
+            for (int i = 0; i < range; i++) {
+                res.add(min + i);
+            }
+            return res;
+        }
+
+        // big possible amount, so skip some values
+        double step = (double) (max - min) / (count - 1);
+        for (int i = 0; i < count; i++) {
+            res.add(min + (int) Math.round(i * step));
+        }
+        // make sure first and last elements are good
+        res.set(0, min);
+        if (res.size() > 1) {
+            res.set(res.size() - 1, max);
+        }
+
+        return res;
+    }
+
+    /**
+     * For finding the spell or ability on the stack for "becomes the target" triggers.
+     * Also ensures that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
      * If this is the first attempt at triggering for a given ability targeting a given object,
-     * this method records that in the game state for later checks by this same method.
+     * this method records that in the game state for later checks by this same method, to not return the same object again.
      *
-     * @param checkingReference must be unique for each usage (this.id.toString() of the TriggeredAbility, or this.getKey() of the watcher)
-     * @param targetingObject   from getTargetingStackObject
+     * @param checkingReference must be unique for each usage (this.getId().toString() of the TriggeredAbility, or this.getKey() of the watcher)
      * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
      * @param game              the Game from checkTrigger() or watch()
-     * @return true if already triggered/watched, false if this is the first/only trigger/watch
+     * @return the StackObject which targeted the source, or null if already used or not found
      */
-    public static boolean checkTargetedEventAlreadyUsed(String checkingReference, StackObject targetingObject, GameEvent event, Game game) {
+    public static StackObject findTargetingStackObject(String checkingReference, GameEvent event, Game game) {
+        // In case of multiple simultaneous triggered abilities from the same source,
+        // need to get the actual one that targeted, see #8026, #8378, rulings for Battle Mammoth
+        // In case of copied triggered abilities, need to trigger on each independently, see #13498
+        // Also avoids triggering on cancelled selections, see #8802
         String stateKey = "targetedMap" + checkingReference;
-        // If a spell or ability an opponent controls targets a single permanent you control more than once,
-        // Battle Mammoth's triggered ability will trigger only once.
-        // However, if a spell or ability an opponent controls targets multiple permanents you control,
-        // Battle Mammoth's triggered ability will trigger once for each of those permanents. (2021-02-05)
         Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue(stateKey);
         // targetMap: key - targetId; value - Set of stackObject Ids
         if (targetMap == null) {
@@ -1119,13 +1158,22 @@ public final class CardUtil {
             targetMap = new HashMap<>(targetMap); // must have new object reference if saved back to game state
         }
         Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
-        if (!targetingObjects.add(targetingObject.getId())) {
-            return true; // The trigger/watcher already recorded that target of the stack object
+        for (StackObject stackObject : game.getStack()) {
+            Ability stackAbility = stackObject.getStackAbility();
+            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
+                continue;
+            }
+            if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {
+                if (!targetingObjects.add(stackObject.getId())) {
+                    continue; // The trigger/watcher already recorded that target of the stack object, check for another
+                }
+                // Otherwise, store this combination of trigger/watcher + target + stack object
+                targetMap.put(event.getTargetId(), targetingObjects);
+                game.getState().setValue(stateKey, targetMap);
+                return stackObject;
+            }
         }
-        // Otherwise, store this combination of trigger/watcher + target + stack object
-        targetMap.put(event.getTargetId(), targetingObjects);
-        game.getState().setValue(stateKey, targetMap);
-        return false;
+        return null;
     }
 
     /**
@@ -1255,7 +1303,7 @@ public final class CardUtil {
         Card permCard;
         if (card instanceof SplitCard) {
             permCard = card;
-        } else if (card instanceof AdventureCard) {
+        } else if (card instanceof CardWithSpellOption) {
             permCard = card;
         } else if (card instanceof ModalDoubleFacedCard) {
             permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
@@ -1269,6 +1317,15 @@ public final class CardUtil {
         }
 
         return permCard;
+    }
+
+    /**
+     * If a card object is moved to the battlefield, object id can be different (e.g. MDFC).
+     * Use this method to get the permanent object from the card object after move to battlefield.
+     * Can return null if not found on the battlefield.
+     */
+    public static Permanent getPermanentFromCardPutToBattlefield(Card card, Game game) {
+        return game.getPermanent(CardUtil.getDefaultCardSideForBattlefield(game, card).getId());
     }
 
     /**
@@ -1353,7 +1410,11 @@ public final class CardUtil {
      */
     public static void takeControlUnderPlayerStart(Game game, Ability source, Player controller, Player playerUnderControl, boolean givePauseForResponse) {
         // game logs added in child's call
-        controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source));
+        if (!controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source))) {
+            return;
+        }
+
+        // give pause, so new controller can look around battlefield and hands before finish controlling choose dialog
         if (givePauseForResponse) {
             while (controller.canRespond()) {
                 if (controller.chooseUse(Outcome.Benefit, "You got control of " + playerUnderControl.getLogName()
@@ -1373,9 +1434,9 @@ public final class CardUtil {
      * @param playerUnderControl
      */
     public static void takeControlUnderPlayerEnd(Game game, Ability source, Player controller, Player playerUnderControl) {
-        playerUnderControl.setGameUnderYourControl(true, false);
+        playerUnderControl.setGameUnderYourControl(game, true, false);
         if (!playerUnderControl.getTurnControlledBy().equals(controller.getId())) {
-            game.informPlayers(controller + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
+            game.informPlayers(controller.getLogName() + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
             controller.getPlayersUnderYourControl().remove(playerUnderControl.getId());
         }
     }
@@ -1439,9 +1500,9 @@ public final class CardUtil {
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
             cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
-        } else if (cardToCast instanceof AdventureCard) {
+        } else if (cardToCast instanceof CardWithSpellOption) {
             cards.add(cardToCast);
-            cards.add(((AdventureCard) cardToCast).getSpellCard());
+            cards.add(((CardWithSpellOption) cardToCast).getSpellCard());
         } else {
             cards.add(cardToCast);
         }
@@ -1579,15 +1640,15 @@ public final class CardUtil {
         }
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card) {
-        castSingle(player, source, game, card, null);
+    public static boolean castSingle(Player player, Ability source, Game game, Card card) {
+        return castSingle(player, source, game, card, null);
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
-        castSingle(player, source, game, card, false, manaCost);
+    public static boolean castSingle(Player player, Ability source, Game game, Card card, ManaCostsImpl<ManaCost> manaCost) {
+        return castSingle(player, source, game, card, false, manaCost);
     }
 
-    public static void castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
+    public static boolean castSingle(Player player, Ability source, Game game, Card card, boolean noMana, ManaCostsImpl<ManaCost> manaCost) {
         // handle split-cards
         if (card instanceof SplitCard) {
             SplitCardHalf leftHalfCard = ((SplitCard) card).getLeftHalfCard();
@@ -1630,9 +1691,9 @@ public final class CardUtil {
         }
 
         // handle adventure cards
-        if (card instanceof AdventureCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             if (manaCost != null) {
                 // get additional cost if any
                 Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
@@ -1653,8 +1714,10 @@ public final class CardUtil {
             player.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), manaCost, additionalCostsNormalCard, MageIdentifier.Default);
         }
 
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getMainCard().getId(), Boolean.TRUE);
+
         // cast it
-        player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
+        boolean result = player.cast(player.chooseAbilityForCast(card.getMainCard(), game, noMana),
                 game, noMana, new ApprovingObject(source, game));
 
         // turn off effect after cast on every possible card-face
@@ -1670,14 +1733,15 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
-        if (card instanceof AdventureCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
         }
         // turn off effect on a normal card
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+        return result;
     }
 
     /**
@@ -1710,8 +1774,9 @@ public final class CardUtil {
             // Waiting on actual ruling of Ashiok, Wicked Manipulator.
             return true;
         }
-        if (player.loseLife(lifeToPay, game, source, false) >= lifeToPay) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lifeToPay));
+        int lostLife = player.loseLife(lifeToPay, game, source, false);
+        if (lostLife > 0) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lostLife));
             return true;
         }
 
@@ -1887,6 +1952,10 @@ public final class CardUtil {
         return defaultValue;
     }
 
+    public static int getSourceCostsTagX(Game game, Ability source, int defaultValue) {
+        return getSourceCostsTag(game, source, "X", defaultValue);
+    }
+
     public static String addCostVerb(String text) {
         if (costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith)) {
             return text;
@@ -2057,8 +2126,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
-            AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
+        } else if (object instanceof CardWithSpellOption || object instanceof SpellOptionCard) {
+            CardWithSpellOption mainCard = (CardWithSpellOption) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getSpellCard());
         } else if (object instanceof Spell) {
@@ -2122,9 +2191,10 @@ public final class CardUtil {
             return null;
         }
 
-        // not started game
+        // T0 - for not started game
+        // T2 - for starting of the turn
         if (gameState.getTurn().getStep() == null) {
-            return "T0";
+            return "T" + gameState.getTurnNum();
         }
 
         // normal game
@@ -2161,6 +2231,15 @@ public final class CardUtil {
             }
         }
         return sb.toString();
+    }
+
+    public static <T> Optional<T> getEffectValueFromAbility(Ability ability, String key, Class<T> clazz) {
+        return castStream(
+                ability.getAllEffects()
+                        .stream()
+                        .map(effect -> effect.getValue(key)),
+                clazz
+        ).findFirst();
     }
 
     public static <T> Stream<T> castStream(Collection<?> collection, Class<T> clazz) {

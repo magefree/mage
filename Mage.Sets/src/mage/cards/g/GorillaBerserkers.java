@@ -31,7 +31,7 @@ public final class GorillaBerserkers extends CardImpl {
         // Rampage 2
         this.addAbility(new RampageAbility(2));
         // Gorilla Berserkers can't be blocked except by three or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByOneEffect(3)));
     }
 
     private GorillaBerserkers(final GorillaBerserkers card) {

@@ -53,7 +53,7 @@ class VigilForTheLostEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+        int costX = controller.announceX(0, Integer.MAX_VALUE, "Announce the value for {X} (pay to gain life)", game, source, true);
         if (new GenericManaCost(costX).pay(source, game, source, source.getControllerId(), false, null)) {
             controller.gainLife(costX, game, source);
             return true;

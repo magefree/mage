@@ -36,7 +36,7 @@ public final class HexgoldHalberd extends CardImpl {
         // As long as it's your turn, equipped creature has first strike and trample.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT),
-                MyTurnCondition.instance, "as long as it's your turn, equipped creature has first strike"
+                MyTurnCondition.instance, "during your turn, equipped creature has first strike"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT),

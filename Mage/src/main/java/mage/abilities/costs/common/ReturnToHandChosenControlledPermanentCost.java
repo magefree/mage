@@ -25,7 +25,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
     public ReturnToHandChosenControlledPermanentCost(TargetControlledPermanent target) {
         target.withNotTarget(true);
         this.addTarget(target);
-        if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
+        if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getMinNumberOfTargets()) {
             this.text = "return " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' '
                     + target.getTargetName()
                     + (target.getTargetName().endsWith(" you control") ? "" : " you control")

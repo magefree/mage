@@ -49,12 +49,16 @@ public class PlayerAction {
 
     /**
      * Calls after action removed from commands queue later (for multi steps
-     * action, e.g.AI related)
-     *
-     * @param game
-     * @param player
+     * action, e.g. AI related)
      */
     public void onActionRemovedLater(Game game, TestPlayer player) {
         //
+    }
+
+    @Override
+    public String toString() {
+        return "T" + this.turnNum + "." + this.step.getStepShortText()
+                + ": " + this.action
+                + (this.actionName.isEmpty() ? "" : " (" + this.actionName + ")");
     }
 }

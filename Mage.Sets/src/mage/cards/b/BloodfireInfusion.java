@@ -41,7 +41,7 @@ public final class BloodfireInfusion extends CardImpl {
         // {R}, Sacrifice enchanted creature: Bloodfire Infusion deals damage equal to the sacrificed creature's power to each creature.
         Effect effect = new DamageAllEffect(AttachedPermanentPowerCount.instance, new FilterCreaturePermanent());
         effect.setText("{this} deals damage equal to the sacrificed creature's power to each creature");
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
+        Ability ability2 = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{R}"));
         ability2.addCost(new SacrificeAttachedCost());
         this.addAbility(ability2);
 

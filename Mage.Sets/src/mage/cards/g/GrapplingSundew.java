@@ -36,7 +36,6 @@ public final class GrapplingSundew extends CardImpl {
 
         // {4}{G}: Grappling Sundew gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(
                         IndestructibleAbility.getInstance(),
                         Duration.EndOfTurn

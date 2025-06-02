@@ -43,7 +43,7 @@ public final class NalathniDragon extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
 
         // {R}: Nalathni Dragon gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Nalathni Dragon at the beginning of the next end step.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}"));
         ability.addEffect(new NalathniDragonEffect());

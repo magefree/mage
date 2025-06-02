@@ -42,7 +42,7 @@ public final class RobobrainWarMind extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Robobrain War Mind's power is equal to the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.instance)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.ANY)));
 
         // When Robobrain War Mind enters the battlefield, you get an amount of {E} equal to the number of artifact creatures you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(new PermanentsOnBattlefieldCount(filter))

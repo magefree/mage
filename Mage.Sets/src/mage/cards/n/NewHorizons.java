@@ -52,7 +52,7 @@ public final class NewHorizons extends CardImpl {
         Ability gainedAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{T}: Add two mana of any one color.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private NewHorizons(final NewHorizons card) {

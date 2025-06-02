@@ -1,9 +1,8 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
@@ -13,14 +12,14 @@ import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BorosBattleshaper extends CardImpl {
@@ -33,9 +32,9 @@ public final class BorosBattleshaper extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of each combat, up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat.
-        Ability ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, new BorosBattleshaperEffect(), TargetController.ANY, false, false);
-        ability.addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent("creature that attacks or blocks if able"), false));
-        ability.addTarget(new TargetCreaturePermanent(0, 1, new FilterCreaturePermanent("creature that can't attack or block"), false));
+        Ability ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, new BorosBattleshaperEffect(), false);
+        ability.addTarget(new TargetCreaturePermanent(0, 1).withChooseHint("attacks or blocks this combat if able"));
+        ability.addTarget(new TargetCreaturePermanent(0, 1).withChooseHint("can't attack or block this combat"));
         this.addAbility(ability);
 
     }

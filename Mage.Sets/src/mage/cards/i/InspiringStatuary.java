@@ -31,7 +31,7 @@ public final class InspiringStatuary extends CardImpl {
         // Non-artifact spells you cast have improvise.
         ImproviseAbility improviseAbility = new ImproviseAbility();
         improviseAbility.setRuleAtTheTop(false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(improviseAbility, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(improviseAbility, filter)));
 
     }
 

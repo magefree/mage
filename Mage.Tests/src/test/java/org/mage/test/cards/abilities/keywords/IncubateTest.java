@@ -46,7 +46,7 @@ public class IncubateTest extends CardTestPlayerBase {
     @Test
     public void test_Transform_Custom() {
         // target transform
-        addCustomEffect_TransformTarget(playerA);
+        addCustomEffect_TargetTransform(playerA);
 
         // Alluring Suitor, 2/3
         // Deadly Dancer, 3/3
@@ -74,7 +74,7 @@ public class IncubateTest extends CardTestPlayerBase {
     @Test
     public void test_Transform_IncubatorToken() {
         // target transform
-        addCustomEffect_TransformTarget(playerA);
+        addCustomEffect_TargetTransform(playerA);
 
         // Incubate 3. (Create an Incubator token with three +1/+1 counters on it and “{2}: Transform this artifact.”
         // It transforms into a 0/0 Phyrexian artifact creature.)
@@ -115,9 +115,9 @@ public class IncubateTest extends CardTestPlayerBase {
         // use case: copy one side, can't tranform
 
         // target transform
-        addCustomEffect_TransformTarget(playerA);
+        addCustomEffect_TargetTransform(playerA);
         // target destroy
-        addCustomEffect_DestroyTarget(playerA);
+        addCustomEffect_TargetDestroy(playerA);
 
         // Incubate 3. (Create an Incubator token with three +1/+1 counters on it and “{2}: Transform this artifact.”
         // It transforms into a 0/0 Phyrexian artifact creature.)
@@ -169,9 +169,9 @@ public class IncubateTest extends CardTestPlayerBase {
         // use case: copy one side, can't tranform
 
         // target transform
-        addCustomEffect_TransformTarget(playerA);
+        addCustomEffect_TargetTransform(playerA);
         // target destroy
-        addCustomEffect_DestroyTarget(playerA);
+        addCustomEffect_TargetDestroy(playerA);
 
         // Incubate 3. (Create an Incubator token with three +1/+1 counters on it and “{2}: Transform this artifact.”
         // It transforms into a 0/0 Phyrexian artifact creature.)

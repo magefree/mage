@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -49,8 +48,7 @@ public final class Murmuration extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(new StormCrowToken(), MurmurationDynamicValue.instance)
                         .setText("for each spell you've cast this turn, create a " +
-                                "1/2 blue Bird creature token with flying named Storm Crow"),
-                TargetController.YOU, false
+                                "1/2 blue Bird creature token with flying named Storm Crow")
         ).addHint(MurmurationDynamicValue.getHint()));
     }
 

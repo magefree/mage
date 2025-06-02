@@ -1,16 +1,17 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
@@ -22,13 +23,15 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
-import mage.target.Target;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
+import mage.target.targetpointer.EachTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class TurfWar extends CardImpl {
@@ -37,8 +40,12 @@ public final class TurfWar extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
 
         // When Turf War enters the battlefield, for each player, put a contested counter on target land that player controls.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TurfWarCounterEffect())
-                .setTargetAdjuster(TurfWarAdjuster.instance));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.CONTESTED.createInstance()).setTargetPointer(new EachTargetPointer())
+                        .setText("for each player, put a contested counter on target land that player controls"));
+        ability.addTarget(new TargetLandPermanent());
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
+        this.addAbility(ability);
 
         // Whenever a creature deals combat damage to a player, if that player controls one or more lands with contested counters on them, that creature's controller gains control of one of those lands of their choice and untaps it.
         this.addAbility(new TurfWarTriggeredAbility());
@@ -51,62 +58,6 @@ public final class TurfWar extends CardImpl {
     @Override
     public TurfWar copy() {
         return new TurfWar(this);
-    }
-}
-
-class TurfWarCounterEffect extends OneShotEffect {
-
-    TurfWarCounterEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "for each player, put a contested counter on target land that player controls";
-    }
-
-    private TurfWarCounterEffect(final TurfWarCounterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TurfWarCounterEffect copy() {
-        return new TurfWarCounterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-        boolean success = false;
-        for (Target target : source.getTargets()) {
-            for (UUID uuid : target.getTargets()) {
-                Permanent permanent = game.getPermanent(uuid);
-                if (permanent != null && permanent.addCounters(CounterType.CONTESTED.createInstance(), source, game)) {
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName()
-                            + " puts a contested counter on " + permanent.getLogName());
-                    success = true;
-                }
-            }
-        }
-        return success;
-    }
-}
-
-enum TurfWarAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            FilterLandPermanent filter = new FilterLandPermanent("land controlled by " + player.getName());
-            filter.add(new ControllerIdPredicate(playerId));
-            ability.addTarget(new TargetLandPermanent(filter));
-        }
     }
 }
 
@@ -191,7 +142,7 @@ class TurfWarControlEffect extends OneShotEffect {
         FilterLandPermanent filter = new FilterLandPermanent("land with a contested counter controlled by " + damagedPlayer.getName());
         filter.add(new ControllerIdPredicate(damagedPlayer.getId()));
         filter.add(TurfWarPredicate.instance);
-        TargetLandPermanent target = new TargetLandPermanent(1, 1, filter, true);
+        TargetPermanent target = new TargetPermanent(1, 1, filter, true);
         if (!target.canChoose(creatureController.getId(), source, game)) {
             return false;
         }

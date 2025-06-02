@@ -34,7 +34,6 @@ public final class DarksteelMonolith extends CardImpl {
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell that you cast from your hand.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new DarksteelMonolithAddAltCostEffect()
         ));
     }
@@ -55,7 +54,7 @@ enum IsBeingCastFromHandCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        if (object instanceof SplitCardHalf || object instanceof AdventureCardSpell || object instanceof ModalDoubleFacedCardHalf) {
+        if (object instanceof SplitCardHalf || object instanceof SpellOptionCard || object instanceof ModalDoubleFacedCardHalf) {
             UUID mainCardId = ((Card) object).getMainCard().getId();
             object = game.getObject(mainCardId);
         }

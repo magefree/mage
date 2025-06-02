@@ -46,10 +46,10 @@ public final class DualCasting extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has "{R}, {tap}: Copy target instant or sorcery spell you control. You may choose new targets for the copy."
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(), new ColoredManaCost(ColoredManaSymbol.R));
+        ability = new SimpleActivatedAbility(new CopyTargetStackObjectEffect(), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }
 
     private DualCasting(final DualCasting card) {

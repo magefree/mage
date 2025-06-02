@@ -37,7 +37,7 @@ public final class SoratamiCloudskater extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}, Return a land you control to its owner's hand: Draw a card, then discard a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
     }

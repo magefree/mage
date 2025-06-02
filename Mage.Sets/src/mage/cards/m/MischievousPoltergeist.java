@@ -29,7 +29,7 @@ public final class MischievousPoltergeist extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Pay 1 life: Regenerate Mischievous Poltergeist.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new PayLifeCost(1)));
     }
 
     private MischievousPoltergeist(final MischievousPoltergeist card) {

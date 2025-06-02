@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -11,7 +11,6 @@ import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class CourtOfIre extends CardImpl {
                 new DamageTargetEffect(7), new DamageTargetEffect(2),
                 MonarchIsSourceControllerCondition.instance, "{this} deals 2 damage to any target. " +
                 "If you're the monarch, it deals 7 damage instead"
-        ), TargetController.YOU, false);
+        ));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

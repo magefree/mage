@@ -3,14 +3,13 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.TapAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 
 /**
@@ -28,7 +27,7 @@ public final class TroublesomeSpirit extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your end step, tap all lands you control.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TapAllEffect(new FilterControlledLandPermanent("lands you control")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TapAllEffect(new FilterControlledLandPermanent("lands you control"))));
     }
 
     private TroublesomeSpirit(final TroublesomeSpirit card) {

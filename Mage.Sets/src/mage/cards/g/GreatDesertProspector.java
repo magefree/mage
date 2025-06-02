@@ -1,32 +1,24 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.PowerstoneToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class GreatDesertProspector extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("other creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
-    private static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
+    private static final PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE);
 
     public GreatDesertProspector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

@@ -36,7 +36,7 @@ public final class BristlingHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(3)));
 
         // Pay {E}{E}{E}: Put a +1/+1 count on Bristling Hydra. It gains hexproof until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new PayEnergyCost(3));
         Effect effect = new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("It gains hexproof until end of turn");

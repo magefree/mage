@@ -28,10 +28,10 @@ public final class UbaMask extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // If a player would draw a card, that player exiles that card face up instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UbaMaskReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new UbaMaskReplacementEffect()));
 
         // Each player may play cards they exiled with Uba Mask this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UbaMaskPlayEffect()), new UbaMaskExiledCardsWatcher());
+        this.addAbility(new SimpleStaticAbility(new UbaMaskPlayEffect()), new UbaMaskExiledCardsWatcher());
     }
 
     private UbaMask(final UbaMask card) {

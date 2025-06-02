@@ -38,7 +38,7 @@ public final class TheTwelfthDoctor extends CardImpl {
         this.toughness = new MageInt(4);
 
     // The first spell you cast from anywhere other than your hand each turn has demonstrate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new TheTwelfthDoctorGainDemonstrateEffect()),
             new TheTwelfthDoctorWatcher());
         this.addAbility(new TheTwelfthDoctorCopyTriggeredAbility());

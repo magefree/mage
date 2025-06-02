@@ -26,7 +26,7 @@ public final class WordsOfWorship extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // {1}: The next time you would draw a card this turn, you gain 5 life instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWorshipEffect(), new GenericManaCost(1));        
+        Ability ability = new SimpleActivatedAbility(new WordsOfWorshipEffect(), new GenericManaCost(1));        
         this.addAbility(ability);
     }
 

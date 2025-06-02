@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.CelebrationCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -33,8 +33,8 @@ public final class LadyOfLaughter extends CardImpl {
 
         // Celebration -- At the beginning of your end step, if two or more nonland permanents entered the battlefield under your control this turn, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), TargetController.YOU,
-                CelebrationCondition.instance, false
+                TargetController.YOU, new DrawCardSourceControllerEffect(1),
+                false, CelebrationCondition.instance
         ).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new PermanentsEnteredBattlefieldWatcher());
     }
 

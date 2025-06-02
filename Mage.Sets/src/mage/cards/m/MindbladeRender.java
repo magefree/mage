@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -10,10 +11,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -45,11 +46,12 @@ public final class MindbladeRender extends CardImpl {
     }
 }
 
-class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
+class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
-    public MindbladeRenderTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.addEffect(new LoseLifeSourceControllerEffect(1));
+    MindbladeRenderTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, true));
+        this.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
+        setTriggerPhrase("Whenever your opponents are dealt combat damage, if any of that damage was dealt by a Warrior, ");
     }
 
     private MindbladeRenderTriggeredAbility(final MindbladeRenderTriggeredAbility effect) {
@@ -63,38 +65,21 @@ class MindbladeRenderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
+    }
+
+    @Override
+    public boolean checkEvent(DamagedPlayerEvent event, Game game) {
+        if (!event.isCombatDamage() || !game.getOpponents(getControllerId()).contains(event.getTargetId())) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return permanent != null && permanent.isControlledBy(getControllerId()) && permanent.hasSubtype(SubType.WARRIOR, game);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Player controller = game.getPlayer(getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-
-        if (!controller.hasOpponent(dEvent.getTargetId(), game)){
-            return false;
-        }
-        if (!dEvent.isCombatDamage()) {
-            return false;
-        }
-
-        int warriorDamage = dEvent.getEvents()
-                .stream()
-                .filter(ev -> {
-                    Permanent attacker = game.getPermanentOrLKIBattlefield(ev.getSourceId());
-                    return attacker != null && attacker.hasSubtype(SubType.WARRIOR, game);
-                })
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-
-        return warriorDamage > 0;
+        return !getFilteredEvents((DamagedBatchForPlayersEvent) event, game).isEmpty();
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever your opponents are dealt combat damage, if any of that damage was dealt by a Warrior, you draw a card and you lose 1 life.";
-    }
 }

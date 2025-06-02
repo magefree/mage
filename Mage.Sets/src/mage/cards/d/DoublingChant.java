@@ -84,3 +84,4 @@ class DoublingChantEffect extends OneShotEffect {
         return true;
     }
 }
+

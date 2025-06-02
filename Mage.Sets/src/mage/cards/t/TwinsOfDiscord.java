@@ -43,7 +43,7 @@ public final class TwinsOfDiscord extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new TwinsOfDiscordEffect(), 1));
         
         // Each other colorless creature you control has bloodthirst 2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
             new BloodthirstAbility(2),
                 Duration.WhileOnBattlefield,
                 colorlessCreatureFilter, true).setText("Each other colorless creature you control has bloodthirst 2")));

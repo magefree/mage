@@ -29,7 +29,7 @@ public final class LilianasElite extends CardImpl {
 
         // Liliana's Elite gets +1/+1 for each creature card in your graveyard.
         DynamicValue amount = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

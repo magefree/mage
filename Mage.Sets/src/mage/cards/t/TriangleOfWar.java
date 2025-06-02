@@ -25,7 +25,7 @@ public final class TriangleOfWar extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {2}, Sacrifice Triangle of War: Target creature you control fights target creature an opponent controls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
             new FightTargetsEffect(),
             new ManaCostsImpl<>("{2}"));
         ability.addCost(new SacrificeSourceCost());

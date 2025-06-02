@@ -1,8 +1,8 @@
 package mage.abilities.keyword;
 
-import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.CrewSaddleIncreasedPowerAbility;
+import mage.abilities.common.CrewSaddleWithToughnessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SaddledCondition;
 import mage.abilities.costs.Cost;
@@ -46,6 +46,23 @@ public class SaddleAbility extends SimpleActivatedAbility {
     private SaddleAbility(final SaddleAbility ability) {
         super(ability);
         this.value = ability.value;
+    }
+
+    public static boolean applySaddle(Permanent permanent, Game game) {
+        if (permanent == null) {
+            return false;
+        }
+        SaddleAbility saddleAbility = permanent.getAbilities().stream()
+                .filter(a -> a instanceof SaddleAbility)
+                .map(a -> (SaddleAbility) a)
+                .findFirst()
+                .orElse(null);
+        if (saddleAbility != null) {
+            SaddleEventEffect effect = new SaddleEventEffect();
+            effect.apply(game, saddleAbility);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -118,8 +135,7 @@ class SaddleCost extends CostImpl {
                 int selectedPower = this.targets.keySet().stream()
                         .map(game::getPermanent)
                         .filter(Objects::nonNull)
-                        .map(MageObject::getPower)
-                        .mapToInt(MageInt::getValue)
+                        .mapToInt(p -> getSaddlePower(p, game))
                         .sum();
                 String extraInfo = "(selected power " + selectedPower + " of " + value + ")";
                 if (selectedPower >= value) {
@@ -137,7 +153,7 @@ class SaddleCost extends CostImpl {
                 if (!game.replaceEvent(event)) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null && permanent.tap(source, game)) {
-                        sumPower += permanent.getPower().getValue();
+                        sumPower += getSaddlePower(permanent, game);
                     }
                 }
             }
@@ -158,7 +174,7 @@ class SaddleCost extends CostImpl {
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         int sumPower = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
-            sumPower += Math.max(permanent.getPower().getValue(), 0);
+            sumPower += Math.max(getSaddlePower(permanent, game), 0);
             if (sumPower >= value) {
                 return true;
             }
@@ -169,5 +185,15 @@ class SaddleCost extends CostImpl {
     @Override
     public SaddleCost copy() {
         return new SaddleCost(this);
+    }
+
+    private static int getSaddlePower(Permanent permanent, Game game) {
+        if (permanent.hasAbility(CrewSaddleWithToughnessAbility.getInstance(), game)) {
+            return permanent.getToughness().getValue();
+        } else if (permanent.getAbilities(game).containsClass(CrewSaddleIncreasedPowerAbility.class)) {
+            return permanent.getPower().getValue() + 2;
+        } else {
+            return permanent.getPower().getValue();
+        }
     }
 }

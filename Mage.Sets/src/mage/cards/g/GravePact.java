@@ -1,20 +1,16 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.ArrayList;
@@ -31,7 +27,9 @@ public final class GravePact extends CardImpl {
 
 
         // Whenever a creature you control dies, each other player sacrifices a creature.
-        this.addAbility(new GravePactTriggeredAbility());
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new GravePactEffect(), false, StaticFilters.FILTER_CONTROLLED_A_CREATURE
+        ));
     }
 
     private GravePact(final GravePact card) {
@@ -44,43 +42,11 @@ public final class GravePact extends CardImpl {
     }
 }
 
-class GravePactTriggeredAbility extends TriggeredAbilityImpl {
-
-    public GravePactTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GravePactEffect());
-        setTriggerPhrase("Whenever a creature you control dies, ");
-    }
-
-    private GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GravePactTriggeredAbility copy() {
-        return new GravePactTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
-        if (zoneChangeEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            return permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature(game);
-        }
-        return false;
-    }
-}
-
 class GravePactEffect extends OneShotEffect {
 
     GravePactEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "each other player sacrifices a creature";
+        this.staticText = "each other player sacrifices a creature of their choice";
     }
 
     private GravePactEffect(final GravePactEffect effect) {

@@ -36,7 +36,7 @@ public final class MidnightEntourage extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Aetherborn you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // Whenever Midnight Entourage or another Aetherborn you control dies, you draw a card and you lose 1 life.
         Ability ability = new DiesThisOrAnotherTriggeredAbility(new DrawCardSourceControllerEffect(1, true), false, filter);

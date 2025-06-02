@@ -25,7 +25,7 @@ public final class PlasmaElemental extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Plasma Elemental can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedSourceEffect()));
     }
 
     private PlasmaElemental(final PlasmaElemental card) {

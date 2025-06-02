@@ -1,16 +1,13 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,8 +24,8 @@ public final class SqueeGoblinNabob extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, you may return Squee, Goblin Nabob from your graveyard to your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), TargetController.YOU, true)
-                .setTriggerPhrase("At the beginning of your upkeep, "));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
+                TargetController.YOU, new ReturnSourceFromGraveyardToHandEffect(), true));
     }
 
     private SqueeGoblinNabob(final SqueeGoblinNabob card) {

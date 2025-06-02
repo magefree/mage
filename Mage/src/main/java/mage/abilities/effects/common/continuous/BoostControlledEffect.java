@@ -9,8 +9,8 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -25,7 +25,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
-    protected FilterCreaturePermanent filter;
+    protected FilterPermanent filter;
     protected boolean excludeSource;
 
     public BoostControlledEffect(int power, int toughness, Duration duration) {
@@ -40,18 +40,18 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_CREATURES, excludeSource);
     }
 
-    public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter) {
+    public BoostControlledEffect(int power, int toughness, Duration duration, FilterPermanent filter) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, false);
     }
 
-    public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
+    public BoostControlledEffect(int power, int toughness, Duration duration, FilterPermanent filter, boolean excludeSource) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, filter, excludeSource);
     }
 
     /**
      * Note: use excludeSource rather than AnotherPredicate
      */
-    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
+    public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterPermanent filter, boolean excludeSource) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;

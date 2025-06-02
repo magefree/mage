@@ -32,7 +32,7 @@ public final class ScrollOfAvacyn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {1}, Sacrifice Scroll of Avacyn: Draw a card. If you control an Angel, you gain 5 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new GainLifeEffect(5), new PermanentsOnTheBattlefieldCondition(filter), "If you control an Angel, you gain 5 life"));
         this.addAbility(ability);

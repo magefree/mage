@@ -37,7 +37,7 @@ public final class GrapeshotCatapult extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Grapeshot Catapult deals 1 damage to target creature with flying.
-        Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability activatedAbility = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         activatedAbility.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(activatedAbility);
     }

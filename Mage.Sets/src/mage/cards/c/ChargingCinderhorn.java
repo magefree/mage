@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -39,7 +39,7 @@ public final class ChargingCinderhorn extends CardImpl {
         ChargingCinderhornDamageTargetEffect effect = new ChargingCinderhornDamageTargetEffect();
         effect.setText("put a fury counter on {this}. Then {this} deals damage equal to the number of fury counters on it to that player");
         BeginningOfEndStepTriggeredAbility ability
-                = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, new ChargingCinderhornCondition(), false);
+                = new BeginningOfEndStepTriggeredAbility(TargetController.ANY, effect, false, new ChargingCinderhornCondition());
         this.addAbility(ability);
     }
 

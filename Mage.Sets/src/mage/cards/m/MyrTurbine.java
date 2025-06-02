@@ -37,10 +37,10 @@ public final class MyrTurbine extends CardImpl {
     public MyrTurbine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CreateTokenEffect(new MyrToken()),
                 new TapSourceCost()));
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterCard)),
                 new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(5, 5, filterMyr, true)));

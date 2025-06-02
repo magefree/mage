@@ -28,6 +28,10 @@ public class SimpleMageClient implements MageClient {
         callbackClient = new LoadCallbackClient(joinGameChat, logsPrefix, showLogsAsHtml);
     }
 
+    protected void updateGlobalProgress(String globalProgress) {
+        callbackClient.updateGlobalProgress(globalProgress);
+    }
+
     @Override
     public MageVersion getVersion() {
         return version;

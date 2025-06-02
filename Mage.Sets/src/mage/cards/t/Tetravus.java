@@ -6,7 +6,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileTargetCost;
@@ -20,7 +20,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
@@ -55,14 +54,12 @@ public final class Tetravus extends CardImpl {
 
         // At the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, create that many 1/1 colorless Tetravite artifact creature tokens. They each have flying and "This creature can't be enchanted."
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TetravusCreateTokensEffect(),
-                TargetController.YOU, true
+                new TetravusCreateTokensEffect(), true
         ));
 
         // At the beginning of your upkeep, you may exile any number of tokens created with Tetravus. If you do, put that many +1/+1 counters on Tetravus.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TetravusAddCountersEffect(),
-                TargetController.YOU, true
+                new TetravusAddCountersEffect(), true
         ));
 
     }
@@ -106,7 +103,7 @@ class TetravusCreateTokensEffect extends OneShotEffect {
         if (countersToRemove == 0) {
             return false;
         }
-        countersToRemove = player.getAmount(0, countersToRemove, "Choose an amount of counters to remove", game);
+        countersToRemove = player.getAmount(0, countersToRemove, "Choose an amount of counters to remove", source, game);
         Cost cost = new RemoveCountersSourceCost(CounterType.P1P1.createInstance(countersToRemove));
         if (cost.pay(source, game, source, source.getControllerId(), true)) {
             CreateTokenEffect effect = new CreateTokenEffect(new TetraviteToken(), countersToRemove);

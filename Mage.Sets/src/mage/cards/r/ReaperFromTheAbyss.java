@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.hint.common.MorbidHint;
@@ -37,8 +37,8 @@ public final class ReaperFromTheAbyss extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new DestroyTargetEffect(),
-                TargetController.ANY, MorbidCondition.instance, false
+                TargetController.ANY, new DestroyTargetEffect(),
+                false, MorbidCondition.instance
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.setAbilityWord(AbilityWord.MORBID).addHint(MorbidHint.instance));

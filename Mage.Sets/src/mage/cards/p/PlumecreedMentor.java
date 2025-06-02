@@ -47,7 +47,7 @@ public final class PlumecreedMentor extends CardImpl {
         // Whenever Plumecreed Mentor or another creature you control with flying enters, put a +1/+1 counter on target creature you control without flying.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                filter, false, true
+                filter, false, false
         );
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);

@@ -37,7 +37,7 @@ public final class InfernalHarvest extends CardImpl {
         this.getSpellAbility().addCost(new InfernalHarvestAdditionalCost());
 
         // Infernal Harvest deals X damage divided as you choose among any number of target creatures.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(GetXValue.instance));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(GetXValue.instance));
     }
 

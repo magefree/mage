@@ -29,7 +29,7 @@ public final class BakuAltar extends CardImpl {
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Baku Altar.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance(1)), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
         // {2}, {tap}, Remove a ki counter from Baku Altar: Create a 1/1 colorless Spirit creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritToken(), 1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new SpiritToken(), 1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.KI.createInstance(1)));
         this.addAbility(ability);

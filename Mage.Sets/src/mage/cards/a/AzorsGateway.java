@@ -42,7 +42,7 @@ public final class AzorsGateway extends CardImpl {
         //           If cards with five or more different converted mana costs are exiled with Azor's Gateway,
         //           you gain 5 life, untap Azor's Gateway, and transform it.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AzorsGatewayEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new AzorsGatewayEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

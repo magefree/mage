@@ -27,7 +27,7 @@ public final class BatteringWurm extends CardImpl {
 
         this.addAbility(new BloodthirstAbility(1));
         // Creatures with power less than Battering Wurm's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
     }
 
     private BatteringWurm(final BatteringWurm card) {

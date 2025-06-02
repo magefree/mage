@@ -31,7 +31,7 @@ public final class AshnodsCylix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {3}, {T}: Target player looks at the top three cards of their library, puts one of them back on top of their library, then exiles the rest.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AshnodsCylixEffect(), new GenericManaCost(3));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new AshnodsCylixEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

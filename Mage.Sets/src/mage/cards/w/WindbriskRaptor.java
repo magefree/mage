@@ -43,7 +43,7 @@ public final class WindbriskRaptor extends CardImpl {
         // Attacking creatures you control have lifelink.
         Effect effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("Attacking creatures you control have lifelink");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
         
     }
 

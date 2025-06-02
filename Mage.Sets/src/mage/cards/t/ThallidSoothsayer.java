@@ -29,7 +29,7 @@ public final class ThallidSoothsayer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}, Sacrifice a creature: Draw a card.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }

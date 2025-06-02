@@ -41,7 +41,7 @@ public final class DragonloftIdol extends CardImpl {
         Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control a Dragon, Dragonloft Idol gets +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "and has flying");

@@ -32,7 +32,7 @@ public final class SpinerockKnoll extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Hideaway
-        this.addAbility(new HideawayAbility(4));
+        this.addAbility(new HideawayAbility(this, 4));
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {tap}: Add {R}.

@@ -27,6 +27,7 @@ import mage.target.common.TargetControlledPermanent;
 import mage.util.MultiAmountMessage;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -90,26 +91,26 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent fromPermanent = game.getPermanent(source.getFirstTarget());
         Permanent toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if(controller == null || fromPermanent == null || toPermanent == null) {
+        if (controller == null || fromPermanent == null || toPermanent == null) {
             return false;
         }
 
         List<Counter> counters = new ArrayList<>(fromPermanent.getCounters(game).values());
-        counters.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
+        counters.sort(Comparator.comparing(Counter::getName));
 
         List<MultiAmountMessage> messages = counters.stream()
                 .map(c -> new MultiAmountMessage(c.getName() + " (" + c.getCount() + ")", 0, c.getCount()))
                 .collect(Collectors.toList());
-        int max = messages.stream().map(m -> m.max).reduce(0, Integer::sum);
+        int totalMin = 0;
+        int totalMax = messages.stream().mapToInt(m -> m.max).sum();
 
         int total;
         List<Integer> choices;
         do {
-            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, 0,
-                    max, MultiAmountType.COUNTERS, game);
-
-            total = choices.stream().reduce(0, Integer::sum);
-        } while (total < 0);
+            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, totalMin,
+                    totalMax, MultiAmountType.COUNTERS, game);
+            total = choices.stream().mapToInt(x -> x).sum();
+        } while (total < totalMin && controller.canRespond());
 
         // Move the counters. Make sure some counters were actually moved.
         for (int i = 0; i < choices.size(); i++) {
@@ -142,7 +143,7 @@ class ResourcefulDefenseTriggeredAbility extends LeavesBattlefieldAllTriggeredAb
 
     ResourcefulDefenseTriggeredAbility() {
         super(new ResourcefulDefenseLeaveEffect(), StaticFilters.FILTER_CONTROLLED_PERMANENT);
-        setTriggerPhrase("Whenever a creature you control leaves the battlefield, if it had counters on it, ");
+        setTriggerPhrase("Whenever a permanent you control leaves the battlefield, if it had counters on it, ");
     }
 
     private ResourcefulDefenseTriggeredAbility(final ResourcefulDefenseTriggeredAbility ability) {

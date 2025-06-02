@@ -33,9 +33,9 @@ public final class FreedFromTheReal extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Untap));
         this.addAbility(new EnchantAbility(auraTarget));
         // {U}: Tap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapEnchantedEffect(), new ManaCostsImpl<>("{U}")));
+        this.addAbility(new SimpleActivatedAbility(new TapEnchantedEffect(), new ManaCostsImpl<>("{U}")));
         // {U}: Untap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapAttachedEffect(), new ManaCostsImpl<>("{U}")));
+        this.addAbility(new SimpleActivatedAbility(new UntapAttachedEffect(), new ManaCostsImpl<>("{U}")));
 
     }
 

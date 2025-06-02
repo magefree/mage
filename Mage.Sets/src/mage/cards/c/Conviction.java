@@ -38,10 +38,10 @@ public final class Conviction extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 3, Duration.WhileOnBattlefield)));
 
         // {W}: Return Conviction to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{W}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{W}")));
     }
 
     private Conviction(final Conviction card) {

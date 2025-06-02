@@ -25,7 +25,7 @@ public final class VolcanicWind extends CardImpl {
 
         // Volcanic Wind deals X damage divided as you choose among any number of target creatures, where X is the number of creatures as you cast Volcanic Wind.
         PermanentsOnBattlefieldCount creatures = new PermanentsOnBattlefieldCount(filter, null);
-        Effect effect = new DamageMultiEffect(creatures);
+        Effect effect = new DamageMultiEffect();
         effect.setText(rule);
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(creatures));

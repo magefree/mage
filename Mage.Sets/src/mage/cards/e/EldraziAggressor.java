@@ -45,7 +45,7 @@ public final class EldraziAggressor extends CardImpl {
 
         // Eldrazi Aggressor has haste as long as you control another colorless creature.
         Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private EldraziAggressor(final EldraziAggressor card) {

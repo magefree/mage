@@ -3,14 +3,13 @@ package mage.cards.b;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,7 +28,7 @@ public final class BountyOfTheLuxa extends CardImpl {
         // At the beginning of your precombat main phase, remove all flood counters from Bounty of the Luxa.
         // If no counters were removed this way, put a flood counter on Bounty of the Luxa and draw a card.
         // Otherwise, add {C}{G}{U}.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new BountyOfTheLuxaEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new BountyOfTheLuxaEffect()));
     }
 
     private BountyOfTheLuxa(final BountyOfTheLuxa card) {

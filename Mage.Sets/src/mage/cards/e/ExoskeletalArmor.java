@@ -39,7 +39,7 @@ public final class ExoskeletalArmor extends CardImpl {
         CardsInAllGraveyardsCount count = new CardsInAllGraveyardsCount(StaticFilters.FILTER_CARD_CREATURES);
         Effect effect = new BoostEnchantedEffect(count, count, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +X/+X, where X is the number of creature cards in all graveyards");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private ExoskeletalArmor(final ExoskeletalArmor card) {

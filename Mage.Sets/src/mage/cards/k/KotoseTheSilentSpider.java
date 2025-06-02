@@ -170,7 +170,7 @@ class KotoseTheSilentSpiderWatcher extends Watcher {
             morMap.values().removeIf(Set::isEmpty);
             return;
         }
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
         Spell spell = game.getSpell(event.getTargetId());
@@ -178,7 +178,7 @@ class KotoseTheSilentSpiderWatcher extends Watcher {
             return;
         }
         morMap.getOrDefault(
-                event.getAdditionalReference().getApprovingMageObjectReference(), Collections.emptySet()
+                event.getApprovingObject().getApprovingMageObjectReference(), Collections.emptySet()
         ).removeIf(set -> set
                 .stream()
                 .anyMatch(mor -> mor.getSourceId().equals(spell.getMainCard().getId())

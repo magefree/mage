@@ -41,7 +41,7 @@ public final class TorporDust extends CardImpl {
         
         // Enchanted creature gets -3/-0.
         Effect effect = new BoostEnchantedEffect(-3, -0, Duration.WhileOnBattlefield);
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability2 = new SimpleStaticAbility(effect);
         this.addAbility(ability2);
         
     }

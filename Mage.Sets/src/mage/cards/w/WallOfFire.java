@@ -24,7 +24,7 @@ public final class WallOfFire extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     private WallOfFire(final WallOfFire card) {

@@ -40,7 +40,7 @@ public final class CinderhazeWretch extends CardImpl {
         this.addAbility(ability);
 
         // Put a -1/-1 counter on Cinderhaze Wretch: Untap Cinderhaze Wretch.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance(1))));
+        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance(1))));
 
     }
 

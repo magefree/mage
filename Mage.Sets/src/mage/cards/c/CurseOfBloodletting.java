@@ -34,7 +34,7 @@ public final class CurseOfBloodletting extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // If a source would deal damage to enchanted player, it deals double that damage to that player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfBloodlettingEffect()));
+        this.addAbility(new SimpleStaticAbility(new CurseOfBloodlettingEffect()));
     }
 
     private CurseOfBloodletting(final CurseOfBloodletting card) {

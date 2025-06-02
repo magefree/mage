@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
@@ -56,8 +56,7 @@ public final class AthreosShroudVeiled extends CardImpl {
 
         // At the beginning of your end step, put a coin counter on another target creature.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.COIN.createInstance()),
-                TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.COIN.createInstance())
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -81,6 +80,7 @@ class AthreosShroudVeiledTriggeredAbility extends TriggeredAbilityImpl {
 
     AthreosShroudVeiledTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private AthreosShroudVeiledTriggeredAbility(final AthreosShroudVeiledTriggeredAbility ability) {

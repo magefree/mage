@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -42,7 +42,7 @@ public final class WolverineRiders extends CardImpl {
 
         // At the beginning of each upkeep, create a 1/1 green Elf Warrior creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new ElfWarriorToken()), TargetController.EACH_PLAYER, false
+                TargetController.ANY, new CreateTokenEffect(new ElfWarriorToken()), false
         ));
 
         // Whenever another Elf you control enters, you gain life equal to its toughness.

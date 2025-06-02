@@ -5,8 +5,8 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldWithCounterEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class BalustradeWurm extends CardImpl {
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(CounterType.FINALITY.createInstance(), false),
                 new ManaCostsImpl<>("{2}{G}{G}"), DeliriumCondition.instance, TimingRule.SORCERY
-        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardHint.YOU));
+        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private BalustradeWurm(final BalustradeWurm card) {

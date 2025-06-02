@@ -30,13 +30,13 @@ public final class SunsetPyramid extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.BRICK.createInstance(3)), "with three brick counters on it"));
 
         // {2}, {T}, Remove a brick counter from Sunset Pyramid: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.BRICK.createInstance()));
         this.addAbility(ability);
 
         // {2}, {T}: Scry 1.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(new ScryEffect(1, false), new GenericManaCost(2));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
 

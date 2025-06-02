@@ -28,7 +28,7 @@ public final class DreadOfNight extends CardImpl {
     public DreadOfNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private DreadOfNight(final DreadOfNight card) {

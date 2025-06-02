@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -14,7 +14,6 @@ import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
 
@@ -31,7 +30,7 @@ public final class DemonicPact extends CardImpl {
 
         // At the beginning of your upkeep, choose one that hasn't been chosen
         // - Demonic Pact deals 4 damage to any target and you gain 4 life;
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(4), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(4));
         ability.setModeTag("deals damage and gain life");
         ability.getModes().setLimitUsageByOnce(false);
         ability.addTarget(new TargetAnyTarget());

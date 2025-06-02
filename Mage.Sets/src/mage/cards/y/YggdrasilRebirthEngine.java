@@ -86,7 +86,7 @@ class YggdrasilRebirthEngineExileAllCreaturesGraveyardEffect extends OneShotEffe
             return false;
         }
         UUID exileZoneId = CardUtil.getExileZoneId(game, source);
-        String exileZoneName = CardUtil.createObjectRealtedWindowTitle(source, game, null);
+        String exileZoneName = CardUtil.createObjectRelatedWindowTitle(source, game, null);
         Cards cards = new CardsImpl(controller.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
         if (cards.isEmpty()){
             return true;
@@ -133,7 +133,7 @@ class YggdrasilRebirthEngineReturnCreatureEffect extends OneShotEffect {
         if (!player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
-        Permanent movedCard = game.getPermanent(card.getId());
+        Permanent movedCard = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (movedCard == null){
             return false;
         }

@@ -40,13 +40,13 @@ public final class Runesword extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
         
         // {3}, {T}: Target attacking creature gets +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), new GenericManaCost(3));
         // When that creature leaves the battlefield this turn, sacrifice Runesword.
         ability.addEffect(new RuneswordCreateTriggeredAbilityEffect());
         // If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn.
         ability.addEffect(new RuneswordCantBeRegeneratedEffect());
         // If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.Custom));
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(new DealtDamageToCreatureBySourceDies(this, Duration.Custom));
         ability2.addWatcher(new DamagedByWatcher(false));
         ability2.setRuleVisible(false);
         ability.addEffect(new GainAbilityTargetEffect(ability2, Duration.EndOfTurn, null, false).setText(

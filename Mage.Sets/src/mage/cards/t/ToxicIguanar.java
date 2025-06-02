@@ -38,7 +38,7 @@ public final class ToxicIguanar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Toxic Iguanar has deathtouch as long as you control a green permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has deathtouch as long as you control a green permanent")));
     }

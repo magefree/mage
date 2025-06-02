@@ -29,7 +29,7 @@ public final class TowerOfTheMagistrate extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
         // {1}, {tap}: Target creature gains protection from artifacts until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromTypeTargetEffect(Duration.EndOfTurn, new FilterArtifactCard("artifacts")), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new GainProtectionFromTypeTargetEffect(Duration.EndOfTurn, new FilterArtifactCard("artifacts")), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

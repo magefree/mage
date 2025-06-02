@@ -2,7 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -35,8 +35,8 @@ public final class ZimoneAllQuestioning extends CardImpl {
 
         // At the beginning of your end step, if a land entered the battlefield under your control this turn and you control a prime number of lands, create Primo, the Indivisible, a legendary 0/0 green and blue Fractal creature token, then put that many +1/+1 counters on it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ZimoneAllQuestioningEffect(), TargetController.YOU,
-                ZimoneAllQuestioningCondition.instance, false
+                TargetController.YOU, new ZimoneAllQuestioningEffect(),
+                false, ZimoneAllQuestioningCondition.instance
         ), new LandfallWatcher());
     }
 

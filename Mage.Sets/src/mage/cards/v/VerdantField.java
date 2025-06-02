@@ -36,9 +36,9 @@ public final class VerdantField extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted land has "{T}: Target creature gets +1/+1 until end of turn."
-        Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
+        Ability gainAbility = new SimpleActivatedAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
         gainAbility.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
 				Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gets +1/+1 until end of turn.\"")));
     }
 

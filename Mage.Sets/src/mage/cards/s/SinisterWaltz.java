@@ -69,7 +69,7 @@ class SinisterWaltzEffect extends OneShotEffect {
         }
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
         if (card != null) {
-            player.putCardsOnBottomOfLibrary(card, game, source, false);
+            player.putCardsOnBottomOfLibrary(card, game, source);
         }
         return true;
     }

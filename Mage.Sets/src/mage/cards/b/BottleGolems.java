@@ -2,8 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -18,8 +17,6 @@ import java.util.UUID;
  */
 public final class BottleGolems extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public BottleGolems(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
 
@@ -31,7 +28,7 @@ public final class BottleGolems extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Bottle Golems dies, you gain life equal to its power.
-        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(xValue, "you gain life equal to its power")));
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(SourcePermanentPowerValue.NOT_NEGATIVE, "you gain life equal to its power")));
     }
 
     private BottleGolems(final BottleGolems card) {

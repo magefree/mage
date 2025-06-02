@@ -1,7 +1,7 @@
 package mage.cards.j;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -48,8 +48,8 @@ public final class JadarGhoulcallerOfNephalia extends CardImpl {
 
         // At the beginning of your end step, if you control no creatures with decayed, create a 2/2 black Zombie creature token with decayed.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieDecayedToken()),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new CreateTokenEffect(new ZombieDecayedToken()),
+                false, condition
         ).addHint(hint));
     }
 

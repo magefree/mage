@@ -49,7 +49,7 @@ public final class DrownerOfHope extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
         // Sacrifice an Eldrazi Scion: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new SacrificeTargetCost(filter));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

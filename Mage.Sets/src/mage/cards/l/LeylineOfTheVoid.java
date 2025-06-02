@@ -32,7 +32,7 @@ public final class LeylineOfTheVoid extends CardImpl {
         // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
         // If a card would be put into an opponent's graveyard from anywhere, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfTheVoidEffect()));
+        this.addAbility(new SimpleStaticAbility(new LeylineOfTheVoidEffect()));
     }
 
     private LeylineOfTheVoid(final LeylineOfTheVoid card) {

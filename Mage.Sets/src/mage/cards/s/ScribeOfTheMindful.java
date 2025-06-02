@@ -44,7 +44,7 @@ public final class ScribeOfTheMindful extends CardImpl {
         // {1}, {T}, Sacrifice Scribe of the Mindful: Return target instant or sorcery card from your graveyard to your hand.
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("Return target instant or sorcery card from your graveyard to your hand");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));

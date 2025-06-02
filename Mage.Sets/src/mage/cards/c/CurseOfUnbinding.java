@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -33,7 +33,7 @@ public final class CurseOfUnbinding extends CardImpl {
 
         // At the beginning of enchanted player's upkeep, that player reveals cards from the top of their library until they reveal a creature card. Put that card onto the battlefield under your control. That player puts the rest of the revealed cards into their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CurseOfUnbindingEffect(), TargetController.ENCHANTED, false
+                TargetController.ENCHANTED, new CurseOfUnbindingEffect(), false
         ));
     }
 

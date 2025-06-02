@@ -32,12 +32,12 @@ public final class SamiteArcher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Prevent the next 1 damage that would be dealt to any target this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1),
+        Ability ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1),
             new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // {T}: Samite Archer deals 1 damage to any target.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

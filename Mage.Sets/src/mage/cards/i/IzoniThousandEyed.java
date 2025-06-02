@@ -48,7 +48,6 @@ public final class IzoniThousandEyed extends CardImpl {
 
         // {B}{G}, Sacrifice another creature: You gain 1 life and draw a card.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainLifeEffect(1),
                 new ManaCostsImpl<>("{B}{G}")
         );

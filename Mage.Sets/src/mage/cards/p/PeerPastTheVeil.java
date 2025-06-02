@@ -3,7 +3,6 @@ package mage.cards.p;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,7 +20,7 @@ public final class PeerPastTheVeil extends CardImpl {
         // Discard your hand. Then draw X cards, where X is the number of card types among cards in your graveyard.
         this.getSpellAbility().addEffect(new DiscardHandControllerEffect());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(CardTypesInGraveyardCount.YOU).concatBy("Then"));
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private PeerPastTheVeil(final PeerPastTheVeil card) {

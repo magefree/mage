@@ -26,7 +26,7 @@ public final class SilentGravestone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Cards in graveyards can't be the targets of spells or abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeTargetedCardsGraveyardsEffect()));
 
         // {4}, {t}: Exile Silent Gravestone and all cards from all graveyards. Draw a card.
         Ability ability = new SimpleActivatedAbility(new ExileSourceEffect(), new GenericManaCost(4));

@@ -30,7 +30,7 @@ public final class GridMonitor extends CardImpl {
         this.toughness = new MageInt(6);
 
         // You can't cast creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GridMonitorEffect()));
+        this.addAbility(new SimpleStaticAbility(new GridMonitorEffect()));
     }
 
     private GridMonitor(final GridMonitor card) {

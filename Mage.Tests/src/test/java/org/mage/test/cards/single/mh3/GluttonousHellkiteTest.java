@@ -112,7 +112,7 @@ public class GluttonousHellkiteTest extends CardTestPlayerBase {
 
     @Test
     public void test_CastWithSac_SacFullAndBlink() {
-        addCustomEffect_BlinkTarget(playerA);
+        addCustomEffect_TargetBlink(playerA);
 
         // When you cast this spell, each player sacrifices X creatures. Gluttonous Hellkite enters the battlefield
         // with two +1/+1 counters on it for each creature sacrificed this way.

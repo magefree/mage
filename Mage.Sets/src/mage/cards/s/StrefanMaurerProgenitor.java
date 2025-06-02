@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -29,8 +29,8 @@ import mage.game.permanent.token.BloodToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.*;
@@ -66,9 +66,8 @@ public class StrefanMaurerProgenitor extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new CreateTokenEffect(
                                 new BloodToken(),
-                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance),
-                        TargetController.YOU,
-                        false)
+                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance)
+                )
                         .addHint(hint)
         );
 
@@ -123,7 +122,7 @@ class StrefanMaurerProgenitorPlayVampireEffect extends OneShotEffect {
 
         player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
 
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

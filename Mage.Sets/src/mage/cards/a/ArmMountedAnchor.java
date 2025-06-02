@@ -71,7 +71,7 @@ enum ArmMountedAnchorAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         // checking state
         if (HeckbentCondition.instance.apply(game, ability)) {
             CardUtil.reduceCost(ability, 2);

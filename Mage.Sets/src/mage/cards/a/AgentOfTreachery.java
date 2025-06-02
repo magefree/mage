@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -46,8 +46,7 @@ public final class AgentOfTreachery extends CardImpl {
         // At the beginning of your end step, if you control three or more permanents you don't own, draw three cards.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(3),
-                        TargetController.YOU, false
+                        new DrawCardSourceControllerEffect(3)
                 ), new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2), "At the beginning of your end step, " +
                 "if you control three or more permanents you don't own, draw three cards."
         ).addHint(new ValueHint("Permanents you control but don't own", new PermanentsOnBattlefieldCount(filter))));

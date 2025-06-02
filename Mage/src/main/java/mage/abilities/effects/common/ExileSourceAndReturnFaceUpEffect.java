@@ -1,6 +1,6 @@
 package mage.abilities.effects.common;
 
-import mage.abilities.Pronoun;
+import mage.constants.Pronoun;
 import mage.constants.PutCards;
 
 /**
@@ -10,7 +10,7 @@ public class ExileSourceAndReturnFaceUpEffect extends ExileAndReturnSourceEffect
 
     public ExileSourceAndReturnFaceUpEffect() {
         super(PutCards.BATTLEFIELD, Pronoun.IT, true, null);
-        staticText = "exile {this}, then return it to the battlefield. <i>(front face up)</i>";
+        staticText = "exile {this}, then return it to the battlefield <i>(front face up)</i>.";
     }
 
     private ExileSourceAndReturnFaceUpEffect(final ExileSourceAndReturnFaceUpEffect effect) {

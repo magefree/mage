@@ -14,8 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterEquipmentPermanent;
+import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
@@ -26,15 +25,15 @@ import java.util.UUID;
  */
 public final class HammerOfRuin extends CardImpl {
 
-    private static final FilterEquipmentPermanent filter
-            = new FilterEquipmentPermanent("Equipment that player controls");
+    private static final FilterPermanent filter
+            = new FilterPermanent(SubType.EQUIPMENT, "Equipment that player controls");
 
     public HammerOfRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
 
         // Whenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.
         Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(new DestroyTargetEffect(), "equipped creature", true, true);

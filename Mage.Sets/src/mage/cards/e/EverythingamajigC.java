@@ -49,7 +49,7 @@ public final class EverythingamajigC extends CardImpl {
 
         // Chimeric Staff
         // X: Everythingamajig becomes an X/X Construct artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChimericStaffEffect(), new VariableManaCost(VariableCostType.NORMAL)));
+        this.addAbility(new SimpleActivatedAbility(new ChimericStaffEffect(), new VariableManaCost(VariableCostType.NORMAL)));
     }
 
     private EverythingamajigC(final EverythingamajigC card) {
@@ -130,6 +130,7 @@ class ChimericStaffEffect extends ContinuousEffectImpl {
     ChimericStaffEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private ChimericStaffEffect(final ChimericStaffEffect effect) {

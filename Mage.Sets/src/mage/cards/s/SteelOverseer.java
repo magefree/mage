@@ -36,7 +36,7 @@ public final class SteelOverseer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new TapSourceCost()));
     }
 
     private SteelOverseer(final SteelOverseer card) {

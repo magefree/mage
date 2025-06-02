@@ -334,8 +334,8 @@ public abstract class GameImpl implements Game {
                 Card rightCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
-            } else if (card instanceof AdventureCard) {
-                Card spellCard = ((AdventureCard) card).getSpellCard();
+            } else if (card instanceof CardWithSpellOption) {
+                Card spellCard = ((CardWithSpellOption) card).getSpellCard();
                 spellCard.setOwnerId(ownerId);
                 addCardToState(spellCard);
             } else if (card.isTransformable() && card.getSecondCardFace() != null) {
@@ -843,6 +843,10 @@ public abstract class GameImpl implements Game {
         // if someone requested concede
         if (currentPriorityPlayer.getId().equals(playerId)) {
             // concede for itself
+            // stop current player dialog and execute concede
+            currentPriorityPlayer.signalPlayerConcede(true);
+        } else if (currentPriorityPlayer.getTurnControlledBy().equals(playerId)) {
+            // concede for itself while controlling another player
             // stop current player dialog and execute concede
             currentPriorityPlayer.signalPlayerConcede(true);
         } else {
@@ -1423,6 +1427,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CreaturesDiedWatcher());
         newWatchers.add(new TemptedByTheRingWatcher());
         newWatchers.add(new SpellsCastWatcher());
+        newWatchers.add(new AttackedOrBlockedThisCombatWatcher()); // required for tests
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -1517,7 +1522,7 @@ public abstract class GameImpl implements Game {
         UUID[] players = getPlayers().keySet().toArray(new UUID[0]);
         UUID playerId;
         while (!hasEnded()) {
-            playerId = players[RandomUtil.nextInt(players.length)];
+            playerId = players[RandomUtil.nextInt(players.length)]; // test game
             Player player = getPlayer(playerId);
             if (player != null && player.canRespond()) {
                 fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");
@@ -1805,14 +1810,21 @@ public abstract class GameImpl implements Game {
 
     protected void resolve() {
         StackObject top = null;
+        boolean wasError = false;
         try {
             top = state.getStack().peek();
             top.resolve(this);
             resetControlAfterSpellResolve(top.getId());
+        } catch (Throwable e) {
+            // workaround to show real error in tests instead checkInfiniteLoop
+            wasError = true;
+            throw e;
         } finally {
             if (top != null) {
                 state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
-                checkInfiniteLoop(top.getSourceId());
+                if (!wasError) {
+                    checkInfiniteLoop(top.getSourceId());
+                }
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
                         state.handleSimultaneousEvent(this);
@@ -1840,7 +1852,7 @@ public abstract class GameImpl implements Game {
                     if (turnController != null) {
                         Player targetPlayer = getPlayer(spellControllerId);
                         if (targetPlayer != null) {
-                            targetPlayer.setGameUnderYourControl(true, false);
+                            targetPlayer.setGameUnderYourControl(this, true, false);
                             informPlayers(turnController.getLogName() + " lost control over " + targetPlayer.getLogName());
                             if (targetPlayer.getTurnControlledBy().equals(turnController.getId())) {
                                 turnController.getPlayersUnderYourControl().remove(targetPlayer.getId());
@@ -1948,7 +1960,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void addEffect(ContinuousEffect continuousEffect, Ability source) {
         Ability newAbility = source.copy();
-        newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+        newAbility.initSourceObjectZoneChangeCounter(this, true);
         ContinuousEffect newEffect = continuousEffect.copy();
 
         newEffect.newId();
@@ -2147,18 +2159,14 @@ public abstract class GameImpl implements Game {
             // countered, or otherwise responded to. Rather, it resolves immediately after the mana
             // ability that triggered it, without waiting for priority.
             Ability manaAbility = ability.copy();
-            if (manaAbility.getSourceObjectZoneChangeCounter() == 0) {
-                manaAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
-            }
+            manaAbility.initSourceObjectZoneChangeCounter(this, false);
             if (manaAbility.activate(this, false)) {
                 manaAbility.resolve(this);
             }
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
-            if (newAbility.getSourceObjectZoneChangeCounter() == 0) {
-                newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
-            }
+            newAbility.initSourceObjectZoneChangeCounter(this, false);
             if (!(newAbility instanceof DelayedTriggeredAbility)) {
                 newAbility.setSourcePermanentTransformCount(this);
             }
@@ -2857,6 +2865,13 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
+
+            // Start Your Engines // Max Speed
+            if (perm.getAbilities(this).containsClass(StartYourEnginesAbility.class)) {
+                Optional.ofNullable(perm.getControllerId())
+                        .map(this::getPlayer)
+                        .ifPresent(player -> player.initSpeed(this));
+            }
         }
         //201300713 - 704.5k
         // If a player controls two or more legendary permanents with the same name, that player
@@ -2986,13 +3001,27 @@ public abstract class GameImpl implements Game {
         }
         String message;
         if (this.canPlaySorcery(playerId)) {
-            message = "Play spells and abilities.";
+            message = "Play spells and abilities";
         } else {
-            message = "Play instants and activated abilities.";
+            message = "Play instants and activated abilities";
         }
-        playerQueryEventSource.select(playerId, message);
+
+        message += getControllingPlayerHint(playerId);
+
+        Player player = this.getPlayer(playerId);
+        playerQueryEventSource.select(player.getTurnControlledBy(), message);
         getState().clearLookedAt();
         getState().clearRevealed();
+    }
+
+    private String getControllingPlayerHint(UUID playerId) {
+        Player player = this.getPlayer(playerId);
+        Player controllingPlayer = this.getPlayer(player.getTurnControlledBy());
+        if (player != controllingPlayer) {
+            return " (as " + player.getLogName() + ")";
+        } else {
+            return "";
+        }
     }
 
     @Override
@@ -3000,7 +3029,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.select(playerId, message);
+        playerQueryEventSource.select(playerId, message + getControllingPlayerHint(playerId));
     }
 
     @Override
@@ -3008,7 +3037,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.select(playerId, message, options);
+        playerQueryEventSource.select(playerId, message + getControllingPlayerHint(playerId), options);
     }
 
     @Override
@@ -3016,7 +3045,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.playMana(playerId, message, options);
+        playerQueryEventSource.playMana(playerId, message + getControllingPlayerHint(playerId), options);
     }
 
     @Override
@@ -3024,7 +3053,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.playXMana(playerId, message);
+        playerQueryEventSource.playXMana(playerId, message + getControllingPlayerHint(playerId));
     }
 
     @Override
@@ -3037,7 +3066,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.ask(playerId, message.getMessage(), source, addMessageToOptions(message, options));
+        playerQueryEventSource.ask(playerId, message.getMessage() + getControllingPlayerHint(playerId), source, addMessageToOptions(message, options));
     }
 
     @Override
@@ -3049,7 +3078,7 @@ public abstract class GameImpl implements Game {
         if (object != null) {
             objectName = object.getName();
         }
-        playerQueryEventSource.chooseAbility(playerId, message, objectName, choices);
+        playerQueryEventSource.chooseAbility(playerId, message + getControllingPlayerHint(playerId), objectName, choices);
     }
 
     @Override
@@ -3057,7 +3086,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.chooseMode(playerId, message, modes);
+        playerQueryEventSource.chooseMode(playerId, message + getControllingPlayerHint(playerId), modes);
     }
 
     @Override
@@ -3065,7 +3094,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message.getMessage(), targets, required, addMessageToOptions(message, options));
+        playerQueryEventSource.target(playerId, message.getMessage() + getControllingPlayerHint(playerId), targets, required, addMessageToOptions(message, options));
     }
 
     @Override
@@ -3073,7 +3102,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message.getMessage(), cards, required, addMessageToOptions(message, options));
+        playerQueryEventSource.target(playerId, message.getMessage() + getControllingPlayerHint(playerId), cards, required, addMessageToOptions(message, options));
     }
 
     /**
@@ -3086,7 +3115,7 @@ public abstract class GameImpl implements Game {
      */
     @Override
     public void fireSelectTargetTriggeredAbilityEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
-        playerQueryEventSource.target(playerId, message, abilities);
+        playerQueryEventSource.target(playerId, message + getControllingPlayerHint(playerId), abilities);
     }
 
     @Override
@@ -3094,7 +3123,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message, perms, required);
+        playerQueryEventSource.target(playerId, message + getControllingPlayerHint(playerId), perms, required);
     }
 
     @Override
@@ -3102,7 +3131,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.amount(playerId, message, min, max);
+        playerQueryEventSource.amount(playerId, message + getControllingPlayerHint(playerId), min, max);
     }
 
     @Override
@@ -3127,7 +3156,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.choosePile(playerId, message, pile1, pile2);
+        playerQueryEventSource.choosePile(playerId, message + getControllingPlayerHint(playerId), pile1, pile2);
     }
 
     @Override
@@ -3150,6 +3179,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.INFO, message, this);
     }
 
@@ -3158,6 +3188,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.STATUS, message, withTime, withTurnInfo, this);
     }
 
@@ -3166,7 +3197,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        logger.trace("fireUpdatePlayersEvent");
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
         getState().clearLookedAt();
         getState().clearRevealed();
@@ -3177,13 +3208,25 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        logger.trace("fireGameEndIfo");
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.END_GAME_INFO, null, this);
     }
 
     @Override
     public void fireErrorEvent(String message, Exception ex) {
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.ERROR, message, ex, this);
+    }
+
+    private void makeSureCalledOutsideLayerEffects() {
+        // very slow, enable/comment it for debug or load/stability tests only
+        // TODO: enable check and remove/rework all wrong usages
+        if (true) return;
+        Arrays.stream(Thread.currentThread().getStackTrace()).forEach(e -> {
+            if (e.toString().contains("GameState.applyEffects")) {
+                throw new IllegalStateException("Wrong code usage: client side events can't be called from layers effects (wrong informPlayers usage?)");
+            }
+        });
     }
 
     @Override
@@ -3509,11 +3552,6 @@ public abstract class GameImpl implements Game {
 
     }
 
-    protected void removeCreaturesFromCombat() {
-        //20091005 - 511.3
-        getCombat().endCombat(this);
-    }
-
     @Override
     public ContinuousEffects getContinuousEffects() {
         return state.getContinuousEffects();
@@ -3635,7 +3673,7 @@ public abstract class GameImpl implements Game {
 
     /**
      * Reset objects stored for Last Known Information. (Happens if all effects
-     * are applied und stack is empty)
+     * are applied and stack is empty)
      */
     @Override
     public void resetLKI() {
@@ -3654,6 +3692,11 @@ public abstract class GameImpl implements Game {
     @Override
     public int getTotalErrorsCount() {
         return this.totalErrorsCount.get();
+    }
+
+    @Override
+    public int getTotalEffectsCount() {
+        return this.getContinuousEffects().getTotalEffectsCount();
     }
 
     @Override
@@ -3706,7 +3749,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PutToBattlefieldInfo> battlefield, List<Card> graveyard, List<Card> command, List<Card> exiled) {
         // fake test ability for triggers and events
-        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        Ability fakeSourceAbilityTemplate = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("fake ability"));
         fakeSourceAbilityTemplate.setControllerId(ownerId);
 
         Player player = getPlayer(ownerId);
@@ -3774,7 +3817,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public boolean endTurn(Ability source) {
-        getTurn().endTurn(this, getActivePlayerId(), source);
+        getTurn().endTurn(this, source);
         return true;
     }
 
@@ -3852,6 +3895,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void initTimer(UUID playerId) {
         if (priorityTime > 0) {
+            makeSureCalledOutsideLayerEffects();
             tableEventSource.fireTableEvent(EventType.INIT_TIMER, playerId, null, this);
         }
     }
@@ -3859,6 +3903,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void resumeTimer(UUID playerId) {
         if (priorityTime > 0) {
+            makeSureCalledOutsideLayerEffects();
             tableEventSource.fireTableEvent(EventType.RESUME_TIMER, playerId, null, this);
         }
     }
@@ -3866,6 +3911,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void pauseTimer(UUID playerId) {
         if (priorityTime > 0) {
+            makeSureCalledOutsideLayerEffects();
             tableEventSource.fireTableEvent(EventType.PAUSE_TIMER, playerId, null, this);
         }
     }
@@ -3971,7 +4017,6 @@ public abstract class GameImpl implements Game {
                         playerObject.resetStoredBookmark(this);
                         playerObject.resetPlayerPassedActions();
                         playerObject.abort();
-
                     }
                 }
                 fireUpdatePlayersEvent();

@@ -35,7 +35,7 @@ public final class Lashwrithe extends CardImpl {
 
         // Equipped creature gets +1/+1 for each Swamp you control.
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(value, value)));
 
         // Equip {B/P}{B/P} (Phyrexian Black can be paid with either Black or 2 life.)
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{B/P}{B/P}"), false));

@@ -46,7 +46,6 @@ public final class GoreclawTerrorOfQalSisma extends CardImpl {
 
         // Creature spells you cast with power 4 or greater cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new SpellsCostReductionControllerEffect(filter, 2)
         ));
 

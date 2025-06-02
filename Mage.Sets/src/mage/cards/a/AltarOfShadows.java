@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -33,10 +32,10 @@ public final class AltarOfShadows extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
 
         // At the beginning of your precombat main phase, add {B} for each charge counter on Altar of Shadows.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new AltarOfShadowsEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new AltarOfShadowsEffect()));
         
         // {7}, {tap}: Destroy target creature. Then put a charge counter on Altar of Shadows.
-        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(7));
+        Ability destroyAbility = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(7));
         destroyAbility.addCost(new TapSourceCost());
         destroyAbility.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true)
                 .concatBy("Then"));
@@ -58,7 +57,7 @@ class AltarOfShadowsEffect extends OneShotEffect {
 
     AltarOfShadowsEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "add {B} for each charge counter on Altar of Shadows";
+        this.staticText = "add {B} for each charge counter on {this}";
     }
 
     private AltarOfShadowsEffect(final AltarOfShadowsEffect effect) {

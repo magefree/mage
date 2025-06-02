@@ -29,7 +29,7 @@ public final class MageIlVec extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}, Discard a card at random: Mage il-Vec deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addCost(new DiscardCardCost(true));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

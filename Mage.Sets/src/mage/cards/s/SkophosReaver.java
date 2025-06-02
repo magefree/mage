@@ -31,7 +31,7 @@ public final class SkophosReaver extends CardImpl {
         // As long as it's your turn, Skophos Reaver gets +2/+0.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "as long as it's your turn, {this} gets +2/+0"
+                MyTurnCondition.instance, "during your turn, {this} gets +2/+0"
         )));
 
         // Madness {1}{R}

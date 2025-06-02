@@ -37,7 +37,7 @@ public final class PurphorossEmissary extends CardImpl {
         this.addAbility(new MenaceAbility());
         
         // Enchanted creature gets +3/+3 and and has menace.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(3,3));
         Effect effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA);
         effect.setText("and has menace");
         ability.addEffect(effect);

@@ -34,7 +34,7 @@ public final class LodestoneMyr extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter))));
     }
 
     private LodestoneMyr(final LodestoneMyr card) {

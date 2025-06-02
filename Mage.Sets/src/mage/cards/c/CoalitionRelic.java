@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -34,9 +33,9 @@ public final class CoalitionRelic extends CardImpl {
         // {tap}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
         // {tap}: Put a charge counter on Coalition Relic.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), new TapSourceCost()));
         // At the beginning of your precombat main phase, remove all charge counters from Coalition Relic. Add one mana of any color for each charge counter removed this way.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new CoalitionRelicEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new CoalitionRelicEffect()));
     }
 
     private CoalitionRelic(final CoalitionRelic card) {

@@ -28,7 +28,7 @@ public final class KessigWolf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{R}: Kessig Wolf gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{R}")));
     }

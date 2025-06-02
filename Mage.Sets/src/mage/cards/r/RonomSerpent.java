@@ -39,7 +39,7 @@ public final class RonomSerpent extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Ronom Serpent can't attack unless defending player controls a snow land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(filter)));
 
         // When you control no snow lands, sacrifice Ronom Serpent.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(

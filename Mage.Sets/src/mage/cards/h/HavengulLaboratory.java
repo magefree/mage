@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -42,11 +42,11 @@ public final class HavengulLaboratory extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // At the beginning of your end step, if you sacrificed three or more Clues this turn, transform Hawkins National Laboratory.
+        // At the beginning of your end step, if you sacrificed three or more Clues this turn, transform Havengul Laboratory.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(),
-                TargetController.YOU, HavengulLaboratoryCondition.instance, false
+                TargetController.YOU, new TransformSourceEffect(),
+                false, HavengulLaboratoryCondition.instance
         ), new HavengulLaboratoryWatcher());
     }
 

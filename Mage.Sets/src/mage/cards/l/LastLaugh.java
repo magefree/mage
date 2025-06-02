@@ -22,7 +22,7 @@ import mage.game.events.GameEvent;
  */
 public final class LastLaugh extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a permanent other than Last Laugh");
+    private static final FilterPermanent filter = new FilterPermanent("a permanent other than {this}");
     static {
         filter.add(AnotherPredicate.instance);
     }

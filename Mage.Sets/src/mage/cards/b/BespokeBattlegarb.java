@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CelebrationCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -28,7 +28,7 @@ public final class BespokeBattlegarb extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0, Duration.WhileOnBattlefield)));
 
         // Celebration -- At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, attach Bespoke Battlegarb to up to one target creature you control.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
@@ -36,9 +36,7 @@ public final class BespokeBattlegarb extends CardImpl {
                         new AttachEffect(
                                 Outcome.BoostCreature,
                                 "attach {this} to up to one target creature you control"
-                        ),
-                        TargetController.YOU,
-                        false
+                        )
                 ), CelebrationCondition.instance, "At the beginning of combat on your turn, if two "
                 + "or more nonland permanents entered the battlefield under your control this turn, "
                 + "attach {this} to up to one target creature you control"

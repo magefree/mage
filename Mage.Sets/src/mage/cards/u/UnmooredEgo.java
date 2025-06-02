@@ -39,7 +39,7 @@ public final class UnmooredEgo extends CardImpl {
 class UnmooredEgoEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     UnmooredEgoEffect() {
-        super(false, "target opponent's", "up to four cards with that name", true, 4);
+        super(true, "target opponent's", "up to four cards with that name", true, 4);
     }
 
     private UnmooredEgoEffect(final UnmooredEgoEffect effect) {

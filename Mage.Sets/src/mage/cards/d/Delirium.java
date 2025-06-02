@@ -29,7 +29,7 @@ public final class Delirium extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filter.add(new ControllerIsActivePlayerPredicate());
+        filter.add(ControllerIsActivePlayerPredicate.instance);
     }
 
     public Delirium(UUID ownerId, CardSetInfo setInfo) {

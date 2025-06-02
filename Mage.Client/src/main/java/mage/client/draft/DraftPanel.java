@@ -45,8 +45,9 @@
 
      /**
       * ms delay between booster showing up and pick being allowed.
+      * Will be disabled in test mode
       */
-     private static final int protectionTime = 1500;
+     private static final int PROTECTION_CLICKS_TIMEOUT_MS = 1500;
      /**
       * Timer starting at booster being displayed, to protect from early pick due to clicking
       * a little too much on the last pick.
@@ -138,7 +139,11 @@
                  }
          );
 
-         protectionTimer = new Timer(protectionTime, e -> protectionTimer.stop());
+         int protectionTimeout = PROTECTION_CLICKS_TIMEOUT_MS;
+         if (SessionHandler.isTestMode()) {
+             protectionTimeout = 100;
+         }
+         protectionTimer = new Timer(protectionTimeout, e -> protectionTimer.stop());
      }
 
      public void cleanUp() {
@@ -186,15 +191,15 @@
      }
 
      public void updateDraft(DraftView draftView) {
-         if (draftView.getSets().size() != 3) {
+         if (draftView.getSetNames().size() != 3) {
              // Random draft - TODO: can we access the type of draft here?
              this.editPack1.setText("Random Boosters");
              this.editPack2.setText("Random Boosters");
              this.editPack3.setText("Random Boosters");
          } else {
-             this.editPack1.setText(String.format("%s - %s", draftView.getSetCodes().get(0), draftView.getSets().get(0)));
-             this.editPack2.setText(String.format("%s - %s", draftView.getSetCodes().get(1), draftView.getSets().get(1)));
-             this.editPack3.setText(String.format("%s - %s", draftView.getSetCodes().get(2), draftView.getSets().get(2)));
+             this.editPack1.setText(draftView.getBoosterInfo(0));
+             this.editPack2.setText(draftView.getBoosterInfo(1));
+             this.editPack3.setText(draftView.getBoosterInfo(2));
          }
 
          // scroll too long text to the start
@@ -396,7 +401,8 @@
          }
          
          if (!draftBooster.isEmptyGrid()) {
-             SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded, otherwise the server will re-send the booster
+             // confirm to the server that the booster has been successfully loaded, otherwise the server will re-send the booster
+             SessionHandler.setBoosterLoaded(draftId);
 
              if (pickNo != protectionPickNo && !protectionTimer.isRunning()) {
                  // Restart the protection timer.
@@ -773,7 +779,6 @@
         labelPlayer02.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer02.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelPlayer02.setText("player 2");
-        labelPlayer02.setToolTipText("");
         labelPlayer02.setAlignmentX(1.0F);
         labelPlayer02.setAlignmentY(0.0F);
         labelPlayer02.setFocusable(false);
@@ -887,7 +892,6 @@
         labelPlayer12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelPlayer12.setText("player 12");
-        labelPlayer12.setToolTipText("");
         labelPlayer12.setFocusable(false);
         labelPlayer12.setRequestFocusEnabled(false);
         labelPlayer12.setVerifyInputWhenFocusTarget(false);

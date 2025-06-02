@@ -31,7 +31,7 @@ public final class QarsiHighPriest extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{B}, {t}, Sacrifice another creature: Manifest the top card of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManifestEffect(1), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new ManifestEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);

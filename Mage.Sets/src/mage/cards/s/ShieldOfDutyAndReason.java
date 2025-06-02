@@ -37,7 +37,7 @@ public final class ShieldOfDutyAndReason extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has protection from green and from blue.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.BLUE),
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.GREEN, ObjectColor.BLUE),
             AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 

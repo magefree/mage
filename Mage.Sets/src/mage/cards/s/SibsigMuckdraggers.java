@@ -28,7 +28,8 @@ public final class SibsigMuckdraggers extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
+
         // When Sibsig Muckdraggers enters the battlefield, return target creature card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

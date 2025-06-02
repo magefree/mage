@@ -40,7 +40,7 @@ public final class MirrorGolem extends CardImpl {
         this.addAbility(ability);
 
         // Mirror Golem has protection from each of the exiled card's card types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MirrorGolemEffect()));
+        this.addAbility(new SimpleStaticAbility(new MirrorGolemEffect()));
     }
 
     private MirrorGolem(final MirrorGolem card) {

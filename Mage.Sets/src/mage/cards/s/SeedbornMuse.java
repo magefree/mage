@@ -26,7 +26,7 @@ public final class SeedbornMuse extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Untap all permanents you control during each other player's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(new FilterControlledPermanent("permanents you control"))));
+        this.addAbility(new SimpleStaticAbility(new UntapAllDuringEachOtherPlayersUntapStepEffect(new FilterControlledPermanent("permanents you control"))));
     }
 
     private SeedbornMuse(final SeedbornMuse card) {

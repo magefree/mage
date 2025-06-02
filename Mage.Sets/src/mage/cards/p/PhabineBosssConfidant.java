@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ParleyCount;
 import mage.abilities.effects.Effect;
@@ -53,9 +53,7 @@ public class PhabineBosssConfidant extends CardImpl {
         //          Then creatures you control get +1/+1 until end of turn for each nonland card revealed this way.
         //          Then each player draws a card.
         Ability parleyAbility = new BeginningOfCombatTriggeredAbility(
-                new PhabineBosssConfidantParleyEffect(),
-                TargetController.YOU,
-                false
+                new PhabineBosssConfidantParleyEffect()
         );
         Effect drawCardAllEffect = new DrawCardAllEffect(1);
         drawCardAllEffect.concatBy("Then");

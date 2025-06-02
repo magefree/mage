@@ -24,10 +24,10 @@ public final class DralnusCrusade extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{R}");
 
         // Goblin creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false)));
 
         // All Goblins are black and are Zombies in addition to their other creature types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DralnusCrusadeEffect()));
+        this.addAbility(new SimpleStaticAbility(new DralnusCrusadeEffect()));
     }
 
     private DralnusCrusade(final DralnusCrusade card) {

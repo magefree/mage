@@ -106,7 +106,7 @@ class PheliaExuberantShepherdEffect extends OneShotEffect {
         boolean enteredUnderYourControl = false;
         for (Card card : cards) {
             // Try to find the permanent that card became
-            Permanent permanent = game.getPermanent(card.getId());
+            Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
             if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
                 enteredUnderYourControl = true;
                 break;

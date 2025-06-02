@@ -38,7 +38,7 @@ public final class KnightCaptainOfEos extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2), false));
 
         // {W}, Sacrifice a Soldier: Prevent all combat damage that would be dealt this turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new ManaCostsImpl<>("{W}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), new ManaCostsImpl<>("{W}"));
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }

@@ -78,7 +78,7 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 if (controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
-                        CardUtil.createObjectRealtedWindowTitle(source, game, "<this card may be played the turn it was exiled>"))) {
+                        CardUtil.createObjectRelatedWindowTitle(source, game, "<this card may be played the turn it was exiled>"))) {
                     ContinuousEffect effect = new PropheticFlamespeakerCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

@@ -12,6 +12,8 @@ Alchemy: Dominaria|YDMU|
 Alchemy: Innistrad|Y22|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
+Aetherdrift|DFT|
+Aetherdrift Commander|DRC|
 Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|
@@ -35,15 +37,15 @@ Battle Royale Box Set|BRB|
 Beatdown Box Set|BTD|
 Bloomburrow|BLB|
 Bloomburrow Commander|BLC|
-Commander 2013 Edition|C13|
-Commander 2014 Edition|C14|
-Commander 2015 Edition|C15|
-Commander 2016 Edition|C16|
-Commander 2017 Edition|C17|
-Commander 2018 Edition|C18|
-Commander 2019 Edition|C19|
-Commander 2020 Edition|C20|
-Commander 2021 Edition|C21|
+Commander 2013|C13|
+Commander 2014|C14|
+Commander 2015|C15|
+Commander 2016|C16|
+Commander 2017|C17|
+Commander 2018|C18|
+Commander 2019|C19|
+Commander 2020|C20|
+Commander 2021|C21|
 Commander Legends|CMR|
 Commander Legends: Battle for Baldur's Gate|CLB|
 Champions of Kamigawa|CHK|
@@ -60,10 +62,10 @@ Conflux|CON|
 Coldsnap|CSP|
 Doctor Who|WHO|
 Duel Decks: Jace vs. Chandra|DD2|
-Duel Decks: Anthology, Divine vs. Demonic|DVD|
-Duel Decks: Anthology, Elves vs. Goblins|EVG|
-Duel Decks: Anthology, Garruk vs. Liliana|GVL|
-Duel Decks: Anthology, Jace vs. Chandra|JVC|
+Duel Decks Anthology: Divine vs. Demonic|DVD|
+Duel Decks Anthology: Elves vs. Goblins|EVG|
+Duel Decks Anthology: Garruk vs. Liliana|GVL|
+Duel Decks Anthology: Jace vs. Chandra|JVC|
 Duel Decks: Divine vs. Demonic|DDC|
 Duel Decks: Garruk vs. Liliana|DDD|
 Duel Decks: Phyrexia vs. the Coalition|DDE|
@@ -109,11 +111,14 @@ Exodus|EXO|
 Zendikar Expeditions|EXP|
 Fallout|PIP|
 Fallen Empires|FEM|
+Final Fantasy|FIN|
+Final Fantasy Commander|FIC|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
 Foundations|FDN|
+Foundations Jumpstar|J25|
 Future Sight|FUT|
-Global Series: Jiang Yanggu & Mu Yanling|GS1|
+Global Series Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
 Guilds of Ravnica|GRN|
 Grand Prix|PGPX|
@@ -131,7 +136,7 @@ Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
 The Lost Caverns of Ixalan|LCI|
-Lost Caverns of Ixalan Commander|LCC|
+The Lost Caverns of Ixalan Commander|LCC|
 Innistrad: Midnight Hunt|MID|
 Midnight Hunt Commander|MIC|
 Innistrad: Crimson Vow|VOW|
@@ -168,6 +173,7 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+Marvel's Spider-Man Eternal|SPE|
 March of the Machine|MOM|
 March of the Machine Commander|MOC|
 March of the Machine: The Aftermath|MAT|
@@ -210,7 +216,7 @@ Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|
 Phyrexia: All Will Be One Commander|ONC|
 Portal Second Age|P02|
-Planechase 2012 Edition|PC2|
+Planechase 2012|PC2|
 Planechase Anthology|PCA|
 Prophecy|PCY|
 Premium Deck Series: Fire and Lightning|PD2|
@@ -243,6 +249,8 @@ New Capenna Commander|NCC|
 Stronghold|STH|
 Special Guests|SPG|
 Super Series|SUS|
+Tarkir: Dragonstorm|TDM|
+Tarkir: Dragonstorm Commander|TDC|
 Theros|THS|
 Theros Beyond Death|THB|
 The Brothers' War|BRO|
@@ -251,7 +259,7 @@ Tempest|TMP|
 Throne of Eldraine|ELD|
 Torment|TOR|
 Tempest Remastered|TPR|
-Time Spiral "Timeshifted"|TSB|
+Time Spiral Timeshifted|TSB|
 Time Spiral|TSP|
 Transformers|BOT|
 Urza's Destiny|UDS|
@@ -262,7 +270,7 @@ Unhinged|UNH|
 Unfinity|UNF|
 Urza's Saga|USG|
 Unstable|UST|
-HASCON Promo 2017|H17|
+HasCon 2017|H17|
 From the Vault: Exiled|V09|
 From the Vault: Relics|V10|
 From the Vault: Legends|V11|
@@ -292,4 +300,4 @@ Zendikar Rising|ZNR|
 Zendikar Rising Commander|ZNC|
 Star Wars|SWS|
 Happy Holidays|HHO|
-Warhammer 40,000|40K|
+Warhammer 40,000 Commander|40K|

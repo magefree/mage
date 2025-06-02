@@ -32,7 +32,7 @@ public final class ElusiveTormentor extends CardImpl {
 
         // {1}, Discard a card: Transform Elusive Tormentor.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new TransformSourceEffect(), new GenericManaCost(1));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

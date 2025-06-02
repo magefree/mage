@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -23,6 +23,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -41,8 +42,8 @@ public final class KheruLichLord extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, you may pay {2}{B}. If you do, return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of the next end step. If that card would leave the battlefield, exile it instead of putting it anywhere else.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl<>("{2}{B}"), "Return creature card from your graveyard?"), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl<>("{2}{B}"), "Return creature card from your graveyard?")));
     }
 
     private KheruLichLord(final KheruLichLord card) {
@@ -79,7 +80,7 @@ class KheruLichLordEffect extends OneShotEffect {
             Card card = cards.getRandom(game);
             if (card != null) {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                Permanent permanent = game.getPermanent(card.getId());
+                Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
                 if (permanent != null) {
                     FixedTarget blueprintTarget = new FixedTarget(permanent, game);
                     ContinuousEffect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);

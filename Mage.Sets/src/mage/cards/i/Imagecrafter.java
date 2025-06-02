@@ -28,7 +28,7 @@ public final class Imagecrafter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BecomesChosenCreatureTypeTargetEffect(true), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

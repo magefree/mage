@@ -34,7 +34,6 @@ public final class Gravewaker extends CardImpl {
 
         // {5}{B}{B}: Return target creature card from your graveyard to the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ReturnFromGraveyardToBattlefieldTargetEffect(true)
                         .setText("return target creature card from your graveyard to the battlefield tapped"),
                 new ManaCostsImpl<>("{5}{B}{B}")

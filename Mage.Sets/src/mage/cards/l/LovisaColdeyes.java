@@ -37,7 +37,7 @@ public final class LovisaColdeyes extends CardImpl {
         // Each creature that's a Barbarian, a Warrior, or a Berserker gets +2/+2 and has haste.
         Effect effect = new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false);
         effect.setText("Each creature that's a Barbarian, a Warrior, or a Berserker gets +2/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
         effect.setText("and has haste");
         ability.addEffect(effect);

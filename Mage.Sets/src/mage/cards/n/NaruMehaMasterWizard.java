@@ -59,7 +59,7 @@ public final class NaruMehaMasterWizard extends CardImpl {
         this.addAbility(ability);
 
         //Other Wizards you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, wizardFilter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, wizardFilter, true)));
     }
 
     private NaruMehaMasterWizard(final NaruMehaMasterWizard card) {

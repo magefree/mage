@@ -34,6 +34,6 @@ public class JudgeGiftCards2014 extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", "1*", Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_ZEN_VARIOUS));
         cards.add(new SetCardInfo("Riku of Two Reflections", 3, Rarity.MYTHIC, mage.cards.r.RikuOfTwoReflections.class));
         cards.add(new SetCardInfo("Swamp", "3*", Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_ZEN_VARIOUS));
-        cards.add(new SetCardInfo("Sword of Feast and Famine", 6, Rarity.RARE, mage.cards.s.SwordOfFeastAndFamine.class));
+        cards.add(new SetCardInfo("Sword of Feast and Famine", 6, Rarity.RARE, mage.cards.s.SwordOfFeastAndFamine.class, RETRO_ART));
      }
 }

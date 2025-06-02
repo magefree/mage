@@ -36,12 +36,12 @@ public final class KazanduTuskcaller extends LevelerCard {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl<>("{1}{G}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
-        abilities1.add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        abilities1.add(new SimpleActivatedAbility(
                 new CreateTokenEffect(new ElephantToken()),
                 new TapSourceCost()));
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
-        abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        abilities2.add(new SimpleActivatedAbility(
                 new CreateTokenEffect(new ElephantToken(), 2),
                 new TapSourceCost()));
 

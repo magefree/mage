@@ -30,7 +30,7 @@ public final class ManaweftSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sliver creatures you control have "{T}: Add one mana of any color."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new AnyColorManaAbility(),
                 Duration.WhileOnBattlefield,
                 filter

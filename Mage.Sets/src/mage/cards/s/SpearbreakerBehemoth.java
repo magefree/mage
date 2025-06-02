@@ -40,7 +40,7 @@ public final class SpearbreakerBehemoth extends CardImpl {
         // Spearbreaker Behemoth is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());
         // {1}: Target creature with power 5 or greater is indestructible this turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetCreaturePermanent(filter));

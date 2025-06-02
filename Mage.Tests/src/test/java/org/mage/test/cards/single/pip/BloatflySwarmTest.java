@@ -6,6 +6,8 @@ import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  * @author Susucr
  */
@@ -32,6 +34,7 @@ public class BloatflySwarmTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, swarm, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", swarm);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -55,7 +58,9 @@ public class BloatflySwarmTest extends CardTestPlayerBase {
         attack(1, playerA, swarm);
         block(1, playerB, "Brimstone Dragon", swarm);
         block(1, playerB, "Giant Spider", swarm);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -79,8 +84,9 @@ public class BloatflySwarmTest extends CardTestPlayerBase {
         attack(1, playerA, swarm);
         block(1, playerB, "Wind Drake", swarm);
         block(1, playerB, "Giant Spider", swarm);
-        setChoice(playerA, "X=5"); // damage attribution
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

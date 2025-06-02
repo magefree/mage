@@ -150,7 +150,6 @@ public class NewTableDialog extends MageDialog {
         popupSaveSettings.add(menuSaveSettings2);
 
         menuLoadSettingsLast.setText("Load from last time");
-        menuLoadSettingsLast.setToolTipText("");
         menuLoadSettingsLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettingsLastActionPerformed(evt);
@@ -160,7 +159,6 @@ public class NewTableDialog extends MageDialog {
         popupLoadSettings.add(separator1);
 
         menuLoadSettings1.setText("Load from config 1");
-        menuLoadSettings1.setToolTipText("");
         menuLoadSettings1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettings1ActionPerformed(evt);
@@ -178,7 +176,6 @@ public class NewTableDialog extends MageDialog {
         popupLoadSettings.add(separator2);
 
         menuLoadSettingsDefault.setText("Load default settings");
-        menuLoadSettingsDefault.setToolTipText("");
         menuLoadSettingsDefault.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettingsDefaultActionPerformed(evt);
@@ -228,7 +225,6 @@ public class NewTableDialog extends MageDialog {
         });
 
         lblSkillLevel.setText("Skill Level:");
-        lblSkillLevel.setToolTipText("");
 
         cbSkillLevel.setToolTipText("<HTML>This option can be used to make it easier to find matches<br>\nwith opponents of the appropriate skill level.");
 
@@ -598,7 +594,7 @@ public class NewTableDialog extends MageDialog {
     private MatchOptions getMatchOptions() {
         // current settings
         GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
-        MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName(), false, 2);
+        MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName(), false);
         options.getPlayerTypes().add(PlayerType.HUMAN);
         for (TablePlayerPanel player : players) {
             options.getPlayerTypes().add(player.getPlayerType());

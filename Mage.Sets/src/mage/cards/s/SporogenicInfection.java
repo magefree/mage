@@ -46,7 +46,8 @@ public final class SporogenicInfection extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Sporogenic Infection enters, target player sacrifices a creature other than enchanted creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player")
+                .setText("target player sacrifices a creature of their choice other than enchanted creature"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
@@ -75,6 +76,7 @@ enum SporogenicInfectionPredicate implements ObjectSourcePlayerPredicate<Permane
         return !Optional
                 .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
                 .map(Permanent::getAttachedTo)
-                .equals(input.getObject().getId());
+                .map(input.getObject().getId()::equals)
+                .orElse(false);
     }
 }

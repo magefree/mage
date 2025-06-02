@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -43,7 +43,7 @@ public final class DoomsdayExcruciator extends CardImpl {
 
         // At the beginning of your upkeep, draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                new DrawCardSourceControllerEffect(1)
         ));
     }
 

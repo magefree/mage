@@ -33,7 +33,6 @@ public final class HonorWornShaku extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.addAbility(new ColorlessManaAbility());
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new UntapSourceEffect(),
                 new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

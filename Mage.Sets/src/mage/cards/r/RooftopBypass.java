@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class RooftopBypass extends CardImpl {
         
 
         // Whenever one or more nontoken creatures you control deal combat damage to a player, create a 1/1 black Assassin creature token with menace.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new AssassinMenaceToken()),
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new CreateTokenEffect(new AssassinMenaceToken()),
                 StaticFilters.FILTER_CONTROLLED_CREATURES_NON_TOKEN));
     }
 

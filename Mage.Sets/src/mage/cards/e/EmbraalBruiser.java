@@ -33,7 +33,7 @@ public final class EmbraalBruiser extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // Embraal Bruiser has menace as long as you control an artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MenaceAbility()),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
                 "{this} has menace as long as you control an artifact")));

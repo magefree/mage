@@ -1,7 +1,7 @@
 package mage.game.command.emblems;
 
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.constants.TargetController;
@@ -16,8 +16,8 @@ public final class SarkhanTheDragonspeakerEmblem extends Emblem {
     public SarkhanTheDragonspeakerEmblem() {
         super("Emblem Sarkhan");
 
-        this.getAbilities().add(new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(2).setText("draw two additional cards"), TargetController.YOU, false));
-        this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new DiscardHandControllerEffect(), TargetController.YOU, null, false));
+        this.getAbilities().add(new BeginningOfDrawTriggeredAbility(Zone.COMMAND, TargetController.YOU, new DrawCardSourceControllerEffect(2).setText("draw two additional cards"), false));
+        this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, TargetController.YOU, new DiscardHandControllerEffect(), false, null));
     }
 
     private SarkhanTheDragonspeakerEmblem(final SarkhanTheDragonspeakerEmblem card) {

@@ -27,7 +27,7 @@ public final class Abundance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbundanceReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new AbundanceReplacementEffect()));
     }
 
     private Abundance(final Abundance card) {

@@ -40,7 +40,7 @@ public final class GoblinGloryChaser extends CardImpl {
                 RenownedSourceCondition.instance,
                 "As long as {this} is renowned, it has menace. " +
                         "<i>(It can't be blocked except by two or more creatures.)</i>");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         this.addAbility(ability);
     }
 

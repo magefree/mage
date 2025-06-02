@@ -45,7 +45,7 @@ public final class MarneusCalgar extends CardImpl {
         ).withFlavorWord("Master Tactician"));
 
         // Chapter Master — {6}: Create two 2/2 white Astartes Warrior creature tokens with vigilance.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CreateTokenEffect(new WhiteAstartesWarriorToken(), 2),
                 new ManaCostsImpl<>("{6}")
         ).withFlavorWord("Chapter Master"));

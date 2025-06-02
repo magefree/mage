@@ -3,7 +3,7 @@ package mage.cards.n;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -55,8 +55,7 @@ public final class NimbleTrapfinder extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new GainAbilityAllEffect(new DealsCombatDamageToAPlayerTriggeredAbility(
                                 new DrawCardSourceControllerEffect(1), false
-                        ), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES),
-                        TargetController.YOU, false
+                        ), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, creatures you control gain " +
                 "\"Whenever this creature deals combat damage to a player, draw a card\" until end of turn."

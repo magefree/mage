@@ -38,7 +38,7 @@ public final class Mosstodon extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetCreaturePermanent(filter));

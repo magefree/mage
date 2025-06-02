@@ -35,7 +35,7 @@ public final class SpearpointOread extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Enchanted creature gets +2/+2 and has first strike.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2,2));
         Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has first strike");
         ability.addEffect(effect);

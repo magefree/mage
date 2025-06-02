@@ -38,7 +38,6 @@ public final class PlagueMare extends CardImpl {
 
         // Plague Mare can't be blocked by white creatures.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedByCreaturesSourceEffect(
                         filter, Duration.WhileOnBattlefield
                 )

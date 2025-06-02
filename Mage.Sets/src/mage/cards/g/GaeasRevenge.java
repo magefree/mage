@@ -40,7 +40,7 @@ public final class GaeasRevenge extends CardImpl {
 
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeTargetedSourceEffect(filter, Duration.WhileOnBattlefield)));
 
     }
 

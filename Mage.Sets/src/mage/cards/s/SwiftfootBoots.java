@@ -29,7 +29,7 @@ public final class SwiftfootBoots extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has hexproof and haste.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and haste");
         ability.addEffect(effect);

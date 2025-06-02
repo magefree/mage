@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -32,9 +32,9 @@ public final class BlitzHellion extends CardImpl {
 
         // At the beginning of the end step, Blitz Hellion's owner shuffles it into their library.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ShuffleIntoLibrarySourceEffect()
+                TargetController.NEXT, new ShuffleIntoLibrarySourceEffect()
                         .setText("{this}'s owner shuffles it into their library."),
-                TargetController.NEXT, false
+                false
         ));
     }
 

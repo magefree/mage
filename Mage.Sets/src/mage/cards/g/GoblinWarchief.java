@@ -36,10 +36,10 @@ public final class GoblinWarchief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Goblin spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterSpells, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filterSpells, 1)));
 
         // Goblins you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(),
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(HasteAbility.getInstance(),
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.GOBLIN, "Goblins"), false)));
     }
 

@@ -32,7 +32,7 @@ public final class GoblinKing extends CardImpl {
         // Other Goblin creatures get +1/+1 and have mountainwalk.
         Effect effect = new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
         effect.setText("Other Goblins get +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAllEffect(new MountainwalkAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
         effect.setText("and have mountainwalk");
         ability.addEffect(effect);

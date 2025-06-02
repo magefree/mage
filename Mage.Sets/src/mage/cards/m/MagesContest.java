@@ -79,7 +79,7 @@ class MagesContestEffect extends OneShotEffect {
                             }
                         } else if (currentPlayer.chooseUse(Outcome.Benefit, winner.getLogName() + " has bet " + highBid + " life. Top the bid?", source, game)) {
                             // Human choose
-                            newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", game);
+                            newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose bid", source, game);
                         }
                         if (newBid > highBid) {
                             highBid = newBid;
@@ -90,7 +90,7 @@ class MagesContestEffect extends OneShotEffect {
                             break;
                         }
                     }
-                } while (!Objects.equals(currentPlayer, winner));
+                } while (you.canRespond() && spellController.canRespond() && !Objects.equals(currentPlayer, winner));
                 game.informPlayers(winner.getLogName() + " has won the contest with a high bid of " + highBid + " life");
                 winner.loseLife(highBid, game, source, false);
                 if (winner == you) {

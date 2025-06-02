@@ -30,7 +30,7 @@ public final class HinterlandScourge extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Hinterland Scourge must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Hinterland Scourge.
         this.addAbility(new WerewolfBackTriggeredAbility());

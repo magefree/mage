@@ -46,13 +46,13 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            this.getEffects().setValue(SavedGainedLifeValue.VALUE_KEY, event.getAmount());
-            if (setTargetPointer) {
-                this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
-            }
-            return true;
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue(SavedGainedLifeValue.VALUE_KEY, event.getAmount());
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+        }
+        return true;
     }
 }

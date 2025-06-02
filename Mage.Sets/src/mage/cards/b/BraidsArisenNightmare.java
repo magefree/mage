@@ -3,7 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -17,7 +17,6 @@ import mage.filter.predicate.mageobject.SharesCardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
@@ -38,7 +37,7 @@ public final class BraidsArisenNightmare extends CardImpl {
         // At the beginning of your end step, you may sacrifice an artifact, creature, enchantment, land, or planeswalker.
         // If you do, each opponent may sacrifice a permanent that shares a card type with it.
         // For each opponent who doesn't, that player loses 2 life and you draw a card.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new BraidsArisenNightmareEffect(), true));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BraidsArisenNightmareEffect(), true));
     }
 
     private BraidsArisenNightmare(final BraidsArisenNightmare card) {
@@ -68,7 +67,7 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
     public BraidsArisenNightmareEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "you may sacrifice an artifact, creature, enchantment, land, or planeswalker. " +
-                "If you do, each opponent may sacrifice a permanent that shares a card type with it. " +
+                "If you do, each opponent may sacrifice a permanent of their choice that shares a card type with it. " +
                 "For each opponent who doesn't, that player loses 2 life and you draw a card";
     }
 

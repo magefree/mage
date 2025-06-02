@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -51,9 +50,7 @@ public final class ThousandMoonsSmithy extends CardImpl {
                 new DoIfCostPaid(
                         new TransformSourceEffect(),
                         new TapTargetCost(new TargetControlledPermanent(5, filter))
-                ),
-                TargetController.YOU,
-                false
+                )
         ));
     }
 

@@ -58,7 +58,6 @@ public final class RimefeatherOwl extends CardImpl {
 
         // {1}{snow}: Put an ice counter on target permanent.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.ICE.createInstance())
                         .setText("Put an ice counter on target permanent."),
                 new ManaCostsImpl<>("{1}{S}")
@@ -67,7 +66,7 @@ public final class RimefeatherOwl extends CardImpl {
         this.addAbility(ability);
 
         // Permanents with ice counters on them are snow.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RimefeatherOwlEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new RimefeatherOwlEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private RimefeatherOwl(final RimefeatherOwl card) {

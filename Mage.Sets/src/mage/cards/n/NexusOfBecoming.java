@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -28,7 +28,7 @@ public final class NexusOfBecoming extends CardImpl {
 
         // At the beginning of combat on your turn, draw a card. Then you may exile an artifact or creature card from your hand. If you do, create a token that's a copy of the exiled card, except it's a 3/3 Golem artifact creature in addition to its other types.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                new DrawCardSourceControllerEffect(1)
         );
         ability.addEffect(new NexusOfBecomingEffect());
         this.addAbility(ability);

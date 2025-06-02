@@ -1,13 +1,12 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -18,6 +17,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +46,7 @@ public final class MausoleumWanderer extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter));
 
         // Sacrifice Mausoleum Wanderer: Counter target instant or sorcery spell unless its controller pays {X}, where X is Mausoleum Wanderer's power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new SourcePermanentPowerCount()), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CounterUnlessPaysEffect(SourcePermanentPowerValue.NOT_NEGATIVE), new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(new FilterInstantOrSorcerySpell()));
         this.addAbility(ability);
     }

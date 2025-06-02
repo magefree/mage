@@ -3,6 +3,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
@@ -26,9 +27,10 @@ public class ImproviseTest extends CardTestPlayerBaseWithAIHelps {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 4);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bastion Inventor");
         setChoice(playerA, "Blue", 4); // pay 1-4
-        // improvise pay by one card
+        // improvise pay by one card (after 2025 addTarget improve - Improvise can be pay by multiple addTarget)
         setChoice(playerA, "Improvise");
         addTarget(playerA, "Alpha Myr"); // pay 5 as improvise
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // choose only 1 of 2 possible permanent
         setChoice(playerA, "Improvise");
         addTarget(playerA, "Alpha Myr"); // pay 6 as improvise
 

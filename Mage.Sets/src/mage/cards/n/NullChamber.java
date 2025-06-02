@@ -32,7 +32,7 @@ public final class NullChamber extends CardImpl {
         // As Null Chamber enters the battlefield, you and an opponent each name a card other than a basic land card.
         // The named cards can't be played.
         this.addAbility(new AsEntersBattlefieldAbility(new NullChamberChooseEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NullChamberReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new NullChamberReplacementEffect()));
 
     }
 

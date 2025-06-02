@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.IxalanVampireToken;
 import mage.game.permanent.token.VampireDemonToken;
@@ -31,7 +30,7 @@ public final class MarchOfTheCanonized extends CardImpl {
 
         // At the beginning of your upkeep, if your devotion to white and black is seven or greater, create a 4/3 white and black Vampire Demon creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new VampireDemonToken()), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new VampireDemonToken())),
                 new MarchOfTheCanonizedCondition(),
                 "At the beginning of your upkeep, "
                         + "if your devotion to white and black is seven or greater, "

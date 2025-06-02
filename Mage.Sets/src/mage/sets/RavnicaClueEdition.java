@@ -18,12 +18,13 @@ public final class RavnicaClueEdition extends ExpansionSet {
     private RavnicaClueEdition() {
         super("Ravnica: Clue Edition", "CLU", ExpansionSet.buildDate(2024, 2, 9), SetType.EXPANSION);
         this.hasBasicLands = true;
-        this.hasBoosters = false;
+        this.hasBoosters = false; // TODO: share code with JumpstartPoolGenerator and add single booster, see #13264
 
         cards.add(new SetCardInfo("Aegis of the Legion", 22, Rarity.RARE, mage.cards.a.AegisOfTheLegion.class));
         cards.add(new SetCardInfo("Affectionate Indrik", 155, Rarity.UNCOMMON, mage.cards.a.AffectionateIndrik.class));
         cards.add(new SetCardInfo("Afterlife Insurance", 23, Rarity.UNCOMMON, mage.cards.a.AfterlifeInsurance.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 52, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
+        //cards.add(new SetCardInfo("Amzu, Swarm's Hunger", 24, Rarity.RARE, mage.cards.a.AmzuSwarmsHunger.class));
         cards.add(new SetCardInfo("Angel of Vitality", 53, Rarity.UNCOMMON, mage.cards.a.AngelOfVitality.class));
         cards.add(new SetCardInfo("Apothecary White", 1, Rarity.RARE, mage.cards.a.ApothecaryWhite.class));
         cards.add(new SetCardInfo("Azorius Arrester", 54, Rarity.COMMON, mage.cards.a.AzoriusArrester.class));
@@ -42,6 +43,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Boros Garrison", 231, Rarity.COMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Guildgate", 232, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
         cards.add(new SetCardInfo("Boros Signet", 220, Rarity.COMMON, mage.cards.b.BorosSignet.class));
+        //cards.add(new SetCardInfo("Boros Strike-Captain", 25, Rarity.RARE, mage.cards.b.BorosStrikeCaptain.class));
         cards.add(new SetCardInfo("Breeding Pool", 275, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Candlestick", 8, Rarity.UNCOMMON, mage.cards.c.Candlestick.class));
         cards.add(new SetCardInfo("Carnage Interpreter", 26, Rarity.RARE, mage.cards.c.CarnageInterpreter.class));
@@ -62,6 +64,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Corpse Churn", 107, Rarity.COMMON, mage.cards.c.CorpseChurn.class));
         cards.add(new SetCardInfo("Cosmotronic Wave", 129, Rarity.COMMON, mage.cards.c.CosmotronicWave.class));
         cards.add(new SetCardInfo("Council's Judgment", 57, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
+        //cards.add(new SetCardInfo("Covetous Elegy", 29, Rarity.RARE, mage.cards.c.CovetousElegy.class));
         cards.add(new SetCardInfo("Curse of Chains", 183, Rarity.COMMON, mage.cards.c.CurseOfChains.class));
         cards.add(new SetCardInfo("Dagger Caster", 130, Rarity.UNCOMMON, mage.cards.d.DaggerCaster.class));
         cards.add(new SetCardInfo("Daggerclaw Imp", 108, Rarity.UNCOMMON, mage.cards.d.DaggerclawImp.class));
@@ -75,6 +78,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Guildgate", 234, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
         cards.add(new SetCardInfo("Dimir Guildmage", 186, Rarity.UNCOMMON, mage.cards.d.DimirGuildmage.class));
         cards.add(new SetCardInfo("Dimir Signet", 221, Rarity.COMMON, mage.cards.d.DimirSignet.class));
+        //cards.add(new SetCardInfo("Dimir Strandcatcher", 30, Rarity.RARE, mage.cards.d.DimirStrandcatcher.class));
         cards.add(new SetCardInfo("Dining Room", 15, Rarity.UNCOMMON, mage.cards.d.DiningRoom.class));
         cards.add(new SetCardInfo("Direct Current", 132, Rarity.COMMON, mage.cards.d.DirectCurrent.class));
         cards.add(new SetCardInfo("Discovery // Dispersal", 187, Rarity.UNCOMMON, mage.cards.d.DiscoveryDispersal.class));
@@ -95,10 +99,15 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Footlight Fiend", 191, Rarity.COMMON, mage.cards.f.FootlightFiend.class));
         cards.add(new SetCardInfo("Forbidden Alchemy", 86, Rarity.UNCOMMON, mage.cards.f.ForbiddenAlchemy.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 271, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 272, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 273, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Goblin", 135, Rarity.UNCOMMON, mage.cards.f.FrenziedGoblin.class));
+        cards.add(new SetCardInfo("Frenzied Gorespawn", 32, Rarity.RARE, mage.cards.f.FrenziedGorespawn.class));
         cards.add(new SetCardInfo("Fresh-Faced Recruit", 192, Rarity.COMMON, mage.cards.f.FreshFacedRecruit.class));
         cards.add(new SetCardInfo("Frostburn Weird", 193, Rarity.COMMON, mage.cards.f.FrostburnWeird.class));
         cards.add(new SetCardInfo("Fungal Rebirth", 163, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
+        //cards.add(new SetCardInfo("Furious Spinesplitter", 33, Rarity.UNCOMMON, mage.cards.f.FuriousSpinesplitter.class));
         cards.add(new SetCardInfo("Giant Adephage", 164, Rarity.MYTHIC, mage.cards.g.GiantAdephage.class));
         cards.add(new SetCardInfo("Gift of Strength", 165, Rarity.COMMON, mage.cards.g.GiftOfStrength.class));
         cards.add(new SetCardInfo("Glorifier of Dusk", 62, Rarity.UNCOMMON, mage.cards.g.GlorifierOfDusk.class));
@@ -120,6 +129,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Havoc Jester", 138, Rarity.UNCOMMON, mage.cards.h.HavocJester.class));
         cards.add(new SetCardInfo("Headliner Scarlett", 4, Rarity.RARE, mage.cards.h.HeadlinerScarlett.class));
         cards.add(new SetCardInfo("Helium Squirter", 87, Rarity.COMMON, mage.cards.h.HeliumSquirter.class));
+        cards.add(new SetCardInfo("Herald of Ilharg", 34, Rarity.RARE, mage.cards.h.HeraldOfIlharg.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 195, Rarity.MYTHIC, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Hypersonic Dragon", 196, Rarity.RARE, mage.cards.h.HypersonicDragon.class));
         cards.add(new SetCardInfo("Incriminating Impetus", 35, Rarity.UNCOMMON, mage.cards.i.IncriminatingImpetus.class));
@@ -127,6 +137,9 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Infest", 114, Rarity.UNCOMMON, mage.cards.i.Infest.class));
         cards.add(new SetCardInfo("Integrity // Intervention", 198, Rarity.UNCOMMON, mage.cards.i.IntegrityIntervention.class));
         cards.add(new SetCardInfo("Island", 258, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 259, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 260, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 261, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivy Lane Denizen", 166, Rarity.COMMON, mage.cards.i.IvyLaneDenizen.class));
         cards.add(new SetCardInfo("Izzet Boilerworks", 239, Rarity.COMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Izzet Guildgate", 240, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
@@ -139,7 +152,8 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Krenko's Command", 139, Rarity.COMMON, mage.cards.k.KrenkosCommand.class));
         cards.add(new SetCardInfo("Kronch Wrangler", 169, Rarity.COMMON, mage.cards.k.KronchWrangler.class));
         cards.add(new SetCardInfo("Lavinia of the Tenth", 199, Rarity.RARE, mage.cards.l.LaviniaOfTheTenth.class));
-        cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 36, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class));
+        cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 284, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class, RETRO_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lavinia, Foil to Conspiracy", 36, Rarity.RARE, mage.cards.l.LaviniaFoilToConspiracy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Law-Rune Enforcer", 64, Rarity.COMMON, mage.cards.l.LawRuneEnforcer.class));
         cards.add(new SetCardInfo("Lead Pipe", 9, Rarity.UNCOMMON, mage.cards.l.LeadPipe.class));
         cards.add(new SetCardInfo("Leapfrog", 89, Rarity.COMMON, mage.cards.l.Leapfrog.class));
@@ -154,9 +168,14 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Master Biomancer", 200, Rarity.MYTHIC, mage.cards.m.MasterBiomancer.class));
         cards.add(new SetCardInfo("Mastermind Plum", 3, Rarity.RARE, mage.cards.m.MastermindPlum.class));
         cards.add(new SetCardInfo("Mausoleum Turnkey", 116, Rarity.UNCOMMON, mage.cards.m.MausoleumTurnkey.class));
+        //cards.add(new SetCardInfo("Memory Vampire", 38, Rarity.RARE, mage.cards.m.MemoryVampire.class));
         cards.add(new SetCardInfo("Mighty Leap", 66, Rarity.COMMON, mage.cards.m.MightyLeap.class));
         cards.add(new SetCardInfo("Mountain", 266, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 267, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 268, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 269, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nissa's Judgment", 170, Rarity.UNCOMMON, mage.cards.n.NissasJudgment.class));
+        //cards.add(new SetCardInfo("Ordruun Mentor", 39, Rarity.UNCOMMON, mage.cards.o.OrdruunMentor.class));
         cards.add(new SetCardInfo("Ornery Goblin", 143, Rarity.COMMON, mage.cards.o.OrneryGoblin.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 241, Rarity.COMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Guildgate", 242, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class));
@@ -173,6 +192,10 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pit Fight", 202, Rarity.COMMON, mage.cards.p.PitFight.class));
         cards.add(new SetCardInfo("Pitiless Gorgon", 203, Rarity.COMMON, mage.cards.p.PitilessGorgon.class));
         cards.add(new SetCardInfo("Plains", 254, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 256, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 257, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        //cards.add(new SetCardInfo("Portal Manipulator", 40, Rarity.UNCOMMON, mage.cards.p.PortalManipulator.class));
         cards.add(new SetCardInfo("Predatory Impetus", 172, Rarity.COMMON, mage.cards.p.PredatoryImpetus.class));
         cards.add(new SetCardInfo("Psychic Impetus", 92, Rarity.COMMON, mage.cards.p.PsychicImpetus.class));
         cards.add(new SetCardInfo("Pyrewild Shaman", 144, Rarity.UNCOMMON, mage.cards.p.PyrewildShaman.class));
@@ -187,6 +210,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Reduce to Ashes", 145, Rarity.COMMON, mage.cards.r.ReduceToAshes.class));
         cards.add(new SetCardInfo("Repeal", 94, Rarity.COMMON, mage.cards.r.Repeal.class));
         cards.add(new SetCardInfo("Rescuer Sphinx", 95, Rarity.UNCOMMON, mage.cards.r.RescuerSphinx.class));
+        //cards.add(new SetCardInfo("Resonance Technician", 41, Rarity.RARE, mage.cards.r.ResonanceTechnician.class));
         cards.add(new SetCardInfo("Ribbons of Night", 120, Rarity.UNCOMMON, mage.cards.r.RibbonsOfNight.class));
         cards.add(new SetCardInfo("Ripscale Predator", 146, Rarity.COMMON, mage.cards.r.RipscalePredator.class));
         cards.add(new SetCardInfo("Roaming Ghostlight", 96, Rarity.COMMON, mage.cards.r.RoamingGhostlight.class));
@@ -229,8 +253,12 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Stunt Double", 101, Rarity.RARE, mage.cards.s.StuntDouble.class));
         cards.add(new SetCardInfo("Sumala Rumblers", 45, Rarity.UNCOMMON, mage.cards.s.SumalaRumblers.class));
         cards.add(new SetCardInfo("Sunhome Stalwart", 73, Rarity.UNCOMMON, mage.cards.s.SunhomeStalwart.class));
+        cards.add(new SetCardInfo("Suppressor Skyguard", 46, Rarity.RARE, mage.cards.s.SuppressorSkyguard.class));
         cards.add(new SetCardInfo("Supreme Verdict", 211, Rarity.RARE, mage.cards.s.SupremeVerdict.class));
         cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 263, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 265, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Syndic of Tithes", 74, Rarity.COMMON, mage.cards.s.SyndicOfTithes.class));
         cards.add(new SetCardInfo("Syndicate Enforcer", 123, Rarity.COMMON, mage.cards.s.SyndicateEnforcer.class));
         cards.add(new SetCardInfo("Syndicate Heavy", 47, Rarity.RARE, mage.cards.s.SyndicateHeavy.class));

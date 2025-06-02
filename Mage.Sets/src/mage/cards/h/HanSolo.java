@@ -3,7 +3,7 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -42,7 +42,7 @@ public final class HanSolo extends CardImpl {
         // At the beginning of each combat, target starship you control gets +2/+2 and gains haste until end of turn.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         effect.setText("target Starship you control gets +2/+2");
-        BeginningOfCombatTriggeredAbility ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, false, false);
+        BeginningOfCombatTriggeredAbility ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, effect, false);
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains haste until end of turn");
         ability.addEffect(effect);

@@ -1,8 +1,8 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.Pronoun;
-import mage.abilities.common.DiesOneOrMoreCreatureTriggeredAbility;
+import mage.constants.Pronoun;
+import mage.abilities.common.DiesOneOrMoreTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
@@ -44,7 +44,7 @@ public final class AjaniNacatlPariah extends CardImpl {
 
         // Whenever one or more other Cats you control die, you may exile Ajani, then return him to the battlefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DiesOneOrMoreCreatureTriggeredAbility(
+        this.addAbility(new DiesOneOrMoreTriggeredAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.HE),
                 filter,
                 true));

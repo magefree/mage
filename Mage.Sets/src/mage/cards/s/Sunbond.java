@@ -43,7 +43,7 @@ public final class Sunbond extends CardImpl {
                         false, true
                 ), AttachmentType.AURA, Duration.WhileOnBattlefield
         );
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

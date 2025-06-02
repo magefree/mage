@@ -37,7 +37,7 @@ public final class MurktideRegent extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -1,9 +1,7 @@
 package mage.cards.s;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -11,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,27 +59,13 @@ class SuspendEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller == null || permanent == null) {
             return false;
         }
         Card card = permanent.getMainCard();
-        if (!controller.moveCards(permanent, Zone.EXILED, source, game)
-                || game.getState().getZone(card.getId()) != Zone.EXILED) {
-            return true;
-        }
-        UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-        if (!controller.moveCardToExileWithInfo(
-                card, exileId, "Suspended cards of " + controller.getName(),
-                source, game, Zone.HAND, true
-        )) {
-            return true;
-        }
-        card.addCounters(CounterType.TIME.createInstance(2), source.getControllerId(), source, game);
-        if (!card.getAbilities(game).containsClass(SuspendAbility.class)) {
-            game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
-        }
-        game.informPlayers(controller.getLogName() + " suspends 2 - " + card.getName());
-        return true;
+        return controller.moveCards(permanent, Zone.EXILED, source, game)
+                && game.getState().getZone(card.getId()) == Zone.EXILED
+                && SuspendAbility.addTimeCountersAndSuspend(card, 3, source, game);
     }
 }

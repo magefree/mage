@@ -64,7 +64,7 @@ public final class DragonhawkFatesTempest extends CardImpl {
 class DragonhawkExileEffect extends ExileTopXMayPlayUntilEffect {
 
     DragonhawkExileEffect(DynamicValue amount, Duration duration) {
-        super(amount, duration);
+        super(amount, false, duration);
         this.withTextOptions("those cards", true);
         staticText += ". At the beginning of your next end step, " + DragonhawkFatesTempestDamageEffect.STATIC_TEXT;
     }

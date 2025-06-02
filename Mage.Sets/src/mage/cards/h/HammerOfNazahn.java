@@ -40,7 +40,7 @@ public final class HammerOfNazahn extends CardImpl {
         this.addAbility(ability);
 
         // Equipped creature gets +2/+0 and has indestructible.
-        Ability abilityEquipped = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0));
+        Ability abilityEquipped = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
         Effect effect = new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has indestructible");
         abilityEquipped.addEffect(effect);

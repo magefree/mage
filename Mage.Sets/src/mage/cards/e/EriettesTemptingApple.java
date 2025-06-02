@@ -42,7 +42,7 @@ public final class EriettesTemptingApple extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Eriette's Tempting Apple: You gain 3 life.
-        this.addAbility(new FoodAbility(true));
+        this.addAbility(new FoodAbility());
 
         // {2}, {T}, Sacrifice Eriette's Tempting Apple: Target opponent loses 3 life.
         ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(3), new GenericManaCost(2));

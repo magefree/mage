@@ -37,7 +37,7 @@ public final class CultGuildmage extends CardImpl {
         this.addAbility(ability);
 
         // {R}, {T}: Cult Guildmage deals 1 damage to target opponent or planeswalker.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);

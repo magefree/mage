@@ -13,6 +13,7 @@ public enum SubType {
     ADVENTURE("Adventure", SubTypeSet.SpellType),
     ARCANE("Arcane", SubTypeSet.SpellType),
     LESSON("Lesson", SubTypeSet.SpellType),
+    OMEN("Omen", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
 
     // Battle subtypes
@@ -35,6 +36,7 @@ public enum SubType {
     MINE("Mine", SubTypeSet.NonBasicLandType),
     POWER_PLANT("Power-Plant", SubTypeSet.NonBasicLandType),
     TOWER("Tower", SubTypeSet.NonBasicLandType),
+    TOWN("Town", SubTypeSet.NonBasicLandType),
     // 205.3h Enchantments have their own unique set of subtypes; these subtypes are called enchantment types.
     AURA("Aura", SubTypeSet.EnchantmentType),
     BACKGROUND("Background", SubTypeSet.EnchantmentType),
@@ -209,6 +211,7 @@ public enum SubType {
     HAMSTER("Hamster", SubTypeSet.CreatureType),
     HARPY("Harpy", SubTypeSet.CreatureType),
     HELLION("Hellion", SubTypeSet.CreatureType),
+    HERO("Hero", SubTypeSet.CreatureType),
     HIPPO("Hippo", SubTypeSet.CreatureType),
     HIPPOGRIFF("Hippogriff", SubTypeSet.CreatureType),
     HOMARID("Homarid", SubTypeSet.CreatureType),
@@ -273,6 +276,7 @@ public enum SubType {
     MONGOOSE("Mongoose", SubTypeSet.CreatureType),
     MONK("Monk", SubTypeSet.CreatureType),
     MONKEY("Monkey", SubTypeSet.CreatureType),
+    MOOGLE("Moogle", SubTypeSet.CreatureType),
     MOONFOLK("Moonfolk", SubTypeSet.CreatureType),
     MOUNT("Mount", SubTypeSet.CreatureType),
     MOUSE("Mouse", SubTypeSet.CreatureType),
@@ -327,6 +331,7 @@ public enum SubType {
     PUREBLOOD("Pureblood", SubTypeSet.CreatureType, true),
     // Q
     QUARREN("Quarren", SubTypeSet.CreatureType, true), // Star Wars
+    QU("Qu", SubTypeSet.CreatureType),
     // R
     RABBIT("Rabbit", SubTypeSet.CreatureType),
     RACCOON("Raccoon", SubTypeSet.CreatureType),
@@ -355,6 +360,7 @@ public enum SubType {
     SCULPTURE("Sculpture", SubTypeSet.CreatureType),
     SERF("Serf", SubTypeSet.CreatureType),
     SERPENT("Serpent", SubTypeSet.CreatureType),
+    SEAL("Seal", SubTypeSet.CreatureType),
     SERVO("Servo", SubTypeSet.CreatureType),
     SHADE("Shade", SubTypeSet.CreatureType),
     SHAMAN("Shaman", SubTypeSet.CreatureType),
@@ -390,6 +396,7 @@ public enum SubType {
     SULLUSTAN("Sullustan", SubTypeSet.CreatureType, true), // Star Wars
     SURRAKAR("Surrakar", SubTypeSet.CreatureType),
     SURVIVOR("Survivor", SubTypeSet.CreatureType),
+    SYMBIOTE("Symbiote", SubTypeSet.CreatureType),
     SYNTH("Synth", SubTypeSet.CreatureType),
     // T
     TENTACLE("Tentacle", SubTypeSet.CreatureType),
@@ -549,7 +556,7 @@ public enum SubType {
 
         @Override
         public String toString() {
-            return "Subtype(" + subtype + ')';
+            return "Subtype(" + subtype + ')'; // warning, do not change until refactor code like predicate.toString().equals
         }
     }
 

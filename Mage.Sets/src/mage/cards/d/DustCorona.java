@@ -41,7 +41,7 @@ public final class DustCorona extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +2/+0 and can't be blocked by creatures with flying.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 0));
         Effect effect = new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.AURA);
         effect.setText("and can't be blocked by creatures with flying");
         ability.addEffect(effect);

@@ -40,7 +40,7 @@ public final class HateWeaver extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

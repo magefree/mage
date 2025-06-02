@@ -12,6 +12,7 @@ public class FlipCoinEvent extends GameEvent {
     private boolean result;
     private final boolean chosen;
     private final boolean winnable;
+    private boolean autoWin = false;
     private int flipCount = 1;
 
     public FlipCoinEvent(UUID playerId, Ability source, boolean result, boolean chosen, boolean winnable) {
@@ -51,6 +52,14 @@ public class FlipCoinEvent extends GameEvent {
 
     public void setFlipCount(int flipCount) {
         this.flipCount = flipCount;
+    }
+
+    public void setAutoWin(boolean autoWin) {
+        this.autoWin = autoWin;
+    }
+
+    public boolean isAutoWin() {
+        return autoWin;
     }
 
     public CoinFlippedEvent createFlippedEvent() {

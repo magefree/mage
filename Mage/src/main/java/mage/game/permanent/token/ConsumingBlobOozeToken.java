@@ -14,8 +14,6 @@ import mage.constants.Zone;
  */
 public final class ConsumingBlobOozeToken extends TokenImpl {
 
-    private static final DynamicValue powerValue = CardTypesInGraveyardCount.YOU;
-
     public ConsumingBlobOozeToken() {
         super("Ooze Token", "green Ooze creature token with \"This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.\"");
         cardType.add(CardType.CREATURE);
@@ -26,7 +24,9 @@ public final class ConsumingBlobOozeToken extends TokenImpl {
         toughness = new MageInt(1);
 
         // This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessPlusOneSourceEffect(CardTypesInGraveyardCount.YOU)
+        ).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private ConsumingBlobOozeToken(final ConsumingBlobOozeToken token) {

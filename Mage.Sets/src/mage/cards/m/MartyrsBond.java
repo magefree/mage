@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -50,6 +51,7 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
 
     public MartyrsBondTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MartyrsBondEffect());
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MartyrsBondTriggeredAbility(final MartyrsBondTriggeredAbility ability) {
@@ -88,6 +90,10 @@ class MartyrsBondTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever {this} or another nonland permanent you control is put into a graveyard from the battlefield, each opponent sacrifices a permanent that shares a card type with it.";
     }
 
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class MartyrsBondEffect extends OneShotEffect {

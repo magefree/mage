@@ -34,12 +34,12 @@ public final class ElderwoodScion extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Spells you cast that target Elderwood Scion cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(-2, new FilterCard("Spells"), TargetController.YOU))
         );
 
         // Spells your opponents cast that target Elderwood Scion cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(2, new FilterCard("Spells"), TargetController.OPPONENT))
         );
     }

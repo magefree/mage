@@ -26,14 +26,14 @@ public final class NullProfusion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // Whenever you play a card, draw a card.
         this.addAbility(new PlayCardTriggeredAbility(TargetController.YOU, Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1)));
 
         // Your maximum hand size is two.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(
                         StaticValue.get(2),
                         Duration.WhileOnBattlefield,

@@ -23,7 +23,7 @@ public final class MartyrsTomb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{B}");
 
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new PayLifeCost(2));
+        Ability ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new PayLifeCost(2));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

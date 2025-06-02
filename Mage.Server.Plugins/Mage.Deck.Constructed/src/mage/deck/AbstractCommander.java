@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 /**
- * @author TheElk801
+ * @author TheElk801, JayDi85
  */
 public abstract class AbstractCommander extends Constructed {
 
@@ -88,13 +88,13 @@ public abstract class AbstractCommander extends Constructed {
             boolean valid = true;
             for (Card card : deck.getCards()) {
                 if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
                     valid = false;
                 }
             }
             for (Card card : deck.getSideboard()) {
                 if (!ManaUtil.isColorIdentityCompatible(colorIdentity, card.getColorIdentity())) {
-                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (" + colorIdentity.toString() + ')', true);
+                    addError(DeckValidatorErrorType.OTHER, card.getName(), "Invalid color (need " + colorIdentity + ", but get " + card.getColorIdentity() + ")", true);
                     valid = false;
                 }
             }
@@ -258,14 +258,18 @@ public abstract class AbstractCommander extends Constructed {
     }
 
     @Override
-    public int getEdhPowerLevel(Deck deck) {
-        if (deck == null) {
-            return 0;
-        }
-
+    public int getEdhPowerLevel(Deck deck, List<String> foundPowerCards, List<String> foundInfo) {
+        // calculate power level and find all related cards with it to show in hints (see deck validation in deck editor)
+        // example: https://edhpowerlevel.com
         int edhPowerLevel = 0;
         int commanderColors = 0;
         int numberInfinitePieces = 0;
+        foundPowerCards.clear();
+        foundInfo.clear();
+
+        if (deck == null) {
+            return 0;
+        }
 
         for (Card card : deck.getCards()) {
 
@@ -330,6 +334,7 @@ public abstract class AbstractCommander extends Constructed {
             boolean yourOpponentsControl = false;
             boolean whenYouCast = false;
 
+            List<String> cardStates = new ArrayList<>();
             for (String str : card.getRules()) {
                 String s = str.toLowerCase(Locale.ENGLISH);
                 annihilator |= s.contains("annihilator");
@@ -406,259 +411,504 @@ public abstract class AbstractCommander extends Constructed {
 
             if (extraTurns) {
                 thisMaxPower = Math.max(thisMaxPower, 7);
+                cardStates.add(String.format("extraTurns %d", 7));
             }
             if (buyback) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
+                cardStates.add(String.format("buyback %d", 6));
             }
             if (tutor) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
+                cardStates.add(String.format("tutor %d", 6));
             }
             if (annihilator) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("annihilator %d", 5));
             }
             if (cantUntap) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("cantUntap %d", 5));
             }
             if (costLessEach) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("costLessEach %d", 5));
             }
             if (infect) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("infect %d", 5));
             }
             if (overload) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("overload %d", 5));
             }
             if (twiceAs) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
+                cardStates.add(String.format("twiceAs %d", 5));
             }
             if (cascade) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("cascade %d", 4));
             }
             if (doesntUntap) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("doesntUntap %d", 4));
             }
             if (each) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("each %d", 4));
             }
             if (exileAll) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("exileAll %d", 4));
             }
             if (flash) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("flash %d", 4));
             }
             if (flashback) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("flashback %d", 4));
             }
             if (flicker) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("flicker %d", 4));
             }
             if (gainControl) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("gainControl %d", 4));
             }
             if (lifeTotalBecomes) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("lifeTotalBecomes %d", 4));
             }
             if (mayCastForFree) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("mayCastForFree %d", 4));
             }
             if (preventDamage) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("preventDamage %d", 4));
             }
             if (proliferate) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("proliferate %d", 4));
             }
             if (protection) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("protection %d", 4));
             }
             if (putUnderYourControl) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("putUnderYourControl %d", 4));
             }
             if (returnFromYourGY) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("returnFromYourGY %d", 4));
             }
             if (sacrifice) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("sacrifice %d", 2));
             }
             if (skip) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("skip %d", 4));
             }
             if (storm) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("storm %d", 4));
             }
             if (unblockable) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("unblockable %d", 4));
             }
             if (whenCounterThatSpell) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("whenCounterThatSpell %d", 4));
             }
             if (wheneverEnters) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("wheneverEnters %d", 4));
             }
             if (xCost) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("xCost %d", 4));
             }
             if (youControlTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("youControlTarget %d", 4));
             }
             if (yourOpponentsControl) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("yourOpponentsControl %d", 4));
             }
             if (whenYouCast) {
                 thisMaxPower = Math.max(thisMaxPower, 4);
+                cardStates.add(String.format("whenYouCast %d", 4));
             }
             if (anyNumberOfTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("anyNumberOfTarget %d", 4));
             }
             if (createToken) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("createToken %d", 3));
             }
             if (destroyAll) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("destroyAll %d", 3));
             }
             if (dredge) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("dredge %d", 3));
             }
             if (hexproof) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("hexproof %d", 3));
             }
             if (shroud) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("shroud %d", 3));
             }
             if (undying) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("undying %d", 3));
             }
             if (persist) {
                 thisMaxPower = Math.max(thisMaxPower, 3);
+                cardStates.add(String.format("persist %d", 3));
             }
             if (cantBe) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("cantBe %d", 2));
             }
             if (evoke) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("evoke %d", 2));
             }
             if (exile) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("exile %d", 2));
             }
             if (menace) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("menace %d", 2));
             }
             if (miracle) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("miracle %d", 2));
             }
             if (sliver) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("sliver %d", 2));
             }
             if (untapTarget) {
                 thisMaxPower = Math.max(thisMaxPower, 2);
+                cardStates.add(String.format("untapTarget %d", 2));
             }
             if (copy) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("copy %d", 1));
             }
             if (counter) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("counter %d", 1));
             }
             if (destroy) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("destroy %d", 1));
             }
             if (drawCards) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("drawCards %d", 1));
             }
             if (exalted) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("exalted %d", 1));
             }
             if (retrace) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("retrace %d", 1));
             }
             if (trample) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("trample %d", 1));
             }
             if (tutorBasic) {
                 thisMaxPower = Math.max(thisMaxPower, 1);
+                cardStates.add(String.format("tutorBasic %d", 1));
             }
 
             if (card.isPlaneswalker()) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
+                cardStates.add(String.format("isPlaneswalker %d", 6));
             }
 
             String cn = card.getName().toLowerCase(Locale.ENGLISH);
-            if (cn.equals("ancient tomb")
+            // Saltiest cards (edhrec)
+            if (cn.equals("acid rain")
+                    || cn.equals("agent of treachery")
                     || cn.equals("anafenza, the foremost")
+                    || cn.equals("animar, soul of element")
+                    || cn.equals("animate artifact")
+                    || cn.equals("apocalypse")
+                    || cn.equals("archaeomancer")
                     || cn.equals("arcum dagsson")
                     || cn.equals("armageddon")
+                    || cn.equals("ashnod's altar")
+                    || cn.equals("atraxa, praetors' voice")
+                    || cn.equals("aura flux")
                     || cn.equals("aura shards")
+                    || cn.equals("avacyn, angel of hope")
                     || cn.equals("azami, lady of scrolls")
                     || cn.equals("azusa, lost but seeking")
                     || cn.equals("back to basics")
                     || cn.equals("bane of progress")
                     || cn.equals("basalt monolith")
+                    || cn.equals("bend or break")
                     || cn.equals("blightsteel collossus")
+                    || cn.equals("blightsteel colossus")
                     || cn.equals("blood moon")
+                    || cn.equals("boil")
+                    || cn.equals("boiling seas")
+                    || cn.equals("brago, king eternal")
                     || cn.equals("braids, cabal minion")
+                    || cn.equals("bribery")
+                    || cn.equals("burning sands")
                     || cn.equals("cabal coffers")
+                    || cn.equals("candelabra of tawnos")
                     || cn.equals("captain sisay")
+                    || cn.equals("cataclysm")
+                    || cn.equals("catastrophe")
                     || cn.equals("celestial dawn")
+                    || cn.equals("cephalid aristocrat")
+                    || cn.equals("cephalid illusionist")
+                    || cn.equals("changeling berserker")
                     || cn.equals("child of alara")
+                    || cn.equals("chulane, teller of tales")
+                    || cn.equals("cinderhaze wretch")
                     || cn.equals("coalition relic")
+                    || cn.equals("confusion in the ranks")
+                    || cn.equals("consecrated sphinx")
+                    || cn.equals("contamination")
                     || cn.equals("craterhoof behemoth")
+                    || cn.equals("cryptic gateway")
+                    || cn.equals("deadeye navigator")
+                    || cn.equals("death cloud")
+                    || cn.equals("decree of annihilation")
+                    || cn.equals("decree of silence")
                     || cn.equals("deepglow skate")
+                    || cn.equals("demonic consultation")
                     || cn.equals("derevi, empyrial tactician")
+                    || cn.equals("devastation")
+                    || cn.equals("dictate of erebos")
                     || cn.equals("dig through time")
+                    || cn.equals("divine intervention")
+                    || cn.equals("dockside extortionist")
+                    || cn.equals("doomsday")
+                    || cn.equals("doubling season")
+                    || cn.equals("drannith magistrate")
+                    || cn.equals("dross scorpion")
+                    || cn.equals("earthcraft")
+                    || cn.equals("edgar markov")
                     || cn.equals("edric, spymaster of trest")
                     || cn.equals("elesh norn, grand cenobite")
+                    || cn.equals("elesh norn, mother of machines")
+                    || cn.equals("embargo")
+                    || cn.equals("emrakul, the promised end")
+                    || cn.equals("enter the infinite")
                     || cn.equals("entomb")
-                    || cn.equals("force of will")
+                    || cn.equals("epicenter")
+                    || cn.equals("erratic portal")
+                    || cn.equals("exquisite blood")
+                    || cn.equals("fall of the thran")
+                    || cn.equals("farewell")
+                    || cn.equals("flashfires")
                     || cn.equals("food chain")
+                    || cn.equals("force of negation")
+                    || cn.equals("future sight")
                     || cn.equals("gaddock teeg")
-                    || cn.equals("gaea's cradle")
-                    || cn.equals("grand arbiter augustin iv")
-                    || cn.equals("grim monolith")
+                    || cn.equals("genesis chamber")
+                    || cn.equals("ghave, guru of spores")
+                    || cn.equals("gilded drake")
+                    || cn.equals("glenn, the voice of calm")
+                    || cn.equals("global ruin")
+                    || cn.equals("golos, tireless pilgrim")
+                    || cn.equals("grave pact")
+                    || cn.equals("grave titan")
+                    || cn.equals("great whale")
+                    || cn.equals("gregor, shrewd magistrate")
+                    || cn.equals("greymond, avacyn's stalwart")
+                    || cn.equals("grip of chaos")
+                    || cn.equals("gush")
+                    || cn.equals("hellkite charger")
                     || cn.equals("hermit druid")
                     || cn.equals("hokori, dust drinker")
                     || cn.equals("humility")
-                    || cn.equals("imperial seal")
+                    || cn.equals("impending disaster")
+                    || cn.equals("intruder alarm")
+                    || cn.equals("invoke prejudice")
                     || cn.equals("iona, shield of emeria")
-                    || cn.equals("jin-gitaxias, core augur")
+                    || cn.equals("jeweled lotus")
+                    || cn.equals("jin-gitaxias, progress tyrant")
+                    || cn.equals("jokulhaups")
+                    || cn.equals("kaalia of the vast")
                     || cn.equals("karador, ghost chieftain")
                     || cn.equals("karakas")
+                    || cn.equals("karn, silver golem")
+                    || cn.equals("karn, the great creator")
                     || cn.equals("kataki, war's wage")
+                    || cn.equals("keldon firebombers")
+                    || cn.equals("kiki-jiki, mirror breaker")
                     || cn.equals("knowledge pool")
+                    || cn.equals("koma, cosmos serpent")
+                    || cn.equals("korvold, fae-cursed king")
+                    || cn.equals("kozilek, butcher of truth")
+                    || cn.equals("krark-clan ironworks")
+                    || cn.equals("krenko, mob boss")
+                    || cn.equals("krosan restorer")
+                    || cn.equals("laboratory maniac")
+                    || cn.equals("land equilibrium")
+                    || cn.equals("leonin relic-warder")
+                    || cn.equals("leovold, emissary of trest")
+                    || cn.equals("leyline of the void")
                     || cn.equals("linvala, keeper of silence")
                     || cn.equals("living death")
                     || cn.equals("llawan, cephalid empress")
                     || cn.equals("loyal retainers")
                     || cn.equals("maelstrom wanderer")
+                    || cn.equals("magister sphinx")
                     || cn.equals("malfegor")
-                    || cn.equals("master of cruelties")
+                    || cn.equals("malik, grim manipulator")
+                    || cn.equals("mana breach")
                     || cn.equals("mana crypt")
                     || cn.equals("mana drain")
-                    || cn.equals("mana vault")
+                    || cn.equals("mana vortex")
+                    || cn.equals("master of cruelties")
+                    || cn.equals("memnarch")
+                    || cn.equals("meren of clan nel toth")
                     || cn.equals("michiko konda, truth seeker")
+                    || cn.equals("mikaeus the unhallowed")
+                    || cn.equals("mikaeus, the unhallowed")
+                    || cn.equals("mindcrank")
+                    || cn.equals("mindslaver")
+                    || cn.equals("minion reflector")
+                    || cn.equals("mycosynth lattice")
+                    || cn.equals("myr turbine")
+                    || cn.equals("nadu, winged wisdom")
+                    || cn.equals("narset, enlightened master")
+                    || cn.equals("narset, parter of veils")
                     || cn.equals("nath of the gilt-leaf")
                     || cn.equals("natural order")
                     || cn.equals("necrotic ooze")
+                    || cn.equals("negan, the cold-blooded")
+                    || cn.equals("nekusar, the mindrazer")
+                    || cn.equals("nether void")
+                    || cn.equals("nexus of fate")
                     || cn.equals("nicol bolas")
+                    || cn.equals("norin the wary")
+                    || cn.equals("notion thief")
                     || cn.equals("numot, the devastator")
                     || cn.equals("oath of druids")
+                    || cn.equals("obliterate")
+                    || cn.equals("oko, thief of crowns")
+                    || cn.equals("oloro, ageless ascetic")
+                    || cn.equals("omniscience")
+                    || cn.equals("opalescence")
+                    || cn.equals("oppression")
+                    || cn.equals("orcish bowmasters")
+                    || cn.equals("ornithopter")
+                    || cn.equals("overwhelming splendor")
+                    || cn.equals("palinchron")
+                    || cn.equals("paradox engine")
                     || cn.equals("pattern of rebirth")
+                    || cn.equals("peregrine drake")
+                    || cn.equals("planar portal")
+                    || cn.equals("possessed portal")
+                    || cn.equals("power artifact")
+                    || cn.equals("price of glory")
+                    || cn.equals("prossh, skyraider of kher")
                     || cn.equals("protean hulk")
                     || cn.equals("purphoros, god of the forge")
                     || cn.equals("ravages of war")
                     || cn.equals("reclamation sage")
+                    || cn.equals("rick, steadfast leader")
+                    || cn.equals("rings of brighthearth")
+                    || cn.equals("rising waters")
+                    || cn.equals("rite of replication")
+                    || cn.equals("ruination")
+                    || cn.equals("sanguine bond")
+                    || cn.equals("scrambleverse")
+                    || cn.equals("seedborn muse")
                     || cn.equals("sen triplets")
-                    || cn.equals("serra's sanctum")
+                    || cn.equals("sensei's divining top")
+                    || cn.equals("sheoldred, the apocalypse")
                     || cn.equals("sheoldred, whispering one")
+                    || cn.equals("sire of insanity")
+                    || cn.equals("skithiryx, the blight dragon")
+                    || cn.equals("smokestack")
                     || cn.equals("sol ring")
+                    || cn.equals("sorin markov")
+                    || cn.equals("splinter twin")
                     || cn.equals("spore frog")
                     || cn.equals("stasis")
+                    || cn.equals("static orb")
+                    || cn.equals("stony silence")
+                    || cn.equals("storage matrix")
+                    || cn.equals("storm cauldron")
                     || cn.equals("strip mine")
-                    || cn.equals("the tabernacle at pendrell vale")
+                    || cn.equals("sunder")
+                    || cn.equals("tainted aether")
+                    || cn.equals("tangle wire")
+                    || cn.equals("tectonic break")
+                    || cn.equals("teferi's protection")
+                    || cn.equals("teferi's puzzle box")
+                    || cn.equals("teferi, mage of zhalfir")
+                    || cn.equals("teferi, master of time")
+                    || cn.equals("teferi, time raveler")
+                    || cn.equals("temporal manipulation")
+                    || cn.equals("tezzeret the seeker")
+                    || cn.equals("the chain veil")
+                    || cn.equals("thieves' auction")
+                    || cn.equals("thoughts of ruin")
+                    || cn.equals("thrasios, triton hero")
+                    || cn.equals("time sieve")
+                    || cn.equals("time stretch")
+                    || cn.equals("time warp")
                     || cn.equals("tinker")
+                    || cn.equals("tooth and nail")
+                    || cn.equals("torment of hailfire")
+                    || cn.equals("torpor orb")
+                    || cn.equals("toxrill, the corrosive")
+                    || cn.equals("training grounds")
                     || cn.equals("treasure cruise")
+                    || cn.equals("triskelavus")
+                    || cn.equals("triskelion")
+                    || cn.equals("triumph of the hordes")
+                    || cn.equals("turnabout")
+                    || cn.equals("ugin, the spirit dragon")
+                    || cn.equals("ulamog, the ceaseless hunger")
+                    || cn.equals("ulamog, the defiler")
+                    || cn.equals("ulamog, the infinite gyre")
+                    || cn.equals("umbral mantle")
                     || cn.equals("urabrask the hidden")
-                    || cn.equals("vorinclex, voice of hunger")
+                    || cn.equals("uyo, silent prophet")
+                    || cn.equals("void winnower")
+                    || cn.equals("voltaic key")
+                    || cn.equals("vorinclex, monstrous raider")
+                    || cn.equals("wake of destruction")
+                    || cn.equals("warp world")
+                    || cn.equals("winter moon")
                     || cn.equals("winter orb")
+                    || cn.equals("workhorse")
+                    || cn.equals("worldfire")
+                    || cn.equals("worldgorger dragon")
+                    || cn.equals("worthy cause")
+                    || cn.equals("xanathar, guild kingpin")
+                    || cn.equals("yawgmoth's will")
+                    || cn.equals("zealous conscripts")
                     || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 12);
+                cardStates.add(String.format("saltiest card %d", 12));
             }
 
             // Parts of infinite combos
@@ -720,155 +970,72 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("worthy cause") || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")) {
                 thisMaxPower = Math.max(thisMaxPower, 15);
+                cardStates.add(String.format("infinite combo %d", 15));
                 numberInfinitePieces++;
             }
 
-            // Saltiest cards (edhrec)
-            if (cn.equals("acid rain")
-                    || cn.equals("agent of treachery")
-                    || cn.equals("apocalypse")
-                    || cn.equals("armageddon")
-                    || cn.equals("atraxa, praetors' voice")
-                    || cn.equals("aura shards")
-                    || cn.equals("avacyn, angel of hope")
-                    || cn.equals("back to basics")
-                    || cn.equals("bend or break")
-                    || cn.equals("blightsteel colossus")
-                    || cn.equals("blood moon")
-                    || cn.equals("boil")
-                    || cn.equals("boiling seas")
-                    || cn.equals("bribery")
-                    || cn.equals("burning sands")
-                    || cn.equals("card view")
-                    || cn.equals("cataclysm")
-                    || cn.equals("catastrophe")
-                    || cn.equals("chulane, teller of tales")
-                    || cn.equals("confusion in the ranks")
-                    || cn.equals("consecrated sphinx")
-                    || cn.equals("contamination")
-                    || cn.equals("craterhoof behemoth")
+            // Game changers
+            if (cn.equals("ad nauseam")
+                    || cn.equals("ancient tomb")
+                    || cn.equals("bolas's citadel")
+                    || cn.equals("chrome mox")
                     || cn.equals("cyclonic rift")
-                    || cn.equals("death cloud")
-                    || cn.equals("decree of annihilation")
-                    || cn.equals("decree of silence")
-                    || cn.equals("demonic consultation")
-                    || cn.equals("derevi, empyrial tactician")
-                    || cn.equals("devastation")
-                    || cn.equals("divine intervention")
-                    || cn.equals("dockside extortionist")
-                    || cn.equals("doomsday")
-                    || cn.equals("doubling season")
+                    || cn.equals("demonic tutor")
                     || cn.equals("drannith magistrate")
-                    || cn.equals("elesh norn, grand cenobite")
-                    || cn.equals("embargo")
-                    || cn.equals("emrakul, the promised end")
-                    || cn.equals("epicenter")
+                    || cn.equals("enlightened tutor")
                     || cn.equals("expropriate")
-                    || cn.equals("fall of the thran")
                     || cn.equals("fierce guardianship")
-                    || cn.equals("food chain")
-                    || cn.equals("force of negation")
                     || cn.equals("force of will")
-                    || cn.equals("gaddock teeg")
                     || cn.equals("gaea's cradle")
-                    || cn.equals("gilded drake")
-                    || cn.equals("glenn, the voice of calm")
-                    || cn.equals("global ruin")
-                    || cn.equals("golos, tireless pilgrim")
+                    || cn.equals("glacial chasm")
                     || cn.equals("grand arbiter augustin iv")
-                    || cn.equals("grip of chaos")
-                    || cn.equals("hokori, dust drinker")
-                    || cn.equals("humility")
-                    || cn.equals("impending disaster")
-                    || cn.equals("invoke prejudice")
-                    || cn.equals("iona, shield of emeria")
+                    || cn.equals("grim monolith")
+                    || cn.equals("imperial seal")
+                    || cn.equals("jeska's will")
                     || cn.equals("jin-gitaxias, core augur")
-                    || cn.equals("jokulhaups")
-                    || cn.equals("keldon firebombers")
                     || cn.equals("kinnan, bonder prodigy")
-                    || cn.equals("kozilek, butcher of truth")
-                    || cn.equals("land equilibrium")
-                    || cn.equals("linvala, keeper of silence")
-                    || cn.equals("magister sphinx")
-                    || cn.equals("mana breach")
-                    || cn.equals("mana crypt")
-                    || cn.equals("mana drain")
-                    || cn.equals("mana vortex")
-                    || cn.equals("mindslaver")
-                    || cn.equals("narset, enlightened master")
-                    || cn.equals("narset, parter of veils")
-                    || cn.equals("negan, the cold-blooded")
-                    || cn.equals("nether void")
-                    || cn.equals("nexus of fate")
-                    || cn.equals("notion thief")
-                    || cn.equals("obliterate")
-                    || cn.equals("oko, thief of crowns")
-                    || cn.equals("oloro, ageless ascetic")
-                    || cn.equals("omniscience")
+                    || cn.equals("lion's eye diamond")
+                    || cn.equals("mana vault")
+                    || cn.equals("mox diamond")
+                    || cn.equals("mystical tutor")
                     || cn.equals("opposition agent")
-                    || cn.equals("oppression")
-                    || cn.equals("overwhelming splendor")
-                    || cn.equals("palinchron")
-                    || cn.equals("paradox engine")
-                    || cn.equals("possessed portal")
-                    || cn.equals("price of glory")
-                    || cn.equals("protean hulk")
-                    || cn.equals("ravages of war")
                     || cn.equals("rhystic study")
-                    || cn.equals("rick, steadfast leader")
-                    || cn.equals("rising waters")
-                    || cn.equals("ruination")
-                    || cn.equals("scrambleverse")
-                    || cn.equals("seedborn muse")
-                    || cn.equals("sen triplets")
-                    || cn.equals("sire of insanity")
-                    || cn.equals("skithiryx, the blight dragon")
-                    || cn.equals("smokestack")
+                    || cn.equals("serra's sanctum")
                     || cn.equals("smothering tithe")
-                    || cn.equals("sorin markov")
-                    || cn.equals("stasis")
-                    || cn.equals("static orb")
-                    || cn.equals("storage matrix")
-                    || cn.equals("sunder")
                     || cn.equals("survival of the fittest")
-                    || cn.equals("table view")
-                    || cn.equals("tainted aether")
-                    || cn.equals("tectonic break")
-                    || cn.equals("teferi's protection")
-                    || cn.equals("teferi, master of time")
-                    || cn.equals("teferi, time raveler")
-                    || cn.equals("temporal manipulation")
                     || cn.equals("tergrid, god of fright")
-                    || cn.equals("text view")
                     || cn.equals("thassa's oracle")
+                    || cn.equals("the one ring")
                     || cn.equals("the tabernacle at pendrell vale")
-                    || cn.equals("thieves' auction")
-                    || cn.equals("thoughts of ruin")
-                    || cn.equals("thrasios, triton hero")
-                    || cn.equals("time stretch")
-                    || cn.equals("time warp")
-                    || cn.equals("tooth and nail")
-                    || cn.equals("torment of hailfire")
-                    || cn.equals("torpor orb")
-                    || cn.equals("triumph of the hordes")
-                    || cn.equals("ugin, the spirit dragon")
-                    || cn.equals("ulamog, the ceaseless hunger")
-                    || cn.equals("ulamog, the infinite gyre")
+                    || cn.equals("trinisphere")
+                    || cn.equals("trouble in pairs")
+                    || cn.equals("underworld breach")
                     || cn.equals("urza, lord high artificer")
-                    || cn.equals("void winnower")
+                    || cn.equals("vampiric tutor")
                     || cn.equals("vorinclex, voice of hunger")
-                    || cn.equals("wake of destruction")
-                    || cn.equals("warp world")
-                    || cn.equals("winter orb")
-                    || cn.equals("xanathar, guild kingpin")
-                    || cn.equals("zur the enchanter")) {
-                thisMaxPower = Math.max(thisMaxPower, 15);
+                    || cn.equals("winota, joiner of forces")
+                    || cn.equals("yuriko, the tiger's shadow")) {
+                thisMaxPower = Math.max(thisMaxPower, 20);
+                cardStates.add(String.format("game changer %d", 20));
             }
+
+            // keep card's level
+            if (!cardStates.isEmpty()) {
+                foundInfo.add(String.format("+%d from <b>%s</b> (%s)",
+                        thisMaxPower,
+                        card.getName(),
+                        String.join(", ", cardStates)
+                ));
+                foundPowerCards.add(card.getName());
+            }
+
             edhPowerLevel += thisMaxPower;
-        }
+
+        } // cards list
 
         ObjectColor color = null;
         for (Card commander : deck.getSideboard()) {
+            List<String> commanderStates = new ArrayList<>();
             int thisMaxPower = 0;
             String cn = commander.getName().toLowerCase(Locale.ENGLISH);
             if (color == null) {
@@ -937,6 +1104,7 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("vorinclex, voice of hunger")
                     || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 25);
+                commanderStates.add(String.format("not fun commander (+%d)", 25));
             }
 
             // Saltiest commanders
@@ -973,21 +1141,40 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("xanathar, guild kingpin")
                     || cn.equals("zur the enchanter")) {
                 thisMaxPower = Math.max(thisMaxPower, 20);
+                commanderStates.add(String.format("saltiest commander (+%d)", 20));
             }
+
+            // keep commander's level
+            if (!commanderStates.isEmpty()) {
+                foundInfo.add(String.format("+%d from <b>%s</b> (%s)",
+                        thisMaxPower,
+                        commander.getName(),
+                        String.join(", ", commanderStates)
+                ));
+                foundPowerCards.add(commander.getName());
+            }
+
             edhPowerLevel += thisMaxPower;
         }
 
-        edhPowerLevel += numberInfinitePieces * 18;
-        edhPowerLevel = Math.round(edhPowerLevel / 10);
-        if (edhPowerLevel >= 100) {
-            edhPowerLevel = 99;
+        if (numberInfinitePieces > 0) {
+            edhPowerLevel += numberInfinitePieces * 18;
+            foundInfo.add(String.format("+%d from <b>%d infinite pieces</b>", numberInfinitePieces * 18, numberInfinitePieces));
         }
-        if (color != null) {
-            edhPowerLevel += (color.isWhite() ? 10000000 : 0);
-            edhPowerLevel += (color.isBlue() ? 1000000 : 0);
-            edhPowerLevel += (color.isBlack() ? 100000 : 0);
-            edhPowerLevel += (color.isRed() ? 10000 : 0);
-            edhPowerLevel += (color.isGreen() ? 1000 : 0);
+
+        // block colored decks by table's edh power level were disabled
+        // it's better to show real edh power level and allow for direct values control
+        if (false) {
+            if (edhPowerLevel >= 100) {
+                edhPowerLevel = 99;
+            }
+            if (color != null) {
+                edhPowerLevel += (color.isWhite() ? 10000000 : 0);
+                edhPowerLevel += (color.isBlue() ? 1000000 : 0);
+                edhPowerLevel += (color.isBlack() ? 100000 : 0);
+                edhPowerLevel += (color.isRed() ? 10000 : 0);
+                edhPowerLevel += (color.isGreen() ? 1000 : 0);
+            }
         }
         return edhPowerLevel;
     }

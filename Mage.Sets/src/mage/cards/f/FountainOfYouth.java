@@ -20,7 +20,7 @@ public final class FountainOfYouth extends CardImpl {
 
     public FountainOfYouth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -31,7 +31,7 @@ public final class Knife extends CardImpl {
         // As long as it's your turn, equipped creature gets +1/+0 and has first strike.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostEquippedEffect(1, 0), MyTurnCondition.instance,
-                "as long as it's your turn, equipped creature gets +1/+0"
+                "during your turn, equipped creature gets +1/+0"
         ));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(
                 FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT

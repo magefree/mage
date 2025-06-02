@@ -3,7 +3,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -39,7 +38,7 @@ public final class LathnuHellion extends CardImpl {
         Cost cost = new PayEnergyCost(2);
         cost.setText("{E}{E}");
         Effect effect = new SacrificeSourceUnlessPaysEffect(cost);
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(effect));
     }
 
     private LathnuHellion(final LathnuHellion card) {

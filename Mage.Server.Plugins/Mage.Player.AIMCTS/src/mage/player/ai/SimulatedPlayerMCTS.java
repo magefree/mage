@@ -141,7 +141,7 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         //useful only for two player games - will only attack first opponent
-        UUID defenderId = game.getOpponents(playerId).iterator().next();
+        UUID defenderId = game.getOpponents(playerId, true).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         //use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
@@ -375,59 +375,11 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
         if (this.isHuman()) {
-            return attackers.get(RandomUtil.nextInt(attackers.size())).getId();
+            return RandomUtil.nextInt(max - min + 1) + min;
         }
-        return super.chooseAttackerOrder(attackers, game);
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
-        if (this.isHuman()) {
-            return blockers.get(RandomUtil.nextInt(blockers.size())).getId();
-        }
-        return super.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
-    }
-
-    @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
-        if (this.isHuman()) {
-            int remainingDamage = damage;
-            UUID targetId;
-            int amount;
-            while (remainingDamage > 0) {
-                if (targets.size() == 1) {
-                    targetId = targets.get(0);
-                    amount = remainingDamage;
-                } else {
-                    targetId = targets.get(RandomUtil.nextInt(targets.size()));
-                    amount = RandomUtil.nextInt(damage + 1);
-                }
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    permanent.damage(amount, attackerId, source, game, false, true);
-                    remainingDamage -= amount;
-                } else {
-                    Player player = game.getPlayer(targetId);
-                    if (player != null) {
-                        player.damage(amount, attackerId, source, game);
-                        remainingDamage -= amount;
-                    }
-                }
-                targets.remove(targetId);
-            }
-        } else {
-            super.assignDamage(damage, targets, singleTargetName, attackerId, source, game);
-        }
-    }
-
-    @Override
-    public int getAmount(int min, int max, String message, Game game) {
-        if (this.isHuman()) {
-            return RandomUtil.nextInt(max - min) + min;
-        }
-        return super.getAmount(min, max, message, game);
+        return super.getAmount(min, max, message, source, game);
     }
 
 }

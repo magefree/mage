@@ -70,7 +70,7 @@ enum PteramanderAdjuster implements CostAdjuster {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         int count = cardsCount.calculate(game, ability, null);
         CardUtil.reduceCost(ability, count);
     }

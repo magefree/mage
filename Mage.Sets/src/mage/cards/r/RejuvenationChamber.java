@@ -23,7 +23,7 @@ public final class RejuvenationChamber extends CardImpl {
         // Fading 2
         this.addAbility(new FadingAbility(2, this));
         // {tap}: You gain 2 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(2), new TapSourceCost()));
     }
 
     private RejuvenationChamber(final RejuvenationChamber card) {

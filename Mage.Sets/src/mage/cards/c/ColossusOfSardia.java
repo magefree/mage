@@ -34,7 +34,7 @@ public final class ColossusOfSardia extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Colossus of Sardia doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // {9}: Untap Colossus of Sardia. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 

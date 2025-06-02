@@ -17,8 +17,9 @@ public class MysteryBooster2 extends ExpansionSet {
 
     private MysteryBooster2() {
         super("Mystery Booster 2", "MB2", ExpansionSet.buildDate(2024, 8, 2), SetType.REMIX);
-        this.hasBoosters = false; // booster generation needs to be implemented
-        this.hasBasicLands = true;
+
+        // https://mtg.fandom.com/wiki/Mystery_Booster_2
+        this.enablePlayBooster(Integer.MAX_VALUE);
 
         cards.add(new SetCardInfo("Abrupt Decay", 78, Rarity.RARE, mage.cards.a.AbruptDecay.class));
         cards.add(new SetCardInfo("Aether Vial", 216, Rarity.UNCOMMON, mage.cards.a.AetherVial.class));
@@ -107,6 +108,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Gitaxian Probe", 28, Rarity.COMMON, mage.cards.g.GitaxianProbe.class));
         cards.add(new SetCardInfo("Giver of Runes", 147, Rarity.RARE, mage.cards.g.GiverOfRunes.class));
         cards.add(new SetCardInfo("Gix, Yawgmoth Praetor", 245, Rarity.MYTHIC, mage.cards.g.GixYawgmothPraetor.class));
+        cards.add(new SetCardInfo("Gobland", 563, Rarity.RARE, mage.cards.g.Gobland.class));
         cards.add(new SetCardInfo("Goblin Charbelcher", 221, Rarity.RARE, mage.cards.g.GoblinCharbelcher.class));
         cards.add(new SetCardInfo("Goblin Gang Leader", 144, Rarity.UNCOMMON, mage.cards.g.GoblinGangLeader.class));
         cards.add(new SetCardInfo("Goblin Guide", 58, Rarity.RARE, mage.cards.g.GoblinGuide.class));
@@ -118,6 +120,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Greater Good", 207, Rarity.RARE, mage.cards.g.GreaterGood.class));
         cards.add(new SetCardInfo("Grinding Station", 223, Rarity.UNCOMMON, mage.cards.g.GrindingStation.class));
         cards.add(new SetCardInfo("Gush", 164, Rarity.COMMON, mage.cards.g.Gush.class));
+        cards.add(new SetCardInfo("Hish of the Snake Cult", 595, Rarity.RARE, mage.cards.h.HishOfTheSnakeCult.class));
         cards.add(new SetCardInfo("Hogaak, Arisen Necropolis", 136, Rarity.RARE, mage.cards.h.HogaakArisenNecropolis.class));
         cards.add(new SetCardInfo("Hollow One", 95, Rarity.RARE, mage.cards.h.HollowOne.class));
         cards.add(new SetCardInfo("Hoodwink", 123, Rarity.COMMON, mage.cards.h.Hoodwink.class));
@@ -126,6 +129,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Hunting Cheetah", 134, Rarity.COMMON, mage.cards.h.HuntingCheetah.class));
         cards.add(new SetCardInfo("Hydroblast", 165, Rarity.COMMON, mage.cards.h.Hydroblast.class));
         cards.add(new SetCardInfo("Ice-Fang Coatl", 83, Rarity.RARE, mage.cards.i.IceFangCoatl.class));
+        cards.add(new SetCardInfo("Indicate", 501, Rarity.RARE, mage.cards.i.Indicate.class));
         cards.add(new SetCardInfo("Iona, Shield of Emeria", 12, Rarity.MYTHIC, mage.cards.i.IonaShieldOfEmeria.class));
         cards.add(new SetCardInfo("Isochron Scepter", 96, Rarity.UNCOMMON, mage.cards.i.IsochronScepter.class));
         cards.add(new SetCardInfo("Jace Beleren", 29, Rarity.MYTHIC, mage.cards.j.JaceBeleren.class));
@@ -160,6 +164,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Mirri's Guile", 209, Rarity.RARE, mage.cards.m.MirrisGuile.class));
         cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 252, Rarity.MYTHIC, mage.cards.m.MirriWeatherlightDuelist.class));
         cards.add(new SetCardInfo("Mishra's Bauble", 97, Rarity.UNCOMMON, mage.cards.m.MishrasBauble.class));
+        cards.add(new SetCardInfo("Mox Poison", 608, Rarity.RARE, mage.cards.m.MoxPoison.class));
         cards.add(new SetCardInfo("Multani, Yavimaya's Avatar", 248, Rarity.MYTHIC, mage.cards.m.MultaniYavimayasAvatar.class));
         cards.add(new SetCardInfo("Mutilate", 45, Rarity.RARE, mage.cards.m.Mutilate.class));
         cards.add(new SetCardInfo("Mystic Sanctuary", 110, Rarity.COMMON, mage.cards.m.MysticSanctuary.class));
@@ -214,12 +219,12 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Simian Spirit Guide", 61, Rarity.COMMON, mage.cards.s.SimianSpiritGuide.class));
         cards.add(new SetCardInfo("Skyclave Apparition", 18, Rarity.RARE, mage.cards.s.SkyclaveApparition.class));
         cards.add(new SetCardInfo("Smokestack", 232, Rarity.RARE, mage.cards.s.Smokestack.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 120, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Island", 117, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 119, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 116, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 118, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Wastes", 121, Rarity.UNCOMMON, mage.cards.s.SnowCoveredWastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 120, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
+        cards.add(new SetCardInfo("Snow-Covered Island", 117, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 119, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 116, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 118, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Snow-Covered Wastes", 121, Rarity.UNCOMMON, mage.cards.s.SnowCoveredWastes.class));
         cards.add(new SetCardInfo("Snuff Out", 187, Rarity.COMMON, mage.cards.s.SnuffOut.class));
         cards.add(new SetCardInfo("Sol Ring", 233, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Soul of Theros", 19, Rarity.MYTHIC, mage.cards.s.SoulOfTheros.class));
@@ -232,7 +237,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Static Orb", 234, Rarity.RARE, mage.cards.s.StaticOrb.class));
         cards.add(new SetCardInfo("Stifle", 173, Rarity.RARE, mage.cards.s.Stifle.class));
         cards.add(new SetCardInfo("Stitcher's Supplier", 48, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
-        cards.add(new SetCardInfo("Stone Drake", 363, Rarity.RARE, mage.cards.s.StoneDrake.class));
+        cards.add(new SetCardInfo("Stone Drake", 602, Rarity.RARE, mage.cards.s.StoneDrake.class));
         cards.add(new SetCardInfo("Stony Silence", 21, Rarity.RARE, mage.cards.s.StonySilence.class));
         cards.add(new SetCardInfo("Street Wraith", 49, Rarity.COMMON, mage.cards.s.StreetWraith.class));
         cards.add(new SetCardInfo("Summoner's Pact", 74, Rarity.RARE, mage.cards.s.SummonersPact.class));
@@ -277,10 +282,12 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Wasteland", 115, Rarity.UNCOMMON, mage.cards.w.Wasteland.class));
         cards.add(new SetCardInfo("Whiteout", 77, Rarity.COMMON, mage.cards.w.Whiteout.class));
         cards.add(new SetCardInfo("Winds of Change", 201, Rarity.UNCOMMON, mage.cards.w.WindsOfChange.class));
+        cards.add(new SetCardInfo("Wisedrafter's Will", 539, Rarity.RARE, mage.cards.w.WisedraftersWill.class));
         cards.add(new SetCardInfo("Wish", 64, Rarity.RARE, mage.cards.w.Wish.class));
         cards.add(new SetCardInfo("Wishclaw Talisman", 51, Rarity.RARE, mage.cards.w.WishclawTalisman.class));
         cards.add(new SetCardInfo("Worst Fears", 52, Rarity.MYTHIC, mage.cards.w.WorstFears.class));
-        cards.add(new SetCardInfo("Wowzer, the Aspirational", 365, Rarity.RARE, mage.cards.w.WowzerTheAspirational.class));
+        cards.add(new SetCardInfo("Wowzer, the Aspirational", 604, Rarity.RARE, mage.cards.w.WowzerTheAspirational.class));
+        cards.add(new SetCardInfo("Wrath of Leknif", 605, Rarity.RARE, mage.cards.w.WrathOfLeknif.class));
         cards.add(new SetCardInfo("Xantcha, Sleeper Agent", 253, Rarity.RARE, mage.cards.x.XantchaSleeperAgent.class));
         cards.add(new SetCardInfo("Yorion, Sky Nomad", 94, Rarity.RARE, mage.cards.y.YorionSkyNomad.class));
         cards.add(new SetCardInfo("Zombie Master", 188, Rarity.RARE, mage.cards.z.ZombieMaster.class));

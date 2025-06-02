@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -41,7 +41,7 @@ public final class RamirezDePietroPillager extends CardImpl {
         this.addAbility(ability);
 
         // Whenever one or more Pirates you control deal combat damage to a player, exile the top card of that player's library. You may cast that card for as long as it remains exiled.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new RamirezDePietroPillagerEffect(),
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(Zone.BATTLEFIELD, new RamirezDePietroPillagerEffect(),
                 filter, SetTargetPointer.PLAYER, false));
     }
 

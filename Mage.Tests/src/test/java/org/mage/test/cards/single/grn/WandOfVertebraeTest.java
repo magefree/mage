@@ -3,6 +3,7 @@ package org.mage.test.cards.single.grn;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -31,6 +32,7 @@ public class WandOfVertebraeTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}");
         addTarget(playerA, lavaCoil);
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // must choose 1 of 5
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();

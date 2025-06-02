@@ -37,7 +37,7 @@ public final class ExaltedDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Exalted Dragon can't attack unless you sacrifice a land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExaltedDragonCostToAttackBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new ExaltedDragonCostToAttackBlockEffect()));
     }
 
     private ExaltedDragon(final ExaltedDragon card) {

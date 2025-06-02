@@ -46,7 +46,7 @@ public final class Hecatomb extends CardImpl {
                 .withRuleTextReplacement(false));
         
         // Tap an untapped Swamp you control: Hecatomb deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

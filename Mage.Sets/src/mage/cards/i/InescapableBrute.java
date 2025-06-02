@@ -30,7 +30,7 @@ public final class InescapableBrute extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
         
         // Inescapable Brute must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
         
     }
 

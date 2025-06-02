@@ -32,7 +32,7 @@ public final class TavernSwindler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Pay 3 life: Flip a coin. If you win the flip, you gain 6 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TavernSwindlerEffect(),new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TavernSwindlerEffect(),new TapSourceCost());
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }

@@ -29,10 +29,10 @@ public final class VoidWinnower extends CardImpl {
         this.toughness = new MageInt(9);
 
         // Your opponent can't cast spells with even converted mana costs. (Zero is even.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidWinnowerCantCastEffect()));
+        this.addAbility(new SimpleStaticAbility(new VoidWinnowerCantCastEffect()));
 
         // Your opponents can't block with creatures with even converted mana costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidWinnowerCantBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new VoidWinnowerCantBlockEffect()));
     }
 
     private VoidWinnower(final VoidWinnower card) {

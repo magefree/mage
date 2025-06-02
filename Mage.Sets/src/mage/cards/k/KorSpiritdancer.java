@@ -38,7 +38,7 @@ public final class KorSpiritdancer extends CardImpl {
 
         // Kor Spiritdancer gets +2/+2 for each Aura attached to it.
         AuraAttachedCount count = new AuraAttachedCount(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
         // Whenever you cast an Aura spell, you may draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, true));
     }

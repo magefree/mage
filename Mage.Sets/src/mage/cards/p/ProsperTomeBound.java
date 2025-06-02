@@ -1,11 +1,11 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PlayCardTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -36,7 +36,7 @@ public final class ProsperTomeBound extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new ExileTopXMayPlayUntilEffect(
                         1, Duration.UntilEndOfYourNextTurn
-                ), TargetController.YOU, false
+                )
         ).withFlavorWord("Mystic Arcanum"));
 
         // Pact Boon — Whenever you play a card from exile, create a Treasure token.
@@ -57,7 +57,7 @@ class ProsperTomeBoundTriggeredAbility extends PlayCardTriggeredAbility {
 
     ProsperTomeBoundTriggeredAbility() {
         super(TargetController.YOU, Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
-        this.flavorWord = "Pact Boon";
+        this.withFlavorWord("Pact Boon");
         setTriggerPhrase("Whenever you play a card from exile, ");
     }
 

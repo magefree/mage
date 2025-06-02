@@ -24,7 +24,8 @@ public final class ShamblingAttendants extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
+
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
     }

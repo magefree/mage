@@ -33,7 +33,7 @@ public final class SelflessSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice Selfless Spirit: Creatures you control gain indestructible until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn,
+        this.addAbility(new SimpleActivatedAbility(new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES), new SacrificeSourceCost()));
     }
 

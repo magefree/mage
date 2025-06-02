@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
 
@@ -21,7 +20,7 @@ import java.util.UUID;
  */
 public final class DefilerOfSouls extends CardImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
     static {
         filter.add(MonocoloredPredicate.instance);
     }
@@ -37,8 +36,8 @@ public final class DefilerOfSouls extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of each player's upkeep, that player sacrifices a monocolored creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.EACH_PLAYER, new SacrificeEffect(filter, 1, "that player"), false));
     }
 
     private DefilerOfSouls(final DefilerOfSouls card) {

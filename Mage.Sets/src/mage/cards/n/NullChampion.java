@@ -36,7 +36,7 @@ public final class NullChampion extends LevelerCard {
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
-        abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
+        abilities2.add(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
 
         this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 4, 2),

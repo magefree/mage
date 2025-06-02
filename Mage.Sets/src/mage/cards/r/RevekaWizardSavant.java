@@ -31,7 +31,7 @@ public final class RevekaWizardSavant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Reveka, Wizard Savant deals 2 damage to any target and doesn't untap during your next untap step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(ability);

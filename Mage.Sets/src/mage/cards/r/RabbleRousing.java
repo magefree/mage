@@ -34,7 +34,7 @@ public final class RabbleRousing extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // Hideaway 5
-        this.addAbility(new HideawayAbility(5));
+        this.addAbility(new HideawayAbility(this, 5));
 
         // Whenever you attack with one or more creatures, create that many 1/1 green and white Citizen creature tokens. Then if you control ten or more creatures, you may play the exiled card without paying its mana cost.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(

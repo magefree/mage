@@ -52,7 +52,7 @@ public class ConditionTrueHint implements Hint {
     }
 
     @Override
-    public Hint copy() {
+    public ConditionTrueHint copy() {
         return new ConditionTrueHint(this);
     }
 }

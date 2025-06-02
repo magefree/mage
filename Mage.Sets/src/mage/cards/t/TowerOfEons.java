@@ -21,7 +21,7 @@ public final class TowerOfEons extends CardImpl {
 
     public TowerOfEons (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(10), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(10), new GenericManaCost(8));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

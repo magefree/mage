@@ -35,7 +35,7 @@ public class SourceTargetsPermanentCondition implements Condition {
 
     @Override
     public String toString() {
-        return "it targets " + filter.getMessage();
+        return "it targets " + CardUtil.addArticle(filter.getMessage());
     }
 
 }

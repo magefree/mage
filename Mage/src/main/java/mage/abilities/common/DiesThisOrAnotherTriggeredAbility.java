@@ -29,7 +29,8 @@ public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
         if (filterMessage.startsWith("a ")) {
             filterMessage = filterMessage.substring(2);
         }
-        setTriggerPhrase("Whenever {this} or another " + filterMessage + " dies, ");
+        setTriggerPhrase("Whenever {this} or " + (filterMessage.startsWith("another") ? "" : "another ") + filterMessage + " dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     protected DiesThisOrAnotherTriggeredAbility(final DiesThisOrAnotherTriggeredAbility ability) {
@@ -60,12 +61,16 @@ public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         // TODO: remove applyFilterOnSource workaround for Basri's Lieutenant
-        return ((!applyFilterOnSource && zEvent.getTarget().getId().equals(this.getSourceId()))
-                || filter.match(zEvent.getTarget(), getControllerId(), this, game));
+        if ((applyFilterOnSource || !zEvent.getTarget().getId().equals(this.getSourceId()))
+                && !filter.match(zEvent.getTarget(), getControllerId(), this, game)) {
+            return false;
+        }
+        this.getEffects().setValue("creatureDied", zEvent.getTarget());
+        return true;
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

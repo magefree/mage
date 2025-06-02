@@ -36,8 +36,9 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.onCard = onCard;
-        this.staticText = "{this} gains " + CardUtil.stripReminderText(ability.getRule())
-                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
+        this.staticText = "{this} " + (duration == Duration.WhileOnBattlefield ? "has" : "gains") +
+                ' ' + CardUtil.stripReminderText(ability.getRule()) +
+                (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
         this.generateGainAbilityDependencies(ability, null);
     }
 

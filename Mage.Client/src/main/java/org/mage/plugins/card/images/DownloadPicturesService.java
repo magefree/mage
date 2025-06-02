@@ -725,8 +725,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             try {
                 TVFS.umount();
             } catch (FsSyncException e) {
-                logger.fatal("Couldn't unmount zip files " + e, e);
-                MageFrame.getInstance().showErrorDialog("Couldn't unmount zip files " + e, e);
+                logger.error("Couldn't unmount zip files " + e, e);
+                // this is not a critical error - just need to run it again - see issue #12833
             }
         }
 
@@ -940,14 +940,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         logger.warn(err);
                     }
                 }
-
             } catch (AccessDeniedException e) {
                 incErrorCount();
                 logger.error("Can't access to files: " + card.getName() + "(" + card.getSet() + "). Try rebooting your system to remove the file lock.");
             } catch (Exception e) {
                 incErrorCount();
-                logger.error("Unknown error: " + e.getMessage(), e);
-            } finally {
+                String sampleUrl = (urls == null ? "null" : urls.getDownloadList().stream().findFirst().orElse(null));
+                logger.error("Unknown error: " + e.getMessage() + ", sample url: " + sampleUrl, e);
             }
 
             synchronized (sync) {

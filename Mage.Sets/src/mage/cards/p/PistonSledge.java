@@ -37,7 +37,7 @@ public final class PistonSledge extends CardImpl {
         this.addAbility(new EntersBattlefieldAttachToTarget());
 
         // Equipped creature gets +3/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 1)));
 
         // Equip—Sacrifice an artifact.
         this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(filter), false));

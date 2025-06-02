@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -37,8 +37,8 @@ public final class Necrogoyf extends CardImpl {
 
         // At the beginning of each player's upkeep, that player discards a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new DiscardTargetEffect(1),
-                TargetController.ACTIVE, false, true
+                TargetController.EACH_PLAYER, new DiscardTargetEffect(1),
+                false
         ));
 
         // Madness {1}{B}{B}

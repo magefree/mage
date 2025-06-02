@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.InfoEffect;
@@ -28,10 +27,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.SummoningSicknessPredicate;
-import mage.game.Game;
-import mage.game.GameImpl;
-import mage.game.Graveyard;
-import mage.game.Table;
+import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.draft.Draft;
@@ -52,6 +48,7 @@ import mage.target.common.*;
 import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
+import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
@@ -71,7 +68,7 @@ public class TestPlayer implements Player {
 
     private static final Logger LOGGER = Logger.getLogger(TestPlayer.class);
 
-    private static final int takeMaxTargetsPerChoose = Integer.MAX_VALUE; // TODO: set 1, fix broken tests and replace all "for (String targetDefinition" by targets.get(0)
+    private static final int takeMaxTargetsPerChoose = Integer.MAX_VALUE; // TODO: set 1 here, fix broken tests and replace all "for (String targetDefinition" by targets.get(0)
 
     public static final String TARGET_SKIP = "[target_skip]"; // stop/skip targeting
     public static final String CHOICE_SKIP = "[choice_skip]"; // stop/skip choice
@@ -90,15 +87,16 @@ public class TestPlayer implements Player {
 
     // warning, test player do not restore own data by game rollback
 
-    // full playable AI, TODO: can be deleted?
-    private boolean AIPlayer;
+    // full playable AI
+    private boolean AIPlayer; // TODO: better rename
     // AI simulates a real game, e.g. ignores strict mode and play command/priority, see aiXXX commands
     // true - unit tests uses real AI logic (e.g. AI hints and AI workarounds in cards)
-    // false - unit tests uses Human logic and dialogs
+    // false - unit tests uses Human logic and dialogs (in non-strict mode AI replace miss target/choice commands)
     private boolean AIRealGameSimulation = false;
+    private PhaseStep AIRealGameControlUntil = null; // enable temporary AI control until some point in time
 
     private final List<PlayerAction> actions = new ArrayList<>();
-    private final Map<PlayerAction, PhaseStep> actionsToRemoveLater = new HashMap<>(); // remove actions later, on next step (e.g. for AI commands)
+    //private final Map<PlayerAction, PhaseStep> actionsToRemoveLater = new HashMap<>(); // remove actions after some step (used for AI commands)
     private final Map<Integer, HashMap<UUID, ArrayList<PlayerAction>>> rollbackActions = new HashMap<>(); // actions to add after a executed rollback
     private final List<String> choices = new ArrayList<>(); // choices stack for choice
     private final List<String> targets = new ArrayList<>(); // targets stack for choose (it's uses on empty direct target by cast command)
@@ -113,7 +111,7 @@ public class TestPlayer implements Player {
     //   (example: card call TestPlayer's choice, but it uses another choices, see docs in TestComputerPlayer)
     private boolean strictChooseMode = false;
 
-    private String[] groupsForTargetHandling = null;
+    private String[] groupsForTargetHandling = null; // predefined targets list from cast/activate command
 
     // Tracks the initial turns (turn 0s) both players are given at the start of the game.
     // Before actual turns start. Needed for checking attacker/blocker legality in the tests
@@ -140,6 +138,7 @@ public class TestPlayer implements Player {
     public TestPlayer(final TestPlayer testPlayer) {
         this.AIPlayer = testPlayer.AIPlayer;
         this.AIRealGameSimulation = testPlayer.AIRealGameSimulation;
+        this.AIRealGameControlUntil = testPlayer.AIRealGameControlUntil;
         this.foundNoAction = testPlayer.foundNoAction;
         this.actions.addAll(testPlayer.actions);
         this.choices.addAll(testPlayer.choices);
@@ -515,7 +514,7 @@ public class TestPlayer implements Player {
                     }
                 }
                 for (UUID id : currentTarget.possibleTargets(ability.getControllerId(), ability, game)) {
-                    if (!currentTarget.getTargets().contains(id)) {
+                    if (!currentTarget.contains(id)) {
                         MageObject object = game.getObject(id);
 
                         if (object == null) {
@@ -538,7 +537,7 @@ public class TestPlayer implements Player {
                         }
 
                         // found, can use as target
-                        if (currentTarget.getNumberOfTargets() == 1) {
+                        if (currentTarget.getMinNumberOfTargets() == 1) {
                             currentTarget.clearChosen();
                         }
                         if (currentTarget.getOriginalTarget() instanceof TargetCreaturePermanentAmount) {
@@ -573,21 +572,27 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean priority(Game game) {
-        // later remove actions (ai commands related)
-        if (actionsToRemoveLater.size() > 0) {
-            List<PlayerAction> removed = new ArrayList<>();
-            actionsToRemoveLater.forEach((action, step) -> {
-                if (game.getTurnStepType() != step) {
-                    action.onActionRemovedLater(game, this);
-                    actions.remove(action);
-                    removed.add(action);
-                }
-            });
-            removed.forEach(actionsToRemoveLater::remove);
+        boolean oldControl = AIRealGameSimulation;
+        if (AIPlayer) {
+            // full AI control
+            changeAIControl(game, true);
+        } else {
+            // temporary AI control
+            // after enabled on priority it must work until end of the priority
+            // e.g. AI can be called multiple times in complex choices
+            if (game.getTurnStepType().equals(PhaseStep.UPKEEP)) {
+                // reset
+                AIRealGameControlUntil = null;
+                changeAIControl(game, false);
+            } else {
+                // setup
+                boolean enable = AIRealGameControlUntil != null && game.getTurnStepType().getIndex() <= AIRealGameControlUntil.getIndex();
+                changeAIControl(game, enable);
+            }
         }
 
         // fake test ability for triggers and events
-        Ability source = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("adding testing cards"));
+        Ability source = new SimpleStaticAbility(Zone.OUTSIDE, new InfoEffect("fake ability"));
         source.setControllerId(this.getId());
 
         int numberOfActions = actions.size();
@@ -746,19 +751,31 @@ public class TestPlayer implements Player {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(AI_PREFIX) + AI_PREFIX.length());
 
-                    // play priority
-                    if (command.equals(AI_COMMAND_PLAY_PRIORITY)) {
-                        AIRealGameSimulation = true; // disable on action's remove
+                    // play single priority, two modes support:
+                    // - really single priority
+                    // - multiple priorities until empty stack
+                    if (command.startsWith(AI_COMMAND_PLAY_PRIORITY)) {
+                        boolean needEmptyStack = Boolean.parseBoolean(command.split(AI_PARAM_DELIMETER)[1]);
+                        changeAIControl(game, true);
                         computerPlayer.priority(game);
-                        actions.remove(action);
+                        if (!needEmptyStack || game.getStack().isEmpty()) {
+                            changeAIControl(game, false);
+                            actions.remove(action);
+                            computerPlayer.resetPassed(); // remove AI's pass, so runtime/check commands can be executed in same priority
+                        }
+                        // control will be disabled on next priority, not here
+                        // (require to process triggers and other non-direct actions and choices)
                         return true;
                     }
 
-                    // play step
-                    if (command.equals(AI_COMMAND_PLAY_STEP)) {
-                        AIRealGameSimulation = true; // disable on action's remove
-                        actionsToRemoveLater.put(action, game.getTurnStepType());
+                    // play multiple priorities on one or multiple steps
+                    if (command.startsWith(AI_COMMAND_PLAY_STEP)) {
+                        PhaseStep endStep = PhaseStep.fromString(command.split(AI_PARAM_DELIMETER)[1]);
+                        changeAIControl(game, true); // enable AI
+                        AIRealGameControlUntil = endStep; // disable on end step
                         computerPlayer.priority(game);
+                        actions.remove(action);
+                        computerPlayer.resetPassed(); // remove AI's pass, so runtime/check commands can be executed in same priority
                         return true;
                     }
 
@@ -814,6 +831,20 @@ public class TestPlayer implements Player {
                         // check ability: card name, ability class, must have
                         if (params[0].equals(CHECK_COMMAND_ABILITY) && params.length == 4) {
                             assertAbility(action, game, computerPlayer, params[1], params[2], Boolean.parseBoolean(params[3]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // check attacking: attackers list
+                        if (params[0].equals(CHECK_COMMAND_ATTACKERS) && params.length == 2) {
+                            assertAttackers(action, game, computerPlayer, params[1]);
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // check attacking: attackers list
+                        if (params[0].equals(CHECK_COMMAND_BLOCKERS) && params.length == 2) {
+                            assertBlockers(action, game, computerPlayer, params[1]);
                             actions.remove(action);
                             wasProccessed = true;
                         }
@@ -1087,6 +1118,7 @@ public class TestPlayer implements Player {
             } // turn/step
         }
 
+        // normal priority (by AI or pass)
         tryToPlayPriority(game);
 
         // check to prevent endless loops
@@ -1101,6 +1133,16 @@ public class TestPlayer implements Player {
             foundNoAction = 0;
         }
         return false;
+    }
+
+    private void changeAIControl(Game game, boolean enable) {
+        if (AIRealGameSimulation != enable) {
+            LOGGER.info("AI control for " + getName()
+                    + " " + (enable ? "ENABLED" : "DISABLED")
+                    //+ " on T" + game.getTurnNum() + "." + game.getTurnStepType().getStepShortText());
+                    + " on " + game);
+        }
+        AIRealGameSimulation = enable;
     }
 
     /**
@@ -1130,7 +1172,7 @@ public class TestPlayer implements Player {
     }
 
     private void tryToPlayPriority(Game game) {
-        if (AIPlayer) {
+        if (AIPlayer || AIRealGameSimulation) {
             computerPlayer.priority(game);
         } else {
             computerPlayer.pass(game);
@@ -1386,6 +1428,64 @@ public class TestPlayer implements Player {
         }
     }
 
+    private void assertAttackers(PlayerAction action, Game game, Player player, String attackers) {
+        AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+        Assert.assertNotNull(watcher);
+
+        List<String> actualAttackers = watcher.getAttackedThisTurnCreatures().stream()
+                .map(mor -> game.getObject(mor.getSourceId()))// no needs in zcc/lki
+                .filter(Objects::nonNull)
+                .filter(o -> o instanceof ControllableOrOwnerable)
+                .map(o -> (ControllableOrOwnerable) o)
+                .filter(o -> o.getControllerOrOwnerId().equals(player.getId()))
+                .map(o -> ((MageObject) o).getName())
+                .sorted()
+                .collect(Collectors.toList());
+        List<String> needAttackers = Arrays.stream(attackers.split("\\^"))
+                .filter(s -> !s.equals(TestPlayer.ATTACK_SKIP))
+                .sorted()
+                .collect(Collectors.toList());
+
+        if (!actualAttackers.equals(needAttackers)) {
+            printStart(game, action.getActionName());
+            System.out.println(String.format("Need attackers: %d", needAttackers.size()));
+            needAttackers.forEach(s -> System.out.println(" - " + s));
+            System.out.println(String.format("Actual attackers: %d", actualAttackers.size()));
+            actualAttackers.forEach(s -> System.out.println(" - " + s));
+            printEnd();
+            Assert.fail("Found wrong attackers");
+        }
+    }
+
+    private void assertBlockers(PlayerAction action, Game game, Player player, String blockers) {
+        AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+        Assert.assertNotNull(watcher);
+
+        List<String> actualBlockers = watcher.getBlockedThisTurnCreatures().stream()
+                .map(mor -> game.getObject(mor.getSourceId()))// no needs in zcc/lki
+                .filter(Objects::nonNull)
+                .filter(o -> o instanceof ControllableOrOwnerable)
+                .map(o -> (ControllableOrOwnerable) o)
+                .filter(o -> o.getControllerOrOwnerId().equals(player.getId()))
+                .map(o -> ((MageObject) o).getName())
+                .sorted()
+                .collect(Collectors.toList());
+        List<String> needBlockers = Arrays.stream(blockers.split("\\^"))
+                .filter(s -> !s.equals(TestPlayer.BLOCK_SKIP))
+                .sorted()
+                .collect(Collectors.toList());
+
+        if (!actualBlockers.equals(needBlockers)) {
+            printStart(game, action.getActionName());
+            System.out.println(String.format("Need blockers: %d", needBlockers.size()));
+            needBlockers.forEach(s -> System.out.println(" - " + s));
+            System.out.println(String.format("Actual blockers: %d", actualBlockers.size()));
+            actualBlockers.forEach(s -> System.out.println(" - " + s));
+            printEnd();
+            Assert.fail("Found wrong blockers");
+        }
+    }
+
     private void assertMayAttackDefender(PlayerAction action, Game game, Player controller, String permanentName, Player defender, boolean expectedMayAttack) {
         Permanent attackingPermanent = findPermanentWithAssert(action, game, controller, permanentName);
 
@@ -1411,7 +1511,7 @@ public class TestPlayer implements Player {
 
     private void assertPermanentCount(PlayerAction action, Game game, Player player, String permanentName, int count) {
         int foundCount = 0;
-        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
             if (hasObjectTargetNameOrAlias(perm, permanentName) && perm.getControllerId().equals(player.getId())) {
                 foundCount++;
             }
@@ -1427,7 +1527,7 @@ public class TestPlayer implements Player {
 
     private void assertPermanentTapped(PlayerAction action, Game game, Player player, String permanentName, boolean tapped, int count) {
         int foundCount = 0;
-        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
             if (hasObjectTargetNameOrAlias(perm, permanentName)
                     && perm.getControllerId().equals(player.getId())
                     && perm.isTapped() == tapped) {
@@ -1446,7 +1546,7 @@ public class TestPlayer implements Player {
 
     private void assertPermanentCounters(PlayerAction action, Game game, Player player, String permanentName, CounterType counterType, int count) {
         int foundCount = 0;
-        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
             if (hasObjectTargetNameOrAlias(perm, permanentName) && perm.getControllerId().equals(player.getId())) {
                 foundCount = perm.getCounters(game).getCount(counterType);
             }
@@ -1788,16 +1888,6 @@ public class TestPlayer implements Player {
         boolean madeAttackByAction = false;
         for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
             PlayerAction action = it.next();
-
-            // aiXXX commands
-            if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
-                mustAttackByAction = true;
-                madeAttackByAction = true;
-                this.computerPlayer.selectAttackers(game, attackingPlayerId);
-                // play step action will be removed on step end
-                continue;
-            }
-
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
                 mustAttackByAction = true;
                 String command = action.getAction();
@@ -1861,7 +1951,7 @@ public class TestPlayer implements Player {
         }
 
         // AI FULL play if no actions available
-        if (!mustAttackByAction && this.AIPlayer) {
+        if (!mustAttackByAction && (this.AIPlayer || this.AIRealGameSimulation)) {
             this.computerPlayer.selectAttackers(game, attackingPlayerId);
         }
     }
@@ -1879,15 +1969,6 @@ public class TestPlayer implements Player {
 
         boolean mustBlockByAction = false;
         for (PlayerAction action : tempActions) {
-
-            // aiXXX commands
-            if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
-                mustBlockByAction = true;
-                this.computerPlayer.selectBlockers(source, game, defendingPlayerId);
-                // play step action will be removed on step end
-                continue;
-            }
-
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
                 mustBlockByAction = true;
                 String command = action.getAction();
@@ -1913,10 +1994,10 @@ public class TestPlayer implements Player {
                 }
             }
         }
-        checkMultipleBlockers(game, blockedCreaturesList);
+        checkMultipleBlockers(game, blockedCreaturesList); // search wrong block commands
 
         // AI FULL play if no actions available
-        if (!mustBlockByAction && this.AIPlayer) {
+        if (!mustBlockByAction && (this.AIPlayer || this.AIRealGameSimulation)) {
             this.computerPlayer.selectBlockers(source, game, defendingPlayerId);
         }
     }
@@ -1966,7 +2047,8 @@ public class TestPlayer implements Player {
         int numBlocked = blocked.size();
 
         // Can't block any more creatures
-        if (++numBlocked > blocker.getMaxBlocks()) {
+        // maxBlocks = 0 equals to "can block any number of creatures"
+        if (blocker.getMaxBlocks() > 0 && ++numBlocked > blocker.getMaxBlocks()) {
             return false;
         }
 
@@ -2015,8 +2097,18 @@ public class TestPlayer implements Player {
         return "Ability: null";
     }
 
-    private String getInfo(Target o, Game game) {
-        return "Target: " + (o != null ? o.getClass().getSimpleName() + ": " + o.getMessage(game) : "null");
+    private String getInfo(Target target, Ability source, Game game) {
+        if (target == null) {
+            return "Target: null";
+        }
+        UUID abilityControllerId = getId();
+        if (target.getTargetController() != null && target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }
+        Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
+
+        return "Target: selected " + target.getSize() + ", possible " + possibleTargets.size()
+                + ", " + target.getClass().getSimpleName() + ": " + target.getMessage(game);
     }
 
     private void assertAliasSupportInChoices(boolean methodSupportAliases) {
@@ -2127,7 +2219,7 @@ public class TestPlayer implements Player {
             // skip choices
             if (possibleChoice.equals(CHOICE_SKIP)) {
                 choices.remove(0);
-                return true;
+                return false; // false - stop to choose
             }
 
             if (choice.setChoiceByAnswers(choices, true)) {
@@ -2180,42 +2272,44 @@ public class TestPlayer implements Player {
             abilityControllerId = target.getAbilityController();
         }
 
+        // TODO: warning, some cards call player.choose methods instead target.choose, see #8254
+        //  most use cases - discard and other cost with choice like that method
+        //  must migrate all choices.remove(xxx) to choices.remove(0), takeMaxTargetsPerChoose can help to find it
+
         // ignore player select
         if (target.getMessage(game).equals("Select a starting player")) {
             return computerPlayer.choose(outcome, target, source, game, options);
         }
 
+        boolean isAddedSomething = false; // must return true on any changes in targets, so game can ask next choose dialog until finish
+
         assertAliasSupportInChoices(true);
         if (!choices.isEmpty()) {
 
             // skip choices
-            if (choices.get(0).equals(CHOICE_SKIP)) {
+            if (tryToSkipSelection(choices, CHOICE_SKIP)) {
                 Assert.assertTrue("found skip choice, but it require more choices, needs "
                                 + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
-                choices.remove(0);
-                return true;
+                return false; // false - stop to choose
             }
-
-            List<Integer> usedChoices = new ArrayList<>();
-            List<UUID> usedTargets = new ArrayList<>();
-
 
             // TODO: Allow to choose a player with TargetPermanentOrPlayer
             if ((target.getOriginalTarget() instanceof TargetPermanent)
-                    || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) // player target not implemented yet
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemented yet
                 FilterPermanent filterPermanent;
                 if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                     filterPermanent = ((TargetPermanentOrPlayer) target.getOriginalTarget()).getFilterPermanent();
-                } else if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
-                    filterPermanent = ((TargetCreatureOrPlayer) target.getOriginalTarget()).getFilterCreature();
                 } else {
                     filterPermanent = ((TargetPermanent) target.getOriginalTarget()).getFilter();
                 }
-                for (String choiceRecord : choices) {
+                while (!choices.isEmpty()) { // TODO: remove cycle after main commits
+                    if (tryToSkipSelection(choices, CHOICE_SKIP)) {
+                        return false; // stop dialog
+                    }
+                    String choiceRecord = choices.get(0);
                     String[] targetList = choiceRecord.split("\\^");
-                    boolean targetFound = false;
+                    isAddedSomething = false;
                     for (String targetName : targetList) {
                         boolean originOnly = false;
                         boolean copyOnly = false;
@@ -2230,14 +2324,14 @@ public class TestPlayer implements Player {
                             }
                         }
                         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterPermanent, abilityControllerId, source, game)) {
-                            if (target.getTargets().contains(permanent.getId())) {
+                            if (target.contains(permanent.getId())) {
                                 continue;
                             }
                             if (hasObjectTargetNameOrAlias(permanent, targetName)) {
                                 if (target.isNotTarget() || target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
-                                        targetFound = true;
+                                        isAddedSomething = true;
                                         break;
                                     }
                                 }
@@ -2245,32 +2339,58 @@ public class TestPlayer implements Player {
                                 if (target.isNotTarget() || target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
-                                        targetFound = true;
+                                        isAddedSomething = true;
                                         break;
                                     }
                                 }
                             }
                         }
                     }
-                    if (targetFound) {
-                        choices.remove(choiceRecord);
-                        return true;
+
+                    try {
+                        if (isAddedSomething) {
+                            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                                return true;
+                            }
+                        } else {
+                            failOnLastBadChoice(game, source, target, choiceRecord, "invalid target or miss skip command");
+                        }
+                    } finally {
+                        choices.remove(0);
                     }
-                }
+                    return isAddedSomething;
+                } // choices
             }
 
             if (target instanceof TargetPlayer) {
-                for (Player player : game.getPlayers().values()) {
-                    for (String choose2 : choices) {
-                        if (player.getName().equals(choose2)) {
-                            if (target.canTarget(abilityControllerId, player.getId(), null, game) && !target.getTargets().contains(player.getId())) {
+                while (!choices.isEmpty()) { // TODO: remove cycle after main commits
+                    if (tryToSkipSelection(choices, CHOICE_SKIP)) {
+                        return false; // stop dialog
+                    }
+                    String choiceRecord = choices.get(0);
+                    isAddedSomething = false;
+                    for (Player player : game.getPlayers().values()) {
+                        if (player.getName().equals(choiceRecord)) {
+                            if (target.canTarget(abilityControllerId, player.getId(), null, game) && !target.contains(player.getId())) {
                                 target.add(player.getId(), game);
-                                choices.remove(choose2);
-                                return true;
+                                isAddedSomething = true;
                             }
                         }
                     }
-                }
+
+                    try {
+                        if (isAddedSomething) {
+                            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                                return true;
+                            }
+                        } else {
+                            failOnLastBadChoice(game, source, target, choiceRecord, "invalid target or miss skip command");
+                        }
+                    } finally {
+                        choices.remove(0);
+                    }
+                    return isAddedSomething;
+                } // while choices
             }
 
             // TODO: add same choices fixes for other target types (one choice must uses only one time for one target)
@@ -2279,102 +2399,78 @@ public class TestPlayer implements Player {
                 // only unique targets
                 //TargetCard targetFull = ((TargetCard) target);
 
-                usedChoices.clear();
-                usedTargets.clear();
-                boolean targetCompleted = false;
-
-                CheckAllChoices:
-                for (int choiceIndex = 0; choiceIndex < choices.size(); choiceIndex++) {
-                    String choiceRecord = choices.get(choiceIndex);
-                    if (targetCompleted) {
-                        break CheckAllChoices;
+                for (String choiceRecord : new ArrayList<>(choices)) { // TODO: remove cycle after main commits
+                    if (tryToSkipSelection(choices, CHOICE_SKIP)) {
+                        return false; // stop dialog
                     }
-
-                    boolean targetFound = false;
+                    isAddedSomething = false;
                     String[] possibleChoices = choiceRecord.split("\\^");
 
-                    CheckOneChoice:
                     for (String possibleChoice : possibleChoices) {
                         Set<UUID> possibleCards = target.possibleTargets(abilityControllerId, source, game);
-                        CheckTargetsList:
                         for (UUID targetId : possibleCards) {
                             MageObject targetObject = game.getCard(targetId);
                             if (hasObjectTargetNameOrAlias(targetObject, possibleChoice)) {
-                                if (target.canTarget(targetObject.getId(), game)) {
-                                    // only unique targets
-                                    if (usedTargets.contains(targetObject.getId())) {
-                                        continue;
-                                    }
-
-                                    // OK, can use it
+                                if (target.canTarget(targetObject.getId(), game) && !target.contains(targetObject.getId())) {
                                     target.add(targetObject.getId(), game);
-                                    targetFound = true;
-                                    usedTargets.add(targetObject.getId());
-
-                                    // break on full targets list
-                                    if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
-                                        targetCompleted = true;
-                                        break CheckOneChoice;
-                                    }
-
-                                    // restart search
-                                    break CheckTargetsList;
+                                    isAddedSomething = true;
+                                    break;
                                 }
                             }
                         }
                     }
-
-                    if (targetFound) {
-                        usedChoices.add(choiceIndex);
-                    }
-                }
-
-                // apply only on ALL targets or revert
-                if (usedChoices.size() > 0) {
-                    if (target.isChosen(game)) {
-                        // remove all used choices
-                        for (int i = choices.size(); i >= 0; i--) {
-                            if (usedChoices.contains(i)) {
-                                choices.remove(i);
+                    try {
+                        if (isAddedSomething) {
+                            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                                return true;
                             }
+                        } else {
+                            failOnLastBadChoice(game, source, target, choiceRecord, "invalid target or miss skip command");
                         }
-                        return true;
-                    } else {
-                        Assert.fail("Not full targets list.");
-                        target.clearChosen();
+                    } finally {
+                        choices.remove(0);
                     }
-                }
+                    return isAddedSomething;
+                } // for choices
             }
 
             if (target.getOriginalTarget() instanceof TargetSource) {
-                Set<UUID> possibleTargets;
                 TargetSource t = ((TargetSource) target.getOriginalTarget());
-                possibleTargets = t.possibleTargets(abilityControllerId, source, game);
-                for (String choiceRecord : choices) {
+                Set<UUID> possibleTargets = t.possibleTargets(abilityControllerId, source, game);
+                // TODO: enable choices.get first instead all
+                for (String choiceRecord : new ArrayList<>(choices)) { // TODO: remove cycle after main commits
+                    if (tryToSkipSelection(choices, CHOICE_SKIP)) {
+                        return false; // stop dialog
+                    }
                     String[] targetList = choiceRecord.split("\\^");
-                    boolean targetFound = false;
+                    isAddedSomething = false;
                     for (String targetName : targetList) {
                         for (UUID targetId : possibleTargets) {
                             MageObject targetObject = game.getObject(targetId);
                             if (targetObject != null) {
                                 if (hasObjectTargetNameOrAlias(targetObject, targetName)) {
-                                    List<UUID> alreadyTargetted = target.getTargets();
-                                    if (t.canTarget(targetObject.getId(), game)) {
-                                        if (alreadyTargetted != null && !alreadyTargetted.contains(targetObject.getId())) {
-                                            target.add(targetObject.getId(), game);
-                                            choices.remove(choiceRecord);
-                                            targetFound = true;
-                                        }
+                                    if (t.canTarget(targetObject.getId(), game) && !target.contains(targetObject.getId())) {
+                                        target.add(targetObject.getId(), game);
+                                        isAddedSomething = true;
+                                        break;
                                     }
                                 }
                             }
-                            if (targetFound) {
-                                choices.remove(choiceRecord);
-                                return true;
-                            }
                         }
                     }
-                }
+                    try {
+                        if (isAddedSomething) {
+                            if (target.isChoiceCompleted(abilityControllerId, source, game)) {
+                                return true;
+                            }
+                        } else {
+                            failOnLastBadChoice(game, source, target, choiceRecord, "invalid target or miss skip command");
+                        }
+                    } finally {
+                        choices.remove(choiceRecord);
+                    }
+                    return isAddedSomething;
+                } // for choices
             }
 
             // TODO: enable fail checks and fix tests
@@ -2383,7 +2479,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, game));
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
         return computerPlayer.choose(outcome, target, source, game, options);
     }
 
@@ -2426,15 +2522,13 @@ public class TestPlayer implements Player {
                                 + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
                 targets.remove(0);
-                return true;
+                return false; // false - stop to choose
             }
 
             Set<Zone> targetCardZonesChecked = new HashSet<>(); // control miss implementation
 
             // player
             if (target.getOriginalTarget() instanceof TargetPlayer
-                    || target.getOriginalTarget() instanceof TargetAnyTarget
-                    || target.getOriginalTarget() instanceof TargetCreatureOrPlayer
                     || target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     if (!targetDefinition.startsWith("targetPlayer=")) {
@@ -2456,8 +2550,6 @@ public class TestPlayer implements Player {
             // permanent in battlefield
             if ((target.getOriginalTarget() instanceof TargetPermanent)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)
-                    || (target.getOriginalTarget() instanceof TargetAnyTarget)
-                    || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard)) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
@@ -2481,9 +2573,6 @@ public class TestPlayer implements Player {
                             }
                         }
                         Filter filter = target.getOriginalTarget().getFilter();
-                        if (filter instanceof FilterCreatureOrPlayer) {
-                            filter = ((FilterCreatureOrPlayer) filter).getCreatureFilter();
-                        }
                         if (filter instanceof FilterPermanentOrPlayer) {
                             filter = ((FilterPermanentOrPlayer) filter).getPermanentFilter();
                         }
@@ -2492,7 +2581,7 @@ public class TestPlayer implements Player {
                         }
                         for (Permanent permanent : game.getBattlefield().getActivePermanents((FilterPermanent) filter, abilityControllerId, source, game)) {
                             if (hasObjectTargetNameOrAlias(permanent, targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) { // TODO: remove exp code search?
-                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
+                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.addTarget(permanent.getId(), source, game);
                                         targetFound = true;
@@ -2522,7 +2611,7 @@ public class TestPlayer implements Player {
                     for (String targetName : targetList) {
                         for (Card card : computerPlayer.getHand().getCards(((TargetCard) target.getOriginalTarget()).getFilter(), game)) {
                             if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
-                                if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
                                     target.addTarget(card.getId(), source, game);
                                     targetFound = true;
                                     break; // return to next targetName
@@ -2560,7 +2649,7 @@ public class TestPlayer implements Player {
                     for (String targetName : targetList) {
                         for (Card card : game.getExile().getCards(filter, game)) {
                             if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
-                                if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
                                     target.addTarget(card.getId(), source, game);
                                     targetFound = true;
                                     break; // return to next targetName
@@ -2585,7 +2674,7 @@ public class TestPlayer implements Player {
                     for (String targetName : targetList) {
                         for (Card card : game.getBattlefield().getAllActivePermanents()) {
                             if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
-                                if (targetFull.canTarget(abilityControllerId, card.getId(), source, game) && !targetFull.getTargets().contains(card.getId())) {
+                                if (targetFull.canTarget(abilityControllerId, card.getId(), source, game) && !targetFull.contains(card.getId())) {
                                     targetFull.add(card.getId(), game);
                                     targetFound = true;
                                     break; // return to next targetName
@@ -2637,7 +2726,7 @@ public class TestPlayer implements Player {
                             Player player = game.getPlayer(playerId);
                             for (Card card : player.getGraveyard().getCards(targetFull.getFilter(), game)) {
                                 if (hasObjectTargetNameOrAlias(card, targetName) || (card.getName() + '-' + card.getExpansionSetCode()).equals(targetName)) { // TODO: remove set code search?
-                                    if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                    if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
                                         target.addTarget(card.getId(), source, game);
                                         targetFound = true;
                                         break IterateGraveyards;  // return to next targetName
@@ -2652,7 +2741,6 @@ public class TestPlayer implements Player {
                         return true;
                     }
                 }
-
             }
 
             // stack
@@ -2667,7 +2755,7 @@ public class TestPlayer implements Player {
                     for (String targetName : targetList) {
                         for (StackObject stackObject : game.getStack()) {
                             if (hasObjectTargetNameOrAlias(stackObject, targetName)) {
-                                if (target.canTarget(abilityControllerId, stackObject.getId(), source, game) && !target.getTargets().contains(stackObject.getId())) {
+                                if (target.canTarget(abilityControllerId, stackObject.getId(), source, game) && !target.contains(stackObject.getId())) {
                                     target.addTarget(stackObject.getId(), source, game);
                                     targetFound = true;
                                     break; // return to next targetName
@@ -2702,24 +2790,25 @@ public class TestPlayer implements Player {
         // how to fix: implement target class processing above (if it a permanent target then check "filter instanceof" code too)
         if (!targets.isEmpty()) {
             String message;
+            Set<UUID> possibleTargets = target.possibleTargets(abilityControllerId, source, game);
 
             if (source != null) {
                 message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
                         + "\nCard: " + source.getSourceObject(game)
                         + "\nAbility: " + source.getClass().getSimpleName() + " (" + source.getRule() + ")"
-                        + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage(game) + ")"
+                        + "\nTarget: selected " + target.getSize() + ", possible " + possibleTargets.size() + ", " + target.getClass().getSimpleName() + " (" + target.getMessage(game) + ")"
                         + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             } else {
                 message = this.getName() + " - Targets list was setup by addTarget with " + targets + ", but not used"
                         + "\nCard: unknown source"
                         + "\nAbility: unknown source"
-                        + "\nTarget: " + target.getClass().getSimpleName() + " (" + target.getMessage(game) + ")"
+                        + "\nTarget: selected " + target.getSize() + ", possible " + possibleTargets.size() + ", " + target.getClass().getSimpleName() + " (" + target.getMessage(game) + ")"
                         + "\nYou must implement target class support in TestPlayer, \"filter instanceof\", or setup good targets";
             }
             Assert.fail(message);
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, game));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
         return computerPlayer.chooseTarget(outcome, target, source, game);
     }
 
@@ -2738,7 +2827,7 @@ public class TestPlayer implements Player {
                                 + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
                 targets.remove(0);
-                return true;
+                return false; // false - stop to choose
             }
             for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                 String[] targetList = targetDefinition.split("\\^");
@@ -2746,7 +2835,7 @@ public class TestPlayer implements Player {
                 for (String targetName : targetList) {
                     for (Card card : cards.getCards(game)) {
                         if (hasObjectTargetNameOrAlias(card, targetName)
-                                && !target.getTargets().contains(card.getId())
+                                && !target.contains(card.getId())
                                 && target.canTarget(abilityControllerId, card.getId(), source, cards, game)) {
                             target.addTarget(card.getId(), source, game);
                             targetFound = true;
@@ -2765,7 +2854,7 @@ public class TestPlayer implements Player {
             LOGGER.warn("Wrong target");
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, game));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
         return computerPlayer.chooseTarget(outcome, cards, target, source, game);
     }
 
@@ -2825,42 +2914,54 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+    public int announceX(int min, int max, String message, Game game, Ability source, boolean isManaPay) {
         assertAliasSupportInChoices(false);
-        if (!choices.isEmpty()) {
-            for (String choice : choices) {
-                if (choice.startsWith("X=")) {
-                    int xValue = Integer.parseInt(choice.substring(2));
-                    choices.remove(choice);
-                    return xValue;
-                }
-            }
+
+        // fast calc on nothing to choose
+        if (min >= max) {
+            return min;
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
-                + "\nMessage: " + message);
-        return computerPlayer.announceXMana(min, max, message, game, ability);
-    }
-
-    @Override
-    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
-        assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
+                assertXMinMaxValue(game, source, xValue, min, max);
                 choices.remove(0);
                 return xValue;
             }
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(ability, game)
-                + "\nMessage: " + message);
-        return computerPlayer.announceXCost(min, max, message, game, ability, null);
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game)
+                + "\nMessage: " + message + prepareXMaxInfo(min, max));
+        return computerPlayer.announceX(min, max, message, game, source, isManaPay);
+    }
+
+    private String prepareXMaxInfo(int min, int max) {
+        if (min == 0 && max == Integer.MAX_VALUE) {
+            return " (any value)";
+        } else {
+            return String.format(" (from %s to %s)",
+                    min,
+                    (max == Integer.MAX_VALUE) ? "any" : String.valueOf(max)
+            );
+        }
+    }
+
+    private void assertXMinMaxValue(Game game, Ability source, int xValue, int min, int max) {
+        if (xValue < min || xValue > max) {
+            Assert.fail("Found wrong X value = " + xValue + ", for " + CardUtil.getSourceName(game, source) + ", must" + prepareXMaxInfo(min, max));
+        }
     }
 
     @Override
-    public int getAmount(int min, int max, String message, Game game) {
+    public int getAmount(int min, int max, String message, Ability source, Game game) {
         assertAliasSupportInChoices(false);
+
+        // fast calc on nothing to choose
+        if (min >= max) {
+            return min;
+        }
+
         if (!choices.isEmpty()) {
             if (choices.get(0).startsWith("X=")) {
                 int xValue = Integer.parseInt(choices.get(0).substring(2));
@@ -2870,19 +2971,20 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, message);
-        return computerPlayer.getAmount(min, max, message, game);
+        return computerPlayer.getAmount(min, max, message, source, game);
     }
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-                                                                 int min, int max, MultiAmountType type, Game game) {
+                                                                 int totalMin, int totalMax, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaultValues(messages, totalMin, totalMax);
         if (needCount == 0) {
             return defaultList;
         }
+
 
         List<Integer> answer = new ArrayList<>(defaultList);
         if (!choices.isEmpty()) {
@@ -2905,7 +3007,7 @@ public class TestPlayer implements Player {
             }
 
             // extra check
-            if (!MultiAmountType.isGoodValues(answer, messages, min, max)) {
+            if (!MultiAmountType.isGoodValues(answer, messages, totalMin, totalMax)) {
                 Assert.fail("Wrong choices in multi amount: " + answer
                         .stream()
                         .map(String::valueOf)
@@ -2916,7 +3018,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
-        return computerPlayer.getMultiAmountWithIndividualConstraints(outcome, messages, min, max, type, game);
+        return computerPlayer.getMultiAmountWithIndividualConstraints(outcome, messages, totalMin, totalMax, type, game);
     }
 
     @Override
@@ -3007,8 +3109,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
-        computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
+    public boolean controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+        return computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
     }
 
     @Override
@@ -3032,13 +3134,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setGameUnderYourControl(boolean value) {
-        computerPlayer.setGameUnderYourControl(value);
+    public void setGameUnderYourControl(Game game, boolean value) {
+        computerPlayer.setGameUnderYourControl(game, value);
     }
 
     @Override
-    public void setGameUnderYourControl(boolean value, boolean fullRestore) {
-        computerPlayer.setGameUnderYourControl(value, fullRestore);
+    public void setGameUnderYourControl(Game game, boolean value, boolean fullRestore) {
+        computerPlayer.setGameUnderYourControl(game, value, fullRestore);
     }
 
     @Override
@@ -3137,8 +3239,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source, boolean anyOrder) {
-        return computerPlayer.putCardsOnBottomOfLibrary(card, game, source, anyOrder);
+    public boolean putCardsOnBottomOfLibrary(Card card, Game game, Ability source) {
+        return computerPlayer.putCardsOnBottomOfLibrary(card, game, source);
     }
 
     @Override
@@ -3692,6 +3794,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public List<Boolean> flipCoins(Ability source, Game game, int amount, boolean winnable) {
+        return computerPlayer.flipCoins(source, game, amount, winnable);
+    }
+
+    @Override
     public boolean flipCoinResult(Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
@@ -3852,11 +3959,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean canPlayCardsFromGraveyard() {
-        return computerPlayer.canPlayCardsFromGraveyard();
-    }
-
-    @Override
     public boolean canPlotFromTopOfLibrary() {
         return computerPlayer.canPlotFromTopOfLibrary();
     }
@@ -3887,13 +3989,28 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setPayManaMode(boolean payManaMode) {
-        computerPlayer.setPayManaMode(payManaMode);
+    public int getSpeed() {
+        return computerPlayer.getSpeed();
     }
 
     @Override
-    public void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard) {
-        computerPlayer.setPlayCardsFromGraveyard(playCardsFromGraveyard);
+    public void initSpeed(Game game) {
+        computerPlayer.initSpeed(game);
+    }
+
+    @Override
+    public void increaseSpeed(Game game) {
+        computerPlayer.increaseSpeed(game);
+    }
+
+    @Override
+    public void decreaseSpeed(Game game) {
+        computerPlayer.decreaseSpeed(game);
+    }
+
+    @Override
+    public void setPayManaMode(boolean payManaMode) {
+        computerPlayer.setPayManaMode(payManaMode);
     }
 
     @Override
@@ -4144,32 +4261,40 @@ public class TestPlayer implements Player {
         return choose(outcome, target, source, game, null);
     }
 
+    private boolean tryToSkipSelection(List<String> selections, String selectionMark) {
+        if (!selections.isEmpty() && selections.get(0).equals(selectionMark)) {
+            selections.remove(0);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
 
             // skip choices
-            if (choices.get(0).equals(CHOICE_SKIP)) {
-                choices.remove(0);
+            if (tryToSkipSelection(choices, CHOICE_SKIP)) {
                 if (cards.isEmpty()) {
                     // cancel button forced in GUI on no possible choices
+                    // TODO: need research
                     return false;
                 } else {
                     Assert.assertTrue("found skip choice, but it require more choices, needs "
                                     + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                             target.getTargets().size() >= target.getMinNumberOfTargets());
-                    return true;
+                    return false; // stop dialog
                 }
             }
 
-            for (String choose2 : choices) {
+            for (String choose2 : new ArrayList<>(choices)) {
                 // TODO: More targetting to fix
                 String[] targetList = choose2.split("\\^");
                 boolean targetFound = false;
                 for (String targetName : targetList) {
                     for (Card card : cards.getCards(game)) {
-                        if (target.getTargets().contains(card.getId())) {
+                        if (target.contains(card.getId())) {
                             continue;
                         }
                         if (hasObjectTargetNameOrAlias(card, targetName)) {
@@ -4190,7 +4315,7 @@ public class TestPlayer implements Player {
             assertWrongChoiceUsage(choices.size() > 0 ? choices.get(0) : "empty list");
         }
 
-        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, game));
+        this.chooseStrictModeFailed("choice", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
         return computerPlayer.choose(outcome, cards, target, source, game);
     }
 
@@ -4212,7 +4337,7 @@ public class TestPlayer implements Player {
                                 + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
                         target.getTargets().size() >= target.getMinNumberOfTargets());
                 targets.remove(0);
-                return false; // false in chooseTargetAmount = stop to choose
+                return false; // false - stop to choose
             }
 
             // only target amount needs
@@ -4252,7 +4377,7 @@ public class TestPlayer implements Player {
                     }
 
                     if (foundTarget) {
-                        if (!target.getTargets().contains(possibleTarget) && target.canTarget(possibleTarget, source, game)) {
+                        if (!target.contains(possibleTarget) && target.canTarget(possibleTarget, source, game)) {
                             // can select
                             target.addTarget(possibleTarget, targetAmount, source, game);
                             targets.remove(0);
@@ -4263,7 +4388,7 @@ public class TestPlayer implements Player {
             }
         }
 
-        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, game));
+        this.chooseStrictModeFailed("target", game, getInfo(source, game) + "\n" + getInfo(target, source, game));
         return computerPlayer.chooseTargetAmount(outcome, target, source, game);
     }
 
@@ -4372,27 +4497,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public UUID chooseAttackerOrder(List<Permanent> attacker, Game game
-    ) {
-        return computerPlayer.chooseAttackerOrder(attacker, game);
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup,
-                                   List<UUID> blockerOrder, Game game
-    ) {
-        return computerPlayer.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
-    }
-
-    @Override
-    public void assignDamage(int damage, List<UUID> targets,
-                             String singleTargetName, UUID attackerId, Ability source,
-                             Game game
-    ) {
-        computerPlayer.assignDamage(damage, targets, singleTargetName, attackerId, source, game);
-    }
-
-    @Override
     public void sideboard(Match match, Deck deck
     ) {
         computerPlayer.sideboard(match, deck);
@@ -4487,10 +4591,6 @@ public class TestPlayer implements Player {
 
     public boolean isAIPlayer() {
         return AIPlayer;
-    }
-
-    public String getHistory() {
-        return computerPlayer.getHistory();
     }
 
     @Override
@@ -4614,10 +4714,6 @@ public class TestPlayer implements Player {
         return computerPlayer;
     }
 
-    public void setAIRealGameSimulation(boolean AIRealGameSimulation) {
-        this.AIRealGameSimulation = AIRealGameSimulation;
-    }
-
     public Map<Integer, HashMap<UUID, ArrayList<org.mage.test.player.PlayerAction>>> getRollbackActions() {
         return rollbackActions;
     }
@@ -4635,6 +4731,15 @@ public class TestPlayer implements Player {
 
         // non-strict mode allows computer assisted choices (for old tests compatibility only)
         return !this.strictChooseMode;
+    }
+
+    private void failOnLastBadChoice(Game game, Ability source, Target target, String lastChoice, String reason) {
+        Assert.fail(String.format("Found wrong choice command (%s):\n%s\n%s\n%s",
+                reason,
+                lastChoice,
+                getInfo(target, source, game),
+                getInfo(source, game)
+        ));
     }
 
     private void assertWrongChoiceUsage(String choice) {

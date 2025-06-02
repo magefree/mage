@@ -29,7 +29,7 @@ public class CounterRemovedFromSourceWhileExiledTriggeredAbility extends Trigger
         this.onlyController = onlyController;
         setTriggerPhrase("Whenever " + (
             onlyController ? ("you remove a " + counterType.getName() + " counter") : ("a " + counterType.getName() + " counter is removed")
-            ) + " from {this} while it's exiled, ");
+            ) + " from this card while it's exiled, ");
     }
 
     private CounterRemovedFromSourceWhileExiledTriggeredAbility(final CounterRemovedFromSourceWhileExiledTriggeredAbility ability) {

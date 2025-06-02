@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.AttachEffect;
@@ -16,8 +16,6 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -41,8 +39,8 @@ public final class PrivateResearch extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may put a page counter on Private Research.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.PAGE.createInstance(), true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.PAGE.createInstance(), true), true));
 
         // When enchanted creature dies, draw a card for each page counter on Private Research.
         this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.PAGE)).setText(rule), "enchanted creature"));

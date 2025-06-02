@@ -35,7 +35,7 @@ public final class TimberpackWolf extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Timberpack Wolf gets +1/+1 for each other creature you control named Timberpack Wolf.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TimberpackWolfEffect()));
+        this.addAbility(new SimpleStaticAbility(new TimberpackWolfEffect()));
     }
 
     private TimberpackWolf(final TimberpackWolf card) {
@@ -79,7 +79,3 @@ public final class TimberpackWolf extends CardImpl {
         }
     }
 }
-
-
-
-

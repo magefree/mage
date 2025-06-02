@@ -31,12 +31,12 @@ public final class GoblinDynamo extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {T}: Goblin Dynamo deals 1 damage to any target.
-        Ability  ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability  ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         
         //{X}{R}, {T}, Sacrifice Goblin Dynamo: Goblin Dynamo deals X damage to any target.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new DamageTargetEffect(GetXValue.instance, "it"), new ManaCostsImpl<>("{X}{R}"));
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(GetXValue.instance, "it"), new ManaCostsImpl<>("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

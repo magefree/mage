@@ -3,8 +3,7 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.ValiantTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -21,8 +20,6 @@ import java.util.UUID;
  */
 public final class HeartfireHero extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public HeartfireHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
 
@@ -36,7 +33,7 @@ public final class HeartfireHero extends CardImpl {
                 .setText("put a +1/+1 counter on it")));
 
         // When Heartfire Hero dies, it deals damage equal to its power to each opponent.
-        this.addAbility(new DiesSourceTriggeredAbility(new DamagePlayersEffect(xValue, TargetController.OPPONENT)
+        this.addAbility(new DiesSourceTriggeredAbility(new DamagePlayersEffect(SourcePermanentPowerValue.NOT_NEGATIVE, TargetController.OPPONENT)
                 .setText("it deals damage equal to its power to each opponent")));
     }
 

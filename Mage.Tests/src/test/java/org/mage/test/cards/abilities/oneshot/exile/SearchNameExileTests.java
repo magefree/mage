@@ -136,6 +136,8 @@ public class SearchNameExileTests extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "fused Ready // Willing");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Test of Talents", "Ready // Willing", "Ready // Willing");
 
+        // TODO: a non strict cause a good AI choice test - make strict and duplicate as really AI test?
+        // in non strict mode AI must choose as much as possible in good "up to" target and half in bad target
         setStrictChooseMode(false);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

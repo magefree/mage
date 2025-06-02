@@ -42,10 +42,10 @@ public final class MadAuntie extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other Goblin creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true)));
 
         // {T}: Regenerate another target Goblin.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter1));
         this.addAbility(ability);
     }

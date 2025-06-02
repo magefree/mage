@@ -29,7 +29,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     public RevealTargetFromHandCost(TargetCardInHand target) {
         this.addTarget(target);
-        this.allowNoReveal = target.getNumberOfTargets() == 0;
+        this.allowNoReveal = target.getMinNumberOfTargets() == 0;
         this.text = "reveal " + target.getDescription();
         this.revealedCards = new ArrayList<>();
     }
@@ -62,7 +62,7 @@ public class RevealTargetFromHandCost extends CostImpl {
                 MageObject baseObject = game.getBaseObject(source.getSourceId());
                 player.revealCards(baseObject == null ? "card cost" : baseObject.getIdName(), cards, game);
             }
-            if (this.getTargets().get(0).getNumberOfTargets() <= numberCardsRevealed) {
+            if (this.getTargets().get(0).getMinNumberOfTargets() <= numberCardsRevealed) {
                 paid = true; // e.g. for optional additional costs.  example: Dragonlord's Prerogative also true if 0 cards shown
                 return paid;
             }

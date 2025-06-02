@@ -31,7 +31,7 @@ public final class LightningCrafter extends CardImpl {
         this.addAbility(new ChampionAbility(this, SubType.GOBLIN, SubType.SHAMAN));
 
         // {T}: Lightning Crafter deals 3 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

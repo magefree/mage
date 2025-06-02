@@ -24,7 +24,7 @@ public final class VoiceOfResurgenceToken extends TokenImpl {
         toughness = new MageInt(0);
 
         // This creature's power and toughness are each equal to the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
                 CreaturesYouControlCount.instance)));
     }
 

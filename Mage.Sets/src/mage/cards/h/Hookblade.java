@@ -36,7 +36,7 @@ public final class Hookblade extends CardImpl {
         // As long as it's your turn, equipped creature has flying.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(FlyingAbility.getInstance().getInstance(), AttachmentType.EQUIPMENT),
-                MyTurnCondition.instance, "as long as it's your turn, equipped creature has flying"
+                MyTurnCondition.instance, "during your turn, equipped creature has flying"
         )).addHint(MyTurnHint.instance));
 
         // Equip {2}

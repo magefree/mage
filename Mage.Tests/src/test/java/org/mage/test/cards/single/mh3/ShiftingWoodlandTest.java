@@ -151,4 +151,24 @@ public class ShiftingWoodlandTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 3 - 1);
         assertGraveyardCount(playerA, woodland, 1);
     }
+
+    @Test
+    public void test_Copy_MDFC() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Yavimaya Coast", 4); // to be sure not to activate Woodland
+        addCard(Zone.BATTLEFIELD, playerA, woodland);
+        addCard(Zone.GRAVEYARD, playerA, "Drowner of Truth");
+        addCard(Zone.GRAVEYARD, playerA, "Plains");
+        addCard(Zone.GRAVEYARD, playerA, "Memnite");
+        addCard(Zone.GRAVEYARD, playerA, "Divination");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}. {this} deals 1 damage to you.", 4);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "<i>Delirium</i> &mdash; {2}{G}{G}:", "Drowner of Truth");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Drowner of Truth", 1);
+    }
 }

@@ -34,7 +34,7 @@ public final class BreathOfDreams extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}")));
 
         // Green creatures have "Cumulative upkeep {1}."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")), Duration.WhileOnBattlefield, filter)));
     }
 
     private BreathOfDreams(final BreathOfDreams card) {

@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -32,9 +32,9 @@ public final class RubblebeltRioters extends CardImpl {
 
         // Whenever Rubblebelt Rioters attacks, it gets +X/+0 until end of turn, where X is the greatest power among creatures you control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
-                GreatestPowerAmongControlledCreaturesValue.instance, StaticValue.get(0),
+                GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES, StaticValue.get(0),
                 Duration.EndOfTurn
-        ), false));
+        ), false).addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint()));
     }
 
     private RubblebeltRioters(final RubblebeltRioters card) {

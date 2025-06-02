@@ -32,7 +32,7 @@ public final class GemhideSliver extends CardImpl {
 
         // All Slivers have "{tap}: Add one mana of any color."
         Ability ability = new AnyColorManaAbility();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(ability,
                         Duration.WhileOnBattlefield, filter,
                         "All Slivers have \"{T}: Add one mana of any color.\"")));

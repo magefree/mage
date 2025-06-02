@@ -31,7 +31,7 @@ public final class BartelRuneaxe extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // Bartel Runeaxe can't be the target of Aura spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BartelRuneaxeEffect()));
+        this.addAbility(new SimpleStaticAbility(new BartelRuneaxeEffect()));
     }
 
     private BartelRuneaxe(final BartelRuneaxe card) {

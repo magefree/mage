@@ -47,7 +47,7 @@ public final class BaronSengir extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P2P2.createInstance()), false));
 
         // {tap}: Regenerate another target Vampire.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

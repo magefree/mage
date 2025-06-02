@@ -3,8 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityPairedEffect;
 import mage.abilities.keyword.ReachAbility;
@@ -20,8 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class DoomWeaver extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
 
     public DoomWeaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
@@ -39,7 +36,7 @@ public final class DoomWeaver extends CardImpl {
 
         // As long as Doom Weaver is paired with another creature, each of those creatures has "When this creature dies, draw cards equal to its power."
         this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(new DiesSourceTriggeredAbility(
-                new DrawCardSourceControllerEffect(xValue).setText("draw cards equal to its power")
+                new DrawCardSourceControllerEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("draw cards equal to its power")
         ).setTriggerPhrase("When this creature dies, "), "As long as {this} is paired with another creature, " +
                 "each of those creatures has \"When this creature dies, draw cards equal to its power.\"")));
     }

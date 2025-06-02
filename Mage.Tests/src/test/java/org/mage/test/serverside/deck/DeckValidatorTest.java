@@ -305,7 +305,7 @@ public class DeckValidatorTest extends MageTestPlayerBase {
         validator.getErrorsList().clear();
 
         deckList.clear();
-        deckList.add(new DeckValidationUtil.CardNameAmount("Green Sun's Zenith", 4));
+        deckList.add(new DeckValidationUtil.CardNameAmount("Grief", 4));
         deckList.add(new DeckValidationUtil.CardNameAmount("Mountain", 56));
         validationSuccessful = testDeckValid(validator, deckList);
         Assert.assertFalse(validator.getErrorsListInfo(), validationSuccessful);

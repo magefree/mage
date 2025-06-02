@@ -36,7 +36,7 @@ public final class Boneknitter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}: Regenerate target Zombie.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Morph {2}{B}

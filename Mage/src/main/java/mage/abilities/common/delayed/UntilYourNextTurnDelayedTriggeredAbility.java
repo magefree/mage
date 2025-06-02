@@ -1,11 +1,14 @@
 
 package mage.abilities.common.delayed;
 
+import mage.MageObject;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.hint.Hint;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.game.Game;
@@ -13,6 +16,7 @@ import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +31,7 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
     public UntilYourNextTurnDelayedTriggeredAbility(TriggeredAbility ability) {
         super(null, Duration.UntilYourNextTurn, false);
         if (ability.isLeavesTheBattlefieldTrigger()) {
-            this.setLeavesTheBattlefieldTrigger(true);
+            setLeavesTheBattlefieldTrigger(true);
         }
         this.ability = ability;
     }
@@ -85,6 +89,13 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
     }
 
     @Override
+    public List<Hint> getHints() {
+        List<Hint> res = new ArrayList<>(super.getHints());
+        res.addAll(ability.getHints());
+        return res;
+    }
+
+    @Override
     public Effects getEffects(Game game, EffectType effectType) {
         return ability.getEffects(game, effectType);
     }
@@ -102,5 +113,15 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
     @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        if (isLeavesTheBattlefieldTrigger()) {
+            // TODO: leaves battlefield and die are not same! Is it possible make a diff logic?
+            return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+        } else {
+            return super.isInUseableZone(game, sourceObject, event);
+        }
     }
 }

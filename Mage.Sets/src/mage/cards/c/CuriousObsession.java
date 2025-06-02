@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.InvertCondition;
@@ -55,7 +55,7 @@ public final class CuriousObsession extends CardImpl {
 
         // At the beginning of your end step, if you didn't attack with a creature this turn sacrifice Curious Obsession.
         ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfYourEndStepTriggeredAbility(new SacrificeSourceEffect(), false),
+                new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect()),
                 new InvertCondition(RaidCondition.instance),
                 "At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice {this}."
         );

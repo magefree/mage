@@ -26,7 +26,7 @@ public final class Mutavault extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new BecomesCreatureSourceEffect(new MutavaultToken(), CardType.LAND, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}")));
     }

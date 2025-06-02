@@ -37,7 +37,7 @@ public final class TideDrifter extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // Other colorless creatures you control get +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
 
     }
 

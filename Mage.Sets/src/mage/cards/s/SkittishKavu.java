@@ -41,7 +41,7 @@ public final class SkittishKavu extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Skittish Kavu gets +1/+1 as long as no opponent controls a white or blue creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
             new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter, false)),
             "{this} gets +1/+1 as long as no opponent controls a white or blue creature")));

@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.target.TargetPermanent;
 
 /**
@@ -32,7 +31,7 @@ public final class DominusOfFealty extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), true);
         ability.addEffect(new UntapTargetEffect().setText("If you do, untap it"));
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and it gains haste until end of turn"));
         ability.addTarget(new TargetPermanent());

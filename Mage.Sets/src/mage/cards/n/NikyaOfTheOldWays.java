@@ -32,7 +32,7 @@ public final class NikyaOfTheOldWays extends CardImpl {
 
         // You can't cast noncreature spells.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new NikyaOfTheOldWaysCantCastEffect()
+                new NikyaOfTheOldWaysCantCastEffect()
         ));
 
         // Whenever you tap a land for mana, add one mana of any type that land produced.

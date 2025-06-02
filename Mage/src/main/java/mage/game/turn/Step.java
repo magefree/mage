@@ -60,6 +60,12 @@ public abstract class Step implements Serializable, Copyable<Step> {
         stepPart = StepPart.PRE;
     }
 
+    /**
+     * Play priority by all players
+     *
+     * @param activePlayerId starting priority player
+     * @param resuming false to reset passed priority and ask it again
+     */
     public void priority(Game game, UUID activePlayerId, boolean resuming) {
         if (hasPriority) {
             stepPart = StepPart.PRIORITY;

@@ -2,6 +2,7 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.mana.ManaOptions;
@@ -71,7 +72,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     }
 
     @Override
-    public ManaOptions getOptions() {
+    public final ManaOptions getOptions() {
         return getOptions(true);
     }
 
@@ -254,6 +255,13 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             return true;
         }
         Player player = game.getPlayer(controllerId);
+        if (player == null) {
+            return false;
+        }
+
+        // no needs to call
+        //AbilityImpl.handlePhyrexianLikeEffects(game, source, ability, this);
+
         if (!player.getManaPool().isForcedToPay()) {
             assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);
         }

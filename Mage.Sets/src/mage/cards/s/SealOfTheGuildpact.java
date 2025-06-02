@@ -37,7 +37,7 @@ public final class SealOfTheGuildpact extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new SealOfTheGuildpactChooseColorEffect()));
 
         // Each spell you cast costs {1} less to cast for each of the chosen colors it is.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SealOfTheGuildpactCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new SealOfTheGuildpactCostReductionEffect()));
     }
 
     private SealOfTheGuildpact(final SealOfTheGuildpact card) {

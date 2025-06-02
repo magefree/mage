@@ -21,7 +21,7 @@ public final class EmptyThePits extends CardImpl {
 
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
         
         // create X 2/2 black Zombie creature tokens tapped.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), GetXValue.instance, true, false));

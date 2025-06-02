@@ -43,7 +43,6 @@ public final class BreyaEtheriumShaper extends CardImpl {
 
         // {2}, Sacrifice two artifacts: Choose one &mdash; Breya deals 3 damage to target player or planeswalker.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DamageTargetEffect(3),
                 new GenericManaCost(2));
         ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_ARTIFACTS));

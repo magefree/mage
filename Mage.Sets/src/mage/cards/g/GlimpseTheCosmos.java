@@ -162,7 +162,7 @@ class GlimpseTheCosmosWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL
                 && event.hasApprovingIdentifier(MageIdentifier.GlimpseTheCosmosWatcher)) {
-            Ability approvingAbility = event.getAdditionalReference().getApprovingAbility();
+            Ability approvingAbility = event.getApprovingObject().getApprovingAbility();
             if (approvingAbility != null
                     && approvingAbility.getSourceId().equals(event.getSourceId())) {
                 sourceCards.add(game.getCard(event.getSourceId()));

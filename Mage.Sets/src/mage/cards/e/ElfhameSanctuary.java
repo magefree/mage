@@ -2,7 +2,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -29,7 +28,7 @@ public final class ElfhameSanctuary extends CardImpl {
         // At the beginning of your upkeep, you may search your library for a basic land card, reveal that card, and put it into your hand. If you do, you skip your draw step this turn and shuffle your library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SearchLibraryPutInHandEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
-        ), TargetController.YOU, true);
+        ), true);
         ability.addEffect(new SkipDrawStepThisTurn());
 
         this.addAbility(ability);

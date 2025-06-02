@@ -27,7 +27,7 @@ public final class Stranglehold extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // Your opponents can't search libraries.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpponentsCantSearchLibrariesEffect()));
+        this.addAbility(new SimpleStaticAbility(new OpponentsCantSearchLibrariesEffect()));
 
         // If an opponent would begin an extra turn, that player skips that turn instead.
         this.addAbility(new SkipExtraTurnsAbility(true));

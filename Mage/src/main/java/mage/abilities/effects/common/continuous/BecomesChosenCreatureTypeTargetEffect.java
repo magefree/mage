@@ -59,10 +59,9 @@ public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
             if (nonWall) {
                 typeChoice.getKeyChoices().remove(SubType.WALL.getDescription());
             }
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
+
+            if (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
+                return false;
             }
             game.informPlayers(card.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
             chosenType = typeChoice.getChoiceKey();

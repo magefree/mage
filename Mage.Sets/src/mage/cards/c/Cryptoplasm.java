@@ -4,14 +4,13 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -40,7 +39,7 @@ public final class Cryptoplasm extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -79,7 +78,7 @@ class CryptoplasmEffect extends OneShotEffect {
             CopyApplier applier = new CopyApplier() {
                 @Override
                 public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-                    Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), TargetController.YOU, true);
+                    Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmEffect(), true);
                     upkeepAbility.addTarget(new TargetCreaturePermanent());
                     blueprint.getAbilities().add(upkeepAbility);
                     return true;

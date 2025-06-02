@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -38,8 +37,7 @@ public final class EyeOfVecna extends CardImpl {
                         new DrawCardSourceControllerEffect(1)
                                 .setText("you draw a card"),
                         new GenericManaCost(2)
-                ).addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and")),
-                TargetController.YOU, false
+                ).addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"))
         ));
     }
 

@@ -1,9 +1,9 @@
-
 package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.WonCoinFlipControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -41,7 +41,9 @@ public final class KarplusanMinotaur extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new KarplusanMinotaurCost()));
 
         // Whenever you win a coin flip, Karplusan Minotaur deals 1 damage to any target.
-        this.addAbility(new KarplusanMinotaurFlipWinTriggeredAbility());
+        Ability ability = new WonCoinFlipControllerTriggeredAbility(new DamageTargetEffect(1));
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
 
         // Whenever you lose a coin flip, Karplusan Minotaur deals 1 damage to any target of an opponent's choice.
         this.addAbility(new KarplusanMinotaurFlipLoseTriggeredAbility());
@@ -54,41 +56,6 @@ public final class KarplusanMinotaur extends CardImpl {
     @Override
     public KarplusanMinotaur copy() {
         return new KarplusanMinotaur(this);
-    }
-}
-
-class KarplusanMinotaurFlipWinTriggeredAbility extends TriggeredAbilityImpl {
-
-    public KarplusanMinotaurFlipWinTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1), false);
-        this.addTarget(new TargetAnyTarget());
-    }
-
-    private KarplusanMinotaurFlipWinTriggeredAbility(final KarplusanMinotaurFlipWinTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KarplusanMinotaurFlipWinTriggeredAbility copy() {
-        return new KarplusanMinotaurFlipWinTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COIN_FLIPPED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        CoinFlippedEvent flipEvent = (CoinFlippedEvent) event;
-        return flipEvent.getPlayerId().equals(controllerId)
-                && flipEvent.isWinnable()
-                && (flipEvent.getChosen() == flipEvent.getResult());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you win a coin flip, {this} deals 1 damage to any target.";
     }
 }
 
@@ -117,9 +84,7 @@ class KarplusanMinotaurFlipLoseTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         CoinFlippedEvent flipEvent = (CoinFlippedEvent) event;
-        return flipEvent.getPlayerId().equals(controllerId)
-                && flipEvent.isWinnable()
-                && (flipEvent.getChosen() != flipEvent.getResult());
+        return isControlledBy(event.getPlayerId()) && flipEvent.isWinnable() && !flipEvent.wasWon();
     }
 
     @Override

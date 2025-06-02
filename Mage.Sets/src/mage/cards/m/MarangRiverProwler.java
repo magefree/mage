@@ -33,7 +33,7 @@ public final class MarangRiverProwler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Marang River Prowler can't block and can't be blocked.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockSourceEffect(Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new CantBlockSourceEffect(Duration.WhileOnBattlefield));
         Effect effect = new CantBeBlockedSourceEffect();
         effect.setText("and can't be blocked");
         ability.addEffect(effect);

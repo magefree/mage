@@ -30,7 +30,7 @@ public final class CunningSparkmage extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

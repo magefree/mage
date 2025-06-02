@@ -27,9 +27,9 @@ public final class PrimalVigor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // If one or more tokens would be created, twice that many of those tokens are created instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalVigorTokenEffect()));
+        this.addAbility(new SimpleStaticAbility(new PrimalVigorTokenEffect()));
         // If one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalVigorCounterEffect()));
+        this.addAbility(new SimpleStaticAbility(new PrimalVigorCounterEffect()));
 
     }
 

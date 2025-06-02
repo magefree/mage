@@ -2,9 +2,8 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CelebrationCondition;
 import mage.abilities.decorator.ConditionalCostModificationEffect;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -14,10 +13,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
-import mage.watchers.common.SpellsCastWatcher;
+import mage.abilities.condition.common.YouCastExactOneSpellThisTurnCondition;
 
 import java.util.UUID;
 
@@ -43,7 +41,7 @@ public final class RagingBattleMouse extends CardImpl {
         // Celebration -- At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, target creature you control gets +1/+1 until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new BoostTargetEffect(1, 1, Duration.EndOfTurn), TargetController.YOU, false
+                        new BoostTargetEffect(1, 1, Duration.EndOfTurn)
                 ), CelebrationCondition.instance, "At the beginning of combat on your turn, "
                         + "if two or more nonland permanents entered the battlefield under your control this turn, "
                         + "target creature you control gets +1/+1 until end of turn."
@@ -61,15 +59,5 @@ public final class RagingBattleMouse extends CardImpl {
     @Override
     public RagingBattleMouse copy() {
         return new RagingBattleMouse(this);
-    }
-}
-
-enum YouCastExactOneSpellThisTurnCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        return watcher != null && watcher.getSpellsCastThisTurn(source.getControllerId()).size() == 1;
     }
 }

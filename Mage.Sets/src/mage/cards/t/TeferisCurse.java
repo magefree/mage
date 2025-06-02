@@ -32,7 +32,7 @@ public final class TeferisCurse extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted permanent has phasing.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(PhasingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, null, "permanent")));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(PhasingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, null, "permanent")));
     }
 
     private TeferisCurse(final TeferisCurse card) {

@@ -35,7 +35,7 @@ public final class DormantGomazoa extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // Dormant Gomazoa doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // Whenever you become the target of a spell, you may untap Dormant Gomazoa.
         this.addAbility(new BecomesTargetControllerTriggeredAbility(new UntapSourceEffect(),

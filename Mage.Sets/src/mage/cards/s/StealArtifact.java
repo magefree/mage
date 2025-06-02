@@ -33,7 +33,7 @@ public final class StealArtifact extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // You control enchanted artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("artifact")));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect("artifact")));
     }
 
     private StealArtifact(final StealArtifact card) {

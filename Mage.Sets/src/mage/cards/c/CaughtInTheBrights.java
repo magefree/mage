@@ -41,7 +41,7 @@ public final class CaughtInTheBrights extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 
         // When a Vehicle you control attacks, exile enchanted creature.
         this.addAbility(new AttacksAllTriggeredAbility(new ExileAttachedEffect(), false, filter, SetTargetPointer.NONE, false).setTriggerPhrase("When a Vehicle you control attacks, "));

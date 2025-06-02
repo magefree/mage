@@ -89,8 +89,9 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
                 && costToPay.pay(source, game, source, spell.getControllerId(), false, null))) {
             game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the counter effect");
             game.getStack().counter(spell.getId(), source, game, exile ? PutCards.EXILED : PutCards.GRAVEYARD);
+        } else {
+            game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
         }
-        game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
         return true;
     }
 

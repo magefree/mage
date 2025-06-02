@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -36,7 +36,7 @@ public final class ValakutExploration extends CardImpl {
         // At the beginning of your end step, if there are cards exiled with Valakut Exploration, put them into their owner's graveyard, then Valakut Exploration deals that much damage to each opponent.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new ValakutExplorationDamageEffect(), TargetController.YOU, false
+                        new ValakutExplorationDamageEffect()
                 ), ValakutExplorationCondition.instance, "At the beginning of your end step, " +
                 "if there are cards exiled with {this}, put them into their owner's graveyard, " +
                 "then {this} deals that much damage to each opponent."

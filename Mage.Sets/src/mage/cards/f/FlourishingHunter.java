@@ -1,21 +1,17 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class FlourishingHunter extends CardImpl {
@@ -29,7 +25,10 @@ public final class FlourishingHunter extends CardImpl {
         this.toughness = new MageInt(6);
 
         // When Flourishing Hunter enters the battlefield, you gain life equal to the greatest toughness among other creatures you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new FlourishingHunterEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new GainLifeEffect(GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES)
+                        .setText("you gain life equal to the greatest toughness among other creatures you control")
+        ).addHint(GreatestAmongPermanentsValue.TOUGHNESS_OTHER_CONTROLLED_CREATURES.getHint()));
     }
 
     private FlourishingHunter(final FlourishingHunter card) {
@@ -39,41 +38,5 @@ public final class FlourishingHunter extends CardImpl {
     @Override
     public FlourishingHunter copy() {
         return new FlourishingHunter(this);
-    }
-}
-
-class FlourishingHunterEffect extends OneShotEffect {
-
-    FlourishingHunterEffect() {
-        super(Outcome.GainLife);
-        staticText = "you gain life equal to the greatest toughness among other creatures you control";
-    }
-
-    private FlourishingHunterEffect(final FlourishingHunterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FlourishingHunterEffect copy() {
-        return new FlourishingHunterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        int greatestToughness = 0;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
-            if (permanent.isCreature(game) && !permanent.getId().equals(source.getSourceId())) {
-                int toughness = permanent.getToughness().getValue();
-                if (toughness > greatestToughness) {
-                    greatestToughness = toughness;
-                }
-            }
-        }
-        controller.gainLife(greatestToughness, game, source);
-        return true;
     }
 }

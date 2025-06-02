@@ -47,7 +47,7 @@ public final class LowlandOaf extends CardImpl {
         // {tap}: Target Goblin creature you control gets +1/+0 and gains flying until end of turn. Sacrifice that creature at the beginning of the next end step.
         Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
         effect.setText("Target Goblin creature you control gets +1/+0");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn.");
         ability.addEffect(effect);

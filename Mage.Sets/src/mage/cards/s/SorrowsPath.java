@@ -21,7 +21,7 @@ import mage.game.events.BlockerDeclaredEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanentSameController;
+import mage.target.common.TargetPermanentSameController;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +44,7 @@ public final class SorrowsPath extends CardImpl {
 
         // {T}: Choose two target blocking creatures an opponent controls. If each of those creatures could block all creatures that the other is blocking, remove both of them from combat. Each one then blocks all creatures the other was blocking.
         Ability ability = new SimpleActivatedAbility(new SorrowsPathSwitchBlockersEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanentSameController(2, filter));
+        ability.addTarget(new TargetPermanentSameController(filter));
         this.addAbility(ability);
 
         // Whenever Sorrow's Path becomes tapped, it deals 2 damage to you and each creature you control.
@@ -176,14 +176,8 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
                 group.addBlockerToGroup(blocker.getId(), blocker.getControllerId(), game);
                 game.getCombat().addBlockingGroup(blocker.getId(), attacker.getId(), blocker.getControllerId(), game);
                 game.fireEvent(new BlockerDeclaredEvent(attacker.getId(), blocker.getId(), blocker.getControllerId()));
-                group.pickBlockerOrder(attacker.getControllerId(), game);
             }
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, blocker.getId(), source, null));
-        CombatGroup blockGroup = findBlockingGroup(blocker, game); // a new blockingGroup is formed, so it's necessary to find it again
-        if (blockGroup != null) {
-            blockGroup.pickAttackerOrder(blocker.getControllerId(), game);
-        }
     }
-
 }

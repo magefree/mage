@@ -86,7 +86,7 @@ public class PrimalPrayersTest extends CardTestPlayerBase {
         setChoice(playerA, "Cast with alternative cost: Pay {E}"); // alternative cost chosen
         checkPlayableAbility("no more energy to cast third Bears", 1, PhaseStep.BEGIN_COMBAT, playerA,
                 "Cast Grizzly Bears", false);
-        runCode("3: energy counter is 0", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> checkEnergyCount(info, player, 0));
+        runCode("3: energy counter is 0", 1, PhaseStep.BEGIN_COMBAT, playerA, (info, player, game) -> checkEnergyCount(info, player, 0));
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();

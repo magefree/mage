@@ -35,7 +35,7 @@ public final class TandemLookout extends CardImpl {
 
         // As long as Tandem Lookout is paired with another creature, each of those creatures has "Whenever this creature deals damage to an opponent, draw a card."
         Ability ability = new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(ability, ruleText)));
     }
 
     private TandemLookout(final TandemLookout card) {

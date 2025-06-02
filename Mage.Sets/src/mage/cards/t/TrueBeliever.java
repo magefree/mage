@@ -28,7 +28,7 @@ public final class TrueBeliever extends CardImpl {
         this.toughness = new MageInt(2);
 
         // You have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield)));
     }
 
     private TrueBeliever(final TrueBeliever card) {

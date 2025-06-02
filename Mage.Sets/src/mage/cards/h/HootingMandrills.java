@@ -24,7 +24,8 @@ public final class HootingMandrills extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
     }

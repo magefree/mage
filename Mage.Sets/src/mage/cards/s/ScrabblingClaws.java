@@ -34,7 +34,6 @@ public final class ScrabblingClaws extends CardImpl {
 
         // {tap}: Target player exiles a card from their graveyard.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ScrabblingClawsEffect(), new
                 TapSourceCost()
         );
@@ -43,7 +42,6 @@ public final class ScrabblingClaws extends CardImpl {
 
         // {1}, Sacrifice Scrabbling Claws: Exile target card from a graveyard. Draw a card.
         ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ExileTargetEffect(),
                 new GenericManaCost(1)
         );

@@ -37,7 +37,7 @@ public final class LyraDawnbringer extends CardImpl {
         // Other Angels you control get +1/+1 and have lifelink.
         Effect effect = new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, AngelFilter, true);
         effect.setText("Other Angels you control get +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         Effect effect2 = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, AngelFilter, true);
         effect2.setText("and have lifelink");
         ability.addEffect(effect2);

@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.RevealPutInHandLoseLifeEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.watchers.common.PlayerAttackedWatcher;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class RuinRaider extends CardImpl {
         // <i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, reveal the top card of your library and put that card into your hand. You lose life equal to the card's converted mana cost.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new RevealPutInHandLoseLifeEffect(), TargetController.YOU, false
+                        new RevealPutInHandLoseLifeEffect()
                 ), RaidCondition.instance, "At the beginning of your end step, " +
                 "if you attacked this turn, reveal the top card of your library " +
                 "and put that card into your hand. You lose life equal to the card's mana value."

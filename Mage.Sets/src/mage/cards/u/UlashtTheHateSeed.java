@@ -50,7 +50,7 @@ public final class UlashtTheHateSeed extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new UlashtTheHateSeedEffect(), "with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control."));
 
         // {1}, Remove a +1/+1 counter from Ulasht: Choose one - Ulasht deals 1 damage to target creature;
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         // or create a 1/1 green Saproling creature token.

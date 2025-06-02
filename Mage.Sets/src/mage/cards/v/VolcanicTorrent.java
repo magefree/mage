@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,6 +37,7 @@ public final class VolcanicTorrent extends CardImpl {
 
         // Volcanic Torrent deals X damage to each creature and planeswalker your opponents control, where X is the number of spells you've cast this turn.
         this.getSpellAbility().addEffect(new DamageAllEffect(VolcanicTorrentValue.instance, filter));
+        this.getSpellAbility().addHint(new ValueHint("Number of spells you've cast this turn", VolcanicTorrentValue.instance));
     }
 
     private VolcanicTorrent(final VolcanicTorrent card) {

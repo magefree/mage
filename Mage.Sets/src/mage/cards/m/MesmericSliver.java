@@ -37,7 +37,7 @@ public final class MesmericSliver extends CardImpl {
 
         // All Slivers have "When this permanent enters the battlefield, you may fateseal 1."
         Ability ability = new EntersBattlefieldTriggeredAbility(new FatesealEffect(1), true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
                 filterSliver, "All Slivers have \"When this permanent enters the battlefield, you may fateseal 1.\" <i>(To fateseal 1, its controller looks at the top card of an opponent's library, then they may put that card on the bottom of that library.)</i>")));
     }

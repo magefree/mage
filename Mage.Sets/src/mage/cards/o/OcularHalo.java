@@ -41,11 +41,11 @@ public final class OcularHalo extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has "{tap}: Draw a card."
-        Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA)));
+        Ability gainAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA)));
         
         // {W}: Enchanted creature gains vigilance until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(),
+        this.addAbility(new SimpleActivatedAbility(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(),
             AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 

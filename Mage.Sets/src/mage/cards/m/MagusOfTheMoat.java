@@ -36,7 +36,7 @@ public final class MagusOfTheMoat extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Creatures without flying can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private MagusOfTheMoat(final MagusOfTheMoat card) {

@@ -1,8 +1,8 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Pronoun;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.constants.Pronoun;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -47,9 +47,8 @@ public final class SorinOfHouseMarkov extends CardImpl {
         // At the beginning of your postcombat main phase, if you gained 3 or more life this turn, exile Sorin of House Markov, then return him to the battlefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfPostCombatMainTriggeredAbility(
+                new BeginningOfPostcombatMainTriggeredAbility(
                         new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.SHE),
-                        TargetController.YOU,
                         false
                 ), condition, "At the beginning of your postcombat main phase, "
                 + "if you gained 3 or more life this turn, exile {this}, "

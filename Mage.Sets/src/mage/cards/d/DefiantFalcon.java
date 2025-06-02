@@ -42,7 +42,7 @@ public final class DefiantFalcon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {4}, {tap}: Search your library for a Rebel permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false),
                 new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());

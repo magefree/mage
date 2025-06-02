@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -21,6 +20,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CatSoldierCreatureToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +61,7 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
 
     BrimazKingOfOreskosEffect() {
         super(Outcome.Benefit);
-        this.staticText = "create a 1/1 white Cat Soldier creature token with vigilance blocking that creature";
+        this.staticText = "create a 1/1 white Cat Soldier creature token with vigilance that's blocking that creature";
     }
 
     private BrimazKingOfOreskosEffect(final BrimazKingOfOreskosEffect effect) {
@@ -99,7 +100,6 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
             combatGroup.addBlocker(tokenId, source.getControllerId(), game);
             game.getCombat().addBlockingGroup(tokenId, attackingCreature.getId(), controller.getId(), game);
         }
-        combatGroup.pickBlockerOrder(attackingCreature.getControllerId(), game);
 
         return true;
     }

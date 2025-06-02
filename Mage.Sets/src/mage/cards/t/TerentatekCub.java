@@ -38,7 +38,7 @@ public final class TerentatekCub extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as an opponent controls a Jedi or Sith, {this} gets +1/+1 and attacks each turn if able.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new OpponentControlsPermanentCondition(filter),
                 "As long as an opponent controls a Jedi or Sith, {this} gets +1/+1"));

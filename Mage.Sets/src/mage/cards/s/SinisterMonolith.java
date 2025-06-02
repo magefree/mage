@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,7 +12,6 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -26,7 +25,7 @@ public final class SinisterMonolith extends CardImpl {
 
         // At the beginning of combat on your turn, each opponent loses 1 life and you gain 1 life.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new LoseLifeOpponentsEffect(1), TargetController.YOU, false
+                new LoseLifeOpponentsEffect(1)
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);

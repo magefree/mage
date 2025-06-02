@@ -39,7 +39,7 @@ public final class LodestoneBauble extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // {1}, {T}, Sacrifice Lodestone Bauble: Put up to four target basic land cards from a player's graveyard on top of their library in any order. That player draws a card at the beginning of the next turn's upkeep.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LodestoneBaubleEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new LodestoneBaubleEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new LodestoneBaubleDrawEffect());

@@ -37,7 +37,7 @@ public final class TreasureCove extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T}, Sacrifice a Treasure: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }

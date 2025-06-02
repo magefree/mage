@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MayCastTargetCardEffect;
 import mage.cards.Card;
@@ -30,7 +30,7 @@ public final class Galvanoth extends CardImpl {
 
         // At the beginning of your upkeep, you may look at the top card of your library. 
         // If it's an instant or sorcery card, you may cast it without paying its mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GalvanothEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GalvanothEffect(), true));
     }
 
     private Galvanoth(final Galvanoth card) {

@@ -1,10 +1,10 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
+import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
@@ -12,14 +12,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ExaltedAngel extends CardImpl {
 
     public ExaltedAngel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);
@@ -27,8 +28,10 @@ public final class ExaltedAngel extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever Exalted Angel deals damage, you gain that much life.
-        this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
+        this.addAbility(new DealsDamageSourceTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)));
+
         // Morph {2}{W}{W}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{W}{W}")));
     }

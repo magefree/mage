@@ -34,7 +34,7 @@ public final class TrooperCommando extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Trooper creatures you control have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
 
     }
 

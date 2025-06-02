@@ -89,7 +89,7 @@ public class CollectEvidenceCost extends CostImpl {
                 );
             }
         }.withNotTarget(true);
-        player.choose(Outcome.Exile, target, source, game);
+        target.choose(Outcome.Exile, player.getId(), source.getSourceId(), source, game);
         Cards cards = new CardsImpl(target.getTargets());
         paid = cards
                 .getCards(game)

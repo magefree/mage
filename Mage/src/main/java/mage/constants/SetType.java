@@ -37,7 +37,10 @@ public enum SetType {
 
     public boolean isEternalLegal() {
         // any official sets except un-sets
-        return this != SetType.CUSTOM_SET && this != SetType.JOKE_SET && this != SetType.MAGIC_ARENA;
+        return this != SetType.CUSTOM_SET
+                && this != SetType.JOKE_SET
+                && this != SetType.REMIX // to exclude MB2 playtest cards
+                && this != SetType.MAGIC_ARENA;
     }
 
     public boolean isStandardLegal() {

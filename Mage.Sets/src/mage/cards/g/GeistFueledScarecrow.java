@@ -31,7 +31,7 @@ public final class GeistFueledScarecrow extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Creature spells you cast cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostIncreasingAllEffect(1, filter, TargetController.YOU)));
     }
 

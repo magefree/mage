@@ -38,7 +38,6 @@ public final class Torture extends CardImpl {
 
         // {1}{B}: Put a -1/-1 counter on enchanted creature.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersAttachedEffect(CounterType.M1M1.createInstance(),"enchanted creature"),
                 new ManaCostsImpl<>("{1}{B}")));
     }

@@ -31,12 +31,12 @@ public final class PhyrexianFurnace extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {tap}: Exile the bottom card of target player's graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianFurnaceEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PhyrexianFurnaceEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // {1}, Sacrifice Phyrexian Furnace: Exile target card from a graveyard. Draw a card.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{1}"));
+        ability = new SimpleActivatedAbility(new ExileTargetEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         ability.addEffect(new DrawCardSourceControllerEffect(1));

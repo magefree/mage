@@ -21,7 +21,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.filter.*;
+import mage.filter.FilterOpponent;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.ZoneChangeInfo;
@@ -210,8 +210,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 + ", " + getBasicMageObject().getClass().getSimpleName()
                 + ", " + imageInfo
                 + ", " + this.getPower() + "/" + this.getToughness()
+                + (this.getDamage() > 0 ? ", damage " + this.getDamage() : "")
                 + (this.isCopy() ? ", copy" : "")
-                + (this.isTapped() ? ", tapped" : "");
+                + (this.isTapped() ? ", tapped" : "")
+                + (this.isAttacking() ? ", attacking" : "")
+                + (this.getBlocking() > 0 ? ", blocking" : "");
     }
 
     @Override
@@ -521,7 +524,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void endOfTurn(Game game) {
-        this.damage = 0;
+        if (!game.replaceEvent(GameEvent.getEvent(
+                EventType.REMOVE_DAMAGE_EOT, this.getId(), null, this.getControllerId()
+        ))) {
+            this.damage = 0;
+        }
         this.timesLoyaltyUsed = 0;
         this.turnsOnBattlefield++;
         this.deathtouched = false;
@@ -1255,11 +1262,26 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         // own etb event
+        // 616.1a
+        // If any of the replacement and/or prevention effects are self-replacement effects (see rule 614.15),
+        // one of them must be chosen. If not, proceed to rule 616.1b.
         if (game.replaceEvent(new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF))) {
             return false;
         }
 
+        // 616.1b
+        // If any of the replacement and/or prevention effects would modify under whose control an object would
+        // enter the battlefield, one of them must be chosen. If not, proceed to rule 616.1c.
+        // TODO: need implementation? See #13062
+
+        // 616.1c
+        // If any of the replacement and/or prevention effects would cause an object to become a copy of another
+        // object as it enters the battlefield, one of them must be chosen. If not, proceed to rule 616.1d.
+        // TODO: need implementation? See #13062
+
         // normal etb event
+        // 616.1d
+        // Any of the applicable replacement and/or prevention effects may be chosen.
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone);
         if (game.replaceEvent(event)) {
             return false;
@@ -1343,32 +1365,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean cantBeAttachedBy(MageObject attachment, Ability source, Game game, boolean silentMode) {
-        for (ProtectionAbility ability : this.getAbilities(game).getProtectionAbilities()) {
-            if ((!attachment.hasSubtype(SubType.AURA, game) || ability.removesAuras())
-                    && (!attachment.hasSubtype(SubType.EQUIPMENT, game) || ability.removesEquipment())
-                    && !attachment.getId().equals(ability.getAuraIdNotToBeRemoved())
-                    && !ability.canTarget(attachment, game)) {
-                return !ability.getDoesntRemoveControlled() || isControlledBy(game.getControllerId(attachment.getId()));
-            }
-        }
-
-        boolean canAttach = true;
-        Permanent attachmentPermanent = game.getPermanent(attachment.getId());
-        // If attachment is an aura, ensures this permanent can still be legally enchanted, according to the enchantment's Enchant ability
-        if (attachment.hasSubtype(SubType.AURA, game)
-                && attachmentPermanent != null
-                && attachmentPermanent.getSpellAbility() != null
-                && !attachmentPermanent.getSpellAbility().getTargets().isEmpty()) {
-            // Line of code below functionally gets the target of the aura's Enchant ability, then compares to this permanent. Enchant improperly implemented in XMage, see #9583
-            // Note: stillLegalTarget used exclusively to account for Dream Leash. Can be made canTarget in the event that that card is rewritten (and "stillLegalTarget" removed from TargetImpl).
-            canAttach = attachmentPermanent.getSpellAbility().getTargets().get(0).copy().withNotTarget(true).stillLegalTarget(attachmentPermanent.getControllerId(), this.getId(), source, game);
-        }
-
-        return !canAttach || game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
     }
 
     @Override

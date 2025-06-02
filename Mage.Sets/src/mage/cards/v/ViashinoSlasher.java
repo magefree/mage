@@ -25,7 +25,7 @@ public final class ViashinoSlasher extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}: Viashino Slasher gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     private ViashinoSlasher(final ViashinoSlasher card) {

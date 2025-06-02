@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -42,7 +41,7 @@ public final class FungusElemental extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P2P2.createInstance()),
                 new ManaCostsImpl<>("{G}"),
-                SourceEnteredThisTurnCondition.instance
+                SourceEnteredThisTurnCondition.DID
         );
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);

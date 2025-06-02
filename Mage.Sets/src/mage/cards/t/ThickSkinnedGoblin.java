@@ -31,7 +31,7 @@ public final class ThickSkinnedGoblin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // You may pay {0} rather than pay the echo cost for permanents you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThickSkinnedGoblinCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(new ThickSkinnedGoblinCostModificationEffect()));
 
         // {R}: Thick-Skinned Goblin gains protection from red until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.RED), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));

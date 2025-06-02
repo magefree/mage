@@ -43,7 +43,7 @@ public final class HeliodsPunishment extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TASK.createInstance(4)), "with four task counters on it"));
 
         // Enchanted creature can't attack or block. It loses all abilities and has "{T}: Remove a task counter from Heliod's Punishment. Then if it has no task counters on it, destroy Heliod's Punishment."
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA));
+        ability = new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA));
         ability.addEffect(new HeliodsPunishmentLoseAllAbilitiesEnchantedEffect());
         this.addAbility(ability);
     }

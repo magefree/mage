@@ -24,7 +24,7 @@ public final class BristlingBoar extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Bristling Boar can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
     private BristlingBoar(final BristlingBoar card) {

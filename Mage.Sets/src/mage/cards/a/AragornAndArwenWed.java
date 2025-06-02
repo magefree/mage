@@ -16,8 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -26,13 +25,7 @@ import java.util.UUID;
  */
 public final class AragornAndArwenWed extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 1);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE, 1);
     private static final Hint hint = new ValueHint("Other creatures you control", xValue);
 
     public AragornAndArwenWed(UUID ownerId, CardSetInfo setInfo) {
@@ -50,7 +43,7 @@ public final class AragornAndArwenWed extends CardImpl {
 
         // Whenever Aragorn and Arwen, Wed enters the battlefield or attacks, put a +1/+1 counter on each other creature you control. You gain 1 life for each other creature you control.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE)
         );
         ability.addEffect(new GainLifeEffect(xValue).setText("you gain 1 life for each other creature you control"));
         ability.addHint(hint);

@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.WardAbility;
@@ -32,7 +32,7 @@ public final class TangletroveKelp extends CardImpl {
         this.addAbility(new WardAbility(new GenericManaCost(2), false));
 
         // At the beginning of each combat, other Clues you control become 6/6 Plant creatures in addition to their other types until end of turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new TangletroveKelpEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new TangletroveKelpEffect(), false));
 
         // {2}, Sacrifice Tangletrove Kelp: Draw a card.
         this.addAbility(new ClueAbility(true));
@@ -60,6 +60,7 @@ class TangletroveKelpEffect extends ContinuousEffectImpl {
     TangletroveKelpEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "other Clues you control become 6/6 Plant creatures in addition to their other types until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private TangletroveKelpEffect(final TangletroveKelpEffect effect) {

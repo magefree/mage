@@ -7,10 +7,11 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * @author emerald000
@@ -21,12 +22,17 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
 
     public AddCardTypeSourceEffect(Duration duration, CardType... addedCardType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+        if (addedCardType.length == 0) {
+            throw new IllegalArgumentException("AddCardTypeSourceEffect should be called with at least one card type.");
+        }
         for (CardType cardType : addedCardType) {
             this.addedCardTypes.add(cardType);
             if (cardType == CardType.ENCHANTMENT) {
                 dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
             } else if (cardType == CardType.ARTIFACT) {
                 dependencyTypes.add(DependencyType.ArtifactAddingRemoving);
+            } else if (cardType == CardType.LAND) {
+                dependencyTypes.add(DependencyType.BecomeNonbasicLand);
             }
         }
     }
@@ -45,7 +51,10 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
+        if (permanent != null
+                && (affectedObjectList.contains(new MageObjectReference(permanent, game))
+                // Workaround to support abilities like "As long as __, this permanent is a __ in addition to its other types."
+                || !duration.isOnlyValidIfNoZoneChange())) {
             for (CardType cardType : addedCardTypes) {
                 permanent.addCardType(game, cardType);
             }
@@ -68,19 +77,20 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("{this} becomes ");
-        boolean article = false;
-        for (CardType cardType : addedCardTypes) {
-            if (!article) {
-                if (cardType.toString().startsWith("A") || cardType.toString().startsWith("E")) {
-                    sb.append("an ");
-                } else {
-                    sb.append("a ");
-                }
-                article = true;
-            }
-            sb.append(cardType.toString().toLowerCase(Locale.ENGLISH)).append(" ");
+        sb.append(CardUtil.addArticle(
+                addedCardTypes
+                        .stream()
+                        .map(CardType::toString)
+                        .map(String::toLowerCase)
+                        .collect(Collectors.joining(" "))
+        ));
+        if (!addedCardTypes.contains(CardType.ARTIFACT) || !addedCardTypes.contains(CardType.CREATURE)) {
+            sb.append(" in addition to its other types");
         }
-        sb.append("in addition to its other types ").append(this.getDuration().toString());
+        if (!this.getDuration().toString().isEmpty()) {
+            sb.append(' ');
+            sb.append(this.getDuration());
+        }
         return sb.toString();
     }
 }

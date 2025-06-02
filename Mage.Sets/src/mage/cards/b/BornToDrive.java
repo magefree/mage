@@ -22,7 +22,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.permanent.token.PilotToken;
+import mage.game.permanent.token.PilotCrewToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -63,7 +63,7 @@ public final class BornToDrive extends CardImpl {
         )).addHint(hint));
 
         // Channel — {2}{W}, Discard Born to Drive: Create two 1/1 colorless Pilot creature tokens with "This creature crews Vehicles as though its power were 2 greater."
-        this.addAbility(new ChannelAbility("{2}{W}", new CreateTokenEffect(new PilotToken(), 2)));
+        this.addAbility(new ChannelAbility("{2}{W}", new CreateTokenEffect(new PilotCrewToken(), 2)));
     }
 
     private BornToDrive(final BornToDrive card) {

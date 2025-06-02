@@ -29,7 +29,7 @@ public final class ShadeOfTrokair extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}: Shade of Trokair gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
         
         // Suspend 3-{W}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{W}"), this));

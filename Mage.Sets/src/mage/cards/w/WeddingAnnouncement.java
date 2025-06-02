@@ -3,7 +3,7 @@ package mage.cards.w;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -36,7 +36,7 @@ public final class WeddingAnnouncement extends CardImpl {
         // Otherwise, create a 1/1 white Human creature token.
         // Then if Wedding Announcement has three or more invitation counters on it, transform it.
         this.addAbility(new TransformAbility());
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.INVITATION.createInstance()), false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.INVITATION.createInstance()));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
                 new CreateTokenEffect(new HumanToken()),

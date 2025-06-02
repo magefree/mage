@@ -1,8 +1,6 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeAttachedCost;
 import mage.abilities.effects.Effect;
@@ -12,13 +10,11 @@ import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPays
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +37,8 @@ public final class CurseArtifact extends CardImpl {
         cost.setText("sacrifice attached artifact");
         Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DamageTargetEffect(2), cost, "Sacrifice enchanted artifact? (otherwise {this} deals 2 damage to you)");
         effect.setText("{this} deals 2 damage to that player unless they sacrifice that artifact");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.CONTROLLER_ATTACHED_TO, false, true, "At the beginning of the upkeep of enchanted artifact's controller, "));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, effect, false)
+                .setTriggerPhrase("At the beginning of the upkeep of enchanted artifact's controller, "));
     }
 
     private CurseArtifact(final CurseArtifact card) {

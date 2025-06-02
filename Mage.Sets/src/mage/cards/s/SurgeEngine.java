@@ -79,7 +79,6 @@ enum SurgeEngineCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
                 .map(permanent -> !permanent.hasAbility(DefenderAbility.getInstance(), game))
                 .orElse(false);
     }
@@ -94,7 +93,6 @@ class SurgeEngineAbility extends ActivatedAbilityImpl {
 
     private static final Condition staticCondition = (game, source) -> Optional
             .ofNullable(source.getSourcePermanentIfItStillExists(game))
-            .filter(Objects::nonNull)
             .map(permanent -> permanent.getColor(game))
             .map(ObjectColor::isBlue)
             .orElse(false);

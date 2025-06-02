@@ -48,6 +48,9 @@ public abstract class DeckValidator implements Serializable {
         maxCopiesMap.put("Dragon's Approach", Integer.MAX_VALUE);
         maxCopiesMap.put("Slime Against Humanity", Integer.MAX_VALUE);
         maxCopiesMap.put("Templar Knight", Integer.MAX_VALUE);
+        maxCopiesMap.put("Hare Apparent", Integer.MAX_VALUE);
+        maxCopiesMap.put("Tempest Hawk", Integer.MAX_VALUE);
+        maxCopiesMap.put("Cid, Timeless Artificer", Integer.MAX_VALUE);
         maxCopiesMap.put("Once More with Feeling", 1);
         maxCopiesMap.put("Seven Dwarves", 7);
         maxCopiesMap.put("Nazgul", 9);
@@ -171,7 +174,7 @@ public abstract class DeckValidator implements Serializable {
         }
     }
 
-    public int getEdhPowerLevel(Deck deck) {
+    public int getEdhPowerLevel(Deck deck, List<String> foundPowerCards, List<String> foundInfo) {
         return 0;
     }
 

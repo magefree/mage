@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.SaprolingToken;
@@ -47,13 +46,13 @@ public final class BrightcapBadger extends AdventureCard {
 
         // At the beginning of your end step, create a 1/1 green Saproling token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new SaprolingToken()), TargetController.YOU, false
+                new CreateTokenEffect(new SaprolingToken())
         ));
 
         // Fungus Frolic
         // Create two 1/1 green Saproling creature tokens.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), 2));
-        this.getSpellCard().finalizeAdventure();
+        this.finalizeAdventure();
     }
 
     private BrightcapBadger(final BrightcapBadger card) {

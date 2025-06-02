@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
@@ -38,8 +38,8 @@ public final class BloodsoakedReveler extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, create a Blood token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new BloodToken()),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new CreateTokenEffect(new BloodToken()),
+                false, condition
         ).addHint(hint));
 
         // {4}{B}: Each opponent loses 2 life and you gain 2 life.

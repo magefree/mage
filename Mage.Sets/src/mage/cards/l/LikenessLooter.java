@@ -43,7 +43,7 @@ public final class LikenessLooter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {T}: Draw a card, then discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new TapSourceCost()));
 
         // {X}: Likeness Looter becomes a copy of target creature card in your graveyard with mana value X, except it has flying and this ability. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(

@@ -2,7 +2,7 @@
 
 package mage.cards.h;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
@@ -36,7 +35,7 @@ public final class HondenOfCleansingFire extends CardImpl {
 
 
         // At the beginning of your upkeep, you gain 2 life for each Shrine you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new MultipliedValue(xValue, 2)), TargetController.YOU, false).addHint(hint));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new MultipliedValue(xValue, 2))).addHint(hint));
     }
 
     private HondenOfCleansingFire(final HondenOfCleansingFire card) {

@@ -2,8 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,8 +17,6 @@ import java.util.UUID;
  */
 public final class NestedShambler extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public NestedShambler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
 
@@ -29,7 +26,7 @@ public final class NestedShambler extends CardImpl {
 
         // When Nested Shambler dies, create X tapped 1/1 green Squirrel creature tokens, where X is Nested Shambler's power.
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(
-                new SquirrelToken(), xValue, true, false
+                new SquirrelToken(), SourcePermanentPowerValue.NOT_NEGATIVE, true, false
         )));
     }
 

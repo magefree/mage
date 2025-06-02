@@ -1,13 +1,11 @@
 package org.mage.test.cards.single.vis;
 
-import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static mage.constants.PhaseStep.*;
 import static mage.constants.Zone.BATTLEFIELD;
 import static mage.constants.Zone.HAND;
-import static org.junit.Assert.assertEquals;
 
 public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
@@ -15,19 +13,6 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
     private static final int ANY_LIFE_TOTAL = 17;
     private static final String BROOD_OF_COCKROACHES = "Brood of Cockroaches";
     private static final String SHOCK = "Shock";
-
-    @Test
-    public void should_display_correct_text() {
-        String expectedText = "When {this} is put into your graveyard from the battlefield, at the beginning of the next end step, you lose 1 life and return {this} to your hand.";
-
-        playerA_casts_Brood_of_Cockroaches_at_precombat_main_phase();
-
-        setStopAt(TURN_1, END_TURN);
-        execute();
-
-        Permanent permanent = getPermanent(BROOD_OF_COCKROACHES, playerA);
-        assertEquals(expectedText, permanent.getAbilities().get(1).toString());
-    }
 
     @Test
     public void should_reduce_life_of_playerA_by_1_at_the_beginning_of_the_next_end_step() {

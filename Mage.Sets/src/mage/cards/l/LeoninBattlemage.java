@@ -31,7 +31,7 @@ public final class LeoninBattlemage extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Target creature gets +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Whenever you cast a spell, you may untap Leonin Battlemage.

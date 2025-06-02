@@ -188,7 +188,7 @@ class LukkaCoppercoatOutcastDamageEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
         );
         List<Player> opponentList = game
-                .getOpponents(source.getControllerId())
+                .getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

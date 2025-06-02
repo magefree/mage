@@ -25,7 +25,7 @@ public final class ChargingRhino extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Charging Rhino can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
     private ChargingRhino(final ChargingRhino card) {

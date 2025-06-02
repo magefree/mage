@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 import java.util.UUID;
@@ -45,7 +44,7 @@ public final class IndulgingPatrician extends CardImpl {
         // At the beginning of your end step, if you gained 3 or more life this turn, each opponent loses 3 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new LoseLifeOpponentsEffect(3), TargetController.YOU, false
+                        new LoseLifeOpponentsEffect(3)
                 ), condition, "At the beginning of your end step, " +
                 "if you gained 3 or more life this turn, each opponent loses 3 life."
         ).addHint(hint), new PlayerGainedLifeWatcher());

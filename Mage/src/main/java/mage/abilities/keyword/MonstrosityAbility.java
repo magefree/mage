@@ -4,6 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.common.MonstrousHint;
 import mage.constants.Outcome;
@@ -13,6 +15,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.Optional;
 
 
 /**
@@ -43,7 +47,7 @@ import mage.util.CardUtil;
 
 public class MonstrosityAbility extends ActivatedAbilityImpl {
 
-    private final int monstrosityValue;
+    private final DynamicValue monstrosityValue;
 
     public MonstrosityAbility(String manaString, int monstrosityValue) {
         this(manaString, monstrosityValue, null, "");
@@ -56,6 +60,10 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
      * @param costAdjusterText Clarifies the cost adjusting condition(s).
      */
     public MonstrosityAbility(String manaString, int monstrosityValue, CostAdjuster costAdjuster, String costAdjusterText) {
+        this(manaString, StaticValue.get(monstrosityValue), costAdjuster, costAdjusterText);
+    }
+
+    public MonstrosityAbility(String manaString, DynamicValue monstrosityValue, CostAdjuster costAdjuster, String costAdjusterText) {
         super(Zone.BATTLEFIELD, new BecomeMonstrousSourceEffect(monstrosityValue, costAdjusterText), new ManaCostsImpl<>(manaString));
         this.monstrosityValue = monstrosityValue;
         this.addHint(MonstrousHint.instance);
@@ -72,7 +80,7 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
         return new MonstrosityAbility(this);
     }
 
-    public int getMonstrosityValue() {
+    public DynamicValue getMonstrosityValue() {
         return monstrosityValue;
     }
 }
@@ -80,11 +88,11 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
 
 class BecomeMonstrousSourceEffect extends OneShotEffect {
 
-    public BecomeMonstrousSourceEffect(int monstrosityValue) {
+    BecomeMonstrousSourceEffect(DynamicValue monstrosityValue) {
         this(monstrosityValue, "");
     }
 
-    public BecomeMonstrousSourceEffect(int monstrosityValue, String costAdjusterText) {
+    BecomeMonstrousSourceEffect(DynamicValue monstrosityValue, String costAdjusterText) {
         super(Outcome.BoostCreature);
         this.staticText = setText(monstrosityValue, costAdjusterText);
     }
@@ -104,11 +112,14 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
         if (permanent == null || permanent.isMonstrous()) {
             return false;
         }
-        int monstrosityValue = ((MonstrosityAbility) source).getMonstrosityValue();
-        // handle monstrosity = X
-        if (monstrosityValue == Integer.MAX_VALUE) {
-            monstrosityValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        }
+        int monstrosityValue = Optional
+                .ofNullable(source)
+                .map(MonstrosityAbility.class::cast)
+                .map(MonstrosityAbility::getMonstrosityValue)
+                .map(dynamicValue -> dynamicValue.calculate(game, source, this))
+                // handle monstrosity = X
+                .map(i -> i == Integer.MAX_VALUE ? CardUtil.getSourceCostsTag(game, source, "X", 0) : i)
+                .orElse(0);
         permanent.addCounters(
                 CounterType.P1P1.createInstance(monstrosityValue),
                 source.getControllerId(), source, game
@@ -121,10 +132,15 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
         return true;
     }
 
-    private String setText(int monstrosityValue, String costAdjusterText) {
-        return "Monstrosity " + (monstrosityValue == Integer.MAX_VALUE ? "X" : monstrosityValue) +
+    private String setText(DynamicValue monstrosityValue, String costAdjusterText) {
+        if (!(monstrosityValue instanceof StaticValue)) {
+            return "Monstrosity X, where X is " + monstrosityValue.getMessage() + ". " + costAdjusterText +
+                    "<i>(If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)</i>";
+        }
+        int value = ((StaticValue) monstrosityValue).getValue();
+        return "Monstrosity " + (value == Integer.MAX_VALUE ? "X" : value) +
                 ". " + costAdjusterText + "<i>(If this creature isn't monstrous, put " +
-                (monstrosityValue == Integer.MAX_VALUE ? "X" : CardUtil.numberToText(monstrosityValue)) +
+                (value == Integer.MAX_VALUE ? "X" : CardUtil.numberToText(value)) +
                 " +1/+1 counters on it and it becomes monstrous.)</i>";
     }
 }

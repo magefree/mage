@@ -37,7 +37,7 @@ public final class AgadeemOccultist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Put target creature card from an opponent's graveyard onto the battlefield under your control if its converted mana cost is less than or equal to the number of Allies you control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AgadeemOccultistEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AgadeemOccultistEffect(), new TapSourceCost()));
 
     }
 

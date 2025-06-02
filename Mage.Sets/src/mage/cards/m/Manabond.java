@@ -3,7 +3,7 @@ package mage.cards.m;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class Manabond extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // At the beginning of your end step, reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new ManabondEffect(), true));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ManabondEffect(), true));
     }
 
     private Manabond(final Manabond card) {

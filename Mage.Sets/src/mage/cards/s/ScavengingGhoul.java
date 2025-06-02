@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 /**
  *
@@ -32,10 +31,10 @@ public final class ScavengingGhoul extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each end step, put a corpse counter on Scavenging Ghoul for each creature that died this turn.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.CORPSE.createInstance(),
-            CreaturesDiedThisTurnCount.instance, true), TargetController.ANY, false).addHint(CreaturesDiedThisTurnHint.instance));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new AddCountersSourceEffect(CounterType.CORPSE.createInstance(),
+            CreaturesDiedThisTurnCount.instance, true), false).addHint(CreaturesDiedThisTurnHint.instance));
         // Remove a corpse counter from Scavenging Ghoul: Regenerate Scavenging Ghoul.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(),
             new RemoveCountersSourceCost(CounterType.CORPSE.createInstance())));
     }
 

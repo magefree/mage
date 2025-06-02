@@ -54,7 +54,7 @@ class AlteredEgoCopyApplier extends CopyApplier {
 
     @Override
     public String getText() {
-        return ", except it enters with an additional X +1/+1 counters on it";
+        return ", except it enters with X additional +1/+1 counters on it";
     }
 
     @Override

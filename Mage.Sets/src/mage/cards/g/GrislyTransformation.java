@@ -36,7 +36,7 @@ public final class GrislyTransformation extends CardImpl {
         // When Grisly Transformation enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
         // Enchanted creature has intimidate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
     private GrislyTransformation(final GrislyTransformation card) {

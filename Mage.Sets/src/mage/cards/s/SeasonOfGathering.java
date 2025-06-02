@@ -1,14 +1,11 @@
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
+import mage.abilities.dynamicvalue.common.GreatestAmongPermanentsValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.*;
+import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -27,8 +24,11 @@ import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jimga150
  */
 public final class SeasonOfGathering extends CardImpl {
@@ -52,10 +52,11 @@ public final class SeasonOfGathering extends CardImpl {
 
         // {P}{P}{P} -- Draw cards equal to the greatest power among creatures you control.
         Mode mode3 = new Mode(
-                new DrawCardSourceControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance)
+                new DrawCardSourceControllerEffect(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES)
                         .setText("Draw cards equal to the greatest power among creatures you control.")
         );
         this.getSpellAbility().addMode(mode3.withPawPrintValue(3));
+        this.getSpellAbility().addHint(GreatestAmongPermanentsValue.POWER_CONTROLLED_CREATURES.getHint());
     }
 
     private SeasonOfGathering(final SeasonOfGathering card) {

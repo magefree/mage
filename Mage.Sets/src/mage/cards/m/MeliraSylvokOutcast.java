@@ -33,13 +33,13 @@ public final class MeliraSylvokOutcast extends CardImpl {
         this.toughness = new MageInt(2);
 
         // You can't get poison counters.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeliraSylvokOutcastEffect()));
+        this.addAbility(new SimpleStaticAbility(new MeliraSylvokOutcastEffect()));
 
         // Creatures you control can't have -1/-1 counters put on them.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeliraSylvokOutcastEffect2()));
+        this.addAbility(new SimpleStaticAbility(new MeliraSylvokOutcastEffect2()));
 
         // Creatures your opponents control lose infect.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeliraSylvokOutcastEffect3()));
+        this.addAbility(new SimpleStaticAbility(new MeliraSylvokOutcastEffect3()));
 
     }
 

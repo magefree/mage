@@ -50,10 +50,10 @@ public final class AltarGolem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(amount)));
 
         // Altar Golem doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // Tap five untapped creatures you control: Untap Altar Golem.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter, true))));
 
     }
 

@@ -33,7 +33,7 @@ public final class AqueousForm extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
         
         // Whenever enchanted creature attacks, scry 1.
         this.addAbility(new AttacksAttachedTriggeredAbility(new ScryEffect(1), AttachmentType.AURA,false));

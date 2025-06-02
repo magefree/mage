@@ -96,10 +96,12 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         if (card != null) {
             card.addCounters(CounterType.HIT.createInstance(), source.getControllerId(), source, game);
         }
-        int cardsFound = 0;
-        cardsFound = game.getExile().getAllCards(game).stream().filter((exiledCard) -> (exiledCard.getCounters(game).getCount(CounterType.HIT) >= 1
-                && exiledCard.getOwnerId().equals(player.getId()))).map((_item) -> 1).reduce(cardsFound, Integer::sum);
-        if (cardsFound > 2) {
+        int cardsFound = game.getExile().getAllCards(game).stream()
+                .filter(c -> c.getOwnerId().equals(player.getId()))
+                .filter(c -> c.getCounters(game).getCount(CounterType.HIT) > 0)
+                .mapToInt(x -> 1)
+                .sum();
+        if (cardsFound >= 3) {
             player.lost(game);
         }
         Permanent etrataTheSilencer = game.getPermanent(source.getSourceId());

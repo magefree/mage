@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
 import mage.abilities.effects.OneShotEffect;
@@ -32,9 +32,9 @@ public final class FeastOfTheVictoriousDead extends CardImpl {
 
         // At the beginning of your end step, if one or more creatures died this turn, you gain that much life and distribute that many +1/+1 counters among creatures you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new GainLifeEffect(CreaturesDiedThisTurnCount.instance)
+                TargetController.YOU, new GainLifeEffect(CreaturesDiedThisTurnCount.instance)
                         .setText("you gain that much life"),
-                TargetController.YOU, FeastOfTheVictoriousDeadCondition.instance, false
+                false, FeastOfTheVictoriousDeadCondition.instance
         );
         ability.addEffect(new FeastOfTheVictoriousDeadEffect());
         this.addAbility(ability.addHint(CreaturesDiedThisTurnHint.instance));
@@ -77,8 +77,7 @@ class FeastOfTheVictoriousDeadEffect extends OneShotEffect {
         if (player == null || game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game) < 1) {
             return false;
         }
-        TargetPermanentAmount target = new TargetCreaturePermanentAmount(amount, StaticFilters.FILTER_CONTROLLED_CREATURE);
-        target.setMinNumberOfTargets(1);
+        TargetPermanentAmount target = new TargetCreaturePermanentAmount(amount, 1, amount, StaticFilters.FILTER_CONTROLLED_CREATURE);
         target.withNotTarget(true);
         target.withChooseHint("to distribute " + amount + " counters");
         target.chooseTarget(outcome, player.getId(), source, game);

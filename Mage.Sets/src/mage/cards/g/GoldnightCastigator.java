@@ -40,7 +40,7 @@ public final class GoldnightCastigator extends CardImpl {
 
         // If a source would deal damage to you, it deals double that damage to you instead.
         // If a source would deal damage to Goldnight Castigator, it deals double that damage to Goldkight Castigator instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoldnightCastigatorDoubleDamageEffect()));
+        this.addAbility(new SimpleStaticAbility(new GoldnightCastigatorDoubleDamageEffect()));
     }
 
     private GoldnightCastigator(final GoldnightCastigator card) {

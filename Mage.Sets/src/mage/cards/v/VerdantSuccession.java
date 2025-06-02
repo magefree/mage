@@ -50,6 +50,11 @@ public final class VerdantSuccession extends CardImpl {
     public VerdantSuccession copy() {
         return new VerdantSuccession(this);
     }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    }
 }
 
 class VerdantSuccessionEffect extends OneShotEffect {

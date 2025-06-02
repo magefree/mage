@@ -51,7 +51,7 @@ public final class GiantOyster extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {tap}: For as long as Giant Oyster remains tapped, target tapped creature doesn't untap during its controller's untap step, and at the beginning of each of your draw steps, put a -1/-1 counter on that creature. When Giant Oyster leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DontUntapAsLongAsSourceTappedEffect()
+        Ability ability = new SimpleActivatedAbility(new DontUntapAsLongAsSourceTappedEffect()
                 .setText("For as long as {this} remains tapped, target tapped creature doesn't untap during its controller's untap step"),
                 new TapSourceCost());
         ability.addEffect(new GiantOysterCreateDelayedTriggerEffects());

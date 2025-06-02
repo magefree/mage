@@ -41,7 +41,7 @@ public final class PrimalAmulet extends CardImpl {
         this.secondSideCardClazz = mage.cards.p.PrimalWellspring.class;
 
         // Instant and sorcery spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever you cast an instant or sorcery spell, put a charge counter on Primal Amulet. Then if there are four or more charge counters on it, you may remove those counters and transform it.
         this.addAbility(new TransformAbility());

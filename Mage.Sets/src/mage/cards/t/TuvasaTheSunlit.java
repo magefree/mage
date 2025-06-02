@@ -43,7 +43,6 @@ public final class TuvasaTheSunlit extends CardImpl {
         DynamicValue value
                 = new PermanentsOnBattlefieldCount(filter);
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(
                         value, value, Duration.WhileOnBattlefield
                 ).setText("{this} gets +1/+1 for each enchantment you control")

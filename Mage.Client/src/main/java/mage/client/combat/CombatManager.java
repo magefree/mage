@@ -83,7 +83,7 @@ public enum CombatManager {
         UUID defenderId = group.getDefenderId();
         if (defenderId != null) {
             // if attacker was blocked then use another arrow color
-            Color attackColor = group.getBlockers().isEmpty() ? ARROW_COLOR_ATTACKER : ARROW_COLOR_BLOCKED_ATTACKER;
+            Color attackColor = group.isBlocked() ? ARROW_COLOR_BLOCKED_ATTACKER : ARROW_COLOR_ATTACKER;
             parentPoint = getParentPoint(attackerCard);
             PlayAreaPanel p = MageFrame.getGamePlayers(gameId).get(defenderId);
             if (p != null) {

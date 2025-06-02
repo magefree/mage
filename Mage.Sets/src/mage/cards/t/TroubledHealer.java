@@ -33,7 +33,6 @@ public final class TroubledHealer extends CardImpl {
 
         // Sacrifice a land: Prevent the next 2 damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2),
                 new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         ability.addTarget(new TargetAnyTarget());

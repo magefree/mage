@@ -20,7 +20,7 @@ public final class TasigursCruelty extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
 
         // Each opponent discards two cards.
         this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(StaticValue.get(2), false, TargetController.OPPONENT));

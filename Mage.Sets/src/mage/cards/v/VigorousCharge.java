@@ -2,9 +2,11 @@ package mage.cards.v;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -16,7 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.DamagedBatchAllEvent;
+import mage.game.events.DamagedBatchBySourceEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -25,15 +27,14 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2 & L_J
  */
 public final class VigorousCharge extends CardImpl {
-    
+
     private static final String staticText = "Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage";
 
     public VigorousCharge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Kicker {W} (You may pay an additional {W} as you cast this spell.)
         this.addAbility(new KickerAbility("{W}"));
@@ -83,12 +84,12 @@ class VigorousChargeEffect extends OneShotEffect {
     }
 }
 
-class VigorousChargeTriggeredAbility extends DelayedTriggeredAbility {
+class VigorousChargeTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedEvent> {
 
     private final MageObjectReference mor;
 
     VigorousChargeTriggeredAbility(MageObjectReference mor) {
-        super(null, Duration.EndOfTurn, false, false);
+        super(new GainLifeEffect(SavedDamageValue.MUCH), Duration.EndOfTurn, false, false);
         this.mor = mor;
     }
 
@@ -104,21 +105,16 @@ class VigorousChargeTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ALL;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int amount = ((DamagedBatchAllEvent) event)
-                .getEvents()
-                .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> mor.refersTo(e.getAttackerId(), game))
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-        this.getEffects().clear();
-        this.addEffect(new GainLifeEffect(amount));
-        return amount >= 1;
+        if (!mor.refersTo(event.getSourceId(), game) || !((DamagedBatchBySourceEvent) event).isCombatDamage()) {
+            return false;
+        }
+        this.getEffects().setValue("damage", event.getAmount());
+        return true;
     }
 
     @Override

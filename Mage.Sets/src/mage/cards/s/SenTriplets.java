@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -36,8 +36,7 @@ public final class SenTriplets extends CardImpl {
         // This turn, that player can't cast spells or activate abilities and plays with their hand revealed.
         // You may play cards from that player's hand this turn.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new SenTripletsRuleModifyingEffect(),
-                TargetController.YOU, false, false
+                new SenTripletsRuleModifyingEffect()
         );
         ability.addEffect(new SenTripletsOpponentRevealsHandEffect());
         ability.addEffect(new SenTripletsPlayFromOpponentsHandEffect());

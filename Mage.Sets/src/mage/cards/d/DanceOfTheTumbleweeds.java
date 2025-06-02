@@ -17,7 +17,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.token.SeedGuardianToken;
+import mage.game.permanent.token.ElementalXXGreenToken;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -83,7 +83,7 @@ class DanceOfTheTumbleweedsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return new SeedGuardianToken(LandsYouControlCount.instance.calculate(game, source, this))
+        return new ElementalXXGreenToken(LandsYouControlCount.instance.calculate(game, source, this))
                 .putOntoBattlefield(1, game, source);
     }
 }

@@ -155,7 +155,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                         + (p.isTapped() ? ",tapped" : "")
                         + (p.isAttacking() ? ",attacking" : "")
                         + (p.getBlocking() > 0 ? ",blocking" : "")
-                        + ":" + GameStateEvaluator2.evaluatePermanent(p, game))
+                        + ":" + GameStateEvaluator2.evaluatePermanent(p, game, true))
                 .collect(Collectors.joining("; "));
         sb.append("-> Permanents: [").append(ownPermanentsInfo).append("]");
         logger.info(sb.toString());
@@ -399,7 +399,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             if (effect != null
                     && stackObject.getControllerId().equals(playerId)) {
                 Target target = effect.getTarget();
-                if (!target.doneChoosing(game)) {
+                if (!target.isChoiceCompleted(game)) {
                     for (UUID targetId : target.possibleTargets(stackObject.getControllerId(), stackObject.getStackAbility(), game)) {
                         Game sim = game.createSimulationForAI();
                         StackAbility newAbility = (StackAbility) stackObject.copy();
@@ -848,10 +848,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
         if (targets.isEmpty()) {
             return super.chooseTarget(outcome, cards, target, source, game);
         }
-        if (!target.doneChoosing(game)) {
+        if (!target.isChoiceCompleted(game)) {
             for (UUID targetId : targets) {
                 target.addTarget(targetId, source, game);
-                if (target.doneChoosing(game)) {
+                if (target.isChoiceCompleted(game)) {
                     targets.clear();
                     return true;
                 }
@@ -866,10 +866,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
         if (targets.isEmpty()) {
             return super.choose(outcome, cards, target, source, game);
         }
-        if (!target.doneChoosing(game)) {
+        if (!target.isChoiceCompleted(game)) {
             for (UUID targetId : targets) {
                 target.add(targetId, game);
-                if (target.doneChoosing(game)) {
+                if (target.isChoiceCompleted(game)) {
                     targets.clear();
                     return true;
                 }
@@ -898,7 +898,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 return;
             }
 
-            CombatUtil.sortByPower(attackers, false);
+            CombatUtil.sortByPower(attackers, false); // most powerfull go to first
 
             CombatInfo combatInfo = CombatUtil.blockWithGoodTrade2(game, attackers, possibleBlockers);
             Player player = game.getPlayer(playerId);
@@ -909,6 +909,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 List<Permanent> blockers = entry.getValue();
                 if (blockers != null) {
                     for (Permanent blocker : blockers) {
+                        // TODO: buggy or miss on multi blocker requirements?!
                         player.declareBlocker(player.getId(), blocker.getId(), attackerId, game);
                         blocked = true;
                     }
@@ -975,7 +976,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             Player attackingPlayer = game.getPlayer(activePlayerId);
 
             // check alpha strike first (all in attack to kill a player)
-            for (UUID defenderId : game.getOpponents(playerId)) {
+            for (UUID defenderId : game.getOpponents(playerId, true)) {
                 Player defender = game.getPlayer(defenderId);
                 if (!defender.isInGame()) {
                     continue;
@@ -998,7 +999,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
             // TODO: add game simulations here to find best attackers/blockers combination
 
             // find safe attackers (can't be killed by blockers)
-            for (UUID defenderId : game.getOpponents(playerId)) {
+            for (UUID defenderId : game.getOpponents(playerId, true)) {
                 Player defender = game.getPlayer(defenderId);
                 if (!defender.isInGame()) {
                     continue;

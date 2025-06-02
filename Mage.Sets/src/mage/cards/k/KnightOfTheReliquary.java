@@ -43,11 +43,11 @@ public final class KnightOfTheReliquary extends CardImpl {
 
         // Knight of the Reliquary gets +1/+1 for each land card in your graveyard.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterLandCard());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
 
         // {T}, Sacrifice a Forest or Plains: Search your library for a land card, put it onto the battlefield, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(target), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }

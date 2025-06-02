@@ -7,7 +7,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -51,12 +51,12 @@ public final class RasputinDreamweaver extends CardImpl {
                 new CountersSourceCount(CounterType.DREAM)));
 
         // Remove a dream counter from Rasputin: Prevent the next 1 damage that would be dealt to Rasputin this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new RemoveCountersSourceCost(CounterType.DREAM.createInstance())));
+        this.addAbility(new SimpleActivatedAbility(new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new RemoveCountersSourceCost(CounterType.DREAM.createInstance())));
 
         // At the beginning of your upkeep, if Rasputin started the turn untapped, put a dream counter on it.
         this.addAbility(
                 new ConditionalInterveningIfTriggeredAbility(
-                        new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance()), TargetController.YOU, false),
+                        new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance())),
                         RasputinDreamweaverStartedUntappedCondition.instance,
                         "At the beginning of your upkeep, if {this} started the turn untapped, put a dream counter on it."),
                 new RasputinDreamweaverStartedUntappedWatcher());

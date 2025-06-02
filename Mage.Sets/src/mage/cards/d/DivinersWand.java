@@ -38,14 +38,14 @@ public final class DivinersWand extends CardImpl {
         // new abilities
         Ability newBoost = new DrawCardControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false);
         newBoost.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).concatBy("and"));
-        Ability newDraw = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(4));
+        Ability newDraw = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(4));
         // gain new abilities
         Effect effectBoost = new GainAbilityAttachedEffect(newBoost, AttachmentType.EQUIPMENT)
                 .setText("Equipped creature has \"Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn\"");
         Effect effectDraw = new GainAbilityAttachedEffect(newDraw, AttachmentType.EQUIPMENT)
                 .setText("\"{4}: Draw a card.\"");
         // total ability
-        Ability totalAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effectBoost);
+        Ability totalAbility = new SimpleStaticAbility(effectBoost);
         totalAbility.addEffect(effectDraw.concatBy("and"));
         this.addAbility(totalAbility);
 

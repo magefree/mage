@@ -10,6 +10,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class CadricSoulKindlerTest extends CardTestPlayerBase {
 
+    // The "legend rule" doesn't apply to tokens you control.
+    // Whenever another nontoken legendary permanent you control enters, you may pay {1}. If you do, create a token
+    // that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
     private static final String cadric = "Cadric, Soul Kindler";
     private static final String isamaru = "Isamaru, Hound of Konda";
 
@@ -20,7 +23,7 @@ public class CadricSoulKindlerTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, isamaru);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, isamaru);
-        setChoice(playerA, true);
+        setChoice(playerA, true); // create copy
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
@@ -36,12 +39,14 @@ public class CadricSoulKindlerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.HAND, playerA, isamaru, 2);
 
+        // first isamaru and copy of it
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, isamaru);
-        setChoice(playerA, true);
+        setChoice(playerA, true); // create copy
 
+        // second isamaru and copy of it
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, isamaru);
-        setChoice(playerA, true);
-        setChoice(playerA, isamaru);
+        setChoice(playerA, isamaru); // keep 1 perm due legendary rule
+        setChoice(playerA, true); // create copy
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);

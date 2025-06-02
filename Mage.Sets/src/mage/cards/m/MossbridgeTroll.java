@@ -44,7 +44,7 @@ public final class MossbridgeTroll extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new MossbridgeTrollReplacementEffect()));
 
         // Tap any number of untapped creatures you control other than Mossbridge Troll with total power 10 or greater: Mossbridge Troll gets +20/+20 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(20, 20, Duration.EndOfTurn), new MossbridgeTrollCost());
+        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(20, 20, Duration.EndOfTurn), new MossbridgeTrollCost());
         ability.setAdditionalCostsRuleVisible(false);
         this.addAbility(ability);
 

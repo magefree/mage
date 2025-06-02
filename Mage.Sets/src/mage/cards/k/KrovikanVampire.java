@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -37,11 +37,9 @@ public final class KrovikanVampire extends CardImpl {
 
         // At the beginning of each end step, if a creature dealt damage by Krovikan Vampire this turn died, put that card onto the battlefield under your control. Sacrifice it when you lose control of Krovikan Vampire.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new KrovikanVampireEffect(),
-                TargetController.ANY,
-                new KrovikanVampireInterveningIfCondition(),
-                false);
+                TargetController.ANY, new KrovikanVampireEffect(),
+                false, new KrovikanVampireInterveningIfCondition()
+        );
         ability.addWatcher(new KrovikanVampireCreaturesDamagedWatcher());
         ability.addWatcher(new KrovikanVampireCreaturesDiedWatcher());
         this.addAbility(ability);

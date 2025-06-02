@@ -52,7 +52,7 @@ public final class Anavolver extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition("{B}"),
                 "If {this} was kicked with its {B} kicker, it enters with a +1/+1 counter on it and with \"Pay 3 life: Regenerate Anavolver.\"",
                 "{this} enters with a +1/+1 counter on it and with \"Pay 3 life: Regenerate Anavolver.\"");
-        ((EntersBattlefieldEffect)ability2.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(3)), Duration.WhileOnBattlefield));
+        ((EntersBattlefieldEffect)ability2.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(new RegenerateSourceEffect(), new PayLifeCost(3)), Duration.WhileOnBattlefield));
         this.addAbility(ability2);
     }
 

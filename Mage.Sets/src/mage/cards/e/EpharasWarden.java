@@ -38,7 +38,7 @@ public final class EpharasWarden extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Tap target creature with power 3 or less.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);

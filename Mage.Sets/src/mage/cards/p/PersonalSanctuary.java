@@ -26,7 +26,7 @@ public final class PersonalSanctuary extends CardImpl {
 
 
         // During your turn, prevent all damage that would be dealt to you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PersonalSanctuaryEffect()));
+        this.addAbility(new SimpleStaticAbility(new PersonalSanctuaryEffect()));
     }
 
     private PersonalSanctuary(final PersonalSanctuary card) {

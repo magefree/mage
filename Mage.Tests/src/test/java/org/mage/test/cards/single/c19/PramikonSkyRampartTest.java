@@ -1,10 +1,6 @@
 package org.mage.test.cards.single.c19;
 
-import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionRestrictionEffect;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
@@ -63,7 +59,7 @@ public class PramikonSkyRampartTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, devil);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pramikon);
-        setChoice(playerA, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_LEFT);
+        setChoice(playerA, ModeChoice.LEFT.toString());
 
         // A has pramikon, and chose left.
         //
@@ -128,7 +124,7 @@ public class PramikonSkyRampartTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, devil);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pramikon);
-        setChoice(playerA, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_RIGHT);
+        setChoice(playerA, ModeChoice.RIGHT.toString());
 
         // A has pramikon, and chose right.
         //
@@ -197,10 +193,10 @@ public class PramikonSkyRampartTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, devil);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pramikon);
-        setChoice(playerA, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_RIGHT);
+        setChoice(playerA, ModeChoice.RIGHT.toString());
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, pramikon);
-        setChoice(playerD, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_LEFT);
+        setChoice(playerD, ModeChoice.LEFT.toString());
 
         // A has pramikon, and chose right.
         // D has pramikon, and chose left.
@@ -270,10 +266,10 @@ public class PramikonSkyRampartTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, devil);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pramikon);
-        setChoice(playerA, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_LEFT);
+        setChoice(playerA, ModeChoice.LEFT.toString());
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, pramikon);
-        setChoice(playerD, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_RIGHT);
+        setChoice(playerD, ModeChoice.RIGHT.toString());
 
         // A has pramikon, and chose left.
         // D has pramikon, and chose right.

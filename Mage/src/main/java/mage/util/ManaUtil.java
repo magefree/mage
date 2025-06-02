@@ -13,10 +13,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -644,8 +641,8 @@ public final class ManaUtil {
         Card secondSide;
         if (card instanceof SplitCard) {
             secondSide = ((SplitCard) card).getRightHalfCard();
-        } else if (card instanceof AdventureCard) {
-            secondSide = ((AdventureCard) card).getSpellCard();
+        } else if (card instanceof CardWithSpellOption) {
+            secondSide = ((CardWithSpellOption) card).getSpellCard();
         } else if (card instanceof ModalDoubleFacedCard) {
             secondSide = ((ModalDoubleFacedCard) card).getRightHalfCard();
         } else {
@@ -713,7 +710,7 @@ public final class ManaUtil {
             int bookmark = game.bookmarkState();
             player.resetStoredBookmark(game);
 
-            wantToPay = player.announceXMana(0, maxValue, "Choose how much mana to pay", game, source);
+            wantToPay = player.announceX(0, maxValue, "Choose how much mana to pay", game, source, true);
             if (wantToPay > 0) {
                 Cost cost = ManaUtil.createManaCost(wantToPay, payAsX);
                 payed = cost.pay(source, game, source, player.getId(), false, null);

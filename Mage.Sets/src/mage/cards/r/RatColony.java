@@ -38,7 +38,7 @@ public final class RatColony extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Rat Colony gets +1/+0 for each other Rat you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter),
                         StaticValue.get(0), Duration.WhileOnBattlefield)));
 

@@ -91,6 +91,7 @@ class EyeOfSingularityETBEffect extends OneShotEffect {
 
         for (Permanent permanent : permanents) {
             permanent.destroy(source, game, true);
+
         }
         return true;
     }

@@ -41,7 +41,7 @@ public final class IndomitableArchangel extends CardImpl {
         // Metalcraft — Artifacts you control have shroud as long as you control three or more artifacts. (An artifact with shroud can’t be the target of spells or abilities.)
         ContinuousEffect gainAbilityEffect = new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(gainAbilityEffect, MetalcraftCondition.instance, rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect)
+        this.addAbility(new SimpleStaticAbility(effect)
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance)
         );

@@ -35,7 +35,7 @@ public final class LlanowarBehemoth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Tap an untapped creature you control: Llanowar Behemoth gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
 
     private LlanowarBehemoth(final LlanowarBehemoth card) {

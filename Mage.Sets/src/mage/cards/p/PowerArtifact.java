@@ -35,7 +35,7 @@ public final class PowerArtifact extends CardImpl {
 
         // Enchanted artifact's activated abilities cost {2} less to activate. 
         // This effect can't reduce the mana in that cost to less than one mana.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PowerArtifactCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(new PowerArtifactCostModificationEffect()));
     }
 
     private PowerArtifact(final PowerArtifact card) {

@@ -42,12 +42,12 @@ public final class ThrunBreakerOfSilence extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Thrun, Breaker of Silence can't be the target of nongreen spells your opponents control or abilities from nongreen sources your opponents control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThrunBreakerOfSilenceEffect()));
+        this.addAbility(new SimpleStaticAbility(new ThrunBreakerOfSilenceEffect()));
         // As long as it's your turn, Thrun has indestructible.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                         MyTurnCondition.instance,
-                        "As long as it's your turn, {this} has indestructible"))
+                        "During your turn, {this} has indestructible"))
                 .addHint(MyTurnHint.instance));
     }
 

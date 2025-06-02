@@ -39,7 +39,7 @@ public final class BilbosRing extends CardImpl {
         // As long as it's your turn, equipped creature has hexproof and can't be blocked.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT),
-                MyTurnCondition.instance, "as long as it's your turn, equipped creature has hexproof"
+                MyTurnCondition.instance, "during your turn, equipped creature has hexproof"
         ));
         ability.addEffect(new ConditionalRestrictionEffect(
                 new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT),

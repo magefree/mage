@@ -37,7 +37,7 @@ public final class SamiteElder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Creatures you control gain protection from the colors of target permanent you control until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SamiteElderEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SamiteElderEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);
     }

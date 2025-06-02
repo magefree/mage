@@ -117,11 +117,11 @@ class MarchOfRecklessJoyWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
         morMap.compute(event
-                        .getAdditionalReference()
+                        .getApprovingObject()
                         .getApprovingMageObjectReference(),
                 CardUtil::setOrIncrementValue
         );

@@ -109,7 +109,7 @@ class KroxaTitanOfDeathsHungerDiscardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Cards cards = new CardsImpl();
-        game.getOpponents(source.getControllerId())
+        game.getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
@@ -133,7 +133,7 @@ class KroxaTitanOfDeathsHungerDiscardEffect extends OneShotEffect {
                     }
                     playerSet.add(player.getId());
                 });
-        game.getOpponents(source.getControllerId())
+        game.getOpponents(source.getControllerId(), true)
                 .stream()
                 .filter(uuid -> !playerSet.contains(uuid))
                 .map(game::getPlayer)

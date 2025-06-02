@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
 
@@ -39,12 +38,12 @@ public final class TallymanOfNurgle extends CardImpl {
 
         // The Seven-fold Chant -- At the beginning of your end step, if a creature died this turn, you draw a card and you lose 1 life. If seven or more creatures died this turn, instead you draw seven cards and you lose 7 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ConditionalOneShotEffect(
+                TargetController.YOU, new ConditionalOneShotEffect(
                         new DrawCardSourceControllerEffect(7), new DrawCardSourceControllerEffect(1),
                         TallymanOfNurgleCondition.instance, "you draw a card and you lose 1 life. " +
                         "If seven or more creatures died this turn, instead you draw seven cards and you lose 7 life"
                 ).addEffect(new LoseLifeSourceControllerEffect(7)).addOtherwiseEffect(new LoseLifeSourceControllerEffect(1)),
-                TargetController.YOU, MorbidCondition.instance, false
+                false, MorbidCondition.instance
         ).withFlavorWord("The Seven-fold Chant").addHint(CreaturesDiedThisTurnHint.instance));
     }
 

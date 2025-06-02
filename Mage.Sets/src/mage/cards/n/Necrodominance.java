@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
@@ -32,7 +32,7 @@ public final class Necrodominance extends CardImpl {
 
         // At the beginning of your end step, you may pay any amount of life. If you do, draw that many cards.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new NecrodominanceEffect(), TargetController.YOU, false
+                new NecrodominanceEffect()
         ));
 
         // Your maximum hand size is five.
@@ -81,7 +81,7 @@ class NecrodominanceEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", game);
+        int payAmount = controller.getAmount(0, controller.getLife(), "Pay any amount of life", source, game);
         Cost cost = new PayLifeCost(payAmount);
         if (!cost.pay(source, game, source, source.getControllerId(), true)) {
             return false;

@@ -67,9 +67,7 @@ class TribalUnityEffect extends OneShotEffect {
         Choice typeChoice = new ChoiceCreatureType(game, source);
         if (player != null && player.choose(outcome, typeChoice, game)) {
             int boost = amount.calculate(game, source, this);
-            if (typeChoice.getChoiceKey() != null) {
-                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoiceKey());
-            }
+            game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoiceKey());
             FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
             filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
             game.addEffect(new BoostAllEffect(

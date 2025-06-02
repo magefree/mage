@@ -1,30 +1,25 @@
 package mage.cards.v;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +40,10 @@ public final class VaevictisAsmadiTheDire extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Vaevictis Asmadi, the Dire attacks, for each player, choose target permanent that player controls. Those players sacrifice those permanents. Each player who sacrificed a permanent this way reveals the top card of their library, then puts it onto the battlefield if it's a permanent card.
-        this.addAbility(new VaevictisAsmadiTheDireTriggeredAbility());
+        Ability ability = new AttacksTriggeredAbility(new VaevictisAsmadiTheDireEffect());
+        ability.addTarget(new TargetPermanent());
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
+        this.addAbility(ability);
     }
 
     private VaevictisAsmadiTheDire(final VaevictisAsmadiTheDire card) {
@@ -56,48 +54,6 @@ public final class VaevictisAsmadiTheDire extends CardImpl {
     public VaevictisAsmadiTheDire copy() {
         return new VaevictisAsmadiTheDire(this);
     }
-}
-
-class VaevictisAsmadiTheDireTriggeredAbility extends TriggeredAbilityImpl {
-
-    VaevictisAsmadiTheDireTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new VaevictisAsmadiTheDireEffect(), false);
-        setTriggerPhrase("Whenever {this} attacks, ");
-    }
-
-    private VaevictisAsmadiTheDireTriggeredAbility(final VaevictisAsmadiTheDireTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VaevictisAsmadiTheDireTriggeredAbility copy() {
-        return new VaevictisAsmadiTheDireTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!game.getCombat().getAttackers().contains(this.getSourceId())) {
-            return false;
-        }
-        this.getTargets().clear();
-        for (UUID playerId : game.getState().getPlayerList(this.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterPermanent("permanent controlled by " + player.getName());
-            filter.add(new ControllerIdPredicate(playerId));
-            TargetPermanent target = new TargetPermanent(filter);
-            this.addTarget(target);
-        }
-        return true;
-    }
-
 }
 
 class VaevictisAsmadiTheDireEffect extends OneShotEffect {

@@ -33,7 +33,7 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
     }
 
-    private GoadTargetEffect(final GoadTargetEffect effect) {
+    protected GoadTargetEffect(final GoadTargetEffect effect) {
         super(effect);
     }
 

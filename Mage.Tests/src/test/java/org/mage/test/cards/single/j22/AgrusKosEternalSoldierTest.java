@@ -3,6 +3,7 @@ package org.mage.test.cards.single.j22;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -65,6 +66,41 @@ public class AgrusKosEternalSoldierTest extends CardTestPlayerBase {
         assertDamageReceived(playerA, firewalker, 0);
         assertLife(playerA, 21);
         assertLife(playerB, 20);
+    }
+
+    @Test
+    public void testCopiedTriggerAbility() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerB, agrus);
+        addCard(Zone.BATTLEFIELD, playerB, turtle);
+        addCard(Zone.BATTLEFIELD, playerB, firewalker);
+        addCard(Zone.BATTLEFIELD, playerB, "Plateau", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Panharmonicon");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        addCard(Zone.HAND, playerA, "Smoldering Werewolf");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Smoldering Werewolf");
+        setChoice(playerB, true); // gain life on cast
+        //
+        setChoice(playerA, "When {this} enters, it deals"); // x2 triggers from Panharmonicon
+        addTarget(playerA, agrus); // x1 trigger
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // x1 trigger
+        addTarget(playerA, agrus); // x2 trigger
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // x2 trigger
+        //
+        setChoice(playerB, "Whenever {this} becomes"); // x2 triggers from Panharmonicon
+        setChoice(playerB, true); // x1 pay to copy
+        setChoice(playerB, true); // x2 pay to copy
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertDamageReceived(playerB, agrus, 2);
+        assertDamageReceived(playerB, turtle, 2);
+        assertDamageReceived(playerB, firewalker, 0);
+        assertLife(playerA, 20);
+        assertLife(playerB, 21);
     }
 
 }

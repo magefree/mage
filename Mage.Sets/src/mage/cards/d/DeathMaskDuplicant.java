@@ -57,7 +57,7 @@ public final class DeathMaskDuplicant extends CardImpl {
         this.addAbility(ability);
 
         // As long as a card exiled with Death-Mask Duplicant has flying, Death-Mask Duplicant has flying. The same is true for fear, first strike, double strike, haste, landwalk, protection, and trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DeathMaskDuplicantEffect()));
+        this.addAbility(new SimpleStaticAbility(new DeathMaskDuplicantEffect()));
     }
 
     private DeathMaskDuplicant(final DeathMaskDuplicant card) {

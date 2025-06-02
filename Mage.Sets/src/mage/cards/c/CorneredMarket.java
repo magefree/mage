@@ -30,7 +30,7 @@ public final class CorneredMarket extends CardImpl {
 
         // Players can't cast spells with the same name as a nontoken permanent.
         // Players can't play nonbasic lands with the same name as a nontoken permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CorneredMarketReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new CorneredMarketReplacementEffect()));
 
     }
 

@@ -36,7 +36,6 @@ public final class MythUnbound extends CardImpl {
 
         // Your commander costs {1} less to cast for each time it's been cast from the command zone this game.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new MythUnboundCostReductionEffect()
         ));
 

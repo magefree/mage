@@ -44,7 +44,7 @@ public final class AshenmoorCohort extends CardImpl {
         // Ashenmoor Cohort gets +1/+1 as long as you control another black creature.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

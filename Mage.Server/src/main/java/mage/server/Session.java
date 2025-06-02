@@ -73,6 +73,7 @@ public class Session {
 
     private final ReentrantLock lock;
     private final ReentrantLock callBackLock;
+    private String lastCallbackInfo = "";
 
     public Session(ManagerFactory managerFactory, String sessionId, InvokerCallbackHandler callbackHandler) {
         this.managerFactory = managerFactory;
@@ -152,11 +153,11 @@ public class Session {
         if (userName.length() > config.getMaxUserNameLength()) {
             return "User name may not be longer than " + config.getMaxUserNameLength() + " characters";
         }
-        if (userName.length() <= 3) {
-            return "User name is too short (3 characters or fewer)";
+        if (userName.length() <= 2) {
+            return "User name is too short (2 characters or fewer)";
         }
-        if (userName.length() >= 500) {
-            return "User name is too long (500 characters or more)";
+        if (userName.length() >= 250) {
+            return "User name is too long (250 characters or more)";
         }
         return null;
     }
@@ -429,8 +430,10 @@ public class Session {
      */
     public void fireCallback(final ClientCallback call) {
         boolean lockSet = false; // TODO: research about locks, why it here? 2023-12-06
+
         try {
             if (valid && callBackLock.tryLock(50, TimeUnit.MILLISECONDS)) {
+                lastCallbackInfo = call.getInfo();
                 call.setMessageId(messageId.incrementAndGet());
                 lockSet = true;
                 Callback callback = new Callback(call);
@@ -440,11 +443,14 @@ public class Session {
             }
         } catch (InterruptedException ex) {
             // already sending another command (connection problem?)
+            // TODO: un-support multiple games/drafts at the same time?!?!?!?!
             if (call.getMethod().equals(ClientCallbackMethod.GAME_INIT)
                     || call.getMethod().equals(ClientCallbackMethod.START_GAME)) {
-                // it's ok use case, user has connection problem so can't send game init (see sendInfoAboutPlayersNotJoinedYetAndTryToFixIt)
+                // it's ok, possible use cases:
+                // - user has connection problem so can't send game init (see sendInfoAboutPlayersNotJoinedYetAndTryToFixIt)
             } else {
-                logger.warn("SESSION LOCK, possible connection problem - fireCallback - userId: " + userId + " messageId: " + call.getMessageId(), ex);
+                logger.warn("SESSION LOCK, possible connection problem - fireCallback - userId: "
+                        + userId + ", prev call: " + lastCallbackInfo + ", current call: " + call.getInfo(), ex);
             }
         } catch (HandleCallbackException ex) {
             // general error

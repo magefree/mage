@@ -1,21 +1,20 @@
-
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,7 +22,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class GarruksPackleader extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 3 or greater");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature you control with power 3 or greater");
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));
@@ -36,7 +35,7 @@ public final class GarruksPackleader extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 

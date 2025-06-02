@@ -30,7 +30,7 @@ public final class KoboldTaskmaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other Kobold creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
         
     }
 

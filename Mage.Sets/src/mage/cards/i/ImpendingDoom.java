@@ -42,7 +42,7 @@ public final class ImpendingDoom extends CardImpl {
         // Enchanted creature gets +3/+3 and attacks each combat if able.
         Effect effect = new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +3/+3");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("and attacks each combat if able");
         ability.addEffect(effect);

@@ -36,7 +36,6 @@ public final class LimitedResources extends CardImpl {
 
         // Players can't play lands as long as ten or more lands are on the battlefield.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousRuleModifyingEffect(
                         new CantPlayLandEffect(),
                         new PermanentsOnTheBattlefieldCondition(

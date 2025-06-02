@@ -43,7 +43,7 @@ public final class StensiaMasquerade extends CardImpl {
         // Attacking creatures you control have first strike.
         Effect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("Attacking creatures you control have first strike");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Whenever a Vampire you control deals combat damage to a player, put a +1/+1 counter on it.
         this.addAbility(new StensiaMasqueradeTriggeredAbility());

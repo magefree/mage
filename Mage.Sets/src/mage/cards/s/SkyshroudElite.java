@@ -28,7 +28,7 @@ public final class SkyshroudElite extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Skyshroud Elite gets +1/+2 as long as an opponent controls a nonbasic land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
                 new OpponentControlsPermanentCondition(FilterLandPermanent.nonbasicLand()),
                 "{this} gets +1/+2 as long as an opponent controls a nonbasic land")));

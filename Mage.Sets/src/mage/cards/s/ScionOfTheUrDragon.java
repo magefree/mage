@@ -36,7 +36,7 @@ public final class ScionOfTheUrDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}: Search your library for a Dragon permanent card and put it into your graveyard. If you do, Scion of the Ur-Dragon becomes a copy of that card until end of turn. Then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new ScionOfTheUrDragonEffect(),
                 new ManaCostsImpl<>("{2}")));
     }

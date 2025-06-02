@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.WardAbility;
@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -31,7 +30,7 @@ public final class HulkingRaptor extends CardImpl {
 
         // At the beginning of your precombat main phase, add {G}{G}.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new BasicManaEffect(Mana.GreenMana(2)), TargetController.YOU, false
+                new BasicManaEffect(Mana.GreenMana(2))
         ));
     }
 

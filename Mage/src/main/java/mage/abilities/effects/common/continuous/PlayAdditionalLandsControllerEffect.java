@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -37,14 +36,11 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (player.getLandsPerTurn() == Integer.MAX_VALUE || this.additionalCards == Integer.MAX_VALUE) {
-                player.setLandsPerTurn(Integer.MAX_VALUE);
-            } else {
-                player.setLandsPerTurn(player.getLandsPerTurn() + this.additionalCards);
-            }
-            return true;
+        if (player == null) {
+            return false;
         }
+
+        player.setLandsPerTurn(CardUtil.overflowInc(player.getLandsPerTurn(), additionalCards));
         return true;
     }
 

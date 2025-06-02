@@ -201,7 +201,7 @@
             <Component class="javax.swing.JToggleButton" name="btnTypeTourneyConstructed">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Constructed tourn."/>
+                <Property name="text" type="java.lang.String" value="Constructed tourney"/>
                 <Property name="toolTipText" type="java.lang.String" value="Shows all constructed tournament tables."/>
                 <Property name="actionCommand" type="java.lang.String" value="typeTourneyConstructed"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
@@ -216,7 +216,7 @@
             <Component class="javax.swing.JToggleButton" name="btnTypeTourneyLimited">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="Limited tourn."/>
+                <Property name="text" type="java.lang.String" value="Limited tourney"/>
                 <Property name="toolTipText" type="java.lang.String" value="Shows all limited tournament tables."/>
                 <Property name="actionCommand" type="java.lang.String" value="typeTourneyLimited"/>
                 <Property name="focusPainted" type="boolean" value="false"/>

@@ -64,7 +64,7 @@ public final class HeroOfBretagard extends CardImpl {
                 "As long as {this} has ten or more counters on it, it has indestructible"
         ));
         tenCountersAbility.addEffect(new ConditionalContinuousEffect(
-                new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, SubType.GOD),
+                new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, true, SubType.GOD),
                 TEN_OR_MORE_COUNTERS,
                 "and is a God in addition to its other types"
         ));

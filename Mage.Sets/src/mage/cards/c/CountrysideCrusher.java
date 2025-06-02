@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -32,7 +32,7 @@ public final class CountrysideCrusher extends CardImpl {
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CountrysideCrusherEffect(), TargetController.YOU, false
+                new CountrysideCrusherEffect()
         ));
 
         // Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Countryside Crusher.

@@ -43,7 +43,7 @@ public final class DementiaSliver extends CardImpl {
         gainedAbility.addEffect(new DementiaSliverEffect());
         gainedAbility.addTarget(new TargetOpponent());
         gainedAbility.addHint(MyTurnHint.instance);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter,
                         "All Slivers have \"{T}: Choose a card name. "
                                 + "Target opponent reveals a card at random from their hand."

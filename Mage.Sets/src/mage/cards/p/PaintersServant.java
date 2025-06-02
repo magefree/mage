@@ -35,7 +35,7 @@ public final class PaintersServant extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
 
         // All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PaintersServantEffect()));
+        this.addAbility(new SimpleStaticAbility(new PaintersServantEffect()));
     }
 
     private PaintersServant(final PaintersServant card) {

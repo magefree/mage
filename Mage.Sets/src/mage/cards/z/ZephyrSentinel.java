@@ -1,38 +1,30 @@
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class ZephyrSentinel extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("other creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public ZephyrSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -50,7 +42,7 @@ public final class ZephyrSentinel extends CardImpl {
 
         // When Zephyr Sentinel enters the battlefield, return up to one other target creature you control to its owner's hand. If it was a Soldier, put a +1/+1 counter on Zephyr Sentinel.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ZephyrSentinelEffect());
-        ability.addTarget(new TargetControlledCreaturePermanent(0, 1, filter, false));
+        ability.addTarget(new TargetControlledCreaturePermanent(0, 1, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE, false));
         this.addAbility(ability);
     }
 

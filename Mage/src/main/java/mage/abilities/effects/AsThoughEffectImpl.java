@@ -6,13 +6,12 @@ import mage.abilities.ActivatedAbility;
 import mage.cards.Card;
 import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
+import mage.cards.CardWithSpellOption;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
-
-import mage.cards.AdventureCard;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -103,9 +102,9 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
                 if (!rightCard.isLand(game)) {
                     player.setCastSourceIdWithAlternateMana(rightCard.getId(), null, rightCard.getSpellAbility().getCosts(), identifier);
                 }
-            } else if (card instanceof AdventureCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 Card creatureCard = card.getMainCard();
-                Card spellCard = ((AdventureCard) card).getSpellCard();
+                Card spellCard = ((CardWithSpellOption) card).getSpellCard();
                 player.setCastSourceIdWithAlternateMana(creatureCard.getId(), null, creatureCard.getSpellAbility().getCosts(), identifier);
                 player.setCastSourceIdWithAlternateMana(spellCard.getId(), null, spellCard.getSpellAbility().getCosts(), identifier);
             }

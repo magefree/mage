@@ -28,7 +28,7 @@ public final class TeardropKami extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Teardrop Kami: You may tap or untap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new MayTapOrUntapTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new MayTapOrUntapTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -42,5 +42,3 @@ public final class TeardropKami extends CardImpl {
         return new TeardropKami(this);
     }
 }
-
-

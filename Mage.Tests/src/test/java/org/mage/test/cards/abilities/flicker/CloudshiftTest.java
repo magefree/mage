@@ -178,7 +178,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
         attack(3, playerA, "Silvercoat Lion");
 
-        activateAbility(3, PhaseStep.END_COMBAT, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull  Equipped creature gets");
+        activateAbility(3, PhaseStep.END_COMBAT, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull Equipped creature gets");
         setModeChoice(playerA, "1");
         castSpell(3, PhaseStep.END_COMBAT, playerA, "Cloudshift", "Silvercoat Lion", "Remove a charge counter from");
 
@@ -215,7 +215,7 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
         attack(3, playerA, "Silvercoat Lion");
 
-        activateAbility(4, PhaseStep.DRAW, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull  Equipped creature gets");
+        activateAbility(4, PhaseStep.DRAW, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull Equipped creature gets");
         setModeChoice(playerA, "1");
         castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Flickerwisp");
         addTarget(playerB, "Silvercoat Lion");

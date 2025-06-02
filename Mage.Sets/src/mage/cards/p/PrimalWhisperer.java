@@ -38,7 +38,7 @@ public final class PrimalWhisperer extends CardImpl {
 
         // Primal Whisperer gets +2/+2 for each face-down creature on the battlefield.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
         // Morph {3}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{G}")));
     }

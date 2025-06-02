@@ -2,7 +2,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.LoseHalfLifeTargetEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
@@ -22,10 +22,10 @@ public final class HavocFestival extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{R}");
 
         // Players can't gain life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantGainLifeAllEffect()));
 
         // At the beginning of each player's upkeep, that player loses half their life, rounded up.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseHalfLifeTargetEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new LoseHalfLifeTargetEffect(), false));
 
     }
 

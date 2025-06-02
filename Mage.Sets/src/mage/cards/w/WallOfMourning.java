@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.dynamicvalue.common.OpponentsCount;
@@ -42,8 +42,8 @@ public final class WallOfMourning extends CardImpl {
 
         // Coven — At the beginning of your end step, if you control three or more creatures with different powers, put a card exiled with Wall of Mourning into its owner's hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new WallOfMourningReturnEffect(),
-                TargetController.YOU, CovenCondition.instance, false
+                TargetController.YOU, new WallOfMourningReturnEffect(),
+                false, CovenCondition.instance
         ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }
 

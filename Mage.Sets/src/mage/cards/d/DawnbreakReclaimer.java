@@ -6,7 +6,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -41,7 +41,7 @@ public final class DawnbreakReclaimer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your end step, choose a creature card in an opponent's graveyard, then that player chooses a creature card in your graveyard.
         // You may return those cards to the battlefield under their owners' control.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DawnbreakReclaimerEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DawnbreakReclaimerEffect()));
     }
 
     private DawnbreakReclaimer(final DawnbreakReclaimer card) {

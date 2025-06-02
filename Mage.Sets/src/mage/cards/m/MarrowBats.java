@@ -29,7 +29,7 @@ public final class MarrowBats extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // Pay 4 life: Regenerate Marrow Bats.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(4)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new PayLifeCost(4)));
     }
 
     private MarrowBats(final MarrowBats card) {

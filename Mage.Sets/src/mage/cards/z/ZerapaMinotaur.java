@@ -27,7 +27,7 @@ public final class ZerapaMinotaur extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // {2}: Zerapa Minotaur loses first strike until end of turn. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilitySourceEffect(
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new LoseAbilitySourceEffect(
             FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}"));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));

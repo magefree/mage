@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -35,7 +35,7 @@ public final class GodPharaohsGift extends CardImpl {
 
         // At the beginning of combat on your turn, you may exile a creature card from your graveyard. If you do, create a token that's a copy of that card, except it's a 4/4 black Zombie. It gains haste until end of turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new GodPharaohsGiftEffect(), TargetController.YOU, false
+                new GodPharaohsGiftEffect()
         ));
     }
 

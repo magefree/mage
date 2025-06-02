@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -50,7 +49,7 @@ public final class AtraxasSkitterfang extends CardImpl {
                 ability,
                 new RemoveCountersSourceCost(CounterType.OIL.createInstance()),
                 "Remove an oil counter?"
-        ), TargetController.YOU, false));
+        )));
     }
 
     private AtraxasSkitterfang(final AtraxasSkitterfang card) {

@@ -7,9 +7,8 @@ import mage.abilities.keyword.CraftAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetPermanentAmount;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
 
@@ -23,12 +22,8 @@ public final class JadeSeedstones extends CardImpl {
         this.secondSideCardClazz = mage.cards.j.JadeheartAttendant.class;
 
         // When Jade Seedstones enters the battlefield, distribute three +1/+1 counters among one, two, or three target creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(
-                CounterType.P1P1, 3, "one, two, or three target creatures you control"
-        ));
-        TargetPermanentAmount target = new TargetPermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES);
-        target.setMinNumberOfTargets(1);
-        ability.addTarget(target);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect());
+        ability.addTarget(new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
 
         // Craft with creature {5}{G}{G}

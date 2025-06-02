@@ -10,7 +10,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.TargetController;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -41,7 +41,7 @@ public class SanctuaryInterveningIfTriggeredAbility extends ConditionalInterveni
 
     private static TriggeredAbility makeTrigger(OneShotEffect effect1, OneShotEffect effect2, ObjectColor color1, ObjectColor color2) {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(
-                new ConditionalOneShotEffect(effect1, new InvertCondition(makeAndCondition(color1, color2))), TargetController.YOU, false
+                new ConditionalOneShotEffect(effect1, new InvertCondition(makeAndCondition(color1, color2)))
         );
         ability.addEffect(new ConditionalOneShotEffect(effect2, makeAndCondition(color1, color2)));
         return ability;

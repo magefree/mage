@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -32,8 +32,7 @@ public final class DawnhartWardens extends CardImpl {
         // Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control get +1/+0 until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new BoostControlledEffect(1, 0, Duration.EndOfTurn),
-                        TargetController.YOU, false
+                        new BoostControlledEffect(1, 0, Duration.EndOfTurn)
                 ), CovenCondition.instance, "At the beginning of combat on your turn, " +
                 "if you control three or more creatures with different powers, " +
                 "creatures you control get +1/+0 until end of turn."

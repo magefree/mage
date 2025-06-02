@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -50,7 +50,7 @@ public final class SolKanarTheTainted extends CardImpl {
         // At the beginning of your end step, choose one that hasn't been chosen --
         // * Draw a card.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                new DrawCardSourceControllerEffect(1)
         );
         ability.setModeTag("draw");
         ability.getModes().setLimitUsageByOnce(false);

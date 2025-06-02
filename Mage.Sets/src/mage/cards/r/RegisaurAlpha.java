@@ -39,7 +39,7 @@ public final class RegisaurAlpha extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Other Dinosaurs you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
 
         // When Regisaur Alpha enters the battlefield, create a 3/3 green Dinosaur creature token with trample.

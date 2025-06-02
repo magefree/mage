@@ -32,7 +32,7 @@ public final class EarthServant extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter, 0),
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter, 0),
                 new PermanentsOnBattlefieldCount(filter, 1),
                 Duration.WhileOnBattlefield)));
     }

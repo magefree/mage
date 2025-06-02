@@ -44,7 +44,7 @@ public final class RiptideReplicator extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
         // {4}, {T}: Create an X/X creature token of the chosen color and type, where X is the number of charge counters on Riptide Replicator.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RiptideReplicatorEffect(), new GenericManaCost(4));
+        ability = new SimpleActivatedAbility(new RiptideReplicatorEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

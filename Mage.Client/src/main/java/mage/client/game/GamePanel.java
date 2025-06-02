@@ -30,8 +30,10 @@ import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
 import mage.players.PlayableObjectStats;
 import mage.players.PlayableObjectsList;
+import mage.util.CardUtil;
 import mage.util.DebugUtil;
 import mage.util.MultiAmountMessage;
+import mage.util.StreamUtils;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -53,6 +55,7 @@ import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static mage.client.dialog.PreferencesDialog.*;
 import static mage.constants.PlayerAction.*;
@@ -211,6 +214,22 @@ public final class GamePanel extends javax.swing.JPanel {
                             }
                         });
             });
+        }
+
+        public List<UUID> getPossibleTargets() {
+            if (options != null && options.containsKey("possibleTargets")) {
+                return (List<UUID>) options.get("possibleTargets");
+            } else {
+                return Collections.emptyList();
+            }
+        }
+
+        public Set<UUID> getChosenTargets() {
+            if (options != null && options.containsKey("chosenTargets")) {
+                return new HashSet<>((List<UUID>) options.get("chosenTargets"));
+            } else {
+                return Collections.emptySet();
+            }
         }
 
         public CardView findCard(UUID id) {
@@ -639,7 +658,7 @@ public final class GamePanel extends javax.swing.JPanel {
                     // see test render dialog for refresh commands order
                     playPanel.getPlayerPanel().fullRefresh(GUISizeHelper.playerPanelGuiScale);
                     playPanel.init(player, bigCard, gameId, player.getPriorityTimeLeftSecs());
-                    playPanel.update(lastGameData.game, player, lastGameData.targets);
+                    playPanel.update(lastGameData.game, player, lastGameData.targets, lastGameData.getChosenTargets());
                     playPanel.getPlayerPanel().sizePlayerPanel(false);
                 }
             });
@@ -649,6 +668,11 @@ public final class GamePanel extends javax.swing.JPanel {
         if (this.abilityPicker != null && !this.abilityPicker.isVisible()) {
             this.abilityPicker.fullRefresh(GUISizeHelper.dialogGuiScale);
             this.abilityPicker.init(gameId, bigCard);
+        }
+        if (this.pickMultiNumber != null && !this.pickMultiNumber.isVisible()) {
+            // TODO: add pick number dialogs support here
+            //this.pickMultiNumber.fullRefresh(GUISizeHelper.dialogGuiScale);
+            this.pickMultiNumber.init(gameId, bigCard);
         }
     }
 
@@ -819,6 +843,7 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.addGame(gameId, this);
         this.feedbackPanel.init(gameId, bigCard);
         this.feedbackPanel.clear();
+        this.pickMultiNumber.init(gameId, bigCard);
         this.abilityPicker.init(gameId, bigCard);
         this.btnConcede.setVisible(true);
         this.btnStopWatching.setVisible(false);
@@ -1161,7 +1186,7 @@ public final class GamePanel extends javax.swing.JPanel {
                         }
                     }
                 }
-                players.get(player.getPlayerId()).update(lastGameData.game, player, lastGameData.targets);
+                players.get(player.getPlayerId()).update(lastGameData.game, player, lastGameData.targets, lastGameData.getChosenTargets());
                 if (player.getPlayerId().equals(playerId)) {
                     skipButtons.updateFromPlayer(player);
                 }
@@ -1777,12 +1802,7 @@ public final class GamePanel extends javax.swing.JPanel {
             needZone = (Zone) lastGameData.options.get("targetZone");
         }
 
-        List<UUID> needChosen;
-        if (lastGameData.options != null && lastGameData.options.containsKey("chosenTargets")) {
-            needChosen = (List<UUID>) lastGameData.options.get("chosenTargets");
-        } else {
-            needChosen = new ArrayList<>();
-        }
+        Set<UUID> needChosen = lastGameData.getChosenTargets();
 
         Set<UUID> needSelectable;
         if (lastGameData.targets != null) {
@@ -1804,7 +1824,36 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // hand
         if (needZone == Zone.HAND || needZone == Zone.ALL) {
+            // my hand
             for (CardView card : lastGameData.game.getMyHand().values()) {
+                if (needSelectable.contains(card.getId())) {
+                    card.setChoosable(true);
+                }
+                if (needChosen.contains(card.getId())) {
+                    card.setSelected(true);
+                }
+                if (needPlayable.containsObject(card.getId())) {
+                    card.setPlayableStats(needPlayable.getStats(card.getId()));
+                }
+            }
+
+            // opponent hands (switching by GUI's button with my hand)
+            List<SimpleCardView> list = lastGameData.game.getOpponentHands().values().stream().flatMap(s -> s.values().stream()).collect(Collectors.toList());
+            for (SimpleCardView card : list) {
+                if (needSelectable.contains(card.getId())) {
+                    card.setChoosable(true);
+                }
+                if (needChosen.contains(card.getId())) {
+                    card.setSelected(true);
+                }
+                if (needPlayable.containsObject(card.getId())) {
+                    card.setPlayableStats(needPlayable.getStats(card.getId()));
+                }
+            }
+
+            // watched hands (switching by GUI's button with my hand)
+            list = lastGameData.game.getWatchedHands().values().stream().flatMap(s -> s.values().stream()).collect(Collectors.toList());
+            for (SimpleCardView card : list) {
                 if (needSelectable.contains(card.getId())) {
                     card.setChoosable(true);
                 }
@@ -1983,7 +2032,7 @@ public final class GamePanel extends javax.swing.JPanel {
     private void prepareSelectableWindows(
             Collection<CardInfoWindowDialog> windows,
             Set<UUID> needSelectable,
-            List<UUID> needChosen,
+            Set<UUID> needChosen,
             PlayableObjectsList needPlayable
     ) {
         // lookAt or reveals windows clean up on next priority, so users can see dialogs, but xmage can't restore it
@@ -2177,6 +2226,7 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
+        pickMultiNumber.init(gameId, bigCard);
         pickMultiNumber.showDialog(messages, min, max, lastGameData.options, () -> {
             if (pickMultiNumber.isCancel()) {
                 SessionHandler.sendPlayerBoolean(gameId, false);

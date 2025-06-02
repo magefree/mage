@@ -42,7 +42,7 @@ public final class BladegraftAspirant extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Equipment spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Activated abilities of Equipment you control that target Bladegraft Aspirant cost {1} less to activate.
 
@@ -96,7 +96,7 @@ class BladegraftAspirantCostReductionEffect extends CostModificationEffectImpl {
 
         Permanent permanent = game.getPermanentOrLKIBattlefield(abilityToModify.getSourceId());
 
-        if (!(permanent != null && permanent.getSubtype(game).contains(SubType.EQUIPMENT) && permanent.isControlledBy(source.getControllerId()))) {
+        if (!(permanent != null && permanent.hasSubtype(SubType.EQUIPMENT, game) && permanent.isControlledBy(source.getControllerId()))) {
             return false;
         }
 

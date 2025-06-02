@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;

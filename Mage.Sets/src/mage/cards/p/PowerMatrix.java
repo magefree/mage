@@ -31,7 +31,7 @@ public final class PowerMatrix extends CardImpl {
         // {tap}: Target creature gets +1/+1 and gains flying, first strike, and trample until end of turn.
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Target creature gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying");
         ability.addEffect(effect);

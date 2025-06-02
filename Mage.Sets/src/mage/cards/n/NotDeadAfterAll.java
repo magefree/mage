@@ -14,6 +14,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -75,8 +76,8 @@ class NotDeadAfterAllEffect extends OneShotEffect {
             return false;
         }
 
-        player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
-        Permanent permanent = game.getPermanent(card.getId());
+        player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
+        Permanent permanent = CardUtil.getPermanentFromCardPutToBattlefield(card, game);
         if (permanent == null) {
             return false;
         }

@@ -35,7 +35,11 @@ public class CreateTokenTargetEffect extends OneShotEffect {
     }
 
     public CreateTokenTargetEffect(Token token, DynamicValue amount) {
-        this(token, amount, false, false);
+        this(token, amount, false);
+    }
+
+    public CreateTokenTargetEffect(Token token, DynamicValue amount, boolean tapped) {
+        this(token, amount, tapped, false);
     }
 
     public CreateTokenTargetEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {

@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -122,6 +123,7 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         setTriggerPhrase("Whenever " + filter.getMessage() + " dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private AthreosDiesCreatureTriggeredAbility(AthreosDiesCreatureTriggeredAbility ability) {
@@ -152,5 +154,10 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
             effect.setValue("creatureId", event.getTargetId());
         }
         return true;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -37,13 +37,13 @@ public final class NutCollector extends CardImpl {
 
         // At the beginning of your upkeep, you may create a 1/1 green Squirrel creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new SquirrelToken()), TargetController.YOU, true
+                new CreateTokenEffect(new SquirrelToken()), true
         ));
 
         // Threshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false),
-                ThresholdCondition.instance, "Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard"
+                ThresholdCondition.instance, "All Squirrels get +2/+2 as long as seven or more cards are in your graveyard"
         ));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

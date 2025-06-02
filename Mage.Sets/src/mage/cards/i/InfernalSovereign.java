@@ -36,7 +36,7 @@ public final class InfernalSovereign extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // Whenever you play a land or cast a spell, you draw a card and you lose 1 life.
         this.addAbility(new InfernalSovereignTriggeredAbility());

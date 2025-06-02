@@ -1,5 +1,11 @@
 package mage.target.targetpointer;
 
+import mage.abilities.Ability;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.players.Player;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +19,7 @@ public abstract class TargetPointerImpl implements TargetPointer {
 
     private boolean initialized = false;
 
-    public TargetPointerImpl() {
+    protected TargetPointerImpl() {
         super();
     }
 
@@ -34,6 +40,21 @@ public abstract class TargetPointerImpl implements TargetPointer {
     @Override
     public void setInitialized() {
         this.initialized = true;
+    }
+
+    @Override
+    public Player getControllerOfFirstTargetOrLKI(Game game, Ability source) {
+        Player targetController = null;
+        Permanent permanent = this.getFirstTargetPermanentOrLKI(game, source);
+        if (permanent != null) {
+            targetController = game.getPlayer(permanent.getControllerId());
+        } else {
+            Spell spell = game.getSpellOrLKIStack(this.getFirst(game, source));
+            if (spell != null) {
+                targetController = game.getPlayer(spell.getControllerId());
+            }
+        }
+        return targetController;
     }
 
     @Override

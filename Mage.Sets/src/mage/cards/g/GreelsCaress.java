@@ -37,7 +37,7 @@ public final class GreelsCaress extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets -3/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-3, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-3, 0, Duration.WhileOnBattlefield)));
     }
 
     private GreelsCaress(final GreelsCaress card) {

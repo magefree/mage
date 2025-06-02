@@ -27,7 +27,7 @@ public final class KeeningApparition extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice Keening Apparition: Destroy target enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(),new SacrificeSourceCost());
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }

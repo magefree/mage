@@ -34,7 +34,7 @@ public final class StarkeOfRath extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Destroy target artifact or creature. That permanent's controller gains control of Starke of Rath.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StarkeOfRathEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new StarkeOfRathEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
 

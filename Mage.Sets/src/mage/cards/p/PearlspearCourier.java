@@ -44,7 +44,7 @@ public final class PearlspearCourier extends CardImpl {
         // You may choose not to untap Pearlspear Courier during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}{W}, {tap}: Target Soldier creature gets +2/+2 and has vigilance for as long as Pearlspear Courier remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(
             new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.TAPPED,
             "target Soldier creature gets +2/+2"), new ManaCostsImpl<>("{2}{W}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(),

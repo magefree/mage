@@ -25,7 +25,7 @@ public final class BreakerOfArmies extends CardImpl {
         this.toughness = new MageInt(8);
 
         // All creatures able to block Breaker of Armies do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield)));
     }
 
     private BreakerOfArmies(final BreakerOfArmies card) {

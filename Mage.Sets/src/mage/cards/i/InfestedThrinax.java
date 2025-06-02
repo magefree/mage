@@ -1,7 +1,9 @@
 package mage.cards.i;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -55,6 +57,7 @@ class InfestedThrinaxTriggeredAbility extends DelayedTriggeredAbility {
 
     InfestedThrinaxTriggeredAbility() {
         super(new CreateTokenEffect(new SaprolingToken(), SavedDamageValue.MUCH), Duration.EndOfTurn, false, false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private InfestedThrinaxTriggeredAbility(final InfestedThrinaxTriggeredAbility ability) {
@@ -88,5 +91,10 @@ class InfestedThrinaxTriggeredAbility extends DelayedTriggeredAbility {
     public String getRule() {
         return "Whenever a nontoken creature you control dies, " +
                 "create a number of 1/1 green Saproling creature tokens equal to that creature's power.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

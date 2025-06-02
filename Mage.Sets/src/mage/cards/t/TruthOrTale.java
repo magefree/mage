@@ -80,7 +80,6 @@ class TruthOrTaleEffect extends OneShotEffect {
         if (opponent != null) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
             List<Card> pile1 = new ArrayList<>();
-            target.setRequired(false);
             if (controller.choose(Outcome.Neutral, cards, target, source, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {

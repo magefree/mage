@@ -24,13 +24,13 @@ public final class Steamclaw extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {3}, {tap}: Exile target card from a graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new TapSourceCost());
         ability.addCost(new GenericManaCost(3));
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
 
         // {1}, Sacrifice Steamclaw: Exile target card from a graveyard.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(1));
+        ability = new SimpleActivatedAbility(new ExileTargetEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);

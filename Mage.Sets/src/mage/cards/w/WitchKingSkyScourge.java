@@ -20,7 +20,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class WitchKingSkyScourge extends CardImpl {
@@ -31,6 +30,7 @@ public final class WitchKingSkyScourge extends CardImpl {
         filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(SubType.WRAITH.getPredicate());
     }
+
     public WitchKingSkyScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{R}");
 
@@ -45,7 +45,7 @@ public final class WitchKingSkyScourge extends CardImpl {
 
         // Whenever you attack with one or more Wraiths, exile the top X cards of your library, where X is their total power. You may play those cards this turn.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(Zone.BATTLEFIELD,
-                new ExileTopXMayPlayUntilEffect(TotalTargetsPowerValue.instance, Duration.EndOfTurn)
+                new ExileTopXMayPlayUntilEffect(TotalTargetsPowerValue.instance, false, Duration.EndOfTurn)
                         .setText("exile the top X cards of your library, where X is their total power. You may play those cards this turn.")
                 , 1, filter, true));
 

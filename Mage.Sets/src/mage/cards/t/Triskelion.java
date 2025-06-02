@@ -33,7 +33,7 @@ public final class Triskelion extends CardImpl {
                 "with three +1/+1 counters on it"));
 
         // Remove a +1/+1 counter from Triskelion: Triskelion deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "it"),
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1, "it"),
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

@@ -70,7 +70,7 @@ class SavraSacrificeEffect extends OneShotEffect {
 
     SavraSacrificeEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "each other player sacrifices a creature";
+        this.staticText = "each other player sacrifices a creature of their choice";
     }
 
     private SavraSacrificeEffect(final SavraSacrificeEffect effect) {

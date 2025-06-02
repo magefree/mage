@@ -39,9 +39,9 @@ public final class IronclawBuzzardiers extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ironclaw Buzzardiers can't block creatures with power 2 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockCreaturesSourceEffect(filter)));
         // {R}: Ironclaw Buzzardiers gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private IronclawBuzzardiers(final IronclawBuzzardiers card) {

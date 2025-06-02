@@ -46,12 +46,12 @@ public final class TrapDigger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{W}, {tap}: Put a trap counter on target land you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.TRAP.createInstance()), new ManaCostsImpl<>("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.TRAP.createInstance()), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
         // Sacrifice a land with a trap counter on it: Trap Digger deals 3 damage to target attacking creature without flying.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new SacrificeTargetCost(filter1));
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new SacrificeTargetCost(filter1));
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }

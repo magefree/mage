@@ -15,16 +15,16 @@ import mage.constants.Zone;
 public final class KarnConstructToken extends TokenImpl {
 
     public KarnConstructToken() {
-        super("Construct Token", "0/0 colorless Construct artifact creature token with \"This creature gets +1/+1 for each artifact you control.\"");
+        super("Construct Token", "0/0 colorless Construct artifact creature token with \"This token gets +1/+1 for each artifact you control.\"");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(ArtifactYouControlCount.instance, ArtifactYouControlCount.instance, Duration.WhileOnBattlefield)
-                        .setText("This creature gets +1/+1 for each artifact you control")
+                        .setText("This token gets +1/+1 for each artifact you control")
         ));
     }
 

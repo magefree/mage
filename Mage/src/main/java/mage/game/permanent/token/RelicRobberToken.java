@@ -1,14 +1,13 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 public final class RelicRobberToken extends TokenImpl {
 
@@ -26,7 +25,7 @@ public final class RelicRobberToken extends TokenImpl {
         ));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(
                 1, "this creature"
-        ), TargetController.YOU, false));
+        )));
     }
 
     private RelicRobberToken(final RelicRobberToken token) {

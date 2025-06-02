@@ -25,7 +25,7 @@ public final class ViashinoGrappler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}: Viashino Grappler gains trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G)));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
     private ViashinoGrappler(final ViashinoGrappler card) {

@@ -29,7 +29,7 @@ public final class PsionicEntity extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Psionic Entity deals 2 damage to any target and 3 damage to itself.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
         ability.addEffect(new DamageSelfEffect(3).setText("and 3 damage to itself"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

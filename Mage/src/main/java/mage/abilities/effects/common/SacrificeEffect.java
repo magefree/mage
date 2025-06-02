@@ -64,13 +64,12 @@ public class SacrificeEffect extends OneShotEffect {
                 continue;
             }
             TargetSacrifice target = new TargetSacrifice(amount, filter);
-            while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
-                player.choose(Outcome.Sacrifice, target, source, game);
-            }
-            for (UUID targetId : target.getTargets()) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && permanent.sacrifice(source, game)) {
-                    applied = true;
+            if (target.choose(Outcome.Sacrifice, player.getId(), source.getSourceId(), source, game)) {
+                for (UUID targetId : target.getTargets()) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null && permanent.sacrifice(source, game)) {
+                        applied = true;
+                    }
                 }
             }
         }
@@ -91,7 +90,8 @@ public class SacrificeEffect extends OneShotEffect {
         if (preText != null) {
             sb.append(preText);
         }
-        if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent") || preText.endsWith("controller"))) {
+        boolean playerSacs = preText != null && (preText.endsWith("player") || preText.endsWith("opponent") || preText.endsWith("controller"));
+        if (playerSacs) {
             sb.append(" sacrifices ");
         } else {
             if (preText == null || preText.isEmpty()) {
@@ -106,6 +106,9 @@ public class SacrificeEffect extends OneShotEffect {
             sb.append(CardUtil.numberToText(count.toString(), "a"));
             sb.append(" ");
             sb.append(filter.getMessage());
+        }
+        if (playerSacs && !filter.getMessage().contains("with")) {
+            sb.append(" of their choice");
         }
         staticText = sb.toString();
     }

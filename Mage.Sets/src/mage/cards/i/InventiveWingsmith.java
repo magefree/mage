@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.HaventCastSpellFromHandThisTurnCondition;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -38,8 +37,8 @@ public final class InventiveWingsmith extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn and Inventive Wingsmith doesn't have a flying counter on it, put a flying counter on it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.FLYING.createInstance()),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new AddCountersSourceEffect(CounterType.FLYING.createInstance()),
+                false, condition
         ).withRuleTextReplacement(true).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
     }
 

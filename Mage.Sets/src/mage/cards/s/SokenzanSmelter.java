@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -11,10 +11,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.ConstructRedToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -38,7 +36,7 @@ public final class SokenzanSmelter extends CardImpl {
                         new GenericManaCost(1),
                         new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN), "pay {1} and sacrifice an artifact"
                 )
-        ), TargetController.YOU, false));
+        )));
     }
 
     private SokenzanSmelter(final SokenzanSmelter card) {

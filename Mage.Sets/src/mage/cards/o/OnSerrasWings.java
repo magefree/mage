@@ -47,7 +47,7 @@ public final class OnSerrasWings extends CardImpl {
         // Enchanted creature is legendary, gets +1/+1, and has flying, vigilance, and lifelink.
         Effect effect = new AddCardSuperTypeAttachedEffect(SuperType.LEGENDARY, Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("Enchanted creature is legendary");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield);
         effect.setText(", gets +1/+1");
         ability.addEffect(effect);

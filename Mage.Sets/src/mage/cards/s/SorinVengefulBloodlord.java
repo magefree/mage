@@ -40,7 +40,7 @@ public final class SorinVengefulBloodlord extends CardImpl {
                 new GainAbilityControlledEffect(
                         LifelinkAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A
-                ), MyTurnCondition.instance, "As long as it's your turn, " +
+                ), MyTurnCondition.instance, "During your turn, " +
                 "creatures and planeswalkers you control have lifelink"
         )).addHint(MyTurnHint.instance));
 

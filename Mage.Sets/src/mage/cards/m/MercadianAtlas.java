@@ -3,14 +3,13 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.PlayLandWatcher;
 
@@ -25,11 +24,8 @@ public final class MercadianAtlas extends CardImpl {
 
         // At the beginning of your end step, if you didn't play a land this turn, you may draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new DrawCardSourceControllerEffect(1),
-                TargetController.YOU,
-                MercadianAtlasCondition.instance,
-                true
+                TargetController.YOU, new DrawCardSourceControllerEffect(1),
+                true, MercadianAtlasCondition.instance
         ), new PlayLandWatcher());
     }
 

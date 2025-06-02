@@ -32,7 +32,7 @@ public final class YuanShaoTheIndecisive extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
         
         // Each creature you control can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneAllEffect(new FilterControlledCreaturePermanent())));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneAllEffect(new FilterControlledCreaturePermanent())));
     }
 
     private YuanShaoTheIndecisive(final YuanShaoTheIndecisive card) {

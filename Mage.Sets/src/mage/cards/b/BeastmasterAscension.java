@@ -28,7 +28,7 @@ public final class BeastmasterAscension extends CardImpl {
 
 
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BeastmasterAscensionEffect()));
+        this.addAbility(new SimpleStaticAbility(new BeastmasterAscensionEffect()));
     }
 
     private BeastmasterAscension(final BeastmasterAscension card) {

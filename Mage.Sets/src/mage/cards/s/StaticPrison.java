@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
@@ -10,7 +10,6 @@ import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
@@ -32,7 +31,7 @@ public final class StaticPrison extends CardImpl {
 
         // At the beginning of your precombat main phase, sacrifice Static Prison unless you pay {E}.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new PayEnergyCost(1)), TargetController.YOU, false
+                new SacrificeSourceUnlessPaysEffect(new PayEnergyCost(1))
         ));
     }
 

@@ -1,5 +1,3 @@
-
-
 package mage.abilities.condition.common;
 
 import mage.constants.Zone;
@@ -42,4 +40,10 @@ public enum SuspendedCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "{this} is suspended";
+    }
+
 }

@@ -29,7 +29,7 @@ public final class CutthroatIlDal extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Hellbent - Cutthroat il-Dal has shadow as long as you have no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
             new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.WhileOnBattlefield),                                                                                                            HellbentCondition.instance,
             "<i>Hellbent</i> &mdash; {this} has shadow as long as you have no cards in hand")));                                                                                                   }
 

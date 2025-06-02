@@ -10,6 +10,7 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -63,13 +64,15 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
                         }
                         break;
                     case GRAVEYARD:
-                        Card graveyardCard = game.getCard(targetId);
-                        if (graveyardCard != null) {
-                            cards.add(graveyardCard);
+                    case EXILED:
+                        Card card = game.getCard(targetId);
+                        if (card != null) {
+                            cards.add(card);
                         }
                         break;
                     case STACK:
-                        Card stackSpellCard = game.getSpell(targetId).getCard();
+                        Spell spell = game.getSpell(targetId);
+                        Card stackSpellCard = (spell != null) ? spell.getCard() : null;
                         if (stackSpellCard != null) {
                             cards.add(stackSpellCard);
                         }
@@ -132,8 +135,8 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
         sb.append("put ");
         if (target.getMaxNumberOfTargets() == 0 || target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
             sb.append("any number of ");
-        } else if (target.getMaxNumberOfTargets() != 1 || target.getNumberOfTargets() != 1) {
-            if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
+        } else if (target.getMaxNumberOfTargets() != 1 || target.getMinNumberOfTargets() != 1) {
+            if (target.getMaxNumberOfTargets() > target.getMinNumberOfTargets()) {
                 sb.append("up to ");
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');

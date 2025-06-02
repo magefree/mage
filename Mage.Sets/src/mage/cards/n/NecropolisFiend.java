@@ -6,11 +6,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
@@ -48,7 +46,7 @@ public final class NecropolisFiend extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
@@ -86,16 +84,12 @@ enum NecropolisFiendCostAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void prepareX(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller == null) {
             return;
         }
-        for (VariableCost variableCost : ability.getManaCostsToPay().getVariableCosts()) {
-            if (variableCost instanceof VariableManaCost) {
-                ((VariableManaCost) variableCost).setMaxX(controller.getGraveyard().size());
-            }
-        }
+        ability.setVariableCostsMinMax(0, controller.getGraveyard().size());
     }
 }
 

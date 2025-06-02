@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.condition.common.HaveInitiativeCondition;
@@ -39,13 +39,13 @@ public final class SafanaCalimportCutthroat extends CardImpl {
 
         // At the beginning of your end step, if you have the initiative, create a Treasure token. If you've completed a dungeon, create three of those tokens instead.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ConditionalOneShotEffect(
+                TargetController.YOU, new ConditionalOneShotEffect(
                         new CreateTokenEffect(new TreasureToken(), 3),
                         new CreateTokenEffect(new TreasureToken()),
                         CompletedDungeonCondition.instance, "create a Treasure token. " +
                         "If you've completed a dungeon, create three of those tokens instead"
                 ),
-                TargetController.YOU, HaveInitiativeCondition.instance, false
+                false, HaveInitiativeCondition.instance
         ).addHint(CompletedDungeonCondition.getHint()).addHint(InitiativeHint.instance), new CompletedDungeonWatcher());
 
         // Choose a Background

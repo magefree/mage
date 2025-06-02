@@ -28,7 +28,7 @@ public final class SnowTrooper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Trooper creatures you control have firststrike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield,
                         new FilterCreaturePermanent(SubType.TROOPER, "Trooper creatures"), false)));
     }

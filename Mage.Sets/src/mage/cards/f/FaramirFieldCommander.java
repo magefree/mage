@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.TheRingTemptsYouChooseAnotherTriggeredAbility;
 import mage.abilities.condition.common.CreatureDiedControlledCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -32,8 +32,8 @@ public final class FaramirFieldCommander extends CardImpl {
 
         // At the beginning of your end step, if a creature died under your control this turn, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), TargetController.YOU,
-                CreatureDiedControlledCondition.instance, false
+                TargetController.YOU, new DrawCardSourceControllerEffect(1),
+                false, CreatureDiedControlledCondition.instance
         ).addHint(CreatureDiedControlledCondition.getHint()));
 
         // Whenever the Ring tempts you, if you chose a creature other than Faramir, Field Commander as your Ring-bearer, create a 1/1 white Human Soldier creature token.
@@ -49,4 +49,3 @@ public final class FaramirFieldCommander extends CardImpl {
         return new FaramirFieldCommander(this);
     }
 }
-

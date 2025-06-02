@@ -29,7 +29,7 @@ public final class MoorlandInquisitor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{W}: Moorland Inquisitor gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{2}{W}")));
     }
 

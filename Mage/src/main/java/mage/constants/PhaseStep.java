@@ -1,5 +1,7 @@
 package mage.constants;
 
+import java.util.Arrays;
+
 /**
  * @author North
  */
@@ -49,6 +51,13 @@ public enum PhaseStep {
     @Override
     public String toString() {
         return text;
+    }
+
+    public static PhaseStep fromString(String needText) {
+        return Arrays.stream(values())
+                .filter(step -> step.toString().equals(needText))
+                .findFirst()
+                .orElse(null);
     }
 
     public String getStepText() {

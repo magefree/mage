@@ -35,7 +35,7 @@ public final class Derelor extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Black spells you cast cost {B} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(new ManaCostsImpl<>("{B}"), filter, TargetController.YOU)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(new ManaCostsImpl<>("{B}"), filter, TargetController.YOU)));
     }
 
     private Derelor(final Derelor card) {

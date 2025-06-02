@@ -32,7 +32,7 @@ public final class SoldeviSage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}, Sacrifice two lands: Draw three cards, then discard one of them.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardOneOfThemEffect(3), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DrawDiscardOneOfThemEffect(3), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS));
         this.addAbility(ability);
     }

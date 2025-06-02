@@ -36,7 +36,7 @@ public final class SphinxsTutelage extends CardImpl {
         this.addAbility(ability);
 
         // {5}{U}: Draw a card, then discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{5}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{5}{U}")));
     }
 
     private SphinxsTutelage(final SphinxsTutelage card) {

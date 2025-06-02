@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -42,8 +42,7 @@ public final class LilianasContract extends CardImpl {
         // At the beginning of your upkeep, if you control four or more Demons with different names, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new WinGameSourceControllerEffect(),
-                        TargetController.YOU, false
+                        new WinGameSourceControllerEffect(), false
                 ), LilianasContractCondition.instance,
                 "At the beginning of your upkeep, "
                         + "if you control four or more Demons with different names, "

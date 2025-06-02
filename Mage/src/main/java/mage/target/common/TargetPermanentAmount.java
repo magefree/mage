@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -23,16 +22,41 @@ public class TargetPermanentAmount extends TargetAmount {
 
     protected final FilterPermanent filter;
 
-    public TargetPermanentAmount(int amount, FilterPermanent filter) {
-        // 107.1c If a rule or ability instructs a player to choose “any number,” that player may choose
-        // any positive number or zero, unless something (such as damage or counters) is being divided
-        // or distributed among “any number” of players and/or objects. In that case, a nonzero number
-        // of players and/or objects must be chosen if possible.
-        this(StaticValue.get(amount), filter);
+    /**
+     * {@code maxNumberOfTargets} defaults to {@code amount}.
+     *
+     * @see TargetPermanentAmount#TargetPermanentAmount(DynamicValue, int, int, FilterPermanent)
+     */
+    public TargetPermanentAmount(int amount, int minNumberOfTargets, FilterPermanent filter) {
+        this(amount, minNumberOfTargets, amount, filter);
     }
 
-    public TargetPermanentAmount(DynamicValue amount, FilterPermanent filter) {
-        super(amount);
+    /**
+     * {@code maxNumberOfTargets} defaults to Integer.MAX_VALUE.
+     *
+     * @see TargetPermanentAmount#TargetPermanentAmount(DynamicValue, int, int, FilterPermanent)
+     */
+    public TargetPermanentAmount(DynamicValue amount, int minNumberOfTargets, FilterPermanent filter) {
+        this(amount, minNumberOfTargets, Integer.MAX_VALUE, filter);
+    }
+
+    /**
+     * @see TargetPermanentAmount#TargetPermanentAmount(DynamicValue, int, int, FilterPermanent)
+     */
+    public TargetPermanentAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterPermanent filter) {
+        this(StaticValue.get(amount), minNumberOfTargets, maxNumberOfTargets, filter);
+    }
+
+    /**
+     * @param amount             Amount of stuff (e.g. damage, counters) to distribute.
+     * @param minNumberOfTargets Minimum number of targets.
+     * @param maxNumberOfTargets Maximum number of targets. If no lower max is needed:
+     *                           set to {@code amount} if amount is static; otherwise, set to Integer.MAX_VALUE.
+     *                           (Game will always prevent distributing among more than {@code amount} permanents.)
+     * @param filter             Filter for permanents that something will be distributed amongst.
+     */
+    public TargetPermanentAmount(DynamicValue amount, int minNumberOfTargets, int maxNumberOfTargets, FilterPermanent filter) {
+        super(amount, minNumberOfTargets, maxNumberOfTargets);
         this.zone = Zone.ALL;
         this.filter = filter;
         this.targetName = filter.getMessage();
@@ -49,7 +73,7 @@ public class TargetPermanentAmount extends TargetAmount {
     }
 
     @Override
-    public Filter getFilter() {
+    public FilterPermanent getFilter() {
         return this.filter;
     }
 

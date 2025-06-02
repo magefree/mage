@@ -432,21 +432,21 @@ public class CardView extends SimpleCardView {
                 fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
                 this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof AdventureCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 this.isSplitCard = true;
-                AdventureCard adventureCard = ((AdventureCard) card);
-                leftSplitName = adventureCard.getName();
-                leftSplitCostsStr = String.join("", adventureCard.getManaCostSymbols());
-                leftSplitRules = adventureCard.getSharedRules(game);
-                leftSplitTypeLine = getCardTypeLine(game, adventureCard);
-                AdventureCardSpell adventureCardSpell = adventureCard.getSpellCard();
-                rightSplitName = adventureCardSpell.getName();
-                rightSplitCostsStr = String.join("", adventureCardSpell.getManaCostSymbols());
-                rightSplitRules = adventureCardSpell.getRules(game);
-                rightSplitTypeLine = getCardTypeLine(game, adventureCardSpell);
-                fullCardName = adventureCard.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + adventureCardSpell.getName();
-                this.manaCostLeftStr = adventureCard.getManaCostSymbols();
-                this.manaCostRightStr = adventureCardSpell.getManaCostSymbols();
+                CardWithSpellOption mainCard = ((CardWithSpellOption) card);
+                leftSplitName = mainCard.getName();
+                leftSplitCostsStr = String.join("", mainCard.getManaCostSymbols());
+                leftSplitRules = mainCard.getSharedRules(game);
+                leftSplitTypeLine = getCardTypeLine(game, mainCard);
+                SpellOptionCard spellOptionCard = mainCard.getSpellCard();
+                rightSplitName = spellOptionCard.getName();
+                rightSplitCostsStr = String.join("", spellOptionCard.getManaCostSymbols());
+                rightSplitRules = spellOptionCard.getRules(game);
+                rightSplitTypeLine = getCardTypeLine(game, spellOptionCard);
+                fullCardName = mainCard.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionCard.getName();
+                this.manaCostLeftStr = mainCard.getManaCostSymbols();
+                this.manaCostRightStr = spellOptionCard.getManaCostSymbols();
             } else if (card instanceof MockCard) {
                 // deck editor cards
                 fullCardName = ((MockCard) card).getFullName(true);
@@ -639,6 +639,11 @@ public class CardView extends SimpleCardView {
                 artRect = ArtRect.FULL_LENGTH_LEFT;
             } else if (card.getSubtype(game).contains(SubType.SAGA)) {
                 artRect = ArtRect.FULL_LENGTH_RIGHT;
+            }
+
+            // Retro border cards need different art cutout
+            if (card.getFrameStyle() == FrameStyle.RETRO) {
+                this.artRect = ArtRect.RETRO;
             }
 
             // Frame color
@@ -944,7 +949,7 @@ public class CardView extends SimpleCardView {
         this(true);
         this.gameObject = true;
         this.id = designation.getId();
-        this.mageObjectType = MageObjectType.NULL;
+        this.mageObjectType = MageObjectType.DESIGNATION;
         this.name = designation.getName();
         this.displayName = name;
         this.displayFullName = name;
@@ -955,9 +960,8 @@ public class CardView extends SimpleCardView {
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.cardNumber = designation.getCardNumber();
         this.expansionSetCode = designation.getExpansionSetCode();
-        this.cardNumber = "";
-        this.imageFileName = "";
-        this.imageNumber = 0;
+        this.imageFileName = designation.getImageFileName();
+        this.imageNumber = designation.getImageNumber();
         this.rarity = Rarity.SPECIAL;
 
         // no playable/chooseable marks for designations

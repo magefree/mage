@@ -47,7 +47,7 @@ public final class DragonGrip extends CardImpl {
         // Enchanted creature gets +2/+0 and has first strike.
         Effect effect2 = new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield);
         effect2.setText("Enchanted creature gets +2/+0");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect2);
+        ability = new SimpleStaticAbility(effect2);
         effect2 = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect2.setText("and has first strike");
         ability.addEffect(effect2);

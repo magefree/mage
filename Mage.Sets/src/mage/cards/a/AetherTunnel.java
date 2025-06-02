@@ -38,7 +38,7 @@ public final class AetherTunnel extends CardImpl {
 
         // Enchanted creature gets +1/+0 and can't be blocked.
         ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield)
+                new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield)
         );
         ability.addEffect(
                 new CantBeBlockedAttachedEffect(AttachmentType.AURA)

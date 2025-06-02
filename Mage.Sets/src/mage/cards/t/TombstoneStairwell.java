@@ -1,22 +1,16 @@
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -28,8 +22,11 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class TombstoneStairwell extends CardImpl {
@@ -42,7 +39,7 @@ public final class TombstoneStairwell extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{B}")));
 
         // At the beginning of each upkeep, if Tombstone Stairwell is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in their graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TombstoneStairwellCreateTokenEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new TombstoneStairwellCreateTokenEffect(), false));
 
         // At the beginning of each end step or when Tombstone Stairwell leaves the battlefield, destroy all tokens created with Tombstone Stairwell. They can't be regenerated.
         this.addAbility(new TombstoneStairwellTriggeredAbility());
@@ -75,7 +72,6 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean apply(Game game, Ability source) {
         Token token = new TombspawnZombieToken();
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
@@ -108,6 +104,7 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
 
     TombstoneStairwellTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TombstoneStairwellDestroyEffect(), false);
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
     private TombstoneStairwellTriggeredAbility(final TombstoneStairwellTriggeredAbility ability) {
@@ -158,7 +155,7 @@ class TombstoneStairwellTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each end step or when {this} leaves the battlefield, destroy all tokens created with {this}. They can't be regenerated.";
+        return "At the beginning of each end step and when {this} leaves the battlefield, destroy all tokens created with {this}. They can't be regenerated.";
     }
 }
 
@@ -181,7 +178,6 @@ class TombstoneStairwellDestroyEffect extends OneShotEffect {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean apply(Game game, Ability source) {
         Object object = game.getState().getValue(cardZoneString);
         if (object != null) {

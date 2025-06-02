@@ -31,7 +31,7 @@ public final class KasetoOrochiArchmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}{U}: Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KasetoEffect(), new ManaCostsImpl<>("{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(new KasetoEffect(), new ManaCostsImpl<>("{G}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

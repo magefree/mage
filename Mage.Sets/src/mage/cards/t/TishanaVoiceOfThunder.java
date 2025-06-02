@@ -32,12 +32,12 @@ public final class TishanaVoiceOfThunder extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Tishana, Voice of Thunder's power and toughness are each equal to the number of cards in your hand.
-        DynamicValue xValue = CardsInControllerHandCount.instance;
+        DynamicValue xValue = CardsInControllerHandCount.ANY;
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
 
         // You have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // When Tishana enters the battlefield, draw a card for each creature you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE))));

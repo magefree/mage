@@ -504,7 +504,7 @@ public class ScryfallImageSource implements CardImageSource {
             jsonReader.close();
             return bulkCardsDatabaseAll.size() > 0;
         } catch (Exception e) {
-            logger.error("Can't read bulk file (possible reason: broken format)");
+            logger.error("Can't read bulk file (possible reason: broken scryfall format), details: " + e, e);
             try {
                 // clean up
                 if (!SCRYFALL_BULK_FILES_DEBUG_READ_ONLY_MODE) {

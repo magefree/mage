@@ -11,6 +11,17 @@ public class DebugUtil {
 
     public static boolean NETWORK_SHOW_CLIENT_CALLBACK_MESSAGES_LOG = false; // show all callback messages (server commands)
 
+    // AI
+    // game simulations runs in multiple threads, if you stop code to debug then it will be terminated by timeout
+    // so AI debug mode will make single simulation thread without any timeouts
+    public static boolean AI_ENABLE_DEBUG_MODE = false;
+    public static boolean AI_SHOW_TARGET_OPTIMIZATION_LOGS = false; // works with target amount
+
+    // GAME
+    // print detail target info for activate/cast/trigger only, not a single choose dialog
+    // can be useful to debug unit tests, auto-choose or AI
+    public static boolean GAME_SHOW_CHOOSE_TARGET_LOGS = false;
+
     // cards basic (card panels)
     public static boolean GUI_CARD_DRAW_OUTER_BORDER = false;
     public static boolean GUI_CARD_DRAW_INNER_BORDER = false;

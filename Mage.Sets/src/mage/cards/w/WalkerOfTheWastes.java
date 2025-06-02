@@ -40,7 +40,7 @@ public final class WalkerOfTheWastes extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Walker of the Wastes gets +1/+1 for each land you control named Wastes.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
                 new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
     }
 

@@ -114,11 +114,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                     filter.add(new PermanentReferenceInCollectionPredicate(list, game));
                     TargetPermanent target = new TargetPermanent(filter);
                     target.withNotTarget(true);
-                    if (target.canChoose(controller.getId(), source, game)) {
-                        while (!target.isChosen(game) && target.canChoose(controller.getId(), source, game) && controller.canRespond()) {
-                            controller.chooseTarget(outcome, target, source, game);
-                        }
-                    } else {
+                    if (!controller.chooseTarget(outcome, target, source, game)) {
                         return true;
                     }
                     Permanent chosenPermanent = game.getPermanent(target.getFirstTarget());
@@ -153,26 +149,11 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                             game.fireEvent(new BlockerDeclaredEvent(chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
                             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, permanent.getId(), source, null));
                         }
-                        CombatGroup blockGroup = findBlockingGroup(permanent, game); // a new blockingGroup is formed, so it's necessary to find it again
-                        if (blockGroup != null) {
-                            blockGroup.pickAttackerOrder(permanent.getControllerId(), game);
-                        }
                     }
                 }
                 return true;
             }
         }
         return false;
-    }
-
-    private CombatGroup findBlockingGroup(Permanent blocker, Game game) {
-        if (game.getCombat().blockingGroupsContains(blocker.getId())) { // if (blocker.getBlocking() > 1) {
-            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-                if (group.getBlockers().contains(blocker.getId())) {
-                    return group;
-                }
-            }
-        }
-        return null;
     }
 }

@@ -36,7 +36,7 @@ public final class BallynockTrapper extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filterWhiteSpell, true));

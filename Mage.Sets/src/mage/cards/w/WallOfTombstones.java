@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
@@ -31,7 +31,7 @@ public final class WallOfTombstones extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // At the beginning of your upkeep, change Wall of Tombstones’s base toughness to 1 plus the number of creature cards in your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WallOfTombstonesEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WallOfTombstonesEffect()));
 
     }
 

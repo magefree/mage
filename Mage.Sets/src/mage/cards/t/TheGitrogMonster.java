@@ -3,7 +3,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -15,11 +15,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeGroupEvent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -39,10 +37,10 @@ public final class TheGitrogMonster extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
         // At the beginning of your upkeep, sacrifice The Gitrog Monster unless you sacrifice a land.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
-                new SacrificeTargetCost(StaticFilters.FILTER_LAND)), TargetController.YOU, false));
+                new SacrificeTargetCost(StaticFilters.FILTER_LAND))));
 
         // You may play an additional land on each of your turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
 
         // Whenever one or more land cards are put into your graveyard from anywhere, draw a card.
         this.addAbility(new TheGitrogMonsterTriggeredAbility());

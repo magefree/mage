@@ -15,12 +15,9 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
-import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -29,6 +26,16 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class KitesailLarcenist extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("other target artifact or creature");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+        filter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+    }
 
     public KitesailLarcenist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -53,7 +60,9 @@ public final class KitesailLarcenist extends CardImpl {
                 "target artifact or creature that player controls. For as long as {this} " +
                 "remains on the battlefield, the chosen permanents become Treasure artifacts with " +
                 "\"{T}, Sacrifice this artifact: Add one mana of any color\" and lose all other abilities"));
-        this.addAbility(ability.setTargetAdjuster(KitesailLarcenistAdjuster.instance));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
+        this.addAbility(ability);
     }
 
     private KitesailLarcenist(final KitesailLarcenist card) {
@@ -63,30 +72,5 @@ public final class KitesailLarcenist extends CardImpl {
     @Override
     public KitesailLarcenist copy() {
         return new KitesailLarcenist(this);
-    }
-}
-
-enum KitesailLarcenistAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            FilterPermanent filter = new FilterPermanent(
-                    "other artifact or creature " + (ability.isControlledBy(playerId) ? " you control" : player.getName() + " controls")
-            );
-            filter.add(new ControllerIdPredicate(playerId));
-            filter.add(AnotherPredicate.instance);
-            filter.add(Predicates.or(
-                    CardType.ARTIFACT.getPredicate(),
-                    CardType.CREATURE.getPredicate()
-            ));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
     }
 }

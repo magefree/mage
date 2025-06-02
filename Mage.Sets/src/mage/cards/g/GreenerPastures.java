@@ -1,21 +1,19 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.SaprolingToken;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,17 +25,10 @@ public final class GreenerPastures extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of each player's upkeep, if that player controls more lands than each other player, the player creates a 1/1 green Saproling creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        Zone.BATTLEFIELD,
-                        new CreateTokenTargetEffect(new SaprolingToken()),
-                        TargetController.ANY, false, true
-                ),
-                ActivePlayerMostLandsCondition.instance,
-                "At the beginning of each player's upkeep, "
-                + "if that player controls more lands than each other player, "
-                + "the player creates a 1/1 green Saproling creature token."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.EACH_PLAYER, new CreateTokenTargetEffect(new SaprolingToken()),
+                false
+        ).withInterveningIf(ActivePlayerMostLandsCondition.instance));
     }
 
     private GreenerPastures(final GreenerPastures card) {

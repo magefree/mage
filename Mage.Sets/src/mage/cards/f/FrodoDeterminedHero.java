@@ -29,6 +29,7 @@ public final class FrodoDeterminedHero extends CardImpl {
             = new FilterControlledPermanent("Equipment you control with mana value 2 or 3");
 
     static {
+        filter.add(SubType.EQUIPMENT.getPredicate());
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
         filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 1));
     }
@@ -50,7 +51,7 @@ public final class FrodoDeterminedHero extends CardImpl {
         // As long as it's your turn, prevent all damage that would be dealt to Frodo.
         this.addAbility(new SimpleStaticAbility(new ConditionalPreventionEffect(
                 new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield), MyTurnCondition.instance,
-                "as long as it's your turn, prevent all damage that would be dealt to {this}"
+                "during your turn, prevent all damage that would be dealt to {this}"
         )));
     }
 

@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
@@ -36,7 +36,7 @@ import java.util.UUID;
 public final class TheArchimandrite extends CardImpl {
 
     private static final DynamicValue xValue = new AdditiveDynamicValue(
-            CardsInControllerHandCount.instance, StaticValue.get(-4)
+            CardsInControllerHandCount.ANY, StaticValue.get(-4)
     );
     private static final FilterPermanent filter = new FilterControlledPermanent();
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();
@@ -67,8 +67,7 @@ public final class TheArchimandrite extends CardImpl {
         // At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus 4.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new GainLifeEffect(xValue)
-                        .setText("you gain X life, where X is the number of cards in your hand minus 4"),
-                TargetController.YOU, false
+                        .setText("you gain X life, where X is the number of cards in your hand minus 4")
         ));
 
         // Whenever you gain life, each Advisor, Artificer, and Monk you control gains vigilance and gets +X/+0 until end of turn, where X is the amount of life you gained.

@@ -37,7 +37,7 @@ public final class CrusadingKnight extends CardImpl {
 
         // Crusading Knight gets +1/+1 for each Swamp your opponents control.
       PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(swampFilter, 1);
-      SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
+      SimpleStaticAbility ability = new SimpleStaticAbility(new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
       this.addAbility(ability);
     }
 

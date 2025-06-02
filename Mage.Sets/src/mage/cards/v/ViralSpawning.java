@@ -33,7 +33,7 @@ public final class ViralSpawning extends CardImpl {
                 Zone.GRAVEYARD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
-                                new FlashbackAbility(this, new ManaCostsImpl<>("{2}{G}")), Duration.Custom, true
+                                new FlashbackAbility(this, new ManaCostsImpl<>("{2}{G}")), Duration.WhileInGraveyard, true
                         ), CorruptedCondition.instance, "as long as an opponent has three or more " +
                         "poison counters and {this} is in your graveyard, it has flashback {2}{G}"
                 )

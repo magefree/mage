@@ -54,7 +54,7 @@ public final class Six extends CardImpl {
                 new ConditionalContinuousEffect(
                         new GainRetraceYourGraveyardEffect(filter),
                         MyTurnCondition.instance,
-                        "As long as it's your turn, nonland permanent cards in your graveyard have retrace."
+                        "During your turn, nonland permanent cards in your graveyard have retrace."
                 )
         ).addHint(MyTurnHint.instance));
     }

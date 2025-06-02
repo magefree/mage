@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.Hint;
@@ -39,7 +39,7 @@ public final class GollumObsessedStalker extends CardImpl {
         this.addAbility(new SkulkAbility());
 
         // At the beginning of your end step, each opponent dealt combat damage this game by a creature named Gollum, Obsessed Stalker loses life equal to the amount of life you gained this turn.
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new GollumObsessedStalkerEffect(), false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new GollumObsessedStalkerEffect(), false);
         ability.addWatcher(new PlayerGainedLifeWatcher());
         ability.addWatcher(new GollumObsessedStalkerWatcher());
         ability.addHint(ControllerGainedLifeCount.getHint());

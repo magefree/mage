@@ -40,7 +40,6 @@ public final class TlincalliHunter extends AdventureCard {
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a creature spell you cast from exile.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new TlincalliHunterAddAltCostEffect()));
 
         // Retrieve Prey
@@ -66,7 +65,7 @@ enum ExiledCreatureSpellCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        if (object instanceof SplitCardHalf || object instanceof AdventureCardSpell || object instanceof ModalDoubleFacedCardHalf) {
+        if (object instanceof SplitCardHalf || object instanceof SpellOptionCard || object instanceof ModalDoubleFacedCardHalf) {
             UUID mainCardId = ((Card) object).getMainCard().getId();
             object = game.getObject(mainCardId);
         }

@@ -32,7 +32,7 @@ public final class Bloodghast extends CardImpl {
         this.addAbility(new CantBlockAbility());
         // Bloodghast has haste as long as an opponent has 10 or less life.
         ContinuousEffect effect = new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect,
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(effect,
                 new LifeCompareCondition(TargetController.OPPONENT, ComparisonType.OR_LESS, 10),
                 "{this} has haste as long as an opponent has 10 or less life")));
         // Landfall — Whenever a land you control enters, you may return Bloodghast from your graveyard to the battlefield.

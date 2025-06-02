@@ -247,7 +247,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 .orElse(0);
     }
 
-    public void update(GameView game, PlayerView player, Set<UUID> possibleTargets) {
+    public void update(GameView game, PlayerView player, Set<UUID> possibleTargets, Set<UUID> chosenTargets) {
         this.player = player;
         int pastLife = player.getLife();
         if (playerLives != null) {
@@ -425,6 +425,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (possibleTargets != null && possibleTargets.contains(this.playerId)) {
             this.avatar.setBorder(YELLOW_BORDER);
             this.btnPlayer.setBorder(YELLOW_BORDER);
+        }
+
+        // selected targeting (draw as priority)
+        if (chosenTargets != null && chosenTargets.contains(this.playerId)) {
+            this.avatar.setBorder(GREEN_BORDER); // TODO: use diff green color for chosen targeting and current priority?
+            this.btnPlayer.setBorder(GREEN_BORDER);
         }
 
         update(player.getManaPool());
@@ -687,11 +693,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         zonesPanel.setLayout(null);
         zonesPanel.setOpaque(false);
 
-        // tools button like hints
+        // hints
         toolHintsHelper = new JButton();
         toolHintsHelper.setFont(this.getFont());
-        toolHintsHelper.setText("hints");
-        toolHintsHelper.setToolTipText("Open new card hints helper window");
+        toolHintsHelper.setText("Hints");
+        toolHintsHelper.setToolTipText("Open card hints helper window");
         toolHintsHelper.addActionListener(this::btnToolHintsHelperActionPerformed);
         toolHintsHelper.setBounds(sizeMod(3), sizeMod(2 + 21 + 2), sizeMod(73), sizeMod(21));
         zonesPanel.add(toolHintsHelper);
@@ -701,7 +707,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         image = ImageHelper.getImageFromResources("/info/command_zone.png");
         resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         commandZone = new HoverButton(null, resized, resized, resized, r, this.guiScaleMod);
-        commandZone.setToolTipText("Command Zone (Commanders, Emblems and Planes)");
+        commandZone.setToolTipText("Command Zone (Commanders, Emblems, and Planes)");
         commandZone.setOpaque(false);
         commandZone.setObserver(() -> btnCommandZoneActionPerformed(null));
         commandZone.setBounds(sizeMod(3), 0, sizeMod(21), sizeMod(21));

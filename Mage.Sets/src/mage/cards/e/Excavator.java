@@ -36,7 +36,7 @@ public final class Excavator extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {tap}, Sacrifice a basic land: Target creature gains landwalk of each of the land types of the sacrificed land until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExcavatorEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExcavatorEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

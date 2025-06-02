@@ -31,7 +31,7 @@ public final class PetrifiedField extends CardImpl {
         // {tap}, Sacrifice Petrified Field: Return target land card from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return target land card from your graveyard to your hand.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(new FilterLandCard()));
         this.addAbility(ability);

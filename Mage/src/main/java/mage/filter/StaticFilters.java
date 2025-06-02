@@ -1,19 +1,13 @@
 package mage.filter;
 
 import mage.ObjectColor;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
-import mage.filter.predicate.permanent.AttachedOrShareCreatureTypePredicate;
-import mage.filter.predicate.permanent.RingBearerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.predicate.permanent.*;
 
 /**
  * A class that holds Filter objects that may not be modified without copying
@@ -61,6 +55,12 @@ public final class StaticFilters {
         FILTER_CARD_ENCHANTMENT.setLockedFilter(true);
     }
 
+    public static final FilterCard FILTER_CARD_ENCHANTMENTS = new FilterEnchantmentCard("enchantment cards");
+
+    static {
+        FILTER_CARD_ENCHANTMENTS.setLockedFilter(true);
+    }
+
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
 
     static {
@@ -95,6 +95,13 @@ public final class StaticFilters {
 
     static {
         FILTER_CARD_CREATURE_A.setLockedFilter(true);
+    }
+
+    // for checks on cards to be cast as "a creature spell", this is a FilterCard, but the text is about spell
+    public static final FilterCreatureCard FILTER_CARD_A_CREATURE_SPELL = new FilterCreatureCard("a creature spell");
+
+    static {
+        FILTER_CARD_A_CREATURE_SPELL.setLockedFilter(true);
     }
 
     public static final FilterCreatureCard FILTER_CARD_CREATURE_YOUR_HAND = new FilterCreatureCard("a creature card from your hand");
@@ -137,6 +144,12 @@ public final class StaticFilters {
 
     static {
         FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
+    }
+
+    public static final FilterCard FILTER_CARD_LAND_FROM_YOUR_GRAVEYARD = new FilterLandCard("land card from your graveyard");
+
+    static {
+        FILTER_CARD_LAND_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
     public static final FilterCreatureCard FILTER_CARD_CREATURE_A_GRAVEYARD = new FilterCreatureCard("creature card from a graveyard");
@@ -329,7 +342,7 @@ public final class StaticFilters {
         FILTER_PERMANENTS_ARTIFACT_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterControlledArtifactPermanent FILTER_ARTIFACT_NON_CREATURE = new FilterControlledArtifactPermanent("noncreature artifact");
+    public static final FilterArtifactPermanent FILTER_ARTIFACT_NON_CREATURE = new FilterArtifactPermanent("noncreature artifact");
 
     static {
         FILTER_ARTIFACT_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
@@ -619,11 +632,33 @@ public final class StaticFilters {
     }
 
 
+    public static final FilterControlledCreaturePermanent FILTER_OTHER_CONTROLLED_CREATURE = new FilterControlledCreaturePermanent("other creature you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_CREATURE.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_CREATURE.setLockedFilter(true);
+    }
+
+
     public static final FilterControlledCreaturePermanent FILTER_OTHER_CONTROLLED_CREATURES = new FilterControlledCreaturePermanent("other creatures you control");
 
     static {
         FILTER_OTHER_CONTROLLED_CREATURES.add(AnotherPredicate.instance);
         FILTER_OTHER_CONTROLLED_CREATURES.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_OTHER_CONTROLLED_PERMANENTS = new FilterControlledPermanent("other permanents you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_PERMANENTS.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_PERMANENTS.setLockedFilter(true);
+    }
+
+    public static final FilterControlledArtifactPermanent FILTER_OTHER_CONTROLLED_ARTIFACTS = new FilterControlledArtifactPermanent("other artifacts you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_ARTIFACTS.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_ARTIFACTS.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
@@ -744,6 +779,28 @@ public final class StaticFilters {
                         CardType.LAND.getPredicate()
                 ));
         FILTER_PERMANENT_CREATURE_OR_LAND.setLockedFilter(true);
+    }
+
+    public static final FilterPermanent FILTER_PERMANENT_CREATURE_OR_VEHICLE = new FilterPermanent("creature or Vehicle");
+
+    static {
+        FILTER_PERMANENT_CREATURE_OR_VEHICLE.add(
+                Predicates.or(
+                        CardType.CREATURE.getPredicate(),
+                        SubType.VEHICLE.getPredicate()
+                ));
+        FILTER_PERMANENT_CREATURE_OR_VEHICLE.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_CREATURE_OR_VEHICLE = new FilterControlledPermanent("creature or Vehicle you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_CREATURE_OR_VEHICLE.add(
+                Predicates.or(
+                        CardType.CREATURE.getPredicate(),
+                        SubType.VEHICLE.getPredicate()
+                ));
+        FILTER_CONTROLLED_PERMANENT_CREATURE_OR_VEHICLE.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
@@ -1003,6 +1060,21 @@ public final class StaticFilters {
         FILTER_SPELL_KICKED_A.setLockedFilter(true);
     }
 
+    public static final FilterSpell FILTER_SPELL_NO_MANA_SPENT = new FilterSpell("a spell, if no mana was spent to cast it");
+
+    static {
+        FILTER_SPELL_NO_MANA_SPENT.add(new ManaSpentToCastPredicate(ComparisonType.EQUAL_TO, 0));
+        FILTER_SPELL_NO_MANA_SPENT.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_NONCREATURE_SPELL_FOUR_MANA_SPENT = new FilterSpell("a noncreature spell, if at least four mana was spent to cast it");
+
+    static {
+        FILTER_NONCREATURE_SPELL_FOUR_MANA_SPENT.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        FILTER_NONCREATURE_SPELL_FOUR_MANA_SPENT.add(new ManaSpentToCastPredicate(ComparisonType.MORE_THAN, 3));
+        FILTER_NONCREATURE_SPELL_FOUR_MANA_SPENT.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT_TOKEN = new FilterPermanent("token");
 
     static {
@@ -1148,6 +1220,22 @@ public final class StaticFilters {
         FILTER_BLOCKING_CREATURES.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_CREATURE_DAMAGED_THIS_TURN = new FilterCreaturePermanent("creature that was dealt damage this turn");
+
+    static {
+        FILTER_CREATURE_DAMAGED_THIS_TURN.add(WasDealtDamageThisTurnPredicate.instance);
+        FILTER_CREATURE_DAMAGED_THIS_TURN.setLockedFilter(true);
+    }
+
+
+    public static final FilterPermanent FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN = new FilterCreaturePermanent("creature an opponent controls that was dealt damage this turn");
+
+    static {
+        FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN.add(TargetController.OPPONENT.getControllerPredicate());
+        FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN.add(WasDealtDamageThisTurnPredicate.instance);
+        FILTER_OPPONENTS_CREATURE_DAMAGED_THIS_TURN.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT_AURAS = new FilterEnchantmentPermanent("Auras");
 
     static {
@@ -1155,10 +1243,16 @@ public final class StaticFilters {
         FILTER_PERMANENT_AURAS.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterEquipmentPermanent();
+    public static final FilterPermanent FILTER_PERMANENT_EQUIPMENT = new FilterPermanent(SubType.EQUIPMENT, "Equipment");
 
     static {
         FILTER_PERMANENT_EQUIPMENT.setLockedFilter(true);
+    }
+
+    public static final FilterPermanent FILTER_CONTROLLED_PERMANENT_EQUIPMENT = new FilterControlledPermanent(SubType.EQUIPMENT);
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_EQUIPMENT.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_PERMANENT_FORTIFICATION = new FilterPermanent();
@@ -1236,5 +1330,4 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_CLUE.setLockedFilter(true);
     }
-
 }

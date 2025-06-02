@@ -40,7 +40,7 @@ public final class ImperialMask extends CardImpl {
         ));
 
         // You have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(HexproofAbility.getInstance())));
     }
 
     private ImperialMask(final ImperialMask card) {

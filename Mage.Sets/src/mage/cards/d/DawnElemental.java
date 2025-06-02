@@ -33,7 +33,7 @@ public final class DawnElemental extends CardImpl {
         // Prevent all damage that would be dealt to Dawn Elemental.
         Effect effect = new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield);
         effect.setText("Prevent all damage that would be dealt to {this}");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private DawnElemental(final DawnElemental card) {

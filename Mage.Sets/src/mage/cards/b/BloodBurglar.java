@@ -35,8 +35,7 @@ public final class BloodBurglar extends CardImpl {
                                 LifelinkAbility.getInstance(),
                                 Duration.WhileOnBattlefield
                         ), MyTurnCondition.instance,
-                        "As long as it's your turn, "
-                                + "{this} has lifelink."
+                        "During your turn, {this} has lifelink."
                 )
         ).addHint(MyTurnHint.instance));
     }

@@ -35,7 +35,6 @@ public final class SteamfloggerBoss extends CardImpl {
 
         // Other Rigger creatures you control get +1/+0 and have haste.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         1, 0, Duration.WhileOnBattlefield,
                         filter, true
@@ -50,7 +49,6 @@ public final class SteamfloggerBoss extends CardImpl {
 
         // If a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new InfoEffect(
                         "If a Rigger you control would assemble a Contraption, "
                         + "it assembles two Contraptions instead"

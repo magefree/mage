@@ -62,7 +62,7 @@ class ExpelTheInterlopersEffect extends OneShotEffect {
         }
 
         // Choose a number between 0 and 10.
-        int number = player.getAmount(0, 10, "Choose a number between 0 and 10", game);
+        int number = player.getAmount(0, 10, "Choose a number between 0 and 10", source, game);
         game.informPlayers(player.getLogName() + " has chosen the number " + number + "." + CardUtil.getSourceLogName(game, source));
 
         // Destroy all creatures with power greater than or equal to the chosen number.

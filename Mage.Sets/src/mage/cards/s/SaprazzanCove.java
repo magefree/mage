@@ -30,7 +30,7 @@ public final class SaprazzanCove extends CardImpl {
         // Saprazzan Cove enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}: Put a storage counter on Saprazzan Cove.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
         // {tap}, Remove any number of storage counters from Saprazzan Cove: Add {U} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.BlueMana(1),

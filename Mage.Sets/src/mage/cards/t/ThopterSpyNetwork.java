@@ -2,7 +2,7 @@
 package mage.cards.t;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class ThopterSpyNetwork extends CardImpl {
         this.addAbility(new ThopterSpyNetworkUpkeepTriggeredAbility());
 
         // Whenever one or more artifact creatures you control deals combat damage to a player, draw a card.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
     private ThopterSpyNetwork(final ThopterSpyNetwork card) {

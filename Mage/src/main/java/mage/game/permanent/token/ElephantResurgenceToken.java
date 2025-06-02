@@ -25,7 +25,6 @@ public final class ElephantResurgenceToken extends TokenImpl {
         toughness = new MageInt(0);
 
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new SetBasePowerToughnessSourceEffect(new CardsInControllerGraveyardCount(new FilterCreatureCard()))
                         .setText("This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard.")
         ));

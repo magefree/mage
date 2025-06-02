@@ -32,7 +32,7 @@ public final class HedronMatrix extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +X/+X, where X is its mana value.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedronMatrixEffect()));
+        this.addAbility(new SimpleStaticAbility(new HedronMatrixEffect()));
 
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));

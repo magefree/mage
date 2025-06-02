@@ -5,7 +5,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -21,43 +20,20 @@ public class CreateTokenControllerTargetEffect extends OneShotEffect {
     private final DynamicValue amount;
     private final boolean tapped;
 
-    /**
-     * What the target is supposed to be, to retrieve its controller from
-     */
-    public enum TargetKind {
-        PERMANENT,
-        SPELL
-    }
-
-    private final TargetKind targetKind;
-
     public CreateTokenControllerTargetEffect(Token token) {
         this(token, 1, false);
-    }
-
-    public CreateTokenControllerTargetEffect(Token token, TargetKind targetKind) {
-        this(token, 1, false, targetKind);
     }
 
     public CreateTokenControllerTargetEffect(Token token, int amount, boolean tapped) {
         this(token, StaticValue.get(amount), tapped);
     }
 
-    public CreateTokenControllerTargetEffect(Token token, int amount, boolean tapped, TargetKind targetKind) {
-        this(token, StaticValue.get(amount), tapped, targetKind);
-    }
-
     public CreateTokenControllerTargetEffect(Token token, DynamicValue amount, boolean tapped) {
-        this(token, amount, tapped, TargetKind.PERMANENT);
-    }
-
-    public CreateTokenControllerTargetEffect(Token token, DynamicValue amount, boolean tapped, TargetKind targetKind) {
         super(Outcome.Neutral);
         this.token = token;
         this.amount = amount.copy();
         this.tapped = tapped;
         this.staticText = makeText();
-        this.targetKind = targetKind;
     }
 
     protected CreateTokenControllerTargetEffect(final CreateTokenControllerTargetEffect effect) {
@@ -65,7 +41,6 @@ public class CreateTokenControllerTargetEffect extends OneShotEffect {
         this.token = effect.token.copy();
         this.amount = effect.amount.copy();
         this.tapped = effect.tapped;
-        this.targetKind = effect.targetKind;
     }
 
     @Override
@@ -75,21 +50,10 @@ public class CreateTokenControllerTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Controllable controllable = null;
-        switch (targetKind) {
-            case PERMANENT:
-                controllable = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-                break;
-            case SPELL:
-                controllable = game.getSpellOrLKIStack(getTargetPointer().getFirst(game, source));
-                break;
-        }
-        if (controllable != null) {
-            Player controllerOfTarget = game.getPlayer(controllable.getControllerId());
-            if (controllerOfTarget != null) {
-                int value = amount.calculate(game, source, this);
-                return token.putOntoBattlefield(value, game, source, controllerOfTarget.getId(), tapped, false);
-            }
+        Player controllerOfTarget = getTargetPointer().getControllerOfFirstTargetOrLKI(game, source);
+        if (controllerOfTarget != null) {
+            int value = amount.calculate(game, source, this);
+            return token.putOntoBattlefield(value, game, source, controllerOfTarget.getId(), tapped, false);
         }
         return false;
     }

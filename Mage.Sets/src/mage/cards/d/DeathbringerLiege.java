@@ -49,8 +49,8 @@ public final class DeathbringerLiege extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlack, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlack, true)));
         Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filterWhiteSpellCard, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

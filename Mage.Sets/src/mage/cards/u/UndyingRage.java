@@ -41,7 +41,7 @@ public final class UndyingRage extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and can't block.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2,2, Duration.WhileOnBattlefield));
         Effect effect = new CantBlockAttachedEffect(AttachmentType.AURA);
         effect.setText("and can't block");
         ability.addEffect(effect);

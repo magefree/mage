@@ -23,10 +23,10 @@ public final class SunbeamSpellbomb extends CardImpl {
 
     public SunbeamSpellbomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability firstAbility = new SimpleActivatedAbility(new GainLifeEffect(5), new ColoredManaCost(ColoredManaSymbol.W));
         firstAbility.addCost(new SacrificeSourceCost());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        Ability secondAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         secondAbility.addCost(new SacrificeSourceCost());
         this.addAbility(secondAbility);
     }

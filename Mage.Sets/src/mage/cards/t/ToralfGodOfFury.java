@@ -2,6 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -28,6 +29,7 @@ import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -92,7 +94,7 @@ public final class ToralfGodOfFury extends ModalDoubleFacedCard {
     }
 }
 
-class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
+class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     ToralfGodOfFuryTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -109,6 +111,7 @@ class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // all events in the batch are always relevant if triggers at all
         DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
         int excessDamage = dEvent.getEvents()
                 .stream()

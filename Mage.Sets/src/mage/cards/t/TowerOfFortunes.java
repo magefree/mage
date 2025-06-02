@@ -22,7 +22,7 @@ public final class TowerOfFortunes extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {8}, {T} : Draw four cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(4), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(4), new GenericManaCost(8));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
