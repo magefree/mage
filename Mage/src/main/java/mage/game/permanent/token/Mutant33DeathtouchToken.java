@@ -10,9 +10,9 @@ import mage.constants.SubType;
  */
 
 
-public final class TheCurseOfFenricMutantToken extends TokenImpl {
+public final class Mutant33DeathtouchToken extends TokenImpl {
 
-    public TheCurseOfFenricMutantToken() {
+    public Mutant33DeathtouchToken() {
         super("Mutant Token", "3/3 green mutant creature token with deathtouch");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.MUTANT);
@@ -23,12 +23,12 @@ public final class TheCurseOfFenricMutantToken extends TokenImpl {
         addAbility(DeathtouchAbility.getInstance());
     }
 
-    private TheCurseOfFenricMutantToken(final TheCurseOfFenricMutantToken token) {
+    private Mutant33DeathtouchToken(final Mutant33DeathtouchToken token) {
         super(token);
     }
 
-    public TheCurseOfFenricMutantToken copy() {
-        return new TheCurseOfFenricMutantToken(this);
+    public Mutant33DeathtouchToken copy() {
+        return new Mutant33DeathtouchToken(this);
     }
 }
 

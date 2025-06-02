@@ -17,14 +17,14 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TheCurseOfFenricMutantToken;
+import mage.game.permanent.token.Mutant33DeathtouchToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -62,7 +62,8 @@ public final class TheCurseOfFenric extends CardImpl {
                                     "creature with deathtouch")
                             .setTargetPointer(new EachTargetPointer())
                     );
-                    ability.setTargetAdjuster(TheCurseOfFenricAdjuster.instance);
+                    ability.addTarget(new TargetPermanent(0, 1, new FilterCreaturePermanent()));
+                    ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
                 }
         );
 
@@ -119,7 +120,7 @@ class TheCurseOfFenricDestroyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Token mutantToken = new TheCurseOfFenricMutantToken();
+        Token mutantToken = new Mutant33DeathtouchToken();
         for (Target target : source.getTargets()) {
             Permanent targetCreature = game.getPermanent(target.getFirstTarget());
             if (targetCreature != null) {
@@ -130,27 +131,6 @@ class TheCurseOfFenricDestroyEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-enum TheCurseOfFenricAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            FilterCreaturePermanent filter = new FilterCreaturePermanent(
-                    "creature "
-                            + (ability.isControlledBy(playerId) ? "you control" : "controlled by " + player.getName())
-            );
-            filter.add(new ControllerIdPredicate(playerId));
-            ability.addTarget(new TargetPermanent(0, 1, filter));
-        }
     }
 }
 
