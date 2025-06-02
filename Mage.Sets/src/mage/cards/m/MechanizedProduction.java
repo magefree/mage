@@ -1,24 +1,20 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -47,9 +43,7 @@ public final class MechanizedProduction extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new MechanizedProductionEffect(), TargetController.YOU, false
-        );
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new MechanizedProductionEffect(), false);
         ability.addEffect(new ConditionalOneShotEffect(
                 new WinGameSourceControllerEffect(), MechanizedProductionCondition.instance,
                 "Then if you control eight or more artifacts with the same name as one another, you win the game"

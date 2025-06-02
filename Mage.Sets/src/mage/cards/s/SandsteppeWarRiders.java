@@ -2,13 +2,13 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,7 +39,7 @@ public final class SandsteppeWarRiders extends CardImpl {
 
         // At the beginning of combat on your turn, bolster X, where X is the number of differently named artifact tokens you control.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new BolsterEffect(SandsteppeWarRidersValue.instance), TargetController.YOU, false
+                new BolsterEffect(SandsteppeWarRidersValue.instance)
         ).addHint(SandsteppeWarRidersValue.getHint()));
     }
 

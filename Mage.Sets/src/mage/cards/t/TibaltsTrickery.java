@@ -89,7 +89,7 @@ class TibaltsTrickeryEffect extends OneShotEffect {
             }
         }
         controller.moveCardsToExile(cardsToExile, source, game, true, source.getSourceId(),
-                CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                CardUtil.createObjectRelatedWindowTitle(source, game, null));
         if (cardToCast != null) {
             if (controller.chooseUse(Outcome.PlayForFree, "Cast " + cardToCast.getLogName() + " for free?", source, game)) {
                 game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
