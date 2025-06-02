@@ -431,6 +431,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Umaro, Raging Yeti", 63, Rarity.RARE, mage.cards.u.UmaroRagingYeti.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Underground River", 439, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
         cards.add(new SetCardInfo("Unfinished Business", 259, Rarity.RARE, mage.cards.u.UnfinishedBusiness.class));
+        cards.add(new SetCardInfo("Urianger Augurelt", 189, Rarity.RARE, mage.cards.u.UriangerAugurelt.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urianger Augurelt", 96, Rarity.RARE, mage.cards.u.UriangerAugurelt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vandalblast", 298, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vanquish the Horde", 260, Rarity.RARE, mage.cards.v.VanquishTheHorde.class));
         cards.add(new SetCardInfo("Vincent, Vengeful Atoner", 157, Rarity.RARE, mage.cards.v.VincentVengefulAtoner.class, NON_FULL_USE_VARIOUS));
