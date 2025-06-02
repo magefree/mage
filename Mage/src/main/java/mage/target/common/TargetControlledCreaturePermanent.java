@@ -17,7 +17,7 @@ public class TargetControlledCreaturePermanent extends TargetControlledPermanent
     }
 
     public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_CONTROLLED_CREATURE, false);
+        this(minNumTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_CONTROLLED_CREATURES : StaticFilters.FILTER_CONTROLLED_CREATURE, false);
     }
 
     public TargetControlledCreaturePermanent(FilterControlledCreaturePermanent filter) {

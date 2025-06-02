@@ -10,7 +10,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.GateYouControlHint;
+import mage.abilities.hint.common.GatesYouControlHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public final class GatebreakerRam extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)
                         .setText("{this} gets +1/+1 for each Gate you control.")
-        ).addHint(GateYouControlHint.instance));
+        ).addHint(GatesYouControlHint.instance));
 
         // As long as you control two or more Gates, Gatebreaker Ram has vigilance and trample.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(

@@ -38,7 +38,8 @@ public final class Painbringer extends CardImpl {
         Effect effect = new BoostTargetEffect(X, X, Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-X until end of turn, where X is the number of cards exiled this way");
         Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
-        ability.addCost(new ExileXFromYourGraveCost(new FilterCard("any number of cards from your graveyard")));
+        ability.addCost(new ExileXFromYourGraveCost(new FilterCard("any number of cards from your graveyard"))
+                .setText("Exile any number of cards from your graveyard"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

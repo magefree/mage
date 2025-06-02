@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class NestingGrounds extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("another target");
+    private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 
     static {
         filter.add(new AnotherTargetPredicate(2));
@@ -36,7 +36,7 @@ public final class NestingGrounds extends CardImpl {
         // {1}, {T}: Move a counter from target permanent you control onto another target permanent. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new MoveCounterTargetsEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledPermanent().withChooseHint("to remove a counter from"));
+        ability.addTarget(new TargetControlledPermanent().withChooseHint("to remove a counter from").setTargetTag(1));
         ability.addTarget(new TargetPermanent(filter).withChooseHint("to move a counter to").setTargetTag(2));
         this.addAbility(ability);
     }

@@ -39,7 +39,9 @@ public final class BlazingBomb extends CardImpl {
 
         // Blow Up -- {T}, Sacrifice this creature: It deals damage equal to its power to target creature. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE, "it"), new TapSourceCost()
+                new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
+                        .setText("it deals damage equal to its power to target creature"),
+                new TapSourceCost()
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

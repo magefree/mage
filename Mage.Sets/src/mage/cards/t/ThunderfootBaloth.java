@@ -33,7 +33,7 @@ public final class ThunderfootBaloth extends CardImpl {
         // Lieutenant - As long as you control your commander, Thunderfoot Baloth gets +2/+2 and other creatures you control get +2/+2 and have trample.
         this.addAbility(new LieutenantAbility(new BoostControlledEffect(
                 2, 2, Duration.WhileOnBattlefield, true
-        ), "and other creature you control get +2/+2").addLieutenantEffect(new GainAbilityAllEffect(
+        ), "and other creatures you control get +2/+2").addLieutenantEffect(new GainAbilityAllEffect(
                 TrampleAbility.getInstance(), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CONTROLLED_CREATURES, true
         ), "and have trample"));

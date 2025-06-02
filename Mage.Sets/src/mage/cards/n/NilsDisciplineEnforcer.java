@@ -2,25 +2,21 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 
 import java.util.UUID;
 
@@ -42,7 +38,8 @@ public final class NilsDisciplineEnforcer extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new NilsDisciplineEnforcerCountersEffect()
         );
-        ability.setTargetAdjuster(NilsDisciplineEnforcerAdjuster.instance);
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
         this.addAbility(ability);
 
         // Each creature with one or more counters on it can't attack you or planeswalkers you control unless its controller pays {X}, where X is the number of counters on that creature.
@@ -56,23 +53,6 @@ public final class NilsDisciplineEnforcer extends CardImpl {
     @Override
     public NilsDisciplineEnforcer copy() {
         return new NilsDisciplineEnforcer(this);
-    }
-}
-
-enum NilsDisciplineEnforcerAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        game.getState().getPlayersInRange(ability.getControllerId(), game).forEach(playerId -> {
-            Player player = game.getPlayer(playerId);
-            if (!(player == null)) {
-                FilterPermanent filter = new FilterCreaturePermanent("creature controlled by " + player.getName());
-                filter.add(new ControllerIdPredicate(playerId));
-                ability.addTarget(new TargetPermanent(0, 1, filter));
-            }
-        });
     }
 }
 

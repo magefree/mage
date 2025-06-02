@@ -26,7 +26,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class DevotedCaretaker extends CardImpl {
     
-    private static final FilterSpell filter = new FilterSpell("instant spells and sorcery spells");
+    private static final FilterSpell filter = new FilterSpell("instant spells and from sorcery spells");
     
     static{
         filter.add(Predicates.or(CardType.SORCERY.getPredicate(), CardType.INSTANT.getPredicate()));

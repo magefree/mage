@@ -20,7 +20,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 
 /**
  *
@@ -34,7 +34,7 @@ public final class DisorientingChoice extends CardImpl {
         // For each opponent, choose up to one target artifact or enchantment that player controls. For each permanent chosen this way, its controller may exile it. Then if one or more of the chosen permanents are still on the battlefield, you search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new DisorientingChoiceEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(0,1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
-        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
+        this.getSpellAbility().setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true));
     }
 
     private DisorientingChoice(final DisorientingChoice card) {

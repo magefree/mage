@@ -44,7 +44,7 @@ public final class SummonFenrir extends CardImpl {
         // I -- Crescent Fang -- Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, ability -> {
             ability.addEffect(new SearchLibraryPutInPlayEffect(
-                    new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
+                    new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
             ));
             ability.withFlavorWord("Crescent Fang");
         });

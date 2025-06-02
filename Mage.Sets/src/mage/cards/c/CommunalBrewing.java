@@ -12,7 +12,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -28,8 +28,6 @@ import java.util.UUID;
  */
 public final class CommunalBrewing extends CardImpl {
 
-    private static final FilterCreatureSpell filter = new FilterCreatureSpell("a creature spell");
-
     public CommunalBrewing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
@@ -41,7 +39,11 @@ public final class CommunalBrewing extends CardImpl {
 
         // Whenever you cast a creature spell, that creature enters with X additional +1/+1
         // counters on it, where X is the number of ingredient counters on Communal Brewing.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CommunalBrewingCountersEffect(), filter, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new CommunalBrewingCountersEffect(),
+                StaticFilters.FILTER_SPELL_A_CREATURE,
+                false, SetTargetPointer.SPELL
+        ));
     }
 
     private CommunalBrewing(final CommunalBrewing card) {
@@ -93,7 +95,7 @@ class CommunalBrewingCountersEffect extends ReplacementEffectImpl {
 
     CommunalBrewingCountersEffect() {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
-        this.staticText = "that creature enters with X additional +1/+1 counters on it, where X is is the number of ingredient counters on {this}";
+        this.staticText = "that creature enters with X additional +1/+1 counters on it, where X is the number of ingredient counters on {this}";
     }
 
     private CommunalBrewingCountersEffect(final CommunalBrewingCountersEffect effect) {

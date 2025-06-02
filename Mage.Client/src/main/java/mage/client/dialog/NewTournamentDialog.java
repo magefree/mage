@@ -40,6 +40,11 @@ public class NewTournamentDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(NewTournamentDialog.class);
 
+    // it's ok to have 4 players at the screen, 6 is fine for big screens too
+    private static final int MAX_WORKABLE_PLAYERS_PER_GAME = 6;
+
+    private static final String CUBE_FROM_DECK_NAME = "Cube From Deck";
+
     // temp settings on loading players list
     private final List<PlayerType> prefPlayerTypes = new ArrayList<>();
     private final List<Integer> prefPlayerSkills = new ArrayList<>();
@@ -77,12 +82,15 @@ public class NewTournamentDialog extends MageDialog {
 
     private int getCurrentNumPlayers() {
         int res = (Integer) spnNumPlayers.getValue();
-        return res > 0 ? res : 2;
+        return Math.max(2, res);
     }
 
     private int getCurrentNumSeats() {
-        int res = (Integer) spnNumSeats.getValue();
-        return res > 0 ? res : 2;
+        if (chkSingleMultiplayerGame.isSelected()) {
+            return getCurrentNumPlayers();
+        } else {
+            return 2;
+        }
     }
 
     public void showDialog(UUID roomId) {
@@ -159,9 +167,8 @@ public class NewTournamentDialog extends MageDialog {
         lblPacks = new javax.swing.JLabel();
         pnlPacks = new javax.swing.JPanel();
         lblNbrPlayers = new javax.swing.JLabel();
-        lblNbrSeats = new javax.swing.JLabel();
         spnNumPlayers = new javax.swing.JSpinner();
-        spnNumSeats = new javax.swing.JSpinner();
+        chkSingleMultiplayerGame = new javax.swing.JCheckBox();
         pnlDraftOptions = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         cbDraftTiming = new javax.swing.JComboBox();
@@ -321,17 +328,17 @@ public class NewTournamentDialog extends MageDialog {
 
         lblNbrPlayers.setText("Players:");
 
-        lblNbrSeats.setText("Seats:");
-
         spnNumPlayers.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spnNumPlayersStateChanged(evt);
             }
         });
 
-        spnNumSeats.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spnNumSeatsStateChanged(evt);
+        chkSingleMultiplayerGame.setText("play as single game");
+        chkSingleMultiplayerGame.setToolTipText("<HTML>Allow to play single game with all tourney's players -- e.g. play one game after draft with 4 players");
+        chkSingleMultiplayerGame.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chkSingleMultiplayerGameItemStateChanged(evt);
             }
         });
 
@@ -390,7 +397,7 @@ public class NewTournamentDialog extends MageDialog {
         );
         pnlPlayersLayout.setVerticalGroup(
             pnlPlayersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 8, Short.MAX_VALUE)
+            .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
         );
 
         btnOk.setText("Create");
@@ -460,25 +467,26 @@ public class NewTournamentDialog extends MageDialog {
                     .addComponent(pnlPacks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPacks)
+                            .addComponent(lblPlayer1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblNbrPlayers)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNbrSeats)
+                                .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnNumSeats, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblPacks)
-                            .addComponent(lblPlayer1))
+                                .addComponent(lblNumWins)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chkSingleMultiplayerGame)))
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(pnlDraftOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblNumRounds))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblConstructionTime)))
+                            .addComponent(lblConstructionTime))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spnConstructTime, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,11 +553,7 @@ public class NewTournamentDialog extends MageDialog {
                                 .addComponent(lbBufferTime)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbBufferTime, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNumWins)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(87, 87, 87)
                                 .addComponent(chkRollbackTurnsAllowed)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbAllowSpectators)))))
@@ -561,8 +565,6 @@ public class NewTournamentDialog extends MageDialog {
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblNumWins)
-                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(chkRollbackTurnsAllowed)
                         .addComponent(cbAllowSpectators, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -612,20 +614,21 @@ public class NewTournamentDialog extends MageDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlPacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlRandomPacks, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)
+                        .addComponent(pnlRandomPacks, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(spnNumRounds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblNumRounds))
                             .addComponent(lblNbrPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(spnNumPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                            .addComponent(pnlDraftOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblNbrSeats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(spnNumSeats))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(spnNumPlayers)
+                                .addComponent(chkSingleMultiplayerGame)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblNumWins)
+                                    .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(pnlDraftOptions, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
                         .addComponent(lblPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(spnConstructTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -652,7 +655,7 @@ public class NewTournamentDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbTournamentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTournamentTypeActionPerformed
-        prepareTourneyView(false, prepareVersionStr(-1, false), getCurrentNumPlayers(), getCurrentNumSeats());
+        loadTourneyView(false, prepareVersionStr(-1, false), getCurrentNumPlayers(), chkSingleMultiplayerGame.isSelected());
 
         jumpstartPacksFilename = "";
         if (cbTournamentType.getSelectedItem().toString().matches(".*Jumpstart.*Custom.*")) {
@@ -690,6 +693,38 @@ public class NewTournamentDialog extends MageDialog {
             DraftOptions draftOptions = (DraftOptions) tOptions.getLimitedOptions();
             if (draftOptions.getTiming() == TimingOption.NONE) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Warning, you must select draft timing option", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
+        // players count limited by GUI size
+        // draft bots are loses and hide at the start, so count only human and AI
+        if (tOptions.getMatchOptions().isSingleGameTourney()) {
+            int workablePlayers = tOptions.getPlayerTypes().stream()
+                    .mapToInt(p -> p.isWorkablePlayer() ? 1 : 0)
+                    .sum();
+            if (workablePlayers > MAX_WORKABLE_PLAYERS_PER_GAME) {
+                JOptionPane.showMessageDialog(
+                        MageFrame.getDesktop(),
+                        String.format("Warning, in single game mode you can choose %d human/ai players but selected %d", MAX_WORKABLE_PLAYERS_PER_GAME, workablePlayers),
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+        }
+
+        // cube from deck uses weird choose logic from combobox select, so players can forget or cancel it
+        if (tournamentType.isDraft()
+                && tOptions.getLimitedOptions().getDraftCubeName() != null
+                && tOptions.getLimitedOptions().getDraftCubeName().contains(CUBE_FROM_DECK_NAME)) {
+            if (tOptions.getLimitedOptions().getCubeFromDeck() == null || tOptions.getLimitedOptions().getCubeFromDeck().getCards().isEmpty()) {
+                JOptionPane.showMessageDialog(
+                        MageFrame.getDesktop(),
+                        "Found empty cube. You must choose Cube From Deck again and select existing deck file.",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE
+                );
                 return;
             }
         }
@@ -741,44 +776,29 @@ public class NewTournamentDialog extends MageDialog {
         doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void updateNumSeats() {
-        int numSeats = (Integer) this.spnNumSeats.getValue();
+    private void applyNewPlayersCount() {
+        // make sure players count is compatible
+        int numPlayers = getCurrentNumPlayers();
+        int compatiblePlayers = getCompatiblePlayersCount(numPlayers);
+        if (numPlayers != compatiblePlayers) {
+            numPlayers = compatiblePlayers;
+            spnNumPlayers.setValue(numPlayers);
+        }
+        createPlayers(numPlayers - 1);
 
-        if (numSeats > 2) {
-            TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-            if (numSeats >= tournamentType.getMinPlayers()) {
-                createPlayers(numSeats - 1);
-                spnNumPlayers.setValue(numSeats);
-            } else {
-                numSeats = tournamentType.getMinPlayers();
-                createPlayers(numSeats - 1);
-                spnNumPlayers.setValue(numSeats);
-                spnNumSeats.setValue(numSeats);
-            }
+        // make sure wins is compatible
+        // is's can be a too long match for 2+ wins in 4+ game
+        if (chkSingleMultiplayerGame.isSelected()) {
             spnNumWins.setValue(1);
         }
     }
 
     private void spnNumPlayersStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumPlayersStateChanged
-        int numPlayers = getCurrentNumPlayers();
-        createPlayers(numPlayers - 1);
-        int numSeats = (Integer) this.spnNumSeats.getValue();
-        if (numSeats > 2 && numPlayers != numSeats) {
-            updateNumSeats();
-        }
+        applyNewPlayersCount();
     }//GEN-LAST:event_spnNumPlayersStateChanged
 
-    private void spnNumSeatsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumSeatsStateChanged
-        int numSeats = (Integer) this.spnNumSeats.getValue();
-        this.spnNumPlayers.setEnabled(numSeats <= 2);
-        updateNumSeats();
-    }//GEN-LAST:event_spnNumSeatsStateChanged
-
     private void spnNumWinsnumPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumWinsnumPlayersChanged
-        int numSeats = getCurrentNumSeats();
-        if (numSeats > 2) {
-            spnNumWins.setValue(1);
-        }
+        applyNewPlayersCount();
     }//GEN-LAST:event_spnNumWinsnumPlayersChanged
 
     private JFileChooser fcSelectDeck = null;
@@ -823,7 +843,7 @@ public class NewTournamentDialog extends MageDialog {
 
     private void cbDraftCubeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDraftCubeActionPerformed
         cubeFromDeckFilename = "";
-        if (cbDraftCube.getSelectedItem().toString().equals("Cube From Deck")) {
+        if (cbDraftCube.getSelectedItem().toString().startsWith(CUBE_FROM_DECK_NAME)) {
             cubeFromDeckFilename = playerLoadDeck();
         }
     }//GEN-LAST:event_cbDraftCubeActionPerformed
@@ -880,27 +900,52 @@ public class NewTournamentDialog extends MageDialog {
         customOptions.showDialog();
     }//GEN-LAST:event_btnCustomOptionsActionPerformed
 
+    private void chkSingleMultiplayerGameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkSingleMultiplayerGameItemStateChanged
+        // for checkboxes - it's important to use ItemStateChanged instead stateChanged
+        // (the last one will raise on moving mouse over, not on checkbox state change only)
+        applyNewPlayersCount();
+    }//GEN-LAST:event_chkSingleMultiplayerGameItemStateChanged
+
     private void setGameOptions() {
         createPlayers(getCurrentNumPlayers() - 1);
     }
 
-    private void prepareTourneyView(boolean loadPlayerSettings, String versionStr, int numPlayers, int numSeats) {
+    private int getCompatiblePlayersCount(int count) {
+        TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
+        if (tournamentType == null) {
+            return count;
+        }
+        int compatibleMin = tournamentType.getMinPlayers();
+        int compatibleMax = tournamentType.getMaxPlayers();
+
+        if (chkSingleMultiplayerGame.isSelected()) {
+            // user can select any amount of draft bots, real amount checks on submit
+            //compatibleMax = Math.min(MAX_PLAYERS_PER_GAME, compatibleMax);
+        }
+
+        int compatibleCount = count;
+        compatibleCount = Math.max(compatibleCount, compatibleMin);
+        compatibleCount = Math.min(compatibleCount, compatibleMax);
+        return compatibleCount;
+    }
+
+    private void loadTourneyView(boolean loadPlayerSettings, String versionStr, int numPlayers, boolean isSingleMultiplayerGame) {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         activatePanelElements(tournamentType);
 
-        if (numPlayers < tournamentType.getMinPlayers() || numPlayers > tournamentType.getMaxPlayers()) {
-            numPlayers = tournamentType.getMinPlayers();
-        }
+        numPlayers = getCompatiblePlayersCount(numPlayers);
         this.spnNumPlayers.setModel(new SpinnerNumberModel(numPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
-        this.spnNumSeats.setModel(new SpinnerNumberModel(2, 2, tournamentType.getMaxPlayers(), 1));
 
-        // manual call change events to apply players/seats restrictions and create miss panels
+        // manual call change events to apply players restrictions and create miss panels before load player related settings
         // TODO: refactor to use isLoading and restrictions from a code instead restrictions from a component
+        this.chkSingleMultiplayerGame.setSelected(isSingleMultiplayerGame);
         this.spnNumPlayers.setValue(numPlayers);
         spnNumPlayersStateChanged(null);
-        this.spnNumSeats.setValue(numSeats);
-        spnNumSeatsStateChanged(null);
+
+        // wins must be loaded after chkSingleMultiplayerGame change, cause it can be limited by 1
+        int numWins = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS + versionStr, "2"));
+        this.spnNumWins.setValue(numWins);
 
         if (loadPlayerSettings) {
             // load player data
@@ -1259,8 +1304,7 @@ public class NewTournamentDialog extends MageDialog {
 
     private TournamentOptions getTournamentOptions() {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-        int numSeats = (Integer) this.spnNumSeats.getValue();
-        TournamentOptions tOptions = new TournamentOptions(this.txtName.getText(), "", numSeats);
+        TournamentOptions tOptions = new TournamentOptions(this.txtName.getText(), "", chkSingleMultiplayerGame.isSelected());
         tOptions.setTournamentType(tournamentType.getName());
         tOptions.setPassword(txtPassword.getText());
         tOptions.getPlayerTypes().add(PlayerType.HUMAN);
@@ -1423,7 +1467,6 @@ public class NewTournamentDialog extends MageDialog {
                 break;
             }
         }
-        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS + versionStr, "2")));
         this.spnQuitRatio.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_QUIT_RATIO + versionStr, "100")));
         this.spnMinimumRating.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_MINIMUM_RATING + versionStr, "0")));
 
@@ -1431,7 +1474,6 @@ public class NewTournamentDialog extends MageDialog {
         activatePanelElements(tournamentType);
 
         int defaultNumberPlayers = 2;
-        int defaultNumberSeats = 2;
         if (tournamentType.isLimited()) {
             if (tournamentType.isDraft()) {
                 defaultNumberPlayers = 4;
@@ -1462,8 +1504,8 @@ public class NewTournamentDialog extends MageDialog {
         }
 
         int numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_PLAYERS + versionStr, String.valueOf(defaultNumberPlayers)));
-        int numSeats = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_SEATS + versionStr, String.valueOf(defaultNumberSeats)));
-        prepareTourneyView(true, versionStr, numPlayers, numSeats);
+        boolean isSingleMultiplayerGame = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_SINGLE_MULTIPLAYER_GAME + versionStr, "No").equals("Yes");
+        loadTourneyView(true, versionStr, numPlayers, isSingleMultiplayerGame);
 
         this.customOptions.onLoadSettings(version);
     }
@@ -1511,7 +1553,7 @@ public class NewTournamentDialog extends MageDialog {
         }
 
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_PLAYERS + versionStr, Integer.toString(tOptions.getPlayerTypes().size()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_SEATS + versionStr, Integer.toString((Integer) this.spnNumSeats.getValue()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_SINGLE_MULTIPLAYER_GAME + versionStr, (tOptions.getMatchOptions().isSingleGameTourney() ? "Yes" : "No"));
 
         // save player data
         // player type
@@ -1552,6 +1594,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JComboBox cbTournamentType;
     private javax.swing.JCheckBox chkRated;
     private javax.swing.JCheckBox chkRollbackTurnsAllowed;
+    private javax.swing.JCheckBox chkSingleMultiplayerGame;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lbBufferTime;
     private javax.swing.JLabel lbDeckType;
@@ -1563,7 +1606,6 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JLabel lblMinimumRating;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNbrPlayers;
-    private javax.swing.JLabel lblNbrSeats;
     private javax.swing.JLabel lblNumRounds;
     private javax.swing.JLabel lblNumWins;
     private javax.swing.JLabel lblPacks;
@@ -1592,7 +1634,6 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JSpinner spnMinimumRating;
     private javax.swing.JSpinner spnNumPlayers;
     private javax.swing.JSpinner spnNumRounds;
-    private javax.swing.JSpinner spnNumSeats;
     private javax.swing.JSpinner spnNumWins;
     private javax.swing.JSpinner spnQuitRatio;
     private javax.swing.JTextField txtName;

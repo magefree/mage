@@ -71,7 +71,7 @@ class RottenmouthViperEffect extends OneShotEffect{
     RottenmouthViperEffect(DynamicValue blightCounterAmount) {
         super(Outcome.LoseLife);
         this.blightCounterAmount = blightCounterAmount;
-        this.staticText = "Then for each blight counter on it, each opponent loses 4 life unless that player sacrifices a nonland permanent or discards a card.";
+        this.staticText = "Then for each blight counter on it, each opponent loses 4 life unless that player sacrifices a nonland permanent of their choice or discards a card.";
     }
 
     private RottenmouthViperEffect(final RottenmouthViperEffect effect) {

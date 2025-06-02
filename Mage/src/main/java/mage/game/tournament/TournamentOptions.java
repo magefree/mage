@@ -26,9 +26,9 @@ public class TournamentOptions implements Serializable {
     protected int quitRatio;
     protected int minimumRating;
 
-    public TournamentOptions(String name, String matchType, int numSeats) {
+    public TournamentOptions(String name, String matchType, boolean isSingleMultiplayerGame) {
         this.name = name;
-        this.matchOptions = new MatchOptions("", matchType, numSeats > 2, numSeats);
+        this.matchOptions = new MatchOptions("", matchType, isSingleMultiplayerGame);
     }
 
     public String getName() {

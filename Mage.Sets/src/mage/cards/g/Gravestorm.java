@@ -47,7 +47,7 @@ class GravestormEffect extends OneShotEffect {
 
     GravestormEffect() {
         super(Outcome.Exile);
-        this.staticText = "At the beginning of your upkeep, target opponent may exile a card from their graveyard. If that player doesn't, you may draw a card.";
+        this.staticText = "target opponent may exile a card from their graveyard. If that player doesn't, you may draw a card.";
     }
 
     private GravestormEffect(final GravestormEffect effect) {

@@ -15,8 +15,7 @@ public class FreeformUnlimitedCommanderMatchTest extends MageTestPlayerBase {
         MatchOptions options = new MatchOptions(
                 "test name",
                 "test match name",
-                false,
-                2
+                false
         );
 
         // Act
@@ -32,8 +31,7 @@ public class FreeformUnlimitedCommanderMatchTest extends MageTestPlayerBase {
         MatchOptions options = new MatchOptions(
                 "test name",
                 "test match name",
-                false,
-                2
+                false
         );
         Match match = new FreeformUnlimitedCommanderMatch(options);
 
@@ -50,8 +48,7 @@ public class FreeformUnlimitedCommanderMatchTest extends MageTestPlayerBase {
         MatchOptions options = new MatchOptions(
                 "test name",
                 "test match name",
-                false,
-                2
+                false
         );
         Match match = new FreeformUnlimitedCommanderMatch(options);
 

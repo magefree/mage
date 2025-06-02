@@ -172,12 +172,17 @@ public class DamageTargetEffect extends OneShotEffect {
                 } else {
                     if (firstTarget.getMinNumberOfTargets() == 0) {
                         int maxTargets = firstTarget.getMaxNumberOfTargets();
-                        if (maxTargets == Integer.MAX_VALUE) {
-                            sb.append("any number of ");
-                        } else {
-                            sb.append("up to ");
-                            sb.append(CardUtil.numberToText(maxTargets));
-                            sb.append(' ');
+                        switch (maxTargets) {
+                            case Integer.MAX_VALUE:
+                                sb.append("any number of ");
+                                break;
+                            case 1:
+                                sb.append("up to one ");
+                                break;
+                            default:
+                                sb.append("each of up to ");
+                                sb.append(CardUtil.numberToText(maxTargets));
+                                sb.append(' ');
                         }
                     }
                     if (!targetName.contains("target ")) {

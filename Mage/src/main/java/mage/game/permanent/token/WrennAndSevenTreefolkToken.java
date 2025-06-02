@@ -15,7 +15,7 @@ import mage.constants.Zone;
 public final class WrennAndSevenTreefolkToken extends TokenImpl {
 
     public WrennAndSevenTreefolkToken() {
-        super("Treefolk Token", "green Treefolk creature token with reach and \"This creature's power and toughness are each equal to the number of lands you control.\"");
+        super("Treefolk Token", "green Treefolk creature token with reach and \"This token's power and toughness are each equal to the number of lands you control.\"");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.TREEFOLK);
@@ -24,7 +24,7 @@ public final class WrennAndSevenTreefolkToken extends TokenImpl {
         this.addAbility(ReachAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
                 LandsYouControlCount.instance
-        ).setText("this creature's power and toughness are each equal to the number of lands you control")));
+        ).setText("this token's power and toughness are each equal to the number of lands you control")));
     }
 
     private WrennAndSevenTreefolkToken(final WrennAndSevenTreefolkToken token) {

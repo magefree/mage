@@ -50,7 +50,7 @@ public final class ForTheCommonGood extends CardImpl {
                 IndestructibleAbility.getInstance(),
                 Duration.UntilYourNextTurn, StaticFilters.FILTER_PERMANENT_TOKENS
         ).concatBy("Then"));
-        this.getSpellAbility().addEffect(new GainLifeEffect(xValue));
+        this.getSpellAbility().addEffect(new GainLifeEffect(xValue).setText("You gain 1 life for each token you control"));
         this.getSpellAbility().addHint(hint);
     }
 

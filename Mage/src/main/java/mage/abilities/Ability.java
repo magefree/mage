@@ -475,6 +475,11 @@ public interface Ability extends Controllable, Serializable {
     Ability withFlavorWord(String flavorWord);
 
     /**
+     * Gets rule prefix for text generation
+     */
+    String addRulePrefix(String rule);
+
+    /**
      * Sets flavor word for first mode
      */
     Ability withFirstModeFlavorWord(String flavorWord);
@@ -499,6 +504,17 @@ public interface Ability extends Controllable, Serializable {
     MageObject getSourceObject(Game game);
 
     void setSourceObjectZoneChangeCounter(int zoneChangeCounter);
+    /**
+     * Initializes the internally stored Source Object ZCC value
+     * to be equal to the source object's current ZCC.
+     * <p>
+     * If the source is an entering permanent, then
+     * the ZCC is set as if the permanent had already entered the battlefield.
+     *
+     * @param game
+     * @param force Update only occurs if stored ZCC is zero or if force is true.
+     */
+    void initSourceObjectZoneChangeCounter(Game game, boolean force);
 
     int getSourceObjectZoneChangeCounter();
 

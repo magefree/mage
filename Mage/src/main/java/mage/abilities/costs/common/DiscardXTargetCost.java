@@ -44,6 +44,7 @@ public class DiscardXTargetCost extends VariableCostImpl {
 
     public DiscardXTargetCost withRandom() {
         this.isRandom = true;
+        this.text += " at random";
         return this;
     }
 

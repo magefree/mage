@@ -2,10 +2,10 @@ package mage.cards.n;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -79,6 +78,7 @@ class NetheresePuzzleWardTriggeredAbility extends TriggeredAbilityImpl {
     NetheresePuzzleWardTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
         this.withFlavorWord("Perfect Illumination");
+        this.setTriggerPhrase("Whenever you roll a die's highest natural result, ");
     }
 
     private NetheresePuzzleWardTriggeredAbility(final NetheresePuzzleWardTriggeredAbility ability) {
@@ -100,11 +100,5 @@ class NetheresePuzzleWardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public NetheresePuzzleWardTriggeredAbility copy() {
         return new NetheresePuzzleWardTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return CardUtil.italicizeWithEmDash(flavorWord)
-                + "Whenever you roll a die's highest natural result, draw a card.";
     }
 }

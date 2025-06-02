@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.GateYouControlCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.common.GateYouControlHint;
+import mage.abilities.hint.common.GatesYouControlHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class GatekeeperGargoyle extends CardImpl {
                         CounterType.P1P1.createInstance(),
                         GateYouControlCount.instance, true
                 ), "with a +1/+1 counter on it for each Gate you control"
-        ).addHint(GateYouControlHint.instance));
+        ).addHint(GatesYouControlHint.instance));
     }
 
     private GatekeeperGargoyle(final GatekeeperGargoyle card) {
