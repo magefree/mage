@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -10,7 +11,9 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -26,21 +29,31 @@ public class GainAllCreatureTypesTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public GainAllCreatureTypesTargetEffect copy() {
-        return new GainAllCreatureTypesTargetEffect(this);
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            ((Permanent) object).setIsAllCreatureTypes(game, true);
+        }
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        int affectedTargets = 0;
-        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
-            Permanent target = game.getPermanent(permanentId);
-            if (target != null) {
-                target.setIsAllCreatureTypes(game, true);
-                affectedTargets++;
-            }
-        }
-        return affectedTargets > 0;
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public GainAllCreatureTypesTargetEffect copy() {
+        return new GainAllCreatureTypesTargetEffect(this);
     }
 
     @Override

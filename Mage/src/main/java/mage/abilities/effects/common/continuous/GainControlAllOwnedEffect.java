@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -11,7 +12,9 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -37,6 +40,24 @@ public class GainControlAllOwnedEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            this.discard();
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
+            if (!permanent.isControlledBy(permanent.getOwnerId())) {
+                permanent.changeControllerId(permanent.getOwnerId(), game, source);
+            }
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
@@ -47,20 +68,16 @@ public class GainControlAllOwnedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) {
-            Permanent permanent = it.next().getPermanent(game);
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        ArrayList<MageItem> objects = new ArrayList<>();
+        for (Iterator<MageObjectReference> iterator = affectedObjectList.iterator(); iterator.hasNext();) {
+            Permanent permanent = (Permanent) iterator.next();
             if (permanent == null) {
-                it.remove();
+                iterator.remove();
                 continue;
             }
-            if (!permanent.isControlledBy(permanent.getOwnerId())) {
-                permanent.changeControllerId(permanent.getOwnerId(), game, source);
-            }
+            objects.add(permanent);
         }
-        if (affectedObjectList.isEmpty()) {
-            this.discard();
-        }
-        return true;
+        return objects;
     }
 }

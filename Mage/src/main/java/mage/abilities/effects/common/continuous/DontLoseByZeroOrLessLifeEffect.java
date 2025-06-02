@@ -2,6 +2,7 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -10,6 +11,9 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author LevelX2
@@ -27,18 +31,27 @@ public class DontLoseByZeroOrLessLifeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public DontLoseByZeroOrLessLifeEffect copy() {
-        return new DontLoseByZeroOrLessLifeEffect(this);
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Player)) {
+                continue;
+            }
+            ((Player) object).setLoseByZeroOrLessLife(false);
+        }
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.setLoseByZeroOrLessLife(false);
-            return true;
-        }
-        return false;
+        return controller != null ? Collections.singletonList(controller) : Collections.emptyList();
     }
 
+    @Override
+    public DontLoseByZeroOrLessLifeEffect copy() {
+        return new DontLoseByZeroOrLessLifeEffect(this);
+    }
 }

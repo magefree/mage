@@ -1,17 +1,17 @@
 
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author LevelX2
@@ -33,18 +33,31 @@ public class GainSuspendEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public GainSuspendEffect copy() {
-        return new GainSuspendEffect(this);
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            this.discard();
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Card)) {
+                continue;
+            }
+            SuspendAbility.addSuspendTemporaryToCard((Card) object, source, game);
+        }
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(mor.getSourceId());
-        if (card != null && mor.refersTo(card, game) && game.getState().getZone(card.getId()) == Zone.EXILED) {
-            SuspendAbility.addSuspendTemporaryToCard(card, source, game);
-        } else {
-            discard();
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Card card = mor.getCard(game);
+        if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+            return Collections.singletonList(card);
         }
-        return true;
+        return Collections.emptyList();
+    }
+
+    @Override
+    public GainSuspendEffect copy() {
+        return new GainSuspendEffect(this);
     }
 }

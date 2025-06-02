@@ -1,7 +1,9 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
@@ -9,6 +11,10 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author notgreat
@@ -40,20 +46,35 @@ public class LookAtOpponentFaceDownCreaturesAnyTimeEffect extends ContinuousEffe
 
     //Based on LookAtTopCardOfLibraryAnyTimeEffect
     @Override
-    public boolean apply(Game game, Ability source) {
-        if (game.inCheckPlayableState()) { // Ignored - see https://github.com/magefree/mage/issues/6994
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
             return false;
+        }
+        Cards cards = new CardsImpl();
+        for (MageItem object : objects) {
+            if (!(object instanceof Card)) {
+                continue;
+            }
+            cards.add((Card) object);
         }
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
-        if (cards.isEmpty()) {
-            return false;
-        }
         controller.lookAtCards(source, "Face Down Creatures", cards, game);
         return true;
+    }
+
+    @Override
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        if (game.inCheckPlayableState()) {
+            return Collections.emptyList();
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return Collections.emptyList();
+        }
+        return new ArrayList<>(game.getBattlefield().getActivePermanents(filter, controller.getId(), source, game));
     }
 
     @Override

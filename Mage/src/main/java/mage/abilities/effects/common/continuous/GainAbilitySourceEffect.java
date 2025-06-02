@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -11,6 +12,11 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -55,6 +61,27 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            if (duration == Duration.Custom) {
+                this.discard();
+            }
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Card)) {
+                continue;
+            }
+            if (onCard) {
+                game.getState().addOtherAbility((Card) object, ability);
+            } else {
+                ((Permanent) object).addAbility(ability);
+            }
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (!onCard && Duration.WhileOnBattlefield != duration) {
@@ -75,34 +102,33 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        List<MageItem> objects = new ArrayList<>();
         if (onCard) {
-            Card card;
             if (getAffectedObjectsSet()) {
-                card = affectedObjectList.get(0).getCard(game);
+                objects.addAll(affectedObjectList.stream()
+                        .map(mor -> mor.getCard(game))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList()));
             } else {
-                card = game.getCard(source.getSourceId());
-            }
-            if (card != null) {
-                // add ability to card only once
-                game.getState().addOtherAbility(card, ability);
-                return true;
+                Card card = game.getCard(source.getSourceId());
+                if (card != null) {
+                    objects.add(card);
+                }
             }
         } else {
-            Permanent permanent;
             if (getAffectedObjectsSet()) {
-                permanent = affectedObjectList.get(0).getPermanent(game);
+                objects.addAll(affectedObjectList.stream()
+                        .map(mor -> mor.getPermanent(game))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList()));
             } else {
-                permanent = game.getPermanent(source.getSourceId());
-            }
-            if (permanent != null) {
-                permanent.addAbility(ability, source.getSourceId(), game);
-                return true;
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    objects.add(permanent);
+                }
             }
         }
-        if (duration == Duration.Custom) {
-            this.discard();
-        }
-        return true;
+        return objects;
     }
 }

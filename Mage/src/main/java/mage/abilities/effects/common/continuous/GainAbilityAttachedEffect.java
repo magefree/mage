@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
@@ -13,6 +14,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -76,6 +80,28 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            if (getAffectedObjectsSet()) {
+                this.discard();
+            }
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
+            if (doesntRemoveItself && ability instanceof ProtectionAbility) {
+                ((ProtectionAbility) ability).setAuraIdNotToBeRemoved(source.getSourceId());
+            }
+            permanent.addAbility(ability, source.getSourceId(), game);
+            afterGain(game, source, permanent, ability);
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         if (getAffectedObjectsSetAtInit(source)) {
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
@@ -87,30 +113,18 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         Permanent permanent;
         if (getAffectedObjectsSet()) {
             permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent == null) {
-                discard();
-                return true;
-            }
         } else {
             Permanent equipment = game.getPermanent(source.getSourceId());
-            if (equipment != null && equipment.getAttachedTo() != null) {
-                permanent = game.getPermanentOrLKIBattlefield(equipment.getAttachedTo());
-            } else {
-                permanent = null;
+            if (equipment == null || equipment.getAttachedTo() == null) {
+                return Collections.emptyList();
             }
+            permanent = game.getPermanentOrLKIBattlefield(equipment.getAttachedTo());
         }
-        if (permanent != null) {
-            if (doesntRemoveItself && ability instanceof ProtectionAbility) {
-                ((ProtectionAbility) ability).setAuraIdNotToBeRemoved(source.getSourceId());
-            }
-            permanent.addAbility(ability, source.getSourceId(), game);
-            afterGain(game, source, permanent, ability);
-        }
-        return true;
+        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }
 
     /**

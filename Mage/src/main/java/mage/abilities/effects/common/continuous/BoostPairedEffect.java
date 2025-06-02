@@ -36,6 +36,9 @@ public class BoostPairedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            return false;
+        }
         for (MageItem object : objects) {
             if (!(object instanceof Permanent)) {
                 continue;

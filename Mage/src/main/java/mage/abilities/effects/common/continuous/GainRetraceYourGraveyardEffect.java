@@ -1,9 +1,10 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.RetraceAbility;
-import mage.cards.*;
+import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -13,7 +14,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.UUID;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * "[filter] cards in your graveyard have retrace."
@@ -40,24 +43,34 @@ public class GainRetraceYourGraveyardEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
             return false;
         }
-        for (UUID cardId : controller.getGraveyard()) {
-            Card card = game.getCard(cardId);
-            if (card == null) {
+        for (MageItem object : objects) {
+            if (!(object instanceof Card)) {
                 continue;
             }
-            for (Card faceCard : CardUtil.getCastableComponents(card, filter, source, controller, game, null, false)) {
-                Ability ability = new RetraceAbility(faceCard);
-                ability.setSourceId(cardId);
-                ability.setControllerId(faceCard.getOwnerId());
-                game.getState().addOtherAbility(faceCard, ability);
-            }
+            Card card = (Card) object;
+            Ability ability = new RetraceAbility(card);
+            ability.setSourceId(card.getId());
+            ability.setControllerId(card.getOwnerId());
+            game.getState().addOtherAbility(card, ability);
         }
         return true;
+    }
+
+    @Override
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return Collections.emptyList();
+        }
+        return controller.getGraveyard().getCards(game)
+                .stream()
+                .map(card -> CardUtil.getCastableComponents(card, filter, source, controller, game, null, false))
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
     @Override

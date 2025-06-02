@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -16,8 +17,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * @author Loki
@@ -58,6 +62,23 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            if (getAffectedObjectsSet()) {
+                this.discard();
+            }
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            ((Permanent) object).addAbility(ability, source.getSourceId(), game);
+        }
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         setRuntimeData(source, game);
@@ -71,33 +92,29 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public GainAbilityAllEffect copy() {
-        return new GainAbilityAllEffect(this);
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        if (getAffectedObjectsSet()) {
+            List<MageItem> objects = new ArrayList<>();
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
+                Permanent permanent = it.next().getPermanentOrLKIBattlefield(game);
+                if (permanent == null) {
+                    it.remove();
+                    continue;
+                }
+                objects.add(permanent);
+            }
+            return objects;
+        }
+        setRuntimeData(source, game);
+        return game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)
+                .stream()
+                .filter(perm -> !(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        if (getAffectedObjectsSet()) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
-                Permanent permanent = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
-                if (permanent != null) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
-                } else {
-                    it.remove(); // no longer on the battlefield, remove reference to object
-                    if (affectedObjectList.isEmpty()) {
-                        discard();
-                    }
-                }
-            }
-        } else {
-            setRuntimeData(source, game);
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
-                    perm.addAbility(ability, source.getSourceId(), game);
-                }
-            }
-        }
-        return true;
+    public GainAbilityAllEffect copy() {
+        return new GainAbilityAllEffect(this);
     }
 
     /**

@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -8,6 +9,9 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -24,21 +28,31 @@ public class GainAllCreatureTypesAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public GainAllCreatureTypesAttachedEffect copy() {
-        return new GainAllCreatureTypesAttachedEffect(this);
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            ((Permanent) object).setIsAllCreatureTypes(game, true);
+        }
+        return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment == null) {
-            return false;
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment != null) {
+            Permanent permanent = game.getPermanent(attachment.getAttachedTo());
+            return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
         }
-        Permanent permanent = game.getPermanent(equipment.getAttachedTo());
-        if (permanent == null) {
-            return false;
-        }
-        permanent.setIsAllCreatureTypes(game, true);
-        return true;
+        return Collections.emptyList();
+    }
+
+    @Override
+    public GainAllCreatureTypesAttachedEffect copy() {
+        return new GainAllCreatureTypesAttachedEffect(this);
     }
 }

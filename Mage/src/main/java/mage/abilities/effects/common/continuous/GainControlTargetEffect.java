@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
@@ -12,7 +13,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -71,11 +76,62 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty()) {
+            this.discard();
+            return false;
+        }
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            Permanent permanent = (Permanent) object;
+            if (permanent.isControlledBy(controllingPlayerId)) {
+                continue;
+            }
+            boolean controlChanged = false;
+            if (controllingPlayerId != null) {
+                if (permanent.changeControllerId(controllingPlayerId, game, source)) {
+                    controlChanged = true;
+                }
+            } else {
+                if (permanent.changeControllerId(source.getControllerId(), game, source)) {
+                    controlChanged = true;
+                }
+            }
+            if (firstControlChange && !controlChanged) {
+                // If it was not possible to get control of target permanent by the activated ability the first time it took place
+                // the effect failed (e.g. because of Guardian Beast) and must be discarded
+                // This does not handle correctly multiple targets at once
+                this.discard();
+            }
+            if (condition != null && !condition.apply(game, source)) {
+                this.discard();
+            }
+        }
+        firstControlChange = false;
+        return true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         if (this.controllingPlayerId == null && fixedControl) {
             this.controllingPlayerId = source.getControllerId();
         }
         super.init(source, game);
+    }
+
+    @Override
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return Collections.emptyList();
+        }
+        return getTargetPointer().getTargets(game, source)
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -8,6 +9,9 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -37,13 +41,23 @@ public class GainAnchorWordAbilitySourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null || !modeChoice.checkMode(game, source)) {
+    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
+        if (objects.isEmpty() || !modeChoice.checkMode(game, source)) {
             return false;
         }
-        permanent.addAbility(ability, source.getSourceId(), game);
+        for (MageItem object : objects) {
+            if (!(object instanceof Permanent)) {
+                continue;
+            }
+            ((Permanent) object).addAbility(ability, source.getSourceId(), game);
+        }
         return true;
+    }
+
+    @Override
+    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }
 
     @Override
