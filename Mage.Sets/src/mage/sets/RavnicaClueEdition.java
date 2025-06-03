@@ -169,6 +169,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mastermind Plum", 3, Rarity.RARE, mage.cards.m.MastermindPlum.class));
         cards.add(new SetCardInfo("Mausoleum Turnkey", 116, Rarity.UNCOMMON, mage.cards.m.MausoleumTurnkey.class));
         //cards.add(new SetCardInfo("Memory Vampire", 38, Rarity.RARE, mage.cards.m.MemoryVampire.class));
+        cards.add(new SetCardInfo("Memory Vampire", 38, Rarity.RARE, mage.cards.m.MemoryVampire.class));
         cards.add(new SetCardInfo("Mighty Leap", 66, Rarity.COMMON, mage.cards.m.MightyLeap.class));
         cards.add(new SetCardInfo("Mountain", 266, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 267, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
