@@ -64,7 +64,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Corpse Churn", 107, Rarity.COMMON, mage.cards.c.CorpseChurn.class));
         cards.add(new SetCardInfo("Cosmotronic Wave", 129, Rarity.COMMON, mage.cards.c.CosmotronicWave.class));
         cards.add(new SetCardInfo("Council's Judgment", 57, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
-        //cards.add(new SetCardInfo("Covetous Elegy", 29, Rarity.RARE, mage.cards.c.CovetousElegy.class));
+        cards.add(new SetCardInfo("Covetous Elegy", 29, Rarity.RARE, mage.cards.c.CovetousElegy.class));
         cards.add(new SetCardInfo("Curse of Chains", 183, Rarity.COMMON, mage.cards.c.CurseOfChains.class));
         cards.add(new SetCardInfo("Dagger Caster", 130, Rarity.UNCOMMON, mage.cards.d.DaggerCaster.class));
         cards.add(new SetCardInfo("Daggerclaw Imp", 108, Rarity.UNCOMMON, mage.cards.d.DaggerclawImp.class));
@@ -107,7 +107,6 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Fresh-Faced Recruit", 192, Rarity.COMMON, mage.cards.f.FreshFacedRecruit.class));
         cards.add(new SetCardInfo("Frostburn Weird", 193, Rarity.COMMON, mage.cards.f.FrostburnWeird.class));
         cards.add(new SetCardInfo("Fungal Rebirth", 163, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
-        //cards.add(new SetCardInfo("Furious Spinesplitter", 33, Rarity.UNCOMMON, mage.cards.f.FuriousSpinesplitter.class));
         cards.add(new SetCardInfo("Furious Spinesplitter", 33, Rarity.UNCOMMON, mage.cards.f.FuriousSpinesplitter.class));
         cards.add(new SetCardInfo("Giant Adephage", 164, Rarity.MYTHIC, mage.cards.g.GiantAdephage.class));
         cards.add(new SetCardInfo("Gift of Strength", 165, Rarity.COMMON, mage.cards.g.GiftOfStrength.class));
@@ -169,7 +168,6 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Master Biomancer", 200, Rarity.MYTHIC, mage.cards.m.MasterBiomancer.class));
         cards.add(new SetCardInfo("Mastermind Plum", 3, Rarity.RARE, mage.cards.m.MastermindPlum.class));
         cards.add(new SetCardInfo("Mausoleum Turnkey", 116, Rarity.UNCOMMON, mage.cards.m.MausoleumTurnkey.class));
-        //cards.add(new SetCardInfo("Memory Vampire", 38, Rarity.RARE, mage.cards.m.MemoryVampire.class));
         cards.add(new SetCardInfo("Memory Vampire", 38, Rarity.RARE, mage.cards.m.MemoryVampire.class));
         cards.add(new SetCardInfo("Mighty Leap", 66, Rarity.COMMON, mage.cards.m.MightyLeap.class));
         cards.add(new SetCardInfo("Mountain", 266, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -177,7 +175,6 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 268, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 269, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nissa's Judgment", 170, Rarity.UNCOMMON, mage.cards.n.NissasJudgment.class));
-        //cards.add(new SetCardInfo("Ordruun Mentor", 39, Rarity.UNCOMMON, mage.cards.o.OrdruunMentor.class));
         cards.add(new SetCardInfo("Ordruun Mentor", 39, Rarity.UNCOMMON, mage.cards.o.OrdruunMentor.class));
         cards.add(new SetCardInfo("Ornery Goblin", 143, Rarity.COMMON, mage.cards.o.OrneryGoblin.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 241, Rarity.COMMON, mage.cards.o.OrzhovBasilica.class));
@@ -213,7 +210,6 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Reduce to Ashes", 145, Rarity.COMMON, mage.cards.r.ReduceToAshes.class));
         cards.add(new SetCardInfo("Repeal", 94, Rarity.COMMON, mage.cards.r.Repeal.class));
         cards.add(new SetCardInfo("Rescuer Sphinx", 95, Rarity.UNCOMMON, mage.cards.r.RescuerSphinx.class));
-        //cards.add(new SetCardInfo("Resonance Technician", 41, Rarity.RARE, mage.cards.r.ResonanceTechnician.class));
         cards.add(new SetCardInfo("Resonance Technician", 41, Rarity.RARE, mage.cards.r.ResonanceTechnician.class));
         cards.add(new SetCardInfo("Ribbons of Night", 120, Rarity.UNCOMMON, mage.cards.r.RibbonsOfNight.class));
         cards.add(new SetCardInfo("Ripscale Predator", 146, Rarity.COMMON, mage.cards.r.RipscalePredator.class));
