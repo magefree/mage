@@ -108,6 +108,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Frostburn Weird", 193, Rarity.COMMON, mage.cards.f.FrostburnWeird.class));
         cards.add(new SetCardInfo("Fungal Rebirth", 163, Rarity.UNCOMMON, mage.cards.f.FungalRebirth.class));
         //cards.add(new SetCardInfo("Furious Spinesplitter", 33, Rarity.UNCOMMON, mage.cards.f.FuriousSpinesplitter.class));
+        cards.add(new SetCardInfo("Furious Spinesplitter", 33, Rarity.UNCOMMON, mage.cards.f.FuriousSpinesplitter.class));
         cards.add(new SetCardInfo("Giant Adephage", 164, Rarity.MYTHIC, mage.cards.g.GiantAdephage.class));
         cards.add(new SetCardInfo("Gift of Strength", 165, Rarity.COMMON, mage.cards.g.GiftOfStrength.class));
         cards.add(new SetCardInfo("Glorifier of Dusk", 62, Rarity.UNCOMMON, mage.cards.g.GlorifierOfDusk.class));
