@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
@@ -17,9 +18,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -35,7 +34,8 @@ public final class BorosStrikeCaptain extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Battalion -- Whenever Boros Strike-Captain and at least two other creatures attack, exile the top card of your library. During any turn you attacked with three or more creatures, you may play that card.
-        this.addAbility(new BattalionAbility(new BorosStrikeCaptainEffect()), new BorosStrikeCaptainWatcher());
+        this.addAbility(new BattalionAbility(new BorosStrikeCaptainEffect())
+                .addHint(BorosStrikeCaptainCondition.getHint()), new BorosStrikeCaptainWatcher());
     }
 
     private BorosStrikeCaptain(final BorosStrikeCaptain card) {
@@ -88,9 +88,13 @@ enum BorosStrikeCaptainCondition implements Condition {
     instance;
     private static final Hint hint = new ConditionHint(instance);
 
+    public static Hint getHint() {
+        return hint;
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getState().getWatcher(BorosStrikeCaptainWatcher.class).conditionMet();
+        return BorosStrikeCaptainWatcher.checkPlayer(game, source);
     }
 
     @Override
@@ -101,7 +105,7 @@ enum BorosStrikeCaptainCondition implements Condition {
 
 class BorosStrikeCaptainWatcher extends Watcher {
 
-    private final Set<UUID> set = new HashSet<>();
+    private final Map<UUID, Set<MageObjectReference>> map = new HashMap<>();
 
     BorosStrikeCaptainWatcher() {
         super(WatcherScope.GAME);
@@ -109,10 +113,30 @@ class BorosStrikeCaptainWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        // TODO: waiting on confirmation from the rules manager on whether this is the correct implementation
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKERS_STEP
-                && game.getCombat().getAttackers().size() >= 3) {
-            condition = true;
+        if (event.getType() != GameEvent.EventType.ATTACKER_DECLARED) {
+            return;
         }
+        Optional.ofNullable(event)
+                .map(GameEvent::getTargetId)
+                .map(game::getPermanent)
+                .ifPresent(permanent -> map
+                        .computeIfAbsent(permanent.getControllerId(), x -> new HashSet<>())
+                        .add(new MageObjectReference(permanent, game)));
+
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        map.clear();
+    }
+
+    static boolean checkPlayer(Game game, Ability source) {
+        return game
+                .getState()
+                .getWatcher(BorosStrikeCaptainWatcher.class)
+                .map
+                .getOrDefault(source.getControllerId(), Collections.emptySet())
+                .size() >= 3;
     }
 }
