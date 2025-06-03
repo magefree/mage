@@ -366,7 +366,9 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Valgavoth's Lair", 327, Rarity.RARE, mage.cards.v.ValgavothsLair.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Valgavoth's Onslaught", 204, Rarity.RARE, mage.cards.v.ValgavothsOnslaught.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Valgavoth's Onslaught", 324, Rarity.RARE, mage.cards.v.ValgavothsOnslaught.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Valgavoth, Terror Eater", 120, Rarity.MYTHIC, mage.cards.v.ValgavothTerrorEater.class));
+        cards.add(new SetCardInfo("Valgavoth, Terror Eater", 120, Rarity.MYTHIC, mage.cards.v.ValgavothTerrorEater.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Valgavoth, Terror Eater", 352, Rarity.MYTHIC, mage.cards.v.ValgavothTerrorEater.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Valgavoth, Terror Eater", 407, Rarity.MYTHIC, mage.cards.v.ValgavothTerrorEater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vanish from Sight", 82, Rarity.COMMON, mage.cards.v.VanishFromSight.class));
         cards.add(new SetCardInfo("Vengeful Possession", 162, Rarity.UNCOMMON, mage.cards.v.VengefulPossession.class));
         cards.add(new SetCardInfo("Veteran Survivor", 40, Rarity.UNCOMMON, mage.cards.v.VeteranSurvivor.class));
