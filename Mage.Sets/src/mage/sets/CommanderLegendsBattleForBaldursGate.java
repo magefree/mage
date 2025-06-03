@@ -571,8 +571,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Mindblade Render", 762, Rarity.RARE, mage.cards.m.MindbladeRender.class));
         cards.add(new SetCardInfo("Mindcrank", 866, Rarity.UNCOMMON, mage.cards.m.Mindcrank.class));
         cards.add(new SetCardInfo("Minimus Containment", 34, Rarity.COMMON, mage.cards.m.MinimusContainment.class));
-        //cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 285, Rarity.MYTHIC, mage.cards.m.MinscAndBooTimelessHeroes.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 363, Rarity.MYTHIC, mage.cards.m.MinscAndBooTimelessHeroes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 285, Rarity.MYTHIC, mage.cards.m.MinscBooTimelessHeroes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 363, Rarity.MYTHIC, mage.cards.m.MinscBooTimelessHeroes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minthara, Merciless Soul", 286, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minthara, Merciless Soul", 432, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Minthara, Merciless Soul", 543, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class, NON_FULL_USE_VARIOUS));
