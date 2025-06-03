@@ -1,5 +1,6 @@
 package mage.abilities.effects;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.constants.DependencyType;
@@ -9,10 +10,7 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -35,6 +33,10 @@ public interface ContinuousEffect extends Effect {
 
     boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game);
 
+    void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects);
+
+    Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game);
+
     boolean hasLayer(Layer layer);
 
     boolean isInactive(Ability source, Game game);
@@ -53,6 +55,8 @@ public interface ContinuousEffect extends Effect {
     SubLayer getSublayer();
 
     List<MageObjectReference> getAffectedObjects();
+
+    Map<UUID, MageItem> getAffectedObjectMap();
 
     Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer);
 

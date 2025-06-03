@@ -185,6 +185,9 @@ public class ContinuousEffects implements Serializable {
     public synchronized List<ContinuousEffect> getLayeredEffects(Game game, String timestampGroupName) {
         List<ContinuousEffect> layerEffects = new ArrayList<>();
         for (ContinuousEffect effect : layeredEffects) {
+            if (timestampGroupName.equals("main")) {
+                effect.getAffectedObjectMap().clear();
+            }
             switch (effect.getDuration()) {
                 case WhileOnBattlefield:
                 case WhileControlled:
@@ -966,6 +969,7 @@ public class ContinuousEffects implements Serializable {
     //20091005 - 613
     public synchronized void apply(Game game) {
         removeInactiveEffects(game);
+
         List<ContinuousEffect> activeLayerEffects = getLayeredEffects(game); // main call
 
         List<ContinuousEffect> layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
