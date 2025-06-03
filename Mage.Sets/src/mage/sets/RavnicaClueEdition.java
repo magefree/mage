@@ -176,6 +176,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 269, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nissa's Judgment", 170, Rarity.UNCOMMON, mage.cards.n.NissasJudgment.class));
         //cards.add(new SetCardInfo("Ordruun Mentor", 39, Rarity.UNCOMMON, mage.cards.o.OrdruunMentor.class));
+        cards.add(new SetCardInfo("Ordruun Mentor", 39, Rarity.UNCOMMON, mage.cards.o.OrdruunMentor.class));
         cards.add(new SetCardInfo("Ornery Goblin", 143, Rarity.COMMON, mage.cards.o.OrneryGoblin.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 241, Rarity.COMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Guildgate", 242, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class));
