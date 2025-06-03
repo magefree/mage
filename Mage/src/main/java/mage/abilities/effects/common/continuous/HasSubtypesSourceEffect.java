@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -11,7 +10,6 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,28 +33,20 @@ public final class HasSubtypesSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof MageObject)) {
-                continue;
-            }
-            ((MageObject) object).addSubType(game, subtypes);
-        }
-        return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        return sourceObject != null ? Collections.singletonList(sourceObject) : Collections.emptyList();
-    }
-
-    @Override
     public HasSubtypesSourceEffect copy() {
         return new HasSubtypesSourceEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject sourceObject = game.getObject(source);
+        if (sourceObject == null) {
+            return false;
+        }
+        for (SubType subType : subtypes) {
+            sourceObject.addSubType(game, subType);
+        }
+        return true;
     }
 
     @Override

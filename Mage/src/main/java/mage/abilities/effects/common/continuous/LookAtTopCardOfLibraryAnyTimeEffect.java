@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
@@ -10,9 +9,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author TheElk801
@@ -34,34 +30,23 @@ public class LookAtTopCardOfLibraryAnyTimeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
+    public boolean apply(Game game, Ability source) {
+        if (game.inCheckPlayableState()) { // Ignored - see https://github.com/magefree/mage/issues/6994
             return false;
         }
-        for (MageItem object : objects) {
-            if (!(object instanceof Card)) {
-                continue;
-            }
-            Player controller = game.getPlayer(((Card) object).getOwnerId());
-            if (controller == null) {
-                return false;
-            }
-            controller.lookAtCards("Top card of your library", (Card) object, game);
-        }
-        return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        if (game.inCheckPlayableState()) { // Ignored - see https://github.com/magefree/mage/issues/6994
-            return Collections.emptyList();
-        }
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || !canLookAtNextTopLibraryCard(game)) {
-            return Collections.emptyList();
+        if (controller == null) {
+            return false;
+        }
+        if (!canLookAtNextTopLibraryCard(game)) {
+            return false;
         }
         Card topCard = controller.getLibrary().getFromTop(game);
-        return topCard != null ? Collections.singletonList(topCard) : Collections.emptyList();
+        if (topCard == null) {
+            return false;
+        }
+        controller.lookAtCards("Top card of your library", topCard, game);
+        return true;
     }
 
     @Override

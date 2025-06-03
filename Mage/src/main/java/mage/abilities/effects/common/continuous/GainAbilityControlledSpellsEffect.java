@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
@@ -8,14 +7,9 @@ import mage.constants.*;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * @author Styxo
@@ -39,61 +33,54 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Card)) {
-                continue;
-            }
-            game.getState().addOtherAbility((Card) object, ability);
-        }
-        return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return Collections.emptyList();
-        }
-        List<MageItem> objects = new ArrayList<>();
-        // in graveyard
-        objects.addAll(controller.getGraveyard().getCards(filter, game));
-        // in Hand
-        objects.addAll(controller.getHand().getCards(filter, game));
-        // in Exile
-        objects.addAll(game.getExile().getAllCards(game, controller.getId())
-                .stream()
-                .filter(card -> filter.match(card, controller.getId(), source, game))
-                .collect(Collectors.toList())
-        );
-        // in Library
-        objects.addAll(controller.getLibrary().getCards(game)
-                .stream()
-                .filter(card -> filter.match(card, controller.getId(), source, game))
-                .collect(Collectors.toList())
-        );
-        // in Command Zone
-        objects.addAll(game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY)
-                .stream()
-                .filter(card -> filter.match(card, controller.getId(), source, game))
-                .collect(Collectors.toList())
-        );
-        // Spells on Stack
-        // TODO: Distinguish "you cast" to exclude copies
-        objects.addAll(game.getStack().stream()
-                .filter(stackObject -> (stackObject instanceof Spell && stackObject.isControlledBy(controller.getId()))
-                        && filter.match((Spell) stackObject, controller.getId(), source, game))
-                .map(stackObject -> game.getCard(stackObject.getSourceId()))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList()));
-        return objects;
-    }
-
-    @Override
     public GainAbilityControlledSpellsEffect copy() {
         return new GainAbilityControlledSpellsEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
+        }
+
+        for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
+            if (filter.match(card, player.getId(), source, game)) {
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        for (Card card : player.getLibrary().getCards(game)) {
+            if (filter.match(card, player.getId(), source, game)) {
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        for (Card card : player.getHand().getCards(game)) {
+            if (filter.match(card, player.getId(), source, game)) {
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        for (Card card : player.getGraveyard().getCards(game)) {
+            if (filter.match(card, player.getId(), source, game)) {
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+
+        // workaround to gain cost reduction abilities to commanders before cast (make it playable)
+        game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY)
+                .stream()
+                .filter(card -> filter.match(card, player.getId(), source, game))
+                .forEach(card -> game.getState().addOtherAbility(card, ability));
+
+        for (StackObject stackObject : game.getStack()) {
+            if (!(stackObject instanceof Spell) || !stackObject.isControlledBy(source.getControllerId())) {
+                continue;
+            }
+            // TODO: Distinguish "you cast" to exclude copies
+            Card card = game.getCard(stackObject.getSourceId());
+            if (card != null && filter.match((Spell) stackObject, player.getId(), source, game)) {
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        return true;
     }
 }

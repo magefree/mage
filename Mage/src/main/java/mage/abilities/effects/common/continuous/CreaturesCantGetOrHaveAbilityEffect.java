@@ -1,16 +1,17 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.DependencyType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.ArrayList;
-import java.util.List;
+import mage.players.Player;
 
 /**
  * @author LevelX2
@@ -25,7 +26,7 @@ public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
     }
 
     public CreaturesCantGetOrHaveAbilityEffect(Ability ability, Duration duration, FilterCreaturePermanent filter) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.Detriment);
+        super(duration, Outcome.Detriment);
         this.ability = ability;
         this.filter = filter;
         staticText = filter.getMessage() + " lose " + ability.getRule() + " and can't have or gain " + ability.getRule();
@@ -44,22 +45,27 @@ public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (permanent != null) {
+                    permanent.removeAbility(ability, source.getSourceId(), game);
+                }
             }
-            ((Permanent) object).removeAbility(ability, source.getSourceId(), game);
+            return true;
         }
-        return true;
+        return false;
+
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return new ArrayList<>(game.getBattlefield()
-                .getActivePermanents(filter, source.getControllerId(), source, game));
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6;
     }
 }

@@ -1,15 +1,11 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author nantuko
@@ -30,24 +26,14 @@ public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            ((Permanent) object).addSubType(game, addedSubtype);
-        }
-        return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
-            return target != null ? Collections.singletonList(target) : Collections.emptyList();
+            if (target != null)
+                target.addSubType(game, addedSubtype);
         }
-        return Collections.emptyList();
+        return true;
     }
 
     @Override

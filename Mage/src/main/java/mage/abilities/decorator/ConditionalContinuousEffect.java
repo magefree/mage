@@ -1,6 +1,5 @@
 package mage.abilities.decorator;
 
-import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
@@ -92,27 +91,18 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (!initDone) { // if simpleStaticAbility, init won't be called
             init(source, game);
         }
         boolean conditionState = condition.apply(game, source);
         if (conditionState) {
-            return effect.queryAffectedObjects(layer, source, game);
+            return effect.apply(layer, sublayer, source, game);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.queryAffectedObjects(layer, source, game);
+            return otherwiseEffect.apply(layer, sublayer, source, game);
         }
-        return Collections.emptyList();
-    }
-
-
-    @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        boolean conditionState = condition.apply(game, source);
-        if (conditionState) {
-            return effect.applyToObjects(layer, sublayer, source, game, objects);
-        } else if (otherwiseEffect != null) {
-            return otherwiseEffect.applyToObjects(layer, sublayer, source, game, objects);
+        if (!conditionState && effect.getDuration() == Duration.OneUse) {
+            used = true;
         }
         switch (effect.getDuration()) {
             case OneUse:
@@ -121,10 +111,32 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
             case Custom:
             case WhileControlled:
                 this.discard();
-                break;
         }
         return false;
+    }
 
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (condition == null && baseCondition != null) {
+            condition = baseCondition;
+        }
+        boolean conditionState = condition != null && condition.apply(game, source);
+        if (conditionState) {
+            effect.setTargetPointer(this.getTargetPointer().copy());
+            return effect.apply(game, source);
+        } else if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
+            return otherwiseEffect.apply(game, source);
+        }
+        switch (effect.getDuration()) {
+            case OneUse:
+                used = true;
+                break;
+            case Custom:
+            case WhileControlled:
+                this.discard();
+        }
+        return false;
     }
 
     @Override

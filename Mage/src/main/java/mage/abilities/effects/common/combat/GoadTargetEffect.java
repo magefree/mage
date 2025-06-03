@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.combat;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -12,8 +11,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -28,9 +25,6 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
      * turn of the controller of that spell or ability, that creature attacks
      * each combat if able and attacks a player other than that player if able.
      */
-
-    UUID goadingPlayerId;
-
     public GoadTargetEffect() {
         this(Duration.UntilYourNextTurn);
     }
@@ -41,23 +35,11 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
 
     protected GoadTargetEffect(final GoadTargetEffect effect) {
         super(effect);
-        this.goadingPlayerId = effect.goadingPlayerId;
     }
 
     @Override
     public GoadTargetEffect copy() {
         return new GoadTargetEffect(this);
-    }
-
-    @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            ((Permanent) object).addGoadingPlayer(this.goadingPlayerId);
-        }
-        return true;
     }
 
     @Override
@@ -67,7 +49,6 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
         if (controller == null) {
             return;
         }
-        this.goadingPlayerId = controller.getId();
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Permanent targetCreature = game.getPermanent(targetId);
             if (targetCreature != null) {
@@ -77,15 +58,14 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        List<MageItem> objects = new ArrayList<>();
+    public boolean apply(Game game, Ability source) {
         for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Permanent targetCreature = game.getPermanent(targetId);
             if (targetCreature != null) {
-                objects.add(targetCreature);
+                targetCreature.addGoadingPlayer(source.getControllerId());
             }
         }
-        return objects;
+        return true;
     }
 
     @Override

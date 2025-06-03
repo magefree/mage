@@ -1,6 +1,6 @@
 package mage.abilities.common;
 
-import mage.*;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -21,7 +21,11 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2, awjackson
@@ -99,51 +103,39 @@ class AnimateDeadReplaceAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        List<MageItem> objects = new ArrayList<>();
-        for (MageObjectReference mor : affectedObjectList) {
-            Permanent permanent = mor.getPermanent(game);
-            if (permanent != null) {
-                objects.add(permanent);
-            }
-        }
-        return objects;
-    }
-
-    @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
+        if (permanent == null) {
             discard();
             return true;
         }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (becomesAura) {
-                        permanent.addSubType(game, SubType.AURA);
-                    }
-                    break;
-                case AbilityAddingRemovingEffects_6:
-                    if (!becomesAura) {
-                        List<Ability> toRemove = new ArrayList<>();
-                        for (Ability ability : permanent.getAbilities(game)) {
-                            if (ability instanceof EnchantAbility &&
-                                    ability.getRule().equals("Enchant creature card in a graveyard")) {
-                                toRemove.add(ability);
-                            }
+        switch (layer) {
+            case TypeChangingEffects_4:
+                if (becomesAura) {
+                    permanent.addSubType(game, SubType.AURA);
+                }
+                break;
+            case AbilityAddingRemovingEffects_6:
+                if (!becomesAura) {
+                    List<Ability> toRemove = new ArrayList<>();
+                    for (Ability ability : permanent.getAbilities(game)) {
+                        if (ability instanceof EnchantAbility &&
+                                ability.getRule().equals("Enchant creature card in a graveyard")) {
+                            toRemove.add(ability);
                         }
-                        permanent.removeAbilities(toRemove, source.getSourceId(), game);
                     }
-                    permanent.addAbility(newAbility, source.getSourceId(), game);
-                    permanent.getSpellAbility().getTargets().clear();
-                    permanent.getSpellAbility().getTargets().add(newTarget);
-            }
+                    permanent.removeAbilities(toRemove, source.getSourceId(), game);
+                }
+                permanent.addAbility(newAbility, source.getSourceId(), game);
+                permanent.getSpellAbility().getTargets().clear();
+                permanent.getSpellAbility().getTargets().add(newTarget);
         }
         return true;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
     }
 
     @Override

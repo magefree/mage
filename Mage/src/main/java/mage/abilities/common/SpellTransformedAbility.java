@@ -1,6 +1,6 @@
 package mage.abilities.common;
 
-import mage.*;
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,8 +11,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -100,29 +98,18 @@ class TransformedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        boolean result = false;
-        for (MageItem object : objects) {
-            if (!(object instanceof Spell)) {
-                continue;
-            }
-            Spell spell = (Spell) object;
-            TransformAbility.transformCardSpellDynamic(spell, spell.getCard().getMainCard(), game);
-        }
-        return result;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        Spell spell = game.getSpell(source.getSourceId());
-        if (spell != null && spell.getCard().getSecondCardFace() != null) {
-            return Collections.singletonList(spell);
-        }
-        return Collections.emptyList();
-    }
-
-    @Override
     public TransformedEffect copy() {
         return new TransformedEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getSpell(source.getSourceId());
+        if (spell == null || spell.getCard().getSecondCardFace() == null) {
+            return false;
+        }
+        // simulate another side as new card (another code part in spell constructor)
+        TransformAbility.transformCardSpellDynamic(spell, spell.getCard().getSecondCardFace(), game);
+        return true;
     }
 }

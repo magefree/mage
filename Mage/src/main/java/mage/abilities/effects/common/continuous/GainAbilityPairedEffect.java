@@ -1,7 +1,7 @@
 
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -10,11 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * @author noxx
@@ -36,35 +31,26 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            ((Permanent) object).addAbility(ability, source.getSourceId(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            Permanent paired = Optional.ofNullable(permanent.getPairedCard())
-                    .map(pairedCard -> pairedCard.getPermanent(game))
-                    .orElse(null);
-            if (paired != null) {
-                return Arrays.asList(permanent, paired);
-            }
-        }
-        return Collections.emptyList();
-    }
-
-    @Override
     public GainAbilityPairedEffect copy() {
         return new GainAbilityPairedEffect(this);
     }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && permanent.getPairedCard() != null) {
+            Permanent paired = permanent.getPairedCard().getPermanent(game);
+            if (paired != null && paired.getPairedCard() != null && paired.getPairedCard().equals(new MageObjectReference(permanent, game))) {
+                permanent.addAbility(ability, source.getSourceId(), game);
+                paired.addAbility(ability, source.getSourceId(), game);
+                return true;
+
+            } else {
+                // No longer the same cards as orininally paired.
+                permanent.setPairedCard(null);
+            }
+        }
+        return false;
+    }
+
 }

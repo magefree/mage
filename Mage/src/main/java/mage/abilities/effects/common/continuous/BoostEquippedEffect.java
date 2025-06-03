@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -14,8 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -62,19 +59,6 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            permanent.addPower(power.calculate(game, source, this));
-            permanent.addToughness(toughness.calculate(game, source, this));
-        }
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         if (fixedTarget) {
             Permanent equipment = game.getPermanent(source.getSourceId());
@@ -86,18 +70,23 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         Permanent creature;
         if (fixedTarget) {
-             creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+            creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         } else {
-            creature = Optional.ofNullable(source)
+            creature = Optional
+                    .ofNullable(source)
                     .map(Ability::getSourceId)
                     .map(game::getPermanent)
                     .map(Permanent::getAttachedTo)
                     .map(game::getPermanent)
                     .orElse(null);
         }
-        return creature != null ? Collections.singletonList(creature) : Collections.emptyList();
+        if (creature != null) {
+            creature.addPower(power.calculate(game, source, this));
+            creature.addToughness(toughness.calculate(game, source, this));
+        }
+        return true;
     }
 }

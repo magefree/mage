@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -14,9 +13,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.UUID;
 
 /**
  * Give Scavenge to all cards matching the filter in your graveyard.
@@ -41,42 +38,30 @@ public class GiveScavengeContinuousEffect extends ContinuousEffectImpl {
 
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
+    public GiveScavengeContinuousEffect copy() {
+        return new GiveScavengeContinuousEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             discard();
             return false;
         }
-        for (MageItem object : objects) {
-            if (!(object instanceof Card)) {
+        for (UUID cardId : controller.getGraveyard()) {
+            Card card = game.getCard(cardId);
+            if (!filter.match(card, source.getControllerId(), source, game)) {
                 continue;
             }
-            Card card = (Card) object;
+            if (card.getManaCost().getText().isEmpty()) { // Checks that the card has a mana cost.
+                continue;
+            }
             ScavengeAbility ability = new ScavengeAbility(new ManaCostsImpl<>(card.getManaCost().getText()));
-            ability.setSourceId(card.getId());
+            ability.setSourceId(cardId);
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, ability);
         }
         return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return Collections.emptyList();
-        }
-        List<MageItem> objects = new ArrayList<>();
-        for (Card card : controller.getGraveyard().getCards(filter, game)) {
-            if (card.getManaCost().getText().isEmpty()) {
-                continue;
-            }
-            objects.add(card);
-        }
-        return objects;
-    }
-
-    @Override
-    public GiveScavengeContinuousEffect copy() {
-        return new GiveScavengeContinuousEffect(this);
     }
 }

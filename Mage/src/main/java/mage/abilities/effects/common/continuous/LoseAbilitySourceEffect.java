@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -9,9 +8,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Noahsark
@@ -41,24 +37,6 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
-            if (getAffectedObjectsSet()) {
-                this.discard();
-            }
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            permanent.removeAbility(ability, source.getSourceId(), game);
-        }
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (duration.isOnlyValidIfNoZoneChange()) {
@@ -67,12 +45,6 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl {
                 discard();
             }
         }
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
     }
 
     @Override

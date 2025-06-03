@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.combat;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -9,9 +8,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author mzulch
@@ -34,7 +30,7 @@ public class CanBlockAdditionalCreatureTargetEffect extends ContinuousEffectImpl
      * @param amount 0 = any number
      */
     public CanBlockAdditionalCreatureTargetEffect(Duration duration, int amount) {
-        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+        super(duration, Outcome.Benefit);
         this.amount = amount;
     }
 
@@ -49,31 +45,31 @@ public class CanBlockAdditionalCreatureTargetEffect extends ContinuousEffectImpl
     }
 
     @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent target = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (target == null) {
+            return false;
+        }
+
+        // maxBlocks = 0 equals to "can block any number of creatures"
+        if (amount > 0) {
+            if (target.getMaxBlocks() > 0) {
+                target.setMaxBlocks(target.getMaxBlocks() + amount);
+            }
+        } else {
+            target.setMaxBlocks(0);
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
         return false;
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            if (amount > 0) {
-                if (permanent.getMaxBlocks() > 0) {
-                    permanent.setMaxBlocks(permanent.getMaxBlocks() + amount);
-                }
-            } else {
-                permanent.setMaxBlocks(0);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        Permanent target = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        return target != null ? Collections.singletonList(target) : Collections.emptyList();
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
 }

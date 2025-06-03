@@ -1,33 +1,35 @@
 
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.*;
 
 /**
  * @author magenoxx_at_googlemail.com
  */
 public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
 
-    private final String rule;
-    private final boolean withSource;
-    private final boolean withSecondTarget;
-    private final boolean destroyAttachedAuras;
+    private String rule;
+    private boolean withSource;
+    private boolean withSecondTarget;
+    private boolean destroyAttachedAuras;
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, UUID> lockedControllers = new HashMap<>();  // Controllers for each permanent that is enforced by this effect
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(SubType.AURA.getPredicate());
-    }
 
     public ExchangeControlTargetEffect(Duration duration, String rule) {
         this(duration, rule, false);
@@ -62,47 +64,6 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
     @Override
     public ExchangeControlTargetEffect copy() {
         return new ExchangeControlTargetEffect(this);
-    }
-
-    @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (zoneChangeCounter.isEmpty()) {
-            this.discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            permanent.setControllerId(lockedControllers.get(permanent.getId()));
-            if (destroyAttachedAuras) {
-                for (UUID attachmentId : new HashSet<>(permanent.getAttachments())) {
-                    Permanent attachment = game.getPermanent(attachmentId);
-                    if (filter.match(attachment, game)) {
-                        attachment.destroy(source, game, false);
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        List<MageItem> objects = new ArrayList<>();
-        for (Iterator<Map.Entry<UUID, Integer>> iterator = zoneChangeCounter.entrySet().iterator(); iterator.hasNext();) {
-            Map.Entry<UUID, Integer> entry = iterator.next();
-            Permanent permanent = game.getPermanent(entry.getKey());
-            if (permanent == null || permanent.getZoneChangeCounter(game) != entry.getValue()) {
-                iterator.remove();
-                zoneChangeCounter.remove(entry.getKey());
-                lockedControllers.remove(entry.getKey());
-                continue;
-            }
-            objects.add(permanent);
-        }
-        return objects;
     }
 
     @Override
@@ -153,6 +114,42 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
             // discard if there are less than 2 permanents
             discard();
         }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Set<UUID> toDelete = new HashSet<>();
+        for (Map.Entry<UUID, Integer> entry : zoneChangeCounter.entrySet()) {
+            Permanent permanent = game.getPermanent(entry.getKey());
+            if (permanent == null || permanent.getZoneChangeCounter(game) != entry.getValue()) {
+                // Control effect cease if the same permanent is no longer on the battlefield
+                toDelete.add(entry.getKey());
+                continue;
+            }
+            permanent.changeControllerId(lockedControllers.get(permanent.getId()), game, source);
+            permanent.getAbilities().setControllerId(lockedControllers.get(permanent.getId()));
+            if (destroyAttachedAuras) {
+                FilterPermanent filter = new FilterPermanent();
+                filter.add(SubType.AURA.getPredicate());
+                for (UUID attachmentId : new HashSet<>(permanent.getAttachments())) {
+                    Permanent attachment = game.getPermanent(attachmentId);
+                    if (filter.match(attachment, game)) {
+                        attachment.destroy(source, game, false);
+                    }
+                }
+            }
+        }
+        if (!toDelete.isEmpty()) {
+            for (UUID uuid : toDelete) {
+                zoneChangeCounter.remove(uuid);
+                lockedControllers.remove(uuid);
+            }
+            if (zoneChangeCounter.isEmpty()) {
+                discard();
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

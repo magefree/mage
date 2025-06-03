@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -13,11 +12,6 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -57,19 +51,6 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            permanent.addPower(power.calculate(game, source, this));
-            permanent.addToughness(toughness.calculate(game, source, this));
-        }
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet()) {
@@ -81,14 +62,18 @@ public class BoostSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
+        Permanent target;
         if (getAffectedObjectsSet()) {
-            return affectedObjectList.stream()
-                    .map(mor -> mor.getPermanent(game))
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
+            target = affectedObjectList.get(0).getPermanent(game);
+        } else {
+            target = game.getPermanent(source.getSourceId());
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
+        if (target != null) {
+            target.addPower(power.calculate(game, source, this));
+            target.addToughness(toughness.calculate(game, source, this));
+            return true;
+        }
+        return false;
     }
 }

@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -9,9 +8,6 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author xenohedron
@@ -28,32 +24,22 @@ public class CantBeSacrificedSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
-            this.discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            permanent.setCanBeSacrificed(false);
-        }
-        return true;
+    public CantBeSacrificedSourceEffect copy() {
+        return new CantBeSacrificedSourceEffect(this);
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent == null) {
             permanent = source.getSourcePermanentIfItStillExists(game);
         }
-        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
+        if (permanent == null) {
+            discard();
+            return false;
+        }
+        permanent.setCanBeSacrificed(false);
+        return true;
     }
 
-    @Override
-    public CantBeSacrificedSourceEffect copy() {
-        return new CantBeSacrificedSourceEffect(this);
-    }
 }

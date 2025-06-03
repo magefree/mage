@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -12,9 +11,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com, North
@@ -55,27 +51,10 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (getAffectedObjectsSet() && objects.isEmpty()) {
-            this.discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            permanent.addPower(power.calculate(game, source, this));
-            permanent.addToughness(toughness.calculate(game, source, this));
-        }
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (getAffectedObjectsSet()) {
-            // Added boosts of activated or triggered abilities exist independent of the source they are created by
+            // Added boosts of activated or triggered abilities exist independent from the source they are created by
             // so a continuous effect for the permanent itself with the attachment is created
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
@@ -83,21 +62,6 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
             }
             power = StaticValue.get(power.calculate(game, source, this));
             toughness = StaticValue.get(toughness.calculate(game, source, this));
-        }
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        if (getAffectedObjectsSet()) {
-            Permanent equipment = game.getPermanent(getTargetPointer().getFirst(game, source));
-            return equipment != null ? Collections.singletonList(equipment) : Collections.emptyList();
-        } else {
-            Permanent equipment = game.getPermanent(source.getSourceId());
-            if (equipment == null || equipment.getAttachedTo() == null) {
-                return Collections.emptyList();
-            }
-            Permanent attachedTo = game.getPermanent(equipment.getAttachedTo());
-            return attachedTo != null ? Collections.singletonList(attachedTo) : Collections.emptyList();
         }
     }
 

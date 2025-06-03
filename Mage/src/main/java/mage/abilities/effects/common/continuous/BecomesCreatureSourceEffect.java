@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -9,11 +8,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com, xenohedron
@@ -95,81 +89,77 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent permanent;
         if (getAffectedObjectsSet()) {
-            return affectedObjectList.stream()
-                    .map(mor -> mor.getPermanent(game))
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
+            permanent = affectedObjectList.get(0).getPermanent(game);
+        } else {
+            permanent = game.getPermanent(source.getSourceId());
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        return permanent != null ? Collections.singletonList(permanent) : Collections.emptyList();
+        if (permanent == null) {
+            if (duration == Duration.Custom) {
+                this.discard();
+            }
+            return false;
+        }
+        switch (layer) {
+            case TypeChangingEffects_4:
+                if (retainType == null) {
+                    permanent.removeAllCardTypes(game);
+                    permanent.removeAllSubTypes(game);
+                }
+                for (SuperType superType : token.getSuperType(game)) {
+                    permanent.addSuperType(game, superType);
+                }
+                for (CardType cardType : token.getCardType(game)) {
+                    permanent.addCardType(game, cardType);
+                }
+                if (loseEquipmentType) {
+                    permanent.removeSubType(game, SubType.EQUIPMENT);
+                }
+                if (!keepCreatureSubtypes) {
+                    permanent.removeAllCreatureTypes(game);
+                }
+                permanent.copySubTypesFrom(game, token);
+                break;
+
+            case ColorChangingEffects_5:
+                if (token.getColor(game).hasColor()) {
+                    permanent.getColor(game).setColor(token.getColor(game));
+                }
+                break;
+
+            case AbilityAddingRemovingEffects_6:
+                if (loseAbilities) {
+                    permanent.removeAllAbilities(source.getSourceId(), game);
+                }
+                for (Ability ability : token.getAbilities()) {
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
+                }
+                break;
+
+            case PTChangingEffects_7:
+                if (sublayer == SubLayer.SetPT_7b) {
+                    if (power != null) {
+                        permanent.getPower().setModifiedBaseValue(power.calculate(game, source, this)); // check all other becomes to use calculate?
+                    } else if (token.getPower() != null) {
+                        permanent.getPower().setModifiedBaseValue(token.getPower().getValue());
+                    }
+                    if (toughness != null) {
+                        permanent.getToughness().setModifiedBaseValue(toughness.calculate(game, source, this));
+                    } else if (token.getToughness() != null) {
+                        permanent.getToughness().setModifiedBaseValue(token.getToughness().getValue());
+                    }
+                }
+                break;
+        }
+
+        return true;
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty() && this.duration == Duration.Custom) {
-            this.discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            switch (layer) {
-                case TypeChangingEffects_4:
-                    if (retainType == null) {
-                        permanent.removeAllCardTypes(game);
-                        permanent.removeAllSubTypes(game);
-                    }
-                    for (SuperType superType : token.getSuperType(game)) {
-                        permanent.addSuperType(game, superType);
-                    }
-                    for (CardType cardType : token.getCardType(game)) {
-                        permanent.addCardType(game, cardType);
-                    }
-                    if (loseEquipmentType) {
-                        permanent.removeSubType(game, SubType.EQUIPMENT);
-                    }
-                    if (!keepCreatureSubtypes) {
-                        permanent.removeAllCreatureTypes(game);
-                    }
-                    permanent.copySubTypesFrom(game, token);
-                    break;
-
-                case ColorChangingEffects_5:
-                    if (token.getColor(game).hasColor()) {
-                        permanent.getColor(game).setColor(token.getColor(game));
-                    }
-                    break;
-
-                case AbilityAddingRemovingEffects_6:
-                    if (loseAbilities) {
-                        permanent.removeAllAbilities(source.getSourceId(), game);
-                    }
-                    for (Ability ability : token.getAbilities()) {
-                        permanent.addAbility(ability, source.getSourceId(), game, true);
-                    }
-                    break;
-
-                case PTChangingEffects_7:
-                    if (sublayer == SubLayer.SetPT_7b) {
-                        if (power != null) {
-                            permanent.getPower().setModifiedBaseValue(power.calculate(game, source, this)); // check all other becomes to use calculate?
-                        } else if (token.getPower() != null) {
-                            permanent.getPower().setModifiedBaseValue(token.getPower().getValue());
-                        }
-                        if (toughness != null) {
-                            permanent.getToughness().setModifiedBaseValue(toughness.calculate(game, source, this));
-                        } else if (token.getToughness() != null) {
-                            permanent.getToughness().setModifiedBaseValue(token.getToughness().getValue());
-                        }
-                    }
-                    break;
-            }
-        }
-        return true;
+    public boolean apply(Game game, Ability source) {
+        return false;
     }
 
     public BecomesCreatureSourceEffect withDynamicPT(DynamicValue power, DynamicValue toughness) {

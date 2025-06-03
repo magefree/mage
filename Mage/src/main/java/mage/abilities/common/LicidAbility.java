@@ -1,6 +1,5 @@
 package mage.abilities.common;
 
-import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpecialAction;
@@ -21,7 +20,6 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -99,16 +97,14 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
-            discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent licid = (Permanent) object;
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent licid = source.getSourcePermanentIfItStillExists(game);
+        if (licid != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     licid.removeAllCardTypes(game);
@@ -135,8 +131,10 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                     licid.getSpellAbility().getTargets().clear();
                     licid.getSpellAbility().getTargets().add(target);
             }
+            return true;
         }
-        return true;
+        discard();
+        return false;
     }
 
     @Override
@@ -148,12 +146,6 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
     public boolean isInactive(Ability source, Game game) {
         Object object = game.getState().getValue(this.messageId.toString());
         return object != null;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        Permanent licid = source.getSourcePermanentIfItStillExists(game);
-        return licid != null ? Collections.singletonList(licid) : Collections.emptyList();
     }
 
     @Override

@@ -1,15 +1,15 @@
 
 package mage.abilities.effects.common.combat;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.*;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author LevelX2
@@ -24,7 +24,7 @@ public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
     }
 
     public CantBeBlockedByOneAttachedEffect(AttachmentType attachmentType, int amount, Duration duration) {
-        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+        super(duration, Outcome.Benefit);
         this.amount = amount;
         this.attachmentType = attachmentType;
         staticText = attachmentType.verb() + " creature can't be blocked except by " + amount + " or more creatures";
@@ -42,23 +42,29 @@ public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            ((Permanent) object).setMinBlockedBy(amount);
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        switch (layer) {
+            case RulesEffects:
+                Permanent attachment = game.getPermanent(source.getSourceId());
+                if (attachment != null && attachment.getAttachedTo() != null) {
+                    Permanent perm = game.getPermanent(attachment.getAttachedTo());
+                    if (perm != null) {
+                        perm.setMinBlockedBy(amount);
+                        return true;
+                    }
+                }
+                break;
         }
-        return true;
+        return false;
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null) {
-            Permanent perm = game.getPermanent(attachment.getAttachedTo());
-            return perm != null ? Collections.singletonList(perm) : Collections.emptyList();
-        }
-        return Collections.emptyList();
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
 }

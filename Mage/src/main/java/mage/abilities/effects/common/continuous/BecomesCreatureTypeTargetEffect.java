@@ -1,14 +1,15 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -44,36 +45,30 @@ public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty() && this.duration == Duration.Custom) {
-            discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
+    public BecomesCreatureTypeTargetEffect copy() {
+        return new BecomesCreatureTypeTargetEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean flag = false;
+        for (UUID targetPermanent : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetPermanent);
+            if (permanent == null) {
                 continue;
             }
-            Permanent permanent = (Permanent) object;
+            flag = true;
             if (loseOther) {
                 permanent.removeAllCreatureTypes(game);
             }
-            permanent.addSubType(game, subtypes);
+            for (SubType subtype : subtypes) {
+                permanent.addSubType(game, subtype);
+            }
+        }
+        if (!flag && duration == Duration.Custom) {
+            discard();
         }
         return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return getTargetPointer().getTargets(game, source)
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public BecomesCreatureTypeTargetEffect copy() {
-        return new BecomesCreatureTypeTargetEffect(this);
     }
 
     private String setText() {

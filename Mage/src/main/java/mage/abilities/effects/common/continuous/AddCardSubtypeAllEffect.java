@@ -1,16 +1,11 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * @author Galatolol
@@ -38,22 +33,13 @@ public class AddCardSubtypeAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            ((Permanent) object).addSubType(game, addedSubtype);
+    public boolean apply(Game game, Ability source) {
+        for (Permanent perm : game.getBattlefield().getActivePermanents(
+                filter, source.getControllerId(), source, game
+        )) {
+            perm.addSubType(game, addedSubtype);
         }
         return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)
-                .stream()
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
     }
 
     @Override

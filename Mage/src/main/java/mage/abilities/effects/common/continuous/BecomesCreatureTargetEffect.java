@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -9,9 +8,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -80,22 +77,14 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         return new BecomesCreatureTargetEffect(this);
     }
 
-    public BecomesCreatureTargetEffect setRemoveSubtypes(boolean removeSubtypes) {
-        this.removeSubtypes = removeSubtypes;
-        return this;
-    }
-
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty() && this.duration == Duration.Custom) {
-            this.discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        boolean result = false;
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent == null) {
                 continue;
             }
-            Permanent permanent = (Permanent) object;
             switch (layer) {
                 case TextChangingEffects_3:
                     if (loseName) {
@@ -156,8 +145,22 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                         permanent.getPower().setModifiedBaseValue(token.getPower().getValue());
                     }
             }
+            result = true;
         }
-        return true;
+        if (!result && this.duration == Duration.Custom) {
+            this.discard();
+        }
+        return result;
+    }
+
+    public BecomesCreatureTargetEffect setRemoveSubtypes(boolean removeSubtypes) {
+        this.removeSubtypes = removeSubtypes;
+        return this;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
     }
 
     @Override
@@ -167,15 +170,6 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 || layer == Layer.ColorChangingEffects_5
                 || layer == Layer.TypeChangingEffects_4
                 || layer == Layer.TextChangingEffects_3;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return getTargetPointer().getTargets(game, source)
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
     }
 
     public BecomesCreatureTargetEffect withDurationRuleAtStart(boolean durationRuleAtStart) {

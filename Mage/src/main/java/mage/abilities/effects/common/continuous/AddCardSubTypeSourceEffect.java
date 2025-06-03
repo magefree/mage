@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -12,7 +11,6 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,40 +39,26 @@ public class AddCardSubTypeSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty() && this.getDuration() == Duration.Custom) {
-            discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
-            if (!inAddition) {
-                permanent.removeAllCreatureTypes(game);
-            }
-            for (SubType subType : addedSubTypes) {
-                permanent.addSubType(game, subType);
-            }
-        }
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        for (MageObjectReference mor : affectedObjectList) {
-            if (mor.refersTo(source.getSourceId(), game)) {
-                return Collections.singletonList(mor.getPermanent(game));
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
+            if (!inAddition) {
+                permanent.removeAllCreatureTypes(game);
             }
+            for (SubType cardType : addedSubTypes) {
+                permanent.addSubType(game, cardType);
+            }
+            return true;
+        } else if (this.getDuration() == Duration.Custom) {
+            this.discard();
         }
-        return Collections.emptyList();
+        return false;
     }
 
     @Override

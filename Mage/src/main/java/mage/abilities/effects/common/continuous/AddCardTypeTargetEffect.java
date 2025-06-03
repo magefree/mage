@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -8,8 +7,10 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -42,27 +43,23 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty() && this.getDuration() == Duration.Custom) {
-            this.discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
+    public boolean apply(Game game, Ability source) {
+        boolean result = false;
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent target = game.getPermanent(targetId);
+            if (target != null) {
+                for (CardType cardType : addedCardTypes) {
+                    target.addCardType(game, cardType);
+                }
+                result = true;
             }
-            ((Permanent) object).addCardType(game, addedCardTypes.toArray(new CardType[0]));
         }
-        return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return getTargetPointer().getTargets(game, source)
-                .stream()
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        if (!result) {
+            if (this.getDuration() == Duration.Custom) {
+                this.discard();
+            }
+        }
+        return result;
     }
 
     @Override

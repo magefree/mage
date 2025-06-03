@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -9,9 +8,6 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author TheElk801
@@ -28,27 +24,17 @@ public class IsAllCreatureTypesSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof MageObject)) {
-                continue;
-            }
-            ((MageObject) object).setIsAllCreatureTypes(game, true);
-        }
-        return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        return sourceObject != null ? Collections.singletonList(sourceObject) : Collections.emptyList();
-    }
-
-    @Override
     public IsAllCreatureTypesSourceEffect copy() {
         return new IsAllCreatureTypesSourceEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject sourceObject = game.getObject(source);
+        if (sourceObject == null) {
+            return false;
+        }
+        sourceObject.setIsAllCreatureTypes(game, true);
+        return true;
     }
 }

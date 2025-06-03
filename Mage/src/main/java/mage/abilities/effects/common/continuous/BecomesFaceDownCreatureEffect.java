@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -29,7 +28,6 @@ import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -176,19 +174,33 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty() && foundPermanent && this.duration == Duration.Custom) {
-            this.discard();
-            return false;
-        }
-        boolean found = false;
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (faceDownType == FaceDownType.MANUAL) {
+            Permanent permanent;
+            if (objectReference != null) {
+                permanent = objectReference.getPermanent(game);
+            } else {
+                permanent = game.getPermanent(source.getSourceId());
             }
-            Permanent permanent = (Permanent) object;
+            if (permanent != null) {
+                permanent.setFaceDown(true, game);
+            }
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent;
+        if (objectReference != null) {
+            permanent = objectReference.getPermanent(game);
+        } else {
+            permanent = game.getPermanent(source.getSourceId());
+        }
+
+        if (permanent != null && permanent.isFaceDown(game)) {
             if (!foundPermanent) {
-                found = true;
+                foundPermanent = true;
                 switch (faceDownType) {
                     case MANIFESTED:
                     case MANUAL: // sets manifested image // TODO: wtf
@@ -209,39 +221,10 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                 }
             }
             makeFaceDownObject(game, source.getSourceId(), permanent, faceDownType, this.additionalAbilities);
+        } else if (duration == Duration.Custom && foundPermanent) {
+            discard();
         }
-        foundPermanent = found;
         return true;
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (faceDownType == FaceDownType.MANUAL) {
-            Permanent permanent;
-            if (objectReference != null) {
-                permanent = objectReference.getPermanent(game);
-            } else {
-                permanent = game.getPermanent(source.getSourceId());
-            }
-            if (permanent != null) {
-                permanent.setFaceDown(true, game);
-            }
-        }
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        Permanent permanent;
-        if (objectReference != null) {
-            permanent = objectReference.getPermanent(game);
-        } else {
-            permanent = game.getPermanent(source.getSourceId());
-        }
-        if (permanent != null && permanent.isFaceDown(game)) {
-            return Collections.singletonList(permanent);
-        }
-        return Collections.emptyList();
     }
 
     // TODO: implement multiple face down types?!

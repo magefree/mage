@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
@@ -40,12 +39,14 @@ public class BecomesAllBasicsControlledEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            Permanent permanent = (Permanent) object;
+    public BecomesAllBasicsControlledEffect copy() {
+        return new BecomesAllBasicsControlledEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, source.getControllerId(), game)) {
             permanent.addSubType(game,
                     SubType.PLAINS,
                     SubType.ISLAND,
@@ -67,16 +68,5 @@ public class BecomesAllBasicsControlledEffect extends ContinuousEffectImpl {
             }
         }
         return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return new ArrayList<>(game.getBattlefield()
-                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, source.getControllerId(), game));
-    }
-
-    @Override
-    public BecomesAllBasicsControlledEffect copy() {
-        return new BecomesAllBasicsControlledEffect(this);
     }
 }

@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
@@ -46,32 +45,29 @@ public class BecomesSubtypeAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty() && duration == Duration.Custom) {
-            this.discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
+    public BecomesSubtypeAllEffect copy() {
+        return new BecomesSubtypeAllEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean flag = false;
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            if (permanent == null) {
                 continue;
             }
-            Permanent permanent = (Permanent) object;
+            flag = true;
             if (loseOther) {
                 permanent.removeAllCreatureTypes(game);
             }
-            permanent.addSubType(game, subtypes);
+            for (SubType subtype : subtypes) {
+                permanent.addSubType(game, subtype);
+            }
+        }
+        if (!flag && duration == Duration.Custom) {
+            discard();
         }
         return true;
-    }
-
-    @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return new ArrayList<>(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
-    }
-
-    @Override
-    public BecomesSubtypeAllEffect copy() {
-        return new BecomesSubtypeAllEffect(this);
     }
 
     private String setText() {

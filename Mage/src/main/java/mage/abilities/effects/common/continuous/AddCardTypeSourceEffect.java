@@ -1,6 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -8,11 +7,10 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 /**
  * @author emerald000
@@ -44,35 +42,26 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty() && this.duration == Duration.Custom) {
-            this.discard();
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
-            }
-            ((Permanent) object).addCardType(game, addedCardTypes.toArray(new CardType[0]));
-        }
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()), game));
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        List<MageItem> objects = new ArrayList<>();
-        for (MageObjectReference mor : affectedObjectList) {
-            if (mor.refersTo(source.getSourceId(), game) || !duration.isOnlyValidIfNoZoneChange()) {
-                objects.add(mor.getPermanent(game));
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null
+                && (affectedObjectList.contains(new MageObjectReference(permanent, game))
+                // Workaround to support abilities like "As long as __, this permanent is a __ in addition to its other types."
+                || !duration.isOnlyValidIfNoZoneChange())) {
+            for (CardType cardType : addedCardTypes) {
+                permanent.addCardType(game, cardType);
             }
+            return true;
+        } else if (this.getDuration() == Duration.Custom) {
+            this.discard();
         }
-        return objects;
+        return false;
     }
 
     @Override
@@ -87,20 +76,19 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         sb.append("{this} becomes ");
-        sb.append(CardUtil.addArticle(
-                addedCardTypes
-                        .stream()
-                        .map(CardType::toString)
-                        .map(String::toLowerCase)
-                        .collect(Collectors.joining(" "))
-        ));
-        if (!addedCardTypes.contains(CardType.ARTIFACT) || !addedCardTypes.contains(CardType.CREATURE)) {
-            sb.append(" in addition to its other types");
+        boolean article = false;
+        for (CardType cardType : addedCardTypes) {
+            if (!article) {
+                if (cardType.toString().startsWith("A") || cardType.toString().startsWith("E")) {
+                    sb.append("an ");
+                } else {
+                    sb.append("a ");
+                }
+                article = true;
+            }
+            sb.append(cardType.toString().toLowerCase(Locale.ENGLISH)).append(" ");
         }
-        if (!this.getDuration().toString().isEmpty()) {
-            sb.append(' ');
-            sb.append(this.getDuration());
-        }
+        sb.append("in addition to its other types ").append(this.getDuration().toString());
         return sb.toString();
     }
 }

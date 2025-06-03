@@ -1,15 +1,12 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageItem;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CreaturesBecomeOtherTypeEffect extends ContinuousEffectImpl {
 
@@ -17,7 +14,7 @@ public class CreaturesBecomeOtherTypeEffect extends ContinuousEffectImpl {
     private final SubType subType;
 
     public CreaturesBecomeOtherTypeEffect(FilterPermanent filter, SubType subType, Duration duration) {
-        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
+        super(duration, Outcome.Neutral);
         this.filter = filter;
         this.subType = subType;
 
@@ -33,27 +30,28 @@ public class CreaturesBecomeOtherTypeEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
     public CreaturesBecomeOtherTypeEffect copy() {
         return new CreaturesBecomeOtherTypeEffect(this);
     }
 
     @Override
-    public boolean applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> objects) {
-        if (objects.isEmpty()) {
-            return false;
-        }
-        for (MageItem object : objects) {
-            if (!(object instanceof Permanent)) {
-                continue;
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        if (layer == Layer.TypeChangingEffects_4) {
+            for (Permanent object : game.getBattlefield().getActivePermanents(this.filter, source.getControllerId(), game)) {
+                object.addSubType(game, this.subType);
             }
-            ((Permanent) object).addSubType(game, this.subType);
         }
+
         return true;
     }
 
     @Override
-    public List<MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return new ArrayList<>(game.getBattlefield()
-                .getActivePermanents(filter, source.getControllerId(), game));
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.TypeChangingEffects_4;
     }
 }
