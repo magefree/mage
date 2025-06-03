@@ -213,6 +213,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Repeal", 94, Rarity.COMMON, mage.cards.r.Repeal.class));
         cards.add(new SetCardInfo("Rescuer Sphinx", 95, Rarity.UNCOMMON, mage.cards.r.RescuerSphinx.class));
         //cards.add(new SetCardInfo("Resonance Technician", 41, Rarity.RARE, mage.cards.r.ResonanceTechnician.class));
+        cards.add(new SetCardInfo("Resonance Technician", 41, Rarity.RARE, mage.cards.r.ResonanceTechnician.class));
         cards.add(new SetCardInfo("Ribbons of Night", 120, Rarity.UNCOMMON, mage.cards.r.RibbonsOfNight.class));
         cards.add(new SetCardInfo("Ripscale Predator", 146, Rarity.COMMON, mage.cards.r.RipscalePredator.class));
         cards.add(new SetCardInfo("Roaming Ghostlight", 96, Rarity.COMMON, mage.cards.r.RoamingGhostlight.class));
