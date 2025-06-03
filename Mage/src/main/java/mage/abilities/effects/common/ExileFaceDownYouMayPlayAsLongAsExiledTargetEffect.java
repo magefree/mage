@@ -2,18 +2,16 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CastManaAdjustment;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.Objects;
@@ -94,9 +92,10 @@ public class ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect extends OneShotEf
                         throw new IllegalArgumentException("Wrong code usage, manaAdjustment is not yet supported: " + manaAdjustment);
                 }
                 // For as long as that card remains exiled, you may look at it
-                ContinuousEffect effect = new MayLookAtTargetCardEffect(controller.getId());
-                effect.setTargetPointer(new FixedTarget(card.getId(), game));
-                game.addEffect(effect, source);
+                ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
+                if (exileZone != null) {
+                    exileZone.letPlayerSeeCards(controller.getId(), card);
+                }
             }
         }
         return true;

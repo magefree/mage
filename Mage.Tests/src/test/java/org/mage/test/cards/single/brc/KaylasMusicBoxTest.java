@@ -48,4 +48,29 @@ public class KaylasMusicBoxTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Plains", 2);
     }
 
+    @Test
+    public void testOwnership() {
+        addCard(Zone.LIBRARY, playerA, LION);
+        addCard(Zone.BATTLEFIELD, playerA, BOX);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Axegrinder Giant", 1);
+        addCard(Zone.HAND, playerB, "Giant's Grasp", 1);
+
+        // Player A activates the box, exiling lion
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{W}, {T}");
+
+        // Player B casts Giant's Grasp on the box
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Giant's Grasp", "Axegrinder Giant");
+        addTarget(playerB, BOX);
+
+        setStrictChooseMode(true);
+        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        checkPlayableAbility("Should not be able to cast lion",
+                4, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast " + LION, false);
+    }
+
 }
