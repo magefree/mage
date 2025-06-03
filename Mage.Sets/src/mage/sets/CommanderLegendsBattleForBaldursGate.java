@@ -206,9 +206,9 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudkill", 121, Rarity.UNCOMMON, mage.cards.c.Cloudkill.class));
         cards.add(new SetCardInfo("Colossal Badger", 223, Rarity.COMMON, mage.cards.c.ColossalBadger.class));
         cards.add(new SetCardInfo("Command Tower", 351, Rarity.COMMON, mage.cards.c.CommandTower.class));
-        //cards.add(new SetCardInfo("Commander Liara Portyr", 270, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Commander Liara Portyr", 418, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Commander Liara Portyr", 529, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Commander Liara Portyr", 270, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Commander Liara Portyr", 418, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Commander Liara Portyr", 529, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Compulsive Research", 715, Rarity.COMMON, mage.cards.c.CompulsiveResearch.class));
         cards.add(new SetCardInfo("Cone of Cold", 61, Rarity.UNCOMMON, mage.cards.c.ConeOfCold.class));
         cards.add(new SetCardInfo("Consuming Aberration", 840, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
