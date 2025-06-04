@@ -75,15 +75,11 @@ enum EshkiTemursRoarCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return CardUtil.castStream(
-                        source.getEffects()
-                                .stream()
-                                .map(effect -> effect.getValue("spellCast")),
-                        Spell.class
-                )
-                .findFirst()
+        return CardUtil
+                .getEffectValueFromAbility(source, "spellCast", Spell.class)
                 .map(Spell::getPower)
                 .map(MageInt::getValue)
-                .orElse(0) >= amount;
+                .filter(x -> x >= amount)
+                .isPresent();
     }
 }

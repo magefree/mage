@@ -17,8 +17,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
+import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -65,11 +65,8 @@ enum WeatherseedTotemCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("permanentWasCreature"))
-                .filter(Objects::nonNull)
-                .anyMatch(Boolean.class::cast);
+        return CardUtil
+                .getEffectValueFromAbility(source, "permanentWasCreature", Boolean.class)
+                .orElse(false);
     }
 }
