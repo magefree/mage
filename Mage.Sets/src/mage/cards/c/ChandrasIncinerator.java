@@ -3,21 +3,21 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SourceDealsNoncombatDamageToOpponentTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
@@ -46,7 +46,10 @@ public final class ChandrasIncinerator extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a source you control deals noncombat damage to an opponent, Chandra's Incinerator deals that much damage to target creature or planeswalker that player controls.
-        this.addAbility(new ChandrasIncineratorTriggeredAbility());
+        Ability ability = new SourceDealsNoncombatDamageToOpponentTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH), SetTargetPointer.PLAYER);
+        ability.addTarget(new TargetPermanent(new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker that player controls")));
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
+        this.addAbility(ability);
     }
 
     private ChandrasIncinerator(final ChandrasIncinerator card) {
@@ -121,49 +124,5 @@ class ChandrasIncineratorWatcher extends Watcher {
 
     int getDamage(UUID playerId) {
         return damageMap.getOrDefault(playerId, 0);
-    }
-}
-
-class ChandrasIncineratorTriggeredAbility extends TriggeredAbilityImpl {
-
-    ChandrasIncineratorTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null);
-    }
-
-    private ChandrasIncineratorTriggeredAbility(final ChandrasIncineratorTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent dEvent = (DamagedPlayerEvent) event;
-        if (dEvent.isCombatDamage()
-                || !game.getOpponents(event.getTargetId()).contains(getControllerId())
-                || !game.getControllerId(event.getSourceId()).equals(getControllerId())) {
-            return false;
-        }
-        this.getEffects().clear();
-        this.addEffect(new DamageTargetEffect(event.getAmount()));
-        FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker");
-        filter.add(new ControllerIdPredicate(event.getTargetId()));
-        this.getTargets().clear();
-        this.addTarget(new TargetPermanent(filter));
-        return true;
-    }
-
-    @Override
-    public ChandrasIncineratorTriggeredAbility copy() {
-        return new ChandrasIncineratorTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a source you control deals noncombat damage to an opponent, " +
-                "{this} deals that much damage to target creature or planeswalker that player controls.";
     }
 }

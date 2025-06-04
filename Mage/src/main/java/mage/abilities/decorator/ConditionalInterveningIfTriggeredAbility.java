@@ -32,6 +32,8 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
      * Triggered ability with a condition. Set the optionality for the trigger
      * ability itself.
      *
+     * @deprecated use {@link mage.abilities.TriggeredAbility}.withInterveningIf() instead
+     *
      * @param ability
      * @param condition
      * @param text      explicit rule text for the ability, if null or empty, the
