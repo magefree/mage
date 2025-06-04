@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class AvalancheTusker extends CardImpl {
         // Whenever Avalanche Tusker attacks, target creature defending player controls blocks it this turn if able.
         Ability ability = new AttacksTriggeredAbility(new MustBeBlockedByTargetSourceEffect(), false, null, SetTargetPointer.PLAYER);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

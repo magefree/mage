@@ -1,7 +1,6 @@
 package mage.target.targetadjustment;
 
 import mage.abilities.Ability;
-import mage.abilities.common.OneOrMoreDamagePlayerTriggeredAbility;
 import mage.filter.Filter;
 import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -17,20 +16,20 @@ import java.util.UUID;
 /**
  * @author notgreat
  */
-public class DamagedPlayerControlsTargetAdjuster extends GenericTargetAdjuster {
+public class ThatPlayerControlsTargetAdjuster extends GenericTargetAdjuster {
     private final boolean owner;
 
     /**
      * Use with {@link mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility} with setTargetPointer enabled,
-     * or {@link OneOrMoreDamagePlayerTriggeredAbility} with "SetTargetPointer.PLAYER" or similar.
-     * Adjusts the target to only target something the damaged player controls (or owns with alternative constructor)
-     * And then removes the effects' target pointer that the triggered ability set
+     * or {@link mage.abilities.common.OneOrMoreDamagePlayerTriggeredAbility} with "SetTargetPointer.PLAYER" or similar.
+     * Adjusts the target to only target something the damaged/attacked/etc player controls (or owns with alternative constructor)
+     * And then removes the effects' target pointer that the triggered ability set, replacing it with the standard {@link FirstTargetPointer}
      */
-    public DamagedPlayerControlsTargetAdjuster() {
+    public ThatPlayerControlsTargetAdjuster() {
         this(false);
     }
 
-    public DamagedPlayerControlsTargetAdjuster(boolean owner) {
+    public ThatPlayerControlsTargetAdjuster(boolean owner) {
         this.owner = owner;
     }
 

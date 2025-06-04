@@ -17,7 +17,7 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
@@ -48,7 +48,7 @@ public final class ChandrasIncinerator extends CardImpl {
         // Whenever a source you control deals noncombat damage to an opponent, Chandra's Incinerator deals that much damage to target creature or planeswalker that player controls.
         Ability ability = new SourceDealsNoncombatDamageToOpponentTriggeredAbility(new DamageTargetEffect(SavedDamageValue.MUCH), SetTargetPointer.PLAYER);
         ability.addTarget(new TargetPermanent(new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker that player controls")));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

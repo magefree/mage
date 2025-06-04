@@ -17,7 +17,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -41,7 +41,7 @@ public final class FearOfBurningAlive extends CardImpl {
         // Delirium -- Whenever a source you control deals noncombat damage to an opponent, if there are four or more card types among cards in your graveyard, Fear of Burning Alive deals that amount of damage to target creature that player controls.
         TriggeredAbility ability = new SourceDealsNoncombatDamageToOpponentTriggeredAbility(new DamageTargetEffect(SavedDamageValue.AMOUNT));
         ability.addTarget(new TargetPermanent(new FilterCreaturePermanent("creature that player controls")));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         ability.withInterveningIf(DeliriumCondition.instance);
         ability.setAbilityWord(AbilityWord.DELIRIUM);
         ability.addHint(CardTypesInGraveyardCount.YOU.getHint());

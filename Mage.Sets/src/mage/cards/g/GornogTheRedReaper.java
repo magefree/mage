@@ -26,7 +26,7 @@ import mage.game.events.DefenderAttackedEvent;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -66,7 +66,7 @@ public final class GornogTheRedReaper extends CardImpl {
                 new BecomesCreatureTypeTargetEffect(Duration.EndOfGame, SubType.COWARD),
                 1, filter, true);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
 
         // Attacking Warriors you control get +X/+0, where X is the number of Cowards your opponents control.

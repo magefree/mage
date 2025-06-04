@@ -16,7 +16,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -52,7 +52,7 @@ public final class FelineSovereign extends CardImpl {
         // Whenever one or more Cats you control deal combat damage to a player, destroy up to one target artifact or enchantment that player controls.
         Ability ability2 = new OneOrMoreCombatDamagePlayerTriggeredAbility(new DestroyTargetEffect(), SetTargetPointer.PLAYER, filterCat, false);
         ability2.addTarget(new TargetPermanent(0, 1, new FilterArtifactOrEnchantmentPermanent("artifact or enchantment that player controls")));
-        ability2.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability2.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability2);
     }
 

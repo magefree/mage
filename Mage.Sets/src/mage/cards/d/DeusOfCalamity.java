@@ -13,7 +13,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -52,7 +52,7 @@ class DeusOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
     public DeusOfCalamityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
         addTarget(new TargetLandPermanent());
-        setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
     }
 
     private DeusOfCalamityTriggeredAbility(final DeusOfCalamityTriggeredAbility ability) {

@@ -15,7 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public final class GoblinVandal extends CardImpl {
         effect.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn).setText("and {this} assigns no combat damage this turn"));
         Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(effect, false, SetTargetPointer.PLAYER);
         ability.addTarget(new TargetArtifactPermanent());
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
 
     }

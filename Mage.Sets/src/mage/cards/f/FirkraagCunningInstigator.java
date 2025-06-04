@@ -20,7 +20,7 @@ import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -54,7 +54,7 @@ public final class FirkraagCunningInstigator extends CardImpl {
         // Whenever one or more Dragons you control attack an opponent, goad target creature that player controls.
         Ability abilityGoad = new AttacksWithCreaturesTriggeredAbility(new GoadTargetEffect(), 1, filterDragons);
         abilityGoad.addTarget(new TargetPermanent(new FilterCreaturePermanent("target creature that player controls")));
-        abilityGoad.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        abilityGoad.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(abilityGoad);
 
         // Whenever a creature deals combat damage to one of your opponents, if that creature had to attack this combat, you put a +1/+1 counter on Firkraag, Cunning Instigator and you draw a card.

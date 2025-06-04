@@ -16,7 +16,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -48,7 +48,7 @@ public final class TinybonesThePickpocket extends CardImpl {
         OneShotEffect effect = new MayCastTargetCardEffect(CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, false);
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetCardInGraveyard(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster(true));
         this.addAbility(ability);
     }
 
