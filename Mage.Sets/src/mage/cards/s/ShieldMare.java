@@ -45,7 +45,7 @@ public final class ShieldMare extends CardImpl {
 
         // When Shield Mare enters the battlefield or becomes the target of a spell or ability and opponent controls, you gain 3 life.
         this.addAbility(new OrTriggeredAbility(Zone.ALL, new GainLifeEffect(3), false,
-                "Whenever {this} enters or becomes the target of a spell or ability an opponent controls, ",
+                "When {this} enters or becomes the target of a spell or ability an opponent controls, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new BecomesTargetSourceTriggeredAbility(null, StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS)));
     }

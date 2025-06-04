@@ -388,7 +388,7 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param value
      */
-    void setGameUnderYourControl(boolean value);
+    void setGameUnderYourControl(Game game, boolean value);
 
     /**
      * Return player's turn control to prev player
@@ -396,7 +396,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param value
      * @param fullRestore return turn control to own
      */
-    void setGameUnderYourControl(boolean value, boolean fullRestore);
+    void setGameUnderYourControl(Game game, boolean value, boolean fullRestore);
 
     void setTestMode(boolean value);
 

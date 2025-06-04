@@ -85,7 +85,7 @@ public final class CardUtil {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     private static final List<String> costWords = Arrays.asList(
-            "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay", "collect"
+            "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay", "collect", "forage"
     );
 
     // search set code in commands like "set_code-card_name"
@@ -980,7 +980,7 @@ public final class CardUtil {
         }
         if (!targetPlayerGets) {
             sb.append(add ? " on " : " from ");
-            if (description.contains("up to")) {
+            if (description.contains("up to") && !description.contains("up to one")) {
                 sb.append("each of ");
             }
             sb.append(description);
@@ -1434,7 +1434,7 @@ public final class CardUtil {
      * @param playerUnderControl
      */
     public static void takeControlUnderPlayerEnd(Game game, Ability source, Player controller, Player playerUnderControl) {
-        playerUnderControl.setGameUnderYourControl(true, false);
+        playerUnderControl.setGameUnderYourControl(game, true, false);
         if (!playerUnderControl.getTurnControlledBy().equals(controller.getId())) {
             game.informPlayers(controller.getLogName() + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
             controller.getPlayersUnderYourControl().remove(playerUnderControl.getId());
@@ -1774,8 +1774,9 @@ public final class CardUtil {
             // Waiting on actual ruling of Ashiok, Wicked Manipulator.
             return true;
         }
-        if (player.loseLife(lifeToPay, game, source, false) >= lifeToPay) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lifeToPay));
+        int lostLife = player.loseLife(lifeToPay, game, source, false);
+        if (lostLife > 0) {
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lostLife));
             return true;
         }
 

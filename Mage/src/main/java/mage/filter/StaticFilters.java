@@ -1330,5 +1330,4 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_CLUE.setLockedFilter(true);
     }
-
 }

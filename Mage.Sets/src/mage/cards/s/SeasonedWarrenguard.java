@@ -43,7 +43,7 @@ public final class SeasonedWarrenguard extends CardImpl {
         // Whenever Seasoned Warrenguard attacks while you control a token, Seasoned Warrenguard gets +2/+0 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn)
-        ).withTriggerCondition(condition).addHint(hint));
+        ).withRuleTextReplacement(false).withTriggerCondition(condition).addHint(hint));
     }
 
     private SeasonedWarrenguard(final SeasonedWarrenguard card) {

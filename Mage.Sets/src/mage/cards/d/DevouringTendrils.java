@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -44,9 +43,7 @@ public final class DevouringTendrils extends CardImpl {
         Effect effect = new DamageWithPowerFromOneToAnotherTargetEffect();
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        TargetPermanent target = new TargetPermanent(filter);
-        target.setTargetTag(2);
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
 
         this.getSpellAbility().addEffect(new DevouringTendrilsEffect());
     }
@@ -79,11 +76,7 @@ class DevouringTendrilsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Target target = source.getTargets().stream()
-            .filter(t -> t.getTargetTag() == 2)
-            .findFirst()
-            .orElseThrow(() -> new IllegalStateException("Expected to find target with tag 2 but found none"));
-        Permanent permanent = game.getPermanent(target.getFirstTarget());
+        Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
             DelayedTriggeredAbility delayedAbility = new DevouringTendrilsDelayedTriggeredAbility(new MageObjectReference(permanent, game));
             game.addDelayedTriggeredAbility(delayedAbility, source);

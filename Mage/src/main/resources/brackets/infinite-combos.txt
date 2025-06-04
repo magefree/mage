@@ -1,0 +1,9 @@
+# Infinite x2 cards combos list for commander brackets score system
+# Format: card_name_1@card_name_2 - must be sorted by name, xmage compatible without non-ascii chars
+# Data source: xxx
+# Generated xxx
+Bloodchief Ascension@Mindcrank
+Zaxara, the Exemplary@Freed from the Real
+Brallin, Skyshark Rider@Ophidian Eye
+Krosan Restorer@Ashaya, Soul of the Wild
+# TODO: generate it

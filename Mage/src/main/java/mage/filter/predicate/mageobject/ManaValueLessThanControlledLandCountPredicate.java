@@ -1,4 +1,4 @@
-package mage.filter.predicate.card;
+package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
 import mage.filter.StaticFilters;

@@ -43,6 +43,7 @@ import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.game.permanent.token.custom.XmageToken;
 import mage.sets.TherosBeyondDeath;
+import mage.target.Target;
 import mage.target.targetpointer.TargetPointer;
 import mage.tournament.cubes.CubeFromDeck;
 import mage.util.CardUtil;
@@ -74,7 +75,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "FIN"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "BLC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
@@ -2276,6 +2277,19 @@ public class VerifyCardDataTest {
                     .anyMatch(tc -> tc.equals(TargetController.YOU));
             if (!hasControlledFilter) {
                 fail(card, "abilities", "card has equip ability, but it doesn't use controllered filter - " + a.getRule());
+            }
+        });
+
+        // special check: target tags must be used for all targets and starts with 1
+        card.getAbilities().stream().filter(a -> a.getTargets().size() >= 2).forEach(a -> {
+            Set<Integer> tags = a.getTargets().stream().map(Target::getTargetTag).collect(Collectors.toSet());
+            if (tags.size() == 1 && tags.stream().findFirst().get().equals(0)) {
+                // no tags usage
+                return;
+            }
+            if (tags.size() != a.getTargets().size() || (tags.size() > 1 && tags.contains(0))) {
+                // how-to fix: make sure each target has it's own target tag like 1 and 2 (don't use 0 because it's default)
+                fail(card, "abilities", "wrong target tags: miss tag in one of the targets, current list: " + tags);
             }
         });
 

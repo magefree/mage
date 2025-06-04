@@ -53,7 +53,7 @@ public final class CombineGuildmage extends CardImpl {
         // {1}{U}, {T}: Move a +1/+1 counter from target creature you control onto another target creature you control.
         ability = new SimpleActivatedAbility(new MoveCounterTargetsEffect(CounterType.P1P1), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent().withChooseHint("to remove a counter from"));
+        ability.addTarget(new TargetControlledCreaturePermanent().withChooseHint("to remove a counter from").setTargetTag(1));
         ability.addTarget(new TargetPermanent(filter).withChooseHint("to move a counter to").setTargetTag(2));
         this.addAbility(ability);
     }

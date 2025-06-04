@@ -226,6 +226,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Krile Baldesion", 86, Rarity.RARE, mage.cards.k.KrileBaldesion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Legions to Ashes", 326, Rarity.RARE, mage.cards.l.LegionsToAshes.class));
         cards.add(new SetCardInfo("Lethal Scheme", 277, Rarity.RARE, mage.cards.l.LethalScheme.class));
+        cards.add(new SetCardInfo("Lifestream's Blessing", 122, Rarity.RARE, mage.cards.l.LifestreamsBlessing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lifestream's Blessing", 67, Rarity.RARE, mage.cards.l.LifestreamsBlessing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Greaves", 349, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lingering Souls", 245, Rarity.UNCOMMON, mage.cards.l.LingeringSouls.class));
         cards.add(new SetCardInfo("Locke, Treasure Hunter", 177, Rarity.RARE, mage.cards.l.LockeTreasureHunter.class, NON_FULL_USE_VARIOUS));
@@ -342,6 +344,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Spire of Industry", 426, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
         cards.add(new SetCardInfo("Stitch Together", 286, Rarity.UNCOMMON, mage.cards.s.StitchTogether.class));
         cards.add(new SetCardInfo("Stitcher's Supplier", 287, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
+        cards.add(new SetCardInfo("Strago and Relm", 155, Rarity.RARE, mage.cards.s.StragoAndRelm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strago and Relm", 59, Rarity.RARE, mage.cards.s.StragoAndRelm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sublime Epiphany", 271, Rarity.RARE, mage.cards.s.SublimeEpiphany.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 427, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
         cards.add(new SetCardInfo("Summon: Esper Valigarmanda", 198, Rarity.RARE, mage.cards.s.SummonEsperValigarmanda.class, NON_FULL_USE_VARIOUS));
@@ -427,6 +431,8 @@ public final class FinalFantasyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Umaro, Raging Yeti", 63, Rarity.RARE, mage.cards.u.UmaroRagingYeti.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Underground River", 439, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
         cards.add(new SetCardInfo("Unfinished Business", 259, Rarity.RARE, mage.cards.u.UnfinishedBusiness.class));
+        cards.add(new SetCardInfo("Urianger Augurelt", 189, Rarity.RARE, mage.cards.u.UriangerAugurelt.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urianger Augurelt", 96, Rarity.RARE, mage.cards.u.UriangerAugurelt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vandalblast", 298, Rarity.UNCOMMON, mage.cards.v.Vandalblast.class));
         cards.add(new SetCardInfo("Vanquish the Horde", 260, Rarity.RARE, mage.cards.v.VanquishTheHorde.class));
         cards.add(new SetCardInfo("Vincent, Vengeful Atoner", 157, Rarity.RARE, mage.cards.v.VincentVengefulAtoner.class, NON_FULL_USE_VARIOUS));

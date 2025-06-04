@@ -3,12 +3,9 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.AffinityEffect;
 import mage.abilities.effects.common.FaceVillainousChoiceOpponentsEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
@@ -32,7 +29,6 @@ import java.util.UUID;
 public final class TheDalekEmperor extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.DALEK, "Daleks");
-    private static final Hint hint = new ValueHint("Daleks you control", new PermanentsOnBattlefieldCount(filter));
     private static final FaceVillainousChoice choice = new FaceVillainousChoice(
             Outcome.Sacrifice, new TheDalekEmperorFirstChoice(), new TheDalekEmperorSecondChoice()
     );
@@ -46,7 +42,7 @@ public final class TheDalekEmperor extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Affinity for Daleks
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).addHint(hint));
+        this.addAbility(new AffinityAbility(AffinityType.DALEKS));
 
         // Other Daleks you control have haste.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

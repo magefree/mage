@@ -32,7 +32,7 @@ public final class TemporaryInsanity extends CardImpl {
 
         // and gain control of it until end of turn.
         Effect effect = new GainControlTargetEffect(Duration.EndOfTurn);
-        effect.setText("and gain control of it until end of turn. ");
+        effect.setText("and gain control of it until end of turn");
         this.getSpellAbility().addEffect(effect);
 
         // That creature gains haste until end of turn.

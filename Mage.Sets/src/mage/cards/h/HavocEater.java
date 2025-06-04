@@ -16,7 +16,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.Objects;
@@ -44,7 +44,7 @@ public final class HavocEater extends CardImpl {
                         .setTargetPointer(new EachTargetPointer()));
         ability.addEffect(new HavocEaterEffect());
         ability.addTarget(new TargetCreaturePermanent(0, 1));
-        this.addAbility(ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster()));
+        this.addAbility(ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, true)));
     }
 
     private HavocEater(final HavocEater card) {

@@ -148,7 +148,7 @@ class SpellweaverHelixTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts a card, if it has the same name as one of the cards exiled with Spellweaver Helix, you may copy the other. If you do, you may cast the copy without paying its mana cost.";
+        return "Whenever a player casts a card, if it has the same name as one of the cards exiled with {this}, you may copy the other. If you do, you may cast the copy without paying its mana cost.";
     }
 }
 

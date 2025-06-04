@@ -40,6 +40,18 @@ public class Targets extends ArrayList<Target> implements Copyable<Targets> {
         return this;
     }
 
+    public Target getByTag(int tag) {
+        return this.stream().filter(t -> t.getTargetTag() == tag).findFirst().orElse(null);
+    }
+
+    public List<UUID> getTargetsByTag(int tag) {
+        Target target = getByTag(tag);
+        if (target == null) {
+            return new ArrayList<>();
+        }
+        return target.getTargets();
+    }
+
     public Target getNextUnchosen(Game game) {
         return getNextUnchosen(game, 0);
     }

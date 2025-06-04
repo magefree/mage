@@ -3,12 +3,8 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AffinityEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.keyword.AffinityAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -26,9 +22,6 @@ import java.util.UUID;
  */
 public final class BartzAndBoko extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.BIRD, "Birds");
-    private static final Hint hint = new ValueHint("Birds you control", new PermanentsOnBattlefieldCount(filter));
-
     public BartzAndBoko(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
@@ -39,7 +32,7 @@ public final class BartzAndBoko extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Affinity for Birds
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).setRuleAtTheTop(true).addHint(hint));
+        this.addAbility(new AffinityAbility(AffinityType.BIRDS));
 
         // When Bartz and Boko enters, each other Bird you control deals damage equal to its power to target creature an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BartzAndBokoEffect());
