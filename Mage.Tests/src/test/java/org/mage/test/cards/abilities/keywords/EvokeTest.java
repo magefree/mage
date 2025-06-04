@@ -42,7 +42,7 @@ public class EvokeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shriekmaw");
         setChoice(playerA, "Cast with Evoke alternative cost: {1}{B} (source: Shriekmaw");
-        setChoice(playerA, "When this permanent enters the battlefield, if its evoke cost was paid, its controller sacrifices it."); // stack triggers
+        setChoice(playerA, "When this permanent enters, if its evoke cost was paid, its controller sacrifices it."); // stack triggers
         addTarget(playerA, "Silvercoat Lion"); // choice for Shriekmaw Destroy trigger
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Exhume");
