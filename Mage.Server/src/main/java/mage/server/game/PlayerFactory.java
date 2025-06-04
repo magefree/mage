@@ -45,12 +45,10 @@ public enum PlayerFactory {
     }
 
     public void addPlayerType(String name, Class playerType) {
+        // will raise error and stop on unknown player and that's ok - it's require HumanPlayer anyway
         PlayerType type = PlayerType.getByDescription(name);
-        if (type != null) {
-            if (playerType != null) {
-                this.playerTypes.put(type, playerType);
-            }
+        if (playerType != null) {
+            this.playerTypes.put(type, playerType);
         }
     }
-
 }
