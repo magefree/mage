@@ -4,8 +4,12 @@ import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.util.GUISizeHelper;
+import org.apache.log4j.Logger;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.*;
 import java.util.stream.Stream;
@@ -16,20 +20,30 @@ import java.util.stream.Stream;
  * <p>
  * Support:
  * - [x] game changers
- * - [ ] infinite combos
+ * - [x] infinite combos
  * - [x] mass land destruction
  * - [x] extra turns
  * - [x] tutors
+ * Features:
+ * - [x] find possible bracket level of the deck
+ * - [x] find affected cards by checking group
+ * - [ ] TODO: data download and generate
+ * - [ ] TODO: tests
+ * - [ ] TODO: table - players brackets level disclose settings
  *
  * @author JayDi85
  */
 public class BracketLegalityLabel extends LegalityLabel {
 
+    private static final Logger logger = Logger.getLogger(BracketLegalityLabel.class);
+
     private static final String GROUP_GAME_CHANGES = "Game Changers";
-    private static final String GROUP_INFINITE_COMBOS = "Infinite Combos (unsupported)";
+    private static final String GROUP_INFINITE_COMBOS = "Infinite Combos";
     private static final String GROUP_MASS_LAND_DESTRUCTION = "Mass Land Destruction";
     private static final String GROUP_EXTRA_TURN = "Extra Turns";
     private static final String GROUP_TUTORS = "Tutors";
+
+    private static final String RESOURCE_INFINITE_COMBOS = "brackets/infinite-combos.txt";
 
     private final BracketLevel level;
 
@@ -41,6 +55,7 @@ public class BracketLegalityLabel extends LegalityLabel {
 
     private final List<String> badCards = new ArrayList<>();
     private final List<String> fullGameChanges = new ArrayList<>();
+    private final Set<String> fullInfiniteCombos = new HashSet<>(); // card1@card2, sorted by names, name must be xmage compatible
 
     public enum BracketLevel {
         BRACKET_1("Bracket 1"),
@@ -243,8 +258,64 @@ public class BracketLegalityLabel extends LegalityLabel {
     }
 
     private void collectInfiniteCombos(Deck deck) {
-        // TODO: implement
         this.foundInfiniteCombos.clear();
+
+        if (this.fullInfiniteCombos.isEmpty()) {
+            InputStream in = BracketLegalityLabel.class.getClassLoader().getResourceAsStream(RESOURCE_INFINITE_COMBOS);
+            if (in == null) {
+                throw new RuntimeException("Commander brackets: can't load infinite combos list");
+            }
+            try (InputStreamReader input = new InputStreamReader(in);
+                 BufferedReader reader = new BufferedReader(input)) {
+                String line = reader.readLine();
+                while (line != null) {
+                    try {
+                        line = line.trim();
+                        if (line.startsWith("#")) {
+                            continue;
+                        }
+                        List<String> cards = Arrays.asList(line.split("@"));
+                        if (cards.size() != 2) {
+                            logger.warn("wrong line format in commander brackets file: " + line);
+                            continue;
+                        }
+
+                        Collections.sort(cards);
+                        this.fullInfiniteCombos.add(String.join("@", cards));
+                    } finally {
+                        line = reader.readLine();
+                    }
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("Tokens brackets: can't load infinite combos list - " + e);
+            }
+        }
+
+        // search and check all x2 combinations
+        List<Card> deckCards = new ArrayList<>();
+        Set<Card> foundCards = new HashSet<>();
+        deckCards.addAll(deck.getCards());
+        deckCards.addAll(deck.getSideboard());
+        for (Card card1 : deckCards) {
+            for (Card card2 : deckCards) {
+                if (card1 == card2) {
+                    continue;
+                }
+                List<String> names = Arrays.asList(card1.getName(), card2.getName());
+                Collections.sort(names);
+                String deckCombo = String.join("@", names);
+                if (this.fullInfiniteCombos.contains(deckCombo)) {
+                    foundCards.add(card1);
+                    foundCards.add(card2);
+                    break;
+                }
+            }
+        }
+
+        foundCards.stream()
+                .map(MageObject::getName)
+                .sorted()
+                .forEach(this.foundInfiniteCombos::add);
     }
 
     private void collectMassLandDestruction(Deck deck) {

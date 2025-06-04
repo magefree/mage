@@ -17,7 +17,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterEnchantmentCard;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -52,7 +52,7 @@ public final class PolisCrusher extends CardImpl {
         // Whenever Polis Crusher deals combat damage to a player, if Polis Crusher is monstrous, destroy target enchantment that player controls.
         TriggeredAbility ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true);
         ability.addTarget(new TargetPermanent(filterPermanent));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
 
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MonstrousCondition.instance,
                 "Whenever {this} deals combat damage to a player, if {this} is monstrous, destroy target enchantment that player controls."));

@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -23,10 +22,10 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -75,19 +74,11 @@ enum BoxingRingPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input
-                .getObject()
-                .getManaValue()
-                == input
-                .getSource()
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("permanentEnteringBattlefield"))
-                .map(Permanent.class::cast)
-                .filter(Objects::nonNull)
+        return CardUtil
+                .getEffectValueFromAbility(input.getSource(), "permanentEnteringBattlefield", Permanent.class)
                 .map(MageObject::getManaValue)
-                .findFirst()
-                .orElse(-1);
+                .filter(x -> x == input.getObject().getManaValue())
+                .isPresent();
     }
 }
 

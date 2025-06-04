@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -38,7 +38,7 @@ public final class SchemaThief extends CardImpl {
         // Whenever Schema Thief deals combat damage to a player, create a token that's a copy of target artifact that player controls.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenCopyTargetEffect(), false, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

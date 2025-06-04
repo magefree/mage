@@ -1,6 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -19,6 +20,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GuenhwyvarToken;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -66,15 +68,13 @@ enum DrizztDoUrdenCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
-        Permanent creatureDied = (Permanent) source
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("creatureDied"))
-                .findFirst()
-                .orElse(null);
         return sourcePermanent != null
-                && creatureDied != null
-                && creatureDied.getPower().getValue() > sourcePermanent.getPower().getValue();
+                && CardUtil
+                .getEffectValueFromAbility(source, "creatureDied", Permanent.class)
+                .map(MageObject::getPower)
+                .map(MageInt::getValue)
+                .filter(x -> sourcePermanent.getPower().getValue() < x)
+                .isPresent();
     }
 }
 
