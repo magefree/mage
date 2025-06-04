@@ -1548,7 +1548,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Black Market", "1577*", Rarity.RARE, mage.cards.b.BlackMarket.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire Undercurrents", 1578, Rarity.RARE, mage.cards.d.DireUndercurrents.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dire Undercurrents", "1578*", Rarity.RARE, mage.cards.d.DireUndercurrents.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Obeka, Brute Chronologist", 1579, Rarity.RARE, mage.cards.o.ObekaBruteChronologist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Obeka, Brute Chronologist", 1579, Rarity.MYTHIC, mage.cards.o.ObekaBruteChronologist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Obeka, Brute Chronologist", "1579*", Rarity.RARE, mage.cards.o.ObekaBruteChronologist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rose Noble", 1580, Rarity.RARE, mage.cards.r.RoseNoble.class));
         cards.add(new SetCardInfo("The Meep", 1581, Rarity.RARE, mage.cards.t.TheMeep.class));
@@ -2031,7 +2031,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Massacre", 9991, Rarity.RARE, mage.cards.m.Massacre.class));
         cards.add(new SetCardInfo("Torment of Hailfire", 9992, Rarity.RARE, mage.cards.t.TormentOfHailfire.class));
         cards.add(new SetCardInfo("Ruination", 9993, Rarity.RARE, mage.cards.r.Ruination.class));
-        cards.add(new SetCardInfo("Mogis, God of Slaughter", 9994, Rarity.RARE, mage.cards.m.MogisGodOfSlaughter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mogis, God of Slaughter", 9994, Rarity.MYTHIC, mage.cards.m.MogisGodOfSlaughter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garruk, Caller of Beasts", 9995, Rarity.MYTHIC, mage.cards.g.GarrukCallerOfBeasts.class));
         cards.add(new SetCardInfo("Rograkh, Son of Rohgahh", 9996, Rarity.RARE, mage.cards.r.RograkhSonOfRohgahh.class));
         cards.add(new SetCardInfo("Geralf's Messenger", 9997, Rarity.RARE, mage.cards.g.GeralfsMessenger.class, NON_FULL_USE_VARIOUS));
