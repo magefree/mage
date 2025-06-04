@@ -13,6 +13,7 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetCardInLibrary;
@@ -24,8 +25,8 @@ import java.util.UUID;
  */
 public final class AyarasOathsworn extends CardImpl {
 
-    private static final Condition condition1 = new SourceHasCounterCondition(CounterType.P1P1, 0, 3);
-    private static final Condition condition2 = new SourceHasCounterCondition(CounterType.P1P1, 4, 4);
+    private static final Condition condition1 = new SourceHasCounterCondition(CounterType.P1P1, ComparisonType.FEWER_THAN, 4);
+    private static final Condition condition2 = new SourceHasCounterCondition(CounterType.P1P1, ComparisonType.EQUAL_TO, 4);
 
     public AyarasOathsworn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -17,6 +17,7 @@ import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.permanent.token.PilotCrewToken;
@@ -29,7 +30,7 @@ import java.util.UUID;
  */
 public final class ReckonerBankbuster extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.CHARGE, 0, 0);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.CHARGE, ComparisonType.EQUAL_TO, 0);
 
     public ReckonerBankbuster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -50,7 +51,7 @@ public final class ReckonerBankbuster extends CardImpl {
         ability.addEffect(new ConditionalOneShotEffect(
                 new CreateTokenEffect(new TreasureToken()).withAdditionalTokens(new PilotCrewToken()), condition,
                 "Then if there are no charge counters on {this}, create a Treasure token and a 1/1 colorless " +
-                        "Pilot creature token with \"This creature crews Vehicles as though its power were 2 greater.\""
+                        "Pilot creature token with \"This token crews Vehicles as though its power were 2 greater.\""
         ));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
