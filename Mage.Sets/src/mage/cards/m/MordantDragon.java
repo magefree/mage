@@ -15,9 +15,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -45,7 +44,7 @@ public final class MordantDragon extends CardImpl {
         effect.setText("have it deal that much damage to target creature that player controls.");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, true, true);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 
