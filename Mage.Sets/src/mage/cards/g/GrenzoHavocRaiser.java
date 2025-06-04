@@ -20,7 +20,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.BlankTargetAdjuster;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
@@ -70,7 +70,7 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
     public GrenzoHavocRaiserTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
         setTriggerPhrase("Whenever a creature you control deals combat damage to a player, ");
-        setTargetAdjuster(BlankTargetAdjuster.instance);
+        setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private GrenzoHavocRaiserTriggeredAbility(final GrenzoHavocRaiserTriggeredAbility ability) {

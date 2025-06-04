@@ -21,7 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetadjustment.BlankTargetAdjuster;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -66,7 +66,7 @@ class FroghemothTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbil
 
     public FroghemothTriggeredAbility() {
         super(new FroghemothEffect(), false);
-        setTargetAdjuster(BlankTargetAdjuster.instance);
+        setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private FroghemothTriggeredAbility(final FroghemothTriggeredAbility ability) {
