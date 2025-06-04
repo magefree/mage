@@ -22,7 +22,7 @@ public class ThatPlayerControlsTargetAdjuster extends GenericTargetAdjuster {
     /**
      * Use with {@link mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility} with setTargetPointer enabled,
      * or {@link mage.abilities.common.OneOrMoreDamagePlayerTriggeredAbility} with "SetTargetPointer.PLAYER" or similar.
-     * Adjusts the target to only target something the damaged/attacked/etc player controls (or owns with alternative constructor)
+     * Adjusts the target to only target something the damaged/attacked/etc. player controls (or owns with alternative constructor)
      * And then removes the effects' target pointer that the triggered ability set, replacing it with the standard {@link FirstTargetPointer}
      */
     public ThatPlayerControlsTargetAdjuster() {
