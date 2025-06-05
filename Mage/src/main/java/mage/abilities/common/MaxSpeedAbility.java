@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.StaticAbility;
@@ -7,13 +8,13 @@ import mage.abilities.dynamicvalue.common.ControllerSpeedCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -70,20 +71,40 @@ class MaxSpeedAbilityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
         if (ControllerSpeedCount.instance.calculate(game, source, null) < 4) {
-            return false;
+            return affectedObjectMap;
+        }
+        if (!affectedObjectMap.isEmpty()) {
+            return affectedObjectMap;
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addAbility(ability, source.getSourceId(), game);
-            return true;
+            affectedObjectMap.put(permanent.getId(), permanent);
+        } else if (game.getCard(source.getSourceId()) != null) {
+            Card card = game.getCard(source.getSourceId());
+            affectedObjectMap.put(card.getId(), card);
         }
-        Card card = game.getCard(source.getSourceId());
-        if (card == null) {
+        return affectedObjectMap;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+        for (MageItem object : objects.values()) {
+            if (object instanceof Permanent) {
+                ((Permanent) object).addAbility(ability, source.getSourceId(), game);
+            } else {
+                game.getState().addOtherAbility((Card) object, ability);
+            }
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (queryAffectedObjects(layer, source, game).isEmpty()) {
             return false;
         }
-        game.getState().addOtherAbility(card, ability);
+        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
         return true;
     }
 
