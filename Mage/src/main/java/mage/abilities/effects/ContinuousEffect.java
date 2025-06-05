@@ -58,6 +58,8 @@ public interface ContinuousEffect extends Effect {
 
     Map<UUID, MageItem> getAffectedObjectMap();
 
+    void clearAffectedObjectMap();
+
     Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer);
 
     EnumSet<DependencyType> getDependencyTypes();

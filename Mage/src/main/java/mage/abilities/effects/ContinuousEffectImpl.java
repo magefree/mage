@@ -118,10 +118,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (this.layer == layer && this.sublayer == sublayer) {
-            if (!affectedObjectMap.isEmpty()) {
-                applyToObjects(layer, sublayer, source, game, this.affectedObjectMap);
-                return true;
-            }
             return apply(game, source);
         }
         return false;
@@ -392,6 +388,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public Map<UUID, MageItem> getAffectedObjectMap() {
         return affectedObjectMap;
+    }
+
+    @Override
+    public void clearAffectedObjectMap() {
+        affectedObjectMap.clear();
     }
 
     /**

@@ -69,6 +69,14 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void clearAffectedObjectMap() {
+        effect.clearAffectedObjectMap();
+        if (otherwiseEffect != null) {
+            otherwiseEffect.clearAffectedObjectMap();
+        }
+    }
+
+    @Override
     public boolean isDiscarded() {
         return this.discarded || effect.isDiscarded() || (otherwiseEffect != null && otherwiseEffect.isDiscarded());
     }

@@ -186,7 +186,7 @@ public class ContinuousEffects implements Serializable {
         List<ContinuousEffect> layerEffects = new ArrayList<>();
         for (ContinuousEffect effect : layeredEffects) {
             if (timestampGroupName.equals("main")) {
-                effect.getAffectedObjectMap().clear();
+                effect.clearAffectedObjectMap();
             }
             switch (effect.getDuration()) {
                 case WhileOnBattlefield:
