@@ -1694,7 +1694,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Ruhan of the Fomori", 1695, Rarity.MYTHIC, mage.cards.r.RuhanOfTheFomori.class));
         cards.add(new SetCardInfo("Sol Ring", 1696, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Command Tower", 1697, Rarity.RARE, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sorin Markov", 1698, Rarity.RARE, mage.cards.s.SorinMarkov.class));
+        cards.add(new SetCardInfo("Sorin Markov", 1698, Rarity.MYTHIC, mage.cards.s.SorinMarkov.class));
         cards.add(new SetCardInfo("Huatli, Radiant Champion", 1699, Rarity.MYTHIC, mage.cards.h.HuatliRadiantChampion.class));
         cards.add(new SetCardInfo("Kiora, Behemoth Beckoner", 1700, Rarity.RARE, mage.cards.k.KioraBehemothBeckoner.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tezzeret, Master of the Bridge", 1701, Rarity.MYTHIC, mage.cards.t.TezzeretMasterOfTheBridge.class));
