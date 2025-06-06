@@ -101,7 +101,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.characterDefining = effect.characterDefining;
         this.nextTurnNumber = effect.nextTurnNumber;
         this.effectStartingStepNum = effect.effectStartingStepNum;
-        this.affectedObjectMap = effect.affectedObjectMap;
+        this.affectedObjectMap.putAll(effect.affectedObjectMap);
     }
 
     @Override
