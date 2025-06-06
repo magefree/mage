@@ -27,9 +27,11 @@ import java.util.stream.Stream;
  * Features:
  * - [x] find possible bracket level of the deck
  * - [x] find affected cards by checking group
- * - [ ] TODO: data download and generate
+ * - [x] can auto-generate infinite combos list, see verify test downloadAndPrepareCommanderBracketsData
  * - [ ] TODO: tests
  * - [ ] TODO: table - players brackets level disclose settings
+ * - [ ] TODO: deck - improve gui to show more levels
+ * - [ ] TODO: generate - convert card name to xmage format and assert on bad names (ascii only)
  *
  * @author JayDi85
  */

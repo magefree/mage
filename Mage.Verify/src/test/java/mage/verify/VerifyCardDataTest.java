@@ -1,6 +1,7 @@
 package mage.verify;
 
 import com.google.common.base.CharMatcher;
+import com.google.gson.Gson;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -30,6 +31,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.*;
 import mage.choices.Choice;
+import mage.client.remote.XmageURLConnection;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
@@ -51,7 +53,9 @@ import mage.utils.SystemUtil;
 import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
 import mage.verify.mtgjson.MtgJsonSet;
+import mage.verify.mtgjson.SpellBookCardsPage;
 import mage.watchers.Watcher;
+import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -59,10 +63,14 @@ import org.junit.Test;
 import org.mage.plugins.card.dl.sources.ScryfallImageSupportCards;
 import org.reflections.Reflections;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -3254,5 +3262,80 @@ public class VerifyCardDataTest {
                         + sorted.stream().map(cn -> "cn%3A" + cn).collect(Collectors.joining("+or+"))
                         + "%29&order=set&as=grid&unique=cards"
         );
+    }
+
+    /**
+     * Helper test to download infinite combos data and prepare it to use in Commander Brackets score system
+     * <p>
+     * How-to use: run it before each main release and upload updated files to github
+     */
+    @Ignore
+    @Test
+    public void downloadAndPrepareCommanderBracketsData() {
+        // download data
+        // load data by pages, max limit = 100, no needs to setup it, ~2000 combos or 20 pages
+        String nextUrl = "https://backend.commanderspellbook.com/variants?format=json&group_by_combo=true&ordering=created&q=cards%3D2+result%3Ainfinite";
+        SpellBookCardsPage page;
+        int pageNumber = 0;
+        List<String> allCombos = new ArrayList<>();
+        while (nextUrl != null && !nextUrl.isEmpty()) {
+            pageNumber++;
+            System.out.println("downloading page " + pageNumber);
+            String res = XmageURLConnection.downloadText(nextUrl);
+            page = new Gson().fromJson(res, SpellBookCardsPage.class);
+            if (page == null || page.results == null) {
+                System.out.println("ERROR, unknown data format: " + res.substring(0, 10) + "...");
+                return;
+            }
+            page.results.forEach(combo -> {
+                if (combo.uses.isEmpty()) {
+                    System.out.println("wrong combo uses: " + combo.uses);
+                    return;
+                }
+                // Stella Lee, Wild Card - can generate infinite combo by itself, so allow 1 card
+                String card1 = combo.uses.get(0).card.name;
+                String card2 = combo.uses.size() == 1 ? card1 : combo.uses.get(1).card.name;
+                if (card1 != null && card2 != null) {
+                    allCombos.add(String.format("%s@%s", card1, card2));
+                }
+            });
+
+            nextUrl = page.next;
+        }
+
+        // save results (run from Mage.Verify)
+        File destFile = new TFile("..\\Mage\\src\\main\\resources\\brackets\\infinite-combos.txt");
+        if (!destFile.exists()) {
+            System.out.println("Can't find dest file " + destFile);
+            return;
+        }
+
+        List<String> infiniteCombosRes;
+        try {
+            infiniteCombosRes = Files.readAllLines(destFile.toPath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println("Can't read file " + destFile + " " + e);
+            return;
+        }
+
+        // replace all cards data, but keep comments
+        infiniteCombosRes.removeIf(s -> !s.startsWith("#")
+                || s.startsWith("# Source")
+                || s.startsWith("# Updated")
+                || s.startsWith("# Found")
+        );
+        infiniteCombosRes.add(String.format("# Source: %s", "https://commanderspellbook.com"));
+        infiniteCombosRes.add(String.format("# Updated: %s", LocalDate.now().format(DateTimeFormatter.ISO_DATE)));
+        infiniteCombosRes.add(String.format("# Found: %d", allCombos.size()));
+        infiniteCombosRes.addAll(allCombos); // do not sort, all new combos will be added to the end due spell book default order
+
+        try {
+            Files.write(destFile.toPath(), infiniteCombosRes, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println("Can't write file " + destFile + " " + e);
+            return;
+        }
+
+        System.out.println(String.format("ALL DONE, found and write %d combos", allCombos.size()));
     }
 }
