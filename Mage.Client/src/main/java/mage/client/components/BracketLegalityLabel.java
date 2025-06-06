@@ -30,7 +30,6 @@ import java.util.stream.Stream;
  * - [x] can auto-generate infinite combos list, see verify test downloadAndPrepareCommanderBracketsData
  * - [ ] TODO: tests
  * - [ ] TODO: table - players brackets level disclose settings
- * - [ ] TODO: deck - improve gui to show more levels
  * - [ ] TODO: generate - convert card name to xmage format and assert on bad names (ascii only)
  *
  * @author JayDi85
@@ -45,9 +44,49 @@ public class BracketLegalityLabel extends LegalityLabel {
     private static final String GROUP_EXTRA_TURN = "Extra Turns";
     private static final String GROUP_TUTORS = "Tutors";
 
+    private static final Map<String, List<Integer>> MAX_GROUP_LIMITS = new LinkedHashMap<>();
+
+    static {
+        // 1
+        // No cards from the Game Changer list.
+        // No intentional two-card infinite combos.
+        // No mass land destruction.
+        // No extra turn cards.
+        // Tutors should be sparse.
+        // 2
+        // No cards from the Game Changer list.
+        // No intentional two-card infinite combos.
+        // No mass land destruction.
+        // Extra turn cards should only appear in low quantities and should not be chained in succession or looped.
+        // Tutors should be sparse.
+        // 3
+        // Up to three (3) cards from the Game Changer list.
+        // No intentional early game two-card infinite combos.
+        // No mass land destruction.
+        // Extra turn cards should only appear in low quantities and should not be chained in succession or looped.
+        // 4
+        // 5
+        // allow any cards
+
+        // cards limits per brackets level, it's ok to use 99 as max
+        // group - levels 0, 1, 2, 3, 4, 5
+        MAX_GROUP_LIMITS.put(GROUP_GAME_CHANGES,
+                Arrays.asList(0, 0, 0, 3, 99, 99));
+        MAX_GROUP_LIMITS.put(GROUP_INFINITE_COMBOS,
+                Arrays.asList(0, 0, 0, 0, 99, 99));
+        MAX_GROUP_LIMITS.put(GROUP_MASS_LAND_DESTRUCTION,
+                Arrays.asList(0, 0, 0, 0, 99, 99));
+        MAX_GROUP_LIMITS.put(GROUP_EXTRA_TURN,
+                Arrays.asList(0, 0, 0, 3, 99, 99));
+        MAX_GROUP_LIMITS.put(GROUP_TUTORS,
+                Arrays.asList(0, 3, 3, 99, 99, 99));
+    }
+
     private static final String RESOURCE_INFINITE_COMBOS = "brackets/infinite-combos.txt";
 
-    private final BracketLevel level;
+    private final String fullName;
+    private final String shortName;
+    private final int maxLevel;
 
     private final List<String> foundGameChangers = new ArrayList<>();
     private final List<String> foundInfiniteCombos = new ArrayList<>();
@@ -59,27 +98,12 @@ public class BracketLegalityLabel extends LegalityLabel {
     private final List<String> fullGameChanges = new ArrayList<>();
     private final Set<String> fullInfiniteCombos = new HashSet<>(); // card1@card2, sorted by names, name must be xmage compatible
 
-    public enum BracketLevel {
-        BRACKET_1("Bracket 1"),
-        BRACKET_2_3("Bracket 2-3"),
-        BRACKET_4_5("Bracket 4-5");
-
-        private final String name;
-
-        BracketLevel(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-    }
-
-    public BracketLegalityLabel(BracketLevel level) {
-        super(level.toString(), null);
-        this.level = level;
-        setPreferredSize(DIM_PREFERRED);
+    public BracketLegalityLabel(String fullName, String shortName, int maxLevel) {
+        super(shortName, null);
+        this.fullName = fullName;
+        this.shortName = shortName;
+        this.maxLevel = maxLevel;
+        setPreferredSize(DIM_PREFERRED_1_OF_5);
     }
 
     @Override
@@ -89,49 +113,26 @@ public class BracketLegalityLabel extends LegalityLabel {
 
     private void validateBracketLevel() {
         this.badCards.clear();
-        switch (this.level) {
-            case BRACKET_1:
-                // No cards from the Game Changer list.
-                // No intentional two-card infinite combos.
-                // No mass land destruction.
-                // No extra turn cards.
-                // Tutors should be sparse.
-                this.badCards.addAll(this.foundGameChangers);
-                this.badCards.addAll(this.foundInfiniteCombos);
-                this.badCards.addAll(this.foundMassLandDestruction);
-                this.badCards.addAll(this.foundExtraTurn);
-                if (this.foundTutors.size() > 3) {
-                    this.badCards.addAll(this.foundTutors);
-                }
-                break;
-            case BRACKET_2_3:
-                // 2
-                // No cards from the Game Changer list.
-                // No intentional two-card infinite combos.
-                // No mass land destruction.
-                // Extra turn cards should only appear in low quantities and should not be chained in succession or looped.
-                // Tutors should be sparse.
-                // 3
-                // Up to three (3) cards from the Game Changer list.
-                // No intentional early game two-card infinite combos.
-                // No mass land destruction.
-                // Extra turn cards should only appear in low quantities and should not be chained in succession or looped.
-                if (this.foundGameChangers.size() > 3) {
-                    this.badCards.addAll(this.foundGameChangers);
-                }
-                this.badCards.addAll(this.foundInfiniteCombos);
-                this.badCards.addAll(this.foundMassLandDestruction);
-                if (this.foundExtraTurn.size() > 3) {
-                    this.badCards.addAll(this.foundExtraTurn);
-                }
-                // this.badCards.addAll(this.foundTutors); // allow any amount
-                break;
-            case BRACKET_4_5:
-                // allow any cards
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported level: " + this.level);
+
+        if (this.foundGameChangers.size() > getMaxCardsLimit(GROUP_GAME_CHANGES)) {
+            this.badCards.addAll(this.foundGameChangers);
         }
+        if (this.foundInfiniteCombos.size() > getMaxCardsLimit(GROUP_INFINITE_COMBOS)) {
+            this.badCards.addAll(this.foundInfiniteCombos);
+        }
+        if (this.foundMassLandDestruction.size() > getMaxCardsLimit(GROUP_MASS_LAND_DESTRUCTION)) {
+            this.badCards.addAll(this.foundMassLandDestruction);
+        }
+        if (this.foundExtraTurn.size() > getMaxCardsLimit(GROUP_EXTRA_TURN)) {
+            this.badCards.addAll(this.foundExtraTurn);
+        }
+        if (this.foundTutors.size() > getMaxCardsLimit(GROUP_TUTORS)) {
+            this.badCards.addAll(this.foundTutors);
+        }
+    }
+
+    private Integer getMaxCardsLimit(String groupName) {
+        return MAX_GROUP_LIMITS.get(groupName).get(this.maxLevel);
     }
 
     @Override
@@ -139,31 +140,41 @@ public class BracketLegalityLabel extends LegalityLabel {
         collectAll(deck);
         validateBracketLevel();
 
-        int infoFontSize = Math.round(GUISizeHelper.cardTooltipFont.getSize() * 0.6f);
+        int infoFontHeaderSize = Math.round(GUISizeHelper.cardTooltipFont.getSize() * 1.0f);
+        int infoFontTextSize = Math.round(GUISizeHelper.cardTooltipFont.getSize() * 0.6f);
 
         // show all found cards in any use cases
         Color showColor = this.badCards.isEmpty() ? COLOR_LEGAL : COLOR_NOT_LEGAL;
 
         List<String> showInfo = new ArrayList<>();
         if (this.badCards.isEmpty()) {
-            showInfo.add("<p>Deck is <span style='color:green;font-weight:bold;'>GOOD</span> for " + this.level + "</p>");
+            showInfo.add(String.format("<span style='font-weight:bold;font-size:%dpx;'><p>Deck is <span style='color:green;'>GOOD</span> for %s</p></span>",
+                    infoFontHeaderSize,
+                    this.fullName
+            ));
         } else {
-            showInfo.add("<p>Deck is <span style='color:#BF544A;font-weight:bold;'>BAD</span> for " + this.level + "</p>");
+            showInfo.add(String.format("<span style='font-weight:bold;font-size:%dpx;'><p>Deck is <span style='color:#BF544A;'>BAD</span> for %s</p></span>",
+                    infoFontHeaderSize,
+                    this.fullName
+            ));
             showInfo.add("<p>(click here to select all bad cards)</p>");
         }
 
         Map<String, List<String>> groups = new LinkedHashMap<>();
-        groups.put(GROUP_GAME_CHANGES, this.foundGameChangers);
-        groups.put(GROUP_INFINITE_COMBOS, this.foundInfiniteCombos);
-        groups.put(GROUP_MASS_LAND_DESTRUCTION, this.foundMassLandDestruction);
-        groups.put(GROUP_EXTRA_TURN, this.foundExtraTurn);
-        groups.put(GROUP_TUTORS, this.foundTutors);
+        groups.put(GROUP_GAME_CHANGES + getStats(GROUP_GAME_CHANGES), this.foundGameChangers);
+        groups.put(GROUP_INFINITE_COMBOS + getStats(GROUP_INFINITE_COMBOS), this.foundInfiniteCombos);
+        groups.put(GROUP_MASS_LAND_DESTRUCTION + getStats(GROUP_MASS_LAND_DESTRUCTION), this.foundMassLandDestruction);
+        groups.put(GROUP_EXTRA_TURN + getStats(GROUP_EXTRA_TURN), this.foundExtraTurn);
+        groups.put(GROUP_TUTORS + getStats(GROUP_TUTORS), this.foundTutors);
         groups.forEach((group, cards) -> {
             showInfo.add("<br>");
-            showInfo.add("<br>");
-            showInfo.add("<span style='font-weight:bold;'>" + group + ": " + cards.size() + "</span>");
-            if (!cards.isEmpty()) {
-                showInfo.add("<ul style=\"font-size: " + infoFontSize + "px; width: " + TOOLTIP_TABLE_WIDTH + "px; padding-left: 10px; margin: 0;\">");
+            showInfo.add("<span style='font-weight:bold;font-size: " + infoFontTextSize + "px;'>" + group + "</span>");
+            if (cards.isEmpty()) {
+                showInfo.add("<ul style=\"font-size: " + infoFontTextSize + "px; width: " + TOOLTIP_TABLE_WIDTH + "px; padding-left: 10px; margin: 0;\">");
+                showInfo.add("<li style=\"margin-bottom: 2px;\">no cards</li>");
+                showInfo.add("</ul>");
+            } else {
+                showInfo.add("<ul style=\"font-size: " + infoFontTextSize + "px; width: " + TOOLTIP_TABLE_WIDTH + "px; padding-left: 10px; margin: 0;\">");
                 cards.forEach(s -> showInfo.add(String.format("<li style=\"margin-bottom: 2px;\">%s</li>", s)));
                 showInfo.add("</ul>");
             }
@@ -171,6 +182,39 @@ public class BracketLegalityLabel extends LegalityLabel {
 
         String showText = "<html><body>" + String.join("\n", showInfo) + "</body></html>";
         showState(showColor, showText, false);
+    }
+
+    private String getStats(String groupName) {
+        int currentAmount = 0;
+        switch (groupName) {
+            case GROUP_GAME_CHANGES:
+                currentAmount = this.foundGameChangers.size();
+                break;
+            case GROUP_INFINITE_COMBOS:
+                currentAmount = this.foundInfiniteCombos.size();
+                break;
+            case GROUP_MASS_LAND_DESTRUCTION:
+                currentAmount = this.foundMassLandDestruction.size();
+                break;
+            case GROUP_EXTRA_TURN:
+                currentAmount = this.foundExtraTurn.size();
+                break;
+            case GROUP_TUTORS:
+                currentAmount = this.foundTutors.size();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown group " + groupName);
+        }
+        int maxAmount = MAX_GROUP_LIMITS.get(groupName).get(this.maxLevel);
+
+        String info;
+        if (currentAmount > maxAmount) {
+            info = " (<span style='color:#BF544A;'>%s of %s</span>)";
+        } else {
+            info = " (<span>%s of %s</span>)";
+        }
+
+        return String.format(info, currentAmount, maxAmount == 99 ? "any" : maxAmount);
     }
 
     private void collectAll(Deck deck) {
