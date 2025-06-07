@@ -2711,9 +2711,9 @@ public abstract class GameImpl implements Game {
                             .add(perm);
                 }
             }
-            // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number
+            // 704.5s If the number of lore counters on a Saga permanent with one or more chapter abilities is greater than or equal to its final chapter number
             // and it isn't the source of a chapter ability that has triggered but not yet left the stack, that Saga's controller sacrifices it.
-            if (perm.hasSubtype(SubType.SAGA, this)) {
+            if (perm.hasSubtype(SubType.SAGA, this) && perm.getAbilities(this).containsClass(SagaAbility.class)) {
                 int maxChapter = perm
                         .getAbilities(this)
                         .stream()
