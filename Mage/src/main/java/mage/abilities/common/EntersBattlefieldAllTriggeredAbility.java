@@ -23,7 +23,11 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
      * zone = BATTLEFIELD optional = false
      */
     public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter) {
-        this(Zone.BATTLEFIELD, effect, filter, false);
+        this(effect, filter, false);
+    }
+
+    public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
+        this(Zone.BATTLEFIELD, effect, filter, optional);
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {

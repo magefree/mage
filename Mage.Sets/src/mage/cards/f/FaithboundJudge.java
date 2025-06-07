@@ -1,21 +1,21 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.DisturbAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class FaithboundJudge extends CardImpl {
 
-    private static final Condition condition1 = new SourceHasCounterCondition(CounterType.JUDGMENT, 0, 2);
+    private static final Condition condition1 = new SourceHasCounterCondition(CounterType.JUDGMENT, ComparisonType.OR_LESS, 2);
     private static final Condition condition2 = new SourceHasCounterCondition(CounterType.JUDGMENT, 3);
 
     public FaithboundJudge(UUID ownerId, CardSetInfo setInfo) {
@@ -49,18 +49,16 @@ public final class FaithboundJudge extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // At the beginning of your upkeep, if Faithbound Judge has two or fewer judgment counters on it, put a judgment counter on it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.JUDGMENT.createInstance()), false
-                ), condition1, "At the beginning of your upkeep, if {this} has " +
-                "two or fewer judgment counters on it, put a judgment counter on it."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.JUDGMENT.createInstance())
+                        .setText("put a judgment counter on it"), false
+        ).withInterveningIf(condition1));
 
         // As long as Faithbound Judge has three or more judgment counters on it, it can attack as though it didn't have defender.
         this.addAbility(new SimpleStaticAbility(new ConditionalAsThoughEffect(
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield), condition2
-        ).setText("as long as {this} has three or more judgment counters on it," +
-                " it can attack as though it didn't have defender")));
+        ).setText("as long as {this} has three or more judgment counters on it, " +
+                "it can attack as though it didn't have defender")));
 
         // Disturb {5}{W}{W}
         this.addAbility(new DisturbAbility(this, "{5}{W}{W}"));

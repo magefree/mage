@@ -17,6 +17,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.PutCards;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
@@ -29,7 +30,7 @@ import java.util.UUID;
  */
 public final class SoulcipherBoard extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.OMEN, 0, 0);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.OMEN, ComparisonType.EQUAL_TO, 0);
 
     public SoulcipherBoard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{U}");

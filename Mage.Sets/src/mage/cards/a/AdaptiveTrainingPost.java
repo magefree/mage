@@ -11,6 +11,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 
@@ -21,7 +22,7 @@ import java.util.UUID;
  */
 public final class AdaptiveTrainingPost extends CardImpl {
 
-    private static final Condition condition = new SourceHasCounterCondition(CounterType.CHARGE, 0, 2);
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.CHARGE, ComparisonType.FEWER_THAN, 3);
 
     public AdaptiveTrainingPost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{U}");

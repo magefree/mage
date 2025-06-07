@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.ObjectColor;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -14,9 +13,13 @@ import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -42,8 +45,8 @@ public final class TidalInfluence extends CardImpl {
 
     private static final Condition conditionCast = new PermanentsOnTheBattlefieldCondition(
             filterName, ComparisonType.EQUAL_TO, 0, false);
-    private static final Condition condition1 = new SourceHasCounterCondition(CounterType.TIDE, 1, 1);
-    private static final Condition condition3 = new SourceHasCounterCondition(CounterType.TIDE, 3, 3);
+    private static final Condition condition1 = new SourceHasCounterCondition(CounterType.TIDE, ComparisonType.EQUAL_TO, 1);
+    private static final Condition condition3 = new SourceHasCounterCondition(CounterType.TIDE, ComparisonType.EQUAL_TO, 3);
 
     public TidalInfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
@@ -62,14 +65,14 @@ public final class TidalInfluence extends CardImpl {
         // As long as there is exactly one tide counter on Tidal Influence, all blue creatures get -2/-0.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostAllEffect(-2, -0, Duration.WhileOnBattlefield, filterBlue, false),
-                condition1,
-                "As long as there is exactly one tide counter on {this}, all blue creatures get -2/-0.")));
+                condition1, "As long as there is exactly one tide counter on {this}, all blue creatures get -2/-0."
+        )));
 
         // As long as there are exactly three tide counters on Tidal Influence, all blue creatures get +2/+0.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filterBlue, false),
-                condition3,
-                "As long as there are exactly three tide counter on {this}, all blue creatures get +2/+0.")));
+                condition3, "As long as there are exactly three tide counters on {this}, all blue creatures get +2/+0."
+        )));
 
         // Whenever there are four tide counters on Tidal Influence, remove all tide counters from it.
         this.addAbility(new TidalInfluenceTriggeredAbility());
@@ -88,8 +91,8 @@ public final class TidalInfluence extends CardImpl {
 class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
 
     public TidalInfluenceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RemoveAllCountersSourceEffect(CounterType.TIDE));
-        setTriggerPhrase("Whenever there are four tide counters on {this}, ");
+        super(Zone.BATTLEFIELD, new RemoveAllCountersSourceEffect(CounterType.TIDE).setText("remove all tide counters from it"));
+        setTriggerPhrase("Whenever there are four or more tide counters on {this}, ");
     }
 
     private TidalInfluenceTriggeredAbility(final TidalInfluenceTriggeredAbility ability) {
@@ -103,6 +106,6 @@ class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return new CountersSourceCount(CounterType.TIDE).calculate(game, this, null) == 4;
+        return new CountersSourceCount(CounterType.TIDE).calculate(game, this, null) >= 4;
     }
 }
