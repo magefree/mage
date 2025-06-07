@@ -857,7 +857,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Yargle and Multani", 872, Rarity.RARE, mage.cards.y.YargleAndMultani.class));
         cards.add(new SetCardInfo("Dark Deal", 873, Rarity.RARE, mage.cards.d.DarkDeal.class));
         cards.add(new SetCardInfo("Archivist of Oghma", 874, Rarity.RARE, mage.cards.a.ArchivistOfOghma.class));
-        cards.add(new SetCardInfo("Battle Angels of Tyr", 875, Rarity.RARE, mage.cards.b.BattleAngelsOfTyr.class));
+        cards.add(new SetCardInfo("Battle Angels of Tyr", 875, Rarity.MYTHIC, mage.cards.b.BattleAngelsOfTyr.class));
         cards.add(new SetCardInfo("Xorn", 876, Rarity.RARE, mage.cards.x.Xorn.class));
         cards.add(new SetCardInfo("Druid of Purification", 877, Rarity.RARE, mage.cards.d.DruidOfPurification.class));
         cards.add(new SetCardInfo("Prosperous Innkeeper", 878, Rarity.RARE, mage.cards.p.ProsperousInnkeeper.class));
@@ -1976,7 +1976,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Lumberjack", 2025, Rarity.RARE, mage.cards.o.OrcishLumberjack.class));
         cards.add(new SetCardInfo("Constant Mists", 2026, Rarity.RARE, mage.cards.c.ConstantMists.class));
         cards.add(new SetCardInfo("Song of the Dryads", 2027, Rarity.RARE, mage.cards.s.SongOfTheDryads.class));
-        cards.add(new SetCardInfo("Consecrated Sphinx", 2028, Rarity.RARE, mage.cards.c.ConsecratedSphinx.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Consecrated Sphinx", 2028, Rarity.MYTHIC, mage.cards.c.ConsecratedSphinx.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Resculpt", 2029, Rarity.RARE, mage.cards.r.Resculpt.class));
         cards.add(new SetCardInfo("Mirage Mirror", 2030, Rarity.RARE, mage.cards.m.MirageMirror.class));
         cards.add(new SetCardInfo("Scion of Draco", 2031, Rarity.MYTHIC, mage.cards.s.ScionOfDraco.class));
