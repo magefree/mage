@@ -21,6 +21,6 @@ public enum RaidCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if you attacked this turn";
+        return "you attacked this turn";
     }
 }

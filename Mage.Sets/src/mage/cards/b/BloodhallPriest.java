@@ -1,13 +1,10 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.condition.common.HellbentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
@@ -16,8 +13,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class BloodhallPriest extends CardImpl {
@@ -29,13 +27,10 @@ public final class BloodhallPriest extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Bloodhall Priest enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to any target.
-        TriggeredAbility triggeredAbility = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(2));
-        triggeredAbility.addTarget(new TargetAnyTarget());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                triggeredAbility,
-                HellbentCondition.instance,
-                "Whenever {this} enters or attacks, if you have no cards in hand, {this} deals 2 damage to any target"
-        ));
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(2))
+                .withInterveningIf(HellbentCondition.instance);
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
 
         // Madness {1}{B}{R}
         this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{B}{R}")));
