@@ -27,7 +27,7 @@ public class PutSourceCountersOnTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = (Permanent) getValue("permanentLeftBattlefield");
+        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent == null || permanent == null) {
             return false;
