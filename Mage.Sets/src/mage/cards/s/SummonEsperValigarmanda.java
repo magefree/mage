@@ -107,7 +107,7 @@ class SummonEsperValigarmandaExileEffect extends OneShotEffect {
         return !cards.isEmpty()
                 && controller.moveCardsToExile(
                 cards.getCards(game), source, game, true,
-                CardUtil.getExileZoneId(game, source, 1),
+                CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
     }

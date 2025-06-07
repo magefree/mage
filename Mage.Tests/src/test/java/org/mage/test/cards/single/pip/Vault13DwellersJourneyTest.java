@@ -2,7 +2,6 @@ package org.mage.test.cards.single.pip;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -21,7 +20,6 @@ public class Vault13DwellersJourneyTest extends CardTestPlayerBase {
      */
     private static final String vault = "Vault 13: Dweller's Journey";
 
-    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay_ReturnOne() {
         addCard(Zone.HAND, playerA, vault, 1);
@@ -49,7 +47,6 @@ public class Vault13DwellersJourneyTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Memnite", 1);
         assertLife(playerA, 20 + 2);
     }
-    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay_Return() {
         addCard(Zone.HAND, playerA, vault, 1);
@@ -81,7 +78,6 @@ public class Vault13DwellersJourneyTest extends CardTestPlayerBase {
         assertLife(playerA, 20 + 2);
     }
 
-    @Ignore // TODO: goal of #11619 is to fix this nicely
     @Test
     public void test_SimplePlay_NoReturn() {
         addCard(Zone.HAND, playerA, vault, 1);
