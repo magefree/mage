@@ -11,6 +11,8 @@ import java.util.List;
 /**
  * Part of testable game dialogs
  * <p>
+ * Its simple dialog to get some amount (example: part of chooseTargetAmount)
+ * <p>
  * Supported methods:
  * - player.getAmount()
  *

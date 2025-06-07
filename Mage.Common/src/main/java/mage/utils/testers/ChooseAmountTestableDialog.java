@@ -15,6 +15,8 @@ import java.util.List;
 /**
  * Part of testable game dialogs
  * <p>
+ * It's a complex dialog with 2 steps: choose targets list + distribute amount between targets
+ * <p>
  * Supported methods:
  * - player.chooseTarget(amount)
  *
