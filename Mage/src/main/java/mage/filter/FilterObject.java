@@ -2,23 +2,16 @@
 package mage.filter;
 
 import mage.MageObject;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicates;
 
 /**
+ * // TODO: migrate all FilterObject to more specific ones, then remove this class?
  *
- * @author North
  * @param <E>
+ * @author North
  */
 public class FilterObject<E extends MageObject> extends FilterImpl<E> {
-
-    @Override
-    public FilterObject<E> copy() {
-        return new FilterObject<>(this);
-    }
-
-    @Override
-    public boolean checkObjectClass(Object object) {
-        return object instanceof MageObject;
-    }
 
     public FilterObject(String name) {
         super(name);
@@ -26,5 +19,22 @@ public class FilterObject<E extends MageObject> extends FilterImpl<E> {
 
     protected FilterObject(final FilterObject<E> filter) {
         super(filter);
+    }
+
+    @Override
+    public FilterObject<E> copy() {
+        return new FilterObject(this);
+    }
+
+    @Override
+    public void add(ObjectSourcePlayerPredicate predicate) {
+        // verify checks
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, MageObject.class);
+        this.addExtra(predicate);
+    }
+
+    @Override
+    public boolean checkObjectClass(Object object) {
+        return object instanceof MageObject;
     }
 }
