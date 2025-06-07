@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -10,6 +11,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author TheElk801, PurpleCrowbar
@@ -80,16 +84,36 @@ class EnduringGlimmerTypeEffect extends ContinuousEffectImpl {
         return new EnduringGlimmerTypeEffect(this);
     }
 
+
+    @Override
+    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        if (!affectedObjectMap.isEmpty()) {
+            return affectedObjectMap;
+        }
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            affectedObjectMap.put(permanent.getId(), permanent);
+        }
+        return affectedObjectMap;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+        for (MageItem object : objects.values()) {
+            Permanent permanent = (Permanent) object;
+            permanent.retainAllEnchantmentSubTypes(game);
+            permanent.removeAllCardTypes(game);
+            permanent.addCardType(game, CardType.ENCHANTMENT);
+        }
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
+        if (queryAffectedObjects(layer, source, game).isEmpty()) {
             discard();
             return false;
         }
-        permanent.retainAllEnchantmentSubTypes(game);
-        permanent.removeAllCardTypes(game);
-        permanent.addCardType(game, CardType.ENCHANTMENT);
+        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
         return true;
     }
 }

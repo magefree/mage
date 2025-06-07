@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.MageIdentifier;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,6 +12,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -103,13 +105,31 @@ class TransformedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        if (!affectedObjectMap.isEmpty()) {
+            return affectedObjectMap;
+        }
         Spell spell = game.getSpell(source.getSourceId());
-        if (spell == null || spell.getCard().getSecondCardFace() == null) {
+        if (spell != null && spell.getCard().getSecondCardFace() != null) {
+            affectedObjectMap.put(spell.getId(), spell);
+        }
+        return affectedObjectMap;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+        for (MageItem object : objects.values()) {
+            TransformAbility.transformCardSpellDynamic((Spell) object, ((Spell) object).getCard().getSecondCardFace(), game);
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (queryAffectedObjects(layer, source, game).isEmpty()) {
             return false;
         }
         // simulate another side as new card (another code part in spell constructor)
-        TransformAbility.transformCardSpellDynamic(spell, spell.getCard().getSecondCardFace(), game);
+        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
         return true;
     }
 }

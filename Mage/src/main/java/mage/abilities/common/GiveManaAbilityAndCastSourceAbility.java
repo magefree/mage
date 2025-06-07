@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -101,39 +102,58 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        if (!affectedObjectMap.isEmpty()) {
+            return affectedObjectMap;
+        }
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            affectedObjectMap.put(permanent.getId(), permanent);
+        }
+        return affectedObjectMap;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+        for (MageItem object : objects.values()) {
+            Permanent permanent = (Permanent) object;
+            for (char c : colors.toCharArray()) {
+                Ability ability;
+                switch (c) {
+                    case 'W':
+                        ability = new WhiteManaAbility();
+                        break;
+                    case 'U':
+                        ability = new BlueManaAbility();
+                        break;
+                    case 'B':
+                        ability = new BlackManaAbility();
+                        break;
+                    case 'R':
+                        ability = new RedManaAbility();
+                        break;
+                    case 'G':
+                        ability = new GreenManaAbility();
+                        break;
+                    default:
+                        continue;
+                }
+                permanent.addAbility(ability, source.getSourceId(), game);
+            }
+        }
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
         if (WasCastFromExileWatcher.check((MageObjectReference) getValue("exiledHandCardRef"), game)) {
             discard();
             return false;
         }
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) {
+        if (queryAffectedObjects(layer, source, game).isEmpty()) {
             discard();
             return false;
         }
-        for (char c : colors.toCharArray()) {
-            Ability ability;
-            switch (c) {
-                case 'W':
-                    ability = new WhiteManaAbility();
-                    break;
-                case 'U':
-                    ability = new BlueManaAbility();
-                    break;
-                case 'B':
-                    ability = new BlackManaAbility();
-                    break;
-                case 'R':
-                    ability = new RedManaAbility();
-                    break;
-                case 'G':
-                    ability = new GreenManaAbility();
-                    break;
-                default:
-                    continue;
-            }
-            permanent.addAbility(ability, source.getSourceId(), game);
-        }
+        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
         return true;
     }
 }

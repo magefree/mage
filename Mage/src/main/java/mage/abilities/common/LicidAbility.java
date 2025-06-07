@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpecialAction;
@@ -21,6 +22,7 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -102,9 +104,21 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent licid = source.getSourcePermanentIfItStillExists(game);
-        if (licid != null) {
+    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        if (!affectedObjectMap.isEmpty()) {
+            return affectedObjectMap;
+        }
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent != null) {
+            affectedObjectMap.put(permanent.getId(), permanent);
+        }
+        return affectedObjectMap;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+        for (MageItem object : objects.values()) {
+            Permanent licid = (Permanent) object;
             switch (layer) {
                 case TypeChangingEffects_4:
                     licid.removeAllCardTypes(game);
@@ -131,6 +145,13 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
                     licid.getSpellAbility().getTargets().clear();
                     licid.getSpellAbility().getTargets().add(target);
             }
+        }
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        if (!queryAffectedObjects(layer, source, game).isEmpty()) {
+            applyToObjects(layer, sublayer, source, game, affectedObjectMap);
             return true;
         }
         discard();

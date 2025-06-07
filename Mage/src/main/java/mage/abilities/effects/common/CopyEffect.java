@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -13,6 +14,7 @@ import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -74,28 +76,44 @@ public class CopyEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        for (MageObjectReference mor : affectedObjectList) {
+            Permanent permanent = mor.getPermanent(game);
+            if (permanent == null && game.checkShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
+                // As long as the permanent is still in the short living LKI continue to copy to get triggered abilities to TriggeredAbilities for dies events.
+                permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
+            }
+            if (permanent != null) {
+                affectedObjectMap.put(permanent.getId(), permanent);
+            } else {
+                affectedObjectMap.remove(mor.getSourceId());
+            }
+        }
+        return affectedObjectMap;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+        for (MageItem object : objects.values()) {
+            copyToPermanent((Permanent) object, game, source);
+        }
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
         if (affectedObjectList.isEmpty()) {
             this.discard();
             return false;
         }
-        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
-        if (permanent == null) {
-            if (!game.checkShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
-                discard();
-                return false;
-            }
-            // As long as the permanent is still in the short living LKI continue to copy to get triggered abilities to TriggeredAbilities for dies events.
-            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
-            if (permanent == null) {
-                discard();
-                return false;
-            }
+        if (queryAffectedObjects(layer, source, game).isEmpty()) {
+            this.discard();
+            return false;
         }
-        return copyToPermanent(permanent, game, source);
+        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
+        return true;
     }
 
-    protected boolean copyToPermanent(Permanent permanent, Game game, Ability source) {
+    protected void copyToPermanent(Permanent permanent, Game game, Ability source) {
         if (copyFromObject.getCopyFrom() != null) {
             // copy from temp blueprints (they are already copies)
             permanent.setCopy(true, copyFromObject.getCopyFrom());
@@ -155,7 +173,6 @@ public class CopyEffect extends ContinuousEffectImpl {
 
         CardUtil.copySetAndCardNumber(permanent, copyFromObject);
 
-        return true;
     }
 
     @Override

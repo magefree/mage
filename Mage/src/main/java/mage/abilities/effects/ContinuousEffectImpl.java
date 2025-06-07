@@ -1,5 +1,6 @@
 package mage.abilities.effects;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
@@ -41,6 +42,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     // is null before being initialized. Any access attempt computes it.
     private Boolean affectedObjectsSet = null;
     protected List<MageObjectReference> affectedObjectList = new ArrayList<>();
+    protected Map<UUID, MageItem> affectedObjectMap = new HashMap<>();
 
     protected boolean temporary = false;
     protected EnumSet<DependencyType> dependencyTypes; // this effect has the dependencyTypes defined here
@@ -99,6 +101,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.characterDefining = effect.characterDefining;
         this.nextTurnNumber = effect.nextTurnNumber;
         this.effectStartingStepNum = effect.effectStartingStepNum;
+        this.affectedObjectMap.putAll(effect.affectedObjectMap);
     }
 
     @Override
@@ -118,6 +121,16 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             return apply(game, source);
         }
         return false;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+
+    }
+
+    @Override
+    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        return affectedObjectMap;
     }
 
     @Override
@@ -370,6 +383,16 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public List<MageObjectReference> getAffectedObjects() {
         return affectedObjectList;
+    }
+
+    @Override
+    public Map<UUID, MageItem> getAffectedObjectMap() {
+        return affectedObjectMap;
+    }
+
+    @Override
+    public void clearAffectedObjectMap() {
+        affectedObjectMap.clear();
     }
 
     /**

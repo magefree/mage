@@ -1,11 +1,15 @@
 package mage.abilities.effects.common;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+
+import java.util.Map;
+import java.util.UUID;
 
 public class CopyTokenEffect extends ContinuousEffectImpl {
 
@@ -23,28 +27,48 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
+        if (!affectedObjectMap.isEmpty()) {
+            return affectedObjectMap;
+        }
         Permanent permanent = game.getPermanent(source.getSourceId());
-        permanent.setName(token.getName());
-        permanent.getColor(game).setColor(token.getColor(game));
-        permanent.removeAllCardTypes(game);
-        for (CardType type : token.getCardType(game)) {
-            permanent.addCardType(game, type);
+        if (permanent != null) {
+            affectedObjectMap.put(permanent.getId(), permanent);
         }
-        permanent.removeAllSubTypes(game);
-        permanent.copySubTypesFrom(game, token);
-        permanent.removeAllSuperTypes(game);
-        for (SuperType type : token.getSuperType(game)) {
-            permanent.addSuperType(game, type);
-        }
-        permanent.getAbilities().clear();
-        for (Ability ability : token.getAbilities()) {
-            permanent.addAbility(ability, source.getSourceId(), game, true);
-        }
-        permanent.getPower().setModifiedBaseValue(token.getPower().getModifiedBaseValue());
-        permanent.getToughness().setModifiedBaseValue(token.getToughness().getModifiedBaseValue());
-        //permanent.getLoyalty().setBoostedValue(card.getLoyalty().getValue());
+        return affectedObjectMap;
+    }
 
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+        for (MageItem object : objects.values()) {
+            Permanent permanent = (Permanent) object;
+            permanent.setName(token.getName());
+            permanent.getColor(game).setColor(token.getColor(game));
+            permanent.removeAllCardTypes(game);
+            for (CardType type : token.getCardType(game)) {
+                permanent.addCardType(game, type);
+            }
+            permanent.removeAllSubTypes(game);
+            permanent.copySubTypesFrom(game, token);
+            permanent.removeAllSuperTypes(game);
+            for (SuperType type : token.getSuperType(game)) {
+                permanent.addSuperType(game, type);
+            }
+            permanent.getAbilities().clear();
+            for (Ability ability : token.getAbilities()) {
+                permanent.addAbility(ability, source.getSourceId(), game, true);
+            }
+            permanent.getPower().setModifiedBaseValue(token.getPower().getModifiedBaseValue());
+            permanent.getToughness().setModifiedBaseValue(token.getToughness().getModifiedBaseValue());
+            //permanent.getLoyalty().setBoostedValue(card.getLoyalty().getValue());
+        }
+    }
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (queryAffectedObjects(layer, source, game).isEmpty()) {
+            return false;
+        }
+        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
         return true;
 
     }
