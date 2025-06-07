@@ -2253,6 +2253,7 @@
 |Generate|TOK:WHO|Human|2||TheEleventhHourToken|
 |Generate|TOK:WHO|Human Noble|||TheGirlInTheFireplaceHumanNobleToken|
 |Generate|TOK:WHO|Mark of the Rani|||MarkOfTheRaniToken|
+|Generate|TOK:WHO|Mutant|||Mutant33DeathtouchToken|
 |Generate|TOK:WHO|Soldier|||SoldierToken|
 |Generate|TOK:WHO|Treasure|1||TreasureToken|
 |Generate|TOK:WHO|Treasure|2||TreasureToken|
