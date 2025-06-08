@@ -1,27 +1,32 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.SourceHasCounterCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.WinGameSourceControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class AzorsElocutors extends CardImpl {
+
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.FILIBUSTER, 5);
 
     public AzorsElocutors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W/U}{W/U}");
@@ -32,7 +37,13 @@ public final class AzorsElocutors extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AzorsElocutorsEffect()));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.FILIBUSTER.createInstance())
+        );
+        ability.addEffect(new ConditionalOneShotEffect(
+                new WinGameSourceControllerEffect(), condition,
+                "Then if {this} has five or more filibuster counters on it, you win the game"
+        ));
 
         // Whenever a source deals damage to you, remove a filibuster counter from Azor's Elocutors.
         this.addAbility(new AzorsElocutorsTriggeredAbility());
@@ -71,39 +82,6 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(this.controllerId);
-    }
-}
-
-class AzorsElocutorsEffect extends OneShotEffect {
-
-    AzorsElocutorsEffect() {
-        super(Outcome.Benefit);
-        staticText = "put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game";
-    }
-
-    private AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.FILIBUSTER.createInstance(), source.getControllerId(), source, game);
-            if (permanent.getCounters(game).getCount(CounterType.FILIBUSTER) > 4) {
-                Player player = game.getPlayer(permanent.getControllerId());
-                if (player != null) {
-                    player.won(game);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public AzorsElocutorsEffect copy() {
-        return new AzorsElocutorsEffect(this);
+        return isControlledBy(event.getTargetId());
     }
 }

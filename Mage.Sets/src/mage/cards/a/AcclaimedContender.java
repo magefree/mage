@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +24,7 @@ import java.util.UUID;
  */
 public final class AcclaimedContender extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.KNIGHT);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.KNIGHT, "you control another Knight");
     private static final FilterCard filter2
             = new FilterCard("a Knight, Aura, Equipment, or legendary artifact card");
 
@@ -53,14 +52,9 @@ public final class AcclaimedContender extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Acclaimed Contender enters the battlefield, if you control another Knight, look at the top five cards of your library. You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                        5, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM
-                )), condition, "When {this} enters, " +
-                "if you control another Knight, look at the top five cards of your library. " +
-                "You may reveal a Knight, Aura, Equipment, or legendary artifact card from among them " +
-                "and put it into your hand. Put the rest on the bottom of your library in a random order."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
+                5, 1, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM
+        )).withInterveningIf(condition));
     }
 
     private AcclaimedContender(final AcclaimedContender card) {

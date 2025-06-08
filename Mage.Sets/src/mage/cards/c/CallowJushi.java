@@ -1,36 +1,36 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CallowJushi extends CardImpl {
+
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.KI, 2);
 
     public CallowJushi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
@@ -43,13 +43,12 @@ public final class CallowJushi extends CardImpl {
         this.flipCardName = "Jaraku the Interloper";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Callow Jushi.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true));
 
         // At the beginning of the end step, if there are two or more ki counters on Callow Jushi, you may flip it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new JarakuTheInterloper()), true),
-                new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
-                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.NEXT, new FlipSourceEffect(new JarakuTheInterloper()).setText("flip it"), true, condition
+        ));
     }
 
     private CallowJushi(final CallowJushi card) {
@@ -80,6 +79,7 @@ class JarakuTheInterloper extends TokenImpl {
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
+
     private JarakuTheInterloper(final JarakuTheInterloper token) {
         super(token);
     }

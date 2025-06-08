@@ -26,6 +26,8 @@ public class EternalWeekend extends ExpansionSet {
         cards.add(new SetCardInfo("Gush", "2022a", Rarity.RARE, mage.cards.g.Gush.class, RETRO_ART));
         cards.add(new SetCardInfo("Mental Misstep", "2023a", Rarity.RARE, mage.cards.m.MentalMisstep.class, RETRO_ART));
         cards.add(new SetCardInfo("Ponder", "2022b", Rarity.RARE, mage.cards.p.Ponder.class, RETRO_ART));
+        cards.add(new SetCardInfo("Tendrils of Agony", "2025a", Rarity.RARE, mage.cards.t.TendrilsOfAgony.class, RETRO_ART));
         cards.add(new SetCardInfo("Tinker", "2024a", Rarity.MYTHIC, mage.cards.t.Tinker.class, RETRO_ART));
+        cards.add(new SetCardInfo("Trinisphere", "2025b", Rarity.MYTHIC, mage.cards.t.Trinisphere.class, RETRO_ART));
     }
 }

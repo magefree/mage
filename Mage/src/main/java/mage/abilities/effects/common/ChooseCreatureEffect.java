@@ -48,6 +48,9 @@ public class ChooseCreatureEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
+        if (sourcePermanent == null) {
+            sourcePermanent = game.getPermanent(source.getSourceId());
+        }
         if (controller == null || sourcePermanent == null) {
             return false;
         }

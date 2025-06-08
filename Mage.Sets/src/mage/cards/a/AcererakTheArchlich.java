@@ -6,7 +6,6 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CompletedDungeonCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
@@ -22,8 +21,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetSacrifice;
 import mage.watchers.common.CompletedDungeonWatcher;
 
@@ -44,13 +41,9 @@ public final class AcererakTheArchlich extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Acererak the Archlich enters the battlefield, if you have not completed Tomb of Annihilation, return Acererak the Archlich to its owner's hand and venture into the dungeon.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandSourceEffect(true)),
-                AcererakTheArchlichCondition.instance, "When {this} enters, " +
-                "if you haven't completed Tomb of Annihilation, return {this} " +
-                "to its owner's hand and venture into the dungeon."
-        );
-        ability.addEffect(new VentureIntoTheDungeonEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandSourceEffect(true))
+                .withInterveningIf(AcererakTheArchlichCondition.instance);
+        ability.addEffect(new VentureIntoTheDungeonEffect().concatBy("and"));
         ability.addHint(CurrentDungeonHint.instance);
         ability.addHint(CompletedDungeonCondition.getHint());
         this.addAbility(ability, new CompletedDungeonWatcher());
@@ -77,6 +70,11 @@ enum AcererakTheArchlichCondition implements Condition {
         return !CompletedDungeonWatcher.getCompletedNames(
                 source.getControllerId(), game
         ).contains("Tomb of Annihilation");
+    }
+
+    @Override
+    public String toString() {
+        return "you haven't completed Tomb of Annihilation";
     }
 }
 

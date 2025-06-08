@@ -1,37 +1,34 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FearAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
  */
 public final class HiredMuscle extends CardImpl {
 
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.KI, 2);
 
     public HiredMuscle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
@@ -44,13 +41,15 @@ public final class HiredMuscle extends CardImpl {
         this.flipCardName = "Scarmaker";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Hired Muscle.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.KI.createInstance()),
+                StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, true
+        ));
 
         // At the beginning of the end step, if there are two or more ki counters on Hired Muscle, you may flip it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect(new Scarmaker()), true),
-                new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
-                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.NEXT, new FlipSourceEffect(new Scarmaker()).setText("flip it"), true, condition
+        ));
     }
 
     private HiredMuscle(final HiredMuscle card) {
@@ -81,6 +80,7 @@ class Scarmaker extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+
     private Scarmaker(final Scarmaker token) {
         super(token);
     }

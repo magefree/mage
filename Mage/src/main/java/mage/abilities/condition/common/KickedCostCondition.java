@@ -12,14 +12,19 @@ import mage.game.Game;
  */
 public class KickedCostCondition implements Condition {
 
-    protected String kickerCostText;
+    protected final String kickerCostText;
 
-    public  KickedCostCondition(String kickerCostText) {
+    public KickedCostCondition(String kickerCostText) {
         this.kickerCostText = kickerCostText;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         return KickerAbility.getKickedCounterStrict(game, source, kickerCostText) > 0;
+    }
+
+    @Override
+    public String toString() {
+        return "it was kicked with its " + kickerCostText + " kicker";
     }
 }

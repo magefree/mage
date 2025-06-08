@@ -24,12 +24,6 @@ public final class StaticFilters {
     private StaticFilters() {
     }
 
-    public static final FilterSpiritOrArcaneCard FILTER_SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
-
-    static {
-        FILTER_SPIRIT_OR_ARCANE_CARD.setLockedFilter(true);
-    }
-
     public static final FilterCard FILTER_CARD = new FilterCard("card");
 
     static {
@@ -158,22 +152,18 @@ public final class StaticFilters {
         FILTER_CARD_CREATURE_A_GRAVEYARD.setLockedFilter(true);
     }
 
-    public static final FilterNoncreatureCard FILTER_CARD_NON_CREATURE = new FilterNoncreatureCard();
+    public static final FilterCard FILTER_CARD_NON_CREATURE = new FilterCard();
 
     static {
+        FILTER_CARD_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
         FILTER_CARD_NON_CREATURE.setLockedFilter(true);
     }
 
-    public static final FilterNoncreatureCard FILTER_CARD_A_NON_CREATURE = new FilterNoncreatureCard("a noncreature card");
+    public static final FilterCard FILTER_CARD_A_NON_CREATURE = new FilterCard("a noncreature card");
 
     static {
+        FILTER_CARD_A_NON_CREATURE.add(Predicates.not(CardType.CREATURE.getPredicate()));
         FILTER_CARD_A_NON_CREATURE.setLockedFilter(true);
-    }
-
-    public static final FilterNoncreatureCard FILTER_CARDS_NON_CREATURE = new FilterNoncreatureCard("noncreature cards");
-
-    static {
-        FILTER_CARDS_NON_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterLandCard FILTER_CARD_LAND = new FilterLandCard();
@@ -520,9 +510,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_LANDS.setLockedFilter(true);
     }
 
-    public static final FilterPermanent FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER = new FilterControlledCreatureOrPlaneswalkerPermanent("creature or planeswalker you control");
+    public static final FilterPermanent FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER = new FilterControlledPermanent("creature or planeswalker you control");
 
     static {
+        FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()
+        ));
         FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER.setLockedFilter(true);
     }
 
@@ -1047,10 +1041,28 @@ public final class StaticFilters {
         FILTER_SPELL_AN_ENCHANTMENT.setLockedFilter(true);
     }
 
-    public static final FilterSpell FILTER_SPELL_AN_ARTIFACT = new FilterArtifactSpell("an artifact spell");
+    public static final FilterSpell FILTER_SPELL_AN_ARTIFACT = new FilterSpell("an artifact spell");
 
     static {
+        FILTER_SPELL_AN_ARTIFACT.add(CardType.ARTIFACT.getPredicate());
         FILTER_SPELL_AN_ARTIFACT.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELL_SPIRIT_OR_ARCANE = new FilterSpell("a Spirit or Arcane spell");
+
+    static {
+        FILTER_SPELL_SPIRIT_OR_ARCANE.add(Predicates.or(
+                SubType.SPIRIT.getPredicate(),
+                SubType.ARCANE.getPredicate()
+        ));
+        FILTER_SPELL_SPIRIT_OR_ARCANE.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELL_HISTORIC = new FilterSpell("a historic spell");
+
+    static {
+        FILTER_SPELL_HISTORIC.add(HistoricPredicate.instance);
+        FILTER_SPELL_HISTORIC.setLockedFilter(true);
     }
 
     public static final FilterSpell FILTER_SPELL_KICKED_A = new FilterSpell("a kicked spell");

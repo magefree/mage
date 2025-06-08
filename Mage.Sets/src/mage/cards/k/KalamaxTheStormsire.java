@@ -13,7 +13,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterInstantSpell;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -55,8 +55,14 @@ public final class KalamaxTheStormsire extends CardImpl {
 }
 
 class KalamaxTheStormsireSpellCastAbility extends SpellCastControllerTriggeredAbility {
+
+    private static final FilterSpell filterInstant = new FilterSpell();
+    static {
+        filterInstant.add(CardType.INSTANT.getPredicate());
+    }
+
     KalamaxTheStormsireSpellCastAbility() {
-        super(new CopyTargetStackObjectEffect(true), new FilterInstantSpell(), false);
+        super(new CopyTargetStackObjectEffect(true), filterInstant, false);
     }
 
     private KalamaxTheStormsireSpellCastAbility(final KalamaxTheStormsireSpellCastAbility ability) {

@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -36,7 +36,7 @@ public final class SparkMage extends CardImpl {
                 new DamageTargetEffect(1), true, true
         ).withRuleTextReplacement(false);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
     }
 

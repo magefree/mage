@@ -13,9 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterHistoricSpell;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -26,7 +25,6 @@ import java.util.UUID;
  */
 public final class GloinDwarfEmissary extends CardImpl {
 
-    private static final FilterSpell filter = new FilterHistoricSpell();
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.TREASURE, "a Treasure");
 
     public GloinDwarfEmissary(UUID ownerId, CardSetInfo setInfo) {
@@ -40,7 +38,7 @@ public final class GloinDwarfEmissary extends CardImpl {
 
         // Whenever you cast a historic spell, create a Treasure token. This ability triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CreateTokenEffect(new TreasureToken()), filter, false
+                new CreateTokenEffect(new TreasureToken()), StaticFilters.FILTER_SPELL_HISTORIC, false
         ).setTriggersLimitEachTurn(1));
 
         // {T}, Sacrifice a Treasure: Goad target creature.

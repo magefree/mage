@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import mage.MageInt;
@@ -11,10 +10,10 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactSpell;
 import mage.game.permanent.token.TokenImpl;
 
 import java.util.UUID;
@@ -26,12 +25,18 @@ import java.util.UUID;
  */
 public final class HiddenGuerrillas extends CardImpl {
 
+
+    private static final FilterSpell filter = new FilterSpell("an artifact spell");
+    static {
+        filter.add(CardType.ARTIFACT.getPredicate());
+    }
+
     public HiddenGuerrillas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // When an opponent casts an artifact spell, if Hidden Guerrillas is an enchantment, Hidden Guerrillas becomes a 5/3 Soldier creature with trample.
         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenGuerrillasSoldier(), null, Duration.WhileOnBattlefield),
-                new FilterArtifactSpell(), false);
+                filter, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When an opponent casts an artifact spell, if {this} is an enchantment, {this} becomes a 5/3 Soldier creature with trample."));
     }

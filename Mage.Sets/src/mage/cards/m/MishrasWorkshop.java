@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -8,7 +7,7 @@ import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.FilterSpell;
 
 /**
  *
@@ -16,12 +15,17 @@ import mage.filter.common.FilterArtifactSpell;
  */
 public final class MishrasWorkshop extends CardImpl {
 
+    private static final FilterSpell filter = new FilterSpell("artifact spells");
+    static {
+        filter.add(CardType.ARTIFACT.getPredicate());
+    }
+
     public MishrasWorkshop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Add {C}{C}{C}. Spend this mana only to cast artifact spells.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 3,
-                new ConditionalSpellManaBuilder(new FilterArtifactSpell("artifact spells"))));
+                new ConditionalSpellManaBuilder(filter)));
 
     }
 

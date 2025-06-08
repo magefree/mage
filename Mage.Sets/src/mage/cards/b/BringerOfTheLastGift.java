@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -39,12 +38,8 @@ public final class BringerOfTheLastGift extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Bringer of the Last Gift enters the battlefield, if you cast it, each player sacrifices all other creatures they control. Then each player returns all creature cards from their graveyard that weren't put there this way to the battlefield.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new BringerOfTheLastGiftEffect()),
-                CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, if you cast it, each player sacrifices all other creatures they control. "
-                        + "Then each player returns all creature cards from their graveyard that weren't put there this way to the battlefield."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BringerOfTheLastGiftEffect())
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance));
     }
 
     private BringerOfTheLastGift(final BringerOfTheLastGift card) {
@@ -61,6 +56,9 @@ class BringerOfTheLastGiftEffect extends OneShotEffect {
 
     BringerOfTheLastGiftEffect() {
         super(Outcome.Benefit);
+        staticText = "each player sacrifices all other creatures they control. " +
+                "Then each player returns all creature cards from their graveyard " +
+                "that weren't put there this way to the battlefield";
     }
 
     private BringerOfTheLastGiftEffect(final BringerOfTheLastGiftEffect effect) {
