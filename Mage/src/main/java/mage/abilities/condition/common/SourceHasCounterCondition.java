@@ -11,6 +11,8 @@ import mage.util.CardUtil;
 import java.util.Optional;
 
 /**
+ * Don't use ComparisonType.OR_GREATER with value 0
+ *
  * @author TheElk801
  */
 public class SourceHasCounterCondition extends IntCompareCondition {
