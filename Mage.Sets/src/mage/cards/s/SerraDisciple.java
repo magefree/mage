@@ -10,14 +10,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterHistoricSpell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
 public final class SerraDisciple extends CardImpl {
-
-    private static final FilterSpell filter = new FilterHistoricSpell();
 
     public SerraDisciple(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -31,7 +28,7 @@ public final class SerraDisciple extends CardImpl {
 
         // Whenever you cast a historic spell, Serra Disciple gets +1/+1 until end of turn
         addAbility(new SpellCastControllerTriggeredAbility(
-                new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false
+                new BoostSourceEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_HISTORIC, false
         ));
     }
 

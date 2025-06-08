@@ -23,9 +23,9 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterHistoricCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -38,18 +38,19 @@ import java.util.UUID;
  */
 public final class HaviTheAllFather extends CardImpl {
 
-    private static final Condition condition = new CardsInControllerGraveyardCondition(
-            4, new FilterHistoricCard("historic cards")
-    );
-    private static final Hint hint = new ValueHint(
-            "Historic cards in your graveyard", new CardsInControllerGraveyardCount(new FilterHistoricCard())
-    );
+    private static final FilterCard filterHistoric = new FilterCard("historic cards");
     private static final FilterCard filter = new FilterCreatureCard("legendary creature card with lesser mana value from your graveyard");
 
     static {
+        filterHistoric.add(HistoricPredicate.instance);
         filter.add(SuperType.LEGENDARY.getPredicate());
         filter.add(HaviTheAllFatherPredicate.instance);
     }
+
+    private static final Condition condition = new CardsInControllerGraveyardCondition(4, filterHistoric);
+    private static final Hint hint = new ValueHint(
+            "Historic cards in your graveyard", new CardsInControllerGraveyardCount(filterHistoric)
+    );
 
     public HaviTheAllFather(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");

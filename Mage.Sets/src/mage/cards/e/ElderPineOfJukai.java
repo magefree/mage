@@ -27,7 +27,7 @@ public final class ElderPineOfJukai extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a Spirit or Arcane spell, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, StaticFilters.FILTER_CARD_LANDS, Zone.LIBRARY), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, StaticFilters.FILTER_CARD_LANDS, Zone.LIBRARY), StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, false));
 
         // Soulshift 2
         this.addAbility(new SoulshiftAbility(2));

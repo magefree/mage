@@ -18,7 +18,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterNoncreatureCard;
 import mage.filter.predicate.Predicates;
 
 /**
@@ -27,12 +26,13 @@ import mage.filter.predicate.Predicates;
  */
 public final class ValleyFloodcaller extends CardImpl {
 
-    private static final FilterCard nonCreatureFilter = new FilterNoncreatureCard("noncreature spells");
+    private static final FilterCard nonCreatureFilter = new FilterCard("noncreature spells");
 
     private static final FilterCreaturePermanent creatureFilter =
             new FilterCreaturePermanent("Birds, Frogs, Otters, and Rats");
 
     static {
+        nonCreatureFilter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         creatureFilter.add(TargetController.YOU.getControllerPredicate());
         creatureFilter.add(Predicates.or(
                 SubType.BIRD.getPredicate(),

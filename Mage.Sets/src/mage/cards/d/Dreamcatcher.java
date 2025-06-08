@@ -28,7 +28,7 @@ public final class Dreamcatcher extends CardImpl {
         // Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new SacrificeSourceCost()
-        ), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false));
+        ), StaticFilters.FILTER_SPELL_SPIRIT_OR_ARCANE, false));
     }
 
     private Dreamcatcher(final Dreamcatcher card) {
