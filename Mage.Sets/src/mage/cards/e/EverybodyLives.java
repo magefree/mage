@@ -24,7 +24,6 @@ public final class EverybodyLives extends CardImpl {
     public EverybodyLives(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
-
         // All creatures gain hexproof and indestructible until end of turn. 
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(
                 HexproofAbility.getInstance(),
@@ -37,7 +36,7 @@ public final class EverybodyLives extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_ALL_CREATURES
         ).setText("and indestructible until end of turn"));
 
-        // Players gain hexproof until end of turn. Players can't lose life this turn and players can't lose the game or win the this turn.
+        // Players gain hexproof until end of turn. Players can't lose life this turn and players can't lose the game or win the game this turn.
         this.getSpellAbility().addEffect(new EverybodyLivesPlayerEffect());
         this.getSpellAbility().addEffect(new EverybodyLivesCantLoseOrWinGameEffect());
     }
