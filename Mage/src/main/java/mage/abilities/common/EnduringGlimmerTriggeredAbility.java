@@ -12,8 +12,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
 
 /**
  * @author TheElk801, PurpleCrowbar
@@ -86,20 +85,17 @@ class EnduringGlimmerTypeEffect extends ContinuousEffectImpl {
 
 
     @Override
-    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        if (!affectedObjectMap.isEmpty()) {
-            return affectedObjectMap;
-        }
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            affectedObjectMap.put(permanent.getId(), permanent);
+            affectedObjects.add(permanent);
         }
-        return affectedObjectMap;
+        return !affectedObjects.isEmpty();
     }
 
     @Override
-    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
-        for (MageItem object : objects.values()) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
             Permanent permanent = (Permanent) object;
             permanent.retainAllEnchantmentSubTypes(game);
             permanent.removeAllCardTypes(game);
@@ -108,12 +104,14 @@ class EnduringGlimmerTypeEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        if (queryAffectedObjects(layer, source, game).isEmpty()) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        if (this.layer != layer && this.sublayer != sublayer) {
+            return false;
+        }
+        if (!super.apply(layer, sublayer, source, game)) {
             discard();
             return false;
         }
-        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
         return true;
     }
 }

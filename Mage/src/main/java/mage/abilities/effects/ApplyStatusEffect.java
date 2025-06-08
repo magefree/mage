@@ -3,15 +3,18 @@ package mage.abilities.effects;
 import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.keyword.MenaceAbility;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.counters.AbilityCounter;
 import mage.counters.BoostCounter;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -29,31 +32,20 @@ public class ApplyStatusEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        if (layer == Layer.AbilityAddingRemovingEffects_6) {
-            affectedObjectMap.clear();
-        }
-        if (!affectedObjectMap.isEmpty()) {
-            return affectedObjectMap;
-        }
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
             Counters counters = permanent.getCounters(game);
             if (!counters.getAbilityCounters().isEmpty() || !counters.getBoostCounters().isEmpty()) {
-                affectedObjectMap.put(permanent.getId(), permanent);
+                affectedObjects.add(permanent);
             }
         }
-        return affectedObjectMap;
+        return !affectedObjects.isEmpty();
     }
 
     @Override
-    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
         if (layer == Layer.AbilityAddingRemovingEffects_6) {
-            for (MageItem object : objects.values()) {
+            for (MageItem object : affectedObjects) {
                 Permanent permanent = (Permanent) object;
                 for (AbilityCounter counter : permanent.getCounters(game).getAbilityCounters()) {
                     permanent.addAbility(counter.getAbility(), source == null ? permanent.getId() : source.getSourceId(), game);
@@ -64,7 +56,7 @@ public class ApplyStatusEffect extends ContinuousEffectImpl {
             }
         }
         if (layer == Layer.PTChangingEffects_7 && sublayer == SubLayer.Counters_7d) {
-            for (MageItem object : objects.values()) {
+            for (MageItem object : affectedObjects) {
                 Permanent permanent = (Permanent) object;
                 for (BoostCounter counter : permanent.getCounters(game).getBoostCounters()) {
                     permanent.addPower(counter.getPower() * counter.getCount());
@@ -76,11 +68,12 @@ public class ApplyStatusEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (queryAffectedObjects(layer, source, game).isEmpty()) {
-            return false;
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
         }
-        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
-        return true;
+        return false;
     }
 
     @Override

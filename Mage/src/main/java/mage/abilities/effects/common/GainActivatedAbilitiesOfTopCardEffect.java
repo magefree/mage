@@ -13,8 +13,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
 
 public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl {
 
@@ -37,28 +36,25 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
     }
 
     @Override
-    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        if (!affectedObjectMap.isEmpty()) {
-            return affectedObjectMap;
-        }
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
-            return affectedObjectMap;
+            return false;
         }
         Card card = player.getLibrary().getFromTop(game);
         if (card == null || !filter.match(card, game)) {
-            return affectedObjectMap;
+            return false;
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            affectedObjectMap.put(permanent.getId(), permanent);
+            affectedObjects.add(permanent);
         }
-        return affectedObjectMap;
+        return !affectedObjects.isEmpty();
     }
 
     @Override
-    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
-        for (MageItem object : affectedObjectMap.values()) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
             Player player = game.getPlayer(source.getControllerId());
             Card card = player.getLibrary().getFromTop(game);
             Permanent permanent = (Permanent) object;
@@ -69,14 +65,4 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
             }
         }
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (queryAffectedObjects(layer, source, game).isEmpty()) {
-            return false;
-        }
-        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
-        return true;
-    }
-
 }

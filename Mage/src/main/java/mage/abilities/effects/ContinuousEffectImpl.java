@@ -42,7 +42,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     // is null before being initialized. Any access attempt computes it.
     private Boolean affectedObjectsSet = null;
     protected List<MageObjectReference> affectedObjectList = new ArrayList<>();
-    protected Map<UUID, MageItem> affectedObjectMap = new HashMap<>();
 
     protected boolean temporary = false;
     protected EnumSet<DependencyType> dependencyTypes; // this effect has the dependencyTypes defined here
@@ -101,7 +100,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.characterDefining = effect.characterDefining;
         this.nextTurnNumber = effect.nextTurnNumber;
         this.effectStartingStepNum = effect.effectStartingStepNum;
-        this.affectedObjectMap.putAll(effect.affectedObjectMap);
     }
 
     @Override
@@ -118,19 +116,31 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (this.layer == layer && this.sublayer == sublayer) {
-            return apply(game, source);
+            List<MageItem> affectedObjects = new ArrayList<>();
+            if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+                applyToObjects(layer, sublayer, source, game, affectedObjects);
+                return true;
+            } else {
+                return apply(game, source);
+            }
         }
         return false;
     }
 
     @Override
-    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
 
     }
 
     @Override
-    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        return affectedObjectMap;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        // Do nothing in new query logic and override in old apply logic
+        return false;
     }
 
     @Override
@@ -383,16 +393,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public List<MageObjectReference> getAffectedObjects() {
         return affectedObjectList;
-    }
-
-    @Override
-    public Map<UUID, MageItem> getAffectedObjectMap() {
-        return affectedObjectMap;
-    }
-
-    @Override
-    public void clearAffectedObjectMap() {
-        affectedObjectMap.clear();
     }
 
     /**

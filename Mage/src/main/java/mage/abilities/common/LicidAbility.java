@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.MageItem;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpecialAction;
@@ -22,7 +23,6 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -99,25 +99,28 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        if (layer == Layer.TypeChangingEffects_4) {
+            affectedObjectList.clear();
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+            if (permanent != null) {
+                affectedObjects.add(permanent);
+                affectedObjectList.add(new MageObjectReference(permanent, game));
+            }
+        } else {
+            for (MageObjectReference mor : affectedObjectList) {
+                Permanent permanent = mor.getPermanent(game);
+                if (permanent != null) {
+                    affectedObjects.add(permanent);
+                }
+            }
+        }
+        return !affectedObjects.isEmpty();
     }
 
     @Override
-    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        if (!affectedObjectMap.isEmpty()) {
-            return affectedObjectMap;
-        }
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null) {
-            affectedObjectMap.put(permanent.getId(), permanent);
-        }
-        return affectedObjectMap;
-    }
-
-    @Override
-    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
-        for (MageItem object : objects.values()) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
             Permanent licid = (Permanent) object;
             switch (layer) {
                 case TypeChangingEffects_4:
@@ -150,11 +153,12 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (!queryAffectedObjects(layer, source, game).isEmpty()) {
-            applyToObjects(layer, sublayer, source, game, affectedObjectMap);
+        ArrayList<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
             return true;
         }
-        discard();
+        this.discard();
         return false;
     }
 

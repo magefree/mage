@@ -8,8 +8,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
 
 public class CopyTokenEffect extends ContinuousEffectImpl {
 
@@ -27,20 +26,17 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        if (!affectedObjectMap.isEmpty()) {
-            return affectedObjectMap;
-        }
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            affectedObjectMap.put(permanent.getId(), permanent);
+            affectedObjects.add(permanent);
         }
-        return affectedObjectMap;
+        return !affectedObjects.isEmpty();
     }
 
     @Override
-    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
-        for (MageItem object : objects.values()) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
             Permanent permanent = (Permanent) object;
             permanent.setName(token.getName());
             permanent.getColor(game).setColor(token.getColor(game));
@@ -62,15 +58,6 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
             permanent.getToughness().setModifiedBaseValue(token.getToughness().getModifiedBaseValue());
             //permanent.getLoyalty().setBoostedValue(card.getLoyalty().getValue());
         }
-    }
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (queryAffectedObjects(layer, source, game).isEmpty()) {
-            return false;
-        }
-        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
-        return true;
-
     }
 
     @Override

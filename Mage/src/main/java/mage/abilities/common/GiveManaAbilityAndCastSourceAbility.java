@@ -102,20 +102,17 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game) {
-        if (!affectedObjectMap.isEmpty()) {
-            return affectedObjectMap;
-        }
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            affectedObjectMap.put(permanent.getId(), permanent);
+            affectedObjects.add(permanent);
         }
-        return affectedObjectMap;
+        return !affectedObjects.isEmpty();
     }
 
     @Override
-    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects) {
-        for (MageItem object : objects.values()) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
             Permanent permanent = (Permanent) object;
             for (char c : colors.toCharArray()) {
                 Ability ability;
@@ -144,16 +141,18 @@ class GainManaAbilitiesWhileExiledEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (WasCastFromExileWatcher.check((MageObjectReference) getValue("exiledHandCardRef"), game)) {
             discard();
             return false;
         }
-        if (queryAffectedObjects(layer, source, game).isEmpty()) {
+        if (this.layer != layer && this.sublayer != sublayer) {
+            return false;
+        }
+        if (!super.apply(layer, sublayer, source, game)) {
             discard();
             return false;
         }
-        applyToObjects(layer, sublayer, source, game, affectedObjectMap);
         return true;
     }
 }

@@ -33,9 +33,17 @@ public interface ContinuousEffect extends Effect {
 
     boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game);
 
-    void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, Map<UUID, MageItem> objects);
+    /**
+     * Applies the effect to the passed in list of objects. This method should only contain logic for applying to
+     * the objects. All object filtering should be done in {@link #queryAffectedObjects} before passing to this function.
+     */
+    void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects);
 
-    Map<UUID, MageItem> queryAffectedObjects(Layer layer, Ability source, Game game);
+    /**
+     * Gathers all objects the effect should apply to. Do all filtering logic in this function to avoid errors in {@link #applyToObjects}.
+     * @return true if adding any objects to the affectedObjects list, otherwise return false
+     */
+    boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects);
 
     boolean hasLayer(Layer layer);
 
@@ -55,10 +63,6 @@ public interface ContinuousEffect extends Effect {
     SubLayer getSublayer();
 
     List<MageObjectReference> getAffectedObjects();
-
-    Map<UUID, MageItem> getAffectedObjectMap();
-
-    void clearAffectedObjectMap();
 
     Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer);
 
