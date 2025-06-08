@@ -96,11 +96,8 @@ public class TargetCardInExile extends TargetCard {
             }
         } else {
             ExileZone exileZone = game.getExile().getExileZone(zoneId);
-            if (exileZone != null) {
-                if (exileZone.count(filter, sourceControllerId, source, game) >= this.minNumberOfTargets) {
-                    return true;
-                }
-            }
+            return exileZone != null && exileZone.count(filter, sourceControllerId, source, game) >= this.minNumberOfTargets;
+
         }
         return false;
     }

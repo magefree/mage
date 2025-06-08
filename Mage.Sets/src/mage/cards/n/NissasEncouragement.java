@@ -74,11 +74,7 @@ class NissasEncouragementEffect extends OneShotEffect {
 
         NissasEncouragementTarget target = new NissasEncouragementTarget(filter);
         if (player.searchLibrary(target, source, game)) {
-            boolean searchGY = false;
-
-            if (target.getTargets().size() < 3) {
-                searchGY = true;
-            }
+            boolean searchGY = target.getTargets().size() < 3;
 
             Map<String, Integer> foundCards = new HashMap<>();
             foundCards.put("Forest", 0);

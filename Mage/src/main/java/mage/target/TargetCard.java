@@ -216,7 +216,7 @@ public class TargetCard extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        return possibleTargets(sourceControllerId, (Ability) null, game);
+        return possibleTargets(sourceControllerId, null, game);
     }
 
     public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Ability source, Game game) {
