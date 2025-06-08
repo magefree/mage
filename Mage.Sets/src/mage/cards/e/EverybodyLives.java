@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -15,32 +14,32 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author padfoot
  */
 public final class EverybodyLives extends CardImpl {
 
     public EverybodyLives(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        
+
 
         // All creatures gain hexproof and indestructible until end of turn. 
-	this.getSpellAbility().addEffect(new GainAbilityAllEffect(
-		HexproofAbility.getInstance(), 
-		Duration.EndOfTurn, 
-		StaticFilters.FILTER_PERMANENT_ALL_CREATURES
-	).setText("all creatures gain hexproof"));
-	this.getSpellAbility().addEffect(new GainAbilityAllEffect(
-		IndestructibleAbility.getInstance(), 
-		Duration.EndOfTurn, 
-		StaticFilters.FILTER_PERMANENT_ALL_CREATURES
-	).setText("and indestructible until end of turn"));
-	// Players gain hexproof until end of turn.
-	this.getSpellAbility().addEffect(new GainAbilityAllPlayersEffect(HexproofAbility.getInstance()));
-	// Players can't lose life this turn and players can't lose the game or win the this turn.
-        this.getSpellAbility().addEffect(new CantLoseLifeAllEffect());
-        this.getSpellAbility().addEffect(new CantLoseOrWinGameAllEffect().concatBy("and"));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(
+                HexproofAbility.getInstance(),
+                Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_ALL_CREATURES
+        ).setText("all creatures gain hexproof"));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(
+                IndestructibleAbility.getInstance(),
+                Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_ALL_CREATURES
+        ).setText("and indestructible until end of turn"));
+
+        // Players gain hexproof until end of turn. Players can't lose life this turn and players can't lose the game or win the this turn.
+        this.getSpellAbility().addEffect(new EverybodyLivesPlayerEffect());
+        this.getSpellAbility().addEffect(new EverybodyLivesCantLoseOrWinGameEffect());
     }
 
     private EverybodyLives(final EverybodyLives card) {
@@ -53,88 +52,49 @@ public final class EverybodyLives extends CardImpl {
     }
 }
 
-class GainAbilityAllPlayersEffect extends ContinuousEffectImpl {
+class EverybodyLivesPlayerEffect extends ContinuousEffectImpl {
 
-    protected Ability ability;
-
-    public GainAbilityAllPlayersEffect(Ability ability) {
+    EverybodyLivesPlayerEffect() {
         super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability.copy();
-        this.staticText = "Players gain " + ability.getRule() + " until end of turn";
+        this.staticText = "Players gain hexproof until end of turn. Players can't lose life this turn";
     }
 
-    protected GainAbilityAllPlayersEffect(final GainAbilityAllPlayersEffect effect) {
-        super(effect);
-        this.ability = effect.ability.copy();
-    }
-
-    @Override
-    public GainAbilityAllPlayersEffect copy() {
-        return new GainAbilityAllPlayersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.addAbility(ability);
-            }
-        }
-        return true;
-    }
-}
-
-class CantLoseLifeAllEffect extends ContinuousEffectImpl {
-
-    public CantLoseLifeAllEffect() {
-        super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "players can't lose life this turn";
-    }
-
-    protected CantLoseLifeAllEffect(final CantLoseLifeAllEffect effect) {
+    private EverybodyLivesPlayerEffect(final EverybodyLivesPlayerEffect effect) {
         super(effect);
     }
 
     @Override
-    public CantLoseLifeAllEffect copy() {
-        return new CantLoseLifeAllEffect(this);
+    public EverybodyLivesPlayerEffect copy() {
+        return new EverybodyLivesPlayerEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
+                player.addAbility(HexproofAbility.getInstance());
                 player.setCanLoseLife(false);
             }
-        }           
+        }
         return true;
     }
 }
 
-class CantLoseOrWinGameAllEffect extends ContinuousRuleModifyingEffectImpl {
+class EverybodyLivesCantLoseOrWinGameEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantLoseOrWinGameAllEffect() {
+    EverybodyLivesCantLoseOrWinGameEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, false, false);
-        staticText = "players can't lose the game or win the game this turn";
+        staticText = "and players can't lose the game or win the game this turn";
     }
 
-    protected CantLoseOrWinGameAllEffect(final CantLoseOrWinGameAllEffect effect) {
+    private EverybodyLivesCantLoseOrWinGameEffect(final EverybodyLivesCantLoseOrWinGameEffect effect) {
         super(effect);
     }
 
     @Override
-    public CantLoseOrWinGameAllEffect copy() {
-        return new CantLoseOrWinGameAllEffect(this);
+    public EverybodyLivesCantLoseOrWinGameEffect copy() {
+        return new EverybodyLivesCantLoseOrWinGameEffect(this);
     }
 
     @Override
@@ -147,4 +107,3 @@ class CantLoseOrWinGameAllEffect extends ContinuousRuleModifyingEffectImpl {
         return true;
     }
 }
-
