@@ -88,11 +88,11 @@ enum ZenosYaeGalvusPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        input.getSource().initSourceObjectZoneChangeCounter(game, false);
+        int zcc = game.getState().getZoneChangeCounter(input.getSource().getSourceId());
         return flag == Optional
                 .of(CardUtil.getObjectZoneString(
                         "chosenCreature", input.getSource().getSourceId(), game,
-                        input.getSource().getSourceObjectZoneChangeCounter(), false
+                        zcc, false
                 ))
                 .map(game.getState()::getValue)
                 .filter(MageObjectReference.class::isInstance)

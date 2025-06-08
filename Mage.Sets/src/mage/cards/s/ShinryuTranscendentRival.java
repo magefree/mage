@@ -125,9 +125,9 @@ class ShinryuTranscendentRivalTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        this.initSourceObjectZoneChangeCounter(game, false);
+        int zcc = game.getState().getZoneChangeCounter(this.getSourceId());
         return Optional
-                .of(this.getSourceId() + "_" + this.getSourceObjectZoneChangeCounter() + "_opponent")
+                .of(this.getSourceId() + "_" + zcc + "_opponent")
                 .map(game.getState()::getValue)
                 .map(event.getPlayerId()::equals)
                 .orElse(false);
