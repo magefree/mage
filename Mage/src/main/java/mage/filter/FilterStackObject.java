@@ -29,11 +29,13 @@ public class FilterStackObject extends FilterObject<StackObject> {
         return new FilterStackObject(this);
     }
 
-    public final void add(ObjectSourcePlayerPredicate predicate) {
+    @Override
+    public final FilterStackObject add(ObjectSourcePlayerPredicate predicate) {
         // verify checks
         // Spell implements Card interface, so it can use some default predicates like owner
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, StackObject.class, Spell.class, Card.class);
         this.addExtra(predicate);
+        return this;
     }
 
     @Override

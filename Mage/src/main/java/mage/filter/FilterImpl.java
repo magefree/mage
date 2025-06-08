@@ -51,24 +51,20 @@ public abstract class FilterImpl<E> implements Filter<E> {
         if (!this.match(object, game)) {
             return false;
         }
-        ObjectSourcePlayer<E> osp = new ObjectSourcePlayer<>(object, sourceControllerId, source);
+        ObjectSourcePlayer osp = new ObjectSourcePlayer<>(object, sourceControllerId, source);
         return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 
     @Override
     public Filter<E> add(Predicate<? super E> predicate) {
-        if (isLockedFilter()) {
-            throw new UnsupportedOperationException("You may not modify a locked filter");
-        }
+        checkUnlockedFilter();
         predicates.add(predicate);
         return this;
     }
 
     @Override
     public final void addExtra(ObjectSourcePlayerPredicate predicate) {
-        if (isLockedFilter()) {
-            throw new UnsupportedOperationException("You may not modify a locked filter");
-        }
+        checkUnlockedFilter();
         extraPredicates.add(predicate);
     }
 
@@ -79,10 +75,14 @@ public abstract class FilterImpl<E> implements Filter<E> {
 
     @Override
     public final void setMessage(String message) {
+        checkUnlockedFilter();
+        this.message = message;
+    }
+
+    protected void checkUnlockedFilter() {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
-        this.message = message;
     }
 
     @Override

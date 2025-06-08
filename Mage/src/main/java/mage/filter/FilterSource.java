@@ -32,11 +32,12 @@ public class FilterSource extends FilterObject<MageObject> {
     }
 
     @Override
-    public void add(ObjectSourcePlayerPredicate predicate) {
+    public FilterSource add(ObjectSourcePlayerPredicate predicate) {
         // verify checks
         // A source can be a lot of different things, so a variety of predicates can be fed here
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class, Card.class, StackObject.class, CommandObject.class);
         this.addExtra(predicate);
+        return this;
     }
 
     @Override

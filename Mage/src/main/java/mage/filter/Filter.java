@@ -37,9 +37,10 @@ public interface Filter<E> extends Serializable, Copyable<Filter<E>> {
      * <p>
      * (method should then call this.addExtra(predicate) after verify checks)
      */
-    void add(ObjectSourcePlayerPredicate predicate);
+    Filter<E> add(ObjectSourcePlayerPredicate predicate);
 
-    // TODO: if someone can find a way to not have to add this (overload of add made it necessary to introduce)
+    // TODO: if someone can find a way to not have to add this
+    //       Compiler was confused between overloads
     void addExtra(ObjectSourcePlayerPredicate predicate);
 
     boolean checkObjectClass(Object object);

@@ -1,11 +1,14 @@
 package mage.filter;
 
+import mage.abilities.Ability;
 import mage.constants.SubType;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author North
@@ -42,10 +45,27 @@ public class FilterPermanent extends FilterObject<Permanent> {
     }
 
     @Override
-    public void add(ObjectSourcePlayerPredicate predicate) {
+    public FilterPermanent add(ObjectSourcePlayerPredicate predicate) {
         // verify checks
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class);
         this.addExtra(predicate);
+        return this;
+    }
+
+    @Override
+    public boolean match(Permanent permanent, Game game) {
+        // TODO: if we can trust the target/checks using FilterPermanent to filter out Phased out permanent,
+        //       this overload would be no longer necessary.
+        return super.match(permanent, game)
+                && permanent.isPhasedIn();
+    }
+
+    @Override
+    public boolean match(Permanent permanent, UUID sourceControllerId, Ability source, Game game) {
+        // TODO: if we can trust the target/checks using FilterPermanent to filter out Phased out permanent,
+        //       this overload would be no longer necessary.
+        return super.match(permanent, sourceControllerId, source, game)
+                && permanent.isPhasedIn();
     }
 
     @Override

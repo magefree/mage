@@ -28,10 +28,11 @@ public class FilterPlayer extends FilterImpl<Player> {
     }
 
     @Override
-    public void add(ObjectSourcePlayerPredicate predicate) {
+    public FilterPlayer add(ObjectSourcePlayerPredicate predicate) {
         // verify checks
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, Player.class);
         this.addExtra(predicate);
+        return this;
     }
 
     @Override

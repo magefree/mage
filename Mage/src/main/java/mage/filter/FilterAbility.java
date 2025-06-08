@@ -41,15 +41,11 @@ public class FilterAbility extends FilterImpl<Ability> {
     }
 
     @Override
-    public Filter<Ability> add(Predicate<? super Ability> predicate) {
-        return super.add(predicate);
-    }
-
-    @Override
-    public void add(ObjectSourcePlayerPredicate predicate) {
+    public FilterAbility add(ObjectSourcePlayerPredicate predicate) {
         // Verify Checks
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, Ability.class, StackObject.class);
         this.addExtra(predicate);
+        return this;
     }
 
     @Override

@@ -32,7 +32,10 @@ public abstract class MultiFilterImpl<E> implements Filter<E> {
         if (filters.length < 2) {
             throw new IllegalArgumentException("Wrong code usage: MultiFilterImpl should have at least 2 inner filters");
         }
-        this.innerFilters.addAll(Arrays.stream(filters).collect(Collectors.toList()));
+        this.innerFilters.addAll(
+                Arrays.stream(filters)
+                        .map(f -> f.copy())
+                        .collect(Collectors.toList()));
     }
 
     protected MultiFilterImpl(final MultiFilterImpl<E> filter) {
@@ -46,25 +49,26 @@ public abstract class MultiFilterImpl<E> implements Filter<E> {
     public boolean match(E object, Game game) {
         return innerFilters
                 .stream()
-                .anyMatch((Filter filter) -> filter.match(object, game));
+                .anyMatch((Filter filter) -> filter.checkObjectClass(object) && filter.match(object, game));
     }
 
     @Override
     public boolean match(E object, UUID sourceControllerId, Ability source, Game game) {
         return innerFilters
                 .stream()
-                .anyMatch((Filter filter) -> filter.match(object, sourceControllerId, source, game));
+                .anyMatch((Filter filter) -> filter.checkObjectClass(object) && filter.match(object, sourceControllerId, source, game));
     }
 
     @Override
-    public Filter<E> add(Predicate<? super E> predicate) {
+    public MultiFilterImpl<E> add(Predicate<? super E> predicate) {
         innerFilters.forEach((Filter filter) -> filter.add(predicate));
         return this;
     }
 
     @Override
-    public void add(ObjectSourcePlayerPredicate predicate) {
+    public MultiFilterImpl<E> add(ObjectSourcePlayerPredicate predicate) {
         innerFilters.forEach((Filter filter) -> filter.add(predicate));
+        return this;
     }
 
     @Override

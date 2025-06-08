@@ -27,10 +27,11 @@ public class FilterObject<E extends MageObject> extends FilterImpl<E> {
     }
 
     @Override
-    public void add(ObjectSourcePlayerPredicate predicate) {
+    public FilterObject<E> add(ObjectSourcePlayerPredicate predicate) {
         // verify checks
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, MageObject.class);
         this.addExtra(predicate);
+        return this;
     }
 
     @Override

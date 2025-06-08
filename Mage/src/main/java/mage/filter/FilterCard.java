@@ -5,11 +5,9 @@ import mage.constants.TargetController;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Works with cards only. For objects like commanders you must override your canTarget method.
@@ -54,11 +52,12 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     @Override
-    public void add(ObjectSourcePlayerPredicate predicate) {
+    public FilterCard add(ObjectSourcePlayerPredicate predicate) {
         // verify checks
         checkPredicateIsSuitableForCardFilter(predicate);
         Predicates.makeSurePredicateCompatibleWithFilter(predicate, Card.class);
         this.addExtra(predicate);
+        return this;
     }
 
     @Override
