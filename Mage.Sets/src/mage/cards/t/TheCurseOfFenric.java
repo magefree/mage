@@ -3,30 +3,31 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Mutant33DeathtouchToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -36,11 +37,12 @@ public final class TheCurseOfFenric extends CardImpl {
 
     private static final FilterCreaturePermanent nontokenFilter = new FilterCreaturePermanent("nontoken creature");
     private static final FilterPermanent mutantFilter = new FilterPermanent(SubType.MUTANT, "mutant");
-    private static final FilterCreaturePermanent fenricFilter = new FilterCreaturePermanent("creature named Fenric");
+    private static final FilterCreaturePermanent fenricFilter = new FilterCreaturePermanent("another target creature named Fenric");
 
     static {
         nontokenFilter.add(TokenPredicate.FALSE);
         fenricFilter.add(new NamePredicate("Fenric"));
+        fenricFilter.add(new AnotherTargetPredicate(2));
     }
 
     public TheCurseOfFenric(UUID ownerId, CardSetInfo setInfo) {
@@ -62,7 +64,7 @@ public final class TheCurseOfFenric extends CardImpl {
                                     "creature with deathtouch")
                             .setTargetPointer(new EachTargetPointer())
                     );
-                    ability.addTarget(new TargetPermanent(0, 1, new FilterCreaturePermanent()));
+                    ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE));
                     ability.setTargetAdjuster(new ForEachPlayerTargetsAdjuster(false, false));
                 }
         );
@@ -83,10 +85,10 @@ public final class TheCurseOfFenric extends CardImpl {
                 this, SagaChapter.CHAPTER_III,
                 ability -> {
                     ability.addEffect(new FightTargetsEffect().setText(
-                            "Target Mutant fight another target creature named Fenric"
+                            "Target Mutant fights another target creature named Fenric"
                     ));
-                    ability.addTarget(new TargetPermanent(mutantFilter));
-                    ability.addTarget(new TargetCreaturePermanent(fenricFilter));
+                    ability.addTarget(new TargetPermanent(mutantFilter).setTargetTag(1));
+                    ability.addTarget(new TargetCreaturePermanent(fenricFilter).setTargetTag(2));
                 }
         );
 
@@ -105,7 +107,7 @@ public final class TheCurseOfFenric extends CardImpl {
 
 class TheCurseOfFenricDestroyEffect extends OneShotEffect {
 
-    public TheCurseOfFenricDestroyEffect() {
+    TheCurseOfFenricDestroyEffect() {
         super(Outcome.DestroyPermanent);
     }
 
@@ -121,14 +123,19 @@ class TheCurseOfFenricDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Token mutantToken = new Mutant33DeathtouchToken();
+        List<UUID> playersToCreateToken = new ArrayList<>();
         for (Target target : source.getTargets()) {
             Permanent targetCreature = game.getPermanent(target.getFirstTarget());
             if (targetCreature != null) {
                 UUID controllerId = targetCreature.getControllerId();
                 if (targetCreature.destroy(source, game, false)) {
-                    mutantToken.putOntoBattlefield(1, game, source, controllerId);            
+                    playersToCreateToken.add(controllerId);
                 }
             }
+        }
+        game.processAction();
+        for (UUID controllerId : playersToCreateToken) {
+            mutantToken.putOntoBattlefield(1, game, source, controllerId);
         }
         return true;
     }
