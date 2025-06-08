@@ -154,7 +154,7 @@ class NissasEncouragementTarget extends TargetCardInLibrary {
                     return false;
                 }
             }
-            return filter.match(card, playerId, game);
+            return filter.match(card, playerId, source, game);
         }
         return false;
     }

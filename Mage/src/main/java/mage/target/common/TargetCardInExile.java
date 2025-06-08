@@ -75,7 +75,7 @@ public class TargetCardInExile extends TargetCard {
             ExileZone exileZone = game.getExile().getExileZone(zoneId);
             if (exileZone != null) {
                 for (Card card : exileZone.getCards(game)) {
-                    if (filter.match(card, sourceControllerId, game)) {
+                    if (filter.match(card, sourceControllerId, source, game)) {
                         possibleTargets.add(card.getId());
                     }
                 }
