@@ -118,6 +118,6 @@ class SharkTyphoonTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you cycle {this}, create an X/X blue Shark creature token with flying.";
+        return "When you cycle this card, create an X/X blue Shark creature token with flying.";
     }
 }

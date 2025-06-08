@@ -39,7 +39,7 @@ public final class IntoTheFloodMaw extends CardImpl {
 
         // Return target creature an opponent controls to its owner's hand. If the gift was promise, instead return target nonland permanent an opponent controls to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect()
-                .setText("return target creature an opponent controls to its owner's hand. If the gift was promise, " +
+                .setText("return target creature an opponent controls to its owner's hand. If the gift was promised, " +
                         "instead return target nonland permanent an opponent controls to its owner's hand"));
         this.getSpellAbility().addTarget(new TargetPermanent(playableFilter));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(GiftWasPromisedCondition.TRUE,

@@ -16,8 +16,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterHistoricSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +29,6 @@ import java.util.UUID;
 
 public final class MoiraAndTeshar extends CardImpl {
 
-    private static final FilterSpell filter = new FilterHistoricSpell();
     private static final FilterPermanentCard targetFilter = new FilterPermanentCard(
             "nonland permanent card from your graveyard");
 
@@ -51,7 +49,7 @@ public final class MoiraAndTeshar extends CardImpl {
         // Whenever you cast a historic spell, return target nonland permanent card from
         // your graveyard to the battlefield. It gains haste. Exile it at the beginning
         // of the next end step.
-        Ability ability = new SpellCastControllerTriggeredAbility(new MoiraAndTesharEffect(), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new MoiraAndTesharEffect(), StaticFilters.FILTER_SPELL_HISTORIC, false);
         ability.addTarget(new TargetCardInYourGraveyard(targetFilter));
 
         // If it would leave the battlefield, exile it instead of putting it anywhere

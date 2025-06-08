@@ -95,7 +95,7 @@ class CommunalBrewingCountersEffect extends ReplacementEffectImpl {
 
     CommunalBrewingCountersEffect() {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
-        this.staticText = "that creature enters with X additional +1/+1 counters on it, where X is is the number of ingredient counters on {this}";
+        this.staticText = "that creature enters with X additional +1/+1 counters on it, where X is the number of ingredient counters on {this}";
     }
 
     private CommunalBrewingCountersEffect(final CommunalBrewingCountersEffect effect) {

@@ -9,9 +9,7 @@ import mage.game.Game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Works with cards only. For objects like commanders you must override your canTarget method.
@@ -38,14 +36,6 @@ public class FilterCard extends FilterObject<Card> {
     @Override
     public FilterCard copy() {
         return new FilterCard(this);
-    }
-
-    public boolean match(Card card, UUID playerId, Game game) {
-        return match(card, playerId, null, game);
-    }
-
-    public Set<Card> filter(Set<Card> cards, Game game) {
-        return cards.stream().filter(card -> match(card, game)).collect(Collectors.toSet());
     }
 
     public static void checkPredicateIsSuitableForCardFilter(Predicate predicate) {

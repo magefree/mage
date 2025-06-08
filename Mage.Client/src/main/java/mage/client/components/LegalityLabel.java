@@ -25,9 +25,10 @@ public class LegalityLabel extends JLabel {
     protected static final Color COLOR_TEXT = new Color(255, 255, 255);
     protected static final Dimension DIM_MINIMUM = new Dimension(75, 25);
     protected static final Dimension DIM_MAXIMUM = new Dimension(150, 75);
-    protected static final Dimension DIM_PREFERRED = new Dimension(75, 25);
-    protected static final Dimension DIM_PREFERRED_X2 = new Dimension(DIM_PREFERRED.width * 2 + 5, 25);
-    protected static final Dimension DIM_PREFERRED_X3 = new Dimension(DIM_PREFERRED.width * 3 + 5 + 5, 25);
+    protected static final Dimension DIM_PREFERRED_1_OF_3 = new Dimension(75, 25);
+    protected static final Dimension DIM_PREFERRED_2_OF_3 = new Dimension(DIM_PREFERRED_1_OF_3.width * 2 + 5, 25);
+    protected static final Dimension DIM_PREFERRED_3_OF_3 = new Dimension(DIM_PREFERRED_1_OF_3.width * 3 + 5 * 2, 25);
+    protected static final Dimension DIM_PREFERRED_1_OF_5 = new Dimension((DIM_PREFERRED_3_OF_3.width - 5 * 4) / 5, 25);
 
     protected static final int TOOLTIP_TABLE_WIDTH = 400; // size of the label's tooltip
     protected static final int TOOLTIP_MAX_ERRORS = 20; // max errors to show in tooltip
@@ -54,7 +55,7 @@ public class LegalityLabel extends JLabel {
         setMaximumSize(DIM_MAXIMUM);
         setName(text); // NOI18N
         setOpaque(true);
-        setPreferredSize(DIM_PREFERRED);
+        setPreferredSize(DIM_PREFERRED_1_OF_3);
     }
 
     /**
@@ -80,7 +81,7 @@ public class LegalityLabel extends JLabel {
         setMinimumSize(DIM_MINIMUM);
         setMaximumSize(DIM_MAXIMUM);
         setOpaque(true);
-        setPreferredSize(DIM_PREFERRED);
+        setPreferredSize(DIM_PREFERRED_1_OF_3);
     }
 
     /**
@@ -91,7 +92,7 @@ public class LegalityLabel extends JLabel {
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setMinimumSize(DIM_MINIMUM);
         button.setMaximumSize(DIM_MAXIMUM);
-        button.setPreferredSize(DIM_PREFERRED);
+        button.setPreferredSize(DIM_PREFERRED_1_OF_3);
         return button;
     }
 

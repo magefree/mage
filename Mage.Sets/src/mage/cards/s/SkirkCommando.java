@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public final class SkirkCommando extends CardImpl {
         //Whenever Skirk Commando deals combat damage to a player, you may have it deal 2 damage to target creature that player controls.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DamageTargetEffect(2), true, true);
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
 
         //Morph {2}{R} (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)

@@ -272,9 +272,7 @@ public abstract class AbilityImpl implements Ability {
         game.applyEffects();
 
         MageObject sourceObject = getSourceObject(game);
-        if (getSourceObjectZoneChangeCounter() == 0) {
-            setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(getSourceId()));
-        }
+        initSourceObjectZoneChangeCounter(game, false);
         setSourcePermanentTransformCount(game);
 
         // if ability can be cast for no mana, clear the mana costs now, because additional mana costs must be paid.
@@ -1664,7 +1662,7 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
         if (getSourceObjectZoneChangeCounter() == 0
-                || getSourceObjectZoneChangeCounter() == game.getState().getZoneChangeCounter(getSourceId())) {
+                || getSourceObjectZoneChangeCounter() == getCurrentSourceObjectZoneChangeCounter(game)) {
             // exists or lki from battlefield
             return game.getObject(getSourceId());
         }
@@ -1701,6 +1699,27 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setSourceObjectZoneChangeCounter(int sourceObjectZoneChangeCounter) {
         this.sourceObjectZoneChangeCounter = sourceObjectZoneChangeCounter;
+    }
+
+    @Override
+    public void initSourceObjectZoneChangeCounter(Game game, boolean force) {
+        if (!(this instanceof MageSingleton) && (force || sourceObjectZoneChangeCounter == 0 )) {
+            setSourceObjectZoneChangeCounter(getCurrentSourceObjectZoneChangeCounter(game));
+        }
+    }
+
+    private int getCurrentSourceObjectZoneChangeCounter(Game game){
+        int zcc = game.getState().getZoneChangeCounter(getSourceId());
+        // TODO: Enable this, #13710
+        /*if (game.getPermanentEntering(getSourceId()) != null){
+            // If the triggered ability triggered while the permanent is entering the battlefield
+            // then add 1 zcc so that it triggers as if the permanent was already on the battlefield
+            // So "Enters with counters" causes "Whenever counters are placed" to trigger with battlefield zcc
+            // Particularly relevant for Sagas, which always involve both
+            // Note that this does NOT apply to "As ~ ETB" effects, those still use the stack zcc
+            zcc += 1;
+        }*/
+        return zcc;
     }
 
     @Override

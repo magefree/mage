@@ -1,6 +1,5 @@
 package mage.target.common;
 
-import mage.filter.common.FilterControlledCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 
 /**
@@ -50,22 +49,6 @@ public class TargetCreatureOrPlaneswalkerAmount extends TargetPermanentAmount {
      * @param filter             Filter for creatures and/or planeswalkers that something will be distributed amongst.
      */
     public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterCreatureOrPlaneswalkerPermanent filter) {
-        super(amount, minNumberOfTargets, maxNumberOfTargets, filter);
-    }
-
-    /**
-     * <b>IMPORTANT</b>: Use more specific constructor if {@code amount} is not always the same number!
-     *
-     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, FilterCreatureOrPlaneswalkerPermanent)
-     */
-    public TargetCreatureOrPlaneswalkerAmount(int amount, FilterControlledCreatureOrPlaneswalkerPermanent filter) {
-        this(amount, amount > 3 ? 0 : 1, amount, filter);
-    }
-
-    /**
-     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, int, int, FilterCreatureOrPlaneswalkerPermanent)
-     */
-    public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterControlledCreatureOrPlaneswalkerPermanent filter) {
         super(amount, minNumberOfTargets, maxNumberOfTargets, filter);
     }
 

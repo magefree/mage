@@ -96,7 +96,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Decomposition", 212, Rarity.UNCOMMON, mage.cards.d.Decomposition.class, RETRO_ART));
         cards.add(new SetCardInfo("Delirium", 260, Rarity.UNCOMMON, mage.cards.d.Delirium.class, RETRO_ART));
         cards.add(new SetCardInfo("Dirtwater Wraith", 117, Rarity.COMMON, mage.cards.d.DirtwaterWraith.class, RETRO_ART));
-//        cards.add(new SetCardInfo("Discordant Spirit", 261, Rarity.RARE, mage.cards.d.DiscordantSpirit.class, RETRO_ART));
+        cards.add(new SetCardInfo("Discordant Spirit", 261, Rarity.RARE, mage.cards.d.DiscordantSpirit.class, RETRO_ART));
         cards.add(new SetCardInfo("Disempower", 9, Rarity.COMMON, mage.cards.d.Disempower.class, RETRO_ART));
         cards.add(new SetCardInfo("Disenchant", 10, Rarity.COMMON, mage.cards.d.Disenchant.class, RETRO_ART));
         cards.add(new SetCardInfo("Dissipate", 61, Rarity.UNCOMMON, mage.cards.d.Dissipate.class, RETRO_ART));
@@ -302,7 +302,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Shauku, Endbringer", 142, Rarity.RARE, mage.cards.s.ShaukuEndbringer.class, RETRO_ART));
         cards.add(new SetCardInfo("Shimmer", 92, Rarity.RARE, mage.cards.s.Shimmer.class, RETRO_ART));
         cards.add(new SetCardInfo("Sidar Jabari", 39, Rarity.RARE, mage.cards.s.SidarJabari.class, RETRO_ART));
-//        cards.add(new SetCardInfo("Sirocco", 192, Rarity.UNCOMMON, mage.cards.s.Sirocco.class, RETRO_ART));
+        cards.add(new SetCardInfo("Sirocco", 192, Rarity.UNCOMMON, mage.cards.s.Sirocco.class, RETRO_ART));
         cards.add(new SetCardInfo("Skulking Ghost", 143, Rarity.COMMON, mage.cards.s.SkulkingGhost.class, RETRO_ART));
         cards.add(new SetCardInfo("Sky Diamond", 319, Rarity.UNCOMMON, mage.cards.s.SkyDiamond.class, RETRO_ART));
         cards.add(new SetCardInfo("Soar", 93, Rarity.COMMON, mage.cards.s.Soar.class, RETRO_ART));

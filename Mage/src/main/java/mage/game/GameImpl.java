@@ -1960,7 +1960,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void addEffect(ContinuousEffect continuousEffect, Ability source) {
         Ability newAbility = source.copy();
-        newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+        newAbility.initSourceObjectZoneChangeCounter(this, true);
         ContinuousEffect newEffect = continuousEffect.copy();
 
         newEffect.newId();
@@ -2159,18 +2159,14 @@ public abstract class GameImpl implements Game {
             // countered, or otherwise responded to. Rather, it resolves immediately after the mana
             // ability that triggered it, without waiting for priority.
             Ability manaAbility = ability.copy();
-            if (manaAbility.getSourceObjectZoneChangeCounter() == 0) {
-                manaAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
-            }
+            manaAbility.initSourceObjectZoneChangeCounter(this, false);
             if (manaAbility.activate(this, false)) {
                 manaAbility.resolve(this);
             }
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
-            if (newAbility.getSourceObjectZoneChangeCounter() == 0) {
-                newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
-            }
+            newAbility.initSourceObjectZoneChangeCounter(this, false);
             if (!(newAbility instanceof DelayedTriggeredAbility)) {
                 newAbility.setSourcePermanentTransformCount(this);
             }
@@ -2715,9 +2711,9 @@ public abstract class GameImpl implements Game {
                             .add(perm);
                 }
             }
-            // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number
+            // 704.5s If the number of lore counters on a Saga permanent with one or more chapter abilities is greater than or equal to its final chapter number
             // and it isn't the source of a chapter ability that has triggered but not yet left the stack, that Saga's controller sacrifices it.
-            if (perm.hasSubtype(SubType.SAGA, this)) {
+            if (perm.hasSubtype(SubType.SAGA, this) && perm.getAbilities(this).containsClass(SagaAbility.class)) {
                 int maxChapter = perm
                         .getAbilities(this)
                         .stream()

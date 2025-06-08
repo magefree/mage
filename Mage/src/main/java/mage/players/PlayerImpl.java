@@ -1306,7 +1306,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         SpellAbility ability = originalAbility.copy();
         Set<MageIdentifier> allowedIdentifiers = originalAbility.spellCanBeActivatedNow(getId(), game);
         ability.setControllerId(getId());
-        ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
+        ability.initSourceObjectZoneChangeCounter(game, true);
 
         //20091005 - 601.2a
         if (ability.getSourceId() == null) {
@@ -1332,7 +1332,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     spell.setCopy(true, null);
                 }
                 // Update the zcc to the stack
-                ability.setSourceObjectZoneChangeCounter(game.getState().getZoneChangeCounter(ability.getSourceId()));
+                ability.initSourceObjectZoneChangeCounter(game, true);
 
                 // ALTERNATIVE COST from dynamic effects
                 // some effects set sourceId to cast without paying mana costs or other costs
@@ -3088,7 +3088,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (winnable) {
                     game.informPlayers(getLogName() + " won the flip" + CardUtil.getSourceLogName(game, source));
                 }
-                game.fireEvent(new FlipCoinEvent(playerId, source, true, true, winnable).createFlippedEvent());
+                game.fireEvent(new FlipCoinEvent(playerId, source, true, true, true).createFlippedEvent());
                 results.add(true);
                 continue;
             }

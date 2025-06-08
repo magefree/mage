@@ -83,6 +83,7 @@ public enum MageIdentifier {
     PrimalPrayersAlternateCast,
     QuilledGreatwurmAlternateCast,
     WickerfolkIndomitableAlternateCast,
+    UriangerAugureltAlternateCast,
     ValgavothTerrorEaterAlternateCast;
 
     /**

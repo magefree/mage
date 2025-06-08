@@ -7,7 +7,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.constants.Outcome;
@@ -43,10 +42,8 @@ public class OffspringAbility extends StaticAbility implements OptionalAdditiona
         this.additionalCost.setRepeatable(false);
         this.rule = additionalCost.getName() + ' ' + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
-        this.addSubAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new OffspringEffect()), OffspringCondition.instance,
-                "When this creature enters, if its offspring cost was paid, create a 1/1 token copy of it."
-        ).setRuleVisible(false));
+        this.addSubAbility(new EntersBattlefieldTriggeredAbility(new OffspringEffect())
+                .withInterveningIf(OffspringCondition.instance).setRuleVisible(false));
     }
 
     private OffspringAbility(final OffspringAbility ability) {
@@ -96,6 +93,7 @@ class OffspringEffect extends OneShotEffect {
 
     OffspringEffect() {
         super(Outcome.Benefit);
+        staticText = "create a 1/1 token copy of it";
     }
 
     private OffspringEffect(final OffspringEffect effect) {
@@ -127,6 +125,6 @@ enum OffspringCondition implements Condition {
 
     @Override
     public String toString() {
-        return "Offspring cost was paid";
+        return "its offspring cost was paid";
     }
 }
