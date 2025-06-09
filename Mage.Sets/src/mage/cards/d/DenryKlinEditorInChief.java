@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCountersCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCounterChoiceSourceEffect;
 import mage.cards.CardImpl;
@@ -43,14 +42,9 @@ public class DenryKlinEditorInChief extends CardImpl {
 
         // Whenever a nontoken creature you control enters,
         // if Denry has counters on it, put the same number of each kind of counter on that creature.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldControlledTriggeredAbility(
-                        new DenryKlinEditorInChiefCopyCountersEffect(),
-                        StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN),
-                SourceHasCountersCondition.instance,
-                "Whenever a nontoken creature you control enters, " +
-                "if Denry has counters on it, put the same number of each kind of counter on that creature.")
-        );
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                new DenryKlinEditorInChiefCopyCountersEffect(), StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN
+        ).withInterveningIf(SourceHasCountersCondition.instance));
 
     }
 
@@ -68,6 +62,7 @@ class DenryKlinEditorInChiefCopyCountersEffect extends OneShotEffect {
 
     DenryKlinEditorInChiefCopyCountersEffect() {
         super(Outcome.Benefit);
+        staticText = "put the same number of each kind of counter on that creature";
     }
 
     @Override

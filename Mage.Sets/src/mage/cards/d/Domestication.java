@@ -1,52 +1,48 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
+import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Optional;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class Domestication extends CardImpl {
 
     public Domestication(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
-        
+        this.addAbility(new EnchantAbility(auraTarget));
+
         // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
-        
+
         // At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice Domestication.
-        TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, new DomesticationCondition(), "At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice {this}"));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect()).withInterveningIf(DomesticationCondition.instance));
     }
 
     private Domestication(final Domestication card) {
@@ -59,19 +55,23 @@ public final class Domestication extends CardImpl {
     }
 }
 
-class DomesticationCondition implements Condition {
-    
+enum DomesticationCondition implements Condition {
+    instance;
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null) {
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (enchanted != null) {
-                if (enchanted.getPower().getValue() >= 4) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return Optional
+                .ofNullable(source.getSourcePermanentIfItStillExists(game))
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanent)
+                .map(MageObject::getPower)
+                .map(MageInt::getValue)
+                .filter(x -> x >= 4)
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "enchanted creature's power is 4 or greater";
     }
 }

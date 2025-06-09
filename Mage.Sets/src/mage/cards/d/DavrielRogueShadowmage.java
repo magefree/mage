@@ -2,16 +2,14 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -21,6 +19,8 @@ import java.util.UUID;
  */
 public final class DavrielRogueShadowmage extends CardImpl {
 
+    private static final Condition condition = new CardsInHandCondition(ComparisonType.OR_LESS, 1, TargetController.ACTIVE);
+
     public DavrielRogueShadowmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}");
 
@@ -29,13 +29,12 @@ public final class DavrielRogueShadowmage extends CardImpl {
         this.setStartingLoyalty(3);
 
         // At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel, Rogue Shadowmage deals 2 damage to them.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        Zone.BATTLEFIELD, TargetController.OPPONENT, new DamageTargetEffect(2),
-                        false
-                ), DavrielRogueShadowmageCondition.instance, "At the beginning of each opponent's upkeep, " +
-                "if that player has one or fewer cards in hand, {this} deals 2 damage to them."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.OPPONENT,
+                new DamageTargetEffect(
+                        2, true, "them", "{this}"
+                ), false
+        ).withInterveningIf(condition));
 
         // -1: Target player discards a card.
         Ability ability = new LoyaltyAbility(new DiscardTargetEffect(1), -1);
@@ -50,15 +49,5 @@ public final class DavrielRogueShadowmage extends CardImpl {
     @Override
     public DavrielRogueShadowmage copy() {
         return new DavrielRogueShadowmage(this);
-    }
-}
-
-enum DavrielRogueShadowmageCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(game.getActivePlayerId());
-        return player != null && player.getHand().size() < 2;
     }
 }
