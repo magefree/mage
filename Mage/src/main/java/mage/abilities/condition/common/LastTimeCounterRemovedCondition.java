@@ -11,7 +11,6 @@ import java.util.Optional;
  * Created by glerman on 20/6/15.
  */
 public enum LastTimeCounterRemovedCondition implements Condition {
-
     instance;
 
     @Override
@@ -19,7 +18,7 @@ public enum LastTimeCounterRemovedCondition implements Condition {
         return Optional
                 .ofNullable(source.getSourcePermanentOrLKI(game))
                 .map(permanent -> permanent.getCounters(game).getCount(CounterType.TIME))
-                .map(x -> x == 0)
+                .filter(x -> x == 0)
                 .isPresent();
     }
 
