@@ -4,8 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -31,7 +29,7 @@ import java.util.UUID;
  */
 public final class ConfoundingConundrum extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterLandPermanent();
+    private static final FilterPermanent filter = new FilterLandPermanent("a land an opponent controls");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
@@ -44,13 +42,10 @@ public final class ConfoundingConundrum extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Whenever a land enters the battlefield under an opponent's control, if that player had another land enter the battlefield under their control this turn, they return a land they control to its owner's hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, new ConfoundingConundrumEffect(), filter,
-                false, SetTargetPointer.PLAYER
-        ), ConfoundingConundrumCondition.instance, "Whenever a land enters the battlefield under " +
-                "an opponent's control, if that player had another land enter the battlefield " +
-                "under their control this turn, they return a land they control to its owner's hand."
-        ), new ConfoundingConundrumWatcher());
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new ConfoundingConundrumEffect(),
+                filter, false, SetTargetPointer.PLAYER
+        ).withInterveningIf(ConfoundingConundrumCondition.instance), new ConfoundingConundrumWatcher());
     }
 
     private ConfoundingConundrum(final ConfoundingConundrum card) {
@@ -69,17 +64,16 @@ enum ConfoundingConundrumCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         ConfoundingConundrumWatcher watcher = game.getState().getWatcher(ConfoundingConundrumWatcher.class);
-        if (watcher == null) {
-            return false;
-        }
-        Player player = null;
-        for (Effect effect : source.getEffects()) {
-            if (player != null) {
-                break;
-            }
-            player = game.getPlayer(effect.getTargetPointer().getFirst(game, source));
-        }
-        return player != null && watcher.checkPlayer(player.getId());
+        return watcher != null
+                && CardUtil
+                .getEffectValueFromAbility(source, "permanentEnteringControllerId", UUID.class)
+                .filter(watcher::checkPlayer)
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "that player had another land enter the battlefield under their control this turn";
     }
 }
 
@@ -87,6 +81,7 @@ class ConfoundingConundrumEffect extends OneShotEffect {
 
     ConfoundingConundrumEffect() {
         super(Outcome.Benefit);
+        staticText = "they return a land they control to its owner's hand";
     }
 
     private ConfoundingConundrumEffect(final ConfoundingConundrumEffect effect) {

@@ -4,7 +4,6 @@ import mage.abilities.common.ScryTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -22,7 +21,7 @@ import java.util.UUID;
 public final class CouncilsDeliberation extends CardImpl {
 
     private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.ISLAND));
+            = new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.ISLAND, "you control an Island"));
 
     public CouncilsDeliberation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
@@ -31,15 +30,11 @@ public final class CouncilsDeliberation extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
 
         // Whenever you scry, if you control an Island, you may exile Council's Deliberation from your graveyard. If you do, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new ScryTriggeredAbility(
-                        Zone.GRAVEYARD,
-                        new DoIfCostPaid(
-                                new DrawCardSourceControllerEffect(1), new ExileSourceFromGraveCost()
-                        ), false
-                ), condition, "Whenever you scry, if you control an Island, " +
-                "you may exile {this} from your graveyard. If you do, draw a card."
-        ));
+        this.addAbility(new ScryTriggeredAbility(
+                Zone.GRAVEYARD,
+                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ExileSourceFromGraveCost()),
+                false
+        ).withInterveningIf(condition));
     }
 
     private CouncilsDeliberation(final CouncilsDeliberation card) {
