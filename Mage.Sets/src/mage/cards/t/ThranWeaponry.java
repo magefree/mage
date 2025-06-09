@@ -1,7 +1,7 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
@@ -13,9 +13,12 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.Layer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -65,16 +68,12 @@ class ThranWeaponryEffect extends BoostAllEffect{
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent ThranWeaponry = game.getPermanent(source.getSourceId());
-        if (ThranWeaponry != null) {
-            if (ThranWeaponry.isTapped()) {
-                super.apply(game, source);
-                return true;
-            } else {
-                used = true;
-            }
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent thranWeaponry = game.getPermanent(source.getSourceId());
+        if (thranWeaponry == null || !thranWeaponry.isTapped()) {
+            this.discard();
+            return false;
         }
-        return false;
+        return super.queryAffectedObjects(layer, source, game, affectedObjects);
     }
 }

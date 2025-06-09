@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -79,13 +80,13 @@ class BecomeSwampEffect extends BecomesBasicLandTargetEffect {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent land = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (land == null || land.getCounters(game).getCount(CounterType.MIRE) < 1) {
             this.discard();
             return false;
         }
-        return super.apply(layer, sublayer, source, game);
+        return true;
     }
 
     @Override

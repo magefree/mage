@@ -1,11 +1,14 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.cards.Card;
 import mage.constants.*;
-import mage.filter.common.*;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledCreatureSpell;
+import mage.filter.common.FilterOwnedCreatureCard;
 import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
@@ -71,7 +74,7 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         UUID controllerId = source.getControllerId();
         Player controller = game.getPlayer(controllerId);
         SubType subType = this.chosenType;
@@ -81,32 +84,31 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
         if (controller == null || subType == null) {
             return false;
         }
-
         // creatures cards you own that aren't on the battlefield
         // in graveyard
         for (UUID cardId : controller.getGraveyard()) {
             Card card = game.getCard(cardId);
             if (filterCard.match(card, controllerId, source, game) && !card.hasSubtype(subType, game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                affectedObjects.add(card);
             }
         }
         // on Hand
         for (UUID cardId : controller.getHand()) {
             Card card = game.getCard(cardId);
             if (filterCard.match(card, controllerId, source, game) && !card.hasSubtype(subType, game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                affectedObjects.add(card);
             }
         }
         // in Exile
         for (Card card : game.getState().getExile().getAllCards(game, controllerId)) {
             if (filterCard.match(card, controllerId, source, game) && !card.hasSubtype(subType, game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                affectedObjects.add(card);
             }
         }
         // in Library (e.g. for Mystical Teachings)
         for (Card card : controller.getLibrary().getCards(game)) {
             if (filterCard.match(card, controllerId, source, game) && !card.hasSubtype(subType, game)) {
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                affectedObjects.add(card);
             }
         }
         // commander in command zone
@@ -114,7 +116,7 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
             if (commandObject instanceof Commander) {
                 Card card = game.getCard((commandObject).getId());
                 if (filterCard.match(card, controllerId, source, game) && !card.hasSubtype(subType, game)) {
-                    game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                    affectedObjects.add(card);
                 }
             }
         }
@@ -125,7 +127,7 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
                     && filterSpell.match(stackObject, controllerId, source, game)
                     && !stackObject.hasSubtype(subType, game)) {
                 Card card = ((Spell) stackObject).getCard();
-                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+                affectedObjects.add(card);
             }
         }
         // creatures you control
@@ -133,9 +135,26 @@ public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
                 filterPermanent, controllerId, game);
         for (Permanent creature : creatures) {
             if (creature != null) {
-                creature.addSubType(game, subType);
+                affectedObjects.add(creature);
             }
         }
-        return true;
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        SubType subType = this.chosenType;
+        if (subType == null) {
+            subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
+        }
+        for (MageItem object : affectedObjects) {
+            if (object instanceof Permanent) {
+                Permanent permanent = (Permanent) object;
+                permanent.addSubType(game, subType);
+            } else if (object instanceof Card) {
+                Card card = (Card) object;
+                game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
+            }
+        }
     }
 }

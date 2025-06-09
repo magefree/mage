@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.ObjectColor;
@@ -190,17 +191,32 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent permanent;
         if (objectReference != null) {
             permanent = objectReference.getPermanent(game);
         } else {
             permanent = game.getPermanent(source.getSourceId());
         }
-
         if (permanent != null && permanent.isFaceDown(game)) {
+            affectedObjects.add(permanent);
+        }
+        if (affectedObjects.isEmpty()) {
+            if (duration == Duration.Custom && foundPermanent) {
+                this.discard();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        boolean foundPermanentResult = false;
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             if (!foundPermanent) {
-                foundPermanent = true;
+                foundPermanentResult = true;
                 switch (faceDownType) {
                     case MANIFESTED:
                     case MANUAL: // sets manifested image // TODO: wtf
@@ -220,11 +236,11 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
                         throw new UnsupportedOperationException("FaceDownType not yet supported: " + faceDownType);
                 }
             }
-            makeFaceDownObject(game, source.getSourceId(), permanent, faceDownType, this.additionalAbilities);
-        } else if (duration == Duration.Custom && foundPermanent) {
-            discard();
+            makeFaceDownObject(game, source.getId(), permanent, faceDownType, additionalAbilities);
         }
-        return true;
+        if (!foundPermanent) {
+            foundPermanent = foundPermanentResult;
+        }
     }
 
     // TODO: implement multiple face down types?!

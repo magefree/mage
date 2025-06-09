@@ -1,7 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
-
+import mage.MageItem;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -16,6 +15,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author LevelX
@@ -71,34 +73,31 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            MageObject mageObject = game.getObject(targetId);
+            if (mageObject instanceof Spell || mageObject instanceof Permanent) {
+                affectedObjects.add(mageObject);
+            }
+        }
+        if (affectedObjects.isEmpty()) {
+            if (duration == Duration.Custom) {
+                discard();
+            }
             return false;
         }
-        if (setColor != null) {
-            boolean objectFound = false;
-            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-                MageObject targetObject = game.getObject(targetId);
-                if (targetObject != null) {
-                    if (targetObject instanceof Spell || targetObject instanceof Permanent) {
-                        objectFound = true;
-                        if (retainColor) {
-                            targetObject.getColor(game).addColor(setColor);
-                        } else {
-                            targetObject.getColor(game).setColor(setColor);
-                        }
-                    } else {
-                        objectFound = false;
-                    }
-                }
+        return true;
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            MageObject mageObject = (MageObject) object;
+            if (retainColor) {
+                mageObject.getColor(game).addColor(setColor);
+            } else {
+                mageObject.getColor(game).setColor(setColor);
             }
-            if (!objectFound && this.getDuration() == Duration.Custom) {
-                this.discard();
-            }
-            return true;
-        } else {
-            throw new UnsupportedOperationException("No color set");
         }
     }
 

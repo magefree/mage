@@ -1,6 +1,6 @@
 package mage.cards.k;
 
-import java.util.UUID;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,6 +16,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -73,23 +76,20 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        // Check if the equipment is attached
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
-            if (equipedCreature != null) {
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    if (perm.shareCreatureTypes(game, equipedCreature)) {
-                        perm.addPower(power.calculate(game, source, this));
-                        perm.addToughness(toughness.calculate(game, source, this));
-
-                    }
+        if (equipment == null || equipment.getAttachedTo() == null) {
+            return false;
+        }
+        Permanent equippedCreature = game.getPermanent(equipment.getAttachedTo());
+        if (equippedCreature != null) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (permanent.shareCreatureTypes(game, equippedCreature)) {
+                    affectedObjects.add(permanent);
                 }
-                return true;
             }
         }
-        return false;
+        return !affectedObjects.isEmpty();
     }
 
     @Override
@@ -113,23 +113,20 @@ class KondasBannerColorBoostEffect extends BoostAllEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        // Check if the equipment is attached
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
-            if (equipedCreature != null) {
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    if (equipedCreature.getColor(game).shares(perm.getColor(game))) {
-                        perm.addPower(power.calculate(game, source, this));
-                        perm.addToughness(toughness.calculate(game, source, this));
-
-                    }
+        if (equipment == null || equipment.getAttachedTo() == null) {
+            return false;
+        }
+        Permanent equippedCreature = game.getPermanent(equipment.getAttachedTo());
+        if (equippedCreature != null) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (permanent.getColor(game).shares(equippedCreature.getColor(game))) {
+                    affectedObjects.add(permanent);
                 }
-                return true;
             }
         }
-        return false;
+        return !affectedObjects.isEmpty();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package mage.cards.u;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -14,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
+import java.util.List;
 import java.util.UUID;
 
 public class UnctussRetrofitter extends CardImpl {
@@ -65,12 +67,11 @@ class UnctussRetrofitterBecomesCreatureEffect extends BecomesCreatureTargetEffec
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (sourcePermanent == null) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        if (game.getPermanent(source.getSourceId()) == null) {
             this.discard();
             return false;
         }
-        return super.apply(layer, sublayer, source, game);
+        return super.queryAffectedObjects(layer, source, game, affectedObjects);
     }
 }

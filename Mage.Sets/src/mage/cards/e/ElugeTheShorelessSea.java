@@ -1,9 +1,11 @@
 package mage.cards.e;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -131,13 +133,14 @@ class ElugeTheShorelessSeaEffect extends BecomesBasicLandTargetEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent land = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (land == null || land.getCounters(game).getCount(CounterType.FLOOD) < 1) {
             discard();
             return false;
         }
-        return super.apply(game, source);
+        affectedObjects.add(land);
+        return true;
     }
 }
 

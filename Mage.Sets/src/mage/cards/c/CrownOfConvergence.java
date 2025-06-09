@@ -1,6 +1,7 @@
 
 package mage.cards.c;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -16,13 +17,14 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -70,21 +72,21 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            Card topCard = you.getLibrary().getFromTop(game);
-            if (topCard != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), source, game)) {
-                    if (permanent.getColor(game).shares(topCard.getColor(game)) && !permanent.getColor(game).isColorless()) {
-                        permanent.addPower(power.calculate(game, source, this));
-                        permanent.addToughness(toughness.calculate(game, source, this));
-                    }
-                }
-            }
-            return true;
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Card topCard = controller.getLibrary().getFromTop(game);
+        if (topCard == null) {
+            return false;
+        }
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
+            if (permanent.getColor(game).shares(topCard.getColor(game))) {
+                affectedObjects.add(permanent);
+            }
+        }
+        return !affectedObjects.isEmpty();
     }
 
     @Override
