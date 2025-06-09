@@ -2,29 +2,29 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+
+import java.util.Optional;
 
 /**
  * Created by glerman on 20/6/15.
  */
-public enum LastTimeCounterRemovedCondition implements Condition{
+public enum LastTimeCounterRemovedCondition implements Condition {
 
-instance;
+    instance;
 
-  @Override
-  public boolean apply(Game game, Ability source) {
-    Permanent permanent = game.getPermanent(source.getSourceId());
-    if (permanent == null) {
-      permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return Optional
+                .ofNullable(source.getSourcePermanentOrLKI(game))
+                .map(permanent -> permanent.getCounters(game).getCount(CounterType.TIME))
+                .map(x -> x == 0)
+                .isPresent();
     }
-    if (permanent != null) {
-      final int timeCounters = permanent.getCounters(game).getCount(CounterType.TIME);
-      return timeCounters == 0;
-    } else {
-      return false;
+
+    @Override
+    public String toString() {
+        return "it had no time counters on it";
     }
-  }
 }
