@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksFirstTimeTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -37,12 +36,7 @@ public final class FearOfMissingOut extends CardImpl {
         this.addAbility(ability);
 
         // Delirium -- Whenever Fear of Missing Out attacks for the first time each turn, if there are four or more card types among cards in your graveyard, untap target creature. After this phase, there is an additional combat phase.
-        ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksFirstTimeTriggeredAbility(new UntapTargetEffect(), false),
-                DeliriumCondition.instance, "<i>Delirium</i> &mdash; Whenever {this} attacks for the first time each turn, "
-                + "if there are four or more card types among cards in your graveyard, untap target creature. "
-                + "After this phase, there is an additional combat phase."
-        );
+        ability = new AttacksFirstTimeTriggeredAbility(new UntapTargetEffect(), false).withInterveningIf(DeliriumCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new AdditionalCombatPhaseEffect());
         ability.addHint(CardTypesInGraveyardCount.YOU.getHint());

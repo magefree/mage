@@ -4,17 +4,16 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 import java.util.UUID;
 
@@ -23,12 +22,12 @@ import java.util.UUID;
  */
 public final class FaerieMiscreant extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("you control another creature named Faerie Miscreant");
 
     static {
         filter.add(new NamePredicate("Faerie Miscreant"));
         filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
@@ -44,12 +43,9 @@ public final class FaerieMiscreant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Faerie Miscreant enters the battlefield, if you control another creature named Faerie Miscreant, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), false
-                ), condition, "When {this} enters, " +
-                "if you control another creature named Faerie Miscreant, draw a card."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new DrawCardSourceControllerEffect(1), false
+        ).withInterveningIf(condition));
     }
 
     private FaerieMiscreant(final FaerieMiscreant card) {

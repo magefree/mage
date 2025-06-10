@@ -3,7 +3,6 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.ReachAbility;
@@ -30,12 +29,8 @@ public final class FunnelWebRecluse extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Morbid — When Funnel-Web Recluse enters the battlefield, if a creature died this turn, investigate.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new InvestigateEffect()),
-                MorbidCondition.instance, "<i>Morbid</i> &mdash; When {this} enters, " +
-                "if a creature died this turn, investigate. <i>(Create a colorless Clue artifact token " +
-                "with \"{2}, Sacrifice this artifact: Draw a card.\")</i>"
-        ).addHint(MorbidHint.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect())
+                .withInterveningIf(MorbidCondition.instance).addHint(MorbidHint.instance));
     }
 
     private FunnelWebRecluse(final FunnelWebRecluse card) {

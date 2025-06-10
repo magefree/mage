@@ -1,13 +1,12 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CorruptedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ToxicAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -38,11 +37,10 @@ public final class GoliathHatchery extends CardImpl {
         ));
 
         // Corrupted -- At the beginning of your upkeep, if an opponent has three or more poison counters, choose a creature you control, then draw cards equal to its total toxic value.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new GoliathHatcheryEffect(), false
-                ).setAbilityWord(AbilityWord.CORRUPTED), CorruptedCondition.instance, null
-        ).addHint(CorruptedCondition.getHint()));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoliathHatcheryEffect())
+                .withInterveningIf(CorruptedCondition.instance)
+                .setAbilityWord(AbilityWord.CORRUPTED)
+                .addHint(CorruptedCondition.getHint()));
     }
 
     private GoliathHatchery(final GoliathHatchery card) {
@@ -59,8 +57,7 @@ class GoliathHatcheryEffect extends OneShotEffect {
 
     GoliathHatcheryEffect() {
         super(Outcome.Benefit);
-        staticText = "if an opponent has three or more poison counters, " +
-                "choose a creature you control, then draw cards equal to its total toxic value";
+        staticText = "choose a creature you control, then draw cards equal to its total toxic value";
     }
 
     private GoliathHatcheryEffect(final GoliathHatcheryEffect effect) {

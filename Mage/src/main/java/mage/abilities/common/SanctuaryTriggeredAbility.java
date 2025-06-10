@@ -1,14 +1,10 @@
-
 package mage.abilities.common;
 
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.filter.FilterPermanent;
@@ -18,10 +14,10 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author TheElk801
  */
-public class SanctuaryInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
+public class SanctuaryTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     private static Condition makeOrCondition(ObjectColor color1, ObjectColor color2) {
-        FilterPermanent filter = new FilterPermanent();
+        FilterPermanent filter = new FilterPermanent("you control a " + color1.getDescription() + " or " + color2.getDescription() + " permanent");
         filter.add(Predicates.or(
                 new ColorPredicate(color1),
                 new ColorPredicate(color2)
@@ -39,24 +35,17 @@ public class SanctuaryInterveningIfTriggeredAbility extends ConditionalInterveni
         return new CompoundCondition(condition1, condition2);
     }
 
-    private static TriggeredAbility makeTrigger(OneShotEffect effect1, OneShotEffect effect2, ObjectColor color1, ObjectColor color2) {
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(
-                new ConditionalOneShotEffect(effect1, new InvertCondition(makeAndCondition(color1, color2)))
-        );
-        ability.addEffect(new ConditionalOneShotEffect(effect2, makeAndCondition(color1, color2)));
-        return ability;
+    public SanctuaryTriggeredAbility(OneShotEffect effect1, OneShotEffect effect2, ObjectColor color1, ObjectColor color2, String text) {
+        super(new ConditionalOneShotEffect(effect2, effect1, makeAndCondition(color1, color2), text));
+        this.withInterveningIf(makeOrCondition(color1, color2));
     }
 
-    public SanctuaryInterveningIfTriggeredAbility(OneShotEffect effect1, OneShotEffect effect2, ObjectColor color1, ObjectColor color2, String text) {
-        super(makeTrigger(effect1, effect2, color1, color2), makeOrCondition(color1, color2), text);
-    }
-
-    protected SanctuaryInterveningIfTriggeredAbility(final SanctuaryInterveningIfTriggeredAbility ability) {
+    protected SanctuaryTriggeredAbility(final SanctuaryTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public SanctuaryInterveningIfTriggeredAbility copy() {
-        return new SanctuaryInterveningIfTriggeredAbility(this);
+    public SanctuaryTriggeredAbility copy() {
+        return new SanctuaryTriggeredAbility(this);
     }
 }
