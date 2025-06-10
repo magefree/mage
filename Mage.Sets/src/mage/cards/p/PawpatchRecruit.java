@@ -1,18 +1,17 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.constants.*;
 import mage.abilities.keyword.OffspringAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -23,7 +22,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,9 +63,6 @@ public final class PawpatchRecruit extends CardImpl {
 
 class PawpatchRecruitTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final FilterPermanent filterTarget = StaticFilters.FILTER_CONTROLLED_A_CREATURE;
-    private final FilterStackObject filterStack = StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS;
-
     public PawpatchRecruitTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
     }
@@ -93,11 +90,11 @@ class PawpatchRecruitTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent == null || !filterTarget.match(permanent, getControllerId(), this, game)) {
+        if (permanent == null || !StaticFilters.FILTER_CONTROLLED_A_CREATURE.match(permanent, getControllerId(), this, game)) {
             return false;
         }
-        StackObject targetingObject = CardUtil.findTargetingStackObject(this.getId().toString(), event, game);
-        if (targetingObject == null || !filterStack.match(targetingObject, getControllerId(), this, game)) {
+        StackObject targetingObject = game.findTargetingStackObject(this.getId().toString(), event);
+        if (targetingObject == null || !StaticFilters.FILTER_SPELL_OR_ABILITY_OPPONENTS.match(targetingObject, getControllerId(), this, game)) {
             return false;
         }
         this.getTargets().clear();
