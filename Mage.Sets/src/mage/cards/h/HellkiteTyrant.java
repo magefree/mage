@@ -2,17 +2,15 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainControlAllControlledTargetEffect;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,6 +26,10 @@ import java.util.UUID;
  */
 public final class HellkiteTyrant extends CardImpl {
 
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterArtifactPermanent("you control twenty or more artifacts"), ComparisonType.MORE_THAN, 19
+    );
+
     public HellkiteTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add(SubType.DRAGON);
@@ -37,8 +39,10 @@ public final class HellkiteTyrant extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Whenever Hellkite Tyrant deals combat damage to a player, gain control of all artifacts that player controls.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new GainControlAllControlledTargetEffect(StaticFilters.FILTER_PERMANENT_ARTIFACTS)
@@ -46,12 +50,8 @@ public final class HellkiteTyrant extends CardImpl {
                 false, true));
 
         // At the beginning of your upkeep, if you control twenty or more artifacts, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                ability,
-                new PermanentsOnTheBattlefieldCondition(new FilterArtifactPermanent(), ComparisonType.MORE_THAN, 19),
-                "At the beginning of your upkeep, if you control twenty or more artifacts, you win the game."
-        ).addHint(new ValueHint("Artifacts you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT))));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect())
+                .withInterveningIf(condition).addHint(ArtifactYouControlHint.instance));
     }
 
     private HellkiteTyrant(final HellkiteTyrant card) {

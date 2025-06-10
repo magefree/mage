@@ -3,11 +3,11 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.HellbentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -29,12 +29,9 @@ public final class HeadlessSpecter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Hellbent — Whenever Headless Specter deals combat damage to a player, if you have no cards in hand, that player discards a card at random.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(
-                        new DiscardTargetEffect(1, true), false, true
-                ), HellbentCondition.instance, "<i>Hellbent</i> &mdash; Whenever {this} deals combat damage " +
-                "to a player, if you have no cards in hand, that player discards a card at random."
-        ));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DiscardTargetEffect(1, true), false, true
+        ).withInterveningIf(HellbentCondition.instance).setAbilityWord(AbilityWord.HELLBENT));
     }
 
     private HeadlessSpecter(final HeadlessSpecter card) {
