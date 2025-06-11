@@ -3,16 +3,16 @@ package mage.cards.o;
 import mage.MageObjectReference;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -24,15 +24,18 @@ import java.util.UUID;
  */
 public final class OpalTitan extends CardImpl {
 
+    private static final Condition condition = new SourceMatchesFilterCondition(
+            new FilterEnchantmentPermanent("this permanent is an enchantment")
+    );
+
     public OpalTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // When an opponent casts a creature spell, if Opal Titan is an enchantment, Opal Titan becomes a 4/4 Giant creature with protection from each of that spell's colors.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new OpalTitanBecomesCreatureEffect(),
-                StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.SPELL);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
-                "When an opponent casts a creature spell, if Opal Titan is an enchantment, Opal Titan becomes a 4/4 Giant creature with protection from each of that spell's colors."));
-
+        this.addAbility(new SpellCastOpponentTriggeredAbility(
+                Zone.BATTLEFIELD, new OpalTitanBecomesCreatureEffect(),
+                StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.SPELL
+        ).withInterveningIf(condition));
     }
 
     private OpalTitan(final OpalTitan card) {

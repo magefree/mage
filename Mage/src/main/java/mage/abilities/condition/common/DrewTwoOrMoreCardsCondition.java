@@ -19,6 +19,6 @@ public enum DrewTwoOrMoreCardsCondition implements Condition {
 
     @Override
     public String toString() {
-        return "you've drawn two or more cards this turn";
+        return "you've drawn more than one card this turn";
     }
 }

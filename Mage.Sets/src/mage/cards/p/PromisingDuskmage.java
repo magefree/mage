@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,6 +12,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -30,11 +30,8 @@ public final class PromisingDuskmage extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Promising Duskmage dies, if it had a +1/+1 counter on it, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                PromisingDuskmageCondition.instance, "When {this} dies, " +
-                "if it had a +1/+1 counter on it, draw a card."
-        ));
+        this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(PromisingDuskmageCondition.instance));
     }
 
     private PromisingDuskmage(final PromisingDuskmage card) {
@@ -52,7 +49,14 @@ enum PromisingDuskmageCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getEffects().get(0).getValue("permanentLeftBattlefield");
-        return permanent != null && permanent.getCounters(game).containsKey(CounterType.P1P1);
+        return CardUtil
+                .getEffectValueFromAbility(source, "permanentLeftBattlefield", Permanent.class)
+                .filter(permanent -> permanent.getCounters(game).containsKey(CounterType.P1P1))
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "it had a +1/+1 counter on it";
     }
 }

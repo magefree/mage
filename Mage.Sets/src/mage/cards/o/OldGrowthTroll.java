@@ -12,7 +12,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -53,13 +52,8 @@ public final class OldGrowthTroll extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Old-Growth Troll dies, if it was a creature, return it to the battlefield. It's an Aura enchantment with enchant Forest you control and "Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: Create a 4/4 green Troll Warrior creature token with trample.'"
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesSourceTriggeredAbility(new OldGrowthTrollReturnEffect()),
-                OldGrowthTrollCondition.instance, "When {this} dies, if it was a creature, " +
-                "return it to the battlefield. It's an Aura enchantment with enchant Forest you control " +
-                "and \"Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: " +
-                "Create a tapped 4/4 green Troll Warrior creature token with trample.'\""
-        ));
+        this.addAbility(new DiesSourceTriggeredAbility(new OldGrowthTrollReturnEffect())
+                .withInterveningIf(OldGrowthTrollCondition.instance));
     }
 
     private OldGrowthTroll(final OldGrowthTroll card) {
@@ -77,8 +71,15 @@ enum OldGrowthTrollCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getEffects().get(0).getValue("permanentLeftBattlefield");
-        return permanent != null && permanent.isCreature(game);
+        return CardUtil
+                .getEffectValueFromAbility(source, "permanentLeftBattlefield", Permanent.class)
+                .filter(permanent -> permanent.isCreature(game))
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "it was a creature";
     }
 }
 
@@ -92,6 +93,9 @@ class OldGrowthTrollReturnEffect extends OneShotEffect {
 
     private OldGrowthTrollReturnEffect(final OldGrowthTrollReturnEffect effect) {
         super(effect);
+        staticText = "return it to the battlefield. It's an Aura enchantment with enchant Forest you control " +
+                "and \"Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: " +
+                "Create a tapped 4/4 green Troll Warrior creature token with trample.'\"";
     }
 
     @Override

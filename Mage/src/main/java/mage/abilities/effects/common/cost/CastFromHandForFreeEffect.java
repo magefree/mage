@@ -35,10 +35,9 @@ public class CastFromHandForFreeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        return CardUtil.castSpellWithAttributesForFree(controller, source, game, new CardsImpl(controller.getHand()), filter);
+        return controller != null && CardUtil.castSpellWithAttributesForFree(
+                controller, source, game, new CardsImpl(controller.getHand()), filter
+        );
     }
 
     @Override
