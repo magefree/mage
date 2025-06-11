@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -36,11 +35,7 @@ public final class KitesailCleric extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Kitesail Cleric enters the battelfield, if it was kicked, tap up to two target creatures.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TapTargetEffect()),
-                KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, tap up to two target creatures."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect()).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
     }

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -33,11 +32,9 @@ public final class JuniperOrderRootweaver extends CardImpl {
         this.addAbility(new KickerAbility("{G}"));
 
         // When Juniper Order Rootweaver enters the battlefield, if it was kicked, put a +1/+1 counter on target creature you control.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                ), KickedCondition.ONCE, "When {this} enters, " +
-                "if it was kicked, put a +1/+1 counter on target creature you control.");
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+        ).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

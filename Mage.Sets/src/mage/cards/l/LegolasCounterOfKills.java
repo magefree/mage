@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.ScryTriggeredAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ReachAbility;
@@ -36,10 +35,8 @@ public final class LegolasCounterOfKills extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Whenever you scry, if Legolas, Counter of Kills is tapped, you may untap it. Do this only once each turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new ScryTriggeredAbility(new UntapSourceEffect()).setDoOnlyOnceEachTurn(true), SourceTappedCondition.TAPPED,
-                "Whenever you scry, if {this} is tapped, you may untap it. Do this only once each turn."
-        ));
+        this.addAbility(new ScryTriggeredAbility(new UntapSourceEffect().setText("untap it"), true)
+                .withInterveningIf(SourceTappedCondition.TAPPED).setDoOnlyOnceEachTurn(true));
 
         // Whenever a creature an opponent controls dies, put a +1/+1 counter on Legolas.
         this.addAbility(new DiesCreatureTriggeredAbility(

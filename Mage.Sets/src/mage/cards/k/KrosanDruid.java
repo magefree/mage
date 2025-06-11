@@ -1,20 +1,18 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.KickerAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class KrosanDruid extends CardImpl {
@@ -31,11 +29,7 @@ public final class KrosanDruid extends CardImpl {
         this.addAbility(new KickerAbility("{4}{G}"));
 
         // When Krosan Druid enters the battlefield, if it was kicked, you gain 10 life.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new GainLifeEffect(10)),
-                KickedCondition.ONCE,
-                "When {this} enters, if it was kicked, you gain 10 life"
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(10)).withInterveningIf(KickedCondition.ONCE));
     }
 
     private KrosanDruid(final KrosanDruid card) {

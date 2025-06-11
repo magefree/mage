@@ -1,12 +1,13 @@
 package mage.cards.l;
 
 import mage.MageInt;
+import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effects;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -22,7 +23,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.watchers.common.ManaPaidSourceWatcher;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -60,15 +61,10 @@ public final class LiberatorUrzasBattlethopter extends CardImpl {
 
         // Whenever you cast a spell, if the amount of mana spent to cast that spell is greater
         // than Liberator, Urza's Battlethopter's power, put a +1/+1 counter on Liberator.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new SpellCastControllerTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL
-                ),
-                LiberatorUrzasBattlethopterCondition.instance,
-                "Whenever you cast a spell, if the amount of mana spent to cast "
-                        + "that spell is greater than {this}'s power, put a +1/+1 counter on {this}"
-        ));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL
+        ).withInterveningIf(LiberatorUrzasBattlethopterCondition.instance));
     }
 
     private LiberatorUrzasBattlethopter(final LiberatorUrzasBattlethopter card) {
@@ -87,17 +83,19 @@ enum LiberatorUrzasBattlethopterCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
-            return false;
-        }
-        Effects effects = source.getEffects();
-        if (effects.isEmpty()) {
-            return false;
-        }
-        Object spell = effects.get(0).getValue("spellCast");
-        if (spell instanceof Spell) {
-            return (ManaPaidSourceWatcher.getTotalPaid(((Spell) spell).getId(), game) > permanent.getPower().getValue());
-        }
-        return false;
+        return permanent != null
+                && CardUtil
+                .getEffectValueFromAbility(source, "spellCast", Spell.class)
+                .map(Spell::getSpellAbility)
+                .map(AbilityImpl::getManaCostsToPay)
+                .map(ManaCost::getUsedManaToPay)
+                .map(Mana::count)
+                .filter(x -> x > permanent.getPower().getValue())
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "the amount of mana spent to cast that spell is greater than {this}'s power";
     }
 }
