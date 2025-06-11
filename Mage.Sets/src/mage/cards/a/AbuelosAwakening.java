@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -17,6 +18,8 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -106,12 +109,29 @@ class AbuelosAwakeningContinuousEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent creature = (Permanent) object;
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    creature.addCardType(game, CardType.CREATURE);
+                    creature.addSubType(game, SubType.SPIRIT);
+                    break;
+                case AbilityAddingRemovingEffects_6:
+                    creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
+                    break;
+                case PTChangingEffects_7:
+                    if (sublayer == SubLayer.SetPT_7b) {
+                        creature.getPower().setModifiedBaseValue(1);
+                        creature.getToughness().setModifiedBaseValue(1);
+                    }
+                    break;
+            }
+        }
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent creature;
         if (source.getTargets().getFirstTarget() == null) {
             creature = game.getPermanent(getTargetPointer().getFirst(game, source));
@@ -122,25 +142,21 @@ class AbuelosAwakeningContinuousEffect extends ContinuousEffectImpl {
             }
         }
         if (creature == null) {
-            this.used = true;
+            this.discard();
             return false;
         }
-        switch (layer) {
-            case TypeChangingEffects_4:
-                creature.addCardType(game, CardType.CREATURE);
-                creature.addSubType(game, SubType.SPIRIT);
-                break;
-            case AbilityAddingRemovingEffects_6:
-                creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
-                break;
-            case PTChangingEffects_7:
-                if (sublayer == SubLayer.SetPT_7b) {
-                    creature.getPower().setModifiedBaseValue(1);
-                    creature.getToughness().setModifiedBaseValue(1);
-                }
-                break;
-        }
+        affectedObjects.add(creature);
         return true;
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
+        return false;
     }
 
     @Override

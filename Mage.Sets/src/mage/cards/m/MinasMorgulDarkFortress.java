@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,15 +11,13 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -73,12 +72,17 @@ class MinasMorgulEffect extends AddCardSubTypeTargetEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        if (creature == null || creature.getCounters(game).getCount(CounterType.SHADOW) < 1) {
-            discard();
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent target = game.getPermanent(targetId);
+            if (target != null && target.getCounters(game).getCount(CounterType.SHADOW) > 0) {
+                affectedObjects.add(target);
+            }
+        }
+        if (affectedObjects.isEmpty()) {
+            this.discard();
             return false;
         }
-        return super.apply(game, source);
+        return true;
     }
 }

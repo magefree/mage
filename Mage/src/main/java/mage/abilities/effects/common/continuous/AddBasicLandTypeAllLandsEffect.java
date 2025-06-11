@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.*;
@@ -7,6 +8,8 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
 
 /**
  * @author Plopman, TheElk801
@@ -52,7 +55,7 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
         Ability ability;
         switch (subType) {
             case PLAINS:
@@ -73,9 +76,8 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
             default:
                 ability = null;
         }
-        for (Permanent land : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_LAND, source.getControllerId(), game
-        )) {
+        for (MageItem object : affectedObjects) {
+            Permanent land = (Permanent) object;
             // 305.7 Note that this doesn't remove any abilities that were granted to the land by other effects
             // So the ability removing has to be done before Layer 6
             // Lands have their mana ability intrinsically, so that is added in layer 4
@@ -84,6 +86,13 @@ public class AddBasicLandTypeAllLandsEffect extends ContinuousEffectImpl {
                 land.addAbility(ability, source.getSourceId(), game);
             }
         }
-        return true;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_LAND, source.getControllerId(), source, game
+        ));
+        return !affectedObjects.isEmpty();
     }
 }

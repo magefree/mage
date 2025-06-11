@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -45,20 +46,31 @@ public class AddCardSubTypeSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             if (!inAddition) {
                 permanent.removeAllCreatureTypes(game);
             }
-            for (SubType cardType : addedSubTypes) {
-                permanent.addSubType(game, cardType);
-            }
-            return true;
-        } else if (this.getDuration() == Duration.Custom) {
-            this.discard();
+            permanent.addSubType(game, addedSubTypes);
         }
-        return false;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageObjectReference mor : affectedObjectList) {
+            Permanent permanent = mor.getPermanent(game);
+            if (permanent != null) {
+                affectedObjects.add(permanent);
+            }
+        }
+        if (affectedObjects.isEmpty()) {
+            if (duration == Duration.Custom) {
+                this.discard();
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package mage.cards.a;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -7,12 +8,11 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -60,19 +60,26 @@ class AettirAndPriwenEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent == null) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        int life = game.getPlayer(source.getControllerId()).getLife();
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            permanent.getPower().setModifiedBaseValue(life);
+            permanent.getToughness().setModifiedBaseValue(life);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
             return false;
         }
-        int life = Optional
-                .ofNullable(source)
-                .map(Controllable::getControllerId)
-                .map(game::getPlayer)
-                .map(Player::getLife)
-                .orElse(0);
-        permanent.getPower().setModifiedBaseValue(life);
-        permanent.getToughness().setModifiedBaseValue(life);
-        return true;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            affectedObjects.add(permanent);
+            return true;
+        }
+        return false;
     }
 }

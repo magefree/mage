@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageItem;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -48,20 +49,34 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null
-                && (affectedObjectList.contains(new MageObjectReference(permanent, game))
-                // Workaround to support abilities like "As long as __, this permanent is a __ in addition to its other types."
-                || !duration.isOnlyValidIfNoZoneChange())) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
             for (CardType cardType : addedCardTypes) {
-                permanent.addCardType(game, cardType);
+                ((Permanent) object).addCardType(game, cardType);
             }
-            return true;
-        } else if (this.getDuration() == Duration.Custom) {
-            this.discard();
         }
-        return false;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = null;
+        if (!duration.isOnlyValidIfNoZoneChange()) {
+            // Workaround to support abilities like "As long as __, this permanent is a __ in addition to its other types."
+            permanent = game.getPermanent(source.getSourceId());
+        } else {
+            for (MageObjectReference mor : affectedObjectList) {
+                permanent = mor.getPermanent(game);
+                if (permanent != null) {
+                    break;
+                }
+            }
+        }
+        if (permanent == null) {
+            this.discard();
+            return false;
+        }
+        affectedObjects.add(permanent);
+        return true;
     }
 
     @Override
