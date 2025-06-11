@@ -1,11 +1,10 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,8 +13,8 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 import java.util.UUID;
 
@@ -24,7 +23,8 @@ import java.util.UUID;
  */
 public final class NessianHornbeetle extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("you control another creature with power 4 or greater");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -41,12 +41,9 @@ public final class NessianHornbeetle extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of combat on your turn, if you control another creature with power 4 or greater, put a +1/+1 counter on Nessian Hornbeetle.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-                ), condition, "At the beginning of combat on your turn, if you control " +
-                "another creature with power 4 or greater, put a +1/+1 counter on {this}."
-        ));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+        ).withInterveningIf(condition));
     }
 
     private NessianHornbeetle(final NessianHornbeetle card) {
