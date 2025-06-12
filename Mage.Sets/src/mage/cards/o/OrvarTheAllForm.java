@@ -8,7 +8,6 @@ import mage.abilities.Mode;
 import mage.abilities.common.DiscardedByOpponentTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.ChangelingAbility;
@@ -54,7 +53,7 @@ public final class OrvarTheAllForm extends CardImpl {
         this.addAbility(new ChangelingAbility());
 
         // Whenever you cast an instant or sorcery spell, if it targets one or more other permanents you control, create a token that's a copy of one of those permanents.
-        this.addAbility(  new SpellCastControllerTriggeredAbility(
+        this.addAbility(new SpellCastControllerTriggeredAbility(
                 new OrvarTheAllFormEffect(),
                 StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
                 false, SetTargetPointer.SPELL
@@ -113,7 +112,8 @@ enum OrvarTheAllFormCondition implements Condition {
 class OrvarTheAllFormEffect extends OneShotEffect {
 
     OrvarTheAllFormEffect() {
-        super(Outcome.Benefit);staticText="create a token that's a copy of one of those permanents.";
+        super(Outcome.Benefit);
+        staticText = "create a token that's a copy of one of those permanents.";
     }
 
     private OrvarTheAllFormEffect(final OrvarTheAllFormEffect effect) {

@@ -1,12 +1,10 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.hint.common.OpenSideboardHint;
@@ -42,7 +40,7 @@ public final class RetrieverPhoenix extends CardImpl {
 
         // When Retriever Phoenix enters the battlefield, if you cast it, learn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LearnEffect())
-                .withInterveningIf( CastFromEverywhereSourceCondition.instance).addHint(OpenSideboardHint.instance));
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance).addHint(OpenSideboardHint.instance));
 
         // As long as Retriever Phoenix is in your graveyard, if you would learn, you may instead return Retriever Phoenix to the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new RetrieverPhoenixEffect()));

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CollectedEvidenceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.CollectEvidenceAbility;
@@ -38,12 +37,10 @@ public final class VituGhaziInspector extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // When Vitu-Ghazi Inspector enters the battlefield, if evidence was collected, put a +1/+1 counter on target creature and you gain 2 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())),
-                CollectedEvidenceCondition.instance, "When {this} enters, if evidence was " +
-                "collected, put a +1/+1 counter on target creature and you gain 2 life."
-        );
-        ability.addEffect(new GainLifeEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
+        ).withInterveningIf(CollectedEvidenceCondition.instance);
+        ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

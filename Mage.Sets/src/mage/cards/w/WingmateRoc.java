@@ -4,9 +4,8 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.common.RaidHint;
@@ -26,6 +25,8 @@ import java.util.UUID;
  */
 public final class WingmateRoc extends CardImpl {
 
+    private static final DynamicValue xValue = new AttackingCreatureCount();
+
     public WingmateRoc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.BIRD);
@@ -37,16 +38,11 @@ public final class WingmateRoc extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // <i>Raid</i> &mdash; When Wingmate Roc enters the battlefield, if you attacked this turn, create a 3/4 white Bird creature token with flying.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WingmateRocToken())), RaidCondition.instance,
-                        "When {this} enters, if you attacked this turn, create a 3/4 white Bird creature token with flying.")
-                        .setAbilityWord(AbilityWord.RAID)
-                        .addHint(RaidHint.instance),
-                new PlayerAttackedWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WingmateRocToken()))
+                .withInterveningIf(RaidCondition.instance).setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
 
         // Whenever Wingmate Roc attacks, you gain 1 life for each attacking creature.
-        Effect effect = new GainLifeEffect(new AttackingCreatureCount());
-        effect.setText("you gain 1 life for each attacking creature");
-        this.addAbility(new AttacksTriggeredAbility(effect, false));
+        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(xValue).setText("you gain 1 life for each attacking creature")));
     }
 
     private WingmateRoc(final WingmateRoc card) {

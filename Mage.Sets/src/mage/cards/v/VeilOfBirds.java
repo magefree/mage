@@ -1,11 +1,9 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -13,26 +11,26 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.permanent.token.TokenImpl;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class VeilOfBirds extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell();
+    private static final Condition condition = new SourceMatchesFilterCondition(new FilterEnchantmentPermanent("{this} is an enchantment"));
 
     public VeilOfBirds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
         // When an opponent casts a spell, if Veil of Birds is an enchantment, Veil of Birds becomes a 1/1 Bird creature with flying.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new VeilOfBirdsToken(), null, Duration.WhileOnBattlefield),
-                filter, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
-                "When an opponent casts a spell, if {this} is an enchantment, {this} becomes a 1/1 Bird creature with flying."));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(
+                new VeilOfBirdsToken(), null, Duration.WhileOnBattlefield
+        ), StaticFilters.FILTER_SPELL_A, false).withInterveningIf(condition));
     }
 
     private VeilOfBirds(final VeilOfBirds card) {

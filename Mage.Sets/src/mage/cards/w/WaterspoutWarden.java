@@ -5,7 +5,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -35,12 +34,9 @@ public final class WaterspoutWarden extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Waterspout Warden attacks, if another creature entered the battlefield under your control this turn, Waterspout Warden gains flying until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new GainAbilitySourceEffect(
-                        FlyingAbility.getInstance(), Duration.EndOfTurn
-                )), WaterspoutWardenCondition.instance, "Whenever {this} attacks, if another creature entered " +
-                "the battlefield under your control this turn, {this} gains flying until end of turn."
-        ), new WaterspoutWardenWatcher());
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilitySourceEffect(
+                FlyingAbility.getInstance(), Duration.EndOfTurn
+        )).withInterveningIf(WaterspoutWardenCondition.instance), new WaterspoutWardenWatcher());
     }
 
     private WaterspoutWarden(final WaterspoutWarden card) {
@@ -59,6 +55,11 @@ enum WaterspoutWardenCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return WaterspoutWardenWatcher.checkPermanent(game, source);
+    }
+
+    @Override
+    public String toString() {
+        return "another creature entered the battlefield under your control this turn";
     }
 }
 
