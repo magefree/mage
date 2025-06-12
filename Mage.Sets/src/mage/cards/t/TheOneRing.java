@@ -1,12 +1,10 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -15,6 +13,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.ProtectionFromEverythingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,17 +39,12 @@ public final class TheOneRing extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // When The One Ring enters the battlefield, if you cast it, you gain protection from everything until your next turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new GainAbilityControllerEffect(
-                        new ProtectionFromEverythingAbility(), Duration.UntilYourNextTurn
-                )), CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
-                "if you cast it, you gain protection from everything until your next turn."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new GainAbilityControllerEffect(new ProtectionFromEverythingAbility(), Duration.UntilYourNextTurn)
+        ).withInterveningIf(CastFromEverywhereSourceCondition.instance));
 
         // At the beginning of your upkeep, you lose 1 life for each burden counter on The One Ring.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new LoseLifeSourceControllerEffect(xValue)
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(xValue)));
 
         // {T}: Put a burden counter on The One Ring, then draw a card for each burden counter on The One Ring.
         Ability ability = new SimpleActivatedAbility(

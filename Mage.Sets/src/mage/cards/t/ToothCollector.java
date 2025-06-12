@@ -1,33 +1,33 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
  */
 public final class ToothCollector extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature that player controls");
+
+    static {
+        filter.add(TargetController.ACTIVE.getControllerPredicate());
+    }
 
     public ToothCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -43,13 +43,11 @@ public final class ToothCollector extends CardImpl {
 
         // {<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,
         // target creature that player controls gets -1/-1 until end of turn.
-        ability = new ConditionalInterveningIfTriggeredAbility(
-                new ToothCollectorAbility(),
-                DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
-                        + "target creature that player controls gets -1/-1 until end of turn.");
-        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
-        this.addAbility(ability);
+        ability = new BeginningOfUpkeepTriggeredAbility(
+                TargetController.OPPONENT, new BoostTargetEffect(-1, -1), false
+        ).withInterveningIf(DeliriumCondition.instance);
+        ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability.setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private ToothCollector(final ToothCollector card) {
@@ -59,47 +57,5 @@ public final class ToothCollector extends CardImpl {
     @Override
     public ToothCollector copy() {
         return new ToothCollector(this);
-    }
-}
-
-class ToothCollectorAbility extends TriggeredAbilityImpl {
-
-    public ToothCollectorAbility() {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
-    }
-
-    private ToothCollectorAbility(final ToothCollectorAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ToothCollectorAbility copy() {
-        return new ToothCollectorAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            Player opponent = game.getPlayer(event.getPlayerId());
-            if (opponent != null) {
-                FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
-                FILTER.add(new ControllerIdPredicate(opponent.getId()));
-                this.getTargets().clear();
-                this.addTarget(new TargetCreaturePermanent(FILTER));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
-                + "target creature that player controls gets -1/-1 until end of turn.";
     }
 }

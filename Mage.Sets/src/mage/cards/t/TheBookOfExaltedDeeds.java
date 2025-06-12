@@ -8,7 +8,6 @@ import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.CantLoseGameSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -33,7 +32,7 @@ import java.util.UUID;
 public final class TheBookOfExaltedDeeds extends CardImpl {
 
     private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2);
-    private static final Hint hint = new ConditionHint(condition, "You gained 3 or more life this turn");
+    private static final Hint hint = new ConditionHint(condition);
     private static final FilterPermanent filter = new FilterPermanent(SubType.ANGEL, "Angel");
 
     public TheBookOfExaltedDeeds(UUID ownerId, CardSetInfo setInfo) {
@@ -42,12 +41,8 @@ public final class TheBookOfExaltedDeeds extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new Angel33Token())
-                ), condition, "At the beginning of your end step, "
-                + "if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying."
-        ).addHint(hint), new PlayerGainedLifeWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new Angel33Token()))
+                .withInterveningIf(condition).addHint(hint), new PlayerGainedLifeWatcher());
 
         // {W}{W}{W}, {T}, Exile The Book of Exalted Deeds: Put an enlightened counter on target Angel. It gains "You can't lose the game and your opponents can't win the game." Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(

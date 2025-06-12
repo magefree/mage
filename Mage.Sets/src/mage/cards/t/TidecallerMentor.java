@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ThresholdCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -33,11 +32,7 @@ public final class TidecallerMentor extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Threshold -- When Tidecaller Mentor enters, if seven or more cards are in your graveyard, return up to one target nonland permanent to its owner's hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()),
-                ThresholdCondition.instance, "When {this} enters, if seven or more cards " +
-                "are in your graveyard, return up to one target nonland permanent to its owner's hand."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()).withInterveningIf(ThresholdCondition.instance);
         ability.addTarget(new TargetNonlandPermanent(0, 1));
         this.addAbility(ability.setAbilityWord(AbilityWord.THRESHOLD));
     }

@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -47,11 +46,7 @@ public final class TourachDreadCantor extends CardImpl {
         ));
 
         // When Tourach enters the battelfield, if it was kicked, target opponent discards two cards at random.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(2, true)),
-                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
-                "target opponent discards two cards at random."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(2, true)).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

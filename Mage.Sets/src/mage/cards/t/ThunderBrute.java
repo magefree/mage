@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -32,12 +31,14 @@ public final class ThunderBrute extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // Tribute 3</i>
+
+        // Tribute 3
         this.addAbility(new TributeAbility(3));
+
         // When Thunder Brute enters the battlefield, if tribute wasn't paid, it gains haste until end of turn.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
-                "When {this} enters, if tribute wasn't paid, it gains haste until end of turn."));
+        this.addAbility( new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(
+                HasteAbility.getInstance(), Duration.EndOfTurn
+        ).setText("it gains haste until end of turn")).withInterveningIf(TributeNotPaidCondition.instance));
     }
 
     private ThunderBrute(final ThunderBrute card) {

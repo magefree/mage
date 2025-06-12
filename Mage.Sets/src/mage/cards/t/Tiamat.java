@@ -3,7 +3,6 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -45,13 +44,9 @@ public final class Tiamat extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Tiamat enters the battlefield, if you cast it, search your library for up to five Dragon cards named Tiama that each have different names, reveal them, put them into your hand, then shuffle.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(
-                        new TargetCardWithDifferentNameInLibrary(0, 5, filter), true
-                )), CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
-                "if you cast it, search your library for up to five Dragon cards not named Tiamat " +
-                "that each have different names, reveal them, put them into your hand, then shuffle."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
+                new TargetCardWithDifferentNameInLibrary(0, 5, filter), true
+        )).withInterveningIf(CastFromEverywhereSourceCondition.instance));
     }
 
     private Tiamat(final Tiamat card) {

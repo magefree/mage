@@ -1,36 +1,38 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.condition.common.CreatureCountCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.TargetController;
-import mage.game.events.GameEvent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class ThranQuarry extends CardImpl {
 
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            new FilterControlledCreaturePermanent("you control no creatures"), ComparisonType.EQUAL_TO, 0
+    );
+
     public ThranQuarry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // At the beginning of the end step, if you control no creatures, sacrifice Thran Quarry.
-        TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.YOU),
-                "At the beginning of the end step, if you control no creatures, sacrifice {this}."));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.NEXT, new SacrificeSourceEffect(), false, condition
+        ));
 
         // {tap}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
-
     }
 
     private ThranQuarry(final ThranQuarry card) {
