@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -39,17 +39,10 @@ public final class SandstalkerMoloch extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Sandstalker Moloch enters the battlefield, if an opponent cast a blue and/or black spell this turn, look at the top four cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(
-                        new LookLibraryAndPickControllerEffect(
-                                4, 1, StaticFilters.FILTER_CARD_A_PERMANENT,
-                                PutCards.HAND, PutCards.BOTTOM_RANDOM
-                        )
-                ), SandstalkerMolochWatcher::checkPlayer, "When {this} enters, " +
-                "if an opponent cast a blue and/or black spell this turn, look at the top four cards " +
-                "of your library. You may reveal a permanent card from among them and put it into your hand. " +
-                "Put the rest on the bottom of your library in a random order."
-        ), new SandstalkerMolochWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
+                4, 1, StaticFilters.FILTER_CARD_A_PERMANENT,
+                PutCards.HAND, PutCards.BOTTOM_RANDOM
+        )).withInterveningIf(SandstalkerMolochCondition.instance), new SandstalkerMolochWatcher());
     }
 
     private SandstalkerMoloch(final SandstalkerMoloch card) {
@@ -59,6 +52,20 @@ public final class SandstalkerMoloch extends CardImpl {
     @Override
     public SandstalkerMoloch copy() {
         return new SandstalkerMoloch(this);
+    }
+}
+
+enum SandstalkerMolochCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return SandstalkerMolochWatcher.checkPlayer(game, source);
+    }
+
+    @Override
+    public String toString() {
+        return "an opponent cast a blue and/or black spell this turn";
     }
 }
 

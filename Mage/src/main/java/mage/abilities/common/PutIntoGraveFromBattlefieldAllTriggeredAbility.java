@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -30,7 +31,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
         this.filter = filter;
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever " + filter.getMessage() + " is put into " +
+        setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " is put into " +
                 (onlyToControllerGraveyard ? "your" : "a") + " graveyard, ");
     }
 

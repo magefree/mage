@@ -1,4 +1,3 @@
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -19,6 +18,6 @@ public enum MonarchIsNotSetCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if there is no monarch";
+        return "there is no monarch";
     }
 }

@@ -41,10 +41,8 @@ public final class RetrieverPhoenix extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // When Retriever Phoenix enters the battlefield, if you cast it, learn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new LearnEffect()), CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, if you cast it, " + LearnEffect.getDefaultText()
-        ).addHint(OpenSideboardHint.instance));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LearnEffect())
+                .withInterveningIf( CastFromEverywhereSourceCondition.instance).addHint(OpenSideboardHint.instance));
 
         // As long as Retriever Phoenix is in your graveyard, if you would learn, you may instead return Retriever Phoenix to the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new RetrieverPhoenixEffect()));

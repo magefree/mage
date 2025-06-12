@@ -1,32 +1,35 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.constants.SubType;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ReclusiveWight extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another nonland permanent");
+    private static final FilterPermanent filter = new FilterControlledPermanent("you control another nonland permanent");
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
         filter.add(AnotherPredicate.instance);
     }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
 
     public ReclusiveWight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -37,11 +40,7 @@ public final class ReclusiveWight extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, if you control another nonland permanent, sacrifice Reclusive Wight.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect()),
-                new PermanentsOnTheBattlefieldCondition(filter),
-                "At the beginning of your upkeep, if you control another nonland permanent, sacrifice {this}."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect()).withInterveningIf(condition));
     }
 
     private ReclusiveWight(final ReclusiveWight card) {

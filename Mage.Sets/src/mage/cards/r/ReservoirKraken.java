@@ -1,20 +1,18 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.WardAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -24,8 +22,9 @@ import mage.game.permanent.token.FishToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class ReservoirKraken extends CardImpl {
@@ -44,11 +43,9 @@ public final class ReservoirKraken extends CardImpl {
         this.addAbility(new WardAbility(new GenericManaCost(2), false));
 
         // At the beginning of each combat, if Reservoir Kraken is untapped, any opponent may tap an untapped creature they control. If they do, tap Reservoir Kraken and create a 1/1 blue Fish creature token with "This creature can't be blocked."
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(TargetController.ANY, new ReservoirKrakenEffect(), false),
-                SourceTappedCondition.UNTAPPED,
-                "At the beginning of each combat, if {this} is untapped, any opponent may tap an untapped creature they control. If they do, tap {this} and create a 1/1 blue Fish creature token with \"This creature can't be blocked.\""
-        ));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                TargetController.ANY, new ReservoirKrakenEffect(), false
+        ).withInterveningIf(SourceTappedCondition.UNTAPPED));
     }
 
     private ReservoirKraken(final ReservoirKraken card) {

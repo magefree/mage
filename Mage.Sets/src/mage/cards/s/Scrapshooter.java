@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.GiftWasPromisedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.GiftAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -47,11 +46,7 @@ public final class Scrapshooter extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // When Scrapshooter enters, if the gift was promised, destroy target artifact or enchantment an opponent controls.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()),
-                GiftWasPromisedCondition.TRUE, "When {this} enters, if the gift was promised, " +
-                "destroy target artifact or enchantment an opponent controls."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()).withInterveningIf(GiftWasPromisedCondition.TRUE);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

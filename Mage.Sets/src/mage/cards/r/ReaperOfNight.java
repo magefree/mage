@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -32,12 +31,9 @@ public final class ReaperOfNight extends AdventureCard {
         this.toughness = new MageInt(5);
 
         // Whenever Reaper of Night attacks, if defending player has two or fewer cards in hand, it gains flying until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new GainAbilitySourceEffect(
-                        FlyingAbility.getInstance(), Duration.EndOfTurn
-                ), false), ReaperOfNightCondition.instance, "Whenever {this} attacks, " +
-                "if defending player has two or fewer cards in hand, it gains flying until end of turn."
-        ));
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilitySourceEffect(
+                FlyingAbility.getInstance(), Duration.EndOfTurn
+        ).setText("it gains flying until end of turn")).withInterveningIf(ReaperOfNightCondition.instance));
 
         // Harvest Fear
         // Target opponent discards two cards.
@@ -64,5 +60,10 @@ enum ReaperOfNightCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game));
         return player != null && player.getHand().size() <= 2;
+    }
+
+    @Override
+    public String toString() {
+        return "defending player has two or fewer cards in hand";
     }
 }

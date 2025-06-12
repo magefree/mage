@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.DescendCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -33,12 +32,8 @@ public final class StingingCaveCrawler extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Descend 4 -- Whenever Stinging Cave Crawler attacks, if there are four or more permanent cards in your graveyard, you draw a card and you lose 1 life.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                DescendCondition.FOUR, "Whenever {this} attacks, if there are four " +
-                "or more permanent cards in your graveyard, you draw a card and you lose 1 life."
-        );
-        ability.addEffect(new LoseLifeSourceControllerEffect(1));
+        Ability ability = new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1, true)).withInterveningIf(DescendCondition.FOUR);
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability.setAbilityWord(AbilityWord.DESCEND_4).addHint(DescendCondition.getHint()));
     }
 

@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.CommittedCrimeCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -34,16 +33,9 @@ public final class ServantOfTheStinger extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever Servant of the Stinger deals combat damage to a player, if you've committed a crime this turn, you may sacrifice Servant of the Stinger. If you do, search your library for a card, put it into your hand, then shuffle.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DealsCombatDamageToAPlayerTriggeredAbility(
-                        new DoIfCostPaid(
-                                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
-                                new SacrificeSourceCost()
-                        ), false
-                ), CommittedCrimeCondition.instance, "Whenever {this} deals combat damage to a player, " +
-                "if you've committed a crime this turn, you may sacrifice {this}. If you do, " +
-                "search your library for a card, put it into your hand, then shuffle."
-        ).addHint(CommittedCrimeCondition.getHint()), new CommittedCrimeWatcher());
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false), new SacrificeSourceCost()
+        )).withInterveningIf(CommittedCrimeCondition.instance).addHint(CommittedCrimeCondition.getHint()), new CommittedCrimeWatcher());
     }
 
     private ServantOfTheStinger(final ServantOfTheStinger card) {

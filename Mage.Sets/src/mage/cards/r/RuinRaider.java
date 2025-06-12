@@ -1,12 +1,10 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.RevealPutInHandLoseLifeEffect;
 import mage.abilities.hint.common.RaidHint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -30,16 +28,8 @@ public final class RuinRaider extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Raid</i> &mdash; At the beginning of your end step, if you attacked this turn, reveal the top card of your library and put that card into your hand. You lose life equal to the card's converted mana cost.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new RevealPutInHandLoseLifeEffect()
-                ), RaidCondition.instance, "At the beginning of your end step, " +
-                "if you attacked this turn, reveal the top card of your library " +
-                "and put that card into your hand. You lose life equal to the card's mana value."
-        );
-        ability.setAbilityWord(AbilityWord.RAID);
-        ability.addHint(RaidHint.instance);
-        this.addAbility(ability, new PlayerAttackedWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new RevealPutInHandLoseLifeEffect())
+                .withInterveningIf(RaidCondition.instance).setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
 
     private RuinRaider(final RuinRaider card) {
