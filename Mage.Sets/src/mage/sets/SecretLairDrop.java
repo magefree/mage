@@ -1554,7 +1554,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("The Meep", 1581, Rarity.RARE, mage.cards.t.TheMeep.class));
 //        cards.add(new SetCardInfo("The Celestial Toymaker", 1582, Rarity.RARE, mage.cards.t.TheCelestialToymaker.class));
         cards.add(new SetCardInfo("The Fourteenth Doctor", 1583, Rarity.RARE, mage.cards.t.TheFourteenthDoctor.class));
-//        cards.add(new SetCardInfo("The Fifteenth Doctor", 1584, Rarity.RARE, mage.cards.t.TheFifteenthDoctor.class));
+        cards.add(new SetCardInfo("The Fifteenth Doctor", 1584, Rarity.RARE, mage.cards.t.TheFifteenthDoctor.class));
         cards.add(new SetCardInfo("Elspeth Tirel", 1585, Rarity.MYTHIC, mage.cards.e.ElspethTirel.class));
         cards.add(new SetCardInfo("Giada, Font of Hope", 1586, Rarity.RARE, mage.cards.g.GiadaFontOfHope.class));
         cards.add(new SetCardInfo("Shelter", 1587, Rarity.RARE, mage.cards.s.Shelter.class, NON_FULL_USE_VARIOUS));
