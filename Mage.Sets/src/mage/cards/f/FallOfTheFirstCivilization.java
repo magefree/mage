@@ -45,7 +45,7 @@ public final class FallOfTheFirstCivilization extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I,
                 new Effects(
-                        new DrawCardSourceControllerEffect(1).setText("you"),
+                        new DrawCardSourceControllerEffect(2).setText("you"),
                         new DrawCardTargetEffect(2).setText("and target opponent each draw two cards")
                 ), new TargetOpponent()
         );
