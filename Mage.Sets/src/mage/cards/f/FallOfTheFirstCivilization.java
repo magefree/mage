@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
@@ -114,7 +113,7 @@ class FallOfTheFirstCivilizationEffect extends OneShotEffect {
                             ));
                     break;
                 default:
-                    TargetPermanent target = new TargetControlledCreaturePermanent(3);
+                    TargetPermanent target = new TargetPermanent(3, StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
                     target.withNotTarget(true);
                     target.withChooseHint("to prevent being destroyed");
                     player.choose(outcome, target, source, game);
