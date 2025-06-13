@@ -63,11 +63,11 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     public ModalDoubleFacedCard(ModalDoubleFacedCard card) {
         super(card);
         if (card.leftHalfCard != null) {
-            this.leftHalfCard = card.leftHalfCard;
+            this.leftHalfCard = card.leftHalfCard.copy();
             ((ModalDoubleFacedCardHalf) this.leftHalfCard).setParentCard(this);
         }
         if (card.rightHalfCard != null) {
-            this.rightHalfCard = card.rightHalfCard;
+            this.rightHalfCard = card.rightHalfCard.copy();
             ((ModalDoubleFacedCardHalf) this.rightHalfCard).setParentCard(this);
         }
     }
