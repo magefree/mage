@@ -2,6 +2,8 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.MageItem;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -15,6 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -59,8 +62,6 @@ public final class BloodlordOfVaasgoth extends CardImpl {
 class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
 
     private Ability ability = new BloodthirstAbility(3);
-    private int zoneChangeCounter;
-    private UUID permanentId;
 
     BloodlordOfVaasgothEffect() {
         super(Duration.OneUse, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
@@ -70,8 +71,6 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
     private BloodlordOfVaasgothEffect(final BloodlordOfVaasgothEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
-        this.zoneChangeCounter = effect.zoneChangeCounter;
-        this.permanentId = effect.permanentId;
     }
 
     @Override
@@ -84,24 +83,38 @@ class BloodlordOfVaasgothEffect extends ContinuousEffectImpl {
         super.init(source, game);
         Spell object = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (object != null) {
-            zoneChangeCounter = game.getState().getZoneChangeCounter(object.getSourceId()) + 1;
-            permanentId = object.getSourceId();
+            int zcc = game.getState().getZoneChangeCounter(object.getSourceId()) + 1;
+            affectedObjectList.add(new MageObjectReference(object.getSourceId(), zcc, game));
         }
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(permanentId);
-        if (permanent != null && permanent.getZoneChangeCounter(game) <= zoneChangeCounter) {
-            permanent.addAbility(ability, source.getSourceId(), game);
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            if (object instanceof Spell) {
+                game.getState().addOtherAbility(((Spell) object).getCard(), ability, true);
+            } else {
+                ((Permanent) object).addAbility(ability, source.getSourceId(), game);
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+        if (spell != null) { // Bloodthirst checked while spell is on the stack so needed to give it already to the spell
+            affectedObjects.add(spell);
         } else {
-            if (game.getState().getZoneChangeCounter(permanentId) >= zoneChangeCounter) {
-                discard();
+            for (MageObjectReference mor : affectedObjectList) {
+                Permanent permanent = mor.getPermanent(game);
+                if (permanent != null) {
+                    affectedObjects.add(permanent);
+                }
             }
-            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-            if (spell != null) { // Bloodthirst checked while spell is on the stack so needed to give it already to the spell
-                game.getState().addOtherAbility(spell.getCard(), ability, true);
-            }
+        }
+        if (affectedObjects.isEmpty()) {
+            this.discard();
+            return false;
         }
         return true;
     }

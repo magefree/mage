@@ -1,6 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.condition.common.SaddledCondition;
@@ -16,6 +17,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -77,20 +79,30 @@ class ArchmagesNewtEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Card card = (Card) object;
+
+            FlashbackAbility ability;
+            if (saddled) {
+                ability = new FlashbackAbility(card, new GenericManaCost(0));
+            } else {
+                ability = new FlashbackAbility(card, card.getManaCost());
+            }
+            ability.setSourceId(card.getId());
+            ability.setControllerId(card.getOwnerId());
+
+            game.getState().addOtherAbility(card, ability);
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card == null) {
             return false;
         }
-        FlashbackAbility ability;
-        if (saddled) {
-            ability = new FlashbackAbility(card, new GenericManaCost(0));
-        } else {
-            ability = new FlashbackAbility(card, card.getManaCost());
-        }
-        ability.setSourceId(card.getId());
-        ability.setControllerId(card.getOwnerId());
-        game.getState().addOtherAbility(card, ability);
+        affectedObjects.add(card);
         return true;
     }
 }

@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
@@ -160,13 +161,19 @@ class BurningCinderFuryOfCrimsonChaosFireCreatureGainControlEffect extends Conti
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null && controller != null) {
-            return permanent.changeControllerId(controller, game, source);
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            ((Permanent) object).changeControllerId(controller, game, source);
         }
-        return false;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            affectedObjects.add(permanent);
+        }
+        return !affectedObjects.isEmpty();
     }
 }
 

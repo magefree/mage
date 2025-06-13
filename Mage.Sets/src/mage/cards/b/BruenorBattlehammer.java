@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -18,6 +19,7 @@ import mage.players.Player;
 import mage.watchers.Watcher;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -69,11 +71,9 @@ class BruenorBattlehammerBoostEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
-                source.getControllerId(), source, game
-        )) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
             int equipped = permanent
                     .getAttachments()
                     .stream()
@@ -82,7 +82,15 @@ class BruenorBattlehammerBoostEffect extends ContinuousEffectImpl {
                     .sum();
             permanent.addPower(2 * equipped);
         }
-        return true;
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        affectedObjects.addAll(game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_CREATURE,
+                source.getControllerId(), source, game
+        ));
+        return !affectedObjects.isEmpty();
     }
 }
 

@@ -1,5 +1,7 @@
 package mage.cards.s;
 
+import mage.MageItem;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -13,6 +15,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -58,17 +62,32 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public BecomesColorlessForestLandEffect copy() {
         return new BecomesColorlessForestLandEffect(this);
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            switch (layer) {
+                case ColorChangingEffects_5:
+                    permanent.getColor(game).setColor(ObjectColor.COLORLESS);
+                    break;
+                case TypeChangingEffects_4:
+                    permanent.removeAllCardTypes(game);
+                    permanent.addCardType(game, CardType.LAND);
+                    permanent.removeAllSubTypes(game);
+                    permanent.addSubType(game, SubType.FOREST);
+                    permanent.removeAllAbilities(source.getSourceId(), game);
+                    permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment == null || enchantment.getAttachedTo() == null) {
             return false;
@@ -77,24 +96,18 @@ class BecomesColorlessForestLandEffect extends ContinuousEffectImpl {
         if (permanent == null) {
             return false;
         }
-        switch (layer) {
-            case ColorChangingEffects_5:
-                permanent.getColor(game).setWhite(false);
-                permanent.getColor(game).setGreen(false);
-                permanent.getColor(game).setBlack(false);
-                permanent.getColor(game).setBlue(false);
-                permanent.getColor(game).setRed(false);
-                break;
-            case TypeChangingEffects_4:
-                permanent.removeAllCardTypes(game);
-                permanent.addCardType(game, CardType.LAND);
-                permanent.removeAllSubTypes(game);
-                permanent.addSubType(game, SubType.FOREST);
-                permanent.removeAllAbilities(source.getSourceId(), game);
-                permanent.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                break;
-        }
+        affectedObjects.add(permanent);
         return true;
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
+            return true;
+        }
+        return false;
     }
 
     @Override

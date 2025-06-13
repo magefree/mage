@@ -129,7 +129,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
 
+        }
     }
 
     @Override

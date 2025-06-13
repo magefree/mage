@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -21,8 +22,8 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Objects;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -85,35 +86,45 @@ class BurdenOfProofEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Permanent permanent = (Permanent) object;
+            if (permanent.isControlledBy(source.getControllerId()) && permanent.hasSubtype(SubType.DETECTIVE, game)) {
+                if (sublayer == SubLayer.ModifyPT_7c) {
+                    permanent.getPower().increaseBoostedValue(2);
+                    permanent.getToughness().increaseBoostedValue(2);
+                }
+            } else if (sublayer == SubLayer.SetPT_7b) {
+                permanent.getPower().setModifiedBaseValue(1);
+                permanent.getToughness().setModifiedBaseValue(1);
+            }
+        }
+    }
+
+    @Override
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment == null || enchantment.getAttachedTo() == null) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
+        if (permanent == null) {
+            return false;
+        }
+        affectedObjects.add(permanent);
+        return true;
+    }
+
+    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (layer != Layer.PTChangingEffects_7) {
             return false;
         }
-        Permanent permanent = Optional
-                .ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
-                .map(Permanent::getAttachedTo)
-                .map(game::getPermanent)
-                .orElse(null);
-        if (permanent == null) {
-            return false;
-        }
-        if (permanent.isControlledBy(source.getControllerId()) && permanent.hasSubtype(SubType.DETECTIVE, game)) {
-            if (sublayer == SubLayer.ModifyPT_7c) {
-                permanent.getPower().increaseBoostedValue(2);
-                permanent.getToughness().increaseBoostedValue(2);
-                return true;
-            }
-        } else if (sublayer == SubLayer.SetPT_7b) {
-            permanent.getPower().setModifiedBaseValue(1);
-            permanent.getToughness().setModifiedBaseValue(1);
+        List<MageItem> affectedObjects = new ArrayList<>();
+        if (queryAffectedObjects(layer, source, game, affectedObjects)) {
+            applyToObjects(layer, sublayer, source, game, affectedObjects);
             return true;
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 
