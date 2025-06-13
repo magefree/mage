@@ -38,14 +38,11 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
 
     protected SplitCard(SplitCard card) {
         super(card);
-        if (card.leftHalfCard != null) {
-            this.leftHalfCard = card.leftHalfCard.copy();
-            ((SplitCardHalf) this.leftHalfCard).setParentCard(this);
-        }
-        if (card.rightHalfCard != null) {
-            this.rightHalfCard = card.rightHalfCard.copy();
-            ((SplitCardHalf) this.rightHalfCard).setParentCard(this);
-        }
+        // make sure all parts created and parent ref added
+        this.leftHalfCard = card.getLeftHalfCard().copy();
+        ((SplitCardHalf) leftHalfCard).setParentCard(this);
+        this.rightHalfCard = card.rightHalfCard.copy();
+        ((SplitCardHalf) rightHalfCard).setParentCard(this);
     }
 
     public void setParts(SplitCardHalf leftHalfCard, SplitCardHalf rightHalfCard) {
