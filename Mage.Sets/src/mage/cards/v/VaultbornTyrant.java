@@ -39,7 +39,7 @@ public final class VaultbornTyrant extends CardImpl {
         filter2.add(TokenPredicate.FALSE);
     }
 
-    private static final Condition condition = new SourceMatchesFilterCondition(filter2)
+    private static final Condition condition = new SourceMatchesFilterCondition(filter2);
 
     public VaultbornTyrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
