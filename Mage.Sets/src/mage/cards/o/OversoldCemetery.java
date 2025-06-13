@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class OversoldCemetery extends CardImpl {
 
-    private static final Condition condition = new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
+    private static final Condition condition = new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_CREATURES);
 
     public OversoldCemetery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");

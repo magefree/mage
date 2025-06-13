@@ -69,6 +69,7 @@ class BorealOutriderEffect extends ReplacementEffectImpl {
 
     BorealOutriderEffect() {
         super(Duration.EndOfStep, Outcome.BoostCreature);
+        staticText = "that creature enters with an additional +1/+1 counter on it";
     }
 
     private BorealOutriderEffect(BorealOutriderEffect effect) {

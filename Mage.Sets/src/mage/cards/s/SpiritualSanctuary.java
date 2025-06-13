@@ -31,7 +31,7 @@ public final class SpiritualSanctuary extends CardImpl {
 
         // At the beginning of each player's upkeep, if that player controls a Plains, they gain 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new GainLifeTargetEffect(1).setText("they gain 1 life"), false
+                TargetController.EACH_PLAYER, new GainLifeTargetEffect(1).setText("they gain 1 life"), false
         ).withInterveningIf(condition));
     }
 

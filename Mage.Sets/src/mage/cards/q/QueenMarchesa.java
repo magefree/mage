@@ -36,7 +36,9 @@ public final class QueenMarchesa extends CardImpl {
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
+
         // Haste
+
         this.addAbility(HasteAbility.getInstance());
         // When Queen Marchesa enters the battlefield, you become the monarch.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));

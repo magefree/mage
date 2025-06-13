@@ -20,6 +20,6 @@ public enum SourceInExileCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is exiled";
+        return "this card is exiled";
     }
 }

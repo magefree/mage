@@ -51,9 +51,9 @@ public final class DarigaazReincarnated extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DarigaazReincarnatedDiesEffect()));
 
         // At the beginning of your upkeep, if Darigaaz is exiled with an egg counter on it, remove an egg counter from it. Then if Darigaaz has no egg counters on it, return it to the battlefield.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.EXILED, TargetController.YOU, new DarigaazReincarnatedReturnEffect(), false
-        ).withInterveningIf(DarigaazReincarnatedCondition.instance);
+        ).withInterveningIf(DarigaazReincarnatedCondition.instance));
     }
 
     private DarigaazReincarnated(final DarigaazReincarnated card) {
@@ -154,6 +154,6 @@ enum DarigaazReincarnatedCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is exiled with an egg counter on it";
+        return "this card is exiled with an egg counter on it";
     }
 }

@@ -76,7 +76,7 @@ class AnaBattlemageEffect extends OneShotEffect {
 
     AnaBattlemageEffect() {
         super(Outcome.Detriment);
-        this.staticText = "and it deals damage equal to its power to its controller";
+        this.staticText = "and that creature deals damage equal to its power to its controller";
     }
 
     private AnaBattlemageEffect(final AnaBattlemageEffect effect) {

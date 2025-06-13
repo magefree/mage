@@ -84,7 +84,7 @@ enum AerialSurveyorCondition implements Condition {
 
     @Override
     public String toString() {
-        return "";
+        return "defending player controls more lands than you";
     }
 }
 

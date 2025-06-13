@@ -55,7 +55,7 @@ public final class OrvarTheAllForm extends CardImpl {
         // Whenever you cast an instant or sorcery spell, if it targets one or more other permanents you control, create a token that's a copy of one of those permanents.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new OrvarTheAllFormEffect(),
-                StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY,
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false, SetTargetPointer.SPELL
         ).withInterveningIf(OrvarTheAllFormCondition.instance));
 

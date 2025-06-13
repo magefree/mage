@@ -34,7 +34,7 @@ public final class Nihilith extends CardImpl {
 
         // Whenever a card is put into an opponent's graveyard from anywhere, if Nihilith is suspended, you may remove a time counter from Nihilith.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
-                Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), true,
+                Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()).setText("remove a time counter from this card"), true,
                 StaticFilters.FILTER_CARD_A, TargetController.OPPONENT, SetTargetPointer.NONE
         ).withInterveningIf(SuspendedCondition.instance));
     }

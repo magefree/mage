@@ -52,7 +52,7 @@ public final class VampireSocialite extends CardImpl {
                         filter, CounterType.P1P1.createInstance(), true
                 ), OpponentsLostLifeCondition.instance
         ).setText("as long as an opponent lost life this turn, " +
-                "each other Vampire you control enters the battlefield with an additional +1/+1 counter on it")));
+                "each other Vampire you control enters with an additional +1/+1 counter on it")));
     }
 
     private VampireSocialite(final VampireSocialite card) {

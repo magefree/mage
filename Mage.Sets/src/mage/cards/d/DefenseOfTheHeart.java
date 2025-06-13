@@ -32,7 +32,7 @@ public final class DefenseOfTheHeart extends CardImpl {
         // At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice Defense of the Heart, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect()).withInterveningIf(condition);
         ability.addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
-                2, StaticFilters.FILTER_CARD_CREATURES
+                0, 2, StaticFilters.FILTER_CARD_CREATURES
         )).concatBy(","));
         this.addAbility(ability);
     }

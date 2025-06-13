@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class GaeasCourser extends CardImpl {
 
     private static final Condition condition
-            = new CardsInControllerGraveyardCondition(3, StaticFilters.FILTER_CARD_CREATURE);
+            = new CardsInControllerGraveyardCondition(3, StaticFilters.FILTER_CARD_CREATURES);
 
     public GaeasCourser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

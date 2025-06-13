@@ -51,7 +51,7 @@ public final class MastermindPlum extends CardImpl {
         // Whenever you cast a spell, if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life.
         ability = new SpellCastControllerTriggeredAbility(
                 new DrawCardSourceControllerEffect(1, true),
-                StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL
+                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL
         ).withInterveningIf(MastermindPlumCondition.instance);
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class MirrorSigilSergeant extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control blue permanent");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a blue permanent");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));

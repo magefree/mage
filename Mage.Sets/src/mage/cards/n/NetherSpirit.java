@@ -60,6 +60,6 @@ enum NetherSpiritCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is the only creature card in your graveyard";
+        return "this card is the only creature card in your graveyard";
     }
 }

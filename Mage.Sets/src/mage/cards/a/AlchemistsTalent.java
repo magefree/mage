@@ -66,7 +66,7 @@ public final class AlchemistsTalent extends CardImpl {
                 new SpellCastControllerTriggeredAbility(
                         new DamagePlayersEffect(AlchemistsTalentValue.instance, TargetController.OPPONENT)
                                 .setText("{this} deals damage equal to that spell's mana value to each opponent"),
-                        StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL
+                        StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL
                 ).withInterveningIf(AlchemistsTalentCondition.instance), 3
         )));
     }

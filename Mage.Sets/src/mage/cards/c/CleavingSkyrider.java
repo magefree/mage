@@ -44,7 +44,7 @@ public final class CleavingSkyrider extends CardImpl {
 
         // When Cleaving Skyrider enters the battlefield, if it was kicked, it deals X damage to any target, where X is the number of attacking creatures.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(xValue, "it")
+                new DamageTargetEffect(xValue, "it").setText("it deals X damage to any target, where X is the number of attacking creatures")
         ).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

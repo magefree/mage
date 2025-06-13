@@ -9,6 +9,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -33,7 +34,7 @@ public final class SabertoothOutrider extends CardImpl {
         // <i>Formidable</i> &mdash; Whenever Sabertooth Outrider attacks, if creatures you control have total power 8 or greater, Sabertooth Outrider gains first strike until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new GainAbilitySourceEffect(
                 FirstStrikeAbility.getInstance(), Duration.EndOfTurn
-        )).withInterveningIf(FormidableCondition.instance));
+        )).withInterveningIf(FormidableCondition.instance).setAbilityWord(AbilityWord.FORMIDABLE));
     }
 
     private SabertoothOutrider(final SabertoothOutrider card) {

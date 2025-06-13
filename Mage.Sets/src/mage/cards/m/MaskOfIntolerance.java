@@ -24,7 +24,7 @@ public final class MaskOfIntolerance extends CardImpl {
 
         // At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, Mask of Intolerance deals 3 damage to that player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new DamageTargetEffect(3), false
+                TargetController.EACH_PLAYER, new DamageTargetEffect(3, true, "that player"), false
         ).withInterveningIf(MaskOfIntoleranceCondition.instance).addHint(DomainHint.instance));
     }
 

@@ -27,9 +27,9 @@ public final class HiredHexblade extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Hired Hexblade enters the battlefield, if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1))
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1, true))
                 .withInterveningIf(TreasureSpentToCastCondition.instance);
-        ability.addEffect(new LoseLifeSourceControllerEffect(1));
+        ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }
 

@@ -34,7 +34,7 @@ import java.util.*;
  */
 public final class KodamaOfTheEastTree extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent("another permanent you control");
 
     static {
         filter.add(AnotherPredicate.instance);

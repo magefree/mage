@@ -34,7 +34,7 @@ public final class DeathSpark extends CardImpl {
         // At the beginning of your upkeep, if Death Spark is in your graveyard with a creature card directly above it, you may pay {1}. If you do, return Death Spark to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.GRAVEYARD, TargetController.YOU,
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new GenericManaCost(1)), false
+                new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return this card to your hand"), new GenericManaCost(1)), false
         ).withInterveningIf(DeathSparkCondition.instance));
     }
 
@@ -71,6 +71,6 @@ enum DeathSparkCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is in your graveyard with a creature card directly above it";
+        return "this card is in your graveyard with a creature card directly above it";
     }
 }

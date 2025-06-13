@@ -30,7 +30,7 @@ public final class ArchmageAscension extends CardImpl {
 
         // At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.EACH_PLAYER, new AddCountersSourceEffect(CounterType.QUEST.createInstance()),
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.QUEST.createInstance()),
                 true, ArchmageAscensionCondition.instance
         ), new CardsAmountDrawnThisTurnWatcher());
 

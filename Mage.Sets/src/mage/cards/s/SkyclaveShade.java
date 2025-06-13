@@ -69,7 +69,7 @@ enum SkyclaveShadeCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{this} is in your graveyard and it's your turn";
+        return "this card is in your graveyard and it's your turn";
     }
 }
 

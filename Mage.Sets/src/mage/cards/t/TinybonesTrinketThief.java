@@ -37,7 +37,7 @@ public final class TinybonesTrinketThief extends CardImpl {
 
         // At the beginning of each end step, if an opponent discarded a card this turn, you draw a card and you lose 1 life.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                TargetController.EACH_PLAYER, new DrawCardSourceControllerEffect(1, true),
+                TargetController.ANY, new DrawCardSourceControllerEffect(1, true),
                 false, TinybonesTrinketThiefCondition.instance
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));

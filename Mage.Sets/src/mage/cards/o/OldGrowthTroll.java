@@ -89,13 +89,13 @@ class OldGrowthTrollReturnEffect extends OneShotEffect {
 
     OldGrowthTrollReturnEffect() {
         super(Outcome.PutCardInPlay);
+        staticText = "return it to the battlefield. It's an Aura enchantment with enchant Forest you control " +
+                "and \"Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: " +
+                "Create a tapped 4/4 green Troll Warrior creature token with trample.'\"";
     }
 
     private OldGrowthTrollReturnEffect(final OldGrowthTrollReturnEffect effect) {
         super(effect);
-        staticText = "return it to the battlefield. It's an Aura enchantment with enchant Forest you control " +
-                "and \"Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: " +
-                "Create a tapped 4/4 green Troll Warrior creature token with trample.'\"";
     }
 
     @Override

@@ -35,7 +35,7 @@ public final class ErgRaiders extends CardImpl {
         // At the beginning of your end step, if Erg Raiders didn't attack this turn, Erg Raiders deals 2 damage to you unless it came under your control this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ConditionalOneShotEffect(
                 new DamageControllerEffect(2), ErgRaidersCondition.instance,
-                "{this} deals 2 damage to you unless it came under your control this turn"
+                "it deals 2 damage to you unless it came under your control this turn"
         )).withInterveningIf(condition));
     }
 

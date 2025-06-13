@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class ViconiaDrowApostate extends CardImpl {
 
     private static final Condition condition
-            = new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_CREATURE);
+            = new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_CREATURES);
     private static final Hint hint = new ValueHint(
             "Creature cards in your graveyard",
             new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)

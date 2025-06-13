@@ -8,10 +8,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -34,7 +31,7 @@ public final class SurrakTheHuntCaller extends CardImpl {
                 HasteAbility.getInstance(), Duration.EndOfTurn
         )).withInterveningIf(FormidableCondition.instance);
         ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.FORMIDABLE));
     }
 
     private SurrakTheHuntCaller(final SurrakTheHuntCaller card) {

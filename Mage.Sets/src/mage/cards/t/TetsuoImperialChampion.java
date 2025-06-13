@@ -40,7 +40,7 @@ public final class TetsuoImperialChampion extends CardImpl {
     static final GreatestAmongPermanentsValue xValue = new GreatestAmongPermanentsValue(GreatestAmongPermanentsValue.Quality.ManaValue, filterEquipment);
     private static final FilterCard filter = new FilterInstantOrSorceryCard(
             "an instant or sorcery spell from your hand with mana value " +
-                    "less than or equal to the highest mana value among Equipment attached to {this}"
+                    "less than or equal to the greatest mana value among Equipment attached to {this}"
     );
 
     static {
@@ -62,7 +62,7 @@ public final class TetsuoImperialChampion extends CardImpl {
                 new DamageTargetEffect(xValue, "it")
                         .setText("{this} deals damage equal to the greatest mana value " +
                                 "among Equipment attached to it to any target")
-        ).setTriggerPhrase("Whenever {this} attacks, if it's equipped, ").withInterveningIf(EquippedSourceCondition.instance);
+        ).withInterveningIf(EquippedSourceCondition.instance);
         ability.addTarget(new TargetAnyTarget());
 
         // * You may cast an instant or sorcery spell from your hand with mana value less than or equal to the greatest mana value among Equipment attached to Tetsuo without paying its mana cost.

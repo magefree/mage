@@ -68,7 +68,7 @@ class ReservoirKrakenEffect extends OneShotEffect {
 
     public ReservoirKrakenEffect() {
         super(Outcome.Tap);
-        this.staticText = "any opponent may tap an untapped creature they control. If they do, tap {this} and create a 1/1 blue Fish creature token with \"This creature can't be blocked.\"";
+        this.staticText = "any opponent may tap an untapped creature they control. If they do, tap {this} and create a 1/1 blue Fish creature token with \"This token can't be blocked.\"";
     }
 
     private ReservoirKrakenEffect(final ReservoirKrakenEffect effect) {

@@ -60,8 +60,8 @@ class RetrieverPhoenixEffect extends ReplacementEffectImpl {
 
     RetrieverPhoenixEffect() {
         super(Duration.WhileInGraveyard, Outcome.PutCreatureInPlay);
-        staticText = "as long as {this} is in your graveyard, if you would learn, " +
-                "you may instead return {this} to the battlefield";
+        staticText = "as long as this card is in your graveyard, if you would learn, " +
+                "you may instead return this card to the battlefield";
     }
 
     private RetrieverPhoenixEffect(final RetrieverPhoenixEffect effect) {

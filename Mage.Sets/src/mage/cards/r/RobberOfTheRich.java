@@ -74,6 +74,11 @@ enum RobberOfTheRichAttacksCondition implements Condition {
                 && player != null
                 && controller.getHand().size() < player.getHand().size();
     }
+
+    @Override
+    public String toString() {
+        return "defending player has more cards in hand than you";
+    }
 }
 
 class RogueAttackedThisTurnCondition implements Condition {

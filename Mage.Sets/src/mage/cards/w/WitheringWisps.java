@@ -71,7 +71,7 @@ class WitheringWispsActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Activate this ability no more times each turn than the number of snow Swamps you control.";
+        return super.getRule() + " Activate no more times each turn than the number of snow Swamps you control.";
     }
 
     @Override

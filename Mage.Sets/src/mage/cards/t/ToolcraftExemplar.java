@@ -3,6 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
@@ -14,10 +15,8 @@ import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 
 import java.util.UUID;
@@ -29,9 +28,6 @@ public final class ToolcraftExemplar extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
             new FilterControlledArtifactPermanent("you control an artifact")
-    );
-    private static final Condition condition2 = new PermanentsOnTheBattlefieldCondition(
-            StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, ComparisonType.MORE_THAN, 2
     );
 
     public ToolcraftExemplar(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +44,7 @@ public final class ToolcraftExemplar extends CardImpl {
         )).withInterveningIf(condition);
         ability.addEffect(new ConditionalOneShotEffect(new AddContinuousEffectToGame(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
-        ), condition2, "If you control at least 3 artifacts, it also gains first strike until end of turn"));
+        ), MetalcraftCondition.instance, "If you control three or more artifacts, it also gains first strike until end of turn"));
         this.addAbility(ability.addHint(ArtifactYouControlHint.instance));
     }
 

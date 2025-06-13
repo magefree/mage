@@ -41,8 +41,8 @@ public final class ShelteredValley extends CardImpl {
         // If Sheltered Valley would enter the battlefield, instead sacrifice each other permanent named Sheltered Valley you control, then put Sheltered Valley onto the battlefield.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeAllCost(filter))
-                .setText("If {this} would enter the battlefield, instead sacrifice each other " +
-                        "permanent named Sheltered Valley you control, then put {this} onto the battlefield.")
+                .setText("If {this} would enter, instead sacrifice each other permanent " +
+                        "named Sheltered Valley you control, then put {this} onto the battlefield.")
         ));
 
         // At the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.

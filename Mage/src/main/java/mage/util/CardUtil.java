@@ -85,7 +85,7 @@ public final class CardUtil {
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
     private static final List<String> costWords = Arrays.asList(
-            "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay", "collect", "forage"
+            "put", "return", "exile", "discard", "mill", "sacrifice", "remove", "tap", "reveal", "pay", "have", "collect", "forage"
     );
 
     // search set code in commands like "set_code-card_name"

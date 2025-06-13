@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class VoldarenAmbusher extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
-            new FilterControlledPermanent(SubType.VAMPIRE, "Vampires you control")
+            new FilterControlledPermanent(SubType.VAMPIRE, "Vampires you control"), null
     );
     private static final Hint hint = new ValueHint("Vampires you control", xValue);
 

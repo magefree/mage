@@ -38,7 +38,7 @@ public final class ScabClanBerserker extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(2, true, "that player"),
-                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, SetTargetPointer.PLAYER
         ).withInterveningIf(RenownedSourceCondition.THIS));
     }
 

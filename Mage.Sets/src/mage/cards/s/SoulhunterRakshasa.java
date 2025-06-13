@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
+import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -37,7 +37,7 @@ public final class SoulhunterRakshasa extends CardImpl {
 
         // When Soulhunter Rakshasa enters the battlefield, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue))
-                .withInterveningIf(CastFromEverywhereSourceCondition.instance);
+                .withInterveningIf(CastFromHandSourcePermanentCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new CastFromHandWatcher());
     }

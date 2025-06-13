@@ -33,7 +33,7 @@ public final class EarwigSquad extends CardImpl {
 
         // When Earwig Squad enters the battlefield, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles their library.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryAndExileTargetEffect(3, true), false
+                new SearchLibraryAndExileTargetEffect(3, false), false
         ).withInterveningIf(ProwlCostWasPaidCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability.addHint(ProwlCostWasPaidHint.instance));

@@ -47,7 +47,7 @@ public final class KeldonStrikeTeam extends CardImpl {
                         HasteAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
                 ), SourceEnteredThisTurnCondition.DID, "as long as {this} " +
-                "entered the battlefield this turn, creatures you control have haste"
+                "entered this turn, creatures you control have haste"
         )));
     }
 

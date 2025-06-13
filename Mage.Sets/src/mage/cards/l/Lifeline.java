@@ -36,7 +36,7 @@ public final class Lifeline extends CardImpl {
         // Whenever a creature dies, if another creature is on the battlefield, return the first card to the battlefield under its owner's control at the beginning of the next end step.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new LifelineEffect(), false,
-                StaticFilters.FILTER_PERMANENT_CREATURE, true
+                StaticFilters.FILTER_PERMANENT_A_CREATURE, true
         ).withInterveningIf(condition));
     }
 

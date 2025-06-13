@@ -48,7 +48,7 @@ public final class YshtolaNightsBlessed extends CardImpl {
 
         // At the beginning of each end step, if a player lost 4 or more life this turn, you draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.ANY, new DrawCardSourceControllerEffect(1),
+                TargetController.ANY, new DrawCardSourceControllerEffect(1, true),
                 false, YshtolaNightsBlessedCondition.instance
         ).addHint(YshtolaNightsBlessedCondition.getHint()));
 

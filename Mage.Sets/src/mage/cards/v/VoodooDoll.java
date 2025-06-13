@@ -49,7 +49,10 @@ public final class VoodooDoll extends CardImpl {
 
         // {X}{X}, {T}: Voodoo Doll deals damage equal to the number of pin counters on it to any target. X is the number of pin counters on Voodoo Doll.
         ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(new CountersSourceCount(CounterType.PIN)), new ManaCostsImpl<>("{X}{X}")
+                new DamageTargetEffect(new CountersSourceCount(CounterType.PIN))
+                        .setText("{this} deals damage equal to the number of pin counters on it " +
+                                "to any target. X is the number of pin counters on {this}"),
+                new ManaCostsImpl<>("{X}{X}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

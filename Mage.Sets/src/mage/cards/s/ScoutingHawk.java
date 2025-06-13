@@ -29,7 +29,7 @@ public final class ScoutingHawk extends CardImpl {
         filter.add(SubType.PLAINS.getPredicate());
     }
 
-    private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LAND);
+    private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS);
 
     public ScoutingHawk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

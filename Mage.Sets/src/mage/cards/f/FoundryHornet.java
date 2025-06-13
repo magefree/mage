@@ -45,7 +45,7 @@ public final class FoundryHornet extends CardImpl {
         // When Foundry Hornet enters the battlefield, if you control a creature with a +1/+1 counter on it, creatures your opponents control get -1/-1 until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(
                 -1, -1, Duration.EndOfTurn,
-                StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false
+                StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false
         ), false).withInterveningIf(condition));
     }
 

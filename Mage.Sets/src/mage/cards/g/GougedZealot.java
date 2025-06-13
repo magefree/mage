@@ -8,6 +8,7 @@ import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
@@ -35,7 +36,7 @@ public final class GougedZealot extends CardImpl {
                 new DamageAllControlledTargetEffect(1)
                         .setText("{this} deals 1 damage to each creature defending player controls"),
                 false, null, SetTargetPointer.PLAYER
-        ).withInterveningIf(DeliriumCondition.instance).addHint(CardTypesInGraveyardCount.YOU.getHint()));
+        ).withInterveningIf(DeliriumCondition.instance).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private GougedZealot(final GougedZealot card) {

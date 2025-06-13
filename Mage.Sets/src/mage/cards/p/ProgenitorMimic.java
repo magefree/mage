@@ -45,7 +45,7 @@ public final class ProgenitorMimic extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(
                         new CreateTokenCopySourceEffect().setText("create a token that's a copy of this creature")
                 ).withInterveningIf(condition)
-        )).setText("as a copy of any creature on the battlefield except it has " +
+        )).setText("as a copy of any creature on the battlefield, except it has " +
                 "\"At the beginning of your upkeep, if this creature isn't a token, " +
                 "create a token that's a copy of this creature.\""), true
         ));

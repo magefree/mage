@@ -30,7 +30,7 @@ public final class SandScout extends CardImpl {
         filter.add(SubType.DESERT.getPredicate());
     }
 
-    private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LAND);
+    private static final Condition condition = new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS);
 
     public SandScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

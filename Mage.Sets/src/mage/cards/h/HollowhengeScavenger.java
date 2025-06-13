@@ -7,6 +7,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -26,7 +27,7 @@ public final class HollowhengeScavenger extends CardImpl {
 
         // <i>Morbid</i> &mdash; When Hollowhenge Scavenger enters the battlefield, if a creature died this turn, you gain 5 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5))
-                .withInterveningIf(MorbidCondition.instance).addHint(MorbidHint.instance));
+                .withInterveningIf(MorbidCondition.instance).setAbilityWord(AbilityWord.MORBID).addHint(MorbidHint.instance));
     }
 
     private HollowhengeScavenger(final HollowhengeScavenger card) {

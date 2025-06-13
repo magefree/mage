@@ -14,7 +14,7 @@ public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     public DiscardedByOpponentTriggeredAbility(Effect effect) {
         super(Zone.GRAVEYARD, effect, false);
-        setTriggerPhrase("When a spell or ability an opponent controls causes you to discard this card");
+        setTriggerPhrase("When a spell or ability an opponent controls causes you to discard this card, ");
     }
 
     protected DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {

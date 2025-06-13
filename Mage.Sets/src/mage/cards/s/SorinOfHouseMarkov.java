@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class SorinOfHouseMarkov extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.OR_GREATER, 3);
+    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2);
     private static final Hint hint = new ConditionHint(condition);
 
     public SorinOfHouseMarkov(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +45,7 @@ public final class SorinOfHouseMarkov extends CardImpl {
         // At the beginning of your postcombat main phase, if you gained 3 or more life this turn, exile Sorin of House Markov, then return him to the battlefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(
-                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.SHE), false
+                new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.HE), false
         ).withInterveningIf(condition).addHint(hint), new PlayerGainedLifeWatcher());
     }
 

@@ -42,7 +42,7 @@ public final class Skizzik extends CardImpl {
 
         // At the beginning of the end step, if Skizzik wasn't kicked, sacrifice it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                TargetController.NEXT, new SacrificeSourceEffect(), false, condition
+                TargetController.NEXT, new SacrificeSourceEffect().setText("sacrifice it"), false, condition
         ));
     }
 

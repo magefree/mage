@@ -24,7 +24,7 @@ public final class LandTax extends CardImpl {
 
         // At the beginning of your upkeep, if an opponent controls more lands than you, you may search your library for up to three basic land cards, reveal them, and put them into your hand. If you do, shuffle your library.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(3, StaticFilters.FILTER_CARD_BASIC_LANDS), true
+                new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_BASIC_LANDS), true
         ), true).withInterveningIf(condition));
     }
 

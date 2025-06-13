@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCountersCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCounterChoiceSourceEffect;
@@ -42,7 +42,7 @@ public class DenryKlinEditorInChief extends CardImpl {
 
         // Whenever a nontoken creature you control enters,
         // if Denry has counters on it, put the same number of each kind of counter on that creature.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 new DenryKlinEditorInChiefCopyCountersEffect(), StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN
         ).withInterveningIf(SourceHasCountersCondition.instance));
 

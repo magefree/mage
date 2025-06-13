@@ -52,7 +52,7 @@ public final class BlizzardStrix extends CardImpl {
         // When Blizzard Strix enters the battlefield, if you control another snow permanent, exile target permanent other than Blizzard Strix. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileReturnBattlefieldNextEndStepTargetEffect()
                 .setText("exile target permanent other than {this}. Return that card to the " +
-                        "battlefield under its owner's control at the beginning of the next end step"));
+                        "battlefield under its owner's control at the beginning of the next end step")).withInterveningIf(condition);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

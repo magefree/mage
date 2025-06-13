@@ -8,6 +8,7 @@ import mage.abilities.hint.common.MorbidHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -30,7 +31,7 @@ public final class FunnelWebRecluse extends CardImpl {
 
         // Morbid — When Funnel-Web Recluse enters the battlefield, if a creature died this turn, investigate.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect())
-                .withInterveningIf(MorbidCondition.instance).addHint(MorbidHint.instance));
+                .withInterveningIf(MorbidCondition.instance).setAbilityWord(AbilityWord.MORBID).addHint(MorbidHint.instance));
     }
 
     private FunnelWebRecluse(final FunnelWebRecluse card) {

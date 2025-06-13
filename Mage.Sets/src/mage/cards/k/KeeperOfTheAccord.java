@@ -64,8 +64,8 @@ public final class KeeperOfTheAccord extends CardImpl {
 
 enum KeeperOfTheAccordCondition implements Condition {
 
-    CREATURES(StaticFilters.FILTER_PERMANENT_CREATURE),
-    LANDS(StaticFilters.FILTER_LAND);
+    CREATURES(StaticFilters.FILTER_PERMANENT_CREATURES),
+    LANDS(StaticFilters.FILTER_LANDS);
 
     private final FilterPermanent filter;
 

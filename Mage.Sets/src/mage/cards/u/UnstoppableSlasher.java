@@ -42,7 +42,7 @@ public final class UnstoppableSlasher extends CardImpl {
                 new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(
                         CounterType.STUN.createInstance(2),
                         true, true, false, false
-                ), false
+                ).setText("return it to the battlefield tapped under its owner's control with two stun counters on it")
         ).withInterveningIf(UnstoppableSlasherCondition.instance));
     }
 

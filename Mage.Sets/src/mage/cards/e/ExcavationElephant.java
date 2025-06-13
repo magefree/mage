@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,9 +31,7 @@ public final class ExcavationElephant extends CardImpl {
         this.addAbility(new KickerAbility("{1}{W}"));
 
         // When Excavation Elephant enters the battlefield, if it was kicked, return target artifact card from your graveyard to your hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ReturnToHandTargetEffect(), false
-        ).withInterveningIf(KickedCondition.ONCE);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

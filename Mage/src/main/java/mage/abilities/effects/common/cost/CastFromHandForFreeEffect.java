@@ -24,7 +24,7 @@ public class CastFromHandForFreeEffect extends OneShotEffect {
     public CastFromHandForFreeEffect(FilterCard filter) {
         super(Outcome.PlayForFree);
         this.filter = filter;
-        this.staticText = "you may cast " + filter.getMessage() + " from your hand without paying its mana cost";
+        this.staticText = "you may cast " + filter.getMessage() + (filter.getMessage().contains("your hand") ? "" : " from your hand") + " without paying its mana cost";
     }
 
     protected CastFromHandForFreeEffect(final CastFromHandForFreeEffect effect) {

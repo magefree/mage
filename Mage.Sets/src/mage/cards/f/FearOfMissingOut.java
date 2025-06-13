@@ -12,6 +12,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
@@ -39,8 +40,7 @@ public final class FearOfMissingOut extends CardImpl {
         ability = new AttacksFirstTimeTriggeredAbility(new UntapTargetEffect(), false).withInterveningIf(DeliriumCondition.instance);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new AdditionalCombatPhaseEffect());
-        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private FearOfMissingOut(final FearOfMissingOut card) {

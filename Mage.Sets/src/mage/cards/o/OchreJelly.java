@@ -69,6 +69,11 @@ enum OchreJellyCondition implements Condition {
                 .filter(permanent -> permanent.getCounters(game).getCount(CounterType.P1P1) >= 2)
                 .isPresent();
     }
+
+    @Override
+    public String toString() {
+        return "it had two or more +1/+1 counters on it";
+    }
 }
 
 class OchreJellyEffect extends OneShotEffect {
