@@ -69,5 +69,6 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("The Space Family Goblinson", 179, Rarity.UNCOMMON, mage.cards.t.TheSpaceFamilyGoblinson.class));
         cards.add(new SetCardInfo("Vegetation Abomination", 160, Rarity.COMMON, mage.cards.v.VegetationAbomination.class));
         cards.add(new SetCardInfo("Watery Grave", 278, Rarity.RARE, mage.cards.w.WateryGrave.class));
+        cards.add(new SetCardInfo("Xenosquirrels", 96, Rarity.COMMON, mage.cards.x.Xenosquirrels.class));
     }
 }
