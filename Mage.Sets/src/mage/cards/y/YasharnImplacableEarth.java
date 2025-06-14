@@ -5,18 +5,16 @@ import mage.abilities.Ability;
 import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.CantPayLifeOrSacrificeEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -25,6 +23,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class YasharnImplacableEarth extends CardImpl {
+
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanents");
 
     public YasharnImplacableEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
@@ -43,7 +43,7 @@ public final class YasharnImplacableEarth extends CardImpl {
         ));
 
         // Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities.
-        Ability ability = new SimpleStaticAbility(new YasharnImplacableEarthEffect());
+        Ability ability = new SimpleStaticAbility(new CantPayLifeOrSacrificeEffect(filter));
         this.addAbility(ability);
     }
 
@@ -100,52 +100,5 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
         Cards cards = new CardsImpl(this.getTargets());
         cards.add(card);
         return subTypeAssigner.getRoleCount(cards, game) >= cards.size();
-    }
-}
-
-class YasharnImplacableEarthEffect extends ContinuousEffectImpl {
-
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland sacrifice cost from spell cast or activated ability");
-
-    static {
-        filter.add(YasharnCostPredicate.instance);
-    }
-
-    YasharnImplacableEarthEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities";
-    }
-
-    private YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public YasharnImplacableEarthEffect copy() {
-        return new YasharnImplacableEarthEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            player.setPayLifeCostLevel(Player.PayLifeCostLevel.nonSpellnonActivatedAbilities);
-            player.setCanPaySacrificeCostFilter(filter);
-        }
-        return true;
-    }
-}
-
-enum YasharnCostPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getSource().isActivatedAbility() || input.getSource().getAbilityType() == AbilityType.SPELL;
-    }
-
-    @Override
-    public String toString() {
-        return "Source is a spell or activated ability";
     }
 }

@@ -206,4 +206,54 @@ public class YasharnImplacableEarthTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Treasure Token", 4);
         assertPermanentCount(playerA, "Food Token", 4);
     }
+
+    @Test
+    public void testCanSacrificeTriggeredAbility() {
+        /*
+        Unscrupulous Contractor
+        {2}{B}
+        Creature — Human Assassin
+        When this creature enters, you may sacrifice a creature. When you do, target player draws two cards and loses 2 life.
+        Plot {2}{B}
+        3/2
+         */
+        String contractor = "Unscrupulous Contractor";
+        /*
+        Bear Cub
+        {1}{G}
+        Creature - Bear
+        2/2
+         */
+        String cub = "Bear Cub";
+
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, yasharn);
+        addCard(Zone.HAND, playerA, contractor);
+        addCard(Zone.HAND, playerB, contractor);
+        addCard(Zone.BATTLEFIELD, playerA, cub);
+        addCard(Zone.BATTLEFIELD, playerB, cub);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, contractor);
+        setChoice(playerA, true);
+        setChoice(playerA, cub);
+        addTarget(playerA, playerA);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, contractor);
+        setChoice(playerB, true);
+        setChoice(playerB, cub);
+        addTarget(playerB, playerB);
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 2);
+        assertLife(playerA, 20 - 2);
+        assertGraveyardCount(playerA, cub, 1);
+
+        assertHandCount(playerB, 1 + 2); //draw + contractor effect
+        assertLife(playerB, 20 - 2);
+        assertGraveyardCount(playerB, cub, 1);
+    }
 }
