@@ -2,13 +2,11 @@ package mage.cards.v;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.SourceMatchesFilterCondition;
+import mage.abilities.condition.common.SourceIsEnchantmentCondition;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -20,13 +18,14 @@ import java.util.UUID;
  */
 public final class VeiledSentry extends CardImpl {
 
-    private static final Condition condition = new SourceMatchesFilterCondition(new FilterEnchantmentPermanent("{this} is an enchantment"));
-
     public VeiledSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");
 
         // When an opponent casts a spell, if Veiled Sentry is an enchantment, Veiled Sentry becomes an Illusion creature with power and toughness each equal to that spell's converted mana cost.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new VeiledSentryEffect(), false).withInterveningIf(condition));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new VeiledSentryEffect(), false)
+                .withInterveningIf(SourceIsEnchantmentCondition.instance)
+                .withRuleTextReplacement(true)
+                .setTriggerPhrase("When an opponent casts a spell, "));
     }
 
     private VeiledSentry(final VeiledSentry card) {
@@ -45,7 +44,7 @@ class VeiledSentryEffect extends ContinuousEffectImpl {
 
     public VeiledSentryEffect() {
         super(Duration.Custom, Outcome.BecomeCreature);
-        staticText = "{this} becomes an Illusion creature with power and toughness equal to that spell's mana value";
+        staticText = "{this} becomes an Illusion creature with power and toughness each equal to that spell's mana value";
         this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 

@@ -1,7 +1,7 @@
 package mage.cards.o;
 
-import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
+import mage.abilities.condition.common.SourceIsEnchantmentCondition;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,8 +11,10 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
+import mage.players.Player;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -40,9 +42,12 @@ public final class OpalAvenger extends CardImpl {
 class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
 
     OpalAvengerStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new OpalAvengerToken(), null, Duration.Custom));
-        this.withRuleTextReplacement(false);
-        setTriggerPhrase("When you have 10 or less life, if {this} is an enchantment, ");
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(3, 5, "3/5 Soldier creature", SubType.SOLDIER), null, Duration.Custom
+        ));
+        this.withInterveningIf(SourceIsEnchantmentCondition.instance);
+        this.withRuleTextReplacement(true);
+        this.setTriggerPhrase("When you have 10 or less life, ");
     }
 
     private OpalAvengerStateTriggeredAbility(final OpalAvengerStateTriggeredAbility ability) {
@@ -56,38 +61,11 @@ class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getState().getPlayer(getControllerId()) != null) {
-            return game.getState().getPlayer(getControllerId()).getLife() <= 10;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        if (getSourcePermanentIfItStillExists(game) != null) {
-            return getSourcePermanentIfItStillExists(game).isEnchantment(game);
-        }
-        return false;
-    }
-
-}
-
-class OpalAvengerToken extends TokenImpl {
-
-    public OpalAvengerToken() {
-        super("Soldier", "3/5 Soldier creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.SOLDIER);
-        power = new MageInt(3);
-        toughness = new MageInt(5);
-    }
-
-    private OpalAvengerToken(final OpalAvengerToken token) {
-        super(token);
-    }
-
-    @Override
-    public OpalAvengerToken copy() {
-        return new OpalAvengerToken(this);
+        return Optional
+                .ofNullable(getControllerId())
+                .map(game::getPlayer)
+                .map(Player::getLife)
+                .filter(x -> x <= 10)
+                .isPresent();
     }
 }

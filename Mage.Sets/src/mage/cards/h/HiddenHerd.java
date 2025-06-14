@@ -1,7 +1,7 @@
 package mage.cards.h;
 
-import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.condition.common.SourceIsEnchantmentCondition;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -12,9 +12,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -42,7 +41,13 @@ public final class HiddenHerd extends CardImpl {
 class HiddenHerdAbility extends TriggeredAbilityImpl {
 
     public HiddenHerdAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenHerdBeast(), null, Duration.WhileOnBattlefield), false);
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(3, 3, "3/3 Beast creature", SubType.BEAST),
+                null, Duration.WhileOnBattlefield
+        ), false);
+        this.withInterveningIf(SourceIsEnchantmentCondition.instance);
+        this.withRuleTextReplacement(true);
+        this.setTriggerPhrase("When an opponent plays a nonbasic land, ");
     }
 
     private HiddenHerdAbility(final HiddenHerdAbility ability) {
@@ -62,38 +67,6 @@ class HiddenHerdAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return game.getOpponents(controllerId).contains(event.getPlayerId()) && !land.isBasic(game);
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        return Optional
-                .ofNullable(getSourcePermanentIfItStillExists(game))
-                .filter(permanent -> permanent.isEnchantment(game))
-                .isPresent();
-    }
-
-    @Override
-    public String getRule() {
-        return "When an opponent plays a nonbasic land, if {this} is an enchantment, {this} becomes a 3/3 Beast creature.";
-    }
-}
-
-class HiddenHerdBeast extends TokenImpl {
-
-    public HiddenHerdBeast() {
-        super("Beast", "3/3 Beast creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.BEAST);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-    }
-
-    private HiddenHerdBeast(final HiddenHerdBeast token) {
-        super(token);
-    }
-
-    public HiddenHerdBeast copy() {
-        return new HiddenHerdBeast(this);
+        return land != null && game.getOpponents(getControllerId()).contains(event.getPlayerId()) && !land.isBasic(game);
     }
 }
