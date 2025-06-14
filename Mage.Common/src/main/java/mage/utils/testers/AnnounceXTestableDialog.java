@@ -25,7 +25,8 @@ class AnnounceXTestableDialog extends BaseTestableDialog {
 
     public AnnounceXTestableDialog(boolean isYou, boolean isMana, int min, int max) {
         super(String.format("player.announceX(%s)", isYou ? "you" : "AI"),
-                String.format("%s from %d to %d", isMana ? "mana" : "cost", min, max), "");
+                String.format("%s from %d to %d", isMana ? "mana" : "cost", min, max), "",
+                new AmountTestableResult());
         this.isYou = isYou;
         this.isMana = isMana;
         this.min = min;
@@ -33,14 +34,15 @@ class AnnounceXTestableDialog extends BaseTestableDialog {
     }
 
     @Override
-    public List<String> showDialog(Player player, Ability source, Game game, Player opponent) {
+    public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
         String message = "<font color=green>message</font> with html";
         int chooseRes;
         chooseRes = choosingPlayer.announceX(this.min, this.max, message, game, source, this.isMana);
-        List<String> result = new ArrayList<>();
-        result.add(getGroup() + " - " + this.getName() + " selected " + chooseRes);
-        return result;
+        List<String> res = new ArrayList<>();
+        res.add(getGroup() + " - " + this.getName() + " selected " + chooseRes);
+
+        ((AmountTestableResult) this.getResult()).save(true, res, chooseRes);
     }
 
     static public void register(TestableDialogsRunner runner) {

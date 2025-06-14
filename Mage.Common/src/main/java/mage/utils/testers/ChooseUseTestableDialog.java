@@ -27,7 +27,11 @@ class ChooseUseTestableDialog extends BaseTestableDialog {
     String messageAdditional;
 
     public ChooseUseTestableDialog(boolean isYou, String name, String trueText, String falseText, String messageMain, String messageAdditional) {
-        super(String.format("player.chooseUse(%s)", isYou ? "you" : "AI"), name + buildName(trueText, falseText, messageMain, messageAdditional), "");
+        super(String.format("player.chooseUse(%s)", isYou ? "you" : "AI"),
+                name + buildName(trueText, falseText, messageMain, messageAdditional),
+                "",
+                new BaseTestableResult()
+        );
         this.isYou = isYou;
         this.trueText = trueText;
         this.falseText = falseText;
@@ -42,7 +46,7 @@ class ChooseUseTestableDialog extends BaseTestableDialog {
     }
 
     @Override
-    public List<String> showDialog(Player player, Ability source, Game game, Player opponent) {
+    public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
         boolean chooseRes = choosingPlayer.chooseUse(
                 Outcome.Benefit,
@@ -53,9 +57,10 @@ class ChooseUseTestableDialog extends BaseTestableDialog {
                 source,
                 game
         );
-        List<String> result = new ArrayList<>();
-        result.add(chooseRes ? "TRUE" : "FALSE");
-        return result;
+        List<String> res = new ArrayList<>();
+        res.add(chooseRes ? "TRUE" : "FALSE");
+
+        this.getResult().save(chooseRes, res);
     }
 
     static public void register(TestableDialogsRunner runner) {

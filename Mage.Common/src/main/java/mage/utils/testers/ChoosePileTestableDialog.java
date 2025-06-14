@@ -28,14 +28,18 @@ class ChoosePileTestableDialog extends BaseTestableDialog {
     int pileSize2;
 
     public ChoosePileTestableDialog(boolean isYou, int pileSize1, int pileSize2) {
-        super(String.format("player.choosePile(%s)", isYou ? "you" : "AI"), "pile sizes: " + pileSize1 + " and " + pileSize2, "");
+        super(String.format("player.choosePile(%s)", isYou ? "you" : "AI"),
+                "pile sizes: " + pileSize1 + " and " + pileSize2,
+                "",
+                new BaseTestableResult()
+        );
         this.isYou = isYou;
         this.pileSize1 = pileSize1;
         this.pileSize2 = pileSize2;
     }
 
     @Override
-    public List<String> showDialog(Player player, Ability source, Game game, Player opponent) {
+    public void showDialog(Player player, Ability source, Game game, Player opponent) {
         // TODO: it's ok to show broken title - must add html support in windows's title someday
         String mainMessage = "main <font color=green>message</font> with html" + CardUtil.getSourceLogName(game, source);
 
@@ -48,10 +52,11 @@ class ChoosePileTestableDialog extends BaseTestableDialog {
 
         Player choosingPlayer = this.isYou ? player : opponent;
         boolean chooseRes = choosingPlayer.choosePile(Outcome.Benefit, mainMessage, pile1, pile2, game);
-        List<String> result = new ArrayList<>();
-        result.add(getGroup() + " - " + this.getName() + " - " + (chooseRes ? "TRUE" : "FALSE"));
-        result.add(" * selected pile: " + (chooseRes ? "pile 1" : "pile 2"));
-        return result;
+        List<String> res = new ArrayList<>();
+        res.add(getGroup() + " - " + this.getName() + " - " + (chooseRes ? "TRUE" : "FALSE"));
+        res.add(" * selected pile: " + (chooseRes ? "pile 1" : "pile 2"));
+
+        this.getResult().save(chooseRes, res);
     }
 
     static public void register(TestableDialogsRunner runner) {

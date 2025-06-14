@@ -36,7 +36,9 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
     public GetMultiAmountTestableDialog(boolean isYou, String info, int totalMin, int totalMax, List<List<Integer>> options) {
         super(String.format("player.getMultiAmount(%s)", isYou ? "you" : "AI"),
                 String.format("%s, %d options from [%d-%d]", info, options.size(), totalMin, totalMax),
-                "");
+                "",
+                new MultiAmountTestableResult()
+        );
         this.isYou = isYou;
         this.totalMin = totalMin;
         this.totalMax = totalMax;
@@ -49,7 +51,7 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
     }
 
     @Override
-    public List<String> showDialog(Player player, Ability source, Game game, Player opponent) {
+    public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
         //String message = "<font color=green>message</font> with html";
         List<Integer> chooseRes;
@@ -63,24 +65,24 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
                 game
         );
 
-        List<String> result = new ArrayList<>();
-        result.add(getGroup() + " - " + this.getName());
+        List<String> res = new ArrayList<>();
+        res.add(getGroup() + " - " + this.getName());
         int selectedIndex = -1;
         int selectedTotal = 0;
         for (Integer selectedValue : chooseRes) {
             selectedIndex++;
             selectedTotal += selectedValue;
             MultiAmountMessage option = this.amountOptions.get(selectedIndex);
-            result.add(String.format("%d from [%d-%d, def %d]",
+            res.add(String.format("%d from [%d-%d, def %d]",
                     selectedValue,
                     option.min,
                     option.max,
                     option.defaultValue
             ));
         }
-        result.add("total selected: " + selectedTotal);
+        res.add("total selected: " + selectedTotal);
 
-        return result;
+        ((MultiAmountTestableResult) this.getResult()).save(true, res, chooseRes);
     }
 
     static public void register(TestableDialogsRunner runner) {
@@ -104,6 +106,7 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
             runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "many, 20 def", 60, 60, genSameOptions(3, 0, 60, 20)));
             // big lists
             runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "big list", 0, 100, genSameOptions(20, 0, 100, 0)));
+            runner.registerDialog(new GetMultiAmountTestableDialog(isYou, "big list", 0, 100, genSameOptions(100, 0, 100, 0)));
         }
     }
 

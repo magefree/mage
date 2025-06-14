@@ -129,8 +129,9 @@ public class TestableDialogsRunner {
         // all fine, can show it and finish
         lastSelectedGroup = needGroup;
         lastSelectedDialog = needDialog;
-        List<String> resInfo = needDialog.showDialog(player, source, game, opponent);
-        needDialog.showResult(player, game, String.join("<br>", resInfo));
+        needDialog.prepare();
+        needDialog.showDialog(player, source, game, opponent);
+        needDialog.showResult(player, game);
     }
 
     private Choice prepareSelectGroupChoice(List<String> groups) {
@@ -198,6 +199,10 @@ public class TestableDialogsRunner {
             );
         }
         return choice;
+    }
+
+    public List<TestableDialog> getDialogs() {
+        return this.dialogs;
     }
 }
 

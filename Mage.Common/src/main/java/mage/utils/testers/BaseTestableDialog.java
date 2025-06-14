@@ -18,11 +18,13 @@ abstract class BaseTestableDialog implements TestableDialog {
     private final String group;
     private final String name;
     private final String description;
+    private final TestableResult result;
 
-    public BaseTestableDialog(String group, String name, String description) {
+    public BaseTestableDialog(String group, String name, String description, TestableResult result) {
         this.group = group;
         this.name = name;
         this.description = description;
+        this.result = result;
     }
 
     @Override
@@ -41,11 +43,21 @@ abstract class BaseTestableDialog implements TestableDialog {
     }
 
     @Override
-    final public void showResult(Player player, Game game, String result) {
+    public void prepare() {
+        this.result.clear();
+    }
+
+    @Override
+    final public void showResult(Player player, Game game) {
         // show message with result
-        game.informPlayer(player, result);
+        game.informPlayer(player, String.join("<br>", getResult().getInfo()));
         // reset game and gui (in most use cases it must return to player's priority)
         game.firePriorityEvent(player.getId());
+    }
+
+    @Override
+    public TestableResult getResult() {
+        return this.result;
     }
 
     static Target createAnyTarget(int min, int max) {
@@ -56,19 +68,16 @@ abstract class BaseTestableDialog implements TestableDialog {
         return new TargetPermanentOrPlayer(min, max).withNotTarget(notTarget);
     }
 
-    static Target createCreatureTarget(int min, int max) {
-        return createCreatureTarget(min, max, false);
-    }
-
-    private static Target createCreatureTarget(int min, int max, boolean notTarget) {
-        return new TargetCreaturePermanent(min, max).withNotTarget(notTarget);
-    }
-
     static Target createImpossibleTarget(int min, int max) {
         return createImpossibleTarget(min, max, false);
     }
 
     private static Target createImpossibleTarget(int min, int max, boolean notTarget) {
         return new TargetCreaturePermanent(min, max, new FilterCreaturePermanent(SubType.TROOPER, "rare type"), notTarget);
+    }
+
+    @Override
+    public String toString() {
+        return this.getGroup() + " - " + this.getName() + " - " + this.getDescription();
     }
 }

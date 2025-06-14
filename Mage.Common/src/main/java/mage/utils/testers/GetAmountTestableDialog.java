@@ -26,21 +26,25 @@ class GetAmountTestableDialog extends BaseTestableDialog {
 
     public GetAmountTestableDialog(boolean isYou, int min, int max) {
         super(String.format("player.getAmount(%s)", isYou ? "you" : "AI"),
-                String.format("from %d to %d", min, max), "");
+                String.format("from %d to %d", min, max),
+                "",
+                new AmountTestableResult()
+        );
         this.isYou = isYou;
         this.min = min;
         this.max = max;
     }
 
     @Override
-    public List<String> showDialog(Player player, Ability source, Game game, Player opponent) {
+    public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
         String message = "<font color=green>message</font> with html";
         int chooseRes;
         chooseRes = choosingPlayer.getAmount(this.min, this.max, message, source, game);
-        List<String> result = new ArrayList<>();
-        result.add(getGroup() + " - " + this.getName() + " selected " + chooseRes);
-        return result;
+        List<String> res = new ArrayList<>();
+        res.add(getGroup() + " - " + this.getName() + " selected " + chooseRes);
+
+        ((AmountTestableResult) this.getResult()).save(true, res, chooseRes);
     }
 
     static public void register(TestableDialogsRunner runner) {
