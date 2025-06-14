@@ -81,7 +81,7 @@ class TheCreationOfAvacynOneEffect extends OneShotEffect {
             if (card != null) {
                 // exile it face down
                 card.setFaceDown(true, game);
-                UUID exileId = CardUtil.getExileZoneId(game, source, 1);
+                UUID exileId = CardUtil.getExileZoneId(game, source);
                 MageObject sourceObject = source.getSourceObject(game);
                 String exileName = sourceObject != null ? sourceObject.getName() : "";
                 controller.moveCardsToExile(card, source, game, false, exileId, exileName);
