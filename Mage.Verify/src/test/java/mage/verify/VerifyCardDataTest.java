@@ -1698,11 +1698,12 @@ public class VerifyCardDataTest {
     }
 
     @Test
-    @Ignore // experimental test to find potentially fail conditions with NPE see https://github.com/magefree/mage/issues/13752
+    @Ignore
+    // experimental test to find potentially fail conditions with NPE see https://github.com/magefree/mage/issues/13752
     public void test_checkBadConditions() {
         // all conditions in AsThoughEffect must be compatible with empty source param (e.g. must be able to use inside ConditionalAsThoughEffect)
         // see AsThoughEffectType.needAffectedAbility ?
-        // 450+ failed conditions
+        // 370+ failed conditions
         Collection<String> errorsList = new ArrayList<>();
         Game fakeGame = new FakeGame();
         Ability fakeAbility = new SimpleStaticAbility(new InfoEffect("fake"));
@@ -1716,15 +1717,30 @@ public class VerifyCardDataTest {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
         for (Class<?> enumClass : conditionEnums) {
             for (Object enumItem : enumClass.getEnumConstants()) {
+                // miss watcher will fail in both use cases, but miss ability only one
+                String errorOnAbility = "";
                 try {
                     ((Condition) enumItem).apply(fakeGame, fakeAbility);
+                } catch (Exception e) {
+                    errorOnAbility = Arrays.stream(e.getStackTrace())
+                            .map(StackTraceElement::toString)
+                            .limit(5)
+                            .collect(Collectors.joining("\n"));
+                }
+
+                String errorOnEmptyAbility = "";
+                try {
                     ((Condition) enumItem).apply(fakeGame, null);
                 } catch (Exception e) {
-                    if (e.toString().contains("watchers")) {
-                        // ignore miss watcher errors cause it's fake game
-                        continue;
-                    }
-                    e.printStackTrace();
+                    errorOnEmptyAbility = Arrays.stream(e.getStackTrace())
+                            .map(StackTraceElement::toString)
+                            .limit(5)
+                            .collect(Collectors.joining("\n"));
+                }
+
+                if (errorOnAbility.isEmpty() && !errorOnEmptyAbility.isEmpty()) {
+                    System.out.println();
+                    System.out.println("bad condition " + enumClass.getName() + "\n" + errorOnEmptyAbility);
                     errorsList.add("Error: condition must support empty and non-empty source params: " + enumClass.getName());
                 }
             }
