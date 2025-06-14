@@ -34,7 +34,7 @@ public final class TyrantOfValakut extends CardImpl {
 
         // When Tyrant of Valakut enters the battlefield, if its surge cost was paid, it deals 3 damage to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3))
-                .withInterveningIf(SurgedCondition.instance);
+                .withInterveningIf(SurgedCondition.instance).withRuleTextReplacement(true);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

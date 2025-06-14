@@ -37,7 +37,8 @@ public final class SoulhunterRakshasa extends CardImpl {
 
         // When Soulhunter Rakshasa enters the battlefield, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue))
-                .withInterveningIf(CastFromHandSourcePermanentCondition.instance);
+                .withInterveningIf(CastFromHandSourcePermanentCondition.instance)
+                .withRuleTextReplacement(true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new CastFromHandWatcher());
     }

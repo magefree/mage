@@ -218,6 +218,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public TriggeredAbility withInterveningIf(Condition interveningIfCondition) {
         this.interveningIfCondition = interveningIfCondition;
+        this.replaceRuleText = false;
         return this;
     }
 
