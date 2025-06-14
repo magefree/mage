@@ -13,10 +13,17 @@ import mage.players.Player;
 
 import java.util.UUID;
 
+/**
+ * Effect used to prevent sacrificing or paying life as a cost for activated abilities and casting spells.
+ * @author Jmlundeen
+ */
 public class CantPayLifeOrSacrificeEffect extends ContinuousEffectImpl {
 
     private final FilterPermanent filter;
 
+    /**
+     * @param filter {@link FilterPermanent} with message set as a descriptor e.g. "creatures" or "nonland permanents"
+     */
     public CantPayLifeOrSacrificeEffect(FilterPermanent filter) {
         super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
         this.filter = filter;
