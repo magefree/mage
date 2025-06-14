@@ -16,6 +16,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
@@ -36,6 +37,7 @@ import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.game.FakeGame;
 import mage.game.Game;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
@@ -1692,6 +1694,45 @@ public class VerifyCardDataTest {
         printMessages(errorsList);
         if (errorsList.size() > 0) {
             Assert.fail("Found dungeon errors: " + errorsList.size());
+        }
+    }
+
+    @Test
+    @Ignore // experimental test to find potentially fail conditions with NPE see https://github.com/magefree/mage/issues/13752
+    public void test_checkBadConditions() {
+        // all conditions in AsThoughEffect must be compatible with empty source param (e.g. must be able to use inside ConditionalAsThoughEffect)
+        // see AsThoughEffectType.needAffectedAbility ?
+        // 450+ failed conditions
+        Collection<String> errorsList = new ArrayList<>();
+        Game fakeGame = new FakeGame();
+        Ability fakeAbility = new SimpleStaticAbility(new InfoEffect("fake"));
+
+        // TODO: add classes support (see example with tokens and default constructor)?
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<?>> conditionEnums = reflections.getSubTypesOf(Condition.class)
+                .stream()
+                .filter(Class::isEnum)
+                .sorted(Comparator.comparing(Class::toString))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        for (Class<?> enumClass : conditionEnums) {
+            for (Object enumItem : enumClass.getEnumConstants()) {
+                try {
+                    ((Condition) enumItem).apply(fakeGame, fakeAbility);
+                    ((Condition) enumItem).apply(fakeGame, null);
+                } catch (Exception e) {
+                    if (e.toString().contains("watchers")) {
+                        // ignore miss watcher errors cause it's fake game
+                        continue;
+                    }
+                    e.printStackTrace();
+                    errorsList.add("Error: condition must support empty and non-empty source params: " + enumClass.getName());
+                }
+            }
+        }
+
+        printMessages(errorsList);
+        if (!errorsList.isEmpty()) {
+            Assert.fail("Found conditions errors: " + errorsList.size());
         }
     }
 
