@@ -50,7 +50,7 @@ public final class StarseerMentor extends CardImpl {
                                 new DiscardCardCost()
                         ),
                         "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
-                )
+                ).setText("target opponent loses 3 life unless they sacrifice a nonland permanent of their choice or discard a card")
         ).withInterveningIf(YouGainedOrLostLifeCondition.instance);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability.addHint(YouGainedOrLostLifeCondition.getHint()), new PlayerGainedLifeWatcher());

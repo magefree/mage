@@ -51,7 +51,7 @@ public final class TwistsAndTurns extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new TransformSourceEffect(), StaticFilters.FILTER_LAND
-        ).withInterveningIf(condition));
+        ).withInterveningIf(condition).setTriggerPhrase("When a land you control enters, "));
     }
 
     private TwistsAndTurns(final TwistsAndTurns card) {

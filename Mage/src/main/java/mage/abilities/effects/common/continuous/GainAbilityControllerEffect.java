@@ -34,7 +34,7 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
     public GainAbilityControllerEffect(Ability ability, Duration duration) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
-        staticText = "you " + (duration == Duration.WhileOnBattlefield ? "have" : "gain") + ability.getRule();
+        staticText = "you " + (duration == Duration.WhileOnBattlefield ? "have" : "gain") + ' ' + ability.getRule();
         if (!duration.toString().isEmpty()) {
             staticText += ' ' + duration.toString();
         }

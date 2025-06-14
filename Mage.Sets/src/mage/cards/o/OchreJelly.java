@@ -45,7 +45,7 @@ public final class OchreJelly extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OchreJellyEffect())
         ).setText("create a token that's a copy of it at the beginning of the next end step. " +
-                "That token enters the battlefield with half that many +1/+1 counters on it, rounded down"))
+                "The token enters with half that many +1/+1 counters on it, rounded down"))
                 .withInterveningIf(OchreJellyCondition.instance).withFlavorWord("Split"));
     }
 

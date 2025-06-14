@@ -79,6 +79,11 @@ enum EowynShieldmaidenCondition implements Condition {
                 source.getSourcePermanentOrLKI(game),
                 source.getControllerId());
     }
+
+    @Override
+    public String toString() {
+        return "another Human entered the battlefield under your control this turn";
+    }
 }
 
 class EowynShieldmaidenWatcher extends Watcher {

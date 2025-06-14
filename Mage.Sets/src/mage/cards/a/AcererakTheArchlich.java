@@ -41,12 +41,10 @@ public final class AcererakTheArchlich extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Acererak the Archlich enters the battlefield, if you have not completed Tomb of Annihilation, return Acererak the Archlich to its owner's hand and venture into the dungeon.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandSourceEffect(true).setText("return it to its owner's hand"))
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandSourceEffect(true))
                 .withInterveningIf(AcererakTheArchlichCondition.instance);
         ability.addEffect(new VentureIntoTheDungeonEffect().concatBy("and"));
-        ability.addHint(CurrentDungeonHint.instance);
-        ability.addHint(CompletedDungeonCondition.getHint());
-        this.addAbility(ability, new CompletedDungeonWatcher());
+        this.addAbility(ability.addHint(CurrentDungeonHint.instance).addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
 
         // Whenever Acererak the Archlich attacks, for each opponent, you create a 2/2 black Zombie creature token unless that player sacrifices a creature.
         this.addAbility(new AttacksTriggeredAbility(new AcererakTheArchlichEffect()));

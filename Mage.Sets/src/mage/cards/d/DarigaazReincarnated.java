@@ -113,7 +113,7 @@ class DarigaazReincarnatedReturnEffect extends OneShotEffect {
 
     DarigaazReincarnatedReturnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "remove an egg counter from it. Then if {this} has no egg counters on it, return it to the battlefield";
+        this.staticText = "remove an egg counter from it. Then if this card has no egg counters on it, return it to the battlefield";
     }
 
     private DarigaazReincarnatedReturnEffect(final DarigaazReincarnatedReturnEffect effect) {

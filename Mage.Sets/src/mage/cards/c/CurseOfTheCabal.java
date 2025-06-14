@@ -104,7 +104,7 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
 
     public CurseOfTheCabalTriggeredAbilityConditionalDelay() {
         super(CounterType.TIME.createInstance(), StaticValue.get(2), false, true);
-        staticText = "that player may sacrifice a permanent. If the player does, put two time counters on {this}";
+        staticText = "that player may sacrifice a permanent of their choice. If the player does, put two time counters on this card";
     }
 
     @Override

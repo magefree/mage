@@ -43,7 +43,9 @@ public final class RoseCutthroatRaider extends CardImpl {
 
         // Raid -- At end of combat on your turn, if you attacked this turn, create a Junk token for each opponent you attacked.
         this.addAbility(new EndOfCombatTriggeredAbility(
-                new CreateTokenEffect(new JunkToken(), AttackedThisTurnOpponentsCount.instance), TargetController.YOU, false
+                new CreateTokenEffect(new JunkToken(), AttackedThisTurnOpponentsCount.instance)
+                        .setText("create a Junk token for each opponent you attacked"),
+                TargetController.YOU, false
         ).withInterveningIf(RaidCondition.instance).setAbilityWord(AbilityWord.RAID).addHint(AttackedThisTurnOpponentsCount.getHint()), new PlayersAttackedThisTurnWatcher());
 
         // Whenever you sacrifice a Junk, add {R}.

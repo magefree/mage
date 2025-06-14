@@ -61,7 +61,7 @@ enum BorealOutriderCondition implements Condition {
 
     @Override
     public String toString() {
-        return "{S} of any of that spell's color was spent to cast it";
+        return "{S} of any of that spell's colors was spent to cast it";
     }
 }
 

@@ -40,7 +40,7 @@ public final class WallOfResistance extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.ANY, new AddCountersSourceEffect(CounterType.P0P1.createInstance()),
                 false, WallOfResistanceCondition.instance
-        ));
+        ).withRuleTextReplacement(true));
     }
 
     private WallOfResistance(final WallOfResistance card) {

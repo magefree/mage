@@ -50,7 +50,7 @@ public final class VesselOfTheAllConsuming extends CardImpl {
 
         // Whenever Vessel of the All-Consuming deals damage to a player, if it has dealt 10 or more damage to that player this turn, they lose the game.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(
-                new LoseGameTargetPlayerEffect(), false, true
+                new LoseGameTargetPlayerEffect().setText("they lose the game"), false, true
         ).withInterveningIf(VesselOfTheAllConsumingCondition.instance));
     }
 
