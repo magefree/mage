@@ -42,7 +42,7 @@ public final class AyarasOathsworn extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                         .setText("put a +1/+1 counter on it"), false
-        ).withInterveningIf(condition1);
+        ).withInterveningIf(condition1).withRuleTextReplacement(true);
         ability.addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
                 condition2, "Then if it has exactly four +1/+1 counters on it, " +

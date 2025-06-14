@@ -37,7 +37,8 @@ public final class KrondTheDawnClad extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Krond the Dawn-Clad attacks, if it's enchanted, exile target permanent.
-        Ability ability = new AttacksTriggeredAbility(new ExileTargetEffect(), false).withInterveningIf(condition);
+        Ability ability = new AttacksTriggeredAbility(new ExileTargetEffect(), false)
+                .withInterveningIf(condition).withRuleTextReplacement(true);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
