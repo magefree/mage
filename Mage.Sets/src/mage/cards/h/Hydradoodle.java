@@ -1,9 +1,8 @@
-
 package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -13,8 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -38,10 +35,8 @@ public final class Hydradoodle extends CardImpl {
         this.toughness = new MageInt(0);
 
         // As Hydradoodle enters the battlefield, roll X six-sided dice. Hydradoodle enters the battlefield with a number of +1/+1 counters on it equal to the total of those results.
-        this.addAbility(new EntersBattlefieldAbility(new HydradoodleEffect(),
-                null,
-                "As {this} enters, roll X six-sided dice. {this} enters with a number of +1/+1 counters on it equal to the total of those results",
-                null));
+        this.addAbility(new AsEntersBattlefieldAbility(new HydradoodleEffect()));
+
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
@@ -60,12 +55,6 @@ public final class Hydradoodle extends CardImpl {
 }
 
 class HydradoodleEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("permanent with a counter");
-
-    static {
-        filter.add(CounterAnyPredicate.instance);
-    }
 
     HydradoodleEffect() {
         super(Outcome.BoostCreature);

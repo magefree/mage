@@ -44,7 +44,9 @@ public final class KjeldoranEliteGuard extends CardImpl {
         this.addAbility(ability);
     }
 
-    private KjeldoranEliteGuard(final KjeldoranEliteGuard card) { super(card); }
+    private KjeldoranEliteGuard(final KjeldoranEliteGuard card) {
+        super(card);
+    }
 
     @Override
     public KjeldoranEliteGuard copy() {
@@ -57,7 +59,7 @@ class KjeldoranEliteGuardEffect extends OneShotEffect {
     KjeldoranEliteGuardEffect() {
         super(Outcome.Neutral);
         staticText = "Target creature gets +2/+2 until end of turn. "
-                + "When that creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard.";
+                + "When that creature leaves the battlefield this turn, sacrifice {this}.";
     }
 
     @Override
@@ -79,10 +81,14 @@ class KjeldoranEliteGuardEffect extends OneShotEffect {
         return true;
     }
 
-    private KjeldoranEliteGuardEffect(KjeldoranEliteGuardEffect effect) { super(effect); }
+    private KjeldoranEliteGuardEffect(KjeldoranEliteGuardEffect effect) {
+        super(effect);
+    }
 
     @Override
-    public KjeldoranEliteGuardEffect copy() { return new KjeldoranEliteGuardEffect(this); }
+    public KjeldoranEliteGuardEffect copy() {
+        return new KjeldoranEliteGuardEffect(this);
+    }
 }
 
 class KjeldoranEliteGuardDelayedTriggeredAbility extends DelayedTriggeredAbility {
@@ -105,7 +111,9 @@ class KjeldoranEliteGuardDelayedTriggeredAbility extends DelayedTriggeredAbility
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) { return event.getTargetId().equals(creatureId); }
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getTargetId().equals(creatureId);
+    }
 
     @Override
     public KjeldoranEliteGuardDelayedTriggeredAbility copy() {
@@ -113,5 +121,7 @@ class KjeldoranEliteGuardDelayedTriggeredAbility extends DelayedTriggeredAbility
     }
 
     @Override
-    public String getRule() { return "that creature left the battlefield this turn"; }
+    public String getRule() {
+        return "that creature left the battlefield this turn";
+    }
 }
