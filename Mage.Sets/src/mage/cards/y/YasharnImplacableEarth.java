@@ -1,34 +1,25 @@
 package mage.cards.y;
 
-import java.util.Optional;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.assignment.common.SubTypeAssignment;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.common.PayVariableLifeCost;
-import mage.abilities.costs.common.SacrificeAllCost;
-import mage.abilities.costs.common.SacrificeAttachedCost;
-import mage.abilities.costs.common.SacrificeAttachmentCost;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.SacrificeXTargetCost;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.filter.Filter;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  * @author TheElk801
@@ -112,10 +103,16 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
     }
 }
 
-class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
+class YasharnImplacableEarthEffect extends ContinuousEffectImpl {
+
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland sacrifice cost from spell cast or activated ability");
+
+    static {
+        filter.add(YasharnCostPredicate.instance);
+    }
 
     YasharnImplacableEarthEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities";
     }
 
@@ -129,104 +126,26 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source);
-        if (mageObject != null) {
-            return "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities.  (" + mageObject.getIdName() + ").";
+    public boolean apply(Game game, Ability source) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            player.setPayLifeCostLevel(Player.PayLifeCostLevel.nonSpellnonActivatedAbilities);
+            player.setCanPaySacrificeCostFilter(filter);
         }
-        return null;
+        return true;
+    }
+}
+
+enum YasharnCostPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return input.getSource().isActivatedAbility() || input.getSource().getAbilityType() == AbilityType.SPELL;
     }
 
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY
-                || event.getType() == GameEvent.EventType.CAST_SPELL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && permanent == null) {
-            return false;
-        }
-
-        boolean canTargetLand = true;
-        Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-        if (!ability.isPresent()) {
-            return false;
-        }
-
-        for (Cost cost : ability.get().getCosts()) {
-            if (cost instanceof PayLifeCost
-                    || cost instanceof PayVariableLifeCost) {
-                return true;  // can't pay with life
-            }
-            if (cost instanceof SacrificeSourceCost
-                    && !permanent.isLand(game)) {
-                return true;
-            }
-            if (cost instanceof SacrificeTargetCost) {
-                SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
-                Filter filter = sacrificeCost.getTargets().get(0).getFilter();
-                for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
-                    }
-                }
-                return !canTargetLand;  // must be nonland target
-            }
-            if (cost instanceof SacrificeAllCost) {
-                SacrificeAllCost sacrificeAllCost = (SacrificeAllCost) cost;
-                Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
-                for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
-                    }
-                }
-                return !canTargetLand;  // must be nonland target
-            }
-            if (cost instanceof SacrificeAttachedCost) {
-                SacrificeAttachedCost sacrificeAllCost = (SacrificeAttachedCost) cost;
-                Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
-                for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
-                    }
-                }
-                return !canTargetLand;  // must be nonland target
-            }
-            if (cost instanceof SacrificeAttachmentCost) {
-                SacrificeAttachmentCost sacrificeAllCost = (SacrificeAttachmentCost) cost;
-                Filter filter = sacrificeAllCost.getTargets().get(0).getFilter();
-                for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
-                    }
-                }
-                return !canTargetLand;  // must be nonland target
-            }
-
-            if (cost instanceof SacrificeXTargetCost) {
-                SacrificeXTargetCost sacrificeCost = (SacrificeXTargetCost) cost;
-                Filter filter = sacrificeCost.getFilter();
-                for (Object predicate : filter.getPredicates()) {
-                    if (predicate instanceof CardType.CardTypePredicate) {
-                        if (!predicate.toString().equals("CardType(Land)")) {
-                            canTargetLand = false;
-                        }
-                    }
-                }
-                return !canTargetLand;  // must be nonland target
-            }
-        }
-        return false;
+    public String toString() {
+        return "Source is a spell or activated ability";
     }
 }

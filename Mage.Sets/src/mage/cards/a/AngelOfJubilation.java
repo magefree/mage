@@ -3,20 +3,18 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.Filter;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -40,7 +38,6 @@ public final class AngelOfJubilation extends CardImpl {
 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities.
         Ability ability = new SimpleStaticAbility(new AngelOfJubilationEffect());
-        ability.addEffect(new AngelOfJubilationSacrificeFilterEffect());
         this.addAbility(ability);
     }
 
@@ -56,9 +53,15 @@ public final class AngelOfJubilation extends CardImpl {
 
 class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature sacrifice cost from spell cast or activated ability");
+
+    static {
+        filter.add(AngelOfJubilationCostPredicate.instance);
+    }
+
     AngelOfJubilationEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "Players can't pay life or sacrifice creatures to cast spells";
+        staticText = "Players can't pay life or sacrifice creatures to cast spells or activate abilities";
     }
 
     private AngelOfJubilationEffect(final AngelOfJubilationEffect effect) {
@@ -75,44 +78,22 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             player.setPayLifeCostLevel(Player.PayLifeCostLevel.nonSpellnonActivatedAbilities);
-            player.setCanPaySacrificeCostFilter(new FilterCreaturePermanent());
+            player.setCanPaySacrificeCostFilter(filter);
         }
         return true;
     }
 }
 
-class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl {
+enum AngelOfJubilationCostPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
-    AngelOfJubilationSacrificeFilterEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.SET_COST);
-        staticText = "or activate abilities";
-    }
-
-    protected AngelOfJubilationSacrificeFilterEffect(AngelOfJubilationSacrificeFilterEffect effect) {
-        super(effect);
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return input.getSource().isActivatedAbility() || input.getSource().getAbilityType() == AbilityType.SPELL;
     }
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        for (Cost cost : abilityToModify.getCosts()) {
-            if (cost instanceof SacrificeTargetCost) {
-                SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
-                Filter filter = sacrificeCost.getTargets().get(0).getFilter();
-                filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-            }
-        }
-        return true;
+    public String toString() {
+        return "Source is a spell or activated ability";
     }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return (abilityToModify.isActivatedAbility() || abilityToModify.getAbilityType() == AbilityType.SPELL)
-                && game.getState().getPlayersInRange(source.getControllerId(), game).contains(abilityToModify.getControllerId());
-    }
-
-    @Override
-    public AngelOfJubilationSacrificeFilterEffect copy() {
-        return new AngelOfJubilationSacrificeFilterEffect(this);
-    }
-
 }

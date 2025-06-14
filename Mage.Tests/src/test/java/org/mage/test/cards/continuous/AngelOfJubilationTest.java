@@ -1,7 +1,13 @@
 package org.mage.test.cards.continuous;
 
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.game.permanent.token.FoodToken;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -18,12 +24,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class AngelOfJubilationTest extends CardTestPlayerBase {
 
+    public static final String angelOfJubilation = "Angel of Jubilation";
+
     /**
      * Tests boosting other non black creatures
      */
     @Test
     public void testBoost() {
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerA, "Devout Chaplain");
         addCard(Zone.BATTLEFIELD, playerA, "Corpse Traders");
 
@@ -33,7 +41,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertPowerToughness(playerA, "Angel of Jubilation", 3, 3);
+        assertPowerToughness(playerA, angelOfJubilation, 3, 3);
         assertPowerToughness(playerA, "Devout Chaplain", 3, 3);
         assertPowerToughness(playerA, "Corpse Traders", 3, 3);
     }
@@ -43,14 +51,14 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
      */
     @Test
     public void testNoBoostOnBattlefieldLeave() {
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerA, "Devout Chaplain");
         addCard(Zone.BATTLEFIELD, playerA, "Corpse Traders");
 
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Angel of Jubilation");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", angelOfJubilation);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -58,14 +66,14 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertPermanentCount(playerA, "Angel of Jubilation", 0);
+        assertPermanentCount(playerA, angelOfJubilation, 0);
         assertPowerToughness(playerA, "Devout Chaplain", 2, 2);
         assertPowerToughness(playerA, "Corpse Traders", 3, 3);
     }
 
     @Test
     public void testOpponentCantSacrificeCreatures() {
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerB, "Nantuko Husk");
         addCard(Zone.BATTLEFIELD, playerB, "Corpse Traders");
 
@@ -81,7 +89,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
     @Test
     public void testOpponentCanSacrificeNonCreaturePermanents() {
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
         addCard(Zone.BATTLEFIELD, playerB, "Barrin, Master Wizard");
         addCard(Zone.BATTLEFIELD, playerB, "Nantuko Husk");
@@ -89,20 +97,20 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Food Chain");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}, Sacrifice a permanent: Return target creature to its owner's hand.");
-        addTarget(playerB, "Angel of Jubilation"); // return to hand
+        addTarget(playerB, angelOfJubilation); // return to hand
         setChoice(playerB, "Food Chain"); // sacrifice cost
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Angel of Jubilation", 0);
+        assertPermanentCount(playerA, angelOfJubilation, 0);
         assertPermanentCount(playerB, "Food Chain", 0);
     }
 
     @Test
     public void testOpponentCantSacrificeCreaturesAsPartOfPermanentsOptions() {
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerB, "Barrin, Master Wizard");
         addCard(Zone.BATTLEFIELD, playerB, "Nantuko Husk");
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves", 2);
@@ -115,13 +123,13 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Angel of Jubilation", 1);
+        assertPermanentCount(playerA, angelOfJubilation, 1);
         assertPermanentCount(playerB, "Nantuko Husk", 1);
     }
 
     @Test
     public void testOpponentCantSacrificeAll() {
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerB, "Nantuko Husk");
         addCard(Zone.BATTLEFIELD, playerB, "Corpse Traders");
         addCard(Zone.HAND, playerB, "Soulblast");
@@ -142,7 +150,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
     @Test
     public void testOpponentCantSacrificeCreatureSource() {
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerB, "Children of Korlis");
 
         checkPlayableAbility("Can't sac", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice", false);
@@ -155,7 +163,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
     @Test
     public void testOpponentCanSacrificeAllLands() {
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerB, "Tomb of Urami");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
 
@@ -169,7 +177,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
     @Test
     public void testOpponentCanSacrificeNonCreatureSource() {
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerA, "Tundra");
         addCard(Zone.BATTLEFIELD, playerB, "Wasteland");
 
@@ -195,7 +203,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         // Other nonblack creatures you control get +1/+1. 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         // Indestructible
@@ -234,7 +242,7 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         // Other nonblack creatures you control get +1/+1. 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities
-        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
 
         // Pay 7 life: Draw seven cards.
         addCard(Zone.BATTLEFIELD, playerB, "Griselbrand");
@@ -243,5 +251,91 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+    }
+
+    @Test
+    public void testCanSacrificeTriggeredAbility() {
+        /*
+        Unscrupulous Contractor
+        {2}{B}
+        Creature — Human Assassin
+        When this creature enters, you may sacrifice a creature. When you do, target player draws two cards and loses 2 life.
+        Plot {2}{B}
+        3/2
+         */
+        String contractor = "Unscrupulous Contractor";
+        /*
+        Bear Cub
+        {1}{G}
+        Creature - Bear
+        2/2
+         */
+        String cub = "Bear Cub";
+
+        setStrictChooseMode(true);
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
+        addCard(Zone.HAND, playerA, contractor);
+        addCard(Zone.HAND, playerB, contractor);
+        addCard(Zone.BATTLEFIELD, playerA, cub);
+        addCard(Zone.BATTLEFIELD, playerB, cub);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, contractor);
+        setChoice(playerA, true);
+        setChoice(playerA, cub);
+        addTarget(playerA, playerA);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, contractor);
+        setChoice(playerB, true);
+        setChoice(playerB, cub);
+        addTarget(playerB, playerB);
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, 2);
+        assertLife(playerA, 20 - 2);
+        assertGraveyardCount(playerA, cub, 1);
+
+        assertHandCount(playerB, 1 + 2); //draw + contractor effect
+        assertLife(playerB, 20 - 2);
+        assertGraveyardCount(playerB, cub, 1);
+    }
+
+    @Test
+    public void canSacToMondrakWithArtifacts() {
+        setStrictChooseMode(true);
+        //Mondrak, Glory Dominus
+        //{2}{W}{W}
+        //Legendary Creature — Phyrexian Horror
+        //If one or more tokens would be created under your control, twice that many of those tokens are created instead.
+        //{1}{W/P}{W/P}, Sacrifice two other artifacts and/or creatures: Put an indestructible counter on Mondrak.
+        String mondrak = "Mondrak, Glory Dominus";
+        Ability ability = new SimpleActivatedAbility(
+                Zone.ALL,
+                new CreateTokenEffect(new FoodToken(), 2),
+                new ManaCostsImpl<>("")
+        );
+        addCustomCardWithAbility("Token-maker", playerA, ability);
+
+        addCard(Zone.BATTLEFIELD, playerA, mondrak);
+        addCard(Zone.BATTLEFIELD, playerA, angelOfJubilation);
+        addCard(Zone.BATTLEFIELD, playerA, "Bear Cub", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        checkPlayableAbility("Can't activate Mondrak", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{W/P}{W/P}, Sacrifice", false);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "create two");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{W/P}{W/P}, Sacrifice");
+        setChoice(playerA, "Food Token", 2);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertCounterCount(playerA, mondrak, CounterType.INDESTRUCTIBLE, 1);
+        assertPermanentCount(playerA, "Bear Cub", 2);
+        assertPermanentCount(playerA, "Food Token", 2);
     }
 }
