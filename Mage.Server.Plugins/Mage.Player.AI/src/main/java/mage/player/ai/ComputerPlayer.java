@@ -692,7 +692,7 @@ public class ComputerPlayer extends PlayerImpl {
                 || target.getOriginalTarget() instanceof TargetCardInHand) {
             isAddedSomething = false;
             if (outcome.isGood()) {
-                // good
+                // good - choose max possible
                 Cards cards = new CardsImpl(possibleTargets);
                 List<Card> cardsInHand = new ArrayList<>(cards.getCards(game));
                 while (!target.isChosen(game)
@@ -703,36 +703,42 @@ public class ComputerPlayer extends PlayerImpl {
                         if (target.canTarget(abilityControllerId, card.getId(), source, game) && !target.contains(card.getId())) {
                             target.addTarget(card.getId(), source, game);
                             isAddedSomething = true;
-                            cardsInHand.remove(card);
                             if (target.isChoiceCompleted(game)) {
                                 return true;
                             }
                         }
+                        cardsInHand.remove(card);
                     }
                 }
             } else {
-                // bad
+                // bad - choose the lowest possible
                 findPlayables(game);
                 for (Card card : unplayable.values()) {
+                    if (target.isChosen(game)) {
+                        return isAddedSomething;
+                    }
                     if (possibleTargets.contains(card.getId())
                             && target.canTarget(abilityControllerId, card.getId(), source, game)
                             && !target.contains(card.getId())) {
                         target.addTarget(card.getId(), source, game);
                         isAddedSomething = true;
-                        if (target.isChoiceCompleted(game)) {
-                            return true;
+                        if (target.isChosen(game)) {
+                            return isAddedSomething;
                         }
                     }
                 }
                 if (!hand.isEmpty()) {
                     for (Card card : hand.getCards(game)) {
+                        if (target.isChosen(game)) {
+                            return isAddedSomething;
+                        }
                         if (possibleTargets.contains(card.getId())
                                 && target.canTarget(abilityControllerId, card.getId(), source, game)
                                 && !target.contains(card.getId())) {
                             target.addTarget(card.getId(), source, game);
                             isAddedSomething = true;
-                            if (target.isChoiceCompleted(game)) {
-                                return true;
+                            if (target.isChosen(game)) {
+                                return isAddedSomething;
                             }
                         }
                     }
@@ -852,39 +858,6 @@ public class ComputerPlayer extends PlayerImpl {
         }
 
         if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
-            List<Permanent> targets;
-            TargetPermanentOrPlayer origTarget = ((TargetPermanentOrPlayer) target.getOriginalTarget());
-            if (outcome.isGood()) {
-                targets = threats(abilityControllerId, source, ((FilterPermanentOrPlayer) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
-            } else {
-                targets = threats(randomOpponentId, source, ((FilterPermanentOrPlayer) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
-            }
-
-            if (targets.isEmpty()) {
-                if (outcome.isGood()) {
-                    if (target.canTarget(abilityControllerId, getId(), source, game) && !target.contains(getId())) {
-                        return tryAddTarget(target, getId(), source, game);
-                    }
-                } else if (target.canTarget(abilityControllerId, randomOpponentId, source, game) && !target.contains(randomOpponentId)) {
-                    return tryAddTarget(target, randomOpponentId, source, game);
-                }
-            }
-
-            if (targets.isEmpty() && target.isRequired(source)) {
-                targets = game.getBattlefield().getActivePermanents(((FilterPermanentOrPlayer) origTarget.getFilter()).getPermanentFilter(), playerId, game);
-            }
-            for (Permanent permanent : targets) {
-                List<UUID> alreadyTargeted = target.getTargets();
-                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
-                    if (alreadyTargeted != null && !alreadyTargeted.contains(permanent.getId())) {
-                        return tryAddTarget(target, permanent.getId(), source, game);
-                    }
-                }
-            }
-        }
-
-        if (target.getOriginalTarget() instanceof TargetPlayerOrPlaneswalker
-                || target.getOriginalTarget() instanceof TargetOpponentOrPlaneswalker) {
             List<Permanent> targets;
             TargetPermanentOrPlayer origTarget = ((TargetPermanentOrPlayer) target.getOriginalTarget());
 
@@ -1239,6 +1212,7 @@ public class ComputerPlayer extends PlayerImpl {
         throw new IllegalStateException("Target wasn't handled in computer's chooseTarget method: " + target.getClass().getCanonicalName());
     } //end of chooseTarget method
 
+    @Deprecated // TODO: replace by source only version
     protected Card selectCard(UUID abilityControllerId, List<Card> cards, Outcome outcome, Target target, Game game) {
         return selectCardInner(abilityControllerId, cards, outcome, target, null, game);
     }
@@ -1277,6 +1251,10 @@ public class ComputerPlayer extends PlayerImpl {
         // TODO: make same code for chooseTarget (without filter and target type dependence)
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
+        }
+
+        if (target.getAmountRemaining() <= 0) {
+            return false;
         }
 
         UUID sourceId = source != null ? source.getSourceId() : null;
@@ -2576,6 +2554,7 @@ public class ComputerPlayer extends PlayerImpl {
         tournament.submitDeck(playerId, deck);
     }
 
+    @Deprecated // TODO: replace by source only version
     public Card selectBestCard(List<Card> cards, List<ColoredManaSymbol> chosenColors) {
         return selectBestCardInner(cards, chosenColors, null, null, null);
     }
@@ -2621,14 +2600,6 @@ public class ComputerPlayer extends PlayerImpl {
             }
         }
         return bestCard;
-    }
-
-    public Card selectWorstCard(List<Card> cards, List<ColoredManaSymbol> chosenColors) {
-        return selectWorstCardInner(cards, chosenColors, null, null, null);
-    }
-
-    public Card selectWorstCardTarget(List<Card> cards, List<ColoredManaSymbol> chosenColors, Target target, Ability targetingSource, Game game) {
-        return selectWorstCardInner(cards, chosenColors, target, targetingSource, game);
     }
 
     /**
@@ -3097,6 +3068,7 @@ public class ComputerPlayer extends PlayerImpl {
         return before != after;
     }
 
+    @Deprecated // TODO: replace by source only version
     private boolean selectPlayer(Outcome outcome, Target target, UUID abilityControllerId, UUID randomOpponentId, Game game, boolean required) {
         return selectPlayerInner(outcome, target, null, abilityControllerId, randomOpponentId, game, required);
     }

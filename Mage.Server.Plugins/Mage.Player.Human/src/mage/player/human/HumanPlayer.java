@@ -1042,6 +1042,10 @@ public class HumanPlayer extends PlayerImpl {
             return false;
         }
 
+        if (target.getAmountRemaining() <= 0) {
+            return false;
+        }
+
         if (source == null) {
             return false;
         }
