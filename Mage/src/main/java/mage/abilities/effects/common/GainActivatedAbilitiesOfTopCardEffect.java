@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
@@ -11,6 +12,8 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.List;
 
 public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl {
 
@@ -33,23 +36,33 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean queryAffectedObjects(Layer layer, Ability source, Game game, List<MageItem> affectedObjects) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        if (player == null) {
+            return false;
+        }
+        Card card = player.getLibrary().getFromTop(game);
+        if (card == null || !filter.match(card, game)) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            affectedObjects.add(permanent);
+        }
+        return !affectedObjects.isEmpty();
+    }
+
+    @Override
+    public void applyToObjects(Layer layer, SubLayer sublayer, Ability source, Game game, List<MageItem> affectedObjects) {
+        for (MageItem object : affectedObjects) {
+            Player player = game.getPlayer(source.getControllerId());
             Card card = player.getLibrary().getFromTop(game);
-            if (filter.match(card, game)) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    for (Ability ability : card.getAbilities(game)) {
-                        if (ability.isActivatedAbility()) {
-                            permanent.addAbility(ability, source.getSourceId(), game, true);
-                        }
-                    }
-                    return true;
+            Permanent permanent = (Permanent) object;
+            for (Ability ability : card.getAbilities(game)) {
+                if (ability.isActivatedAbility()) {
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
                 }
             }
         }
-        return false;
     }
-
 }
