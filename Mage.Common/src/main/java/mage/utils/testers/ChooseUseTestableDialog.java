@@ -60,7 +60,7 @@ class ChooseUseTestableDialog extends BaseTestableDialog {
         List<String> res = new ArrayList<>();
         res.add(chooseRes ? "TRUE" : "FALSE");
 
-        this.getResult().save(chooseRes, res);
+        this.getResult().onFinish(chooseRes, res);
     }
 
     static public void register(TestableDialogsRunner runner) {

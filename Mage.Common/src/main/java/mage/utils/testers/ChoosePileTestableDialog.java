@@ -56,7 +56,7 @@ class ChoosePileTestableDialog extends BaseTestableDialog {
         res.add(getGroup() + " - " + this.getName() + " - " + (chooseRes ? "TRUE" : "FALSE"));
         res.add(" * selected pile: " + (chooseRes ? "pile 1" : "pile 2"));
 
-        this.getResult().save(chooseRes, res);
+        this.getResult().onFinish(chooseRes, res);
     }
 
     static public void register(TestableDialogsRunner runner) {

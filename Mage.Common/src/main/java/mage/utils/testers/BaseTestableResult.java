@@ -10,41 +10,41 @@ import java.util.List;
  */
 public class BaseTestableResult implements TestableResult {
 
-    boolean saved = false;
-    boolean status = false;
-    List<String> info = new ArrayList<>();
+    boolean isFinished = false;
+    boolean resStatus = false;
+    List<String> resInfo = new ArrayList<>();
 
     @Override
-    public boolean getStatus() {
-        return this.status;
+    public boolean getResStatus() {
+        return this.resStatus;
     }
 
     @Override
-    public List<String> getInfo() {
-        return this.info;
+    public List<String> getResDetails() {
+        return this.resInfo;
     }
 
     @Override
-    public void save(boolean status, List<String> info) {
-        this.saved = true;
-        this.status = status;
-        this.info = info;
+    public Boolean getResAssert() {
+        return null; // TODO: implement
     }
 
     @Override
-    public boolean isOk() {
-        return true;
+    public void onFinish(boolean resStatus, List<String> resDetails) {
+        this.isFinished = true;
+        this.resStatus = resStatus;
+        this.resInfo = resDetails;
     }
 
     @Override
-    public boolean isSaved() {
-        return this.saved;
+    public boolean isFinished() {
+        return this.isFinished;
     }
 
     @Override
-    public void clear() {
-        this.saved = false;
-        this.status = false;
-        this.info.clear();
+    public void onClear() {
+        this.isFinished = false;
+        this.resStatus = false;
+        this.resInfo.clear();
     }
 }

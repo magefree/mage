@@ -13,33 +13,33 @@ public class TargetTestableResult extends BaseTestableResult {
 
     Target target = null;
 
-    boolean aiAssert = false;
-    boolean aiMustChooseStatus = false;
-    int aiMustChooseTargetsCount = 0;
+    boolean aiAssertEnabled = false;
+    boolean aiAssertResStatus = false;
+    int aiAssertTargetsCount = 0;
 
-    public void save(boolean status, List<String> info, Target target) {
-        this.save(status, info);
+    public void onFinish(boolean status, List<String> info, Target target) {
+        this.onFinish(status, info);
         this.target = target;
     }
 
     @Override
-    public boolean isOk() {
-        if (!this.aiAssert) {
-            return true;
+    public Boolean getResAssert() {
+        if (!this.aiAssertEnabled) {
+            return null;
         }
 
-        // not finish
+        // not finished
         if (this.target == null) {
-            return false;
+            return null;
         }
 
         // wrong choose
-        if (this.getStatus() != this.aiMustChooseStatus) {
+        if (this.getResStatus() != this.aiAssertResStatus) {
             return false;
         }
 
         // wrong targets
-        if (this.target.getTargets().size() != this.aiMustChooseTargetsCount) {
+        if (this.target.getTargets().size() != this.aiAssertTargetsCount) {
             return false;
         }
 
@@ -48,8 +48,8 @@ public class TargetTestableResult extends BaseTestableResult {
     }
 
     @Override
-    public void clear() {
-        super.clear();
+    public void onClear() {
+        super.onClear();
         this.target = null;
     }
 }

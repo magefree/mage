@@ -44,13 +44,13 @@ abstract class BaseTestableDialog implements TestableDialog {
 
     @Override
     public void prepare() {
-        this.result.clear();
+        this.result.onClear();
     }
 
     @Override
     final public void showResult(Player player, Game game) {
         // show message with result
-        game.informPlayer(player, String.join("<br>", getResult().getInfo()));
+        game.informPlayer(player, String.join("<br>", getResult().getResDetails()));
         // reset game and gui (in most use cases it must return to player's priority)
         game.firePriorityEvent(player.getId());
     }

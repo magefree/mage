@@ -9,21 +9,25 @@ import java.util.List;
  */
 public interface TestableResult {
 
-    boolean getStatus();
+    /**
+     * Dialog's result
+     */
+    boolean getResStatus();
 
-    List<String> getInfo();
+    /**
+     * Dialog's detail result
+     */
+    List<String> getResDetails();
 
     /**
      * Save new result after show dialog
      *
-     * @param status result of choice dialog call
-     * @param info   detail result to show in GUI
      */
-    void save(boolean status, List<String> info);
+    void onFinish(boolean resStatus, List<String> resDetails);
 
-    boolean isSaved();
+    boolean isFinished();
 
-    void clear();
+    void onClear();
 
-    boolean isOk();
+    Boolean getResAssert();
 }

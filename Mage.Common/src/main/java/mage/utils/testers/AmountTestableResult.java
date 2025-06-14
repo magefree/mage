@@ -11,19 +11,19 @@ public class AmountTestableResult extends BaseTestableResult {
 
     int amount = 0;
 
-    public void save(boolean status, List<String> info, int amount) {
-        this.save(status, info);
+    public void onFinish(boolean status, List<String> info, int amount) {
+        this.onFinish(status, info);
         this.amount = amount;
     }
 
     @Override
-    public boolean isOk() {
-        return true;
+    public Boolean getResAssert() {
+        return null; // TODO: implement
     }
 
     @Override
-    public void clear() {
-        super.clear();
+    public void onClear() {
+        super.onClear();
         this.amount = 0;
     }
 }

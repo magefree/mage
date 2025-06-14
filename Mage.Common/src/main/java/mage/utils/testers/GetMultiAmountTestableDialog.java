@@ -82,7 +82,7 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
         }
         res.add("total selected: " + selectedTotal);
 
-        ((MultiAmountTestableResult) this.getResult()).save(true, res, chooseRes);
+        ((MultiAmountTestableResult) this.getResult()).onFinish(true, res, chooseRes);
     }
 
     static public void register(TestableDialogsRunner runner) {

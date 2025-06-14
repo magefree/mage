@@ -12,19 +12,19 @@ public class MultiAmountTestableResult extends BaseTestableResult {
 
     List<Integer> values = new ArrayList<>();
 
-    public void save(boolean status, List<String> info, List<Integer> values) {
-        this.save(status, info);
+    public void onFinish(boolean status, List<String> info, List<Integer> values) {
+        this.onFinish(status, info);
         this.values = values;
     }
 
     @Override
-    public boolean isOk() {
-        return true;
+    public Boolean getResAssert() {
+        return null; // TODO: implement
     }
 
     @Override
-    public void clear() {
-        super.clear();
+    public void onClear() {
+        super.onClear();
         this.values.clear();
     }
 }

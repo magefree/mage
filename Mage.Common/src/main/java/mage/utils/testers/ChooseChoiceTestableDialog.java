@@ -52,7 +52,7 @@ class ChooseChoiceTestableDialog extends BaseTestableDialog {
             res.add(String.format("* selected value: %s", choice));
         }
 
-        ((ChoiceTestableResult) this.getResult()).save(chooseRes, res, choice);
+        ((ChoiceTestableResult) this.getResult()).onFinish(chooseRes, res, choice);
     }
 
     static public void register(TestableDialogsRunner runner) {

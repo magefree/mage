@@ -42,7 +42,7 @@ class AnnounceXTestableDialog extends BaseTestableDialog {
         List<String> res = new ArrayList<>();
         res.add(getGroup() + " - " + this.getName() + " selected " + chooseRes);
 
-        ((AmountTestableResult) this.getResult()).save(true, res, chooseRes);
+        ((AmountTestableResult) this.getResult()).onFinish(true, res, chooseRes);
     }
 
     static public void register(TestableDialogsRunner runner) {

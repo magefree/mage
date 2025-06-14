@@ -74,14 +74,14 @@ class ChooseTargetTestableDialog extends BaseTestableDialog {
             Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "FALSE", new Targets(choosingTarget), source, game, res);
         }
 
-        ((TargetTestableResult) this.getResult()).save(chooseRes, res, choosingTarget);
+        ((TargetTestableResult) this.getResult()).onFinish(chooseRes, res, choosingTarget);
     }
 
-    private ChooseTargetTestableDialog aiMustChoose(boolean status, int count) {
+    private ChooseTargetTestableDialog aiMustChoose(boolean resStatus, int targetsCount) {
         TargetTestableResult res = ((TargetTestableResult) this.getResult());
-        res.aiAssert = true;
-        res.aiMustChooseStatus = status;
-        res.aiMustChooseTargetsCount = count;
+        res.aiAssertEnabled = true;
+        res.aiAssertResStatus = resStatus;
+        res.aiAssertTargetsCount = targetsCount;
         return this;
     }
 

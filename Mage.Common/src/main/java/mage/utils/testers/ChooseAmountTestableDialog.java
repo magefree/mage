@@ -54,7 +54,7 @@ class ChooseAmountTestableDialog extends BaseTestableDialog {
             Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "FALSE", new Targets(choosingTarget), source, game, res);
         }
 
-        ((TargetTestableResult) this.getResult()).save(chooseRes, res, choosingTarget);
+        ((TargetTestableResult) this.getResult()).onFinish(chooseRes, res, choosingTarget);
     }
 
     static public void register(TestableDialogsRunner runner) {

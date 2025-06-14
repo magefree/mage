@@ -11,19 +11,19 @@ public class ChoiceTestableResult extends BaseTestableResult {
 
     String choice = null;
 
-    public void save(boolean status, List<String> info, String choice) {
-        this.save(status, info);
+    public void onFinish(boolean status, List<String> info, String choice) {
+        this.onFinish(status, info);
         this.choice = choice;
     }
 
     @Override
-    public boolean isOk() {
-        return true;
+    public Boolean getResAssert() {
+        return null; // TODO: implement
     }
 
     @Override
-    public void clear() {
-        super.clear();
+    public void onClear() {
+        super.onClear();
         this.choice = null;
     }
 }
