@@ -30,6 +30,7 @@ import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
+import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
 import mage.game.turn.Turn;
@@ -309,6 +310,19 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void resetLKI();
 
     void resetShortLivingLKI();
+
+    /**
+     * For finding the spell or ability on the stack for "becomes the target" triggers.
+     * Also ensures that spells/abilities that target the same object twice only trigger each "becomes the target" ability once.
+     * If this is the first attempt at triggering for a given ability targeting a given object,
+     * this method temporarily records that in the game state for later checks by this same method,
+     * to not return the same object again (until short living LKI is cleared)
+     *
+     * @param checkingReference must be unique for each usage (this.getId().toString() of the TriggeredAbility, or this.getKey() of the watcher)
+     * @param event             the GameEvent.EventType.TARGETED from checkTrigger() or watch()
+     * @return the StackObject which targeted the source, or null if already used or not found
+     */
+    StackObject findTargetingStackObject(String checkingReference, GameEvent event);
 
     void setLosingPlayer(Player player);
 
