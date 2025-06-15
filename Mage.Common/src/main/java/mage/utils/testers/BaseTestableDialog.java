@@ -15,6 +15,7 @@ import mage.target.common.TargetPermanentOrPlayer;
  */
 abstract class BaseTestableDialog implements TestableDialog {
 
+    private Integer regNumber; // dialog number in runner (use it to find results and debugging)
     private final String group;
     private final String name;
     private final String description;
@@ -25,6 +26,16 @@ abstract class BaseTestableDialog implements TestableDialog {
         this.name = name;
         this.description = description;
         this.result = result;
+    }
+
+    @Override
+    public void setRegNumber(Integer regNumber) {
+        this.regNumber = regNumber;
+    }
+
+    @Override
+    public Integer getRegNumber() {
+        return this.regNumber;
     }
 
     @Override

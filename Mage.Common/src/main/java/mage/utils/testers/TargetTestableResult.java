@@ -23,7 +23,7 @@ public class TargetTestableResult extends BaseTestableResult {
     }
 
     @Override
-    public Boolean getResAssert() {
+    public String getResAssert() {
         if (!this.aiAssertEnabled) {
             return null;
         }
@@ -35,16 +35,22 @@ public class TargetTestableResult extends BaseTestableResult {
 
         // wrong choose
         if (this.getResStatus() != this.aiAssertResStatus) {
-            return false;
+            return String.format("Wrong status: need %s, but get %s",
+                    this.aiAssertResStatus,
+                    this.getResStatus()
+            );
         }
 
         // wrong targets
         if (this.target.getTargets().size() != this.aiAssertTargetsCount) {
-            return false;
+            return String.format("Wrong targets count: need %d, but get %d",
+                    this.aiAssertTargetsCount,
+                    this.target.getTargets().size()
+            );
         }
 
         // all fine
-        return true;
+        return "";
     }
 
     @Override

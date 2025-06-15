@@ -21,7 +21,6 @@ public interface TestableResult {
 
     /**
      * Save new result after show dialog
-     *
      */
     void onFinish(boolean resStatus, List<String> resDetails);
 
@@ -29,5 +28,11 @@ public interface TestableResult {
 
     void onClear();
 
-    Boolean getResAssert();
+    /**
+     * Assert dialog result
+     * - null - not ready (dev must setup wanted result)
+     * - empty - good
+     * - not empty - fail (return error message)
+     */
+    String getResAssert();
 }

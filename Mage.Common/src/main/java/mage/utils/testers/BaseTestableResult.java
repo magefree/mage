@@ -25,7 +25,7 @@ public class BaseTestableResult implements TestableResult {
     }
 
     @Override
-    public Boolean getResAssert() {
+    public String getResAssert() {
         return null; // TODO: implement
     }
 

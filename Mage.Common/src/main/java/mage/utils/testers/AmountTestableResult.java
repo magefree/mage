@@ -17,7 +17,7 @@ public class AmountTestableResult extends BaseTestableResult {
     }
 
     @Override
-    public Boolean getResAssert() {
+    public String getResAssert() {
         return null; // TODO: implement
     }
 

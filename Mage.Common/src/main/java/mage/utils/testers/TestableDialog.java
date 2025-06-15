@@ -17,6 +17,10 @@ import mage.players.Player;
  */
 public interface TestableDialog {
 
+    void setRegNumber(Integer regNumber);
+
+    Integer getRegNumber();
+
     String getGroup();
 
     String getName();
