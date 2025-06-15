@@ -6,6 +6,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,12 +52,13 @@ class ChoosePileTestableDialog extends BaseTestableDialog {
         List<Card> pile2 = all.stream().limit(this.pileSize2).collect(Collectors.toList());
 
         Player choosingPlayer = this.isYou ? player : opponent;
+        String chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
         boolean chooseRes = choosingPlayer.choosePile(Outcome.Benefit, mainMessage, pile1, pile2, game);
         List<String> res = new ArrayList<>();
         res.add(getGroup() + " - " + this.getName() + " - " + (chooseRes ? "TRUE" : "FALSE"));
         res.add(" * selected pile: " + (chooseRes ? "pile 1" : "pile 2"));
 
-        this.getResult().onFinish(chooseRes, res);
+        this.getResult().onFinish(chooseDebugSource, chooseRes, res);
     }
 
     static public void register(TestableDialogsRunner runner) {

@@ -3,6 +3,7 @@ package mage.utils.testers;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,12 +40,12 @@ class GetAmountTestableDialog extends BaseTestableDialog {
     public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
         String message = "<font color=green>message</font> with html";
-        int chooseRes;
-        chooseRes = choosingPlayer.getAmount(this.min, this.max, message, source, game);
+        String chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
+        int chooseRes = choosingPlayer.getAmount(this.min, this.max, message, source, game);
         List<String> res = new ArrayList<>();
         res.add(getGroup() + " - " + this.getName() + " selected " + chooseRes);
 
-        ((AmountTestableResult) this.getResult()).onFinish(true, res, chooseRes);
+        ((AmountTestableResult) this.getResult()).onFinish(chooseDebugSource, true, res, chooseRes);
     }
 
     static public void register(TestableDialogsRunner runner) {

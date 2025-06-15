@@ -5,6 +5,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +49,7 @@ class ChooseUseTestableDialog extends BaseTestableDialog {
     @Override
     public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
+        String chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
         boolean chooseRes = choosingPlayer.chooseUse(
                 Outcome.Benefit,
                 messageMain,
@@ -60,7 +62,7 @@ class ChooseUseTestableDialog extends BaseTestableDialog {
         List<String> res = new ArrayList<>();
         res.add(chooseRes ? "TRUE" : "FALSE");
 
-        this.getResult().onFinish(chooseRes, res);
+        this.getResult().onFinish(chooseDebugSource, chooseRes, res);
     }
 
     static public void register(TestableDialogsRunner runner) {

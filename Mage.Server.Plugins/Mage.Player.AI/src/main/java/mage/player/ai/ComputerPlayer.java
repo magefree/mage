@@ -148,6 +148,12 @@ public class ComputerPlayer extends PlayerImpl {
             log.debug("choose: " + outcome.toString() + ':' + target.toString());
         }
 
+        // choose itself for starting player all the time
+        if (target.getMessage(game).equals("Select a starting player")) {
+            target.add(this.getId(), game);
+            return true;
+        }
+
         boolean isAddedSomething = false; // must return true on any changes in targets, so game can ask next choose dialog until finish
 
         // controller hints:

@@ -12,8 +12,8 @@ public class MultiAmountTestableResult extends BaseTestableResult {
 
     List<Integer> values = new ArrayList<>();
 
-    public void onFinish(boolean status, List<String> info, List<Integer> values) {
-        this.onFinish(status, info);
+    public void onFinish(String resDebugSource, boolean status, List<String> info, List<Integer> values) {
+        this.onFinish(resDebugSource, status, info);
         this.values = values;
     }
 

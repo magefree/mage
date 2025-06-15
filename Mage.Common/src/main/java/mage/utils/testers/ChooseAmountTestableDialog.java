@@ -7,6 +7,7 @@ import mage.players.Player;
 import mage.target.TargetAmount;
 import mage.target.Targets;
 import mage.target.common.TargetAnyTargetAmount;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +47,7 @@ class ChooseAmountTestableDialog extends BaseTestableDialog {
         Player choosingPlayer = this.isYou ? player : opponent;
 
         // TODO: add "damage" word in ability text, so chooseTargetAmount an show diff dialog (due inner logic - distribute damage or 1/1)
+        String chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
         boolean chooseRes = choosingPlayer.chooseTargetAmount(Outcome.Benefit, choosingTarget, source, game);
         List<String> res = new ArrayList<>();
         if (chooseRes) {
@@ -54,7 +56,7 @@ class ChooseAmountTestableDialog extends BaseTestableDialog {
             Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "FALSE", new Targets(choosingTarget), source, game, res);
         }
 
-        ((TargetTestableResult) this.getResult()).onFinish(chooseRes, res, choosingTarget);
+        ((TargetTestableResult) this.getResult()).onFinish(chooseDebugSource, chooseRes, res, choosingTarget);
     }
 
     static public void register(TestableDialogsRunner runner) {

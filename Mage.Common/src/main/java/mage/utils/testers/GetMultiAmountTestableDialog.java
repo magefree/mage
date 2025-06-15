@@ -5,6 +5,7 @@ import mage.constants.MultiAmountType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.DebugUtil;
 import mage.util.MultiAmountMessage;
 
 import java.util.ArrayList;
@@ -54,9 +55,9 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
     public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
         //String message = "<font color=green>message</font> with html";
-        List<Integer> chooseRes;
         List<MultiAmountMessage> options = this.amountOptions.stream().map(MultiAmountMessage::copy).collect(Collectors.toList());
-        chooseRes = choosingPlayer.getMultiAmountWithIndividualConstraints(
+        String chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
+        List<Integer> chooseRes = choosingPlayer.getMultiAmountWithIndividualConstraints(
                 Outcome.Benefit,
                 options,
                 this.totalMin,
@@ -82,7 +83,7 @@ class GetMultiAmountTestableDialog extends BaseTestableDialog {
         }
         res.add("total selected: " + selectedTotal);
 
-        ((MultiAmountTestableResult) this.getResult()).onFinish(true, res, chooseRes);
+        ((MultiAmountTestableResult) this.getResult()).onFinish(chooseDebugSource, true, res, chooseRes);
     }
 
     static public void register(TestableDialogsRunner runner) {

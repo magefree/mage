@@ -11,8 +11,8 @@ public class ChoiceTestableResult extends BaseTestableResult {
 
     String choice = null;
 
-    public void onFinish(boolean status, List<String> info, String choice) {
-        this.onFinish(status, info);
+    public void onFinish(String resDebugSource, boolean status, List<String> info, String choice) {
+        this.onFinish(resDebugSource, status, info);
         this.choice = choice;
     }
 

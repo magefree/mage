@@ -11,8 +11,8 @@ public class AmountTestableResult extends BaseTestableResult {
 
     int amount = 0;
 
-    public void onFinish(boolean status, List<String> info, int amount) {
-        this.onFinish(status, info);
+    public void onFinish(String resDebugSource, boolean status, List<String> info, int amount) {
+        this.onFinish(resDebugSource, status, info);
         this.amount = amount;
     }
 

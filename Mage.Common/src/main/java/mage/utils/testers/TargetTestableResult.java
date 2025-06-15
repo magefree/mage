@@ -17,8 +17,8 @@ public class TargetTestableResult extends BaseTestableResult {
     boolean aiAssertResStatus = false;
     int aiAssertTargetsCount = 0;
 
-    public void onFinish(boolean status, List<String> info, Target target) {
-        this.onFinish(status, info);
+    public void onFinish(String resDebugSource, boolean status, List<String> info, Target target) {
+        this.onFinish(resDebugSource, status, info);
         this.target = target;
     }
 

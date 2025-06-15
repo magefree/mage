@@ -2267,6 +2267,13 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
+
+        // choose itself for starting player all the time
+        if (target.getMessage(game).equals("Select a starting player")) {
+            target.add(this.getId(), game);
+            return true;
+        }
+
         UUID abilityControllerId = this.getId();
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
@@ -2275,11 +2282,6 @@ public class TestPlayer implements Player {
         // TODO: warning, some cards call player.choose methods instead target.choose, see #8254
         //  most use cases - discard and other cost with choice like that method
         //  must migrate all choices.remove(xxx) to choices.remove(0), takeMaxTargetsPerChoose can help to find it
-
-        // ignore player select
-        if (target.getMessage(game).equals("Select a starting player")) {
-            return computerPlayer.choose(outcome, target, source, game, options);
-        }
 
         boolean isAddedSomething = false; // must return true on any changes in targets, so game can ask next choose dialog until finish
 

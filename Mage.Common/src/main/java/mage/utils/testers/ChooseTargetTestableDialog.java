@@ -6,6 +6,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,18 +52,23 @@ class ChooseTargetTestableDialog extends BaseTestableDialog {
         Player choosingPlayer = this.isYou ? player : opponent;
 
         boolean chooseRes;
+        String chooseDebugSource;
         if (this.isPlayerChoice) {
             // player.chooseXXX
             if (this.isTargetChoice) {
+                chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
                 chooseRes = choosingPlayer.chooseTarget(Outcome.Benefit, choosingTarget, source, game);
             } else {
+                chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
                 chooseRes = choosingPlayer.choose(Outcome.Benefit, choosingTarget, source, game);
             }
         } else {
             // target.chooseXXX
             if (this.isTargetChoice) {
+                chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
                 chooseRes = choosingTarget.chooseTarget(Outcome.Benefit, choosingPlayer.getId(), source, game);
             } else {
+                chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
                 chooseRes = choosingTarget.choose(Outcome.Benefit, choosingPlayer.getId(), source, game);
             }
         }
@@ -74,7 +80,7 @@ class ChooseTargetTestableDialog extends BaseTestableDialog {
             Targets.printDebugTargets(getGroup() + " - " + this.getName() + " - " + "FALSE", new Targets(choosingTarget), source, game, res);
         }
 
-        ((TargetTestableResult) this.getResult()).onFinish(chooseRes, res, choosingTarget);
+        ((TargetTestableResult) this.getResult()).onFinish(chooseDebugSource, chooseRes, res, choosingTarget);
     }
 
     private ChooseTargetTestableDialog aiMustChoose(boolean resStatus, int targetsCount) {

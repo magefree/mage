@@ -78,7 +78,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
     @Test
     @Ignore // debug only - run single dialog by reg number
     public void test_RunSingle_Debugging() {
-        int needRedNumber = 95;
+        int needRegNumber = 7;
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
         addCard(Zone.HAND, playerA, "Forest", 6);
@@ -86,7 +86,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerA);
         aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, PhaseStep.END_TURN, playerB);
         runCode("run by number", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
-            TestableDialog dialog = findDialog(runner, needRedNumber);
+            TestableDialog dialog = findDialog(runner, needRegNumber);
             dialog.prepare();
             dialog.showDialog(playerA, fakeAbility, game, playerB);
         });
@@ -148,20 +148,31 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     private void assertAndPrintRunnerResults(boolean showFullList, boolean failOnBadResults) {
-        // print text table with full dialogs list and results
+        // print table with full dialogs list and assert results
 
-        // found table sizes
+        // auto-size for columns
         int maxNumberLength = "9999".length();
         int maxGroupLength = "Group".length();
         int maxNameLength = "Name".length();
+        int maxResultLength = "Result".length();
+        int needTotalsSize = 0;
         for (TestableDialog dialog : runner.getDialogs()) {
             if (!showFullList && !dialog.getResult().isFinished()) {
                 continue;
             }
             maxGroupLength = Math.max(maxGroupLength, dialog.getGroup().length());
             maxNameLength = Math.max(maxNameLength, dialog.getName().length());
+
+            // resize group to keep space for bigger total message like assert res
+            String resAssert = dialog.getResult().getResAssert();
+            resAssert = resAssert == null ? "" : resAssert;
+            needTotalsSize = Math.max(needTotalsSize, dialog.getResult().getResDebugSource().length());
+            needTotalsSize = Math.max(needTotalsSize, resAssert.length());
+            int currentTotalsSize = maxNumberLength + maxGroupLength + maxNameLength + maxResultLength + 9;
+            if (currentTotalsSize < needTotalsSize) {
+                maxGroupLength = maxGroupLength + needTotalsSize - currentTotalsSize;
+            }
         }
-        int maxResultLength = "Result".length();
 
         String rowFormat = "| %-" + maxNumberLength + "s | %-" + maxGroupLength + "s | %-" + maxNameLength + "s | %-" + maxResultLength + "s |%n";
         String horizontalBorder = "+-" +
@@ -172,12 +183,12 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
         String totalsLeftFormat = "| %-" + (maxNumberLength + maxGroupLength + maxNameLength + maxResultLength + 9) + "s |%n";
         String totalsRightFormat = "| %" + (maxNumberLength + maxGroupLength + maxNameLength + maxResultLength + 9) + "s |%n";
 
-        // header
+        // print header row
         System.out.println(horizontalBorder);
         System.out.printf(rowFormat, "N", "Group", "Name", "Result");
         System.out.println(horizontalBorder);
 
-        // data
+        // print data rows
         String prevGroup = "";
         int totalDialogs = 0;
         int totalGood = 0;
@@ -203,6 +214,7 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
             String status;
             coloredTexts.clear();
             String resAssert = dialog.getResult().getResAssert();
+            String resDebugSource = dialog.getResult().getResDebugSource();
             String assertError = "";
             if (resAssert == null) {
                 totalUnknown++;
@@ -231,7 +243,9 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
             if (!assertError.isEmpty()) {
                 coloredTexts.clear();
                 coloredTexts.put(resAssert, asRed(resAssert));
-                System.out.print(getColoredRow(totalsRightFormat, coloredTexts, String.format("%s", resAssert)));
+                coloredTexts.put(resDebugSource, asRed(resDebugSource));
+                System.out.print(getColoredRow(totalsRightFormat, coloredTexts, resAssert));
+                System.out.print(getColoredRow(totalsRightFormat, coloredTexts, resDebugSource));
                 System.out.println(horizontalBorder);
                 usedHorizontalBorder = true;
             }
@@ -241,10 +255,9 @@ public class TestableDialogsTest extends CardTestPlayerBaseWithAIHelps {
             usedHorizontalBorder = true;
         }
 
-        // totals dialogs
+        // print totals
         System.out.printf(totalsLeftFormat, "Total dialogs: " + totalDialogs);
         usedHorizontalBorder = false;
-        // totals results
         String goodStats = String.format("%d good", totalGood);
         String badStats = String.format("%d bad", totalBad);
         String unknownStats = String.format("%d unknown", totalUnknown);

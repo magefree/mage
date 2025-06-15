@@ -5,6 +5,7 @@ import mage.choices.*;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +38,7 @@ class ChooseChoiceTestableDialog extends BaseTestableDialog {
     public void showDialog(Player player, Ability source, Game game, Player opponent) {
         Player choosingPlayer = this.isYou ? player : opponent;
         Choice dialog = this.choice.copy();
+        String chooseDebugSource = DebugUtil.getMethodNameWithSource(0, "class");
         boolean chooseRes = choosingPlayer.choose(Outcome.Benefit, dialog, game);
 
         List<String> res = new ArrayList<>();
@@ -52,7 +54,7 @@ class ChooseChoiceTestableDialog extends BaseTestableDialog {
             res.add(String.format("* selected value: %s", choice));
         }
 
-        ((ChoiceTestableResult) this.getResult()).onFinish(chooseRes, res, choice);
+        ((ChoiceTestableResult) this.getResult()).onFinish(chooseDebugSource, chooseRes, res, choice);
     }
 
     static public void register(TestableDialogsRunner runner) {
