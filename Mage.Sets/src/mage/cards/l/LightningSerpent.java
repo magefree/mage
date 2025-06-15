@@ -1,23 +1,22 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.game.events.GameEvent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LoneFox
  */
 public final class LightningSerpent extends CardImpl {
@@ -31,12 +30,17 @@ public final class LightningSerpent extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
+
         // Lightning Serpent enters the battlefield with X +1/+0 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P0.createInstance())));
+
         // At the beginning of the end step, sacrifice Lightning Serpent.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.NEXT, new SacrificeSourceEffect(), false
+        ));
     }
 
     private LightningSerpent(final LightningSerpent card) {

@@ -1,29 +1,27 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
- *
  */
 public final class FollowedFootsteps extends CardImpl {
 
@@ -35,11 +33,10 @@ public final class FollowedFootsteps extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Copy));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of your upkeep, create a token that's a copy of enchanted creature.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new FollowedFootstepsEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FollowedFootstepsEffect()));
     }
 
     private FollowedFootsteps(final FollowedFootsteps card) {
