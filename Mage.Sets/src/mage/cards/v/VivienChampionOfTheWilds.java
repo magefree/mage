@@ -3,8 +3,6 @@ package mage.cards.v;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -18,7 +16,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -107,21 +104,14 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
 
         // exile
         Card cardToExile = game.getCard(target.getFirstTarget());
-        if (!player.moveCardsToExile(cardToExile, source, game, false,
+        if (!CardUtil.moveCardsToExileFaceDown(game, source, player, cardToExile,
                 CardUtil.getCardExileZoneId(game, source),
-                CardUtil.createObjectRelatedWindowTitle(source, game, " (look and cast)"))) {
+                CardUtil.createObjectRelatedWindowTitle(source, game, " (look and cast)"), true)) {
             return false;
         }
-        cardToExile.setFaceDown(true, game);
-
-        // look and cast
-        ContinuousEffect effect = new VivienChampionOfTheWildsLookEffect(player.getId());
-        effect.setTargetPointer(new FixedTarget(cardToExile, game));
-        game.addEffect(effect, source);
+        // cast
         if (cardToExile.isCreature(game)) {
-            effect = new VivienChampionOfTheWildsCastFromExileEffect(player.getId());
-            effect.setTargetPointer(new FixedTarget(cardToExile, game));
-            game.addEffect(effect, source);
+            CardUtil.makeCardPlayable(game, source, cardToExile, true, Duration.EndOfGame, false);
         }
 
         // put the rest on the bottom of your library in any order
@@ -130,79 +120,5 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         player.putCardsOnBottomOfLibrary(cardsToBottom, game, source, true);
 
         return true;
-    }
-}
-
-class VivienChampionOfTheWildsLookEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    VivienChampionOfTheWildsLookEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-    }
-
-    private VivienChampionOfTheWildsLookEffect(final VivienChampionOfTheWildsLookEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public VivienChampionOfTheWildsLookEffect copy() {
-        return new VivienChampionOfTheWildsLookEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        }
-        return affectedControllerId.equals(authorizedPlayerId)
-                && objectId.equals(cardId);
-    }
-}
-
-class VivienChampionOfTheWildsCastFromExileEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    VivienChampionOfTheWildsCastFromExileEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-    }
-
-    private VivienChampionOfTheWildsCastFromExileEffect(final VivienChampionOfTheWildsCastFromExileEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public VivienChampionOfTheWildsCastFromExileEffect copy() {
-        return new VivienChampionOfTheWildsCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        } else if (objectId.equals(cardId)
-                && affectedControllerId.equals(authorizedPlayerId)) {
-            Card card = game.getCard(objectId);
-            // TODO: Allow to cast Zoetic Cavern face down
-            return card != null && !card.isLand(game);
-        }
-        return false;
     }
 }
