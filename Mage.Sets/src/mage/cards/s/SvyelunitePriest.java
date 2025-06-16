@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
@@ -13,28 +11,30 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class SvyelunitePriest extends CardImpl {
 
     public SvyelunitePriest(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {U}{U}, {tap}: Target creature gains shroud until end of turn. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}{U}"),
-                new IsStepCondition(PhaseStep.UPKEEP), null);
+        Ability ability = new ConditionalActivatedAbility(
+                new GainAbilityTargetEffect(
+                        ShroudAbility.getInstance(), Duration.EndOfTurn
+                ), new ManaCostsImpl<>("{U}{U}"), IsStepCondition.getMyUpkeep()
+        );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -9,9 +9,9 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -31,10 +31,8 @@ public final class KindlyStranger extends CardImpl {
         // <i>Delirium</i> &mdash; {2}{B}: Transform Kindly Stranger. Activate this ability only if there are four or more card types among cards in your graveyard.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{2}{B}"),
-                DeliriumCondition.instance, "<i>Delirium</i> &mdash; {2}{B}: Transform {this}. " +
-                "Activate only if there are four or more card types among cards in your graveyard."
-        ).addHint(CardTypesInGraveyardCount.YOU.getHint()));
+                new TransformSourceEffect(), new ManaCostsImpl<>("{2}{B}"), DeliriumCondition.instance
+        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private KindlyStranger(final KindlyStranger card) {

@@ -14,7 +14,10 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -37,10 +40,9 @@ public final class NimDevourer extends CardImpl {
         );
 
         // {B}{B}: Return Nim Devourer from your graveyard to the battlefield, then sacrifice a creature. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
-                new ManaCostsImpl<>("{B}{B}"),
-                new IsStepCondition(PhaseStep.UPKEEP), null);
+        Ability ability = new ConditionalActivatedAbility(
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
+                new ManaCostsImpl<>("{B}{B}"), IsStepCondition.getMyUpkeep());
         ability.addEffect(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, ", then"));
         this.addAbility(ability);
     }

@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsStepCondition;
@@ -13,14 +11,12 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.PhaseStep;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class BlackCarriage extends CardImpl {
@@ -38,9 +34,10 @@ public final class BlackCarriage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // Sacrifice a creature: Untap Black Carriage. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new ConditionalActivatedAbility(
                 new UntapSourceEffect(), new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE),
-                new IsStepCondition(PhaseStep.UPKEEP), "Sacrifice a creature: Untap {this}. Activate only during your upkeep."));
+                IsStepCondition.getMyUpkeep()
+        ));
     }
 
     private BlackCarriage(final BlackCarriage card) {

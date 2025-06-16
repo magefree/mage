@@ -40,12 +40,10 @@ public final class HallOfOracles extends CardImpl {
 
         // {T}: Put a +1/+1 counter on target creature. Activate only as a sorcery and only if you've cast an instant or sorcery spell this turn.
         ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost(),
-                HallOfOraclesCondition.instance, "{T}: Put a +1/+1 counter on target creature. " +
-                "Activate only as a sorcery and only if you've cast an instant or sorcery spell this turn."
-        );
+                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new TapSourceCost(), HallOfOraclesCondition.instance
+        ).setTiming(TimingRule.SORCERY);
         ability.addTarget(new TargetCreaturePermanent());
-        ability.setTiming(TimingRule.SORCERY);
         this.addAbility(ability);
     }
 
@@ -70,5 +68,10 @@ enum HallOfOraclesCondition implements Condition {
                 .stream()
                 .filter(Objects::nonNull)
                 .anyMatch(spell -> spell.isInstantOrSorcery(game));
+    }
+
+    @Override
+    public String toString() {
+        return "you've cast an instant or sorcery spell this turn";
     }
 }

@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -26,8 +25,9 @@ import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author MTGfan & L_J
  */
 public final class Norritt extends CardImpl {
@@ -38,13 +38,12 @@ public final class Norritt extends CardImpl {
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("non-Wall creature");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("non-Wall creature the active player has controlled continuously since the beginning of the turn");
 
     static {
         filterCreature.add(Predicates.not(SubType.WALL.getPredicate()));
         filterCreature.add(new ControlledFromStartOfControllerTurnPredicate());
         filterCreature.add(TargetController.ACTIVE.getControllerPredicate());
-        filterCreature.setMessage("non-Wall creature the active player has controlled continuously since the beginning of the turn.");
     }
 
     public Norritt(UUID ownerId, CardSetInfo setInfo) {
@@ -60,11 +59,12 @@ public final class Norritt extends CardImpl {
         this.addAbility(ability1);
 
         // {T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only before attackers are declared.
-        Ability ability2 = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn),
-                new TapSourceCost(), BeforeAttackersAreDeclaredCondition.instance,
-                "{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. "
-                + "That creature attacks this turn if able. Destroy it at the beginning of the next end step if it didn't attack this turn. "
-                + "Activate only before attackers are declared.");
+        Ability ability2 = new ConditionalActivatedAbility(
+                new AttacksIfAbleTargetEffect(Duration.EndOfTurn)
+                        .setText("choose target non-Wall creature the active player has controlled continuously " +
+                                "since the beginning of the turn. That creature attacks this turn if able"),
+                new TapSourceCost(), BeforeAttackersAreDeclaredCondition.instance
+        );
         ability2.addEffect(new NorrittDelayedDestroyEffect());
         ability2.addTarget(new TargetCreaturePermanent(filterCreature));
         this.addAbility(ability2);
@@ -85,7 +85,7 @@ class NorrittDelayedDestroyEffect extends OneShotEffect {
 
     NorrittDelayedDestroyEffect() {
         super(Outcome.Detriment);
-        this.staticText = "If it doesn't, destroy it at the beginning of the next end step";
+        this.staticText = "Destroy it at the beginning of the next end step if it didn't attack this turn";
     }
 
     private NorrittDelayedDestroyEffect(final NorrittDelayedDestroyEffect effect) {

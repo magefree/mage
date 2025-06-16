@@ -13,7 +13,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -44,7 +47,7 @@ public final class FiremaneAngel extends CardImpl {
         // {6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
-                new ManaCostsImpl<>("{6}{R}{R}{W}{W}"), new IsStepCondition(PhaseStep.UPKEEP), null
+                new ManaCostsImpl<>("{6}{R}{R}{W}{W}"), IsStepCondition.getMyUpkeep()
         ));
     }
 

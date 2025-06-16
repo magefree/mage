@@ -1,11 +1,10 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -13,18 +12,20 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class ColossusOfSardia extends CardImpl {
 
+    private static final Condition condition = new IsStepCondition(PhaseStep.UPKEEP);
+
     public ColossusOfSardia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{9}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{9}");
         this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(9);
@@ -37,8 +38,7 @@ public final class ColossusOfSardia extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // {9}: Untap Colossus of Sardia. Activate this ability only during your upkeep.
-        this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                new UntapSourceEffect(), new ManaCostsImpl<>("{9}"), new IsStepCondition(PhaseStep.UPKEEP), null));
+        this.addAbility(new ConditionalActivatedAbility(new UntapSourceEffect(), new GenericManaCost(9), condition));
     }
 
     private ColossusOfSardia(final ColossusOfSardia card) {

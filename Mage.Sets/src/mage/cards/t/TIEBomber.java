@@ -1,8 +1,8 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsPhaseCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -11,16 +11,18 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class TIEBomber extends CardImpl {
+
+    private static final Condition condition = new IsPhaseCondition(TurnPhase.COMBAT);
 
     public TIEBomber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
@@ -33,11 +35,9 @@ public final class TIEBomber extends CardImpl {
 
         // {1}: TIE Bomber loses Spaceflight until end od turn. Activate this ability only during combat.
         this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
                 new LoseAbilitySourceEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn),
-                new GenericManaCost(1),
-                new IsPhaseCondition(TurnPhase.COMBAT),
-                "{1}: {this} loses Spaceflight until end od turn. Activate only during combat."));
+                new GenericManaCost(1), condition
+        ));
     }
 
     private TIEBomber(final TIEBomber card) {

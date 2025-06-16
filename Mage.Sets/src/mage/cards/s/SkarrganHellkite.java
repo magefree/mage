@@ -2,6 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
@@ -23,6 +24,8 @@ import java.util.UUID;
  */
 public final class SkarrganHellkite extends CardImpl {
 
+    private static final Condition condition = new SourceHasCounterCondition(CounterType.P1P1);
+
     public SkarrganHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
 
@@ -38,10 +41,8 @@ public final class SkarrganHellkite extends CardImpl {
 
         // {3}{R}: Skarrgan Hellkite deals 2 damage divided as you choose among one or two targets. Activate this ability only if Skarrgan Hellkite has a +1/+1 counter on it.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new DamageMultiEffect(),
-                new ManaCostsImpl<>("{3}{R}"), new SourceHasCounterCondition(CounterType.P1P1),
-                "{3}{R}: {this} deals 2 damage divided as you choose among one or two targets. " +
-                        "Activate only if {this} has a +1/+1 counter on it."
+                Zone.BATTLEFIELD, new DamageMultiEffect(), new ManaCostsImpl<>("{3}{R}"),
+                condition, "activate only if {this} has a +1/+1 counter on it"
         );
         ability.addTarget(new TargetAnyTargetAmount(2));
         this.addAbility(ability);

@@ -9,6 +9,7 @@ import mage.constants.EffectType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX
@@ -17,7 +18,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     private static final Effects emptyEffects = new Effects();
 
-    private String ruleText = null;
+    private final String conditionText;
     private boolean showCondition = true;
 
     public ConditionalActivatedAbility(Effect effect, Cost cost, Condition condition) {
@@ -25,18 +26,18 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
-        super(zone, effect, cost);
-        this.condition = condition;
+        this(zone, effect, cost, condition, null);
     }
 
-    public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
-        this(zone, effect, cost, condition);
-        this.ruleText = rule;
+    public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String conditionText) {
+        super(zone, effect, cost);
+        this.condition = condition;
+        this.conditionText = conditionText;
     }
 
     protected ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
-        this.ruleText = ability.ruleText;
+        this.conditionText = ability.conditionText;
         this.showCondition = ability.showCondition;
     }
 
@@ -60,8 +61,11 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        if (ruleText != null && !ruleText.isEmpty()) {
-            return ruleText;
+        if (conditionText != null) {
+            if (conditionText.isEmpty()) {
+                return super.getRule();
+            }
+            return super.getRule() + ' ' + CardUtil.getTextWithFirstCharUpperCase(conditionText) + '.';
         }
         StringBuilder sb = new StringBuilder(super.getRule());
         if (showCondition) {
