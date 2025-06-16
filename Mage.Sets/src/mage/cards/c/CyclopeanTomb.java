@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -44,14 +43,13 @@ public final class CyclopeanTomb extends CardImpl {
         filter.add(Predicates.not(SubType.SWAMP.getPredicate()));
     }
 
-    private static final Condition condition = new IsStepCondition(PhaseStep.UPKEEP);
-
     public CyclopeanTomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {2}, {tap}: Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(
-                new AddCountersTargetEffect(CounterType.MIRE.createInstance()), new GenericManaCost(2), condition
+                new AddCountersTargetEffect(CounterType.MIRE.createInstance()),
+                new GenericManaCost(2), IsStepCondition.getMyUpkeep()
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
