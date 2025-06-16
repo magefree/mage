@@ -1,20 +1,19 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.condition.common.SourceBlockedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class CinderCrawler extends CardImpl {
@@ -28,10 +27,8 @@ public final class CinderCrawler extends CardImpl {
 
         // {R}: Cinder Crawler gets +1/+0 until end of turn. Activate this ability only if Cinder Crawler is blocked.
         this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new ManaCostsImpl<>("{R}"),
-                SourceBlockedCondition.instance
+                new ManaCostsImpl<>("{R}"), SourceBlockedCondition.instance
         ));
     }
 

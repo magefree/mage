@@ -43,14 +43,14 @@ public final class TheSeedcore extends CardImpl {
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
+
         // {T}: Add one mana of any color. Spend this mana only to cast Phyrexian creature spells.
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new TheSeedcoreManaBuilder(), true));
+
         // Corrupted -- {T}: Target 1/1 creature gets +2/+1 until end of turn. Activate only if an opponent has three or more poison counters.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn),
-                new TapSourceCost(),
-                CorruptedCondition.instance
+                new TapSourceCost(), CorruptedCondition.instance
         ).setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
@@ -103,4 +103,3 @@ class TheSeedcoreManaCondition extends CreatureCastManaCondition {
         return false;
     }
 }
-

@@ -54,10 +54,7 @@ public final class HakimLoreweaver extends CardImpl {
 
         // {U}{U}: Return target Aura card from your graveyard to the battlefield attached to Hakim, Loreweaver. Activate this ability only during your upkeep and only if Hakim isn't enchanted.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
-                new HakimLoreweaverEffect(),
-                new ManaCostsImpl<>("{U}{U}"),
-                HakimLoreweaverCondition.instance
+                new HakimLoreweaverEffect(), new ManaCostsImpl<>("{U}{U}"), HakimLoreweaverCondition.instance
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

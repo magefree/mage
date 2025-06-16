@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterOpponent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -38,8 +37,9 @@ public class KeeperOfTheMind extends CardImpl {
 
         // {U}, {tap}: Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1)
-                .setText("choose target opponent who has at least two more cards in hand than you do as you activate this ability. Draw a card"),
+                new DrawCardSourceControllerEffect(1)
+                        .setText("choose target opponent who has at least two more cards " +
+                                "in hand than you do as you activate this ability. Draw a card"),
                 new ManaCostsImpl<>("{U}"), KeeperOfTheMindCondition.instance
         ).hideCondition();
         ability.addCost(new TapSourceCost());

@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.permanent.token.TreasureToken;
 
 import java.util.UUID;
@@ -30,8 +29,7 @@ public final class UndercityScrounger extends CardImpl {
 
         // {T}: Create a Treasure token. Activate only if a creature died this turn.
         this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()),
-                new TapSourceCost(), MorbidCondition.instance
+                new CreateTokenEffect(new TreasureToken()), new TapSourceCost(), MorbidCondition.instance
         ).addHint(MorbidHint.instance));
     }
 

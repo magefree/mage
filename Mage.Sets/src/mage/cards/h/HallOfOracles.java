@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -40,7 +39,7 @@ public final class HallOfOracles extends CardImpl {
 
         // {T}: Put a +1/+1 counter on target creature. Activate only as a sorcery and only if you've cast an instant or sorcery spell this turn.
         ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 new TapSourceCost(), HallOfOraclesCondition.instance
         ).setTiming(TimingRule.SORCERY);
         ability.addTarget(new TargetCreaturePermanent());

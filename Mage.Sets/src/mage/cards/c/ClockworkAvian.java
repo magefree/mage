@@ -15,7 +15,9 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,8 +54,7 @@ public final class ClockworkAvian extends CardImpl {
 
         // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Avian. This ability can't cause the total number of +1/+0 counters on Clockwork Avian to be greater than four. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new ClockworkAvianEffect(),
-                new ManaCostsImpl<>("{X}"), new IsStepCondition(PhaseStep.UPKEEP)
+                new ClockworkAvianEffect(), new ManaCostsImpl<>("{X}"), IsStepCondition.getMyUpkeep()
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

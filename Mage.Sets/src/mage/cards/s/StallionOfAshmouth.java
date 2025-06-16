@@ -8,7 +8,10 @@ import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -27,7 +30,6 @@ public final class StallionOfAshmouth extends CardImpl {
         // <i>Delirium</i> &mdash; {1}{B}: Stallion of Ashmouth gets +1/+1 until end of turn. Activate this ability only if there are
         // four or more card types among cards in your graveyard.
         this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{B}"), DeliriumCondition.instance
         ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));

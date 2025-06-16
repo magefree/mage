@@ -11,7 +11,6 @@ import mage.abilities.effects.common.DestroySourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
@@ -28,8 +27,8 @@ public final class RocketLauncher extends CardImpl {
 
         // {2}: Rocket Launcher deals 1 damage to any target. Destroy Rocket Launcher at the beginning of the next end step. Activate this ability only if you've controlled Rocket Launcher continuously since the beginning of your most recent turn.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(1),
-                new GenericManaCost(2), RocketLauncherCondition.instance);
+                new DamageTargetEffect(1), new GenericManaCost(2), RocketLauncherCondition.instance
+        );
         ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DestroySourceEffect())

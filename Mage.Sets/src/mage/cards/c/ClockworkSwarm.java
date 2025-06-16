@@ -16,7 +16,10 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -61,8 +64,7 @@ public final class ClockworkSwarm extends CardImpl {
 
         // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Swarm. This ability can't cause the total number of +1/+0 counters on Clockwork Swarm to be greater than four. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new ClockworkSwarmEffect(),
-                new ManaCostsImpl<>("{X}"), new IsStepCondition(PhaseStep.UPKEEP)
+                new ClockworkSwarmEffect(), new ManaCostsImpl<>("{X}"), IsStepCondition.getMyUpkeep()
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

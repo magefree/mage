@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -36,15 +35,12 @@ public final class TimestreamNavigator extends CardImpl {
         this.addAbility(new AscendAbility());
 
         // {2}{U}{U}, {T}, Put Timestream Navigator on the bottom of its owner's library: Take an extra turn after this one. Activate this ability only if you have the city's blessing.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new AddExtraTurnControllerEffect(),
-                new ManaCostsImpl<>("{2}{U}{U}"),
-                CitysBlessingCondition.instance);
+        Ability ability = new ConditionalActivatedAbility(
+                new AddExtraTurnControllerEffect(), new ManaCostsImpl<>("{2}{U}{U}"), CitysBlessingCondition.instance
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new PutSourceOnBottomOwnerLibraryCost());
-        ability.addHint(CitysBlessingHint.instance);
-        this.addAbility(ability);
-
+        this.addAbility(ability.addHint(CitysBlessingHint.instance));
     }
 
     private TimestreamNavigator(final TimestreamNavigator card) {

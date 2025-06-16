@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -27,12 +26,13 @@ public final class KeldonMegaliths extends CardImpl {
 
         // Keldon Megaliths enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+
         // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
+
         // Hellbent - {1}{R}, {tap}: Keldon Megaliths deals 1 damage to any target. Activate this ability only if you have no cards in hand.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(1),
-                new ManaCostsImpl<>("{1}{R}"), HellbentCondition.instance
+                new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"), HellbentCondition.instance
         );
         ability.setAbilityWord(AbilityWord.HELLBENT);
         ability.addCost(new TapSourceCost());

@@ -11,7 +11,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveFromCombatTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
@@ -38,7 +41,7 @@ public final class BalduvianWarlord extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked, then it blocks an attacking creature of your choice. Activate this ability only during the declare blockers step.
-        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new BalduvianWarlordUnblockEffect(), new TapSourceCost(), new IsStepCondition(PhaseStep.DECLARE_BLOCKERS, false));
+        Ability ability = new ConditionalActivatedAbility(new BalduvianWarlordUnblockEffect(), new TapSourceCost(), new IsStepCondition(PhaseStep.DECLARE_BLOCKERS, false));
         ability.addTarget(new TargetPermanent(new FilterBlockingCreature()));
         this.addAbility(ability, new BlockedByOnlyOneCreatureThisCombatWatcher());
     }

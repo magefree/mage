@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -40,14 +39,11 @@ public final class NihilisticGlee extends CardImpl {
 
         // Hellbent - {1}, Pay 2 life: Draw a card. Activate this ability only if you have no cards in hand.
         ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
-                new GenericManaCost(1),
-                HellbentCondition.instance
+                new GenericManaCost(1), HellbentCondition.instance
         );
         ability.addCost(new PayLifeCost(2));
-        ability.setAbilityWord(AbilityWord.HELLBENT);
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.HELLBENT));
     }
 
     private NihilisticGlee(final NihilisticGlee card) {

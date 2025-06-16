@@ -1,9 +1,7 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -11,9 +9,13 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.constants.*;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Elemental21TrampleHasteToken;
@@ -22,8 +24,9 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CreaturesDiedWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class LagomosHandOfHatred extends CardImpl {
@@ -42,10 +45,8 @@ public final class LagomosHandOfHatred extends CardImpl {
 
         // {T}: Search your library for a card, put it into your hand, then shuffle. Activate only if five or more creatures died this turn.
         this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
-                new TapSourceCost(),
-                LagomosHandOfHatredCondition.instance
+                new TapSourceCost(), LagomosHandOfHatredCondition.instance
         ));
     }
 

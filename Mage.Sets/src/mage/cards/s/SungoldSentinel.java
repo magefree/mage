@@ -44,8 +44,7 @@ public final class SungoldSentinel extends CardImpl {
 
         // Coven — {1}{W}: Choose a color. Sungold Sentinel gains hexproof from that color until end of turn and can't be blocked by creatures of that color this turn. Activate only if you control three or more creatures with different powers.
         this.addAbility(new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new SungoldSentinelEffect(),
-                new ManaCostsImpl<>("{1}{W}"), CovenCondition.instance
+                new SungoldSentinelEffect(), new ManaCostsImpl<>("{1}{W}"), CovenCondition.instance
         ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }
 

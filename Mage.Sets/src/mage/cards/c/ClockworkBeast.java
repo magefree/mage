@@ -15,7 +15,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,8 +51,7 @@ public final class ClockworkBeast extends CardImpl {
 
         // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Beast. This ability can't cause the total number of +1/+0 counters on Clockwork Beast to be greater than seven. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(
-                Zone.BATTLEFIELD, new ClockworkBeastEffect(),
-                new ManaCostsImpl<>("{X}"), new IsStepCondition(PhaseStep.UPKEEP)
+                new ClockworkBeastEffect(), new ManaCostsImpl<>("{X}"), IsStepCondition.getMyUpkeep()
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
