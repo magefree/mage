@@ -6,8 +6,8 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.hint.Hint;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -16,12 +16,10 @@ import mage.constants.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
@@ -43,6 +41,7 @@ public final class TheFourthDoctor extends CardImpl {
         // You may look at the top card of your library any time.
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 	
+        // adapted from Serra Paragon
 	// Would You Like A...? -- Once each turn, you may play a historic land or cast a historic spell from the top of your library. When you do, create a Food token.
         this.addAbility(
                 new SimpleStaticAbility(
@@ -52,6 +51,7 @@ public final class TheFourthDoctor extends CardImpl {
                         .withFlavorWord("Would You Like A…?"),
                 new TheFourthDoctorWatcher()
         );
+        this.addAbility(new TheFourthDoctorTriggeredAbility());
     }
 
     private TheFourthDoctor(final TheFourthDoctor card) {
@@ -64,13 +64,13 @@ public final class TheFourthDoctor extends CardImpl {
     }
 }
 
-// Adapted from PlayFromTopOfLibraryEffect and Johann, Apprentice Sorcerer.
+// adapted from PlayFromTopOfLibraryEffect
 class TheFourthDoctorPlayFromTopEffect extends AsThoughEffectImpl {
 
     TheFourthDoctorPlayFromTopEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Once each turn, you may play a historic land or cast a historic spell from the top of your library. When you do, create a Food token. "
-            + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>";
+        staticText = "Once each turn, you may play a historic land or cast a historic spell from the top of your library. " +
+            "When you do, create a Food token.";
     }
 
     private TheFourthDoctorPlayFromTopEffect(final TheFourthDoctorPlayFromTopEffect effect) {
@@ -94,13 +94,24 @@ class TheFourthDoctorPlayFromTopEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-
-        Card cardToCheck = game.getCard(objectId);
-        if (cardToCheck == null) {
+        
+        // only applies for ability's controller 
+        if (!playerId.equals(source.getControllerId())) {
             return false;
         }
-
-        // to let the player cast a spell
+        
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+        TheFourthDoctorWatcher watcher = game.getState().getWatcher(TheFourthDoctorWatcher.class);
+        Card cardToCheck = game.getCard(objectId);
+        // null checks
+        if (controller == null 
+                || sourcePermanent == null 
+                || watcher == null
+                || cardToCheck == null) {
+            return false;
+        }
+        
         if (affectedAbility instanceof SpellAbility) {
             SpellAbility spellAbility = (SpellAbility) affectedAbility;
             if (spellAbility.getManaCosts().isEmpty()
@@ -110,45 +121,68 @@ class TheFourthDoctorPlayFromTopEffect extends AsThoughEffectImpl {
             cardToCheck = spellAbility.getCharacteristics(game);
         }
 
-        Player controller = game.getPlayer(source.getControllerId());
-        TheFourthDoctorWatcher watcher = game.getState().getWatcher(TheFourthDoctorWatcher.class);
-        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Player cardOwner = game.getPlayer(cardToCheck.getOwnerId());
-
-        if (controller == null 
-                || cardOwner == null
-                || sourcePermanent == null 
-                || watcher == null) {
+        if (cardOwner == null){
             return false;
         }
 
-        // only applies to the controller of the ability.
-        if (!playerId.equals(source.getControllerId())) {
-            return false;
-        }
-        // has the ability already been used this turn by the player?
+        // works only once each turn
         if (watcher.isAbilityUsed(controller.getId(), new MageObjectReference(sourcePermanent, game))) {
             return false;
         }
+
+        // card being played must be top card of library
         Card topCard = controller.getLibrary().getFromTop(game);
-        // is the card attempted to be played the top card of the library?
         if (topCard == null || !topCard.getId().equals(cardToCheck.getMainCard().getId())) {
             return false;
         }
         
-        // check for historic land or spell and create food token.
-        if (cardToCheck.isHistoric(game)) {
-            ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                    new CreateTokenEffect(new FoodToken()), false);
-            game.fireReflexiveTriggeredAbility(ability, source);
-        }
+        // checks that the land/spell is historic
         return cardToCheck.isHistoric(game);
     }
 }
-   
-// Adapted from OnceEachTurnCastWatcher
+
+class TheFourthDoctorTriggeredAbility extends TriggeredAbilityImpl {
+
+    TheFourthDoctorTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new FoodToken()));
+        this.setRuleVisible(false);
+    }
+
+    private TheFourthDoctorTriggeredAbility(final TheFourthDoctorTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public TheFourthDoctorTriggeredAbility copy() {
+        return new TheFourthDoctorTriggeredAbility(this); 
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST
+            || event.getType() == GameEvent.EventType.LAND_PLAYED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        // returns true if a card was played via this card's ability 
+        // (i.e. same identifier and same approving object)
+        if (event.hasApprovingIdentifier(MageIdentifier.TheFourthDoctorWatcher)) {
+            return event
+                    .getApprovingObject()
+                    .getApprovingAbility()
+                    .getSourceId()
+                    .equals(this.getSourceId());
+        }
+        return false;
+    }
+}
+
+// adapted from OnceEachTurnCastWatcher
 class TheFourthDoctorWatcher extends Watcher {
 
+    // we store a map of playerIds linked to a set of used approving objects.
     private final Map<UUID, Set<MageObjectReference>> usedFrom = new HashMap<>();
 
     TheFourthDoctorWatcher() {
@@ -161,20 +195,9 @@ class TheFourthDoctorWatcher extends Watcher {
                 ||event.getType() == GameEvent.EventType.LAND_PLAYED)
                 && event.getPlayerId()!= null
                 && event.hasApprovingIdentifier(MageIdentifier.TheFourthDoctorWatcher)) {
-            if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-                Spell spell = (Spell) game.getObject(event.getTargetId());
-                if (spell != null && spell.isHistoric(game)) {
-                    usedFrom.computeIfAbsent(event.getPlayerId(), k -> new HashSet<>())
+            usedFrom.computeIfAbsent(event.getPlayerId(), k -> new HashSet<>())
                     .add(event.getApprovingObject().getApprovingMageObjectReference());
-                }
-            }
-            else {
-                Card landCard = game.getCard(event.getTargetId());
-                if (landCard.isHistoric(game)) {
-                    usedFrom.computeIfAbsent(event.getPlayerId(), k -> new HashSet<>())
-                    .add(event.getApprovingObject().getApprovingMageObjectReference());
-                }
-            }
+
         }
     }
 
@@ -184,7 +207,7 @@ class TheFourthDoctorWatcher extends Watcher {
         usedFrom.clear();
     }
 
-    public boolean isAbilityUsed(UUID playerId, MageObjectReference mor) {
+    boolean isAbilityUsed(UUID playerId, MageObjectReference mor) {
         return usedFrom.getOrDefault(playerId, Collections.emptySet()).contains(mor);
     }
 
