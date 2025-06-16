@@ -18,8 +18,8 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 /**
@@ -54,11 +54,10 @@ class DragonsFireCost extends CostImpl {
 
     public enum DragonZone {
         HAND,
-        BATTLEFIELD,
-        NONE
+        BATTLEFIELD
     }
 
-    private DragonZone dragonZone = DragonZone.NONE;
+    private DragonZone dragonZone = null;
     private UUID selectedCardId = null;
 
     private static final FilterCard handFilter = new FilterCard("Dragon card from your hand");
@@ -90,14 +89,13 @@ class DragonsFireCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        this.getTargets().clear();
-        dragonZone = DragonZone.NONE;
+        dragonZone = null;
         selectedCardId = null;
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             boolean dragonInHand = false;
             boolean dragonOnBattlefield = false;
-            DragonZone chosenZone = DragonZone.NONE;
+            DragonZone chosenZone = null;
             for (UUID cardId : controller.getHand()) {
                 Card card = game.getCard(cardId);
                 if (card != null && card.hasSubtype(SubType.DRAGON, game)) {
@@ -132,23 +130,25 @@ class DragonsFireCost extends CostImpl {
             }
             switch (chosenZone) {
                 case HAND:
-                    this.getTargets().add(new TargetCardInHand(handFilter));
-                    if (this.getTargets().choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
-                        Card card = game.getCard(this.getTargets().getFirstTarget());
+                    TargetCardInHand handTarget = new TargetCardInHand(handFilter);
+                    handTarget.withNotTarget(true);
+                    if (controller.choose(Outcome.Benefit, handTarget, source, game)) {
+                        Card card = game.getCard(handTarget.getFirstTarget());
                         if (card != null) {
                             dragonZone = DragonZone.HAND;
-                            selectedCardId = this.getTargets().getFirstTarget();
+                            selectedCardId = handTarget.getFirstTarget();
                             controller.revealCards(source, new CardsImpl(card), game);
                         }
                     }
                     break;
                 case BATTLEFIELD:
-                    this.getTargets().add(new TargetControlledPermanent(battlefieldFilter));
-                    if (this.getTargets().choose(Outcome.Benefit, controllerId, source.getSourceId(), source, game)) {
-                        Permanent permanent = game.getPermanent(this.getTargets().getFirstTarget());
+                    TargetPermanent battlefieldTarget = new TargetPermanent(battlefieldFilter);
+                    battlefieldTarget.withNotTarget(true);
+                    if (controller.choose(Outcome.Benefit, battlefieldTarget, source, game)) {
+                        Permanent permanent = game.getPermanent(battlefieldTarget.getFirstTarget());
                         if (permanent != null) {
                             dragonZone = DragonZone.BATTLEFIELD;
-                            selectedCardId = this.getTargets().getFirstTarget();
+                            selectedCardId = battlefieldTarget.getFirstTarget();
                             game.informPlayers(controller.getLogName() + " chooses " + permanent.getLogName());
                         }
                     }
@@ -190,7 +190,7 @@ class DragonsFireEffect extends OneShotEffect {
         if (targetedPermanent == null) {
             return false;
         }
-        DragonsFireCost.DragonZone dragonZone = DragonsFireCost.DragonZone.NONE;
+        DragonsFireCost.DragonZone dragonZone = null;
         UUID selectedCardId = null;
         int damage = 3;
         for (Cost cost : source.getCosts()) {
@@ -201,19 +201,21 @@ class DragonsFireEffect extends OneShotEffect {
                 break;
             }
         }
-        switch (dragonZone) {
-            case HAND:
-                Card card = game.getCard(selectedCardId);
-                if (card != null) {
-                    damage = card.getPower().getValue();
-                }
-                break;
-            case BATTLEFIELD:
-                Permanent dragon = game.getPermanentOrLKIBattlefield(selectedCardId);
-                if (dragon != null) {
-                    damage = dragon.getPower().getValue();
-                }
-                break;
+        if (dragonZone != null) {
+            switch (dragonZone) {
+                case HAND:
+                    Card card = game.getCard(selectedCardId);
+                    if (card != null) {
+                        damage = card.getPower().getValue();
+                    }
+                    break;
+                case BATTLEFIELD:
+                    Permanent dragon = game.getPermanentOrLKIBattlefield(selectedCardId);
+                    if (dragon != null) {
+                        damage = dragon.getPower().getValue();
+                    }
+                    break;
+            }
         }
         targetedPermanent.damage(damage, source.getSourceId(), source, game);
         return true;
