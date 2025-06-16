@@ -30,8 +30,8 @@ public final class ResurrectedCultist extends CardImpl {
         this.addAbility(new ActivateIfConditionActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(CounterType.FINALITY.createInstance(), false),
-                new ManaCostsImpl<>("{2}{B}{B}"), DeliriumCondition.instance, TimingRule.SORCERY
-        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
+                new ManaCostsImpl<>("{2}{B}{B}"), DeliriumCondition.instance
+        ).setTiming(TimingRule.SORCERY).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private ResurrectedCultist(final ResurrectedCultist card) {

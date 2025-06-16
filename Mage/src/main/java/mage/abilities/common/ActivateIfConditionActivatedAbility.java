@@ -14,17 +14,12 @@ import mage.constants.Zone;
 public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
     public ActivateIfConditionActivatedAbility(Effect effect, Cost cost, Condition condition) {
-        this(Zone.BATTLEFIELD, effect, cost, condition, TimingRule.INSTANT);
+        this(Zone.BATTLEFIELD, effect, cost, condition);
     }
 
     public ActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
-        this(zone, effect, cost, condition, TimingRule.INSTANT);
-    }
-
-    public ActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, TimingRule timing) {
         super(zone, effect, cost);
         this.condition = condition;
-        this.timing = timing;
     }
 
     protected ActivateIfConditionActivatedAbility(final ActivateIfConditionActivatedAbility ability) {
