@@ -1,10 +1,15 @@
 package mage.cards;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.ZoneChangeInfo;
+import mage.game.ZonesHandler;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.stack.Spell;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,7 +21,8 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
 
     SplitCard splitCardParent;
 
-    public SplitCardHalfImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SplitCard splitCardParent, SpellAbilityType spellAbilityType) {
+    public SplitCardHalfImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs,
+            SplitCard splitCardParent, SpellAbilityType spellAbilityType) {
         super(ownerId, setInfo, cardTypes, costs, spellAbilityType);
         this.splitCardParent = splitCardParent;
     }

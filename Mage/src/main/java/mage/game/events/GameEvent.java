@@ -676,6 +676,11 @@ public class GameEvent implements Serializable {
         /* rad counter life loss/gain effect
          */
         RADIATION_GAIN_LIFE,
+        /* room door effects
+         */
+        LOCK_DOOR,
+        UNLOCK_DOOR,
+        FULLY_UNLOCK_ROOM,
         // custom events - must store some unique data to track
         CUSTOM_EVENT;
 
