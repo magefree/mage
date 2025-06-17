@@ -2791,7 +2791,7 @@
 |Generate|TOK:FIN|Hero|14||HeroToken|
 |Generate|TOK:FIN|Hero|15||HeroToken|
 |Generate|TOK:FIN|Hero|16||HeroToken|
-|Generate|TOK:FIN|Knight|||KnightToken|
+|Generate|TOK:FIN|Knight|||WaylayToken|
 |Generate|TOK:FIN|Moogle|1||MoogleToken|
 |Generate|TOK:FIN|Moogle|2||MoogleToken|
 |Generate|TOK:FIN|Robot Warrior|||RobotBlueToken|
