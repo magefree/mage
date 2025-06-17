@@ -2788,6 +2788,17 @@
 |Generate|TOK:FIN|Elemental|||ElementalAllColorsToken|
 |Generate|TOK:FIN|Treasure|||TreasureToken|
 
+# FIN
+|Generate|TOK:FIC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:FIC|Soldier|||SoldierToken|
+|Generate|TOK:FIC|Spirit|||SpiritWhiteToken|
+|Generate|TOK:FIC|Bird|||BirdVigilanceToken|
+|Generate|TOK:FIC|Squid|||SquidToken|
+|Generate|TOK:FIC|Zombie|||ZombieToken|
+|Generate|TOK:FIC|Rebel|||RebelRedToken|
+|Generate|TOK:FIC|The Blackjack|||TheBlackjackToken|
+|Generate|TOK:FIC|Clue|||ClueArtifactToken|
+
 # JVC
 |Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|
 
