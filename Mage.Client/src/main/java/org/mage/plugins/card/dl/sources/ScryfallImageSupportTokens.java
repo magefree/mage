@@ -2723,7 +2723,20 @@ public class ScryfallImageSupportTokens {
             put("DD2/Elemental Shaman", "https://api.scryfall.com/cards/tdd2/1?format=image");            
 
             // FIN
+            put("FIN/Hero", "https://api.scryfall.com/cards/tfin/2/en?format=image");
+            put("FIN/Knight", "https://api.scryfall.com/cards/tfin/10/en?format=image");
+            put("FIN/Moogle", "https://api.scryfall.com/cards/tfin/11/en?format=image");
+            put("FIN/Robot Warrior", "https://api.scryfall.com/cards/tfin/12/en?format=image");
+            put("FIN/Horror", "https://api.scryfall.com/cards/tfin/13/en?format=image");
+            put("FIN/Wizard", "https://api.scryfall.com/cards/tfin/14/en?format=image");
+            put("FIN/Bird", "https://api.scryfall.com/cards/tfin/16/en?format=image");
+            put("FIN/Frog", "https://api.scryfall.com/cards/tfin/18/en?format=image");
+            put("FIN/Angelo", "https://api.scryfall.com/cards/tfin/19/en?format=image");
+            put("FIN/Darkstar", "https://api.scryfall.com/cards/tfin/20/en?format=image");
+            put("FIN/Elemental", "https://api.scryfall.com/cards/tfin/21/en?format=image");
             put("FIN/Food", "https://api.scryfall.com/cards/tfin/22?format=image");
+            put("FIN/Treasure", "https://api.scryfall.com/cards/tfin/23/en?format=image");
+            put("FIN/Emblem Sephiroth", "https://api.scryfall.com/cards/tfin/24/en?format=image");
 
             // JVC
             put("JVC/Elemental Shaman", "https://api.scryfall.com/cards/tjvc/4?format=image");
