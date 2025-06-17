@@ -2763,7 +2763,7 @@ public class ScryfallImageSupportTokens {
             put("FIC/Soldier", "https://api.scryfall.com/cards/tfic/2/en?format=image");
             put("FIC/Spirit", "https://api.scryfall.com/cards/tfic/3/en?format=image");
             put("FIC/Bird", "https://api.scryfall.com/cards/tfic/4/en?format=image");
-            put("FIC/Squid", "SquidToken");
+            put("FIC/Squid", "https://api.scryfall.com/cards/tfic/5/en?format=image");
             put("FIC/Zombie", "https://api.scryfall.com/cards/tfic/6/en?format=image");
             put("FIC/Rebel", "https://api.scryfall.com/cards/tfic/7/en?format=image");
             put("FIC/The Blackjack", "https://api.scryfall.com/cards/tfic/8/en?format=image");

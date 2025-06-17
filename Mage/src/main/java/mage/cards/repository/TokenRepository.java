@@ -299,12 +299,14 @@ public enum TokenRepository {
         // Foretell
         // https://scryfall.com/search?q=Foretell+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
         res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, 1, "https://api.scryfall.com/cards/tkhm/23/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, 2, "https://api.scryfall.com/cards/tfic/10/en?format=image"));
 
         // The Monarch
         // https://scryfall.com/search?q=Monarch+unique%3Aprints+otag%3Aassistant-cards&unique=cards&as=grid&order=name
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 1, "https://api.scryfall.com/cards/tonc/22/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
         res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 3, "https://api.scryfall.com/cards/tltc/15/en?format=image"));
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_MONARCH, 4, "https://api.scryfall.com/cards/tfic/11/en?format=image"));
 
         // Radiation (for trigger)
         res.add(createXmageToken(XMAGE_IMAGE_NAME_RADIATION, 1, "https://api.scryfall.com/cards/tpip/22/en?format=image"));
