@@ -1,4 +1,4 @@
-package mage.player.ai.ma;
+package mage.player.ai.score;
 
 import mage.MageObject;
 import mage.abilities.Ability;

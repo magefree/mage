@@ -63,20 +63,23 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
     public void testAuraTokenRedirect() {
         makeTester();
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
-        addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser");
-        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant");
+        addCard(Zone.BATTLEFIELD, playerB, "Centaur Courser"); // 3/3
+        addCard(Zone.BATTLEFIELD, playerB, "Serra Angel"); // 4/4
         addCard(Zone.HAND, playerA, "Dead Weight");
 
-        setChoice(playerA, true);
+        setChoice(playerA, true); // use new target
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dead Weight", "Centaur Courser");
 
+        // it's bad/unboost effect
+        // allow AI make a choice for new target of copied spell (it will be angel as a opponent's bigger creature for bad effect)
+        setStrictChooseMode(false);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerB, "Centaur Courser", 1);
-        assertPowerToughness(playerB, "Centaur Courser", 1, 1);
-        assertPermanentCount(playerB, "Hill Giant", 1);
-        assertPowerToughness(playerB, "Hill Giant", 1, 1);
+        assertPowerToughness(playerB, "Centaur Courser", 3 - 2, 3 - 2);
+        assertPermanentCount(playerB, "Serra Angel", 1);
+        assertPowerToughness(playerB, "Serra Angel", 4 - 2, 4 - 2);
         assertPermanentCount(playerA, "Dead Weight", 2);
     }
 
@@ -152,23 +155,26 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
     public void testBestowRedirect() {
         makeTester();
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
-        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf"); // 1/1
         addCard(Zone.HAND, playerA, "Nimbus Naiad");
 
-        setChoice(playerA, true);
+        setChoice(playerA, true); // change target
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nimbus Naiad using bestow", "Grizzly Bears");
 
+        // it's good/boost effect
+        // allow AI make a choice for new target of copied spell (it will be bear as a bigger creature for good effect)
+        setStrictChooseMode(false);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Grizzly Bears", 1);
-        assertPowerToughness(playerA, "Grizzly Bears", 4, 4);
+        assertPowerToughness(playerA, "Grizzly Bears", 2 + 2 + 2, 2 + 2 + 2);
         assertAbility(playerA, "Grizzly Bears", FlyingAbility.getInstance(), true);
 
-        assertPermanentCount(playerA, "Silvercoat Lion", 1);
-        assertPowerToughness(playerA, "Silvercoat Lion", 4, 4);
-        assertAbility(playerA, "Silvercoat Lion", FlyingAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Arbor Elf", 1);
+        assertPowerToughness(playerA, "Arbor Elf", 1, 1);
+        assertAbility(playerA, "Arbor Elf", FlyingAbility.getInstance(), false);
 
         assertPermanentCount(playerA, "Nimbus Naiad", 2);
     }
