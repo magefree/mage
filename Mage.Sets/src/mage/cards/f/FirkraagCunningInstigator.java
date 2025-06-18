@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
+import mage.abilities.common.AttacksPlayerWithCreaturesTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -29,12 +29,11 @@ import java.util.UUID;
  */
 public final class FirkraagCunningInstigator extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
-    private static final FilterPermanent filterDragons = new FilterControlledCreaturePermanent("Dragons you control");
+    private static final FilterPermanent filterHadToAttack = new FilterCreaturePermanent();
+    private static final FilterPermanent filterDragons = new FilterControlledPermanent(SubType.DRAGON, "Dragons you control");
 
     static {
-        filter.add(FirkraagCunningInstigatorPredicate.instance);
-        filterDragons.add(SubType.DRAGON.getPredicate());
+        filterHadToAttack.add(FirkraagCunningInstigatorPredicate.instance);
     }
 
     public FirkraagCunningInstigator(UUID ownerId, CardSetInfo setInfo) {
@@ -52,7 +51,7 @@ public final class FirkraagCunningInstigator extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever one or more Dragons you control attack an opponent, goad target creature that player controls.
-        Ability abilityGoad = new AttacksWithCreaturesTriggeredAbility(Zone.BATTLEFIELD, new GoadTargetEffect(), 1, filterDragons, true);
+        Ability abilityGoad = new AttacksPlayerWithCreaturesTriggeredAbility(new GoadTargetEffect(), 1, filterDragons, SetTargetPointer.PLAYER, true);
         abilityGoad.addTarget(new TargetPermanent(new FilterCreaturePermanent("target creature that player controls")));
         abilityGoad.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(abilityGoad);
@@ -61,7 +60,7 @@ public final class FirkraagCunningInstigator extends CardImpl {
         Ability ability = new DealsDamageToAPlayerAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                         .setText("you put a +1/+1 counter on {this}"),
-                filter, false, SetTargetPointer.NONE,
+                filterHadToAttack, false, SetTargetPointer.NONE,
                 true, false, TargetController.OPPONENT
         ).setTriggerPhrase("Whenever a creature deals combat damage to one of your opponents, " +
                 "if that creature had to attack this combat, ");
