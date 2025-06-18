@@ -10,13 +10,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.Target;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
+import mage.target.targetadjustment.ThatPlayerControlsTargetAdjuster;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -53,6 +51,8 @@ class DeusOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
 
     public DeusOfCalamityTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
+        addTarget(new TargetLandPermanent());
+        setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
     }
 
     private DeusOfCalamityTriggeredAbility(final DeusOfCalamityTriggeredAbility ability) {
@@ -74,11 +74,7 @@ class DeusOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getSourceId().equals(this.getSourceId())
                 && event.getAmount() > 5
                 && game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
-            FilterPermanent filter = new FilterLandPermanent("land of the damaged player");
-            filter.add(new ControllerIdPredicate(event.getTargetId()));
-            Target target = new TargetPermanent(filter);
-            this.getTargets().clear();
-            this.addTarget(target);
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         return false;

@@ -1,20 +1,19 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
-import mage.MageObject;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -23,10 +22,13 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public final class DeathsPresence extends CardImpl {
 
     public DeathsPresence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
 
         // Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.
-        this.addAbility(new DeathsPresenceTriggeredAbility());
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance(), DeathsPresenceDiedPermanentPowerCount.instance)
+                        .setText("put X +1/+1 counters on target creature you control, where X is the power of the creature that died"),
+                false, StaticFilters.FILTER_CONTROLLED_CREATURE));
     }
 
     private DeathsPresence(final DeathsPresence card) {
@@ -39,50 +41,31 @@ public final class DeathsPresence extends CardImpl {
     }
 }
 
-class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DeathsPresenceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null);
-        setLeavesTheBattlefieldTrigger(true);
-    }
-
-    private DeathsPresenceTriggeredAbility(final DeathsPresenceTriggeredAbility ability) {
-        super(ability);
-    }
+enum DeathsPresenceDiedPermanentPowerCount implements DynamicValue {
+    instance;
 
     @Override
-    public DeathsPresenceTriggeredAbility copy() {
-        return new DeathsPresenceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
-        if (zoneChangeEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature(game)) {
-                this.getTargets().clear();
-                this.addTarget(new TargetControlledCreaturePermanent());
-                this.getEffects().clear();
-                this.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(permanent.getPower().getValue())));
-                return true;
-            }
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Permanent targetPermanent = (Permanent) effect.getValue("creatureDied");
+        if (targetPermanent != null) {
+            return targetPermanent.getPower().getValue();
         }
-        return false;
+
+        return 0;
     }
 
     @Override
-    public String getRule() {
-        return "Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.";
+    public DeathsPresenceDiedPermanentPowerCount copy() {
+        return DeathsPresenceDiedPermanentPowerCount.instance;
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+    public String toString() {
+        return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "its power";
     }
 }

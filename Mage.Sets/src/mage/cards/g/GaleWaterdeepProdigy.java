@@ -15,6 +15,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 import mage.watchers.common.CastFromHandWatcher;
 
 import java.util.UUID;
@@ -71,6 +72,7 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
                 false
         );
         addWatcher(new CastFromHandWatcher());
+        setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private GaleWaterdeepProdigyTriggeredAbility(final GaleWaterdeepProdigyTriggeredAbility ability) {
