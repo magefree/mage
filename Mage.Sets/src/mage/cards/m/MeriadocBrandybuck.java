@@ -6,6 +6,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
@@ -30,7 +31,7 @@ public final class MeriadocBrandybuck extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever one or more Halflings you control attack a player, create a Food token.
-        this.addAbility(new AttacksPlayerWithCreaturesTriggeredAbility(new CreateTokenEffect(new FoodToken()), filter, false));
+        this.addAbility(new AttacksPlayerWithCreaturesTriggeredAbility(new CreateTokenEffect(new FoodToken()), filter, SetTargetPointer.NONE));
     }
 
     private MeriadocBrandybuck(final MeriadocBrandybuck card) {

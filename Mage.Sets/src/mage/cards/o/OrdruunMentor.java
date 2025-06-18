@@ -9,6 +9,7 @@ import mage.abilities.keyword.MentorAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,7 +46,7 @@ public final class OrdruunMentor extends CardImpl {
 
         // Whenever you attack a player, target creature that's attacking that player gains first strike until end of turn.
         Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(
-                new GainAbilityTargetEffect(FirstStrikeAbility.getInstance()), false);
+                new GainAbilityTargetEffect(FirstStrikeAbility.getInstance()), SetTargetPointer.NONE);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

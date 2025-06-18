@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -47,7 +48,7 @@ public final class EchoingAssault extends CardImpl {
         )));
 
         // Whenever you attack a player, choose target nontoken creature that's attacking that player. Create a token that's a copy of that creature, except it's 1/1. The token enters tapped and attacking that player. Sacrifice it at the beginning of the next end step.
-        Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(new EchoingAssaultEffect(), false);
+        Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(new EchoingAssaultEffect(), SetTargetPointer.NONE);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

@@ -7,10 +7,7 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
@@ -46,7 +43,7 @@ public final class LandrovalHorizonWitness extends CardImpl {
         // Whenever two or more creatures you control attack a player, target attacking creature without flying gains flying until end of turn.
         Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(
                 new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                2, StaticFilters.FILTER_CONTROLLED_CREATURES, false, false);
+                2, StaticFilters.FILTER_CONTROLLED_CREATURES, SetTargetPointer.NONE, false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

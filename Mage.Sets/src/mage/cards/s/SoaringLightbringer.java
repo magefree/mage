@@ -9,10 +9,7 @@ import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -48,7 +45,7 @@ public final class SoaringLightbringer extends CardImpl {
         )));
 
         // Whenever you attack a player, create a 1/1 white Glimmer enchantment creature token that's tapped and attacking that player.
-        this.addAbility(new AttacksPlayerWithCreaturesTriggeredAbility(new SoaringLightbringerEffect(), true));
+        this.addAbility(new AttacksPlayerWithCreaturesTriggeredAbility(new SoaringLightbringerEffect(), SetTargetPointer.PLAYER));
     }
 
     private SoaringLightbringer(final SoaringLightbringer card) {

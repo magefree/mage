@@ -60,7 +60,7 @@ public final class GornogTheRedReaper extends CardImpl {
         // Whenever one or more Warriors you control attack a player, target creature that player controls becomes a Coward.
         Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(
                 new BecomesCreatureTypeTargetEffect(Duration.EndOfGame, SubType.COWARD).setText("target creature that player controls becomes a Coward"),
-                filterWarrior, true);
+                filterWarrior, SetTargetPointer.PLAYER);
         ability.addTarget(new TargetPermanent());
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);

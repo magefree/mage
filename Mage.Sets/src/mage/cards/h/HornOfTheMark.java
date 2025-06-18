@@ -6,6 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PutCards;
+import mage.constants.SetTargetPointer;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 
@@ -24,7 +25,7 @@ public final class HornOfTheMark extends CardImpl {
         // Whenever two or more creatures you control attack a player, look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new AttacksPlayerWithCreaturesTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(5, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_RANDOM),
-                2, StaticFilters.FILTER_CONTROLLED_CREATURES, false, false));
+                2, StaticFilters.FILTER_CONTROLLED_CREATURES, SetTargetPointer.NONE, false));
     }
 
     private HornOfTheMark(final HornOfTheMark card) {

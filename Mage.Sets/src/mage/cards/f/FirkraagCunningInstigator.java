@@ -51,7 +51,7 @@ public final class FirkraagCunningInstigator extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever one or more Dragons you control attack an opponent, goad target creature that player controls.
-        Ability abilityGoad = new AttacksPlayerWithCreaturesTriggeredAbility(new GoadTargetEffect(), 1, filterDragons, true, true);
+        Ability abilityGoad = new AttacksPlayerWithCreaturesTriggeredAbility(new GoadTargetEffect(), 1, filterDragons, SetTargetPointer.PLAYER, true);
         abilityGoad.addTarget(new TargetPermanent(new FilterCreaturePermanent("target creature that player controls")));
         abilityGoad.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(abilityGoad);

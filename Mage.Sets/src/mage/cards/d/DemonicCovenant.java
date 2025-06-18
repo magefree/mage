@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -36,7 +37,7 @@ public final class DemonicCovenant extends CardImpl {
         this.subtype.add(SubType.DEMON);
 
         // Whenever one or more Demons you control attack a player, you draw a card and lose 1 life.
-        Ability abilityAttack = new AttacksPlayerWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1, true), filter, false);
+        Ability abilityAttack = new AttacksPlayerWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1, true), filter, SetTargetPointer.NONE);
         abilityAttack.addEffect(new LoseLifeSourceControllerEffect(1).setText("and lose 1 life"));
         this.addAbility(abilityAttack);
 

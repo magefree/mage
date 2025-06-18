@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -10,6 +11,7 @@ import mage.game.events.DefenderAttackedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
@@ -25,21 +27,21 @@ public class AttacksPlayerWithCreaturesTriggeredAbility extends TriggeredAbility
     private final FilterPermanent filter;
     private final int minAttackers;
     private final boolean onlyOpponents;
-    private final boolean setTargetPointer;
+    private final SetTargetPointer setTargetPointer;
 
-    public AttacksPlayerWithCreaturesTriggeredAbility(Effect effect, boolean setTargetPointer) {
+    public AttacksPlayerWithCreaturesTriggeredAbility(Effect effect, SetTargetPointer setTargetPointer) {
         this(effect, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED, setTargetPointer);
     }
 
-    public AttacksPlayerWithCreaturesTriggeredAbility(Effect effect, FilterPermanent filter, boolean setTargetPointer) {
+    public AttacksPlayerWithCreaturesTriggeredAbility(Effect effect, FilterPermanent filter, SetTargetPointer setTargetPointer) {
         this(effect, 1, filter, setTargetPointer, false);
     }
 
-    public AttacksPlayerWithCreaturesTriggeredAbility(Effect effect, int minAttackers, FilterPermanent filter, boolean setTargetPointer, boolean onlyOpponents) {
+    public AttacksPlayerWithCreaturesTriggeredAbility(Effect effect, int minAttackers, FilterPermanent filter, SetTargetPointer setTargetPointer, boolean onlyOpponents) {
         this(Zone.BATTLEFIELD, effect, minAttackers, filter, setTargetPointer, onlyOpponents, false);
     }
 
-    public AttacksPlayerWithCreaturesTriggeredAbility(Zone zone, Effect effect, int minAttackers, FilterPermanent filter, boolean setTargetPointer, boolean onlyOpponents, boolean optional) {
+    public AttacksPlayerWithCreaturesTriggeredAbility(Zone zone, Effect effect, int minAttackers, FilterPermanent filter, SetTargetPointer setTargetPointer, boolean onlyOpponents, boolean optional) {
         super(zone, effect, optional);
         this.filter = filter;
         this.minAttackers = minAttackers;
@@ -84,8 +86,18 @@ public class AttacksPlayerWithCreaturesTriggeredAbility extends TriggeredAbility
         if (attackers.size() < minAttackers || (onlyOpponents && !game.isOpponent(player, attackedEvent.getTargetId()))) {
             return false;
         }
-        if (setTargetPointer) {
-            getEffects().setTargetPointer(new FixedTargets(new ArrayList<>(attackers), game));
+        switch (setTargetPointer){
+            case NONE:
+                break;
+            case PLAYER:
+                getEffects().setTargetPointer(new FixedTarget(attackedEvent.getTargetId()));
+                break;
+            case PERMANENT:
+                getEffects().setTargetPointer(new FixedTargets(new ArrayList<>(attackers), game));
+                break;
+            default:
+                throw new UnsupportedOperationException("Unexpected setTargetPointer in AttacksPlayerWithCreaturesTriggeredAbility: " + setTargetPointer);
+
         }
         this.getEffects().setValue("playerAttacked", attackedEvent.getTargetId());
         return true;
