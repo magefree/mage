@@ -32,13 +32,13 @@ import java.util.UUID;
  */
 public final class NeyaliSunsVanguard extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("attacking tokens");
-    private static final FilterPermanent filter2 = new FilterControlledPermanent("tokens you control");
+    private static final FilterPermanent filterAttacking = new FilterPermanent("attacking tokens");
+    private static final FilterPermanent filterControlled = new FilterControlledPermanent("tokens you control");
 
     static {
-        filter.add(AttackingPredicate.instance);
-        filter.add(TokenPredicate.TRUE);
-        filter2.add(TokenPredicate.TRUE);
+        filterAttacking.add(AttackingPredicate.instance);
+        filterAttacking.add(TokenPredicate.TRUE);
+        filterControlled.add(TokenPredicate.TRUE);
     }
 
     public NeyaliSunsVanguard(UUID ownerId, CardSetInfo setInfo) {
@@ -52,11 +52,11 @@ public final class NeyaliSunsVanguard extends CardImpl {
 
         // Attacking tokens you control have double strike.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter
+                DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filterAttacking
         )));
 
         // Whenever one or more tokens you control attack a player, exile the top card of your library. During any turn you attacked with a token, you may play that card.
-        Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(new NeyaliSunsVanguardEffect(), filter, false);
+        Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(new NeyaliSunsVanguardEffect(), filterControlled, false);
         ability.addWatcher(new NeyaliSunsVanguardWatcher());
         this.addAbility(ability);
     }
