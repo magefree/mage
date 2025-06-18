@@ -1,11 +1,8 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,8 +12,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.watchers.common.CastFromHandWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class WakeningSunsAvatar extends CardImpl {
@@ -36,11 +34,8 @@ public final class WakeningSunsAvatar extends CardImpl {
         this.toughness = new MageInt(7);
 
         // When Wakening Sun's Avatar enters the battlefield, if you cast it from you hand, destroy all non-Dinosaur creatures.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter), false),
-                CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters, if you cast it from your hand, destroy all non-Dinosaur creatures."),
-                new CastFromHandWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter))
+                .withInterveningIf(CastFromHandSourcePermanentCondition.instance), new CastFromHandWatcher());
     }
 
     private WakeningSunsAvatar(final WakeningSunsAvatar card) {

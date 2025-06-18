@@ -6,6 +6,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * Created by glerman on 20/6/15.
@@ -27,8 +28,8 @@ public class CreateTokenCopySourceEffect extends OneShotEffect {
         super(Outcome.PutCreatureInPlay);
         this.number = copies;
         this.tapped = tapped;
-        staticText = "create " + (copies > 1 ? copies : "a") + " " + (tapped ? "tapped " : "")
-                + (copies > 1 ? "tokens that are" : "token that's") + " a copy of {this}";
+        staticText = "create " + CardUtil.numberToText(copies, "a") + " " + (tapped ? "tapped " : "")
+                + (copies > 1 ? "tokens that are copies of " : "token that's a copy of ") + "{this}";
     }
 
     protected CreateTokenCopySourceEffect(final CreateTokenCopySourceEffect effect) {

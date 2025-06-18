@@ -2,14 +2,13 @@ package mage.cards.h;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,7 +17,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.*;
-import java.util.List;
 
 /**
  * @author TheElk801
@@ -32,17 +30,11 @@ public final class HappilyEverAfter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HappilyEverAfterEffect()));
 
         // At the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new WinGameSourceControllerEffect(), false
-                ), HappilyEverAfterCondition.instance, "At the beginning of your upkeep, " +
-                "if there are five colors among permanents you control, there are six or more card types " +
-                "among permanents you control and/or cards in your graveyard, and your life total is " +
-                "greater than or equal to your starting life total, you win the game.")
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect())
+                .withInterveningIf(HappilyEverAfterCondition.instance)
                 .addHint(HappilyEverAfterColorHint.instance)
                 .addHint(HappilyEverAfterCardTypeHint.instance)
-                .addHint(HappilyEverAfterLifeHint.instance)
-        );
+                .addHint(HappilyEverAfterLifeHint.instance));
     }
 
     private HappilyEverAfter(final HappilyEverAfter card) {
@@ -121,6 +113,13 @@ enum HappilyEverAfterCondition implements Condition {
                 .flatMap(Collection::stream)
                 .forEach(cardTypeEnumSet::add);
         return cardTypeEnumSet.size() >= 6;
+    }
+
+    @Override
+    public String toString() {
+        return "there are five colors among permanents you control, " +
+                "there are six or more card types among permanents you control and/or cards in your graveyard, " +
+                "and your life total is greater than or equal to your starting life total";
     }
 }
 

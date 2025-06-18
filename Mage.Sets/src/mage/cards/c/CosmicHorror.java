@@ -16,7 +16,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -34,7 +33,7 @@ public final class CosmicHorror extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of your upkeep, destroy Cosmic Horror unless you pay {3}{B}{B}{B}. If Cosmic Horror is destroyed this way, it deals 7 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CosmicHorrorEffect(new ManaCostsImpl<>("{3}{B}{B}{B}"))));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CosmicHorrorEffect()));
     }
 
     private CosmicHorror(final CosmicHorror card) {
@@ -49,30 +48,22 @@ public final class CosmicHorror extends CardImpl {
 
 class CosmicHorrorEffect extends OneShotEffect {
 
-    protected Cost cost;
-
-    public CosmicHorrorEffect(Cost cost) {
+    CosmicHorrorEffect() {
         super(Outcome.DestroyPermanent);
-        this.cost = cost;
-        staticText = "destroy {this} unless you pay {3}{B}{B}{B}. If {this} is destroyed this way it deals 7 damage to you";
+        staticText = "destroy {this} unless you pay {3}{B}{B}{B}. If {this} is destroyed this way, it deals 7 damage to you";
     }
 
     private CosmicHorrorEffect(final CosmicHorrorEffect effect) {
         super(effect);
-        this.cost = effect.cost.copy();
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent cosmicHorror = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent cosmicHorror = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && cosmicHorror != null) {
-            StringBuilder sb = new StringBuilder(cost.getText()).append('?');
-            if (!sb.toString().toLowerCase(Locale.ENGLISH).startsWith("exile ") && !sb.toString().toLowerCase(Locale.ENGLISH).startsWith("return ")) {
-                sb.insert(0, "Pay ");
-            }
-            if (controller.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
-                cost.clearPaid();
+            if (controller.chooseUse(Outcome.Benefit, "Pay {3}{B}{B}{B} to prevent destroy effect?", source, game)) {
+                Cost cost = new ManaCostsImpl<>("{3}{B}{B}{B}");
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     return true;
                 }

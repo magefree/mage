@@ -1,14 +1,11 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
@@ -29,8 +26,9 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastFromHandWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class InameAsOne extends CardImpl {
@@ -42,18 +40,16 @@ public final class InameAsOne extends CardImpl {
     }
 
     public InameAsOne(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}{B}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{8}{B}{B}{G}{G}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 
         // When Iname as One enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle your library.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter)), true),
-                CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle."),
-                new CastFromHandWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), true
+        ).withInterveningIf(CastFromHandSourcePermanentCondition.instance), new CastFromHandWatcher());
 
         // When Iname as One dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.
         Ability ability = new DiesSourceTriggeredAbility(new InameAsOneEffect(), false);

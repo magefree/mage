@@ -27,4 +27,9 @@ public enum AddendumCondition implements Condition {
         Spell spell = game.getSpell(source.getSourceId());
         return spell != null && !spell.isCopy(); // copies are not casted
     }
+
+    @Override
+    public String toString() {
+        return "you cast it during your main phase";
+    }
 }

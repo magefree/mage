@@ -67,6 +67,7 @@ class SiegeGangLieutenantEffect extends OneShotEffect {
 
     SiegeGangLieutenantEffect() {
         super(Outcome.Benefit);
+        staticText = "create two 1/1 red Goblin creature tokens. Those tokens gain haste until end of turn";
     }
 
     private SiegeGangLieutenantEffect(final SiegeGangLieutenantEffect effect) {

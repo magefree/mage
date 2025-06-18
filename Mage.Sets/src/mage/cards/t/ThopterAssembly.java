@@ -2,13 +2,12 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +24,7 @@ import java.util.UUID;
  */
 public final class ThopterAssembly extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.THOPTER, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.THOPTER, "you control no Thopters other than {this}");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -44,15 +43,8 @@ public final class ThopterAssembly extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, if you control no Thopters other than Thopter Assembly, return Thopter Assembly to its owner's hand and create five 1/1 colorless Thopter artifact creature tokens with flying.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new ReturnToHandSourceEffect(true), false
-                ), condition, "At the beginning of your upkeep, " +
-                "if you control no Thopters other than {this}, " +
-                "return {this} to its owner's hand and create five 1/1 colorless " +
-                "Thopter artifact creature tokens with flying."
-        );
-        ability.addEffect(new CreateTokenEffect(new ThopterColorlessToken(), 5));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true)).withInterveningIf(condition);
+        ability.addEffect(new CreateTokenEffect(new ThopterColorlessToken(), 5).concatBy("and"));
         this.addAbility(ability);
     }
 

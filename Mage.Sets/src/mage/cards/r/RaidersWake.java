@@ -1,13 +1,12 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.hint.common.RaidHint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -27,16 +26,15 @@ public final class RaidersWake extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // Whenever an opponent discards a card, that player loses 2 life.
-        this.addAbility(new DiscardsACardOpponentTriggeredAbility(new LoseLifeTargetEffect(2), false, SetTargetPointer.PLAYER));
+        this.addAbility(new DiscardsACardOpponentTriggeredAbility(
+                new LoseLifeTargetEffect(2), false, SetTargetPointer.PLAYER
+        ));
 
         // Raid — At the beginning of your end step, if you attacked this turn, target opponent discards a card.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DiscardTargetEffect(1)), RaidCondition.instance,
-                "At the beginning of your end step, if you attacked this turn, target opponent discards a card.");
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new DiscardTargetEffect(1))
+                .withInterveningIf(RaidCondition.instance);
         ability.addTarget(new TargetOpponent());
-        ability.setAbilityWord(AbilityWord.RAID);
-        ability.addHint(RaidHint.instance);
-        this.addAbility(ability, new PlayerAttackedWatcher());
+        this.addAbility(ability.setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
 
     private RaidersWake(final RaidersWake card) {

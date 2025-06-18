@@ -1,8 +1,10 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -57,6 +59,41 @@ public class DayNightTest extends CardTestPlayerBase {
         execute();
 
         assertRuffianSmasher(true);
+    }
+
+    @Test
+    public void testCopy() {
+        // possible bug: stack overflow on copy
+        addCard(Zone.HAND, playerA, ruffian);
+
+        runCode("copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Card card = currentGame.getCards().stream().filter(c -> c.getName().equals(ruffian)).findFirst().orElse(null);
+            Assert.assertNotNull(card);
+            Assert.assertNotNull(card.getSecondCardFace());
+
+            // original
+            Assert.assertNotNull(card.getSecondCardFace());
+            // copy
+            Card copy = card.copy();
+            Assert.assertNotNull(copy.getSecondCardFace());
+            // deep copy
+            copy = CardUtil.deepCopyObject(card);
+            Assert.assertNotNull(copy.getSecondCardFace());
+
+            // copied
+            Card copied = game.copyCard(card, null, playerA.getId());
+            Assert.assertNotNull(copied.getSecondCardFace());
+            // copy
+            copy = copied.copy();
+            Assert.assertNotNull(copy.getSecondCardFace());
+            // deep copy
+            copy = CardUtil.deepCopyObject(copied);
+            Assert.assertNotNull(copy.getSecondCardFace());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
     }
 
     @Test

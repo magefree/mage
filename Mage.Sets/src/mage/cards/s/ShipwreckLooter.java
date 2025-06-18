@@ -1,10 +1,8 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.hint.common.RaidHint;
 import mage.cards.CardImpl;
@@ -30,12 +28,9 @@ public final class ShipwreckLooter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Raid - When Shipwreck Looter enters the battlefield,if you attacked this turn, you may draw a card. If you do, discard a card.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true)),
-                RaidCondition.instance, "When {this} enters, if you attacked this turn, you may draw a card. If you do, discard a card.");
-        ability.setAbilityWord(AbilityWord.RAID);
-        ability.addHint(RaidHint.instance);
-        this.addAbility(ability, new PlayerAttackedWatcher());
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new DrawDiscardControllerEffect(1, 1, true)
+        ).withInterveningIf(RaidCondition.instance).setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
 
     private ShipwreckLooter(final ShipwreckLooter card) {

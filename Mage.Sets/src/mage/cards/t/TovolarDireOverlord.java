@@ -2,17 +2,16 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DayboundAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -31,7 +30,7 @@ import java.util.UUID;
  */
 public final class TovolarDireOverlord extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("a Wolf or Werewolf you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("you control three or more Wolves and/or Werewolves");
 
     static {
         filter.add(Predicates.or(
@@ -57,15 +56,10 @@ public final class TovolarDireOverlord extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter,
                 false, SetTargetPointer.NONE, true
-        ));
+        ).setTriggerPhrase("Whenever a Wolf or Werewolf you control deals combat damage to a player, "));
 
         // At the beginning of your upkeep, if you control three or more Wolves and/or Werewolves, it becomes night. Then transform any number of Human Werewolves you control.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        new TovolarDireOverlordEffect(), false
-                ), condition, "At the beginning of your upkeep, if you control three or more Wolves " +
-                "and/or Werewolves, it becomes night. Then transform any number of Human Werewolves you control."
-        ));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TovolarDireOverlordEffect()).withInterveningIf(condition).addHint(hint));
 
         // Daybound
         this.addAbility(new DayboundAbility());
@@ -92,6 +86,7 @@ class TovolarDireOverlordEffect extends OneShotEffect {
 
     TovolarDireOverlordEffect() {
         super(Outcome.Benefit);
+        staticText = "it becomes night. Then transform any number of Human Werewolves you control";
     }
 
     private TovolarDireOverlordEffect(final TovolarDireOverlordEffect effect) {

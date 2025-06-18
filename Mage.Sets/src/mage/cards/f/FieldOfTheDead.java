@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -32,13 +31,9 @@ public final class FieldOfTheDead extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // Whenever Field of the Dead or another land you control enters, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                        new CreateTokenEffect(new ZombieToken()), StaticFilters.FILTER_LAND, false, true
-                ), FieldOfTheDeadCondition.instance, "Whenever {this} or another land " +
-                "you control enters, if you control seven or more lands with different names, " +
-                "create a 2/2 black Zombie creature token."
-        ));
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
+                new CreateTokenEffect(new ZombieToken()), StaticFilters.FILTER_LAND, false, true
+        ).withInterveningIf(FieldOfTheDeadCondition.instance));
     }
 
     private FieldOfTheDead(final FieldOfTheDead card) {
@@ -68,5 +63,10 @@ enum FieldOfTheDeadCondition implements Condition {
                 .filter(s -> s.length() > 0)
                 .distinct()
                 .count() > 6;
+    }
+
+    @Override
+    public String toString() {
+        return "you control seven or more lands with different names";
     }
 }

@@ -12,14 +12,17 @@ public enum SourceHasCountersCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
-        if (permanent == null) {
-            return false;
-        }
-        return permanent
+        return permanent != null
+                && permanent
                 .getCounters(game)
                 .values()
                 .stream()
                 .mapToInt(Counter::getCount)
                 .anyMatch(x -> x > 0);
+    }
+
+    @Override
+    public String toString() {
+        return "{this} has counters on it";
     }
 }

@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterHistoricCard;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -24,7 +24,10 @@ import java.util.UUID;
  */
 public final class AbstergoEntertainment extends CardImpl {
 
-    private static final FilterCard filter = new FilterHistoricCard("historic card from your graveyard");
+    private static final FilterCard filter = new FilterCard("historic card from your graveyard");
+    static {
+        filter.add(HistoricPredicate.instance);
+    }
 
     public AbstergoEntertainment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

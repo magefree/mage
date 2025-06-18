@@ -1,13 +1,11 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsMainPhaseCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
@@ -21,6 +19,8 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -40,12 +40,7 @@ public final class MoraugFuryOfAkoum extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new MoraugFuryOfAkoumBoostEffect()));
 
         // Landfall — Whenever a land you control enters, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new LandfallAbility(new MoraugFuryOfAkoumCombatEffect()), IsMainPhaseCondition.YOUR,
-                "<i>Landfall</i> &mdash; Whenever a land you control enters, " +
-                        "if it's your main phase, there's an additional combat phase after this phase. " +
-                        "At the beginning of that combat, untap all creatures you control."
-        ), new MoraugFuryOfAkoumWatcher());
+        this.addAbility(new LandfallAbility(new MoraugFuryOfAkoumCombatEffect()).withInterveningIf(IsMainPhaseCondition.YOUR), new MoraugFuryOfAkoumWatcher());
     }
 
     private MoraugFuryOfAkoum(final MoraugFuryOfAkoum card) {
@@ -91,6 +86,7 @@ class MoraugFuryOfAkoumCombatEffect extends OneShotEffect {
 
     MoraugFuryOfAkoumCombatEffect() {
         super(Outcome.Benefit);
+        staticText = "there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control";
     }
 
     private MoraugFuryOfAkoumCombatEffect(final MoraugFuryOfAkoumCombatEffect effect) {

@@ -58,7 +58,7 @@ class FirestormPhoenixEffect extends ReplacementEffectImpl {
 
     FirestormPhoenixEffect() {
         super(Duration.Custom, Outcome.ReturnToHand);
-        staticText = "If {this} would die, return {this} to its owner's hand instead. " +
+        staticText = "If {this} would die, return it to its owner's hand instead. " +
                 "Until that player's next turn, that player plays with that card revealed in their hand and can't play it";
     }
 

@@ -46,7 +46,7 @@ public class ManaValueInGraveyard implements DynamicValue {
             return 0;
         }
         int value = player.getGraveyard().stream().map(game::getCard).filter(Objects::nonNull)
-                .filter(card -> filter.match(card, playerId, game)).mapToInt(MageObject::getManaValue).sum();
+                .filter(card -> filter.match(card, playerId, sourceAbility, game)).mapToInt(MageObject::getManaValue).sum();
         if (multiplier != null) {
             value *= multiplier;
         }

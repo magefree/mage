@@ -3,7 +3,6 @@ package mage.cards.u;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CraftAbility;
 import mage.cards.CardImpl;
@@ -25,7 +24,6 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author notgreat
  */
 public final class UnstableGlyphbridge extends CardImpl {
@@ -35,12 +33,8 @@ public final class UnstableGlyphbridge extends CardImpl {
         this.secondSideCardClazz = mage.cards.s.SandswirlWanderglyph.class;
 
         // When Unstable Glyphbridge enters the battlefield, if you cast it, for each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
-                new UnstableGlyphbridgeEffect()), CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, if you cast it, " +
-                    "for each player, choose a creature with power 2 or less that player controls. " +
-                    "Then destroy all creatures except creatures chosen this way."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new UnstableGlyphbridgeEffect())
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance));
 
         // Craft with artifact {3}{W}{W}
         this.addAbility(new CraftAbility("{3}{W}{W}"));
@@ -86,7 +80,7 @@ class UnstableGlyphbridgeEffect extends OneShotEffect {
                 continue;
             }
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
-            filter.add(new PowerPredicate(ComparisonType.OR_LESS,2));
+            filter.add(new PowerPredicate(ComparisonType.OR_LESS, 2));
             filter.add(new ControllerIdPredicate(playerId));
             TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
             target.withNotTarget(true);

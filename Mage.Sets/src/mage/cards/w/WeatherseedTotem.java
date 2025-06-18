@@ -5,7 +5,6 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -17,8 +16,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
+import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -43,11 +42,9 @@ public final class WeatherseedTotem extends CardImpl {
         ), new ManaCostsImpl<>("{2}{G}{G}{G}")));
 
         // When Weatherseed Totem is put into a graveyard from the battlefield, if it was a creature, return this card to its owner's hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnSourceFromGraveyardToHandEffect()),
-                WeatherseedTotemCondition.instance, "When {this} is put into a graveyard from the battlefield, "
-                + "if it was a creature, return this card to its owner's hand"
-        ));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(
+                new ReturnSourceFromGraveyardToHandEffect().setText("return this card to its owner's hand")
+        ).withInterveningIf(WeatherseedTotemCondition.instance));
     }
 
     private WeatherseedTotem(final WeatherseedTotem card) {
@@ -65,11 +62,13 @@ enum WeatherseedTotemCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("permanentWasCreature"))
-                .filter(Objects::nonNull)
-                .anyMatch(Boolean.class::cast);
+        return CardUtil
+                .getEffectValueFromAbility(source, "permanentWasCreature", Boolean.class)
+                .orElse(false);
+    }
+
+    @Override
+    public String toString() {
+        return "it was a creature";
     }
 }

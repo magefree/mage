@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -37,13 +36,9 @@ public final class DemolisherSpawn extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Delirium -- Whenever Demolisher Spawn attacks, if there are four or more card types among cards in your graveyard, other attacking creatures get +4/+4 until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new AttacksTriggeredAbility(new BoostAllEffect(
-                        4, 4, Duration.EndOfTurn,
-                        StaticFilters.FILTER_ATTACKING_CREATURES, true
-                )), DeliriumCondition.instance, "Whenever {this} attacks, if there are four or more " +
-                "card types among cards in your graveyard, other attacking creatures get +4/+4 until end of turn."
-        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(
+                4, 4, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true
+        )).withInterveningIf(DeliriumCondition.instance).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private DemolisherSpawn(final DemolisherSpawn card) {

@@ -5,16 +5,15 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -58,9 +57,7 @@ public final class UvildaDeanOfPerfection extends ModalDoubleFacedCard {
         this.getRightHalfCard().setPT(4, 4);
 
         // At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast spells from among those exiled cards, and you many spend mana as though it were mana of any color to cast those spells.
-        this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new NassariDeanOfExpressionEffect()
-        ));
+        this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(new NassariDeanOfExpressionEffect()));
 
         // Whenever you cast a spell from exile, put a +1/+1 counter on Nassari, Dean of Expression.
         this.getRightHalfCard().addAbility(SpellCastControllerTriggeredAbility.createWithFromZone(
@@ -150,13 +147,11 @@ class UvildaDeanOfPerfectionGainAbilityEffect extends ContinuousEffectImpl {
             discard();
             return true;
         }
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        Zone.EXILED, TargetController.YOU, new RemoveCounterSourceEffect(CounterType.HONE.createInstance()),
-                        false
-                ), UvildaDeanOfPerfectionCondition.instance, "At the beginning of your upkeep, " +
-                "if this card is exiled, remove a hone counter from it."
-        );
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                Zone.EXILED, TargetController.YOU,
+                new RemoveCounterSourceEffect(CounterType.HONE.createInstance())
+                        .setText("remove a hone counter from it"), false
+        ).withInterveningIf(UvildaDeanOfPerfectionCondition.instance);
         ability.setSourceId(card.getId());
         ability.setControllerId(source.getControllerId());
         game.getState().addOtherAbility(card, ability);
@@ -174,6 +169,11 @@ enum UvildaDeanOfPerfectionCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         return game.getState().getZone(source.getSourceId()) == Zone.EXILED;
+    }
+
+    @Override
+    public String toString() {
+        return "this card is exiled";
     }
 }
 

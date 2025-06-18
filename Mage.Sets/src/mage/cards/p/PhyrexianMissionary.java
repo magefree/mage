@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -38,11 +37,7 @@ public final class PhyrexianMissionary extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Phyrexian Missionary enters the battlefield, if it was kicked, return target creature card from your graveyard to your hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
-                KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
-                "return target creature card from your graveyard to your hand."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()).withInterveningIf(KickedCondition.ONCE);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

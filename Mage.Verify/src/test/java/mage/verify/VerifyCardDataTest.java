@@ -1,6 +1,7 @@
 package mage.verify;
 
 import com.google.common.base.CharMatcher;
+import com.google.gson.Gson;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
@@ -15,6 +16,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
@@ -30,10 +32,12 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.*;
 import mage.choices.Choice;
+import mage.client.remote.XmageURLConnection;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.game.FakeGame;
 import mage.game.Game;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
@@ -51,7 +55,9 @@ import mage.utils.SystemUtil;
 import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
 import mage.verify.mtgjson.MtgJsonSet;
+import mage.verify.mtgjson.SpellBookCardsPage;
 import mage.watchers.Watcher;
+import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -59,10 +65,14 @@ import org.junit.Test;
 import org.mage.plugins.card.dl.sources.ScryfallImageSupportCards;
 import org.reflections.Reflections;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,9 +85,21 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "BLC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
-    private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
+    private static String FULL_ABILITIES_CHECK_SET_CODES = "BLC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
+
+    // for automated local testing support
+    static {
+        String val = System.getProperty("xmage.tests.verifyCheckSetCodes");
+        if (val != null) {
+            FULL_ABILITIES_CHECK_SET_CODES = val;
+        }
+        val = System.getProperty("xmage.tests.verifyCheckOnlyText");
+        if (val != null) {
+            CHECK_ONLY_ABILITIES_TEXT = Boolean.parseBoolean(val);
+        }
+    }
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
 
@@ -1675,6 +1697,61 @@ public class VerifyCardDataTest {
         }
     }
 
+    @Test
+    @Ignore
+    // experimental test to find potentially fail conditions with NPE see https://github.com/magefree/mage/issues/13752
+    public void test_checkBadConditions() {
+        // all conditions in AsThoughEffect must be compatible with empty source param (e.g. must be able to use inside ConditionalAsThoughEffect)
+        // see AsThoughEffectType.needAffectedAbility ?
+        // 370+ failed conditions
+        Collection<String> errorsList = new ArrayList<>();
+        Game fakeGame = new FakeGame();
+        Ability fakeAbility = new SimpleStaticAbility(new InfoEffect("fake"));
+
+        // TODO: add classes support (see example with tokens and default constructor)?
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<?>> conditionEnums = reflections.getSubTypesOf(Condition.class)
+                .stream()
+                .filter(Class::isEnum)
+                .sorted(Comparator.comparing(Class::toString))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        for (Class<?> enumClass : conditionEnums) {
+            for (Object enumItem : enumClass.getEnumConstants()) {
+                // miss watcher will fail in both use cases, but miss ability only one
+                String errorOnAbility = "";
+                try {
+                    ((Condition) enumItem).apply(fakeGame, fakeAbility);
+                } catch (Exception e) {
+                    errorOnAbility = Arrays.stream(e.getStackTrace())
+                            .map(StackTraceElement::toString)
+                            .limit(5)
+                            .collect(Collectors.joining("\n"));
+                }
+
+                String errorOnEmptyAbility = "";
+                try {
+                    ((Condition) enumItem).apply(fakeGame, null);
+                } catch (Exception e) {
+                    errorOnEmptyAbility = Arrays.stream(e.getStackTrace())
+                            .map(StackTraceElement::toString)
+                            .limit(5)
+                            .collect(Collectors.joining("\n"));
+                }
+
+                if (errorOnAbility.isEmpty() && !errorOnEmptyAbility.isEmpty()) {
+                    System.out.println();
+                    System.out.println("bad condition " + enumClass.getName() + "\n" + errorOnEmptyAbility);
+                    errorsList.add("Error: condition must support empty and non-empty source params: " + enumClass.getName());
+                }
+            }
+        }
+
+        printMessages(errorsList);
+        if (!errorsList.isEmpty()) {
+            Assert.fail("Found conditions errors: " + errorsList.size());
+        }
+    }
+
     private void check(Card card, int cardIndex) {
         MtgJsonCard ref = MtgJsonService.cardFromSet(card.getExpansionSetCode(), card.getName(), card.getCardNumber());
         if (ref != null) {
@@ -3254,5 +3331,80 @@ public class VerifyCardDataTest {
                         + sorted.stream().map(cn -> "cn%3A" + cn).collect(Collectors.joining("+or+"))
                         + "%29&order=set&as=grid&unique=cards"
         );
+    }
+
+    /**
+     * Helper test to download infinite combos data and prepare it to use in Commander Brackets score system
+     * <p>
+     * How-to use: run it before each main release and upload updated files to github
+     */
+    @Ignore
+    @Test
+    public void downloadAndPrepareCommanderBracketsData() {
+        // download data
+        // load data by pages, max limit = 100, no needs to setup it, ~2000 combos or 20 pages
+        String nextUrl = "https://backend.commanderspellbook.com/variants?format=json&group_by_combo=true&ordering=created&q=cards%3D2+result%3Ainfinite";
+        SpellBookCardsPage page;
+        int pageNumber = 0;
+        List<String> allCombos = new ArrayList<>();
+        while (nextUrl != null && !nextUrl.isEmpty()) {
+            pageNumber++;
+            System.out.println("downloading page " + pageNumber);
+            String res = XmageURLConnection.downloadText(nextUrl);
+            page = new Gson().fromJson(res, SpellBookCardsPage.class);
+            if (page == null || page.results == null) {
+                System.out.println("ERROR, unknown data format: " + res.substring(0, 10) + "...");
+                return;
+            }
+            page.results.forEach(combo -> {
+                if (combo.uses.isEmpty()) {
+                    System.out.println("wrong combo uses: " + combo.uses);
+                    return;
+                }
+                // Stella Lee, Wild Card - can generate infinite combo by itself, so allow 1 card
+                String card1 = combo.uses.get(0).card.name;
+                String card2 = combo.uses.size() == 1 ? card1 : combo.uses.get(1).card.name;
+                if (card1 != null && card2 != null) {
+                    allCombos.add(String.format("%s@%s", card1, card2));
+                }
+            });
+
+            nextUrl = page.next;
+        }
+
+        // save results (run from Mage.Verify)
+        File destFile = new TFile("..\\Mage\\src\\main\\resources\\brackets\\infinite-combos.txt");
+        if (!destFile.exists()) {
+            System.out.println("Can't find dest file " + destFile);
+            return;
+        }
+
+        List<String> infiniteCombosRes;
+        try {
+            infiniteCombosRes = Files.readAllLines(destFile.toPath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println("Can't read file " + destFile + " " + e);
+            return;
+        }
+
+        // replace all cards data, but keep comments
+        infiniteCombosRes.removeIf(s -> !s.startsWith("#")
+                || s.startsWith("# Source")
+                || s.startsWith("# Updated")
+                || s.startsWith("# Found")
+        );
+        infiniteCombosRes.add(String.format("# Source: %s", "https://commanderspellbook.com"));
+        infiniteCombosRes.add(String.format("# Updated: %s", LocalDate.now().format(DateTimeFormatter.ISO_DATE)));
+        infiniteCombosRes.add(String.format("# Found: %d", allCombos.size()));
+        infiniteCombosRes.addAll(allCombos); // do not sort, all new combos will be added to the end due spell book default order
+
+        try {
+            Files.write(destFile.toPath(), infiniteCombosRes, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println("Can't write file " + destFile + " " + e);
+            return;
+        }
+
+        System.out.println(String.format("ALL DONE, found and write %d combos", allCombos.size()));
     }
 }

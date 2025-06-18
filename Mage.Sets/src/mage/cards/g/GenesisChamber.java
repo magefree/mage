@@ -1,10 +1,8 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,12 +26,11 @@ public final class GenesisChamber extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Whenever a nontoken creature enters the battlefield, if Genesis Chamber is untapped, that creature's controller creates a 1/1 colorless Myr artifact creature token.
-        TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GenesisChamberEffect(), StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability,
-                SourceTappedCondition.UNTAPPED,
-                "Whenever a nontoken creature enters, "
-                        + "if {this} is untapped, "
-                        + "that creature's controller creates a 1/1 colorless Myr artifact creature token"));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new GenesisChamberEffect(),
+                StaticFilters.FILTER_CREATURE_NON_TOKEN,
+                false, SetTargetPointer.PERMANENT
+        ).withInterveningIf(SourceTappedCondition.UNTAPPED));
     }
 
     private GenesisChamber(final GenesisChamber card) {

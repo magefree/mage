@@ -1,12 +1,11 @@
 package mage.cards.r;
 
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.OpponentHasNoCardsInHandCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,7 +21,7 @@ import java.util.UUID;
 public final class RekindledFlame extends CardImpl {
 
     private static final Hint hint = new ConditionHint(
-            OpponentHasNoCardsInHandCondition.instance, "Opponent has no cards in hand"
+            OpponentHasNoCardsInHandCondition.instance, "An opponent has no cards in hand"
     );
 
     public RekindledFlame(UUID ownerId, CardSetInfo setInfo) {
@@ -33,13 +32,9 @@ public final class RekindledFlame extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // At the beginning of your upkeep, if an opponent has no cards in hand, you may return Rekindled Flame from your graveyard to your hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(
-                        Zone.GRAVEYARD, TargetController.YOU, new ReturnSourceFromGraveyardToHandEffect(),
-                        true
-                ), OpponentHasNoCardsInHandCondition.instance, "At the beginning of your upkeep, " +
-                "if an opponent has no cards in hand, you may return {this} from your graveyard to your hand."
-        ).addHint(hint));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                Zone.GRAVEYARD, TargetController.YOU, new ReturnSourceFromGraveyardToHandEffect(), true
+        ).withInterveningIf(OpponentHasNoCardsInHandCondition.instance).addHint(hint));
     }
 
     private RekindledFlame(final RekindledFlame card) {

@@ -18,9 +18,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterHistoricSpell;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.game.permanent.token.SoldierToken;
 
@@ -31,7 +30,6 @@ import java.util.UUID;
  */
 public final class AlistairTheBrigadier extends CardImpl {
 
-    private static final FilterSpell filter = new FilterHistoricSpell();
     private static final FilterPermanent filter2 = new FilterControlledPermanent("historic permanents you control");
 
     static {
@@ -52,7 +50,7 @@ public final class AlistairTheBrigadier extends CardImpl {
 
         // Whenever you cast a historic spell, create a 1/1 white Soldier creature token.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CreateTokenEffect(new SoldierToken()), filter, false
+                new CreateTokenEffect(new SoldierToken()), StaticFilters.FILTER_SPELL_HISTORIC, false
         ));
 
         // Whenever Alistair attacks, you may pay {8}. If you do, creatures you control get +X/+X until end of turn, where X is the number of historic permanents you control.

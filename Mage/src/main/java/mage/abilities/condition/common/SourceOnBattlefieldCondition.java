@@ -20,6 +20,6 @@ public enum SourceOnBattlefieldCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if {this} is on the battlefield";
+        return "{this} is on the battlefield";
     }
 }

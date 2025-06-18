@@ -28,7 +28,7 @@ import java.util.UUID;
 public final class QuestForUlasTemple extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterCreatureCard("Kraken, Leviathan, Octopus, or Serpent creature card");
+            = new FilterCreatureCard("a Kraken, Leviathan, Octopus, or Serpent creature card");
 
     static {
         filter.add(Predicates.or(

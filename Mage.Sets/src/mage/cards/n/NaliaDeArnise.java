@@ -2,19 +2,21 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FullPartyCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
 import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.hint.common.PartyCountHint;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -54,17 +56,13 @@ public final class NaliaDeArnise extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
         // At the beginning of combat on your turn, if you have a full party, put a +1/+1 counter on each creature you control and those creatures gain deathtouch until end of turn.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new AddCountersAllEffect(
-                        CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
-                )), FullPartyCondition.instance, "At the beginning " +
-                "of combat on your turn, if you have a full party, put a +1/+1 counter on each creature " +
-                "you control and those creatures gain deathtouch until end of turn."
-        );
+        Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersAllEffect(
+                CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
+        )).withInterveningIf(FullPartyCondition.instance);
         ability.addEffect(new GainAbilityAllEffect(
                 DeathtouchAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURE
-        ));
+        ).setText("and those creatures gain deathtouch until end of turn"));
         this.addAbility(ability.addHint(PartyCountHint.instance));
     }
 

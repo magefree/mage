@@ -99,7 +99,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public int count(FilterCard filter, UUID playerId, Game game) {
-        return (int) this.stream().filter(card -> filter.match(game.getCard(card), playerId, game)).count();
+        return (int) this.stream().filter(card -> filter.match(game.getCard(card), playerId, null, game)).count();
 
     }
 

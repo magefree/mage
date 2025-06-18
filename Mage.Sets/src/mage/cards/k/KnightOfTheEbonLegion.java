@@ -2,16 +2,16 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,12 +46,8 @@ public final class KnightOfTheEbonLegion extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your end step, if a player lost 4 or more life this turn, put a +1/+1 counter on Knight of the Ebon Legion.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-                ), KnightOfTheEbonLegionCondition.instance, "At the beginning of your end step, " +
-                "if a player lost 4 or more life this turn, put a +1/+1 counter on {this}."
-        ).addHint(new ConditionHint(KnightOfTheEbonLegionCondition.instance, "A player lost 4 or more life this turn")));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))
+                .withInterveningIf(KnightOfTheEbonLegionCondition.instance).addHint(KnightOfTheEbonLegionCondition.getHint()));
     }
 
     private KnightOfTheEbonLegion(final KnightOfTheEbonLegion card) {
@@ -66,6 +62,11 @@ public final class KnightOfTheEbonLegion extends CardImpl {
 
 enum KnightOfTheEbonLegionCondition implements Condition {
     instance;
+    private static final Hint hint = new ConditionHint(instance);
+
+    public static Hint getHint() {
+        return hint;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -78,5 +79,10 @@ enum KnightOfTheEbonLegionCondition implements Condition {
                 .getPlayersInRange(source.getControllerId(), game)
                 .stream()
                 .anyMatch(uuid -> watcher.getLifeLost(uuid) > 3);
+    }
+
+    @Override
+    public String toString() {
+        return "a player lost 4 or more life this turn";
     }
 }

@@ -1,16 +1,11 @@
-
 package mage.cards.o;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -20,6 +15,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.ZombieToken;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author fireshoes
@@ -31,14 +30,15 @@ public final class OathOfLiliana extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Liliana enters the battlefield, each opponent sacrifices a creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE)
+        ));
 
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, create a 2/2 black Zombie creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 TargetController.ANY, new CreateTokenEffect(new ZombieToken()),
-                false), OathOfLilianaCondition.instance,
-                "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, "
-                        + "create a 2/2 black Zombie creature token."), new OathOfLilianaWatcher());
+                false, OathOfLilianaCondition.instance
+        ), new OathOfLilianaWatcher());
     }
 
     private OathOfLiliana(final OathOfLiliana card) {
@@ -63,7 +63,7 @@ enum OathOfLilianaCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if a planeswalker entered the battlefield under your control this turn";
+        return "a planeswalker entered the battlefield under your control this turn";
     }
 
 }
@@ -95,6 +95,4 @@ class OathOfLilianaWatcher extends Watcher {
     public boolean enteredPlaneswalkerForPlayer(UUID playerId) {
         return players.contains(playerId);
     }
-
-
 }

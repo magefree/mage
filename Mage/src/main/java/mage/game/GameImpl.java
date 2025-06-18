@@ -121,6 +121,8 @@ public abstract class GameImpl implements Game {
     protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
     // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
     protected Map<Zone, Set<UUID>> lkiShortLiving = new EnumMap<>(Zone.class);
+    // For checking "becomes the target" triggers accurately. Cleared on short living LKI reset
+    protected Map<String, Map<UUID, Set<UUID>>> targetedMap = new HashMap<>();
 
     // Permanents entering the Battlefield while handling replacement effects before they are added to the battlefield
     protected Map<UUID, Permanent> permanentsEntering = new HashMap<>();
@@ -202,6 +204,7 @@ public abstract class GameImpl implements Game {
         this.lkiCardState = CardUtil.deepCopyObject(game.lkiCardState);
         this.lkiExtended = CardUtil.deepCopyObject(game.lkiExtended);
         this.lkiShortLiving = CardUtil.deepCopyObject(game.lkiShortLiving);
+        this.targetedMap = CardUtil.deepCopyObject(game.targetedMap);
 
         this.permanentsEntering = CardUtil.deepCopyObject(game.permanentsEntering);
         this.enterWithCounters = CardUtil.deepCopyObject(game.enterWithCounters);
@@ -2711,9 +2714,9 @@ public abstract class GameImpl implements Game {
                             .add(perm);
                 }
             }
-            // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number
+            // 704.5s If the number of lore counters on a Saga permanent with one or more chapter abilities is greater than or equal to its final chapter number
             // and it isn't the source of a chapter ability that has triggered but not yet left the stack, that Saga's controller sacrifices it.
-            if (perm.hasSubtype(SubType.SAGA, this)) {
+            if (perm.hasSubtype(SubType.SAGA, this) && perm.getAbilities(this).containsClass(SagaAbility.class)) {
                 int maxChapter = perm
                         .getAbilities(this)
                         .stream()
@@ -3687,6 +3690,39 @@ public abstract class GameImpl implements Game {
     @Override
     public void resetShortLivingLKI() {
         lkiShortLiving.clear();
+        targetedMap.clear();
+    }
+
+    @Override
+    public StackObject findTargetingStackObject(String checkingReference, GameEvent event) {
+        // In case of multiple simultaneous triggered abilities from the same source,
+        // need to get the actual one that targeted, see #8026, #8378, rulings for Battle Mammoth
+        // In case of copied triggered abilities, need to trigger on each independently, see #13498
+        // Also avoids triggering on cancelled selections, see #8802
+        Map<UUID, Set<UUID>> targetMap = targetedMap.getOrDefault(checkingReference, null);
+        // targetMap: key - targetId; value - Set of stackObject Ids
+        if (targetMap == null) {
+            targetMap = new HashMap<>();
+        } else {
+            targetMap = new HashMap<>(targetMap); // must have new object reference if saved back
+        }
+        Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
+        for (StackObject stackObject : getStack()) {
+            Ability stackAbility = stackObject.getStackAbility();
+            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
+                continue;
+            }
+            if (CardUtil.getAllSelectedTargets(stackAbility, this).contains(event.getTargetId())) {
+                if (!targetingObjects.add(stackObject.getId())) {
+                    continue; // The trigger/watcher already recorded that target of the stack object, check for another
+                }
+                // Otherwise, store this combination of trigger/watcher + target + stack object
+                targetMap.put(event.getTargetId(), targetingObjects);
+                targetedMap.put(checkingReference, targetMap);
+                return stackObject;
+            }
+        }
+        return null;
     }
 
     @Override

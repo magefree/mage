@@ -27,11 +27,11 @@ public enum AdamantCondition implements Condition {
     private final boolean colorless;
 
 
-    private AdamantCondition(ColoredManaSymbol coloredManaSymbol) {
+    AdamantCondition(ColoredManaSymbol coloredManaSymbol) {
         this(coloredManaSymbol, false);
     }
 
-    private AdamantCondition(ColoredManaSymbol coloredManaSymbol, boolean colorless) {
+    AdamantCondition(ColoredManaSymbol coloredManaSymbol, boolean colorless) {
         this.coloredManaSymbol = coloredManaSymbol;
         this.colorless = colorless;
     }
@@ -44,9 +44,9 @@ public enum AdamantCondition implements Condition {
             }
             if (coloredManaSymbol == null) {
                 return Arrays
-                    .stream(ColoredManaSymbol.values())
-                    .map(source.getManaCostsToPay().getUsedManaToPay()::getColor)
-                    .anyMatch(i -> i > 2);
+                        .stream(ColoredManaSymbol.values())
+                        .map(source.getManaCostsToPay().getUsedManaToPay()::getColor)
+                        .anyMatch(i -> i > 2);
             }
             return source.getManaCostsToPay().getUsedManaToPay().getColor(coloredManaSymbol) > 2;
         }
@@ -63,9 +63,9 @@ public enum AdamantCondition implements Condition {
         }
         if (coloredManaSymbol == null) {
             return Arrays
-                .stream(ColoredManaSymbol.values())
-                .map(payment::getColor)
-                .anyMatch(i -> i > 2);
+                    .stream(ColoredManaSymbol.values())
+                    .map(payment::getColor)
+                    .anyMatch(i -> i > 2);
         }
         return payment.getColor(coloredManaSymbol) > 2;
     }
@@ -73,5 +73,18 @@ public enum AdamantCondition implements Condition {
     @Override
     public boolean caresAboutManaColor() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("at least three ");
+        if (coloredManaSymbol == null && !colorless) {
+            sb.append("mana of the same color");
+        } else {
+            sb.append(coloredManaSymbol != null ? coloredManaSymbol.getColorName() : "colorless");
+            sb.append(" mana");
+        }
+        sb.append(" was spent to cast it");
+        return sb.toString();
     }
 }

@@ -107,9 +107,11 @@ public class DeckLegalityPanel extends javax.swing.JPanel {
         // extra buttons like score
         this.add(new EdhPowerLevelLegalityLabel());
         // only 3 buttons allowed for one line
-        this.add(new BracketLegalityLabel(BracketLegalityLabel.BracketLevel.BRACKET_1));
-        this.add(new BracketLegalityLabel(BracketLegalityLabel.BracketLevel.BRACKET_2_3));
-        this.add(new BracketLegalityLabel(BracketLegalityLabel.BracketLevel.BRACKET_4_5));
+        this.add(new BracketLegalityLabel("Bracket 1", "B1", 1));
+        this.add(new BracketLegalityLabel("Bracket 2", "B2", 2));
+        this.add(new BracketLegalityLabel("Bracket 3", "B3", 3));
+        this.add(new BracketLegalityLabel("Bracket 4", "B4", 4));
+        this.add(new BracketLegalityLabel("Bracket 5", "B5", 5));
 
         addHidePanelButton();
 

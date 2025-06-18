@@ -57,7 +57,7 @@ enum TransposeCondition implements Condition {
                 .map(Ability::getSourceId)
                 .map(game::getSpell)
                 .map(Spell::getFromZone)
-                .map(Zone.GRAVEYARD::match)
+                .map(Zone.HAND::match)
                 .orElse(false);
     }
 

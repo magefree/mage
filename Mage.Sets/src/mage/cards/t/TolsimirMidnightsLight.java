@@ -1,24 +1,17 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.Duration;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -26,8 +19,9 @@ import mage.game.permanent.token.TolsimirMidnightsLightToken;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author DominionSpy
  */
 public final class TolsimirMidnightsLight extends CardImpl {
@@ -54,10 +48,10 @@ public final class TolsimirMidnightsLight extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TolsimirMidnightsLightToken())));
 
         // Whenever a Wolf you control attacks, if Tolsimir attacked this combat, target creature an opponent controls blocks that Wolf this combat if able.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new AttacksAllTriggeredAbility(new TolsimirMidnightsLightEffect(), false, filter, SetTargetPointer.PERMANENT, false),
-                TolsimirMidnightsLightCondition.instance,
-                "Whenever a Wolf you control attacks, if {this} attacked this combat, target creature an opponent controls blocks that Wolf this combat if able.");
+        Ability ability = new AttacksAllTriggeredAbility(
+                new TolsimirMidnightsLightEffect(), false, filter,
+                SetTargetPointer.PERMANENT, false
+        ).withInterveningIf(TolsimirMidnightsLightCondition.instance);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability, new AttackedOrBlockedThisCombatWatcher());
     }
@@ -92,12 +86,18 @@ enum TolsimirMidnightsLightCondition implements Condition {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "{this} attacked this combat";
+    }
 }
 
 class TolsimirMidnightsLightEffect extends RequirementEffect {
 
     TolsimirMidnightsLightEffect() {
         super(Duration.EndOfCombat);
+        staticText = "target creature an opponent controls blocks that Wolf this combat if able";
     }
 
     private TolsimirMidnightsLightEffect(final TolsimirMidnightsLightEffect effect) {

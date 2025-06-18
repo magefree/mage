@@ -3,12 +3,10 @@ package mage.cards.n;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.FullPartyCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -16,9 +14,13 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.common.PartyCountHint;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,15 +53,13 @@ public final class NimbleTrapfinder extends CardImpl {
         )).addHint(NimbleTrapfinderCondition.getHint()), new NimbleTrapfinderWatcher());
 
         // At the beginning of combat on your turn, if you have a full party, creatures you control gain "Whenever this creature deals combat damage to a player, draw a card" until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new GainAbilityAllEffect(new DealsCombatDamageToAPlayerTriggeredAbility(
-                                new DrawCardSourceControllerEffect(1), false
-                        ), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
-                ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
-                "if you have a full party, creatures you control gain " +
-                "\"Whenever this creature deals combat damage to a player, draw a card\" until end of turn."
-        ).addHint(PartyCountHint.instance));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new GainAbilityAllEffect(
+                new DealsCombatDamageToAPlayerTriggeredAbility(
+                        new DrawCardSourceControllerEffect(1), false
+                ), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES
+        ).setText("creatures you control gain \"Whenever this creature " +
+                "deals combat damage to a player, draw a card\" until end of turn"))
+                .withInterveningIf(FullPartyCondition.instance).addHint(PartyCountHint.instance));
     }
 
     private NimbleTrapfinder(final NimbleTrapfinder card) {

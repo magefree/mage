@@ -16,8 +16,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
+import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -65,12 +65,9 @@ enum FaridehDevilsChosenCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source
-                .getEffects()
-                .stream()
-                .map(effect -> effect.getValue("maxDieRoll"))
-                .filter(Objects::nonNull)
-                .mapToInt(Integer.class::cast)
-                .anyMatch(x -> x >= 10);
+        return CardUtil
+                .getEffectValueFromAbility(source, "maxDieRoll", Integer.class)
+                .filter(x -> x >= 10)
+                .isPresent();
     }
 }

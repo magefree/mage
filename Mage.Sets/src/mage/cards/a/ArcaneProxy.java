@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.CardImpl;
@@ -42,12 +41,11 @@ public final class ArcaneProxy extends CardImpl {
         this.addAbility(new PrototypeAbility(this, "{1}{U}{U}", 2, 1));
 
         // When Arcane Proxy enters the battlefield, if you cast it, exile target instant or sorcery card with mana value less than or equal to Arcane Proxy's power from your graveyard. Copy that card. You may cast the copy without paying its mana cost.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ExileTargetCardCopyAndCastEffect(true)),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
-                "if you cast it, exile target instant or sorcery card with mana value less than or equal to {this}'s " +
-                "power from your graveyard. Copy that card. You may cast the copy without paying its mana cost."
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new ExileTargetCardCopyAndCastEffect(true)
+                        .setText("exile target instant or sorcery card with mana value less than or equal to {this}'s " +
+                                "power from your graveyard. Copy that card. You may cast the copy without paying its mana cost")
+        ).withInterveningIf(CastFromEverywhereSourceCondition.instance);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

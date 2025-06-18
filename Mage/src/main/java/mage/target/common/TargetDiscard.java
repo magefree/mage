@@ -47,7 +47,7 @@ public class TargetDiscard extends TargetCard {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(playerId).getHand().get(id, game);
-        return filter.match(card, source.getControllerId(), game);
+        return filter.match(card, source.getControllerId(), source, game);
     }
 
     @Override

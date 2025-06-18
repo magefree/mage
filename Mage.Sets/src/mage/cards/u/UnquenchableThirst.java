@@ -4,7 +4,6 @@ package mage.cards.u;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DesertControlledOrGraveyardCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
@@ -36,11 +35,8 @@ public final class UnquenchableThirst extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Unquenchable Thirst enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()),
-                DesertControlledOrGraveyardCondition.instance, "When {this} enters, " +
-                "if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature."
-        ).addHint(DesertControlledOrGraveyardCondition.getHint()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect())
+                .withInterveningIf(DesertControlledOrGraveyardCondition.instance).addHint(DesertControlledOrGraveyardCondition.getHint()));
 
         // Enchanted creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));

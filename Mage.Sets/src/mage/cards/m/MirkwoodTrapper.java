@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PlayerAttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -40,11 +39,7 @@ public final class MirkwoodTrapper extends CardImpl {
         this.addAbility(new MirkwoodTrapperTriggerAttackYou());
 
         // Whenever a player attacks, if they aren't attacking you, that player chooses an attacking creature. It gets +2/+0 until end of turn.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-            new PlayerAttacksTriggeredAbility(new MirkwoodTrapperEffect(), true),
-            NotAttackingSourceControllerCondition.instance,
-            "Whenever a player attacks, if they aren't attacking you, that player chooses an attacking creature. It gets +2/+0 until end of turn."
-        ));
+        this.addAbility(new PlayerAttacksTriggeredAbility(new MirkwoodTrapperEffect(), true).withInterveningIf(MirkwoodTrapperCondition.instance));
     }
 
     private MirkwoodTrapper(final MirkwoodTrapper card) {
@@ -85,15 +80,15 @@ class MirkwoodTrapperTriggerAttackYou extends TriggeredAbilityImpl {
     }
 }
 
-enum NotAttackingSourceControllerCondition implements Condition {
+enum MirkwoodTrapperCondition implements Condition {
     instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         return game.getCombat()
-            .getPlayerDefenders(game, false)
-            .stream()
-            .noneMatch(pId -> pId.equals(source.getControllerId()));
+                .getPlayerDefenders(game, false)
+                .stream()
+                .noneMatch(pId -> pId.equals(source.getControllerId()));
     }
 
     @Override

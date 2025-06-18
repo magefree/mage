@@ -6,7 +6,6 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
@@ -43,14 +42,11 @@ public final class OchreJelly extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // Split — When Ochre Jelly dies, if it had two or more +1/+1 counters on it, create a token that's a copy of it at the beginning of the next end step. That token enters the battlefield with half that many +1/+1 counters on it, rounded down.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OchreJellyEffect())
-                )), OchreJellyCondition.instance, CardUtil.italicizeWithEmDash("Split")
-                + "When {this} dies, if it had two or more +1/+1 counters on it, "
-                + "create a token that's a copy of it at the beginning of the next end step. "
-                + "The token enters the battlefield with half that many +1/+1 counters on it, rounded down."
-        ));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OchreJellyEffect())
+        ).setText("create a token that's a copy of it at the beginning of the next end step. " +
+                "The token enters with half that many +1/+1 counters on it, rounded down"))
+                .withInterveningIf(OchreJellyCondition.instance).withFlavorWord("Split"));
     }
 
     private OchreJelly(final OchreJelly card) {
@@ -68,8 +64,15 @@ enum OchreJellyCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getEffects().get(0).getValue("permanentLeftBattlefield");
-        return permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) >= 2;
+        return CardUtil
+                .getEffectValueFromAbility(source, "permanentLeftBattlefield", Permanent.class)
+                .filter(permanent -> permanent.getCounters(game).getCount(CounterType.P1P1) >= 2)
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return "it had two or more +1/+1 counters on it";
     }
 }
 
@@ -95,10 +98,8 @@ class OchreJellyEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        final int counters = permanent.getCounters(game).getCount(CounterType.P1P1) / 2;
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(CounterType.P1P1, counters);
-        effect.setSavedPermanent(permanent);
-        effect.apply(game, source);
-        return true;
+        return new CreateTokenCopyTargetEffect(
+                CounterType.P1P1, permanent.getCounters(game).getCount(CounterType.P1P1) / 2
+        ).setSavedPermanent(permanent).apply(game, source);
     }
 }

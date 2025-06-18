@@ -9,7 +9,6 @@ import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
@@ -47,12 +46,9 @@ public final class ClockworkAvian extends CardImpl {
         ));
 
         // At end of combat, if Clockwork Avian attacked or blocked this combat, remove a +1/+0 counter from it.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EndOfCombatTriggeredAbility(
-                        new RemoveCounterSourceEffect(CounterType.P1P0.createInstance()), false
-                ), AttackedOrBlockedThisCombatSourceCondition.instance, "At end of combat, " +
-                "if {this} attacked or blocked this combat, remove a +1/+0 counter from it."
-        ), new AttackedOrBlockedThisCombatWatcher());
+        this.addAbility(new EndOfCombatTriggeredAbility(
+                new RemoveCounterSourceEffect(CounterType.P1P0.createInstance()).setText("remove a +1/+0 counter from it"), false
+        ).withInterveningIf(AttackedOrBlockedThisCombatSourceCondition.instance), new AttackedOrBlockedThisCombatWatcher());
 
         // {X}, {tap}: Put up to X +1/+0 counters on Clockwork Avian. This ability can't cause the total number of +1/+0 counters on Clockwork Avian to be greater than four. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(

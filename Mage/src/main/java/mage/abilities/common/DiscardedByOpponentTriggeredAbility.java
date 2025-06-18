@@ -13,13 +13,8 @@ import mage.game.stack.StackObject;
 public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     public DiscardedByOpponentTriggeredAbility(Effect effect) {
-        this(effect, false);
-    }
-
-    public DiscardedByOpponentTriggeredAbility(Effect effect, boolean textCardName) {
         super(Zone.GRAVEYARD, effect, false);
-        setTriggerPhrase("When a spell or ability an opponent controls causes you to discard "
-                + (textCardName ? "{this}, " : "this card, "));
+        setTriggerPhrase("When a spell or ability an opponent controls causes you to discard this card, ");
     }
 
     protected DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {
@@ -38,12 +33,10 @@ public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (getSourceId().equals(event.getTargetId())) {
-            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-            if (stackObject != null) {
-                return game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId());
-            }
+        if (!getSourceId().equals(event.getTargetId())) {
+            return false;
         }
-        return false;
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
+        return stackObject != null && game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId());
     }
 }

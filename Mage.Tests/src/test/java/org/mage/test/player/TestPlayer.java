@@ -2267,6 +2267,13 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
+
+        // choose itself for starting player all the time
+        if (target.getMessage(game).equals("Select a starting player")) {
+            target.add(this.getId(), game);
+            return true;
+        }
+
         UUID abilityControllerId = this.getId();
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
@@ -2275,11 +2282,6 @@ public class TestPlayer implements Player {
         // TODO: warning, some cards call player.choose methods instead target.choose, see #8254
         //  most use cases - discard and other cost with choice like that method
         //  must migrate all choices.remove(xxx) to choices.remove(0), takeMaxTargetsPerChoose can help to find it
-
-        // ignore player select
-        if (target.getMessage(game).equals("Select a starting player")) {
-            return computerPlayer.choose(outcome, target, source, game, options);
-        }
 
         boolean isAddedSomething = false; // must return true on any changes in targets, so game can ask next choose dialog until finish
 
@@ -2328,7 +2330,7 @@ public class TestPlayer implements Player {
                                 continue;
                             }
                             if (hasObjectTargetNameOrAlias(permanent, targetName)) {
-                                if (target.isNotTarget() || target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         isAddedSomething = true;
@@ -2336,7 +2338,7 @@ public class TestPlayer implements Player {
                                     }
                                 }
                             } else if ((permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) { // TODO: remove search by exp code?
-                                if (target.isNotTarget() || target.canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                                if (target.canTarget(abilityControllerId, permanent.getId(), source, game) && !target.contains(permanent.getId())) {
                                     if ((permanent.isCopy() && !originOnly) || (!permanent.isCopy() && !copyOnly)) {
                                         target.add(permanent.getId(), game);
                                         isAddedSomething = true;
@@ -2371,7 +2373,7 @@ public class TestPlayer implements Player {
                     isAddedSomething = false;
                     for (Player player : game.getPlayers().values()) {
                         if (player.getName().equals(choiceRecord)) {
-                            if (target.canTarget(abilityControllerId, player.getId(), null, game) && !target.contains(player.getId())) {
+                            if (target.canTarget(abilityControllerId, player.getId(), source, game) && !target.contains(player.getId())) {
                                 target.add(player.getId(), game);
                                 isAddedSomething = true;
                             }
@@ -2538,7 +2540,8 @@ public class TestPlayer implements Player {
                     String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
                     for (Player player : game.getPlayers().values()) {
                         if (player.getName().equals(playerName)
-                                && target.canTarget(abilityControllerId, player.getId(), source, game)) {
+                                && target.canTarget(abilityControllerId, player.getId(), source, game)
+                                && !target.contains(player.getId())) {
                             target.addTarget(player.getId(), source, game);
                             targets.remove(targetDefinition);
                             return true;
@@ -2887,7 +2890,7 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
-        if (message.equals("Scry 1?")) {
+        if (message != null && message.equals("Scry 1?")) {
             return false;
         }
         assertAliasSupportInChoices(false);
@@ -4326,7 +4329,9 @@ public class TestPlayer implements Player {
         // chooseTargetAmount calls for EACH target cycle (e.g. one target per click, see TargetAmount)
         // if use want to stop choosing then chooseTargetAmount must return false (example: up to xxx)
 
-        Assert.assertNotEquals("chooseTargetAmount needs non zero amount remaining", 0, target.getAmountRemaining());
+        if (target.getAmountRemaining() <= 0) {
+            return false;
+        }
 
         assertAliasSupportInTargets(true);
         if (!targets.isEmpty()) {

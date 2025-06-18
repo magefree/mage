@@ -104,7 +104,7 @@ class MirrorOfLifeTrappingEffect extends OneShotEffect {
         if (toBattlefield != null) {
             game.processAction();
             controller.moveCards(toBattlefield.getCards(StaticFilters.FILTER_CARD_PERMANENT, game),
-                    Zone.BATTLEFIELD, source, game, false, true, true, null);
+                    Zone.BATTLEFIELD, source, game, false, false, true, null);
         }
 
         return true;

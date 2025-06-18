@@ -68,16 +68,24 @@ public class DebugUtil {
     public static String NETWORK_PROFILE_REQUESTS_DUMP_FILE_NAME = "httpRequests.log";
 
     /**
-     * Return method and source line number like "secondMethod - DebugUtilTest.java:21"
+     * Return source line number for better debugging like "secondMethod - DebugUtilTest.java:21"
      *
-     * @param skipMethodsAmount use 0 to return current method info, use 1 for prev method, use 2 for prev-prev method
+     * @param skipMethodsAmount use 0 to return current method info, use 1 for prev method, use 2 for prev-prev method, etc
+     * @param infoType          use "class" for full class name and "method" for short method name
      */
-    public static String getMethodNameWithSource(final int skipMethodsAmount) {
+    public static String getMethodNameWithSource(int skipMethodsAmount, String infoType) {
         // 3 is default methods amount to skip:
         // - getMethodNameWithSource
         // - TraceHelper.getMethodNameWithSource
         // - Thread.currentThread().getStackTrace()
-        return TraceHelper.getMethodNameWithSource(3 + skipMethodsAmount);
+        switch (infoType) {
+            case "class":
+                return TraceHelper.getClassNameWithSource(3 + skipMethodsAmount);
+            case "method":
+                return TraceHelper.getMethodNameWithSource(3 + skipMethodsAmount);
+            default:
+                throw new IllegalArgumentException("Unknown info type: " + infoType);
+        }
     }
 
 }
@@ -88,12 +96,28 @@ public class DebugUtil {
  */
 class TraceHelper {
 
+    /**
+     * Example: showDialog - ChooseTargetTestableDialog.java:72
+     */
     public static String getMethodNameWithSource(final int depth) {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         if (stackTrace.length == 0) {
             return "[no access to stack]";
         } else {
             return String.format("%s - %s:%d", stackTrace[depth].getMethodName(), stackTrace[depth].getFileName(), stackTrace[depth].getLineNumber());
+        }
+    }
+
+    /**
+     * Compatible with IntelliJ IDEA's logs navigation (will be clickable)
+     * Example: mage.utils.testers.ChooseTargetTestableDialog(ChooseTargetTestableDialog.java:62)
+     */
+    public static String getClassNameWithSource(final int depth) {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        if (stackTrace.length == 0) {
+            return "[no access to stack]";
+        } else {
+            return String.format("%s(%s:%d)", stackTrace[depth].getClassName(), stackTrace[depth].getFileName(), stackTrace[depth].getLineNumber());
         }
     }
 }

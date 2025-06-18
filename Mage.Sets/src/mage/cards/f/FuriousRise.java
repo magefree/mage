@@ -2,17 +2,20 @@ package mage.cards.f;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.FerociousHint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -31,9 +34,8 @@ public final class FuriousRise extends CardImpl {
 
         // At the beginning of your end step, if you control a creature with power 4 or greater, exile the top card of your library.
         // You may play that card until you exile another card with Furious Rise.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new FuriousRiseEffect()), FerociousCondition.instance,
-                "At the beginning of your end step, if you control a creature with power 4 or greater, exile the top card of your library. You may play that card until you exile another card with {this}."));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new FuriousRiseEffect())
+                .withInterveningIf(FerociousCondition.instance).addHint(FerociousHint.instance));
     }
 
     private FuriousRise(final FuriousRise card) {
@@ -50,7 +52,7 @@ class FuriousRiseEffect extends OneShotEffect {
 
     FuriousRiseEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile the top card of your library. You may play that card until you exile another card with Furious Rise";
+        this.staticText = "exile the top card of your library. You may play that card until you exile another card with {this}";
     }
 
     private FuriousRiseEffect(final FuriousRiseEffect effect) {

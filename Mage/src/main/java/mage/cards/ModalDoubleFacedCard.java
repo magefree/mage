@@ -62,6 +62,7 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
 
     public ModalDoubleFacedCard(ModalDoubleFacedCard card) {
         super(card);
+        // make sure all parts created and parent ref added
         this.leftHalfCard = card.getLeftHalfCard().copy();
         ((ModalDoubleFacedCardHalf) leftHalfCard).setParentCard(this);
         this.rightHalfCard = card.rightHalfCard.copy();

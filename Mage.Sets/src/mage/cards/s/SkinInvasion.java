@@ -66,7 +66,7 @@ class SkinInvasionEffect extends OneShotEffect {
 
     SkinInvasionEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "return {this} to the battlefield transformed under your control";
+        this.staticText = "return this card to the battlefield transformed under your control";
     }
 
     private SkinInvasionEffect(final SkinInvasionEffect effect) {

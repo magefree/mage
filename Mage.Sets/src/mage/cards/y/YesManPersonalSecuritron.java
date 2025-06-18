@@ -47,7 +47,8 @@ public final class YesManPersonalSecuritron extends CardImpl {
         this.addAbility(ability);
 
         // Wild Card -- When Yes Man leaves the battlefield, its owner creates a tapped 1/1 white Soldier creature token for each quest counter on it.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new YesManPersonalSecuritronLeavesEffect(), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new YesManPersonalSecuritronLeavesEffect(), false)
+                .withFlavorWord("Wild Card"));
     }
 
     private YesManPersonalSecuritron(final YesManPersonalSecuritron card) {
@@ -61,6 +62,7 @@ public final class YesManPersonalSecuritron extends CardImpl {
 }
 
 class YesManPersonalSecuritronControlEffect extends TargetPlayerGainControlSourceEffect {
+
     YesManPersonalSecuritronControlEffect() {
         super();
         this.staticText = "Target opponent gains control of {this}. When they do, you draw two cards and put a quest counter on Yes Man.";
@@ -91,6 +93,7 @@ class YesManPersonalSecuritronControlEffect extends TargetPlayerGainControlSourc
 }
 
 class YesManPersonalSecuritronLeavesEffect extends CreateTokenTargetEffect {
+
     YesManPersonalSecuritronLeavesEffect() {
         super(new SoldierToken(), new CountersSourceCount(CounterType.QUEST), true);
         this.staticText = "its owner creates a tapped 1/1 white Soldier creature token for each quest counter on it.";
