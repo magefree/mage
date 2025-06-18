@@ -12,6 +12,7 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FirstTargetPointer;
@@ -55,8 +56,12 @@ enum HarnessTheStormAdjuster implements TargetAdjuster {
         ability.getTargets().clear();
         ability.getAllEffects().setTargetPointer(new FirstTargetPointer());
 
+        Spell spell = game.getSpellOrLKIStack(spellId);
+        if (spell == null){
+            return;
+        }
         FilterCard filter = new FilterCard("target card with the same name as that spell from your graveyard");
-        filter.add(new NamePredicate(game.getSpellOrLKIStack(spellId).getName()));
+        filter.add(new NamePredicate(spell.getName()));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
     }
 }
