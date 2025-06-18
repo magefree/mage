@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetArtifactPermanent;
+import mage.target.targetadjustment.DefineByTriggerTargetAdjuster;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -56,6 +57,7 @@ class RampagingWarMammothTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     RampagingWarMammothTriggeredAbility() {
         super(Zone.ALL, null, "", false);
+        this.setTargetAdjuster(DefineByTriggerTargetAdjuster.instance);
     }
 
     private RampagingWarMammothTriggeredAbility(RampagingWarMammothTriggeredAbility ability) {
