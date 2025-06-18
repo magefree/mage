@@ -9,8 +9,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -25,7 +27,7 @@ import java.util.UUID;
 public final class BladegriffPrototype extends CardImpl {
     static FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent of that player's choice that one of your opponents controls");
     static{
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(BladegriffSourceOpponentControlsPredicate.instance);
     }
 
     public BladegriffPrototype(UUID ownerId, CardSetInfo setInfo) {
@@ -52,6 +54,17 @@ public final class BladegriffPrototype extends CardImpl {
     @Override
     public BladegriffPrototype copy() {
         return new BladegriffPrototype(this);
+    }
+}
+enum BladegriffSourceOpponentControlsPredicate implements ObjectSourcePlayerPredicate<Controllable> {
+    instance;
+    @Override
+    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
+        Controllable object = input.getObject();
+        UUID playerId = input.getSource().getControllerId();
+
+        return !object.isControlledBy(playerId)
+                && game.getPlayer(playerId).hasOpponent(object.getControllerId(), game);
     }
 }
 
