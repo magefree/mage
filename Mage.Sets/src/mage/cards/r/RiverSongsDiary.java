@@ -3,7 +3,6 @@ package mage.cards.r;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -24,7 +23,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.ExileZone;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -42,15 +40,12 @@ public final class RiverSongsDiary extends CardImpl {
 	this.addAbility(new RiverSongsDiaryImprintAbility().setAbilityWord(AbilityWord.IMPRINT));
 
 	// At the beginning of your upkeep, if there are four or more cards exiled with River Song's Diary, choose one of them at random. You may cast it without paying its mana cost.
-	this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-	        new BeginningOfUpkeepTriggeredAbility(
-		        new RiverSongsDiaryCastEffect()
-		), RiverSongsDiaryCondition.instance, 
-		"At the beginning of your upkeep, if there are four or more cards exiled with " + 
-                " {this}, choose one of them at random. You may cast it without paying its mana cost."
-	).addHint(RiverSongsDiaryExiledSpellsCount.getHint()));
-
-
+	this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new RiverSongsDiaryCastEffect()
+                        .setText("choose one of them at random. You may cast it without paying its mana cost.")
+                ).withInterveningIf(RiverSongsDiaryCondition.instance)
+                .addHint(RiverSongsDiaryExiledSpellsCount.getHint())
+        );
     }
 
     private RiverSongsDiary(final RiverSongsDiary card) {
@@ -76,7 +71,6 @@ enum RiverSongsDiaryCondition implements Condition {
     public String toString() {
         return "there are four or more cards exiled with {this}";
     }
-
 }
 
 enum RiverSongsDiaryExiledSpellsCount implements DynamicValue {
@@ -152,22 +146,26 @@ class RiverSongsDiaryImprintAbility extends TriggeredAbilityImpl {
 
 class RiverSongsDiaryExileEffect extends ReplacementEffectImpl {
 
-    private final MageObjectReference mor;
+    // we store both Spell and Card to work properly on split cards
+    private final MageObjectReference morSpell;
+    private final MageObjectReference morCard;
 
     RiverSongsDiaryExileEffect(Spell spell, Game game) {
    	super(Duration.OneUse, Outcome.Benefit);
-        this.mor = new MageObjectReference(spell.getCard(), game);
+        this.morSpell = new MageObjectReference(spell.getCard(), game);
+        this.morCard = new MageObjectReference(spell.getMainCard(), game);
     }
 
     private RiverSongsDiaryExileEffect(final RiverSongsDiaryExileEffect effect) {
         super(effect);
-        this.mor = effect.mor;
+        this.morSpell = effect.morSpell;
+        this.morCard = effect.morCard;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
-        Spell sourceSpell = game.getStack().getSpell(event.getTargetId());
+        Spell sourceSpell = morSpell.getSpell(game);
         if (player == null || sourceSpell == null || sourceSpell.isCopy()) {
             return false;
         }
@@ -187,14 +185,10 @@ class RiverSongsDiaryExileEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
 	ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
-        if (zEvent.getFromZone() != Zone.STACK
-                || zEvent.getToZone() != Zone.GRAVEYARD
-                || event.getSourceId() == null
-                || !event.getSourceId().equals(event.getTargetId())
-                || !mor.equals(new MageObjectReference(event.getTargetId(), game))) {
-            return false;
-        }
-        return true;
+        return Zone.STACK.equals(zEvent.getFromZone())
+                && Zone.GRAVEYARD.equals(zEvent.getToZone())
+                && morSpell.refersTo(event.getSourceId(), game) // this is how we check that the spell resolved properly (and was not countered or the like)
+                && morCard.refersTo(event.getTargetId(), game); // this is how we check that the card being moved is the one we want.
     }
 
     @Override
