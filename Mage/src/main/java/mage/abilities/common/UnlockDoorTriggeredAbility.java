@@ -27,16 +27,22 @@ public class UnlockDoorTriggeredAbility extends TriggeredAbilityImpl {
         return new UnlockDoorTriggeredAbility(this);
     }
     
-    @Override
+   @Override
     public boolean checkEventType(GameEvent event, Game game) {
+        System.out.println("EVENT TYPE"); // This should now print!
+        System.out.println(event);
         return event.getType() == GameEvent.EventType.UNLOCK_DOOR;
     }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // Check if this door was unlocked
-        UnlockDoorEvent unlockEvent = (UnlockDoorEvent) event;
-        return unlockEvent.getTargetId().equals(getSourceId()) && 
-               unlockEvent.getPlayerId().equals(getControllerId());
+        System.out.println("CHECK YOUR TRIGGER"); // This should now print!
+        System.out.println(event);
+        System.out.println(event.getPlayerId());
+        System.out.println(event.getTargetId());
+        
+        // NO CAST NEEDED HERE: Use the generic GameEvent directly
+        return event.getTargetId().equals(getSourceId()) && 
+               event.getPlayerId().equals(getControllerId());
     }
 }

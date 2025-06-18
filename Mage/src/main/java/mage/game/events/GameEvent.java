@@ -679,6 +679,8 @@ public class GameEvent implements Serializable {
         /* room door effects
          */
         LOCK_DOOR,
+        UNLOCK_LEFT_DOOR,
+        UNLOCK_RIGHT_DOOR,
         UNLOCK_DOOR,
         FULLY_UNLOCK_ROOM,
         // custom events - must store some unique data to track
