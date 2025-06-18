@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
+import mage.abilities.common.AttacksPlayerWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -17,6 +17,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -29,16 +30,17 @@ import java.util.UUID;
  */
 public final class GornogTheRedReaper extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "Attacking Warriors");
-    private static final FilterPermanent filter2 = new FilterPermanent(SubType.COWARD, "Cowards your opponents control");
+    private static final FilterPermanent filterAttackWarrior = new FilterCreaturePermanent(SubType.WARRIOR, "Attacking Warriors");
+    private static final FilterPermanent filterWarrior = new FilterControlledPermanent(SubType.WARRIOR, "Warriors you control");
+    private static final FilterPermanent filterCoward = new FilterPermanent(SubType.COWARD, "Cowards your opponents control");
 
     static {
-        filter.add(AttackingPredicate.instance);
-        filter2.add(TargetController.OPPONENT.getControllerPredicate());
+        filterAttackWarrior.add(AttackingPredicate.instance);
+        filterCoward.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2, null);
-    private static final Hint hint = new ValueHint(filter2.getMessage(), xValue);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filterCoward, null);
+    private static final Hint hint = new ValueHint(filterCoward.getMessage(), xValue);
 
     public GornogTheRedReaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -56,16 +58,16 @@ public final class GornogTheRedReaper extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CowardsCantBlockWarriorsEffect()));
 
         // Whenever one or more Warriors you control attack a player, target creature that player controls becomes a Coward.
-        Ability ability = new AttacksWithCreaturesTriggeredAbility(Zone.BATTLEFIELD,
+        Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(
                 new BecomesCreatureTypeTargetEffect(Duration.EndOfGame, SubType.COWARD),
-                1, filter, true);
+                filterWarrior, true);
         ability.addTarget(new TargetCreaturePermanent());
         ability.setTargetAdjuster(new ThatPlayerControlsTargetAdjuster());
         this.addAbility(ability);
 
         // Attacking Warriors you control get +X/+0, where X is the number of Cowards your opponents control.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
-                xValue, StaticValue.get(0), Duration.WhileOnBattlefield, filter, false
+                xValue, StaticValue.get(0), Duration.WhileOnBattlefield, filterAttackWarrior, false
         )).addHint(hint));
     }
 

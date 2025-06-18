@@ -2,20 +2,21 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksPlayerWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.token.GlimmerToken;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ public final class SoaringLightbringer extends CardImpl {
         )));
 
         // Whenever you attack a player, create a 1/1 white Glimmer enchantment creature token that's tapped and attacking that player.
-        this.addAbility(new SoaringLightbringerTriggeredAbility());
+        this.addAbility(new AttacksPlayerWithCreaturesTriggeredAbility(new SoaringLightbringerEffect(), true));
     }
 
     private SoaringLightbringer(final SoaringLightbringer card) {
@@ -57,37 +58,6 @@ public final class SoaringLightbringer extends CardImpl {
     @Override
     public SoaringLightbringer copy() {
         return new SoaringLightbringer(this);
-    }
-}
-
-class SoaringLightbringerTriggeredAbility extends TriggeredAbilityImpl {
-
-    SoaringLightbringerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SoaringLightbringerEffect());
-        setTriggerPhrase("Whenever you attack a player, ");
-    }
-
-    private SoaringLightbringerTriggeredAbility(final SoaringLightbringerTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SoaringLightbringerTriggeredAbility copy() {
-        return new SoaringLightbringerTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DEFENDER_ATTACKED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId()) || game.getPlayer(event.getTargetId()) == null) {
-            return false;
-        }
-        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
-        return true;
     }
 }
 

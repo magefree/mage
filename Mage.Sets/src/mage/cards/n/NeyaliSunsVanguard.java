@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksPlayerWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -12,11 +12,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.events.DefenderAttackedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -34,10 +33,12 @@ import java.util.UUID;
 public final class NeyaliSunsVanguard extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("attacking tokens");
+    private static final FilterPermanent filter2 = new FilterControlledPermanent("tokens you control");
 
     static {
         filter.add(AttackingPredicate.instance);
         filter.add(TokenPredicate.TRUE);
+        filter2.add(TokenPredicate.TRUE);
     }
 
     public NeyaliSunsVanguard(UUID ownerId, CardSetInfo setInfo) {
@@ -55,7 +56,9 @@ public final class NeyaliSunsVanguard extends CardImpl {
         )));
 
         // Whenever one or more tokens you control attack a player, exile the top card of your library. During any turn you attacked with a token, you may play that card.
-        this.addAbility(new NeyaliSunsVanguardTriggeredAbility());
+        Ability ability = new AttacksPlayerWithCreaturesTriggeredAbility(new NeyaliSunsVanguardEffect(), filter, true);
+        ability.addWatcher(new NeyaliSunsVanguardWatcher());
+        this.addAbility(ability);
     }
 
     private NeyaliSunsVanguard(final NeyaliSunsVanguard card) {
@@ -65,45 +68,6 @@ public final class NeyaliSunsVanguard extends CardImpl {
     @Override
     public NeyaliSunsVanguard copy() {
         return new NeyaliSunsVanguard(this);
-    }
-}
-
-class NeyaliSunsVanguardTriggeredAbility extends TriggeredAbilityImpl {
-
-    NeyaliSunsVanguardTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new NeyaliSunsVanguardEffect());
-        this.addWatcher(new NeyaliSunsVanguardWatcher());
-    }
-
-    private NeyaliSunsVanguardTriggeredAbility(final NeyaliSunsVanguardTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public NeyaliSunsVanguardTriggeredAbility copy() {
-        return new NeyaliSunsVanguardTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DEFENDER_ATTACKED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getPlayer(event.getTargetId()) != null
-                && ((DefenderAttackedEvent) event)
-                .getAttackers(game)
-                .stream()
-                .filter(PermanentToken.class::isInstance)
-                .map(Controllable::getControllerId)
-                .anyMatch(this::isControlledBy);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever one or more tokens you control attack a player, exile the top card of your library. " +
-                "During any turn you attacked with a token, you may play that card.";
     }
 }
 
